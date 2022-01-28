@@ -1,0 +1,22 @@
+{
+  "name": "klevuheadless",
+  "version": "0.0.1",
+  "description": "Source of Klevu Headless",
+  "main": "index.js",
+  "scripts": {
+    "build:examples": "cd examples && npm run build",
+    "build:core": "cd packages/core && npm run build",
+    "build": "npm run build:core && npm run build:examples",
+    "example": "cd examples && npm start"
+  },
+  "author": "Klevu",
+  "license": "MIT",
+  "workspaces": [
+    "examples",
+    "packages/core"
+  ],
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "type": "module"
+}
