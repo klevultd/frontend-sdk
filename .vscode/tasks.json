@@ -2,17 +2,51 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "npm",
+      "label": "Run development",
       "script": "build",
-      "path": "packages/core/",
+      "dependsOn": [
+        "Build @klevu/core",
+        "Build @klevu/ui",
+        "npm: start - examples"
+      ],
+      "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
-      },
+      }
+    },
+    {
+      "type": "npm",
+      "script": "build:watch",
+      "path": "packages/core/",
       "problemMatcher": [],
-      "label": "npm: build - packages/core",
-      "detail": "tsc"
+      "label": "Build @klevu/core",
+      "detail": "tsc",
+      "presentation": {
+        "group": "groupA"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "build:watch",
+      "path": "packages/ui/",
+      "problemMatcher": [],
+      "label": "Build @klevu/ui",
+      "detail": "tsc",
+      "presentation": {
+        "group": "groupA"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "examples/",
+      "problemMatcher": [],
+      "label": "npm: start - examples",
+      "detail": "vite",
+      "presentation": {
+        "group": "groupA"
+      }
     }
   ]
 }
- 

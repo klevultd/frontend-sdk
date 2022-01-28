@@ -1,4 +1,11 @@
-import { KlevuConfig, search, KlevuTypeOfRecord } from "@klevu/core"
+import {
+  KlevuConfig,
+  search,
+  KlevuFetch,
+  newArrivals,
+  listFilters,
+  applyFilters,
+} from "@klevu/core"
 import debounce from "lodash.debounce"
 
 KlevuConfig.init({
@@ -7,18 +14,18 @@ KlevuConfig.init({
 })
 
 const onChange = debounce(async (event) => {
-  console.log(event.target.value)
-  const result = await search({
-    query: {
-      term: event.target.value,
-    },
-    limit: 5,
-    typeOfRecords: [KlevuTypeOfRecord.Product],
-    fields: ["id", "name", "image", "url"],
-  })
+  const result = await KlevuFetch(
+    listFilters(["color"]),
+    search(event.target.value, {
+      limit: 10,
+      fields: ["image"],
+      offset: 100,
+    }),
+    newArrivals()
+  )
 
   let html = ""
-  for (const p of result.queryResults[0].records) {
+  for (const p of result.queryResults.search.records) {
     html += `<div class="product"><img src="${p.imageUrl}" />
       <p>${p.name}</p>
       <a href="${p.url}">Buy now</a>

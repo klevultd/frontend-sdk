@@ -1,3 +1,5 @@
 node_modules
 dist
 .swc
+packages/core/docs
+coverage

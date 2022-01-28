@@ -6,11 +6,17 @@
   "exports": "./dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc"
+    "build:watch": "tsc --watch",
+    "build": "tsc",
+    "qoc": "eslint src/",
+    "docs": "typedoc --out docs",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest src --coverage"
   },
-  "author": "",
+  "author": "Klevu",
   "license": "MIT",
+  "typedocMain": "src/index.ts",
   "dependencies": {
-    "examples": "file:examples"
+    "axios": "^0.25.0",
+    "murmur-32": "^1.0.0"
   }
 }

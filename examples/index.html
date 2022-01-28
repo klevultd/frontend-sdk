@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="./src/style.css" />
     <script src="./src/index.ts" type="module"></script>
-    <script src="./src/react.tsx" type="module"></script>
+    <script src="./src/klevu-ui.ts" type="module"></script>
   </head>
   <body>
     <h1>Hello world vanilla JS</h1>
@@ -11,11 +11,14 @@
     <div class="productGrid" id="vanillaresult"></div>
 
     <h1>Hello React</h1>
-    <div id="reactroot"></div>
+    <a href="react.html">Click here</a>
 
     <h1>Hello Vue</h1>
     <div id="vueroot">
       <input type="text" v-model="search" placeholder="Search" />
     </div>
+
+    <h1>Hello Klevu UI</h1>
+    <klevu-search></klevu-search>
   </body>
 </html>
