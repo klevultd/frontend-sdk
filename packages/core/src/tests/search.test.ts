@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuFetch, search } from ".."
+import { KlevuConfig, KlevuFetch, search, suggestions } from ".."
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -15,4 +15,15 @@ test("Basic search", async () => {
   )
 
   expect(result.queryResults?.test).toBeDefined()
+  expect(result.queryResults?.test.records.length).toBeGreaterThan(0)
+})
+
+test("Suggestion test", async () => {
+  const result = await KlevuFetch(search("hoo"), suggestions("hoo"))
+
+  expect(result.queryResults?.search).toBeDefined()
+  expect(result.suggestionResults?.suggestions).toBeDefined()
+  expect(
+    result.suggestionResults?.suggestions.suggestions.length
+  ).toBeGreaterThan(0)
 })

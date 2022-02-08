@@ -2,7 +2,6 @@ import React, { useMemo, useEffect, useState } from "react"
 import debounce from "lodash.debounce"
 
 import {
-  applyFilters,
   KlevuFetch,
   listFilters,
   newArrivals,
@@ -10,7 +9,6 @@ import {
   suggestions,
   trending,
 } from "@klevu/core"
-import { merchendising } from "@klevu/core/src/query/merchendising/merchendising"
 
 export function Search() {
   const [products, setProducts] = useState(undefined)
@@ -22,19 +20,8 @@ export function Search() {
     }
 
     const result = await KlevuFetch(
-      applyFilters([
-        {
-          key: "category",
-          settings: {
-            singleSelect: true,
-          },
-          values: [],
-        },
-      ]),
       listFilters(["category"]),
-      search(event.target.value, {
-        fields: ["sku", "tags"],
-      }),
+      search(event.target.value),
       suggestions(event.target.value),
       newArrivals(),
       trending()

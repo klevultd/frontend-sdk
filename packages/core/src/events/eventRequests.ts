@@ -24,7 +24,7 @@ type V1SearchEvent = {
   klevu_typeOfQuery: KlevuTypeOfSearch
 }
 
-export async function KlevuEventV1Seach(event: V1SearchEvent) {
+export async function KlevuEventV1Search(event: V1SearchEvent) {
   const url = `${KlevuConfig.eventsApiV1Url}n-search/search${objectToUrlParams(
     event
   )}`
@@ -79,7 +79,7 @@ export async function KlevuEventV1ProductTracking(
   return Axios.get(url)
 }
 
-type V1CheckedOutProductsEvent = {
+export type V1CheckedOutProductsEvent = {
   /**
    * This is your Klevu JS API Key.
    */

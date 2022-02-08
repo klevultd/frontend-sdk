@@ -167,7 +167,7 @@ function sendSearchEvent(
   ) {
     const searchResponse: QueryResult =
       responseObject.queryResults[searchQuery.id]
-    KlevuEvents.search(
+    KlevuEvents.onSearch(
       searchQuery.settings.query.term,
       searchResponse.meta.totalResultsFound,
       searchResponse.meta.typeOfSearch

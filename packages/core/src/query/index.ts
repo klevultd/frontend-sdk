@@ -1,3 +1,4 @@
-export * from "./search/index"
-export * from "./recommendation/index"
+export * from "./search"
+export * from "./recommendation"
 export * from "./filters"
+export * from "./merchendising"
