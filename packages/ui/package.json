@@ -13,14 +13,6 @@
   "author": "Klevu",
   "license": "MIT",
   "dependencies": {
-    "@klevu/core": "file:../core",
-    "@lit-labs/motion": "^1.0.2",
-    "lit": "^2.1.2",
-    "lodash-es": "^4.17.21",
-    "lodash.debounce": "^4.0.8"
-  },
-  "devDependencies": {
-    "@types/lodash-es": "^4.17.5",
-    "@types/lodash.debounce": "^4.0.6"
+    "@klevu/core": "file:../core"
   }
 }

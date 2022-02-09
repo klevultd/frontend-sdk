@@ -1,1 +1,1 @@
-export * from "./search"
+console.log("hello world @klevu/ui")

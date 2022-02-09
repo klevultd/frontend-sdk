@@ -1,13 +1,13 @@
+import Axios from "axios"
 import { KlevuEvents } from "../events/events"
 import { KlevuConfig } from "../index"
 import { KlevuRecord, KlevuTypeOfRequest, KlevuTypeOfSearch } from "../model"
-import { cacheResult, getCachedResult } from "./cache"
 import {
   AllRecordQueries,
+  isKlevuSearchQuery,
   KlevuSearchQuery,
   KlevuSuggestionQuery,
 } from "./queryModels"
-import Axios from "axios"
 
 export type AllQueries = AllRecordQueries | KlevuSuggestionQuery
 
@@ -37,7 +37,7 @@ type FilterResult = {
   type: FilterType
 }
 
-type FilterResultOptions = FilterResult & {
+export type FilterResultOptions = FilterResult & {
   type: FilterType.Options
   options: Array<{
     name: string
@@ -47,7 +47,13 @@ type FilterResultOptions = FilterResult & {
   }>
 }
 
-type FilterResultSlider = FilterResult & {
+function isFilterResultOptions(
+  filter: FilterResultOptions | FilterResultSlider
+): filter is FilterResultOptions {
+  return filter.type === FilterType.Options
+}
+
+export type FilterResultSlider = FilterResult & {
   type: FilterType.Slider
   min: number
   max: number
@@ -55,19 +61,58 @@ type FilterResultSlider = FilterResult & {
   end: number
 }
 
+function isFilterResultSlider(
+  filter: FilterResultOptions | FilterResultSlider
+): filter is FilterResultSlider {
+  return filter.type === FilterType.Slider
+}
+
 type QueryResult = {
   id: string
   meta: {
     apiKey: string
-    debuggingInformation: unknown
     isPersonalised: boolean
-    noOfResults: number
-    notificationCode: number
-    offset: number
+    /**
+     * The time taken by the Klevu Search engine to fetch the response.
+     */
     qTime: number
-    searchedTerm: string
+
+    /**
+     * The number of results requested to be returned for this query.
+     */
+    noOfResults: number
+
+    /**
+     * The total number of results found for this query.
+     */
     totalResultsFound: number
+
+    /**
+     * The index of the first result returned in this response.
+     */
+    offset: number
+
+    /**
+     * The query type that was executed by Klevu to retrieve the results.
+     */
     typeOfSearch: KlevuTypeOfSearch
+
+    /**
+     * Information that can be useful for debugging the query. For example, the actual query that was fired by the Klevu Search engine, inclusive of any synonyms or de-compounded words taken into consideration.
+     */
+    debuggingInformation: unknown
+
+    /**
+     * This may be populated with a code if any actions were taken on the record. Possible values are:
+     * 1: Nothing to report.
+     * 2: The price of the record is using the base currency.
+     */
+    notificationCode: number
+
+    /**
+     * The search term submitted for this query.
+     */
+    searchedTerm: string
   }
   records: Array<{ id: string } & KlevuRecord>
 }
@@ -83,13 +128,11 @@ export type KlevuApiResponse = {
 }
 
 export type KlevuResponse = {
-  suggestionResults?: {
-    [id: string]: SuggestionResult
-  }
-  queryResults?: {
-    [id: string]: QueryResult
-  }
+  apiResponse: null | KlevuApiResponse
   filters?: Array<FilterResultOptions | FilterResultSlider>
+  suggestionsById: (id: string) => SuggestionResult | undefined
+  queriesById: (id: string) => QueryResult | undefined
+  next?: () => Promise<KlevuResponse>
 }
 
 export async function KlevuFetch(
@@ -108,13 +151,7 @@ export async function KlevuFetch(
     (q) => q.typeOfRequest === KlevuTypeOfRequest.Search
   ) as KlevuSearchQuery | undefined
 
-  const result: KlevuResponse | undefined = getCachedResult(flattenedQueries)
-  if (result) {
-    if (searchQuery) {
-      sendSearchEvent(searchQuery, result)
-    }
-    return result
-  }
+  // TODO: Check cache and send the result. If cached send still event at this point
 
   // Check for duplicate id's
   for (const query of flattenedQueries) {
@@ -140,66 +177,78 @@ export async function KlevuFetch(
     suggestions: suggestions.length > 0 ? suggestions : undefined,
   }
 
-  const response = await Axios.post(KlevuConfig.url, payload, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  const responseObject = transformFromApiToResponse(response.data)
+  const response = await Axios.post<KlevuApiResponse>(
+    KlevuConfig.url,
+    payload,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+
+  const responseObject: KlevuResponse = {
+    apiResponse: response.data,
+    filters: response.data.filters,
+    suggestionsById: (id: string) =>
+      response.data.suggestionResults?.find((q) => q.id === id),
+    queriesById: (id: string) =>
+      response.data.queryResults?.find((s) => s.id === id),
+    next: fetchNextPage(response.data, flattenedQueries),
+  }
 
   if (searchQuery) {
     sendSearchEvent(searchQuery, responseObject)
   }
 
-  cacheResult(flattenedQueries, responseObject)
   return responseObject
+}
+
+function fetchNextPage(response: KlevuApiResponse, queries: AllQueries[]) {
+  if (response.queryResults && response.queryResults.length < 1) {
+    return undefined
+  }
+
+  // find search queries for pagination
+  const searchQueries = queries.filter(isKlevuSearchQuery)
+
+  // If there is multiple then do not support paging
+  if (searchQueries.length != 1) {
+    return undefined
+  }
+
+  const searchQueryResponse = response.queryResults?.find(
+    (r) => r.id === searchQueries[0].id
+  )
+
+  if (!searchQueryResponse) {
+    return undefined
+  }
+
+  // Remove old filters
+  const newQueries = queries.filter((q: any) => !q.filters)
+
+  // TODO: Apply current filters somehow to queries
+
+  return async () => {
+    return await KlevuFetch(newQueries)
+  }
 }
 
 function sendSearchEvent(
   searchQuery: KlevuSearchQuery,
   responseObject: KlevuResponse
 ) {
+  const searchResponse = responseObject.queriesById(searchQuery.id)
   if (
     searchQuery.settings.query?.term &&
-    responseObject.queryResults &&
-    responseObject.queryResults[searchQuery.id] &&
+    searchResponse &&
     searchQuery.doNotSendEvent !== true
   ) {
-    const searchResponse: QueryResult =
-      responseObject.queryResults[searchQuery.id]
     KlevuEvents.onSearch(
       searchQuery.settings.query.term,
       searchResponse.meta.totalResultsFound,
       searchResponse.meta.typeOfSearch
     )
   }
-}
-
-function transformFromApiToResponse(
-  responseJson: KlevuApiResponse
-): KlevuResponse {
-  let suggestionResults: KlevuResponse["suggestionResults"] | undefined
-  let queryResults: KlevuResponse["queryResults"] | undefined
-
-  if (responseJson.suggestionResults) {
-    suggestionResults = {}
-    for (const s of responseJson.suggestionResults) {
-      suggestionResults[s.id] = s
-    }
-  }
-
-  if (responseJson.queryResults) {
-    queryResults = {}
-    for (const q of responseJson.queryResults) {
-      queryResults[q.id] = q
-    }
-  }
-
-  const responseObject: KlevuResponse = {
-    suggestionResults,
-    queryResults,
-    filters: responseJson.filters,
-  }
-
-  return responseObject
 }

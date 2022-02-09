@@ -4,6 +4,7 @@ import {
   KlevuTypeOfRequest,
   KlevuTypeOfSearch,
 } from "../model"
+import { AllQueries } from "./connection"
 
 export enum FilterOrder {
   Frequency = "FREQ",
@@ -109,8 +110,10 @@ export enum SearchPreference {
   debugQuery = "debugQuery",
 }
 
+export type KlevuBaseQueryDefaultIds = "applyFilters" | "search" | string
+
 type KlevuBaseQuery = {
-  id: string
+  id: KlevuBaseQueryDefaultIds
   typeOfRequest?: KlevuTypeOfRequest
 }
 
@@ -144,6 +147,15 @@ export type KlevuSearchQuery = KlevuBaseQuery & {
     typeOfSearch?: KlevuTypeOfSearch
     searchPrefs?: SearchPreference[]
   }
+}
+
+export function isKlevuSearchQuery(
+  query: AllQueries
+): query is KlevuSearchQuery {
+  return (
+    query.typeOfRequest === KlevuTypeOfRequest.Search ||
+    query.typeOfRequest === KlevuTypeOfRequest.Merchandising
+  )
 }
 
 export type RangeFilterSettings = {
