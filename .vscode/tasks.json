@@ -18,7 +18,7 @@
     {
       "type": "npm",
       "script": "build:watch",
-      "path": "packages/core/",
+      "path": "packages/klevu-core/",
       "problemMatcher": [],
       "label": "Build @klevu/core",
       "detail": "tsc",
@@ -29,7 +29,7 @@
     {
       "type": "npm",
       "script": "build:watch",
-      "path": "packages/ui/",
+      "path": "packages/klevu-ui/",
       "problemMatcher": [],
       "label": "Build @klevu/ui",
       "detail": "tsc",
