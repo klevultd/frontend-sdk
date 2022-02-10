@@ -3,6 +3,7 @@ import {
   KlevuDefaultOptions,
   KlevuNewArrivalsQuery,
 } from "../../connection/queryModels"
+import { KlevuFetchFunction } from ".."
 
 type Options = KlevuDefaultOptions
 
@@ -13,13 +14,13 @@ const defaultOptions = {
 export function newArrivals(
   category?: string,
   options?: Partial<Options>
-): KlevuNewArrivalsQuery {
+): KlevuFetchFunction {
   const params: Options = {
     ...defaultOptions,
     ...options,
   }
 
-  return {
+  const query: KlevuNewArrivalsQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.NewArrivals,
     settings: category
@@ -29,5 +30,10 @@ export function newArrivals(
           },
         }
       : undefined,
+  }
+
+  return {
+    klevuFunctionId: "newarrivals",
+    queries: [query],
   }
 }

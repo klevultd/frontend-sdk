@@ -1,12 +1,19 @@
+import { KlevuFetchFunction } from ".."
 import {
-  KlevuApplyFilterQuery,
-  KlevuDefaultOptions,
+  isKlevuSearchQuery,
+  KlevuApplyFilter,
+  KlevuListFilter,
 } from "../../connection/queryModels"
 
-type Options = KlevuDefaultOptions
+type Options = {
+  /**
+   * Which queries should have these filters applied. By defaut this is ["search"]
+   */
+  targetIds: string[]
+}
 
 const defaults: Options = {
-  id: "applyFilters",
+  targetIds: ["search"],
 }
 
 type Filter = {
@@ -25,21 +32,37 @@ type Filter = {
  * @param options
  * @returns
  */
-export function applyFilters(filters: Filter[], options?: Partial<Options>) {
+export function applyFilters(
+  filters: Filter[],
+  options?: Partial<Options>
+): KlevuFetchFunction {
   const params: Options = {
     ...defaults,
     ...options,
   }
 
-  const query: KlevuApplyFilterQuery = {
-    id: params.id,
-    typeOfRequest: undefined,
-    filters: {
-      applyFilters: {
-        filters,
-      },
+  const query: KlevuApplyFilter = {
+    applyFilters: {
+      filters,
     },
   }
 
-  return query
+  return {
+    klevuFunctionId: "applyFilters",
+    modifyAfter: (queries) => {
+      for (const q of queries) {
+        if (!isKlevuSearchQuery(q)) {
+          continue
+        }
+        if (params.targetIds.includes(q.id)) {
+          const filters: KlevuListFilter & KlevuApplyFilter = {
+            ...q.filters,
+            applyFilters: query.applyFilters,
+          }
+          q.filters = filters
+        }
+      }
+      return queries
+    },
+  }
 }

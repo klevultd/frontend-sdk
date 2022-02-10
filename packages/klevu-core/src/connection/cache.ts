@@ -1,6 +1,7 @@
+/*
 import murmur32 from "murmur-32"
 import { KlevuConfig } from ".."
-import { AllQueries, KlevuResponse } from "./queryModels"
+import { KlevuResponse } from "./queryModels"
 
 const cache = new Map<
   ArrayBuffer,
@@ -42,3 +43,4 @@ export function cacheResult(queries: AllQueries[], response: KlevuResponse) {
     data: response,
   })
 }
+*/

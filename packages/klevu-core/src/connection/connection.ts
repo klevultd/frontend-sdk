@@ -1,9 +1,8 @@
 import Axios from "axios"
 import { KlevuEvents } from "../events/events"
-import { KlevuConfig } from "../index"
+import { KlevuConfig, KlevuFetchFunction } from "../index"
 import { KlevuTypeOfRequest } from "../model"
 import {
-  AllQueries,
   AllRecordQueries,
   isKlevuSearchQuery,
   KlevuApiResponse,
@@ -14,45 +13,19 @@ import {
 } from "./queryModels"
 
 export async function KlevuFetch(
-  ...queries: Array<AllQueries | AllQueries[]>
+  ...functions: KlevuFetchFunction[]
 ): Promise<KlevuResponse> {
-  const flattenedQueries: AllQueries[] = []
-  for (const q of queries) {
-    if (Array.isArray(q)) {
-      flattenedQueries.push(...q)
-    } else {
-      flattenedQueries.push(q)
-    }
-  }
-
-  const searchQuery = flattenedQueries.find(
-    (q) => q.typeOfRequest === KlevuTypeOfRequest.Search
-  ) as KlevuSearchQuery | undefined
+  const { recordQueries, suggestionQueries } =
+    cleanAndProcessFunctions(functions)
 
   // TODO: Check cache and send the result. If cached send still event at this point
-
-  // Check for duplicate id's
-  for (const query of flattenedQueries) {
-    if (flattenedQueries.filter((q) => q.id === query.id).length !== 1) {
-      throw new Error(
-        "Duplicate ids in request. Please provider unique ids for requests"
-      )
-    }
-  }
-
-  const recordQueries = flattenedQueries.filter(
-    (q) => q?.typeOfRequest !== KlevuTypeOfRequest.Suggestion
-  ) as AllRecordQueries[]
-  const suggestions = flattenedQueries.filter(
-    (q) => q?.typeOfRequest === KlevuTypeOfRequest.Suggestion
-  ) as KlevuSuggestionQuery[]
 
   const payload: KlevuPayload = {
     context: {
       apiKeys: [KlevuConfig.apiKey],
     },
     recordQueries: recordQueries.length > 0 ? recordQueries : undefined,
-    suggestions: suggestions.length > 0 ? suggestions : undefined,
+    suggestions: suggestionQueries.length > 0 ? suggestionQueries : undefined,
   }
 
   const response = await Axios.post<KlevuApiResponse>(
@@ -72,8 +45,12 @@ export async function KlevuFetch(
       response.data.suggestionResults?.find((q) => q.id === id),
     queriesById: (id: string) =>
       response.data.queryResults?.find((s) => s.id === id),
-    next: fetchNextPage(response.data, flattenedQueries),
+    next: fetchNextPage(response.data, functions),
   }
+
+  const searchQuery = recordQueries.find(
+    (q) => q.typeOfRequest === KlevuTypeOfRequest.Search && !q.isFallbackQuery
+  ) as KlevuSearchQuery | undefined
 
   if (searchQuery) {
     sendSearchEvent(searchQuery, responseObject)
@@ -82,48 +59,55 @@ export async function KlevuFetch(
   return responseObject
 }
 
-function fetchNextPage(response: KlevuApiResponse, queries: AllQueries[]) {
+function fetchNextPage(
+  response: KlevuApiResponse,
+  functions: KlevuFetchFunction[]
+) {
   if (response.queryResults && response.queryResults.length < 1) {
     return undefined
   }
 
-  // find search queries for pagination
-  const searchQueries = queries.filter(isKlevuSearchQuery)
-
-  // If there is multiple then do not support paging
-  if (searchQueries.length != 1) {
-    return undefined
-  }
-
-  const queryToModify = searchQueries[0]
-
-  const searchQueryResponse = response.queryResults?.find(
-    (r) => r.id === searchQueries[0].id
+  const searchFunctionsIndex = functions.findIndex((f) =>
+    f.queries?.find((q) => isKlevuSearchQuery(q) && !q.isFallbackQuery)
   )
 
-  if (!searchQueryResponse) {
+  if (searchFunctionsIndex === -1) {
     return undefined
   }
 
-  const lastLimit = queryToModify.settings.limit ?? 5
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const queryIndex = functions[searchFunctionsIndex].queries!.findIndex(
+    (q) => isKlevuSearchQuery(q) && !q.isFallbackQuery
+  )
 
-  if (!queryToModify.settings.offset) {
-    queryToModify.settings.offset = lastLimit
-  } else {
-    queryToModify.settings.offset += lastLimit
+  if (queryIndex === -1) {
+    return undefined
   }
 
-  // Remove old filters
-  const newQueries = queries.filter((q: any) => !q.filters)
+  const prevQuery: KlevuSearchQuery = functions[searchFunctionsIndex].queries?.[
+    queryIndex
+  ] as KlevuSearchQuery
 
-  // TODO: Apply current filters somehow to queries. See https://github.com/klevultd/frontend-sdk/issues/8
+  return async (override?: { limit?: number }) => {
+    const lastLimit = override?.limit ?? prevQuery.settings.limit ?? 5
 
-  // Change old query to new one
-  const index = newQueries.findIndex((q) => q.id === queryToModify.id)
-  newQueries[index] = queryToModify
+    if (!prevQuery.settings.offset) {
+      prevQuery.settings.offset = lastLimit
+    } else {
+      prevQuery.settings.offset += lastLimit
+    }
 
-  return async () => {
-    return await KlevuFetch(newQueries)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    functions[searchFunctionsIndex].queries![queryIndex] = prevQuery
+
+    // TODO: Apply current filters somehow to queries. See https://github.com/klevultd/frontend-sdk/issues/8
+
+    // remove list filters
+    const functionsWithoutListFilters = functions.filter(
+      (f) => f.klevuFunctionId !== "listfilters"
+    )
+
+    return await KlevuFetch(...functionsWithoutListFilters)
   }
 }
 
@@ -142,5 +126,38 @@ function sendSearchEvent(
       searchResponse.meta.totalResultsFound,
       searchResponse.meta.typeOfSearch
     )
+  }
+}
+
+function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
+  let recordQueries: AllRecordQueries[] = []
+  const suggestionQueries: KlevuSuggestionQuery[] = []
+  for (const f of functions) {
+    if (f.queries) {
+      recordQueries.push(...f.queries)
+    }
+    if (f.suggestions) {
+      suggestionQueries.push(...f.suggestions)
+    }
+  }
+
+  // Check for duplicate id's
+  for (const query of recordQueries) {
+    if (recordQueries.filter((q) => q.id === query.id).length !== 1) {
+      throw new Error(
+        "Duplicate ids in request. Please provider unique ids for requests"
+      )
+    }
+  }
+
+  for (const f of functions) {
+    if (f.modifyAfter) {
+      recordQueries = f.modifyAfter(recordQueries)
+    }
+  }
+
+  return {
+    recordQueries,
+    suggestionQueries,
   }
 }

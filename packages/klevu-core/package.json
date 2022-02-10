@@ -17,6 +17,7 @@
   "typedocMain": "src/index.ts",
   "dependencies": {
     "axios": "^0.25.0",
-    "murmur-32": "^1.0.0"
+    "murmur-32": "^1.0.0",
+    "type-fest": "^2.11.2"
   }
 }

@@ -3,6 +3,7 @@ import {
   KlevuDefaultOptions,
   KlevuTrendingProductsQuery,
 } from "../../connection/queryModels"
+import { KlevuFetchFunction } from ".."
 
 type Options = KlevuDefaultOptions & {
   enablePersonlisation?: boolean
@@ -15,13 +16,13 @@ const defaultOptions: Options = {
   id: "trending",
 }
 
-export function trending(options?: Options): KlevuTrendingProductsQuery {
+export function trending(options?: Options): KlevuFetchFunction {
   const params: Options = {
     ...defaultOptions,
     ...options,
   }
 
-  return {
+  const query: KlevuTrendingProductsQuery = {
     id: `trending`,
     typeOfRequest: KlevuTypeOfRequest.Trending,
     settings: {
@@ -47,5 +48,10 @@ export function trending(options?: Options): KlevuTrendingProductsQuery {
           }
         : undefined,
     },
+  }
+
+  return {
+    klevuFunctionId: "trending",
+    queries: [query],
   }
 }

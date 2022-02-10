@@ -38,10 +38,14 @@ test("Pagination test", async () => {
   expect(result.queriesById("search")?.records.length).toBe(2)
   expect(result.next).toBeDefined()
 
-  if (result.next) {
-    const nextResult = await result.next()
-    const prevFirstId = result.queriesById("search")?.records[0].id
-    const nextFirstId = nextResult.queriesById("search")?.records[0].id
-    expect(nextFirstId).not.toBe(prevFirstId)
-  }
+  const nextResult = await result.next!()
+  const prevFirstId = result.queriesById("search")?.records[0].id
+  const nextFirstId = nextResult.queriesById("search")?.records[0].id
+  expect(nextFirstId).not.toBe(prevFirstId)
+  expect(nextResult.next).toBeDefined()
+
+  const nextNextResult = await nextResult.next!()
+  const nextNextFirstId = nextNextResult.queriesById("search")?.records[0].id
+  expect(nextNextFirstId).not.toBe(prevFirstId)
+  expect(nextNextFirstId).not.toBe(nextFirstId)
 })

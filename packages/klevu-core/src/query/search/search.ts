@@ -1,3 +1,4 @@
+import { KlevuFetchFunction } from ".."
 import {
   KlevuDefaultOptions,
   KlevuSearchQuery,
@@ -30,7 +31,10 @@ const defaults: Options = {
  * @param options
  * @returns
  */
-export function search(term: string, options?: Partial<Options>) {
+export function search(
+  term: string,
+  options?: Partial<Options>
+): KlevuFetchFunction {
   const { doNotSendEvent, ...otherOptions } = options || {}
 
   const params: Options = {
@@ -52,5 +56,8 @@ export function search(term: string, options?: Partial<Options>) {
     },
   }
 
-  return query
+  return {
+    klevuFunctionId: "search",
+    queries: [query],
+  }
 }

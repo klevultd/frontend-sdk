@@ -1,3 +1,4 @@
+import { KlevuFetchFunction } from ".."
 import {
   KlevuDefaultOptions,
   KlevuSearchQuery,
@@ -10,7 +11,10 @@ const defaults: Options = {
   id: "merchendising",
 }
 
-export function merchendising(category: string, options?: Partial<Options>) {
+export function merchendising(
+  category: string,
+  options?: Partial<Options>
+): KlevuFetchFunction {
   const params: Options = {
     ...defaults,
     ...options,
@@ -28,5 +32,8 @@ export function merchendising(category: string, options?: Partial<Options>) {
     },
   }
 
-  return query
+  return {
+    klevuFunctionId: "merchendising",
+    queries: [query],
+  }
 }
