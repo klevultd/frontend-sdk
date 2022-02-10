@@ -1,10 +1,10 @@
 import {
+  KlevuRecord,
   KlevuRecordFields,
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
   KlevuTypeOfSearch,
 } from "../model"
-import { AllQueries } from "./connection"
 
 export enum FilterOrder {
   Frequency = "FREQ",
@@ -316,3 +316,129 @@ export type AllRecordQueries =
   | KlevuAlsoViewedQuery
   | KlevuListFilterQuery
   | KlevuApplyFilterQuery
+
+export type AllQueries = AllRecordQueries | KlevuSuggestionQuery
+
+export type KlevuPayload = {
+  context: {
+    apiKeys: string[]
+  }
+  recordQueries?: Array<AllRecordQueries>
+  suggestions?: Array<KlevuSuggestionQuery>
+}
+
+export type SuggestionResult = {
+  id: string
+  suggestions: Array<{
+    suggest: string
+  }>
+}
+
+enum FilterType {
+  Options = "OPTIONS",
+  Slider = "SLIDER",
+}
+
+type FilterResult = {
+  key: string
+  label: string
+  type: FilterType
+}
+
+export type FilterResultOptions = FilterResult & {
+  type: FilterType.Options
+  options: Array<{
+    name: string
+    value: string
+    count: number
+    selected: boolean
+  }>
+}
+
+export function isFilterResultOptions(
+  filter: FilterResultOptions | FilterResultSlider
+): filter is FilterResultOptions {
+  return filter.type === FilterType.Options
+}
+
+export type FilterResultSlider = FilterResult & {
+  type: FilterType.Slider
+  min: number
+  max: number
+  start: number
+  end: number
+}
+
+export function isFilterResultSlider(
+  filter: FilterResultOptions | FilterResultSlider
+): filter is FilterResultSlider {
+  return filter.type === FilterType.Slider
+}
+
+type QueryResult = {
+  id: string
+  meta: {
+    apiKey: string
+    isPersonalised: boolean
+    /**
+     * The time taken by the Klevu Search engine to fetch the response.
+     */
+    qTime: number
+
+    /**
+     * The number of results requested to be returned for this query.
+     */
+    noOfResults: number
+
+    /**
+     * The total number of results found for this query.
+     */
+    totalResultsFound: number
+
+    /**
+     * The index of the first result returned in this response.
+     */
+    offset: number
+
+    /**
+     * The query type that was executed by Klevu to retrieve the results.
+     */
+    typeOfSearch: KlevuTypeOfSearch
+
+    /**
+     * Information that can be useful for debugging the query. For example, the actual query that was fired by the Klevu Search engine, inclusive of any synonyms or de-compounded words taken into consideration.
+     */
+    debuggingInformation: unknown
+
+    /**
+     * This may be populated with a code if any actions were taken on the record. Possible values are:
+     * 1: Nothing to report.
+     * 2: The price of the record is using the base currency.
+     */
+    notificationCode: number
+
+    /**
+     * The search term submitted for this query.
+     */
+    searchedTerm: string
+  }
+  records: Array<{ id: string } & KlevuRecord>
+}
+
+export type KlevuApiResponse = {
+  meta: {
+    qTime: number
+    responseCode: number
+  }
+  suggestionResults?: SuggestionResult[]
+  queryResults?: QueryResult[]
+  filters?: Array<FilterResultOptions | FilterResultSlider>
+}
+
+export type KlevuResponse = {
+  apiResponse: null | KlevuApiResponse
+  filters?: Array<FilterResultOptions | FilterResultSlider>
+  suggestionsById: (id: string) => SuggestionResult | undefined
+  queriesById: (id: string) => QueryResult | undefined
+  next?: () => Promise<KlevuResponse>
+}

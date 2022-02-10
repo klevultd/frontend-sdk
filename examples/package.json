@@ -9,7 +9,7 @@
     "qoc": ""
   },
   "dependencies": {
-    "@klevu/core": "file:../packages/core",
+    "@klevu/core": "file:../packages/klevu-core",
     "lodash.debounce": "^4.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

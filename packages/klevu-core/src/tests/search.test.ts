@@ -27,3 +27,21 @@ test("Suggestion test", async () => {
     result.suggestionsById("suggestions")?.suggestions.length
   ).toBeGreaterThan(0)
 })
+
+test("Pagination test", async () => {
+  const result = await KlevuFetch(
+    search("hoodies", {
+      limit: 2,
+    })
+  )
+
+  expect(result.queriesById("search")?.records.length).toBe(2)
+  expect(result.next).toBeDefined()
+
+  if (result.next) {
+    const nextResult = await result.next()
+    const prevFirstId = result.queriesById("search")?.records[0].id
+    const nextFirstId = nextResult.queriesById("search")?.records[0].id
+    expect(nextFirstId).not.toBe(prevFirstId)
+  }
+})

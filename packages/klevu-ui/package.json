@@ -13,6 +13,6 @@
   "author": "Klevu",
   "license": "MIT",
   "dependencies": {
-    "@klevu/core": "file:../core"
+    "@klevu/core": "file:../klevu-core"
   }
 }
