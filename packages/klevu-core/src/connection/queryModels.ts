@@ -582,5 +582,5 @@ export type KlevuResponse = {
   filters?: Array<FilterResultOptions | FilterResultSlider>
   suggestionsById: (id: string) => SuggestionResult | undefined
   queriesById: (id: string) => QueryResult | undefined
-  next?: () => Promise<KlevuResponse>
+  next?: (override?: { limit?: number }) => Promise<KlevuResponse>
 }

@@ -88,7 +88,9 @@ function fetchNextPage(
     queryIndex
   ] as KlevuSearchQuery
 
-  return async (override?: { limit?: number }) => {
+  const nextFunc: KlevuResponse["next"] = async (override?: {
+    limit?: number
+  }) => {
     const lastLimit = override?.limit ?? prevQuery.settings.limit ?? 5
 
     if (!prevQuery.settings.offset) {
@@ -109,6 +111,8 @@ function fetchNextPage(
 
     return await KlevuFetch(...functionsWithoutListFilters)
   }
+
+  return nextFunc
 }
 
 function sendSearchEvent(

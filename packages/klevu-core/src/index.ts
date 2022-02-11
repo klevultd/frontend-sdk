@@ -46,5 +46,6 @@ export class KlevuConfig {
 
 export * from "./model"
 export * from "./connection/connection"
+export * from "./connection/kmc"
 export * from "./query"
 export * from "./events"

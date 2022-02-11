@@ -6,13 +6,13 @@ import {
 import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../model"
 import { cleanSearchQuery } from "../../utils"
 
-type Options = KlevuDefaultOptions & {
+export type SearchOptions = KlevuDefaultOptions & {
   typeOfRecords: KlevuTypeOfRecord[]
   fallbackQuery?: KlevuSearchQuery
   doNotSendEvent?: boolean
 } & Omit<KlevuSearchQuery["settings"], "query">
 
-const defaults: Options = {
+const defaults: SearchOptions = {
   id: "search",
   limit: 5,
   typeOfRecords: [
@@ -33,11 +33,11 @@ const defaults: Options = {
  */
 export function search(
   term: string,
-  options?: Partial<Options>
+  options?: Partial<SearchOptions>
 ): KlevuFetchFunction {
   const { doNotSendEvent, ...otherOptions } = options || {}
 
-  const params: Options = {
+  const params: SearchOptions = {
     ...defaults,
     ...otherOptions,
   }
