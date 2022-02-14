@@ -3,7 +3,6 @@ import {
   KlevuFetch,
   KlevuLastSearches,
   KlevuTypeOfRecord,
-  listFilters,
   search,
   suggestions,
   trendingSearchProducts,
@@ -12,6 +11,7 @@ import type { KlevuRecord, KlevuLastSearch } from "@klevu/core"
 import {
   Grid,
   IconButton,
+  InputAdornment,
   Paper,
   Popper,
   TextField,
@@ -26,6 +26,7 @@ import {
 import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
 import { Close } from "@mui/icons-material"
+import SearchIcon from "@mui/icons-material/Search"
 
 export function Search() {
   const [searchValue, setSearchValue] = useState("")
@@ -48,7 +49,6 @@ export function Search() {
     }
 
     const result = await KlevuFetch(
-      listFilters(["category"]),
       search(term, {
         limit: 9,
         typeOfRecords: [KlevuTypeOfRecord.Product],
@@ -132,6 +132,13 @@ export function Search() {
         onChange={onSearchChange}
         onFocus={fetchEmptySuggestions}
         placeholder="Search for products"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
         {...bindTrigger(popupState)}
       />
       <Popper

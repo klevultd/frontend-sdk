@@ -38,9 +38,15 @@ export async function KlevuFetch(
     }
   )
 
+  // Send event to functions on result
+  for (const f of functions) {
+    if (f.onResult) {
+      f.onResult(response.data)
+    }
+  }
+
   const responseObject: KlevuResponse = {
     apiResponse: response.data,
-    filters: response.data.filters,
     suggestionsById: (id: string) =>
       response.data.suggestionResults?.find((q) => q.id === id),
     queriesById: (id: string) =>

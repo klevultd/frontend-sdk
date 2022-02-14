@@ -1,11 +1,17 @@
+import { SetRequired } from "type-fest"
 import { KlevuFetchFunction } from ".."
 import {
   FilterOrder,
   isKlevuSearchQuery,
   KlevuApplyFilter,
   KlevuListFilter,
-  RangeFilterSettings,
 } from "../../connection/queryModels"
+import { FilterManager } from "../../store/filterManager"
+
+type FilterType = SetRequired<
+  KlevuListFilter,
+  "filtersToReturn"
+>["filtersToReturn"]
 
 type Options = {
   /**
@@ -15,52 +21,19 @@ type Options = {
   targetIds: string[]
 
   /**
-   * This is the list of filter keys that you do not want Klevu Search to
-   * include in the response. If a filter is specified in both include and
-   * exclude lists, include will take precedence.
+   * Automatically apply filters to manager
    */
-  exclude?: string[]
-  /**
-   * Order of results
-   */
-  order: FilterOrder
-  /**
-   *  Maximum number of options to be included per filter.
-   */
-  limit?: number
-  /**
-   * If the parameter minCount is present with a positive number, only the
-   * options with an option count equal to or higher than the minCount are
-   * included.
-   */
-  minCount?: number
-
-  /*
-   * This allows you to retrieve range filters for use with numeric values such
-   * as price, so you can display bands of 0-99, 100-199, etc. or a price
-   * slider.
-   */
-  rangeFilters?: RangeFilterSettings[]
-}
+  manager?: FilterManager
+} & Pick<FilterType, "include" | "exclude" | "rangeFilterSettings"> &
+  FilterType["options"]
 
 const defaults: Options = {
-  targetIds: ["search", "merchedising"],
+  targetIds: ["search", "merchedising", "trendingSearchProducts"],
   order: FilterOrder.Index,
   limit: 10,
 }
 
-/**
- *
- * @category Queries
- * @param term Search term from input
- * @param id id of request. Response is under this is. Has to be unique across single query. Default is 'search'
- * @param options
- * @returns
- */
-export function listFilters(
-  include: string[],
-  options?: Partial<Options>
-): KlevuFetchFunction {
+export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
   const params: Options = {
     ...defaults,
     ...options,
@@ -69,14 +42,14 @@ export function listFilters(
   const query: KlevuListFilter = {
     filtersToReturn: {
       enabled: true,
-      include,
+      include: params.include,
       exclude: params.exclude,
       options: {
         order: params.order,
         limit: params.limit,
-        mincount: params.minCount,
+        mincount: params.mincount,
       },
-      rangeFilterSettings: params.rangeFilters,
+      rangeFilterSettings: params.rangeFilterSettings,
     },
   }
 
@@ -96,6 +69,18 @@ export function listFilters(
         }
       }
       return queries
+    },
+    onResult: (result) => {
+      if (!options?.manager) {
+        return
+      }
+      const q = result.queryResults?.find((q) =>
+        options?.targetIds?.includes(q.id)
+      )
+      if (!q || !q.filters) {
+        return
+      }
+      options.manager.initFromListFilters(q.filters)
     },
   }
 }

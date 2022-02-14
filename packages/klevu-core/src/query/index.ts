@@ -1,5 +1,6 @@
 import {
   AllRecordQueries,
+  KlevuApiResponse,
   KlevuSuggestionQuery,
 } from "../connection/queryModels"
 import type { LiteralUnion } from "type-fest"
@@ -18,6 +19,7 @@ export type KlevuFetchFunction = {
   queries?: AllRecordQueries[]
   suggestions?: KlevuSuggestionQuery[]
   modifyAfter?: (queries: AllRecordQueries[]) => AllRecordQueries[]
+  onResult?: (response: KlevuApiResponse) => void
 }
 
 export * from "./search"

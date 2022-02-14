@@ -11,7 +11,7 @@ export enum FilterOrder {
   Index = "INDEX",
 }
 
-export enum Sorting {
+export enum KlevuSorting {
   Relevance = "RELEVANCE",
   PriceAsc = "PRICE_ASC",
   PriceDesc = "PRICE_DESC",
@@ -215,7 +215,7 @@ export type KlevuSearchQuery = KlevuBaseQuery & {
      * determine the order. There are various other options available which you
      * can provide to your customers as required.
      */
-    sort?: Sorting
+    sort?: KlevuSorting
 
     /**
      * Specify the number of record you would like to display per page.
@@ -335,7 +335,7 @@ export type KlevuListFilter = {
      * filters. A filter may also not be returned if there aren't enough
      * applicable records in the result set.
      */
-    include: string[]
+    include?: string[]
     /**
      * This is the list of filter keys that you do not want Klevu Search to
      * include in the response. If a filter is specified in both include and
@@ -517,6 +517,7 @@ export function isFilterResultSlider(
 
 type QueryResult = {
   id: string
+  filters?: Array<FilterResultOptions | FilterResultSlider>
   meta: {
     apiKey: string
     isPersonalised: boolean
@@ -574,12 +575,10 @@ export type KlevuApiResponse = {
   }
   suggestionResults?: SuggestionResult[]
   queryResults?: QueryResult[]
-  filters?: Array<FilterResultOptions | FilterResultSlider>
 }
 
 export type KlevuResponse = {
   apiResponse: null | KlevuApiResponse
-  filters?: Array<FilterResultOptions | FilterResultSlider>
   suggestionsById: (id: string) => SuggestionResult | undefined
   queriesById: (id: string) => QueryResult | undefined
   next?: (override?: { limit?: number }) => Promise<KlevuResponse>
