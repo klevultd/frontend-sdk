@@ -1,4 +1,5 @@
 import { KlevuConfig, KlevuTypeOfSearch } from ".."
+import { KlevuLastSearches } from "../store/lastSearches"
 import {
   KlevuEventV1CheckedOutProducts,
   KlevuEventV1ProductTracking,
@@ -51,6 +52,7 @@ export class KlevuEvents {
     totalResults: number,
     typeOfSearch: KlevuTypeOfSearch
   ) {
+    KlevuLastSearches.save(term)
     KlevuEventV1Search({
       klevu_apiKey: KlevuConfig.apiKey,
       klevu_term: term,
