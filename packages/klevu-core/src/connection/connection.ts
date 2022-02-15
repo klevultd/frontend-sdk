@@ -1,6 +1,10 @@
 import Axios from "axios"
 import { KlevuEvents } from "../events/events"
-import { KlevuConfig, KlevuFetchFunction } from "../index"
+import {
+  applyFilterWithManager,
+  KlevuConfig,
+  KlevuFetchFunction,
+} from "../index"
 import { KlevuTypeOfRequest } from "../model"
 import {
   AllRecordQueries,
@@ -94,9 +98,7 @@ function fetchNextPage(
     queryIndex
   ] as KlevuSearchQuery
 
-  const nextFunc: KlevuResponse["next"] = async (override?: {
-    limit?: number
-  }) => {
+  const nextFunc: KlevuResponse["next"] = async (override?) => {
     const lastLimit = override?.limit ?? prevQuery.settings.limit ?? 5
 
     if (!prevQuery.settings.offset) {
@@ -108,7 +110,10 @@ function fetchNextPage(
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     functions[searchFunctionsIndex].queries![queryIndex] = prevQuery
 
-    // TODO: Apply current filters somehow to queries. See https://github.com/klevultd/frontend-sdk/issues/8
+    // add previous filters with manager
+    if (override?.filterManager) {
+      functions.push(applyFilterWithManager(override?.filterManager))
+    }
 
     // remove list filters
     const functionsWithoutListFilters = functions.filter(

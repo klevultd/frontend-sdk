@@ -4,6 +4,7 @@ import {
   KlevuApplyFilter,
   KlevuListFilter,
 } from "../../connection/queryModels"
+import { FilterManager } from "../../store/filterManager"
 
 type Options = {
   /**
@@ -16,7 +17,7 @@ const defaults: Options = {
   targetIds: ["search"],
 }
 
-type Filter = {
+export type ApplyFilter = {
   key: string
   values: string[] | [number, number]
   settings: {
@@ -33,7 +34,7 @@ type Filter = {
  * @returns
  */
 export function applyFilters(
-  filters: Filter[],
+  filters: ApplyFilter[],
   options?: Partial<Options>
 ): KlevuFetchFunction {
   const params: Options = {
@@ -65,4 +66,11 @@ export function applyFilters(
       return queries
     },
   }
+}
+
+export function applyFilterWithManager(
+  manager: FilterManager,
+  options?: Partial<Options>
+) {
+  return applyFilters(manager.toApplyFilters(), options)
 }

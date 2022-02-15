@@ -13,16 +13,19 @@ import {
   ListItemButton,
   ListItemIcon,
   Typography,
+  Button,
 } from "@mui/material"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import React, { useCallback, useEffect, useState } from "react"
 import FilterIcon from "@mui/icons-material/FilterAlt"
 import {
+  applyFilterWithManager,
   FilterManager,
   isFilterResultOptions,
   isFilterResultSlider,
   KlevuDomEvents,
   KlevuFetch,
+  KlevuResponse,
   KlevuSorting,
   listFilters,
   trendingSearchProducts,
@@ -37,6 +40,8 @@ import { Product } from "./product"
 const drawerWidth = 240
 
 const manager = new FilterManager()
+
+let prevRes: KlevuResponse
 
 export function ProductGrid() {
   const [open, setOpen] = useState(false)
@@ -53,7 +58,7 @@ export function ProductGrid() {
     setOpen(false)
   }
 
-  const fetch = useCallback(async () => {
+  const initialFetch = useCallback(async () => {
     const res = await KlevuFetch(
       listFilters({
         targetIds: ["search"],
@@ -63,21 +68,37 @@ export function ProductGrid() {
             minMax: true,
           },
         ],
-        manager: manager,
+        filterManager: manager,
+      }),
+      applyFilterWithManager(manager, {
+        targetIds: ["search"],
       }),
       trendingSearchProducts({
         id: "search",
         limit: 36,
       })
     )
+    prevRes = res
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(res.queriesById("search")?.records ?? [])
   }, [])
 
+  const fetchMore = async () => {
+    const nextRes = await prevRes.next({
+      filterManager: manager,
+    })
+    setProducts([
+      ...products,
+      ...(nextRes.queriesById("search")?.records ?? []),
+    ])
+    prevRes = nextRes
+  }
+
   const handleFilterUpdate = () => {
     setOptions([...manager.options])
     setSliders([...manager.sliders])
+    initialFetch()
   }
 
   React.useEffect(() => {
@@ -96,7 +117,7 @@ export function ProductGrid() {
   }, [])
 
   useEffect(() => {
-    fetch()
+    initialFetch()
   }, [])
 
   return (
@@ -188,6 +209,9 @@ export function ProductGrid() {
               />
             </Grid>
           ))}
+          <Button variant="contained" onClick={() => fetchMore()}>
+            Load more
+          </Button>
         </Grid>
       </div>
     </React.Fragment>

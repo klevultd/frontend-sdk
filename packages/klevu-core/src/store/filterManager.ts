@@ -5,6 +5,7 @@ import {
   isFilterResultSlider,
 } from "../connection/queryModels"
 import { KlevuDomEvents } from "../events/customEvents"
+import { ApplyFilter } from "../query/filters/applyFilter"
 
 export class FilterManager {
   options: FilterResultOptions[] = []
@@ -70,5 +71,38 @@ export class FilterManager {
         },
       })
     )
+  }
+
+  toApplyFilters(): ApplyFilter[] {
+    const filters: ApplyFilter[] = []
+    for (const o of this.options) {
+      const selected = o.options.filter(
+        (subOption) => subOption.selected === true
+      )
+      if (selected.length === 0) {
+        continue
+      }
+      filters.push({
+        key: o.key,
+        values: selected.map((s) => s.value),
+        settings: {
+          singleSelect: false,
+        },
+      })
+    }
+    for (const s of this.sliders) {
+      if (!s.start || !s.end) {
+        continue
+      }
+      filters.push({
+        key: s.key,
+        values: [s.start, s.end],
+        settings: {
+          singleSelect: false,
+        },
+      })
+    }
+
+    return filters
   }
 }

@@ -5,6 +5,7 @@ import {
   KlevuTypeOfRequest,
   KlevuTypeOfSearch,
 } from "../model"
+import { FilterManager } from "../store/filterManager"
 
 export enum FilterOrder {
   Frequency = "FREQ",
@@ -581,5 +582,8 @@ export type KlevuResponse = {
   apiResponse: null | KlevuApiResponse
   suggestionsById: (id: string) => SuggestionResult | undefined
   queriesById: (id: string) => QueryResult | undefined
-  next?: (override?: { limit?: number }) => Promise<KlevuResponse>
+  next?: (override?: {
+    limit?: number
+    filterManager?: FilterManager
+  }) => Promise<KlevuResponse>
 }

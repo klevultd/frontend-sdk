@@ -2,10 +2,10 @@ export enum KlevuDomEvents {
   /**
    * When list of last searched terms update
    */
-  LastSearchUpdate = "klevu-update-last-searches",
+  LastSearchUpdate = "klevu-last-search-update",
 
   /**
    * When filter selection has changed
    */
-  FilterSelectionUpdate = "klevu-update-filter-selection",
+  FilterSelectionUpdate = "klevu-filter-selection-updates",
 }

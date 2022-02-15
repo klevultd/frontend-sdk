@@ -23,7 +23,7 @@ type Options = {
   /**
    * Automatically apply filters to manager
    */
-  manager?: FilterManager
+  filterManager?: FilterManager
 } & Pick<FilterType, "include" | "exclude" | "rangeFilterSettings"> &
   FilterType["options"]
 
@@ -71,7 +71,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
       return queries
     },
     onResult: (result) => {
-      if (!options?.manager) {
+      if (!options?.filterManager) {
         return
       }
       const q = result.queryResults?.find((q) =>
@@ -80,7 +80,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
       if (!q || !q.filters) {
         return
       }
-      options.manager.initFromListFilters(q.filters)
+      options.filterManager.initFromListFilters(q.filters)
     },
   }
 }
