@@ -10,7 +10,7 @@
   "author": "Klevu",
   "license": "MIT",
   "workspaces": [
-    "examples",
+    "examples/react",
     "packages/core",
     "packages/ui"
   ],

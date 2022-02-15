@@ -1,5 +1,5 @@
 {
-  "name": "examples",
+  "name": "examples-react",
   "version": "1.0.0",
   "description": "",
   "main": "simple.js",
@@ -11,20 +11,21 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@klevu/core": "file:../packages/klevu-core",
+    "@klevu/core": "file:../../packages/klevu-core",
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "lodash.debounce": "^4.0.8",
     "material-ui-popup-state": "^2.0.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "vue": "^2.6.14"
+    "react-dom": "^17.0.2"
   },
   "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
     "@types/react": "^17.0.38",
+    "@vitejs/plugin-react": "^1.2.0",
     "vite": "^2.7.13"
   }
 }

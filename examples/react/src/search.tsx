@@ -87,7 +87,7 @@ export function Search() {
     debouncedChangeHandler(event.target.value)
   }
 
-  const debouncedChangeHandler = useMemo(() => debounce(doSearch, 300), [])
+  const debouncedChangeHandler: any = useMemo(() => debounce(doSearch, 300), [])
 
   const clickOnSearch = (suggestion: string) => {
     const raw = suggestion.replace(/<[^>]*>?/gm, "")

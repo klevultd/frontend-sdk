@@ -20,7 +20,7 @@ const defaults: SearchOptions = {
     KlevuTypeOfRecord.Cms,
     KlevuTypeOfRecord.Category,
   ],
-  fields: ["id", "image", "name", "url"],
+  fields: ["id", "image", "name", "url", "price", "currency"],
 }
 
 /**

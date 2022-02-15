@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   Typography,
   Button,
+  Slider,
 } from "@mui/material"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import React, { useCallback, useEffect, useState } from "react"
@@ -21,8 +22,6 @@ import FilterIcon from "@mui/icons-material/FilterAlt"
 import {
   applyFilterWithManager,
   FilterManager,
-  isFilterResultOptions,
-  isFilterResultSlider,
   KlevuDomEvents,
   KlevuFetch,
   KlevuResponse,
@@ -49,6 +48,7 @@ export function ProductGrid() {
   const [sliders, setSliders] = useState<FilterResultSlider[]>(manager.sliders)
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [sorting, setSorting] = useState(KlevuSorting.Relevance)
+  const [showMore, setShowMore] = useState(false)
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -68,6 +68,7 @@ export function ProductGrid() {
             minMax: true,
           },
         ],
+        exclude: ["inventory_item_id", "rim_size", "category"],
         filterManager: manager,
       }),
       applyFilterWithManager(manager, {
@@ -76,13 +77,21 @@ export function ProductGrid() {
       trendingSearchProducts({
         id: "search",
         limit: 36,
+        sort: sorting,
       })
     )
     prevRes = res
+
+    const searchResult = res.queriesById("search")
+    if (!searchResult) {
+      return
+    }
+
+    setShowMore(Boolean(res.next))
     setOptions(manager.options)
     setSliders(manager.sliders)
-    setProducts(res.queriesById("search")?.records ?? [])
-  }, [])
+    setProducts(searchResult.records ?? [])
+  }, [sorting])
 
   const fetchMore = async () => {
     const nextRes = await prevRes.next({
@@ -93,11 +102,12 @@ export function ProductGrid() {
       ...(nextRes.queriesById("search")?.records ?? []),
     ])
     prevRes = nextRes
+    setShowMore(Boolean(nextRes.next))
   }
 
   const handleFilterUpdate = () => {
-    setOptions([...manager.options])
-    setSliders([...manager.sliders])
+    setOptions(manager.options)
+    setSliders(manager.sliders)
     initialFetch()
   }
 
@@ -118,7 +128,7 @@ export function ProductGrid() {
 
   useEffect(() => {
     initialFetch()
-  }, [])
+  }, [sorting])
 
   return (
     <React.Fragment>
@@ -131,17 +141,25 @@ export function ProductGrid() {
             boxSizing: "border-box",
           },
         }}
-        variant="persistent"
+        variant="temporary"
         anchor="left"
         open={open}
+        onClose={handleDrawerClose}
       >
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
         </IconButton>
         <Divider />
-        {manager.options.map((o, i) => (
+        {options.map((o, i) => (
           <React.Fragment>
-            <Typography variant="h5">{o.label}</Typography>
+            <Typography
+              variant="h6"
+              style={{
+                margin: "0 12px",
+              }}
+            >
+              {o.label}
+            </Typography>
             <List key={i}>
               {o.options.map((o2, i2) => (
                 <ListItemButton
@@ -163,6 +181,20 @@ export function ProductGrid() {
                 </ListItemButton>
               ))}
             </List>
+          </React.Fragment>
+        ))}
+        {sliders.map((s, i) => (
+          <React.Fragment>
+            <Typography variant="h6" style={{ margin: "0 12px" }}>
+              {s.label}
+            </Typography>
+            <div style={{ margin: "24px" }}>
+              <Slider
+                defaultValue={[s.start || s.min, s.end || s.max]}
+                max={s.max}
+                min={s.min}
+              />
+            </div>
           </React.Fragment>
         ))}
       </Drawer>
@@ -200,7 +232,13 @@ export function ProductGrid() {
             </MenuItem>
           </Select>
         </Box>
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+          style={{
+            margin: "24px",
+          }}
+        >
           {products.map((p, i) => (
             <Grid item key={i}>
               <Product
@@ -209,10 +247,12 @@ export function ProductGrid() {
               />
             </Grid>
           ))}
+        </Grid>
+        {showMore ? (
           <Button variant="contained" onClick={() => fetchMore()}>
             Load more
           </Button>
-        </Grid>
+        ) : null}
       </div>
     </React.Fragment>
   )

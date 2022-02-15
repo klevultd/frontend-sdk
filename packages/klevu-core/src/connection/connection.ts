@@ -98,6 +98,21 @@ function fetchNextPage(
     queryIndex
   ] as KlevuSearchQuery
 
+  const prevQueryResponse = response.queryResults?.find(
+    (q) => q.id === prevQuery.id
+  )
+  if (!prevQueryResponse) {
+    return undefined
+  }
+
+  // no more pages
+  if (
+    prevQueryResponse.meta.totalResultsFound <
+    prevQueryResponse.meta.offset + prevQueryResponse.meta.noOfResults
+  ) {
+    return undefined
+  }
+
   const nextFunc: KlevuResponse["next"] = async (override?) => {
     const lastLimit = override?.limit ?? prevQuery.settings.limit ?? 5
 
