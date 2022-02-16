@@ -51,7 +51,11 @@ export function applyFilters(
   return {
     klevuFunctionId: "applyFilters",
     modifyAfter: (queries) => {
-      for (const q of queries) {
+      const copy = Array.from(queries)
+      if (filters.length == 0) {
+        return copy
+      }
+      for (const q of copy) {
         if (!isKlevuSearchQuery(q)) {
           continue
         }
@@ -63,7 +67,7 @@ export function applyFilters(
           q.filters = filters
         }
       }
-      return queries
+      return copy
     },
   }
 }

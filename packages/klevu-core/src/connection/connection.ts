@@ -127,15 +127,16 @@ function fetchNextPage(
 
     // add previous filters with manager
     if (override?.filterManager) {
+      const prevApply = functions.findIndex(
+        (f) => f.klevuFunctionId === "applyFilters"
+      )
+      if (prevApply !== -1) {
+        functions.splice(prevApply, 1)
+      }
       functions.push(applyFilterWithManager(override?.filterManager))
     }
 
-    // remove list filters
-    const functionsWithoutListFilters = functions.filter(
-      (f) => f.klevuFunctionId !== "listfilters"
-    )
-
-    return await KlevuFetch(...functionsWithoutListFilters)
+    return await KlevuFetch(...removeListFilters(functions))
   }
 
   return nextFunc
@@ -190,4 +191,20 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
     recordQueries,
     suggestionQueries,
   }
+}
+
+function removeListFilters(
+  functions: KlevuFetchFunction[]
+): KlevuFetchFunction[] {
+  return functions
+    .filter((f) => f.klevuFunctionId !== "listfilters")
+    .map((f) => {
+      f.queries = f.queries?.map((q) => {
+        if (isKlevuSearchQuery(q)) {
+          delete q.filters?.filtersToReturn
+        }
+        return q
+      })
+      return f
+    })
 }

@@ -56,7 +56,8 @@ export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
   return {
     klevuFunctionId: "listfilters",
     modifyAfter: (queries) => {
-      for (const q of queries) {
+      const copy = Array.from(queries)
+      for (const q of copy) {
         if (!isKlevuSearchQuery(q)) {
           continue
         }
@@ -68,7 +69,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
           q.filters = filters
         }
       }
-      return queries
+      return copy
     },
     onResult: (result) => {
       if (!options?.filterManager) {

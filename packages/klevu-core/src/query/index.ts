@@ -3,7 +3,7 @@ import {
   KlevuApiResponse,
   KlevuSuggestionQuery,
 } from "../connection/queryModels"
-import type { LiteralUnion } from "type-fest"
+import type { LiteralUnion, ReadonlyDeep } from "type-fest"
 
 export type KlevuFetchIds =
   | "search"
@@ -18,7 +18,7 @@ export type KlevuFetchFunction = {
   klevuFunctionId: LiteralUnion<KlevuFetchIds, string>
   queries?: AllRecordQueries[]
   suggestions?: KlevuSuggestionQuery[]
-  modifyAfter?: (queries: AllRecordQueries[]) => AllRecordQueries[]
+  modifyAfter?: (queries: Readonly<AllRecordQueries[]>) => AllRecordQueries[]
   onResult?: (response: KlevuApiResponse) => void
 }
 

@@ -4,6 +4,7 @@ import {
   KlevuLastSearches,
   KlevuTypeOfRecord,
   search,
+  SearchPreference,
   suggestions,
   trendingSearchProducts,
 } from "@klevu/core"
