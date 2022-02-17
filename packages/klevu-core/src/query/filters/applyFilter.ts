@@ -6,14 +6,14 @@ import {
 } from "../../connection/queryModels"
 import { FilterManager } from "../../store/filterManager"
 
-type Options = {
+export type ApplyFilterOptions = {
   /**
    * Which queries should have these filters applied. By defaut this is ["search"]
    */
   targetIds: string[]
 }
 
-const defaults: Options = {
+const defaults: ApplyFilterOptions = {
   targetIds: ["search"],
 }
 
@@ -35,9 +35,9 @@ export type ApplyFilter = {
  */
 export function applyFilters(
   filters: ApplyFilter[],
-  options?: Partial<Options>
+  options?: Partial<ApplyFilterOptions>
 ): KlevuFetchFunction {
-  const params: Options = {
+  const params: ApplyFilterOptions = {
     ...defaults,
     ...options,
   }
@@ -70,11 +70,4 @@ export function applyFilters(
       return copy
     },
   }
-}
-
-export function applyFilterWithManager(
-  manager: FilterManager,
-  options?: Partial<Options>
-) {
-  return applyFilters(manager.toApplyFilters(), options)
 }
