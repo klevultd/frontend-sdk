@@ -1,4 +1,10 @@
-import { KlevuConfig, KlevuFetch, search, suggestions } from ".."
+import {
+  KlevuConfig,
+  KlevuFetch,
+  search,
+  suggestions,
+  trendingSearchProducts,
+} from ".."
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -48,4 +54,33 @@ test("Pagination test", async () => {
   const nextNextFirstId = nextNextResult.queriesById("search")?.records[0].id
   expect(nextNextFirstId).not.toBe(prevFirstId)
   expect(nextNextFirstId).not.toBe(nextFirstId)
+})
+
+test("Fallback query", async () => {
+  const result = await KlevuFetch(
+    search("asdfgsdjug8isujgosidgjidsogjsdiogjsdiog", {
+      id: "wrong-search",
+      fallbackWhenCountLessThan: 300,
+      fallbackQuery: trendingSearchProducts(),
+    })
+  )
+
+  expect(result.queriesById("wrong-search")?.records.length).toBe(0)
+  expect(result.queriesById("wrong-search-fallback")).toBeDefined()
+  expect(
+    result.queriesById("wrong-search-fallback")?.records.length
+  ).toBeGreaterThan(0)
+})
+
+test("No fallback when enough results", async () => {
+  const result = await KlevuFetch(
+    search("hoodies", {
+      id: "wrong-search",
+      fallbackWhenCountLessThan: 2,
+      fallbackQuery: trendingSearchProducts(),
+    })
+  )
+
+  expect(result.queriesById("wrong-search")?.records.length).toBeGreaterThan(0)
+  expect(result.queriesById("wrong-search-fallback")).not.toBeDefined()
 })

@@ -10,7 +10,7 @@
     "build": "tsc",
     "qoc": "eslint src/",
     "docs": "typedoc --out docs",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest src --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
   },
   "author": "Klevu",
   "license": "MIT",

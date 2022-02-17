@@ -6,7 +6,8 @@
   "scripts": {
     "start": "vite",
     "build": "",
-    "qoc": ""
+    "qoc": "",
+    "test": "echo 'No tests'"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",

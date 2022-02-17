@@ -5,14 +5,15 @@
   "scripts": {
     "build": "npm run build -ws",
     "example": "cd examples && npm start",
-    "qoc": "npm run qoc -ws "
+    "qoc": "npm run qoc -ws ",
+    "test": "npm run test -ws"
   },
   "author": "Klevu",
   "license": "MIT",
   "workspaces": [
     "examples/react",
-    "packages/core",
-    "packages/ui"
+    "packages/klevu-core",
+    "packages/klevu-ui"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.2",

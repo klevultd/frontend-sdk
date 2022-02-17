@@ -1,4 +1,5 @@
 import { KlevuDomEvents } from "../events/customEvents"
+import { isBrowser } from "../utils"
 
 export type KlevuLastSearch = {
   timestamp: number
@@ -6,7 +7,7 @@ export type KlevuLastSearch = {
 }
 const SAVE_KEY = "klevu-last-searches"
 let lastSearches: KlevuLastSearch[] = []
-if (window) {
+if (isBrowser()) {
   const res = window.localStorage.getItem(SAVE_KEY)
   if (res) {
     lastSearches = JSON.parse(res)
@@ -20,7 +21,7 @@ export const KlevuLastSearches = {
       term: term,
     })
 
-    if (window && document) {
+    if (isBrowser()) {
       document.dispatchEvent(new CustomEvent(KlevuDomEvents.LastSearchUpdate))
       window.localStorage.setItem(SAVE_KEY, JSON.stringify(lastSearches))
     }
