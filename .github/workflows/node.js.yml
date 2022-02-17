@@ -25,5 +25,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm packages/klevu-core/
+    - run: cd packages/klevu-core/
     - run: npm test
