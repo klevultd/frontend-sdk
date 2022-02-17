@@ -1,4 +1,5 @@
 import Axios from "axios"
+import cloneDeep from "lodash.clonedeep"
 import { KlevuEvents } from "../events/events"
 import {
   applyFilterWithManager,
@@ -21,8 +22,6 @@ export async function KlevuFetch(
 ): Promise<KlevuResponse> {
   const { recordQueries, suggestionQueries } =
     cleanAndProcessFunctions(functions)
-
-  // TODO: Check cache and send the result. If cached send still event at this point
 
   const payload: KlevuPayload = {
     context: {
@@ -165,10 +164,10 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
     if (f.queries) {
-      recordQueries.push(...f.queries)
+      recordQueries.push(...cloneDeep(f.queries))
     }
     if (f.suggestions) {
-      suggestionQueries.push(...f.suggestions)
+      suggestionQueries.push(...cloneDeep(f.suggestions))
     }
   }
 

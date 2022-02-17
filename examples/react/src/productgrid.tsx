@@ -59,7 +59,7 @@ export function ProductGrid() {
   }
 
   const initialFetch = useCallback(async () => {
-    const res = await KlevuFetch(
+    const functions = [
       listFilters({
         targetIds: ["search"],
         rangeFilterSettings: [
@@ -78,8 +78,10 @@ export function ProductGrid() {
         id: "search",
         limit: 36,
         sort: sorting,
-      })
-    )
+      }),
+    ]
+    console.log(functions)
+    const res = await KlevuFetch(...functions)
     prevRes = res
 
     const searchResult = res.queriesById("search")
@@ -151,7 +153,7 @@ export function ProductGrid() {
         </IconButton>
         <Divider />
         {options.map((o, i) => (
-          <React.Fragment>
+          <React.Fragment key={i}>
             <Typography
               variant="h6"
               style={{
@@ -184,15 +186,18 @@ export function ProductGrid() {
           </React.Fragment>
         ))}
         {sliders.map((s, i) => (
-          <React.Fragment>
+          <React.Fragment key={i}>
             <Typography variant="h6" style={{ margin: "0 12px" }}>
               {s.label}
             </Typography>
             <div style={{ margin: "24px" }}>
               <Slider
-                defaultValue={[s.start || s.min, s.end || s.max]}
-                max={s.max}
-                min={s.min}
+                defaultValue={[
+                  parseInt(s.start || s.min),
+                  parseInt(s.end || s.max),
+                ]}
+                max={parseInt(s.max)}
+                min={parseInt(s.min)}
               />
             </div>
           </React.Fragment>

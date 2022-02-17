@@ -504,10 +504,10 @@ export function isFilterResultOptions(
 
 export type FilterResultSlider = FilterResult & {
   type: FilterType.Slider
-  min: number
-  max: number
-  start: number
-  end: number
+  min: string
+  max: string
+  start: string
+  end: string
 }
 
 export function isFilterResultSlider(
