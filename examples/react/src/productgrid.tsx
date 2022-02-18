@@ -61,24 +61,22 @@ export function ProductGrid() {
   const initialFetch = useCallback(async () => {
     const functions = [
       trendingSearchProducts(
-        [
-          listFilters({
-            rangeFilterSettings: [
-              {
-                key: "klevu_price",
-                minMax: true,
-              },
-            ],
-            exclude: ["inventory_item_id", "rim_size", "category"],
-            filterManager: manager,
-          }),
-          applyFilterWithManager(manager),
-        ],
         {
           id: "search",
           limit: 36,
           sort: sorting,
-        }
+        },
+        listFilters({
+          rangeFilterSettings: [
+            {
+              key: "klevu_price",
+              minMax: true,
+            },
+          ],
+          exclude: ["inventory_item_id", "rim_size", "category"],
+          filterManager: manager,
+        }),
+        applyFilterWithManager(manager)
       ),
     ]
     console.log(functions)
