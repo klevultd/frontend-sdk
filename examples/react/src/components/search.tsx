@@ -74,7 +74,7 @@ export function Search() {
     }
 
     const res = await KlevuFetch(
-      trendingSearchProducts([], {
+      trendingSearchProducts({
         limit: 9,
       })
     )
@@ -212,7 +212,9 @@ export function Search() {
                     <Grid item key={i}>
                       <Product
                         product={p}
-                        onClick={() => alert("Should show product page")}
+                        onClick={() => {
+                          popupState.close()
+                        }}
                       />
                     </Grid>
                   ))}
@@ -226,7 +228,9 @@ export function Search() {
                     <Grid item key={i}>
                       <Product
                         product={p}
-                        onClick={() => alert("Should show product page")}
+                        onClick={() => {
+                          popupState.close()
+                        }}
                       />
                     </Grid>
                   ))}

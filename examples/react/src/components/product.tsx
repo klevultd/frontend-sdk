@@ -3,6 +3,7 @@ import { KlevuEvents } from "@klevu/core"
 import type { KlevuRecord } from "@klevu/core"
 import { Typography } from "@mui/material"
 import { css } from "@emotion/react"
+import { Link } from "react-router-dom"
 
 const containerCss = css`
   display: flex;
@@ -43,9 +44,9 @@ export function Product(props: {
   product: KlevuRecord
   onClick?: (product: KlevuRecord) => void
 }) {
-  const onClick = () => {
+  const onClick = (event) => {
     const p = props.product
-    KlevuEvents.onProductClick({
+    KlevuEvents.productClick({
       klevu_productId: p.id,
       klevu_productName: p.name,
       klevu_productUrl: p.url,
@@ -54,10 +55,11 @@ export function Product(props: {
       klevu_keywords: "",
     })
     props.onClick && props.onClick(props.product)
+    return false
   }
   const p = props.product
   return (
-    <div onClick={onClick} css={containerCss}>
+    <Link to={`/products/${p.id}`} onClick={onClick} css={containerCss}>
       <div
         className="image"
         style={{
@@ -73,6 +75,6 @@ export function Product(props: {
           currency: p.currency,
         }).format(parseFloat(p.price))}
       </Typography>
-    </div>
+    </Link>
   )
 }

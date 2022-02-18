@@ -79,7 +79,6 @@ export function ProductGrid() {
         applyFilterWithManager(manager)
       ),
     ]
-    console.log(functions)
     const res = await KlevuFetch(...functions)
     prevRes = res
 
@@ -245,10 +244,7 @@ export function ProductGrid() {
         >
           {products.map((p, i) => (
             <Grid item key={i}>
-              <Product
-                product={p}
-                onClick={() => alert("Should show product page")}
-              />
+              <Product product={p} />
             </Grid>
           ))}
         </Grid>
