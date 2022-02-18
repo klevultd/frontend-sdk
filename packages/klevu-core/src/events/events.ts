@@ -35,7 +35,7 @@ export class KlevuEvents {
 
   static categoryView() {}
 
-  static onProductClick(
+  static productClick(
     data: Omit<V1ProductTrackingEvent, "klevu_apiKey" | "klevu_type">
   ) {
     KlevuEventV1ProductTracking({
@@ -47,7 +47,7 @@ export class KlevuEvents {
 
   static collect() {}
 
-  static onSearch(
+  static search(
     term: string,
     totalResults: number,
     typeOfSearch: KlevuTypeOfSearch

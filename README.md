@@ -38,25 +38,51 @@ const result = await KlevuFetch(search("hoodies"))
 console.log(result.getQueriesById("hoodies")?.records)
 ```
 
-## Queries and modifiers
+## Queries
 
-Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and search results for typed letters in one request.
+Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
 
-| function                    | type     | Description                                                |
-| --------------------------- | -------- | ---------------------------------------------------------- |
-| `search()`                  | Query    | Most basic query to find items based on a term             |
-| `suggestions()`             | Query    | Fetches suggestions based on a term.                       |
-| `trendingSearch()`          | Query    | Find all products that are trending right now in results   |
-| `newArrivals()`             | Query    | Recommendation list of new arrivals for the current user   |
-| `trending()`                | Query    | Trending recommendation based for current user             |
-| `merchendising()`           | Query    | Products to display on category page                       |
-| `listFilters()`             | Modifer  | List all filters that given search result has              |
-| `applyFilters()`            | Modifier | Applies selected filters to query                          |
-| `applyFiltersWithManager()` | Modifier | Applies filters that's state is managed by `FilterManager` |
+| Klevu Function     | Description                                              |
+| ------------------ | -------------------------------------------------------- |
+| `search()`         | Most basic query to find items based on a term           |
+| `suggestions()`    | Fetches suggestions based on a term.                     |
+| `trendingSearch()` | Find all products that are trending right now in results |
+| `newArrivals()`    | Recommendation list of new arrivals for the current user |
+| `trending()`       | Trending recommendation based for current user           |
+| `merchendising()`  | Products to display on category page                     |
+
+## Modifiers
+
+Some of the functions can be modified with modifier functions. Any number of them can be added to end of query functions
+
+| Modifier                    | Description                                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `listFilters()`             | List all filters that given search result has                                                 |
+| `applyFilters()`            | Applies selected filters to query                                                             |
+| `applyFiltersWithManager()` | Applies filters that's state is managed by `FilterManager`                                    |
+| `fallback()`                | When query returns less results than fallback treshold then additional fallback query is sent |
 
 ## Filter Manager
 
+Filter Manager is a helper class that takes care of state of filters. What are currently selected and what should be sent. It can be passed to `listFilters()` and then result is automatically applied to state. Modifier `applyFiltersWithManager()` can base used to apply current state of filters to query.
+
+@TODO: Write how DOM events are used to notify listeners about updated filters.
+
 ## Events
+
+Klevu requires data for machine learning to work better. `KlevuEvents` class should be used to send the five basic events Klevu has.
+
+```ts
+KlevuEvents.productClick()
+```
+
+| Method            | Description                                                    |
+| ----------------- | -------------------------------------------------------------- |
+| `buy()`           | When products are bought                                       |
+| `categoryClick()` | When product is clicked on category page                       |
+| `categoryView()`  | When certain category is viewed                                |
+| `productClick()`  | When product is clicked on search results                      |
+| `search()`        | When search is made. This is automatically sent in the queries |
 
 # Development
 

@@ -4,6 +4,7 @@ import {
   KlevuNewArrivalsQuery,
 } from "../../connection/queryModels"
 import { KlevuFetchFunction } from ".."
+import { KlevuFetchModifer } from "../../modifiers"
 
 type Options = KlevuDefaultOptions
 
@@ -13,6 +14,7 @@ const defaultOptions = {
 
 export function newArrivals(
   category?: string,
+  modifiers?: KlevuFetchModifer[],
   options?: Partial<Options>
 ): KlevuFetchFunction {
   const params: Options = {

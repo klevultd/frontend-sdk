@@ -1,5 +1,5 @@
 import { SetRequired } from "type-fest"
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchModifer } from ".."
 import {
   FilterOrder,
   isKlevuSearchQuery,
@@ -15,12 +15,6 @@ type FilterType = SetRequired<
 
 type Options = {
   /**
-   * Target query ids where filter is applied. If you define custom id then this
-   * needs to be defined
-   */
-  targetIds: string[]
-
-  /**
    * Automatically apply filters to manager
    */
   filterManager?: FilterManager
@@ -28,12 +22,11 @@ type Options = {
   FilterType["options"]
 
 const defaults: Options = {
-  targetIds: ["search", "merchedising", "trendingSearchProducts"],
   order: FilterOrder.Index,
   limit: 10,
 }
 
-export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
+export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
   const params: Options = {
     ...defaults,
     ...options,
@@ -54,20 +47,18 @@ export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
   }
 
   return {
-    klevuFunctionId: "listfilters",
+    klevuModifierId: "listfilters",
     modifyAfter: (queries) => {
       const copy = Array.from(queries)
       for (const q of copy) {
         if (!isKlevuSearchQuery(q)) {
           continue
         }
-        if (params.targetIds.includes(q.id)) {
-          const filters: KlevuListFilter & KlevuApplyFilter = {
-            ...q.filters,
-            filtersToReturn: query.filtersToReturn,
-          }
-          q.filters = filters
+        const filters: KlevuListFilter & KlevuApplyFilter = {
+          ...q.filters,
+          filtersToReturn: query.filtersToReturn,
         }
+        q.filters = filters
       }
       return copy
     },
@@ -75,13 +66,12 @@ export function listFilters(options?: Partial<Options>): KlevuFetchFunction {
       if (!options?.filterManager) {
         return
       }
-      const q = result.queryResults?.find((q) =>
-        options?.targetIds?.includes(q.id)
-      )
-      if (!q || !q.filters) {
-        return
+
+      for (const qr of result.apiResponse?.queryResults ?? []) {
+        if (qr.filters) {
+          options.filterManager.initFromListFilters(qr.filters)
+        }
       }
-      options.filterManager.initFromListFilters(q.filters)
     },
   }
 }

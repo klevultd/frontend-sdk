@@ -10,28 +10,13 @@ beforeEach(() => {
 
 test("List filters", async () => {
   const result = await KlevuFetch(
-    listFilters({
-      targetIds: ["test"],
-    }),
-    search("hoodies", {
-      id: "test",
-    })
-  )
-
-  expect(result.queriesById("test")).toBeDefined()
-  expect(result.queriesById("test")?.records.length).toBeGreaterThan(0)
-  expect(result.queriesById("test")?.filters).toBeDefined()
-  expect(result.queriesById("test")?.filters?.length).toBeGreaterThan(0)
-})
-
-test("Filters after search", async () => {
-  const result = await KlevuFetch(
-    search("hoodies", {
-      id: "test",
-    }),
-    listFilters({
-      targetIds: ["test"],
-    })
+    search(
+      "hoodies",
+      {
+        id: "test",
+      },
+      listFilters()
+    )
   )
 
   expect(result.queriesById("test")).toBeDefined()
@@ -43,13 +28,15 @@ test("Filters after search", async () => {
 test("Filter manager - populates results", async () => {
   const filterManager = new FilterManager()
   const result = await KlevuFetch(
-    search("hoodies", {
-      id: "test",
-    }),
-    listFilters({
-      targetIds: ["test"],
-      filterManager,
-    })
+    search(
+      "hoodies",
+      {
+        id: "test",
+      },
+      listFilters({
+        filterManager,
+      })
+    )
   )
 
   expect(filterManager.options.length).toBeGreaterThan(0)

@@ -4,6 +4,7 @@ import {
   KlevuTrendingProductsQuery,
 } from "../../connection/queryModels"
 import { KlevuFetchFunction } from ".."
+import { KlevuFetchModifer } from "../../modifiers"
 
 type Options = KlevuDefaultOptions & {
   enablePersonlisation?: boolean
@@ -16,7 +17,10 @@ const defaultOptions: Options = {
   id: "trending",
 }
 
-export function trending(options?: Options): KlevuFetchFunction {
+export function trending(
+  modifiers?: KlevuFetchModifer[],
+  options?: Options
+): KlevuFetchFunction {
   const params: Options = {
     ...defaultOptions,
     ...options,
@@ -53,5 +57,6 @@ export function trending(options?: Options): KlevuFetchFunction {
   return {
     klevuFunctionId: "trending",
     queries: [query],
+    modifiers,
   }
 }

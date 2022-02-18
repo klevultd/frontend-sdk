@@ -4,6 +4,7 @@ import {
   KlevuSearchQuery,
 } from "../../connection/queryModels"
 import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../model"
+import { KlevuFetchModifer } from "../../modifiers"
 import { cleanSearchQuery } from "../../utils"
 
 /**
@@ -14,25 +15,6 @@ export type SearchOptions = KlevuDefaultOptions & {
    * The type of records to search for.
    */
   typeOfRecords: KlevuTypeOfRecord[]
-  /**
-   * Optional fallback query in case that there are less results than defined in option {@link KlevuSearchQuery.settings.fallbackWhenCountLessThan}.
-   *
-   * Type of the KlevuFetchFunction has to be search. Returning search query will have automatic fallback id. Format is "{your-id}-fallback"
-   *
-   * @example Fallback query
-   * ```ts
-   * const result = await KlevuFetch(
-   *   search("hoodies", {
-   *     id: "search-hoodies",
-   *     fallbackWhenCountLessThan: 300,
-   *     fallbackQuery: trendingSearchProducts(),
-   *   })
-   * )
-   *
-   * console.log(result.getQueries("search-hoodies-fallback").records)
-   * ```
-   */
-  fallbackQuery?: KlevuFetchFunction
   doNotSendEvent?: boolean
 } & Omit<KlevuSearchQuery["settings"], "query">
 
@@ -59,7 +41,8 @@ const defaults: SearchOptions = {
  */
 export function search(
   term: string,
-  options?: Partial<SearchOptions>
+  options?: Partial<SearchOptions>,
+  ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
   const { doNotSendEvent, ...otherOptions } = options || {}
 
@@ -82,21 +65,9 @@ export function search(
     },
   }
 
-  let fallbackQuery: KlevuSearchQuery | undefined = undefined
-
-  if (
-    options?.fallbackQuery &&
-    options.fallbackQuery.queries &&
-    options.fallbackQuery.queries.length == 1
-  ) {
-    fallbackQuery = options.fallbackQuery.queries[0] as KlevuSearchQuery
-    fallbackQuery.isFallbackQuery = true
-    fallbackQuery.id = `${query.id}-fallback`
-    query.settings.fallbackQueryId = fallbackQuery.id
-  }
-
   return {
     klevuFunctionId: "search",
-    queries: fallbackQuery !== undefined ? [query, fallbackQuery] : [query],
+    queries: [query],
+    modifiers,
   }
 }

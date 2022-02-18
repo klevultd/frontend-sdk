@@ -4,6 +4,7 @@ import {
   KlevuSuggestionQuery,
 } from "../../connection/queryModels"
 import { KlevuTypeOfRequest } from "../../model"
+import { KlevuFetchModifer } from "../../modifiers"
 import { cleanSearchQuery } from "../../utils"
 
 type Options = KlevuDefaultOptions &

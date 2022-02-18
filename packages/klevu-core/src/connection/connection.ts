@@ -41,13 +41,6 @@ export async function KlevuFetch(
     }
   )
 
-  // Send event to functions on result
-  for (const f of functions) {
-    if (f.onResult) {
-      f.onResult(response.data)
-    }
-  }
-
   const responseObject: KlevuResponse = {
     apiResponse: response.data,
     suggestionsById: (id: string) =>
@@ -55,6 +48,17 @@ export async function KlevuFetch(
     queriesById: (id: string) =>
       response.data.queryResults?.find((s) => s.id === id),
     next: fetchNextPage(response.data, functions),
+  }
+
+  // Send event to functions on result
+  for (const f of functions) {
+    if (f.modifiers) {
+      for (const modifier of f.modifiers) {
+        if (modifier.onResult) {
+          modifier.onResult(responseObject)
+        }
+      }
+    }
   }
 
   const searchQuery = recordQueries.find(
@@ -126,13 +130,13 @@ function fetchNextPage(
 
     // add previous filters with manager
     if (override?.filterManager) {
-      const prevApply = functions.findIndex(
-        (f) => f.klevuFunctionId === "applyFilters"
-      )
-      if (prevApply !== -1) {
-        functions.splice(prevApply, 1)
+      // @TODO remove applyFilter modifer from functions as we are overriding it
+      for (const f of functions) {
+        if (!f.modifiers) {
+          f.modifiers = []
+        }
+        f.modifiers.push(applyFilterWithManager(override.filterManager))
       }
-      functions.push(applyFilterWithManager(override?.filterManager))
     }
 
     return await KlevuFetch(...removeListFilters(functions))
@@ -151,7 +155,7 @@ function sendSearchEvent(
     searchResponse &&
     searchQuery.doNotSendEvent !== true
   ) {
-    KlevuEvents.onSearch(
+    KlevuEvents.search(
       searchQuery.settings.query.term,
       searchResponse.meta.totalResultsFound,
       searchResponse.meta.typeOfSearch
@@ -164,7 +168,15 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
     if (f.queries) {
-      recordQueries.push(...cloneDeep(f.queries))
+      let qs = cloneDeep(f.queries)
+      if (f.modifiers) {
+        for (const modifier of f.modifiers) {
+          if (modifier.modifyAfter) {
+            qs = modifier.modifyAfter(qs)
+          }
+        }
+      }
+      recordQueries.push(...qs)
     }
     if (f.suggestions) {
       suggestionQueries.push(...cloneDeep(f.suggestions))
@@ -177,12 +189,6 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
       throw new Error(
         "Duplicate ids in request. Please provider unique ids for requests"
       )
-    }
-  }
-
-  for (const f of functions) {
-    if (f.modifyAfter) {
-      recordQueries = f.modifyAfter(recordQueries)
     }
   }
 

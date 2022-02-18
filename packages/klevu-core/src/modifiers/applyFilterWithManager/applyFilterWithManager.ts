@@ -1,5 +1,5 @@
 import { FilterManager } from "../../store/filterManager"
-import { ApplyFilterOptions, applyFilters } from "./applyFilter"
+import { ApplyFilterOptions, applyFilters } from "../applyFilter/applyFilter"
 
 export function applyFilterWithManager(
   manager: FilterManager,
