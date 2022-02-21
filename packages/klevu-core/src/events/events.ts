@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuTypeOfSearch } from ".."
+import { KlevuConfig, KlevuRecord, KlevuTypeOfSearch } from ".."
 import { KlevuLastSearches } from "../store/lastSearches"
 import {
   KlevuEventV1CheckedOutProducts,
@@ -9,24 +9,29 @@ import {
 } from "./eventRequests"
 
 export class KlevuEvents {
+  /**
+   * Tell Klevu what products where bought by the user
+   *
+   * @param items Items user bought
+   */
   static buy(
-    products: Array<
-      Pick<
-        V1CheckedOutProductsEvent,
-        | "klevu_currency"
-        | "klevu_productGroupId"
-        | "klevu_productId"
-        | "klevu_productVariantId"
-        | "klevu_salePrice"
-        | "klevu_type"
-        | "klevu_unit"
-      >
-    >
+    items: Array<{
+      amount: number
+      product: KlevuRecord
+      variantId?: string
+    }>
   ) {
-    for (const p of products) {
+    for (const i of items) {
+      const p = i.product
       KlevuEventV1CheckedOutProducts({
         klevu_apiKey: KlevuConfig.apiKey,
-        ...p,
+        klevu_currency: p.currency,
+        klevu_productGroupId: p.itemGroupId,
+        klevu_productId: p.id,
+        klevu_salePrice: parseFloat(p.salePrice),
+        klevu_productVariantId: i.variantId || p.id,
+        klevu_type: "checkout",
+        klevu_unit: i.amount,
       })
     }
   }
@@ -35,18 +40,40 @@ export class KlevuEvents {
 
   static categoryView() {}
 
+  /**
+   * When product is clicked in search results. *Do not* use this in category navigation.
+   *
+   * @param searchTerm
+   * @param product
+   */
   static productClick(
-    data: Omit<V1ProductTrackingEvent, "klevu_apiKey" | "klevu_type">
+    searchTerm: string,
+    product: KlevuRecord,
+    variantId?: string
   ) {
     KlevuEventV1ProductTracking({
       klevu_apiKey: KlevuConfig.apiKey,
       klevu_type: "clicked",
-      ...data,
+      klevu_keywords: searchTerm,
+      klevu_productGroupId: product.itemGroupId,
+      klevu_productId: product.id,
+      klevu_productName: product.name,
+      klevu_productUrl: product.url,
+      klevu_productVariantId: variantId || product.id,
     })
   }
 
   static collect() {}
 
+  /**
+   * What user has last searched. This is important for Klevu to function
+   * properly. `search()` query automatically sends this event. Use
+   * `doNotSendEvent` option in search to disable it.
+   *
+   * @param term What was searched
+   * @param totalResults Total number of results (can be found in result meta)
+   * @param typeOfSearch Type of search used (can be found in result meta)
+   */
   static search(
     term: string,
     totalResults: number,

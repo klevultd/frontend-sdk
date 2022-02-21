@@ -105,4 +105,21 @@ export class FilterManager {
 
     return filters
   }
+
+  currentSelection(key: string): string[] | undefined {
+    const opt = this.options.find((o) => o.key === key)
+    if (opt) {
+      const selectedOptions = opt.options.filter(
+        (subOpt) => subOpt.selected === true
+      )
+      return selectedOptions.map((s) => s.value)
+    }
+
+    const slider = this.sliders.find((s) => s.key === key)
+    if (slider && slider.start && slider.end) {
+      return [slider.start, slider.end]
+    }
+
+    return undefined
+  }
 }

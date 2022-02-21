@@ -61,6 +61,10 @@ Some of the functions can be modified with modifier functions. Any number of the
 | `applyFilters()`            | Applies selected filters to query                                                             |
 | `applyFiltersWithManager()` | Applies filters that's state is managed by `FilterManager`                                    |
 | `fallback()`                | When query returns less results than fallback treshold then additional fallback query is sent |
+| `boostWithKeywords()`       | Boost or deboost results with keywords                                                        |
+| `boostWithRecords()`        | Boost or deboost certain products in the result by id                                         |
+| `boostWithFilters()`        | Boost or deboost results based on a filters                                                   |
+| `boostWithFilterManager()`  | Boost or deboost results based in selection in filter manager                                 |
 
 ## Filter Manager
 

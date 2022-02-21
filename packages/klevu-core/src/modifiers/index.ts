@@ -6,6 +6,9 @@ export type KlevuModifierId =
   | "applyFilters"
   | "fallback"
   | "boostWithKeywords"
+  | "boostWithFilterManager"
+  | "boostWithFilters"
+  | "personalisation"
 
 export type KlevuFetchModifer = {
   klevuModifierId: LiteralUnion<KlevuModifierId, string>
@@ -19,3 +22,5 @@ export * from "./fallback/fallback"
 export * from "./listFilters/listFilters"
 export * from "./boostWithKeywords/boostWithKeywords"
 export * from "./boostWithRecords/boostWithRecords"
+export * from "./boostWithFilters/boostWithFilters"
+export * from "./boostWithFilterManager/boostWithFilterManager"
