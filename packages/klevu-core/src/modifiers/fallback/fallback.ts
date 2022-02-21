@@ -1,8 +1,5 @@
 import { KlevuFetchModifer } from ".."
-import {
-  isKlevuSearchQuery,
-  KlevuSearchQuery,
-} from "../../connection/queryModels"
+import { KlevuBaseQuery } from "../../connection/queryModels"
 import { KlevuFetchFunction } from "../../queries"
 
 export function fallback(func: KlevuFetchFunction): KlevuFetchModifer {
@@ -10,7 +7,7 @@ export function fallback(func: KlevuFetchFunction): KlevuFetchModifer {
     throw new Error("Fallback modifier can only be applied to single query")
   }
 
-  const fallbackQuery: KlevuSearchQuery = func.queries[0] as KlevuSearchQuery
+  const fallbackQuery: KlevuBaseQuery = func.queries[0] as KlevuBaseQuery
   fallbackQuery.isFallbackQuery = true
 
   return {
@@ -19,12 +16,16 @@ export function fallback(func: KlevuFetchFunction): KlevuFetchModifer {
       const copy = Array.from(queries)
 
       for (const query of copy) {
-        if (isKlevuSearchQuery(query)) {
-          fallbackQuery.id = `${query.id}-fallback`
-          query.settings.fallbackQueryId = fallbackQuery.id
+        if (!query.id || query.isFallbackQuery === true) {
+          continue
         }
+        fallbackQuery.id = `${query.id}-fallback`
+        if (!query.settings) {
+          query.settings = {}
+        }
+        query.settings.fallbackQueryId = fallbackQuery.id
+        copy.push(fallbackQuery)
       }
-      copy.push(fallbackQuery)
       return copy
     },
   }

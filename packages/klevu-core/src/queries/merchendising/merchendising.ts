@@ -1,11 +1,11 @@
 import { KlevuFetchFunction } from ".."
 import {
   KlevuDefaultOptions,
-  KlevuSearchQuery,
+  KlevuBaseQuery,
 } from "../../connection/queryModels"
 import { KlevuTypeOfRequest } from "../../model"
 
-type Options = KlevuDefaultOptions & Omit<KlevuSearchQuery["settings"], "query">
+type Options = KlevuDefaultOptions & Omit<KlevuBaseQuery["settings"], "query">
 
 const defaults: Options = {
   id: "merchendising",
@@ -20,7 +20,7 @@ export function merchendising(
     ...options,
   }
 
-  const query: KlevuSearchQuery = {
+  const query: KlevuBaseQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.Search,
     doNotSendEvent: true,

@@ -1,9 +1,5 @@
 import { KlevuFetchModifer } from ".."
-import {
-  isKlevuSearchQuery,
-  KlevuApplyFilter,
-  KlevuListFilter,
-} from "../../connection/queryModels"
+import { KlevuApplyFilter, KlevuListFilter } from "../../connection/queryModels"
 
 export type ApplyFilterOptions = {}
 
@@ -48,9 +44,6 @@ export function applyFilters(
         return copy
       }
       for (const q of copy) {
-        if (!isKlevuSearchQuery(q)) {
-          continue
-        }
         const filters: KlevuListFilter & KlevuApplyFilter = {
           ...q.filters,
           applyFilters: query.applyFilters,

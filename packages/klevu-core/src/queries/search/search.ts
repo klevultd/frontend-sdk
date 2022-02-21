@@ -1,7 +1,8 @@
 import { KlevuFetchFunction } from ".."
 import {
   KlevuDefaultOptions,
-  KlevuSearchQuery,
+  KlevuBaseQuery,
+  KlevuBaseQuerySettings,
 } from "../../connection/queryModels"
 import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../model"
 import { KlevuFetchModifer } from "../../modifiers"
@@ -16,7 +17,7 @@ export type SearchOptions = KlevuDefaultOptions & {
    */
   typeOfRecords: KlevuTypeOfRecord[]
   doNotSendEvent?: boolean
-} & Omit<KlevuSearchQuery["settings"], "query">
+} & Omit<KlevuBaseQuerySettings, "query">
 
 const defaults: SearchOptions = {
   id: "search",
@@ -53,7 +54,7 @@ export function search(
 
   const cleanedTerm = cleanSearchQuery(term)
 
-  const query: KlevuSearchQuery = {
+  const query: KlevuBaseQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.Search,
     doNotSendEvent,

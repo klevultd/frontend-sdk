@@ -9,11 +9,10 @@ import {
 import { KlevuTypeOfRequest } from "../model"
 import {
   AllRecordQueries,
-  isKlevuSearchQuery,
   KlevuApiResponse,
   KlevuPayload,
   KlevuResponse,
-  KlevuSearchQuery,
+  KlevuBaseQuery,
   KlevuSuggestionQuery,
 } from "./queryModels"
 
@@ -63,7 +62,7 @@ export async function KlevuFetch(
 
   const searchQuery = recordQueries.find(
     (q) => q.typeOfRequest === KlevuTypeOfRequest.Search && !q.isFallbackQuery
-  ) as KlevuSearchQuery | undefined
+  ) as KlevuBaseQuery | undefined
 
   if (searchQuery) {
     sendSearchEvent(searchQuery, responseObject)
@@ -81,7 +80,7 @@ function fetchNextPage(
   }
 
   const searchFunctionsIndex = functions.findIndex((f) =>
-    f.queries?.find((q) => isKlevuSearchQuery(q) && !q.isFallbackQuery)
+    f.queries?.find((q) => !q.isFallbackQuery)
   )
 
   if (searchFunctionsIndex === -1) {
@@ -90,16 +89,16 @@ function fetchNextPage(
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const queryIndex = functions[searchFunctionsIndex].queries!.findIndex(
-    (q) => isKlevuSearchQuery(q) && !q.isFallbackQuery
+    (q) => !q.isFallbackQuery
   )
 
   if (queryIndex === -1) {
     return undefined
   }
 
-  const prevQuery: KlevuSearchQuery = functions[searchFunctionsIndex].queries?.[
+  const prevQuery: KlevuBaseQuery = functions[searchFunctionsIndex].queries?.[
     queryIndex
-  ] as KlevuSearchQuery
+  ] as KlevuBaseQuery
 
   const prevQueryResponse = response.queryResults?.find(
     (q) => q.id === prevQuery.id
@@ -117,9 +116,13 @@ function fetchNextPage(
   }
 
   const nextFunc: KlevuResponse["next"] = async (override?) => {
-    const lastLimit = override?.limit ?? prevQuery.settings.limit ?? 5
+    const lastLimit = override?.limit ?? prevQuery.settings?.limit ?? 5
 
-    if (!prevQuery.settings.offset) {
+    if (!prevQuery.settings) {
+      prevQuery.settings = {}
+    }
+
+    if (!prevQuery.settings?.offset) {
       prevQuery.settings.offset = lastLimit
     } else {
       prevQuery.settings.offset += lastLimit
@@ -146,12 +149,12 @@ function fetchNextPage(
 }
 
 function sendSearchEvent(
-  searchQuery: KlevuSearchQuery,
+  searchQuery: KlevuBaseQuery,
   responseObject: KlevuResponse
 ) {
   const searchResponse = responseObject.queriesById(searchQuery.id)
   if (
-    searchQuery.settings.query?.term &&
+    searchQuery.settings?.query?.term &&
     searchResponse &&
     searchQuery.doNotSendEvent !== true
   ) {
@@ -205,7 +208,7 @@ function removeListFilters(
     .filter((f) => f.klevuFunctionId !== "listfilters")
     .map((f) => {
       f.queries = f.queries?.map((q) => {
-        if (isKlevuSearchQuery(q)) {
+        if (q.filters?.filtersToReturn) {
           delete q.filters?.filtersToReturn
         }
         return q

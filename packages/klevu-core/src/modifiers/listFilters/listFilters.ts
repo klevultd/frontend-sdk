@@ -2,7 +2,6 @@ import { SetRequired } from "type-fest"
 import { KlevuFetchModifer } from ".."
 import {
   FilterOrder,
-  isKlevuSearchQuery,
   KlevuApplyFilter,
   KlevuListFilter,
 } from "../../connection/queryModels"
@@ -51,9 +50,6 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
     modifyAfter: (queries) => {
       const copy = Array.from(queries)
       for (const q of copy) {
-        if (!isKlevuSearchQuery(q)) {
-          continue
-        }
         const filters: KlevuListFilter & KlevuApplyFilter = {
           ...q.filters,
           filtersToReturn: query.filtersToReturn,

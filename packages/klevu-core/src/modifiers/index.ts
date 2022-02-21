@@ -1,7 +1,11 @@
 import { LiteralUnion } from "type-fest"
 import { AllRecordQueries, KlevuResponse } from "../connection/queryModels"
 
-export type KlevuModifierId = "listfilters" | "applyFilters" | "fallback"
+export type KlevuModifierId =
+  | "listfilters"
+  | "applyFilters"
+  | "fallback"
+  | "boostWithKeywords"
 
 export type KlevuFetchModifer = {
   klevuModifierId: LiteralUnion<KlevuModifierId, string>
@@ -13,3 +17,5 @@ export * from "./applyFilter/applyFilter"
 export * from "./applyFilterWithManager/applyFilterWithManager"
 export * from "./fallback/fallback"
 export * from "./listFilters/listFilters"
+export * from "./boostWithKeywords/boostWithKeywords"
+export * from "./boostWithRecords/boostWithRecords"
