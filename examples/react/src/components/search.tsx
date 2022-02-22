@@ -6,7 +6,7 @@ import {
   search,
   SearchPreference,
   suggestions,
-  trendingSearchProducts,
+  trendingSearch,
 } from "@klevu/core"
 import type { KlevuRecord, KlevuLastSearch } from "@klevu/core"
 import {
@@ -74,13 +74,11 @@ export function Search() {
     }
 
     const res = await KlevuFetch(
-      trendingSearchProducts({
+      trendingSearch({
         limit: 9,
       })
     )
-    setTrendingProducts(
-      res.queriesById("trendingSearchProducts")?.records ?? []
-    )
+    setTrendingProducts(res.queriesById("trendingSearch")?.records ?? [])
   }
 
   const onSearchChange = (event) => {

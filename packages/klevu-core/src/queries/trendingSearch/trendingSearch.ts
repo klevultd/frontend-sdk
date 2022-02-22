@@ -2,7 +2,7 @@ import { search, SearchOptions } from "../search/search"
 import { KlevuFetchFunction, KlevuFetchModifer, KlevuTypeOfRecord } from "../.."
 
 /**
- * Create a trending search query. Id for this query is `trendingSearchProducts`
+ * Create a trending search query. Id for this query is `trendingSearch`
  *
  * @category Queries
  * @param options {@link search}
@@ -11,13 +11,13 @@ import { KlevuFetchFunction, KlevuFetchModifer, KlevuTypeOfRecord } from "../.."
  * @example Simple example
  * ```
  * const result = await KlevuFetch(
- *  trendingSearchProducts()
+ *  trendingSearch()
  * )
  *
- * console.log(result.getQueries("trendingSearchProducts").records)
+ * console.log(result.getQueries("trendingSearch").records)
  * ```
  */
-export function trendingSearchProducts(
+export function trendingSearch(
   options?: Partial<SearchOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
@@ -25,7 +25,7 @@ export function trendingSearchProducts(
     "*",
     {
       doNotSendEvent: true,
-      id: "trendingSearchProducts",
+      id: "trendingSearch",
       typeOfRecords: [KlevuTypeOfRecord.Product],
       ...options,
     },

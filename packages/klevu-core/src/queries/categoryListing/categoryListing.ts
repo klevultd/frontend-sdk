@@ -8,10 +8,10 @@ import { KlevuTypeOfRequest } from "../../model"
 type Options = KlevuDefaultOptions & Omit<KlevuBaseQuery["settings"], "query">
 
 const defaults: Options = {
-  id: "merchendising",
+  id: "categoryListing",
 }
 
-export function merchendising(
+export function categoryListing(
   category: string,
   options?: Partial<Options>
 ): KlevuFetchFunction {
@@ -33,7 +33,7 @@ export function merchendising(
   }
 
   return {
-    klevuFunctionId: "merchendising",
+    klevuFunctionId: "categoryListing",
     queries: [query],
   }
 }

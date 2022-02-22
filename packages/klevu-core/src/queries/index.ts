@@ -5,14 +5,21 @@ import {
 import type { LiteralUnion } from "type-fest"
 import { KlevuFetchModifer } from "../modifiers"
 
+/**
+ * Internal. List of known KlevuFetchIds
+ * @ignore
+ */
 export type KlevuFetchId =
   | "search"
   | "suggestions"
   | "trending"
   | "newarrivals"
-  | "merchendising"
+  | "categoryListing"
   | "similarProducts"
 
+/**
+ * @ignore
+ */
 export type KlevuFetchFunction = {
   klevuFunctionId: LiteralUnion<KlevuFetchId, string>
   queries?: AllRecordQueries[]
@@ -20,7 +27,7 @@ export type KlevuFetchFunction = {
   modifiers?: KlevuFetchModifer[]
 }
 
-export * from "./merchendising/merchendising"
+export * from "./categoryListing/categoryListing"
 export * from "./newarrivals/newarrivals"
 export * from "./search/search"
 export * from "./suggestions/suggestions"

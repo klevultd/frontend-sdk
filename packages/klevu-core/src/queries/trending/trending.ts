@@ -17,9 +17,16 @@ const defaultOptions: Options = {
   id: "trending",
 }
 
+/**
+ * Return trending recommendations
+ *
+ * @param options
+ * @param modifiers
+ * @returns
+ */
 export function trending(
-  modifiers?: KlevuFetchModifer[],
-  options?: Options
+  options?: Options,
+  ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
   const params: Options = {
     ...defaultOptions,

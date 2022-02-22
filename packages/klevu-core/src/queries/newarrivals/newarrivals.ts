@@ -14,8 +14,8 @@ const defaultOptions = {
 
 export function newArrivals(
   category?: string,
-  modifiers?: KlevuFetchModifer[],
-  options?: Partial<Options>
+  options?: Partial<Options>,
+  ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
   const params: Options = {
     ...defaultOptions,

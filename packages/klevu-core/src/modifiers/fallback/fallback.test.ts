@@ -3,7 +3,7 @@ import {
   KlevuConfig,
   KlevuFetch,
   search,
-  trendingSearchProducts,
+  trendingSearch,
 } from "../.."
 
 beforeEach(() => {
@@ -21,7 +21,7 @@ test("Fallback query", async () => {
         id: "wrong-search",
         fallbackWhenCountLessThan: 300,
       },
-      fallback(trendingSearchProducts())
+      fallback(trendingSearch())
     )
   )
 
@@ -40,7 +40,7 @@ test("No fallback when enough results", async () => {
         id: "no-fallback",
         fallbackWhenCountLessThan: 2,
       },
-      fallback(trendingSearchProducts())
+      fallback(trendingSearch())
     )
   )
 

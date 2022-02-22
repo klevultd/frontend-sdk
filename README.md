@@ -42,14 +42,15 @@ console.log(result.getQueriesById("hoodies")?.records)
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
 
-| Klevu Function     | Description                                              |
-| ------------------ | -------------------------------------------------------- |
-| `search()`         | Most basic query to find items based on a term           |
-| `suggestions()`    | Fetches suggestions based on a term.                     |
-| `trendingSearch()` | Find all products that are trending right now in results |
-| `newArrivals()`    | Recommendation list of new arrivals for the current user |
-| `trending()`       | Trending recommendation based for current user           |
-| `merchendising()`  | Products to display on category page                     |
+| Klevu Function      | Description                                              | Link                |
+| ------------------- | -------------------------------------------------------- | ------------------- |
+| `search()`          | Most basic query to find items based on a term           | [[search]]          |
+| `suggestions()`     | Fetches suggestions based on a term.                     | [[suggestions]]     |
+| `trendingSearch()`  | Find all products that are trending right now in results | [[trendingSearch]]  |
+| `newArrivals()`     | Recommendation list of new arrivals for the current user | [[newArrivals]]     |
+| `trending()`        | Trending recommendation based for current user           | [[trending]]        |
+| `categoryListing()` | Products to display on category page                     | [[categoryListing]] |
+| `similarProducts()` | Fetch similar products based on given ids                | [[similarProducts]] |
 
 ## Modifiers
 
@@ -80,13 +81,13 @@ Klevu requires data for machine learning to work better. `KlevuEvents` class sho
 KlevuEvents.productClick()
 ```
 
-| Method            | Description                                                    |
-| ----------------- | -------------------------------------------------------------- |
-| `buy()`           | When products are bought                                       |
-| `categoryClick()` | When product is clicked on category page                       |
-| `categoryView()`  | When certain category is viewed                                |
-| `productClick()`  | When product is clicked on search results                      |
-| `search()`        | When search is made. This is automatically sent in the queries |
+| Method                  | Description                                                    |
+| ----------------------- | -------------------------------------------------------------- |
+| `buy()`                 | When products are bought                                       |
+| `productClick()`        | When product is clicked on search results                      |
+| `search()`              | When search is made. This is automatically sent in the queries |
+| `recommendationClick()` | When product is clicked on list of recommended products        |
+| `recommendationView()`  | When recommendations are shown                                 |
 
 # Development
 
