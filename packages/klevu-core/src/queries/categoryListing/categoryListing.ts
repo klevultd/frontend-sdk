@@ -11,6 +11,14 @@ const defaults: Options = {
   id: "categoryListing",
 }
 
+/**
+ * Fetch products for a category listing page.
+ *
+ * @category Queries
+ * @param category
+ * @param options
+ * @returns
+ */
 export function categoryListing(
   category: string,
   options?: Partial<Options>

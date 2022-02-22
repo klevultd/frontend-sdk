@@ -3,6 +3,7 @@ import { KlevuFetchModifer } from ".."
 /**
  * Boost or deboost query based on a record ids.
  *
+ * @category Modifiers
  * @param records Keywords to boost and deboost
  * @returns KlevuModifier that be used to modify query
  */

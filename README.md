@@ -42,15 +42,15 @@ console.log(result.getQueriesById("hoodies")?.records)
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
 
-| Klevu Function      | Description                                              | Link                |
-| ------------------- | -------------------------------------------------------- | ------------------- |
-| `search()`          | Most basic query to find items based on a term           | [[search]]          |
-| `suggestions()`     | Fetches suggestions based on a term.                     | [[suggestions]]     |
-| `trendingSearch()`  | Find all products that are trending right now in results | [[trendingSearch]]  |
-| `newArrivals()`     | Recommendation list of new arrivals for the current user | [[newArrivals]]     |
-| `trending()`        | Trending recommendation based for current user           | [[trending]]        |
-| `categoryListing()` | Products to display on category page                     | [[categoryListing]] |
-| `similarProducts()` | Fetch similar products based on given ids                | [[similarProducts]] |
+| Klevu Function      | Description                                              | Link                | Type           |
+| ------------------- | -------------------------------------------------------- | ------------------- | -------------- |
+| `search()`          | Most basic query to find items based on a term           | [[search]]          | Search         |
+| `suggestions()`     | Fetches suggestions based on a term.                     | [[suggestions]]     | Search         |
+| `trendingSearch()`  | Find all products that are trending right now in results | [[trendingSearch]]  | Search         |
+| `categoryListing()` | Products to display on category page                     | [[categoryListing]] | Search         |
+| `newArrivals()`     | Recommendation list of new arrivals for the current user | [[newArrivals]]     | Recommendation |
+| `trending()`        | Trending recommendation based for current user           | [[trending]]        | Recommendation |
+| `similarProducts()` | Fetch similar products based on given ids                | [[similarProducts]] | Recommendation |
 
 ## Modifiers
 
@@ -66,6 +66,7 @@ Some of the functions can be modified with modifier functions. Any number of the
 | `boostWithRecords()`        | Boost or deboost certain products in the result by id                                         |
 | `boostWithFilters()`        | Boost or deboost results based on a filters                                                   |
 | `boostWithFilterManager()`  | Boost or deboost results based in selection in filter manager                                 |
+| `personalisation()`         | Enable personalisation to the query. Automatically applies last visited products              |
 
 ## Filter Manager
 

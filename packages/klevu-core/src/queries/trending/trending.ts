@@ -20,6 +20,7 @@ const defaultOptions: Options = {
 /**
  * Return trending recommendations
  *
+ * @category RecommendationQuery
  * @param options
  * @param modifiers
  * @returns

@@ -2,6 +2,13 @@ import { KlevuFetchModifer } from ".."
 import { KlevuRecordFields, KlevuTypeOfRecord } from "../../model"
 import { lastClickedProducts } from "../../store/lastClickedProducts"
 
+/**
+ * Enable personlisation to the query
+ *
+ * @category Modifiers
+ * @param options
+ * @returns
+ */
 export function personalisation(options?: {
   /**
    * This is an optional field. By default, Klevu will analyse all attributes of

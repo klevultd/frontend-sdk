@@ -24,7 +24,7 @@ export enum KlevuSorting {
   NewArrivalDesc = "NEW_ARRIVAL_DESC",
 }
 
-export enum SearchPreference {
+export enum KlevuSearchPreference {
   showOutOfStockProducts = "showOutOfStockProducts",
   /**
    * 	Whether or not your store should include 'Out of Stock' products in search
@@ -159,8 +159,9 @@ export enum SearchPreference {
   debugQuery = "debugQuery",
 }
 
-export type KlevuBaseQueryDefaultIds = "applyFilters" | "search" | string
-
+/**
+ * @ignore
+ */
 export type KlevuDefaultOptions = {
   id: string
 }
@@ -234,7 +235,7 @@ export type KlevuBaseQuerySettings = {
    *  spelling mistakes on a query by query basis. The available searchPrefs
    *  are detailed below.
    */
-  searchPrefs?: SearchPreference[]
+  searchPrefs?: KlevuSearchPreference[]
 
   /**
    * The ID of another query which should be fired if the current query yields
@@ -349,7 +350,7 @@ export type KlevuBaseQuerySettings = {
 }
 
 export type KlevuBaseQuery = {
-  id: KlevuBaseQueryDefaultIds
+  id: string
   typeOfRequest: KlevuTypeOfRequest
   doNotSendEvent?: boolean
   isFallbackQuery?: boolean
@@ -517,6 +518,7 @@ export type KlevuApplyFilter = {
   }
 }
 
+/*
 export type KlevuNewArrivalsQuery = KlevuBaseQuery & {
   typeOfRequest: KlevuTypeOfRequest.NewArrivals
   settings?: {
@@ -525,6 +527,7 @@ export type KlevuNewArrivalsQuery = KlevuBaseQuery & {
     }
   }
 }
+*/
 
 export type KlevuSimilarProcutsQuery = KlevuBaseQuery & {
   typeOfRequest: KlevuTypeOfRequest.SimilarProducts
@@ -583,7 +586,6 @@ export type KlevuSuggestionQuery = KlevuBaseQuery & {
 
 export type AllRecordQueries =
   | KlevuBaseQuery
-  | KlevuNewArrivalsQuery
   | KlevuSimilarProcutsQuery
   | KlevuTrendingProductsQuery
   | KlevuAlsoViewedQuery

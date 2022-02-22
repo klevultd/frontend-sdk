@@ -25,6 +25,13 @@ const defaults: Options = {
   limit: 10,
 }
 
+/**
+ * List filters that can affect given query
+ *
+ * @category Modifiers
+ * @param options
+ * @returns
+ */
 export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
   const params: Options = {
     ...defaults,

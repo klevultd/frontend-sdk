@@ -18,11 +18,17 @@ export async function KlevuKMCSettings() {
   }
 }
 
+/**
+ * @ignore
+ */
 export interface NoResultsOptions {
   messages: any[]
   banners: any[]
 }
 
+/**
+ * @ignore
+ */
 export interface KlevuUcUserOptions {
   addToCartButton: string
   showRolloverImage: boolean
@@ -41,6 +47,9 @@ export interface KlevuUcUserOptions {
   showFiltersInMobile: boolean
 }
 
+/**
+ * @ignore
+ */
 export interface RootObject {
   klevu_showBannerAds: boolean
   klevu_multiSelectFilters: boolean
@@ -77,6 +86,9 @@ export interface RootObject {
   klevu_userJavascriptDomain: string
 }
 
+/**
+ * @ignore
+ */
 export interface KlevuBanner {
   showForTerms?: any
   showOnLandingPage: boolean
@@ -92,10 +104,16 @@ export interface KlevuBanner {
   startDate: string
 }
 
+/**
+ * @ignore
+ */
 export interface BannerRootObject {
   klevu_banner: KlevuBanner[]
 }
 
+/**
+ * @ignore
+ */
 export interface MapsRootObject {
   klevu_autoCorrectMap: any[]
   klevu_keywordUrlMap: any[]

@@ -1,5 +1,12 @@
 import { KlevuFetchModifer } from ".."
 
+/**
+ * Boost products based on a filters
+ *
+ * @category Modifiers
+ * @param boosts
+ * @returns
+ */
 export function boostWithFilters(
   boosts: Array<{
     key: string

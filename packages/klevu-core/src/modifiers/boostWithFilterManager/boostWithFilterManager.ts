@@ -5,6 +5,7 @@ import { notEmpty } from "../../utils/notEmpty"
 /**
  * Boost query with currect selection of filter manager
  *
+ * @category Modifiers
  * @param manager Instance of filter manager to use for selection of current values
  * @param weights Tell the weight of each filter
  * @returns KlevuModifier that be used to modify query

@@ -1,7 +1,7 @@
 import { KlevuTypeOfRequest } from "../../model"
 import {
+  KlevuBaseQuery,
   KlevuDefaultOptions,
-  KlevuNewArrivalsQuery,
 } from "../../connection/queryModels"
 import { KlevuFetchFunction } from ".."
 import { KlevuFetchModifer } from "../../modifiers"
@@ -12,6 +12,15 @@ const defaultOptions = {
   id: "newarrivals",
 }
 
+/**
+ * Get new arrival recommendations
+ *
+ * @category RecommendationQuery
+ * @param category
+ * @param options
+ * @param modifiers
+ * @returns
+ */
 export function newArrivals(
   category?: string,
   options?: Partial<Options>,
@@ -22,7 +31,7 @@ export function newArrivals(
     ...options,
   }
 
-  const query: KlevuNewArrivalsQuery = {
+  const query: KlevuBaseQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.NewArrivals,
     settings: category

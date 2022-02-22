@@ -15,7 +15,7 @@ export type ApplyFilter = {
 
 /**
  *
- * @category Queries
+ * @category Modifiers
  * @param term Search term from input
  * @param id id of request. Response is under this is. Has to be unique across single query. Default is 'search'
  * @param options

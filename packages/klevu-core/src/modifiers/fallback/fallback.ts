@@ -2,6 +2,13 @@ import { KlevuFetchModifer } from ".."
 import { KlevuBaseQuery } from "../../connection/queryModels"
 import { KlevuFetchFunction } from "../../queries"
 
+/**
+ * If original query doesn't return enough results then fallback query is run added to results
+ *
+ * @category Modifiers
+ * @param func
+ * @returns
+ */
 export function fallback(func: KlevuFetchFunction): KlevuFetchModifer {
   if (func.queries?.length !== 1) {
     throw new Error("Fallback modifier can only be applied to single query")

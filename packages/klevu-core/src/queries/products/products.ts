@@ -4,6 +4,7 @@ import { search } from "../search/search"
 /**
  * Fetches list of products. All fields are fetched.
  *
+ * @category Queries
  * @param productIds
  * @returns
  */

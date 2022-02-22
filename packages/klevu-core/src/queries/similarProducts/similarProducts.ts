@@ -9,6 +9,14 @@ const defaultOptions: Options = {
   limit: 5,
 }
 
+/**
+ * Fetch similiar products based on list of ids
+ *
+ * @category RecommendationQuery
+ * @param ids similiar to these ids
+ * @param options
+ * @returns
+ */
 export function similarProducts(
   ids: string[],
   options?: Partial<Options>
