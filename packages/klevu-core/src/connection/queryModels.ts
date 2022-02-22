@@ -319,15 +319,7 @@ export type KlevuBaseQuerySettings = {
      */
     fields?: KlevuRecordFields[]
   }
-}
 
-export type KlevuBaseQuery = {
-  id: KlevuBaseQueryDefaultIds
-  typeOfRequest: KlevuTypeOfRequest
-  doNotSendEvent?: boolean
-  isFallbackQuery?: boolean
-  filters?: KlevuListFilter & KlevuApplyFilter
-  settings?: KlevuBaseQuerySettings
   context?: {
     /**
      * @TODO: Rewrite this doc. Describe how personalisation works
@@ -354,6 +346,15 @@ export type KlevuBaseQuery = {
       records: Array<{ id: string }>
     }>
   }
+}
+
+export type KlevuBaseQuery = {
+  id: KlevuBaseQueryDefaultIds
+  typeOfRequest: KlevuTypeOfRequest
+  doNotSendEvent?: boolean
+  isFallbackQuery?: boolean
+  filters?: KlevuListFilter & KlevuApplyFilter
+  settings?: KlevuBaseQuerySettings
 
   /**
    * If you have already built up a profile of your customer and would like to

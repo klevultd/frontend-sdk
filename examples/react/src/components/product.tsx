@@ -42,18 +42,13 @@ const containerCss = css`
 
 export function Product(props: {
   product: KlevuRecord
+  // If there is search term is used this is required for analytics
+  searchTerm?: string
   onClick?: (product: KlevuRecord) => void
 }) {
   const onClick = (event) => {
     const p = props.product
-    KlevuEvents.productClick({
-      klevu_productId: p.id,
-      klevu_productName: p.name,
-      klevu_productUrl: p.url,
-      klevu_productGroupId: p.itemGroupId,
-      klevu_productVariantId: "",
-      klevu_keywords: "",
-    })
+    KlevuEvents.productClick(p, props.searchTerm)
     props.onClick && props.onClick(props.product)
     return false
   }

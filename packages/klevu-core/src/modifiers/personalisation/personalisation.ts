@@ -30,7 +30,7 @@ export function personalisation(options?: {
           enablePersonalisation: true,
           fields: options?.fields,
         }
-        q.context = {
+        q.settings.context = {
           recentObjects: [
             {
               typeOfRecord: KlevuTypeOfRecord.Product,

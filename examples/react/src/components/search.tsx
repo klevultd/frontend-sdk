@@ -50,7 +50,7 @@ export function Search() {
     }
 
     const result = await KlevuFetch(
-      search(term, [], {
+      search(term, {
         limit: 9,
         typeOfRecords: [KlevuTypeOfRecord.Product],
       }),
@@ -212,6 +212,7 @@ export function Search() {
                     <Grid item key={i}>
                       <Product
                         product={p}
+                        searchTerm={searchValue}
                         onClick={() => {
                           popupState.close()
                         }}

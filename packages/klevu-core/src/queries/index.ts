@@ -11,6 +11,7 @@ export type KlevuFetchId =
   | "trending"
   | "newarrivals"
   | "merchendising"
+  | "similarProducts"
 
 export type KlevuFetchFunction = {
   klevuFunctionId: LiteralUnion<KlevuFetchId, string>
@@ -26,3 +27,4 @@ export * from "./suggestions/suggestions"
 export * from "./trending/trending"
 export * from "./trendingSearch/trendingSearch"
 export * from "./products/products"
+export * from "./similarProducts/similarProducts"

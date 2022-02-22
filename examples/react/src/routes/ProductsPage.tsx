@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
 
-export function Products() {
+export function ProductsPage() {
   return <Outlet />
 }

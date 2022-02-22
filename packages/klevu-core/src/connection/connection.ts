@@ -1,6 +1,6 @@
 import Axios from "axios"
 import cloneDeep from "lodash.clonedeep"
-import { KlevuEvents } from "../events/events"
+import { KlevuEvents } from "../events/klevuEvents"
 import {
   applyFilterWithManager,
   KlevuConfig,

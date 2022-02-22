@@ -1,5 +1,5 @@
 import { ProductGrid } from "../components/productgrid"
 
-export function Home() {
+export function HomePage() {
   return <ProductGrid />
 }

@@ -1,11 +1,16 @@
-import { KlevuConfig, KlevuRecord, KlevuTypeOfSearch } from ".."
+import {
+  KlevuConfig,
+  KlevuRecord,
+  KlevuTypeOfRequest,
+  KlevuTypeOfSearch,
+} from ".."
+import { lastClickedProducts } from "../store/lastClickedProducts"
 import { KlevuLastSearches } from "../store/lastSearches"
 import {
   KlevuEventV1CheckedOutProducts,
   KlevuEventV1ProductTracking,
   KlevuEventV1Search,
-  V1ProductTrackingEvent,
-  V1CheckedOutProductsEvent,
+  KlevuEventV2,
 } from "./eventRequests"
 
 export class KlevuEvents {
@@ -36,21 +41,22 @@ export class KlevuEvents {
     }
   }
 
-  static categoryClick() {}
+  static recommendationClick() {}
 
-  static categoryView() {}
+  static recommendationView() {}
 
   /**
-   * When product is clicked in search results. *Do not* use this in category navigation.
+   * When product is clicked. Do not use this for recommendations
    *
    * @param searchTerm
    * @param product
    */
   static productClick(
-    searchTerm: string,
     product: KlevuRecord,
+    searchTerm?: string,
     variantId?: string
   ) {
+    lastClickedProducts.click(product.id)
     KlevuEventV1ProductTracking({
       klevu_apiKey: KlevuConfig.apiKey,
       klevu_type: "clicked",
@@ -62,8 +68,6 @@ export class KlevuEvents {
       klevu_productVariantId: variantId || product.id,
     })
   }
-
-  static collect() {}
 
   /**
    * What user has last searched. This is important for Klevu to function

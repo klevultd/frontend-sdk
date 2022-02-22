@@ -43,7 +43,7 @@ export type V1ProductTrackingEvent = {
   /**
    * 	This is the term being searched. For example iphone 5s.
    */
-  klevu_keywords: string
+  klevu_keywords?: string
   /**
    * 	Here, the value must be clicked.
    */
