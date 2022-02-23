@@ -1,5 +1,5 @@
-import { ProductGrid } from "../components/productgrid"
+import { TrendingProductsGrid } from "../components/trendingproductsgrid"
 
 export function HomePage() {
-  return <ProductGrid />
+  return <TrendingProductsGrid />
 }

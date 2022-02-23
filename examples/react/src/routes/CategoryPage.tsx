@@ -1,48 +1,46 @@
 import {
+  FilterResultOptions,
+  FilterResultSlider,
+  KlevuRecord,
+  KlevuSorting,
+  trendingSearch,
+  listFilters,
+  applyFilterWithManager,
+  KlevuFetch,
+  KlevuDomEvents,
+  FilterManager,
+  KlevuResponse,
+  categoryListing,
+} from "@klevu/core"
+import {
   Drawer,
   IconButton,
   Divider,
+  Typography,
   List,
-  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  Checkbox,
   ListItemText,
-  Grid,
+  Slider,
   Box,
   Select,
   MenuItem,
-  Checkbox,
-  ListItemButton,
-  ListItemIcon,
-  Typography,
+  Grid,
   Button,
-  Slider,
 } from "@mui/material"
+import { useParams } from "react-router-dom"
+import React, { useState, useCallback, useEffect } from "react"
+import { Product } from "../components/product"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-import React, { useCallback, useEffect, useState } from "react"
 import FilterIcon from "@mui/icons-material/FilterAlt"
-import {
-  applyFilterWithManager,
-  FilterManager,
-  KlevuDomEvents,
-  KlevuFetch,
-  KlevuResponse,
-  KlevuSorting,
-  listFilters,
-  trendingSearch,
-} from "@klevu/core"
-import type {
-  KlevuRecord,
-  FilterResultOptions,
-  FilterResultSlider,
-} from "@klevu/core"
-import { Product } from "./product"
 
 const drawerWidth = 240
-
 const manager = new FilterManager()
-
 let prevRes: KlevuResponse
 
-export function ProductGrid() {
+export function CategoryPage() {
+  const params = useParams()
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<FilterResultOptions[]>(manager.options)
   const [sliders, setSliders] = useState<FilterResultSlider[]>(manager.sliders)
@@ -60,7 +58,8 @@ export function ProductGrid() {
 
   const initialFetch = useCallback(async () => {
     const functions = [
-      trendingSearch(
+      categoryListing(
+        params.id,
         {
           id: "search",
           limit: 36,
@@ -73,7 +72,6 @@ export function ProductGrid() {
               minMax: true,
             },
           ],
-          exclude: ["inventory_item_id", "rim_size", "category"],
           filterManager: manager,
         }),
         applyFilterWithManager(manager)
@@ -91,7 +89,7 @@ export function ProductGrid() {
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
-  }, [sorting])
+  }, [sorting, params.id])
 
   const fetchMore = async () => {
     const nextRes = await prevRes.next({
@@ -128,7 +126,7 @@ export function ProductGrid() {
 
   useEffect(() => {
     initialFetch()
-  }, [sorting])
+  }, [sorting, params.id])
 
   return (
     <React.Fragment>

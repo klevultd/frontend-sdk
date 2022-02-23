@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { HomePage } from "./routes/HomePage"
 import { ProductsPage } from "./routes/ProductsPage"
 import { ProductPage } from "./routes/ProductPage"
+import { CategoryPage } from "./routes/CategoryPage"
 
 KlevuConfig.init({
   url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
@@ -19,6 +20,9 @@ ReactDOM.render(
         <Route index element={<HomePage />} />
         <Route path="products" element={<ProductsPage />}>
           <Route path=":id" element={<ProductPage />} />
+        </Route>
+        <Route path="category" element={<CategoryPage />}>
+          <Route path=":id" element={<CategoryPage />} />
         </Route>
       </Route>
     </Routes>

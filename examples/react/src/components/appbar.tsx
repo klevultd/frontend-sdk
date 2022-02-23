@@ -24,12 +24,14 @@ const ResponsiveAppBar = () => {
             sx={{ display: "flex", flexDirection: "row", marginRight: "auto" }}
           >
             {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <Link to={`/category/${page}`}>
+                <Button
+                  key={page}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
           <Search />
