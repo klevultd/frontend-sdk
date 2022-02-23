@@ -1,0 +1,5 @@
+node_modules
+src
+typedoc.json
+tsconfig.json
+jest.config.cjs
