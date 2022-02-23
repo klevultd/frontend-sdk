@@ -9,15 +9,15 @@ beforeEach(() => {
 })
 
 test("Products search", async () => {
-  // @TODO: Ask why this fails?
+  // @TODO: This works in frontend but fails in jest. Why?
   /*
   const p = ["36800801865882", "36801135149210"]
   const result = await KlevuFetch(products(p))
 
-  expect(result.queriesById("search")).toBeDefined()
-  expect(result.queriesById("search")?.records.length).toBe(p.length)
+  expect(result.queriesById("products")).toBeDefined()
+  expect(result.queriesById("products")?.records.length).toBe(p.length)
 
-  const recordIds = result.queriesById("search")?.records.map((r) => r.id)
+  const recordIds = result.queriesById("products")?.records.map((r) => r.id)
   p.every((id) => expect(recordIds).toContain(id))
   */
 })

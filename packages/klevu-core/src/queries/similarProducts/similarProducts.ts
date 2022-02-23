@@ -1,5 +1,5 @@
 import { KlevuFetchFunction } from ".."
-import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../.."
+import { KlevuRecord, KlevuTypeOfRecord, KlevuTypeOfRequest } from "../.."
 
 type Options = {
   limit: number
@@ -18,7 +18,7 @@ const defaultOptions: Options = {
  * @returns
  */
 export function similarProducts(
-  ids: string[],
+  products: Array<Pick<KlevuRecord, "id" | "itemGroupId">>,
   options?: Partial<Options>
 ): KlevuFetchFunction {
   const params: Options = {
@@ -34,12 +34,16 @@ export function similarProducts(
         typeOfRequest: KlevuTypeOfRequest.SimilarProducts,
         settings: {
           limit: params.limit,
+          excludeIds: products.map((p) => ({
+            key: "itemGroupId",
+            value: p.itemGroupId,
+          })),
           context: {
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: ids.map((pId) => ({
-                  id: pId,
+                records: products.map((p) => ({
+                  id: p.id,
                 })),
               },
             ],

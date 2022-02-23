@@ -10,12 +10,13 @@ export function ProductPage() {
   const params = useParams()
 
   const fetchProduct = useCallback(async () => {
-    const res = await KlevuFetch(
-      products([params.id]),
-      similarProducts([params.id])
-    )
-    setProduct(res.queriesById("search")?.records?.[0])
-    setSimilar(res.queriesById("similar")?.records)
+    const res = await KlevuFetch(products([params.id]))
+    const product = res.queriesById("products")?.records?.[0]
+    setProduct(product)
+
+    const similarRes = await KlevuFetch(similarProducts([product]))
+
+    setSimilar(similarRes.queriesById("similar")?.records)
   }, [params.id])
 
   useEffect(() => {

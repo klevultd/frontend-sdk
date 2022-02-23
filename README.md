@@ -29,13 +29,43 @@ KlevuConfig.init({
 
 Function queries are inserted into a `KlevuFetch()` function where functions are processed and sent to backend.
 
-Here is most minimal example
+Here is most minimal example where we are making "hoodies" seach from the API.
 
 ```ts
 import { KlevuFetch, search } from "@klevu/core"
 
 const result = await KlevuFetch(search("hoodies"))
-console.log(result.getQueriesById("hoodies")?.records)
+console.log(result.getQueriesById("search")?.records)
+```
+
+### Typical example
+
+Following example finds result based on a term and suggestions what user could search next
+
+```ts
+import { KlevuFetch, search } from "@klevu/core"
+
+// search string coming from a textfield
+const term = "hoodies"
+
+const result = await KlevuFetch(
+  search(
+    // term to search
+    term,
+    // search parameters
+    {},
+    // and lastly list of modifiers for the query.
+    // In this example we are fetching all filters that are related to the search
+    listFilters()
+    // More modifiers can be added as parameters to search.
+  ),
+  // In same fetch we want to fetch all search suggestions also
+  suggestion(term)
+  // in here we could add more queries to fetch
+)
+
+// Prints records that are found from the search
+console.log(result.getQueriesById("search")?.records)
 ```
 
 ## Queries
