@@ -22,12 +22,7 @@ export type SearchOptions = KlevuDefaultOptions & {
 const defaults: SearchOptions = {
   id: "search",
   limit: 5,
-  typeOfRecords: [
-    KlevuTypeOfRecord.Product,
-    KlevuTypeOfRecord.Cms,
-    KlevuTypeOfRecord.Category,
-  ],
-  fields: ["id", "image", "name", "url", "price", "currency"],
+  typeOfRecords: [KlevuTypeOfRecord.Product],
 }
 
 /**

@@ -39,3 +39,13 @@ test("Pagination test", async () => {
   expect(nextNextFirstId).not.toBe(prevFirstId)
   expect(nextNextFirstId).not.toBe(nextFirstId)
 })
+
+test("Limit test", async () => {
+  const result = await KlevuFetch(
+    search("*", {
+      limit: 14,
+    })
+  )
+
+  expect(result.queriesById("search")?.records.length).toBe(14)
+})

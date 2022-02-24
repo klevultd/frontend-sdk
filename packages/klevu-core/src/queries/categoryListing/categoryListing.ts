@@ -3,6 +3,7 @@ import { KlevuFetchModifer } from "../.."
 import {
   KlevuDefaultOptions,
   KlevuBaseQuery,
+  KlevuBaseQuerySettingsQuery,
 } from "../../connection/queryModels"
 import { KlevuTypeOfRequest } from "../../model"
 
@@ -21,7 +22,7 @@ const defaults: Options = {
  * @returns
  */
 export function categoryListing(
-  category: string,
+  category: KlevuBaseQuerySettingsQuery["categoryPath"],
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
@@ -32,7 +33,7 @@ export function categoryListing(
 
   const query: KlevuBaseQuery = {
     id: params.id,
-    typeOfRequest: KlevuTypeOfRequest.Merchandising,
+    typeOfRequest: KlevuTypeOfRequest.CategoryNavigation,
     doNotSendEvent: true,
     settings: {
       query: {

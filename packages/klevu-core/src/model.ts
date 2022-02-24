@@ -163,7 +163,7 @@ export type KlevuRecordFields = keyof KlevuRecord
 export enum KlevuTypeOfRequest {
   Search = "SEARCH",
   Suggestion = "AUTO_SUGGESTIONS",
-  Merchandising = "CATNAV",
+  CategoryNavigation = "CATNAV",
   NewArrivals = "RECS_NEW_ARRIVALS",
   SimilarProducts = "RECS_SIMILAR",
   Trending = "RECS_TRENDING",
