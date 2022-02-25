@@ -1,7 +1,9 @@
 {
   "name": "@klevu/core",
   "version": "0.0.1",
-  "description": "",
+  "description": "Typescript SDK that simplifies development on Klevu backend.",
+  "keywords": ["klevu", "search", "recommendation", "ecommerce tools"],
+  "homepage": "https://developers.klevu.com",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "type": "module",
@@ -13,6 +15,15 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
   },
   "author": "Klevu",
+  "contributors": [{
+    "name": "Juha-Pekka Rajaniemi",
+    "email": "juha-pekka.rajaniemi@klevu.com"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klevultd/frontend-sdk",
+    "directory": "packages/klevu-core"
+  },
   "license": "MIT",
   "typedocMain": "src/index.ts",
   "dependencies": {

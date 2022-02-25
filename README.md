@@ -1,3 +1,7 @@
+# Links
+
+[@klevu/core](packages/klevu-core/README.md)
+
 # Development
 
 Node.js and npm is required to be installed on your system before starting
