@@ -3,3 +3,4 @@ src
 typedoc.json
 tsconfig.json
 jest.config.cjs
+coverage
