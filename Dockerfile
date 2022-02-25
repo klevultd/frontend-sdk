@@ -9,7 +9,8 @@ WORKDIR /usr/src/app
 RUN npm ci
 WORKDIR /usr/src/app/packages/klevu-core
 RUN npm run docs
-RUN npm install -g http-server
-EXPOSE 8080
-CMD "http-server" "docs"
+WORKDIR /usr/src/app/docs
+RUN npm install
+EXPOSE 3000
+CMD "npm" "start"
 

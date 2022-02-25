@@ -1,40 +1,70 @@
 import Link from "next/link"
 import styles from "./Sidebar.module.css"
+import groupBy from "lodash.groupby"
+import React from "react"
 
-export function Sidebar(props: { navigation: any }) {
+type NavItem = {
+  isContainer?: boolean
+  isCoreApi?: boolean
+  slug: string
+  title: string
+  children?: NavItem[]
+}
+
+export function Sidebar(props: { navigation: NavItem[]; coreapi: any }) {
+  const nav: NavItem[] = [...props.navigation]
+
+  const coreapiitem = nav.find((i) => i.slug === "klevu-core-api")
+  if (coreapiitem) {
+    const grouped = groupBy(props.coreapi.children, "kindString")
+    console.log(grouped)
+    coreapiitem.children = []
+    for (const [key, children] of Object.entries(grouped)) {
+      coreapiitem.children.push({
+        isContainer: true,
+        title: key,
+        slug: key,
+        children: children
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((i) => ({
+            isCoreApi: true,
+            slug: i.name,
+            title: i.name,
+          })),
+      })
+    }
+  }
+
   return (
     <nav className={styles.nav}>
-      <ul>
-        {props.navigation.map((item, index) => (
-          <li key={index}>
-            <Link href={`/article/${item.slug}`}>
+      <RecursiveMenu nav={nav} />
+    </nav>
+  )
+}
+
+function RecursiveMenu({ nav }) {
+  return (
+    <ul>
+      {nav.map((item, index) => (
+        <li key={index}>
+          {item.isContainer ? (
+            <React.Fragment>{item.title}</React.Fragment>
+          ) : (
+            <Link
+              href={
+                item.isCoreApi
+                  ? `/coreapi/${item.slug}`
+                  : `/article/${item.slug}`
+              }
+            >
               <a>{item.title}</a>
             </Link>
-            {item.children ? (
-              <ul>
-                {item.children.map((child, childIndex) => (
-                  <li key={childIndex}>
-                    <Link href={`/article/${child.slug}`}>
-                      <a>{child.title}</a>
-                    </Link>
-                    {child.children ? (
-                      <ul>
-                        {child.children.map((subchild, subchildIndex) => (
-                          <li key={subchildIndex}>
-                            <Link href={`/article/${subchild.slug}`}>
-                              <a>{subchild.title}</a>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-    </nav>
+          )}
+          {item.children && item.children.length > 0 ? (
+            <RecursiveMenu nav={item.children} />
+          ) : null}
+        </li>
+      ))}
+    </ul>
   )
 }

@@ -1,4 +1,9 @@
 .header {
-  max-width: 1100px;
-  margin: 0 auto;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  height: 60px;
+}
+
+.header img {
+  height: 28px;
 }

@@ -6,10 +6,15 @@ import {
 } from "../../lib/queries"
 import { request } from "../../lib/datocms"
 import { ArticleContent } from "../../components/ArticleContent/ArticleContent"
+import { CoreApi } from "../../lib/coreapi"
 
-export default function Article(props: { article: any; navigation: any }) {
+export default function Article(props: {
+  article: any
+  navigation: any
+  coreapidata: any
+}) {
   return (
-    <Layout navigation={props.navigation}>
+    <Layout navigation={props.navigation} coreapi={props.coreapidata}>
       <h1>{props.article.title}</h1>
       <ArticleContent content={props.article.content} />
     </Layout>
@@ -17,6 +22,7 @@ export default function Article(props: { article: any; navigation: any }) {
 }
 
 export async function getStaticProps(context) {
+  const coreapidata = await CoreApi()
   const req = await request({
     query: ARTICLE,
     preview: Boolean(context.preview),
@@ -27,6 +33,7 @@ export async function getStaticProps(context) {
     props: {
       navigation: req.navigation.children,
       article: req.article || null,
+      coreapidata,
     },
   }
 }

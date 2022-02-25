@@ -7,22 +7,24 @@ export function Layout({
   navigation,
   children,
   topnav,
+  coreapi,
 }: {
-  navigation: any
+  navigation?: any
   children: any
-  topnav: any
+  topnav?: any
+  coreapi?: any
 }) {
   return (
-    <React.Fragment>
+    <div className={styles.container}>
       <Header topnav={topnav} />
-      <div className={styles.container}>
+      <div className={styles.innercontainer}>
         {navigation ? (
           <aside>
-            <Sidebar navigation={navigation} />
+            <Sidebar navigation={navigation} coreapi={coreapi} />
           </aside>
         ) : null}
         <main>{children}</main>
       </div>
-    </React.Fragment>
+    </div>
   )
 }
