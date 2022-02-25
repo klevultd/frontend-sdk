@@ -12,7 +12,4 @@ test("Basic search", async () => {
   const result = await KlevuFetch(categoryListing("Women"))
 
   expect(result.queriesById("categoryListing")).toBeDefined()
-  expect(result.queriesById("categoryListing")?.records.length).toBeGreaterThan(
-    0
-  )
 })
