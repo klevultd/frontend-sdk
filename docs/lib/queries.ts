@@ -31,8 +31,8 @@ export const FULL_ARTICLE_FRAGMENT = gql`
     content {
       blocks {
         __typename
-        id
         ... on CodesandboxRecord {
+          id
           options
           sandboxId
         }
