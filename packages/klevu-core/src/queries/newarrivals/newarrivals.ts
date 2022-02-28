@@ -45,6 +45,7 @@ export function newArrivals(
 
   return {
     klevuFunctionId: "newarrivals",
+    modifiers,
     queries: [query],
   }
 }

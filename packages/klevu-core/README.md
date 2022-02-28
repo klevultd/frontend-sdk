@@ -72,15 +72,18 @@ console.log(result.getQueriesById("search")?.records)
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
 
-| Klevu Function      | Description                                              | Link                | Type           |
-| ------------------- | -------------------------------------------------------- | ------------------- | -------------- |
-| `search()`          | Most basic query to find items based on a term           | [[search]]          | Search         |
-| `suggestions()`     | Fetches suggestions based on a term.                     | [[suggestions]]     | Search         |
-| `trendingSearch()`  | Find all products that are trending right now in results | [[trendingSearch]]  | Search         |
-| `categoryListing()` | Products to display on category page                     | [[categoryListing]] | Search         |
-| `newArrivals()`     | Recommendation list of new arrivals for the current user | [[newArrivals]]     | Recommendation |
-| `trending()`        | Trending recommendation based for current user           | [[trending]]        | Recommendation |
-| `similarProducts()` | Fetch similar products based on given ids                | [[similarProducts]] | Recommendation |
+| Klevu Function      | Description                                              | Type           |
+| ------------------- | -------------------------------------------------------- | -------------- |
+| `search()`          | Most basic query to find items based on a term           | Search         |
+| `suggestions()`     | Fetches suggestions based on a term.                     | Search         |
+| `trendingSearch()`  | Find all products that are trending right now in results | Search         |
+| `categoryListing()` | Products to display on category page                     | Search         |
+| `searchCategory()`  | Search categories based on term                          | Search         |
+| `searchCms()`       | Search CMS pages based on term                           | Search         |
+| `newArrivals()`     | Recommendation list of new arrivals for the current user | Recommendation |
+| `trending()`        | Trending recommendation based for current user           | Recommendation |
+| `similarProducts()` | Fetch similar products based on given ids                | Recommendation |
+| `alsoViewed()`      | Product recommendations what user should also check out  | Recommendation |
 
 ## Modifiers
 
@@ -97,6 +100,8 @@ Some of the functions can be modified with modifier functions. Any number of the
 | `boostWithFilters()`        | Boost or deboost results based on a filters                                                   |
 | `boostWithFilterManager()`  | Boost or deboost results based in selection in filter manager                                 |
 | `personalisation()`         | Enable personalisation to the query. Automatically applies last visited products              |
+| `include()`                 | Force include given id's in the result                                                        |
+| `top()`                     | Force return given id's as first items on results                                             |
 
 ## Filter Manager
 

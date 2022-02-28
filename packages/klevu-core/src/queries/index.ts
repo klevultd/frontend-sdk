@@ -16,6 +16,7 @@ export type KlevuFetchId =
   | "newarrivals"
   | "categoryListing"
   | "similarProducts"
+  | "alsoViewed"
 
 /**
  * @ignore
@@ -35,3 +36,5 @@ export * from "./trending/trending"
 export * from "./trendingSearch/trendingSearch"
 export * from "./products/products"
 export * from "./similarProducts/similarProducts"
+export * from "./searchCategory/searchCategory"
+export * from "./searchCms/searchCms"

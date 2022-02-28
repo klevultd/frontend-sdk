@@ -5,6 +5,7 @@ import {
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../.."
+import { lastClickedProducts } from "../../store/lastClickedProducts"
 
 type Options = {
   limit: number
@@ -15,15 +16,13 @@ const defaultOptions: Options = {
 }
 
 /**
- * Fetch similiar products based on list of ids
+ * Shows products that visitor should also see. Automatically applies products that user has already clicked.
  *
  * @category RecommendationQuery
- * @param ids similiar to these ids
  * @param options
  * @returns
  */
-export function similarProducts(
-  products: Array<Pick<KlevuRecord, "id" | "itemGroupId">>,
+export function alsoViewed(
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
@@ -33,24 +32,20 @@ export function similarProducts(
   }
 
   return {
-    klevuFunctionId: "similarProducts",
+    klevuFunctionId: "alsoViewed",
     modifiers,
     queries: [
       {
-        id: "similar",
-        typeOfRequest: KlevuTypeOfRequest.SimilarProducts,
+        id: "alsoviewed",
+        typeOfRequest: KlevuTypeOfRequest.AlsoViewed,
         settings: {
           limit: params.limit,
-          excludeIds: products.map((p) => ({
-            key: "itemGroupId",
-            value: p.itemGroupId,
-          })),
           context: {
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: products.map((p) => ({
-                  id: p.id,
+                records: lastClickedProducts.ids.map((pId) => ({
+                  id: pId,
                 })),
               },
             ],
