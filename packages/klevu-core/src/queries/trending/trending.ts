@@ -5,12 +5,25 @@ import {
 } from "../../connection/queryModels"
 import { KlevuFetchFunction } from ".."
 import { KlevuFetchModifer } from "../../modifiers"
+import { lastClickedProducts } from "../../store/lastClickedProducts"
 
 type Options = KlevuDefaultOptions & {
-  enablePersonlisation?: boolean
+  /**
+   * Tell algorithm which type or records we have last visited
+   */
   recentType?: KlevuTypeOfRecord
+  /**
+   * The id's of those records
+   */
   recent?: string[]
+  /**
+   * Do we want to limit to some category these trending products
+   */
   categoryPath?: string
+  /**
+   * Use automatic last clicked products
+   */
+  useLastVisitedProducts?: boolean
 }
 
 const defaultOptions: Options = {
@@ -38,27 +51,33 @@ export function trending(
     id: `trending`,
     typeOfRequest: KlevuTypeOfRequest.Trending,
     settings: {
-      personalisation: params?.enablePersonlisation
+      context: params.useLastVisitedProducts
         ? {
-            enablePersonalisation: true,
+            recentObjects: [
+              {
+                typeOfRecord: KlevuTypeOfRecord.Product,
+                records: lastClickedProducts.ids.map((id) => ({ id })),
+              },
+            ],
+          }
+        : params?.recent && params?.recentType
+        ? {
+            recentObjects: [
+              {
+                typeOfRecord: params.recentType,
+                records: params.recent.map((id) => ({ id })),
+              },
+            ],
           }
         : undefined,
-      context:
-        params?.recent && params?.recentType
-          ? {
-              recentObjects: [
-                {
-                  typeOfRecord: params.recentType,
-                  records: params.recent.map((id) => ({ id })),
-                },
-              ],
-            }
-          : undefined,
       query: params?.categoryPath
         ? {
+            term: "*",
             categoryPath: params?.categoryPath,
           }
-        : undefined,
+        : {
+            term: "*",
+          },
     },
   }
 

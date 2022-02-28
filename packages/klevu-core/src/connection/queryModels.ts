@@ -552,17 +552,9 @@ export type KlevuSimilarProcutsQuery = KlevuBaseQuery & {
 export type KlevuTrendingProductsQuery = KlevuBaseQuery & {
   typeOfRequest: KlevuTypeOfRequest.Trending
   settings?: {
-    personalisation?: {
-      enablePersonalisation: boolean
-    }
-    context?: {
-      recentObjects: Array<{
-        typeOfRecord: KlevuTypeOfRecord
-        records: Array<{ id: string }>
-      }>
-    }
     query?: {
-      categoryPath: string
+      term: "*"
+      categoryPath?: string
     }
   }
 }

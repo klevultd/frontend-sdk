@@ -19,5 +19,7 @@ test("Basic search", async () => {
 
   expect(q).toBeDefined()
   expect(q?.records.length).toBeGreaterThan(0)
-  expect(q?.records[0].typeOfRecord).toBe(KlevuTypeOfRecord.Category)
+  for (const r of q?.records ?? []) {
+    expect(r.typeOfRecord).toBe(KlevuTypeOfRecord.Category)
+  }
 })
