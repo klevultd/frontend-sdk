@@ -6,6 +6,38 @@ export const NAVIGATION_FRAGMENT = gql`
     id
     title
     slug
+    navigationRoot {
+      slug
+    }
+    children {
+      id
+      title
+      slug
+      navigationRoot {
+        slug
+      }
+      children {
+        id
+        title
+        slug
+        navigationRoot {
+          slug
+        }
+        children {
+          id
+          title
+          slug
+          navigationRoot {
+            slug
+          }
+        }
+      }
+    }
+  }
+`
+
+export const TOPNAV_FRAGMENT = gql`
+  fragment TopNav on ArticleRecord {
     children {
       id
       title
@@ -14,10 +46,9 @@ export const NAVIGATION_FRAGMENT = gql`
         id
         title
         slug
-        children {
-          id
-          title
-          slug
+        linkDescription
+        linkIcon {
+          url
         }
       }
     }
@@ -46,6 +77,9 @@ export const FULL_ARTICLE_FRAGMENT = gql`
         }
       }
       value
+    }
+    navigationRoot {
+      slug
     }
   }
 `

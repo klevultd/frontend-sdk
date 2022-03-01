@@ -17,7 +17,6 @@ export function Sidebar(props: { navigation: NavItem[]; coreapi: any }) {
   const coreapiitem = nav.find((i) => i.slug === "klevu-core-api")
   if (coreapiitem) {
     const grouped = groupBy(props.coreapi.children, "kindString")
-    console.log(grouped)
     coreapiitem.children = []
     for (const [key, children] of Object.entries(grouped)) {
       coreapiitem.children.push({
@@ -54,6 +53,8 @@ function RecursiveMenu({ nav }) {
               href={
                 item.isCoreApi
                   ? `/coreapi/${item.slug}`
+                  : item.navigationRoot
+                  ? `/article/${item.navigationRoot.slug}/${item.slug}`
                   : `/article/${item.slug}`
               }
             >

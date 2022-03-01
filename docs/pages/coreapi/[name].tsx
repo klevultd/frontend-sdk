@@ -1,5 +1,5 @@
 import { Layout } from "../../components/Layout/Layout"
-import { gql, NAVIGATION_FRAGMENT } from "../../lib/queries"
+import { gql, NAVIGATION_FRAGMENT, TOPNAV_FRAGMENT } from "../../lib/queries"
 
 import { ArticleContent } from "../../components/ArticleContent/ArticleContent"
 import { CoreApi } from "../../lib/coreapi"
@@ -9,10 +9,15 @@ export default function CoreApiPage(props: {
   apiItem: any
   navigation: any
   coreapidata: any
+  topnav: any
 }) {
   const apiItem = props.apiItem
   return (
-    <Layout navigation={props.navigation} coreapi={props.coreapidata}>
+    <Layout
+      navigation={props.navigation}
+      coreapi={props.coreapidata}
+      topnav={props.topnav}
+    >
       <h1>{apiItem.name}</h1>
       <pre>{JSON.stringify(apiItem, undefined, 2)}</pre>
     </Layout>
@@ -30,6 +35,7 @@ export async function getStaticProps(context) {
       apiItem,
       coreapidata: api,
       navigation: req.navigation.children,
+      topnav: req.topnav.children,
     },
   }
 }
@@ -49,6 +55,11 @@ const NAV = gql`
     navigation: article(filter: { slug: { eq: "frontpage" } }) {
       ...Navigation
     }
+
+    topnav: article(filter: { slug: { eq: "frontpage" } }) {
+      ...TopNav
+    }
   }
   ${NAVIGATION_FRAGMENT}
+  ${TOPNAV_FRAGMENT}
 `
