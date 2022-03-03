@@ -16,7 +16,7 @@
     "build:watch": "tsc --watch",
     "build": "tsc",
     "qoc": "eslint src/",
-    "docs": "typedoc --json ../../docs/klevu-core-api.json",
+    "docs": "typedoc --json ../../klevu-core-api.json",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
   },
   "author": "Klevu",
@@ -34,7 +34,7 @@
   "license": "MIT",
   "typedocMain": "src/index.ts",
   "dependencies": {
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "lodash.clonedeep": "^4.5.0",
     "type-fest": "^2.11.2"
   },
