@@ -4,7 +4,7 @@ import {
   isFilterResultOptions,
   isFilterResultSlider,
 } from "../connection/queryModels"
-import { KlevuDomEvents } from "../events/customEvents"
+import { KlevuDomEvents } from "../events/klevuDomEvents"
 import { ApplyFilter } from "../modifiers/applyFilter/applyFilter"
 
 export class FilterManager {

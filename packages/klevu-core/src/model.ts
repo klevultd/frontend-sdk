@@ -1,3 +1,5 @@
+import { LiteralUnion } from "type-fest"
+
 export enum KlevuTypeOfRecord {
   Product = "KLEVU_PRODUCT",
   Cms = "KLEVU_CMS",
@@ -158,7 +160,7 @@ swatches:
 
 */
 
-export type KlevuRecordFields = keyof KlevuRecord
+export type KlevuRecordFields = LiteralUnion<keyof KlevuRecord, string>
 
 export enum KlevuTypeOfRequest {
   Search = "SEARCH",

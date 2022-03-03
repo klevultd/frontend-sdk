@@ -1,4 +1,4 @@
-# THIS IS WORK IN PROCESS ALPHA! DO NOT USE FOR PRODUCTION!
+# THIS IS WORK IN PROCESS! ALPHA! DO NOT USE FOR PRODUCTION!
 
 # `@klevu/core`
 
@@ -107,7 +107,62 @@ Some of the functions can be modified with modifier functions. Any number of the
 
 Filter Manager is a helper class that takes care of state of filters. What are currently selected and what should be sent. It can be passed to `listFilters()` and then result is automatically applied to state. Modifier `applyFiltersWithManager()` can base used to apply current state of filters to query.
 
-@TODO: Write how DOM events are used to notify listeners about updated filters.
+## Internal DOM events
+
+Core sends a DOM events that any browser library could listen and act on the events. All events are attached to document. KlevuDomEvents enumeration is exposed from the library and it's quite simple to listen. For example:
+
+```ts
+import { KlevuDomEvents } from "@klevu/core"
+
+// Function to run when filter selection is updated
+const handleFilterUpdate = () => {
+  console.log("Filter updated")
+}
+
+// Attach event listener
+document.addEventListener(
+  KlevuDomEvents.FilterSelectionUpdate,
+  handleFilterUpdate
+)
+
+// Don't forget remove event listener in your component destructor
+document.removeEventListener(handleFilterUpdate)
+```
+
+Or as React example
+
+```ts
+import React, { useEffect } from "react";
+import { KlevuDomEvents } from "@klevu/core";
+
+
+function MyComponent() {
+  const handleFilterUpdate = (event) => {
+    console.log(event.detail)
+  }
+
+  useEffect(() => {
+    document.addEventListener(
+      KlevuDomEvents.FilterSelectionUpdate,
+      handleFilterUpdate
+    )
+
+    // cleanup this component
+    return () => {
+      document.removeEventListener(
+        KlevuDomEvents.FilterSelectionUpdate,
+        handleFilterUpdate
+      )
+    }
+  }, [])
+
+  return ...
+}
+```
+
+Read more from [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) about Custom Events.
+
+See list of events from [KlevuDomEvents](src/events/klevuDomEvents.ts)
 
 ## Events
 
