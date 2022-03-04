@@ -1,12 +1,9 @@
-import { KlevuTypeOfRequest } from "../../model"
-import {
-  KlevuBaseQuery,
-  KlevuDefaultOptions,
-} from "../../connection/queryModels"
+import { KlevuTypeOfRequest } from "../../models"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuFetchFunction } from ".."
 import { KlevuFetchModifer } from "../../modifiers"
 
-type Options = KlevuDefaultOptions
+type Options = { id: string }
 
 const defaultOptions = {
   id: "newarrivals",

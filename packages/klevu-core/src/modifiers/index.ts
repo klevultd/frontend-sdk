@@ -1,5 +1,6 @@
 import { LiteralUnion } from "type-fest"
-import { AllRecordQueries, KlevuResponse } from "../connection/queryModels"
+import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
+import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
 
 /**
  * @ignore
@@ -18,8 +19,10 @@ export type KlevuModifierId =
  */
 export type KlevuFetchModifer = {
   klevuModifierId: LiteralUnion<KlevuModifierId, string>
-  modifyAfter: (queries: Readonly<AllRecordQueries[]>) => AllRecordQueries[]
-  onResult?: (response: KlevuResponse) => void
+  modifyAfter: (
+    queries: Readonly<KlevuAllRecordQueries[]>
+  ) => KlevuAllRecordQueries[]
+  onResult?: (response: KlevuFetchResponse) => void
 }
 
 export * from "./applyFilter/applyFilter"

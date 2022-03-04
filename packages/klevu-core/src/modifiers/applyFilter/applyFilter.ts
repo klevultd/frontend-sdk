@@ -1,5 +1,6 @@
 import { KlevuFetchModifer } from ".."
-import { KlevuApplyFilter, KlevuListFilter } from "../../connection/queryModels"
+import { KlevuApplyFilter } from "../../models/KlevuApplyFilter"
+import { KlevuListFilter } from "../../models/KlevuListFilter"
 
 export type ApplyFilterOptions = {}
 

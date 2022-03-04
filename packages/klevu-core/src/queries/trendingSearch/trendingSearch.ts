@@ -1,6 +1,6 @@
 import { search, SearchOptions } from "../search/search"
 import { KlevuFetchFunction, KlevuFetchModifer, KlevuTypeOfRecord } from "../.."
-import { KlevuSearchPreference } from "../../connection/queryModels"
+import { KlevuSearchPreference } from "../../models/KlevuSearchPreference"
 
 /**
  * Create a trending search query. Id for this query is `trendingSearch`

@@ -1,14 +1,12 @@
 import { KlevuFetchFunction } from ".."
-import {
-  KlevuDefaultOptions,
-  KlevuSuggestionQuery,
-} from "../../connection/queryModels"
-import { KlevuTypeOfRequest } from "../../model"
-import { KlevuFetchModifer } from "../../modifiers"
+import { KlevuSuggestionQuery } from "../../models/KlevuSuggestionQuery"
+import { KlevuTypeOfRequest } from "../../models"
 import { cleanSearchQuery } from "../../utils"
 
-type Options = KlevuDefaultOptions &
-  Pick<KlevuSuggestionQuery, "limit" | "hlEndElem" | "hlStartElem">
+type Options = { id: string } & Pick<
+  KlevuSuggestionQuery,
+  "limit" | "hlEndElem" | "hlStartElem"
+>
 
 const defaults: Options = {
   id: "suggestions",

@@ -1,25 +1,25 @@
-import {
-  FilterResultOptions,
-  FilterResultSlider,
-  isFilterResultOptions,
-  isFilterResultSlider,
-} from "../connection/queryModels"
+import {} from "../models"
 import { KlevuDomEvents } from "../events/klevuDomEvents"
 import { ApplyFilter } from "../modifiers/applyFilter/applyFilter"
+import {
+  KlevuFilterType,
+  KlevuFilterResultSlider,
+  KlevuFilterResultOptions,
+} from "../models/KlevuApiRawResponse"
 
 export class FilterManager {
-  options: FilterResultOptions[] = []
-  sliders: FilterResultSlider[] = []
+  options: KlevuFilterResultOptions[] = []
+  sliders: KlevuFilterResultSlider[] = []
 
   initFromListFilters(
-    filters: Array<FilterResultOptions | FilterResultSlider>
+    filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider>
   ) {
     this.options = []
     this.sliders = []
     for (const f of filters) {
-      if (isFilterResultOptions(f)) {
+      if (isKlevuFilterResultOptions(f)) {
         this.options.push(f)
-      } else if (isFilterResultSlider(f)) {
+      } else if (isKlevuFilterResultSlider(f)) {
         this.sliders.push(f)
       }
     }
@@ -122,4 +122,16 @@ export class FilterManager {
 
     return undefined
   }
+}
+
+function isKlevuFilterResultSlider(
+  filter: KlevuFilterResultOptions | KlevuFilterResultSlider
+): filter is KlevuFilterResultSlider {
+  return filter.type === KlevuFilterType.Slider
+}
+
+function isKlevuFilterResultOptions(
+  filter: KlevuFilterResultOptions | KlevuFilterResultSlider
+): filter is KlevuFilterResultOptions {
+  return filter.type === KlevuFilterType.Options
 }

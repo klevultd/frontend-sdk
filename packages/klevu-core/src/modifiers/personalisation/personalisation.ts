@@ -1,5 +1,5 @@
 import { KlevuFetchModifer } from ".."
-import { KlevuRecordFields, KlevuTypeOfRecord } from "../../model"
+import { KlevuTypeOfRecord, KlevuRecordFields } from "../../models"
 import { lastClickedProducts } from "../../store/lastClickedProducts"
 
 /**

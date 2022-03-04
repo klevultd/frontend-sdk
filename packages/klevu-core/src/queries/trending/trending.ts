@@ -1,13 +1,11 @@
-import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../model"
-import {
-  KlevuDefaultOptions,
-  KlevuTrendingProductsQuery,
-} from "../../connection/queryModels"
+import { KlevuTrendingProductsQuery } from "../../models/KlevuTrendingProductsQuery"
 import { KlevuFetchFunction } from ".."
 import { KlevuFetchModifer } from "../../modifiers"
 import { lastClickedProducts } from "../../store/lastClickedProducts"
+import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../models"
 
-type Options = KlevuDefaultOptions & {
+type Options = {
+  id: string
   /**
    * Tell algorithm which type or records we have last visited
    */

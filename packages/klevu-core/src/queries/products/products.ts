@@ -1,4 +1,4 @@
-import { KlevuTypeOfRecord, KlevuTypeOfSearch } from "../../model"
+import { KlevuTypeOfRecord, KlevuTypeOfSearch } from "../../models"
 import { search } from "../search/search"
 
 /**

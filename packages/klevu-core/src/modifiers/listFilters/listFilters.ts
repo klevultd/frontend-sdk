@@ -1,10 +1,8 @@
 import { SetRequired } from "type-fest"
 import { KlevuFetchModifer } from ".."
-import {
-  FilterOrder,
-  KlevuApplyFilter,
-  KlevuListFilter,
-} from "../../connection/queryModels"
+import { KlevuApplyFilter } from "../../models/KlevuApplyFilter"
+import { KlevuListFilter } from "../../models/KlevuListFilter"
+import { KlevuFilterOrder } from "../../models/KlevuFilterOrder"
 import { FilterManager } from "../../store/filterManager"
 
 type FilterType = SetRequired<
@@ -21,7 +19,7 @@ type Options = {
   FilterType["options"]
 
 const defaults: Options = {
-  order: FilterOrder.Index,
+  order: KlevuFilterOrder.Index,
   limit: 10,
 }
 

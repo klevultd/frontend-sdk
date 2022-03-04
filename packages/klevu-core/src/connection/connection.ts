@@ -6,19 +6,17 @@ import {
   KlevuConfig,
   KlevuFetchFunction,
 } from "../index"
-import { KlevuTypeOfRequest } from "../model"
-import {
-  AllRecordQueries,
-  KlevuApiResponse,
-  KlevuPayload,
-  KlevuResponse,
-  KlevuBaseQuery,
-  KlevuSuggestionQuery,
-} from "./queryModels"
+import { KlevuTypeOfRequest } from "../models"
+import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
+import { KlevuPayload } from "../models/KlevuPayload"
+import { KlevuApiRawResponse } from "../models/KlevuApiRawResponse"
+import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
+import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery"
+import { KlevuBaseQuery } from "../models/KlevuBaseQuery"
 
 export async function KlevuFetch(
   ...functions: KlevuFetchFunction[]
-): Promise<KlevuResponse> {
+): Promise<KlevuFetchResponse> {
   const { recordQueries, suggestionQueries } =
     cleanAndProcessFunctions(functions)
 
@@ -30,7 +28,7 @@ export async function KlevuFetch(
     suggestions: suggestionQueries.length > 0 ? suggestionQueries : undefined,
   }
 
-  const response = await Axios.post<KlevuApiResponse>(
+  const response = await Axios.post<KlevuApiRawResponse>(
     KlevuConfig.url,
     payload,
     {
@@ -40,7 +38,7 @@ export async function KlevuFetch(
     }
   )
 
-  const responseObject: KlevuResponse = {
+  const responseObject: KlevuFetchResponse = {
     apiResponse: response.data,
     suggestionsById: (id: string) =>
       response.data.suggestionResults?.find((q) => q.id === id),
@@ -72,7 +70,7 @@ export async function KlevuFetch(
 }
 
 function fetchNextPage(
-  response: KlevuApiResponse,
+  response: KlevuApiRawResponse,
   functions: KlevuFetchFunction[]
 ) {
   if (response.queryResults && response.queryResults.length < 1) {
@@ -115,7 +113,7 @@ function fetchNextPage(
     return undefined
   }
 
-  const nextFunc: KlevuResponse["next"] = async (override?) => {
+  const nextFunc: KlevuFetchResponse["next"] = async (override?) => {
     const lastLimit = override?.limit ?? prevQuery.settings?.limit ?? 5
 
     if (!prevQuery.settings) {
@@ -150,7 +148,7 @@ function fetchNextPage(
 
 function sendSearchEvent(
   searchQuery: KlevuBaseQuery,
-  responseObject: KlevuResponse
+  responseObject: KlevuFetchResponse
 ) {
   const searchResponse = responseObject.queriesById(searchQuery.id)
   if (
@@ -167,7 +165,7 @@ function sendSearchEvent(
 }
 
 function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
-  let recordQueries: AllRecordQueries[] = []
+  let recordQueries: KlevuAllRecordQueries[] = []
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
     if (f.queries) {

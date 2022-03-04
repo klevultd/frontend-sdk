@@ -1,5 +1,5 @@
 import { KlevuFetchModifer } from ".."
-import { KlevuBaseQuery } from "../../connection/queryModels"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuFetchFunction } from "../../queries"
 
 /**

@@ -1,17 +1,15 @@
 import { KlevuFetchFunction } from ".."
-import {
-  KlevuDefaultOptions,
-  KlevuBaseQuery,
-  KlevuBaseQuerySettings,
-} from "../../connection/queryModels"
-import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../model"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
+import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings"
+import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../models"
 import { KlevuFetchModifer } from "../../modifiers"
 import { cleanSearchQuery } from "../../utils"
 
 /**
  * Search options to modify the search query.
  */
-export type SearchOptions = KlevuDefaultOptions & {
+export type SearchOptions = {
+  id: string
   /**
    * The type of records to search for.
    */

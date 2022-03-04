@@ -1,7 +1,5 @@
-import {
-  AllRecordQueries,
-  KlevuSuggestionQuery,
-} from "../connection/queryModels"
+import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
+import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery"
 import type { LiteralUnion } from "type-fest"
 import { KlevuFetchModifer } from "../modifiers"
 
@@ -23,7 +21,7 @@ export type KlevuFetchId =
  */
 export type KlevuFetchFunction = {
   klevuFunctionId: LiteralUnion<KlevuFetchId, string>
-  queries?: AllRecordQueries[]
+  queries?: KlevuAllRecordQueries[]
   suggestions?: KlevuSuggestionQuery[]
   modifiers?: KlevuFetchModifer[]
 }
