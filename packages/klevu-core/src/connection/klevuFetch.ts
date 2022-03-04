@@ -14,9 +14,20 @@ import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
 import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery"
 import { KlevuBaseQuery } from "../models/KlevuBaseQuery"
 
+/**
+ * Function that makes query to KlevuBackend. It can take amount of queries.
+ *
+ * @category KlevuFetch
+ * @param functions list of functions to execute
+ * @returns Tools to operate results and get next results {@link KlevuFetchResponse}
+ */
 export async function KlevuFetch(
   ...functions: KlevuFetchFunction[]
 ): Promise<KlevuFetchResponse> {
+  if (functions.length < 1) {
+    throw new Error("At least one fetch function should be provided to fetch.")
+  }
+
   const { recordQueries, suggestionQueries } =
     cleanAndProcessFunctions(functions)
 

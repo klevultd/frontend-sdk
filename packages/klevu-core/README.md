@@ -181,3 +181,11 @@ KlevuEvents.productClick()
 | `search()`              | When search is made. This is automatically sent in the queries |
 | `recommendationClick()` | When product is clicked on list of recommended products        |
 | `recommendationView()`  | When recommendations are shown                                 |
+
+## Klevu Merchant Center settings
+
+Users of Klevu can change settings in the Klevu Merchant Center. These settings can be easily fetched with `KlevuKMCSettings` function.
+
+```ts
+const result = await KlevuKMCSettings()
+```

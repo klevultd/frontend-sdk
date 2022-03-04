@@ -46,7 +46,7 @@ export class KlevuConfig {
 
 // These are visible for users of the library
 export * from "./models"
-export * from "./connection/connection"
+export * from "./connection/klevuFetch"
 export * from "./connection/kmc"
 export * from "./queries"
 export * from "./modifiers"

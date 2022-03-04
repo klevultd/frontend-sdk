@@ -5,6 +5,7 @@ import { search, SearchOptions } from "../search/search"
 /**
  * Search helper function that sets correct settings
  *
+ * @category RecommendationQuery
  * @param term cms page to find
  * @param options
  * @returns

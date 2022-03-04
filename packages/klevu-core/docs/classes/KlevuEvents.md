@@ -42,7 +42,7 @@ Tell Klevu what products where bought by the user
 
 #### Defined in
 
-[events/klevuEvents.ts:22](https://github.com/klevultd/frontend-sdk/blob/753ea2a/packages/klevu-core/src/events/klevuEvents.ts#L22)
+[events/klevuEvents.ts:22](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L22)
 
 ___
 
@@ -66,7 +66,7 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/klevuEvents.ts:54](https://github.com/klevultd/frontend-sdk/blob/753ea2a/packages/klevu-core/src/events/klevuEvents.ts#L54)
+[events/klevuEvents.ts:54](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L54)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 #### Defined in
 
-[events/klevuEvents.ts:44](https://github.com/klevultd/frontend-sdk/blob/753ea2a/packages/klevu-core/src/events/klevuEvents.ts#L44)
+[events/klevuEvents.ts:44](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L44)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[events/klevuEvents.ts:46](https://github.com/klevultd/frontend-sdk/blob/753ea2a/packages/klevu-core/src/events/klevuEvents.ts#L46)
+[events/klevuEvents.ts:46](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L46)
 
 ___
 
@@ -120,4 +120,4 @@ properly. `search()` query automatically sends this event. Use
 
 #### Defined in
 
-[events/klevuEvents.ts:81](https://github.com/klevultd/frontend-sdk/blob/753ea2a/packages/klevu-core/src/events/klevuEvents.ts#L81)
+[events/klevuEvents.ts:81](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L81)
