@@ -1,8 +1,13 @@
-import { KlevuTypeOfRequest } from "."
-import { KlevuBaseQuerySettings } from "./KlevuBaseQuerySettings"
-import { KlevuApplyFilter } from "./KlevuApplyFilter"
-import { KlevuListFilter } from "./KlevuListFilter"
+import {
+  KlevuTypeOfRequest,
+  KlevuBaseQuerySettings,
+  KlevuApplyFilter,
+  KlevuListFilter,
+} from "."
 
+/**
+ * Generic
+ */
 export type KlevuBaseQuery = {
   id: string
   typeOfRequest: KlevuTypeOfRequest

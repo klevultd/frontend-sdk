@@ -16,7 +16,7 @@
     "build:watch": "tsc --watch",
     "build": "tsc",
     "qoc": "eslint src/",
-    "docs": "typedoc --json ../../klevu-core-api.json",
+    "docs": "typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
   },
   "author": "Klevu",
@@ -39,6 +39,8 @@
     "type-fest": "^2.11.2"
   },
   "devDependencies": {
-    "@types/lodash.clonedeep": "^4.5.6"
+    "@types/lodash.clonedeep": "^4.5.6",
+    "typedoc": "^0.22.12",
+    "typedoc-plugin-markdown": "^3.11.14"
   }
 }

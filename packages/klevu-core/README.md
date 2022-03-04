@@ -6,6 +6,8 @@ Klevu core is a library that helps developers to interact with Klevu API. It inc
 
 The library can run it's code in browsers and in Node.js.
 
+[Api Reference can be found from here](docs/modules.md)
+
 ## Getting started
 
 ```sh

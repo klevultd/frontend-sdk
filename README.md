@@ -1,7 +1,7 @@
 # Links
 
-[@klevu/core](packages/klevu-core/README.md)
-[React example](examples/react/)
+- [@klevu/core](packages/klevu-core/README.md)
+- [React example](examples/react/)
 
 # Internal development
 

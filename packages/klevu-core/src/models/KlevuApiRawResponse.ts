@@ -1,39 +1,90 @@
 import { KlevuRecord, KlevuTypeOfSearch } from "."
 import { KlevuSuggestionResult } from "./KlevuSuggestionResult"
 
+/**
+ * Filter types Klevu support
+ */
 export enum KlevuFilterType {
   Options = "OPTIONS",
   Slider = "SLIDER",
 }
 
+/**
+ * Generic keys for all filter types
+ */
 type KlevuFilterResult = {
+  /**
+   * Key of the filter
+   */
   key: string
+  /**
+   * Label of the filter
+   */
   label: string
+  /**
+   * Type of the filter
+   */
   type: KlevuFilterType
 }
 
 export type KlevuFilterResultOptions = KlevuFilterResult & {
   type: KlevuFilterType.Options
+  /**
+   * Options of filter
+   */
   options: Array<{
+    /**
+     * Name / label of filter
+     */
     name: string
+    /**
+     * Value of filter. That will be sent to backend
+     */
     value: string
+    /**
+     *
+     */
     count: number
+    /**
+     * Was this filter selected on the query
+     */
     selected: boolean
   }>
 }
 
 export type KlevuFilterResultSlider = KlevuFilterResult & {
   type: KlevuFilterType.Slider
+  /**
+   * Minimum value of slider
+   */
   min: string
+  /**
+   * Maxium value of slider
+   */
   max: string
+  /**
+   * Current start value slider
+   */
   start: string
+  /**
+   * Current end value of slider
+   */
   end: string
 }
 
 export type KlevuQueryResult = {
+  /**
+   * Id used when defining query
+   */
   id: string
+  /**
+   * Currently available filters
+   */
   filters?: Array<KlevuFilterResultOptions | KlevuFilterResultSlider>
   meta: {
+    /**
+     * Klevu API key
+     */
     apiKey: string
     isPersonalised: boolean
     /**
@@ -83,6 +134,9 @@ export type KlevuQueryResult = {
   records: Array<{ id: string } & KlevuRecord>
 }
 
+/**
+ * Raw response from Klevu API
+ */
 export type KlevuApiRawResponse = {
   meta: {
     qTime: number

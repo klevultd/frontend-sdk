@@ -1,3 +1,6 @@
+/**
+ * Apply Filter type for Klevu base query
+ */
 export type KlevuApplyFilter = {
   applyFilters?: {
     filters: Array<{
