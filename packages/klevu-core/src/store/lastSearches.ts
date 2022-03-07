@@ -1,4 +1,4 @@
-import { KlevuDomEvents } from "../events/klevuDomEvents"
+import { KlevuDomEvents } from "../events/KlevuDomEvents"
 import { isBrowser } from "../utils"
 
 export type KlevuLastSearch = {

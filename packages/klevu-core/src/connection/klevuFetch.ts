@@ -1,8 +1,9 @@
 import Axios from "axios"
 import cloneDeep from "lodash.clonedeep"
-import { KlevuEvents } from "../events/klevuEvents"
+import { KlevuEvents } from "../events/KlevuEvents"
 import {
   applyFilterWithManager,
+  defaultKlevuConfig,
   KlevuConfig,
   KlevuFetchFunction,
 } from "../index"
@@ -33,14 +34,16 @@ export async function KlevuFetch(
 
   const payload: KlevuPayload = {
     context: {
-      apiKeys: [KlevuConfig.apiKey],
+      apiKeys: [defaultKlevuConfig.apiKey],
     },
     recordQueries: recordQueries.length > 0 ? recordQueries : undefined,
     suggestions: suggestionQueries.length > 0 ? suggestionQueries : undefined,
   }
 
+  const withOverride = functions.find((f) => Boolean(f.configOverride))
+
   const response = await Axios.post<KlevuApiRawResponse>(
-    KlevuConfig.url,
+    withOverride?.configOverride?.apiKey ?? defaultKlevuConfig.url,
     payload,
     {
       headers: {

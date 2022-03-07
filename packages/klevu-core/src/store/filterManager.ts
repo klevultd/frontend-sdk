@@ -1,5 +1,5 @@
 import {} from "../models"
-import { KlevuDomEvents } from "../events/klevuDomEvents"
+import { KlevuDomEvents } from "../events/KlevuDomEvents"
 import { ApplyFilter } from "../modifiers/applyFilter/applyFilter"
 import {
   KlevuFilterType,

@@ -1,7 +1,7 @@
-import { KlevuKMCSettings, KlevuConfig } from "../index"
+import { KlevuKMCSettings, initKlevuConfig } from "../index"
 
 beforeEach(() => {
-  KlevuConfig.init({
+  initKlevuConfig({
     url: "https://eucs15v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-156925593843210765",
   })

@@ -24,18 +24,13 @@ type KlevuConfiguration = {
 }
 
 export class KlevuConfig {
-  static apiKey: string
-  static url: string
-  static cacheMaxTTL = 600000
-  static eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
-  static eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
+  apiKey: string
+  url: string
+  cacheMaxTTL = 600000
+  eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
+  eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
 
-  /**
-   * Must be called once per application to initialize Klevu
-   *
-   * @param config
-   */
-  static init(config: KlevuConfiguration) {
+  constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
     this.url = config.url
     if (config.cacheMaxTTL) {
@@ -44,11 +39,16 @@ export class KlevuConfig {
   }
 }
 
+export let defaultKlevuConfig: KlevuConfig
+export function initKlevuConfig(config: KlevuConfiguration) {
+  defaultKlevuConfig = new KlevuConfig(config)
+}
+
 // These are visible for users of the library
-export * from "./models"
 export * from "./connection/klevuFetch"
 export * from "./connection/kmc"
-export * from "./queries"
-export * from "./modifiers"
 export * from "./events"
+export * from "./models"
+export * from "./modifiers"
+export * from "./queries"
 export * from "./store"

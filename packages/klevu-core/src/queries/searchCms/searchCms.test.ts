@@ -1,8 +1,8 @@
-import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord, search } from "../.."
+import { initKlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../.."
 import { searchCms } from "./searchCms"
 
 beforeEach(() => {
-  KlevuConfig.init({
+  initKlevuConfig({
     url: "https://eucs15v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-156925593843210765",
   })

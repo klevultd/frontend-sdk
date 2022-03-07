@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuTypeOfSearch } from ".."
+import { defaultKlevuConfig, KlevuTypeOfSearch } from ".."
 import Axios from "axios"
 
 type V1SearchEvent = {
@@ -29,9 +29,9 @@ type V1SearchEvent = {
 }
 
 export async function KlevuEventV1Search(event: V1SearchEvent) {
-  const url = `${KlevuConfig.eventsApiV1Url}n-search/search${objectToUrlParams(
-    event
-  )}`
+  const url = `${
+    defaultKlevuConfig.eventsApiV1Url
+  }n-search/search${objectToUrlParams(event)}`
   return Axios.get(url)
 }
 
@@ -84,9 +84,9 @@ export type V1ProductTrackingEvent = {
 export async function KlevuEventV1ProductTracking(
   event: V1ProductTrackingEvent
 ) {
-  const url = `${KlevuConfig.eventsApiV1Url}productTracking${objectToUrlParams(
-    event
-  )}`
+  const url = `${
+    defaultKlevuConfig.eventsApiV1Url
+  }productTracking${objectToUrlParams(event)}`
   return Axios.get(url)
 }
 
@@ -140,9 +140,9 @@ export type V1CheckedOutProductsEvent = {
 export async function KlevuEventV1CheckedOutProducts(
   event: V1CheckedOutProductsEvent
 ) {
-  const url = `${KlevuConfig.eventsApiV1Url}productTracking${objectToUrlParams(
-    event
-  )}`
+  const url = `${
+    defaultKlevuConfig.eventsApiV1Url
+  }productTracking${objectToUrlParams(event)}`
   return Axios.get(url)
 }
 
@@ -244,5 +244,5 @@ type KlevuEventV2 = {
 }
 
 export async function KlevuEventV2(data: KlevuEventV2) {
-  return (await Axios.post(KlevuConfig.eventsApiV2Url, data)).data
+  return (await Axios.post(defaultKlevuConfig.eventsApiV2Url, data)).data
 }

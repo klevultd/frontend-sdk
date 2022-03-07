@@ -2,6 +2,7 @@ import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
 import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery"
 import type { LiteralUnion } from "type-fest"
 import { KlevuFetchModifer } from "../modifiers"
+import { KlevuConfig } from ".."
 
 /**
  * Internal. List of known KlevuFetchIds
@@ -24,6 +25,7 @@ export type KlevuFetchFunction = {
   queries?: KlevuAllRecordQueries[]
   suggestions?: KlevuSuggestionQuery[]
   modifiers?: KlevuFetchModifer[]
+  configOverride?: KlevuConfig
 }
 
 export * from "./categoryListing/categoryListing"
