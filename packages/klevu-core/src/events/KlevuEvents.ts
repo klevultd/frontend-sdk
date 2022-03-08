@@ -1,4 +1,4 @@
-import { defaultKlevuConfig, KlevuRecord, KlevuTypeOfSearch } from ".."
+import { KlevuConfig, KlevuRecord, KlevuTypeOfSearch } from ".."
 import { KlevuRecommendationBanner } from "../models/KlevuRecommendationBanner"
 import { lastClickedProducts } from "../store/lastClickedProducts"
 import { KlevuLastSearches } from "../store/lastSearches"
@@ -25,7 +25,7 @@ export class KlevuEvents {
     for (const i of items) {
       const p = i.product
       KlevuEventV1CheckedOutProducts({
-        klevu_apiKey: defaultKlevuConfig.apiKey,
+        klevu_apiKey: KlevuConfig.default.apiKey,
         klevu_currency: p.currency,
         klevu_productGroupId: p.itemGroupId,
         klevu_productId: p.id,
@@ -49,7 +49,7 @@ export class KlevuEvents {
   ) {
     KlevuEventV2({
       event: "select_recs_list",
-      event_apikey: defaultKlevuConfig.apiKey,
+      event_apikey: KlevuConfig.default.apiKey,
       event_list_id: recommendation.metadata.recsKey,
       event_list_logic: recommendation.metadata.logic,
       event_list_name: recommendation.metadata.title,
@@ -81,7 +81,7 @@ export class KlevuEvents {
   ) {
     KlevuEventV2({
       event: "view_recs_list",
-      event_apikey: defaultKlevuConfig.apiKey,
+      event_apikey: KlevuConfig.default.apiKey,
       event_list_id: recommendation.metadata.recsKey,
       event_list_logic: recommendation.metadata.logic,
       event_list_name: recommendation.metadata.title,
@@ -114,7 +114,7 @@ export class KlevuEvents {
   ) {
     lastClickedProducts.click(product.id)
     KlevuEventV1ProductTracking({
-      klevu_apiKey: defaultKlevuConfig.apiKey,
+      klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_type: "clicked",
       klevu_keywords: searchTerm,
       klevu_productGroupId: product.itemGroupId,
@@ -141,7 +141,7 @@ export class KlevuEvents {
   ) {
     KlevuLastSearches.save(term)
     KlevuEventV1Search({
-      klevu_apiKey: defaultKlevuConfig.apiKey,
+      klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_term: term,
       klevu_totalResults: totalResults,
       klevu_typeOfQuery: typeOfSearch,

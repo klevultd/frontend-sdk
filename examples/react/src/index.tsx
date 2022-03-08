@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { initKlevuConfig } from "@klevu/core"
+import { KlevuConfig } from "@klevu/core"
 import { App } from "./app"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { HomePage } from "./routes/HomePage"
@@ -8,7 +8,7 @@ import { ProductsPage } from "./routes/ProductsPage"
 import { ProductPage } from "./routes/ProductPage"
 import { CategoryPage } from "./routes/CategoryPage"
 
-initKlevuConfig({
+KlevuConfig.init({
   url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
   apiKey: "klevu-160320037354512854",
 })

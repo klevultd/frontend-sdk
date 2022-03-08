@@ -19,9 +19,9 @@ The library can run it's code in browsers and in Node.js.
 Before making any request it is required to provide Klevu API key and the search server you are targeting. This should be done in the index of application or in the initialization of your app.
 
 ```ts
-import { initDefaultConfig } from "@klevu/core"
+import { KlevuConfig } from "@klevu/core"
 
-initDefaultConfig({
+KlevuConfig.init({
   url: "https://<your-server>.ksearchnet.com/cs/v2/search",
   apiKey: "klevu-xxxxxxxxxxxxx",
 })

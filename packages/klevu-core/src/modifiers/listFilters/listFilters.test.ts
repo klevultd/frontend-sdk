@@ -1,13 +1,13 @@
 import {
   FilterManager,
-  initKlevuConfig,
+  KlevuConfig,
   KlevuFetch,
   listFilters,
   search,
 } from "../.."
 
 beforeEach(() => {
-  initKlevuConfig({
+  KlevuConfig.init({
     url: "https://eucs15v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-156925593843210765",
   })
