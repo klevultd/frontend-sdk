@@ -4,16 +4,17 @@ import { KlevuEvents } from "../events/KlevuEvents"
 import {
   applyFilterWithManager,
   defaultKlevuConfig,
-  KlevuConfig,
   KlevuFetchFunction,
 } from "../index"
-import { KlevuTypeOfRequest } from "../models"
-import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
-import { KlevuPayload } from "../models/KlevuPayload"
-import { KlevuApiRawResponse } from "../models/KlevuApiRawResponse"
-import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
-import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery"
-import { KlevuBaseQuery } from "../models/KlevuBaseQuery"
+import {
+  KlevuTypeOfRequest,
+  KlevuAllRecordQueries,
+  KlevuPayload,
+  KlevuApiRawResponse,
+  KlevuFetchResponse,
+  KlevuSuggestionQuery,
+  KlevuBaseQuery,
+} from "../models"
 
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.

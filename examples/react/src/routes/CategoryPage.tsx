@@ -2,7 +2,7 @@ import {
   FilterResultOptions,
   FilterResultSlider,
   KlevuRecord,
-  KlevuSorting,
+  KlevuSearchSorting,
   trendingSearch,
   listFilters,
   applyFilterWithManager,
@@ -45,7 +45,7 @@ export function CategoryPage() {
   const [options, setOptions] = useState<FilterResultOptions[]>(manager.options)
   const [sliders, setSliders] = useState<FilterResultSlider[]>(manager.sliders)
   const [products, setProducts] = useState<KlevuRecord[]>([])
-  const [sorting, setSorting] = useState(KlevuSorting.Relevance)
+  const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
 
   const handleDrawerOpen = () => {
@@ -222,13 +222,15 @@ export function CategoryPage() {
             size="small"
             value={sorting}
             style={{ margin: "12px" }}
-            onChange={(event) => setSorting(event.target.value as KlevuSorting)}
+            onChange={(event) =>
+              setSorting(event.target.value as KlevuSearchSorting)
+            }
           >
-            <MenuItem value={KlevuSorting.Relevance}>Relevance</MenuItem>
-            <MenuItem value={KlevuSorting.PriceAsc}>
+            <MenuItem value={KlevuSearchSorting.Relevance}>Relevance</MenuItem>
+            <MenuItem value={KlevuSearchSorting.PriceAsc}>
               Price: Low to high
             </MenuItem>
-            <MenuItem value={KlevuSorting.PriceDesc}>
+            <MenuItem value={KlevuSearchSorting.PriceDesc}>
               Price: Hight to low
             </MenuItem>
           </Select>
