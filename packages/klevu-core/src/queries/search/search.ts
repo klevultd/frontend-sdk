@@ -1,7 +1,11 @@
 import { KlevuFetchFunction } from ".."
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings"
-import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../models"
+import {
+  KlevuAnyTypeOfRecord,
+  KlevuTypeOfRecord,
+  KlevuTypeOfRequest,
+} from "../../models"
 import { KlevuFetchModifer } from "../../modifiers"
 import { cleanSearchQuery } from "../../utils"
 
@@ -13,7 +17,7 @@ export type SearchOptions = {
   /**
    * The type of records to search for.
    */
-  typeOfRecords: KlevuTypeOfRecord[]
+  typeOfRecords: KlevuAnyTypeOfRecord[]
   doNotSendEvent?: boolean
 } & Omit<KlevuBaseQuerySettings, "query">
 

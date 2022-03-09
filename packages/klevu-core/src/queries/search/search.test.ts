@@ -49,3 +49,14 @@ test("Limit test", async () => {
 
   expect(result.queriesById("search")?.records.length).toBe(14)
 })
+
+test("No type errors", async () => {
+  const result = await KlevuFetch(
+    search("*", {
+      limit: 14,
+      typeOfRecords: ["test"],
+    })
+  )
+
+  expect(result.queriesById("test")).toBe(undefined)
+})

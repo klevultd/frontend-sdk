@@ -1,7 +1,6 @@
 import { KlevuFetchFunction } from ".."
 import {
   KlevuFetchModifer,
-  KlevuRecord,
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../.."

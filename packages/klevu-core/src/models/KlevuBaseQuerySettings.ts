@@ -1,4 +1,4 @@
-import { KlevuRecordFields, KlevuTypeOfRecord, KlevuTypeOfSearch } from "."
+import { KlevuAnyTypeOfRecord, KlevuRecordFields, KlevuTypeOfSearch } from "."
 import { KlevuSearchSorting } from "./KlevuSearchSorting"
 import { KlevuSearchPreference } from "./KlevuSearchPreference"
 import { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery"
@@ -24,7 +24,7 @@ export type KlevuBaseQuerySettings = {
    * physical stores within your search you can do so by utilising the
    * typeOfRecords parameter.
    */
-  typeOfRecords?: KlevuTypeOfRecord[]
+  typeOfRecords?: KlevuAnyTypeOfRecord[]
 
   /**
    *
@@ -169,7 +169,7 @@ export type KlevuBaseQuerySettings = {
       /**
        * Type of visited record
        */
-      typeOfRecord: KlevuTypeOfRecord
+      typeOfRecord: KlevuAnyTypeOfRecord
       /**
        * Id's of records
        */

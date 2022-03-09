@@ -1,4 +1,4 @@
-import { KlevuTypeOfRecord } from "./KlevuTypeOfRecord"
+import { KlevuAnyTypeOfRecord } from "./KlevuTypeOfRecord"
 
 export type KlevuRecord = {
   /**
@@ -115,7 +115,7 @@ export type KlevuRecord = {
   /**
    * The type of record, e.g. KLEVU_PRODUCT, KLEVU_CMS, KLEVU_CATEGORY, etc.
    */
-  typeOfRecord: KlevuTypeOfRecord
+  typeOfRecord: KlevuAnyTypeOfRecord
   /**
    * The fully qualified URL used to access the record in your store.
    */

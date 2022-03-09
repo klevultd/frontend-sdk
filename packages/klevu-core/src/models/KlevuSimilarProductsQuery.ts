@@ -1,4 +1,4 @@
-import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "."
+import { KlevuAnyTypeOfRecord, KlevuTypeOfRequest } from "."
 import { KlevuBaseQuery } from "./KlevuBaseQuery"
 
 export type KlevuSimilarProductsQuery = KlevuBaseQuery & {
@@ -6,7 +6,7 @@ export type KlevuSimilarProductsQuery = KlevuBaseQuery & {
   settings: {
     context: {
       recentObjects: Array<{
-        typeOfRecord: KlevuTypeOfRecord
+        typeOfRecord: KlevuAnyTypeOfRecord
         records: Array<{ id: string }>
       }>
     }
