@@ -7,7 +7,8 @@
       "dependsOn": [
         "Build @klevu/core",
         "Build @klevu/ui",
-        "npm: start - react"
+        "npm: start - react",
+        "npm: start - vue"
       ],
       "problemMatcher": [],
       "group": {
@@ -43,6 +44,17 @@
       "path": "examples/react/",
       "problemMatcher": [],
       "label": "npm: start - react",
+      "detail": "vite",
+      "presentation": {
+        "group": "groupA"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "examples/vue/",
+      "problemMatcher": [],
+      "label": "npm: start - vue",
       "detail": "vite",
       "presentation": {
         "group": "groupA"
