@@ -25,7 +25,7 @@ import {
   KlevuFetch,
   KlevuSearchSorting,
   listFilters,
-  trendingSearch,
+  trendingProducts,
   KlevuFetchResponse,
 } from "@klevu/core"
 import type {
@@ -63,7 +63,7 @@ export function TrendingProductsGrid() {
 
   const initialFetch = useCallback(async () => {
     const functions = [
-      trendingSearch(
+      trendingProducts(
         {
           id: "search",
           limit: 36,

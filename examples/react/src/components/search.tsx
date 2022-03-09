@@ -5,7 +5,7 @@ import {
   KlevuTypeOfRecord,
   search,
   suggestions,
-  trendingSearch,
+  trendingProducts,
 } from "@klevu/core"
 import type { KlevuRecord, KlevuLastSearch } from "@klevu/core"
 import {
@@ -31,7 +31,7 @@ import SearchIcon from "@mui/icons-material/Search"
 export function Search() {
   const [searchValue, setSearchValue] = useState("")
   const [products, setProducts] = useState<KlevuRecord[]>([])
-  const [trendingProducts, setTrendingProducts] = useState<KlevuRecord[]>([])
+  const [trendProducts, setTrendingProducts] = useState<KlevuRecord[]>([])
   const [lastSearches, setLastSearches] = useState<KlevuLastSearch[]>(
     KlevuLastSearches.get()
   )
@@ -68,16 +68,16 @@ export function Search() {
     popupState.open()
     setLastSearches(KlevuLastSearches.get())
 
-    if (trendingProducts.length > 0) {
+    if (trendProducts.length > 0) {
       return
     }
 
     const res = await KlevuFetch(
-      trendingSearch({
+      trendingProducts({
         limit: 9,
       })
     )
-    setTrendingProducts(res.queriesById("trendingSearch")?.records ?? [])
+    setTrendingProducts(res.queriesById("trendingProducts")?.records ?? [])
   }
 
   const onSearchChange = (event) => {
@@ -218,11 +218,11 @@ export function Search() {
                   ))}
                 </Grid>
               </React.Fragment>
-            ) : trendingProducts.length > 0 ? (
+            ) : trendProducts.length > 0 ? (
               <React.Fragment>
                 <Typography variant="h6">Trending products</Typography>
                 <Grid container spacing={2}>
-                  {trendingProducts.map((p, i) => (
+                  {trendProducts.map((p, i) => (
                     <Grid item key={i}>
                       <Product
                         product={p}

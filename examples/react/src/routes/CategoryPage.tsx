@@ -1,16 +1,15 @@
 import {
-  FilterResultOptions,
-  FilterResultSlider,
   KlevuRecord,
   KlevuSearchSorting,
-  trendingSearch,
   listFilters,
   applyFilterWithManager,
   KlevuFetch,
   KlevuDomEvents,
   FilterManager,
-  KlevuResponse,
   categoryListing,
+  KlevuFilterResultOptions,
+  KlevuFilterResultSlider,
+  KlevuFetchResponse,
 } from "@klevu/core"
 import {
   Drawer,
@@ -37,13 +36,17 @@ import FilterIcon from "@mui/icons-material/FilterAlt"
 
 const drawerWidth = 240
 const manager = new FilterManager()
-let prevRes: KlevuResponse
+let prevRes: KlevuFetchResponse
 
 export function CategoryPage() {
   const params = useParams()
   const [open, setOpen] = useState(false)
-  const [options, setOptions] = useState<FilterResultOptions[]>(manager.options)
-  const [sliders, setSliders] = useState<FilterResultSlider[]>(manager.sliders)
+  const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
+    manager.options
+  )
+  const [sliders, setSliders] = useState<KlevuFilterResultSlider[]>(
+    manager.sliders
+  )
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
