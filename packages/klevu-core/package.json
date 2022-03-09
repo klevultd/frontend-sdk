@@ -1,6 +1,6 @@
 {
   "name": "@klevu/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Typescript SDK that simplifies development on Klevu backend.",
   "keywords": [
     "klevu",
@@ -17,7 +17,8 @@
     "build": "rm -rf dist && tsc",
     "qoc": "eslint src/",
     "docs": "typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts",
-    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage",
+    "deploy": "npm run build && npm run docs && np"
   },
   "author": "Klevu",
   "contributors": [

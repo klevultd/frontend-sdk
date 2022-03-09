@@ -42,7 +42,7 @@ Tell Klevu what products where bought by the user
 
 #### Defined in
 
-[events/klevuEvents.ts:22](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L22)
+[events/KlevuEvents.ts:18](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuEvents.ts#L18)
 
 ___
 
@@ -66,13 +66,23 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/klevuEvents.ts:54](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L54)
+[events/KlevuEvents.ts:110](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuEvents.ts#L110)
 
 ___
 
 ### recommendationClick
 
-▸ `Static` **recommendationClick**(): `void`
+▸ `Static` **recommendationClick**(`recommendation`, `product`, `productIndexInList`): `void`
+
+When product has been clicked in the recommendation banner
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `recommendation` | `KlevuRecommendationBanner` | What recommendation is clicked |
+| `product` | [`KlevuRecord`](../modules.md#klevurecord) | Which product is clicked in the list |
+| `productIndexInList` | `number` | What is the index of the product in the list. Starting from 1 |
 
 #### Returns
 
@@ -80,13 +90,22 @@ ___
 
 #### Defined in
 
-[events/klevuEvents.ts:44](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L44)
+[events/KlevuEvents.ts:77](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuEvents.ts#L77)
 
 ___
 
 ### recommendationView
 
-▸ `Static` **recommendationView**(): `void`
+▸ `Static` **recommendationView**(`recommendation`, `products`): `void`
+
+When recommendation banner is shown in the page
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `recommendation` | `KlevuRecommendationBanner` | What recommendation is shown |
+| `products` | [`KlevuRecord`](../modules.md#klevurecord)[] | List of all products that are shown |
 
 #### Returns
 
@@ -94,7 +113,7 @@ ___
 
 #### Defined in
 
-[events/klevuEvents.ts:46](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L46)
+[events/KlevuEvents.ts:46](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuEvents.ts#L46)
 
 ___
 
@@ -103,8 +122,7 @@ ___
 ▸ `Static` **search**(`term`, `totalResults`, `typeOfSearch`): `void`
 
 What user has last searched. This is important for Klevu to function
-properly. `search()` query automatically sends this event. Use
-`doNotSendEvent` option in search to disable it.
+properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Parameters
 
@@ -120,4 +138,4 @@ properly. `search()` query automatically sends this event. Use
 
 #### Defined in
 
-[events/klevuEvents.ts:81](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuEvents.ts#L81)
+[events/KlevuEvents.ts:136](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuEvents.ts#L136)

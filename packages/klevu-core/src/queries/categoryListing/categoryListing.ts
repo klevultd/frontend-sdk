@@ -31,7 +31,6 @@ export function categoryListing(
   const query: KlevuBaseQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.CategoryNavigation,
-    doNotSendEvent: true,
     settings: {
       query: {
         categoryPath: category,

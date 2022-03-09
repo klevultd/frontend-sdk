@@ -15,6 +15,7 @@
 - [eventsApiV1Url](KlevuConfig.md#eventsapiv1url)
 - [eventsApiV2Url](KlevuConfig.md#eventsapiv2url)
 - [url](KlevuConfig.md#url)
+- [default](KlevuConfig.md#default)
 
 ### Methods
 
@@ -24,65 +25,83 @@
 
 ### constructor
 
-• **new KlevuConfig**()
+• **new KlevuConfig**(`config`)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `config` | `KlevuConfiguration` |
+
+#### Defined in
+
+[config.ts:35](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L35)
 
 ## Properties
 
 ### apiKey
 
-▪ `Static` **apiKey**: `string`
+• **apiKey**: `string`
 
 #### Defined in
 
-[index.ts:27](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/index.ts#L27)
+[config.ts:29](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L29)
 
 ___
 
 ### cacheMaxTTL
 
-▪ `Static` **cacheMaxTTL**: `number` = `600000`
+• **cacheMaxTTL**: `number` = `600000`
 
 #### Defined in
 
-[index.ts:29](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/index.ts#L29)
+[config.ts:31](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L31)
 
 ___
 
 ### eventsApiV1Url
 
-▪ `Static` **eventsApiV1Url**: `string` = `"https://stats.ksearchnet.com/analytics/"`
+• **eventsApiV1Url**: `string` = `"https://stats.ksearchnet.com/analytics/"`
 
 #### Defined in
 
-[index.ts:30](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/index.ts#L30)
+[config.ts:32](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L32)
 
 ___
 
 ### eventsApiV2Url
 
-▪ `Static` **eventsApiV2Url**: `string` = `"https://stats.ksearchnet.com/analytics/collect"`
+• **eventsApiV2Url**: `string` = `"https://stats.ksearchnet.com/analytics/collect"`
 
 #### Defined in
 
-[index.ts:31](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/index.ts#L31)
+[config.ts:33](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L33)
 
 ___
 
 ### url
 
-▪ `Static` **url**: `string`
+• **url**: `string`
 
 #### Defined in
 
-[index.ts:28](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/index.ts#L28)
+[config.ts:30](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L30)
+
+___
+
+### default
+
+▪ `Static` **default**: [`KlevuConfig`](KlevuConfig.md)
+
+#### Defined in
+
+[config.ts:27](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L27)
 
 ## Methods
 
 ### init
 
 ▸ `Static` **init**(`config`): `void`
-
-Must be called once per application to initialize Klevu
 
 #### Parameters
 
@@ -96,4 +115,4 @@ Must be called once per application to initialize Klevu
 
 #### Defined in
 
-[index.ts:38](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/index.ts#L38)
+[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/config.ts#L43)

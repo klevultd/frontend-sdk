@@ -11,7 +11,6 @@ import {
 export type KlevuBaseQuery = {
   id: string
   typeOfRequest: KlevuTypeOfRequest
-  doNotSendEvent?: boolean
   isFallbackQuery?: boolean
   filters?: KlevuListFilter & KlevuApplyFilter
   settings?: KlevuBaseQuerySettings

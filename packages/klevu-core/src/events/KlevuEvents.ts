@@ -127,8 +127,7 @@ export class KlevuEvents {
 
   /**
    * What user has last searched. This is important for Klevu to function
-   * properly. `search()` query automatically sends this event. Use
-   * `doNotSendEvent` option in search to disable it.
+   * properly. Use `sendSearchEvent()` modifier with search query to send results
    *
    * @param term What was searched
    * @param totalResults Total number of results (can be found in result meta)

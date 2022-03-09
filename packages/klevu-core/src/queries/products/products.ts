@@ -22,7 +22,6 @@ export function products(productIds: string[]) {
       value: pId,
     })),
     fields: undefined,
-    doNotSendEvent: true,
     typeOfRecords: [KlevuTypeOfRecord.Product],
   })
 }

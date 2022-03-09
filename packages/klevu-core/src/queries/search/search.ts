@@ -18,7 +18,6 @@ export type SearchOptions = {
    * The type of records to search for.
    */
   typeOfRecords: KlevuAnyTypeOfRecord[]
-  doNotSendEvent?: boolean
 } & Omit<KlevuBaseQuerySettings, "query">
 
 const defaults: SearchOptions = {
@@ -42,11 +41,9 @@ export function search(
   options?: Partial<SearchOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunction {
-  const { doNotSendEvent, ...otherOptions } = options || {}
-
   const params: SearchOptions = {
     ...defaults,
-    ...otherOptions,
+    ...options,
   }
 
   const cleanedTerm = cleanSearchQuery(term)
@@ -54,7 +51,6 @@ export function search(
   const query: KlevuBaseQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.Search,
-    doNotSendEvent,
     settings: {
       query: {
         term: cleanedTerm,
@@ -65,6 +61,10 @@ export function search(
 
   return {
     klevuFunctionId: "search",
+    params: {
+      ...params,
+      term,
+    },
     queries: [query],
     modifiers,
   }

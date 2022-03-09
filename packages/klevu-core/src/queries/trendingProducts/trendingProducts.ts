@@ -24,7 +24,6 @@ export function trendingProducts(
   return search(
     "*",
     {
-      doNotSendEvent: true,
       id: "trendingProducts",
       typeOfRecords: [KlevuTypeOfRecord.Product],
       ...options,

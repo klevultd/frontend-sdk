@@ -22,6 +22,7 @@ export type KlevuFetchId =
  */
 export type KlevuFetchFunction = {
   klevuFunctionId: LiteralUnion<KlevuFetchId, string>
+  params?: any
   queries?: KlevuAllRecordQueries[]
   suggestions?: KlevuSuggestionQuery[]
   modifiers?: KlevuFetchModifer[]

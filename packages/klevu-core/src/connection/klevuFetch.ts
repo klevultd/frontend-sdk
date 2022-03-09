@@ -67,18 +67,10 @@ export async function KlevuFetch(
     if (f.modifiers) {
       for (const modifier of f.modifiers) {
         if (modifier.onResult) {
-          modifier.onResult(responseObject)
+          modifier.onResult(responseObject, f)
         }
       }
     }
-  }
-
-  const searchQuery = recordQueries.find(
-    (q) => q.typeOfRequest === KlevuTypeOfRequest.Search && !q.isFallbackQuery
-  ) as KlevuBaseQuery | undefined
-
-  if (searchQuery) {
-    sendSearchEvent(searchQuery, responseObject)
   }
 
   return responseObject
@@ -159,24 +151,6 @@ function fetchNextPage(
   }
 
   return nextFunc
-}
-
-function sendSearchEvent(
-  searchQuery: KlevuBaseQuery,
-  responseObject: KlevuFetchResponse
-) {
-  const searchResponse = responseObject.queriesById(searchQuery.id)
-  if (
-    searchQuery.settings?.query?.term &&
-    searchResponse &&
-    searchQuery.doNotSendEvent !== true
-  ) {
-    KlevuEvents.search(
-      searchQuery.settings.query.term,
-      searchResponse.meta.totalResultsFound,
-      searchResponse.meta.typeOfSearch
-    )
-  }
 }
 
 function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {

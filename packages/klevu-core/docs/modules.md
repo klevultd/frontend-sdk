@@ -28,6 +28,7 @@
 - [KlevuAllRecordQueries](modules.md#klevuallrecordqueries)
 - [KlevuAlsoBoughtQuery](modules.md#klevualsoboughtquery)
 - [KlevuAlsoViewedQuery](modules.md#klevualsoviewedquery)
+- [KlevuAnyTypeOfRecord](modules.md#klevuanytypeofrecord)
 - [KlevuApiRawResponse](modules.md#klevuapirawresponse)
 - [KlevuApplyFilter](modules.md#klevuapplyfilter)
 - [KlevuBaseQuery](modules.md#klevubasequery)
@@ -63,7 +64,7 @@
 - [products](modules.md#products)
 - [search](modules.md#search)
 - [suggestions](modules.md#suggestions)
-- [trendingSearch](modules.md#trendingsearch)
+- [trendingProducts](modules.md#trendingproducts)
 
 ### RecommendationQuery Functions
 
@@ -107,7 +108,7 @@
 
 #### Defined in
 
-[modifiers/applyFilter/applyFilter.ts:9](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L9)
+[modifiers/applyFilter/applyFilter.ts:9](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L9)
 
 ___
 
@@ -117,7 +118,7 @@ ___
 
 #### Defined in
 
-[modifiers/applyFilter/applyFilter.ts:5](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L5)
+[modifiers/applyFilter/applyFilter.ts:5](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L5)
 
 ___
 
@@ -129,7 +130,7 @@ All possible record queries that can be used with [KlevuFetch](modules.md#klevuf
 
 #### Defined in
 
-[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
+[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
 
 ___
 
@@ -141,19 +142,29 @@ Backend API parameters relevat for Also Bought Recommendation query
 
 #### Defined in
 
-[models/KlevuAlsoBoughtQuery.ts:8](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuAlsoBoughtQuery.ts#L8)
+[models/KlevuAlsoBoughtQuery.ts:8](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuAlsoBoughtQuery.ts#L8)
 
 ___
 
 ### KlevuAlsoViewedQuery
 
-Ƭ **KlevuAlsoViewedQuery**: [`KlevuBaseQuery`](modules.md#klevubasequery) & { `settings?`: { `context?`: { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)  }[]  }  } ; `typeOfRequest`: [`AlsoViewed`](enums/KlevuTypeOfRequest.md#alsoviewed)  }
+Ƭ **KlevuAlsoViewedQuery**: [`KlevuBaseQuery`](modules.md#klevubasequery) & { `settings?`: { `context?`: { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)  }[]  }  } ; `typeOfRequest`: [`AlsoViewed`](enums/KlevuTypeOfRequest.md#alsoviewed)  }
 
 Klevu API query specific for Also Viewed recommendation
 
 #### Defined in
 
-[models/KlevuAlsoViewedQuery.ts:7](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuAlsoViewedQuery.ts#L7)
+[models/KlevuAlsoViewedQuery.ts:7](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuAlsoViewedQuery.ts#L7)
+
+___
+
+### KlevuAnyTypeOfRecord
+
+Ƭ **KlevuAnyTypeOfRecord**: `LiteralUnion`<`ValueOf`<typeof [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)\>, `string`\>
+
+#### Defined in
+
+[models/KlevuTypeOfRecord.ts:9](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L9)
 
 ___
 
@@ -175,7 +186,7 @@ Raw response from Klevu API
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:140](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L140)
+[models/KlevuApiRawResponse.ts:140](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L140)
 
 ___
 
@@ -194,7 +205,7 @@ Apply Filter type for Klevu base query
 
 #### Defined in
 
-[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
+[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
 
 ___
 
@@ -212,7 +223,6 @@ Generic
 | `boost.filters?` | { `key`: `string` ; `values`: `string`[] ; `weight`: `number`  }[] | Specify filter values to apply a boosting score to. They key is the unique identifier of the attribute, eg. Color. Each of the values represents the value of that filter to boost, eg. red or blue. |
 | `boost.keywords?` | { `phrase`: `string` ; `weight`: `number`  }[] | Specify keywords or phrases to apply a boosting score to, for example "comfortable". |
 | `boost.records?` | { `id`: `string` ; `weight`: `number`  }[] | Specify the Klevu ID of any records to apply a boosting score to. |
-| `doNotSendEvent?` | `boolean` | - |
 | `filters?` | [`KlevuListFilter`](modules.md#klevulistfilter) & [`KlevuApplyFilter`](modules.md#klevuapplyfilter) | - |
 | `id` | `string` | - |
 | `isFallbackQuery?` | `boolean` | - |
@@ -221,7 +231,7 @@ Generic
 
 #### Defined in
 
-[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
+[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
 
 ___
 
@@ -233,8 +243,8 @@ ___
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `context?` | { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)  }[]  } | - |
-| `context.recentObjects` | { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)  }[] | **`todo:`** Rewrite this doc. Describe how personalisation works  Use this object to specify the records (e.g. products, categories, etc.) that were recently interacted with by a customer.  Please only specify one recentObject object per record type, one for all KLEVU_PRODUCT entries, another for all KLEVU_CMS pages visited, etc.  Each recentObject object may contain multiple record objects (e.g. 5 recently viewed products). The most recently clicked record should be the first element in the array. |
+| `context?` | { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)  }[]  } | - |
+| `context.recentObjects` | { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)  }[] | **`todo:`** Rewrite this doc. Describe how personalisation works  Use this object to specify the records (e.g. products, categories, etc.) that were recently interacted with by a customer.  Please only specify one recentObject object per record type, one for all KLEVU_PRODUCT entries, another for all KLEVU_CMS pages visited, etc.  Each recentObject object may contain multiple record objects (e.g. 5 recently viewed products). The most recently clicked record should be the first element in the array. |
 | `customeANDQuery?` | `string` | The custom query you would like to fire, which Klevu automatically converts into an appropriate query to be included with the request. Use a - character before the parenthesis to exclude records matching the contained condition.  This is advanced usage of our API and you may need some help with building these queries, so when you need support please reach out to us via the Community Forum. |
 | `excludeIds?` | { `key`: `string` ; `value`: `string`  }[] | Use this field to exclude certain records from the search results. You can specify a record id to control this at variant level, or an itemGroupId to control this at compound level. |
 | `fallbackQueryId?` | `string` | The ID of another query which should be fired if the current query yields too few results. |
@@ -251,12 +261,12 @@ ___
 | `searchPrefs?` | [`KlevuSearchPreference`](enums/KlevuSearchPreference.md)[] | There are a number of preferences available for fine-tuning your queries.  For example you can control whether or not to allow fuzzy search for  spelling mistakes on a query by query basis. The available searchPrefs  are detailed below. |
 | `sort?` | [`KlevuSearchSorting`](enums/KlevuSearchSorting.md) | The default sorting of results is RELEVANCE, which uses Klevu A.I. to determine the order. There are various other options available which you can provide to your customers as required. |
 | `topIds?` | { `key`: `string` ; `value`: `string`  }[] | Specify any records which should always be displayed at the top of the result set. You can specify a record id to control this at variant level, or a itemGroupId to control this at compound item level.  Note that this is only applicable when the sort order is by 'RELEVANCE'. |
-| `typeOfRecords?` | [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)[] | In addition to Products, Categories and CMS Pages, Klevu APIv2 allows you to search for custom entities.  For example if you want to display results for recipes, articles or physical stores within your search you can do so by utilising the typeOfRecords parameter. |
+| `typeOfRecords?` | [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)[] | In addition to Products, Categories and CMS Pages, Klevu APIv2 allows you to search for custom entities.  For example if you want to display results for recipes, articles or physical stores within your search you can do so by utilising the typeOfRecords parameter. |
 | `typeOfSearch?` | [`KlevuTypeOfSearch`](enums/KlevuTypeOfSearch.md) | The typeOfSearch parameter defines the behaviour when identifying matches  for a searched term. For example, whether all or just one of the entered  words must be matched, whether to allow spelling mistakes, etc. |
 
 #### Defined in
 
-[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
+[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
 
 ___
 
@@ -273,7 +283,7 @@ ___
 
 #### Defined in
 
-[models/KlevuBaseQuerySettingsQuery.ts:1](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuBaseQuerySettingsQuery.ts#L1)
+[models/KlevuBaseQuerySettingsQuery.ts:1](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuBaseQuerySettingsQuery.ts#L1)
 
 ___
 
@@ -294,7 +304,7 @@ Tools for operating results in easier way.
 
 #### Defined in
 
-[models/KlevuFetchResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuFetchResponse.ts#L8)
+[models/KlevuFetchResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuFetchResponse.ts#L8)
 
 ___
 
@@ -304,7 +314,7 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:30](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L30)
+[models/KlevuApiRawResponse.ts:30](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L30)
 
 ___
 
@@ -314,7 +324,7 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:55](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L55)
+[models/KlevuApiRawResponse.ts:55](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L55)
 
 ___
 
@@ -331,7 +341,7 @@ ___
 
 #### Defined in
 
-[store/lastSearches.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/store/lastSearches.ts#L4)
+[store/lastSearches.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/lastSearches.ts#L4)
 
 ___
 
@@ -355,7 +365,7 @@ ___
 
 #### Defined in
 
-[models/KlevuListFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuListFilter.ts#L4)
+[models/KlevuListFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuListFilter.ts#L4)
 
 ___
 
@@ -374,7 +384,7 @@ ___
 
 #### Defined in
 
-[models/KlevuPayload.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuPayload.ts#L4)
+[models/KlevuPayload.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuPayload.ts#L4)
 
 ___
 
@@ -403,7 +413,7 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
+[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
 
 ___
 
@@ -421,7 +431,7 @@ ___
 
 #### Defined in
 
-[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
+[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
 
 ___
 
@@ -467,13 +477,13 @@ ___
 | `toPrice` | `string` | The salePrice of the highest variant within all those indexed with the same itemGroupId. This can be used if you would like to show 'from X to Y' price range. |
 | `totalVariants` | `number` | How many additional variants are available for this product. For example when searching for 'small tshirt', if a product has 3 colours available in small then the value here will be 2. If the search was 'tshirt' then the same record would return a value of 8 if there are 3 colours and 3 sizes of each available. |
 | `type` | `string` | - |
-| `typeOfRecord` | [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md) | The type of record, e.g. KLEVU_PRODUCT, KLEVU_CMS, KLEVU_CATEGORY, etc. |
+| `typeOfRecord` | [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord) | The type of record, e.g. KLEVU_PRODUCT, KLEVU_CMS, KLEVU_CATEGORY, etc. |
 | `url` | `string` | The fully qualified URL used to access the record in your store. |
 | `weight` | `string` | - |
 
 #### Defined in
 
-[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuRecord.ts#L3)
+[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuRecord.ts#L3)
 
 ___
 
@@ -483,17 +493,17 @@ ___
 
 #### Defined in
 
-[models/KlevuRecordFields.ts:9](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuRecordFields.ts#L9)
+[models/KlevuRecordFields.ts:9](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuRecordFields.ts#L9)
 
 ___
 
 ### KlevuSimilarProductsQuery
 
-Ƭ **KlevuSimilarProductsQuery**: [`KlevuBaseQuery`](modules.md#klevubasequery) & { `settings`: { `context`: { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)  }[]  }  } ; `typeOfRequest`: [`SimilarProducts`](enums/KlevuTypeOfRequest.md#similarproducts)  }
+Ƭ **KlevuSimilarProductsQuery**: [`KlevuBaseQuery`](modules.md#klevubasequery) & { `settings`: { `context`: { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)  }[]  }  } ; `typeOfRequest`: [`SimilarProducts`](enums/KlevuTypeOfRequest.md#similarproducts)  }
 
 #### Defined in
 
-[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
+[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
 
 ___
 
@@ -503,7 +513,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSuggestionQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuSuggestionQuery.ts#L4)
+[models/KlevuSuggestionQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSuggestionQuery.ts#L4)
 
 ___
 
@@ -520,7 +530,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSuggestionResult.ts:1](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuSuggestionResult.ts#L1)
+[models/KlevuSuggestionResult.ts:1](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSuggestionResult.ts#L1)
 
 ___
 
@@ -530,19 +540,19 @@ ___
 
 #### Defined in
 
-[models/KlevuTrendingProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/models/KlevuTrendingProductsQuery.ts#L4)
+[models/KlevuTrendingProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuTrendingProductsQuery.ts#L4)
 
 ___
 
 ### SearchOptions
 
-Ƭ **SearchOptions**: { `doNotSendEvent?`: `boolean` ; `id`: `string` ; `typeOfRecords`: [`KlevuTypeOfRecord`](enums/KlevuTypeOfRecord.md)[]  } & `Omit`<[`KlevuBaseQuerySettings`](modules.md#klevubasequerysettings), ``"query"``\>
+Ƭ **SearchOptions**: { `id`: `string` ; `typeOfRecords`: [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)[]  } & `Omit`<[`KlevuBaseQuerySettings`](modules.md#klevubasequerysettings), ``"query"``\>
 
 Search options to modify the search query.
 
 #### Defined in
 
-[queries/search/search.ts:11](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/search/search.ts#L11)
+[queries/search/search.ts:15](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/search/search.ts#L15)
 
 ## Variables
 
@@ -559,7 +569,7 @@ Search options to modify the search query.
 
 #### Defined in
 
-[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/store/lastSearches.ts#L17)
+[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/lastSearches.ts#L17)
 
 ## KlevuFetch Functions
 
@@ -583,7 +593,7 @@ Tools to operate results and get next results [KlevuFetchResponse](modules.md#kl
 
 #### Defined in
 
-connection/klevuFetch.ts:24
+[connection/klevuFetch.ts:26](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/connection/klevuFetch.ts#L26)
 
 ___
 
@@ -609,7 +619,7 @@ Fetch products for a category listing page.
 
 #### Defined in
 
-[queries/categoryListing/categoryListing.ts:21](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/categoryListing/categoryListing.ts#L21)
+[queries/categoryListing/categoryListing.ts:21](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/categoryListing/categoryListing.ts#L21)
 
 ___
 
@@ -631,7 +641,7 @@ Fetches list of products. All fields are fetched.
 
 #### Defined in
 
-[queries/products/products.ts:11](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/products/products.ts#L11)
+[queries/products/products.ts:11](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/products/products.ts#L11)
 
 ___
 
@@ -655,7 +665,7 @@ Create a basic search to Klevu backend. Id for this query is `search`
 
 #### Defined in
 
-[queries/search/search.ts:36](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/search/search.ts#L36)
+[queries/search/search.ts:39](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/search/search.ts#L39)
 
 ___
 
@@ -678,30 +688,30 @@ Return suggestion on given search term
 
 #### Defined in
 
-[queries/suggestions/suggestions.ts:24](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/suggestions/suggestions.ts#L24)
+[queries/suggestions/suggestions.ts:24](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/suggestions/suggestions.ts#L24)
 
 ___
 
-### trendingSearch
+### trendingProducts
 
-▸ **trendingSearch**(`options?`, ...`modifiers`): `KlevuFetchFunction`
+▸ **trendingProducts**(`options?`, ...`modifiers`): `KlevuFetchFunction`
 
-Create a trending search query. Id for this query is `trendingSearch`
+Create a trending products search query. Id for this query is `trendingProducts`
 
 **`example`** Simple example
 ```
 const result = await KlevuFetch(
- trendingSearch()
+ trendingProducts()
 )
 
-console.log(result.getQueries("trendingSearch").records)
+console.log(result.getQueries("trendingProducts").records)
 ```
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options?` | `Partial`<[`SearchOptions`](modules.md#searchoptions)\> | [search](modules.md#search) |
+| `options?` | `Partial`<[`SearchOptions`](modules.md#searchoptions)\> | [search](classes/KlevuEvents.md#search) |
 | `...modifiers` | `KlevuFetchModifer`[] | - |
 
 #### Returns
@@ -712,7 +722,7 @@ See {@link KlevuFetchFunction}
 
 #### Defined in
 
-[queries/trendingSearch/trendingSearch.ts:21](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/trendingSearch/trendingSearch.ts#L21)
+[queries/trendingProducts/trendingProducts.ts:20](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L20)
 
 ___
 
@@ -738,7 +748,7 @@ Get new arrival recommendations
 
 #### Defined in
 
-[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
+[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
 
 ___
 
@@ -761,7 +771,7 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
+[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
 
 ___
 
@@ -784,7 +794,7 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
+[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
 
 ___
 
@@ -808,7 +818,7 @@ Fetch similiar products based on list of ids
 
 #### Defined in
 
-[queries/similarProducts/similarProducts.ts:25](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L25)
+[queries/similarProducts/similarProducts.ts:25](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L25)
 
 ___
 
@@ -831,7 +841,7 @@ Return trending recommendations
 
 #### Defined in
 
-[queries/trending/trending.ts:39](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/queries/trending/trending.ts#L39)
+[queries/trending/trending.ts:43](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/queries/trending/trending.ts#L43)
 
 ___
 
@@ -856,7 +866,7 @@ Apply filters to query based on Filter Manager
 
 #### Defined in
 
-[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
+[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
 
 ___
 
@@ -877,7 +887,7 @@ ___
 
 #### Defined in
 
-[modifiers/applyFilter/applyFilter.ts:25](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L25)
+[modifiers/applyFilter/applyFilter.ts:25](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L25)
 
 ___
 
@@ -902,7 +912,7 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
+[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
 
 ___
 
@@ -924,7 +934,7 @@ Boost products based on a filters
 
 #### Defined in
 
-[modifiers/boostWithFilters/boostWithFilters.ts:10](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/boostWithFilters/boostWithFilters.ts#L10)
+[modifiers/boostWithFilters/boostWithFilters.ts:10](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/boostWithFilters/boostWithFilters.ts#L10)
 
 ___
 
@@ -948,7 +958,7 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithKeywords/boostWithKeywords.ts:10](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/boostWithKeywords/boostWithKeywords.ts#L10)
+[modifiers/boostWithKeywords/boostWithKeywords.ts:10](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/boostWithKeywords/boostWithKeywords.ts#L10)
 
 ___
 
@@ -972,7 +982,7 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithRecords/boostWithRecords.ts:10](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/boostWithRecords/boostWithRecords.ts#L10)
+[modifiers/boostWithRecords/boostWithRecords.ts:10](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/boostWithRecords/boostWithRecords.ts#L10)
 
 ___
 
@@ -994,7 +1004,7 @@ If original query doesn't return enough results then fallback query is run added
 
 #### Defined in
 
-[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
+[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
 
 ___
 
@@ -1016,7 +1026,7 @@ Force include product ids on result
 
 #### Defined in
 
-[modifiers/include/include.ts:10](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/include/include.ts#L10)
+[modifiers/include/include.ts:10](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/include/include.ts#L10)
 
 ___
 
@@ -1038,7 +1048,7 @@ List filters that can affect given query
 
 #### Defined in
 
-[modifiers/listFilters/listFilters.ts:33](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/listFilters/listFilters.ts#L33)
+[modifiers/listFilters/listFilters.ts:33](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/listFilters/listFilters.ts#L33)
 
 ___
 
@@ -1060,7 +1070,7 @@ Add given ids as first items in results
 
 #### Defined in
 
-[modifiers/top/top.ts:10](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/modifiers/top/top.ts#L10)
+[modifiers/top/top.ts:10](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/modifiers/top/top.ts#L10)
 
 ___
 
@@ -1076,4 +1086,4 @@ ___
 
 #### Defined in
 
-[connection/kmc.ts:6](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/connection/kmc.ts#L6)
+[connection/kmc.ts:6](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/connection/kmc.ts#L6)

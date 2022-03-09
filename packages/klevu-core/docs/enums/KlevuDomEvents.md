@@ -21,7 +21,7 @@ When filter manager selection has changed
 
 #### Defined in
 
-[events/klevuDomEvents.ts:13](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuDomEvents.ts#L13)
+[events/KlevuDomEvents.ts:13](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuDomEvents.ts#L13)
 
 ___
 
@@ -33,4 +33,4 @@ When list of last searched terms update
 
 #### Defined in
 
-[events/klevuDomEvents.ts:8](https://github.com/klevultd/frontend-sdk/blob/59ea899/packages/klevu-core/src/events/klevuDomEvents.ts#L8)
+[events/KlevuDomEvents.ts:8](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/events/KlevuDomEvents.ts#L8)

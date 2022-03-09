@@ -104,6 +104,7 @@ Some of the functions can be modified with modifier functions. Any number of the
 | `personalisation()`         | Enable personalisation to the query. Automatically applies last visited products              |
 | `include()`                 | Force include given id's in the result                                                        |
 | `top()`                     | Force return given id's as first items on results                                             |
+| `sendSearchEvent()`         | When user takes action to search something this should be used                                |
 
 ## Filter Manager
 
