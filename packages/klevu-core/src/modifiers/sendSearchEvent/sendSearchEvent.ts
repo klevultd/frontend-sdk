@@ -21,8 +21,6 @@ export function sendSearchEvent(): KlevuFetchModifer {
         return
       }
 
-      console.log("sending search event with", f.params.term, meta)
-
       KlevuEvents.search(
         f.params.term,
         meta.totalResultsFound,
