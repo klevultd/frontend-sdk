@@ -6,7 +6,7 @@ export type KlevuApplyFilter = {
     filters: Array<{
       key: string
       values: string[] | [number, number]
-      settings: {
+      settings?: {
         singleSelect: boolean
       }
     }>
