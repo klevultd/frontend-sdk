@@ -1,5 +1,7 @@
 # THIS IS WORK IN PROCESS! ALPHA! DO NOT USE FOR PRODUCTION!
 
+![Klevu](../../images/klevu_header.jpg?raw=true "Klevu")
+
 # `@klevu/core`
 
 Klevu core is a library that helps developers to interact with Klevu API. It includes fetching function, easy to use functions operate queries, state management for filters, data transformations and event tracking for easier usage.

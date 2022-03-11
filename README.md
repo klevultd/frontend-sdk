@@ -1,3 +1,5 @@
+![Klevu](images/klevu_header.jpg?raw=true "Klevu")
+
 # Links
 
 - [@klevu/core](packages/klevu-core/README.md)
