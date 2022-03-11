@@ -18,7 +18,7 @@
     "qoc": "eslint src/",
     "docs": "typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage",
-    "deploy": "npm run build && npm run docs && np"
+    "publish": "npm run build && npm run docs && np"
   },
   "author": "Klevu",
   "contributors": [
