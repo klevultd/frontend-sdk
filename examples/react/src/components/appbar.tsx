@@ -3,7 +3,6 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import Toolbar from "@mui/material/Toolbar"
-import Typography from "@mui/material/Typography"
 import React from "react"
 import { Search } from "./search"
 import { Link } from "react-router-dom"
@@ -16,9 +15,7 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/">
-            <Typography variant="h6" noWrap component="div" sx={{ mr: 2 }}>
-              LOGO
-            </Typography>
+            <img style={{maxHeight: 20}} src="/cropped-klevu-icon-192x192.png"></img>
           </Link>
           <Box
             sx={{ display: "flex", flexDirection: "row", marginRight: "auto" }}
