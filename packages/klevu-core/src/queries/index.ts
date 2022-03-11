@@ -13,7 +13,7 @@ export type KlevuFetchId =
   | "suggestions"
   | "trending"
   | "newarrivals"
-  | "categoryListing"
+  | "categoryMerchandising"
   | "similarProducts"
   | "alsoViewed"
 
@@ -29,7 +29,7 @@ export type KlevuFetchFunction = {
   configOverride?: KlevuConfig
 }
 
-export * from "./categoryListing/categoryListing"
+export * from "./categoryMerchandising/categoryMerchandising"
 export * from "./newarrivals/newarrivals"
 export * from "./search/search"
 export * from "./suggestions/suggestions"

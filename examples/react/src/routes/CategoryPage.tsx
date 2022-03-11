@@ -6,7 +6,7 @@ import {
   KlevuFetch,
   KlevuDomEvents,
   FilterManager,
-  categoryListing,
+  categoryMerchandising,
   KlevuFilterResultOptions,
   KlevuFilterResultSlider,
   KlevuFetchResponse,
@@ -61,7 +61,7 @@ export function CategoryPage() {
 
   const initialFetch = useCallback(async () => {
     const functions = [
-      categoryListing(
+      categoryMerchandising(
         params.id,
         {
           id: "search",

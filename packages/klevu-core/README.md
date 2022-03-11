@@ -1,5 +1,7 @@
 # THIS IS WORK IN PROCESS! ALPHA! DO NOT USE FOR PRODUCTION!
 
+![Klevu](../../images/klevu_header.jpg?raw=true "Klevu")
+
 # `@klevu/core`
 
 Klevu core is a library that helps developers to interact with Klevu API. It includes fetching function, easy to use functions operate queries, state management for filters, data transformations and event tracking for easier usage.
@@ -74,18 +76,18 @@ console.log(result.getQueriesById("search")?.records)
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
 
-| Klevu Function       | Description                                              | Type           |
-| -------------------- | -------------------------------------------------------- | -------------- |
-| `search()`           | Most basic query to find items based on a term           | Search         |
-| `suggestions()`      | Fetches suggestions based on a term.                     | Search         |
-| `trendingProducts()` | Find all products that are trending right now in results | Search         |
-| `categoryListing()`  | Products to display on category page                     | Search         |
-| `searchCategory()`   | Search categories based on term                          | Search         |
-| `searchCms()`        | Search CMS pages based on term                           | Search         |
-| `newArrivals()`      | Recommendation list of new arrivals for the current user | Recommendation |
-| `trending()`         | Trending recommendation based for current user           | Recommendation |
-| `similarProducts()`  | Fetch similar products based on given ids                | Recommendation |
-| `alsoViewed()`       | Product recommendations what user should also check out  | Recommendation |
+| Klevu Function            | Description                                              | Type           |
+| ------------------------- | -------------------------------------------------------- | -------------- |
+| `search()`                | Most basic query to find items based on a term           | Search         |
+| `suggestions()`           | Fetches suggestions based on a term.                     | Search         |
+| `trendingProducts()`      | Find all products that are trending right now in results | Search         |
+| `categoryMerchandising()` | Products to display on category page                     | Search         |
+| `searchCategory()`        | Search categories based on term                          | Search         |
+| `searchCms()`             | Search CMS pages based on term                           | Search         |
+| `newArrivals()`           | Recommendation list of new arrivals for the current user | Recommendation |
+| `trending()`              | Trending recommendation based for current user           | Recommendation |
+| `similarProducts()`       | Fetch similar products based on given ids                | Recommendation |
+| `alsoViewed()`            | Product recommendations what user should also check out  | Recommendation |
 
 ## Modifiers
 

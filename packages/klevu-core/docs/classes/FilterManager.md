@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[store/filterManager.ts:11](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L11)
+[store/filterManager.ts:11](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L11)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L12)
+[store/filterManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L12)
 
 ## Methods
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:109](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L109)
+[store/filterManager.ts:109](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L109)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:14](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L14)
+[store/filterManager.ts:14](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L14)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:29](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L29)
+[store/filterManager.ts:29](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L29)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:76](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L76)
+[store/filterManager.ts:76](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L76)
 
 ___
 
@@ -138,4 +138,4 @@ Sends a Dom event on change
 
 #### Defined in
 
-[store/filterManager.ts:43](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/store/filterManager.ts#L43)
+[store/filterManager.ts:43](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L43)

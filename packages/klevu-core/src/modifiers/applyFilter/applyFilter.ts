@@ -2,14 +2,10 @@ import { KlevuFetchModifer } from ".."
 import { KlevuApplyFilter } from "../../models/KlevuApplyFilter"
 import { KlevuListFilter } from "../../models/KlevuListFilter"
 
-export type ApplyFilterOptions = {}
-
-const defaults: ApplyFilterOptions = {}
-
 export type ApplyFilter = {
   key: string
   values: string[] | [number, number]
-  settings: {
+  settings?: {
     singleSelect: boolean
   }
 }
@@ -22,15 +18,7 @@ export type ApplyFilter = {
  * @param options
  * @returns
  */
-export function applyFilters(
-  filters: ApplyFilter[],
-  options?: Partial<ApplyFilterOptions>
-): KlevuFetchModifer {
-  const params: ApplyFilterOptions = {
-    ...defaults,
-    ...options,
-  }
-
+export function applyFilters(filters: ApplyFilter[]): KlevuFetchModifer {
   const query: KlevuApplyFilter = {
     applyFilters: {
       filters,
