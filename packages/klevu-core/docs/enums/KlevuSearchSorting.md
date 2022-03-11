@@ -24,7 +24,7 @@
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:5](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L5)
+[models/KlevuSearchSorting.ts:5](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L5)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:6](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L6)
+[models/KlevuSearchSorting.ts:6](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L6)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:9](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L9)
+[models/KlevuSearchSorting.ts:9](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L9)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:10](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L10)
+[models/KlevuSearchSorting.ts:10](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L10)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:3](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L3)
+[models/KlevuSearchSorting.ts:3](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L3)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:4](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L4)
+[models/KlevuSearchSorting.ts:4](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L4)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:7](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L7)
+[models/KlevuSearchSorting.ts:7](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L7)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:8](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L8)
+[models/KlevuSearchSorting.ts:8](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L8)
 
 ___
 
@@ -104,4 +104,4 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:2](https://github.com/klevultd/frontend-sdk/blob/69fb0bc/packages/klevu-core/src/models/KlevuSearchSorting.ts#L2)
+[models/KlevuSearchSorting.ts:2](https://github.com/klevultd/frontend-sdk/blob/322c43f/packages/klevu-core/src/models/KlevuSearchSorting.ts#L2)

@@ -4,10 +4,14 @@ import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery"
 import { KlevuTypeOfRequest } from "../../models"
 
-type Options = { id: string } & Omit<KlevuBaseQuery["settings"], "query">
+type Options = { id: string; searchTerm: string } & Omit<
+  KlevuBaseQuery["settings"],
+  "query"
+>
 
 const defaults: Options = {
-  id: "categoryListing",
+  id: "categoryMerchandising",
+  searchTerm: "*",
 }
 
 /**
@@ -18,7 +22,7 @@ const defaults: Options = {
  * @param options
  * @returns
  */
-export function categoryListing(
+export function categoryMerchandising(
   category: KlevuBaseQuerySettingsQuery["categoryPath"],
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
@@ -34,14 +38,14 @@ export function categoryListing(
     settings: {
       query: {
         categoryPath: category,
-        term: "*",
+        term: params.searchTerm,
       },
       ...params,
     },
   }
 
   return {
-    klevuFunctionId: "categoryListing",
+    klevuFunctionId: "categoryMerchandising",
     queries: [query],
     modifiers,
   }

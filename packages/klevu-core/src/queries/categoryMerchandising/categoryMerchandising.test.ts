@@ -1,5 +1,5 @@
 import { KlevuConfig, KlevuFetch } from "../.."
-import { categoryListing } from "./categoryListing"
+import { categoryMerchandising } from "./categoryMerchandising"
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 test("Basic search", async () => {
-  const result = await KlevuFetch(categoryListing("Women"))
+  const result = await KlevuFetch(categoryMerchandising("Women"))
 
-  expect(result.queriesById("categoryListing")).toBeDefined()
+  expect(result.queriesById("categoryMerchandising")).toBeDefined()
 })
