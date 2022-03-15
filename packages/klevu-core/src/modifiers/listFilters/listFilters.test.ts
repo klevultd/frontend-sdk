@@ -32,7 +32,7 @@ test("List filters", async () => {
 
 test("Filter manager - populates results", async () => {
   const filterManager = new FilterManager()
-  const result = await KlevuFetch(
+  await KlevuFetch(
     search(
       "hoodies",
       {
