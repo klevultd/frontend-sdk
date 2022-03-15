@@ -23,12 +23,14 @@ import {
   bindTrigger,
   usePopupState,
 } from "material-ui-popup-state/hooks"
+import { useNavigate } from "react-router-dom"
 import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
 import { Close } from "@mui/icons-material"
 import SearchIcon from "@mui/icons-material/Search"
 
-export function Search() {
+export function QuickSearch() {
+  const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState("")
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [trendProducts, setTrendingProducts] = useState<KlevuRecord[]>([])
@@ -74,10 +76,16 @@ export function Search() {
 
     const res = await KlevuFetch(
       trendingProducts({
-        limit: 9,
+        limit: 3,
       })
     )
     setTrendingProducts(res.queriesById("trendingProducts")?.records ?? [])
+  }
+
+  const onKeydown: React.KeyboardEventHandler<HTMLDivElement> = (event) => {
+    if (event.key === "Enter") {
+      navigate("/search?q=" + encodeURIComponent(searchValue))
+    }
   }
 
   const onSearchChange = (event) => {
@@ -127,6 +135,7 @@ export function Search() {
         value={searchValue}
         variant="filled"
         size="small"
+        onKeyDown={onKeydown}
         onChange={onSearchChange}
         onFocus={fetchEmptySuggestions}
         placeholder="Search for products"

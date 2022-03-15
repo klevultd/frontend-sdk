@@ -5,7 +5,7 @@ import Container from "@mui/material/Container"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import React from "react"
-import { Search } from "./search"
+import { QuickSearch } from "./quicksearch"
 import { Link } from "react-router-dom"
 
 const pages = ["Men", "Women", "Accessories"]
@@ -34,7 +34,7 @@ const ResponsiveAppBar = () => {
               </Link>
             ))}
           </Box>
-          <Search />
+          <QuickSearch />
         </Toolbar>
       </Container>
     </AppBar>

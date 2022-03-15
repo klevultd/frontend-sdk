@@ -5,7 +5,7 @@ import {
   KlevuFetch,
   KlevuDomEvents,
   FilterManager,
-  categoryMerchandising,
+  search,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -30,7 +30,7 @@ import {
   Grid,
   Button,
 } from "@mui/material"
-import { useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
@@ -40,8 +40,15 @@ const drawerWidth = 240
 const manager = new FilterManager()
 let prevRes: KlevuFetchResponse
 
-export function CategoryPage() {
-  const params = useParams()
+function useQuery() {
+  const { search } = useLocation()
+
+  return React.useMemo(() => new URLSearchParams(search), [search])
+}
+
+export function SearchResultPage() {
+  const query = useQuery()
+
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
     manager.options
@@ -63,8 +70,8 @@ export function CategoryPage() {
 
   const initialFetch = useCallback(async () => {
     const functions = [
-      categoryMerchandising(
-        params.id,
+      search(
+        query.get("q"),
         {
           id: "search",
           limit: 36,
@@ -94,7 +101,7 @@ export function CategoryPage() {
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
-  }, [sorting, params.id])
+  }, [sorting, query])
 
   const fetchMore = async () => {
     const nextRes = await prevRes.next({
@@ -131,7 +138,7 @@ export function CategoryPage() {
 
   useEffect(() => {
     initialFetch()
-  }, [sorting, params.id])
+  }, [sorting, query])
 
   return (
     <React.Fragment>
