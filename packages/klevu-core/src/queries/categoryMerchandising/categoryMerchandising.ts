@@ -2,10 +2,10 @@ import { KlevuFetchFunction } from ".."
 import { KlevuFetchModifer } from "../.."
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery"
-import { KlevuTypeOfRequest } from "../../models"
+import { KlevuBaseQuerySettings, KlevuTypeOfRequest } from "../../models"
 
 type Options = { id: string; searchTerm: string } & Omit<
-  KlevuBaseQuery["settings"],
+  KlevuBaseQuerySettings,
   "query"
 >
 

@@ -22,6 +22,7 @@ export type KlevuFetchId =
  */
 export type KlevuFetchFunction = {
   klevuFunctionId: LiteralUnion<KlevuFetchId, string>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params?: any
   queries?: KlevuAllRecordQueries[]
   suggestions?: KlevuSuggestionQuery[]

@@ -17,7 +17,7 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   rules: {
     "linebreak-style": ["error", "unix"],
-    "import/no-unresolved": false,
+    "import/no-unresolved": 0,
   },
   settings: {
     "import/resolver": {

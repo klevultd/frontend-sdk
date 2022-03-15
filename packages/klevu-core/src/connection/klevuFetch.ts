@@ -1,13 +1,11 @@
 import Axios from "axios"
 import cloneDeep from "lodash.clonedeep"
-import { KlevuEvents } from "../events/KlevuEvents"
 import {
   applyFilterWithManager,
   KlevuConfig,
   KlevuFetchFunction,
 } from "../index"
 import {
-  KlevuTypeOfRequest,
   KlevuAllRecordQueries,
   KlevuPayload,
   KlevuApiRawResponse,
@@ -154,7 +152,7 @@ function fetchNextPage(
 }
 
 function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
-  let recordQueries: KlevuAllRecordQueries[] = []
+  const recordQueries: KlevuAllRecordQueries[] = []
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
     if (f.queries) {

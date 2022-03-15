@@ -5,3 +5,5 @@ tsconfig.json
 jest.config.cjs
 coverage
 docs
+tsconfig*
+fixup

@@ -19,6 +19,7 @@ export type KlevuRecommendationBanner = {
     base: string
   }
   scripts: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recsObject: any
   }
 }

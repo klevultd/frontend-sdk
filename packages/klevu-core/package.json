@@ -1,6 +1,6 @@
 {
   "name": "@klevu/core",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Typescript SDK that simplifies development on Klevu backend.",
   "keywords": [
     "klevu",
@@ -9,12 +9,17 @@
     "ecommerce tools"
   ],
   "homepage": "https://developers.klevu.com",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
-  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/mjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "scripts": {
     "build:watch": "tsc --watch",
-    "build": "rm -rf dist && tsc",
+    "build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
     "qoc": "eslint src/",
     "docs": "typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
