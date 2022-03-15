@@ -8,6 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@klevu/core": "file:../../packages/klevu-core",
+    "css.gg": "^2.0.0",
+    "lodash.debounce": "^4.0.8",
     "pinia": "^2.0.11",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
