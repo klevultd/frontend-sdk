@@ -35,7 +35,9 @@ const router = createRouter({
 router.beforeEach((to) => {
   // ✅ This will work make sure the correct store is used for the
   // current running app
-  const search = useSearch()
+  const searchStore = useSearch()
+
+  searchStore.quickSearchOpen = false
 
   //if (to.meta.requiresAuth && !main.isLoggedIn) return '/login'
 })
