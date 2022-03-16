@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-
+import { KlevuSearchSorting } from "@klevu/core"
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
 const useSearch = defineStore("search-store", {
@@ -10,6 +10,10 @@ const useSearch = defineStore("search-store", {
       trendingProducts: [],
       suggestions: [],
       lastSearches: [],
+      options: [],
+      sliders: [],
+      sorting: KlevuSearchSorting.Relevance,
+      showMore: false,
       quickSearchOpen: false,
     }
   },
@@ -28,6 +32,14 @@ const useSearch = defineStore("search-store", {
     },
     setLastSearches(arr) {
       this.lastSearches =
+        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
+    },
+    setOptions(arr) {
+      this.options =
+        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
+    },
+    setSliders(arr) {
+      this.sliders =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
     },
   },

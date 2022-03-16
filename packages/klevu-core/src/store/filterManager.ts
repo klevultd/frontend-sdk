@@ -73,6 +73,37 @@ export class FilterManager {
     )
   }
 
+  /**
+   * Function to update slide in filter manager
+   *
+   * Sends a Dom event on change
+   *
+   * @param key Key of slide
+   * @param min Min value of slide
+   * @param max Max value of slide
+   */
+   updateSlide(key:string, min:number, max:number) {
+    const slideIndex = this.sliders.findIndex(s => s.key === key)
+
+    if (slideIndex === -1) {
+        console.warn(`No slider found with ${key}.`)
+        return
+    }
+    this.sliders[slideIndex].start = min.toString()
+    this.sliders[slideIndex].end = max.toString()
+
+    document.dispatchEvent(
+      new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
+          detail: {
+              key: key,
+              name: this.sliders[slideIndex].label,
+              start: min.toString(),
+              end: max.toString(),
+          },
+      })
+    )
+  }
+
   toApplyFilters(): ApplyFilter[] {
     const filters: ApplyFilter[] = []
     for (const o of this.options) {
