@@ -5,3 +5,7 @@
 * {
   @apply focus:outline-none;
 }
+
+.quick-search h3 {
+  @apply text-xl my-3 uppercase;
+}

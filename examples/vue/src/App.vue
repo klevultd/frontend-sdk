@@ -13,19 +13,22 @@ KlevuConfig.init({
 </script>
 
 <template>
-  <navigation class="flex justify-between p-3 bg-blue-700 text-white align-center">
+  <nav class="flex justify-between p-3 bg-blue-700 text-white align-center">
     <div class="links">
+      <router-link to="/">
+        <img src="/cropped-klevu-icon-192x192.png" class="h-5 inline-block mb-1" />
+      </router-link>
       <router-link to="/">Home</router-link>
       <router-link to="/collection/mens">Mens</router-link>
       <router-link to="/collection/womens">Womens</router-link>
     </div>
     <Search />
-  </navigation>
+  </nav>
   <router-view />
 </template>
 
 <style scoped>
-navigation .links a {
+nav .links a {
   @apply px-2;
 }
 </style>

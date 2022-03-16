@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import QuickSearchSuggestions from './QuickSearchSuggestions.vue';
 import QuickSearchLastSearches from './QuickSearchLastSearches.vue';
 import QuickSearchProducts from './QuickSearchProducts.vue';
@@ -11,10 +13,11 @@ import {
     KlevuTypeOfRecord,
     search,
     suggestions,
-    trendingProducts,
+    trendingProducts
 } from "@klevu/core"
 import debounce from "lodash.debounce"
 
+const router = useRouter()
 const searchStore = useSearch()
 
 const doEmptySuggestions = async function () {
@@ -31,20 +34,25 @@ const doEmptySuggestions = async function () {
     searchStore.setTrendingProducts(res.queriesById('trendingProducts').records ?? [])
 }
 
+const clearSearchResults = () => {
+    searchStore.setProducts([])
+    searchStore.setSuggestions([])
+    searchStore.setTrendingProducts([])
+}
+
 const doSearch = async function () {
     if (searchStore.searchTerm.length < 3) {
-        searchStore.setProducts([])
-        searchStore.setSuggestions([])
+        clearSearchResults()
+        doEmptySuggestions()
         return
     }
-
+    searchStore.setTrendingProducts([])
     const result = await KlevuFetch(
         search(searchStore.searchTerm, {
             limit: 9,
             typeOfRecords: [KlevuTypeOfRecord.Product],
         }),
-        suggestions(searchStore.searchTerm),
-        sendSearchEvent()
+        suggestions(searchStore.searchTerm)
     )
 
     searchStore.setProducts(result.queriesById("search").records ?? [])
@@ -55,29 +63,60 @@ const doSearch = async function () {
     )
 }
 
+const debouncedSearchHandler = debounce(doSearch, 300)
+
 const doSearchSubmit = function () {
     if (searchStore.searchTerm.length > 0) {
-        $router.push({ path: '/search', query: { q: searchStore.searchTerm } })
+        router.push({ path: '/search', query: { q: searchStore.searchTerm } })
+        closeQuickSearch()
     }
+}
+
+const closeQuickSearch = () => {
+    searchStore.quickSearchOpen = false
+    searchStore.searchTerm = ''
+    clearSearchResults()
 }
 
 </script>
 
 <template>
     <form @submit.prevent="doSearchSubmit" class="search-field">
+        <svg
+            class="absolute mt-1 mr-2 right-0"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
+                fill="gray"
+            />
+        </svg>
         <input
-            class="border px-2 text-gray-500 text-sm"
-            placeholder="search"
+            class="block px-2 text-gray-500 text-sm w-16 md:w-32 h-full"
+            placeholder="Search"
             type="text"
-            @change="doSearch"
-            @keyup="doSearch"
+            @change="debouncedSearchHandler"
+            @keyup="debouncedSearchHandler"
             @focus="doEmptySuggestions"
             v-model="searchStore.searchTerm"
         />
     </form>
     <div class="quick-search" :class="{ open: searchStore.quickSearchOpen }">
-        <div class="quick-search-close absolute right-0 mr-3">
-            <button @click="searchStore.quickSearchOpen = false">
+        <div
+            class="text-center"
+            v-if="!searchStore.products.length && !searchStore.trendingProducts.length"
+        >Loading results...</div>
+        <div
+            v-if="searchStore.products.length || searchStore.trendingProducts.length"
+            class="quick-search-close absolute right-0 mr-3"
+        >
+            <button @click="closeQuickSearch">
                 <svg
                     width="24"
                     height="24"
@@ -106,8 +145,11 @@ const doSearchSubmit = function () {
 </template>
 
 <style scoped>
+.search-field {
+    @apply relative bg-white border w-24 md:w-40;
+}
 .quick-search {
-    top: 48px;
+    top: 50px;
     right: 10%;
     width: 80%;
     min-height: 50px;
