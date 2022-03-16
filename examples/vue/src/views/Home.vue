@@ -57,7 +57,6 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
-
 }
 
 const fetchMore = async () => {
@@ -84,17 +83,15 @@ onBeforeRouteUpdate((to, from) => {
     initialFetch
   )
 })
-
-const toggleFacets = () => {
-  openFacets.value = !openFacets.value
-}
-
 const updateSort = e => {
   searchStore.sorting = e.target.value
   initialFetch()
 }
-
 initialFetch()
+
+const toggleFacets = () => {
+  openFacets.value = !openFacets.value
+}
 
 </script>
 
