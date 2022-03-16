@@ -1,11 +1,10 @@
 <script setup>
-import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import QuickSearchSuggestions from './QuickSearchSuggestions.vue';
 import QuickSearchLastSearches from './QuickSearchLastSearches.vue';
 import QuickSearchProducts from './QuickSearchProducts.vue';
 import QuickSearchTrendingProducts from './QuickSearchTrendingProducts.vue';
-import useSearch from '../state/searchStore'
+import useQuickSearch from '../state/quickSearchStore'
 import {
     KlevuDomEvents,
     KlevuFetch,
@@ -18,45 +17,45 @@ import {
 import debounce from "lodash.debounce"
 
 const router = useRouter()
-const searchStore = useSearch()
+const quickSearchStore = useQuickSearch()
 
 const doEmptySuggestions = async function () {
-    searchStore.quickSearchOpen = true
-    searchStore.setLastSearches(KlevuLastSearches.get())
+    quickSearchStore.quickSearchOpen = true
+    quickSearchStore.setLastSearches(KlevuLastSearches.get())
 
-    if (searchStore.trendingProducts.length > 0) {
+    if (quickSearchStore.trendingProducts.length > 0) {
         return
     }
 
     const res = await KlevuFetch(
         trendingProducts({ limit: 9 })
     )
-    searchStore.setTrendingProducts(res.queriesById('trendingProducts').records ?? [])
+    quickSearchStore.setTrendingProducts(res.queriesById('trendingProducts').records ?? [])
 }
 
 const clearSearchResults = () => {
-    searchStore.setProducts([])
-    searchStore.setSuggestions([])
-    searchStore.setTrendingProducts([])
+    quickSearchStore.setProducts([])
+    quickSearchStore.setSuggestions([])
+    quickSearchStore.setTrendingProducts([])
 }
 
 const doSearch = async function () {
-    if (searchStore.searchTerm.length < 3) {
+    if (quickSearchStore.searchTerm.length < 3) {
         clearSearchResults()
         doEmptySuggestions()
         return
     }
-    searchStore.setTrendingProducts([])
+    quickSearchStore.setTrendingProducts([])
     const result = await KlevuFetch(
-        search(searchStore.searchTerm, {
+        search(quickSearchStore.searchTerm, {
             limit: 9,
             typeOfRecords: [KlevuTypeOfRecord.Product],
         }),
-        suggestions(searchStore.searchTerm)
+        suggestions(quickSearchStore.searchTerm)
     )
 
-    searchStore.setProducts(result.queriesById("search").records ?? [])
-    searchStore.setSuggestions(
+    quickSearchStore.setProducts(result.queriesById("search").records ?? [])
+    quickSearchStore.setSuggestions(
         result
             .suggestionsById("suggestions")
             .suggestions.map((i) => i.suggest) ?? []
@@ -66,15 +65,15 @@ const doSearch = async function () {
 const debouncedSearchHandler = debounce(doSearch, 300)
 
 const doSearchSubmit = function () {
-    if (searchStore.searchTerm.length > 0) {
-        router.push({ path: '/search', query: { q: searchStore.searchTerm } })
+    if (quickSearchStore.searchTerm.length > 0) {
+        router.push({ path: '/search', query: { q: quickSearchStore.searchTerm } })
         closeQuickSearch()
     }
 }
 
 const closeQuickSearch = () => {
-    searchStore.quickSearchOpen = false
-    searchStore.searchTerm = ''
+    quickSearchStore.quickSearchOpen = false
+    quickSearchStore.searchTerm = ''
     clearSearchResults()
 }
 
@@ -104,16 +103,16 @@ const closeQuickSearch = () => {
             @change="debouncedSearchHandler"
             @keyup="debouncedSearchHandler"
             @focus="doEmptySuggestions"
-            v-model="searchStore.searchTerm"
+            v-model="quickSearchStore.searchTerm"
         />
     </form>
-    <div class="quick-search" :class="{ open: searchStore.quickSearchOpen }">
+    <div class="quick-search" :class="{ open: quickSearchStore.quickSearchOpen }">
         <div
             class="text-center"
-            v-if="!searchStore.products.length && !searchStore.trendingProducts.length"
+            v-if="!quickSearchStore.products.length && !quickSearchStore.trendingProducts.length"
         >Loading results...</div>
         <div
-            v-if="searchStore.products.length || searchStore.trendingProducts.length"
+            v-if="quickSearchStore.products.length || quickSearchStore.trendingProducts.length"
             class="quick-search-close absolute right-0 mr-3"
         >
             <button @click="closeQuickSearch">
@@ -153,6 +152,7 @@ const closeQuickSearch = () => {
     right: 10%;
     width: 80%;
     min-height: 50px;
+    z-index: 10;
     @apply hidden absolute border rounded text-black shadow shadow-lg bg-white px-5 py-3;
 }
 .quick-search.open {
