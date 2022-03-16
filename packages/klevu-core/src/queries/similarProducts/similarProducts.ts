@@ -1,4 +1,4 @@
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import {
   KlevuFetchModifer,
   KlevuRecord,
@@ -26,7 +26,7 @@ export function similarProducts(
   products: Array<Pick<KlevuRecord, "id" | "itemGroupId">>,
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   const params: Options = {
     ...defaultOptions,
     ...options,

@@ -1,9 +1,5 @@
-import { KlevuFetchFunction } from ".."
-import {
-  KlevuFetchModifer,
-  KlevuTypeOfRecord,
-  KlevuTypeOfRequest,
-} from "../.."
+import { KlevuFetchFunctionReturnValue } from ".."
+import { KlevuFetchModifer, KlevuTypeOfRecord, KlevuTypeOfRequest } from "../.."
 import { lastClickedProducts } from "../../store/lastClickedProducts"
 
 type Options = {
@@ -24,7 +20,7 @@ const defaultOptions: Options = {
 export function alsoViewed(
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   const params: Options = {
     ...defaultOptions,
     ...options,

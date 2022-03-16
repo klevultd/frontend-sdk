@@ -1,5 +1,5 @@
 import { KlevuTrendingProductsQuery } from "../../models/KlevuTrendingProductsQuery"
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import { KlevuFetchModifer } from "../../modifiers"
 import { lastClickedProducts } from "../../store/lastClickedProducts"
 import {
@@ -43,7 +43,7 @@ const defaultOptions: Options = {
 export function trending(
   options?: Options,
   ...modifiers: KlevuFetchModifer[]
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   const params: Options = {
     ...defaultOptions,
     ...options,

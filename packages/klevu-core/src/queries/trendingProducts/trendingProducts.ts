@@ -1,5 +1,9 @@
 import { search, SearchOptions } from "../search/search"
-import { KlevuFetchFunction, KlevuFetchModifer, KlevuTypeOfRecord } from "../.."
+import {
+  KlevuFetchFunctionReturnValue,
+  KlevuFetchModifer,
+  KlevuTypeOfRecord,
+} from "../.."
 
 /**
  * Create a trending products search query. Id for this query is `trendingProducts`
@@ -20,7 +24,7 @@ import { KlevuFetchFunction, KlevuFetchModifer, KlevuTypeOfRecord } from "../.."
 export function trendingProducts(
   options?: Partial<SearchOptions>,
   ...modifiers: KlevuFetchModifer[]
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   return search(
     "*",
     {
