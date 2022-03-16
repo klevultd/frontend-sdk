@@ -1,9 +1,6 @@
 import { search, SearchOptions } from "../search/search"
-import {
-  KlevuFetchFunctionReturnValue,
-  KlevuFetchModifer,
-  KlevuTypeOfRecord,
-} from "../.."
+import { KlevuFetchModifer, KlevuTypeOfRecord } from "../.."
+import { KlevuFetchFunctionReturnValue } from "../../queries"
 
 /**
  * Create a trending products search query. Id for this query is `trendingProducts`

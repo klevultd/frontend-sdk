@@ -15,6 +15,10 @@
     ".": {
       "import": "./dist/mjs/index.js",
       "require": "./dist/cjs/index.js"
+    },
+    "./queries": {
+      "import": "./dist/mjs/queries.js",
+      "require": "./dist/cjs/queries.js"
     }
   },
   "scripts": {

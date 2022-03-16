@@ -1,10 +1,5 @@
-import {
-  fallback,
-  KlevuConfig,
-  KlevuFetch,
-  search,
-  trendingProducts,
-} from "../.."
+import { fallback, KlevuConfig, KlevuFetch } from "../.."
+import { search, trendingProducts } from "../../queries"
 
 beforeEach(() => {
   KlevuConfig.init({

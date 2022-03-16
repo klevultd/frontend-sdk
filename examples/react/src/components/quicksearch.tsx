@@ -3,10 +3,8 @@ import {
   KlevuFetch,
   KlevuLastSearches,
   KlevuTypeOfRecord,
-  search,
-  suggestions,
-  trendingProducts,
 } from "@klevu/core"
+import { search, suggestions, trendingProducts } from "@klevu/core/queries"
 import type { KlevuRecord, KlevuLastSearch } from "@klevu/core"
 import {
   Grid,

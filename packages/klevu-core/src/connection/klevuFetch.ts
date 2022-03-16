@@ -1,10 +1,6 @@
 import Axios from "axios"
 import cloneDeep from "lodash.clonedeep"
-import {
-  applyFilterWithManager,
-  KlevuConfig,
-  KlevuFetchFunctionReturnValue,
-} from "../index"
+import { applyFilterWithManager, KlevuConfig } from "../index"
 import {
   KlevuAllRecordQueries,
   KlevuPayload,
@@ -13,6 +9,7 @@ import {
   KlevuSuggestionQuery,
   KlevuBaseQuery,
 } from "../models"
+import { KlevuFetchFunctionReturnValue } from "../queries"
 
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.

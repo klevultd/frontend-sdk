@@ -1,4 +1,5 @@
-import { KlevuConfig, KlevuFetch, search } from "../.."
+import { KlevuConfig, KlevuFetch } from "../.."
+import { search } from "../../queries"
 
 beforeEach(() => {
   KlevuConfig.init({

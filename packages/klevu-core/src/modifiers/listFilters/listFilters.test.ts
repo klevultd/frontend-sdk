@@ -1,10 +1,5 @@
-import {
-  FilterManager,
-  KlevuConfig,
-  KlevuFetch,
-  listFilters,
-  search,
-} from "../.."
+import { FilterManager, KlevuConfig, KlevuFetch, listFilters } from "../.."
+import { search } from "../../queries"
 
 beforeEach(() => {
   KlevuConfig.init({

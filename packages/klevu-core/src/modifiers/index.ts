@@ -1,5 +1,5 @@
 import { LiteralUnion } from "type-fest"
-import { KlevuFetchFunctionReturnValue } from ".."
+import { KlevuFetchFunctionReturnValue } from "../queries"
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
 import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
 

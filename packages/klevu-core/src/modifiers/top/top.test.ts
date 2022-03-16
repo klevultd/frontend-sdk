@@ -1,4 +1,5 @@
-import { KlevuConfig, KlevuFetch, search, debug } from "../.."
+import { KlevuConfig, KlevuFetch, debug } from "../.."
+import { search } from "../../queries"
 import { KlevuSearchSorting } from "../../models"
 import { include } from "../include/include"
 import { top } from "./top"
