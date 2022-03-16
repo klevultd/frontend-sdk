@@ -1,5 +1,5 @@
 import { KlevuConfig, KlevuFetch, search } from "../.."
-import { sendSearchEvent } from "./sendSearchEvent"
+import { include } from "./include"
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -8,16 +8,22 @@ beforeEach(() => {
   })
 })
 
-test("Sending search event", async () => {
+test("Include modifier", async () => {
+  const includeProductId = "36800563314842"
+
   const result = await KlevuFetch(
     search(
       "hoodies",
       {
         id: "test",
       },
-      sendSearchEvent()
+      include([includeProductId])
     )
   )
 
   expect(result.queriesById("test")).toBeDefined()
+  expect(result.queriesById("test")?.records.length).toBeGreaterThan(0)
+  expect(
+    result.queriesById("test")?.records.some((r) => r.id === includeProductId)
+  ).toBeTruthy()
 })
