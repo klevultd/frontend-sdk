@@ -1,14 +1,18 @@
 <script setup>
-import useSearch from '../state/searchStore'
-const searchStore = useSearch()
+import useQuickSearch from '../state/quickSearchStore'
+const quickSearchStore = useQuickSearch()
 
 </script>
 
 <template>
-    <div class="last-searches" v-if="searchStore.lastSearches.length > 0">
+    <div class="last-searches" v-if="quickSearchStore.lastSearches.length > 0">
         <h3>Last Searches</h3>
         <div class="search-list">
-            <div class="search" v-for="search in searchStore.lastSearches" :key="search.timestamp">
+            <div
+                class="search"
+                v-for="search in quickSearchStore.lastSearches"
+                :key="search.timestamp"
+            >
                 <a :href="`/search?q=${search.term}`">{{ search.term }}</a>
             </div>
         </div>

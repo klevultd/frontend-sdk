@@ -1,9 +1,11 @@
 <script setup>
+import { ref } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import useSearch from '../state/searchStore';
 import Product from '../components/Product.vue';
 import Option from '../components/Option.vue';
 import Slider from '../components/Slider.vue';
+import FacetToggle from '../components/FacetToggle.vue';
 import {
   applyFilterWithManager,
   FilterManager,
@@ -18,6 +20,9 @@ import {
 const searchStore = useSearch();
 const manager = new FilterManager();
 let prevRes
+const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+
+const openFacets = ref(vw >= 1024 ? true : false);
 
 const initialFetch = async () => {
   const functions = [
@@ -34,7 +39,7 @@ const initialFetch = async () => {
             minMax: true,
           },
         ],
-        exclude: ["inventory_item_id", "rim_size", "category", "type"],
+        exclude: ["inventory_item_id", "rim_size", "category", "type", "tags"],
         filterManager: manager,
       }),
       applyFilterWithManager(manager)
@@ -83,6 +88,9 @@ onBeforeRouteLeave((to, from, next) => {
     handleFilterUpdate
   )
 })
+const toggleFacets = () => {
+  openFacets.value = !openFacets.value
+}
 const updateSort = e => {
   searchStore.sorting = e.target.value
   initialFetch()
@@ -95,18 +103,21 @@ initialFetch()
   <div class="homepage-wrapper">
     <section class="filter-section">
       <div class="facets border p-6">
-        <Option
-          v-for="(option, index) in searchStore.options"
-          :key="index"
-          :option="option"
-          :manager="manager"
-        />
-        <Slider
-          v-for="(slider, index) in searchStore.sliders"
-          :key="index"
-          :slider="slider"
-          :manager="manager"
-        />
+        <FacetToggle :handler="toggleFacets" :open="openFacets" :vw="vw" />
+        <div v-show="openFacets">
+          <Option
+            v-for="(option, index) in searchStore.options"
+            :key="index"
+            :option="option"
+            :manager="manager"
+          />
+          <Slider
+            v-for="(slider, index) in searchStore.sliders"
+            :key="index"
+            :slider="slider"
+            :manager="manager"
+          />
+        </div>
       </div>
     </section>
     <section class="results-section">
@@ -125,7 +136,7 @@ initialFetch()
           classes="p-2 md:w-1/3 lg:w-1/4 mb-5"
         />
         <div class="w-full" v-if="searchStore.showMore">
-          <button class="border py-2 px-5 block w-32 mx-auto my-5" @click="fetchMore">Load more</button>
+          <button class="btn" @click="fetchMore">Load more</button>
         </div>
       </div>
     </section>
@@ -138,16 +149,21 @@ initialFetch()
   @apply flex flex-col lg:flex-row mx-auto mt-6 mb-12;
 }
 .filter-section {
-  @apply lg:w-1/4 mt-12;
+  @apply px-5 lg:w-1/4 mt-12 w-96 mx-auto;
+}
+.facets {
+  max-height: 1000px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .results-section {
-  @apply lg:w-3/4;
+  @apply mt-12 lg:mt-0 lg:w-3/4;
 }
 .sorting-options {
-  @apply px-6;
+  @apply px-6 text-center lg:text-left pb-6 lg:pb-0;
 }
 .product-results {
   max-width: 1000px;
-  @apply lg:flex lg:flex-wrap mx-auto;
+  @apply md:flex md:flex-wrap mx-auto;
 }
 </style>
