@@ -87,6 +87,8 @@ const updateSort = e => {
   searchStore.sorting = e.target.value
   initialFetch()
 }
+
+//searchStore.resetSearch();
 initialFetch()
 
 const toggleFacets = () => {

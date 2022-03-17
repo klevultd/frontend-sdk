@@ -49,6 +49,13 @@ const useSearch = defineStore("search-store", {
       this.sliders =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
     },
+    resetSearch() {
+      this.searchTerm = ""
+      this.showMore = false
+      this.setProducts()
+      this.setOptions()
+      this.setSliders()
+    },
   },
 })
 
