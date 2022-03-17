@@ -39,7 +39,7 @@ const initialFetch = async () => {
             minMax: true,
           },
         ],
-        exclude: ["inventory_item_id", "rim_size", "category", "type", "tags"],
+        exclude: searchStore.homeFilterExcludes,
         filterManager: manager,
       }),
       applyFilterWithManager(manager)
