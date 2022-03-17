@@ -2,8 +2,8 @@ import { KlevuConfig, KlevuFetch, search } from "../.."
 
 beforeEach(() => {
   KlevuConfig.init({
-    url: "https://eucs15v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-156925593843210765",
+    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-160320037354512854",
   })
 })
 
@@ -20,7 +20,7 @@ test("Basic search", async () => {
 
 test("Pagination test", async () => {
   const result = await KlevuFetch(
-    search("hoodies", {
+    search("*", {
       limit: 2,
     })
   )

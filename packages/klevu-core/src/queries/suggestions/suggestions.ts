@@ -1,4 +1,4 @@
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import { KlevuSuggestionQuery } from "../../models/KlevuSuggestionQuery"
 import { KlevuTypeOfRequest } from "../../models"
 import { cleanSearchQuery } from "../../utils"
@@ -24,7 +24,7 @@ const defaults: Options = {
 export function suggestions(
   term: string,
   options?: Partial<Options>
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   const params: Options = {
     ...defaults,
     ...options,

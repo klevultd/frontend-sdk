@@ -4,10 +4,10 @@ import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import Toolbar from "@mui/material/Toolbar"
 import React from "react"
-import { Search } from "./search"
+import { QuickSearch } from "./quicksearch"
 import { Link } from "react-router-dom"
 
-const pages = ["Men", "Women", "Accessories"]
+const pages = ["Men", "Women", "Clothing"]
 
 const ResponsiveAppBar = () => {
   return (
@@ -31,7 +31,7 @@ const ResponsiveAppBar = () => {
               </Link>
             ))}
           </Box>
-          <Search />
+          <QuickSearch />
         </Toolbar>
       </Container>
     </AppBar>

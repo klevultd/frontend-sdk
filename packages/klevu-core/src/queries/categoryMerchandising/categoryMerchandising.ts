@@ -1,4 +1,4 @@
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import { KlevuFetchModifer } from "../.."
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery"
@@ -26,7 +26,7 @@ export function categoryMerchandising(
   category: KlevuBaseQuerySettingsQuery["categoryPath"],
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   const params: Options = {
     ...defaults,
     ...options,

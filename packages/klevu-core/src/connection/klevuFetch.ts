@@ -3,7 +3,7 @@ import cloneDeep from "lodash.clonedeep"
 import {
   applyFilterWithManager,
   KlevuConfig,
-  KlevuFetchFunction,
+  KlevuFetchFunctionReturnValue,
 } from "../index"
 import {
   KlevuAllRecordQueries,
@@ -22,27 +22,33 @@ import {
  * @returns Tools to operate results and get next results {@link KlevuFetchResponse}
  */
 export async function KlevuFetch(
-  ...functions: KlevuFetchFunction[]
+  ...functionPromises: Array<
+    Promise<KlevuFetchFunctionReturnValue> | KlevuFetchFunctionReturnValue
+  >
 ): Promise<KlevuFetchResponse> {
-  if (functions.length < 1) {
+  if (functionPromises.length < 1) {
     throw new Error("At least one fetch function should be provided to fetch.")
   }
+
+  const functions = await Promise.all(functionPromises)
 
   const { recordQueries, suggestionQueries } =
     cleanAndProcessFunctions(functions)
 
+  const withOverride = functions.find((f) => Boolean(f.configOverride))
+
   const payload: KlevuPayload = {
     context: {
-      apiKeys: [KlevuConfig.default.apiKey],
+      apiKeys: [
+        withOverride?.configOverride?.apiKey ?? KlevuConfig.default.apiKey,
+      ],
     },
     recordQueries: recordQueries.length > 0 ? recordQueries : undefined,
     suggestions: suggestionQueries.length > 0 ? suggestionQueries : undefined,
   }
 
-  const withOverride = functions.find((f) => Boolean(f.configOverride))
-
   const response = await Axios.post<KlevuApiRawResponse>(
-    withOverride?.configOverride?.apiKey ?? KlevuConfig.default.url,
+    withOverride?.configOverride?.url ?? KlevuConfig.default.url,
     payload,
     {
       headers: {
@@ -76,7 +82,7 @@ export async function KlevuFetch(
 
 function fetchNextPage(
   response: KlevuApiRawResponse,
-  functions: KlevuFetchFunction[]
+  functions: KlevuFetchFunctionReturnValue[]
 ) {
   if (response.queryResults && response.queryResults.length < 1) {
     return undefined
@@ -151,7 +157,7 @@ function fetchNextPage(
   return nextFunc
 }
 
-function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
+function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
   const recordQueries: KlevuAllRecordQueries[] = []
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
@@ -187,8 +193,8 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunction[]) {
 }
 
 function removeListFilters(
-  functions: KlevuFetchFunction[]
-): KlevuFetchFunction[] {
+  functions: KlevuFetchFunctionReturnValue[]
+): KlevuFetchFunctionReturnValue[] {
   return functions
     .filter((f) => f.klevuFunctionId !== "listfilters")
     .map((f) => {

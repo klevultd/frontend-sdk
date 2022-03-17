@@ -1,4 +1,4 @@
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
 import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings"
 import {
@@ -40,7 +40,7 @@ export function search(
   term: string,
   options?: Partial<SearchOptions>,
   ...modifiers: KlevuFetchModifer[]
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   const params: SearchOptions = {
     ...defaults,
     ...options,

@@ -16,17 +16,36 @@ export type KlevuFetchId =
   | "categoryMerchandising"
   | "similarProducts"
   | "alsoViewed"
+  | "kmcRecommendation"
 
 /**
- * @ignore
+ * What functions passed to KlevuFetch should implement
  */
-export type KlevuFetchFunction = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type KlevuFetchFunctionReturnValue<T = any> = {
+  /**
+   * Id of function. Used only internally
+   */
   klevuFunctionId: LiteralUnion<KlevuFetchId, string>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params?: any
+  /**
+   * Anything you wish to pass down as params incoming to function
+   */
+  params?: T
+  /**
+   * What queries should KlevuFetch do to backend
+   */
   queries?: KlevuAllRecordQueries[]
+  /**
+   * What suggestions queries should do to backend
+   */
   suggestions?: KlevuSuggestionQuery[]
+  /**
+   * List of modifiers set for this function
+   */
   modifiers?: KlevuFetchModifer[]
+  /**
+   * Pass down the if config has been overridden.
+   */
   configOverride?: KlevuConfig
 }
 
@@ -40,3 +59,4 @@ export * from "./products/products"
 export * from "./similarProducts/similarProducts"
 export * from "./searchCategory/searchCategory"
 export * from "./searchCms/searchCms"
+export * from "./kmcRecommendation/kmcRecommendation"

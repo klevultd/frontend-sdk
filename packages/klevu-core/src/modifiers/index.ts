@@ -1,5 +1,5 @@
 import { LiteralUnion } from "type-fest"
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
 import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
 
@@ -23,7 +23,10 @@ export type KlevuFetchModifer = {
   modifyAfter?: (
     queries: Readonly<KlevuAllRecordQueries[]>
   ) => KlevuAllRecordQueries[]
-  onResult?: (response: KlevuFetchResponse, query: KlevuFetchFunction) => void
+  onResult?: (
+    response: KlevuFetchResponse,
+    query: KlevuFetchFunctionReturnValue
+  ) => void
 }
 
 export * from "./applyFilter/applyFilter"
@@ -36,3 +39,5 @@ export * from "./boostWithFilters/boostWithFilters"
 export * from "./boostWithFilterManager/boostWithFilterManager"
 export * from "./include/include"
 export * from "./top/top"
+export * from "./sendSearchEvent/sendSearchEvent"
+export * from "./debug/debug"

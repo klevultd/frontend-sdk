@@ -1,4 +1,4 @@
-import { KlevuFetchFunction } from ".."
+import { KlevuFetchFunctionReturnValue } from ".."
 import { KlevuTypeOfRecord } from "../.."
 import { search, SearchOptions } from "../search/search"
 
@@ -13,7 +13,7 @@ import { search, SearchOptions } from "../search/search"
 export function searchCategory(
   term: string,
   options?: Partial<SearchOptions>
-): KlevuFetchFunction {
+): KlevuFetchFunctionReturnValue {
   return search(term, {
     typeOfRecords: [KlevuTypeOfRecord.Category],
     groupBy: "name",
