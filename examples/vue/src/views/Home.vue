@@ -14,7 +14,7 @@ import {
   KlevuSearchSorting,
   listFilters,
   trendingProducts,
-  //KlevuFetchResponse,
+  KlevuFetchResponse,
 } from "@klevu/core";
 
 const searchStore = useSearch();
@@ -88,13 +88,17 @@ onBeforeRouteLeave((to, from, next) => {
     handleFilterUpdate
   )
 })
+
 const toggleFacets = () => {
   openFacets.value = !openFacets.value
 }
+
 const updateSort = e => {
   searchStore.sorting = e.target.value
   initialFetch()
 }
+
+//searchStore.resetSearch();
 initialFetch()
 
 </script>
