@@ -13,6 +13,13 @@ const useSearch = defineStore("search-store", {
       options: [],
       sliders: [],
       sorting: KlevuSearchSorting.Relevance,
+      homeFilterExcludes: [
+        "inventory_item_id",
+        "rim_size",
+        "category",
+        "type",
+        "tags",
+      ],
       showMore: false,
       quickSearchOpen: false,
     }

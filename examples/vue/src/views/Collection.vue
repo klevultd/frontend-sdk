@@ -1,11 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import {
+  KlevuRecord,
+  KlevuSearchSorting,
+  listFilters,
+  applyFilterWithManager,
+  KlevuFetch,
+  KlevuDomEvents,
+  FilterManager,
+  categoryMerchandising,
+  KlevuFilterResultOptions,
+  KlevuFilterResultSlider,
+  KlevuFetchResponse,
+} from "@klevu/core"
 
-defineProps({
-  msg: String
-})
+const searchStore = useSearch();
+const manager = new FilterManager()
+let prevRes;
+const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+const openFacets = ref(vw >= 1024 ? true : false);
 
-const count = ref(0)
+
 </script>
 
 <template>

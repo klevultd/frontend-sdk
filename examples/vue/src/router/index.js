@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
 import Home from "../views/Home.vue"
-import useSearch from "../state/searchStore"
+import useQuickSearch from "../state/quickSearchStore"
 const Search = () => import("../views/Search.vue")
 const Collection = () => import("../views/Collection.vue")
 const Product = () => import("../views/Product.vue")
@@ -35,9 +35,9 @@ const router = createRouter({
 router.beforeEach((to) => {
   // ✅ This will work make sure the correct store is used for the
   // current running app
-  const searchStore = useSearch()
+  const quickSearchStore = useQuickSearch()
 
-  searchStore.quickSearchOpen = false
+  quickSearchStore.quickSearchOpen = false
 
   //if (to.meta.requiresAuth && !main.isLoggedIn) return '/login'
 })
