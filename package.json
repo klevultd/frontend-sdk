@@ -11,9 +11,9 @@
   "author": "Klevu",
   "license": "MIT",
   "workspaces": [
-    "examples/react",
     "packages/klevu-core",
-    "packages/klevu-ui"
+    "packages/klevu-ui",
+    "examples/react"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.2",

@@ -8,7 +8,7 @@ import React from "react"
 import { QuickSearch } from "./quicksearch"
 import { Link } from "react-router-dom"
 
-const pages = ["Jackets", "Bags", "Bras"]
+const pages = ["Men", "Women", "Clothing"]
 
 const ResponsiveAppBar = () => {
   return (
