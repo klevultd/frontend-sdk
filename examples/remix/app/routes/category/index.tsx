@@ -7,7 +7,7 @@ import {
 } from "@klevu/core"
 import { Product, links as ProductLinks } from "~/components/product/product"
 import { json, LoaderFunction, useLoaderData } from "remix"
-import styles from "./index.css"
+import styles from "../../../styles/index.css"
 import { useState } from "react"
 
 export function links() {

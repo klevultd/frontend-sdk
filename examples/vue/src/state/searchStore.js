@@ -7,9 +7,6 @@ const useSearch = defineStore("search-store", {
     return {
       searchTerm: "",
       products: [],
-      trendingProducts: [],
-      suggestions: [],
-      lastSearches: [],
       options: [],
       sliders: [],
       sorting: KlevuSearchSorting.Relevance,
@@ -20,25 +17,13 @@ const useSearch = defineStore("search-store", {
         "type",
         "tags",
       ],
+      collectionFilterExcludes: [],
       showMore: false,
-      quickSearchOpen: false,
     }
   },
   actions: {
     setProducts(arr) {
       this.products =
-        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
-    },
-    setSuggestions(arr) {
-      this.suggestions =
-        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
-    },
-    setTrendingProducts(arr) {
-      this.trendingProducts =
-        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
-    },
-    setLastSearches(arr) {
-      this.lastSearches =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
     },
     setOptions(arr) {
@@ -48,6 +33,13 @@ const useSearch = defineStore("search-store", {
     setSliders(arr) {
       this.sliders =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
+    },
+    resetSearch() {
+      this.searchTerm = ""
+      this.showMore = false
+      this.setProducts()
+      this.setOptions()
+      this.setSliders()
     },
   },
 })
