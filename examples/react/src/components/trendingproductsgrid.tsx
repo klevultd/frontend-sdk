@@ -76,7 +76,11 @@ export function TrendingProductsGrid() {
               minMax: true,
             },
           ],
-          exclude: [],
+          exclude: ["inventory_item_id",
+          "rim_size",
+          "category",
+          "type",
+          "tags",],
           filterManager: manager,
         }),
         applyFilterWithManager(manager)

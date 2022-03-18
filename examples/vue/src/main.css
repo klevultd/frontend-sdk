@@ -17,3 +17,7 @@
 .btn {
   @apply py-2 px-5 block w-52 mx-auto my-5 bg-blue-700 text-white;
 }
+
+.loading-message {
+  @apply text-center pt-32;
+}
