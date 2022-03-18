@@ -6,6 +6,9 @@ const props = defineProps({
     option: Object,
     manager: Object,
 })
+const toggleOption = (key, name) => {
+    props.manager.toggleOption(key, name)
+}
 </script>
 
 <template>
@@ -13,11 +16,12 @@ const props = defineProps({
         <div class="option-label py-2 uppercase">{{ option.label }}</div>
         <ul class="option-links">
             <li v-for="(optionLink, index) in option.options" :key="index">
-                <label
-                    class="cursor-pointer text-sm py-2"
-                    @click="manager.toggleOption(option.key, optionLink.name)"
-                >
-                    <input type="checkbox" :checked="optionLink.selected" />
+                <label class="cursor-pointer text-sm py-2">
+                    <input
+                        type="checkbox"
+                        :checked="optionLink.selected"
+                        @click="toggleOption(option.key, optionLink.name)"
+                    />
                     {{ optionLink.name }} ({{ optionLink.count }})
                 </label>
             </li>

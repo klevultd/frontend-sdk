@@ -37,9 +37,9 @@ const useSearch = defineStore("search-store", {
     resetSearch() {
       this.searchTerm = ""
       this.showMore = false
-      this.setProducts()
-      this.setOptions()
-      this.setSliders()
+      this.setProducts([])
+      this.setOptions([])
+      this.setSliders([])
     },
   },
 })
