@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { onBeforeRouteLeave } from 'vue-router'
+import { ref, nextTick } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 import useSearch from '../state/searchStore';
 import Product from '../components/Product.vue';
 import Option from '../components/Option.vue';
@@ -14,7 +14,6 @@ import {
   KlevuSearchSorting,
   listFilters,
   trendingProducts,
-  KlevuFetchResponse,
 } from "@klevu/core";
 
 const searchStore = useSearch();
@@ -22,8 +21,18 @@ const manager = new FilterManager();
 let prevRes
 const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 
-const openFacets = ref(vw >= 1024 ? true : false);
+searchStore.resetSearch()
 
+const openFacets = ref(vw >= 1024 ? true : false);
+const logOptions = (options) => {
+  options.forEach(f => {
+    const output = []
+    const o = f.options.forEach(op => {
+      if (op.selected) output.push([op.value, op.selected])
+    })
+    if (output.length) console.log(f.key, output.join('--'))
+  })
+}
 const initialFetch = async () => {
   const functions = [
     trendingProducts(
@@ -57,6 +66,7 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
+
 }
 
 const fetchMore = async () => {
@@ -71,18 +81,21 @@ const fetchMore = async () => {
   searchStore.showMore = Boolean(nextRes.next)
 }
 
-const handleFilterUpdate = () => {
+const handleFilterUpdate = async () => {
+  searchStore.setProducts([])
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   initialFetch()
 }
 
+console.log('loading FilterSelectionUpdate handler')
 document.addEventListener(
   KlevuDomEvents.FilterSelectionUpdate,
   handleFilterUpdate
 )
 
-onBeforeRouteLeave((to, from, next) => {
+onBeforeRouteUpdate((to, from) => {
+  console.log('unloading FilterSelectionUpdate handler')
   document.removeEventListener(
     KlevuDomEvents.FilterSelectionUpdate,
     handleFilterUpdate
@@ -98,13 +111,13 @@ const updateSort = e => {
   initialFetch()
 }
 
-//searchStore.resetSearch();
 initialFetch()
 
 </script>
 
 <template>
-  <div class="homepage-wrapper">
+  <div class="loading-message" v-show="!searchStore.products.length">Loading products...</div>
+  <div class="homepage-wrapper" v-show="searchStore.products.length">
     <section class="filter-section">
       <div class="facets border p-6">
         <FacetToggle :handler="toggleFacets" :open="openFacets" :vw="vw" />

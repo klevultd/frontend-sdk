@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router'
+import { ref, nextTick } from 'vue'
+import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import {
   KlevuSearchSorting,
   listFilters,
@@ -25,6 +25,9 @@ const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth
 const openFacets = ref(vw >= 1024 ? true : false);
 
 const initialFetch = async () => {
+  searchStore.setProducts([])
+  await nextTick()
+
   const functions = [
     categoryMerchandising(
       route.params.id,
@@ -58,6 +61,7 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
+
 }
 
 const fetchMore = async () => {
@@ -83,7 +87,7 @@ document.addEventListener(
   handleFilterUpdate
 )
 
-onBeforeRouteLeave((to, from, next) => {
+onBeforeRouteUpdate((to, from) => {
   document.removeEventListener(
     KlevuDomEvents.FilterSelectionUpdate,
     handleFilterUpdate
@@ -105,7 +109,8 @@ initialFetch()
 </script>
 
 <template>
-  <div class="collection-wrapper">
+  <div class="loading-message" v-show="!searchStore.products.length">Loading products...</div>
+  <div class="collection-wrapper" v-show="searchStore.products.length">
     <section class="filter-section">
       <div class="facets border p-6">
         <FacetToggle :handler="toggleFacets" :open="openFacets" :vw="vw" />

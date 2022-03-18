@@ -19,12 +19,12 @@ KlevuConfig.init({
         <img src="/cropped-klevu-icon-192x192.png" class="h-5 inline-block mb-1" />
       </router-link>
       <router-link to="/">Home</router-link>
-      <router-link to="/collection/mens">Mens</router-link>
-      <router-link to="/collection/womens">Womens</router-link>
+      <router-link to="/collection/men">Men</router-link>
+      <router-link to="/collection/women">Women</router-link>
     </div>
     <Search />
   </nav>
-  <router-view />
+  <router-view :key="$route.fullPath" />
 </template>
 
 <style scoped>
