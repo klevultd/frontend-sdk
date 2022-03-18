@@ -57,6 +57,7 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
+
 }
 
 const fetchMore = async () => {
@@ -88,7 +89,6 @@ const updateSort = e => {
   initialFetch()
 }
 
-//searchStore.resetSearch();
 initialFetch()
 
 const toggleFacets = () => {

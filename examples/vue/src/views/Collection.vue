@@ -60,6 +60,7 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
+
 }
 
 const fetchMore = async () => {
