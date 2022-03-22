@@ -8,7 +8,8 @@
         "Build @klevu/core",
         "Build @klevu/ui",
         "npm: start - react",
-        "npm: start - vue"
+        "npm: start - vue",
+        "npm: start - vanilla-klevu-ui"
       ],
       "problemMatcher": [],
       "group": {
@@ -46,7 +47,7 @@
       "label": "npm: start - react",
       "detail": "vite",
       "presentation": {
-        "group": "groupA"
+        "group": "groupB"
       }
     },
     {
@@ -57,7 +58,18 @@
       "label": "npm: start - vue",
       "detail": "vite",
       "presentation": {
-        "group": "groupA"
+        "group": "groupB"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "examples/vanilla-klevu-ui/",
+      "problemMatcher": [],
+      "label": "npm: start - vanilla-klevu-ui",
+      "detail": "vite",
+      "presentation": {
+        "group": "groupB"
       }
     }
   ]

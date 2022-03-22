@@ -2,11 +2,10 @@
   "name": "@klevu/ui",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
   "type": "module",
+  "exports": "./dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -fr dist/* && tsc && cp src/klevu-ui-default-style.css dist",
     "build:watch": "tsc --watch",
     "qoc": "eslint src/",
     "test": "echo 'No tests'"
@@ -14,6 +13,11 @@
   "author": "Klevu",
   "license": "MIT",
   "dependencies": {
-    "@klevu/core": "file:../klevu-core"
+    "@klevu/core": "file:../klevu-core",
+    "lit": "^2.2.1",
+    "lodash.debounce": "^4.0.8"
+  },
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.6"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "vanilla-klevu-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite --port 3003"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@klevu/ui": "file:../../packages/klevu-ui",
+    "lit-html": "^2.2.1",
+    "lodash.debounce": "^4.0.8"
+  },
+  "devDependencies": {
+    "vite": "^2.8.6"
+  }
+}

@@ -1,0 +1,9 @@
+:root {
+  --p-s: 6px;
+  --p-m: 8px;
+  --p-l: 12px;
+
+  --color-font-light: #666;
+  --color-font-primary: #333;
+  --color-font-strong: #000;
+}
