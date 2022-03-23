@@ -72,6 +72,10 @@ const result = await KlevuFetch(
 console.log(result.getQueriesById("search")?.records)
 ```
 
+### Platform specific guides
+
+- [React with Material UI](../../examples/react/README.md)
+
 ## Queries
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
@@ -193,3 +197,11 @@ Users of Klevu can change settings in the Klevu Merchant Center. These settings 
 ```ts
 const result = await KlevuKMCSettings()
 ```
+
+## Last searches
+
+To get list of last searches you can use the `KlevuLastSearches` class.
+
+To get the list of last searches call `KlevuLastSearches.get()` and if you wish to store a search use `KlevuLastSearches.save('user search string')`
+
+##
