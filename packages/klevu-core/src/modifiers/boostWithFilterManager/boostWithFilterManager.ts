@@ -1,6 +1,6 @@
-import { KlevuFetchModifer } from ".."
-import { FilterManager } from "../../store/filterManager"
-import { notEmpty } from "../../utils/notEmpty"
+import { KlevuFetchModifer } from "../index.js"
+import { FilterManager } from "../../store/filterManager.js"
+import { notEmpty } from "../../utils/notEmpty.js"
 
 /**
  * Boost query with currect selection of filter manager

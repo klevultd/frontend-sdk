@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, search } from "../.."
-import { boostWithKeywords } from "./boostWithKeywords"
+import { KlevuConfig, KlevuFetch, search } from "../../index.js"
+import { boostWithKeywords } from "./boostWithKeywords.js"
 
 beforeEach(() => {
   KlevuConfig.init({

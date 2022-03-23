@@ -1,2 +1,2 @@
-export * from "./KlevuEvents"
-export * from "./KlevuDomEvents"
+export * from "./KlevuEvents.js"
+export * from "./KlevuDomEvents.js"

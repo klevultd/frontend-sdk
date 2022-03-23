@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuFetch, products } from "../.."
+import { KlevuConfig, KlevuFetch, products } from "../../index.js"
 
 beforeEach(() => {
   KlevuConfig.init({

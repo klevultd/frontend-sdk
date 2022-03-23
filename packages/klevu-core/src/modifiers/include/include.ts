@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from ".."
+import { KlevuFetchModifer } from "../index.js"
 
 /**
  * Force include product ids on result

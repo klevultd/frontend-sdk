@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuFetch, search, suggestions } from "../.."
+import { KlevuConfig, KlevuFetch, search, suggestions } from "../../index.js"
 
 beforeEach(() => {
   KlevuConfig.init({

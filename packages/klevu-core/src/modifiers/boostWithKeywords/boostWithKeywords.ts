@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from ".."
+import { KlevuFetchModifer } from "../index.js"
 
 /**
  * Boost or deboost query based on a keywords.

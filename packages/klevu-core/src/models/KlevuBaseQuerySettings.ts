@@ -1,7 +1,7 @@
 import { KlevuAnyTypeOfRecord, KlevuRecordFields, KlevuTypeOfSearch } from "."
-import { KlevuSearchSorting } from "./KlevuSearchSorting"
-import { KlevuSearchPreference } from "./KlevuSearchPreference"
-import { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery"
+import { KlevuSearchSorting } from "./KlevuSearchSorting.js"
+import { KlevuSearchPreference } from "./KlevuSearchPreference.js"
+import { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery.js"
 
 export type KlevuBaseQuerySettings = {
   query?: KlevuBaseQuerySettingsQuery

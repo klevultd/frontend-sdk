@@ -1,5 +1,5 @@
 import { LiteralUnion } from "type-fest"
-import { KlevuRecord } from "./KlevuRecord"
+import { KlevuRecord } from "./KlevuRecord.js"
 
 /*
 swatches:

@@ -1,6 +1,6 @@
-import { KlevuFetchModifer } from ".."
-import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
-import { KlevuFetchFunctionReturnValue } from "../../queries"
+import { KlevuFetchModifer } from "../index.js"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
+import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
 
 /**
  * If original query doesn't return enough results then fallback query is run added to results

@@ -1,13 +1,13 @@
-import { KlevuConfig, KlevuRecord, KlevuTypeOfSearch } from ".."
-import { KlevuRecommendationBanner } from "../models/KlevuRecommendationBanner"
-import { lastClickedProducts } from "../store/lastClickedProducts"
-import { KlevuLastSearches } from "../store/lastSearches"
+import { KlevuConfig, KlevuRecord, KlevuTypeOfSearch } from "../index.js"
+import { KlevuRecommendationBanner } from "../models/KlevuRecommendationBanner.js"
+import { lastClickedProducts } from "../store/lastClickedProducts.js"
+import { KlevuLastSearches } from "../store/lastSearches.js"
 import {
   KlevuEventV1CheckedOutProducts,
   KlevuEventV1ProductTracking,
   KlevuEventV1Search,
   KlevuEventV2,
-} from "./eventRequests"
+} from "./eventRequests.js"
 
 export class KlevuEvents {
   /**

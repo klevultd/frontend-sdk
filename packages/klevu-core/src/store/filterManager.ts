@@ -1,11 +1,11 @@
-import {} from "../models"
-import { KlevuDomEvents } from "../events/KlevuDomEvents"
-import { ApplyFilter } from "../modifiers/applyFilter/applyFilter"
+import {} from "../models/index.js"
+import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
+import { ApplyFilter } from "../modifiers/applyFilter/applyFilter.js"
 import {
   KlevuFilterType,
   KlevuFilterResultSlider,
   KlevuFilterResultOptions,
-} from "../models/KlevuApiRawResponse"
+} from "../models/KlevuApiRawResponse.js"
 
 export class FilterManager {
   options: KlevuFilterResultOptions[] = []
@@ -82,24 +82,24 @@ export class FilterManager {
    * @param min Min value of slide
    * @param max Max value of slide
    */
-   updateSlide(key:string, min:number, max:number) {
-    const slideIndex = this.sliders.findIndex(s => s.key === key)
+  updateSlide(key: string, min: number, max: number) {
+    const slideIndex = this.sliders.findIndex((s) => s.key === key)
 
     if (slideIndex === -1) {
-        console.warn(`No slider found with ${key}.`)
-        return
+      console.warn(`No slider found with ${key}.`)
+      return
     }
     this.sliders[slideIndex].start = min.toString()
     this.sliders[slideIndex].end = max.toString()
 
     document.dispatchEvent(
       new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
-          detail: {
-              key: key,
-              name: this.sliders[slideIndex].label,
-              start: min.toString(),
-              end: max.toString(),
-          },
+        detail: {
+          key: key,
+          name: this.sliders[slideIndex].label,
+          start: min.toString(),
+          end: max.toString(),
+        },
       })
     )
   }

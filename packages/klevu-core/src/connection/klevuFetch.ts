@@ -4,7 +4,7 @@ import {
   applyFilterWithManager,
   KlevuConfig,
   KlevuFetchFunctionReturnValue,
-} from "../index"
+} from "../index.js"
 import {
   KlevuAllRecordQueries,
   KlevuPayload,
@@ -12,7 +12,7 @@ import {
   KlevuFetchResponse,
   KlevuSuggestionQuery,
   KlevuBaseQuery,
-} from "../models"
+} from "../models/index.js"
 
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.

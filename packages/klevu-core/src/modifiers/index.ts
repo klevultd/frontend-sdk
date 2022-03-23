@@ -1,7 +1,7 @@
 import { LiteralUnion } from "type-fest"
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
-import { KlevuFetchResponse } from "../models/KlevuFetchResponse"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
+import { KlevuFetchResponse } from "../models/KlevuFetchResponse.js"
 
 /**
  * @ignore
@@ -29,15 +29,15 @@ export type KlevuFetchModifer = {
   ) => void
 }
 
-export * from "./applyFilter/applyFilter"
-export * from "./applyFilterWithManager/applyFilterWithManager"
-export * from "./fallback/fallback"
-export * from "./listFilters/listFilters"
-export * from "./boostWithKeywords/boostWithKeywords"
-export * from "./boostWithRecords/boostWithRecords"
-export * from "./boostWithFilters/boostWithFilters"
-export * from "./boostWithFilterManager/boostWithFilterManager"
-export * from "./include/include"
-export * from "./top/top"
-export * from "./sendSearchEvent/sendSearchEvent"
-export * from "./debug/debug"
+export * from "./applyFilter/applyFilter.js"
+export * from "./applyFilterWithManager/applyFilterWithManager.js"
+export * from "./fallback/fallback.js"
+export * from "./listFilters/listFilters.js"
+export * from "./boostWithKeywords/boostWithKeywords.js"
+export * from "./boostWithRecords/boostWithRecords.js"
+export * from "./boostWithFilters/boostWithFilters.js"
+export * from "./boostWithFilterManager/boostWithFilterManager.js"
+export * from "./include/include.js"
+export * from "./top/top.js"
+export * from "./sendSearchEvent/sendSearchEvent.js"
+export * from "./debug/debug.js"

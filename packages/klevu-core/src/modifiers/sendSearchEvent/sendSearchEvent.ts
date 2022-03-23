@@ -1,5 +1,5 @@
-import { KlevuFetchModifer } from ".."
-import { KlevuEvents } from "../../events"
+import { KlevuFetchModifer } from "../index.js"
+import { KlevuEvents } from "../../events/index.js"
 
 /**
  * This modifier should be used in the case when user hits enter (or presses button) to see

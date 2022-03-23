@@ -1,6 +1,10 @@
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuFetchModifer, KlevuTypeOfRecord, KlevuTypeOfRequest } from "../.."
-import { lastClickedProducts } from "../../store/lastClickedProducts"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import {
+  KlevuFetchModifer,
+  KlevuTypeOfRecord,
+  KlevuTypeOfRequest,
+} from "../../index.js"
+import { lastClickedProducts } from "../../store/lastClickedProducts.js"
 
 type Options = {
   limit: number

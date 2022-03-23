@@ -1,5 +1,5 @@
-import { FilterManager } from "../../store/filterManager"
-import { applyFilters } from "../applyFilter/applyFilter"
+import { FilterManager } from "../../store/filterManager.js"
+import { applyFilters } from "../applyFilter/applyFilter.js"
 
 /**
  * Apply filters to query based on Filter Manager

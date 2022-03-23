@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuTypeOfSearch } from ".."
+import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import Axios from "axios"
 
 type V1SearchEvent = {

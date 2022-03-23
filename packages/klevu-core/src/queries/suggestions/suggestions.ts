@@ -1,7 +1,7 @@
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuSuggestionQuery } from "../../models/KlevuSuggestionQuery"
-import { KlevuTypeOfRequest } from "../../models"
-import { cleanSearchQuery } from "../../utils"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuSuggestionQuery } from "../../models/KlevuSuggestionQuery.js"
+import { KlevuTypeOfRequest } from "../../models/index.js"
+import { cleanSearchQuery } from "../../utils/index.js"
 
 type Options = { id: string } & Pick<
   KlevuSuggestionQuery,

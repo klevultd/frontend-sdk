@@ -1,5 +1,5 @@
 import { KlevuAnyTypeOfRecord, KlevuTypeOfRequest } from "."
-import { KlevuBaseQuery } from "./KlevuBaseQuery"
+import { KlevuBaseQuery } from "./KlevuBaseQuery.js"
 
 /**
  * Klevu API query specific for Also Viewed recommendation

@@ -1,4 +1,4 @@
-import { KlevuKMCSettings, KlevuConfig } from "../index"
+import { KlevuKMCSettings, KlevuConfig } from "../index.js"
 
 beforeEach(() => {
   KlevuConfig.init({

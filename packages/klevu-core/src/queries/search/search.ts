@@ -1,13 +1,13 @@
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
-import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
+import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings.js"
 import {
   KlevuAnyTypeOfRecord,
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
-} from "../../models"
-import { KlevuFetchModifer } from "../../modifiers"
-import { cleanSearchQuery } from "../../utils"
+} from "../../models/index.js"
+import { KlevuFetchModifer } from "../../modifiers/index.js"
+import { cleanSearchQuery } from "../../utils/index.js"
 
 /**
  * Search options to modify the search query.

@@ -4,7 +4,7 @@ import {
   KlevuFetch,
   listFilters,
   search,
-} from "../.."
+} from "../../index.js"
 
 beforeEach(() => {
   KlevuConfig.init({

@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../.."
-import { kmcRecommendation } from "./kmcRecommendation"
+import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../../index.js"
+import { kmcRecommendation } from "./kmcRecommendation.js"
 
 beforeEach(() => {
   KlevuConfig.init({

@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, search } from "../.."
-import { sendSearchEvent } from "./sendSearchEvent"
+import { KlevuConfig, KlevuFetch, search } from "../../index.js"
+import { sendSearchEvent } from "./sendSearchEvent.js"
 
 beforeEach(() => {
   KlevuConfig.init({

@@ -1,8 +1,11 @@
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuFetchModifer } from "../.."
-import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
-import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery"
-import { KlevuBaseQuerySettings, KlevuTypeOfRequest } from "../../models"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchModifer } from "../../index.js"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
+import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery.js"
+import {
+  KlevuBaseQuerySettings,
+  KlevuTypeOfRequest,
+} from "../../models/index.js"
 
 type Options = { id: string; searchTerm: string } & Omit<
   KlevuBaseQuerySettings,

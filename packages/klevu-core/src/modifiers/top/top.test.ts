@@ -1,7 +1,7 @@
-import { KlevuConfig, KlevuFetch, search, debug } from "../.."
-import { KlevuSearchSorting } from "../../models"
-import { include } from "../include/include"
-import { top } from "./top"
+import { KlevuConfig, KlevuFetch, search, debug } from "../../index.js"
+import { KlevuSearchSorting } from "../../models/index.js"
+import { include } from "../include/include.js"
+import { top } from "./top.js"
 
 beforeEach(() => {
   KlevuConfig.init({

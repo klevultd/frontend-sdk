@@ -1,2 +1,2 @@
-export * from "./cleanSearchQuery"
-export * from "./isBrowser"
+export * from "./cleanSearchQuery.js"
+export * from "./isBrowser.js"
