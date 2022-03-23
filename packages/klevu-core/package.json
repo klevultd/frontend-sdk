@@ -1,6 +1,6 @@
 {
   "name": "@klevu/core",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Typescript SDK that simplifies development on Klevu backend.",
   "keywords": [
     "klevu",
