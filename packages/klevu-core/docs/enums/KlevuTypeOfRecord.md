@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
+[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
+[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:4](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L4)
+[models/KlevuTypeOfRecord.ts:4](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L4)

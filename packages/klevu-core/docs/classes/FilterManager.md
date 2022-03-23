@@ -20,6 +20,7 @@
 - [sort](FilterManager.md#sort)
 - [toApplyFilters](FilterManager.md#toapplyfilters)
 - [toggleOption](FilterManager.md#toggleoption)
+- [updateSlide](FilterManager.md#updateslide)
 
 ## Constructors
 
@@ -35,7 +36,7 @@
 
 #### Defined in
 
-[store/filterManager.ts:11](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L11)
+[store/filterManager.ts:11](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L11)
 
 ___
 
@@ -45,7 +46,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L12)
+[store/filterManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L12)
 
 ## Methods
 
@@ -65,7 +66,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:109](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L109)
+[store/filterManager.ts:140](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L140)
 
 ___
 
@@ -85,7 +86,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:14](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L14)
+[store/filterManager.ts:14](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L14)
 
 ___
 
@@ -99,7 +100,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:29](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L29)
+[store/filterManager.ts:29](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L29)
 
 ___
 
@@ -113,7 +114,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:76](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L76)
+[store/filterManager.ts:107](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L107)
 
 ___
 
@@ -138,4 +139,30 @@ Sends a Dom event on change
 
 #### Defined in
 
-[store/filterManager.ts:43](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/store/filterManager.ts#L43)
+[store/filterManager.ts:43](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L43)
+
+___
+
+### updateSlide
+
+▸ **updateSlide**(`key`, `min`, `max`): `void`
+
+Function to update slide in filter manager
+
+Sends a Dom event on change
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `string` | Key of slide |
+| `min` | `number` | Min value of slide |
+| `max` | `number` | Max value of slide |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[store/filterManager.ts:85](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/store/filterManager.ts#L85)

@@ -19,7 +19,7 @@ Filter types Klevu support
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
+[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)
+[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)
