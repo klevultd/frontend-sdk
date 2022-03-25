@@ -185,13 +185,15 @@ Klevu requires data for machine learning to work better. `KlevuEvents` class sho
 KlevuEvents.productClick()
 ```
 
-| Method                  | Description                                                    |
-| ----------------------- | -------------------------------------------------------------- |
-| `buy()`                 | When products are bought                                       |
-| `productClick()`        | When product is clicked on search results                      |
-| `search()`              | When search is made. This is automatically sent in the queries |
-| `recommendationClick()` | When product is clicked on list of recommended products        |
-| `recommendationView()`  | When recommendations are shown                                 |
+| Method                                | Description                                                    |
+| ------------------------------------- | -------------------------------------------------------------- |
+| `buy()`                               | When products are bought                                       |
+| `searchProductClick()`                | When product is clicked on search results                      |
+| `search()`                            | When search is made. This is automatically sent in the queries |
+| `categoryMerchandisingView()`         | When category is displayed. Should be called on paging too     |
+| `categoryMerchandisingProductClick()` | When product is clicked in category page                       |
+| `recommendationClick()`               | When product is clicked on list of recommended products        |
+| `recommendationView()`                | When recommendations are shown                                 |
 
 ## Klevu Merchant Center settings
 
