@@ -80,6 +80,8 @@ console.log(result.getQueriesById("search")?.records)
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
 
+Detailed information in [API reference.](./docs/modules.md#Queries-Functions)
+
 | Klevu Function            | Description                                                                      | Type           |
 | ------------------------- | -------------------------------------------------------------------------------- | -------------- |
 | `search()`                | Most basic query to find items based on a term                                   | Search         |
@@ -88,6 +90,7 @@ Queries implement the `KlevuFetchFunction` interface. Multiple queries can be pa
 | `categoryMerchandising()` | Products to display on category page                                             | Search         |
 | `searchCategory()`        | Search categories based on term                                                  | Search         |
 | `searchCms()`             | Search CMS pages based on term                                                   | Search         |
+| `raw`                     | Write raw request to Klevu api. For expert use                                   | Search         |
 | `kmcRecommendation()`     | Fetches predefined recommendation by id from KMC and creates query automatically | Recommendation |
 | `newArrivals()`           | Recommendation list of new arrivals for the current user                         | Recommendation |
 | `trending()`              | Trending recommendation based for current user                                   | Recommendation |
