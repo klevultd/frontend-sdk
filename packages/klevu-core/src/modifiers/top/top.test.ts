@@ -21,12 +21,10 @@ test("Product as top result", async () => {
         sort: KlevuSearchSorting.Relevance,
       },
       top([topProductId]),
-      include([topProductId]),
-      debug()
+      include([topProductId])
     )
   )
 
-  console.log(JSON.stringify(result.apiResponse, undefined, 2))
   expect(result.queriesById("test")).toBeDefined()
   expect(result.queriesById("test")?.records.length).toBeGreaterThan(0)
   expect(

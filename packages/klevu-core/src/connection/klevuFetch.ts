@@ -12,7 +12,9 @@ import {
   KlevuFetchResponse,
   KlevuSuggestionQuery,
   KlevuBaseQuery,
+  KlevuQueryResult,
 } from "../models/index.js"
+import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.
@@ -57,7 +59,7 @@ export async function KlevuFetch(
     }
   )
 
-  const responseObject: KlevuFetchResponse = {
+  let responseObject: KlevuFetchResponse = {
     apiResponse: response.data,
     suggestionsById: (id: string) =>
       response.data.suggestionResults?.find((q) => q.id === id),
@@ -71,7 +73,7 @@ export async function KlevuFetch(
     if (f.modifiers) {
       for (const modifier of f.modifiers) {
         if (modifier.onResult) {
-          modifier.onResult(responseObject, f)
+          responseObject = modifier.onResult(responseObject, f)
         }
       }
     }
@@ -151,7 +153,7 @@ function fetchNextPage(
       }
     }
 
-    return await KlevuFetch(...removeListFilters(functions))
+    return await KlevuFetch(...removeListFilters(functions, prevQueryResponse))
   }
 
   return nextFunc
@@ -193,17 +195,25 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
 }
 
 function removeListFilters(
-  functions: KlevuFetchFunctionReturnValue[]
+  functions: KlevuFetchFunctionReturnValue[],
+  prevQueryResult: KlevuQueryResult
 ): KlevuFetchFunctionReturnValue[] {
-  return functions
-    .filter((f) => f.klevuFunctionId !== "listfilters")
-    .map((f) => {
-      f.queries = f.queries?.map((q) => {
-        if (q.filters?.filtersToReturn) {
-          delete q.filters?.filtersToReturn
-        }
-        return q
-      })
-      return f
+  return functions.map((f) => {
+    f.queries = f.queries?.map((q) => {
+      if (q.filters?.filtersToReturn) {
+        delete q.filters?.filtersToReturn
+      }
+      return q
     })
+    if (f.modifiers) {
+      const index = f.modifiers.findIndex(
+        (m) => m.klevuModifierId == "listfilters"
+      )
+      if (index > -1) {
+        f.modifiers.splice(index, 1)
+      }
+      f.modifiers.push(injectFilterResult(prevQueryResult))
+    }
+    return f
+  })
 }

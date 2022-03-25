@@ -24,9 +24,9 @@ export type KlevuFetchModifer = {
     queries: Readonly<KlevuAllRecordQueries[]>
   ) => KlevuAllRecordQueries[]
   onResult?: (
-    response: KlevuFetchResponse,
+    response: Readonly<KlevuFetchResponse>,
     query: KlevuFetchFunctionReturnValue
-  ) => void
+  ) => KlevuFetchResponse
 }
 
 export * from "./applyFilter/applyFilter.js"
