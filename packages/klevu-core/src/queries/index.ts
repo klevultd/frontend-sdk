@@ -22,7 +22,7 @@ export type KlevuFetchId =
  * What functions passed to KlevuFetch should implement
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type KlevuFetchFunctionReturnValue<T = any> = {
+export type KlevuFetchFunctionReturnValue = {
   /**
    * Id of function. Used only internally
    */
@@ -30,7 +30,7 @@ export type KlevuFetchFunctionReturnValue<T = any> = {
   /**
    * Anything you wish to pass down as params incoming to function
    */
-  params?: T
+  params?: any
   /**
    * What queries should KlevuFetch do to backend
    */

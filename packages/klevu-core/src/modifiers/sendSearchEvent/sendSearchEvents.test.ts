@@ -8,6 +8,7 @@ beforeEach(() => {
   })
 })
 
+// @todo check that event is properly sent. This just test that function can be used
 test("Sending search event", async () => {
   const result = await KlevuFetch(
     search(
