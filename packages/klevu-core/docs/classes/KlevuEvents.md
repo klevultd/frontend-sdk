@@ -11,10 +11,12 @@
 ### Methods
 
 - [buy](KlevuEvents.md#buy)
-- [productClick](KlevuEvents.md#productclick)
+- [categoryMerchandisingProductClick](KlevuEvents.md#categorymerchandisingproductclick)
+- [categoryMerchandisingView](KlevuEvents.md#categorymerchandisingview)
 - [recommendationClick](KlevuEvents.md#recommendationclick)
 - [recommendationView](KlevuEvents.md#recommendationview)
 - [search](KlevuEvents.md#search)
+- [searchProductClick](KlevuEvents.md#searchproductclick)
 
 ## Constructors
 
@@ -42,23 +44,23 @@ Tell Klevu what products where bought by the user
 
 #### Defined in
 
-[events/KlevuEvents.ts:18](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/events/KlevuEvents.ts#L18)
+[events/KlevuEvents.ts:20](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L20)
 
 ___
 
-### productClick
+### categoryMerchandisingProductClick
 
-▸ `Static` **productClick**(`product`, `searchTerm?`, `variantId?`): `void`
-
-When product is clicked. Do not use this for recommendations
+▸ `Static` **categoryMerchandisingProductClick**(`product`, `categoryTitle`, `klevuCategory`, `variantId?`, `productPosition?`): `void`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `product` | [`KlevuRecord`](../modules.md#klevurecord) |
-| `searchTerm?` | `string` |
-| `variantId?` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `product` | [`KlevuRecord`](../modules.md#klevurecord) | Product clicked |
+| `categoryTitle` | `string` | This is the name of the category being visited. For example, Stackable Rings. The name should not include parent categories. |
+| `klevuCategory` | `string` | This is the complete hierarchy of the category being visited. For example, Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the separator between a parent and a child category. |
+| `variantId?` | `string` | This is the child/variant ID of the clicked product. eg. 12345. For compound products with a parent and multiple child/variant products, this is the ID of the specific variant. |
+| `productPosition?` | `number` | Position of the product on the category page when it was clicked. For example, the value would be 0 if it is the first product on the first page. The value will be 30, if it is the first product on the 2nd page with 30 products being displayed per page. |
 
 #### Returns
 
@@ -66,13 +68,36 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/KlevuEvents.ts:110](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/events/KlevuEvents.ts#L110)
+[events/KlevuEvents.ts:188](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L188)
+
+___
+
+### categoryMerchandisingView
+
+▸ `Static` **categoryMerchandisingView**(`categoryTitle`, `klevuCategory`, `products`, `pageStartsFrom?`): `void`
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `categoryTitle` | `string` | This is the name of the category being visited. For example, Stackable Rings. The name should not include parent categories. |
+| `klevuCategory` | `string` | This is the complete hierarchy of the category being visited. For example, Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the separator between a parent and a child category. |
+| `products` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\>[] | Products in the view |
+| `pageStartsFrom?` | `number` | Offset of the first product being shown on this page. For example, if you are displaying 30 products per page and if a customer is on the 2nd page, the value here should be 30. If on the 3rd page, it will be 60. |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[events/KlevuEvents.ts:165](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L165)
 
 ___
 
 ### recommendationClick
 
-▸ `Static` **recommendationClick**(`recommendation`, `product`, `productIndexInList`): `void`
+▸ `Static` **recommendationClick**(`recommendationMetadata`, `product`, `productIndexInList`): `void`
 
 When product has been clicked in the recommendation banner
 
@@ -80,7 +105,7 @@ When product has been clicked in the recommendation banner
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `recommendation` | `KlevuRecommendationBanner` | What recommendation is clicked |
+| `recommendationMetadata` | `Pick`<{ `enabled`: `boolean` ; `logic`: `string` ; `maxProducts`: `number` ; `pageType`: `string` ; `productThreshold`: `number` ; `recsKey`: `string` ; `title`: `string`  }, ``"recsKey"`` \| ``"logic"`` \| ``"title"``\> | Metadata of what recommendation is clicked |
 | `product` | [`KlevuRecord`](../modules.md#klevurecord) | Which product is clicked in the list |
 | `productIndexInList` | `number` | What is the index of the product in the list. Starting from 1 |
 
@@ -90,13 +115,13 @@ When product has been clicked in the recommendation banner
 
 #### Defined in
 
-[events/KlevuEvents.ts:77](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/events/KlevuEvents.ts#L77)
+[events/KlevuEvents.ts:82](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L82)
 
 ___
 
 ### recommendationView
 
-▸ `Static` **recommendationView**(`recommendation`, `products`): `void`
+▸ `Static` **recommendationView**(`recommendationMetadata`, `products`): `void`
 
 When recommendation banner is shown in the page
 
@@ -104,7 +129,7 @@ When recommendation banner is shown in the page
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `recommendation` | `KlevuRecommendationBanner` | What recommendation is shown |
+| `recommendationMetadata` | `Pick`<{ `enabled`: `boolean` ; `logic`: `string` ; `maxProducts`: `number` ; `pageType`: `string` ; `productThreshold`: `number` ; `recsKey`: `string` ; `title`: `string`  }, ``"recsKey"`` \| ``"logic"`` \| ``"title"``\> | - |
 | `products` | [`KlevuRecord`](../modules.md#klevurecord)[] | List of all products that are shown |
 
 #### Returns
@@ -113,7 +138,7 @@ When recommendation banner is shown in the page
 
 #### Defined in
 
-[events/KlevuEvents.ts:46](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/events/KlevuEvents.ts#L46)
+[events/KlevuEvents.ts:48](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L48)
 
 ___
 
@@ -138,4 +163,28 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Defined in
 
-[events/KlevuEvents.ts:136](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/events/KlevuEvents.ts#L136)
+[events/KlevuEvents.ts:144](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L144)
+
+___
+
+### searchProductClick
+
+▸ `Static` **searchProductClick**(`product`, `searchTerm?`, `variantId?`): `void`
+
+When product is clicked. Do not use this for recommendations
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `product` | [`KlevuRecord`](../modules.md#klevurecord) |
+| `searchTerm?` | `string` |
+| `variantId?` | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[events/KlevuEvents.ts:118](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/events/KlevuEvents.ts#L118)

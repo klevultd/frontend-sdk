@@ -28,7 +28,7 @@ contain the exact terms "hooded" AND "jacket".
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:64](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L64)
+[models/KlevuTypeOfSearch.ts:64](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L64)
 
 ___
 
@@ -53,7 +53,7 @@ words, the 'OR' query types will be skipped.
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:18](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L18)
+[models/KlevuTypeOfSearch.ts:18](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L18)
 
 ___
 
@@ -70,7 +70,7 @@ jakcet", Klevu will still be able to match any records containing the words
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:37](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L37)
+[models/KlevuTypeOfSearch.ts:37](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L37)
 
 ___
 
@@ -87,7 +87,7 @@ jakcet", Klevu will still be able to match any records containing the words
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:56](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L56)
+[models/KlevuTypeOfSearch.ts:56](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L56)
 
 ___
 
@@ -103,7 +103,7 @@ contain one of the exact terms "hooded" OR "jacket".
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:72](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L72)
+[models/KlevuTypeOfSearch.ts:72](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L72)
 
 ___
 
@@ -121,7 +121,7 @@ For example, if the searched query is "hooded jacket", this will become
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:28](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L28)
+[models/KlevuTypeOfSearch.ts:28](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L28)
 
 ___
 
@@ -139,4 +139,4 @@ For example, if the searched query is "hooded jacket", this will become
 
 #### Defined in
 
-[models/KlevuTypeOfSearch.ts:47](https://github.com/klevultd/frontend-sdk/blob/8bfa7d3/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L47)
+[models/KlevuTypeOfSearch.ts:47](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfSearch.ts#L47)
