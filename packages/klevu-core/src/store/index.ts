@@ -1,2 +1,2 @@
-export * from "./lastSearches"
-export * from "./filterManager"
+export * from "./lastSearches.js"
+export * from "./filterManager.js"

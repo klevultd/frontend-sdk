@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../.."
-import { searchCategory } from "./searchCategory"
+import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../../index.js"
+import { searchCategory } from "./searchCategory.js"
 
 beforeEach(() => {
   KlevuConfig.init({

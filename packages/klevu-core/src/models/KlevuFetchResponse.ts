@@ -1,6 +1,6 @@
-import { FilterManager } from "../store/filterManager"
-import { KlevuSuggestionResult } from "./KlevuSuggestionResult"
-import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse"
+import { FilterManager } from "../store/filterManager.js"
+import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
+import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse.js"
 
 /**
  * Tools for operating results in easier way.

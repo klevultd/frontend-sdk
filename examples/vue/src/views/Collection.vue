@@ -28,7 +28,7 @@ const initialFetch = async () => {
   searchStore.setProducts([])
   await nextTick()
 
-  const functions = [
+  const res = await KlevuFetch(
     categoryMerchandising(
       route.params.id,
       {
@@ -47,9 +47,8 @@ const initialFetch = async () => {
         filterManager: manager,
       }),
       applyFilterWithManager(manager)
-    ),
-  ]
-  const res = await KlevuFetch(...functions)
+    )
+  )
   prevRes = res
 
   const searchResult = res.queriesById('search')
@@ -76,21 +75,15 @@ const fetchMore = async () => {
   searchStore.showMore = Boolean(nextRes.next)
 }
 
-const handleFilterUpdate = () => {
-  searchStore.setOptions(manager.options)
-  searchStore.setSliders(manager.sliders)
-  initialFetch()
-}
-
 document.addEventListener(
   KlevuDomEvents.FilterSelectionUpdate,
-  handleFilterUpdate
+  initialFetch
 )
 
 onBeforeRouteUpdate((to, from) => {
   document.removeEventListener(
     KlevuDomEvents.FilterSelectionUpdate,
-    handleFilterUpdate
+    initialFetch
   )
 })
 

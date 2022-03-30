@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "ES2019",
     "lib": ["ES2019", "DOM"],
-    "module": "ESNext",
+    "module": "ES2015",
     "moduleResolution": "node",
     "declaration": true,
     "outDir": "./dist/",

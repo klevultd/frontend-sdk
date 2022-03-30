@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, search } from "../.."
-import { sendSearchEvent } from "./sendSearchEvent"
+import { KlevuConfig, KlevuFetch, search } from "../../index.js"
+import { sendSearchEvent } from "./sendSearchEvent.js"
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -8,6 +8,7 @@ beforeEach(() => {
   })
 })
 
+// @todo check that event is properly sent. This just test that function can be used
 test("Sending search event", async () => {
   const result = await KlevuFetch(
     search(

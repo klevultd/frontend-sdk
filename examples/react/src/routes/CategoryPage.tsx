@@ -6,6 +6,7 @@ import {
   KlevuDomEvents,
   FilterManager,
   categoryMerchandising,
+  sendMerchandisingViewEvent,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -79,7 +80,8 @@ export function CategoryPage() {
           ],
           filterManager: manager,
         }),
-        applyFilterWithManager(manager)
+        applyFilterWithManager(manager),
+        sendMerchandisingViewEvent(params.id, params.id)
       ),
     ]
     const res = await KlevuFetch(...functions)

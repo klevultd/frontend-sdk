@@ -1,8 +1,8 @@
-import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries"
-import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery"
+import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
+import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery.js"
 import type { LiteralUnion } from "type-fest"
-import { KlevuFetchModifer } from "../modifiers"
-import { KlevuConfig } from ".."
+import { KlevuFetchModifer } from "../modifiers/index.js"
+import { KlevuConfig } from "../index.js"
 
 /**
  * Internal. List of known KlevuFetchIds
@@ -22,7 +22,7 @@ export type KlevuFetchId =
  * What functions passed to KlevuFetch should implement
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type KlevuFetchFunctionReturnValue<T = any> = {
+export type KlevuFetchFunctionReturnValue = {
   /**
    * Id of function. Used only internally
    */
@@ -30,7 +30,7 @@ export type KlevuFetchFunctionReturnValue<T = any> = {
   /**
    * Anything you wish to pass down as params incoming to function
    */
-  params?: T
+  params?: any
   /**
    * What queries should KlevuFetch do to backend
    */
@@ -49,14 +49,15 @@ export type KlevuFetchFunctionReturnValue<T = any> = {
   configOverride?: KlevuConfig
 }
 
-export * from "./categoryMerchandising/categoryMerchandising"
-export * from "./newarrivals/newarrivals"
-export * from "./search/search"
-export * from "./suggestions/suggestions"
-export * from "./trending/trending"
-export * from "./trendingProducts/trendingProducts"
-export * from "./products/products"
-export * from "./similarProducts/similarProducts"
-export * from "./searchCategory/searchCategory"
-export * from "./searchCms/searchCms"
-export * from "./kmcRecommendation/kmcRecommendation"
+export * from "./categoryMerchandising/categoryMerchandising.js"
+export * from "./newarrivals/newarrivals.js"
+export * from "./search/search.js"
+export * from "./suggestions/suggestions.js"
+export * from "./trending/trending.js"
+export * from "./trendingProducts/trendingProducts.js"
+export * from "./products/products.js"
+export * from "./similarProducts/similarProducts.js"
+export * from "./searchCategory/searchCategory.js"
+export * from "./searchCms/searchCms.js"
+export * from "./kmcRecommendation/kmcRecommendation.js"
+export * from "./raw/raw.js"

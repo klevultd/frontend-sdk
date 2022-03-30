@@ -1,7 +1,7 @@
 import { KlevuAnyTypeOfRecord, KlevuRecordFields, KlevuTypeOfSearch } from "."
-import { KlevuSearchSorting } from "./KlevuSearchSorting"
-import { KlevuSearchPreference } from "./KlevuSearchPreference"
-import { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery"
+import { KlevuSearchSorting } from "./KlevuSearchSorting.js"
+import { KlevuSearchPreference } from "./KlevuSearchPreference.js"
+import { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery.js"
 
 export type KlevuBaseQuerySettings = {
   query?: KlevuBaseQuerySettingsQuery
@@ -176,4 +176,34 @@ export type KlevuBaseQuerySettings = {
       records: Array<{ id: string }>
     }>
   }
+
+  /**
+   * If you have multiple currency support enabled for your store, this
+   * parameter can be used to retrieve prices for a specific currency. For
+   * example, if the data you have indexed with Klevu includes prices for a base
+   * currency GBP and an additional currency USD, a value of 'GBP' or 'USD' here
+   * will display the relevant currency values for your records.
+   */
+  priceFieldSuffix?: string
+
+  /**
+   * A common B2B requirement is different product visibility and prices based
+   * on a customer group. With Klevu APIv2 you can specify parameters to filter
+   * out products which a particular customer should not see, and also show
+   * them specific prices if they differ from the base price.
+   *
+   * When specifying a value for priceFieldSuffix, the following fields in your
+   * response data will be replaced with the value indexed with Klevu for the
+   * corresponding currency and group:
+   *
+   * price, salePrice, currency
+   *
+   * When specifying a value for visibilityGroupID, any records that do not
+   * belong to that group will be excluded from the results.
+   *
+   * In the example to the right, the same product is indexed with data for
+   * currencies 'GBP' and 'USD'. It's visibility is set to groups 'my_group_1'
+   * and 'my_group_3', but not 'my_group_2'.
+   */
+  visibilityGroupID?: string
 }

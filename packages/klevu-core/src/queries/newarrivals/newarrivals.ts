@@ -1,7 +1,7 @@
-import { KlevuTypeOfRequest } from "../../models"
-import { KlevuBaseQuery } from "../../models/KlevuBaseQuery"
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuFetchModifer } from "../../modifiers"
+import { KlevuTypeOfRequest } from "../../models/index.js"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchModifer } from "../../modifiers/index.js"
 
 type Options = { id: string }
 

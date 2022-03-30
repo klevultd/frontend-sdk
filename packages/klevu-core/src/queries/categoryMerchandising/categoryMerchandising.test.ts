@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch } from "../.."
-import { categoryMerchandising } from "./categoryMerchandising"
+import { KlevuConfig, KlevuFetch } from "../../index.js"
+import { categoryMerchandising } from "./categoryMerchandising.js"
 
 beforeEach(() => {
   KlevuConfig.init({

@@ -1,6 +1,6 @@
-import { KlevuFetchModifer } from ".."
-import { KlevuApplyFilter } from "../../models/KlevuApplyFilter"
-import { KlevuListFilter } from "../../models/KlevuListFilter"
+import { KlevuFetchModifer } from "../index.js"
+import { KlevuApplyFilter } from "../../models/KlevuApplyFilter.js"
+import { KlevuListFilter } from "../../models/KlevuListFilter.js"
 
 export type ApplyFilter = {
   key: string

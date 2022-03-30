@@ -1,10 +1,10 @@
-import { KlevuFetchFunctionReturnValue } from ".."
+import { KlevuFetchFunctionReturnValue } from "../index.js"
 import {
   KlevuFetchModifer,
   KlevuRecord,
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
-} from "../.."
+} from "../../index.js"
 
 type Options = {
   limit: number

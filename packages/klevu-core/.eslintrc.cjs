@@ -18,6 +18,7 @@ module.exports = {
   rules: {
     "linebreak-style": ["error", "unix"],
     "import/no-unresolved": 0,
+    "import/extensions": ["error", "always"],
   },
   settings: {
     "import/resolver": {

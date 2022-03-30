@@ -72,9 +72,15 @@ const result = await KlevuFetch(
 console.log(result.getQueriesById("search")?.records)
 ```
 
+### Platform specific guides
+
+- [React with Material UI](../../examples/react/README.md)
+
 ## Queries
 
 Queries implement the `KlevuFetchFunction` interface. Multiple queries can be passed onto KlevuFetch. For example its possible to get suggestions and multiple search results for typed letters in one request.
+
+Detailed information in [API reference.](./docs/modules.md#Queries-Functions)
 
 | Klevu Function            | Description                                                                      | Type           |
 | ------------------------- | -------------------------------------------------------------------------------- | -------------- |
@@ -84,6 +90,7 @@ Queries implement the `KlevuFetchFunction` interface. Multiple queries can be pa
 | `categoryMerchandising()` | Products to display on category page                                             | Search         |
 | `searchCategory()`        | Search categories based on term                                                  | Search         |
 | `searchCms()`             | Search CMS pages based on term                                                   | Search         |
+| `raw`                     | Write raw request to Klevu api. For expert use                                   | Search         |
 | `kmcRecommendation()`     | Fetches predefined recommendation by id from KMC and creates query automatically | Recommendation |
 | `newArrivals()`           | Recommendation list of new arrivals for the current user                         | Recommendation |
 | `trending()`              | Trending recommendation based for current user                                   | Recommendation |
@@ -178,13 +185,15 @@ Klevu requires data for machine learning to work better. `KlevuEvents` class sho
 KlevuEvents.productClick()
 ```
 
-| Method                  | Description                                                    |
-| ----------------------- | -------------------------------------------------------------- |
-| `buy()`                 | When products are bought                                       |
-| `productClick()`        | When product is clicked on search results                      |
-| `search()`              | When search is made. This is automatically sent in the queries |
-| `recommendationClick()` | When product is clicked on list of recommended products        |
-| `recommendationView()`  | When recommendations are shown                                 |
+| Method                                | Description                                                    |
+| ------------------------------------- | -------------------------------------------------------------- |
+| `buy()`                               | When products are bought                                       |
+| `searchProductClick()`                | When product is clicked on search results                      |
+| `search()`                            | When search is made. This is automatically sent in the queries |
+| `categoryMerchandisingView()`         | When category is displayed. Should be called on paging too     |
+| `categoryMerchandisingProductClick()` | When product is clicked in category page                       |
+| `recommendationClick()`               | When product is clicked on list of recommended products        |
+| `recommendationView()`                | When recommendations are shown                                 |
 
 ## Klevu Merchant Center settings
 
@@ -193,3 +202,11 @@ Users of Klevu can change settings in the Klevu Merchant Center. These settings 
 ```ts
 const result = await KlevuKMCSettings()
 ```
+
+## Last searches
+
+To get list of last searches you can use the `KlevuLastSearches` class.
+
+To get the list of last searches call `KlevuLastSearches.get()` and if you wish to store a search use `KlevuLastSearches.save('user search string')`
+
+##

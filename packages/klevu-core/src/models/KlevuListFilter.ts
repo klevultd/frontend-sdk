@@ -1,5 +1,5 @@
-import { KlevuFilterOrder } from "./KlevuFilterOrder"
-import { KlevuRangeFilterSettings } from "./KlevuRangeFilterSettings"
+import { KlevuFilterOrder } from "./KlevuFilterOrder.js"
+import { KlevuRangeFilterSettings } from "./KlevuRangeFilterSettings.js"
 
 export type KlevuListFilter = {
   filtersToReturn?: {

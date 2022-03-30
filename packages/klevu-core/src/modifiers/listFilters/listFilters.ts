@@ -1,9 +1,9 @@
 import { SetRequired } from "type-fest"
-import { KlevuFetchModifer } from ".."
-import { KlevuApplyFilter } from "../../models/KlevuApplyFilter"
-import { KlevuListFilter } from "../../models/KlevuListFilter"
-import { KlevuFilterOrder } from "../../models/KlevuFilterOrder"
-import { FilterManager } from "../../store/filterManager"
+import { KlevuFetchModifer } from "../index.js"
+import { KlevuApplyFilter } from "../../models/KlevuApplyFilter.js"
+import { KlevuListFilter } from "../../models/KlevuListFilter.js"
+import { KlevuFilterOrder } from "../../models/KlevuFilterOrder.js"
+import { FilterManager } from "../../store/filterManager.js"
 
 type FilterType = SetRequired<
   KlevuListFilter,
@@ -65,7 +65,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
     },
     onResult: (result) => {
       if (!options?.filterManager) {
-        return
+        return result
       }
 
       for (const qr of result.apiResponse?.queryResults ?? []) {
@@ -73,6 +73,8 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
           options.filterManager.initFromListFilters(qr.filters)
         }
       }
+
+      return result
     },
   }
 }

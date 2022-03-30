@@ -1,4 +1,4 @@
-import { KlevuConfig, KlevuTypeOfSearch } from ".."
+import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import Axios from "axios"
 
 type V1SearchEvent = {
@@ -143,6 +143,113 @@ export async function KlevuEventV1CheckedOutProducts(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
+  return Axios.get(url)
+}
+
+export type KlevuV1CategoryProductsView = {
+  /**
+   * This is your Klevu JS API Key.
+   */
+  klevu_apiKey: string
+  /**
+   * This is the name of the category being visited. For example, Stackable
+   * Rings. The name should not include parent categories.
+   */
+  klevu_categoryName: string
+  /**  This is the complete hierarchy of the category being visited. For
+   * example, Jewellery;Rings;Stackable Rings. Please note the use of a
+   * semicolon as the separator between a parent and a child category. */
+  klevu_categoryPath: string
+  /**  Comma separated list of product IDs being shown on the current page of
+   *the category page. For example, P1,P2,P3,P4,P5…
+   *
+   *All the product IDs listed here are treated as impressions for these
+   *products.
+   */
+  klevu_productIds: string
+  /**
+   * Offset of the first product being shown on this page. For example, if you
+   * are displaying 30 products per page and if a customer is on the 2nd page,
+   * the value here should be 30. If on the 3rd page, it will be 60.
+   */
+  klevu_pageStartsFrom?: number
+  /**
+   * IP address of the shopper who bought the product(s).
+   */
+  klevu_shopperIP?: string
+}
+
+export async function KlevuEventV1CategoryView(
+  event: KlevuV1CategoryProductsView
+) {
+  const url = `${
+    KlevuConfig.default.eventsApiV1Url
+  }categoryProductViewTracking${objectToUrlParams(event)}`
+  return Axios.get(url)
+}
+
+export type KlevuV1CategoryProductsClick = {
+  /**This is your Klevu JS API Key. */
+  klevu_apiKey: string
+  /**
+   * This is the name of the category being visited. For example, Stackable
+   * Rings. The name should not include parent categories.
+   */
+  klevu_categoryName: string
+  /**
+   * This is the complete hierarchy of the category being visited. For example,
+   * Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the
+   * separator between a parent and a child category.
+   */
+  klevu_categoryPath: string
+  /**
+   * This is the Klevu ID of the clicked product. eg. 54321-12345.
+   */
+  klevu_productId: string
+  /**
+   * This is the parent ID of the clicked product. eg. 54321. For compound
+   * products with a parent and multiple child/variant products, this is the
+   * common ID which ties the products together. For simple products, please
+   * specify the same as klevu_productId.
+   */
+  klevu_productGroupId: string
+  /**
+   * This is the child/variant ID of the clicked product. eg. 12345. For
+   * compound products with a parent and multiple child/variant products, this
+   * is the ID of the specific variant. For simple products, please specify the
+   * same as klevu_productId. */
+  klevu_productVariantId: string
+  /** Name of the product that was clicked. */
+  klevu_productName?: string
+  /** URL of the product that was clicked. */
+  klevu_productUrl?: string
+  /** SKU code of the product that was clicked. */
+  klevu_productSku?: string
+  /** Decimal sale price of the product that was clicked. */
+  klevu_salePrice?: string
+  /** A decimal rating value between 0 and 5 of the product that was clicked. */
+  klevu_productRatings?: number
+  /**
+   * Position of the product on the category page when it was clicked. For
+   * example, the value would be 0 if it is the first product on the first page.
+   * The value will be 30, if it is the first product on the 2nd page with 30
+   * products being displayed per page.
+   */
+  klevu_productPosition?: number
+  /** IP address of the shopper who clicked the product(s). */
+  klevu_shopperIP?: string
+  /** The unique identifier of the A/B Test. */
+  abTestId?: string
+  /** The unique identifier of the A/B Test Variant. */
+  abTestVariantId?: string
+}
+
+export async function KlevuEventV1CategoryProductClick(
+  event: KlevuV1CategoryProductsClick
+) {
+  const url = `${
+    KlevuConfig.default.eventsApiV1Url
+  }categoryProductClickTracking${objectToUrlParams(event)}`
   return Axios.get(url)
 }
 

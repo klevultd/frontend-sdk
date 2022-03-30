@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:9](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L9)
+[models/KlevuTypeOfRequest.ts:9](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L9)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:8](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L8)
+[models/KlevuTypeOfRequest.ts:8](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L8)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:4](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L4)
+[models/KlevuTypeOfRequest.ts:4](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L4)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:5](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L5)
+[models/KlevuTypeOfRequest.ts:5](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L5)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:2](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L2)
+[models/KlevuTypeOfRequest.ts:2](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L2)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:6](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L6)
+[models/KlevuTypeOfRequest.ts:6](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L6)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:3](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L3)
+[models/KlevuTypeOfRequest.ts:3](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L3)
 
 ___
 
@@ -93,4 +93,4 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:7](https://github.com/klevultd/frontend-sdk/blob/9bfac58/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L7)
+[models/KlevuTypeOfRequest.ts:7](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L7)

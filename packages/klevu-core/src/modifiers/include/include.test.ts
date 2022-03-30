@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, search } from "../.."
-import { include } from "./include"
+import { KlevuConfig, KlevuFetch, search } from "../../index.js"
+import { include } from "./include.js"
 
 beforeEach(() => {
   KlevuConfig.init({

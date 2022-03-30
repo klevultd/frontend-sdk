@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from ".."
+import { KlevuFetchModifer } from "../index.js"
 
 /**
  * Add given ids as first items in results

@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from ".."
+import { KlevuFetchModifer } from "../index.js"
 
 /**
  * Boost products based on a filters

@@ -4,7 +4,7 @@ import {
   KlevuFetch,
   search,
   trendingProducts,
-} from "../.."
+} from "../../index.js"
 
 beforeEach(() => {
   KlevuConfig.init({

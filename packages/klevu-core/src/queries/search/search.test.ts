@@ -1,4 +1,5 @@
-import { KlevuConfig, KlevuFetch, search } from "../.."
+import { KlevuConfig, KlevuFetch, search } from "../../index.js"
+import { listFilters } from "../../modifiers/index.js"
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -20,13 +21,18 @@ test("Basic search", async () => {
 
 test("Pagination test", async () => {
   const result = await KlevuFetch(
-    search("*", {
-      limit: 2,
-    })
+    search(
+      "*",
+      {
+        limit: 2,
+      },
+      listFilters()
+    )
   )
 
   expect(result.queriesById("search")?.records.length).toBe(2)
   expect(result.next).toBeDefined()
+  expect(result.queriesById("search")?.filters?.length).toBeGreaterThan(0)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const nextResult = await result.next!()
@@ -34,12 +40,16 @@ test("Pagination test", async () => {
   const nextFirstId = nextResult.queriesById("search")?.records[0].id
   expect(nextFirstId).not.toBe(prevFirstId)
   expect(nextResult.next).toBeDefined()
+  expect(nextResult.queriesById("search")?.filters?.length).toBeGreaterThan(0)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const nextNextResult = await nextResult.next!()
   const nextNextFirstId = nextNextResult.queriesById("search")?.records[0].id
   expect(nextNextFirstId).not.toBe(prevFirstId)
   expect(nextNextFirstId).not.toBe(nextFirstId)
+  expect(nextNextResult.queriesById("search")?.filters?.length).toBeGreaterThan(
+    0
+  )
 })
 
 test("Limit test", async () => {

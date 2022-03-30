@@ -1,5 +1,5 @@
-import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../.."
-import { searchCms } from "./searchCms"
+import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../../index.js"
+import { searchCms } from "./searchCms.js"
 
 beforeEach(() => {
   KlevuConfig.init({

@@ -1,5 +1,5 @@
 import { KlevuRecord, KlevuTypeOfSearch } from "."
-import { KlevuSuggestionResult } from "./KlevuSuggestionResult"
+import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 
 /**
  * Filter types Klevu support

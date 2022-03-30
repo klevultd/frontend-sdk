@@ -1,5 +1,5 @@
-import { KlevuDomEvents } from "../events/KlevuDomEvents"
-import { isBrowser } from "../utils"
+import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
+import { isBrowser } from "../utils/index.js"
 
 export type KlevuLastSearch = {
   timestamp: number

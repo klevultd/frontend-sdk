@@ -1,12 +1,12 @@
-import { KlevuTrendingProductsQuery } from "../../models/KlevuTrendingProductsQuery"
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuFetchModifer } from "../../modifiers"
-import { lastClickedProducts } from "../../store/lastClickedProducts"
+import { KlevuTrendingProductsQuery } from "../../models/KlevuTrendingProductsQuery.js"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchModifer } from "../../modifiers/index.js"
+import { lastClickedProducts } from "../../store/lastClickedProducts.js"
 import {
   KlevuAnyTypeOfRecord,
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
-} from "../../models"
+} from "../../models/index.js"
 
 type Options = {
   id: string

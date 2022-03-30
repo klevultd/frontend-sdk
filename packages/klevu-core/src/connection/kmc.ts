@@ -1,8 +1,8 @@
 import Axios from "axios"
-import { KlevuConfig } from ".."
-import { KMCBannerRootObject } from "./kmcmodels/KMCBanner"
-import { KMCMapsRootObject } from "./kmcmodels/KMCMaps"
-import { KMCRootObject } from "./kmcmodels/KMCRoot"
+import { KlevuConfig } from "../index.js"
+import { KMCBannerRootObject } from "./kmcmodels/KMCBanner.js"
+import { KMCMapsRootObject } from "./kmcmodels/KMCMaps.js"
+import { KMCRootObject } from "./kmcmodels/KMCRoot.js"
 
 const url = "https://js.klevu.com/klevu-js-v1/klevu-js-api/"
 

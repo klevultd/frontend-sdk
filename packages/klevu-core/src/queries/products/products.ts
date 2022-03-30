@@ -1,5 +1,5 @@
-import { KlevuTypeOfRecord, KlevuTypeOfSearch } from "../../models"
-import { search } from "../search/search"
+import { KlevuTypeOfRecord, KlevuTypeOfSearch } from "../../models/index.js"
+import { search } from "../search/search.js"
 
 /**
  * Fetches list of products. All fields are fetched.

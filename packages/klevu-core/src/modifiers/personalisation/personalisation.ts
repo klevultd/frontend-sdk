@@ -1,6 +1,6 @@
-import { KlevuFetchModifer } from ".."
-import { KlevuTypeOfRecord, KlevuRecordFields } from "../../models"
-import { lastClickedProducts } from "../../store/lastClickedProducts"
+import { KlevuFetchModifer } from "../index.js"
+import { KlevuTypeOfRecord, KlevuRecordFields } from "../../models/index.js"
+import { lastClickedProducts } from "../../store/lastClickedProducts.js"
 
 /**
  * Enable personlisation to the query

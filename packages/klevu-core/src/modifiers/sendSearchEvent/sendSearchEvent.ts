@@ -1,5 +1,5 @@
-import { KlevuFetchModifer } from ".."
-import { KlevuEvents } from "../../events"
+import { KlevuFetchModifer } from "../index.js"
+import { KlevuEvents } from "../../events/index.js"
 
 /**
  * This modifier should be used in the case when user hits enter (or presses button) to see
@@ -13,12 +13,12 @@ export function sendSearchEvent(): KlevuFetchModifer {
     klevuModifierId: "sendSearchEvent",
     onResult: (res, f) => {
       if (!f.params || !f.params?.id) {
-        return
+        return res
       }
 
       const meta = res.queriesById(f.params.id)?.meta
       if (!meta) {
-        return
+        return res
       }
 
       KlevuEvents.search(
@@ -26,6 +26,8 @@ export function sendSearchEvent(): KlevuFetchModifer {
         meta.totalResultsFound,
         meta.typeOfSearch
       )
+
+      return res
     },
   }
 }

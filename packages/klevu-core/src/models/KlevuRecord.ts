@@ -1,4 +1,4 @@
-import { KlevuAnyTypeOfRecord } from "./KlevuTypeOfRecord"
+import { KlevuAnyTypeOfRecord } from "./KlevuTypeOfRecord.js"
 
 export type KlevuRecord = {
   /**
@@ -147,4 +147,7 @@ export type KlevuRecord = {
      */
     numberOfAdditionalVariants: string
   }>
+  /** Allow custom keys for records */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
 }

@@ -1,7 +1,7 @@
 import Axios from "axios"
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuConfig } from "../../config"
-import { KlevuFetchModifer } from "../../modifiers"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuConfig } from "../../config.js"
+import { KlevuFetchModifer } from "../../modifiers/index.js"
 
 type KlevuKMCRecommendation = {
   metadata: {

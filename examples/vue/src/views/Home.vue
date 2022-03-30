@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 import { onBeforeRouteUpdate } from 'vue-router'
 import useSearch from '../state/searchStore';
 import Product from '../components/Product.vue';
@@ -24,17 +24,9 @@ const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth
 searchStore.resetSearch()
 
 const openFacets = ref(vw >= 1024 ? true : false);
-const logOptions = (options) => {
-  options.forEach(f => {
-    const output = []
-    const o = f.options.forEach(op => {
-      if (op.selected) output.push([op.value, op.selected])
-    })
-    if (output.length) console.log(f.key, output.join('--'))
-  })
-}
+
 const initialFetch = async () => {
-  const functions = [
+  const res = await KlevuFetch(
     trendingProducts(
       {
         id: "search",
@@ -52,9 +44,8 @@ const initialFetch = async () => {
         filterManager: manager,
       }),
       applyFilterWithManager(manager)
-    ),
-  ]
-  const res = await KlevuFetch(...functions)
+    )
+  )
   prevRes = res
 
   const searchResult = res.queriesById('search')
@@ -81,24 +72,16 @@ const fetchMore = async () => {
   searchStore.showMore = Boolean(nextRes.next)
 }
 
-const handleFilterUpdate = async () => {
-  searchStore.setProducts([])
-  searchStore.setOptions(manager.options)
-  searchStore.setSliders(manager.sliders)
-  initialFetch()
-}
-
-console.log('loading FilterSelectionUpdate handler')
 document.addEventListener(
   KlevuDomEvents.FilterSelectionUpdate,
-  handleFilterUpdate
+  initialFetch
+
 )
 
 onBeforeRouteUpdate((to, from) => {
-  console.log('unloading FilterSelectionUpdate handler')
   document.removeEventListener(
     KlevuDomEvents.FilterSelectionUpdate,
-    handleFilterUpdate
+    initialFetch
   )
 })
 

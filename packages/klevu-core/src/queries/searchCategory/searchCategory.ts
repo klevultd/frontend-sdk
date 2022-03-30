@@ -1,6 +1,6 @@
-import { KlevuFetchFunctionReturnValue } from ".."
-import { KlevuTypeOfRecord } from "../.."
-import { search, SearchOptions } from "../search/search"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuTypeOfRecord } from "../../index.js"
+import { search, SearchOptions } from "../search/search.js"
 
 /**
  * Search helper function that sets correct settings
