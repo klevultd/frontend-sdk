@@ -71,7 +71,7 @@ export async function KlevuFetch(
       }
       const func = functions.find((f) => f.queries?.some((q) => q.id == res.id))
       if (!func) {
-        return undefined
+        return res
       }
       return FetchResultEvents(res, func)
     },
