@@ -1,5 +1,6 @@
 import Axios from "axios"
 import cloneDeep from "lodash.clonedeep"
+import { FetchResultEvents } from "../events/FetchResultEvents.js"
 import {
   applyFilterWithManager,
   KlevuConfig,
@@ -63,8 +64,17 @@ export async function KlevuFetch(
     apiResponse: response.data,
     suggestionsById: (id: string) =>
       response.data.suggestionResults?.find((q) => q.id === id),
-    queriesById: (id: string) =>
-      response.data.queryResults?.find((s) => s.id === id),
+    queriesById: (id: string) => {
+      const res = response.data.queryResults?.find((s) => s.id === id)
+      if (!res) {
+        return undefined
+      }
+      const func = functions.find((f) => f.queries?.some((q) => q.id == res.id))
+      if (!func) {
+        return undefined
+      }
+      return FetchResultEvents(res, func)
+    },
     next: fetchNextPage(response.data, functions),
   }
 

@@ -8,15 +8,13 @@ import { KlevuConfig } from "../index.js"
  * Internal. List of known KlevuFetchIds
  * @ignore
  */
-export type KlevuFetchId =
+export type KlevuFetchTypeId =
   | "search"
   | "suggestions"
-  | "trending"
-  | "newarrivals"
+  | "recommendation"
   | "categoryMerchandising"
-  | "similarProducts"
-  | "alsoViewed"
   | "kmcRecommendation"
+  | "raw"
 
 /**
  * What functions passed to KlevuFetch should implement
@@ -26,7 +24,7 @@ export type KlevuFetchFunctionReturnValue = {
   /**
    * Id of function. Used only internally
    */
-  klevuFunctionId: LiteralUnion<KlevuFetchId, string>
+  klevuFunctionId: KlevuFetchTypeId
   /**
    * Anything you wish to pass down as params incoming to function
    */

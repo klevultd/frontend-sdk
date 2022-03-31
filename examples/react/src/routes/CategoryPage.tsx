@@ -13,6 +13,7 @@ import type {
   KlevuFilterResultOptions,
   KlevuFilterResultSlider,
   KlevuFetchResponse,
+  KlevuResultEvent,
 } from "@klevu/core"
 import {
   Drawer,
@@ -40,6 +41,9 @@ import FilterIcon from "@mui/icons-material/FilterAlt"
 const drawerWidth = 240
 const manager = new FilterManager()
 let prevRes: KlevuFetchResponse
+let productClickManager: ReturnType<
+  KlevuResultEvent["getCategoryMerchandisingClickManager"]
+>
 
 export function CategoryPage() {
   const params = useParams()
@@ -63,7 +67,7 @@ export function CategoryPage() {
   }
 
   const initialFetch = useCallback(async () => {
-    const functions = [
+    const res = await KlevuFetch(
       categoryMerchandising(
         params.id,
         {
@@ -82,15 +86,16 @@ export function CategoryPage() {
         }),
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id, params.id)
-      ),
-    ]
-    const res = await KlevuFetch(...functions)
+      )
+    )
     prevRes = res
 
     const searchResult = res.queriesById("search")
     if (!searchResult) {
       return
     }
+
+    productClickManager = searchResult.getCategoryMerchandisingClickManager()
 
     setShowMore(Boolean(res.next))
     setOptions(manager.options)
@@ -251,7 +256,12 @@ export function CategoryPage() {
         >
           {products.map((p, i) => (
             <Grid item key={i}>
-              <Product product={p} />
+              <Product
+                product={p}
+                onClick={() => {
+                  productClickManager(p.id, params.id)
+                }}
+              />
             </Grid>
           ))}
         </Grid>

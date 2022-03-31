@@ -2,6 +2,7 @@ import {
   KlevuDomEvents,
   KlevuFetch,
   KlevuLastSearches,
+  KlevuResultEvent,
   KlevuTypeOfRecord,
   search,
   suggestions,
@@ -28,6 +29,8 @@ import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
 import { Close } from "@mui/icons-material"
 import SearchIcon from "@mui/icons-material/Search"
+
+let clickManager: ReturnType<KlevuResultEvent["getSearchClickManager"]>
 
 export function QuickSearch() {
   const navigate = useNavigate()
@@ -58,7 +61,10 @@ export function QuickSearch() {
       suggestions(term)
     )
 
-    setProducts(result.queriesById("search")?.records ?? [])
+    const searchResult = result.queriesById("search")
+    clickManager = searchResult.getSearchClickManager()
+
+    setProducts(searchResult?.records ?? [])
     setSuggestions(
       result
         .suggestionsById("suggestions")
@@ -218,8 +224,8 @@ export function QuickSearch() {
                     <Grid item key={i}>
                       <Product
                         product={p}
-                        searchTerm={searchValue}
                         onClick={() => {
+                          clickManager(p.id)
                           popupState.close()
                         }}
                       />

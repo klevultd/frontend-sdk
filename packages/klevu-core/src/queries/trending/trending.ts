@@ -84,7 +84,7 @@ export function trending(
   }
 
   return {
-    klevuFunctionId: "trending",
+    klevuFunctionId: "recommendation",
     queries: [query],
     modifiers,
   }

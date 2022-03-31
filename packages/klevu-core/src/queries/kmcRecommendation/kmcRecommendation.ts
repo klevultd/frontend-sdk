@@ -3,7 +3,7 @@ import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
 
-type KlevuKMCRecommendation = {
+export type KlevuKMCRecommendation = {
   metadata: {
     title: string
     recsKey: string
@@ -63,6 +63,9 @@ export async function kmcRecommendation(
       ...query,
       id: "kmcrecommendation",
     })),
+    params: {
+      kmcConfig,
+    },
     modifiers,
     configOverride,
   }
