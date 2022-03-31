@@ -1,6 +1,7 @@
 import { FilterManager } from "../store/filterManager.js"
 import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse.js"
+import { KlevuResultEvent } from "./KlevuResultEvent.js"
 
 /**
  * Tools for operating results in easier way.
@@ -17,7 +18,7 @@ export type KlevuFetchResponse = {
   /**
    * Get query result by id
    */
-  queriesById: (id: string) => KlevuQueryResult | undefined
+  queriesById: (id: string) => (KlevuQueryResult & KlevuResultEvent) | undefined
   /**
    * Next function is available if there are more results in the given query.
    * It is optimized function that removes parts from query that might slow down

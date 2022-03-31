@@ -31,7 +31,7 @@ export function alsoViewed(
   }
 
   return {
-    klevuFunctionId: "alsoViewed",
+    klevuFunctionId: "recommendation",
     modifiers,
     queries: [
       {

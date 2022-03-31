@@ -40,21 +40,16 @@ const containerCss = css`
   }
 `
 
-export function Product(props: {
-  product: KlevuRecord
-  // If there is search term is used this is required for analytics
-  searchTerm?: string
-  onClick?: (product: KlevuRecord) => void
-}) {
-  const onClick = (event) => {
-    const p = props.product
-    KlevuEvents.productClick(p, props.searchTerm)
-    props.onClick && props.onClick(props.product)
-    return false
-  }
+export function Product(props: { product: KlevuRecord; onClick?: () => void }) {
   const p = props.product
   return (
-    <Link to={`/products/${p.id}`} onClick={onClick} css={containerCss}>
+    <Link
+      to={`/products/${p.id}`}
+      onClick={(event) => {
+        props.onClick()
+      }}
+      css={containerCss}
+    >
       <div
         className="image"
         style={{

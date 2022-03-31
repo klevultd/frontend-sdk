@@ -15,7 +15,18 @@ if (isBrowser()) {
 }
 
 export const KlevuLastSearches = {
+  /**
+   * Saves last searched term. If there is previous it's moved to as last item
+   *
+   * @param term searched term
+   */
   save: (term: string) => {
+    const lastIndex = lastSearches.findIndex((ls) => ls.term === term)
+
+    if (lastIndex > -1) {
+      lastSearches.splice(lastIndex, 1)
+    }
+
     lastSearches.push({
       timestamp: new Date().getTime(),
       term: term,
@@ -27,6 +38,10 @@ export const KlevuLastSearches = {
     }
   },
 
+  /**
+   *
+   * @returns five latests searches
+   */
   get: () => {
     return lastSearches.slice(-5)
   },

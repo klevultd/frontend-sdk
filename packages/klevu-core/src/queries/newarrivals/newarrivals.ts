@@ -41,7 +41,7 @@ export function newArrivals(
   }
 
   return {
-    klevuFunctionId: "newarrivals",
+    klevuFunctionId: "recommendation",
     modifiers,
     queries: [query],
   }

@@ -33,7 +33,7 @@ export function similarProducts(
   }
 
   return {
-    klevuFunctionId: "similarProducts",
+    klevuFunctionId: "recommendation",
     modifiers,
     queries: [
       {

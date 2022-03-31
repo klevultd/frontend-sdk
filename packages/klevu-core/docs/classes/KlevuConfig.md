@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[config.ts:35](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L35)
+[config.ts:35](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L35)
 
 ## Properties
 
@@ -45,7 +45,7 @@
 
 #### Defined in
 
-[config.ts:29](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L29)
+[config.ts:29](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L29)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[config.ts:31](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L31)
+[config.ts:31](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L31)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[config.ts:32](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L32)
+[config.ts:32](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L32)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[config.ts:33](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L33)
+[config.ts:33](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L33)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[config.ts:30](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L30)
+[config.ts:30](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L30)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[config.ts:27](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L27)
+[config.ts:27](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L27)
 
 ## Methods
 
@@ -115,4 +115,4 @@ ___
 
 #### Defined in
 
-[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/8112ad5/packages/klevu-core/src/config.ts#L43)
+[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/9a3b7e3/packages/klevu-core/src/config.ts#L43)
