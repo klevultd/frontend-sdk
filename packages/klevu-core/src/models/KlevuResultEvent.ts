@@ -1,11 +1,14 @@
 export type KlevuResultEvent = {
-  getSearchClickManager?: () => (productId: string, variantId?: string) => void
-  getCategoryMerchandisingClickManager?: () => (
+  getSearchClickSendEvent?: () => (
+    productId: string,
+    variantId?: string
+  ) => void
+  getCategoryMerchandisingClickSendEvent?: () => (
     productId: string,
     categoryTitle: string,
     variantId?: string
   ) => void
-  getRecommendationClickManager?: () => (
+  getRecommendationClickSendEvent?: () => (
     productId: string,
     variantId?: string
   ) => void

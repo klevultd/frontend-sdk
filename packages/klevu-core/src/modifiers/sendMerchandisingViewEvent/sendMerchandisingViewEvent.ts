@@ -7,10 +7,7 @@ import { KlevuEvents } from "../../events/index.js"
  * @param category Category search term used
  * @returns
  */
-export function sendMerchandisingViewEvent(
-  title: string,
-  category: string
-): KlevuFetchModifer {
+export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
     onResult: (res, f) => {
@@ -21,6 +18,13 @@ export function sendMerchandisingViewEvent(
       if (f.klevuFunctionId !== "categoryMerchandising") {
         return res
       }
+
+      const categoryFunction = f.queries?.find((q) =>
+        Boolean(q.settings?.query?.categoryPath)
+      )
+
+      const category =
+        categoryFunction?.settings?.query?.categoryPath ?? "unknown"
 
       const queryResult = res.queriesById(f.params.id)
       if (!queryResult) {

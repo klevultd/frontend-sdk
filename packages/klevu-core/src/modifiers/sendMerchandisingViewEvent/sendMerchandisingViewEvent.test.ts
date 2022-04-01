@@ -17,9 +17,14 @@ test("Sending merchandising event", async () => {
       {
         id: "test",
       },
-      sendMerchandisingViewEvent("Hoodies", "men;hoodies")
+      sendMerchandisingViewEvent("Hoodies")
     )
   )
+
+  const click = result
+    .queriesById("test")
+    ?.getCategoryMerchandisingClickSendEvent?.()
+  click?.(result.queriesById("test")?.records[0].id ?? "", "Hoodies")
 
   expect(result.queriesById("test")).toBeDefined()
 })
