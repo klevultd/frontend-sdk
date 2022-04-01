@@ -2,7 +2,7 @@ import { KlevuQueryResult } from "../models/index.js"
 import { KlevuResultEvent } from "../models/KlevuResultEvent.js"
 import {
   KlevuFetchFunctionReturnValue,
-  KlevuKMCRecommendation,
+  KlevuKMCRecommendations,
 } from "../queries/index.js"
 import { KlevuEvents } from "./KlevuEvents.js"
 
@@ -81,7 +81,7 @@ export function FetchResultEvents(
     }
 
     case "kmcRecommendation": {
-      const config = func.params.kmcConfig as KlevuKMCRecommendation
+      const config = func.params.kmcConfig as KlevuKMCRecommendations
       return {
         ...object,
         ...{
