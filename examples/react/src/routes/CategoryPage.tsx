@@ -85,7 +85,7 @@ export function CategoryPage() {
           filterManager: manager,
         }),
         applyFilterWithManager(manager),
-        sendMerchandisingViewEvent(params.id, params.id)
+        sendMerchandisingViewEvent(params.id)
       )
     )
     prevRes = res

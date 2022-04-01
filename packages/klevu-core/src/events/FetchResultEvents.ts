@@ -15,7 +15,7 @@ export function FetchResultEvents(
       return {
         ...object,
         ...{
-          getSearchClickManager: () => {
+          getSearchClickSendEvent: () => {
             let viewSent = false
             return (productId: string, variantId?: string) => {
               if (!viewSent) {
@@ -48,7 +48,7 @@ export function FetchResultEvents(
       return {
         ...object,
         ...{
-          getCategoryMerchandisingClickManager: () => {
+          getCategoryMerchandisingClickSendEvent: () => {
             return (
               productId: string,
               categoryTitle: string,
@@ -70,7 +70,7 @@ export function FetchResultEvents(
               KlevuEvents.categoryMerchandisingProductClick(
                 record,
                 categoryTitle,
-                q?.settings?.query?.categoryPath ?? "",
+                q?.settings?.query?.categoryPath ?? "unknown",
                 variantId,
                 index + 1
               )
@@ -85,7 +85,7 @@ export function FetchResultEvents(
       return {
         ...object,
         ...{
-          getRecommendationClickManager: () => {
+          getRecommendationClickSendEvent: () => {
             return (productId: string) => {
               const record = object.records.find((r) => r.id === productId)
               if (!record) {
