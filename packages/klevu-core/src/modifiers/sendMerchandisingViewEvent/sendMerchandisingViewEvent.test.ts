@@ -13,7 +13,7 @@ beforeEach(() => {
 test("Sending merchandising event", async () => {
   const result = await KlevuFetch(
     categoryMerchandising(
-      "men;hoodies",
+      "men",
       {
         id: "test",
       },
