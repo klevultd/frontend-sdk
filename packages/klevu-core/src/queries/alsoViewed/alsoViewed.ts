@@ -43,9 +43,11 @@ export function alsoViewed(
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: lastClickedProducts.ids.map((pId) => ({
-                  id: pId,
-                })),
+                records: lastClickedProducts
+                  .getLastClickedLatestsFirst()
+                  .map((pId) => ({
+                    id: pId,
+                  })),
               },
             ],
           },

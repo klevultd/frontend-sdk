@@ -51,6 +51,9 @@ export function categoryMerchandising(
     klevuFunctionId: "categoryMerchandising",
     queries: [query],
     modifiers,
-    params,
+    params: {
+      ...params,
+      category,
+    },
   }
 }

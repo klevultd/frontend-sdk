@@ -21,7 +21,8 @@ export type KlevuModifierId =
 export type KlevuFetchModifer = {
   klevuModifierId: LiteralUnion<KlevuModifierId, string>
   modifyAfter?: (
-    queries: Readonly<KlevuAllRecordQueries[]>
+    queries: Readonly<KlevuAllRecordQueries[]>,
+    func: KlevuFetchFunctionReturnValue
   ) => KlevuAllRecordQueries[]
   onResult?: (
     response: Readonly<KlevuFetchResponse>,

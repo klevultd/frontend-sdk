@@ -159,13 +159,13 @@ export async function kmcRecommendation(
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Home &&
     kmcConfig.metadata.logic === KMCRecommendationLogic.RecentlyViewed
   ) {
-    const last5 = Array.from(lastClickedProducts.ids).slice(0, 10)
+    const last10 = lastClickedProducts.getLastClickedLatestsFirst(10)
     for (const q of queries) {
       if (!q.settings) {
         q.settings = {}
       }
-      q.settings.customeANDQuery = `id:(${last5.join(" OR ")})`
-      q.settings.topIds = last5.map((id) => ({ key: "id", value: id }))
+      q.settings.customeANDQuery = `id:(${last10.join(" OR ")})`
+      q.settings.topIds = last10.map((id) => ({ key: "id", value: id }))
     }
   }
   if (

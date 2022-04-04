@@ -178,7 +178,7 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
       if (f.modifiers) {
         for (const modifier of f.modifiers) {
           if (modifier.modifyAfter) {
-            qs = modifier.modifyAfter(qs)
+            qs = modifier.modifyAfter(qs, f)
           }
         }
       }
