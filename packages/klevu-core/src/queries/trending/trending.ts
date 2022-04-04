@@ -58,7 +58,9 @@ export function trending(
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: lastClickedProducts.ids.map((id) => ({ id })),
+                records: lastClickedProducts
+                  .getLastClickedLatestsFirst()
+                  .map((id) => ({ id })),
               },
             ],
           }

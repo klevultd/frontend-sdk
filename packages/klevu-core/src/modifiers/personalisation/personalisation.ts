@@ -27,7 +27,7 @@ export function personalisation(options?: {
 }): KlevuFetchModifer {
   return {
     klevuModifierId: "personalisation",
-    modifyAfter: (queries) => {
+    modifyAfter: (queries, klevuFunc) => {
       const copy = Array.from(queries)
       for (const q of queries) {
         if (!q.settings) {
@@ -37,17 +37,27 @@ export function personalisation(options?: {
           enablePersonalisation: true,
           fields: options?.fields,
         }
+
+        let records: Array<{ id: string }> = []
+        if (options?.lastClickedProductIds) {
+          records = options.lastClickedProductIds.map((pId) => ({
+            id: pId,
+          }))
+        } else if (klevuFunc.klevuFunctionId === "categoryMerchandising") {
+          records = lastClickedProducts
+            .getCategoryPersonalisationIds(klevuFunc.params.category)
+            .map((id) => ({ id }))
+        } else {
+          records = lastClickedProducts
+            .getLastClickedLatestsFirst()
+            .map((id) => ({ id }))
+        }
+
         q.settings.context = {
           recentObjects: [
             {
               typeOfRecord: KlevuTypeOfRecord.Product,
-              records:
-                options?.lastClickedProductIds?.map((pId) => ({
-                  id: pId,
-                })) ??
-                lastClickedProducts.ids.map((pId) => ({
-                  id: pId,
-                })),
+              records,
             },
           ],
         }
