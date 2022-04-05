@@ -1,0 +1,17 @@
+{
+  "name": "klevu-example-vanillajs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite --port 3005"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@klevu/core": "^0.0.18"
+  },
+  "devDependencies": {
+    "vite": "^2.9.1"
+  }
+}
