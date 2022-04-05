@@ -72,9 +72,16 @@ const result = await KlevuFetch(
 console.log(result.getQueriesById("search")?.records)
 ```
 
+### Result object
+
+`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `getSuggestionsById()` to fetch suggestions results and `getQueriesById()` for search results. `next()` is nice helper to fetch next results set with same queries and modifiers. `next()` is defined only if there are more results available.
+
+`getQueriesById()` result contains metadata for query, result records and possible event functions for providing click events to search, category merchandising and recommendations.
+
 ### Platform specific guides
 
 - [React with Material UI](../../examples/react/README.md)
+- [Vue 3](../../examples/vue/README.md)
 
 ## Queries
 
@@ -179,7 +186,7 @@ See list of events from [KlevuDomEvents](src/events/klevuDomEvents.ts)
 
 ## Events
 
-Klevu requires data for machine learning to work better. `KlevuEvents` class should be used to send the five basic events Klevu has.
+Klevu requires data for machine learning to work better. `KlevuEvents` class is low level solution to pass events to Klevu backend.
 
 ```ts
 KlevuEvents.productClick()
@@ -208,5 +215,3 @@ const result = await KlevuKMCSettings()
 To get list of last searches you can use the `KlevuLastSearches` class.
 
 To get the list of last searches call `KlevuLastSearches.get()` and if you wish to store a search use `KlevuLastSearches.save('user search string')`
-
-##
