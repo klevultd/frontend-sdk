@@ -89,39 +89,42 @@ Queries implement the `KlevuFetchFunction` interface. Multiple queries can be pa
 
 Detailed information in [API reference.](./docs/modules.md#Queries-Functions)
 
-| Klevu Function            | Description                                                                      | Type           |
-| ------------------------- | -------------------------------------------------------------------------------- | -------------- |
-| `search()`                | Most basic query to find items based on a term                                   | Search         |
-| `suggestions()`           | Fetches suggestions based on a term.                                             | Search         |
-| `trendingProducts()`      | Find all products that are trending right now in results                         | Search         |
-| `categoryMerchandising()` | Products to display on category page                                             | Search         |
-| `searchCategory()`        | Search categories based on term                                                  | Search         |
-| `searchCms()`             | Search CMS pages based on term                                                   | Search         |
-| `raw`                     | Write raw request to Klevu api. For expert use                                   | Search         |
-| `kmcRecommendation()`     | Fetches predefined recommendation by id from KMC and creates query automatically | Recommendation |
-| `newArrivals()`           | Recommendation list of new arrivals for the current user                         | Recommendation |
-| `trending()`              | Trending recommendation based for current user                                   | Recommendation |
-| `similarProducts()`       | Fetch similar products based on given ids                                        | Recommendation |
-| `alsoViewed()`            | Product recommendations what user should also check out                          | Recommendation |
+| Klevu Function               | Description                                                                      | Type           |
+| ---------------------------- | -------------------------------------------------------------------------------- | -------------- |
+| `search()`                   | Most basic query to find items based on a term                                   | Search         |
+| `suggestions()`              | Fetches suggestions based on a term.                                             | Search         |
+| `trendingProducts()`         | Find all products that are trending right now in results                         | Search         |
+| `categoryMerchandising()`    | Products to display on category page                                             | Search         |
+| `searchCategory()`           | Search categories based on term                                                  | Search         |
+| `searchCms()`                | Search CMS pages based on term                                                   | Search         |
+| `raw`                        | Write raw request to Klevu api. For expert use                                   | Search         |
+| `recentlyViewedProducts()`   | List of products user has recently viewed                                        | Search         |
+| `kmcRecommendation()`        | Fetches predefined recommendation by id from KMC and creates query automatically | Recommendation |
+| `newArrivals()`              | Recommendation list of new arrivals for the current user                         | Recommendation |
+| `trendingCategoryProducts()` | Trending recommendation based for current user                                   | Recommendation |
+| `similarProducts()`          | Fetch similar products based on given ids                                        | Recommendation |
+| `alsoViewed()`               | Product recommendations what user should also check out                          | Recommendation |
+| `boughTogether()`            | On checkout page check what products are recommended to current cart products    | Recommendation |
 
 ## Modifiers
 
 Some of the functions can be modified with modifier functions. Any number of them can be added to end of query functions
 
-| Modifier                    | Description                                                                                   |
-| --------------------------- | --------------------------------------------------------------------------------------------- |
-| `listFilters()`             | List all filters that given search result has                                                 |
-| `applyFilters()`            | Applies selected filters to query                                                             |
-| `applyFiltersWithManager()` | Applies filters that's state is managed by `FilterManager`                                    |
-| `fallback()`                | When query returns less results than fallback treshold then additional fallback query is sent |
-| `boostWithKeywords()`       | Boost or deboost results with keywords                                                        |
-| `boostWithRecords()`        | Boost or deboost certain products in the result by id                                         |
-| `boostWithFilters()`        | Boost or deboost results based on a filters                                                   |
-| `boostWithFilterManager()`  | Boost or deboost results based in selection in filter manager                                 |
-| `personalisation()`         | Enable personalisation to the query. Automatically applies last visited products              |
-| `include()`                 | Force include given id's in the result                                                        |
-| `top()`                     | Force return given id's as first items on results                                             |
-| `sendSearchEvent()`         | When user takes action to search something this should be used                                |
+| Modifier                       | Description                                                                                   |
+| ------------------------------ | --------------------------------------------------------------------------------------------- |
+| `listFilters()`                | List all filters that given search result has                                                 |
+| `applyFilters()`               | Applies selected filters to query                                                             |
+| `applyFiltersWithManager()`    | Applies filters that's state is managed by `FilterManager`                                    |
+| `fallback()`                   | When query returns less results than fallback treshold then additional fallback query is sent |
+| `boostWithKeywords()`          | Boost or deboost results with keywords                                                        |
+| `boostWithRecords()`           | Boost or deboost certain products in the result by id                                         |
+| `boostWithFilters()`           | Boost or deboost results based on a filters                                                   |
+| `boostWithFilterManager()`     | Boost or deboost results based in selection in filter manager                                 |
+| `personalisation()`            | Enable personalisation to the query. Automatically applies last visited products              |
+| `include()`                    | Force include given id's in the result                                                        |
+| `top()`                        | Force return given id's as first items on results                                             |
+| `sendSearchEvent()`            | When user takes action to search something this should be used                                |
+| `sendMerchandisingViewEvent()` | Should be used with `categoryMerchandising()` query to send view event of merchandising       |
 
 ## Filter Manager
 
