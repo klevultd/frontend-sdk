@@ -19,10 +19,6 @@ type Options = {
    */
   recent?: string[]
   /**
-   * Do we want to limit to some category these trending products
-   */
-  categoryPath?: string
-  /**
    * Use automatic last clicked products
    */
   useLastVisitedProducts?: boolean
@@ -40,7 +36,7 @@ const defaultOptions: Options = {
  * @param modifiers
  * @returns
  */
-export function trending(
+export function trendingCategoryProducts(
   categoryPath: string,
   options?: Options,
   ...modifiers: KlevuFetchModifer[]
@@ -51,7 +47,7 @@ export function trending(
   }
 
   const query: KlevuTrendingProductsQuery = {
-    id: `trending`,
+    id: "trendingCategoryProducts",
     typeOfRequest: KlevuTypeOfRequest.Trending,
     settings: {
       context: params.useLastVisitedProducts
@@ -75,14 +71,10 @@ export function trending(
             ],
           }
         : undefined,
-      query: params?.categoryPath
-        ? {
-            term: "*",
-            categoryPath: params?.categoryPath,
-          }
-        : {
-            term: "*",
-          },
+      query: {
+        term: "*",
+        categoryPath: categoryPath,
+      },
     },
   }
 
