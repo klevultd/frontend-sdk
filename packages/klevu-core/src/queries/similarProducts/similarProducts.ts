@@ -1,7 +1,6 @@
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import {
   KlevuFetchModifer,
-  KlevuRecord,
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../../index.js"
@@ -18,12 +17,12 @@ const defaultOptions: Options = {
  * Fetch similiar products based on list of ids
  *
  * @category RecommendationQuery
- * @param ids similiar to these ids
+ * @param ids similiar to these ids or itemgroupids
  * @param options
  * @returns
  */
 export function similarProducts(
-  products: Array<Pick<KlevuRecord, "id" | "itemGroupId">>,
+  ids: string[],
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunctionReturnValue {
@@ -41,17 +40,15 @@ export function similarProducts(
         typeOfRequest: KlevuTypeOfRequest.SimilarProducts,
         settings: {
           limit: params.limit,
-          excludeIds: products.map((p) => ({
+          excludeIds: ids.map((id) => ({
             key: "itemGroupId",
-            value: p.itemGroupId,
+            value: id,
           })),
           context: {
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: products.map((p) => ({
-                  id: p.id,
-                })),
+                records: ids.map((id) => ({ id })),
               },
             ],
           },

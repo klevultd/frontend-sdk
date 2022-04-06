@@ -1,5 +1,10 @@
-import { KlevuTypeOfRecord, KlevuTypeOfSearch } from "../../models/index.js"
-import { search } from "../search/search.js"
+import {
+  KlevuBaseQuery,
+  KlevuTypeOfRecord,
+  KlevuTypeOfRequest,
+} from "../../models/index.js"
+import { KlevuFetchModifer } from "../../modifiers/index.js"
+import { KlevuFetchFunctionReturnValue } from "../index.js"
 
 /**
  * Fetches list of products. All fields are fetched.
@@ -8,20 +13,27 @@ import { search } from "../search/search.js"
  * @param productIds
  * @returns
  */
-export function products(productIds: string[]) {
-  // @TODO: There is hard limit on fetching products throught search term
-  if (productIds.length > 10) {
+export function products(
+  productIds: string[],
+  ...modifiers: KlevuFetchModifer[]
+): KlevuFetchFunctionReturnValue {
+  if (productIds.length > 20) {
     throw Error("Too many products fetched")
   }
-  return search(productIds.join(" "), {
+  const query: KlevuBaseQuery = {
     id: "products",
-    typeOfSearch: KlevuTypeOfSearch.Or,
-    limit: productIds.length,
-    includeIds: productIds.map((pId) => ({
-      key: "id",
-      value: pId,
-    })),
-    fields: undefined,
-    typeOfRecords: [KlevuTypeOfRecord.Product],
-  })
+    typeOfRequest: KlevuTypeOfRequest.Search,
+    settings: {
+      limit: productIds.length,
+      customeANDQuery: `id:(${productIds.join(" OR ")})`,
+      topIds: productIds.map((id) => ({ key: "id", value: id })),
+      typeOfRecords: [KlevuTypeOfRecord.Product],
+    },
+  }
+
+  return {
+    klevuFunctionId: "search",
+    queries: [query],
+    modifiers,
+  }
 }

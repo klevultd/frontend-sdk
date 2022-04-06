@@ -41,6 +41,7 @@ const defaultOptions: Options = {
  * @returns
  */
 export function trending(
+  categoryPath: string,
   options?: Options,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunctionReturnValue {
