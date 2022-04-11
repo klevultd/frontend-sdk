@@ -10,6 +10,7 @@ import {
   applyFilterWithManager,
   FilterManager,
   KlevuDomEvents,
+  KlevuEvents,
   KlevuFetch,
   KlevuSearchSorting,
   listFilters,
@@ -93,6 +94,10 @@ const updateSort = e => {
   initialFetch()
 }
 
+const productClick = product => {
+  KlevuEvents.productClick(product, quickSearchStore.searchTerm)
+}
+
 initialFetch()
 
 </script>
@@ -132,6 +137,7 @@ initialFetch()
           v-for="product in searchStore.products"
           :key="product.id"
           :product="product"
+          @clickHandler="productClick"
           classes="p-2 md:w-1/3 lg:w-1/4 mb-5"
         />
         <div class="w-full" v-if="searchStore.showMore">

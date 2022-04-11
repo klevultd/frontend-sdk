@@ -1,8 +1,15 @@
 <script setup>
 import useQuickSearch from '../state/quickSearchStore'
 import Product from './Product.vue'
+import {
+    KlevuEvents,
+} from '@klevu/core'
+
 const quickSearchStore = useQuickSearch();
 
+const productClick = product => {
+    KlevuEvents.productClick(product, quickSearchStore.searchTerm)
+}
 </script>
 
 <template>
@@ -13,6 +20,7 @@ const quickSearchStore = useQuickSearch();
                 v-for="product in quickSearchStore.trendingProducts"
                 :key="product.id"
                 :product="product"
+                @clickHandler="productClick"
                 classes="p-2 lg:w-1/3"
             />
         </div>

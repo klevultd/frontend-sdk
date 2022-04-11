@@ -16,6 +16,8 @@ The Klevu SDK integration in this example can be broken down into 5 main areas:
   - Show trending products on the homepage
 - **Category Merchandizing Page:**
   - Show products in a category with Klevu's filter and sorting options
+- **Analytics Events:**
+  - Capture the analytics events that drive Klevu's machine learning
 
 To run the example:
 
@@ -275,7 +277,44 @@ const res = await KlevuFetch(
       exclude: searchStore.collectionFilterExcludes,
       filterManager: manager,
     }),
-    applyFilterWithManager(manager)
+    applyFilterWithManager(manager),
+    sendMerchandisingViewEvent(route.params.id)
   )
 )
 ```
+
+Similar to the search page, notice how the last parameter we pass to the _categoryMerchandising_ search is calling _sendMerchandisingViewEvent_ while also passing in the title of the category/collection. This is done to send Klevu the analytics event for this type of search.
+
+## Analytics Events
+
+Under-the-hood Klevu's machine learning is driven by three type of events:
+
+- Searches
+- Product Clicks
+- Purchases
+
+The Klevu SDK has built-in functions make sending these events to Klevu simple.
+
+### Searches
+
+We've already covered passing in _sendSearchEvent()_ as the last parameter in the _search()_ function within [Search.vue](./src/views/Search.vue) and passing in _sendMerchandisingViewEvent(categoryTitle)_ as the last parameter in _categoryMerchandising()_ within [Collection.vue](./src/views/Collection.vue).
+
+These search modifier functions handle sending the analytics data to Klevu that drive machine learning algorithm.
+
+### Product Clicks
+
+Along with the searches mentioned above, product clicks are another key portion of the analytics data that drives the magic 🪄 behind Klevu.
+
+Tracking product clicks is done by importing _KlevuEvents_ from the SDK and calling _productClick_ method.
+
+searchProductClick(product, searchTerm, variantId)
+
+### Purchases
+
+buy(
+items: Array<{
+amount: number
+product: KlevuRecord
+variantId?: string
+}>
+)

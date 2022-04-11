@@ -7,6 +7,7 @@ import {
   applyFilterWithManager,
   KlevuFetch,
   KlevuDomEvents,
+  sendMerchandisingViewEvent,
   FilterManager,
   categoryMerchandising,
 } from "@klevu/core"
@@ -21,6 +22,7 @@ const router = useRouter();
 const searchStore = useSearch();
 const manager = new FilterManager()
 let prevRes;
+let productClickManager;
 const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 const openFacets = ref(vw >= 1024 ? true : false);
 
@@ -46,7 +48,8 @@ const initialFetch = async () => {
         exclude: searchStore.collectionFilterExcludes,
         filterManager: manager,
       }),
-      applyFilterWithManager(manager)
+      applyFilterWithManager(manager),
+      sendMerchandisingViewEvent(route.params.id)
     )
   )
   prevRes = res
@@ -55,6 +58,8 @@ const initialFetch = async () => {
   if (!searchResult) {
     return
   }
+
+  productClickManager = searchResult.getCategoryMerchandisingClickManager()
 
   searchStore.showMore = Boolean(res.next)
   searchStore.setOptions(manager.options)
@@ -96,6 +101,9 @@ const updateSort = e => {
   initialFetch()
 }
 
+const productClickHandler = id => {
+  productClickManager(id, route.params.id)
+}
 //searchStore.resetSearch();
 initialFetch()
 
@@ -136,6 +144,7 @@ initialFetch()
           v-for="product in searchStore.products"
           :key="product.id"
           :product="product"
+          @click="productClickHandler(product.id)"
           classes="p-2 md:w-1/3 lg:w-1/4 mb-5"
         />
         <div class="w-full" v-if="searchStore.showMore">

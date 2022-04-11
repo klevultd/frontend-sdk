@@ -10,12 +10,14 @@ import {
     applyFilterWithManager,
     FilterManager,
     KlevuDomEvents,
+    KlevuEvents,
     KlevuFetch,
     KlevuSearchSorting,
     listFilters,
     search,
     sendSearchEvent,
 } from "@klevu/core";
+import { KlevuEvents } from '@klevu/core/dist/cjs/events/KlevuEvents';
 
 const props = defineProps({
     searchTerm: String
@@ -76,6 +78,10 @@ const fetchMore = async () => {
     ])
     prevRes = nextRes
     searchStore.showMore = Boolean(nextRes.next)
+}
+
+const productClick = function (product) {
+    KlevuEvents.searchProductClick(product, props.searchTerm)
 }
 
 document.addEventListener(
@@ -144,6 +150,7 @@ initialFetch()
                     v-for="product in searchStore.products"
                     :key="product.id"
                     :product="product"
+                    @clickHandler="productClick"
                     classes="p-2 md:w-1/3 lg:w-1/4 mb-5"
                 />
                 <div class="w-full" v-if="searchStore.showMore">
