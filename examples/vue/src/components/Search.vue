@@ -6,7 +6,6 @@ import QuickSearchProducts from './QuickSearchProducts.vue';
 import QuickSearchTrendingProducts from './QuickSearchTrendingProducts.vue';
 import useQuickSearch from '../state/quickSearchStore'
 import {
-    KlevuDomEvents,
     KlevuFetch,
     KlevuLastSearches,
     KlevuTypeOfRecord,

@@ -2,7 +2,12 @@
 const props = defineProps({
     product: Object,
     classes: String,
+    clickHandler: Function,
 })
+
+const clickHandler = function () {
+    this.$emit('clickHandler', props.product)
+}
 /*
 if (props.product.totalVariants) {
     console.log(props.product.name, props.product.totalVariants)
@@ -18,7 +23,7 @@ if (props.product.totalVariants) {
 
 <template>
     <div class="product" :class="[classes]">
-        <router-link :to="`/product/${product.id}`">
+        <router-link :to="`/product/${product.id}`" @click.native="clickHandler">
             <div class="product-image" @mouseover="hoverOn" @mouseout="hoverOut">
                 <img :src="product.imageUrl" />
             </div>
