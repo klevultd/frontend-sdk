@@ -1,8 +1,9 @@
 import { KlevuFetch, KlevuRecord, products, similarProducts } from "@klevu/core"
-import { CircularProgress, Typography } from "@mui/material"
+import { CircularProgress, Container, Typography } from "@mui/material"
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Product } from "../components/product"
+import { RecommendationBanner } from "../components/recommendationBanner"
 
 export function ProductPage() {
   const [product, setProduct] = useState<KlevuRecord>()
@@ -14,7 +15,7 @@ export function ProductPage() {
     const product = res.queriesById("products")?.records?.[0]
     setProduct(product)
 
-    const similarRes = await KlevuFetch(similarProducts([product]))
+    const similarRes = await KlevuFetch(similarProducts([product.id]))
 
     setSimilar(similarRes.queriesById("similar")?.records)
   }, [params.id])
@@ -28,15 +29,14 @@ export function ProductPage() {
   }
 
   return (
-    <div>
-      <Typography variant="h1">{product.name}</Typography>
-      <img src={product.image} alt={product.name} />
-      <p>{product.shortDesc}</p>
+    <Container maxWidth="lg">
+      <div>
+        <Typography variant="h1">{product.name}</Typography>
+        <img src={product.image} alt={product.name} />
+        <p>{product.shortDesc}</p>
 
-      <Typography variant="h2">Similar products</Typography>
-      {similar.map((p) => (
-        <Product product={p} />
-      ))}
-    </div>
+        <RecommendationBanner products={similar} title="Similar products" />
+      </div>
+    </Container>
   )
 }

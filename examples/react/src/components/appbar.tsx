@@ -6,32 +6,50 @@ import Toolbar from "@mui/material/Toolbar"
 import React from "react"
 import { QuickSearch } from "./quicksearch"
 import { Link } from "react-router-dom"
+import { CartButton } from "./cartbutton"
+import { Divider } from "@mui/material"
 
-const pages = ["Men", "Women", "Clothing"]
+const pages = ["Men", "Women"]
 
 const ResponsiveAppBar = () => {
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="fixed" color="inherit">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Link to="/">
-            <img style={{maxHeight: 20}} src="/cropped-klevu-icon-192x192.png"></img>
+            <div
+              style={{
+                background: "white",
+                padding: "6px",
+                borderRadius: "50%",
+                height: "30px",
+                width: "30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "1px solid green",
+              }}
+            >
+              <img
+                style={{ maxHeight: 20 }}
+                src="/cropped-klevu-icon-192x192.png"
+              ></img>
+            </div>
           </Link>
           <Box
             sx={{ display: "flex", flexDirection: "row", marginRight: "auto" }}
           >
             {pages.map((page) => (
               <Link to={`/category/${page}`}>
-                <Button
-                  key={page}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
+                <Button key={page} sx={{ my: 2, display: "block" }}>
                   {page}
                 </Button>
               </Link>
             ))}
           </Box>
           <QuickSearch />
+          <Divider />
+          <CartButton />
         </Toolbar>
       </Container>
     </AppBar>

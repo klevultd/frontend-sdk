@@ -29,6 +29,7 @@ import {
   MenuItem,
   Grid,
   Button,
+  Container,
 } from "@mui/material"
 import { useLocation } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
@@ -141,7 +142,7 @@ export function SearchResultPage() {
   }, [sorting, query])
 
   return (
-    <React.Fragment>
+    <Container maxWidth="lg">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -266,6 +267,6 @@ export function SearchResultPage() {
           </Button>
         ) : null}
       </div>
-    </React.Fragment>
+    </Container>
   )
 }

@@ -30,7 +30,7 @@ import { Product } from "./product"
 import { Close } from "@mui/icons-material"
 import SearchIcon from "@mui/icons-material/Search"
 
-let clickManager: ReturnType<KlevuResultEvent["getSearchClickManager"]>
+let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
 export function QuickSearch() {
   const navigate = useNavigate()
@@ -62,7 +62,7 @@ export function QuickSearch() {
     )
 
     const searchResult = result.queriesById("search")
-    clickManager = searchResult.getSearchClickManager()
+    clickManager = searchResult.getSearchClickSendEvent()
 
     setProducts(searchResult?.records ?? [])
     setSuggestions(
@@ -145,6 +145,12 @@ export function QuickSearch() {
         onChange={onSearchChange}
         onFocus={fetchEmptySuggestions}
         placeholder="Search for products"
+        inputProps={{
+          autoComplete: "off",
+          form: {
+            autocomplete: "off",
+          },
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -159,14 +165,18 @@ export function QuickSearch() {
         popperOptions={{
           placement: "bottom-end",
         }}
+        style={{
+          zIndex: 10,
+        }}
       >
         <Paper
           elevation={8}
           style={{
             padding: "12px",
-            width: "650px",
+            width: "780px",
             display: "flex",
             position: "relative",
+            marginTop: "16px",
           }}
         >
           <IconButton
