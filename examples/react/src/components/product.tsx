@@ -1,9 +1,11 @@
 import React from "react"
 import { KlevuEvents } from "@klevu/core"
 import type { KlevuRecord } from "@klevu/core"
-import { Typography } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { css } from "@emotion/react"
 import { Link } from "react-router-dom"
+import { useCart } from "../cartContext"
+import { useSnackbar } from "notistack"
 
 const containerCss = css`
   display: flex;
@@ -40,8 +42,26 @@ const containerCss = css`
   }
 `
 
-export function Product(props: { product: KlevuRecord; onClick?: () => void }) {
+export function Product(props: {
+  product: KlevuRecord
+  onClick?: () => void
+  hideAddToCart?: boolean
+}) {
+  const { enqueueSnackbar } = useSnackbar()
+
   const p = props.product
+  const cart = useCart()
+
+  const addToCart: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    cart.add(props.product)
+    enqueueSnackbar(`Added ${props.product.name} to shopport cart`, {
+      variant: "success",
+    })
+    event.preventDefault()
+    event.stopPropagation()
+    return false
+  }
+
   return (
     <Link
       to={`/products/${p.id}`}
@@ -65,6 +85,11 @@ export function Product(props: { product: KlevuRecord; onClick?: () => void }) {
           currency: p.currency,
         }).format(parseFloat(p.price))}
       </Typography>
+      {props.hideAddToCart ? null : (
+        <Button variant="contained" color="primary" onClick={addToCart}>
+          Add to cart
+        </Button>
+      )}
     </Link>
   )
 }

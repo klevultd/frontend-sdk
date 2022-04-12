@@ -31,18 +31,20 @@ import {
   MenuItem,
   Grid,
   Button,
+  Container,
 } from "@mui/material"
 import { useParams } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import FilterIcon from "@mui/icons-material/FilterAlt"
+import debounce from "lodash.debounce"
 
 const drawerWidth = 240
 const manager = new FilterManager()
 let prevRes: KlevuFetchResponse
 let productClickManager: ReturnType<
-  KlevuResultEvent["getCategoryMerchandisingClickManager"]
+  KlevuResultEvent["getCategoryMerchandisingClickSendEvent"]
 >
 
 export function CategoryPage() {
@@ -57,6 +59,7 @@ export function CategoryPage() {
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
+  const [itemsOnPage, setItemsOnPage] = useState(36)
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -72,7 +75,7 @@ export function CategoryPage() {
         params.id,
         {
           id: "search",
-          limit: 36,
+          limit: itemsOnPage,
           sort: sorting,
         },
         listFilters({
@@ -91,17 +94,18 @@ export function CategoryPage() {
     prevRes = res
 
     const searchResult = res.queriesById("search")
+
     if (!searchResult) {
       return
     }
 
-    productClickManager = searchResult.getCategoryMerchandisingClickManager()
+    productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
 
     setShowMore(Boolean(res.next))
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
-  }, [sorting, params.id])
+  }, [sorting, params.id, itemsOnPage])
 
   const fetchMore = async () => {
     const nextRes = await prevRes.next({
@@ -138,10 +142,15 @@ export function CategoryPage() {
 
   useEffect(() => {
     initialFetch()
-  }, [sorting, params.id])
+  }, [sorting, params.id, itemsOnPage])
+
+  const deboucnedSlider = (key) =>
+    debounce((event, value) => {
+      manager.updateSlide(key, value[0], value[1])
+    }, 300)
 
   return (
-    <React.Fragment>
+    <Container maxWidth="lg">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -206,6 +215,7 @@ export function CategoryPage() {
                 ]}
                 max={parseInt(s.max)}
                 min={parseInt(s.min)}
+                onChange={deboucnedSlider(s.key)}
               />
             </div>
           </React.Fragment>
@@ -246,6 +256,21 @@ export function CategoryPage() {
               Price: Hight to low
             </MenuItem>
           </Select>
+          <Divider orientation="vertical" flexItem />
+          <Select
+            size="small"
+            value={itemsOnPage}
+            style={{ margin: "12px" }}
+            onChange={(event) => {
+              console.log(event.target.value)
+              setItemsOnPage(event.target.value as number)
+            }}
+          >
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+            <MenuItem value={24}>24</MenuItem>
+            <MenuItem value={36}>36</MenuItem>
+          </Select>
         </Box>
         <Grid
           container
@@ -266,11 +291,18 @@ export function CategoryPage() {
           ))}
         </Grid>
         {showMore ? (
-          <Button variant="contained" onClick={() => fetchMore()}>
-            Load more
-          </Button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button variant="contained" onClick={() => fetchMore()}>
+              Load more
+            </Button>
+          </div>
         ) : null}
       </div>
-    </React.Fragment>
+    </Container>
   )
 }

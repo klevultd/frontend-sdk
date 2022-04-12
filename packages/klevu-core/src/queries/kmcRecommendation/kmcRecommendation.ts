@@ -8,6 +8,8 @@ import { personalisation } from "../../modifiers/personalisation/personalisation
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 
 type Options = {
+  id: string
+
   /**
    * If KMC recommendation is category based then category path is required.
    * Requires categories to be separated with semicolon. For example
@@ -151,7 +153,7 @@ export async function kmcRecommendation(
   const queries: KlevuAllRecordQueries[] = payload.recordQueries.map(
     (query: any) => ({
       ...query,
-      id: "kmcrecommendation",
+      id: options?.id ?? "kmcrecommendation",
     })
   )
 
