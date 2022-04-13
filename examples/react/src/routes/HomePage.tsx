@@ -1,18 +1,34 @@
-import { KlevuFetch, KlevuRecord, kmcRecommendation } from "@klevu/core"
+import {
+  KlevuFetch,
+  KlevuRecord,
+  kmcRecommendation,
+  sendRecommendationViewEvent,
+} from "@klevu/core"
 import { Container, Typography } from "@mui/material"
 import { Fragment, useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
+
+let eventClick
 
 export function HomePage() {
   const [trendingRecs, setTrendingRecs] = useState<KlevuRecord[]>([])
 
   const fetchData = async () => {
     const result = await KlevuFetch(
-      kmcRecommendation("k-1c38efe1-143d-4768-a340-54cf422838bb", {
-        id: "trendingrecs",
-      })
+      kmcRecommendation(
+        "k-1c38efe1-143d-4768-a340-54cf422838bb",
+        {
+          id: "trendingrecs",
+        },
+        sendRecommendationViewEvent(
+          "Trending recommendations using KMC builder"
+        )
+      )
     )
 
+    eventClick = result
+      .queriesById("trendingrecs")
+      .getRecommendationClickSendEvent()
     setTrendingRecs(result.queriesById("trendingrecs").records)
   }
 
@@ -41,6 +57,7 @@ export function HomePage() {
         <RecommendationBanner
           products={trendingRecs}
           title="Trending recommendations using KMC builder"
+          productClick={eventClick}
         />
       </Container>
     </Fragment>

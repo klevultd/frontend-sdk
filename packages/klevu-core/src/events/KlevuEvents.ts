@@ -1,5 +1,9 @@
-import { KlevuConfig, KlevuRecord, KlevuTypeOfSearch } from "../index.js"
-import { KlevuRecommendationBanner } from "../models/KlevuRecommendationBanner.js"
+import {
+  KlevuConfig,
+  KlevuKMCRecommendations,
+  KlevuRecord,
+  KlevuTypeOfSearch,
+} from "../index.js"
 import { lastClickedProducts } from "../store/lastClickedProducts.js"
 import { KlevuLastSearches } from "../store/lastSearches.js"
 import {
@@ -10,6 +14,11 @@ import {
   KlevuEventV1Search,
   KlevuEventV2,
 } from "./eventRequests.js"
+
+export type RecommendationViewEventMetaData = Pick<
+  KlevuKMCRecommendations["metadata"],
+  "recsKey" | "logic" | "title"
+>
 
 export class KlevuEvents {
   /**
@@ -46,30 +55,29 @@ export class KlevuEvents {
    * @param products List of all products that are shown
    */
   static recommendationView(
-    recommendationMetadata: Pick<
-      KlevuRecommendationBanner["metadata"],
-      "recsKey" | "logic" | "title"
-    >,
+    recommendationMetadata: RecommendationViewEventMetaData,
     products: KlevuRecord[]
   ) {
-    KlevuEventV2({
-      event: "select_recs_list",
-      event_apikey: KlevuConfig.default.apiKey,
-      event_list_id: recommendationMetadata.recsKey,
-      event_list_logic: recommendationMetadata.logic,
-      event_list_name: recommendationMetadata.title,
-      items: products.map((p, index) => ({
-        index: index + 1,
-        item_id: p.id,
-        item_group_id: p.itemGroupId || p.id,
-        item_name: p.name,
-        item_variant_id: p.itemGroupId || p.id,
-        price: p.price,
-        currency: p.currency,
-        item_brand: p.brand,
-        item_category: p.category,
-      })),
-    })
+    KlevuEventV2([
+      {
+        event: "view_recs_list",
+        event_apikey: KlevuConfig.default.apiKey,
+        event_list_id: recommendationMetadata.recsKey,
+        event_list_logic: recommendationMetadata.logic,
+        event_list_name: recommendationMetadata.title,
+        items: products.map((p, index) => ({
+          index: index + 1,
+          item_id: p.id,
+          item_group_id: p.itemGroupId || p.id,
+          item_name: p.name,
+          item_variant_id: p.itemGroupId || p.id,
+          price: p.price,
+          currency: p.currency,
+          item_brand: p.brand,
+          item_category: p.category,
+        })),
+      },
+    ])
   }
 
   /**
@@ -80,33 +88,32 @@ export class KlevuEvents {
    * @param productIndexInList What is the index of the product in the list. Starting from 1
    */
   static recommendationClick(
-    recommendationMetadata: Pick<
-      KlevuRecommendationBanner["metadata"],
-      "recsKey" | "logic" | "title"
-    >,
+    recommendationMetadata: RecommendationViewEventMetaData,
     product: KlevuRecord,
     productIndexInList: number
   ) {
-    KlevuEventV2({
-      event: "view_recs_list",
-      event_apikey: KlevuConfig.default.apiKey,
-      event_list_id: recommendationMetadata.recsKey,
-      event_list_logic: recommendationMetadata.logic,
-      event_list_name: recommendationMetadata.title,
-      items: [
-        {
-          index: productIndexInList,
-          item_id: product.id,
-          item_group_id: product.itemGroupId || product.id,
-          item_name: product.name,
-          item_variant_id: product.itemGroupId || product.id,
-          price: product.price,
-          currency: product.currency,
-          item_brand: product.brand,
-          item_category: product.category,
-        },
-      ],
-    })
+    KlevuEventV2([
+      {
+        event: "select_recs_list",
+        event_apikey: KlevuConfig.default.apiKey,
+        event_list_id: recommendationMetadata.recsKey,
+        event_list_logic: recommendationMetadata.logic,
+        event_list_name: recommendationMetadata.title,
+        items: [
+          {
+            index: productIndexInList,
+            item_id: product.id,
+            item_group_id: product.itemGroupId || product.id,
+            item_name: product.name,
+            item_variant_id: product.itemGroupId || product.id,
+            price: product.price,
+            currency: product.currency,
+            item_brand: product.brand,
+            item_category: product.category,
+          },
+        ],
+      },
+    ])
   }
 
   /**
