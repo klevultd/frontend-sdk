@@ -350,6 +350,6 @@ type KlevuEventV2 = {
   }>
 }
 
-export async function KlevuEventV2(data: KlevuEventV2) {
+export async function KlevuEventV2(data: KlevuEventV2[]) {
   return (await Axios.post(KlevuConfig.default.eventsApiV2Url, data)).data
 }

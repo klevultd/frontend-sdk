@@ -14,6 +14,7 @@ import { Typography } from "@mui/material"
 export function RecommendationBanner(props: {
   products: KlevuRecord[]
   title: string
+  productClick: (productId: string, variantId?: string) => void
 }) {
   if (props.products.length === 0) {
     return null
@@ -44,7 +45,12 @@ export function RecommendationBanner(props: {
               justifyContent: "center",
             }}
           >
-            <Product product={p} />
+            <Product
+              product={p}
+              onClick={() => {
+                props.productClick(p.id, p.itemGroupId)
+              }}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

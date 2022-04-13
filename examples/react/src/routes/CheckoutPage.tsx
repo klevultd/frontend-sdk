@@ -12,10 +12,13 @@ import { useSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
 
+let eventClick
+
 export function CheckoutPage() {
   const [alsoBoughtProducts, setAlsoBoughtProducts] = useState<KlevuRecord[]>(
     []
   )
+
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
 
@@ -27,6 +30,9 @@ export function CheckoutPage() {
       })
     )
 
+    eventClick = result
+      .queriesById("alsobought")
+      .getRecommendationClickSendEvent()
     setAlsoBoughtProducts(result.queriesById("alsobought").records)
   }
 
@@ -74,6 +80,7 @@ export function CheckoutPage() {
       <RecommendationBanner
         products={alsoBoughtProducts}
         title="Also bought together KMC recommendation"
+        productClick={eventClick}
       />
 
       <Button

@@ -4,7 +4,6 @@ import { KlevuEvents } from "../../events/index.js"
 /**
  *
  * @param title Title of the category page viewed
- * @param category Category search term used
  * @returns
  */
 export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
