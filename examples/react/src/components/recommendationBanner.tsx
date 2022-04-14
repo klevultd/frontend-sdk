@@ -14,7 +14,12 @@ import { Typography } from "@mui/material"
 export function RecommendationBanner(props: {
   products: KlevuRecord[]
   title: string
-  productClick: (productId: string, variantId?: string) => void
+  productClick: (
+    productId: string,
+    variantId?: string,
+    product?: KlevuRecord,
+    index?: number
+  ) => void
 }) {
   if (props.products.length === 0) {
     return null
@@ -37,7 +42,7 @@ export function RecommendationBanner(props: {
         slidesPerView={4}
         navigation
       >
-        {props.products.map((p) => (
+        {props.products.map((p, index) => (
           <SwiperSlide
             key={p.id}
             style={{
@@ -48,7 +53,7 @@ export function RecommendationBanner(props: {
             <Product
               product={p}
               onClick={() => {
-                props.productClick(p.id, p.itemGroupId)
+                props.productClick(p.id, p.itemGroupId, p, index + 1)
               }}
             />
           </SwiperSlide>

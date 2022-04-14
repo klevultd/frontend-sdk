@@ -37,7 +37,7 @@ enum KMCRecommendationPagetype {
   Checkout = "CHECKOUT",
 }
 
-enum KMCRecommendationLogic {
+export enum KMCRecommendationLogic {
   Trending = "TRENDING",
   TrendingPersonalized = "TRENDING_PERSONALIZED",
   NewestArrivals = "NEWEST_ARRIVALS",

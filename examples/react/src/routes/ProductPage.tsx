@@ -1,4 +1,11 @@
-import { KlevuFetch, KlevuRecord, products, similarProducts } from "@klevu/core"
+import {
+  KlevuEvents,
+  KlevuFetch,
+  KlevuRecord,
+  products,
+  similarProducts,
+  KMCRecommendationLogic,
+} from "@klevu/core"
 import { CircularProgress, Container, Typography } from "@mui/material"
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
@@ -35,7 +42,21 @@ export function ProductPage() {
         <img src={product.image} alt={product.name} />
         <p>{product.shortDesc}</p>
 
-        <RecommendationBanner products={similar} title="Similar products" />
+        <RecommendationBanner
+          products={similar}
+          title="Similar products"
+          productClick={(productId, variantId, product, index) => {
+            KlevuEvents.recommendationClick(
+              {
+                recsKey: "product-similar",
+                logic: KMCRecommendationLogic.Similar,
+                title: "Similar products",
+              },
+              product,
+              index
+            )
+          }}
+        />
       </div>
     </Container>
   )
