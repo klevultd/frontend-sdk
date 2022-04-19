@@ -1,8 +1,10 @@
 import {
+  fallback,
   KlevuEvents,
   KlevuFetch,
   KlevuRecord,
   kmcRecommendation,
+  trendingProducts,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCart } from "../cartContext"
@@ -24,16 +26,26 @@ export function CheckoutPage() {
 
   const fetchData = async () => {
     const result = await KlevuFetch(
-      kmcRecommendation("k-95d0920b-be19-4528-a5b9-6ff80ccedc69", {
-        id: "alsobought",
-        cartProductIds: cart.items.map((p) => p.id),
-      })
+      kmcRecommendation(
+        "k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6",
+        {
+          id: "alsobought",
+          cartProductIds: cart.items.map((p) => p.id),
+        },
+        fallback(trendingProducts())
+      )
     )
 
-    eventClick = result
-      .queriesById("alsobought")
-      .getRecommendationClickSendEvent()
-    setAlsoBoughtProducts(result.queriesById("alsobought").records)
+    const fallbackResults = result.queriesById("alsobought-fallback")
+
+    if (fallbackResults) {
+      setAlsoBoughtProducts(fallbackResults.records)
+    } else {
+      eventClick = result
+        .queriesById("alsobought")
+        .getRecommendationClickSendEvent()
+      setAlsoBoughtProducts(result.queriesById("alsobought").records)
+    }
   }
 
   useEffect(() => {

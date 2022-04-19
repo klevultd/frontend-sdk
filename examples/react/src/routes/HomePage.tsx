@@ -16,7 +16,7 @@ export function HomePage() {
   const fetchData = async () => {
     const result = await KlevuFetch(
       kmcRecommendation(
-        "k-1c38efe1-143d-4768-a340-54cf422838bb",
+        "k-97cece7f-34de-4b3a-b0bc-8e3bfec86e72",
         {
           id: "trendingrecs",
         },
