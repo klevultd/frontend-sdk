@@ -211,7 +211,7 @@ Nothing special here, but notice how we save the response of this additional sea
 
 ## Trending Product Search
 
-On the homepage we chose to highlight another use of Klevu's search results, showing trending products.
+As an example we chose to include another use of Klevu's search results, showing trending products in a component for your reference.
 
 [TrendingProductsGrid component](./src/components/trendingproductsgrid.tsx) uses all the same search functionality found in the previous SearchResultPage example except instead of calling _search_ and passing in the _searchTerm_, we call the _trendingProducts_ function instead and omit the first parameter.
 
@@ -242,7 +242,7 @@ Notice how we can also pass in the filters to exclude in the _listFilters_ funct
 
 ## Category page
 
-And finally we can look at [CategoryPage view](./src/routes/CategoryPage.tsx) to show that the Klevu SDK has yet another search type we can use specifically for requesting results from a category or collection _categoryMerchandising_. It is very similar to the _search_ function but instead of passing in a search term as the first parameter, we pass in the name of the category:
+This example includes category pages to organize products so to view an example look at [CategoryPage view](./src/routes/CategoryPage.tsx). The Klevu SDK has yet another search type we can use specifically for requesting results from a category or collection _categoryMerchandising_. It is very similar to the _search_ function but instead of passing in a search term as the first parameter, we pass in the name of the category:
 
 ```js
 const res = await KlevuFetch(
@@ -250,7 +250,7 @@ const res = await KlevuFetch(
     params.id,
     {
       id: "search",
-      limit: 36,
+      limit: itemsOnPage,
       sort: sorting,
     },
     listFilters({
@@ -266,4 +266,170 @@ const res = await KlevuFetch(
     sendMerchandisingViewEvent(params.id)
   )
 )
+```
+
+This example also shows a search modifier specifically created to log analytics data for category pages, _sendMerchandisingViewEvent_ which accepts the name/title of the category to display in KMC.
+
+In addition, the results of this search include a new function which we can use to log click events for products returned by this search.
+
+```js
+productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
+```
+
+Now we can use _productClickManager_ (can be called anything) to send click events that also show in KMC.
+
+```react
+<Product
+  product={p}
+  onClick={() => {
+    productClickManager(p.id, params.id)
+  }}
+/>
+```
+
+In the example above, we pass in the ID of the product along with the category name/title to the _productClickManager_ function which we have called within a onClick handler.
+
+## Product Search
+
+The Klevu SDK includes a convenient and simple search to quickly load a product called _products_ and passing in the ID of the product.
+
+```ts
+const res = await KlevuFetch(products([params.id]))
+```
+
+This search returns all the information for a single product.
+
+## Recommendations
+
+The Klevu SDK also supports recommendations created in KMC. In this example project we've create three types of recommendations:
+
+- Trending Products ([HomePage.tsx view](./src/routes/HomePage.tsx))
+- Similar Products ([ProductPage.tsx view](./src/routes/ProductPage.tsx))
+- Also Bought ([CheckoutPage.tsx view](./src/routes/CheckoutPage.tsx))
+
+### Trending Products
+
+The trending products recommendation search found in the [HomePage.tsx view](./src/routes/HomePage.tsx) looks very similar to all the searches we've made so far as seen in the example below:
+
+```ts
+const result = await KlevuFetch(
+  kmcRecommendation(
+    "k-1c38efe1-143d-4768-a340-54cf422838bb",
+    {
+      id: "trendingrecs",
+    },
+    sendRecommendationViewEvent("Trending recommendations using KMC builder")
+  )
+)
+
+eventClick = result
+  .queriesById("trendingrecs")
+  .getRecommendationClickSendEvent()
+```
+
+This type of search first needs to be created within the KMC. Then you are able to call _kmcRecommendation_ and pass in the id. The next parameter is the query id (name) of the search, in our example we called it _trendingrects_. The last parameter is the _sendRecommendationViewEvent_ modifier which logs the view of this recommendation by a user.
+
+The result of this search also returns a function we can use to log click events of the recommendation products by calling _getRecommendationClicckSendEvent_ as seen above. In our example we store this function as _eventClick_.
+
+We can then use this function to handle the click event for our recommendation products:
+
+```jsx
+<RecommendationBanner
+  products={trendingRecs}
+  title="Trending recommendations using KMC builder"
+  productClick={eventClick}
+/>
+```
+
+### Similar Products
+
+The second example of making a recommendation search is found in [ProductPage.tsx view](./src/routes/ProductPage.tsx). This is such a common search that it does not require creation in KMC.
+
+In our example we call _similarProducts_ and pass in the ID of the product we want to retrieve recommendations for:
+
+```ts
+const similarRes = await KlevuFetch(similarProducts([product.id]))
+```
+
+In this case we can call the _recommendationClick_ method of the KlevuEvents object to log click analytics events into KMC
+
+```jsx
+<RecommendationBanner
+  products={similar}
+  title="Similar products"
+  productClick={(productId, variantId, product, index) => {
+    KlevuEvents.recommendationClick(
+      {
+        recsKey: "product-similar",
+        logic: KMCRecommendationLogic.Similar,
+        title: "Similar products",
+      },
+      product,
+      index
+    )
+  }}
+/>
+```
+
+We pass in the an object with the information to log this recommendation click as being associated with similar products. Next we pass in the product, and finally we pass in the index of the currrent product.
+
+### Also Bought
+
+Our final recommendations example is found in the [CheckoutPage.tsx view](./src/routes/CheckoutPage.tsx). As the name implies it shows the user product recommendations based on the items in the user's cart.
+
+```ts
+const result = await KlevuFetch(
+  kmcRecommendation("k-95d0920b-be19-4528-a5b9-6ff80ccedc69", {
+    id: "alsobought",
+    cartProductIds: cart.items.map((p) => p.id),
+  })
+)
+
+eventClick = result.queriesById("alsobought").getRecommendationClickSendEvent()
+```
+
+Here the main difference to the first recommendations example is that instead of only passing in an id for the search we also include a reference to all the products ids in the cart.
+
+Similar to the first example, we see the _getRecommendationClickSendEvent_ function called on the resutls to retrieve the click event handler we are storing in _eventClick_ which we will also attach to the click event handler for each product recommendation:
+
+```jsx
+<RecommendationBanner
+  products={alsoBoughtProducts}
+  title="Also bought together KMC recommendation"
+  productClick={eventClick}
+/>
+```
+
+## Purchase Analytics Event (buy)
+
+As our final use of the Klevu SDK we will show the use of the _KlevuEvents.buy_ method.
+
+In our example we simply created a button to trigger onClick:
+
+<Button
+variant="contained"
+color="primary"
+onClick={buy}
+disabled={cart.items.length === 0}
+
+> Buy products
+> </Button>
+
+In your implementation this event would be triggered on the first time a thank you page is rendered or when an order is logged.
+
+Our example implementation starts by grouping the products by ID. Then creating an array of products with their quanties. This array is then passed into _KlevuEvents.buy_ to log the purchased items.
+
+```ts
+const buy = () => {
+  const groupedProducts = groupBy(cart.items, (i) => i.id)
+
+  const toBuy = Object.entries(groupedProducts).map((entry) => {
+    const data: KlevuRecord[] = entry[1] as KlevuRecord[]
+    return {
+      amount: data.length,
+      product: data[0],
+    }
+  })
+  KlevuEvents.buy(toBuy)
+}
 ```
