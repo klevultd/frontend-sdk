@@ -297,7 +297,7 @@ The Klevu SDK has built-in functions make sending these events to Klevu simple.
 
 ### Searches
 
-We've already covered passing in _sendSearchEvent()_ as the last parameter in the _search()_ function within [Search.vue](./src/views/Search.vue) and passing in _sendMerchandisingViewEvent(categoryTitle)_ as the last parameter in _categoryMerchandising()_ within [Collection.vue](./src/views/Collection.vue).
+We've already covered passing in _sendSearchEvent()_ as the last parameter in the _search()_ function within [Search view](./src/views/Search.vue) and passing in _sendMerchandisingViewEvent(categoryTitle)_ as the last parameter in _categoryMerchandising()_ within [Collection view](./src/views/Collection.vue).
 
 These search modifier functions handle sending the analytics data to Klevu that drive machine learning algorithm.
 
@@ -305,16 +305,38 @@ These search modifier functions handle sending the analytics data to Klevu that 
 
 Along with the searches mentioned above, product clicks are another key portion of the analytics data that drives the magic 🪄 behind Klevu.
 
-Tracking product clicks is done by importing _KlevuEvents_ from the SDK and calling _productClick_ method.
+Tracking product clicks is done by importing _KlevuEvents_ from the SDK and calling the _searchProductClick_ method when a product is clicked. In this example we add a click event handler to the template where we pass in the product along with the searchTerm:
 
-searchProductClick(product, searchTerm, variantId)
+```js
+const productClick = (product) => {
+  KlevuEvents.searchProductClick(product, quickSearchStore.searchTerm)
+}
+```
+
+For the [Search view](./src/views/Search.vue) when the result comes back from the KlevuFetch call we can get the click handler by calling _getCategoryMerchandisingClickManager()_ like this:
+
+```js
+productClickManager = searchResult.getCategoryMerchandisingClickManager()
+```
+
+We then add a click handler to the product in the template code like this:
+
+```
+@click="productClickHandler(product.id)"
+```
+
+When productClickHandler is called we pass in the product id of the product which we then pass into the productClickManager along with the category/collection title like this:
+
+```js
+const productClickHandler = (id) => {
+  productClickManager(id, route.params.id)
+}
+```
 
 ### Purchases
 
-buy(
-items: Array<{
-amount: number
-product: KlevuRecord
-variantId?: string
-}>
-)
+When a purchase is made we need to call the _buy_ method of _KlevuEvents_. We pass it an array of items purchased (objects) that each contain the following:
+
+- amount: number
+- product: KlevuRecord
+- variantId?: string
