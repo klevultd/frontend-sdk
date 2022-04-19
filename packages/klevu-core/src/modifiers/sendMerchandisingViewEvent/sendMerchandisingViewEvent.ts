@@ -10,7 +10,11 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
     onResult: (res, f) => {
-      if (!f.params || !f.params?.id) {
+      const { id } = f.params as {
+        id?: string
+      }
+
+      if (!f.params || !id) {
         return res
       }
 
@@ -25,7 +29,7 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
       const category =
         categoryFunction?.settings?.query?.categoryPath ?? "unknown"
 
-      const queryResult = res.queriesById(f.params.id)
+      const queryResult = res.queriesById(id)
       if (!queryResult) {
         return res
       }

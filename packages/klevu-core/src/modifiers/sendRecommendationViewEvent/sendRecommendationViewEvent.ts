@@ -36,7 +36,8 @@ export function sendRecommendationViewEvent(
           return res
         }
 
-        const kmcData: KlevuKMCRecommendations = f.params.kmcConfig
+        const kmcData = (f.params as { kmcConfig: KlevuKMCRecommendations })
+          .kmcConfig
 
         if (!kmcData) {
           console.warn(

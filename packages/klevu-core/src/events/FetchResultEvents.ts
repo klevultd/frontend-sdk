@@ -81,7 +81,8 @@ export function FetchResultEvents(
     }
 
     case "kmcRecommendation": {
-      const config = func.params.kmcConfig as KlevuKMCRecommendations
+      const config = (func.params as { kmcConfig: KlevuKMCRecommendations })
+        .kmcConfig
       return {
         ...object,
         ...{

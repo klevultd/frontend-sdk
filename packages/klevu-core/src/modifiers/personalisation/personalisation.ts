@@ -44,8 +44,10 @@ export function personalisation(options?: {
             id: pId,
           }))
         } else if (klevuFunc.klevuFunctionId === "categoryMerchandising") {
+          const { category } = klevuFunc.params as { category: string }
+
           records = lastClickedProducts
-            .getCategoryPersonalisationIds(klevuFunc.params.category)
+            .getCategoryPersonalisationIds(category)
             .map((id) => ({ id }))
         } else {
           records = lastClickedProducts

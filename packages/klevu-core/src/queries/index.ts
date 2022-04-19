@@ -1,6 +1,5 @@
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
 import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery.js"
-import type { LiteralUnion } from "type-fest"
 import { KlevuFetchModifer } from "../modifiers/index.js"
 import { KlevuConfig } from "../index.js"
 
@@ -28,7 +27,7 @@ export type KlevuFetchFunctionReturnValue = {
   /**
    * Anything you wish to pass down as params incoming to function
    */
-  params?: any
+  params?: unknown
   /**
    * What queries should KlevuFetch do to backend
    */

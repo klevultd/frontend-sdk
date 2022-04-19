@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "qoc": "eslint src/",
+    "qoc": "echo 'No qoc'",
     "test": "echo 'No tests'"
   },
   "author": "Klevu",

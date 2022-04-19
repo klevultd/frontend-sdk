@@ -12,20 +12,18 @@ export function sendSearchEvent(): KlevuFetchModifer {
   return {
     klevuModifierId: "sendSearchEvent",
     onResult: (res, f) => {
-      if (!f.params || !f.params?.id) {
+      const { id, term } = f.params as { id: string; term: string }
+
+      if (!f.params || !id) {
         return res
       }
 
-      const meta = res.queriesById(f.params.id)?.meta
+      const meta = res.queriesById(id)?.meta
       if (!meta) {
         return res
       }
 
-      KlevuEvents.search(
-        f.params.term,
-        meta.totalResultsFound,
-        meta.typeOfSearch
-      )
+      KlevuEvents.search(term, meta.totalResultsFound, meta.typeOfSearch)
 
       return res
     },

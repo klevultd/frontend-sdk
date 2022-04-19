@@ -6,6 +6,7 @@ import { KlevuAllRecordQueries } from "../../models/KlevuAllRecordQueries.js"
 import { lastClickedProducts } from "../../store/lastClickedProducts.js"
 import { personalisation } from "../../modifiers/personalisation/personalisation.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
+import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 
 type Options = {
   id: string
@@ -151,7 +152,7 @@ export async function kmcRecommendation(
   const payload = JSON.parse(recsResult.data.search.payload)
 
   const queries: KlevuAllRecordQueries[] = payload.recordQueries.map(
-    (query: any) => ({
+    (query: KlevuBaseQuery) => ({
       ...query,
       id: options?.id ?? "kmcrecommendation",
     })
@@ -217,6 +218,7 @@ export async function kmcRecommendation(
         q.settings = {}
       }
       if (!q.settings.context) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         q.settings.context = {} as any
       }
       q.settings.excludeIds = [
@@ -254,6 +256,7 @@ export async function kmcRecommendation(
         q.settings = {}
       }
       if (!q.settings.context) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         q.settings.context = {} as any
       }
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
