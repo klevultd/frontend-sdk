@@ -95,7 +95,7 @@ const updateSort = e => {
 }
 
 const productClick = product => {
-  KlevuEvents.productClick(product, quickSearchStore.searchTerm)
+  KlevuEvents.searchProductClick(product, quickSearchStore.searchTerm)
 }
 
 initialFetch()
