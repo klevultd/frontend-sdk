@@ -2,6 +2,7 @@ import {
   KlevuFetch,
   KlevuRecord,
   kmcRecommendation,
+  personalisation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Container, Typography } from "@mui/material"
@@ -22,7 +23,8 @@ export function HomePage() {
         },
         sendRecommendationViewEvent(
           "Trending recommendations using KMC builder"
-        )
+        ),
+        personalisation()
       )
     )
 

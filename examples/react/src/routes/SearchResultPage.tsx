@@ -6,6 +6,9 @@ import {
   KlevuDomEvents,
   FilterManager,
   search,
+  KlevuResultEvent,
+  sendSearchEvent,
+  personalisation
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -40,6 +43,7 @@ import FilterIcon from "@mui/icons-material/FilterAlt"
 const drawerWidth = 240
 const manager = new FilterManager()
 let prevRes: KlevuFetchResponse
+let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
 function useQuery() {
   const { search } = useLocation()
@@ -87,7 +91,9 @@ export function SearchResultPage() {
           ],
           filterManager: manager,
         }),
-        applyFilterWithManager(manager)
+        applyFilterWithManager(manager),
+        sendSearchEvent(),
+        personalisation()
       ),
     ]
     const res = await KlevuFetch(...functions)
@@ -97,6 +103,8 @@ export function SearchResultPage() {
     if (!searchResult) {
       return
     }
+
+    clickManager = searchResult.getSearchClickSendEvent()
 
     setShowMore(Boolean(res.next))
     setOptions(manager.options)
@@ -257,7 +265,12 @@ export function SearchResultPage() {
         >
           {products.map((p, i) => (
             <Grid item key={i}>
-              <Product product={p} />
+              <Product
+                product={p}
+                onClick={() => {
+                  clickManager(p.id, p.itemGroupId)
+                }}
+              />
             </Grid>
           ))}
         </Grid>

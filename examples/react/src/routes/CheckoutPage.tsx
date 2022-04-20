@@ -4,6 +4,7 @@ import {
   KlevuFetch,
   KlevuRecord,
   kmcRecommendation,
+  personalisation,
   trendingProducts,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
@@ -32,7 +33,8 @@ export function CheckoutPage() {
           id: "alsobought",
           cartProductIds: cart.items.map((p) => p.id),
         },
-        fallback(trendingProducts())
+        fallback(trendingProducts()),
+        personalisation()
       )
     )
 

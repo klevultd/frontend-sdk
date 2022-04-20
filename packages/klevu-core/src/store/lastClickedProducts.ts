@@ -1,5 +1,7 @@
-const ONE_HOUR = 36000000
+import { isBrowser } from "../utils/isBrowser.js"
 
+const ONE_HOUR = 36000000
+const STORAGE_KEY = "klevu-last-clicks"
 class LastClickedProducts {
   private categoryCache: {
     [categoryPath: string]: {
@@ -13,6 +15,25 @@ class LastClickedProducts {
     id: string
   }> = []
 
+  private save() {
+    if (isBrowser() && window.localStorage) {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.clicks))
+    }
+  }
+
+  private restore() {
+    if (isBrowser() && window.localStorage) {
+      const res = window.localStorage.getItem(STORAGE_KEY)
+      if (res) {
+        this.clicks = JSON.parse(res)
+      }
+    }
+  }
+
+  constructor() {
+    this.restore()
+  }
+
   /**
    * Should be called when product is clicked
    *
@@ -23,6 +44,8 @@ class LastClickedProducts {
       ts: new Date(),
       id: productId,
     })
+
+    this.save()
   }
 
   /**

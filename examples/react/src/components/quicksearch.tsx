@@ -1,17 +1,18 @@
 import {
   KlevuDomEvents,
   KlevuFetch,
+  KlevuKMCSettings,
   KlevuLastSearches,
   KlevuResultEvent,
   KlevuTypeOfRecord,
+  personalisation,
   search,
   suggestions,
   trendingProducts,
 } from "@klevu/core"
-import type { KlevuRecord, KlevuLastSearch } from "@klevu/core"
+import type { KlevuRecord, KlevuLastSearch, KMCRootObject } from "@klevu/core"
 import {
   Grid,
-  IconButton,
   InputAdornment,
   Paper,
   Popper,
@@ -20,14 +21,13 @@ import {
 } from "@mui/material"
 import debounce from "lodash.debounce"
 import {
-  bindMenu,
-  bindTrigger,
+  bindPopper,
+  bindFocus,
   usePopupState,
 } from "material-ui-popup-state/hooks"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
-import { Close } from "@mui/icons-material"
 import SearchIcon from "@mui/icons-material/Search"
 
 let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
@@ -44,7 +44,16 @@ export function QuickSearch() {
   const popupState = usePopupState({
     variant: "popper",
     popupId: "searchPopup",
+    disableAutoFocus: true,
   })
+
+  const [kmcSettings, setKmcSettings] = useState<KMCRootObject>()
+
+  let location = useLocation()
+  React.useEffect(() => {
+    popupState.close()
+    setProducts([])
+  }, [location])
 
   const doSearch = async (term: string) => {
     if (term.length < 3) {
@@ -54,10 +63,14 @@ export function QuickSearch() {
     }
 
     const result = await KlevuFetch(
-      search(term, {
-        limit: 9,
-        typeOfRecords: [KlevuTypeOfRecord.Product],
-      }),
+      search(
+        term,
+        {
+          limit: 6,
+          typeOfRecords: [KlevuTypeOfRecord.Product],
+        },
+        personalisation()
+      ),
       suggestions(term)
     )
 
@@ -73,8 +86,7 @@ export function QuickSearch() {
   }
 
   const fetchEmptySuggestions = async () => {
-    popupState.open()
-    setLastSearches(KlevuLastSearches.get())
+    handleLastSearchesUpdate()
 
     if (trendProducts.length > 0) {
       return
@@ -91,6 +103,7 @@ export function QuickSearch() {
   const onKeydown: React.KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (event.key === "Enter") {
       navigate("/search?q=" + encodeURIComponent(searchValue))
+      popupState.close()
     }
   }
 
@@ -101,20 +114,20 @@ export function QuickSearch() {
 
   const debouncedChangeHandler: any = useMemo(() => debounce(doSearch, 300), [])
 
-  const clickOnSearch = (suggestion: string) => {
-    const raw = suggestion.replace(/<[^>]*>?/gm, "")
-    setSearchValue(raw)
-    doSearch(raw)
+  const fetchKMCSettings = async () => {
+    const settings = await KlevuKMCSettings()
+    setKmcSettings(settings.root)
   }
 
   useEffect(() => {
+    fetchKMCSettings()
     return () => {
       debouncedChangeHandler.cancel()
     }
   }, [])
 
-  const handleLastSearchesUpdate = (event) => {
-    setLastSearches(KlevuLastSearches.get())
+  const handleLastSearchesUpdate = () => {
+    setLastSearches(Array.from(KlevuLastSearches.get()).reverse())
   }
 
   React.useEffect(() => {
@@ -131,6 +144,15 @@ export function QuickSearch() {
       )
     }
   }, [])
+
+  const focusParams = bindFocus(popupState)
+  const params = {
+    ...focusParams,
+    onFocus: (event) => {
+      focusParams.onFocus(event)
+      fetchEmptySuggestions()
+    },
+  }
 
   return (
     <React.Fragment>
@@ -158,10 +180,10 @@ export function QuickSearch() {
             </InputAdornment>
           ),
         }}
-        {...bindTrigger(popupState)}
+        {...params}
       />
       <Popper
-        {...bindMenu(popupState)}
+        {...bindPopper(popupState)}
         popperOptions={{
           placement: "bottom-end",
         }}
@@ -173,22 +195,21 @@ export function QuickSearch() {
           elevation={8}
           style={{
             padding: "12px",
-            width: "780px",
+            width: "792px",
             display: "flex",
             position: "relative",
             marginTop: "16px",
           }}
         >
-          <IconButton
-            style={{ position: "absolute", top: "6px", right: "6px" }}
-            onClick={() => {
-              popupState.close()
-              setSearchValue("")
+          <div
+            style={{
+              width: "160px",
+              flexShrink: 0,
+              borderRight: "1px solid #d1d1d1",
+              paddingRight: "8px",
+              marginRight: "8px",
             }}
           >
-            <Close />
-          </IconButton>
-          <div style={{ width: "160px", flexShrink: 0 }}>
             {sugs.length > 0 ? (
               <React.Fragment>
                 <Typography variant="h6">Suggestions</Typography>
@@ -198,14 +219,35 @@ export function QuickSearch() {
                   {sugs.map((s, i) => (
                     <li
                       key={i}
-                      onClick={() => clickOnSearch(s)}
-                      style={{ padding: 0, cursor: "pointer" }}
+                      style={{ padding: 0 }}
                       dangerouslySetInnerHTML={{ __html: s }}
                     ></li>
                   ))}
                 </ul>
               </React.Fragment>
-            ) : null}
+            ) : (
+              <React.Fragment>
+                {kmcSettings &&
+                  kmcSettings.klevu_webstorePopularTerms.length > 0 && (
+                    <React.Fragment>
+                      <Typography variant="h6">Popular searches</Typography>
+                      <ul
+                        style={{
+                          margin: 0,
+                          listStyleType: "none",
+                          padding: "12px",
+                        }}
+                      >
+                        {kmcSettings.klevu_webstorePopularTerms.map((s, i) => (
+                          <li key={i} style={{ padding: 0 }}>
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </React.Fragment>
+                  )}
+              </React.Fragment>
+            )}
             {lastSearches.length > 0 ? (
               <React.Fragment>
                 <Typography variant="h6">Last searches</Typography>
@@ -213,11 +255,7 @@ export function QuickSearch() {
                   style={{ margin: 0, listStyleType: "none", padding: "12px" }}
                 >
                   {lastSearches.map((s, i) => (
-                    <li
-                      key={i}
-                      style={{ padding: 0, cursor: "pointer" }}
-                      onClick={() => clickOnSearch(s.term)}
-                    >
+                    <li key={i} style={{ padding: 0 }}>
                       {s.term}
                     </li>
                   ))}
@@ -235,8 +273,7 @@ export function QuickSearch() {
                       <Product
                         product={p}
                         onClick={() => {
-                          clickManager(p.id)
-                          popupState.close()
+                          clickManager(p.id, p.itemGroupId)
                         }}
                       />
                     </Grid>

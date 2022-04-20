@@ -92,6 +92,7 @@ export class KlevuEvents {
     product: KlevuRecord,
     productIndexInList: number
   ) {
+    lastClickedProducts.click(product.id)
     KlevuEventV2([
       {
         event: "select_recs_list",
@@ -199,6 +200,7 @@ export class KlevuEvents {
     variantId?: string,
     productPosition?: number
   ) {
+    lastClickedProducts.click(product.id)
     KlevuEventV1CategoryProductClick({
       klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_categoryName: categoryTitle,

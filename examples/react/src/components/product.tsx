@@ -66,7 +66,9 @@ export function Product(props: {
     <Link
       to={`/products/${p.id}`}
       onClick={(event) => {
-        props.onClick()
+        if (props.onClick) {
+          props.onClick()
+        }
       }}
       css={containerCss}
     >
