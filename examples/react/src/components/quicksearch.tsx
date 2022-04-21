@@ -93,9 +93,12 @@ export function QuickSearch() {
     }
 
     const res = await KlevuFetch(
-      trendingProducts({
-        limit: 3,
-      })
+      trendingProducts(
+        {
+          limit: 3,
+        },
+        personalisation()
+      )
     )
     setTrendingProducts(res.queriesById("trendingProducts")?.records ?? [])
   }
