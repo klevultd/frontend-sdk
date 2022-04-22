@@ -61,8 +61,9 @@ const initialFetch = async () => {
   if (!searchResult) {
     return
   }
+  // console.log(searchResult)
 
-  productClickManager = searchResult.getCategoryMerchandisingClickManager()
+  productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
 
   searchStore.showMore = Boolean(res.next)
   searchStore.setOptions(manager.options)

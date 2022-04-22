@@ -2,6 +2,7 @@
 import { ref } from "vue"
 import { onBeforeRouteUpdate } from "vue-router"
 import useSearch from "../state/searchStore"
+import useQuickSearch from "../state/quickSearchStore"
 import Product from "../components/Product.vue"
 import Option from "../components/Option.vue"
 import Slider from "../components/Slider.vue"
@@ -18,6 +19,7 @@ import {
 } from "@klevu/core"
 
 const searchStore = useSearch()
+const quickSearchStore = useQuickSearch()
 const manager = new FilterManager()
 let prevRes
 const vw = Math.max(
@@ -93,7 +95,7 @@ const updateSort = (e) => {
   initialFetch()
 }
 
-const productClick = product => {
+const productClick = (product) => {
   KlevuEvents.searchProductClick(product, quickSearchStore.searchTerm)
 }
 
