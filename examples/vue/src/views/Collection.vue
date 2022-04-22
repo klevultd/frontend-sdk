@@ -1,6 +1,6 @@
 <script setup>
-import { ref, nextTick } from 'vue'
-import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
+import { ref, nextTick } from "vue"
+import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router"
 import {
   KlevuSearchSorting,
   listFilters,
@@ -11,20 +11,23 @@ import {
   FilterManager,
   categoryMerchandising,
 } from "@klevu/core"
-import useSearch from '../state/searchStore'
-import Product from '../components/Product.vue';
-import Option from '../components/Option.vue';
-import Slider from '../components/Slider.vue';
-import FacetToggle from '../components/FacetToggle.vue';
+import useSearch from "../state/searchStore"
+import Product from "../components/Product.vue"
+import Option from "../components/Option.vue"
+import Slider from "../components/Slider.vue"
+import FacetToggle from "../components/FacetToggle.vue"
 
-const route = useRoute();
-const router = useRouter();
-const searchStore = useSearch();
+const route = useRoute()
+const router = useRouter()
+const searchStore = useSearch()
 const manager = new FilterManager()
-let prevRes;
-let productClickManager;
-const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-const openFacets = ref(vw >= 1024 ? true : false);
+let prevRes
+let productClickManager
+const vw = Math.max(
+  document.documentElement.clientWidth || 0,
+  window.innerWidth || 0
+)
+const openFacets = ref(vw >= 1024 ? true : false)
 
 const initialFetch = async () => {
   searchStore.setProducts([])
@@ -54,7 +57,7 @@ const initialFetch = async () => {
   )
   prevRes = res
 
-  const searchResult = res.queriesById('search')
+  const searchResult = res.queriesById("search")
   if (!searchResult) {
     return
   }
@@ -65,7 +68,6 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
-
 }
 
 const fetchMore = async () => {
@@ -74,16 +76,13 @@ const fetchMore = async () => {
   })
   searchStore.setProducts([
     ...searchStore.products,
-    ...(nextRes.queriesById('search').records ?? []),
+    ...(nextRes.queriesById("search").records ?? []),
   ])
   prevRes = nextRes
   searchStore.showMore = Boolean(nextRes.next)
 }
 
-document.addEventListener(
-  KlevuDomEvents.FilterSelectionUpdate,
-  initialFetch
-)
+document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, initialFetch)
 
 onBeforeRouteUpdate((to, from) => {
   document.removeEventListener(
@@ -96,24 +95,25 @@ const toggleFacets = () => {
   openFacets.value = !openFacets.value
 }
 
-const updateSort = e => {
+const updateSort = (e) => {
   searchStore.sorting = e.target.value
   initialFetch()
 }
 
-const productClickHandler = id => {
+const productClickHandler = (id) => {
   productClickManager(id, route.params.id)
 }
 //searchStore.resetSearch();
 initialFetch()
-
 </script>
 
 <template>
-  <div class="loading-message" v-show="!searchStore.products.length">Loading products...</div>
+  <div class="loading-message" v-show="!searchStore.products.length">
+    Loading products...
+  </div>
   <div class="collection-wrapper" v-show="searchStore.products.length">
     <section class="filter-section">
-      <div class="facets border p-6">
+      <div class="facets p-6" :class="{ border: openFacets }">
         <FacetToggle :handler="toggleFacets" :open="openFacets" :vw="vw" />
         <div v-show="openFacets">
           <Option
@@ -133,10 +133,18 @@ initialFetch()
     </section>
     <section class="results-section">
       <div class="sorting-options">
-        <select class="border py-2 px-3" v-model="searchStore.sorting" @change="updateSort">
+        <select
+          class="border py-2 px-3"
+          v-model="searchStore.sorting"
+          @change="updateSort"
+        >
           <option :value="KlevuSearchSorting.Relevance">Relevance</option>
-          <option :value="KlevuSearchSorting.PriceAsc">Price: Low to high</option>
-          <option :value="KlevuSearchSorting.PriceDesc">Price: Hight to low</option>
+          <option :value="KlevuSearchSorting.PriceAsc">
+            Price: Low to high
+          </option>
+          <option :value="KlevuSearchSorting.PriceDesc">
+            Price: Hight to low
+          </option>
         </select>
       </div>
       <div class="product-results">

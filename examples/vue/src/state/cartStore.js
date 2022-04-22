@@ -5,6 +5,7 @@ const useCart = defineStore("cart-store", {
   state: () => {
     return {
       products: [],
+      open: false,
     }
   },
   actions: {
