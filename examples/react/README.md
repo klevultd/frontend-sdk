@@ -8,6 +8,8 @@ To run the example:
 
 > npm start
 
+[Click here to run example in CodeSandbox.io](https://codesandbox.io/s/github/klevultd/frontend-sdk/tree/master/examples/react)
+
 ## Initialization
 
 Klevu configuration initialization is done in [index.tsx](./src/index.tsx) before any other code.
