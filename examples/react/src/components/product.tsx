@@ -1,5 +1,4 @@
 import React from "react"
-import { KlevuEvents } from "@klevu/core"
 import type { KlevuRecord } from "@klevu/core"
 import { Button, Typography } from "@mui/material"
 import { css } from "@emotion/react"

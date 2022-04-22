@@ -39,7 +39,18 @@ export function RecommendationBanner(props: {
         // install Swiper modules
         modules={[Navigation]}
         spaceBetween={50}
-        slidesPerView={4}
+        slidesPerView={1}
+        breakpoints={{
+          400: {
+            slidesPerView: 2,
+          },
+          600: {
+            slidesPerView: 3,
+          },
+          800: {
+            slidesPerView: 4,
+          },
+        }}
         navigation
       >
         {props.products.map((p, index) => (

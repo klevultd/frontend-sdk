@@ -79,6 +79,7 @@ export function CategoryPage() {
           sort: sorting,
         },
         listFilters({
+          include: ["color", "", "size", "designer"],
           rangeFilterSettings: [
             {
               key: "klevu_price",
@@ -197,6 +198,17 @@ export function CategoryPage() {
                     />
                   </ListItemIcon>
                   <ListItemText primary={`${o2.name} (${o2.count})`} />
+                  {o.key === "color" ? (
+                    <div
+                      style={{
+                        height: "16px",
+                        width: "16px",
+                        border: "1px solid gray",
+                        backgroundColor: o2.name,
+                        marginLeft: "8px",
+                      }}
+                    ></div>
+                  ) : null}
                 </ListItemButton>
               ))}
             </List>

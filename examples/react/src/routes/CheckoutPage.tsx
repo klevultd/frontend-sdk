@@ -14,6 +14,7 @@ import groupBy from "lodash.groupby"
 import { useSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
+import { flexbox } from "@mui/system"
 
 let eventClick
 
@@ -56,7 +57,6 @@ export function CheckoutPage() {
 
   const buy = () => {
     const groupedProducts = groupBy(cart.items, (i) => i.id)
-    console.log(groupedProducts)
     const toBuy = Object.entries(groupedProducts).map((entry) => {
       const data: KlevuRecord[] = entry[1] as KlevuRecord[]
       return {
@@ -68,6 +68,13 @@ export function CheckoutPage() {
 
     enqueueSnackbar("Items bought!", {
       variant: "info",
+    })
+    cart.clear()
+  }
+
+  const clear = () => {
+    enqueueSnackbar("Items cleared.", {
+      variant: "warning",
     })
     cart.clear()
   }
@@ -91,20 +98,25 @@ export function CheckoutPage() {
         ))}
       </Grid>
 
+      <div style={{ display: "flex", justifyContent: "center", gap: "16px" }}>
+        <Button variant="outlined" color="secondary" onClick={clear}>
+          Clear
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={buy}
+          disabled={cart.items.length === 0}
+        >
+          Buy products
+        </Button>
+      </div>
+
       <RecommendationBanner
         products={alsoBoughtProducts}
         title="Also bought together KMC recommendation"
         productClick={eventClick}
       />
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={buy}
-        disabled={cart.items.length === 0}
-      >
-        Buy products
-      </Button>
     </Container>
   )
 }

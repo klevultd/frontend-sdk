@@ -29,6 +29,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
 import SearchIcon from "@mui/icons-material/Search"
+import { LoadingIndicator } from "./loadingIndicator"
 
 let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
@@ -299,7 +300,9 @@ export function QuickSearch() {
                   ))}
                 </Grid>
               </React.Fragment>
-            ) : null}
+            ) : (
+              <LoadingIndicator />
+            )}
           </div>
         </Paper>
       </Popper>

@@ -19,7 +19,7 @@ export function CartContextProvider(props: { children: any }) {
 
   const add = (product: KlevuRecord) => {
     items.push(product)
-    setItems(items)
+    setItems(Array.from(items))
   }
 
   const remove = (id: string) => {
@@ -27,7 +27,7 @@ export function CartContextProvider(props: { children: any }) {
       items.findIndex((p) => p.id === id),
       1
     )
-    setItems(items)
+    setItems(Array.from(items))
   }
 
   const clear = () => {

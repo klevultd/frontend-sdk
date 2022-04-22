@@ -5,25 +5,38 @@ import { Outlet } from "react-router-dom"
 import { SnackbarProvider } from "notistack"
 
 import { createTheme, ThemeProvider } from "@mui/material/styles"
-import { lightBlue, green } from "@mui/material/colors"
 import { CartContextProvider } from "./cartContext"
+import { Footer } from "./components/footer"
 
 const theme = createTheme({
   palette: {
-    primary: green,
-    secondary: lightBlue,
+    primary: {
+      main: "#97C73E",
+    },
+    secondary: {
+      main: "#2b556e",
+    },
+  },
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+    h1: {
+      fontSize: "4rem",
+    },
   },
 })
 
 export function App() {
   return (
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={3} autoHideDuration={1000}>
       <CartContextProvider>
         <ThemeProvider theme={theme}>
           <ResponsiveAppBar />
           <Box p={2} style={{ marginTop: "80px" }}>
             <Outlet />
           </Box>
+          <Footer />
         </ThemeProvider>
       </CartContextProvider>
     </SnackbarProvider>

@@ -10,6 +10,10 @@ import { CartButton } from "./cartbutton"
 import { Divider } from "@mui/material"
 
 const pages = ["Men", "Women"]
+const emojis = {
+  Men: "🙎‍♂️",
+  Women: "🙍‍♀️",
+}
 
 const ResponsiveAppBar = () => {
   return (
@@ -37,11 +41,23 @@ const ResponsiveAppBar = () => {
             </div>
           </Link>
           <Box
-            sx={{ display: "flex", flexDirection: "row", marginRight: "auto" }}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              marginRight: "auto",
+              marginLeft: "8px",
+              gap: "8px",
+            }}
           >
             {pages.map((page) => (
               <Link key={page} to={`/category/${page}`}>
-                <Button sx={{ my: 2, display: "block" }}>{page}</Button>
+                <Button
+                  sx={{ my: 2, display: "block" }}
+                  variant="outlined"
+                  color="secondary"
+                >
+                  {emojis[page]} {page}
+                </Button>
               </Link>
             ))}
           </Box>
