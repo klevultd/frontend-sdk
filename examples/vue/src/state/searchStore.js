@@ -9,6 +9,7 @@ const useSearch = defineStore("search-store", {
       products: [],
       options: [],
       sliders: [],
+      similarProducts: [],
       sorting: KlevuSearchSorting.Relevance,
       homeFilterExcludes: [
         "inventory_item_id",
@@ -26,6 +27,10 @@ const useSearch = defineStore("search-store", {
       this.products =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
     },
+    setSimilar(arr) {
+      this.similarProducts =
+        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
+    },
     setOptions(arr) {
       this.options =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
@@ -40,6 +45,7 @@ const useSearch = defineStore("search-store", {
       this.setProducts([])
       this.setOptions([])
       this.setSliders([])
+      this.setSimilar([])
     },
   },
 })
