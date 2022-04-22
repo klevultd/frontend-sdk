@@ -1,54 +1,60 @@
 <script setup>
-import { ref } from 'vue'
+import { nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import useCart from '../state/cartStore';
-import { KlevuFetch, products, similarProducts } from "@klevu/core"
+import useSearch from '../state/searchStore';
+import { KlevuFetch, products as getProducts, similarProducts } from "@klevu/core"
 
+const searchStore = useSearch();
 const cartStore = useCart();
 const route = useRoute()
 
-defineProps({
-  msg: String
-})
+searchStore.setProducts([])
 
-const Products = []
+const fetchProduct = async function () {
+  const res = await KlevuFetch(getProducts([route.params.id]))
+  searchStore.setProducts(res.queriesById("products")?.records ?? [])
 
-const fetchProduct = async function() {
-    const res = await KlevuFetch(products([route.params.id]))
-    Products.push(res.queriesById("products")?.records?.[0])
-    console.log(Products)
-    //setProduct(product)
+  //const similarRes = await KlevuFetch(similarProducts([product]))
 
-    //const similarRes = await KlevuFetch(similarProducts([product]))
+  //setSimilar(similarRes.queriesById("similar")?.records)
+}
 
-    //setSimilar(similarRes.queriesById("similar")?.records)
+const addToCart = function () {
+  cartStore.addProduct(searchStore.products[0], 1)
 }
 
 fetchProduct()
 
-const count = ref(0)
 </script>
 
 <template>
-  <div v-for="product in Products" :key="product.id" class="product-page-wrapper">
+  <div v-for="product in searchStore.products" :key="product.id" class="product-page-wrapper">
     <div class="product-wrapper flex flex-col lg:flex-row">
-      <div class="product-image lg:p-20 lg:w-1/2 flex justify-end items-center">
+      <div class="product-image lg:p-20 lg:w-1/2 flex justify-center lg:justify-end items-center">
         <img :src="product.imageUrl.toString().replace('_medium', '')">
       </div>
       <div class="lg:p-20 lg:w-1/2">
-        <div>
+        <div class="px-6 max-w-xs mx-auto md:max-w-lg">
           <h2 class="text-xl pb-3">{{ product.name }}</h2>
-          <div class="pb-3">{{ new Intl.NumberFormat(undefined, { style: 'currency', currency: product.currency }).format(product.price) }}</div>
+          <div class="pb-3">{{
+            new Intl.NumberFormat(undefined, {
+              style: 'currency', currency: product.currency
+            }).format(product.price)
+          }}</div>
           <div class="pb-3">{{ product.shortDesc }}</div>
+          <div class="pb-3">
+            <button @click="addToCart" class="btn block mx-auto">Add to Cart</button>
+          </div>
         </div>
       </div>
     </div>
-    <!-- this is the product page "{{ $route.params.id }}" -->
   </div>
 </template>
 
 <style scoped>
 .product-image img {
   max-width: 60%;
+  @apply p-3 m-3 border;
 }
 </style>

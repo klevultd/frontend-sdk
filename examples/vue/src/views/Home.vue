@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue'
-import { onBeforeRouteUpdate } from 'vue-router'
-import useSearch from '../state/searchStore';
-import Product from '../components/Product.vue';
-import Option from '../components/Option.vue';
-import Slider from '../components/Slider.vue';
-import FacetToggle from '../components/FacetToggle.vue';
+import { ref } from "vue"
+import { onBeforeRouteUpdate } from "vue-router"
+import useSearch from "../state/searchStore"
+import Product from "../components/Product.vue"
+import Option from "../components/Option.vue"
+import Slider from "../components/Slider.vue"
+import FacetToggle from "../components/FacetToggle.vue"
 import {
   applyFilterWithManager,
   FilterManager,
@@ -15,16 +15,19 @@ import {
   KlevuSearchSorting,
   listFilters,
   trendingProducts,
-} from "@klevu/core";
+} from "@klevu/core"
 
-const searchStore = useSearch();
-const manager = new FilterManager();
+const searchStore = useSearch()
+const manager = new FilterManager()
 let prevRes
-const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+const vw = Math.max(
+  document.documentElement.clientWidth || 0,
+  window.innerWidth || 0
+)
 
 searchStore.resetSearch()
 
-const openFacets = ref(vw >= 1024 ? true : false);
+const openFacets = ref(vw >= 1024 ? true : false)
 
 const initialFetch = async () => {
   const res = await KlevuFetch(
@@ -49,7 +52,7 @@ const initialFetch = async () => {
   )
   prevRes = res
 
-  const searchResult = res.queriesById('search')
+  const searchResult = res.queriesById("search")
   if (!searchResult) {
     return
   }
@@ -58,7 +61,6 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
-
 }
 
 const fetchMore = async () => {
@@ -67,16 +69,13 @@ const fetchMore = async () => {
   })
   searchStore.setProducts([
     ...searchStore.products,
-    ...(nextRes.queriesById('search').records ?? []),
+    ...(nextRes.queriesById("search").records ?? []),
   ])
   prevRes = nextRes
   searchStore.showMore = Boolean(nextRes.next)
 }
 
-document.addEventListener(
-  KlevuDomEvents.FilterSelectionUpdate,
-  initialFetch
-)
+document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, initialFetch)
 
 onBeforeRouteUpdate((to, from) => {
   document.removeEventListener(
@@ -89,7 +88,7 @@ const toggleFacets = () => {
   openFacets.value = !openFacets.value
 }
 
-const updateSort = e => {
+const updateSort = (e) => {
   searchStore.sorting = e.target.value
   initialFetch()
 }
@@ -99,14 +98,15 @@ const productClick = product => {
 }
 
 initialFetch()
-
 </script>
 
 <template>
-  <div class="loading-message" v-show="!searchStore.products.length">Loading products...</div>
+  <div class="loading-message" v-show="!searchStore.products.length">
+    Loading products...
+  </div>
   <div class="homepage-wrapper" v-show="searchStore.products.length">
     <section class="filter-section">
-      <div class="facets border p-6">
+      <div class="facets p-6" :class="{ border: openFacets }">
         <FacetToggle :handler="toggleFacets" :open="openFacets" :vw="vw" />
         <div v-show="openFacets">
           <Option
@@ -126,10 +126,18 @@ initialFetch()
     </section>
     <section class="results-section">
       <div class="sorting-options">
-        <select class="border py-2 px-3" v-model="searchStore.sorting" @change="updateSort">
+        <select
+          class="border py-2 px-3"
+          v-model="searchStore.sorting"
+          @change="updateSort"
+        >
           <option :value="KlevuSearchSorting.Relevance">Relevance</option>
-          <option :value="KlevuSearchSorting.PriceAsc">Price: Low to high</option>
-          <option :value="KlevuSearchSorting.PriceDesc">Price: Hight to low</option>
+          <option :value="KlevuSearchSorting.PriceAsc">
+            Price: Low to high
+          </option>
+          <option :value="KlevuSearchSorting.PriceDesc">
+            Price: Hight to low
+          </option>
         </select>
       </div>
       <div class="product-results">
@@ -153,20 +161,25 @@ initialFetch()
   max-width: 1200px;
   @apply flex flex-col lg:flex-row mx-auto mt-6 mb-12;
 }
+
 .filter-section {
   @apply px-5 lg:w-1/4 mt-12 w-96 mx-auto;
 }
+
 .facets {
   max-height: 1000px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 .results-section {
   @apply mt-12 lg:mt-0 lg:w-3/4;
 }
+
 .sorting-options {
   @apply px-6 text-center lg:text-left pb-6 lg:pb-0;
 }
+
 .product-results {
   max-width: 1000px;
   @apply md:flex md:flex-wrap mx-auto;
