@@ -8,7 +8,7 @@ import {
   search,
   KlevuResultEvent,
   sendSearchEvent,
-  personalisation
+  personalisation,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -215,6 +215,7 @@ export function SearchResultPage() {
                 ]}
                 max={parseInt(s.max)}
                 min={parseInt(s.min)}
+                valueLabelDisplay="on"
               />
             </div>
           </React.Fragment>

@@ -228,6 +228,7 @@ export function CategoryPage() {
                 max={parseInt(s.max)}
                 min={parseInt(s.min)}
                 onChange={deboucnedSlider(s.key)}
+                valueLabelDisplay="on"
               />
             </div>
           </React.Fragment>
