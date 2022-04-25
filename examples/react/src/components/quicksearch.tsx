@@ -33,7 +33,12 @@ import { LoadingIndicator } from "./loadingIndicator"
 
 let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
-export function QuickSearch() {
+type Props = {
+  label: string
+  enablePersonalisation?: boolean
+}
+
+export function QuickSearch(props: Props) {
   const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState("")
   const [products, setProducts] = useState<KlevuRecord[]>([])
@@ -56,6 +61,8 @@ export function QuickSearch() {
     setProducts([])
   }, [location])
 
+  const searchModifiers = props.enablePersonalisation ? [personalisation()] : []
+
   const doSearch = async (term: string) => {
     if (term.length < 3) {
       setProducts([])
@@ -70,7 +77,7 @@ export function QuickSearch() {
           limit: 6,
           typeOfRecords: [KlevuTypeOfRecord.Product],
         },
-        personalisation()
+        ...searchModifiers
       ),
       suggestions(term)
     )
@@ -89,16 +96,12 @@ export function QuickSearch() {
   const fetchEmptySuggestions = async () => {
     handleLastSearchesUpdate()
 
-    if (trendProducts.length > 0) {
-      return
-    }
-
     const res = await KlevuFetch(
       trendingProducts(
         {
           limit: 3,
         },
-        personalisation()
+        ...searchModifiers
       )
     )
     setTrendingProducts(res.queriesById("trendingProducts")?.records ?? [])
@@ -164,6 +167,7 @@ export function QuickSearch() {
         style={{
           color: "#fff",
         }}
+        label={props.label}
         value={searchValue}
         variant="filled"
         size="small"

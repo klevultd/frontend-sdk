@@ -61,8 +61,23 @@ const ResponsiveAppBar = () => {
               </Link>
             ))}
           </Box>
-          <QuickSearch />
-          <Divider />
+          <Divider
+            flexItem
+            orientation="vertical"
+            style={{ margin: "0 8px" }}
+          />
+          <QuickSearch label="Quick Search" />
+          <Divider
+            flexItem
+            orientation="vertical"
+            style={{ margin: "0 8px" }}
+          />
+          <QuickSearch label="QS with personalisation" enablePersonalisation />
+          <Divider
+            flexItem
+            orientation="vertical"
+            style={{ margin: "0 8px" }}
+          />
           <CartButton />
         </Toolbar>
       </Container>
