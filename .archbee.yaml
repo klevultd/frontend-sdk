@@ -1,3 +1,4 @@
-root: ./packages/klevu-core/docs
+root: ./packages/klevu-core
 structure:
-  readme: modules.md
+  readme: README.md
+  reference: docs/modules.md
