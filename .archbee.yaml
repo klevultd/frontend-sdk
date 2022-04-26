@@ -2,3 +2,4 @@ root: ./packages/klevu-core
 structure:
   readme: README.md
   reference: docs/modules.md
+  assets: images
