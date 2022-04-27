@@ -9,10 +9,12 @@ import { Link } from "react-router-dom"
 import { CartButton } from "./cartbutton"
 import { Divider } from "@mui/material"
 
-const pages = ["Men", "Women"]
+export const pages = ["Men", "Women", "Men's shoes"]
+export const links = ["Men", "Women", "men;shoes"]
 const emojis = {
   Men: "🙎‍♂️",
   Women: "🙍‍♀️",
+  "Men's shoes": "👞",
 }
 
 const ResponsiveAppBar = () => {
@@ -21,24 +23,15 @@ const ResponsiveAppBar = () => {
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Link to="/">
-            <div
+            <img
+              src="/logo-green.png"
+              alt="Klevu"
               style={{
-                background: "white",
-                padding: "6px",
-                borderRadius: "50%",
-                height: "30px",
-                width: "30px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "1px solid green",
+                height: "20px",
+                marginRight: "10px",
+                marginTop: "7px",
               }}
-            >
-              <img
-                style={{ maxHeight: 20 }}
-                src="/cropped-klevu-icon-192x192.png"
-              ></img>
-            </div>
+            />
           </Link>
           <Box
             sx={{
@@ -49,8 +42,8 @@ const ResponsiveAppBar = () => {
               gap: "8px",
             }}
           >
-            {pages.map((page) => (
-              <Link key={page} to={`/category/${page}`}>
+            {pages.map((page, index) => (
+              <Link key={page} to={`/category/${links[index]}`}>
                 <Button
                   sx={{ my: 2, display: "block" }}
                   variant="outlined"

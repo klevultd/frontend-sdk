@@ -72,7 +72,7 @@ export function HomePage() {
           }}
         >
           This is a demo store build with React, React Router, Material UI and
-          @klevu/core. It should all the features of the @klevu/core and
+          @klevu/core. It displays all the features of the @klevu/core and
           implement everything as a example.
         </Typography>
 

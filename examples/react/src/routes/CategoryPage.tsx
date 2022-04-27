@@ -7,6 +7,8 @@ import {
   FilterManager,
   categoryMerchandising,
   sendMerchandisingViewEvent,
+  kmcRecommendation,
+  personalisation,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -39,12 +41,17 @@ import { Product } from "../components/product"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import FilterIcon from "@mui/icons-material/FilterAlt"
 import debounce from "lodash.debounce"
+import { RecommendationBanner } from "../components/recommendationBanner"
+import { links, pages } from "../components/appbar"
 
 const drawerWidth = 240
 const manager = new FilterManager()
 let prevRes: KlevuFetchResponse
 let productClickManager: ReturnType<
   KlevuResultEvent["getCategoryMerchandisingClickSendEvent"]
+>
+let recommendationClickManager: ReturnType<
+  KlevuResultEvent["getRecommendationClickSendEvent"]
 >
 
 export function CategoryPage() {
@@ -57,6 +64,9 @@ export function CategoryPage() {
     manager.sliders
   )
   const [products, setProducts] = useState<KlevuRecord[]>([])
+  const [recommendationProducts, setRecommendationProducts] = useState<
+    KlevuRecord[]
+  >([])
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
   const [itemsOnPage, setItemsOnPage] = useState(36)
@@ -90,11 +100,20 @@ export function CategoryPage() {
         }),
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id)
+      ),
+      kmcRecommendation(
+        "k-c0013603-1783-4293-bf80-7b3002587dcb",
+        {
+          categoryPath: params.id,
+          id: "recommendation",
+        },
+        personalisation()
       )
     )
     prevRes = res
 
     const searchResult = res.queriesById("search")
+    const recommendationResult = res.queriesById("recommendation")
 
     if (!searchResult) {
       return
@@ -106,6 +125,13 @@ export function CategoryPage() {
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
+
+    if (recommendationResult) {
+      recommendationClickManager =
+        recommendationResult.getRecommendationClickSendEvent()
+
+      setRecommendationProducts(recommendationResult.records ?? [])
+    }
   }, [sorting, params.id, itemsOnPage])
 
   const fetchMore = async () => {
@@ -149,6 +175,8 @@ export function CategoryPage() {
     debounce((event, value) => {
       manager.updateSlide(key, value[0], value[1])
     }, 300)
+
+  const title = pages[links.findIndex((p) => p === params.id)]
 
   return (
     <Container maxWidth="lg">
@@ -234,7 +262,18 @@ export function CategoryPage() {
           </React.Fragment>
         ))}
       </Drawer>
+
+      <RecommendationBanner
+        products={recommendationProducts}
+        title="Category product recommendations personalised"
+        productClick={recommendationClickManager}
+      />
+
       <div id="main">
+        <Typography variant="h4" style={{ margin: "3rem 0" }}>
+          Category merchendising for {title}
+        </Typography>
+
         <Box
           sx={{
             display: "flex",

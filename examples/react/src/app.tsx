@@ -8,28 +8,57 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { CartContextProvider } from "./cartContext"
 import { Footer } from "./components/footer"
 
+const primary = "#97C73E"
+const secondary = "#2b556e"
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#97C73E",
+      main: primary,
+      contrastText: "#fff",
     },
     secondary: {
-      main: "#2b556e",
+      main: secondary,
+    },
+    success: {
+      main: primary,
     },
   },
   typography: {
+    fontFamily: '"Poppins", sans-serif',
     button: {
       textTransform: "none",
     },
     h1: {
       fontSize: "4rem",
+      fontWeight: "normal",
+      color: secondary,
+    },
+    h2: {
+      color: secondary,
+      fontWeight: "normal",
+    },
+    h3: {
+      color: secondary,
+      fontWeight: "normal",
+    },
+    h4: {
+      color: secondary,
+      fontWeight: "normal",
     },
   },
 })
 
 export function App() {
   return (
-    <SnackbarProvider maxSnack={3} autoHideDuration={1000}>
+    <SnackbarProvider
+      maxSnack={3}
+      autoHideDuration={1000}
+      anchorOrigin={{
+        horizontal: "right",
+        vertical: "top",
+      }}
+    >
       <CartContextProvider>
         <ThemeProvider theme={theme}>
           <ResponsiveAppBar />
