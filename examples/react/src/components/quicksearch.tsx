@@ -47,6 +47,7 @@ export function QuickSearch(props: Props) {
     KlevuLastSearches.get()
   )
   const [sugs, setSuggestions] = useState<string[]>([])
+  const [categories, setCategories] = useState<string[]>([])
   const popupState = usePopupState({
     variant: "popper",
     popupId: "searchPopup",
@@ -79,6 +80,12 @@ export function QuickSearch(props: Props) {
         },
         ...searchModifiers
       ),
+      search(term, {
+        id: "categories",
+        limit: 5,
+        typeOfRecords: [KlevuTypeOfRecord.Category],
+        groupBy: "name",
+      }),
       suggestions(term)
     )
 
@@ -90,6 +97,9 @@ export function QuickSearch(props: Props) {
       result
         .suggestionsById("suggestions")
         ?.suggestions.map((i) => i.suggest) ?? []
+    )
+    setCategories(
+      result.queriesById("categories")?.records.map((r) => r.name) ?? []
     )
   }
 
@@ -265,6 +275,20 @@ export function QuickSearch(props: Props) {
                   {lastSearches.map((s, i) => (
                     <li key={i} style={{ padding: 0 }}>
                       {s.term}
+                    </li>
+                  ))}
+                </ul>
+              </React.Fragment>
+            ) : null}
+            {categories.length > 0 ? (
+              <React.Fragment>
+                <Typography variant="h6">Found categories</Typography>
+                <ul
+                  style={{ margin: 0, listStyleType: "none", padding: "12px" }}
+                >
+                  {categories.map((s, i) => (
+                    <li key={i} style={{ padding: 0 }}>
+                      {s}
                     </li>
                   ))}
                 </ul>

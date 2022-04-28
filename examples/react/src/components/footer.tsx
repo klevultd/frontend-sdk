@@ -5,14 +5,16 @@ export function Footer() {
     <div
       style={{
         marginTop: "2rem",
-        background: "#333",
-        color: "#ccc",
+        background: "#0c4563",
+        color: "#fff",
         padding: "3rem",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" style={{ fontSize: "12px" }}>
         <Box m="3">
-          <Typography variant="h6">Links</Typography>
+          <Typography variant="h6" style={{ color: "#fff" }}>
+            Links
+          </Typography>
           <ul>
             <li>
               <a href="https://www.klevu.com" target="_blank">

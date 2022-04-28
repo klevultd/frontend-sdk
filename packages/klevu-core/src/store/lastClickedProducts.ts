@@ -1,3 +1,5 @@
+import { notEmpty } from "../utils/notEmpty.js"
+import { KlevuRecord } from "../models/KlevuRecord.js"
 import { isBrowser } from "../utils/isBrowser.js"
 
 const ONE_HOUR = 36000000
@@ -13,6 +15,7 @@ class LastClickedProducts {
   private clicks: Array<{
     ts: Date
     id: string
+    product?: KlevuRecord
   }> = []
 
   private save() {
@@ -39,10 +42,11 @@ class LastClickedProducts {
    *
    * @param productId
    */
-  click(productId: string) {
+  click(productId: string, product?: KlevuRecord) {
     this.clicks.push({
       ts: new Date(),
       id: productId,
+      product,
     })
 
     this.save()
@@ -56,6 +60,18 @@ class LastClickedProducts {
    */
   getLastClickedLatestsFirst(n = 20): string[] {
     return Array.from(this.clicks.map((i) => i.id))
+      .reverse()
+      .slice(0, n)
+  }
+
+  /**
+   * Get last clicked products returning last clicked product first
+   *
+   * @param n amount of products to return
+   * @returns
+   */
+  getProducts(n = 10) {
+    return Array.from(this.clicks.map((i) => i.product).filter(notEmpty))
       .reverse()
       .slice(0, n)
   }

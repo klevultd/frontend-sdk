@@ -46,6 +46,14 @@ const theme = createTheme({
       color: secondary,
       fontWeight: "normal",
     },
+    h5: {
+      color: secondary,
+      fontWeight: "normal",
+    },
+    h6: {
+      color: secondary,
+      fontWeight: "normal",
+    },
   },
 })
 
