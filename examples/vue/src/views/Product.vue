@@ -32,16 +32,15 @@ const addToCart = function () {
 
 fetchProduct()
 const recommendationClickHandler = function (product, index) {
-  console.log(product, index)
-  // KlevuEvents.recommendationClick(
-  //   {
-  //     recsKey: "product-similar",
-  //     logic: KMCRecommendationLogic.Similar,
-  //     title: "Similar products",
-  //   },
-  //   product,
-  //   index
-  // )
+  KlevuEvents.recommendationClick(
+    {
+      recsKey: "product-similar",
+      logic: KMCRecommendationLogic.Similar,
+      title: "Similar products",
+    },
+    product,
+    index
+  )
 }
 </script>
 
