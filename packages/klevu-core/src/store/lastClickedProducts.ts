@@ -1,6 +1,7 @@
 import { notEmpty } from "../utils/notEmpty.js"
 import { KlevuRecord } from "../models/KlevuRecord.js"
 import { isBrowser } from "../utils/isBrowser.js"
+import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
 
 const ONE_HOUR = 36000000
 const STORAGE_KEY = "klevu-last-clicks"
@@ -50,6 +51,17 @@ class LastClickedProducts {
     })
 
     this.save()
+
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.ClickEventSent, {
+          detail: {
+            productId,
+            product,
+          },
+        })
+      )
+    }
   }
 
   /**
@@ -111,4 +123,4 @@ class LastClickedProducts {
   }
 }
 
-export const lastClickedProducts = new LastClickedProducts()
+export const KlevuLastClickedProducts = new LastClickedProducts()

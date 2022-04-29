@@ -2,7 +2,7 @@ import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
-import { lastClickedProducts } from "../../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 
 type Options = {
@@ -30,7 +30,7 @@ export function recentlyViewed(
     ...options,
   }
 
-  const lastProducts = lastClickedProducts.getLastClickedLatestsFirst(
+  const lastProducts = KlevuLastClickedProducts.getLastClickedLatestsFirst(
     opts.amount
   )
   const query: KlevuBaseQuery = {

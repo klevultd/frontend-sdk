@@ -1,6 +1,6 @@
 import { KlevuConfig, KlevuFetch, search } from "../../index.js"
 import { categoryMerchandising } from "../../queries/index.js"
-import { lastClickedProducts } from "../../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { personalisation } from "./personalisation.js"
 
 beforeEach(() => {
@@ -31,7 +31,7 @@ test("Category personalisation test", async () => {
   expect(firstRecords.length).toBeGreaterThan(2)
 
   for (const r of initRecords) {
-    lastClickedProducts.click(r.id)
+    KlevuLastClickedProducts.click(r.id)
   }
 
   // @todo values are not different...

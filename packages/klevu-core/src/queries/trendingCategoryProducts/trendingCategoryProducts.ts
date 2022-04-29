@@ -1,7 +1,7 @@
 import { KlevuTrendingProductsQuery } from "../../models/KlevuTrendingProductsQuery.js"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
-import { lastClickedProducts } from "../../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import {
   KlevuAnyTypeOfRecord,
   KlevuTypeOfRecord,
@@ -55,9 +55,10 @@ export function trendingCategoryProducts(
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: lastClickedProducts
-                  .getLastClickedLatestsFirst()
-                  .map((id) => ({ id })),
+                records:
+                  KlevuLastClickedProducts.getLastClickedLatestsFirst().map(
+                    (id) => ({ id })
+                  ),
               },
             ],
           }

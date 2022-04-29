@@ -11,4 +11,9 @@ export enum KlevuDomEvents {
    * When filter manager selection has changed
    */
   FilterSelectionUpdate = "klevu-filter-selection-updates",
+
+  /**
+   * When any click event has been fired on the page
+   */
+  ClickEventSent = "klevu-click-event-sent",
 }

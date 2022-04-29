@@ -4,7 +4,7 @@ import {
   KlevuRecord,
   KlevuTypeOfSearch,
 } from "../index.js"
-import { lastClickedProducts } from "../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../store/lastClickedProducts.js"
 import { KlevuLastSearches } from "../store/lastSearches.js"
 import {
   KlevuEventV1CategoryProductClick,
@@ -92,7 +92,7 @@ export class KlevuEvents {
     product: KlevuRecord,
     productIndexInList: number
   ) {
-    lastClickedProducts.click(product.id, product)
+    KlevuLastClickedProducts.click(product.id, product)
     KlevuEventV2([
       {
         event: "select_recs_list",
@@ -128,7 +128,7 @@ export class KlevuEvents {
     searchTerm?: string,
     variantId?: string
   ) {
-    lastClickedProducts.click(product.id, product)
+    KlevuLastClickedProducts.click(product.id, product)
     KlevuEventV1ProductTracking({
       klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_type: "clicked",
@@ -200,7 +200,7 @@ export class KlevuEvents {
     variantId?: string,
     productPosition?: number
   ) {
-    lastClickedProducts.click(product.id, product)
+    KlevuLastClickedProducts.click(product.id, product)
     KlevuEventV1CategoryProductClick({
       klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_categoryName: categoryTitle,

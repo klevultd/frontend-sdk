@@ -3,7 +3,7 @@ import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
 import { KlevuAllRecordQueries } from "../../models/KlevuAllRecordQueries.js"
-import { lastClickedProducts } from "../../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { personalisation } from "../../modifiers/personalisation/personalisation.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
@@ -162,7 +162,7 @@ export async function kmcRecommendation(
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Home &&
     kmcConfig.metadata.logic === KMCRecommendationLogic.RecentlyViewed
   ) {
-    const last10 = lastClickedProducts.getLastClickedLatestsFirst(10)
+    const last10 = KlevuLastClickedProducts.getLastClickedLatestsFirst(10)
     for (const q of queries) {
       if (!q.settings) {
         q.settings = {}

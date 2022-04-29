@@ -4,7 +4,7 @@ import {
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../../index.js"
-import { lastClickedProducts } from "../../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 
 type Options = {
   limit: number
@@ -43,11 +43,12 @@ export function alsoViewed(
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records: lastClickedProducts
-                  .getLastClickedLatestsFirst()
-                  .map((pId) => ({
-                    id: pId,
-                  })),
+                records:
+                  KlevuLastClickedProducts.getLastClickedLatestsFirst().map(
+                    (pId) => ({
+                      id: pId,
+                    })
+                  ),
               },
             ],
           },

@@ -38,8 +38,7 @@ import {
 import { useParams } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-import FilterIcon from "@mui/icons-material/FilterAlt"
+import { ChevronLeft, Filter } from "@mui/icons-material"
 import debounce from "lodash.debounce"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { links, pages } from "../components/appbar"
@@ -195,7 +194,7 @@ export function CategoryPage() {
         onClose={handleDrawerClose}
       >
         <IconButton onClick={handleDrawerClose}>
-          <ChevronLeftIcon />
+          <ChevronLeft />
         </IconButton>
         <Divider />
         {options.map((o, i) => (
@@ -289,7 +288,7 @@ export function CategoryPage() {
             size="small"
             style={{ margin: "12px" }}
           >
-            <FilterIcon />
+            <Filter />
           </IconButton>
           <Divider orientation="vertical" flexItem />
           <Select

@@ -1,6 +1,6 @@
 import { KlevuFetchModifer } from "../index.js"
 import { KlevuTypeOfRecord, KlevuRecordFields } from "../../models/index.js"
-import { lastClickedProducts } from "../../store/lastClickedProducts.js"
+import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 
 /**
  * Enable personlisation to the query
@@ -46,13 +46,13 @@ export function personalisation(options?: {
         } else if (klevuFunc.klevuFunctionId === "categoryMerchandising") {
           const { category } = klevuFunc.params as { category: string }
 
-          records = lastClickedProducts
-            .getCategoryPersonalisationIds(category)
-            .map((id) => ({ id }))
+          records = KlevuLastClickedProducts.getCategoryPersonalisationIds(
+            category
+          ).map((id) => ({ id }))
         } else {
-          records = lastClickedProducts
-            .getLastClickedLatestsFirst()
-            .map((id) => ({ id }))
+          records = KlevuLastClickedProducts.getLastClickedLatestsFirst().map(
+            (id) => ({ id })
+          )
         }
 
         q.settings.context = {
