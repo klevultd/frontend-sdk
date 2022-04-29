@@ -9,8 +9,10 @@ RUN chmod +x /entrypoint.sh
 
 ADD . .
 
+RUN rm -f package-lock.json
 RUN npm install
 
 ENTRYPOINT ["/entrypoint.sh"]
 
+EXPOSE 3001
 CMD ["npm", "start"]
