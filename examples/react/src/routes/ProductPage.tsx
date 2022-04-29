@@ -8,7 +8,7 @@ import {
   kmcRecommendation,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState, Fragment } from "react"
 import { useParams } from "react-router-dom"
 import { useCart } from "../cartContext"
 import { RecommendationBanner } from "../components/recommendationBanner"
@@ -77,7 +77,45 @@ export function ProductPage() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <p>{product.shortDesc || "No description 🤷‍♂️"}</p>
+            {product.shortDesc.length > 0 ? (
+              <p>{product.shortDesc}</p>
+            ) : (
+              <Fragment>
+                <p>
+                  Perfect for leveling up your ecommerce style. Klevu Product
+                  Discovery Platform captures e-commerce shoppers’ intent and
+                  then leverages AI to provide highly relevant, personalized
+                  online search and discovery experiences that go well beyond
+                  keywords typed into the search box.
+                </p>
+                <p>
+                  Using Klevu on your customer-facing ecommerce interfaces can
+                  help you improve revenue per web session by 37%.
+                </p>
+                <p>
+                  The Klevu Product Discovery Suite is equipped with the
+                  following:
+                </p>
+                <ul>
+                  <li>
+                    Harness the power of real-time shopper intent with Smart
+                    Search
+                  </li>
+                  <li>
+                    Balance AI magic and strategic control with Smart Category
+                    Merchandising
+                  </li>
+                  <li>
+                    Delight shoppers with hyper-relevant Smart Product
+                    Recommendations
+                  </li>
+                </ul>
+                <p>
+                  Using Klevu on your ecommerce website may cause product
+                  discovery superpowers.
+                </p>
+              </Fragment>
+            )}
             <Button variant="contained" color="primary" onClick={addToCart}>
               Add to cart
             </Button>
