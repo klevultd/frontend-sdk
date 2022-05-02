@@ -39,7 +39,7 @@ export function Footer() {
             variant="body2"
             style={{ color: "#fff", textAlign: "center" }}
           >
-            &copy; Klevu
+            &copy; Klevu 2022
           </Typography>
         </Box>
       </Container>
