@@ -35,6 +35,12 @@ export function Footer() {
               </a>
             </li>
           </ul>
+          <Typography
+            variant="body2"
+            style={{ color: "#fff", textAlign: "center" }}
+          >
+            &copy; Klevu
+          </Typography>
         </Box>
       </Container>
     </div>
