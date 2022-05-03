@@ -6,13 +6,14 @@
   "scripts": {
     "start": "vite --port 3001 --host",
     "build": "vite build",
+    "serve": "vite preview --port 3001 --host",
     "qoc": "",
     "test": "echo 'No tests'"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@klevu/core": "^0.0.24",
+    "@klevu/core": "^0.0.25",
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "lodash.debounce": "^4.0.8",

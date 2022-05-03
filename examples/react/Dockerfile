@@ -11,8 +11,9 @@ ADD . .
 
 RUN rm -f package-lock.json
 RUN npm install
+RUN npm run build
 
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 3001
-CMD ["npm", "start"]
+CMD ["npm", "run", "serve"]

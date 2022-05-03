@@ -45,7 +45,7 @@ const ResponsiveAppBar = () => {
             {pages.map((page, index) => (
               <Link key={page} to={`/category/${links[index]}`}>
                 <Button
-                  sx={{ my: 2, display: "block" }}
+                  sx={{ my: 2, display: "block", whiteSpace: "nowrap" }}
                   variant="outlined"
                   color="secondary"
                 >

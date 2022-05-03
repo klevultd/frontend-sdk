@@ -37,7 +37,7 @@ import {
 import { useLocation } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
-import { ChevronLeft, Filter } from "@mui/icons-material"
+import { ChevronLeft, FilterAlt } from "@mui/icons-material"
 
 const drawerWidth = 240
 const manager = new FilterManager()
@@ -50,8 +50,13 @@ function useQuery() {
   return React.useMemo(() => new URLSearchParams(search), [search])
 }
 
-export function SearchResultPage() {
+type Props = {
+  personlisationEnabled?: boolean
+}
+
+export function SearchResultPage(props: Props) {
   const query = useQuery()
+  const location = useLocation()
 
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
@@ -73,6 +78,25 @@ export function SearchResultPage() {
   }
 
   const initialFetch = useCallback(async () => {
+    const modifiers = [
+      listFilters({
+        include: ["color", "", "size", "designer"],
+        rangeFilterSettings: [
+          {
+            key: "klevu_price",
+            minMax: true,
+          },
+        ],
+        filterManager: manager,
+      }),
+      applyFilterWithManager(manager),
+      sendSearchEvent(),
+    ]
+
+    if (props.personlisationEnabled) {
+      modifiers.push(personalisation())
+    }
+
     const functions = [
       search(
         query.get("q"),
@@ -81,18 +105,7 @@ export function SearchResultPage() {
           limit: 36,
           sort: sorting,
         },
-        listFilters({
-          rangeFilterSettings: [
-            {
-              key: "klevu_price",
-              minMax: true,
-            },
-          ],
-          filterManager: manager,
-        }),
-        applyFilterWithManager(manager),
-        sendSearchEvent(),
-        personalisation()
+        ...modifiers
       ),
     ]
     const res = await KlevuFetch(...functions)
@@ -146,7 +159,7 @@ export function SearchResultPage() {
 
   useEffect(() => {
     initialFetch()
-  }, [sorting, query])
+  }, [sorting, query, location.pathname])
 
   return (
     <Container maxWidth="lg">
@@ -236,7 +249,7 @@ export function SearchResultPage() {
             size="small"
             style={{ margin: "12px" }}
           >
-            <Filter />
+            <FilterAlt />
           </IconButton>
           <Divider orientation="vertical" flexItem />
           <Select

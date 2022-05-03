@@ -38,7 +38,7 @@ import {
 import { useParams } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
-import { ChevronLeft, Filter } from "@mui/icons-material"
+import { ChevronLeft, FilterAlt } from "@mui/icons-material"
 import debounce from "lodash.debounce"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { links, pages } from "../components/appbar"
@@ -100,14 +100,10 @@ export function CategoryPage() {
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id)
       ),
-      kmcRecommendation(
-        "k-c0013603-1783-4293-bf80-7b3002587dcb",
-        {
-          categoryPath: params.id,
-          id: "recommendation",
-        },
-        personalisation()
-      )
+      kmcRecommendation("k-c0013603-1783-4293-bf80-7b3002587dcb", {
+        categoryPath: params.id,
+        id: "recommendation",
+      })
     )
     prevRes = res
 
@@ -288,7 +284,7 @@ export function CategoryPage() {
             size="small"
             style={{ margin: "12px" }}
           >
-            <Filter />
+            <FilterAlt />
           </IconButton>
           <Divider orientation="vertical" flexItem />
           <Select

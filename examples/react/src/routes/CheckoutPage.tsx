@@ -1,11 +1,9 @@
 import {
-  fallback,
   KlevuEvents,
   KlevuFetch,
   KlevuRecord,
   kmcRecommendation,
   personalisation,
-  trendingProducts,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCart } from "../cartContext"
@@ -14,7 +12,6 @@ import groupBy from "lodash.groupby"
 import { useSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
-import { flexbox } from "@mui/system"
 
 let eventClick
 
@@ -28,27 +25,16 @@ export function CheckoutPage() {
 
   const fetchData = async () => {
     const result = await KlevuFetch(
-      kmcRecommendation(
-        "k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6",
-        {
-          id: "alsobought",
-          cartProductIds: cart.items.map((p) => p.id),
-        },
-        fallback(trendingProducts()),
-        personalisation()
-      )
+      kmcRecommendation("k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6", {
+        id: "alsobought",
+        cartProductIds: cart.items.map((p) => p.id),
+      })
     )
 
-    const fallbackResults = result.queriesById("alsobought-fallback")
-
-    if (fallbackResults) {
-      setAlsoBoughtProducts(fallbackResults.records)
-    } else {
-      eventClick = result
-        .queriesById("alsobought")
-        .getRecommendationClickSendEvent()
-      setAlsoBoughtProducts(result.queriesById("alsobought").records)
-    }
+    eventClick = result
+      .queriesById("alsobought")
+      .getRecommendationClickSendEvent()
+    setAlsoBoughtProducts(result.queriesById("alsobought").records)
   }
 
   useEffect(() => {

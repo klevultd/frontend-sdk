@@ -28,7 +28,11 @@ ReactDOM.render(
         <Route path="category" element={<CategoryPage />}>
           <Route path=":id" element={<CategoryPage />} />
         </Route>
-        <Route path="search" element={<SearchResultPage />} />
+        <Route
+          path="search"
+          element={<SearchResultPage personlisationEnabled />}
+        />
+        <Route path="searchnopersonalisation" element={<SearchResultPage />} />
         <Route path="cart" element={<CheckoutPage />} />
       </Route>
     </Routes>

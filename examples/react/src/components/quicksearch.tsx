@@ -119,7 +119,10 @@ export function QuickSearch(props: Props) {
 
   const onKeydown: React.KeyboardEventHandler<HTMLDivElement> = (event) => {
     if (event.key === "Enter") {
-      navigate("/search?q=" + encodeURIComponent(searchValue))
+      const url = props.enablePersonalisation
+        ? "/search?q="
+        : "/searchnopersonalisation?q="
+      navigate(url + encodeURIComponent(searchValue))
       popupState.close()
     }
   }
