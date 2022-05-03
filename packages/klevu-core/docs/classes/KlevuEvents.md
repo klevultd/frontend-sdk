@@ -44,7 +44,7 @@ Tell Klevu what products where bought by the user
 
 #### Defined in
 
-[events/KlevuEvents.ts:20](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L20)
+[events/KlevuEvents.ts:29](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L29)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:188](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L188)
+[events/KlevuEvents.ts:196](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L196)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:165](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L165)
+[events/KlevuEvents.ts:173](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L173)
 
 ___
 
@@ -105,7 +105,7 @@ When product has been clicked in the recommendation banner
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `recommendationMetadata` | `Pick`<{ `enabled`: `boolean` ; `logic`: `string` ; `maxProducts`: `number` ; `pageType`: `string` ; `productThreshold`: `number` ; `recsKey`: `string` ; `title`: `string`  }, ``"recsKey"`` \| ``"logic"`` \| ``"title"``\> | Metadata of what recommendation is clicked |
+| `recommendationMetadata` | [`RecommendationViewEventMetaData`](../modules.md#recommendationvieweventmetadata) | Metadata of what recommendation is clicked |
 | `product` | [`KlevuRecord`](../modules.md#klevurecord) | Which product is clicked in the list |
 | `productIndexInList` | `number` | What is the index of the product in the list. Starting from 1 |
 
@@ -115,7 +115,7 @@ When product has been clicked in the recommendation banner
 
 #### Defined in
 
-[events/KlevuEvents.ts:82](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L82)
+[events/KlevuEvents.ts:90](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L90)
 
 ___
 
@@ -129,7 +129,7 @@ When recommendation banner is shown in the page
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `recommendationMetadata` | `Pick`<{ `enabled`: `boolean` ; `logic`: `string` ; `maxProducts`: `number` ; `pageType`: `string` ; `productThreshold`: `number` ; `recsKey`: `string` ; `title`: `string`  }, ``"recsKey"`` \| ``"logic"`` \| ``"title"``\> | - |
+| `recommendationMetadata` | [`RecommendationViewEventMetaData`](../modules.md#recommendationvieweventmetadata) | - |
 | `products` | [`KlevuRecord`](../modules.md#klevurecord)[] | List of all products that are shown |
 
 #### Returns
@@ -138,7 +138,7 @@ When recommendation banner is shown in the page
 
 #### Defined in
 
-[events/KlevuEvents.ts:48](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L48)
+[events/KlevuEvents.ts:57](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L57)
 
 ___
 
@@ -163,7 +163,7 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Defined in
 
-[events/KlevuEvents.ts:144](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L144)
+[events/KlevuEvents.ts:152](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L152)
 
 ___
 
@@ -187,4 +187,4 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/KlevuEvents.ts:118](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/KlevuEvents.ts#L118)
+[events/KlevuEvents.ts:126](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L126)

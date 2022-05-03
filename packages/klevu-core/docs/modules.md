@@ -6,6 +6,7 @@
 
 ### Enumerations
 
+- [KMCRecommendationLogic](enums/KMCRecommendationLogic.md)
 - [KlevuDomEvents](enums/KlevuDomEvents.md)
 - [KlevuFilterOrder](enums/KlevuFilterOrder.md)
 - [KlevuFilterType](enums/KlevuFilterType.md)
@@ -20,6 +21,12 @@
 - [FilterManager](classes/FilterManager.md)
 - [KlevuConfig](classes/KlevuConfig.md)
 - [KlevuEvents](classes/KlevuEvents.md)
+
+### Interfaces
+
+- [KMCBannerRootObject](interfaces/KMCBannerRootObject.md)
+- [KMCMapsRootObject](interfaces/KMCMapsRootObject.md)
+- [KMCRootObject](interfaces/KMCRootObject.md)
 
 ### Type aliases
 
@@ -50,10 +57,12 @@
 - [KlevuSuggestionQuery](modules.md#klevusuggestionquery)
 - [KlevuSuggestionResult](modules.md#klevusuggestionresult)
 - [KlevuTrendingProductsQuery](modules.md#klevutrendingproductsquery)
+- [RecommendationViewEventMetaData](modules.md#recommendationvieweventmetadata)
 - [SearchOptions](modules.md#searchoptions)
 
 ### Variables
 
+- [KlevuLastClickedProducts](modules.md#klevulastclickedproducts)
 - [KlevuLastSearches](modules.md#klevulastsearches)
 
 ### KlevuFetch Functions
@@ -64,6 +73,7 @@
 
 - [categoryMerchandising](modules.md#categorymerchandising)
 - [products](modules.md#products)
+- [raw](modules.md#raw)
 - [search](modules.md#search)
 - [suggestions](modules.md#suggestions)
 - [trendingProducts](modules.md#trendingproducts)
@@ -71,6 +81,7 @@
 ### RecommendationQuery Functions
 
 - [boughtTogether](modules.md#boughttogether)
+- [kmcRecommendation](modules.md#kmcrecommendation)
 - [newArrivals](modules.md#newarrivals)
 - [recentlyViewed](modules.md#recentlyviewed)
 - [searchCategory](modules.md#searchcategory)
@@ -93,6 +104,7 @@
 - [fallback](modules.md#fallback)
 - [include](modules.md#include)
 - [listFilters](modules.md#listfilters)
+- [personalisation](modules.md#personalisation)
 - [top](modules.md#top)
 
 ### Other Functions
@@ -101,9 +113,8 @@
 - [KlevuKMCSettings](modules.md#klevukmcsettings)
 - [debug](modules.md#debug)
 - [injectFilterResult](modules.md#injectfilterresult)
-- [kmcRecommendation](modules.md#kmcrecommendation)
-- [raw](modules.md#raw)
 - [sendMerchandisingViewEvent](modules.md#sendmerchandisingviewevent)
+- [sendRecommendationViewEvent](modules.md#sendrecommendationviewevent)
 
 ## Type aliases
 
@@ -122,7 +133,7 @@
 
 #### Defined in
 
-[modifiers/applyFilter/applyFilter.ts:5](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L5)
+[modifiers/applyFilter/applyFilter.ts:5](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L5)
 
 ___
 
@@ -134,7 +145,7 @@ All possible record queries that can be used with [KlevuFetch](modules.md#klevuf
 
 #### Defined in
 
-[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
+[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
 
 ___
 
@@ -146,7 +157,7 @@ Backend API parameters relevat for Also Bought Recommendation query
 
 #### Defined in
 
-[models/KlevuAlsoBoughtQuery.ts:8](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuAlsoBoughtQuery.ts#L8)
+[models/KlevuAlsoBoughtQuery.ts:8](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuAlsoBoughtQuery.ts#L8)
 
 ___
 
@@ -158,7 +169,7 @@ Klevu API query specific for Also Viewed recommendation
 
 #### Defined in
 
-[models/KlevuAlsoViewedQuery.ts:7](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuAlsoViewedQuery.ts#L7)
+[models/KlevuAlsoViewedQuery.ts:7](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuAlsoViewedQuery.ts#L7)
 
 ___
 
@@ -168,7 +179,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:9](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L9)
+[models/KlevuTypeOfRecord.ts:9](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L9)
 
 ___
 
@@ -190,7 +201,7 @@ Raw response from Klevu API
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:140](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L140)
+[models/KlevuApiRawResponse.ts:140](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L140)
 
 ___
 
@@ -209,7 +220,7 @@ Apply Filter type for Klevu base query
 
 #### Defined in
 
-[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
+[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
 
 ___
 
@@ -235,7 +246,7 @@ Generic
 
 #### Defined in
 
-[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
+[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
 
 ___
 
@@ -272,7 +283,7 @@ ___
 
 #### Defined in
 
-[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
+[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
 
 ___
 
@@ -289,7 +300,7 @@ ___
 
 #### Defined in
 
-[models/KlevuBaseQuerySettingsQuery.ts:1](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuBaseQuerySettingsQuery.ts#L1)
+[models/KlevuBaseQuerySettingsQuery.ts:1](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuBaseQuerySettingsQuery.ts#L1)
 
 ___
 
@@ -306,13 +317,13 @@ What functions passed to KlevuFetch should implement
 | `configOverride?` | [`KlevuConfig`](classes/KlevuConfig.md) | Pass down the if config has been overridden. |
 | `klevuFunctionId` | `KlevuFetchTypeId` | Id of function. Used only internally |
 | `modifiers?` | `KlevuFetchModifer`[] | List of modifiers set for this function |
-| `params?` | `any` | Anything you wish to pass down as params incoming to function |
+| `params?` | `unknown` | Anything you wish to pass down as params incoming to function |
 | `queries?` | [`KlevuAllRecordQueries`](modules.md#klevuallrecordqueries)[] | What queries should KlevuFetch do to backend |
 | `suggestions?` | [`KlevuSuggestionQuery`](modules.md#klevusuggestionquery)[] | What suggestions queries should do to backend |
 
 #### Defined in
 
-[queries/index.ts:23](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/index.ts#L23)
+[queries/index.ts:22](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/index.ts#L22)
 
 ___
 
@@ -333,7 +344,7 @@ Tools for operating results in easier way.
 
 #### Defined in
 
-[models/KlevuFetchResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuFetchResponse.ts#L9)
+[models/KlevuFetchResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuFetchResponse.ts#L9)
 
 ___
 
@@ -343,7 +354,7 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:30](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L30)
+[models/KlevuApiRawResponse.ts:30](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L30)
 
 ___
 
@@ -353,7 +364,7 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:55](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L55)
+[models/KlevuApiRawResponse.ts:55](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L55)
 
 ___
 
@@ -363,7 +374,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:116](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L116)
+[queries/kmcRecommendation/kmcRecommendation.ts:119](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L119)
 
 ___
 
@@ -380,7 +391,7 @@ ___
 
 #### Defined in
 
-[store/lastSearches.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/store/lastSearches.ts#L4)
+[store/lastSearches.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/store/lastSearches.ts#L4)
 
 ___
 
@@ -404,7 +415,7 @@ ___
 
 #### Defined in
 
-[models/KlevuListFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuListFilter.ts#L4)
+[models/KlevuListFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuListFilter.ts#L4)
 
 ___
 
@@ -423,7 +434,7 @@ ___
 
 #### Defined in
 
-[models/KlevuPayload.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuPayload.ts#L4)
+[models/KlevuPayload.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuPayload.ts#L4)
 
 ___
 
@@ -452,7 +463,7 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
+[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
 
 ___
 
@@ -470,7 +481,7 @@ ___
 
 #### Defined in
 
-[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
+[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
 
 ___
 
@@ -528,7 +539,7 @@ Allow custom keys for records
 
 #### Defined in
 
-[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuRecord.ts#L3)
+[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuRecord.ts#L3)
 
 ___
 
@@ -538,7 +549,7 @@ ___
 
 #### Defined in
 
-[models/KlevuRecordFields.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuRecordFields.ts#L4)
+[models/KlevuRecordFields.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuRecordFields.ts#L4)
 
 ___
 
@@ -556,7 +567,7 @@ ___
 
 #### Defined in
 
-[models/KlevuResultEvent.ts:1](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuResultEvent.ts#L1)
+[models/KlevuResultEvent.ts:1](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuResultEvent.ts#L1)
 
 ___
 
@@ -566,7 +577,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
+[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
 
 ___
 
@@ -576,7 +587,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSuggestionQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuSuggestionQuery.ts#L4)
+[models/KlevuSuggestionQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuSuggestionQuery.ts#L4)
 
 ___
 
@@ -593,7 +604,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSuggestionResult.ts:1](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuSuggestionResult.ts#L1)
+[models/KlevuSuggestionResult.ts:1](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuSuggestionResult.ts#L1)
 
 ___
 
@@ -603,7 +614,17 @@ ___
 
 #### Defined in
 
-[models/KlevuTrendingProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/models/KlevuTrendingProductsQuery.ts#L4)
+[models/KlevuTrendingProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuTrendingProductsQuery.ts#L4)
+
+___
+
+### RecommendationViewEventMetaData
+
+Ƭ **RecommendationViewEventMetaData**: `Pick`<[`KlevuKMCRecommendations`](modules.md#klevukmcrecommendations)[``"metadata"``], ``"recsKey"`` \| ``"logic"`` \| ``"title"``\>
+
+#### Defined in
+
+[events/KlevuEvents.ts:18](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuEvents.ts#L18)
 
 ___
 
@@ -615,9 +636,19 @@ Search options to modify the search query.
 
 #### Defined in
 
-[queries/search/search.ts:15](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/search/search.ts#L15)
+[queries/search/search.ts:15](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/search/search.ts#L15)
 
 ## Variables
+
+### KlevuLastClickedProducts
+
+• `Const` **KlevuLastClickedProducts**: `LastClickedProducts`
+
+#### Defined in
+
+[store/lastClickedProducts.ts:126](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/store/lastClickedProducts.ts#L126)
+
+___
 
 ### KlevuLastSearches
 
@@ -632,7 +663,7 @@ Search options to modify the search query.
 
 #### Defined in
 
-[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/store/lastSearches.ts#L17)
+[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/store/lastSearches.ts#L17)
 
 ## KlevuFetch Functions
 
@@ -656,7 +687,7 @@ Tools to operate results and get next results [KlevuFetchResponse](modules.md#kl
 
 #### Defined in
 
-[connection/klevuFetch.ts:27](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/connection/klevuFetch.ts#L27)
+[connection/klevuFetch.ts:27](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/connection/klevuFetch.ts#L27)
 
 ___
 
@@ -682,7 +713,7 @@ Fetch products for a category listing page.
 
 #### Defined in
 
-[queries/categoryMerchandising/categoryMerchandising.ts:28](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L28)
+[queries/categoryMerchandising/categoryMerchandising.ts:28](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L28)
 
 ___
 
@@ -705,7 +736,30 @@ Fetches list of products. All fields are fetched.
 
 #### Defined in
 
-[queries/products/products.ts:16](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/products/products.ts#L16)
+[queries/products/products.ts:16](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/products/products.ts#L16)
+
+___
+
+### raw
+
+▸ **raw**(`query`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+
+Take control and write any kind of query you wish to Klevu API. For experts only.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `query` | [`KlevuBaseQuery`](modules.md#klevubasequery) |
+| `...modifiers` | `KlevuFetchModifer`[] |
+
+#### Returns
+
+[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+
+#### Defined in
+
+[queries/raw/raw.ts:13](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/raw/raw.ts#L13)
 
 ___
 
@@ -729,7 +783,7 @@ Create a basic search to Klevu backend. Id for this query is `search`
 
 #### Defined in
 
-[queries/search/search.ts:39](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/search/search.ts#L39)
+[queries/search/search.ts:39](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/search/search.ts#L39)
 
 ___
 
@@ -752,7 +806,7 @@ Return suggestion on given search term
 
 #### Defined in
 
-[queries/suggestions/suggestions.ts:24](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/suggestions/suggestions.ts#L24)
+[queries/suggestions/suggestions.ts:24](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/suggestions/suggestions.ts#L24)
 
 ___
 
@@ -786,7 +840,7 @@ See {@link KlevuFetchFunction}
 
 #### Defined in
 
-[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
+[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
 
 ___
 
@@ -812,7 +866,31 @@ Bought together recommendation on checkout page
 
 #### Defined in
 
-[queries/boughtTogether/boughtTogether.ts:23](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/boughtTogether/boughtTogether.ts#L23)
+[queries/boughtTogether/boughtTogether.ts:23](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/boughtTogether/boughtTogether.ts#L23)
+
+___
+
+### kmcRecommendation
+
+▸ **kmcRecommendation**(`recommendationId`, `options?`, ...`modifiers`): `Promise`<[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)\>
+
+Fetches products based on
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `recommendationId` | `string` | Id of recommendation in the backend |
+| `options?` | `Partial`<`Options`\> | - |
+| `...modifiers` | `KlevuFetchModifer`[] | - |
+
+#### Returns
+
+`Promise`<[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)\>
+
+#### Defined in
+
+[queries/kmcRecommendation/kmcRecommendation.ts:132](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L132)
 
 ___
 
@@ -836,7 +914,7 @@ Get new arrival recommendations
 
 #### Defined in
 
-[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
+[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
 
 ___
 
@@ -859,7 +937,7 @@ Recently viewed products
 
 #### Defined in
 
-[queries/recentlyViewedProducts/recentlyViewedProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/recentlyViewedProducts/recentlyViewedProducts.ts#L24)
+[queries/recentlyViewedProducts/recentlyViewedProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/recentlyViewedProducts/recentlyViewedProducts.ts#L24)
 
 ___
 
@@ -882,7 +960,7 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
+[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
 
 ___
 
@@ -905,7 +983,7 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
+[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
 
 ___
 
@@ -929,7 +1007,7 @@ Fetch similiar products based on list of ids
 
 #### Defined in
 
-[queries/similarProducts/similarProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L24)
+[queries/similarProducts/similarProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L24)
 
 ___
 
@@ -953,7 +1031,7 @@ Return trending recommendations
 
 #### Defined in
 
-[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
+[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
 
 ___
 
@@ -972,7 +1050,7 @@ all results from search.
 
 #### Defined in
 
-[modifiers/sendSearchEvent/sendSearchEvent.ts:11](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/sendSearchEvent/sendSearchEvent.ts#L11)
+[modifiers/sendSearchEvent/sendSearchEvent.ts:11](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/sendSearchEvent/sendSearchEvent.ts#L11)
 
 ___
 
@@ -996,7 +1074,7 @@ Apply filters to query based on Filter Manager
 
 #### Defined in
 
-[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
+[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
 
 ___
 
@@ -1016,7 +1094,7 @@ ___
 
 #### Defined in
 
-[modifiers/applyFilter/applyFilter.ts:21](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L21)
+[modifiers/applyFilter/applyFilter.ts:21](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L21)
 
 ___
 
@@ -1041,7 +1119,7 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
+[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
 
 ___
 
@@ -1063,7 +1141,7 @@ Boost products based on a filters
 
 #### Defined in
 
-[modifiers/boostWithFilters/boostWithFilters.ts:10](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/boostWithFilters/boostWithFilters.ts#L10)
+[modifiers/boostWithFilters/boostWithFilters.ts:10](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/boostWithFilters/boostWithFilters.ts#L10)
 
 ___
 
@@ -1087,7 +1165,7 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithKeywords/boostWithKeywords.ts:10](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/boostWithKeywords/boostWithKeywords.ts#L10)
+[modifiers/boostWithKeywords/boostWithKeywords.ts:10](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/boostWithKeywords/boostWithKeywords.ts#L10)
 
 ___
 
@@ -1111,7 +1189,7 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithRecords/boostWithRecords.ts:10](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/boostWithRecords/boostWithRecords.ts#L10)
+[modifiers/boostWithRecords/boostWithRecords.ts:10](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/boostWithRecords/boostWithRecords.ts#L10)
 
 ___
 
@@ -1133,7 +1211,7 @@ If original query doesn't return enough results then fallback query is run added
 
 #### Defined in
 
-[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
+[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
 
 ___
 
@@ -1155,7 +1233,7 @@ Force include product ids on result
 
 #### Defined in
 
-[modifiers/include/include.ts:10](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/include/include.ts#L10)
+[modifiers/include/include.ts:10](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/include/include.ts#L10)
 
 ___
 
@@ -1177,7 +1255,31 @@ List filters that can affect given query
 
 #### Defined in
 
-[modifiers/listFilters/listFilters.ts:33](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/listFilters/listFilters.ts#L33)
+[modifiers/listFilters/listFilters.ts:33](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/listFilters/listFilters.ts#L33)
+
+___
+
+### personalisation
+
+▸ **personalisation**(`options?`): `KlevuFetchModifer`
+
+Enable personlisation to the query
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options?` | `Object` |  |
+| `options.fields?` | [`KlevuRecordFields`](modules.md#klevurecordfields)[] | This is an optional field. By default, Klevu will analyse all attributes of the records the customer has interacted with, in order to determine the common patterns. If you prefer to focus on particular aspects, for example brand or price, specify those attributes within this object. |
+| `options.lastClickedProductIds?` | `string`[] | Override last clicked product id's with your own selection. First item should be the latest product clicked. By default @klevu/core uses internal store to keep track of last clicked products. It is important use KlevuEvent class to store all interactions. |
+
+#### Returns
+
+`KlevuFetchModifer`
+
+#### Defined in
+
+[modifiers/personalisation/personalisation.ts:12](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/personalisation/personalisation.ts#L12)
 
 ___
 
@@ -1199,7 +1301,7 @@ Add given ids as first items in results
 
 #### Defined in
 
-[modifiers/top/top.ts:10](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/top/top.ts#L10)
+[modifiers/top/top.ts:10](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/top/top.ts#L10)
 
 ___
 
@@ -1222,21 +1324,29 @@ ___
 
 #### Defined in
 
-[events/FetchResultEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/events/FetchResultEvents.ts#L9)
+[events/FetchResultEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/FetchResultEvents.ts#L9)
 
 ___
 
 ### KlevuKMCSettings
 
-▸ **KlevuKMCSettings**(): `Promise`<{ `banner`: `KMCBannerRootObject` ; `maps`: `KMCMapsRootObject` ; `root`: `KMCRootObject`  }\>
+▸ **KlevuKMCSettings**(`ignoreCache?`): `Promise`<`any`\>
+
+Fetches KMC settings from server. Caches data for a day.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `ignoreCache?` | `boolean` | If true, will ignore cache and fetch data from server |
 
 #### Returns
 
-`Promise`<{ `banner`: `KMCBannerRootObject` ; `maps`: `KMCMapsRootObject` ; `root`: `KMCRootObject`  }\>
+`Promise`<`any`\>
 
 #### Defined in
 
-[connection/kmc.ts:9](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/connection/kmc.ts#L9)
+[connection/kmc.ts:19](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/connection/kmc.ts#L19)
 
 ___
 
@@ -1250,7 +1360,7 @@ ___
 
 #### Defined in
 
-[modifiers/debug/debug.ts:3](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/debug/debug.ts#L3)
+[modifiers/debug/debug.ts:3](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/debug/debug.ts#L3)
 
 ___
 
@@ -1273,54 +1383,7 @@ Do not expose this to library users
 
 #### Defined in
 
-[modifiers/injectFilterResult/injectFilterResult.ts:11](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/injectFilterResult/injectFilterResult.ts#L11)
-
-___
-
-### kmcRecommendation
-
-▸ **kmcRecommendation**(`recommendationId`, `options?`, ...`modifiers`): `Promise`<[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)\>
-
-Fetches products based on
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `recommendationId` | `string` | Id of recommendation in the backend |
-| `options?` | `Partial`<`Options`\> | - |
-| `...modifiers` | `KlevuFetchModifer`[] | - |
-
-#### Returns
-
-`Promise`<[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)\>
-
-#### Defined in
-
-[queries/kmcRecommendation/kmcRecommendation.ts:128](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L128)
-
-___
-
-### raw
-
-▸ **raw**(`query`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
-
-Take control and write any kind of query you wish to Klevu API. For experts only.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `query` | [`KlevuBaseQuery`](modules.md#klevubasequery) |
-| `...modifiers` | `KlevuFetchModifer`[] |
-
-#### Returns
-
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
-
-#### Defined in
-
-[queries/raw/raw.ts:12](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/queries/raw/raw.ts#L12)
+[modifiers/injectFilterResult/injectFilterResult.ts:11](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/injectFilterResult/injectFilterResult.ts#L11)
 
 ___
 
@@ -1340,4 +1403,25 @@ ___
 
 #### Defined in
 
-[modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts:10](https://github.com/klevultd/frontend-sdk/blob/1e22b7c/packages/klevu-core/src/modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts#L10)
+[modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts:9](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts#L9)
+
+___
+
+### sendRecommendationViewEvent
+
+▸ **sendRecommendationViewEvent**(`title`, `eventData?`): `KlevuFetchModifer`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `title` | `string` |
+| `eventData?` | [`RecommendationViewEventMetaData`](modules.md#recommendationvieweventmetadata) |
+
+#### Returns
+
+`KlevuFetchModifer`
+
+#### Defined in
+
+[modifiers/sendRecommendationViewEvent/sendRecommendationViewEvent.ts:21](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/modifiers/sendRecommendationViewEvent/sendRecommendationViewEvent.ts#L21)
