@@ -6,6 +6,7 @@ import {
   similarProducts,
   KMCRecommendationLogic,
   kmcRecommendation,
+  sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCallback, useEffect, useState, Fragment } from "react"
@@ -29,10 +30,14 @@ export function ProductPage() {
     const res = await KlevuFetch(
       products([params.id]),
       similarProducts([params.id]),
-      kmcRecommendation("k-efd5337c-051e-44a2-810c-e23de2be513f", {
-        id: "alsobought",
-        currentProductId: params.id,
-      })
+      kmcRecommendation(
+        "k-efd5337c-051e-44a2-810c-e23de2be513f",
+        {
+          id: "alsobought",
+          currentProductId: params.id,
+        },
+        sendRecommendationViewEvent("Also bought together KMC recommendation")
+      )
     )
     const product = res.queriesById("products")?.records?.[0]
     const sim = res.queriesById("similar")

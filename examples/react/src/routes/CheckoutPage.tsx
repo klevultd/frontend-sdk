@@ -4,6 +4,7 @@ import {
   KlevuRecord,
   kmcRecommendation,
   personalisation,
+  sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCart } from "../cartContext"
@@ -25,10 +26,14 @@ export function CheckoutPage() {
 
   const fetchData = async () => {
     const result = await KlevuFetch(
-      kmcRecommendation("k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6", {
-        id: "alsobought",
-        cartProductIds: cart.items.map((p) => p.id),
-      })
+      kmcRecommendation(
+        "k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6",
+        {
+          id: "alsobought",
+          cartProductIds: cart.items.map((p) => p.id),
+        },
+        sendRecommendationViewEvent("Also bought together KMC recommendation")
+      )
     )
 
     eventClick = result

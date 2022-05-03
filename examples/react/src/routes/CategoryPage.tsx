@@ -9,6 +9,7 @@ import {
   sendMerchandisingViewEvent,
   kmcRecommendation,
   personalisation,
+  sendRecommendationViewEvent,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -100,10 +101,14 @@ export function CategoryPage() {
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id)
       ),
-      kmcRecommendation("k-c0013603-1783-4293-bf80-7b3002587dcb", {
-        categoryPath: params.id,
-        id: "recommendation",
-      })
+      kmcRecommendation(
+        "k-c0013603-1783-4293-bf80-7b3002587dcb",
+        {
+          categoryPath: params.id,
+          id: "recommendation",
+        },
+        sendRecommendationViewEvent("Category product recommendations")
+      )
     )
     prevRes = res
 
@@ -260,7 +265,7 @@ export function CategoryPage() {
 
       <RecommendationBanner
         products={recommendationProducts}
-        title="Category product recommendations personalised"
+        title="Category product recommendations"
         productClick={recommendationClickManager}
       />
 
