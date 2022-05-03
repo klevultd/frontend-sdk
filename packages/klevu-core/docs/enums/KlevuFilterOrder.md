@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[models/KlevuFilterOrder.ts:2](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuFilterOrder.ts#L2)
+[models/KlevuFilterOrder.ts:2](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuFilterOrder.ts#L2)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[models/KlevuFilterOrder.ts:3](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/models/KlevuFilterOrder.ts#L3)
+[models/KlevuFilterOrder.ts:3](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuFilterOrder.ts#L3)

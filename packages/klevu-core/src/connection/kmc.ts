@@ -13,6 +13,7 @@ const ONE_DAY = 86_400_000
 /**
  * Fetches KMC settings from server. Caches data for a day.
  *
+ * @category KlevuFetch
  * @param ignoreCache If true, will ignore cache and fetch data from server
  * @returns
  */

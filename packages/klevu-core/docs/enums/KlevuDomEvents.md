@@ -2,8 +2,6 @@
 
 # Enumeration: KlevuDomEvents
 
-Global custom document events that @klevu/core sends
-
 ## Table of contents
 
 ### Enumeration members
@@ -22,7 +20,7 @@ When any click event has been fired on the page
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:18](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuDomEvents.ts#L18)
+[events/KlevuDomEvents.ts:19](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/events/KlevuDomEvents.ts#L19)
 
 ___
 
@@ -34,7 +32,7 @@ When filter manager selection has changed
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:13](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuDomEvents.ts#L13)
+[events/KlevuDomEvents.ts:14](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/events/KlevuDomEvents.ts#L14)
 
 ___
 
@@ -46,4 +44,4 @@ When list of last searched terms update
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:8](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/events/KlevuDomEvents.ts#L8)
+[events/KlevuDomEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/events/KlevuDomEvents.ts#L9)

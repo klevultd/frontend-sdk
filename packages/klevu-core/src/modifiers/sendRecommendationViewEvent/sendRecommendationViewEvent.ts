@@ -15,7 +15,10 @@ const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
 ]
 
 /**
+ * This modifier should be used with all recommendation requests. It sends
+ * correct event data to klevu backend on recommendation view
  *
+ * @category Modifiers
  * @returns
  */
 export function sendRecommendationViewEvent(

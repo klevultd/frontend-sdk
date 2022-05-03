@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[connection/kmcmodels/KMCBanner.ts:21](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/connection/kmcmodels/KMCBanner.ts#L21)
+[connection/kmcmodels/KMCBanner.ts:21](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/connection/kmcmodels/KMCBanner.ts#L21)

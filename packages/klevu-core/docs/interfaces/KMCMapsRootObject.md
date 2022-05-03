@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[connection/kmcmodels/KMCMaps.ts:7](https://github.com/klevultd/frontend-sdk/blob/323c956/packages/klevu-core/src/connection/kmcmodels/KMCMaps.ts#L7)
+[connection/kmcmodels/KMCMaps.ts:7](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/connection/kmcmodels/KMCMaps.ts#L7)

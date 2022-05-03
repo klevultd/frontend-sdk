@@ -6,6 +6,15 @@ import {
 } from "../queries/index.js"
 import { KlevuEvents } from "./KlevuEvents.js"
 
+/**
+ * Automatically injects events helpers to klevuFetch result object.
+ *
+ * @ignore
+ * @category KlevuEvents
+ * @param object
+ * @param func
+ * @returns
+ */
 export function FetchResultEvents(
   object: KlevuQueryResult,
   func: KlevuFetchFunctionReturnValue

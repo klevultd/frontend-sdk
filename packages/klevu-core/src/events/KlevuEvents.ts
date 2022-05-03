@@ -20,6 +20,9 @@ export type RecommendationViewEventMetaData = Pick<
   "recsKey" | "logic" | "title"
 >
 
+/**
+ * @category KlevuEvents
+ */
 export class KlevuEvents {
   /**
    * Tell Klevu what products where bought by the user

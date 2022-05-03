@@ -1,4 +1,5 @@
 /**
+ * @category KlevuEvents
  * Global custom document events that @klevu/core sends
  */
 export enum KlevuDomEvents {

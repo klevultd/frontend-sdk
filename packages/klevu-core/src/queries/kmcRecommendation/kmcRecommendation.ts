@@ -159,10 +159,6 @@ export async function kmcRecommendation(
     })
   )
 
-  if (modifiers.some((m) => m.klevuModifierId === "personalisation")) {
-    throw new Error("Cannot enable personalisation on kmcRecommendation query")
-  }
-
   if (
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Home &&
     kmcConfig.metadata.logic === KMCRecommendationLogic.RecentlyViewed
@@ -177,6 +173,7 @@ export async function kmcRecommendation(
     }
   }
   if (
+    kmcConfig.metadata.pageType === KMCRecommendationPagetype.Category &&
     [
       KMCRecommendationLogic.Trending,
       KMCRecommendationLogic.TrendingPersonalized,
@@ -196,12 +193,12 @@ export async function kmcRecommendation(
       }
       q.settings.query.categoryPath = options?.categoryPath
     }
+  }
 
-    if (
-      kmcConfig.metadata.logic === KMCRecommendationLogic.TrendingPersonalized
-    ) {
-      modifiers.push(personalisation())
-    }
+  if (
+    kmcConfig.metadata.logic === KMCRecommendationLogic.TrendingPersonalized
+  ) {
+    modifiers.push(personalisation())
   }
 
   if (

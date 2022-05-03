@@ -21,7 +21,7 @@
     "build:watch": "tsc --watch",
     "build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
     "qoc": "eslint src/",
-    "docs": "typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts",
+    "docs": "rm -rf docs && (typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts || true) && node split_docs.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest src --coverage"
   },
   "author": "Klevu",
