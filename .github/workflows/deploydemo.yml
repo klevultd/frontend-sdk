@@ -16,9 +16,9 @@ env:
   ECR_REPOSITORY: klevu/headless              # set this to your Amazon ECR repository name
   ECS_SERVICE: klevu-headless-demo-srv        # set this to your Amazon ECS service name
   ECS_CLUSTER: klevu-docs                     # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: klevu-headless-demo # set this to the path to your Amazon ECS task definition
+  #ECS_TASK_DEFINITION: klevu-headless-demo # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: klevu-headless-demo           # set this to the name of the container in the
+  #CONTAINER_NAME: klevu-headless-demo           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 jobs:
@@ -55,6 +55,8 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          aws ecs update-service --cluster "${ECS_CLUSTER}" --service "${ECS_SERVICE}" --force-new-deployment
+          
 
       #- name: Fill in the new image ID in the Amazon ECS task definition
       #  id: task-def
