@@ -1,24 +1,23 @@
 # klevulastsearches
-    
-
+      
 • `Const` **KlevuLastSearches**: `Object`
 
 #### Type declaration
 
 | Name | Type |
 | :------ | :------ |
-| `get` | () => [`KlevuLastSearch`](modules.md#klevulastsearch)[] |
+| `get` | () => [`KlevuLastSearch`](klevulastsearch.md)[] |
 | `save` | (`term`: `string`) => `void` |
 
 #### Defined in
 
-[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/store/lastSearches.ts#L17)
+[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/store/lastSearches.ts#L17)
 
 ## KlevuFetch Functions
 
 ### KlevuFetch
 
-▸ **KlevuFetch**(...`functionPromises`): `Promise`<[`KlevuFetchResponse`](modules.md#klevufetchresponse)\>
+▸ **KlevuFetch**(...`functionPromises`): `Promise`<[`KlevuFetchResponse`](klevufetchresponse.md)\>
 
 Function that makes query to KlevuBackend. It can take amount of queries.
 
@@ -26,15 +25,15 @@ Function that makes query to KlevuBackend. It can take amount of queries.
 
 | Name | Type |
 | :------ | :------ |
-| `...functionPromises` | ([`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue) \| `Promise`<[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)\>)[] |
+| `...functionPromises` | ([`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md) \| `Promise`<[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)\>)[] |
 
 #### Returns
 
-`Promise`<[`KlevuFetchResponse`](modules.md#klevufetchresponse)\>
+`Promise`<[`KlevuFetchResponse`](klevufetchresponse.md)\>
 
-Tools to operate results and get next results [KlevuFetchResponse](modules.md#klevufetchresponse)
+Tools to operate results and get next results [KlevuFetchResponse](klevufetchresponse.md)
 
 #### Defined in
 
-[connection/klevuFetch.ts:27](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/connection/klevuFetch.ts#L27)
+[connection/klevuFetch.ts:27](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/connection/klevuFetch.ts#L27)
 

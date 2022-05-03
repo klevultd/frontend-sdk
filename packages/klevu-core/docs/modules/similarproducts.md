@@ -1,23 +1,6 @@
 # similarproducts
-    Query`](modules.md#klevusimilarproductsquery) \| [`KlevuTrendingProductsQuery`](modules.md#klevutrendingproductsquery) \| [`KlevuAlsoViewedQuery`](modules.md#klevualsoviewedquery)
-
-All possible record queries that can be used with [KlevuFetch](modules.md#klevufetch) function
-
-#### Defined in
-
-[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
-
-Query
-
-Ƭ **KlevuSimilarProductsQuery**: [`KlevuBaseQuery`](modules.md#klevubasequery) & { `settings`: { `context`: { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](modules.md#klevuanytypeofrecord)  }[]  }  } ; `typeOfRequest`: [`SimilarProducts`](enums/KlevuTypeOfRequest.md#similarproducts)  }
-
-#### Defined in
-
-[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
-
-
-
-▸ **similarProducts**(`ids`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+      
+▸ **similarProducts**(`ids`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Fetch similiar products based on list of ids
 
@@ -31,9 +14,9 @@ Fetch similiar products based on list of ids
 
 #### Returns
 
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 #### Defined in
 
-[queries/similarProducts/similarProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L24)
+[queries/similarProducts/similarProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L24)
 

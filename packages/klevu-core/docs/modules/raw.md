@@ -1,42 +1,6 @@
 # raw
-    Response
-
-Ƭ **KlevuApiRawResponse**: `Object`
-
-Raw response from Klevu API
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `meta` | { `qTime`: `number` ; `responseCode`: `number`  } |
-| `meta.qTime` | `number` |
-| `meta.responseCode` | `number` |
-| `queryResults?` | [`KlevuQueryResult`](modules.md#klevuqueryresult)[] |
-| `suggestionResults?` | [`KlevuSuggestionResult`](modules.md#klevusuggestionresult)[] |
-
-#### Defined in
-
-[models/KlevuApiRawResponse.ts:140](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L140)
-
-Response`](modules.md#klevuapirawresponse) | Raw response from Klevu API |
-| `next?` | (`override?`: { `filterManager?`: [`FilterManager`](classes/FilterManager.md) ; `limit?`: `number`  }) => `Promise`<[`KlevuFetchResponse`](modules.md#klevufetchresponse)\> | Next function is available if there are more results in the given query. It is optimized function that removes parts from query that might slow down the response and they are not needed after first request. |
-| `queriesById` | (`id`: `string`) => `undefined` \| [`KlevuQueryResult`](modules.md#klevuqueryresult) & [`KlevuResultEvent`](modules.md#klevuresultevent) | Get query result by id |
-| `suggestionsById` | (`id`: `string`) => `undefined` \| [`KlevuSuggestionResult`](modules.md#klevusuggestionresult) | Get suggestion by Id |
-
-#### Defined in
-
-[models/KlevuFetchResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuFetchResponse.ts#L9)
-
-Response.ts:30](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L30)
-
-Response.ts:55](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L55)
-
-Response.ts:75](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
-
-
-
-▸ **raw**(`query`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+      
+▸ **raw**(`query`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Take control and write any kind of query you wish to Klevu API. For experts only.
 
@@ -44,14 +8,14 @@ Take control and write any kind of query you wish to Klevu API. For experts only
 
 | Name | Type |
 | :------ | :------ |
-| `query` | [`KlevuBaseQuery`](modules.md#klevubasequery) |
+| `query` | [`KlevuBaseQuery`](klevubasequery.md) |
 | `...modifiers` | `KlevuFetchModifer`[] |
 
 #### Returns
 
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 #### Defined in
 
-[queries/raw/raw.ts:13](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/raw/raw.ts#L13)
+[queries/raw/raw.ts:13](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/raw/raw.ts#L13)
 

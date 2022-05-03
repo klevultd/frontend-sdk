@@ -1,6 +1,5 @@
 # sendsearchevent
-    
-
+      
 ▸ **sendSearchEvent**(): `KlevuFetchModifer`
 
 This modifier should be used in the case when user hits enter (or presses button) to see
@@ -12,5 +11,5 @@ all results from search.
 
 #### Defined in
 
-[modifiers/sendSearchEvent/sendSearchEvent.ts:11](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/modifiers/sendSearchEvent/sendSearchEvent.ts#L11)
+[modifiers/sendSearchEvent/sendSearchEvent.ts:11](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/modifiers/sendSearchEvent/sendSearchEvent.ts#L11)
 

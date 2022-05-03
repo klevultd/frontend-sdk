@@ -1,7 +1,6 @@
 # searchcms
-    
-
-▸ **searchCms**(`term`, `options?`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+      
+▸ **searchCms**(`term`, `options?`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Search helper function that sets correct settings
 
@@ -10,13 +9,13 @@ Search helper function that sets correct settings
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `term` | `string` | cms page to find |
-| `options?` | `Partial`<[`SearchOptions`](modules.md#searchoptions)\> |  |
+| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> |  |
 
 #### Returns
 
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 #### Defined in
 
-[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
+[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
 

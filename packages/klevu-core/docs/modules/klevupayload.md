@@ -1,6 +1,5 @@
 # klevupayload
-    
-
+      
 Ƭ **KlevuPayload**: `Object`
 
 #### Type declaration
@@ -9,10 +8,10 @@
 | :------ | :------ |
 | `context` | { `apiKeys`: `string`[]  } |
 | `context.apiKeys` | `string`[] |
-| `recordQueries?` | [`KlevuAllRecordQueries`](modules.md#klevuallrecordqueries)[] |
-| `suggestions?` | [`KlevuSuggestionQuery`](modules.md#klevusuggestionquery)[] |
+| `recordQueries?` | [`KlevuAllRecordQueries`](klevuallrecordqueries.md)[] |
+| `suggestions?` | [`KlevuSuggestionQuery`](klevusuggestionquery.md)[] |
 
 #### Defined in
 
-[models/KlevuPayload.ts:4](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuPayload.ts#L4)
+[models/KlevuPayload.ts:4](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuPayload.ts#L4)
 

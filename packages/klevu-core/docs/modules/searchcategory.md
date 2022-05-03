@@ -1,7 +1,6 @@
 # searchcategory
-    
-
-▸ **searchCategory**(`term`, `options?`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+      
+▸ **searchCategory**(`term`, `options?`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Search helper function that sets correct settings
 
@@ -10,13 +9,13 @@ Search helper function that sets correct settings
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `term` | `string` | category to find |
-| `options?` | `Partial`<[`SearchOptions`](modules.md#searchoptions)\> |  |
+| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> |  |
 
 #### Returns
 
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 #### Defined in
 
-[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
+[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
 

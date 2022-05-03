@@ -1,6 +1,5 @@
 # boostwithfiltermanager
-    
-
+      
 ▸ **boostWithFilterManager**(`manager`, `weights`): `KlevuFetchModifer`
 
 Boost query with currect selection of filter manager
@@ -20,5 +19,5 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
+[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
 

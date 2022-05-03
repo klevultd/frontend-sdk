@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:49](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L49)
+[queries/kmcRecommendation/kmcRecommendation.ts:49](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L49)
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:46](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L46)
+[queries/kmcRecommendation/kmcRecommendation.ts:46](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L46)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:44](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L44)
+[queries/kmcRecommendation/kmcRecommendation.ts:44](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L44)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:47](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L47)
+[queries/kmcRecommendation/kmcRecommendation.ts:47](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L47)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:45](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L45)
+[queries/kmcRecommendation/kmcRecommendation.ts:45](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L45)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:48](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L48)
+[queries/kmcRecommendation/kmcRecommendation.ts:48](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L48)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:42](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L42)
+[queries/kmcRecommendation/kmcRecommendation.ts:42](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L42)
 
 ___
 
@@ -93,4 +93,4 @@ ___
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:43](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L43)
+[queries/kmcRecommendation/kmcRecommendation.ts:43](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L43)

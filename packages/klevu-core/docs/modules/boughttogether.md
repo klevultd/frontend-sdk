@@ -1,7 +1,6 @@
 # boughttogether
-    
-
-▸ **boughtTogether**(`productIdsInCart`, `options`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+      
+▸ **boughtTogether**(`productIdsInCart`, `options`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Bought together recommendation on checkout page
 
@@ -15,9 +14,9 @@ Bought together recommendation on checkout page
 
 #### Returns
 
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 #### Defined in
 
-[queries/boughtTogether/boughtTogether.ts:23](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/boughtTogether/boughtTogether.ts#L23)
+[queries/boughtTogether/boughtTogether.ts:23](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/boughtTogether/boughtTogether.ts#L23)
 

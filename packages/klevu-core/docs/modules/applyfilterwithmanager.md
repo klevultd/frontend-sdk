@@ -1,6 +1,5 @@
 # applyfilterwithmanager
-    
-
+      
 ▸ **applyFilterWithManager**(`manager`): `KlevuFetchModifer`
 
 Apply filters to query based on Filter Manager
@@ -17,5 +16,5 @@ Apply filters to query based on Filter Manager
 
 #### Defined in
 
-[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
+[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
 

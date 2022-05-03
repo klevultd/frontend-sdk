@@ -1,27 +1,12 @@
 # klevuqueryresult
-    `](modules.md#klevuqueryresult)[] |
-| `suggestionResults?` | [`KlevuSuggestionResult`](modules.md#klevusuggestionresult)[] |
-
-#### Defined in
-
-[models/KlevuApiRawResponse.ts:140](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L140)
-
-`](modules.md#klevuqueryresult) & [`KlevuResultEvent`](modules.md#klevuresultevent) | Get query result by id |
-| `suggestionsById` | (`id`: `string`) => `undefined` \| [`KlevuSuggestionResult`](modules.md#klevusuggestionresult) | Get suggestion by Id |
-
-#### Defined in
-
-[models/KlevuFetchResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuFetchResponse.ts#L9)
-
-
-
+      
 Ƭ **KlevuQueryResult**: `Object`
 
 #### Type declaration
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `filters?` | ([`KlevuFilterResultOptions`](modules.md#klevufilterresultoptions) \| [`KlevuFilterResultSlider`](modules.md#klevufilterresultslider))[] | Currently available filters |
+| `filters?` | ([`KlevuFilterResultOptions`](klevufilterresultoptions.md) \| [`KlevuFilterResultSlider`](klevufilterresultslider.md))[] | Currently available filters |
 | `id` | `string` | Id used when defining query |
 | `meta` | { `apiKey`: `string` ; `debuggingInformation`: `unknown` ; `isPersonalised`: `boolean` ; `noOfResults`: `number` ; `notificationCode`: `number` ; `offset`: `number` ; `qTime`: `number` ; `searchedTerm`: `string` ; `totalResultsFound`: `number` ; `typeOfSearch`: [`KlevuTypeOfSearch`](enums/KlevuTypeOfSearch.md)  } | - |
 | `meta.apiKey` | `string` | Klevu API key |
@@ -34,19 +19,9 @@
 | `meta.searchedTerm` | `string` | The search term submitted for this query. |
 | `meta.totalResultsFound` | `number` | The total number of results found for this query. |
 | `meta.typeOfSearch` | [`KlevuTypeOfSearch`](enums/KlevuTypeOfSearch.md) | The query type that was executed by Klevu to retrieve the results. |
-| `records` | { `id`: `string`  } & [`KlevuRecord`](modules.md#klevurecord)[] | - |
+| `records` | { `id`: `string`  } & [`KlevuRecord`](klevurecord.md)[] | - |
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
-
-`](modules.md#klevuqueryresult) |
-
-#### Returns
-
-`KlevuFetchModifer`
-
-#### Defined in
-
-[modifiers/injectFilterResult/injectFilterResult.ts:12](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/modifiers/injectFilterResult/injectFilterResult.ts#L12)
+[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
 

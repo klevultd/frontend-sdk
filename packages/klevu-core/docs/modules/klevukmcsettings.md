@@ -1,6 +1,5 @@
 # klevukmcsettings
-    
-
+      
 ▸ **KlevuKMCSettings**(`ignoreCache?`): `Promise`<`any`\>
 
 Fetches KMC settings from server. Caches data for a day.
@@ -17,5 +16,5 @@ Fetches KMC settings from server. Caches data for a day.
 
 #### Defined in
 
-[connection/kmc.ts:20](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/connection/kmc.ts#L20)
+[connection/kmc.ts:20](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/connection/kmc.ts#L20)
 

@@ -1,6 +1,5 @@
 # listfilters
-    
-
+      
 ▸ **listFilters**(`options?`): `KlevuFetchModifer`
 
 List filters that can affect given query
@@ -17,5 +16,5 @@ List filters that can affect given query
 
 #### Defined in
 
-[modifiers/listFilters/listFilters.ts:33](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/modifiers/listFilters/listFilters.ts#L33)
+[modifiers/listFilters/listFilters.ts:33](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/modifiers/listFilters/listFilters.ts#L33)
 

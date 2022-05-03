@@ -1,7 +1,6 @@
 # newarrivals
-    
-
-▸ **newArrivals**(`category?`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+      
+▸ **newArrivals**(`category?`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Get new arrival recommendations
 
@@ -15,9 +14,9 @@ Get new arrival recommendations
 
 #### Returns
 
-[`KlevuFetchFunctionReturnValue`](modules.md#klevufetchfunctionreturnvalue)
+[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 #### Defined in
 
-[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
+[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
 

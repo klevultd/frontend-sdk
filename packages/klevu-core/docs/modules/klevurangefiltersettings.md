@@ -1,20 +1,5 @@
 # klevurangefiltersettings
-    `](modules.md#klevurangefiltersettings)[]  } |
-| `filtersToReturn.enabled` | `boolean` |
-| `filtersToReturn.exclude?` | `string`[] |
-| `filtersToReturn.include?` | `string`[] |
-| `filtersToReturn.options` | { `limit?`: `number` ; `mincount?`: `number` ; `order`: [`KlevuFilterOrder`](enums/KlevuFilterOrder.md)  } |
-| `filtersToReturn.options.limit?` | `number` |
-| `filtersToReturn.options.mincount?` | `number` |
-| `filtersToReturn.options.order` | [`KlevuFilterOrder`](enums/KlevuFilterOrder.md) |
-| `filtersToReturn.rangeFilterSettings?` | [`KlevuRangeFilterSettings`](modules.md#klevurangefiltersettings)[] |
-
-#### Defined in
-
-[models/KlevuListFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuListFilter.ts#L4)
-
-
-
+      
 Ƭ **KlevuRangeFilterSettings**: `Object`
 
 #### Type declaration
@@ -27,5 +12,5 @@
 
 #### Defined in
 
-[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
+[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
 

@@ -11,19 +11,28 @@ if (!fs.existsSync("./docs/modules")) {
 }
 const modules = fs.readFileSync("./docs/modules.md").toString()
 
-const [toc, rest] = modules.split("\n## Type aliases\n")
+let [toc, rest] = modules.split("\n## Type aliases\n")
+rest += "\n___"
 const matches = [...toc.matchAll(/(modules\.md#([a-z]*))/gim)]
 for (const m of matches) {
   const anchor = m[2]
-  const match = rest.match(new RegExp(`(?<=${anchor}+).*?(?=s*___)`, "gsi"))
-  fs.writeFileSync(
-    "./docs/modules/" + anchor + ".md",
-    `# ${anchor}
-    ${match.join("")}`,
-    {
-      flag: "w+",
-    }
+  const match = rest.match(
+    new RegExp(`(?<=### ${anchor}\n).*?(?=s*___)`, "gsi")
   )
+  if (!match) {
+    console.log(`anchor "${anchor}" not found`)
+  } else {
+    fs.writeFileSync(
+      "./docs/modules/" + anchor + ".md",
+      `# ${anchor}
+      ${match.join("").replaceAll(/modules\.md#([a-z]*)/gim, (match, p1) => {
+        return `${p1}.md`
+      })}`,
+      {
+        flag: "w+",
+      }
+    )
+  }
 }
 
 const newtoc = toc.replaceAll(/modules\.md#([a-z]*)/gim, (match, p1) => {

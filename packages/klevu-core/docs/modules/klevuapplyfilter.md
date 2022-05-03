@@ -1,6 +1,5 @@
 # klevuapplyfilter
-    
-
+      
 Ƭ **KlevuApplyFilter**: `Object`
 
 Apply Filter type for Klevu base query
@@ -14,15 +13,5 @@ Apply Filter type for Klevu base query
 
 #### Defined in
 
-[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
-
-`](modules.md#klevuapplyfilter) | - |
-| `id` | `string` | - |
-| `isFallbackQuery?` | `boolean` | - |
-| `settings?` | [`KlevuBaseQuerySettings`](modules.md#klevubasequerysettings) | - |
-| `typeOfRequest` | [`KlevuTypeOfRequest`](enums/KlevuTypeOfRequest.md) | - |
-
-#### Defined in
-
-[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/f14d7e9/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
+[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
 
