@@ -177,7 +177,6 @@ export async function kmcRecommendation(
     }
   }
   if (
-    kmcConfig.metadata.pageType === KMCRecommendationPagetype.Category &&
     [
       KMCRecommendationLogic.Trending,
       KMCRecommendationLogic.TrendingPersonalized,
