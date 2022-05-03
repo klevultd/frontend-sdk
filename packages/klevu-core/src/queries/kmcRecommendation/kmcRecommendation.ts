@@ -125,6 +125,7 @@ export type KlevuKMCRecommendations =
 /**
  * Fetches products based on
  *
+ * @category RecommendationQuery
  * @param recommendationId Id of recommendation in the backend
  * @returns
  */
@@ -157,6 +158,10 @@ export async function kmcRecommendation(
       id: options?.id ?? "kmcrecommendation",
     })
   )
+
+  if (modifiers.some((m) => m.klevuModifierId === "personalisation")) {
+    throw new Error("Cannot enable personalisation on kmcRecommendation query")
+  }
 
   if (
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Home &&

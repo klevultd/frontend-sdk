@@ -5,6 +5,7 @@ import { KlevuFetchFunctionReturnValue } from "../index.js"
 /**
  * Take control and write any kind of query you wish to Klevu API. For experts only.
  *
+ * @category Queries
  * @param query
  * @param modifiers
  * @returns

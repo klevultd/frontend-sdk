@@ -63,13 +63,13 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
       }
       return copy
     },
-    onResult: (result) => {
+    onResult: (result, query) => {
       if (!options?.filterManager) {
         return result
       }
 
       for (const qr of result.apiResponse?.queryResults ?? []) {
-        if (qr.filters) {
+        if (qr.filters && qr.filters.length > 0) {
           options.filterManager.initFromListFilters(qr.filters)
         }
       }
