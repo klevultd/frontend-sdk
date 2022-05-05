@@ -1,4 +1,3 @@
-root: ./
 structure:
   readme: ./packages/klevu-core/README.md
   summary: ./packages/klevu-core/docs/modules.md
