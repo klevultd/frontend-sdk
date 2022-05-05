@@ -123,7 +123,7 @@ export type KlevuKMCRecommendations =
   | KlevuKMCCheckoutRecommendation
 
 /**
- * Fetches products based on
+ * Fetches products based on KMC recommendation. Provide id created in KMC
  *
  * @category RecommendationQuery
  * @param recommendationId Id of recommendation in the backend

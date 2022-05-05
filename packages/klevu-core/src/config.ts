@@ -8,7 +8,7 @@ type KlevuConfiguration = {
    */
   apiKey: string
   /**
-   * Max request caching time. Default 10 minutes. Set to 0 to disable
+   * Max request caching time in milliseconds. Default 10 minutes. Set to 0 to disable
    */
   cacheMaxTTL?: number
 
@@ -28,7 +28,7 @@ export class KlevuConfig {
 
   apiKey: string
   url: string
-  cacheMaxTTL = 600000
+  cacheMaxTTL = 600_000
   eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
 

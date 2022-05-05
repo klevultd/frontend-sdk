@@ -10,9 +10,30 @@ import {
  */
 export type KlevuBaseQuery = {
   id: string
+  /**
+   * This parameter defines the type of request it is
+   */
   typeOfRequest: KlevuTypeOfRequest
+
+  /**
+   * Specify a value of true for any queries that should not be executed until
+   * some particular criteria are met, in another query. It is not possible for
+   * a fallback query to have its own fallback query.
+   *
+   * Use fallback() modifier to simplify usage
+   */
   isFallbackQuery?: boolean
+
+  /**
+   * Apply certain filters to query. Recommended to use modifier functions for these.
+   */
   filters?: KlevuListFilter & KlevuApplyFilter
+
+  /**
+   * There are numerous settings, preferences and configurations available with
+   * APIv2 to fine-tune your search and category merchandising queries. This
+   * section explores them in more detail.
+   */
   settings?: KlevuBaseQuerySettings
 
   /**

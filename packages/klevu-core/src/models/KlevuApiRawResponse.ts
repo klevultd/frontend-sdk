@@ -52,6 +52,9 @@ export type KlevuFilterResultOptions = KlevuFilterResult & {
   }>
 }
 
+/**
+ * Klevu slider filters
+ */
 export type KlevuFilterResultSlider = KlevuFilterResult & {
   type: KlevuFilterType.Slider
   /**
@@ -72,6 +75,9 @@ export type KlevuFilterResultSlider = KlevuFilterResult & {
   end: string
 }
 
+/**
+ * Raw query object from api
+ */
 export type KlevuQueryResult = {
   /**
    * Id used when defining query

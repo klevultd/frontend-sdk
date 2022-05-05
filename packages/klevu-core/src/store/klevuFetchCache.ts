@@ -1,6 +1,5 @@
+import { KlevuConfig } from "../config.js"
 import { isBrowser } from "../utils/isBrowser.js"
-
-const FIVE_MINUTES = 300_000
 
 /**
  * @ignore
@@ -35,7 +34,7 @@ export class KlevuFetchCache<T extends object, K extends object> {
     return undefined
   }
 
-  cache(key: T, data: K, timetocache = FIVE_MINUTES) {
+  cache(key: T, data: K, timetocache = KlevuConfig.default.cacheMaxTTL) {
     const hash = this.hash(key)
     this._cache.set(hash, data)
     this._timestamp.set(hash, new Date().getTime() + timetocache)

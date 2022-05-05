@@ -7,6 +7,10 @@ import {
   KlevuFilterResultOptions,
 } from "../models/KlevuApiRawResponse.js"
 
+/**
+ * Filter manager is used to store and handle filters (facets) in the results easily.
+ * It can be easily used with applyFilterWithFilterManager() and listFilters() modifiers
+ */
 export class FilterManager {
   options: KlevuFilterResultOptions[] = []
   sliders: KlevuFilterResultSlider[] = []
