@@ -7,8 +7,8 @@ env:
   AWS_REGION: eu-west-1
   ECR_REPOSITORY: klevu/headless
   ECS_SERVICE: klevu-headless-demo-srv
-  ECS_CLUSTER: klevu-docs             
- 
+  ECS_CLUSTER: klevu-docs
+
 jobs:
   deploy:
     name: Deploy
@@ -36,7 +36,6 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: latest
         run: |
-          cd examples/react
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

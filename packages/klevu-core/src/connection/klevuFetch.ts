@@ -16,6 +16,9 @@ import {
   KlevuQueryResult,
 } from "../models/index.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
+import { KlevuFetchCache } from "../store/klevuFetchCache.js"
+
+const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
 
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.
@@ -50,22 +53,31 @@ export async function KlevuFetch(
     suggestions: suggestionQueries.length > 0 ? suggestionQueries : undefined,
   }
 
-  const response = await Axios.post<KlevuApiRawResponse>(
-    withOverride?.configOverride?.url ?? KlevuConfig.default.url,
-    payload,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  const cached = cache.check(payload)
+  let response: KlevuApiRawResponse
+  if (cached) {
+    response = cached
+  } else {
+    response = (
+      await Axios.post<KlevuApiRawResponse>(
+        withOverride?.configOverride?.url ?? KlevuConfig.default.url,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+    ).data
+    cache.cache(payload, response)
+  }
 
   let responseObject: KlevuFetchResponse = {
-    apiResponse: response.data,
+    apiResponse: response,
     suggestionsById: (id: string) =>
-      response.data.suggestionResults?.find((q) => q.id === id),
+      response.suggestionResults?.find((q) => q.id === id),
     queriesById: (id: string) => {
-      const res = response.data.queryResults?.find((s) => s.id === id)
+      const res = response.queryResults?.find((s) => s.id === id)
       if (!res) {
         return undefined
       }
@@ -75,7 +87,7 @@ export async function KlevuFetch(
       }
       return FetchResultEvents(res, func)
     },
-    next: fetchNextPage(response.data, functions),
+    next: fetchNextPage(response, functions),
   }
 
   // Send event to functions on result

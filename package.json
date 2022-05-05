@@ -4,7 +4,7 @@
   "description": "Source of Klevu Headless",
   "scripts": {
     "build": "npm run build -ws",
-    "example": "cd examples/react && npm start",
+    "example": "cd examples/react && npm run serve",
     "qoc": "npm run qoc -ws ",
     "test": "npm run test -ws"
   },

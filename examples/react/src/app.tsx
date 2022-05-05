@@ -9,6 +9,7 @@ import { CartContextProvider } from "./cartContext"
 import { Footer } from "./components/footer"
 import { LastVisited } from "./components/lastVisited"
 import { Container } from "@mui/material"
+import ScrollToTop from "./scrollTop"
 
 const primary = "#97C73E"
 const secondary = "#2b556e"
@@ -69,6 +70,7 @@ export function App() {
         vertical: "top",
       }}
     >
+      <ScrollToTop />
       <CartContextProvider>
         <ThemeProvider theme={theme}>
           <ResponsiveAppBar />

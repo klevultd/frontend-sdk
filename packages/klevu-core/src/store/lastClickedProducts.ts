@@ -5,6 +5,10 @@ import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
 
 const ONE_HOUR = 36000000
 const STORAGE_KEY = "klevu-last-clicks"
+
+/**
+ * Keeps track of last clicked products in store
+ */
 class LastClickedProducts {
   private categoryCache: {
     [categoryPath: string]: {
@@ -70,7 +74,7 @@ class LastClickedProducts {
    * @param n
    * @returns
    */
-  getLastClickedLatestsFirst(n = 20): string[] {
+  getLastClickedLatestsFirst(n = 10): string[] {
     return Array.from(this.clicks.map((i) => i.id))
       .reverse()
       .slice(0, n)

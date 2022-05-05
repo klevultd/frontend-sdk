@@ -49,6 +49,10 @@ export function sendRecommendationViewEvent(
           return res
         }
 
+        if (products.length === 0) {
+          return res
+        }
+
         KlevuEvents.recommendationView(
           {
             ...kmcData.metadata,
