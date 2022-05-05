@@ -1,5 +1,7 @@
-root: ./packages/klevu-core
+root: ./packages/klevu-core/docs
 structure:
-  readme: README.md
-  reference: docs/modules.md
-  assets: images
+  readme: ./packages/klevu-core/README.md
+  reference: modules.md
+  react_example: ./examples/react/README.md
+  vue_example: ./examples/vue/README.md
+  assets: ./images
