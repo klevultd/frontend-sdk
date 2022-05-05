@@ -1,5 +1,5 @@
-root: ./packages/klevu-core
+root: ./packages/klevu-core/docs
 structure:
-  readme: README.md
-  reference: docs/modules.md
-  assets: images
+  readme: ./../README.md
+  reference: modules.md
+  assets: ./../../../images
