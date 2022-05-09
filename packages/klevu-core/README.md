@@ -1,12 +1,10 @@
-# THIS IS WORK IN PROCESS! ALPHA! DO NOT USE FOR PRODUCTION!
-
 ![Klevu](../../images/klevu_header.jpg?raw=true "Klevu")
 
 # `@klevu/core`
 
-Klevu core is a library that helps developers to interact with Klevu API. It includes fetching function, easy to use functions operate queries, state management for filters, data transformations and event tracking for easier usage.
+Klevu core is a library that helps developers to interact with Klevu API. It includes a fetching function, easy-to-use functions to perform queries, state management for filters, data transformations and event tracking for easier usage.
 
-The library can run it's code in browsers and in Node.js.
+The library can run its code in browsers and Node.js.
 
 [Api Reference can be found from here](docs/modules.md)
 
@@ -18,7 +16,7 @@ The library can run it's code in browsers and in Node.js.
 
 ## Initialization
 
-Before making any request it is required to provide Klevu API key and the search server you are targeting. This should be done in the index of application or in the initialization of your app.
+Before making any request it is required to provide the Klevu API key and the search server you are targeting. This should be done in the index of the application or the initialization of your app.
 
 ```ts
 import { KlevuConfig } from "@klevu/core"
@@ -31,9 +29,9 @@ KlevuConfig.init({
 
 ## KlevuFetch
 
-Function queries are inserted into a `KlevuFetch()` function where functions are processed and sent to backend.
+Function queries are inserted into a `KlevuFetch()` function where functions are processed and sent to the backend.
 
-Here is most minimal example where we are making "hoodies" seach from the API.
+Here is the most minimal example where we are making a "hoodies" search from the API.
 
 ```ts
 import { KlevuFetch, search } from "@klevu/core"
@@ -44,7 +42,7 @@ console.log(result.getQueriesById("search")?.records)
 
 ### Typical example
 
-Following example finds result based on a term and suggestions what user could search next
+The following example finds results based on a term and suggestions what the user could search for next
 
 ```ts
 import { KlevuFetch, search } from "@klevu/core"
@@ -74,11 +72,13 @@ console.log(result.getQueriesById("search")?.records)
 
 ### Result object
 
-`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `getSuggestionsById()` to fetch suggestions results and `getQueriesById()` for search results. `next()` is nice helper to fetch next results set with same queries and modifiers. `next()` is defined only if there are more results available.
+`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `getSuggestionsById()` to fetch suggestions results and `getQueriesById()` for search results. `next()` is a nice helper to fetch the next results set with the same queries and modifiers. `next()` is defined only if there are more results available.
 
-`getQueriesById()` result contains metadata for query, result records and possible event functions for providing click events to search, category merchandising and recommendations.
+`getQueriesById()` result contains metadata for query, the result records and possible event functions for providing click events to search, category merchandising and recommendations.
 
-### Platform specific guides
+Calling these event functions returns a function to use to send events to Klevu. [See definition these functions from here](./src/models/KlevuResultEvent.ts)
+
+### Platform-specific guides
 
 - [React with Material UI](../../examples/react/README.md)
 - [Vue 3](../../examples/vue/README.md)
@@ -97,6 +97,7 @@ Detailed information in [API reference.](./docs/modules.md#Queries-Functions)
 | `categoryMerchandising()`    | Products to display on category page                                             | Search         |
 | `searchCategory()`           | Search categories based on term                                                  | Search         |
 | `searchCms()`                | Search CMS pages based on term                                                   | Search         |
+| `products()`                 | Fetches products by id from Klevu                                                | Search         |
 | `raw`                        | Write raw request to Klevu api. For expert use                                   | Search         |
 | `recentlyViewedProducts()`   | List of products user has recently viewed                                        | Search         |
 | `kmcRecommendation()`        | Fetches predefined recommendation by id from KMC and creates query automatically | Recommendation |
@@ -110,25 +111,27 @@ Detailed information in [API reference.](./docs/modules.md#Queries-Functions)
 
 Some of the functions can be modified with modifier functions. Any number of them can be added to end of query functions
 
-| Modifier                       | Description                                                                                   |
-| ------------------------------ | --------------------------------------------------------------------------------------------- |
-| `listFilters()`                | List all filters that given search result has                                                 |
-| `applyFilters()`               | Applies selected filters to query                                                             |
-| `applyFiltersWithManager()`    | Applies filters that's state is managed by `FilterManager`                                    |
-| `fallback()`                   | When query returns less results than fallback treshold then additional fallback query is sent |
-| `boostWithKeywords()`          | Boost or deboost results with keywords                                                        |
-| `boostWithRecords()`           | Boost or deboost certain products in the result by id                                         |
-| `boostWithFilters()`           | Boost or deboost results based on a filters                                                   |
-| `boostWithFilterManager()`     | Boost or deboost results based in selection in filter manager                                 |
-| `personalisation()`            | Enable personalisation to the query. Automatically applies last visited products              |
-| `include()`                    | Force include given id's in the result                                                        |
-| `top()`                        | Force return given id's as first items on results                                             |
-| `sendSearchEvent()`            | When user takes action to search something this should be used                                |
-| `sendMerchandisingViewEvent()` | Should be used with `categoryMerchandising()` query to send view event of merchandising       |
+| Modifier                        | Description                                                                                          |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `listFilters()`                 | List all filters that given search result has                                                        |
+| `applyFilters()`                | Applies selected filters to query                                                                    |
+| `applyFiltersWithManager()`     | Applies filters that's state is managed by `FilterManager`                                           |
+| `fallback()`                    | When query returns less results than fallback treshold then additional fallback query is sent        |
+| `boostWithKeywords()`           | Boost or deboost results with keywords                                                               |
+| `boostWithRecords()`            | Boost or deboost certain products in the result by id                                                |
+| `boostWithFilters()`            | Boost or deboost results based on a filters                                                          |
+| `boostWithFilterManager()`      | Boost or deboost results based in selection in filter manager                                        |
+| `personalisation()`             | Enable personalisation to the query. Automatically applies last visited products                     |
+| `include()`                     | Force include given id's in the result                                                               |
+| `top()`                         | Force return given id's as first items on results                                                    |
+| `sendSearchEvent()`             | When user takes action to search something this should be used                                       |
+| `sendMerchandisingViewEvent()`  | Should be used with `categoryMerchandising()` query to send view event of merchandising              |
+| `sendRecommendationViewEvent()` | Should be used with all recommendation queries. Send a analytical data about recommendation to Klevu |
+| `debug()`                       | Prints query results to console                                                                      |
 
 ## Filter Manager
 
-Filter Manager is a helper class that takes care of state of filters. What are currently selected and what should be sent. It can be passed to `listFilters()` and then result is automatically applied to state. Modifier `applyFiltersWithManager()` can base used to apply current state of filters to query.
+Filter Manager is a helper class that takes care of the state of filters. What filters are currently selected and what should be sent. It can be passed to `listFilters()` and then the result is automatically applied to the state. Modifier `applyFiltersWithManager()` can base used to apply the current state of filters to query.
 
 ## Internal DOM events
 
@@ -185,7 +188,7 @@ function MyComponent() {
 
 Read more from [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent) about Custom Events.
 
-See list of events from [KlevuDomEvents](src/events/klevuDomEvents.ts)
+See the list of events from [KlevuDomEvents](src/events/klevuDomEvents.ts)
 
 ## Events
 
@@ -215,6 +218,6 @@ const result = await KlevuKMCSettings()
 
 ## Last searches
 
-To get list of last searches you can use the `KlevuLastSearches` class.
+To get the list of last searches you can use the `KlevuLastSearches` class.
 
 To get the list of last searches call `KlevuLastSearches.get()` and if you wish to store a search use `KlevuLastSearches.save('user search string')`

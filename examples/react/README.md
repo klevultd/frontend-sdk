@@ -1,6 +1,25 @@
 # Klevu React example
 
-This example is build with Typescript, React, @klevu/core, Vite (server) and @mui/material (styling)
+## Table of contents
+
+- [Initialization](#initialization)
+- [KMC settings](#kmc-settings)
+- [Quick search](#quick-search)
+- [Search landing page](#search-landing-results-page)
+  - [Search parameters](#search-parameters)
+  - [Filters](#filters)
+  - [Load more](#load-more)
+- [Trending product search](#trending-product-search)
+- [Category merchandising](#category-merchandising)
+  - [Category recommendation](#category-recommendation)
+- [Product fetch](#product-fetch)
+- [Recommendations](#recommendations)
+  - [KMC recommendations](#kmc-recommendations)
+  - [Recommendations without KMC](#recommendations-without-kmc)
+  - [Also Bought KMC recommendation](#also-bought-kmc-recommendation)
+- [Purchase Analytics Event (buy)](#purchase-analytics-event-buy)
+
+This example is built with Typescript, React, @klevu/core, Vite (server) and @mui/material (styling)
 
 To run the example:
 
@@ -9,6 +28,8 @@ To run the example:
 > npm start
 
 [Click here to run example in CodeSandbox.io](https://codesandbox.io/s/github/klevultd/frontend-sdk/tree/master/examples/react)
+
+[Click here to see working demo](https://headlessdemo.klevu.com)
 
 ## Initialization
 
@@ -25,11 +46,17 @@ KlevuConfig.init({
 
 Both the URL and API Key are provided to you when you create an account with Klevu.
 
+## KMC settings
+
+It is possible to fetch KMC settings from Klevu to show information and data set by the user. For example, most popular searches are done this way. In [index.tsx](./src/index.tsx) settings are fetched with `KlevuKMCSettings()` function. It fetches the data and caches it to localstorage for one day. The return value is the [settings](../../packages/klevu-core/src/connection/kmcmodels/).
+
+The reason for running it in a startup is that it speeds up the subsequent calls to function by returning data from the cache.
+
 ## Quick search
 
-[QuickSearch component](./src/components/quicksearch.tsx) is located in the top right corner in example. It has two functions. When user focuses to field then popup is shown where trendiding products and last searches and displayed. As a second function when user starts to type we will fetch matching products and search suggestions.
+[QuickSearch component](./src/components/quicksearch.tsx) is located in the top right corner in the example. It has two functions. When the user focuses on to field then a popup is shown where trending products and last searches and displayed. As a second function when the user starts to type we will fetch matching products and search suggestions.
 
-Logic for fetching trending products and KlevuLastSearches:
+The logic for fetching trending products and KlevuLastSearches:
 
 ```ts
 const fetchEmptySuggestions = async () => {
@@ -49,11 +76,11 @@ const fetchEmptySuggestions = async () => {
 }
 ```
 
-The _KlevuFetch_ function is the main method for triggering calls to Klevu's API through the SDK. The parameters passed to this function are the actual searches you intend to make. The Klevu SDK comes with many built-in search functions that can be passed into KlevuFetch. In the above example we pass in a search by calling _trendingProducts_ with a configuration object limiting the results to just 3.
+The _KlevuFetch_ function is the main method for triggering calls to Klevu's API through the SDK. The parameters passed to this function are the actual searches you intend to make. The Klevu SDK comes with many built-in search functions that can be passed into KlevuFetch. In the above example, we pass in a search by calling _trendingProducts_ with a configuration object limiting the results to just 3.
 
-The response of KlevuFetch contains an object with helper methods. In the example above we call the queriesById method which will return data associated with the search. In this case we pull up the _trendingProducts_ search and access it's _records_ which are then passed back into Vue as an array to populate the UI.
+The response of KlevuFetch contains an object with helper methods. In the example above we call the queriesById method which will return data associated with the search. In this case, we pull up the _trendingProducts_ search and access its _records_ which are then passed back into Vue as an array to populate the UI.
 
-And logic for to run after each keypress:
+And the logic for running after each keypress:
 
 ```ts
 const doSearch = async (term: string) => {
@@ -86,9 +113,9 @@ Since React is reactive we start by simply clearing out the trendingProducts we 
 
 Then we see _KlevuFetch_ used again to make search requests to Klevu's API, but this time we are passing in two searches (search and suggestions). \*\*KlevuFetch can be passed any number of searches.
 
-The first search we make by calling the _search_ function with two parameters. The first is the search term which we are pulling from the search input value in the UI. The second is an object were we limit the results to just 9 and we also limit the types of results to only display products.
+The first search we make by calling the _search_ function with two parameters. The first is the search term which we are pulling from the search input value in the UI. The second is an object where we limit the results to just 9 and we also limit the types of results to only display products.
 
-The second search we make by calling the _suggestions_ function with a single parameter, the search term in order to return search suggestions based on that term.
+The second search we make by calling the _suggestions_ function with a single parameter, the search term to return search suggestions based on that term.
 
 ## Search Landing (results) page
 
@@ -96,7 +123,7 @@ Building from what we've covered so far, this example introduces the use of face
 
 ### Search parameters
 
-First lets start with the search used in KlevuFetch. Here we are using the same _search_ call as before, but this time we are passing in a few more parameters:
+First, let's start with the search used in KlevuFetch. Here we are using the same _search_ call as before, but this time we are passing in a few more parameters:
 
 ```js
 const res = await KlevuFetch(
@@ -121,7 +148,7 @@ const res = await KlevuFetch(
 )
 ```
 
-Next lets cover the sort option passed into the second parameter of the search function. The Klevu SDK includes an enumerable object called _KlevuSearchSorting_ which exposes a number of sorting methods that can be used to rearange the results.
+Next let's cover the sort option passed into the second parameter of the search function. The Klevu SDK includes an enumerable object called _KlevuSearchSorting_ which exposes a number of sorting methods that can be used to rearrange the results.
 
 The available sorting options are:
 
@@ -194,7 +221,7 @@ See how filterManager makes it easy to manage filters 😉
 
 Another Klevu SDK feature used in this example is the load more button at the bottom of the results.
 
-The response from KlevuFetch has a _next_ method when there are still more results. Otherwise it returns false. We can use this function to call for more results without having to specify all the parameters we originally passed to the _search_ function.
+The response from KlevuFetch has a _next_ method when there are still more results. Otherwise, it returns false. We can use this function to call for more results without having to specify all the parameters we originally passed to the _search_ function.
 
 In this example we saved the response to a variable called prevRes, we then handle loading more results by calling the following function:
 
@@ -242,7 +269,7 @@ const res = await KlevuFetch(
 
 Notice how we can also pass in the filters to exclude in the _listFilters_ function.
 
-## Category page
+## Category merchandising
 
 This example includes category pages to organize products so to view an example look at [CategoryPage view](./src/routes/CategoryPage.tsx). The Klevu SDK has yet another search type we can use specifically for requesting results from a category or collection _categoryMerchandising_. It is very similar to the _search_ function but instead of passing in a search term as the first parameter, we pass in the name of the category:
 
@@ -272,7 +299,7 @@ const res = await KlevuFetch(
 
 This example also shows a search modifier specifically created to log analytics data for category pages, _sendMerchandisingViewEvent_ which accepts the name/title of the category to display in KMC.
 
-In addition, the results of this search include a new function which we can use to log click events for products returned by this search.
+In addition, the results of this search include a new function that we can use to log click events for products returned by this search.
 
 ```js
 productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
@@ -291,7 +318,11 @@ Now we can use _productClickManager_ (can be called anything) to send click even
 
 In the example above, we pass in the ID of the product along with the category name/title to the _productClickManager_ function which we have called within a onClick handler.
 
-## Product Search
+### Category recommendation
+
+In [Category page](./src/routes/CategoryPage.tsx) klevuFetch function there is a kmcRecommendation call included. It is created in KMC and it creates a product category recommendation. You need to pass current category id to it get correct results. Read more about [KMC recommendations](#kmc-recommendations).
+
+## Product fetch
 
 The Klevu SDK includes a convenient and simple search to quickly load a product called _products_ and passing in the ID of the product.
 
@@ -299,7 +330,7 @@ The Klevu SDK includes a convenient and simple search to quickly load a product 
 const res = await KlevuFetch(products([params.id]))
 ```
 
-This search returns all the information for a single product.
+This search returns all the information for a single product. Usually this is not used. One should use the platform specified API to fetch product data.
 
 ## Recommendations
 
@@ -309,7 +340,11 @@ The Klevu SDK also supports recommendations created in KMC. In this example proj
 - Similar Products ([ProductPage.tsx view](./src/routes/ProductPage.tsx))
 - Also Bought ([CheckoutPage.tsx view](./src/routes/CheckoutPage.tsx))
 
-### Trending Products
+### KMC recommendations
+
+Most of the recommendations are created by users in Klevu Merchant Center (KMC). This allows shop owners to modify the recommendations without need of developers. When recommendation is created in KMC it will provide a id to recommendation that is passed to `kmcRecommendation()` function. Depending on type of recommendation additional parameters is required by the function. For example, in checkout recommendation is it required to pass current product and variant ids in cart.
+
+#### Trending products KMC recommendation
 
 The trending products recommendation search found in the [HomePage.tsx view](./src/routes/HomePage.tsx) looks very similar to all the searches we've made so far as seen in the example below:
 
@@ -329,9 +364,9 @@ eventClick = result
   .getRecommendationClickSendEvent()
 ```
 
-This type of search first needs to be created within the KMC. Then you are able to call _kmcRecommendation_ and pass in the id. The next parameter is the query id (name) of the search, in our example we called it _trendingrects_. The last parameter is the _sendRecommendationViewEvent_ modifier which logs the view of this recommendation by a user.
+This type of search first needs to be created within the KMC. Then you are able to call _kmcRecommendation_ and pass in the id. The next parameter is the query id (name) of the search, in our example, we called it _trendingrects_. The last parameter is the _sendRecommendationViewEvent_ modifier which logs the view of this recommendation by a user.
 
-The result of this search also returns a function we can use to log click events of the recommendation products by calling _getRecommendationClicckSendEvent_ as seen above. In our example we store this function as _eventClick_.
+The result of this search also returns a function we can use to log click events of the recommendation products by calling _getRecommendationClicckSendEvent_ as seen above. In our example, we store this function as _eventClick_.
 
 We can then use this function to handle the click event for our recommendation products:
 
@@ -343,7 +378,7 @@ We can then use this function to handle the click event for our recommendation p
 />
 ```
 
-### Similar Products
+### Recommendations without KMC
 
 The second example of making a recommendation search is found in [ProductPage.tsx view](./src/routes/ProductPage.tsx). This is such a common search that it does not require creation in KMC.
 
@@ -353,7 +388,7 @@ In our example we call _similarProducts_ and pass in the ID of the product we wa
 const similarRes = await KlevuFetch(similarProducts([product.id]))
 ```
 
-In this case we can call the _recommendationClick_ method of the KlevuEvents object to log click analytics events into KMC
+In this case, we can call the _recommendationClick_ method of the KlevuEvents object to log click analytics events into KMC
 
 ```jsx
 <RecommendationBanner
@@ -373,9 +408,9 @@ In this case we can call the _recommendationClick_ method of the KlevuEvents obj
 />
 ```
 
-We pass in the an object with the information to log this recommendation click as being associated with similar products. Next we pass in the product, and finally we pass in the index of the currrent product.
+We pass in an object with the information to log this recommendation click as being associated with similar products. Next, we pass in the product, and finally, we pass in the index of the current product.
 
-### Also Bought
+### Also Bought KMC recommendation
 
 Our final recommendations example is found in the [CheckoutPage.tsx view](./src/routes/CheckoutPage.tsx). As the name implies it shows the user product recommendations based on the items in the user's cart.
 
@@ -419,7 +454,7 @@ disabled={cart.items.length === 0}
 
 In your implementation this event would be triggered on the first time a thank you page is rendered or when an order is logged.
 
-Our example implementation starts by grouping the products by ID. Then creating an array of products with their quanties. This array is then passed into _KlevuEvents.buy_ to log the purchased items.
+Our example implementation starts by grouping the products by ID. Then creates an array of products with their quantities. This array is then passed into _KlevuEvents.buy_ to log the purchased items.
 
 ```ts
 const buy = () => {
