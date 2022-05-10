@@ -3,7 +3,7 @@ import { KlevuFetchModifer } from "../index.js"
 /**
  * Boost products based on a filters
  *
- * @category Modifiers
+ * @category Modifier
  * @param boosts
  * @returns
  */

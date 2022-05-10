@@ -3,7 +3,7 @@ import { KlevuFetchModifer } from "../index.js"
 /**
  * Boost or deboost query based on a keywords.
  *
- * @category Modifiers
+ * @category Modifier
  * @param keywords Keywords to boost and deboost
  * @returns KlevuModifier that be used to modify query
  */

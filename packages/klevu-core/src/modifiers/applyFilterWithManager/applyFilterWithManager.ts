@@ -4,7 +4,7 @@ import { applyFilters } from "../applyFilter/applyFilter.js"
 /**
  * Apply filters to query based on Filter Manager
  *
- * @category Modifiers
+ * @category Modifier
  * @param manager
  * @param options
  * @returns

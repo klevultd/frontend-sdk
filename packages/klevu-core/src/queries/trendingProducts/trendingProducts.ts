@@ -8,7 +8,7 @@ import {
 /**
  * Create a trending products search query. Id for this query is `trendingProducts`
  *
- * @category Queries
+ * @category Query
  * @param options {@link search}
  * @returns See {@link KlevuFetchFunction}
  *

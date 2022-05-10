@@ -26,7 +26,7 @@ const defaults: Options = {
 /**
  * List filters that can affect given query
  *
- * @category Modifiers
+ * @category Modifier
  * @param options
  * @returns
  */

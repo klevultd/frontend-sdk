@@ -5,7 +5,7 @@ import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
 /**
  * If original query doesn't return enough results then fallback query is run added to results
  *
- * @category Modifiers
+ * @category Modifier
  * @param func
  * @returns
  */

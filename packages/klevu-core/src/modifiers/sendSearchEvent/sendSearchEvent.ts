@@ -5,7 +5,7 @@ import { KlevuEvents } from "../../events/index.js"
  * This modifier should be used in the case when user hits enter (or presses button) to see
  * all results from search.
  *
- * @category Modifiers
+ * @category Modifier
  * @returns
  */
 export function sendSearchEvent(): KlevuFetchModifer {

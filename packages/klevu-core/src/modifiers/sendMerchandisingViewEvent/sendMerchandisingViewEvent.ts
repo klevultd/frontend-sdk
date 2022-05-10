@@ -5,7 +5,7 @@ import { KlevuEvents } from "../../events/index.js"
  * This modifier should be used with merchandising query. It sends
  * automatically correct event data to Klevu
  *
- * @category Modifiers
+ * @category Modifier
  * @param title Title of the category page viewed
  * @returns
  */

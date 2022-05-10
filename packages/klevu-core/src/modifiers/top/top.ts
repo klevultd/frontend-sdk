@@ -3,7 +3,7 @@ import { KlevuFetchModifer } from "../index.js"
 /**
  * Add given ids as first items in results
  *
- * @category Modifiers
+ * @category Modifier
  * @param options
  * @returns
  */

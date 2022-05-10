@@ -16,7 +16,7 @@ const defaults: Options = {
 /**
  * Return suggestion on given search term
  *
- * @category Queries
+ * @category Query
  * @param term search term
  * @param options
  * @returns

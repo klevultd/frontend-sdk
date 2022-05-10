@@ -5,7 +5,7 @@ import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 /**
  * Enable personlisation to the query
  *
- * @category Modifiers
+ * @category Modifier
  * @param options
  * @returns
  */

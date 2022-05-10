@@ -5,7 +5,7 @@ import { KlevuFetchModifer } from "../index.js"
  * Internal function to inject listFilter results back to result object when they are removed in next() function
  * Should not be used outside of library itself
  *
- * @category Modifiers
+ * @category Modifier
  * @param prevQuery
  * @returns
  */

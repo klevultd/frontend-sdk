@@ -3,7 +3,7 @@ import { KlevuFetchModifer } from "../index.js"
 /**
  * Force include product ids on result
  *
- * @category Modifiers
+ * @category Modifier
  * @param options
  * @returns
  */

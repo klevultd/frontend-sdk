@@ -20,7 +20,7 @@ const defaults: Options = {
 /**
  * Fetch products for a category listing page.
  *
- * @category Queries
+ * @category Query
  * @param category
  * @param options
  * @returns

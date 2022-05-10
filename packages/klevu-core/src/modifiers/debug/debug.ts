@@ -3,7 +3,7 @@ import { KlevuFetchModifer } from "../index.js"
 /**
  * Prints queries to console for easier debugging
  *
- * @category Modifiers
+ * @category Modifier
  * @returns
  */
 export function debug(): KlevuFetchModifer {

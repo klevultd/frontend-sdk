@@ -9,7 +9,7 @@ import { KlevuFetchFunctionReturnValue } from "../index.js"
 /**
  * Fetches list of products. All fields are fetched.
  *
- * @category Queries
+ * @category Query
  * @param productIds
  * @returns
  */
