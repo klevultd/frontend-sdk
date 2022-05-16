@@ -25,6 +25,11 @@ type Options = {
   currentProductId?: string
 
   /**
+   * If KMC recommendation is Product based then Item group id (the parent id) is required information.
+   */
+  itemGroupId?: string
+
+  /**
    * If KMC recommendation is Checkout page based then its required to provide
    * productIds that are currently in the cart
    */
@@ -208,9 +213,9 @@ export async function kmcRecommendation(
       KMCRecommendationLogic.Similar,
     ].includes(kmcConfig.metadata.logic)
   ) {
-    if (!options || !options.currentProductId) {
+    if (!options || !options.currentProductId || !options.itemGroupId) {
       throw new Error(
-        "'currentProductId' is required for Product recommendation"
+        "'currentProductId' and 'itemGroupdId' is required for Product recommendation"
       )
     }
 
@@ -225,7 +230,7 @@ export async function kmcRecommendation(
       q.settings.excludeIds = [
         {
           key: "itemGroupId",
-          value: options.currentProductId,
+          value: options.itemGroupId,
         },
       ]
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

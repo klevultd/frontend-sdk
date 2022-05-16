@@ -63,7 +63,7 @@ export function Product(props: {
 
   return (
     <Link
-      to={`/products/${p.id}`}
+      to={`/products/${p.itemGroupId}/${p.id}`}
       onClick={(event) => {
         if (props.onClick) {
           props.onClick()

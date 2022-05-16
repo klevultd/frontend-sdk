@@ -7,6 +7,7 @@ import {
   KMCRecommendationLogic,
   kmcRecommendation,
   sendRecommendationViewEvent,
+  exclude,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCallback, useEffect, useState, Fragment } from "react"
@@ -29,12 +30,13 @@ export function ProductPage() {
   const fetchProduct = useCallback(async () => {
     const res = await KlevuFetch(
       products([params.id]),
-      similarProducts([params.id]),
+      similarProducts([params.id], {}, exclude([params.groupId])),
       kmcRecommendation(
         "k-efd5337c-051e-44a2-810c-e23de2be513f",
         {
           id: "alsobought",
           currentProductId: params.id,
+          itemGroupId: params.groupId,
         },
         sendRecommendationViewEvent("Also bought together KMC recommendation")
       )

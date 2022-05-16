@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
         <Route path="products" element={<ProductsPage />}>
-          <Route path=":id" element={<ProductPage />} />
+          <Route path=":groupId/:id" element={<ProductPage />} />
         </Route>
         <Route path="category" element={<CategoryPage />}>
           <Route path=":id" element={<CategoryPage />} />
