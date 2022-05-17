@@ -14,6 +14,7 @@ import {
   KlevuSuggestionQuery,
   KlevuBaseQuery,
   KlevuQueryResult,
+  KlevuNextFunc,
 } from "../models/index.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
@@ -85,9 +86,11 @@ export async function KlevuFetch(
       if (!func) {
         return res
       }
-      return FetchResultEvents(res, func)
+      return {
+        ...FetchResultEvents(res, func),
+        next: fetchNextPageSingleFunc(response, func),
+      }
     },
-    next: fetchNextPage(response, functions),
   }
 
   // Send event to functions on result
@@ -104,38 +107,26 @@ export async function KlevuFetch(
   return responseObject
 }
 
-function fetchNextPage(
+function fetchNextPageSingleFunc(
   response: KlevuApiRawResponse,
-  functions: KlevuFetchFunctionReturnValue[]
+  func: KlevuFetchFunctionReturnValue
 ) {
-  if (response.queryResults && response.queryResults.length < 1) {
+  if (!func.queries) {
     return undefined
   }
 
-  const searchFunctionsIndex = functions.findIndex((f) =>
-    f.queries?.find((q) => !q.isFallbackQuery)
-  )
-
-  if (searchFunctionsIndex === -1) {
-    return undefined
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const queryIndex = functions[searchFunctionsIndex].queries!.findIndex(
-    (q) => !q.isFallbackQuery
-  )
+  const queryIndex = func.queries.findIndex((q) => !q.isFallbackQuery)
 
   if (queryIndex === -1) {
     return undefined
   }
 
-  const prevQuery: KlevuBaseQuery = functions[searchFunctionsIndex].queries?.[
-    queryIndex
-  ] as KlevuBaseQuery
+  const prevQuery: KlevuBaseQuery = func.queries[queryIndex] as KlevuBaseQuery
 
   const prevQueryResponse = response.queryResults?.find(
     (q) => q.id === prevQuery.id
   )
+
   if (!prevQueryResponse) {
     return undefined
   }
@@ -148,7 +139,7 @@ function fetchNextPage(
     return undefined
   }
 
-  const nextFunc: KlevuFetchResponse["next"] = async (override?) => {
+  const nextFunc: KlevuNextFunc = async (override?) => {
     const lastLimit = override?.limit ?? prevQuery.settings?.limit ?? 5
 
     if (!prevQuery.settings) {
@@ -162,20 +153,17 @@ function fetchNextPage(
     }
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    functions[searchFunctionsIndex].queries![queryIndex] = prevQuery
+    func.queries![queryIndex] = prevQuery
 
     // add previous filters with manager
     if (override?.filterManager) {
-      // @TODO remove applyFilter modifer from functions as we are overriding it
-      for (const f of functions) {
-        if (!f.modifiers) {
-          f.modifiers = []
-        }
-        f.modifiers.push(applyFilterWithManager(override.filterManager))
+      if (!func.modifiers) {
+        func.modifiers = []
       }
+      func.modifiers.push(applyFilterWithManager(override.filterManager))
     }
 
-    return await KlevuFetch(...removeListFilters(functions, prevQueryResponse))
+    return await KlevuFetch(removeListFilters(func, prevQueryResponse))
   }
 
   return nextFunc
@@ -217,25 +205,23 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
 }
 
 function removeListFilters(
-  functions: KlevuFetchFunctionReturnValue[],
+  f: KlevuFetchFunctionReturnValue,
   prevQueryResult: KlevuQueryResult
-): KlevuFetchFunctionReturnValue[] {
-  return functions.map((f) => {
-    f.queries = f.queries?.map((q) => {
-      if (q.filters?.filtersToReturn) {
-        delete q.filters?.filtersToReturn
-      }
-      return q
-    })
-    if (f.modifiers) {
-      const index = f.modifiers.findIndex(
-        (m) => m.klevuModifierId == "listfilters"
-      )
-      if (index > -1) {
-        f.modifiers.splice(index, 1)
-      }
-      f.modifiers.push(injectFilterResult(prevQueryResult))
+): KlevuFetchFunctionReturnValue {
+  f.queries = f.queries?.map((q) => {
+    if (q.filters?.filtersToReturn) {
+      delete q.filters?.filtersToReturn
     }
-    return f
+    return q
   })
+  if (f.modifiers) {
+    const index = f.modifiers.findIndex(
+      (m) => m.klevuModifierId == "listfilters"
+    )
+    if (index > -1) {
+      f.modifiers.splice(index, 1)
+    }
+    f.modifiers.push(injectFilterResult(prevQueryResult))
+  }
+  return f
 }

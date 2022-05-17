@@ -30,26 +30,29 @@ test("Pagination test", async () => {
     )
   )
 
-  expect(result.queriesById("search")?.records.length).toBe(2)
-  expect(result.next).toBeDefined()
-  expect(result.queriesById("search")?.filters?.length).toBeGreaterThan(0)
+  const searchResult = result.queriesById("search")
+
+  expect(searchResult?.records.length).toBe(2)
+  expect(searchResult?.next).toBeDefined()
+  expect(searchResult?.filters?.length).toBeGreaterThan(0)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const nextResult = await result.next!()
-  const prevFirstId = result.queriesById("search")?.records[0].id
-  const nextFirstId = nextResult.queriesById("search")?.records[0].id
+  const nextResult = await searchResult?.next!()
+  const nextSearchResult = nextResult?.queriesById("search")
+
+  const prevFirstId = searchResult?.records[0].id
+  const nextFirstId = nextSearchResult?.records[0].id
   expect(nextFirstId).not.toBe(prevFirstId)
-  expect(nextResult.next).toBeDefined()
-  expect(nextResult.queriesById("search")?.filters?.length).toBeGreaterThan(0)
+  expect(nextSearchResult?.next).toBeDefined()
+  expect(nextSearchResult?.filters?.length).toBeGreaterThan(0)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const nextNextResult = await nextResult.next!()
-  const nextNextFirstId = nextNextResult.queriesById("search")?.records[0].id
+  const nextNextResult = await nextSearchResult?.next!()
+  const nextNextSearchResult = nextNextResult?.queriesById("search")
+  const nextNextFirstId = nextNextSearchResult?.records[0].id
   expect(nextNextFirstId).not.toBe(prevFirstId)
   expect(nextNextFirstId).not.toBe(nextFirstId)
-  expect(nextNextResult.queriesById("search")?.filters?.length).toBeGreaterThan(
-    0
-  )
+  expect(nextNextSearchResult?.filters?.length).toBeGreaterThan(0)
 })
 
 test("Limit test", async () => {
