@@ -8,15 +8,14 @@ import {
   categoryMerchandising,
   sendMerchandisingViewEvent,
   kmcRecommendation,
-  personalisation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import type {
   KlevuRecord,
   KlevuFilterResultOptions,
   KlevuFilterResultSlider,
-  KlevuFetchResponse,
   KlevuResultEvent,
+  KlevuNextFunc,
 } from "@klevu/core"
 import {
   Drawer,
@@ -46,7 +45,7 @@ import { links, pages } from "../components/appbar"
 
 const drawerWidth = 240
 const manager = new FilterManager()
-let prevRes: KlevuFetchResponse
+let nextFunc: KlevuNextFunc
 let productClickManager: ReturnType<
   KlevuResultEvent["getCategoryMerchandisingClickSendEvent"]
 >
@@ -110,8 +109,6 @@ export function CategoryPage() {
         sendRecommendationViewEvent("Category product recommendations")
       )
     )
-    prevRes = res
-
     const searchResult = res.queriesById("search")
     const recommendationResult = res.queriesById("recommendation")
 
@@ -121,7 +118,8 @@ export function CategoryPage() {
 
     productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
 
-    setShowMore(Boolean(res.next))
+    setShowMore(Boolean(searchResult.next))
+    nextFunc = searchResult.next
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
@@ -135,15 +133,16 @@ export function CategoryPage() {
   }, [sorting, params.id, itemsOnPage])
 
   const fetchMore = async () => {
-    const nextRes = await prevRes.next({
+    const nextRes = await nextFunc({
       filterManager: manager,
     })
-    setProducts([
-      ...products,
-      ...(nextRes.queriesById("search")?.records ?? []),
-    ])
-    prevRes = nextRes
-    setShowMore(Boolean(nextRes.next))
+
+    const nextSearchResult = nextRes.queriesById("search")
+
+    setProducts([...products, ...(nextSearchResult?.records ?? [])])
+
+    setShowMore(Boolean(nextSearchResult?.next))
+    nextFunc = nextSearchResult?.next
   }
 
   const handleFilterUpdate = () => {

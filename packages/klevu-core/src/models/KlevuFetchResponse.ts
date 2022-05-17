@@ -4,6 +4,16 @@ import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse.js"
 import { KlevuResultEvent } from "./KlevuResultEvent.js"
 
 /**
+ * Next function is available if there are more results in the given query.
+ * It is optimized function that removes parts from query that might slow down
+ * the response and they are not needed after first request.
+ */
+export type KlevuNextFunc = (override?: {
+  limit?: number
+  filterManager?: FilterManager
+}) => Promise<KlevuFetchResponse>
+
+/**
  * Tools for operating results in easier way.
  */
 export type KlevuFetchResponse = {
@@ -18,14 +28,9 @@ export type KlevuFetchResponse = {
   /**
    * Get query result by id
    */
-  queriesById: (id: string) => (KlevuQueryResult & KlevuResultEvent) | undefined
-  /**
-   * Next function is available if there are more results in the given query.
-   * It is optimized function that removes parts from query that might slow down
-   * the response and they are not needed after first request.
-   */
-  next?: (override?: {
-    limit?: number
-    filterManager?: FilterManager
-  }) => Promise<KlevuFetchResponse>
+  queriesById: (
+    id: string
+  ) =>
+    | (KlevuQueryResult & KlevuResultEvent & { next?: KlevuNextFunc })
+    | undefined
 }

@@ -72,11 +72,11 @@ console.log(result.getQueriesById("search")?.records)
 
 ### Result object
 
-`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `getSuggestionsById()` to fetch suggestions results and `getQueriesById()` for search results. `next()` is a nice helper to fetch the next results set with the same queries and modifiers. `next()` is defined only if there are more results available.
+`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `getSuggestionsById()` to fetch suggestions results and `getQueriesById()` for search results.
 
-`getQueriesById()` result contains metadata for query, the result records and possible event functions for providing click events to search, category merchandising and recommendations.
+`getQueriesById()` result contains metadata for query, the result records and possible event functions for providing click events to search, category merchandising and recommendations. It also includes `next()` function. It is a nice helper to fetch the next results set with the same query and modifiers. `next()` is defined only if there are more results available.
 
-Calling these event functions returns a function to use to send events to Klevu. [See definition these functions from here](./src/models/KlevuResultEvent.ts)
+Calling event functions returns a function to use to send events to Klevu. [See definition these functions from here](./src/models/KlevuResultEvent.ts)
 
 ### Platform-specific guides
 

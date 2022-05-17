@@ -6,7 +6,6 @@
       "script": "build",
       "dependsOn": [
         "Build @klevu/core",
-        "Build @klevu/ui",
         "npm: start - react",
         "npm: start - vue"
       ],
