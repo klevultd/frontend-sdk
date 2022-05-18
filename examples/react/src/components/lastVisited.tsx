@@ -3,6 +3,7 @@ import {
   KlevuRecord,
   KlevuLastClickedProducts,
   KlevuDomEvents,
+  KlevuListenDomEvent,
 } from "@klevu/core"
 import { useEffect, useState } from "react"
 import { RecommendationBanner } from "./recommendationBanner"
@@ -17,17 +18,14 @@ export function LastVisited() {
   }
 
   useEffect(() => {
-    document.addEventListener(
+    const stop = KlevuListenDomEvent(
       KlevuDomEvents.ClickEventSent,
       handleProductClickUpdate
     )
 
     // cleanup this component
     return () => {
-      document.removeEventListener(
-        KlevuDomEvents.ClickEventSent,
-        handleProductClickUpdate
-      )
+      stop()
     }
   }, [])
 

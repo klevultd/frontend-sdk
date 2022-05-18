@@ -138,7 +138,7 @@ Filter Manager is a helper class that takes care of the state of filters. What f
 Core sends a DOM events that any browser library could listen and act on the events. All events are attached to document. KlevuDomEvents enumeration is exposed from the library and it's quite simple to listen. For example:
 
 ```ts
-import { KlevuDomEvents } from "@klevu/core"
+import { KlevuDomEvents, KlevuListenDomEvent } from "@klevu/core"
 
 // Function to run when filter selection is updated
 const handleFilterUpdate = () => {
@@ -146,20 +146,20 @@ const handleFilterUpdate = () => {
 }
 
 // Attach event listener
-document.addEventListener(
+const stop = KlevuListenDomEvent(
   KlevuDomEvents.FilterSelectionUpdate,
   handleFilterUpdate
 )
 
 // Don't forget remove event listener in your component destructor
-document.removeEventListener(handleFilterUpdate)
+stop()
 ```
 
 Or as React example
 
 ```ts
 import React, { useEffect } from "react";
-import { KlevuDomEvents } from "@klevu/core";
+import { KlevuDomEvents, KlevuListenDomEvent } from "@klevu/core";
 
 
 function MyComponent() {
@@ -168,17 +168,14 @@ function MyComponent() {
   }
 
   useEffect(() => {
-    document.addEventListener(
+    const stop = KlevuListenDomEvent(
       KlevuDomEvents.FilterSelectionUpdate,
       handleFilterUpdate
     )
 
     // cleanup this component
     return () => {
-      document.removeEventListener(
-        KlevuDomEvents.FilterSelectionUpdate,
-        handleFilterUpdate
-      )
+      stop()
     }
   }, [])
 

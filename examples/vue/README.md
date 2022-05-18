@@ -196,7 +196,10 @@ The filter is basically just a checkbox input. We can pass in the manager instan
 We then need to add an event handler to listen for the _KlevuDomEvents.FilterSelectionUpdate_ event and handle triggering a new search:
 
 ```js
-document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, initialFetch)
+const stopListening = KlevuListenDomEvent(
+  KlevuDomEvents.FilterSelectionUpdate,
+  initialFetch
+)
 ```
 
 See how filterManager makes it easy to manage filters 😉
