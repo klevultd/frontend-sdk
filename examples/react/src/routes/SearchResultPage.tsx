@@ -4,6 +4,7 @@ import {
   applyFilterWithManager,
   KlevuFetch,
   KlevuDomEvents,
+  KlevuListenDomEvent,
   FilterManager,
   search,
   KlevuResultEvent,
@@ -143,17 +144,14 @@ export function SearchResultPage(props: Props) {
   }
 
   React.useEffect(() => {
-    document.addEventListener(
+    const stop = KlevuListenDomEvent(
       KlevuDomEvents.FilterSelectionUpdate,
       handleFilterUpdate
     )
 
     // cleanup this component
     return () => {
-      document.removeEventListener(
-        KlevuDomEvents.FilterSelectionUpdate,
-        handleFilterUpdate
-      )
+      stop()
     }
   }, [])
 

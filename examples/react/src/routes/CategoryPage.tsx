@@ -8,6 +8,7 @@ import {
   categoryMerchandising,
   sendMerchandisingViewEvent,
   kmcRecommendation,
+  KlevuListenDomEvent,
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import type {
@@ -152,17 +153,13 @@ export function CategoryPage() {
   }
 
   React.useEffect(() => {
-    document.addEventListener(
+    const stop = KlevuListenDomEvent(
       KlevuDomEvents.FilterSelectionUpdate,
       handleFilterUpdate
     )
-
     // cleanup this component
     return () => {
-      document.removeEventListener(
-        KlevuDomEvents.FilterSelectionUpdate,
-        handleFilterUpdate
-      )
+      stop()
     }
   }, [])
 

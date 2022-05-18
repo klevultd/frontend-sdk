@@ -1,5 +1,6 @@
 import {
   KlevuDomEvents,
+  KlevuListenDomEvent,
   KlevuFetch,
   KlevuKMCSettings,
   KlevuLastSearches,
@@ -151,17 +152,14 @@ export function QuickSearch(props: Props) {
   }
 
   React.useEffect(() => {
-    document.addEventListener(
+    const stop = KlevuListenDomEvent(
       KlevuDomEvents.LastSearchUpdate,
       handleLastSearchesUpdate
     )
 
     // cleanup this component
     return () => {
-      document.removeEventListener(
-        KlevuDomEvents.LastSearchUpdate,
-        handleLastSearchesUpdate
-      )
+      stop()
     }
   }, [])
 

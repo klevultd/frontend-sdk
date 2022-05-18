@@ -209,7 +209,7 @@ The filter is basically just a checkbox input. We can call the manager.toggleOpt
 We then need to add an event handler to listen for the _KlevuDomEvents.FilterSelectionUpdate_ event and handle triggering a new search:
 
 ```js
-document.addEventListener(
+const stopListening = KlevuListenDomEvent(
   KlevuDomEvents.FilterSelectionUpdate,
   handleFilterUpdate
 )
