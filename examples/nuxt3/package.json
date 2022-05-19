@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@element-plus/icons-vue": "^1.1.4",
+    "@nuxtjs/svg": "^0.4.0",
+    "@vueuse/nuxt": "^8.5.0",
+    "element-plus": "^2.2.0",
+    "nuxt": "3.0.0-rc.3",
+    "sass": "^1.51.0",
+    "sass-loader": "^12.6.0",
+    "unplugin-icons": "^0.14.3",
+    "unplugin-vue-components": "^0.19.5"
+  },
+  "dependencies": {
+    "postcss-loader": "^6.2.1"
+  }
+}
