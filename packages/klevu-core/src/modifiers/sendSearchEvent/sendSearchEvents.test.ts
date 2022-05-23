@@ -1,10 +1,12 @@
 import { KlevuConfig, KlevuFetch, search } from "../../index.js"
 import { sendSearchEvent } from "./sendSearchEvent.js"
+import axios from "axios"
 
 beforeEach(() => {
   KlevuConfig.init({
     url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-160320037354512854",
+    axios,
   })
 })
 

@@ -1,9 +1,9 @@
-import Axios from "axios"
 import { KlevuConfig } from "../index.js"
 import { isBrowser } from "../utils/isBrowser.js"
 import { KMCBannerRootObject } from "./kmcmodels/KMCBanner.js"
 import { KMCMapsRootObject } from "./kmcmodels/KMCMaps.js"
 import { KMCRootObject } from "./kmcmodels/KMCRoot.js"
+import { get } from "./fetch.js"
 
 const url = "https://js.klevu.com/klevu-js-v1/klevu-js-api/"
 const STORAGE_KEY = "klevu-kmc-data"
@@ -28,9 +28,9 @@ export async function KlevuKMCSettings(ignoreCache?: boolean) {
 
   const start = `${url}${KlevuConfig.default.apiKey}`
   const res = await Promise.all([
-    Axios.get<KMCRootObject>(`${start}.json`).then((r) => r.data),
-    Axios.get<KMCBannerRootObject>(`${start}-banner.json`).then((r) => r.data),
-    Axios.get<KMCMapsRootObject>(`${start}-maps.json`).then((r) => r.data),
+    get<KMCRootObject>(`${start}.json`),
+    get<KMCBannerRootObject>(`${start}-banner.json`),
+    get<KMCMapsRootObject>(`${start}-maps.json`),
   ])
 
   const data = {

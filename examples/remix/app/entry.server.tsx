@@ -2,10 +2,12 @@ import { renderToString } from "react-dom/server"
 import { RemixServer } from "remix"
 import type { EntryContext } from "remix"
 import { KlevuConfig } from "@klevu/core"
+import axios from "axios"
 
 KlevuConfig.init({
   url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
   apiKey: "klevu-160320037354512854",
+  axios,
 })
 
 export default function handleRequest(

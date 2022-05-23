@@ -2,11 +2,13 @@ import { KlevuConfig, KlevuFetch, search } from "../../index.js"
 import { categoryMerchandising } from "../../queries/index.js"
 import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { personalisation } from "./personalisation.js"
+import axios from "axios"
 
 beforeEach(() => {
   KlevuConfig.init({
     url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-160320037354512854",
+    axios,
   })
 })
 
