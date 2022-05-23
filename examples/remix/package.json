@@ -14,6 +14,7 @@
     "@klevu/core": "file:../../packages/klevu-core",
     "@remix-run/react": "^1.2.3",
     "@remix-run/serve": "^1.2.3",
+    "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

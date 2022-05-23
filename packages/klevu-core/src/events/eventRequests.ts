@@ -1,5 +1,5 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
-import Axios from "axios"
+import { get, post } from "../connection/fetch.js"
 
 type V1SearchEvent = {
   /**
@@ -32,7 +32,7 @@ export async function KlevuEventV1Search(event: V1SearchEvent) {
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }n-search/search${objectToUrlParams(event)}`
-  return Axios.get(url)
+  return get(url)
 }
 
 export type V1ProductTrackingEvent = {
@@ -87,7 +87,7 @@ export async function KlevuEventV1ProductTracking(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
-  return Axios.get(url)
+  return get(url)
 }
 
 export type V1CheckedOutProductsEvent = {
@@ -143,7 +143,7 @@ export async function KlevuEventV1CheckedOutProducts(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
-  return Axios.get(url)
+  return get(url)
 }
 
 export type KlevuV1CategoryProductsView = {
@@ -185,7 +185,7 @@ export async function KlevuEventV1CategoryView(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }categoryProductViewTracking${objectToUrlParams(event)}`
-  return Axios.get(url)
+  return get(url)
 }
 
 export type KlevuV1CategoryProductsClick = {
@@ -250,7 +250,7 @@ export async function KlevuEventV1CategoryProductClick(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }categoryProductClickTracking${objectToUrlParams(event)}`
-  return Axios.get(url)
+  return get(url)
 }
 
 function objectToUrlParams(event: object) {
@@ -351,5 +351,5 @@ type KlevuEventV2 = {
 }
 
 export async function KlevuEventV2(data: KlevuEventV2[]) {
-  return (await Axios.post(KlevuConfig.default.eventsApiV2Url, data)).data
+  return await post(KlevuConfig.default.eventsApiV2Url, data)
 }

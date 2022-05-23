@@ -1,5 +1,3 @@
-import Axios from "axios"
-import cloneDeep from "lodash.clonedeep"
 import { FetchResultEvents } from "../events/FetchResultEvents.js"
 import {
   applyFilterWithManager,
@@ -18,6 +16,7 @@ import {
 } from "../models/index.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
+import { post } from "./fetch.js"
 
 const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
 
@@ -59,17 +58,10 @@ export async function KlevuFetch(
   if (cached) {
     response = cached
   } else {
-    response = (
-      await Axios.post<KlevuApiRawResponse>(
-        withOverride?.configOverride?.url ?? KlevuConfig.default.url,
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-    ).data
+    response = await post<KlevuApiRawResponse>(
+      withOverride?.configOverride?.url ?? KlevuConfig.default.url,
+      payload
+    )
     cache.cache(payload, response)
   }
 
@@ -174,7 +166,7 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
     if (f.queries) {
-      let qs = cloneDeep(f.queries)
+      let qs = [...f.queries]
       if (f.modifiers) {
         for (const modifier of f.modifiers) {
           if (modifier.modifyAfter) {
@@ -185,7 +177,7 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
       recordQueries.push(...qs)
     }
     if (f.suggestions) {
-      suggestionQueries.push(...cloneDeep(f.suggestions))
+      suggestionQueries.push(...f.suggestions)
     }
   }
 

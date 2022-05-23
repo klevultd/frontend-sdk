@@ -1,10 +1,12 @@
 import { KlevuConfig, KlevuFetch, KlevuTypeOfRecord } from "../../index.js"
 import { kmcRecommendation } from "./kmcRecommendation.js"
+import axios from "axios"
 
 beforeEach(() => {
   KlevuConfig.init({
     url: "", // this should work without url
     apiKey: "klevu-158755634955912036",
+    axios,
   })
 })
 

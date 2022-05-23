@@ -7,6 +7,7 @@ module.exports = {
   globals: {
     "ts-jest": {
       useESM: true,
+      tsconfig: "tsconfig-tests.json",
     },
   },
   moduleNameMapper: {

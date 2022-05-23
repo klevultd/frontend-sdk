@@ -1,3 +1,5 @@
+import type { AxiosStatic } from "axios"
+
 type KlevuConfiguration = {
   /**
    * Your Klevu url
@@ -21,6 +23,11 @@ type KlevuConfiguration = {
    * Events API v2 url
    */
   eventsApiV2Url?: string
+
+  /**
+   *
+   */
+  axios?: AxiosStatic
 }
 
 export class KlevuConfig {
@@ -31,6 +38,7 @@ export class KlevuConfig {
   cacheMaxTTL = 600_000
   eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
+  axios?: AxiosStatic
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -38,6 +46,7 @@ export class KlevuConfig {
     if (config.cacheMaxTTL) {
       this.cacheMaxTTL = config.cacheMaxTTL
     }
+    this.axios = config.axios
   }
 
   static init(config: KlevuConfiguration) {

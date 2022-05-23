@@ -1,4 +1,3 @@
-import Axios from "axios"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
@@ -7,6 +6,7 @@ import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { personalisation } from "../../modifiers/personalisation/personalisation.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
+import { get } from "../../connection/fetch.js"
 
 type Options = {
   id: string
@@ -139,23 +139,16 @@ export async function kmcRecommendation(
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
 ): Promise<KlevuFetchFunctionReturnValue> {
-  const recsResult = await Axios.get<KlevuKMCRecommendations>(
-    `https://config-cdn.ksearchnet.com/recommendations/${KlevuConfig.default.apiKey}/settings/${recommendationId}`,
-    {
-      headers: {
-        accept: "application/json",
-      },
-    }
+  const kmcConfig = await get<KlevuKMCRecommendations>(
+    `https://config-cdn.ksearchnet.com/recommendations/${KlevuConfig.default.apiKey}/settings/${recommendationId}`
   )
-
-  const kmcConfig = recsResult.data
 
   const configOverride = new KlevuConfig({
     apiKey: KlevuConfig.default.apiKey,
     url: `https://${kmcConfig.search.basePath}`,
   })
 
-  const payload = JSON.parse(recsResult.data.search.payload)
+  const payload = JSON.parse(kmcConfig.search.payload)
 
   const queries: KlevuAllRecordQueries[] = payload.recordQueries.map(
     (query: KlevuBaseQuery) => ({

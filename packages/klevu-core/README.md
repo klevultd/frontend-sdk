@@ -27,6 +27,29 @@ KlevuConfig.init({
 })
 ```
 
+If you wish to use Axios to enable SSR or you wish to support old IE browser you can use axios npm package with the library.
+
+First you need to install it into to your project with
+
+```sh
+> npm install axios
+```
+
+Then import and add it to your configuration.
+
+```ts
+import { KlevuConfig } from "@klevu/core"
+import axios from "axios"
+
+KlevuConfig.init({
+  url: "https://<your-server>.ksearchnet.com/cs/v2/search",
+  apiKey: "klevu-xxxxxxxxxxxxx",
+  axios,
+})
+```
+
+Then axios will be used for fetching data.
+
 ## KlevuFetch
 
 Function queries are inserted into a `KlevuFetch()` function where functions are processed and sent to the backend.

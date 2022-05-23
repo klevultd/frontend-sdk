@@ -13,6 +13,5 @@
   },
   "watchOptions": {
     "excludeDirectories": ["**/node_modules", "dist"]
-  },
-  "exclude": ["*/**/*.test.ts"]
+  }
 }
