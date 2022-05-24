@@ -52,7 +52,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
 
   return {
     klevuModifierId: "listfilters",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       for (const q of copy) {
         const filters: KlevuListFilter & KlevuApplyFilter = {

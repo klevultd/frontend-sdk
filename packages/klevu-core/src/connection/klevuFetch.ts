@@ -38,8 +38,9 @@ export async function KlevuFetch(
 
   const functions = await Promise.all(functionPromises)
 
-  const { recordQueries, suggestionQueries } =
-    cleanAndProcessFunctions(functions)
+  const { recordQueries, suggestionQueries } = await cleanAndProcessFunctions(
+    functions
+  )
 
   const withOverride = functions.find((f) => Boolean(f.configOverride))
 
@@ -161,7 +162,9 @@ function fetchNextPageSingleFunc(
   return nextFunc
 }
 
-function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
+async function cleanAndProcessFunctions(
+  functions: KlevuFetchFunctionReturnValue[]
+) {
   const recordQueries: KlevuAllRecordQueries[] = []
   const suggestionQueries: KlevuSuggestionQuery[] = []
   for (const f of functions) {
@@ -170,7 +173,7 @@ function cleanAndProcessFunctions(functions: KlevuFetchFunctionReturnValue[]) {
       if (f.modifiers) {
         for (const modifier of f.modifiers) {
           if (modifier.modifyAfter) {
-            qs = modifier.modifyAfter(qs, f)
+            qs = await modifier.modifyAfter(qs, f)
           }
         }
       }

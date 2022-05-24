@@ -23,7 +23,7 @@ export type KlevuFetchModifer = {
   modifyAfter?: (
     queries: Readonly<KlevuAllRecordQueries[]>,
     func: KlevuFetchFunctionReturnValue
-  ) => KlevuAllRecordQueries[]
+  ) => Promise<KlevuAllRecordQueries[]>
   onResult?: (
     response: Readonly<KlevuFetchResponse>,
     query: KlevuFetchFunctionReturnValue
@@ -47,3 +47,4 @@ export * from "./sendMerchandisingViewEvent/sendMerchandisingViewEvent.js"
 export * from "./injectFilterResult/injectFilterResult.js"
 export * from "./sendRecommendationViewEvent/sendRecommendationViewEvent.js"
 export * from "./personalisation/personalisation.js"
+export * from "./abTest/abTest.js"

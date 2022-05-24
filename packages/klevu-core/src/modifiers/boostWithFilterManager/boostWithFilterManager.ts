@@ -19,7 +19,7 @@ export function boostWithFilterManager(
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "boostWithFilterManager",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       for (const q of queries) {
         if (!q.boost) {

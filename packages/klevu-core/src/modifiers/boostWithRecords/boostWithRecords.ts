@@ -23,7 +23,7 @@ export function boostWithRecords(
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "boostWithRecords",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       for (const q of queries) {
         if (!q.boost) {

@@ -15,7 +15,7 @@ export function exclude(itemGroupIds: string[]): KlevuFetchModifer {
 
   return {
     klevuModifierId: "exclude",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       for (const q of copy) {
         if (!q.settings) {

@@ -151,6 +151,7 @@ Some of the functions can be modified with modifier functions. Any number of the
 | `sendMerchandisingViewEvent()`  | Should be used with `categoryMerchandising()` query to send view event of merchandising              |
 | `sendRecommendationViewEvent()` | Should be used with all recommendation queries. Send a analytical data about recommendation to Klevu |
 | `debug()`                       | Prints query results to console                                                                      |
+| `abTest()`                      | Enable A/B testing for the category merchandising                                                    |
 
 ## Filter Manager
 
@@ -241,3 +242,10 @@ const result = await KlevuKMCSettings()
 To get the list of last searches you can use the `KlevuLastSearches` class.
 
 To get the list of last searches call `KlevuLastSearches.get()` and if you wish to store a search use `KlevuLastSearches.save('user search string')`
+
+## A/B Testing
+
+Currently A/B testing is supported only in the category merchandising. To enable A/B testing add `abTest()` modifier to `categoryMerchandising()` query function.
+
+For A/B testing to work correctly you need to provide correct event data to Klevu. Best way is to use `getCategoryMerchandisingClickSendEvent()` send event helper from [result object](./src/models/KlevuResultEvent.ts)
+.

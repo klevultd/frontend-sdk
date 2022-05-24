@@ -9,11 +9,12 @@ import { ProductPage } from "./routes/ProductPage"
 import { CategoryPage } from "./routes/CategoryPage"
 import { SearchResultPage } from "./routes/SearchResultPage"
 import { CheckoutPage } from "./routes/CheckoutPage"
-import ScrollToTop from "./scrollTop"
+import axios from "axios"
 
 KlevuConfig.init({
   url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
   apiKey: "klevu-164651914788114877",
+  axios,
 })
 
 KlevuKMCSettings()

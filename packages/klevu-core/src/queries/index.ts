@@ -27,7 +27,8 @@ export type KlevuFetchFunctionReturnValue = {
   /**
    * Anything you wish to pass down as params incoming to function
    */
-  params?: unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params?: any
   /**
    * What queries should KlevuFetch do to backend
    */
