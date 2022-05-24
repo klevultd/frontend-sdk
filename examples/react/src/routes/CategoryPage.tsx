@@ -10,6 +10,8 @@ import {
   kmcRecommendation,
   KlevuListenDomEvent,
   sendRecommendationViewEvent,
+  abTest,
+  debug,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -99,7 +101,9 @@ export function CategoryPage() {
           filterManager: manager,
         }),
         applyFilterWithManager(manager),
-        sendMerchandisingViewEvent(params.id)
+        sendMerchandisingViewEvent(params.id),
+        abTest(),
+        debug()
       ),
       kmcRecommendation(
         "k-c0013603-1783-4293-bf80-7b3002587dcb",

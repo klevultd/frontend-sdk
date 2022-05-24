@@ -15,7 +15,7 @@ export function top(ids: string[]): KlevuFetchModifer {
 
   return {
     klevuModifierId: "top",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       for (const q of copy) {
         if (!q.settings) {

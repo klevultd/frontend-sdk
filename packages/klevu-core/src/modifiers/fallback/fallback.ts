@@ -21,7 +21,7 @@ export function fallback(
 
   return {
     klevuModifierId: "fallback",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
 
       for (const query of copy) {

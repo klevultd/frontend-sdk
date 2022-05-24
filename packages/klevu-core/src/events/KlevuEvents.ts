@@ -13,6 +13,7 @@ import {
   KlevuEventV1ProductTracking,
   KlevuEventV1Search,
   KlevuEventV2,
+  KlevuV1CategoryProductsClick,
 } from "./eventRequests.js"
 
 export type RecommendationViewEventMetaData = Pick<
@@ -201,10 +202,12 @@ export class KlevuEvents {
     categoryTitle: string,
     klevuCategory: string,
     variantId?: string,
-    productPosition?: number
+    productPosition?: number,
+    abTestId?: string,
+    abTestVariantId?: string
   ) {
     KlevuLastClickedProducts.click(product.id, product)
-    KlevuEventV1CategoryProductClick({
+    let data: KlevuV1CategoryProductsClick = {
       klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_categoryName: categoryTitle,
       klevu_productGroupId: product.itemGroupId,
@@ -216,6 +219,16 @@ export class KlevuEvents {
       klevu_salePrice: product.salePrice,
       klevu_productSku: product.sku,
       klevu_productPosition: productPosition,
-    })
+    }
+
+    if (abTestId && abTestVariantId) {
+      data = {
+        ...data,
+        abTestId,
+        abTestVariantId,
+      }
+    }
+
+    KlevuEventV1CategoryProductClick(data)
   }
 }

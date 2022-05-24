@@ -42,6 +42,7 @@ export function FetchResultEvents(
                   `KlevuEvents: Given "${productId}" doesn't exists in results`
                 )
               }
+
               KlevuEvents.searchProductClick(
                 record,
                 object.meta.searchedTerm,
@@ -76,12 +77,21 @@ export function FetchResultEvents(
                 Boolean(q.settings?.query?.categoryPath)
               )
 
+              let abTestId, abTestVariantId
+
+              if (func.params.abtest) {
+                abTestId = func.params.abtest.abTestId
+                abTestVariantId = func.params.abtest.abTestVariantId
+              }
+
               KlevuEvents.categoryMerchandisingProductClick(
                 record,
                 categoryTitle,
                 q?.settings?.query?.categoryPath ?? "unknown",
                 variantId,
-                index + 1
+                index + 1,
+                abTestId,
+                abTestVariantId
               )
             }
           },

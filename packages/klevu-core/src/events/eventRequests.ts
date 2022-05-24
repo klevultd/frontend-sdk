@@ -79,6 +79,16 @@ export type V1ProductTrackingEvent = {
    * 	javascript (i.e. an ajax call), this is an optional parameter.
    */
   klevu_shopperIP?: string
+
+  /**
+   * The unique identifier of the A/B Test.
+   */
+  abTestId?: string
+
+  /**
+   * The unique identifier of the A/B Test Variant.
+   */
+  abTestVariantId?: string
 }
 
 export async function KlevuEventV1ProductTracking(

@@ -27,7 +27,7 @@ export function personalisation(options?: {
 }): KlevuFetchModifer {
   return {
     klevuModifierId: "personalisation",
-    modifyAfter: (queries, klevuFunc) => {
+    modifyAfter: async (queries, klevuFunc) => {
       const copy = Array.from(queries)
       for (const q of queries) {
         if (!q.settings) {

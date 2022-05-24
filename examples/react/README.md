@@ -292,12 +292,15 @@ const res = await KlevuFetch(
       filterManager: manager,
     }),
     applyFilterWithManager(manager),
-    sendMerchandisingViewEvent(params.id)
+    sendMerchandisingViewEvent(params.id),
+    abTest()
   )
 )
 ```
 
 This example also shows a search modifier specifically created to log analytics data for category pages, _sendMerchandisingViewEvent_ which accepts the name/title of the category to display in KMC.
+
+Second new feature shown in this example is _abTest()_ modifier that automatically checks if there are A/B created for the category in KMC and enables them. In the following `getCategoryMerchandisingClickSendEvent()` example SDK will now automatically send correct event data to Klevu. If you know that you are planning on using A/B testing feature then it is recommended to add `abTest()` modifier to each `categoryMerchandising` query.
 
 In addition, the results of this search include a new function that we can use to log click events for products returned by this search.
 

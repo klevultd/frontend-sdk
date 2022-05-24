@@ -15,7 +15,7 @@ export function include(ids: string[]): KlevuFetchModifer {
 
   return {
     klevuModifierId: "include",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       for (const q of copy) {
         if (!q.settings) {

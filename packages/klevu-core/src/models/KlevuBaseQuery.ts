@@ -112,4 +112,14 @@ export type KlevuBaseQuery = {
       weight: number
     }>
   }
+
+  /**
+   * The unique identifier of the A/B Test.
+   */
+  abTestId?: string
+
+  /**
+   * The unique identifier of the A/B Test Variant.
+   */
+  abTestVariantId?: string
 }

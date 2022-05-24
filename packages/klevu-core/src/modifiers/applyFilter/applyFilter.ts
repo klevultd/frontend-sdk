@@ -27,7 +27,7 @@ export function applyFilters(filters: ApplyFilter[]): KlevuFetchModifer {
 
   return {
     klevuModifierId: "applyFilters",
-    modifyAfter: (queries) => {
+    modifyAfter: async (queries) => {
       const copy = Array.from(queries)
       if (filters.length == 0) {
         return copy
