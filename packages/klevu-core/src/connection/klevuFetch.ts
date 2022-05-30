@@ -58,10 +58,16 @@ export async function KlevuFetch(
   if (cached) {
     response = cached
   } else {
-    response = await post<KlevuApiRawResponse>(
+    const res = await post<KlevuApiRawResponse>(
       withOverride?.configOverride?.url ?? KlevuConfig.default.url,
       payload
     )
+
+    if (!res) {
+      throw new Error("Couldn't fetch data")
+    }
+
+    response = res
     cache.cache(payload, response)
   }
 

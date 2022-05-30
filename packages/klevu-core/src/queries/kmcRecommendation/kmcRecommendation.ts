@@ -143,6 +143,10 @@ export async function kmcRecommendation(
     `https://config-cdn.ksearchnet.com/recommendations/${KlevuConfig.default.apiKey}/settings/${recommendationId}`
   )
 
+  if (!kmcConfig) {
+    throw new Error("Couldn't fetch KMC config")
+  }
+
   const configOverride = new KlevuConfig({
     apiKey: KlevuConfig.default.apiKey,
     url: `https://${kmcConfig.search.basePath}`,

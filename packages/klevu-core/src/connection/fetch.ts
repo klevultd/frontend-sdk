@@ -1,20 +1,33 @@
 import { KlevuConfig } from "../config.js"
 
-export async function get<T>(url: string): Promise<T> {
+export async function get<T>(
+  url: string,
+  ignoreResult = false
+): Promise<T | undefined> {
   if (KlevuConfig.default.axios) {
     return (await KlevuConfig.default.axios.get<T>(url)).data
   }
 
-  return await fetch(url, {
+  const res = await fetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json())
+  })
+
+  if (ignoreResult) {
+    return undefined
+  }
+
+  return (await res.json()) as T
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function post<T>(url: string, data: any): Promise<T> {
+export async function post<T>(
+  url: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any,
+  ignoreResult = false
+): Promise<T | undefined> {
   if (KlevuConfig.default.axios) {
     return await KlevuConfig.default.axios
       .post<T>(url, data, {
@@ -25,11 +38,17 @@ export async function post<T>(url: string, data: any): Promise<T> {
       .then((res) => res.data)
   }
 
-  return await fetch(url, {
+  const res = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((res) => res.json())
+  })
+
+  if (ignoreResult) {
+    return undefined
+  }
+
+  return (await res.json()) as T
 }

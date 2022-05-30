@@ -32,7 +32,7 @@ export async function KlevuEventV1Search(event: V1SearchEvent) {
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }n-search/search${objectToUrlParams(event)}`
-  return get(url)
+  return get(url, true)
 }
 
 export type V1ProductTrackingEvent = {
@@ -87,7 +87,7 @@ export async function KlevuEventV1ProductTracking(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
-  return get(url)
+  return get(url, true)
 }
 
 export type V1CheckedOutProductsEvent = {
@@ -143,7 +143,7 @@ export async function KlevuEventV1CheckedOutProducts(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
-  return get(url)
+  return get(url, true)
 }
 
 export type KlevuV1CategoryProductsView = {
@@ -185,7 +185,7 @@ export async function KlevuEventV1CategoryView(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }categoryProductViewTracking${objectToUrlParams(event)}`
-  return get(url)
+  return get(url, true)
 }
 
 export type KlevuV1CategoryProductsClick = {
@@ -250,7 +250,7 @@ export async function KlevuEventV1CategoryProductClick(
   const url = `${
     KlevuConfig.default.eventsApiV1Url
   }categoryProductClickTracking${objectToUrlParams(event)}`
-  return get(url)
+  return get(url, true)
 }
 
 function objectToUrlParams(event: object) {
@@ -351,5 +351,5 @@ type KlevuEventV2 = {
 }
 
 export async function KlevuEventV2(data: KlevuEventV2[]) {
-  return await post(KlevuConfig.default.eventsApiV2Url, data)
+  return await post(KlevuConfig.default.eventsApiV2Url, data, true)
 }
