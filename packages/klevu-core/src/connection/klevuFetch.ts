@@ -138,18 +138,15 @@ function fetchNextPageSingleFunc(
   }
 
   const nextFunc: KlevuNextFunc = async (override?) => {
-    const lastLimit = override?.limit ?? prevQuery.settings?.limit ?? 5
-
     if (!prevQuery.settings) {
       prevQuery.settings = {}
     }
 
-    if (!prevQuery.settings?.offset) {
-      prevQuery.settings.offset = lastLimit
-    } else {
-      prevQuery.settings.offset += lastLimit
-    }
+    prevQuery.settings.offset =
+      prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
+    prevQuery.settings.limit = override?.limit ?? prevQuery.settings?.limit ?? 5
 
+    // existance of prevQuery has checked in function before
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     func.queries![queryIndex] = prevQuery
 
