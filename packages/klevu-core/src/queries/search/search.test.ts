@@ -22,11 +22,13 @@ test("Basic search", async () => {
 })
 
 test("Pagination test", async () => {
+  const limit = 2
+
   const result = await KlevuFetch(
     search(
       "*",
       {
-        limit: 2,
+        limit,
       },
       listFilters()
     )
@@ -37,6 +39,8 @@ test("Pagination test", async () => {
   expect(searchResult?.records.length).toBe(2)
   expect(searchResult?.next).toBeDefined()
   expect(searchResult?.filters?.length).toBeGreaterThan(0)
+  expect(searchResult?.meta.offset).toBe(0 * limit)
+  expect(searchResult?.meta.noOfResults).toBe(limit)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const nextResult = await searchResult?.next!()
@@ -47,6 +51,8 @@ test("Pagination test", async () => {
   expect(nextFirstId).not.toBe(prevFirstId)
   expect(nextSearchResult?.next).toBeDefined()
   expect(nextSearchResult?.filters?.length).toBeGreaterThan(0)
+  expect(nextSearchResult?.meta.offset).toBe(1 * limit)
+  expect(nextSearchResult?.meta.noOfResults).toBe(limit)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const nextNextResult = await nextSearchResult?.next!()
@@ -55,6 +61,8 @@ test("Pagination test", async () => {
   expect(nextNextFirstId).not.toBe(prevFirstId)
   expect(nextNextFirstId).not.toBe(nextFirstId)
   expect(nextNextSearchResult?.filters?.length).toBeGreaterThan(0)
+  expect(nextNextSearchResult?.meta.offset).toBe(2 * limit)
+  expect(nextNextSearchResult?.meta.noOfResults).toBe(limit)
 })
 
 test("Limit test", async () => {

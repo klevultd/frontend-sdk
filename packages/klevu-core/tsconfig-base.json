@@ -14,5 +14,5 @@
   "watchOptions": {
     "excludeDirectories": ["**/node_modules", "dist"]
   },
-  "exclude": ["*/**/*.test.ts"]
+  "exclude": ["*/**/*.test.ts", "**/node_modules", "dist"]
 }

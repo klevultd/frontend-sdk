@@ -9,7 +9,13 @@ import { KlevuResultEvent } from "./KlevuResultEvent.js"
  * the response and they are not needed after first request.
  */
 export type KlevuNextFunc = (override?: {
+  /**
+   * Limit number of results for next query. By default this is automatically calculated from previous result
+   */
   limit?: number
+  /**
+   * Filter manager to apply for next function
+   */
   filterManager?: FilterManager
 }) => Promise<KlevuFetchResponse>
 
