@@ -10,6 +10,7 @@ import {
   KlevuResultEvent,
   sendSearchEvent,
   personalisation,
+  KlevuNextFunc,
 } from "@klevu/core"
 import type {
   KlevuRecord,
@@ -39,10 +40,11 @@ import { useLocation } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
 import { ChevronLeft, FilterAlt } from "@mui/icons-material"
+import debounce from "lodash.debounce"
 
 const drawerWidth = 240
 const manager = new FilterManager()
-let prevRes: KlevuFetchResponse
+let nextFunc: KlevuNextFunc
 let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
 function useQuery() {
@@ -110,32 +112,38 @@ export function SearchResultPage(props: Props) {
       ),
     ]
     const res = await KlevuFetch(...functions)
-    prevRes = res
 
     const searchResult = res.queriesById("search")
     if (!searchResult) {
       return
     }
 
+    nextFunc = searchResult.next
+
     clickManager = searchResult.getSearchClickSendEvent()
 
-    setShowMore(Boolean(res.next))
+    setShowMore(Boolean(searchResult.next))
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
   }, [sorting, query])
 
   const fetchMore = async () => {
-    const nextRes = await prevRes.next({
+    const nextRes = await nextFunc({
       filterManager: manager,
     })
-    setProducts([
-      ...products,
-      ...(nextRes.queriesById("search")?.records ?? []),
-    ])
-    prevRes = nextRes
-    setShowMore(Boolean(nextRes.next))
+
+    const searchResult = nextRes.queriesById("search")
+
+    setProducts([...products, ...(searchResult?.records ?? [])])
+    nextFunc = searchResult.next
+    setShowMore(Boolean(searchResult.next))
   }
+
+  const deboucnedSlider = (key) =>
+    debounce((event, value) => {
+      manager.updateSlide(key, value[0], value[1])
+    }, 300)
 
   const handleFilterUpdate = () => {
     setOptions(manager.options)
@@ -225,6 +233,7 @@ export function SearchResultPage(props: Props) {
                 ]}
                 max={parseInt(s.max)}
                 min={parseInt(s.min)}
+                onChange={deboucnedSlider(s.key)}
                 valueLabelDisplay="on"
               />
             </div>
