@@ -7,17 +7,18 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "@element-plus/icons-vue": "^1.1.4",
-    "@nuxtjs/svg": "^0.4.0",
+    "@nuxtjs/tailwindcss": "^5.1.2",
+    "@pinia/nuxt": "^0.1.9",
     "@vueuse/nuxt": "^8.5.0",
-    "element-plus": "^2.2.0",
+    "daisyui": "^2.15.0",
+    "epic-spinners": "^1.1.0",
+    "naive-ui": "^2.29.0",
     "nuxt": "3.0.0-rc.3",
-    "sass": "^1.51.0",
-    "sass-loader": "^12.6.0",
-    "unplugin-icons": "^0.14.3",
-    "unplugin-vue-components": "^0.19.5"
+    "pinia": "^2.0.14"
   },
   "dependencies": {
-    "postcss-loader": "^6.2.1"
+    "@klevu/core": "^1.0.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "multi-range-slider-vue": "^1.1.4"
   }
 }
