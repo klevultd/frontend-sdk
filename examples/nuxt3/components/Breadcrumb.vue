@@ -22,6 +22,9 @@ const isSearch = computed(() => route.path == "/search")
 const breadcrumbs = computed(() => {
   const crumbs = []
   let url = ""
+  if (route.path.indexOf("/products/") == 0) {
+    return
+  }
   const splits = route.path.substring(1).split("/")
   splits.forEach((crumb, pathIndex) => {
     const splitCrumbs = crumb.split(";")

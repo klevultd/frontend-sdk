@@ -1,5 +1,6 @@
 import useQuickSearch from "../stores/quickSearchStore"
-export default defineNuxtRouteMiddleware((to, from) => {
+
+export default defineNuxtRouteMiddleware(() => {
   // ✅ This will work make sure the correct store is used for the
   // current running app
   const quickSearchStore = useQuickSearch()

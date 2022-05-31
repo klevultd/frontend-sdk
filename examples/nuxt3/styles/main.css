@@ -35,10 +35,10 @@ body .quick-search-results {
   min-height: 50px;
   min-width: 320px;
   z-index: 10;
-  @apply hidden border rounded text-black shadow shadow-lg bg-white px-5 py-3 absolute flex flex-col lg:flex-row right-10;
+  @apply hidden border rounded text-black shadow shadow-lg bg-white px-5 py-3 absolute right-10 md:w-[500px] lg:w-[800px] max-h-[80vh];
 }
 body.show-quick-search .quick-search-results {
-  @apply block;
+  @apply flex flex-col lg:flex-row ;
 }
 
 body .slideout-cart-wrapper {

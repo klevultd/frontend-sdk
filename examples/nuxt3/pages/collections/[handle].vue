@@ -1,12 +1,11 @@
 <template>
-  <div>
-    {{ $route.params.handle }}
-    {{ $route.path.substring(1).split("/") }}
-  </div>
+  <div>collection page</div>
 </template>
 
-<script script>
-definePageMeta({
-  layout: "search-results",
-})
+<script setup>
+const route = useRoute()
+console.log(route.path)
+const { data } = await useFetch("/api/collections/" + route.params.handle)
+
+console.log(data.ret)
 </script>
