@@ -10,17 +10,6 @@ const emit = defineEmits(["clickHandler"])
 const clickHandler = function () {
   emit("clickHandler", props.product)
 }
-/*
-if (props.product.totalVariants) {
-    console.log(props.product.name, props.product.totalVariants)
-    const rawSwatchesInfo = props.product.swatchesInfo.split(';;;;')
-    rawSwatchesInfo.forEach(si => {
-        const [first, ...rest] = si.split(':')
-        const last = rest.join(':')
-        console.log(first.trim(), last.trim())
-    })
-}
-*/
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative" @mouseleave="blurHandler">
     <div class="form-control">
       <form @submit.prevent="doSearchSubmit" class="input-group">
         <input
@@ -7,6 +7,7 @@
           @change="debouncedSearchHandler"
           @keyup="debouncedSearchHandler"
           @focus="debouncedSearchHandler"
+          @blur="blurHandler"
           v-model="quickSearchStore.searchTerm"
           id="quickSearchInput"
           placeholder="Search…"
@@ -69,6 +70,12 @@ import {
 const router = useRouter()
 const quickSearchStore = useQuickSearch()
 const loading = ref(true)
+const config = useRuntimeConfig()
+
+KlevuConfig.init({
+  url: config.klevuUrl,
+  apiKey: config.klevuApikey,
+})
 
 const doSearch = async function (e) {
   showQuickSearch()
@@ -134,13 +141,17 @@ const closeQuickSearch = (e) => {
   quickSearchStore.searchTerm = ""
   clearSearchResults()
 }
+
+const blurHandler = (e) => {
+  console.log("close quicksearch")
+}
 </script>
 
 <style scoped>
-.results .top-results {
+.quick-search-results .top-results {
   @apply lg:w-1/4 p-3;
 }
-.results .bottom-results {
-  @apply lg:w-3/4 p-3;
+.quick-search-results .bottom-results {
+  @apply lg:w-3/4 p-3 overflow-y-auto;
 }
 </style>
