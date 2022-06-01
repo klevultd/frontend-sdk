@@ -26,19 +26,24 @@
 
 <script setup>
 import useSearch from "../stores/searchStore"
-import {
-  applyFilterWithManager,
-  FilterManager,
-  KlevuDomEvents,
-  KlevuEvents,
-  KlevuFetch,
-  KlevuSearchSorting,
-  listFilters,
-  trendingProducts,
-} from "@klevu/core"
+import { KlevuConfig } from "@klevu/core"
+// {
+//   applyFilterWithManager,
+//   FilterManager,
+//   KlevuDomEvents,
+//   KlevuEvents,
+//   KlevuFetch,
+//   KlevuSearchSorting,
+//   listFilters,
+//   trendingProducts,
+// }
 
 definePageMeta({
   layout: "search-results",
+})
+
+onMounted(() => {
+  console.log("")
 })
 
 const searchStore = useSearch()
