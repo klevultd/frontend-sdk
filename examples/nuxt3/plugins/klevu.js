@@ -35,7 +35,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     setTimeout(() => {
       quickSearchStore.submitting = false
     }, 1000)
-    console.log(cartStore.products.length)
     console.log("page is finish", route.path)
   })
 
