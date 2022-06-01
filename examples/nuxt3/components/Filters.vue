@@ -18,8 +18,18 @@
       </svg>
     </div>
     <div v-if="searchStore.hasFilters">
-      <div v-for="option in searchStore.options" :key="option.id"></div>
-      <div v-for="slider in searchStore.sliders" :key="slider.id"></div>
+      <Option
+        v-for="(option, index) in searchStore.options"
+        :key="index"
+        :option="option"
+        :manager="manager"
+      />
+      <Slider
+        v-for="(slider, index) in searchStore.sliders"
+        :key="index"
+        :slider="slider"
+        :manager="manager"
+      />
     </div>
     <div v-else>No Filters to Display</div>
   </div>

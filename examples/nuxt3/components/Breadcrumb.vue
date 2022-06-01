@@ -6,9 +6,11 @@
           <NuxtLink to="/"><IconsHome class="w-4 mr-2" /> Home</NuxtLink>
         </li>
         <li v-for="(crumb, index) in breadcrumbs" :key="index">
-          <NuxtLink :to="crumb.link" v-if="crumb.link">{{
-            crumb.title
-          }}</NuxtLink>
+          <NuxtLink
+            :to="crumb.link"
+            v-if="crumb.link && crumb.link != '/search'"
+            >{{ crumb.title }}</NuxtLink
+          >
           <span v-else>{{ crumb.title }}</span>
         </li>
       </ul>

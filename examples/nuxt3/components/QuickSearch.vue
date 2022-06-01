@@ -32,30 +32,12 @@
         </button>
       </form>
     </div>
-    <div class="quick-search-results">
-      <div class="top-results" v-if="!loading">
-        <QuickSearchSuggestions />
-        <QuickSearchLastSearches />
-      </div>
-      <div class="bottom-results" v-if="!loading">
-        <QuickSearchProducts />
-        <QuickSearchTrendingProducts />
-      </div>
-      <trinity-rings-spinner
-        v-if="loading"
-        class="mx-auto my-12"
-        :animation-duration="1500"
-        :size="60"
-        color="#97C73E"
-      />
-    </div>
   </div>
 </template>
 
 <script setup>
 import useQuickSearch from "../stores/quickSearchStore"
 import { KlevuLastSearches } from "@klevu/core"
-import { TrinityRingsSpinner } from "epic-spinners"
 import {
   KlevuFetch,
   KlevuTypeOfRecord,
@@ -69,7 +51,6 @@ import {
 
 const router = useRouter()
 const quickSearchStore = useQuickSearch()
-const loading = ref(true)
 const config = useRuntimeConfig()
 
 KlevuConfig.init({
@@ -78,9 +59,10 @@ KlevuConfig.init({
 })
 
 const doSearch = async function (e) {
+  if (quickSearchStore.submitting) return null
   showQuickSearch()
   clearSearchResults()
-  loading.value = true
+  quickSearchStore.loading = true
 
   if (quickSearchStore.searchTerm < 3) {
     await doEmptySuggestions()
@@ -94,7 +76,7 @@ const doSearch = async function (e) {
     suggestions(quickSearchStore.searchTerm)
   )
 
-  loading.value = false
+  quickSearchStore.loading = false
 
   quickSearchStore.setProducts(result.queriesById("search").records ?? [])
   quickSearchStore.setSuggestions(
@@ -107,7 +89,7 @@ const debouncedSearchHandler = useDebounceFn(doSearch, 300)
 
 const doEmptySuggestions = async function () {
   const res = await KlevuFetch(trendingProducts({ limit: 9 }))
-  loading.value = false
+  quickSearchStore.loading = false
   quickSearchStore.setLastSearches(KlevuLastSearches.get())
   quickSearchStore.setTrendingProducts(
     res.queriesById("trendingProducts").records ?? []
@@ -121,10 +103,12 @@ const clearSearchResults = () => {
 }
 
 const doSearchSubmit = function () {
+  quickSearchStore.submitting = true
   const searchTerm = quickSearchStore.searchTerm
+  document.getElementById("quickSearchInput").blur()
   closeQuickSearch()
   if (searchTerm.length > 0) {
-    router.push({ path: "/search", query: { q: searchTerm } })
+    router.push({ path: "/search/", query: { q: searchTerm } })
   }
 }
 
@@ -146,12 +130,3 @@ const blurHandler = (e) => {
   console.log("close quicksearch")
 }
 </script>
-
-<style scoped>
-.quick-search-results .top-results {
-  @apply lg:w-1/4 p-3;
-}
-.quick-search-results .bottom-results {
-  @apply lg:w-3/4 p-3 overflow-y-auto;
-}
-</style>

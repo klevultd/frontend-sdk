@@ -10,6 +10,8 @@ const useQuickSearch = defineStore("quick-search-store", {
       suggestions: [],
       lastSearches: [],
       quickSearchOpen: false,
+      loading: true,
+      submitting: false,
     }
   },
   actions: {
