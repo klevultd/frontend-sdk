@@ -2,6 +2,8 @@
       
 Ƭ **KlevuQueryResult**: `Object`
 
+Raw query object from api
+
 #### Type declaration
 
 | Name | Type | Description |
@@ -23,5 +25,5 @@
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:75](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L75)
+[models/KlevuApiRawResponse.ts:81](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L81)
 

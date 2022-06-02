@@ -17,5 +17,5 @@ Fetches list of products. All fields are fetched.
 
 #### Defined in
 
-[queries/products/products.ts:16](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/products/products.ts#L16)
+[queries/products/products.ts:16](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/products/products.ts#L16)
 

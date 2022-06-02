@@ -4,5 +4,5 @@
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:9](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L9)
+[models/KlevuTypeOfRecord.ts:9](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L9)
 

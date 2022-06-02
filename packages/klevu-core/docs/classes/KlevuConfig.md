@@ -11,6 +11,7 @@
 ### Properties
 
 - [apiKey](KlevuConfig.md#apikey)
+- [axios](KlevuConfig.md#axios)
 - [cacheMaxTTL](KlevuConfig.md#cachemaxttl)
 - [eventsApiV1Url](KlevuConfig.md#eventsapiv1url)
 - [eventsApiV2Url](KlevuConfig.md#eventsapiv2url)
@@ -35,7 +36,7 @@
 
 #### Defined in
 
-[config.ts:35](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L35)
+[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L43)
 
 ## Properties
 
@@ -45,17 +46,27 @@
 
 #### Defined in
 
-[config.ts:29](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L29)
+[config.ts:36](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L36)
+
+___
+
+### axios
+
+• `Optional` **axios**: `AxiosStatic`
+
+#### Defined in
+
+[config.ts:41](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L41)
 
 ___
 
 ### cacheMaxTTL
 
-• **cacheMaxTTL**: `number` = `600000`
+• **cacheMaxTTL**: `number` = `600_000`
 
 #### Defined in
 
-[config.ts:31](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L31)
+[config.ts:38](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L38)
 
 ___
 
@@ -65,7 +76,7 @@ ___
 
 #### Defined in
 
-[config.ts:32](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L32)
+[config.ts:39](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L39)
 
 ___
 
@@ -75,7 +86,7 @@ ___
 
 #### Defined in
 
-[config.ts:33](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L33)
+[config.ts:40](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L40)
 
 ___
 
@@ -85,7 +96,7 @@ ___
 
 #### Defined in
 
-[config.ts:30](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L30)
+[config.ts:37](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L37)
 
 ___
 
@@ -95,7 +106,7 @@ ___
 
 #### Defined in
 
-[config.ts:27](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L27)
+[config.ts:34](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L34)
 
 ## Methods
 
@@ -115,4 +126,4 @@ ___
 
 #### Defined in
 
-[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/config.ts#L43)
+[config.ts:52](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/config.ts#L52)

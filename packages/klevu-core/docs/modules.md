@@ -54,6 +54,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuKMCRecommendations](modules/klevukmcrecommendations.md)
 - [KlevuLastSearch](modules/klevulastsearch.md)
 - [KlevuListFilter](modules/klevulistfilter.md)
+- [KlevuNextFunc](modules/klevunextfunc.md)
 - [KlevuPayload](modules/klevupayload.md)
 - [KlevuQueryResult](modules/klevuqueryresult.md)
 - [KlevuRangeFilterSettings](modules/klevurangefiltersettings.md)
@@ -77,15 +78,6 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuFetch](modules/klevufetch.md)
 - [KlevuKMCSettings](modules/klevukmcsettings.md)
 
-### Queries Functions
-
-- [categoryMerchandising](modules/categorymerchandising.md)
-- [products](modules/products.md)
-- [raw](modules/raw.md)
-- [search](modules/search.md)
-- [suggestions](modules/suggestions.md)
-- [trendingProducts](modules/trendingproducts.md)
-
 ### RecommendationQuery Functions
 
 - [boughtTogether](modules/boughttogether.md)
@@ -97,8 +89,9 @@ Global custom document events that @klevu/core sends Enumerations
 - [similarProducts](modules/similarproducts.md)
 - [trendingCategoryProducts](modules/trendingcategoryproducts.md)
 
-### Modifiers Functions
+### Modifier Functions
 
+- [abTest](modules/abtest.md)
 - [applyFilterWithManager](modules/applyfilterwithmanager.md)
 - [applyFilters](modules/applyfilters.md)
 - [boostWithFilterManager](modules/boostwithfiltermanager.md)
@@ -106,6 +99,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [boostWithKeywords](modules/boostwithkeywords.md)
 - [boostWithRecords](modules/boostwithrecords.md)
 - [debug](modules/debug.md)
+- [exclude](modules/exclude.md)
 - [fallback](modules/fallback.md)
 - [include](modules/include.md)
 - [injectFilterResult](modules/injectfilterresult.md)
@@ -115,3 +109,16 @@ Global custom document events that @klevu/core sends Enumerations
 - [sendRecommendationViewEvent](modules/sendrecommendationviewevent.md)
 - [sendSearchEvent](modules/sendsearchevent.md)
 - [top](modules/top.md)
+
+### Other Functions
+
+- [KlevuListenDomEvent](modules/klevulistendomevent.md)
+
+### Query Functions
+
+- [categoryMerchandising](modules/categorymerchandising.md)
+- [products](modules/products.md)
+- [raw](modules/raw.md)
+- [search](modules/search.md)
+- [suggestions](modules/suggestions.md)
+- [trendingProducts](modules/trendingproducts.md)

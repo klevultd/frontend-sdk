@@ -18,5 +18,5 @@ Fetch products for a category listing page.
 
 #### Defined in
 
-[queries/categoryMerchandising/categoryMerchandising.ts:28](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L28)
+[queries/categoryMerchandising/categoryMerchandising.ts:28](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L28)
 

@@ -17,5 +17,5 @@ Take control and write any kind of query you wish to Klevu API. For experts only
 
 #### Defined in
 
-[queries/raw/raw.ts:13](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/raw/raw.ts#L13)
+[queries/raw/raw.ts:13](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/raw/raw.ts#L13)
 

@@ -2,7 +2,7 @@
       
 ▸ **kmcRecommendation**(`recommendationId`, `options?`, ...`modifiers`): `Promise`<[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)\>
 
-Fetches products based on
+Fetches products based on KMC recommendation. Provide id created in KMC
 
 #### Parameters
 
@@ -18,5 +18,5 @@ Fetches products based on
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:132](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L132)
+[queries/kmcRecommendation/kmcRecommendation.ts:137](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L137)
 

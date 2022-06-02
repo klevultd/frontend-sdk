@@ -44,13 +44,13 @@ Tell Klevu what products where bought by the user
 
 #### Defined in
 
-[events/KlevuEvents.ts:32](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L32)
+[events/KlevuEvents.ts:33](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L33)
 
 ___
 
 ### categoryMerchandisingProductClick
 
-▸ `Static` **categoryMerchandisingProductClick**(`product`, `categoryTitle`, `klevuCategory`, `variantId?`, `productPosition?`): `void`
+▸ `Static` **categoryMerchandisingProductClick**(`product`, `categoryTitle`, `klevuCategory`, `variantId?`, `productPosition?`, `abTestId?`, `abTestVariantId?`): `void`
 
 #### Parameters
 
@@ -61,6 +61,8 @@ ___
 | `klevuCategory` | `string` | This is the complete hierarchy of the category being visited. For example, Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the separator between a parent and a child category. |
 | `variantId?` | `string` | This is the child/variant ID of the clicked product. eg. 12345. For compound products with a parent and multiple child/variant products, this is the ID of the specific variant. |
 | `productPosition?` | `number` | Position of the product on the category page when it was clicked. For example, the value would be 0 if it is the first product on the first page. The value will be 30, if it is the first product on the 2nd page with 30 products being displayed per page. |
+| `abTestId?` | `string` | - |
+| `abTestVariantId?` | `string` | - |
 
 #### Returns
 
@@ -68,7 +70,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:199](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L199)
+[events/KlevuEvents.ts:200](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L200)
 
 ___
 
@@ -91,7 +93,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:176](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L176)
+[events/KlevuEvents.ts:177](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L177)
 
 ___
 
@@ -115,7 +117,7 @@ When product has been clicked in the recommendation banner
 
 #### Defined in
 
-[events/KlevuEvents.ts:93](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L93)
+[events/KlevuEvents.ts:94](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L94)
 
 ___
 
@@ -138,7 +140,7 @@ When recommendation banner is shown in the page
 
 #### Defined in
 
-[events/KlevuEvents.ts:60](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L60)
+[events/KlevuEvents.ts:61](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L61)
 
 ___
 
@@ -163,7 +165,7 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Defined in
 
-[events/KlevuEvents.ts:155](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L155)
+[events/KlevuEvents.ts:156](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L156)
 
 ___
 
@@ -187,4 +189,4 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/KlevuEvents.ts:129](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/events/KlevuEvents.ts#L129)
+[events/KlevuEvents.ts:130](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuEvents.ts#L130)

@@ -15,9 +15,12 @@
 
 • **Frequency** = `"FREQ"`
 
+Sort options based on the number of records each option has in the result
+set.
+
 #### Defined in
 
-[models/KlevuFilterOrder.ts:2](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuFilterOrder.ts#L2)
+[models/KlevuFilterOrder.ts:6](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuFilterOrder.ts#L6)
 
 ___
 
@@ -25,6 +28,8 @@ ___
 
 • **Index** = `"INDEX"`
 
+'INDEX' will sort the options alphabetically.
+
 #### Defined in
 
-[models/KlevuFilterOrder.ts:3](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/models/KlevuFilterOrder.ts#L3)
+[models/KlevuFilterOrder.ts:10](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuFilterOrder.ts#L10)

@@ -18,5 +18,5 @@ Bought together recommendation on checkout page
 
 #### Defined in
 
-[queries/boughtTogether/boughtTogether.ts:23](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/queries/boughtTogether/boughtTogether.ts#L23)
+[queries/boughtTogether/boughtTogether.ts:23](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/boughtTogether/boughtTogether.ts#L23)
 

@@ -17,5 +17,5 @@ Should not be used outside of library itself
 
 #### Defined in
 
-[modifiers/injectFilterResult/injectFilterResult.ts:12](https://github.com/klevultd/frontend-sdk/blob/0515b77/packages/klevu-core/src/modifiers/injectFilterResult/injectFilterResult.ts#L12)
+[modifiers/injectFilterResult/injectFilterResult.ts:12](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/modifiers/injectFilterResult/injectFilterResult.ts#L12)
 
