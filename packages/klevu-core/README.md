@@ -1,5 +1,12 @@
 ![Klevu](../../images/klevu_header.jpg?raw=true "Klevu")
 
+[![npm version][npm-src]][npm-href]
+[![Bundle size][bundlephobia-src]][bundlephobia-href]
+[![npm total downloads][npm-total-downloads]][npm-href]
+[![npm weekly downloads][npm-weekly-downloads]][npm-href]
+![github stars][github-stars-src]
+![github issues][github-issues-src]
+
 # `@klevu/core`
 
 Klevu core is a library that helps developers to interact with Klevu API. It includes a fetching function, easy-to-use functions to perform queries, state management for filters, data transformations and event tracking for easier usage.
@@ -249,3 +256,13 @@ Currently A/B testing is supported only in the category merchandising. To enable
 
 For A/B testing to work correctly you need to provide correct event data to Klevu. Best way is to use `getCategoryMerchandisingClickSendEvent()` send event helper from [result object](./src/models/KlevuResultEvent.ts)
 .
+
+[npm-src]: https://badgen.net/npm/v/@klevu/core
+[npm-href]: https://www.npmjs.com/package/@klevu/core
+[bundlephobia-src]: https://badgen.net/bundlephobia/minzip/@klevu/core
+[bundlephobia-href]: https://bundlephobia.com/package/@klevu/core
+[npm-weekly-downloads]: https://badgen.net/npm/dw/@klevu/core
+[npm-total-downloads]: https://badgen.net/npm/dt/@klevu/core
+[github-stars-src]: https://badgen.net/github/stars/klevultd/frontend-sdk?color=purple
+[github-issues-src]: https://badgen.net/github/issues/klevultd/frontend-sdk?color=purple
+[github-href]: https://github.com/klevultd/frontend-sdk
