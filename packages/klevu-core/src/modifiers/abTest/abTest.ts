@@ -18,6 +18,11 @@ export function abTest(): KlevuFetchModifer {
     klevuModifierId: "abtest",
     modifyAfter: async (queries, func) => {
       const data = await fetchAbTestInfo()
+
+      if (!data) {
+        throw new Error("Failed to fetch AB test data")
+      }
+
       const copy = Array.from(queries)
       for (const q of copy) {
         if (q.typeOfRequest !== KlevuTypeOfRequest.CategoryNavigation) {
@@ -47,7 +52,7 @@ export function abTest(): KlevuFetchModifer {
   }
 }
 
-async function fetchAbTestInfo(): Promise<KlevuABDataModel> {
+async function fetchAbTestInfo(): Promise<KlevuABDataModel | undefined> {
   const ts = window.localStorage.getItem(STORAGE_TS_KEY)
   const res = window.localStorage.getItem(STORAGE_KEY)
   if (res && ts && new Date().getTime() - parseInt(ts, 10) < ONE_HOUR) {
