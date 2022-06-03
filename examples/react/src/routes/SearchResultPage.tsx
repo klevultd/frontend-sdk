@@ -37,12 +37,13 @@ import {
   Container,
 } from "@mui/material"
 import { useLocation } from "react-router-dom"
-import React, { useState, useCallback, useEffect, useRef } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
 import { ChevronLeft, FilterAlt } from "@mui/icons-material"
 import debounce from "lodash.debounce"
 
 const drawerWidth = 240
+const manager = new FilterManager()
 let nextFunc: KlevuNextFunc
 let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
@@ -57,16 +58,15 @@ type Props = {
 }
 
 export function SearchResultPage(props: Props) {
-  const manager = useRef(new FilterManager())
   const query = useQuery()
   const location = useLocation()
 
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
-    manager.current.options
+    manager.options
   )
   const [sliders, setSliders] = useState<KlevuFilterResultSlider[]>(
-    manager.current.sliders
+    manager.sliders
   )
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
@@ -90,9 +90,9 @@ export function SearchResultPage(props: Props) {
             minMax: true,
           },
         ],
-        filterManager: manager.current,
+        filterManager: manager,
       }),
-      applyFilterWithManager(manager.current),
+      applyFilterWithManager(manager),
       sendSearchEvent(),
     ]
 
@@ -123,14 +123,14 @@ export function SearchResultPage(props: Props) {
     clickManager = searchResult.getSearchClickSendEvent()
 
     setShowMore(Boolean(searchResult.next))
-    setOptions(manager.current.options)
-    setSliders(manager.current.sliders)
+    setOptions(manager.options)
+    setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
   }, [sorting, query])
 
   const fetchMore = async () => {
     const nextRes = await nextFunc({
-      filterManager: manager.current,
+      filterManager: manager,
     })
 
     const searchResult = nextRes.queriesById("search")
@@ -142,12 +142,12 @@ export function SearchResultPage(props: Props) {
 
   const deboucnedSlider = (key) =>
     debounce((event, value) => {
-      manager.current.updateSlide(key, value[0], value[1])
+      manager.updateSlide(key, value[0], value[1])
     }, 300)
 
   const handleFilterUpdate = () => {
-    setOptions(manager.current.options)
-    setSliders(manager.current.sliders)
+    setOptions(manager.options)
+    setSliders(manager.sliders)
     initialFetch()
   }
 
@@ -161,7 +161,7 @@ export function SearchResultPage(props: Props) {
     return () => {
       stop()
     }
-  }, [location.pathname])
+  }, [location.pathname, query, sorting])
 
   useEffect(() => {
     initialFetch()
@@ -203,7 +203,7 @@ export function SearchResultPage(props: Props) {
                   key={i2}
                   role={undefined}
                   onClick={() => {
-                    manager.current.toggleOption(o.key, o2.name)
+                    manager.toggleOption(o.key, o2.name)
                   }}
                   dense
                 >
