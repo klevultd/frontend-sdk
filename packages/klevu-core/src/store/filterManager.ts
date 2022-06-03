@@ -28,12 +28,29 @@ export class FilterManager {
       }
     }
     this.sort()
+
+    document.dispatchEvent(
+      new CustomEvent(KlevuDomEvents.FiltersApplied, {
+        detail: {
+          options: this.options,
+          sliders: this.sliders,
+        },
+      })
+    )
   }
 
   private sort() {
     for (const o of this.options) {
       o.options.sort((a, b) => b.count - a.count)
     }
+  }
+
+  /**
+   * clear current options and sliders
+   */
+  clear() {
+    this.options = []
+    this.sliders = []
   }
 
   /**
@@ -108,6 +125,10 @@ export class FilterManager {
     )
   }
 
+  /**
+   * Populate filter manager with filters from Klevu API
+   * @returns
+   */
   toApplyFilters(): ApplyFilter[] {
     const filters: ApplyFilter[] = []
     for (const o of this.options) {
@@ -141,6 +162,12 @@ export class FilterManager {
     return filters
   }
 
+  /**
+   * Get current selection by key
+   *
+   * @param key
+   * @returns
+   */
   currentSelection(key: string): string[] | undefined {
     const opt = this.options.find((o) => o.key === key)
     if (opt) {

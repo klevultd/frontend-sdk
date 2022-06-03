@@ -39,7 +39,7 @@ import {
   Container,
 } from "@mui/material"
 import { useParams } from "react-router-dom"
-import React, { useState, useCallback, useEffect } from "react"
+import React, { useState, useCallback, useEffect, useRef } from "react"
 import { Product } from "../components/product"
 import { ChevronLeft, FilterAlt } from "@mui/icons-material"
 import debounce from "lodash.debounce"
@@ -47,7 +47,6 @@ import { RecommendationBanner } from "../components/recommendationBanner"
 import { links, pages } from "../components/appbar"
 
 const drawerWidth = 240
-const manager = new FilterManager()
 let nextFunc: KlevuNextFunc
 let productClickManager: ReturnType<
   KlevuResultEvent["getCategoryMerchandisingClickSendEvent"]
@@ -57,13 +56,14 @@ let recommendationClickManager: ReturnType<
 >
 
 export function CategoryPage() {
+  const manager = useRef(new FilterManager())
   const params = useParams()
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
-    manager.options
+    manager.current.options
   )
   const [sliders, setSliders] = useState<KlevuFilterResultSlider[]>(
-    manager.sliders
+    manager.current.sliders
   )
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [recommendationProducts, setRecommendationProducts] = useState<
@@ -98,9 +98,9 @@ export function CategoryPage() {
               minMax: true,
             },
           ],
-          filterManager: manager,
+          filterManager: manager.current,
         }),
-        applyFilterWithManager(manager),
+        applyFilterWithManager(manager.current),
         sendMerchandisingViewEvent(params.id),
         abTest(),
         debug()
@@ -125,8 +125,8 @@ export function CategoryPage() {
 
     setShowMore(Boolean(searchResult.next))
     nextFunc = searchResult.next
-    setOptions(manager.options)
-    setSliders(manager.sliders)
+    setOptions(manager.current.options)
+    setSliders(manager.current.sliders)
     setProducts(searchResult.records ?? [])
 
     if (recommendationResult) {
@@ -139,7 +139,7 @@ export function CategoryPage() {
 
   const fetchMore = async () => {
     const nextRes = await nextFunc({
-      filterManager: manager,
+      filterManager: manager.current,
     })
 
     const nextSearchResult = nextRes.queriesById("search")
@@ -151,8 +151,8 @@ export function CategoryPage() {
   }
 
   const handleFilterUpdate = () => {
-    setOptions(manager.options)
-    setSliders(manager.sliders)
+    setOptions(manager.current.options)
+    setSliders(manager.current.sliders)
     initialFetch()
   }
 
@@ -165,15 +165,15 @@ export function CategoryPage() {
     return () => {
       stop()
     }
-  }, [])
+  }, [params.id])
 
   useEffect(() => {
     initialFetch()
   }, [sorting, params.id, itemsOnPage])
 
-  const deboucnedSlider = (key) =>
+  const debouncedSlider = (key) =>
     debounce((event, value) => {
-      manager.updateSlide(key, value[0], value[1])
+      manager.current.updateSlide(key, value[0], value[1])
     }, 300)
 
   const title = pages[links.findIndex((p) => p === params.id)]
@@ -214,7 +214,7 @@ export function CategoryPage() {
                   key={i2}
                   role={undefined}
                   onClick={() => {
-                    manager.toggleOption(o.key, o2.name)
+                    manager.current.toggleOption(o.key, o2.name)
                   }}
                   dense
                 >
@@ -255,7 +255,7 @@ export function CategoryPage() {
                 ]}
                 max={parseInt(s.max)}
                 min={parseInt(s.min)}
-                onChange={deboucnedSlider(s.key)}
+                onChange={debouncedSlider(s.key)}
                 valueLabelDisplay="on"
               />
             </div>
