@@ -6,6 +6,7 @@ import {
   KlevuFilterResultSlider,
   KlevuFilterResultOptions,
 } from "../models/KlevuApiRawResponse.js"
+import { isBrowser } from "../utils/isBrowser.js"
 
 /**
  * Filter manager is used to store and handle filters (facets) in the results easily.
@@ -29,14 +30,16 @@ export class FilterManager {
     }
     this.sort()
 
-    document.dispatchEvent(
-      new CustomEvent(KlevuDomEvents.FiltersApplied, {
-        detail: {
-          options: this.options,
-          sliders: this.sliders,
-        },
-      })
-    )
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FiltersApplied, {
+          detail: {
+            options: this.options,
+            sliders: this.sliders,
+          },
+        })
+      )
+    }
   }
 
   private sort() {
