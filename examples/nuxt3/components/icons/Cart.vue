@@ -1,10 +1,11 @@
 <template>
   <svg
-    width="24"
-    height="24"
+    :width="cWidth"
+    :height="cHeight"
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    class="inline-block"
   >
     <path
       fill-rule="evenodd"
@@ -22,3 +23,33 @@
     />
   </svg>
 </template>
+
+<script setup>
+const props = defineProps({
+  width: String,
+  height: String,
+})
+const size = {
+  width: 24,
+  height: 24,
+}
+
+const cWidth = computed(() => {
+  if (!props.width && props.height) {
+    return props.height
+  } else if (props.width) {
+    return props.width
+  } else {
+    return size.width
+  }
+})
+const cHeight = computed(() => {
+  if (props.width && !props.height) {
+    return props.width
+  } else if (props.height) {
+    return props.height
+  } else {
+    return size.height
+  }
+})
+</script>

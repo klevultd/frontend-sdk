@@ -1,5 +1,5 @@
 <template>
-  <div class="relative" @mouseleave="blurHandler">
+  <div class="relative">
     <div class="form-control">
       <form @submit.prevent="doSearchSubmit" class="input-group">
         <input
@@ -118,8 +118,7 @@ const showQuickSearch = () => {
 }
 
 const closeQuickSearch = (e) => {
-  document.body.classList.remove("show-quick-search")
-  document.getElementById("quickSearchInput").blur()
+  // document.getElementById("quickSearchInput").blur()
 
   quickSearchStore.quickSearchOpen = false
   quickSearchStore.searchTerm = ""
@@ -128,5 +127,8 @@ const closeQuickSearch = (e) => {
 
 const blurHandler = (e) => {
   console.log("close quicksearch")
+  setTimeout(() => {
+    quickSearchStore.quickSearchOpen = false
+  }, 500)
 }
 </script>

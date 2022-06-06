@@ -2,7 +2,7 @@
   <Transition name="page">
     <div>
       <SlideoutCart />
-      <Filters />
+      <SlideoutFilters />
       <QuickSearchResults />
       <Menu />
       <Breadcrumb v-if="$route.path != '/search'" />

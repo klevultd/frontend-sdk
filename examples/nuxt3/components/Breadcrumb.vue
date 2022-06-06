@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-sm breadcrumbs">
+    <div class="text-sm breadcrumbs" style="height: 64px">
       <ul class="m-3">
         <li>
           <NuxtLink to="/"><IconsHome class="w-4 mr-2" /> Home</NuxtLink>

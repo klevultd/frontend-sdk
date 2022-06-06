@@ -17,21 +17,28 @@
         />
       </svg>
     </div>
-    <div v-if="searchStore.hasFilters">
+    <h2>FILTERS</h2>
+    <div
+      v-if="hasFilters"
+      class="overflow-y-auto overflow-x-hidden mb-6 w-full"
+    >
       <Option
         v-for="(option, index) in searchStore.options"
         :key="index"
         :option="option"
-        :manager="manager"
       />
       <Slider
         v-for="(slider, index) in searchStore.sliders"
         :key="index"
         :slider="slider"
-        :manager="manager"
       />
     </div>
-    <div v-else>No Filters to Display</div>
+    <div v-else class="text-gray-300 text-center">
+      <div class="text-center text-gray-200">
+        <IconsFilter width="150" />
+      </div>
+      <div>No Filters to Display</div>
+    </div>
   </div>
 </template>
 
@@ -42,7 +49,7 @@ import useSearch from "../stores/searchStore.js"
 const searchStore = useSearch()
 
 const hasFilters = computed(() => {
-  return useSearch.options.length || useSearch.sliders.length
+  return false || searchStore.options.length || searchStore.sliders.length
 })
 </script>
 

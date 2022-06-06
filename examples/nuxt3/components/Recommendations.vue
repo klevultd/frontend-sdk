@@ -1,8 +1,11 @@
 <template>
-  <div class="pt-12 pb-6 text-center text-lg font-bold uppercase">
-    {{ title }}
-  </div>
   <div class="recommendations-wrapper">
+    <div
+      v-if="searchStore.similarProducts.length"
+      class="pt-12 pb-6 text-center text-lg font-bold uppercase"
+    >
+      {{ title }}
+    </div>
     <carousel :items-to-show="numOfRecs">
       <slide
         v-for="(rec, index) in searchStore.similarProducts"
@@ -26,12 +29,16 @@
 import useSearch from "../stores/searchStore"
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel"
 import "vue3-carousel/dist/carousel.css"
+import { trendingProducts } from "@klevu/core"
 // import { useBreakpoints } from '@vueuse/core'
 
 const breakpoints = useBreakpoints({
   tablet: 768,
   laptop: 1024,
 })
+const xl = breakpoints.greater("laptop")
+const laptop = breakpoints.greater("tablet")
+
 const searchStore = useSearch()
 const props = defineProps({
   title: String,
@@ -42,9 +49,9 @@ const recommendationClickHandler = function (product, index) {
 }
 
 const numOfRecs = computed(() => {
-  if (breakpoints.greater("laptop")) {
+  if (xl.value) {
     return 4
-  } else if (breakpoints.greater("tablet")) {
+  } else if (laptop.value) {
     return 3
   } else {
     return 2
@@ -52,12 +59,26 @@ const numOfRecs = computed(() => {
 })
 </script>
 
-<style>
+<style lang="scss">
 .recommendations-wrapper {
   @apply pb-12 px-6 mx-auto;
-}
-.carousel {
-  @apply flex-col;
+
+  .carousel {
+    @apply flex-col;
+
+    .carousel__slide {
+      @apply items-start;
+
+      .carousel__item {
+        @apply flex-grow p-2;
+
+        a {
+          max-width: 250px;
+          @apply justify-center items-center mx-auto;
+        }
+      }
+    }
+  }
 }
 .carousel__prev--in-active,
 .carousel__next--in-active {
@@ -69,6 +90,7 @@ const numOfRecs = computed(() => {
 .carousel__prev {
   left: 15px;
 }
+
 :root {
   --vc-nav-background-color: #97c73e;
   --vc-pgn-background-color: #97c73e;

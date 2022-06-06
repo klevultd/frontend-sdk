@@ -8,7 +8,7 @@
     }"
   >
     <NuxtLayout>
-      <NuxtPage />
+      <NuxtPage :key="route.fullPath" />
     </NuxtLayout>
   </Body>
 </template>
@@ -18,6 +18,7 @@ import useCart from "./stores/cartStore"
 import useSearch from "./stores/searchStore.js"
 import useQuickSearch from "./stores/quickSearchStore"
 
+const route = useRoute()
 const cartStore = useCart()
 const searchStore = useSearch()
 const quickSearchStore = useQuickSearch()

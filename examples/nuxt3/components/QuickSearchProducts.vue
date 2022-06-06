@@ -8,7 +8,7 @@
           :key="index"
           :product="product"
           @clickHandler="productClick"
-          classes="p-4 w-full md:w-1/2 lg:w-1/3"
+          classes="p-4 w-1/2 lg:w-1/3"
         />
       </div>
     </div>

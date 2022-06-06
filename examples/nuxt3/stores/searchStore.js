@@ -7,6 +7,7 @@ const useSearch = defineStore("search-store", {
     return {
       searchTerm: "",
       products: [],
+      recommendationProducts: [],
       options: [],
       sliders: [],
       similarProducts: [],
@@ -20,12 +21,19 @@ const useSearch = defineStore("search-store", {
       ],
       collectionFilterExcludes: [],
       showMore: false,
+      loading: true,
       filtersOpen: false,
+      manager: null,
+      searchFn: null,
     }
   },
   actions: {
     setProducts(arr) {
       this.products =
+        typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
+    },
+    setRecommendationProducts(arr) {
+      this.recommendationProducts =
         typeof arr == "object" && typeof arr.length != "undefined" ? arr : []
     },
     setSimilar(arr) {
@@ -42,11 +50,15 @@ const useSearch = defineStore("search-store", {
     },
     resetSearch() {
       this.searchTerm = ""
+      this.clearSearchResults()
+      this.setSimilar([])
+    },
+    clearSearchResults() {
       this.showMore = false
       this.setProducts([])
+      this.setRecommendationProducts([])
       this.setOptions([])
       this.setSliders([])
-      this.setSimilar([])
     },
   },
 })
