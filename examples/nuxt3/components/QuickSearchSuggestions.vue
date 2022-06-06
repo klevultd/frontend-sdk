@@ -1,10 +1,10 @@
 <template>
-  <div class="suggestions" v-if="quickSearchStore.suggestions.length > 0">
+  <div class="suggestions mb-6" v-if="quickSearchStore.suggestions.length > 0">
     <h3>Suggestions</h3>
     <div class="suggestion-results">
-      <router-link
+      <NuxtLink
         v-for="(suggestion, index) in quickSearchStore.suggestions"
-        class="block"
+        class="block text-gray-700 hover:text-primary"
         :key="index"
         :to="`/search?q=${suggestion.replace(/<[^>]*>?/gm, '')}`"
         v-html="suggestion"

@@ -1,6 +1,16 @@
 <template>
   <div>
-    <div class="loading-message" v-show="!searchStore.products.length">
+    <trinity-rings-spinner
+      v-if="searchStore.loading"
+      class="mx-auto my-12"
+      :animation-duration="1500"
+      :size="60"
+      color="#97C73E"
+    />
+    <div
+      class="loading-message"
+      v-show="!searchStore.products.length && !searchStore.loading"
+    >
       Loading products...
     </div>
     <div class="collection-wrapper" v-show="searchStore.products.length">
@@ -13,39 +23,142 @@
             :key="product.id"
             :product="product"
             @click="productClickHandler(product.id)"
-            classes="p-2 md:w-1/3 lg:w-1/4 xl:w-1/5 mb-5"
+            classes="p-2 mx-auto max-w-[300px] md:mx-0 w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 mb-5"
           />
           <div class="w-full text-center" v-if="searchStore.showMore">
             <button class="btn" @click="fetchMore">Load more</button>
           </div>
         </div>
       </section>
-      <!-- <div>
-      {{ $route.params.handle }}
-      {{ $route.path.substring(1).split("/") }}
-    </div> -->
     </div>
   </div>
 </template>
 
 <script setup>
 import useSearch from "../../stores/searchStore"
+import {
+  listFilters,
+  applyFilterWithManager,
+  KlevuFetch,
+  KlevuDomEvents,
+  sendMerchandisingViewEvent,
+  FilterManager,
+  categoryMerchandising,
+  kmcRecommendation,
+  sendRecommendationViewEvent,
+} from "@klevu/core"
+import { TrinityRingsSpinner } from "epic-spinners"
 
 definePageMeta({
   layout: "search-results",
 })
 
+onMounted(() => {
+  document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, initialFetch)
+})
+
+onUpdated(() => {
+  useNuxtApp().$validateImages()
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener(
+    KlevuDomEvents.FilterSelectionUpdate,
+    initialFetch
+  )
+})
+
 const searchStore = useSearch()
 const route = useRoute()
-const pending = ref(true)
-const { data } = await $fetch("/api/collections/" + route.params.handle)
-pending.value = false
+searchStore.manager = new FilterManager()
+let prevRes
+let productClickManager
+let recommendationClickManager
 
-let manager = {}
+const initialFetch = async () => {
+  searchStore.clearSearchResults()
+  await nextTick()
+  searchStore.loading = true
 
-if (data && data.products && data.products.length) {
-  searchStore.setProducts(data.products)
-  searchStore.showMore = data.showMore
+  const res = await KlevuFetch(
+    categoryMerchandising(
+      route.params.handle,
+      {
+        id: "search",
+        limit: 36,
+        sort: searchStore.sorting,
+      },
+      listFilters({
+        rangeFilterSettings: [
+          {
+            key: "klevu_price",
+            minMax: true,
+          },
+        ],
+        exclude: searchStore.collectionFilterExcludes,
+        filterManager: searchStore.manager,
+      }),
+      applyFilterWithManager(searchStore.manager),
+      sendMerchandisingViewEvent(route.params.handle)
+    ),
+    kmcRecommendation(
+      "k-c0013603-1783-4293-bf80-7b3002587dcb",
+      {
+        categoryPath: route.params.handle,
+        id: "recommendation",
+      },
+      sendRecommendationViewEvent("Category product recommendations")
+    )
+  )
+
+  searchStore.loading = false
+
+  const searchResult = res.queriesById("search")
+  const recommendationResult = res.queriesById("recommendation")
+
+  if (!searchResult) {
+    return
+  }
+  prevRes = searchResult
+
+  productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
+
+  searchStore.showMore = Boolean(searchResult.next)
+  searchStore.setOptions(searchStore.manager.options)
+  searchStore.setSliders(searchStore.manager.sliders)
+  searchStore.setProducts(searchResult.records ?? [])
+
+  if (recommendationResult) {
+    recommendationClickManager =
+      recommendationResult.getRecommendationClickSendEvent()
+
+    searchStore.setRecommendationProducts(recommendationResult.records ?? [])
+  }
 }
-// console.log(data)
+
+searchStore.searchFn = initialFetch
+
+const fetchMore = async () => {
+  const nextRes = await prevRes.next({
+    filterManager: searchStore.manager,
+  })
+  const searchResult = nextRes.queriesById("search")
+  searchStore.setProducts([
+    ...searchStore.products,
+    ...(searchResult.records ?? []),
+  ])
+  prevRes = searchResult
+  searchStore.showMore = Boolean(searchResult.next)
+}
+
+const updateSort = (e) => {
+  searchStore.sorting = e.target.value
+  initialFetch()
+}
+
+const productClickHandler = (id) => {
+  productClickManager(id, route.params.id)
+}
+
+initialFetch()
 </script>

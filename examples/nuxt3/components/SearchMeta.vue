@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-primary text-primary-content">
+  <div class="navbar bg-primary text-primary-content" style="height: 64px">
     <div class="flex-1 px-2 lg:flex-none">
       <button
         @click="searchStore.filtersOpen = !searchStore.filtersOpen"
@@ -12,9 +12,12 @@
       <div class="flex items-stretch">
         <div class="dropdown dropdown-end">
           Sort By:
-          <label tabindex="0" class="btn glass rounded-btn normal-case">{{
-            sortTitles[searchStore.sorting]
-          }}</label>
+          <label
+            tabindex="0"
+            id="sortTrigger"
+            class="btn glass rounded-btn normal-case"
+            >{{ sortTitles[searchStore.sorting] }}</label
+          >
           <ul
             tabindex="0"
             class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4 text-primary"
@@ -40,18 +43,28 @@ import { KlevuSearchSorting } from "@klevu/core"
 import useSearch from "../stores/searchStore.js"
 
 const searchStore = useSearch()
+let sortTrigger
+
 const setSorting = (sorting) => {
   searchStore.sorting = sorting
   updateSort()
 }
-const updateSort = () => {
-  console.log(searchStore.sorting)
+const updateSort = async () => {
+  await nextTick()
+  console.log(
+    `handle sort update here: ${sortTrigger.innerText}; which is ${searchStore.sorting}`
+  )
+  if (searchStore.searchFn) searchStore.searchFn()
 }
 const sortTitles = {
   RELEVANCE: "Relevance",
   PRICE_ASC: "Price Low to High",
   PRICE_DESC: "Price High to Low",
 }
+
+onMounted(() => {
+  sortTrigger = document.getElementById("sortTrigger")
+})
 </script>
 
 <style scoped>

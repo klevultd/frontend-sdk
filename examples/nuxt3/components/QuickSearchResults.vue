@@ -23,6 +23,10 @@ import useQuickSearch from "../stores/quickSearchStore"
 import { TrinityRingsSpinner } from "epic-spinners"
 
 const quickSearchStore = useQuickSearch()
+
+onUpdated(() => {
+  useNuxtApp().$validateImages()
+})
 </script>
 
 <style scoped>

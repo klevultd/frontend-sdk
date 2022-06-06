@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-base-100 drop-shadow-md">
+  <div class="navbar bg-base-100 drop-shadow-md" style="height: 64px">
     <div class="navbar-start">
       <div class="dropdown">
         <label tabindex="0" class="btn btn-ghost md:hidden">
@@ -53,6 +53,9 @@
           >
         </li>
       </ul>
+      <ul :class="{ hidden: !isDev }">
+        <button @click="fetchCategories">Show categories</button>
+      </ul>
     </div>
     <div class="navbar-end">
       <QuickSearch />
@@ -66,14 +69,78 @@ import IconsMan from "./icons/Man.vue"
 import IconsWoman from "./icons/Woman.vue"
 import IconsManShoe from "./icons/ManShoe.vue"
 import useCart from "../stores/cartStore"
+import useSearch from "../stores/searchStore"
+import { KlevuFetch, search } from "@klevu/core"
 
 const cartStore = useCart()
+const searchStore = useSearch()
+const allCategories = []
+let prevRes
+
+const isDev = ref(false)
 
 const categories = [
   { link: "/collections/Men", title: "Men", icon: IconsMan },
   { link: "/collections/Women", title: "Women", icon: IconsWoman },
   { link: "/collections/men;shoes", title: "Men's Shoes", icon: IconsManShoe },
 ]
+
+const structureCategories = () => {
+  const newcats = allCategories.map((cat) => ({
+    // name: cat.name,
+    // url: cat.url,
+    klevu_category: cat.klevu_category,
+    image: cat.image,
+    imageUrl: cat.imageUrl,
+  }))
+  console.log(newcats)
+}
+
+const fetchCategories = async () => {
+  const res = await KlevuFetch(
+    search("*", {
+      id: "categories",
+      limit: 400,
+      sort: searchStore.sorting,
+      typeOfRecords: ["KLEVU_CATEGORY"],
+    })
+  )
+  const searchResult = res.queriesById("categories")
+  if (!searchResult || !searchResult.records.length) {
+    return
+  }
+
+  console.log(searchResult)
+
+  allCategories.push(...searchResult.records)
+
+  if (Boolean(searchResult.next)) {
+    prevRes = searchResult
+    fetchMoreCategories()
+  } else {
+    structureCategories(allCategories)
+  }
+}
+
+const fetchMoreCategories = async () => {
+  const nextRes = await prevRes.next()
+  const searchResult = nextRes.queriesById("categories")
+
+  if (!searchResult || !searchResult.records.length) {
+    return
+  }
+
+  console.log(searchResult)
+
+  allCategories.push(...searchResult.records)
+
+  if (Boolean(searchResult.next)) {
+    prevRes = searchResult
+    fetchMoreCategories()
+  } else {
+    structureCategories(allCategories)
+  }
+}
 </script>
 
 <style scoped>

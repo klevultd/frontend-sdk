@@ -1,6 +1,16 @@
 <template>
   <div>
-    <div class="loading-message" v-show="!searchStore.products.length">
+    <trinity-rings-spinner
+      v-if="searchStore.loading"
+      class="mx-auto my-12"
+      :animation-duration="1500"
+      :size="60"
+      color="#97C73E"
+    />
+    <div
+      class="loading-message"
+      v-show="!searchStore.products.length && !searchStore.loading"
+    >
       Loading products...
     </div>
     <div class="collection-wrapper" v-show="searchStore.products.length">
@@ -25,37 +35,113 @@
 </template>
 
 <script setup>
+import {
+  applyFilterWithManager,
+  FilterManager,
+  KlevuDomEvents,
+  KlevuEvents,
+  KlevuFetch,
+  KlevuSearchSorting,
+  listFilters,
+  search,
+  sendSearchEvent,
+} from "@klevu/core"
 import useSearch from "../stores/searchStore"
-import { KlevuConfig } from "@klevu/core"
-// {
-//   applyFilterWithManager,
-//   FilterManager,
-//   KlevuDomEvents,
-//   KlevuEvents,
-//   KlevuFetch,
-//   KlevuSearchSorting,
-//   listFilters,
-//   trendingProducts,
-// }
+import { TrinityRingsSpinner } from "epic-spinners"
+
+const searchStore = useSearch()
+const route = useRoute()
+const manager = new FilterManager()
+let prevRes
 
 definePageMeta({
   layout: "search-results",
 })
 
 onMounted(() => {
-  console.log("")
+  document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, initialFetch)
 })
 
-const searchStore = useSearch()
-const route = useRoute()
-const pending = ref(true)
-const { data } = await $fetch("/api/search/" + route.query.q)
-pending.value = false
+onUpdated(() => {
+  useNuxtApp().$validateImages()
+})
 
-let manager = {}
+onBeforeUnmount(() => {
+  document.removeEventListener(
+    KlevuDomEvents.FilterSelectionUpdate,
+    initialFetch
+  )
+})
 
-if (data && data.products && data.products.length) {
-  searchStore.setProducts(data.products)
-  searchStore.showMore = data.showMore
+const initialFetch = async () => {
+  searchStore.clearSearchResults()
+  await nextTick()
+  searchStore.loading = true
+
+  const res = await KlevuFetch(
+    search(
+      route.query.q,
+      {
+        id: "search",
+        limit: 36,
+        sort: searchStore.sorting,
+      },
+      listFilters({
+        rangeFilterSettings: [
+          {
+            key: "klevu_price",
+            minMax: true,
+          },
+        ],
+        exclude: searchStore.homeFilterExcludes,
+        filterManager: manager,
+      }),
+      applyFilterWithManager(manager),
+      sendSearchEvent()
+    )
+  )
+
+  searchStore.loading = false
+
+  const searchResult = res.queriesById("search")
+  if (!searchResult) {
+    return
+  }
+  prevRes = searchResult
+
+  searchStore.showMore = Boolean(searchResult.next)
+  searchStore.setOptions(manager.options)
+  searchStore.setSliders(manager.sliders)
+  searchStore.setProducts(searchResult.records ?? [])
 }
+
+const fetchMore = async () => {
+  const nextRes = await prevRes.next({
+    filterManager: manager,
+  })
+  const searchResult = nextRes.queriesById("search")
+  searchStore.setProducts([
+    ...searchStore.products,
+    ...(searchResult.records ?? []),
+  ])
+  prevRes = searchResult
+  searchStore.showMore = Boolean(searchResult.next)
+}
+
+searchStore.searchFn = initialFetch
+
+const productClick = function (product) {
+  KlevuEvents.searchProductClick(product, props.searchTerm)
+}
+
+const toggleFacets = () => {
+  openFacets.value = !openFacets.value
+}
+
+const updateSort = (e) => {
+  searchStore.sorting = e.target.value
+  initialFetch()
+}
+
+initialFetch()
 </script>

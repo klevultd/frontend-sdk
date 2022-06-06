@@ -3,11 +3,15 @@ import { defineNuxtConfig } from "nuxt"
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   runtimeConfig: {
-    klevuApikey: "klevu-160320037354512854",
-    klevuUrl: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+    // klevuApikey: "klevu-160320037354512854",
+    klevuApikey: "klevu-164651914788114877",
+    // klevuUrl: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+    klevuUrl: "https://eucs29v2.ksearchnet.com/cs/v2/search",
     public: {
-      klevuApikey: "klevu-160320037354512854",
-      klevuUrl: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+      // klevuApikey: "klevu-160320037354512854",
+      klevuApikey: "klevu-164651914788114877",
+      // klevuUrl: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+      klevuUrl: "https://eucs29v2.ksearchnet.com/cs/v2/search",
     },
   },
 
@@ -24,6 +28,7 @@ export default defineNuxtConfig({
     ],
     link: [
       { rel: "icon", sizes: "32x32", href: "/cropped-klevu-icon-32x32.png" },
+      { rel: "preload", as: "image", href: "/No-Image-Placeholder.svg" },
     ],
     bodyAttrs: {
       class: "overflow-x-hidden",

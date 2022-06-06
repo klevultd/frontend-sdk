@@ -14,6 +14,7 @@
         />
       </svg>
     </div>
+    <h2>YOUR BASKET</h2>
     <div v-if="cartStore.products.length">
       <div v-for="item in cartStore.products" :key="item.product.id">
         <div class="product-wrapper">
@@ -60,10 +61,17 @@
           </div>
         </div>
       </div>
-      <div class="subtotal"></div>
+      <div class="subtotal m-6 text-gray-700">
+        Basket Subtotal: {{ cartStore.subtotal }}
+      </div>
       <button @click="checkout" class="block btn mx-auto">CHECKOUT</button>
     </div>
-    <div v-else>No products in shopping basket</div>
+    <div v-else class="text-gray-300 text-center">
+      <div class="text-gray-200">
+        <IconsCart width="150" />
+      </div>
+      <div>No products in shopping basket</div>
+    </div>
   </div>
 </template>
 

@@ -8,6 +8,28 @@ const useCart = defineStore("cart-store", {
       open: false,
     }
   },
+  getters: {
+    subtotal(state) {
+      let currency
+      const displaySubtotal = state.products.reduce((price, item) => {
+        if (!currency && item.product.currency) currency = item.product.currency
+        return item.amount * item.product.price + price
+      }, 0)
+      return displaySubtotal
+        ? new Intl.NumberFormat(undefined, {
+            style: "currency",
+            currency: currency,
+          }).format(displaySubtotal)
+        : 0
+    },
+    cartTotalQuantity(state) {
+      const displayQuantity = state.products.reduce(
+        (qty, item) => qty + item.amount,
+        0
+      )
+      return displayQuantity
+    },
+  },
   actions: {
     addProduct(product, quantity) {
       const found = this.products.findIndex(
