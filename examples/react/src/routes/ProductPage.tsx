@@ -17,12 +17,12 @@ import { RecommendationBanner } from "../components/recommendationBanner"
 import { useSnackbar } from "notistack"
 import { LoadingIndicator } from "../components/loadingIndicator"
 
-let alsoBoughtClick
+let alsoviewedClick
 
 export function ProductPage() {
   const [product, setProduct] = useState<KlevuRecord>()
   const [similar, setSimilar] = useState<KlevuRecord[]>([])
-  const [alsoBought, setAlsoBoought] = useState<KlevuRecord[]>([])
+  const [alsoviewed, setAlsoBoought] = useState<KlevuRecord[]>([])
   const params = useParams()
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
@@ -34,21 +34,21 @@ export function ProductPage() {
       kmcRecommendation(
         "k-efd5337c-051e-44a2-810c-e23de2be513f",
         {
-          id: "alsobought",
+          id: "alsoviewed",
           currentProductId: params.id,
           itemGroupId: params.groupId,
         },
-        sendRecommendationViewEvent("Also bought together KMC recommendation")
+        sendRecommendationViewEvent("Also viewed KMC recommendation")
       )
     )
     const product = res.queriesById("products")?.records?.[0]
     const sim = res.queriesById("similar")
-    const also = res.queriesById("alsobought")
+    const also = res.queriesById("alsoviewed")
     setProduct(product)
     setSimilar(sim?.records)
     setAlsoBoought(also?.records)
 
-    alsoBoughtClick = also.getRecommendationClickSendEvent()
+    alsoviewedClick = also.getRecommendationClickSendEvent()
   }, [params.id])
 
   useEffect(() => {
@@ -147,9 +147,9 @@ export function ProductPage() {
         />
 
         <RecommendationBanner
-          products={alsoBought}
-          title="Also bought together KMC recommendation"
-          productClick={alsoBoughtClick}
+          products={alsoviewed}
+          title="Also viewed KMC recommendation"
+          productClick={alsoviewedClick}
         />
       </div>
     </Container>
