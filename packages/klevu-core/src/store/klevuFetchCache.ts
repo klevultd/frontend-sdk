@@ -5,7 +5,7 @@ import { isBrowser } from "../utils/isBrowser.js"
  * @ignore
  */
 export class KlevuFetchCache<T extends object, K extends object> {
-  _cache = new Map<number, K>()
+  _cache = new Map<number, string>()
   _timestamp = new Map<number, number>()
 
   check(key: T): K | undefined {
@@ -25,7 +25,7 @@ export class KlevuFetchCache<T extends object, K extends object> {
 
     if (cached && ts) {
       if (new Date().getTime() < ts) {
-        return cached
+        return JSON.parse(cached)
       }
       this._cache.delete(hash)
       this._timestamp.delete(hash)
@@ -36,7 +36,7 @@ export class KlevuFetchCache<T extends object, K extends object> {
 
   cache(key: T, data: K, timetocache = KlevuConfig.default.cacheMaxTTL) {
     const hash = this.hash(key)
-    this._cache.set(hash, data)
+    this._cache.set(hash, JSON.stringify(data))
     this._timestamp.set(hash, new Date().getTime() + timetocache)
   }
 
