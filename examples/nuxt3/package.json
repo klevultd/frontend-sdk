@@ -17,7 +17,7 @@
     "pinia": "^2.0.14"
   },
   "dependencies": {
-    "@klevu/core": "^1.1.1",
+    "@klevu/core": "^1.1.2",
     "@tailwindcss/forms": "^0.5.2",
     "multi-range-slider-vue": "^1.1.4",
     "vue3-carousel": "^0.1.40"
