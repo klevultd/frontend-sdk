@@ -16,7 +16,3 @@ export function cleanSearchQuery(term: string): string {
       .toLocaleLowerCase()
   )
 }
-
-export function stripTags(html: string): string {
-  return html.replace(/<[^>]*>?/gm, "")
-}
