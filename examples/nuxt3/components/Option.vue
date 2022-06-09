@@ -6,7 +6,7 @@ const props = defineProps({
   option: Object,
 })
 const toggleOption = (key, name) => {
-  searchStore.manager.toggleOption(key, name)
+  searchStore.managerOptionToggleFn(key, name)
 }
 </script>
 

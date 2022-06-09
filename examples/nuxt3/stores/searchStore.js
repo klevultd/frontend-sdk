@@ -23,7 +23,8 @@ const useSearch = defineStore("search-store", {
       showMore: false,
       loading: true,
       filtersOpen: false,
-      manager: null,
+      managerOptionToggleFn: null,
+      managerUpdateSlideFn: null,
       searchFn: null,
     }
   },

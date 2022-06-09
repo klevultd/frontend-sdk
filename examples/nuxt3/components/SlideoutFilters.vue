@@ -18,6 +18,13 @@
       </svg>
     </div>
     <h2>FILTERS</h2>
+    <trinity-rings-spinner
+      v-if="searchStore.loading"
+      class="mx-auto my-12"
+      :animation-duration="1500"
+      :size="60"
+      color="#97C73E"
+    />
     <div
       v-if="hasFilters"
       class="overflow-y-auto overflow-x-hidden mb-6 w-full"
@@ -33,7 +40,10 @@
         :slider="slider"
       />
     </div>
-    <div v-else class="text-gray-300 text-center">
+    <div
+      v-if="!hasFilters && !searchStore.loading"
+      class="text-gray-300 text-center"
+    >
       <div class="text-center text-gray-200">
         <IconsFilter width="150" />
       </div>
@@ -45,11 +55,12 @@
 <script setup>
 import { computed } from "vue"
 import useSearch from "../stores/searchStore.js"
+import { TrinityRingsSpinner } from "epic-spinners"
 
 const searchStore = useSearch()
 
 const hasFilters = computed(() => {
-  return false || searchStore.options.length || searchStore.sliders.length
+  return searchStore.options.length || searchStore.sliders.length
 })
 </script>
 

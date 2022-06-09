@@ -15,7 +15,7 @@ const updateSliderValues = (e) => {
   minValue = e.minValue
   maxValue = e.maxValue
 
-  searchStore.manager.updateSlide(props.slider.key, minValue, maxValue)
+  searchStore.managerUpdateSlideFn(props.slider.key, minValue, maxValue)
 }
 const debouncedUpdateSliderHandler = debounce(updateSliderValues, 300)
 </script>
