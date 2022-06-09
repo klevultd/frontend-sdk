@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
 
 const searchStore = useSearch()
 const route = useRoute()
-searchStore.manager = new FilterManager()
+const manager = new FilterManager()
 let prevRes
 let productClickManager
 let recommendationClickManager
@@ -96,9 +96,9 @@ const initialFetch = async () => {
           },
         ],
         exclude: searchStore.collectionFilterExcludes,
-        filterManager: searchStore.manager,
+        filterManager: manager,
       }),
-      applyFilterWithManager(searchStore.manager),
+      applyFilterWithManager(manager),
       sendMerchandisingViewEvent(route.params.handle)
     ),
     kmcRecommendation(
@@ -124,9 +124,12 @@ const initialFetch = async () => {
   productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
 
   searchStore.showMore = Boolean(searchResult.next)
-  searchStore.setOptions(searchStore.manager.options)
-  searchStore.setSliders(searchStore.manager.sliders)
+  searchStore.setOptions(manager.options)
+  searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
+
+  searchStore.managerOptionToggleFn = manager.toggleOption
+  searchStore.managerUpdateSlideFn = manager.updateSlide
 
   if (recommendationResult) {
     recommendationClickManager =
@@ -134,13 +137,14 @@ const initialFetch = async () => {
 
     searchStore.setRecommendationProducts(recommendationResult.records ?? [])
   }
+  await nextTick()
 }
 
 searchStore.searchFn = initialFetch
 
 const fetchMore = async () => {
   const nextRes = await prevRes.next({
-    filterManager: searchStore.manager,
+    filterManager: manager,
   })
   const searchResult = nextRes.queriesById("search")
   searchStore.setProducts([
@@ -149,11 +153,6 @@ const fetchMore = async () => {
   ])
   prevRes = searchResult
   searchStore.showMore = Boolean(searchResult.next)
-}
-
-const updateSort = (e) => {
-  searchStore.sorting = e.target.value
-  initialFetch()
 }
 
 const productClickHandler = (id) => {

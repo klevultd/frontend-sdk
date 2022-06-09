@@ -33,6 +33,5 @@ export default defineNuxtPlugin((nuxtApp) => {
     setTimeout(() => {
       quickSearchStore.submitting = false
     }, 1000)
-    // nuxtApp.$validateImages()
   })
 })

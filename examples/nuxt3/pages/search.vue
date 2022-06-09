@@ -11,7 +11,7 @@
       class="loading-message"
       v-show="!searchStore.products.length && !searchStore.loading"
     >
-      Loading products...
+      No products found.
     </div>
     <div class="collection-wrapper" v-show="searchStore.products.length">
       <section class="results-section mt-10 mb-24">
@@ -41,7 +41,6 @@ import {
   KlevuDomEvents,
   KlevuEvents,
   KlevuFetch,
-  KlevuSearchSorting,
   listFilters,
   search,
   sendSearchEvent,
@@ -113,6 +112,10 @@ const initialFetch = async () => {
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
+
+  searchStore.managerOptionToggleFn = manager.toggleOption
+  searchStore.managerUpdateSlideFn = manager.updateSlide
+  await nextTick()
 }
 
 const fetchMore = async () => {
@@ -132,15 +135,6 @@ searchStore.searchFn = initialFetch
 
 const productClick = function (product) {
   KlevuEvents.searchProductClick(product, props.searchTerm)
-}
-
-const toggleFacets = () => {
-  openFacets.value = !openFacets.value
-}
-
-const updateSort = (e) => {
-  searchStore.sorting = e.target.value
-  initialFetch()
 }
 
 initialFetch()
