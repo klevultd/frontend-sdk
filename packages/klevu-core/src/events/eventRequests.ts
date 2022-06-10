@@ -83,12 +83,12 @@ export type V1ProductTrackingEvent = {
   /**
    * The unique identifier of the A/B Test.
    */
-  abTestId?: string
+  klevu_abTestId?: string
 
   /**
    * The unique identifier of the A/B Test Variant.
    */
-  abTestVariantId?: string
+  klevu_abTestVariantId?: string
 }
 
 export async function KlevuEventV1ProductTracking(
@@ -249,9 +249,9 @@ export type KlevuV1CategoryProductsClick = {
   /** IP address of the shopper who clicked the product(s). */
   klevu_shopperIP?: string
   /** The unique identifier of the A/B Test. */
-  abTestId?: string
+  klevu_abTestId?: string
   /** The unique identifier of the A/B Test Variant. */
-  abTestVariantId?: string
+  klevu_abTestVariantId?: string
 }
 
 export async function KlevuEventV1CategoryProductClick(
