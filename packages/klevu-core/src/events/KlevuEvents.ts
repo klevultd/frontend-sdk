@@ -224,8 +224,8 @@ export class KlevuEvents {
     if (abTestId && abTestVariantId) {
       data = {
         ...data,
-        abTestId,
-        abTestVariantId,
+        klevu_abTestId: abTestId,
+        klevu_abTestVariantId: abTestVariantId,
       }
     }
 
