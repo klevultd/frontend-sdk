@@ -44,19 +44,10 @@ import {
   search,
   suggestions,
   trendingProducts,
-  KlevuConfig,
 } from "@klevu/core"
-
-// 'page:start'
 
 const router = useRouter()
 const quickSearchStore = useQuickSearch()
-const config = useRuntimeConfig()
-
-KlevuConfig.init({
-  url: config.klevuUrl,
-  apiKey: config.klevuApikey,
-})
 
 const doSearch = async function (e) {
   if (quickSearchStore.submitting) return null

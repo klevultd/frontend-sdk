@@ -95,7 +95,7 @@ const initialFetch = async () => {
             minMax: true,
           },
         ],
-        exclude: searchStore.collectionFilterExcludes,
+        exclude: searchStore.searchFilterExcludes,
         filterManager: manager,
       }),
       applyFilterWithManager(manager),
