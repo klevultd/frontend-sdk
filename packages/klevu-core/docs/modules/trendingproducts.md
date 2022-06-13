@@ -28,5 +28,5 @@ See {@link KlevuFetchFunction}
 
 #### Defined in
 
-[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
+[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
 

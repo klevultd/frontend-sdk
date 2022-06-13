@@ -40,5 +40,5 @@ stopListen();
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:42](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/events/KlevuDomEvents.ts#L42)
+[events/KlevuDomEvents.ts:47](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuDomEvents.ts#L47)
 

@@ -27,12 +27,11 @@ const defaults: SearchOptions = {
 }
 
 /**
- * Create a basic search to Klevu backend. Id for this query is `search`
+ * Create a basic search to Klevu backend. Default ID for this query is `search`
  *
  *
  * @category Query
  * @param term Search term from input
- * @param id id of request. Response is under this is. Has to be unique across single query. Default is 'search'
  * @param options {@link SearchOptions}
  * @returns
  */

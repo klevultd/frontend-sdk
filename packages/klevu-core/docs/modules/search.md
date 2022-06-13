@@ -2,7 +2,7 @@
       
 ▸ **search**(`term`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
-Create a basic search to Klevu backend. Id for this query is `search`
+Create a basic search to Klevu backend. Default ID for this query is `search`
 
 #### Parameters
 
@@ -18,5 +18,5 @@ Create a basic search to Klevu backend. Id for this query is `search`
 
 #### Defined in
 
-[queries/search/search.ts:39](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/search/search.ts#L39)
+[queries/search/search.ts:38](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/search/search.ts#L38)
 

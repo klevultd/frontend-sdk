@@ -14,5 +14,5 @@ Tools for operating results in easier way.
 
 #### Defined in
 
-[models/KlevuFetchResponse.ts:25](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuFetchResponse.ts#L25)
+[models/KlevuFetchResponse.ts:25](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuFetchResponse.ts#L25)
 

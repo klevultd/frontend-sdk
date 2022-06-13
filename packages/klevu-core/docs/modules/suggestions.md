@@ -17,5 +17,5 @@ Return suggestion on given search term
 
 #### Defined in
 
-[queries/suggestions/suggestions.ts:24](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/queries/suggestions/suggestions.ts#L24)
+[queries/suggestions/suggestions.ts:24](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/suggestions/suggestions.ts#L24)
 

@@ -10,5 +10,5 @@ Enables AB test functionality. This will make extra request to Klevu servers and
 
 #### Defined in
 
-[modifiers/abTest/abTest.ts:16](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/modifiers/abTest/abTest.ts#L16)
+[modifiers/abTest/abTest.ts:16](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/modifiers/abTest/abTest.ts#L16)
 

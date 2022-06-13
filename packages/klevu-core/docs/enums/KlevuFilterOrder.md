@@ -20,7 +20,7 @@ set.
 
 #### Defined in
 
-[models/KlevuFilterOrder.ts:6](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuFilterOrder.ts#L6)
+[models/KlevuFilterOrder.ts:6](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuFilterOrder.ts#L6)
 
 ___
 
@@ -32,4 +32,4 @@ ___
 
 #### Defined in
 
-[models/KlevuFilterOrder.ts:10](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/models/KlevuFilterOrder.ts#L10)
+[models/KlevuFilterOrder.ts:10](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuFilterOrder.ts#L10)

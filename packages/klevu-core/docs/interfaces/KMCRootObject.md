@@ -24,7 +24,7 @@ Is A/B test active
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:5](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L5)
+[connection/kmcmodels/KMCRoot.ts:5](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L5)
 
 ___
 
@@ -36,7 +36,7 @@ Domain to send cms analytics to
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:21](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L21)
+[connection/kmcmodels/KMCRoot.ts:21](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L21)
 
 ___
 
@@ -48,7 +48,7 @@ Most popular products of the store
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:17](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L17)
+[connection/kmcmodels/KMCRoot.ts:17](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L17)
 
 ___
 
@@ -60,7 +60,7 @@ Messages and banners created by user in KMC
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:9](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L9)
+[connection/kmcmodels/KMCRoot.ts:9](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L9)
 
 ___
 
@@ -72,7 +72,7 @@ Domain where JSv2 is hosted on
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:29](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L29)
+[connection/kmcmodels/KMCRoot.ts:29](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L29)
 
 ___
 
@@ -84,7 +84,7 @@ Domain to send search analytics to
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:25](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L25)
+[connection/kmcmodels/KMCRoot.ts:25](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L25)
 
 ___
 
@@ -96,4 +96,4 @@ Popular terms in the store
 
 #### Defined in
 
-[connection/kmcmodels/KMCRoot.ts:13](https://github.com/klevultd/frontend-sdk/blob/6dc6e86/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L13)
+[connection/kmcmodels/KMCRoot.ts:13](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/connection/kmcmodels/KMCRoot.ts#L13)
