@@ -271,7 +271,7 @@ export function CategoryPage() {
 
       <div id="main">
         <Typography variant="h4" style={{ margin: "3rem 0" }}>
-          Category merchendising for {title}
+          Category merchandising for {title}
         </Typography>
 
         <Box
