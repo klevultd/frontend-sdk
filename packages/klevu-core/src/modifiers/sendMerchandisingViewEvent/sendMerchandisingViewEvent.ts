@@ -13,8 +13,12 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
     onResult: (res, f) => {
-      const { id } = f.params as {
+      const { id, abtest } = f.params as {
         id?: string
+        abtest?: {
+          abTestId: string
+          abTestVariantId: string
+        }
       }
 
       if (!f.params || !id) {
@@ -41,7 +45,9 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
         title,
         category,
         queryResult.records,
-        queryResult.meta.offset
+        queryResult.meta.offset,
+        abtest?.abTestId,
+        abtest?.abTestVariantId
       )
 
       return res
