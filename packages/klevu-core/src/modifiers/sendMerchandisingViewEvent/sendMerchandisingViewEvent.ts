@@ -13,19 +13,13 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
     onResult: (res, f) => {
-      const { id, abtest } = f.params as {
-        id?: string
-        abtest?: {
-          abTestId: string
-          abTestVariantId: string
-        }
-      }
-
-      if (!f.params || !id) {
+      if (!f.params) {
         return res
       }
 
-      if (f.klevuFunctionId !== "categoryMerchandising") {
+      const { id, abtest } = f.params
+
+      if (f.klevuFunctionId !== "categoryMerchandising" || !id) {
         return res
       }
 

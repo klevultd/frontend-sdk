@@ -88,6 +88,7 @@ export async function KlevuFetch(
       return {
         ...FetchResultEvents(res, func),
         next: fetchNextPageSingleFunc(response, func),
+        functionParams: func.params,
       }
     },
   }

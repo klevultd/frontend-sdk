@@ -62,6 +62,10 @@ export function abTest(): KlevuFetchModifer {
           (a) => a.sourceId.toLocaleLowerCase() === path.toLocaleLowerCase()
         )
 
+        if (!func.params) {
+          func.params = {}
+        }
+
         if (perm) {
           q.abTestId = perm.abTestId
           q.abTestVariantId = perm.abTestVariantId

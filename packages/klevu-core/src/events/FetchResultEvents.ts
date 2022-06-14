@@ -1,9 +1,6 @@
 import { KlevuQueryResult } from "../models/index.js"
 import { KlevuResultEvent } from "../models/KlevuResultEvent.js"
-import {
-  KlevuFetchFunctionReturnValue,
-  KlevuKMCRecommendations,
-} from "../queries/index.js"
+import { KlevuFetchFunctionReturnValue } from "../queries/index.js"
 import { KlevuEvents } from "./KlevuEvents.js"
 
 /**
@@ -79,6 +76,10 @@ export function FetchResultEvents(
 
               let abTestId, abTestVariantId
 
+              if (!func.params) {
+                func.params = {}
+              }
+
               if (func.params.abtest) {
                 abTestId = func.params.abtest.abTestId
                 abTestVariantId = func.params.abtest.abTestVariantId
@@ -100,8 +101,8 @@ export function FetchResultEvents(
     }
 
     case "kmcRecommendation": {
-      const config = (func.params as { kmcConfig: KlevuKMCRecommendations })
-        .kmcConfig
+      const config = func.params?.kmcConfig
+
       return {
         ...object,
         ...{
@@ -113,6 +114,13 @@ export function FetchResultEvents(
                   `KlevuEvents: Given "${productId}" doesn't exists in results`
                 )
               }
+
+              if (!config) {
+                throw new Error(
+                  "KlevuEvents: Recommendation kmcConfig not available"
+                )
+              }
+
               const index = object.records.findIndex((r) => r.id === productId)
               KlevuEvents.recommendationClick(
                 config.metadata,

@@ -2,6 +2,7 @@ import { FilterManager } from "../store/filterManager.js"
 import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse.js"
 import { KlevuResultEvent } from "./KlevuResultEvent.js"
+import { KlevuFecthFunctionParams } from "../queries/index.js"
 
 /**
  * Next function is available if there are more results in the given query.
@@ -20,6 +21,19 @@ export type KlevuNextFunc = (override?: {
 }) => Promise<KlevuFetchResponse>
 
 /**
+ * Fetch query results
+ */
+type KlevuFetchQueryResult = KlevuQueryResult &
+  KlevuResultEvent & {
+    /** If there are multiple pages of results next function is defined. Calling this function will result new result  */
+    next?: KlevuNextFunc
+    /**
+     * All parameters defined in that query function
+     */
+    functionParams?: KlevuFecthFunctionParams
+  }
+
+/**
  * Tools for operating results in easier way.
  */
 export type KlevuFetchResponse = {
@@ -34,9 +48,5 @@ export type KlevuFetchResponse = {
   /**
    * Get query result by id
    */
-  queriesById: (
-    id: string
-  ) =>
-    | (KlevuQueryResult & KlevuResultEvent & { next?: KlevuNextFunc })
-    | undefined
+  queriesById: (id: string) => KlevuFetchQueryResult | undefined
 }
