@@ -14,6 +14,7 @@ import {
   KlevuEventV1Search,
   KlevuEventV2,
   KlevuV1CategoryProductsClick,
+  KlevuV1CategoryProductsView,
 } from "./eventRequests.js"
 
 export type RecommendationViewEventMetaData = Pick<
@@ -178,15 +179,25 @@ export class KlevuEvents {
     categoryTitle: string,
     klevuCategory: string,
     products: Array<Pick<KlevuRecord, "id">>,
-    pageStartsFrom?: number
+    pageStartsFrom?: number,
+    abTestId?: string,
+    abTestVariantId?: string
   ) {
-    KlevuEventV1CategoryView({
+    let data: KlevuV1CategoryProductsView = {
       klevu_apiKey: KlevuConfig.default.apiKey,
       klevu_categoryName: categoryTitle,
       klevu_categoryPath: klevuCategory,
       klevu_productIds: products.map((p) => p.id).join(","),
       klevu_pageStartsFrom: pageStartsFrom,
-    })
+    }
+    if (abTestId && abTestVariantId) {
+      data = {
+        ...data,
+        klevu_abTestId: abTestId,
+        klevu_abTestVariantId: abTestVariantId,
+      }
+    }
+    KlevuEventV1CategoryView(data)
   }
 
   /**
