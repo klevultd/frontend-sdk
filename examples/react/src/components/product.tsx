@@ -1,9 +1,8 @@
 import React from "react"
-import type { KlevuRecord } from "@klevu/core"
 import { Button, Typography } from "@mui/material"
 import { css } from "@emotion/react"
 import { Link } from "react-router-dom"
-import { useCart } from "../cartContext"
+import { CartItem, useCart } from "../cartContext"
 import { useSnackbar } from "notistack"
 
 const containerCss = css`
@@ -42,7 +41,7 @@ const containerCss = css`
 `
 
 export function Product(props: {
-  product: KlevuRecord
+  product: CartItem
   onClick?: () => void
   hideAddToCart?: boolean
 }) {

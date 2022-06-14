@@ -7,7 +7,7 @@ import {
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
-import { useCart } from "../cartContext"
+import { CartItem, useCart } from "../cartContext"
 import { Product } from "../components/product"
 import groupBy from "lodash.groupby"
 import { useSnackbar } from "notistack"
@@ -53,6 +53,8 @@ export function CheckoutPage() {
       return {
         amount: data.length,
         product: data[0],
+        abTestId: data[0].abTestId,
+        abTestVariantId: data[0].abTestVariantId,
       }
     })
     KlevuEvents.buy(toBuy)

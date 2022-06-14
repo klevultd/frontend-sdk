@@ -1,7 +1,7 @@
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
 import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery.js"
 import { KlevuFetchModifer } from "../modifiers/index.js"
-import { KlevuConfig } from "../index.js"
+import { KlevuConfig, KlevuKMCRecommendations } from "../index.js"
 
 /**
  * Internal. List of known KlevuFetchIds
@@ -15,20 +15,50 @@ export type KlevuFetchTypeId =
   | "kmcRecommendation"
   | "raw"
 
+export type KlevuFecthFunctionParams = {
+  /**
+   * Current id of function
+   */
+  id?: string
+
+  /**
+   * term used in the search
+   */
+  term?: string
+
+  /**
+   * KMC recommendation information
+   */
+  kmcConfig?: KlevuKMCRecommendations
+
+  /**
+   * A/B test information of request
+   */
+  abtest?: {
+    abTestId: string
+    abTestVariantId: string
+  }
+
+  /**
+   * Which category merchandising was called
+   */
+  category?: string
+}
+
 /**
  * What functions passed to KlevuFetch should implement
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type KlevuFetchFunctionReturnValue = {
   /**
    * Id of function. Used only internally
    */
   klevuFunctionId: KlevuFetchTypeId
+
   /**
-   * Anything you wish to pass down as params incoming to function
+   * Some of the functions pass metadata that can be used in other places
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params?: any
+  params?: KlevuFecthFunctionParams
+
   /**
    * What queries should KlevuFetch do to backend
    */

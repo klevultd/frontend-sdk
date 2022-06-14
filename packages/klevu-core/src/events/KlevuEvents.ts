@@ -15,6 +15,7 @@ import {
   KlevuEventV2,
   KlevuV1CategoryProductsClick,
   KlevuV1CategoryProductsView,
+  V1CheckedOutProductsEvent,
 } from "./eventRequests.js"
 
 export type RecommendationViewEventMetaData = Pick<
@@ -36,11 +37,14 @@ export class KlevuEvents {
       amount: number
       product: KlevuRecord
       variantId?: string
+      abTestId?: string
+      abTestVariantId?: string
     }>
   ) {
     for (const i of items) {
       const p = i.product
-      KlevuEventV1CheckedOutProducts({
+
+      let data: V1CheckedOutProductsEvent = {
         klevu_apiKey: KlevuConfig.default.apiKey,
         klevu_currency: p.currency,
         klevu_productGroupId: p.itemGroupId,
@@ -49,7 +53,17 @@ export class KlevuEvents {
         klevu_productVariantId: i.variantId || p.id,
         klevu_type: "checkout",
         klevu_unit: i.amount,
-      })
+      }
+
+      if (i.abTestId && i.abTestVariantId) {
+        data = {
+          ...data,
+          klevu_abTestId: i.abTestId,
+          klevu_abTestVariantId: i.abTestVariantId,
+        }
+      }
+
+      KlevuEventV1CheckedOutProducts(data)
     }
   }
 
