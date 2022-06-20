@@ -53,8 +53,6 @@ export function CheckoutPage() {
       return {
         amount: data.length,
         product: data[0],
-        abTestId: data[0].abTestId,
-        abTestVariantId: data[0].abTestVariantId,
       }
     })
     KlevuEvents.buy(toBuy)

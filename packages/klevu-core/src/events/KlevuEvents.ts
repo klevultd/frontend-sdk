@@ -37,14 +37,12 @@ export class KlevuEvents {
       amount: number
       product: KlevuRecord
       variantId?: string
-      abTestId?: string
-      abTestVariantId?: string
     }>
   ) {
     for (const i of items) {
       const p = i.product
 
-      let data: V1CheckedOutProductsEvent = {
+      const data: V1CheckedOutProductsEvent = {
         klevu_apiKey: KlevuConfig.default.apiKey,
         klevu_currency: p.currency,
         klevu_productGroupId: p.itemGroupId,
@@ -53,14 +51,6 @@ export class KlevuEvents {
         klevu_productVariantId: i.variantId || p.id,
         klevu_type: "checkout",
         klevu_unit: i.amount,
-      }
-
-      if (i.abTestId && i.abTestVariantId) {
-        data = {
-          ...data,
-          klevu_abTestId: i.abTestId,
-          klevu_abTestVariantId: i.abTestVariantId,
-        }
       }
 
       KlevuEventV1CheckedOutProducts(data)

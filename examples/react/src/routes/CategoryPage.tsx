@@ -72,13 +72,6 @@ export function CategoryPage() {
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
   const [itemsOnPage, setItemsOnPage] = useState(36)
-  const [abTestData, setAbTestData] = useState<
-    | {
-        abTestId: string
-        abTestVariantId: string
-      }
-    | undefined
-  >(undefined)
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -135,7 +128,6 @@ export function CategoryPage() {
     setOptions(manager.options)
     setSliders(manager.sliders)
     setProducts(searchResult.records ?? [])
-    setAbTestData(searchResult.functionParams?.abtest)
 
     if (recommendationResult) {
       recommendationClickManager =
@@ -178,10 +170,6 @@ export function CategoryPage() {
   useEffect(() => {
     initialFetch()
   }, [sorting, params.id, itemsOnPage])
-
-  useEffect(() => {
-    setAbTestData(undefined)
-  }, [params.id])
 
   const debouncedSlider = (key) =>
     debounce((event, value) => {
@@ -346,10 +334,7 @@ export function CategoryPage() {
           {products.map((p, i) => (
             <Grid item key={i}>
               <Product
-                product={{
-                  ...p,
-                  ...abTestData,
-                }}
+                product={p}
                 onClick={() => {
                   productClickManager(p.id, params.id)
                 }}
