@@ -6,27 +6,27 @@ Filter types Klevu support
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [Options](KlevuFilterType.md#options)
 - [Slider](KlevuFilterType.md#slider)
 
-## Enumeration members
+## Enumeration Members
 
 ### Options
 
-• **Options** = `"OPTIONS"`
+• **Options**
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
+[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
 
 ___
 
 ### Slider
 
-• **Slider** = `"SLIDER"`
+• **Slider**
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)
+[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)

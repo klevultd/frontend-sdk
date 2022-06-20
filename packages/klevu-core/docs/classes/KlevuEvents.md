@@ -44,7 +44,7 @@ Tell Klevu what products where bought by the user
 
 #### Defined in
 
-[events/KlevuEvents.ts:33](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L33)
+[events/KlevuEvents.ts:35](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L35)
 
 ___
 
@@ -70,13 +70,13 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:200](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L200)
+[events/KlevuEvents.ts:215](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L215)
 
 ___
 
 ### categoryMerchandisingView
 
-▸ `Static` **categoryMerchandisingView**(`categoryTitle`, `klevuCategory`, `products`, `pageStartsFrom?`): `void`
+▸ `Static` **categoryMerchandisingView**(`categoryTitle`, `klevuCategory`, `products`, `pageStartsFrom?`, `abTestId?`, `abTestVariantId?`): `void`
 
 #### Parameters
 
@@ -86,6 +86,8 @@ ___
 | `klevuCategory` | `string` | This is the complete hierarchy of the category being visited. For example, Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the separator between a parent and a child category. |
 | `products` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\>[] | Products in the view |
 | `pageStartsFrom?` | `number` | Offset of the first product being shown on this page. For example, if you are displaying 30 products per page and if a customer is on the 2nd page, the value here should be 30. If on the 3rd page, it will be 60. |
+| `abTestId?` | `string` | - |
+| `abTestVariantId?` | `string` | - |
 
 #### Returns
 
@@ -93,7 +95,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:177](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L177)
+[events/KlevuEvents.ts:182](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L182)
 
 ___
 
@@ -117,7 +119,7 @@ When product has been clicked in the recommendation banner
 
 #### Defined in
 
-[events/KlevuEvents.ts:94](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L94)
+[events/KlevuEvents.ts:99](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L99)
 
 ___
 
@@ -140,7 +142,7 @@ When recommendation banner is shown in the page
 
 #### Defined in
 
-[events/KlevuEvents.ts:61](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L61)
+[events/KlevuEvents.ts:66](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L66)
 
 ___
 
@@ -165,7 +167,7 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Defined in
 
-[events/KlevuEvents.ts:156](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L156)
+[events/KlevuEvents.ts:161](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L161)
 
 ___
 
@@ -189,4 +191,4 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/KlevuEvents.ts:130](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L130)
+[events/KlevuEvents.ts:135](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L135)

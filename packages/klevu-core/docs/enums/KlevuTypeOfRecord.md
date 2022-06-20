@@ -4,38 +4,38 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [Category](KlevuTypeOfRecord.md#category)
 - [Cms](KlevuTypeOfRecord.md#cms)
 - [Product](KlevuTypeOfRecord.md#product)
 
-## Enumeration members
+## Enumeration Members
 
 ### Category
 
-• **Category** = `"KLEVU_CATEGORY"`
+• **Category**
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
+[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
 
 ___
 
 ### Cms
 
-• **Cms** = `"KLEVU_CMS"`
+• **Cms**
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
+[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
 
 ___
 
 ### Product
 
-• **Product** = `"KLEVU_PRODUCT"`
+• **Product**
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:4](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L4)
+[models/KlevuTypeOfRecord.ts:4](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L4)

@@ -11,7 +11,7 @@ if (!fs.existsSync("./docs/modules")) {
 }
 const modules = fs.readFileSync("./docs/modules.md").toString()
 
-let [toc, rest] = modules.split("\n## Type aliases\n")
+let [toc, rest] = modules.split("\n## Type Aliases\n")
 rest += "\n___"
 const matches = [...toc.matchAll(/(modules\.md#([a-z]*))/gim)]
 for (const m of matches) {

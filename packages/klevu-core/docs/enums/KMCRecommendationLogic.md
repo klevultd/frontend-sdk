@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [BoughtTogether](KMCRecommendationLogic.md#boughttogether)
 - [HandPicked](KMCRecommendationLogic.md#handpicked)
@@ -15,82 +15,82 @@
 - [Trending](KMCRecommendationLogic.md#trending)
 - [TrendingPersonalized](KMCRecommendationLogic.md#trendingpersonalized)
 
-## Enumeration members
+## Enumeration Members
 
 ### BoughtTogether
 
-• **BoughtTogether** = `"BOUGHT_TOGETHER"`
+• **BoughtTogether**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:54](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L54)
+[queries/kmcRecommendation/kmcRecommendation.ts:54](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L54)
 
 ___
 
 ### HandPicked
 
-• **HandPicked** = `"HAND_PICKED"`
+• **HandPicked**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:51](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L51)
+[queries/kmcRecommendation/kmcRecommendation.ts:51](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L51)
 
 ___
 
 ### NewestArrivals
 
-• **NewestArrivals** = `"NEWEST_ARRIVALS"`
+• **NewestArrivals**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:49](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L49)
+[queries/kmcRecommendation/kmcRecommendation.ts:49](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L49)
 
 ___
 
 ### OtherAlsoViewed
 
-• **OtherAlsoViewed** = `"OTHER_ALSO_VIEWED"`
+• **OtherAlsoViewed**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:52](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L52)
+[queries/kmcRecommendation/kmcRecommendation.ts:52](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L52)
 
 ___
 
 ### RecentlyViewed
 
-• **RecentlyViewed** = `"RECENTLY_VIEWED"`
+• **RecentlyViewed**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:50](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L50)
+[queries/kmcRecommendation/kmcRecommendation.ts:50](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L50)
 
 ___
 
 ### Similar
 
-• **Similar** = `"SIMILAR"`
+• **Similar**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:53](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L53)
+[queries/kmcRecommendation/kmcRecommendation.ts:53](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L53)
 
 ___
 
 ### Trending
 
-• **Trending** = `"TRENDING"`
+• **Trending**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:47](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L47)
+[queries/kmcRecommendation/kmcRecommendation.ts:47](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L47)
 
 ___
 
 ### TrendingPersonalized
 
-• **TrendingPersonalized** = `"TRENDING_PERSONALIZED"`
+• **TrendingPersonalized**
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:48](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L48)
+[queries/kmcRecommendation/kmcRecommendation.ts:48](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L48)

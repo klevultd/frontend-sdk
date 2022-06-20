@@ -25,5 +25,5 @@ Raw query object from api
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:81](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L81)
+[models/KlevuApiRawResponse.ts:81](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L81)
 

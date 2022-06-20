@@ -16,5 +16,5 @@ Boost products based on a filters
 
 #### Defined in
 
-[modifiers/boostWithFilters/boostWithFilters.ts:10](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/modifiers/boostWithFilters/boostWithFilters.ts#L10)
+[modifiers/boostWithFilters/boostWithFilters.ts:10](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/modifiers/boostWithFilters/boostWithFilters.ts#L10)
 

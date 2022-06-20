@@ -11,11 +11,11 @@ What functions passed to KlevuFetch should implement
 | `configOverride?` | [`KlevuConfig`](classes/KlevuConfig.md) | Pass down the if config has been overridden. |
 | `klevuFunctionId` | `KlevuFetchTypeId` | Id of function. Used only internally |
 | `modifiers?` | `KlevuFetchModifer`[] | List of modifiers set for this function |
-| `params?` | `any` | Anything you wish to pass down as params incoming to function |
+| `params?` | [`KlevuFecthFunctionParams`](klevufecthfunctionparams.md) | Some of the functions pass metadata that can be used in other places |
 | `queries?` | [`KlevuAllRecordQueries`](klevuallrecordqueries.md)[] | What queries should KlevuFetch do to backend |
 | `suggestions?` | [`KlevuSuggestionQuery`](klevusuggestionquery.md)[] | What suggestions queries should do to backend |
 
 #### Defined in
 
-[queries/index.ts:22](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/queries/index.ts#L22)
+[queries/index.ts:51](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/index.ts#L51)
 

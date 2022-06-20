@@ -24,5 +24,5 @@ the response and they are not needed after first request.
 
 #### Defined in
 
-[models/KlevuFetchResponse.ts:11](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuFetchResponse.ts#L11)
+[models/KlevuFetchResponse.ts:12](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuFetchResponse.ts#L12)
 

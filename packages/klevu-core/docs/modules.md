@@ -35,7 +35,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [KMCMapsRootObject](interfaces/KMCMapsRootObject.md)
 - [KMCRootObject](interfaces/KMCRootObject.md)
 
-### Type aliases
+### Type Aliases
 
 - [ApplyFilter](modules/applyfilter.md)
 - [KlevuAllRecordQueries](modules/klevuallrecordqueries.md)
@@ -47,6 +47,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuBaseQuery](modules/klevubasequery.md)
 - [KlevuBaseQuerySettings](modules/klevubasequerysettings.md)
 - [KlevuBaseQuerySettingsQuery](modules/klevubasequerysettingsquery.md)
+- [KlevuFecthFunctionParams](modules/klevufecthfunctionparams.md)
 - [KlevuFetchFunctionReturnValue](modules/klevufetchfunctionreturnvalue.md)
 - [KlevuFetchResponse](modules/klevufetchresponse.md)
 - [KlevuFilterResultOptions](modules/klevufilterresultoptions.md)

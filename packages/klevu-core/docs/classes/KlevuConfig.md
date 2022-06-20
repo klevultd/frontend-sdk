@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L43)
+[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L43)
 
 ## Properties
 
@@ -46,7 +46,7 @@
 
 #### Defined in
 
-[config.ts:36](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L36)
+[config.ts:36](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L36)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[config.ts:41](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L41)
+[config.ts:41](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L41)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 #### Defined in
 
-[config.ts:38](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L38)
+[config.ts:38](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L38)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[config.ts:39](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L39)
+[config.ts:39](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L39)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[config.ts:40](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L40)
+[config.ts:40](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L40)
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 #### Defined in
 
-[config.ts:37](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L37)
+[config.ts:37](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L37)
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 #### Defined in
 
-[config.ts:34](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L34)
+[config.ts:34](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L34)
 
 ## Methods
 
@@ -126,4 +126,4 @@ ___
 
 #### Defined in
 
-[config.ts:52](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/config.ts#L52)
+[config.ts:52](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L52)

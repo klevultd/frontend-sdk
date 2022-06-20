@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Enumeration members
+### Enumeration Members
 
 - [debugQuery](KlevuSearchPreference.md#debugquery)
 - [disableFuzzyMatch](KlevuSearchPreference.md#disablefuzzymatch)
@@ -26,11 +26,11 @@
 - [showFiltersWithSmallCount](KlevuSearchPreference.md#showfilterswithsmallcount)
 - [showOutOfStockProducts](KlevuSearchPreference.md#showoutofstockproducts)
 
-## Enumeration members
+## Enumeration Members
 
 ### debugQuery
 
-• **debugQuery** = `"debugQuery"`
+• **debugQuery**
 
 Use this flag to include additional information about the query execution.
 This information is populated in the meta object of the response.
@@ -40,39 +40,39 @@ Production environment, as performance will be impacted.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:133](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L133)
+[models/KlevuSearchPreference.ts:133](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L133)
 
 ___
 
 ### disableFuzzyMatch
 
-• **disableFuzzyMatch** = `"disableFuzzyMatch"`
+• **disableFuzzyMatch**
 
 	This flag can be used in conjunction with the typeOfSearch 'DEFAULT' to
 	disable the FUZZY_AND and FUZZY_OR search types from being attempted.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:39](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L39)
+[models/KlevuSearchPreference.ts:39](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L39)
 
 ___
 
 ### disableORSearch
 
-• **disableORSearch** = `"disableORSearch"`
+• **disableORSearch**
 
 	This flag can be used in conjunction with the typeOfSearch 'DEFAULT' to
 	disable the WILDCARD_OR and FUZZY_OR search types from being attempted.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:50](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L50)
+[models/KlevuSearchPreference.ts:50](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L50)
 
 ___
 
 ### disableStockSorting
 
-• **disableStockSorting** = `"disableStockSorting"`
+• **disableStockSorting**
 
 	This can be used in conjunction with showOutOfStockProducts. If your store
 	is configured to display out of stock products, they will be displayed at
@@ -82,13 +82,13 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:17](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L17)
+[models/KlevuSearchPreference.ts:17](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L17)
 
 ___
 
 ### disableWildcard
 
-• **disableWildcard** = `"disableWildcard"`
+• **disableWildcard**
 
 	This flag can be used in conjunction with the typeOfSearch 'DEFAULT' to
 	disable the WILDCARD_AND and WILDCARD_OR search types from being
@@ -96,13 +96,13 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:45](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L45)
+[models/KlevuSearchPreference.ts:45](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L45)
 
 ___
 
 ### disableWordShingles
 
-• **disableWordShingles** = `"disableWordShingles"`
+• **disableWordShingles**
 
 	For a query longer than one word, all the possible bigrams and trigrams
 	(i.e. formed out of query terms) are looked up in records and the ones
@@ -111,13 +111,13 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:78](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L78)
+[models/KlevuSearchPreference.ts:78](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L78)
 
 ___
 
 ### enableBoostingOriginalTermsInSynonyms
 
-• **enableBoostingOriginalTermsInSynonyms** = `"enableBoostingOriginalTermsInSynonyms"`
+• **enableBoostingOriginalTermsInSynonyms**
 
 	By default, synonyms are treated equally to their query term. Should you
 	wish to give higher priority to the actual terms your customer entered in
@@ -126,38 +126,38 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:100](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L100)
+[models/KlevuSearchPreference.ts:100](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L100)
 
 ___
 
 ### enableScores
 
-• **enableScores** = `"enableScores"`
+• **enableScores**
 
 Include the score information with the response fields: score,
 klevu_manual_boosting, klevu_bulk_boosting and klevu_selflearning_boosting.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:125](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L125)
+[models/KlevuSearchPreference.ts:125](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L125)
 
 ___
 
 ### excludeIds
 
-• **excludeIds** = `"excludeIds"`
+• **excludeIds**
 
 	Use this flag to disable the searching of record IDs.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:27](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L27)
+[models/KlevuSearchPreference.ts:27](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L27)
 
 ___
 
 ### hideOutOfStockProducts
 
-• **hideOutOfStockProducts** = `"hideOutOfStockProducts"`
+• **hideOutOfStockProducts**
 
 	Whether or not your store should include 'Out of Stock' products in search
 	results by default can be configured within the Klevu Merchant Centre.
@@ -166,13 +166,13 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:9](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L9)
+[models/KlevuSearchPreference.ts:9](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L9)
 
 ___
 
 ### includeCategoryFilterInCatNav
 
-• **includeCategoryFilterInCatNav** = `"includeCategoryFilterInCatNav"`
+• **includeCategoryFilterInCatNav**
 
 When the typeOfRequest is 'CATNAV', the filter for 'Category' is
 automatically excluded since you are already within the context of a
@@ -181,13 +181,13 @@ filters even for CatNav requests.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:120](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L120)
+[models/KlevuSearchPreference.ts:120](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L120)
 
 ___
 
 ### includeDescription
 
-• **includeDescription** = `"includeDescription"`
+• **includeDescription**
 
 , excludeDescription Whether or not a record's 'description' is considered
 for search results can be configured by Klevu Support on a store by store
@@ -196,13 +196,13 @@ please include one of these flags.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:34](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L34)
+[models/KlevuSearchPreference.ts:34](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L34)
 
 ___
 
 ### includeStopwords
 
-• **includeStopwords** = `"includeStopwords"`
+• **includeStopwords**
 
 	By default, functional words such as prepositions, pronouns, articles,
 	etc. are excluded from searches. Add this flag to include these stopwords
@@ -210,13 +210,13 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:23](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L23)
+[models/KlevuSearchPreference.ts:23](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L23)
 
 ___
 
 ### partialMatch
 
-• **partialMatch** = `"partialMatch"`
+• **partialMatch**
 
 Enable partial match for the last word of a query, where the last word
 searched can be a substring of any other word found in a record. This can
@@ -230,13 +230,13 @@ it contains a word which ends with 'glas'.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:63](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L63)
+[models/KlevuSearchPreference.ts:63](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L63)
 
 ___
 
 ### partialMatchForAllWords
 
-• **partialMatchForAllWords** = `"partialMatchForAllWords"`
+• **partialMatchForAllWords**
 
 	Similar to partialMatch, but for all words rather than just the last. In
 	the same "rödvinsglas" example, a search for "högt glas" would become
@@ -245,13 +245,13 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:71](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L71)
+[models/KlevuSearchPreference.ts:71](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L71)
 
 ___
 
 ### searchCompoundsAsAndQuery
 
-• **searchCompoundsAsAndQuery** = `"searchCompoundsAsAndQuery"`
+• **searchCompoundsAsAndQuery**
 
 When a compound word is searched for, i.e. two or more individual words
 joined together as one word, Klevu automatically disjoints them if the
@@ -267,13 +267,13 @@ include this flag.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:92](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L92)
+[models/KlevuSearchPreference.ts:92](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L92)
 
 ___
 
 ### showDisabledFacets
 
-• **showDisabledFacets** = `"showDisabledFacets"`
+• **showDisabledFacets**
 
 It is possible to configure which facets or filters should be enabled or
 disabled within the Klevu Merchant Centre. By including this flag, all
@@ -282,13 +282,13 @@ the KMC.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:107](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L107)
+[models/KlevuSearchPreference.ts:107](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L107)
 
 ___
 
 ### showFiltersWithSmallCount
 
-• **showFiltersWithSmallCount** = `"showFiltersWithSmallCount"`
+• **showFiltersWithSmallCount**
 
 By default some filters are excluded from the results if they only have a
 small number of results. Please use this flag to override this logic and
@@ -296,14 +296,14 @@ include all filters in the response.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:113](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L113)
+[models/KlevuSearchPreference.ts:113](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L113)
 
 ___
 
 ### showOutOfStockProducts
 
-• **showOutOfStockProducts** = `"showOutOfStockProducts"`
+• **showOutOfStockProducts**
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:2](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/models/KlevuSearchPreference.ts#L2)
+[models/KlevuSearchPreference.ts:2](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchPreference.ts#L2)

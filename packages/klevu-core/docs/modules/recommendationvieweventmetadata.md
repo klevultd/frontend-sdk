@@ -4,5 +4,5 @@
 
 #### Defined in
 
-[events/KlevuEvents.ts:19](https://github.com/klevultd/frontend-sdk/blob/d712c6c/packages/klevu-core/src/events/KlevuEvents.ts#L19)
+[events/KlevuEvents.ts:21](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuEvents.ts#L21)
 
