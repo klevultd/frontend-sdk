@@ -14,8 +14,9 @@ Here are the links to different projects.
 
 - [@klevu/core](packages/klevu-core/README.md) package that can be used to build modern frontends with Klevu search.
 - [React example](examples/react/) React, React Router, Material UI example.
-- [Remix example](examples/remix/) Remix is a React-based example of using Klevu with Server Side Rendering.
 - [Vue example](examples/vue/) Vue 3, Vue-Router, TailwindCSS example.
+- [Nuxt example](examples/nuxt3/) Nuxt 3 example.
+- [Remix example](examples/remix/) Remix is a React-based example of using Klevu with Server Side Rendering.
 - [Vanilla JavaScript example](examples/vanillajs/) - Minimal JavaScript example.
 
 # Integrate Klevu into your application with ease. We do all the heavy lifting.
