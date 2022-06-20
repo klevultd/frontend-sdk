@@ -145,10 +145,6 @@ export type V1CheckedOutProductsEvent = {
    * IP address of the shopper who bought the product(s).
    */
   klevu_shopperIP?: string
-  /** The unique identifier of the A/B Test. */
-  klevu_abTestId?: string
-  /** The unique identifier of the A/B Test Variant. */
-  klevu_abTestVariantId?: string
 }
 
 export async function KlevuEventV1CheckedOutProducts(

@@ -1,10 +1,7 @@
 import { KlevuRecord } from "@klevu/core"
 import React, { useContext, useState } from "react"
 
-export type CartItem = KlevuRecord & {
-  abTestId?: string
-  abTestVariantId?: string
-}
+export type CartItem = KlevuRecord
 
 type Context = {
   items: CartItem[]
@@ -24,7 +21,6 @@ export function CartContextProvider(props: { children: any }) {
 
   const add = (product: CartItem) => {
     items.push(product)
-    console.log(items)
     setItems(Array.from(items))
   }
 
