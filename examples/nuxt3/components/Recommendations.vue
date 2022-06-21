@@ -6,8 +6,8 @@
     >
       {{ title }}
     </div>
-    <carousel :items-to-show="numOfRecs">
-      <slide
+    <Carousel :items-to-show="numOfRecs">
+      <Slide
         v-for="(rec, index) in searchStore.similarProducts"
         :key="'rec' + index"
       >
@@ -16,12 +16,12 @@
           :product="rec"
           @clickHandler="recommendationClickHandler(rec, index)"
         />
-      </slide>
+      </Slide>
       <template #addons>
-        <navigation />
-        <pagination />
+        <Navigation />
+        <Pagination />
       </template>
-    </carousel>
+    </Carousel>
   </div>
 </template>
 
@@ -29,8 +29,6 @@
 import useSearch from "../stores/searchStore"
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel"
 import "vue3-carousel/dist/carousel.css"
-import { trendingProducts } from "@klevu/core"
-// import { useBreakpoints } from '@vueuse/core'
 
 const breakpoints = useBreakpoints({
   tablet: 768,
@@ -45,7 +43,7 @@ const props = defineProps({
 })
 const emit = defineEmits(["productClick"])
 const recommendationClickHandler = function (product, index) {
-  // emit("productClick", product, index)
+  emit("productClick", product, index)
 }
 
 const numOfRecs = computed(() => {

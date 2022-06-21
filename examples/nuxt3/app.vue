@@ -7,6 +7,7 @@
       'show-search-filters': searchStore.filtersOpen,
     }"
   >
+    <Snackbar />
     <NuxtLayout>
       <NuxtPage :key="route.fullPath" />
     </NuxtLayout>

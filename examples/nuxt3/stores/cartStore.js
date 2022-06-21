@@ -6,6 +6,9 @@ const useCart = defineStore("cart-store", {
     return {
       products: [],
       open: false,
+      snackbarType: "",
+      snackbarMessage: "",
+      showSnackbar: false,
     }
   },
   getters: {
@@ -69,6 +72,16 @@ const useCart = defineStore("cart-store", {
       KlevuEvents.buy(this.products)
 
       this.emptyCart()
+    },
+    snackbar(type, message) {
+      this.snackbarType = type
+      this.snackbarMessage = message
+      this.showSnackbar = true
+      setTimeout(() => {
+        this.snackbarType = ""
+        this.snackbarMessage = ""
+        this.showSnackbar = false
+      }, 2800)
     },
   },
 })
