@@ -83,7 +83,16 @@ const removeProduct = function (product) {
   cartStore.removeProduct(product)
 }
 const checkout = () => {
+  cartStore.snackbar(
+    "Success",
+    `${cartStore.cartTotalQuantity} item${
+      Number(cartStore.cartTotalQuantity) > 1 ? "s" : ""
+    } have been purchased.`
+  )
   cartStore.buy()
+  setTimeout(() => {
+    cartStore.open = false
+  }, 2800)
 }
 </script>
 
