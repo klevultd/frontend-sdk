@@ -25,7 +25,7 @@ type Options = {
 }
 
 const defaultOptions: Options = {
-  id: "trending",
+  id: "trendingCategoryProducts",
 }
 
 /**
@@ -47,7 +47,7 @@ export function trendingCategoryProducts(
   }
 
   const query: KlevuTrendingProductsQuery = {
-    id: "trendingCategoryProducts",
+    id: params.id,
     typeOfRequest: KlevuTypeOfRequest.Trending,
     settings: {
       context: params.useLastVisitedProducts
