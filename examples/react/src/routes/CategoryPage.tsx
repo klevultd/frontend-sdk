@@ -169,7 +169,12 @@ export function CategoryPage() {
 
   useEffect(() => {
     initialFetch()
-  }, [sorting, params.id, itemsOnPage])
+  }, [sorting, itemsOnPage])
+
+  useEffect(() => {
+    manager.clear()
+    initialFetch()
+  }, [params.id])
 
   const debouncedSlider = (key) =>
     debounce((event, value) => {
