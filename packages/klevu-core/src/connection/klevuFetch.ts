@@ -133,7 +133,7 @@ function fetchNextPageSingleFunc(
 
   // no more pages
   if (
-    prevQueryResponse.meta.totalResultsFound <
+    prevQueryResponse.meta.totalResultsFound <=
     prevQueryResponse.meta.offset + prevQueryResponse.meta.noOfResults
   ) {
     return undefined
