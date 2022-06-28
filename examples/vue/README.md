@@ -113,6 +113,9 @@ The first search we make by calling the _search_ function with two parameters. T
 
 The second search we make by calling the _suggestions_ function with a single parameter, the search term in order to return search suggestions based on that term.
 
+**IMPORTANT NOTE**
+Although the SDK also contains functions to send analytics data back to Klevu in order to update the AI, we recommend that you do not use these for doing a Quick Search. 
+
 ## Search Landing Page
 
 This Vue example app uses the vue-router plugin to handle page navigation. When a user clicks the enter key on the search input field in the navigation, the value is passed as a URL parameter to the [Search view](./src/views/Search.vue).
@@ -208,25 +211,26 @@ See how filterManager makes it easy to manage filters 😉
 
 Another Klevu SDK feature used in this example is the load more button at the bottom of the results.
 
-The response from KlevuFetch has a _next_ method when there are still more results. Otherwise it returns false. We can use this function to call for more results without having to specify all the parameters we originally passed to the _search_ function.
+Each search response from KlevuFetch has a _next_ method when there are still more results. Otherwise it returns false. We can use this function to call for more results without having to specify all the parameters we originally passed to the _search_ function.
 
-In this example we saved the response to a variable called prevRes, we then handle loading more results by calling the following function:
+In this example we saved the search response to a variable called prevRes, we then handle loading more results by calling the following function:
 
 ```js
 const fetchMore = async () => {
   const nextRes = await prevRes.next({
     filterManager: manager,
   })
+  const searchResult = nextRes.queriesById("search")
   searchStore.setProducts([
     ...searchStore.products,
-    ...(nextRes.queriesById("search").records ?? []),
+    ...(searchResult.records ?? []),
   ])
-  prevRes = nextRes
-  searchStore.showMore = Boolean(nextRes.next)
+  prevRes = searchResult
+  searchStore.showMore = Boolean(searchResult.next)
 }
 ```
 
-Nothing special here, but notice how we save the response of this additional search into prevRes again, so we can continue loading more results.
+Nothing special here, but notice how we save the new response of this additional search into prevRes again, so we can continue loading more results.
 
 ## Trending Product Search
 

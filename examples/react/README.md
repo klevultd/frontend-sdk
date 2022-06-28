@@ -46,7 +46,7 @@ KlevuConfig.init({
 
 Both the URL and API Key are provided to you when you create an account with Klevu.
 
-## KMC settings
+## KMC settings (Klevu Merchant Center / Account Admin)
 
 It is possible to fetch KMC settings from Klevu to show information and data set by the user. For example, most popular searches are done this way. In [index.tsx](./src/index.tsx) settings are fetched with `KlevuKMCSettings()` function. It fetches the data and caches it to localstorage for one day. The return value is the [settings](../../packages/klevu-core/src/connection/kmcmodels/).
 
@@ -78,9 +78,9 @@ const fetchEmptySuggestions = async () => {
 
 The _KlevuFetch_ function is the main method for triggering calls to Klevu's API through the SDK. The parameters passed to this function are the actual searches you intend to make. The Klevu SDK comes with many built-in search functions that can be passed into KlevuFetch. In the above example, we pass in a search by calling _trendingProducts_ with a configuration object limiting the results to just 3.
 
-The response of KlevuFetch contains an object with helper methods. In the example above we call the queriesById method which will return data associated with the search. In this case, we pull up the _trendingProducts_ search and access its _records_ which are then passed back into Vue as an array to populate the UI.
+The response of KlevuFetch contains an object with helper methods. In the example above we only make a single search request within KlevuFetch and then call the queriesById method which will return data associated with that search. In this case, we pull up the _trendingProducts_ search and access its _records_ which are then passed back as an array to populate the UI.
 
-And the logic for running after each keypress:
+Below is another example that shows the logic for running a search after each keypress:
 
 ```ts
 const doSearch = async (term: string) => {
@@ -116,6 +116,9 @@ Then we see _KlevuFetch_ used again to make search requests to Klevu's API, but 
 The first search we make by calling the _search_ function with two parameters. The first is the search term which we are pulling from the search input value in the UI. The second is an object where we limit the results to just 9 and we also limit the types of results to only display products.
 
 The second search we make by calling the _suggestions_ function with a single parameter, the search term to return search suggestions based on that term.
+
+**IMPORTANT NOTE**
+Although the SDK also contains functions to send analytics data back to Klevu in order to update the AI, we recommend that you do not use these for doing a Quick Search. 
 
 ## Search Landing (results) page
 
@@ -221,22 +224,26 @@ See how filterManager makes it easy to manage filters 😉
 
 Another Klevu SDK feature used in this example is the load more button at the bottom of the results.
 
-The response from KlevuFetch has a _next_ method when there are still more results. Otherwise, it returns false. We can use this function to call for more results without having to specify all the parameters we originally passed to the _search_ function.
+Each response from a KlevuFetch search has a _next_ method when there are still more results for that search. Otherwise, it returns false. We can use this function to call for more results without having to specify all the parameters we originally passed to the _search_ function.
 
-In this example we saved the response to a variable called prevRes, we then handle loading more results by calling the following function:
+In this example we saved the response of the main product search to a variable called nextFunc, we then handle loading more results by calling the following function:
 
 ```js
 const fetchMore = async () => {
-  const nextRes = await prevRes.next({
+  const nextRes = await nextFunc({
     filterManager: manager,
   })
-  setProducts([...products, ...(nextRes.queriesById("search")?.records ?? [])])
-  prevRes = nextRes
-  setShowMore(Boolean(nextRes.next))
+
+  const nextSearchResult = nextRes.queriesById("search")
+
+  setProducts([...products, ...(nextSearchResult?.records ?? [])])
+
+  setShowMore(Boolean(nextSearchResult?.next))
+  nextFunc = nextSearchResult?.next
 }
 ```
 
-Nothing special here, but notice how we save the response of this additional search into prevRes again, so we can continue loading more results.
+Nothing special here, but notice how we save the response of this additional search into nextFunc again, so we can continue loading more results.
 
 ## Trending Product Search
 
