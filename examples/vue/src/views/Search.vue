@@ -56,14 +56,15 @@ const initialFetch = async () => {
       sendSearchEvent()
     )
   )
-  prevRes = res
 
   const searchResult = res.queriesById("search")
   if (!searchResult) {
     return
   }
 
-  searchStore.showMore = Boolean(res.next)
+  prevRes = searchResult
+
+  searchStore.showMore = Boolean(searchResult.next)
   searchStore.setOptions(manager.options)
   searchStore.setSliders(manager.sliders)
   searchStore.setProducts(searchResult.records ?? [])
@@ -73,12 +74,14 @@ const fetchMore = async () => {
   const nextRes = await prevRes.next({
     filterManager: manager,
   })
+  const searchResult = nextRes.queriesById("search")
+
   searchStore.setProducts([
     ...searchStore.products,
-    ...(nextRes.queriesById("search").records ?? []),
+    ...(searchResult.records ?? []),
   ])
-  prevRes = nextRes
-  searchStore.showMore = Boolean(nextRes.next)
+  prevRes = searchResult
+  searchStore.showMore = Boolean(searchResult.next)
 }
 
 const productClick = function (product) {
