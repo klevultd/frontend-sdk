@@ -1,0 +1,15 @@
+{
+  "name": "klevu-ui-components",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^2.9.13",
+    "@klevu/core": "file:../../packages/klevu-core",
+    "@klevu/ui": "file:../../packages/klevu-ui"
+  }
+}

@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
-  "exports": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./init.js": "./dist/init/init.js",
+    "./loadingindicator.js": "./dist/loadingindicator/loadingindicator.js",
+    "./popularterms.js": "./dist/popularterms/popularterms.js",
+    "./product.js": "./dist/product/product.js",
+    "./quicksearch.js": "./dist/quicksearch/quicksearch.js",
+    "./suggestion.js": "./dist/suggestions/suggestions.js"
+  },
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp src/klevuStyle.css dist",
     "build:watch": "tsc --watch",
     "qoc": "echo 'No qoc'",
     "test": "echo 'No tests'"
@@ -14,6 +22,7 @@
   "author": "Klevu",
   "license": "MIT",
   "dependencies": {
-    "@klevu/core": "file:../klevu-core"
+    "@klevu/core": "file:../klevu-core",
+    "lit": "^2.2.6"
   }
 }

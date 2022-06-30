@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="module">
+      import "@klevu/ui/init.js"
+      import "@klevu/ui/quicksearch.js"
+    </script>
+
+    <link rel="stylesheet" href="node_modules/@klevu/ui/dist/klevuStyle.css" />
+  </head>
+  <body>
+    <h1>Hello Klevu web components</h1>
+    <klevu-init
+      url="https://eucs29v2.ksearchnet.com/cs/v2/search"
+      apiKey="klevu-164651914788114877"
+    ></klevu-init>
+    <klevu-quicksearch
+      style="width: 600px"
+      id="quicksearch"
+    ></klevu-quicksearch>
+
+    <p>This should be normal page once again. Popup should go over.</p>
+  </body>
+</html>

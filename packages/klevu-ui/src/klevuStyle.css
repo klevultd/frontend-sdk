@@ -1,0 +1,10 @@
+:root {
+  --klevu-spacing-m: 12px;
+  --klevu-spacing-s: 6px;
+  --klevu-spacing-l: 18px;
+  --klevu-roundness: 5px;
+  --klevu-color-primary: rgb(89, 167, 89);
+  --klevu-color-secondary: rgb(83, 91, 92);
+  --klevu-color-shadow: rgba(83, 91, 92, 0.4);
+  --klevu-color-text: #333;
+}
