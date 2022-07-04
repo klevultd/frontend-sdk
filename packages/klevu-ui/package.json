@@ -5,12 +5,14 @@
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./style.css": "./dist/klevuStyle.css",
     "./init.js": "./dist/init/init.js",
     "./loadingindicator.js": "./dist/loadingindicator/loadingindicator.js",
     "./popularterms.js": "./dist/popularterms/popularterms.js",
     "./product.js": "./dist/product/product.js",
     "./quicksearch.js": "./dist/quicksearch/quicksearch.js",
-    "./suggestion.js": "./dist/suggestions/suggestions.js"
+    "./suggestion.js": "./dist/suggestions/suggestions.js",
+    "./searchfield.js": "./dist/searchfield/searchfield.js"
   },
   "type": "module",
   "scripts": {

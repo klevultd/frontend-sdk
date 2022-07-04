@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <script type="module">
+      import "@klevu/ui/style.css"
       import "@klevu/ui/init.js"
       import "@klevu/ui/quicksearch.js"
       import "@klevu/ui/loadingindicator.js"
       import "@klevu/ui/popularterms.js"
+      import "@klevu/ui/searchfield.js"
     </script>
-
-    <link rel="stylesheet" href="node_modules/@klevu/ui/dist/klevuStyle.css" />
   </head>
   <body>
     <h1>Hello Klevu web components</h1>
@@ -21,6 +21,26 @@
       id="quicksearch"
     ></klevu-quicksearch>
     <p>This should be normal page once again. Popup should go over.</p>
+    <h2>Popular terms as component next</h2>
     <klevu-popularterms></klevu-popularterms>
+
+    <hr />
+
+    <h1>Example of just search field</h1>
+    <klevu-searchfield id="searchfield" dosearch></klevu-searchfield>
+    <pre id="result"></pre>
+
+    <script type="module">
+      document
+        .getElementById("searchfield")
+        .addEventListener("klevu-search-result", function (event) {
+          console.log(event)
+          document.getElementById("result").innerHTML = JSON.stringify(
+            event.detail.results,
+            undefined,
+            2
+          )
+        })
+    </script>
   </body>
 </html>

@@ -69,7 +69,6 @@ export class KlevuQuicksearch extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent("klevu-start-search", {
-        bubbles: true,
         composed: true,
       })
     )
@@ -98,7 +97,6 @@ export class KlevuQuicksearch extends LitElement {
         suggestions: typeof suggestionResults
         analyticalClick?: (productId: string, variantId?: string) => void
       }>("klevu-search-result", {
-        bubbles: true,
         composed: true,
         detail: {
           results: searchResults,
@@ -116,7 +114,6 @@ export class KlevuQuicksearch extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent("search", {
-        bubbles: true,
         composed: true,
         detail: {
           term,
