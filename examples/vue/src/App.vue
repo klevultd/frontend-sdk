@@ -26,6 +26,7 @@ KlevuConfig.init({
         <router-link to="/">Home</router-link>
         <router-link to="/collection/men">Men</router-link>
         <router-link to="/collection/women">Women</router-link>
+        <router-link to="/webcomponent">Web component</router-link>
       </div>
       <Search />
       <CartIcon />

@@ -4,6 +4,7 @@ import useQuickSearch from "../state/quickSearchStore"
 const Search = () => import("../views/Search.vue")
 const Collection = () => import("../views/Collection.vue")
 const Product = () => import("../views/Product.vue")
+const WC = () => import("../views/WebComponent.vue")
 const routes = [
   {
     path: "/",
@@ -25,6 +26,11 @@ const routes = [
     path: "/product/:id",
     name: "Product",
     component: Product,
+  },
+  {
+    path: "/webcomponent",
+    name: "Web component",
+    component: WC,
   },
 ]
 const router = createRouter({

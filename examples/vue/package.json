@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@klevu/core": "file:../../packages/klevu-core",
+    "@klevu/ui": "file:../../packages/klevu-ui",
     "css.gg": "^2.0.0",
     "daisyui": "^2.14.1",
     "lodash.debounce": "^4.0.8",
