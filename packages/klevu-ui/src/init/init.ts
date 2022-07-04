@@ -13,8 +13,9 @@ export class KlevuInit extends LitElement {
   connectedCallback() {
     super.connectedCallback()
 
-    // throw error if apikey and url are not defined
-    console.log("init", this.apiKey, this.url)
+    if (!this.apiKey || !this.url) {
+      throw new Error("apiKey and url attributes are required for klevu-init")
+    }
 
     KlevuConfig.init({
       apiKey: this.apiKey,

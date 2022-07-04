@@ -9,7 +9,6 @@ import { html, css, LitElement } from "lit"
 import { customElement, property, state } from "lit/decorators.js"
 import { classMap } from "lit/directives/class-map.js"
 import { cache } from "lit/directives/cache.js"
-import { debounce } from "../utils"
 import "../product/product"
 import "../suggestions/suggestions"
 import {
@@ -18,6 +17,7 @@ import {
 } from "../product/product"
 import "../loadingindicator/loadingindicator"
 import "../popularterms/popularterms"
+import "../searchfield/searchfield"
 
 @customElement("klevu-quicksearch")
 export class KlevuQuicksearch extends LitElement {
@@ -27,23 +27,6 @@ export class KlevuQuicksearch extends LitElement {
     }
     .container {
       position: relative;
-    }
-    form {
-      display: flex;
-    }
-    input {
-      box-sizing: border-box;
-      width: 100%;
-      padding: var(--klevu-spacing-m);
-      border-radius: var(--klevu-roundness);
-      border: 1px solid var(--klevu-color-secondary);
-    }
-    button {
-      margin-left: var(--klevu-spacing-m);
-      background: var(--klevu-color-primary);
-      border: none;
-      appearance: unset;
-      border-radius: var(--klevu-roundness);
     }
     .popup {
       position: absolute;
@@ -103,8 +86,6 @@ export class KlevuQuicksearch extends LitElement {
     ></klevu-product>`
   }
 
-  @property({ attribute: false }) onsearch = (term: string) => {}
-
   @state() _trendingProducts: KlevuRecord[] = []
   @state() _results: KlevuRecord[] = []
   @state() _suggestions: string[] = []
@@ -114,13 +95,10 @@ export class KlevuQuicksearch extends LitElement {
   @state() _showpopup = false
   @state() _loading = false
 
-  private async onInputChange(event: KeyboardEvent) {
-    const searchElement = event.target as HTMLInputElement
-    this.fetchFromKlevu(searchElement.value)
-  }
-
   private onInputFocus() {
-    console.log("show popup")
+    if (this._showpopup === true) {
+      return
+    }
     this._showpopup = true
 
     document.body.addEventListener("click", this.closePopup.bind(this))
@@ -132,7 +110,8 @@ export class KlevuQuicksearch extends LitElement {
         .composedPath()
         .some((e) => (e as HTMLElement).tagName === "KLEVU-QUICKSEARCH")
     ) {
-      return
+      event.preventDefault()
+      return false
     }
     this._showpopup = false
     document.body.removeEventListener("click", this.closePopup)
@@ -147,33 +126,12 @@ export class KlevuQuicksearch extends LitElement {
     return false
   }
 
-  private fetchFromKlevu = debounce(async (term: string) => {
-    if (term.length < 3) {
-      this._results = []
-      this._suggestions = []
-      return
-    }
-
-    this._loading = true
-    const result = await KlevuFetch(
-      search(term, {
-        limit: 3,
-      }),
-      suggestions(term)
-    )
-    const searchRes = result.queriesById("search")
-    if (searchRes) {
-      this._results = searchRes.records ?? []
-      if (searchRes.getSearchClickSendEvent) {
-        this._analyticsClick = searchRes.getSearchClickSendEvent()
-      }
-    }
-    this._suggestions =
-      result
-        .suggestionsById("suggestions")
-        ?.suggestions.map((s) => s.suggest) ?? []
+  private onKlevuSearch = async (event: CustomEvent) => {
+    this._results = event.detail.results
+    this._suggestions = event.detail.suggestions
+    this._analyticsClick = event.detail.analyticalClick
     this._loading = false
-  }, 300)
+  }
 
   async connectedCallback() {
     super.connectedCallback()
@@ -186,39 +144,16 @@ export class KlevuQuicksearch extends LitElement {
     this._trendingProducts = res.queriesById("trendingProducts")?.records ?? []
   }
 
-  private formsubmit(event: SubmitEvent) {
-    const termValue = (
-      (event.target as HTMLElement).getElementsByClassName(
-        "klevu-fetch-term"
-      )[0] as HTMLInputElement
-    ).value
-
-    if (typeof termValue === "string" && termValue.length > 0) {
-      this.onsearch(termValue)
-    }
-
-    event.preventDefault()
-    return false
-  }
-
   render() {
     const popupClasses = { popup: true, show: this._showpopup }
     return html`
       <div class="container">
-        <form @submit=${this.formsubmit}>
-          <input
-            class="klevu-fetch-term"
-            id="klevu-fetch-term"
-            type="text"
-            name="klevu-fetch-term"
-            placeholder="For example 'shoes under 40'"
-            @keyup="${this.onInputChange}"
-            @focus=${this.onInputFocus}
-            autocomplete="off"
-          />
-          <button type="submit">Search</button>
-        </form>
-
+        <klevu-searchfield
+          @focus=${this.onInputFocus}
+          @klevu-start-search=${() => (this._loading = true)}
+          @klevu-search-result=${this.onKlevuSearch}
+          doSearch
+        ></klevu-searchfield>
         <div class=${classMap(popupClasses)}>
           <div class="innercontainer">
             <div class="leftmenu">
