@@ -1,10 +1,4 @@
-import {
-  KlevuFetch,
-  KlevuRecord,
-  search,
-  suggestions,
-  trendingProducts,
-} from "@klevu/core"
+import { KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
 import { html, css, LitElement } from "lit"
 import { customElement, property, state } from "lit/decorators.js"
 import { classMap } from "lit/directives/class-map.js"
@@ -22,6 +16,16 @@ import "../searchfield/searchfield"
 namespace Events {
   export interface KlevuProductClick {
     record: KlevuRecord
+  }
+}
+
+declare global {
+  interface WindowEventMap {
+    "klevu-product-click": Events.KlevuProductClick
+  }
+
+  interface HTMLElementTagNameMap {
+    "klevu-quicksearch": KlevuQuicksearch
   }
 }
 

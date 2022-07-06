@@ -1,17 +1,41 @@
-import {
-  KlevuFetch,
-  KlevuRecord,
-  KlevuSuggestionResult,
-  search,
-  suggestions,
-} from "@klevu/core"
+import { KlevuFetch, KlevuRecord, search, suggestions } from "@klevu/core"
 import { html, css, LitElement } from "lit"
 import { customElement, property, state } from "lit/decorators.js"
-import { KlevuProductAnalyticsFunctionClick } from "../product/product"
 import { debounce } from "../utils"
 
+namespace Events {
+  export interface KlevuSearchResult {
+    results: KlevuRecord[]
+    suggestions: string[]
+    analyticalClick?: (productId: string, variantId?: string) => void
+  }
+
+  export interface KlevuDoSearch {
+    term: string
+  }
+
+  export interface KlevuDebounceInputChange {
+    term: string
+  }
+
+  export interface KlevuStartSearch {}
+}
+
+declare global {
+  interface WindowEventMap {
+    "klevu-search-result": Events.KlevuSearchResult
+    "klevu-do-search": Events.KlevuDoSearch
+    "klevu-debounce-input-change": Events.KlevuDebounceInputChange
+    "klevu-start-search": Events.KlevuStartSearch
+  }
+
+  interface HTMLElementTagNameMap {
+    "klevu-searchfield": KlevuSearchfield
+  }
+}
+
 @customElement("klevu-searchfield")
-export class KlevuQuicksearch extends LitElement {
+export class KlevuSearchfield extends LitElement {
   @property({ type: Boolean }) doSearch = false
 
   static styles = css`
@@ -50,11 +74,14 @@ export class KlevuQuicksearch extends LitElement {
 
   private emitInputChange = debounce((term: string) => {
     this.dispatchEvent(
-      new CustomEvent("klevu-debounced-input-change", {
-        detail: {
-          term,
-        },
-      })
+      new CustomEvent<Events.KlevuDebounceInputChange>(
+        "klevu-debounced-input-change",
+        {
+          detail: {
+            term,
+          },
+        }
+      )
     )
 
     if (this.doSearch) {
@@ -68,7 +95,7 @@ export class KlevuQuicksearch extends LitElement {
     }
 
     this.dispatchEvent(
-      new CustomEvent("klevu-start-search", {
+      new CustomEvent<Events.KlevuStartSearch>("klevu-start-search", {
         composed: true,
       })
     )
@@ -92,11 +119,7 @@ export class KlevuQuicksearch extends LitElement {
         ?.suggestions.map((s) => s.suggest) ?? []
 
     this.dispatchEvent(
-      new CustomEvent<{
-        results: KlevuRecord[]
-        suggestions: typeof suggestionResults
-        analyticalClick?: (productId: string, variantId?: string) => void
-      }>("klevu-search-result", {
+      new CustomEvent<Events.KlevuSearchResult>("klevu-search-result", {
         composed: true,
         detail: {
           results: searchResults,
@@ -113,7 +136,7 @@ export class KlevuQuicksearch extends LitElement {
         .value ?? ""
 
     this.dispatchEvent(
-      new CustomEvent("search", {
+      new CustomEvent<Events.KlevuDoSearch>("klevu-do-search", {
         composed: true,
         detail: {
           term,
