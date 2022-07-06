@@ -8,6 +8,7 @@ const props = defineProps({
 const emit = defineEmits(["clickHandler"])
 
 const clickHandler = function () {
+  console.log("emitting...")
   emit("clickHandler", props.product)
 }
 /*

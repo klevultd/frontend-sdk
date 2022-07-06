@@ -19,6 +19,12 @@ import "../loadingindicator/loadingindicator"
 import "../popularterms/popularterms"
 import "../searchfield/searchfield"
 
+namespace Events {
+  export interface KlevuProductClick {
+    record: KlevuRecord
+  }
+}
+
 @customElement("klevu-quicksearch")
 export class KlevuQuicksearch extends LitElement {
   static styles = css`
@@ -121,7 +127,15 @@ export class KlevuQuicksearch extends LitElement {
     if (this._analyticsClick) {
       this._analyticsClick(record.id, record.itemGroupId)
     }
-    alert(`should redirect to "${record.url}"`)
+
+    this.dispatchEvent(
+      new CustomEvent<Events.KlevuProductClick>("klevu-product-click", {
+        composed: true,
+        detail: {
+          record,
+        },
+      })
+    )
     event.preventDefault()
     return false
   }
