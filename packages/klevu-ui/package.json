@@ -16,15 +16,27 @@
   },
   "type": "module",
   "scripts": {
-    "build": "tsc && cp src/klevuStyle.css dist",
-    "build:watch": "tsc --watch",
+    "build": "tsc --project tsconfig-build.json && cp src/klevuStyle.css dist",
+    "build:watch": "tsc --project tsconfig-build.json --watch",
     "qoc": "echo 'No qoc'",
-    "test": "echo 'No tests'"
+    "test": "echo 'No tests'",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "Klevu",
   "license": "MIT",
   "dependencies": {
     "@klevu/core": "file:../klevu-core",
     "lit": "^2.2.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-vite": "^0.1.38",
+    "@storybook/web-components": "^6.5.9",
+    "babel-loader": "^8.2.5",
+    "lit-html": "^2.2.6"
   }
 }

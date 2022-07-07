@@ -14,7 +14,7 @@ namespace Events {
     term: string
   }
 
-  export interface KlevuDebounceInputChange {
+  export interface KlevuDebouncedInputChange {
     term: string
   }
 
@@ -25,7 +25,7 @@ declare global {
   interface WindowEventMap {
     "klevu-search-result": Events.KlevuSearchResult
     "klevu-do-search": Events.KlevuDoSearch
-    "klevu-debounce-input-change": Events.KlevuDebounceInputChange
+    "klevu-debounce-input-change": Events.KlevuDebouncedInputChange
     "klevu-start-search": Events.KlevuStartSearch
   }
 
@@ -37,6 +37,7 @@ declare global {
 @customElement("klevu-searchfield")
 export class KlevuSearchfield extends LitElement {
   @property({ type: Boolean }) doSearch = false
+  @property({ type: String }) placeholder = "For example 'shoes under 40'"
 
   static styles = css`
     form {
@@ -74,7 +75,7 @@ export class KlevuSearchfield extends LitElement {
 
   private emitInputChange = debounce((term: string) => {
     this.dispatchEvent(
-      new CustomEvent<Events.KlevuDebounceInputChange>(
+      new CustomEvent<Events.KlevuDebouncedInputChange>(
         "klevu-debounced-input-change",
         {
           detail: {
@@ -84,6 +85,7 @@ export class KlevuSearchfield extends LitElement {
       )
     )
 
+    console.log(this.doSearch)
     if (this.doSearch) {
       this.doKlevuSearch(term)
     }
@@ -155,7 +157,7 @@ export class KlevuSearchfield extends LitElement {
         id="klevu-fetch-term"
         type="text"
         name="klevu-fetch-term"
-        placeholder="For example 'shoes under 40'"
+        placeholder=${this.placeholder}
         @keyup=${this.onInputChange}
         @focus=${this.onInputFocus}
         autocomplete="off"

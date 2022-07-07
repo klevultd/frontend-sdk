@@ -2,8 +2,10 @@ import { KlevuRecord } from "@klevu/core"
 import { css, html, LitElement } from "lit"
 import { customElement, property } from "lit/decorators.js"
 
+export type ProductRecord = Partial<KlevuRecord>
+
 export type KlevuProductAnalyticsFunctionClick = (
-  record: KlevuRecord,
+  record: ProductRecord,
   event: Event
 ) => void | boolean
 
@@ -40,16 +42,16 @@ export class KlevuProduct extends LitElement {
   `
 
   @property({
-    attribute: false,
+    type: Object,
   })
-  data?: KlevuRecord
+  data?: ProductRecord
 
   @property({
     attribute: false,
   })
   klevuanalyticsclick?: KlevuProductAnalyticsFunctionClick
 
-  productclick(event: Event) {
+  private productclick(event: Event) {
     if (this.klevuanalyticsclick && this.data) {
       return this.klevuanalyticsclick(this.data, event)
     }
@@ -65,10 +67,16 @@ export class KlevuProduct extends LitElement {
       currency: this.data.currency,
     })
 
-    return html`<a href="${this.data.url}" @click=${this.productclick}>
-      <img src="${this.data.image}" alt="${this.data.name}" />
+    const image = this.data.image
+      ? html`<img src="${this.data.image}" alt="${this.data.name ?? ""}" />`
+      : null
+
+    return html`<a href="${this.data.url ?? ""}" @click=${this.productclick}>
+      ${image}
       <p class="name">${this.data.name}</p>
-      <p class="price">${priceFormatter.format(parseFloat(this.data.price))}</p>
+      <p class="price">
+        ${priceFormatter.format(parseFloat(this.data.price ?? "0"))}
+      </p>
     </a>`
   }
 }

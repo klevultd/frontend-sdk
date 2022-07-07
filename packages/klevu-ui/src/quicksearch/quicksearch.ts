@@ -8,6 +8,7 @@ import "../suggestions/suggestions"
 import {
   KlevuProduct,
   KlevuProductAnalyticsFunctionClick,
+  ProductRecord,
 } from "../product/product"
 import "../loadingindicator/loadingindicator"
 import "../popularterms/popularterms"
@@ -15,7 +16,7 @@ import "../searchfield/searchfield"
 
 namespace Events {
   export interface KlevuProductClick {
-    record: KlevuRecord
+    record: ProductRecord
   }
 }
 
@@ -127,8 +128,8 @@ export class KlevuQuicksearch extends LitElement {
     document.body.removeEventListener("click", this.closePopup)
   }
 
-  private onProductClick = (record: KlevuRecord, event: Event) => {
-    if (this._analyticsClick) {
+  private onProductClick = (record: ProductRecord, event: Event) => {
+    if (this._analyticsClick && record.id) {
       this._analyticsClick(record.id, record.itemGroupId)
     }
 
