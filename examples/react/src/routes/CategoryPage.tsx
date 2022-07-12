@@ -38,13 +38,14 @@ import {
   Button,
   Container,
 } from "@mui/material"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
 import { ChevronLeft, FilterAlt } from "@mui/icons-material"
 import debounce from "lodash.debounce"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { links, pages } from "../components/appbar"
+import { useSnackbar } from "notistack"
 
 const drawerWidth = 240
 const manager = new FilterManager()
@@ -58,6 +59,8 @@ let recommendationClickManager: ReturnType<
 
 export function CategoryPage() {
   const params = useParams()
+  const { enqueueSnackbar } = useSnackbar()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
     manager.options
@@ -339,9 +342,17 @@ export function CategoryPage() {
           {products.map((p, i) => (
             <Grid item key={i}>
               <Product
+                onAddToCart={(product) => {
+                  enqueueSnackbar(`Added ${product.name} to shopping cart`, {
+                    variant: "success",
+                  })
+                }}
                 product={p}
-                onClick={() => {
+                onClick={(event) => {
+                  navigate(`/products/${p.itemGroupId}/${p.id}`)
                   productClickManager(p.id, params.id)
+                  event.preventDefault()
+                  return false
                 }}
               />
             </Grid>

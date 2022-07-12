@@ -1,9 +1,7 @@
 import React from "react"
 import { Button, Typography } from "@mui/material"
 import { css } from "@emotion/react"
-import { Link } from "react-router-dom"
 import { CartItem, useCart } from "../cartContext"
-import { useSnackbar } from "notistack"
 
 const containerCss = css`
   display: flex;
@@ -40,32 +38,36 @@ const containerCss = css`
   }
 `
 
+/**
+ * This product has been modified to be used with both React and Hydrogen example.
+ * You should not use this component in your project.
+ *
+ * @param props
+ * @returns
+ */
 export function Product(props: {
   product: CartItem
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent) => void
+  onAddToCart?: (product: CartItem) => void
   hideAddToCart?: boolean
 }) {
-  const { enqueueSnackbar } = useSnackbar()
-
   const p = props.product
   const cart = useCart()
 
   const addToCart: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     cart.add(props.product)
-    enqueueSnackbar(`Added ${props.product.name} to shopport cart`, {
-      variant: "success",
-    })
+
     event.preventDefault()
     event.stopPropagation()
     return false
   }
 
   return (
-    <Link
-      to={`/products/${p.itemGroupId}/${p.id}`}
+    <a
+      href={`/products/${p.itemGroupId}/${p.id}`}
       onClick={(event) => {
         if (props.onClick) {
-          props.onClick()
+          props.onClick(event)
         }
       }}
       css={containerCss}
@@ -90,6 +92,6 @@ export function Product(props: {
           Add to cart
         </Button>
       )}
-    </Link>
+    </a>
   )
 }

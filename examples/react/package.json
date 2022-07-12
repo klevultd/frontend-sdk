@@ -2,10 +2,11 @@
   "name": "examples-react",
   "version": "1.0.0",
   "description": "",
-  "main": "simple.js",
+  "main": "./libdist/exports.js",
   "scripts": {
     "start": "vite --port 3001 --host",
     "build": "vite build",
+    "build:lib": "tsc -p ./tsconfig.lib.json",
     "serve": "vite preview --port 3001 --host",
     "qoc": "",
     "test": "echo 'No tests'"
@@ -26,7 +27,7 @@
     "react-router-dom": "^6.2.1",
     "swiper": "^8.1.0"
   },
-  "type": "module",
+  "type": "commonjs",
   "author": "",
   "license": "ISC",
   "devDependencies": {

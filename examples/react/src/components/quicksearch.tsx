@@ -26,7 +26,6 @@ import {
   bindFocus,
   usePopupState,
 } from "material-ui-popup-state/hooks"
-import { useLocation, useNavigate } from "react-router-dom"
 import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
 import SearchIcon from "@mui/icons-material/Search"
@@ -36,11 +35,19 @@ let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
 type Props = {
   label: string
+  currentUrl: string
   enablePersonalisation?: boolean
+  onProductClick?: (product: KlevuRecord) => void
 }
 
+/**
+ * This component has been modified to be used in React and Hydrogen examples.
+ * It is a bit more complicated that it needs to be, but it is still a good example of how to use the Klevu core.
+ *
+ * @param props
+ * @returns
+ */
 export function QuickSearch(props: Props) {
-  const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState("")
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [trendProducts, setTrendingProducts] = useState<KlevuRecord[]>([])
@@ -57,11 +64,10 @@ export function QuickSearch(props: Props) {
 
   const [kmcSettings, setKmcSettings] = useState<KMCRootObject>()
 
-  let location = useLocation()
   React.useEffect(() => {
     popupState.close()
     setProducts([])
-  }, [location])
+  }, [props.currentUrl])
 
   const searchModifiers = props.enablePersonalisation ? [personalisation()] : []
 
@@ -123,7 +129,7 @@ export function QuickSearch(props: Props) {
       const url = props.enablePersonalisation
         ? "/search?q="
         : "/searchnopersonalisation?q="
-      navigate(url + encodeURIComponent(searchValue))
+      //navigate(url + encodeURIComponent(searchValue))
       popupState.close()
     }
   }
@@ -304,9 +310,13 @@ export function QuickSearch(props: Props) {
                   {products.map((p, i) => (
                     <Grid item key={i}>
                       <Product
+                        hideAddToCart
                         product={p}
-                        onClick={() => {
+                        onClick={(event) => {
                           clickManager(p.id, p.itemGroupId)
+                          props.onProductClick?.(p)
+                          event.preventDefault()
+                          return false
                         }}
                       />
                     </Grid>
@@ -320,9 +330,13 @@ export function QuickSearch(props: Props) {
                   {trendProducts.map((p, i) => (
                     <Grid item key={i}>
                       <Product
+                        hideAddToCart
                         product={p}
-                        onClick={() => {
+                        onClick={(event) => {
+                          props.onProductClick?.(p)
                           popupState.close()
+                          event.preventDefault()
+                          return false
                         }}
                       />
                     </Grid>

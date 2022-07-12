@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "esModuleInterop": true,
+    "outDir": "./libdist/",
+    "target": "ES2019",
+    "lib": ["ES2019", "DOM"],
+    "moduleResolution": "node",
+    "declaration": true
+  },
+  "include": ["exports.ts"],
+  "exclude": ["node_modules", "libdist"]
+}

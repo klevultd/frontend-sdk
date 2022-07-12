@@ -1,15 +1,11 @@
 import { Navigation } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 
-// Import Swiper styles
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
-import "swiper/css/scrollbar"
 import { KlevuRecord } from "@klevu/core"
 import { Product } from "./product"
 import React from "react"
 import { Typography } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 export function RecommendationBanner(props: {
   products: KlevuRecord[]
@@ -21,6 +17,8 @@ export function RecommendationBanner(props: {
     index?: number
   ) => void
 }) {
+  const navigate = useNavigate()
+
   if (props.products.length === 0) {
     return null
   }
@@ -62,9 +60,13 @@ export function RecommendationBanner(props: {
             }}
           >
             <Product
+              hideAddToCart
               product={p}
-              onClick={() => {
+              onClick={(event) => {
                 props.productClick(p.id, p.itemGroupId, p, index + 1)
+                navigate(`/products/${p.itemGroupId}/${p.id}`)
+                event.preventDefault()
+                return false
               }}
             />
           </SwiperSlide>
