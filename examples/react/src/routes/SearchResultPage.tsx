@@ -58,6 +58,7 @@ type Props = {
 }
 
 export function SearchResultPage(props: Props) {
+  const { enqueueSnackbar } = useSnackbar()
   const query = useQuery()
   const location = useLocation()
 
@@ -287,8 +288,16 @@ export function SearchResultPage(props: Props) {
             <Grid item key={i}>
               <Product
                 product={p}
-                onClick={() => {
+                onClick={(event) => {
+                  navigate(`/products/${p.itemGroupId}/${p.id}`)
                   clickManager(p.id, p.itemGroupId)
+                  event.preventDefault()
+                  return false
+                }}
+                onAddToCart={(product) => {
+                  enqueueSnackbar(`Added ${product.name} to shopping cart`, {
+                    variant: "success",
+                  })
                 }}
               />
             </Grid>

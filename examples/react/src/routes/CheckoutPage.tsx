@@ -84,7 +84,15 @@ export function CheckoutPage() {
       >
         {cart.items.map((p, i) => (
           <Grid item key={i}>
-            <Product product={p} hideAddToCart />
+            <Product
+              product={p}
+              hideAddToCart
+              onClick={(event) => {
+                navigate(`/products/${p.itemGroupId}/${p.id}`)
+                event.preventDefault()
+                return false
+              }}
+            />
           </Grid>
         ))}
       </Grid>

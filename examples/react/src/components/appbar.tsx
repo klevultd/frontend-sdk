@@ -5,7 +5,7 @@ import Container from "@mui/material/Container"
 import Toolbar from "@mui/material/Toolbar"
 import React from "react"
 import { QuickSearch } from "./quicksearch"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { CartButton } from "./cartbutton"
 import { Divider } from "@mui/material"
 
@@ -18,6 +18,9 @@ const emojis = {
 }
 
 const ResponsiveAppBar = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   return (
     <AppBar position="fixed" color="inherit">
       <Container maxWidth="lg">
@@ -59,13 +62,26 @@ const ResponsiveAppBar = () => {
             orientation="vertical"
             style={{ margin: "0 8px" }}
           />
-          <QuickSearch label="Quick Search" />
+          <QuickSearch
+            label="Quick Search"
+            currentUrl={location.pathname}
+            onProductClick={(p) => {
+              navigate(`/products/${p.itemGroupId}/${p.id}`)
+            }}
+          />
           <Divider
             flexItem
             orientation="vertical"
             style={{ margin: "0 8px" }}
           />
-          <QuickSearch label="QS with personalisation" enablePersonalisation />
+          <QuickSearch
+            label="QS with personalisation"
+            enablePersonalisation
+            currentUrl={location.pathname}
+            onProductClick={(p) => {
+              navigate(`/products/${p.itemGroupId}/${p.id}`)
+            }}
+          />
           <Divider
             flexItem
             orientation="vertical"
