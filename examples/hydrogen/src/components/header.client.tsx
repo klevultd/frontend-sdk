@@ -2,15 +2,18 @@ import { QuickSearch } from "examples-react"
 import { useNavigate } from "@shopify/hydrogen"
 import React from "react"
 import { getRecordHandle } from "./klevu/utils"
+import { Container } from "@mui/material"
 
 export function Header(props: { pathname: string }) {
   const navigate = useNavigate()
 
   return (
-    <div
+    <Container
+      maxWidth="lg"
       style={{
         display: "flex",
         width: "100%",
+        paddingBottom: "3rem",
       }}
     >
       <h1
@@ -26,11 +29,13 @@ export function Header(props: { pathname: string }) {
       <QuickSearch
         label="Search from Klevu"
         currentUrl={props.pathname}
-        enablePersonalisation
         onProductClick={(product) => {
           navigate(`/products/${getRecordHandle(product)}`)
         }}
+        onSearchClick={(q) => {
+          navigate(`/search?q=${encodeURIComponent(q)}`)
+        }}
       />
-    </div>
+    </Container>
   )
 }

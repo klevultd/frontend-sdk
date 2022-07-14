@@ -16,19 +16,10 @@ import type {
   KlevuRecord,
   KlevuFilterResultOptions,
   KlevuFilterResultSlider,
-  KlevuFetchResponse,
 } from "@klevu/core"
 import {
-  Drawer,
   IconButton,
   Divider,
-  Typography,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  Checkbox,
-  ListItemText,
-  Slider,
   Box,
   Select,
   MenuItem,
@@ -36,13 +27,13 @@ import {
   Button,
   Container,
 } from "@mui/material"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
-import { ChevronLeft, FilterAlt } from "@mui/icons-material"
-import debounce from "lodash.debounce"
+import { FilterAlt } from "@mui/icons-material"
+import { FilterDrawer } from "../components/filterdrawer"
+import { useSnackbar } from "notistack"
 
-const drawerWidth = 240
 const manager = new FilterManager()
 let nextFunc: KlevuNextFunc
 let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
@@ -59,6 +50,7 @@ type Props = {
 
 export function SearchResultPage(props: Props) {
   const { enqueueSnackbar } = useSnackbar()
+  const navigate = useNavigate()
   const query = useQuery()
   const location = useLocation()
 
@@ -75,10 +67,6 @@ export function SearchResultPage(props: Props) {
 
   const handleDrawerOpen = () => {
     setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
   }
 
   const initialFetch = useCallback(async () => {
@@ -141,11 +129,6 @@ export function SearchResultPage(props: Props) {
     setShowMore(Boolean(searchResult.next))
   }
 
-  const deboucnedSlider = (key) =>
-    debounce((event, value) => {
-      manager.updateSlide(key, value[0], value[1])
-    }, 300)
-
   const handleFilterUpdate = () => {
     setOptions(manager.options)
     setSliders(manager.sliders)
@@ -170,77 +153,13 @@ export function SearchResultPage(props: Props) {
 
   return (
     <Container maxWidth="lg">
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="temporary"
-        anchor="left"
+      <FilterDrawer
         open={open}
-        onClose={handleDrawerClose}
-      >
-        <IconButton onClick={handleDrawerClose}>
-          <ChevronLeft />
-        </IconButton>
-        <Divider />
-        {options.map((o, i) => (
-          <React.Fragment key={i}>
-            <Typography
-              variant="h6"
-              style={{
-                margin: "0 12px",
-              }}
-            >
-              {o.label}
-            </Typography>
-            <List key={i}>
-              {o.options.map((o2, i2) => (
-                <ListItemButton
-                  key={i2}
-                  role={undefined}
-                  onClick={() => {
-                    manager.toggleOption(o.key, o2.name)
-                  }}
-                  dense
-                >
-                  <ListItemIcon>
-                    <Checkbox
-                      edge="start"
-                      checked={o2.selected == true}
-                      disableRipple
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary={`${o2.name} (${o2.count})`} />
-                </ListItemButton>
-              ))}
-            </List>
-          </React.Fragment>
-        ))}
-        {sliders.map((s, i) => (
-          <React.Fragment key={i}>
-            <Typography variant="h6" style={{ margin: "0 12px" }}>
-              {s.label}
-            </Typography>
-            <div style={{ margin: "24px" }}>
-              <Slider
-                defaultValue={[
-                  parseInt(s.start || s.min),
-                  parseInt(s.end || s.max),
-                ]}
-                max={parseInt(s.max)}
-                min={parseInt(s.min)}
-                onChange={deboucnedSlider(s.key)}
-                valueLabelDisplay="on"
-              />
-            </div>
-          </React.Fragment>
-        ))}
-      </Drawer>
+        onClose={() => setOpen(false)}
+        manager={manager}
+        options={options}
+        sliders={sliders}
+      />
       <div id="main">
         <Box
           sx={{

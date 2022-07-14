@@ -1,53 +1,46 @@
-import {
-  KlevuSearchSorting,
-  listFilters,
-  applyFilterWithManager,
-  KlevuFetch,
-  KlevuDomEvents,
-  FilterManager,
-  categoryMerchandising,
-  sendMerchandisingViewEvent,
-  kmcRecommendation,
-  KlevuListenDomEvent,
-  sendRecommendationViewEvent,
-  abTest,
-  debug,
-} from "@klevu/core"
 import type {
-  KlevuRecord,
   KlevuFilterResultOptions,
   KlevuFilterResultSlider,
-  KlevuResultEvent,
   KlevuNextFunc,
+  KlevuRecord,
+  KlevuResultEvent,
 } from "@klevu/core"
 import {
-  Drawer,
-  IconButton,
-  Divider,
-  Typography,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  Checkbox,
-  ListItemText,
-  Slider,
+  abTest,
+  applyFilterWithManager,
+  categoryMerchandising,
+  debug,
+  FilterManager,
+  KlevuDomEvents,
+  KlevuFetch,
+  KlevuListenDomEvent,
+  KlevuSearchSorting,
+  kmcRecommendation,
+  listFilters,
+  sendMerchandisingViewEvent,
+  sendRecommendationViewEvent,
+} from "@klevu/core"
+import { FilterAlt } from "@mui/icons-material"
+import {
   Box,
-  Select,
-  MenuItem,
-  Grid,
   Button,
   Container,
+  Divider,
+  Grid,
+  IconButton,
+  MenuItem,
+  Select,
+  Typography,
 } from "@mui/material"
+import React, { useCallback, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import React, { useState, useCallback, useEffect } from "react"
 import { Product } from "../components/product"
-import { ChevronLeft, FilterAlt } from "@mui/icons-material"
-import debounce from "lodash.debounce"
-import { RecommendationBanner } from "../components/recommendationBanner"
-import { links, pages } from "../components/appbar"
-import { useSnackbar } from "notistack"
 
-const drawerWidth = 240
+import { useSnackbar } from "notistack"
+import { links, pages } from "../components/appbar"
+import { FilterDrawer } from "../components/filterdrawer"
+import { RecommendationBanner } from "../components/recommendationBanner"
+
 const manager = new FilterManager()
 let nextFunc: KlevuNextFunc
 let productClickManager: ReturnType<
@@ -78,10 +71,6 @@ export function CategoryPage() {
 
   const handleDrawerOpen = () => {
     setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
   }
 
   const initialFetch = useCallback(async () => {
@@ -179,97 +168,17 @@ export function CategoryPage() {
     initialFetch()
   }, [params.id])
 
-  const debouncedSlider = (key) =>
-    debounce((event, value) => {
-      manager.updateSlide(key, value[0], value[1])
-    }, 300)
-
   const title = pages[links.findIndex((p) => p === params.id)]
 
   return (
     <Container maxWidth="lg">
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="temporary"
-        anchor="left"
+      <FilterDrawer
         open={open}
-        onClose={handleDrawerClose}
-      >
-        <IconButton onClick={handleDrawerClose}>
-          <ChevronLeft />
-        </IconButton>
-        <Divider />
-        {options.map((o, i) => (
-          <React.Fragment key={i}>
-            <Typography
-              variant="h6"
-              style={{
-                margin: "0 12px",
-              }}
-            >
-              {o.label}
-            </Typography>
-            <List key={i}>
-              {o.options.map((o2, i2) => (
-                <ListItemButton
-                  key={i2}
-                  role={undefined}
-                  onClick={() => {
-                    manager.toggleOption(o.key, o2.name)
-                  }}
-                  dense
-                >
-                  <ListItemIcon>
-                    <Checkbox
-                      edge="start"
-                      checked={o2.selected == true}
-                      disableRipple
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary={`${o2.name} (${o2.count})`} />
-                  {o.key === "color" ? (
-                    <div
-                      style={{
-                        height: "16px",
-                        width: "16px",
-                        border: "1px solid gray",
-                        backgroundColor: o2.name,
-                        marginLeft: "8px",
-                      }}
-                    ></div>
-                  ) : null}
-                </ListItemButton>
-              ))}
-            </List>
-          </React.Fragment>
-        ))}
-        {sliders.map((s, i) => (
-          <React.Fragment key={i}>
-            <Typography variant="h6" style={{ margin: "0 12px" }}>
-              {s.label}
-            </Typography>
-            <div style={{ margin: "24px" }}>
-              <Slider
-                defaultValue={[
-                  parseInt(s.start || s.min),
-                  parseInt(s.end || s.max),
-                ]}
-                max={parseInt(s.max)}
-                min={parseInt(s.min)}
-                onChange={debouncedSlider(s.key)}
-                valueLabelDisplay="on"
-              />
-            </div>
-          </React.Fragment>
-        ))}
-      </Drawer>
+        onClose={() => setOpen(false)}
+        manager={manager}
+        options={options}
+        sliders={sliders}
+      />
 
       <RecommendationBanner
         products={recommendationProducts}

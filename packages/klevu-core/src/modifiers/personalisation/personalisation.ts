@@ -58,6 +58,10 @@ export function personalisation(options?: {
           )
         }
 
+        if (records.length === 0) {
+          continue
+        }
+
         q.settings.context = {
           recentObjects: [
             {
@@ -67,6 +71,7 @@ export function personalisation(options?: {
           ],
         }
       }
+      console.log(copy)
       return copy
     },
   }
