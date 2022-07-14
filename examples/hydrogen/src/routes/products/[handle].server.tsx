@@ -3,7 +3,7 @@ import React from "react"
 import { useShopQuery, useRouteParams, gql } from "@shopify/hydrogen"
 import { Header } from "../../components/header.client"
 
-export default function Product() {
+export default function Product(props: { pathname: string }) {
   const { handle } = useRouteParams()
 
   const {
@@ -22,10 +22,9 @@ export default function Product() {
 
   return (
     <React.Fragment>
-      <Header pathname="" />
+      <Header pathname={props.pathname} />
       <h2>{product.title}</h2>
       <img src={product.featuredImage.url} />
-      <pre>{JSON.stringify(product, undefined, 2)}</pre>
     </React.Fragment>
   )
 }

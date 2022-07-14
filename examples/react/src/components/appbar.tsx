@@ -68,6 +68,9 @@ const ResponsiveAppBar = () => {
             onProductClick={(p) => {
               navigate(`/products/${p.itemGroupId}/${p.id}`)
             }}
+            onSearchClick={(q) => {
+              navigate(`/searchnopersonalisation?q=${encodeURIComponent(q)}`)
+            }}
           />
           <Divider
             flexItem
@@ -80,6 +83,9 @@ const ResponsiveAppBar = () => {
             currentUrl={location.pathname}
             onProductClick={(p) => {
               navigate(`/products/${p.itemGroupId}/${p.id}`)
+            }}
+            onSearchClick={(q) => {
+              navigate(`/search?q=${encodeURIComponent(q)}`)
             }}
           />
           <Divider

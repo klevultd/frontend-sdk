@@ -38,6 +38,7 @@ type Props = {
   currentUrl: string
   enablePersonalisation?: boolean
   onProductClick?: (product: KlevuRecord) => void
+  onSearchClick?: (term: string) => void
 }
 
 /**
@@ -130,6 +131,7 @@ export function QuickSearch(props: Props) {
         ? "/search?q="
         : "/searchnopersonalisation?q="
       //navigate(url + encodeURIComponent(searchValue))
+      props.onSearchClick?.(searchValue)
       popupState.close()
     }
   }
