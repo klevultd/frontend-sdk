@@ -49,7 +49,9 @@ export function ProductGrid(props: {
         options={props.manager.options}
         sliders={props.manager.sliders}
       />
-      <Button onClick={() => setFiltersOpen(true)}>Open filters</Button>
+      <Button variant="contained" onClick={() => setFiltersOpen(true)}>
+        Open filters
+      </Button>
       <Grid container spacing={2}>
         {props.products.map((product) => (
           <Grid item key={product.id}>
@@ -61,6 +63,7 @@ export function ProductGrid(props: {
                 event.preventDefault()
                 return false
               }}
+              hideAddToCart
             />
           </Grid>
         ))}
