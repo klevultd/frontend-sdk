@@ -18,6 +18,7 @@ Here are the links to different projects.
 - [Nuxt example](examples/nuxt3/) Nuxt 3 example.
 - [Remix example](examples/remix/) Remix is a React-based example of using Klevu with Server Side Rendering.
 - [Vanilla JavaScript example](examples/vanillajs/) - Minimal JavaScript example.
+- [Shopify Hydrogen example](examles/hydrogen/) - Small Hydrogen example
 
 # Integrate Klevu into your application with ease. We do all the heavy lifting.
 
