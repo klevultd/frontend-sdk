@@ -11,29 +11,34 @@ Hydrogen is a React framework and SDK that you can use to build fast and dynamic
 **Requirements:**
 
 - Node.js version 16.5.0 or higher
-- Yarn
 
-```bash
-npm init @shopify/hydrogen@latest --template hello-world-ts
+## Building and running
+
+First, you need to build react example components as library. These are used in this project.
+
+```
+cd ../react
+npm run build:lib
 ```
 
-Remember to update `hydrogen.config.ts` with your shop's domain and Storefront API token!
-
-## Building for production
+Then you can run a development build to get results.
 
 ```bash
-yarn build
-```
-
-## Previewing a production build
-
-To run a local preview of your Hydrogen app in an environment similar to Oxygen, build your Hydrogen app and then run `yarn preview`:
-
-```bash
-yarn build
-yarn preview
+npm run dev
 ```
 
 ## Klevu integration
 
 This example uses pieces from [React example](../react/) to show that it works with Hydrogen.
+
+The main difference to normal React applications is that Hydrogen requires initialization on the server side and client.
+
+Server initialization is done in `App.server.tsx` file and for the frontend, it's done by importing init.ts before loading other frontend code.
+
+Axios is also required by server-side in order to make requests. If using Node.js version that supports `fetch()` then Axios is not required.
+
+### What you need to know from Klevu-Hydrogen integration
+
+You can pass _only_ JSON data from server components to client components. `@klevu/core` enriches this JSON data with helper functions for easier usage. For this reason you need to use raw API response to first render the page and then use function special functions to enrich this data to get these helper functions to use.
+
+For example, how this works there is [searchResultPage.client.tsx](./src/components/searchResultPage.client.tsx) which takes server-side JSON and adds client-side magic on top. And then there is [grid.client.tsx](./src/components/grid.client.tsx) which takes this result and uses `FetchResultEvents()` function to create helper events.
