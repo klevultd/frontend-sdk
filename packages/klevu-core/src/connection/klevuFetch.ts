@@ -47,7 +47,7 @@ export async function KlevuFetch(
   const payload: KlevuPayload = {
     context: {
       apiKeys: [
-        withOverride?.configOverride?.apiKey ?? KlevuConfig.default.apiKey,
+        withOverride?.configOverride?.apiKey ?? KlevuConfig.getDefault().apiKey,
       ],
     },
     recordQueries: recordQueries.length > 0 ? recordQueries : undefined,
@@ -60,7 +60,7 @@ export async function KlevuFetch(
     response = cached
   } else {
     const res = await post<KlevuApiRawResponse>(
-      withOverride?.configOverride?.url ?? KlevuConfig.default.url,
+      withOverride?.configOverride?.url ?? KlevuConfig.getDefault().url,
       payload
     )
 

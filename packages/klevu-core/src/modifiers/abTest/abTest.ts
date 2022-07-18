@@ -88,7 +88,9 @@ export function abTest(): KlevuFetchModifer {
         ) {
           newpermanent.push(test)
           post(
-            `https://config-cdn.ksearchnet.com/abtest/public/usage/${KlevuConfig.default.apiKey}`,
+            `https://config-cdn.ksearchnet.com/abtest/public/usage/${
+              KlevuConfig.getDefault().apiKey
+            }`,
             test,
             true
           )
@@ -121,7 +123,9 @@ async function fetchAbTestInfo(): Promise<KlevuABDataModel | undefined> {
 
   const fetch = async () => {
     const data = await post<KlevuABDataModel>(
-      `https://config-cdn.ksearchnet.com/abtest/public/allocation/${KlevuConfig.default.apiKey}/`,
+      `https://config-cdn.ksearchnet.com/abtest/public/allocation/${
+        KlevuConfig.getDefault().apiKey
+      }/`,
       {}
     )
 

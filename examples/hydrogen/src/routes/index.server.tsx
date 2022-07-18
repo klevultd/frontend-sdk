@@ -12,7 +12,7 @@ export default function Home(props: { pathname: string }) {
         enter there takes you to search landing page.
       </p>
       <p>
-        And then there is <a href="/category/women">category pages.</a>
+        And then there is <a href="/category/men">category pages.</a>
       </p>
     </div>
   )

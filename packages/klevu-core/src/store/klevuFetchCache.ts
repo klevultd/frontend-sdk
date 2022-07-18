@@ -34,7 +34,7 @@ export class KlevuFetchCache<T extends object, K extends object> {
     return undefined
   }
 
-  cache(key: T, data: K, timetocache = KlevuConfig.default.cacheMaxTTL) {
+  cache(key: T, data: K, timetocache = KlevuConfig.getDefault().cacheMaxTTL) {
     const hash = this.hash(key)
     this._cache.set(hash, JSON.stringify(data))
     this._timestamp.set(hash, new Date().getTime() + timetocache)

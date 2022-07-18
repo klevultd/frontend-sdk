@@ -8,7 +8,7 @@ import {
   KlevuQueryResult,
   KlevuRecord,
 } from "@klevu/core"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { ProductGrid } from "./grid.client"
 
 const manager = new FilterManager()
@@ -17,6 +17,13 @@ export function CategoryMerchandisingPage(props: {
   serverResult: KlevuQueryResult
   category: string
 }) {
+  // this is used to prevent useless re-render in client after server
+  const prevCategoryIdRef = useRef<string>()
+  useEffect(() => {
+    prevCategoryIdRef.current = props.category
+  })
+  const prevCategoryId = prevCategoryIdRef.current
+
   const [products, setProducts] = React.useState<KlevuRecord[]>(
     props.serverResult.records
   )
@@ -69,7 +76,12 @@ export function CategoryMerchandisingPage(props: {
   }, [])
 
   React.useEffect(() => {
-    loadMore(true)
+    if (prevCategoryId === undefined) {
+      return
+    }
+    if (prevCategoryId !== props.category) {
+      loadMore(true)
+    }
   }, [props.category])
 
   return (

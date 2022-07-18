@@ -140,7 +140,9 @@ export async function kmcRecommendation(
   ...modifiers: KlevuFetchModifer[]
 ): Promise<KlevuFetchFunctionReturnValue> {
   const kmcConfig = await get<KlevuKMCRecommendations>(
-    `https://config-cdn.ksearchnet.com/recommendations/${KlevuConfig.default.apiKey}/settings/${recommendationId}`
+    `https://config-cdn.ksearchnet.com/recommendations/${
+      KlevuConfig.getDefault().apiKey
+    }/settings/${recommendationId}`
   )
 
   if (!kmcConfig) {
@@ -148,7 +150,7 @@ export async function kmcRecommendation(
   }
 
   const configOverride = new KlevuConfig({
-    apiKey: KlevuConfig.default.apiKey,
+    apiKey: KlevuConfig.getDefault().apiKey,
     url: `https://${kmcConfig.search.basePath}`,
   })
 

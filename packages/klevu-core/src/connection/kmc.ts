@@ -26,7 +26,7 @@ export async function KlevuKMCSettings(ignoreCache?: boolean) {
     }
   }
 
-  const start = `${url}${KlevuConfig.default.apiKey}`
+  const start = `${url}${KlevuConfig.getDefault().apiKey}`
   const res = await Promise.all([
     get<KMCRootObject>(`${start}.json`),
     get<KMCBannerRootObject>(`${start}-banner.json`),

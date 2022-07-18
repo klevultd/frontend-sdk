@@ -43,7 +43,7 @@ export class KlevuEvents {
       const p = i.product
 
       const data: V1CheckedOutProductsEvent = {
-        klevu_apiKey: KlevuConfig.default.apiKey,
+        klevu_apiKey: KlevuConfig.getDefault().apiKey,
         klevu_currency: p.currency,
         klevu_productGroupId: p.itemGroupId,
         klevu_productId: p.id,
@@ -70,7 +70,7 @@ export class KlevuEvents {
     KlevuEventV2([
       {
         event: "view_recs_list",
-        event_apikey: KlevuConfig.default.apiKey,
+        event_apikey: KlevuConfig.getDefault().apiKey,
         event_list_id: recommendationMetadata.recsKey,
         event_list_logic: recommendationMetadata.logic,
         event_list_name: recommendationMetadata.title,
@@ -105,7 +105,7 @@ export class KlevuEvents {
     KlevuEventV2([
       {
         event: "select_recs_list",
-        event_apikey: KlevuConfig.default.apiKey,
+        event_apikey: KlevuConfig.getDefault().apiKey,
         event_list_id: recommendationMetadata.recsKey,
         event_list_logic: recommendationMetadata.logic,
         event_list_name: recommendationMetadata.title,
@@ -139,7 +139,7 @@ export class KlevuEvents {
   ) {
     KlevuLastClickedProducts.click(product.id, product)
     KlevuEventV1ProductTracking({
-      klevu_apiKey: KlevuConfig.default.apiKey,
+      klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_type: "clicked",
       klevu_keywords: searchTerm,
       klevu_productGroupId: product.itemGroupId,
@@ -165,7 +165,7 @@ export class KlevuEvents {
   ) {
     KlevuLastSearches.save(term)
     KlevuEventV1Search({
-      klevu_apiKey: KlevuConfig.default.apiKey,
+      klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_term: term,
       klevu_totalResults: totalResults,
       klevu_typeOfQuery: typeOfSearch,
@@ -188,7 +188,7 @@ export class KlevuEvents {
     abTestVariantId?: string
   ) {
     let data: KlevuV1CategoryProductsView = {
-      klevu_apiKey: KlevuConfig.default.apiKey,
+      klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
       klevu_categoryPath: klevuCategory,
       klevu_productIds: products.map((p) => p.id).join(","),
@@ -223,7 +223,7 @@ export class KlevuEvents {
   ) {
     KlevuLastClickedProducts.click(product.id, product)
     let data: KlevuV1CategoryProductsClick = {
-      klevu_apiKey: KlevuConfig.default.apiKey,
+      klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
       klevu_productGroupId: product.itemGroupId,
       klevu_productVariantId: variantId || product.id,

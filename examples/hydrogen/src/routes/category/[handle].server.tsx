@@ -9,6 +9,7 @@ import {
 import { useQuery, useRouteParams } from "@shopify/hydrogen"
 import { CategoryMerchandisingPage } from "../../components/categoryMerchandisingPage.client"
 import { Header } from "../../components/header.client"
+import { KlevuInit } from "../../App.server"
 
 export default function Category(props: { pathname: string }) {
   const { handle } = useRouteParams()
@@ -38,12 +39,14 @@ export default function Category(props: { pathname: string }) {
     <div>
       <Header pathname={props.pathname} />
       <Suspense fallback="loading">
-        {query.data && (
-          <CategoryMerchandisingPage
-            serverResult={query.data}
-            category={handle}
-          />
-        )}
+        <KlevuInit>
+          {query.data && (
+            <CategoryMerchandisingPage
+              serverResult={query.data}
+              category={handle}
+            />
+          )}
+        </KlevuInit>
       </Suspense>
     </div>
   )
