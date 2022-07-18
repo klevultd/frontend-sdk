@@ -1,5 +1,5 @@
 import { QuickSearch } from "examples-react"
-import { useNavigate } from "@shopify/hydrogen"
+import { Link, useNavigate } from "@shopify/hydrogen"
 import React from "react"
 import { getRecordHandle } from "./klevu/utils"
 import { Container } from "@mui/material"
@@ -16,16 +16,17 @@ export function Header(props: { pathname: string }) {
         paddingBottom: "3rem",
       }}
     >
-      <h1
-        style={{
-          margin: 0,
-          marginRight: "auto",
-          fontSize: "2.5rem",
-          fontWeight: "bold",
-        }}
-      >
-        Hello Klevu - Hydrogen
-      </h1>
+      <Link to="/" style={{ marginRight: "auto" }}>
+        <h1
+          style={{
+            margin: 0,
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+          }}
+        >
+          Hello Klevu - Hydrogen
+        </h1>
+      </Link>
       <QuickSearch
         label="Search from Klevu"
         currentUrl={props.pathname}

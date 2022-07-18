@@ -1,6 +1,7 @@
 import { KlevuFetch, listFilters, search, sendSearchEvent } from "@klevu/core"
 import { useQuery } from "@shopify/hydrogen"
 import React, { Suspense } from "react"
+import { KlevuInit } from "../App.server"
 import { Header } from "../components/header.client"
 import { SearchResultPage } from "../components/searchResultPage.client"
 
@@ -23,9 +24,11 @@ export default function Search(params: { pathname: string; search: string }) {
     <div>
       <Header pathname={params.pathname} />
       <Suspense fallback="loading">
-        {query.data && (
-          <SearchResultPage serverResult={query.data} term={term} />
-        )}
+        <KlevuInit>
+          {query.data && (
+            <SearchResultPage serverResult={query.data} term={term} />
+          )}
+        </KlevuInit>
       </Suspense>
     </div>
   )

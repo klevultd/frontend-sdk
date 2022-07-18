@@ -4,8 +4,9 @@ export async function get<T>(
   url: string,
   ignoreResult = false
 ): Promise<T | undefined> {
-  if (KlevuConfig.default.axios) {
-    return (await KlevuConfig.default.axios.get<T>(url)).data
+  const axios = KlevuConfig.getDefault().axios
+  if (axios) {
+    return (await axios.get<T>(url)).data
   }
 
   const res = await fetch(url, {
@@ -28,8 +29,9 @@ export async function post<T>(
   data: any,
   ignoreResult = false
 ): Promise<T | undefined> {
-  if (KlevuConfig.default.axios) {
-    return await KlevuConfig.default.axios
+  const axios = KlevuConfig.getDefault().axios
+  if (axios) {
+    return await axios
       .post<T>(url, data, {
         headers: {
           "Content-Type": "application/json",

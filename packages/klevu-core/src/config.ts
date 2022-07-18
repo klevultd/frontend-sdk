@@ -1,4 +1,5 @@
 import type { AxiosStatic } from "axios"
+import { isBrowser } from "./utils"
 
 type KlevuConfiguration = {
   /**
@@ -31,7 +32,7 @@ type KlevuConfiguration = {
 }
 
 export class KlevuConfig {
-  static default: KlevuConfig
+  static default: KlevuConfig | undefined = loadFromGlobal()
 
   apiKey: string
   url: string
@@ -52,4 +53,25 @@ export class KlevuConfig {
   static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
   }
+
+  static getDefault(): KlevuConfig {
+    if (!KlevuConfig.default) {
+      throw new Error("Configuration missing")
+    }
+    return KlevuConfig.default
+  }
+}
+
+function loadFromGlobal(): KlevuConfig | undefined {
+  if (!isBrowser()) {
+    return undefined
+  }
+
+  const cfg = (window as any).KlevuConfig
+
+  if (!cfg) {
+    return undefined
+  }
+
+  return new KlevuConfig(cfg)
 }

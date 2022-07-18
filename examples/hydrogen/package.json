@@ -6,8 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "shopify hydrogen dev",
-    "build": "shopify hydrogen build",
-    "preview": "shopify hydrogen preview"
+    "build": "shopify hydrogen build"
   },
   "devDependencies": {
     "@shopify/cli": "3.0.27",

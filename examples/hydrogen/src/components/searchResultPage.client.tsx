@@ -17,6 +17,13 @@ export function SearchResultPage(props: {
   serverResult: KlevuQueryResult
   term: string
 }) {
+  // this is used to prevent useless re-render in client after server
+  const prevTermRef = React.useRef<string>()
+  React.useEffect(() => {
+    prevTermRef.current = props.term
+  })
+  const prevTerm = prevTermRef.current
+
   const [products, setProducts] = React.useState<KlevuRecord[]>(
     props.serverResult.records
   )
@@ -69,7 +76,13 @@ export function SearchResultPage(props: {
   }, [])
 
   React.useEffect(() => {
-    loadMore(true)
+    if (prevTerm === undefined) {
+      return
+    }
+
+    if (prevTerm !== props.term) {
+      loadMore(true)
+    }
   }, [props.term])
 
   return (
