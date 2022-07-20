@@ -6,8 +6,8 @@ import {
 
 export default defineConfig({
   shopify: {
-    storeDomain: "klevu-qa.myshopify.com",
-    storefrontToken: "d00b3f1931c815a9a8a7cbf119783fea",
+    storeDomain: "hydrogen-demo-by-klevu.myshopify.com",
+    storefrontToken: "e4d424683967b9bab850a08d1fb44ba4",
     storefrontApiVersion: "2022-07",
   },
   session: CookieSessionStorage("__session", {

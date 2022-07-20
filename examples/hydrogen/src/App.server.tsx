@@ -4,6 +4,7 @@ import { Router, FileRoutes, ShopifyProvider } from "@shopify/hydrogen"
 import { Suspense } from "react"
 import { KlevuConfig } from "@klevu/core"
 import Axios from "axios"
+import { credentials } from "./components/klevu/init"
 
 function App() {
   return (
@@ -21,8 +22,7 @@ function App() {
 
 export function KlevuInit(props: any) {
   KlevuConfig.init({
-    url: "https://box-qa.klevu.com/cs/v2/search",
-    apiKey: "klevu-16521954575361126",
+    ...credentials,
     axios: Axios,
   })
 

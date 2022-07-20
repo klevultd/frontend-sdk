@@ -1,8 +1,12 @@
 import { KlevuConfig } from "@klevu/core"
 import Axios from "axios"
 
+export const credentials = {
+  url: "https://eucs30v2.ksearchnet.com/cs/v2/search",
+  apiKey: "klevu-165829460115715456",
+}
+
 KlevuConfig.init({
-  url: "https://box-qa.klevu.com/cs/v2/search",
-  apiKey: "klevu-16521954575361126",
+  ...credentials,
   axios: Axios,
 })
