@@ -12,7 +12,6 @@
   "license": "MIT",
   "workspaces": [
     "packages/klevu-core",
-    "packages/klevu-ui",
     "examples/react"
   ],
   "devDependencies": {

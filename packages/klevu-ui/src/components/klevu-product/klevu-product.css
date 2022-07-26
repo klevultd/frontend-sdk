@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.image {
+  height: 300px;
+  width: 300px;
+  background-size: cover;
+  background-position: center center;
+}
+
