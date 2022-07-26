@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+:host li {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--klevu-spacing-small);
+}
+
+:host .name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0.95em;
+  margin: 0 var(--klevu-spacing-small);
+}
+
+:host .count {
+  display: inline-block;
+  margin-left: auto;
+  font-size: var(--font-size-small);
+  padding: var(--klevu-spacing-small);
+  background: var(--klevu-color-dim-background);
+  font-size: 0.8em;
+  border-radius: var(--klevu-rounded-corners);
+}

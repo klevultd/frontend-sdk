@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  gap: var(--klevu-spacing-large);
+}
+
+:host klevu-facet-list {
+  flex-shrink: 0;
+}
+
+.loadmorebuttoncontainer {
+  display: flex;
+  justify-content: center;
+  margin: var(--klevu-spacing-large);
+}

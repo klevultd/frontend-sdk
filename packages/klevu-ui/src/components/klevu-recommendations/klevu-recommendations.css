@@ -1,0 +1,20 @@
+:host {
+  height: 400px;
+  margin: 20px;
+  text-align: center;
+  border-radius: 20px;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  gap: var(--klevu-spacing-large);
+  overflow-x: scroll;
+  position: relative;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.slides klevu-product {
+  scroll-snap-align: center;
+}

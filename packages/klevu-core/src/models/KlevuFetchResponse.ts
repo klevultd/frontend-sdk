@@ -23,7 +23,7 @@ export type KlevuNextFunc = (override?: {
 /**
  * Fetch query results
  */
-type KlevuFetchQueryResult = KlevuQueryResult &
+export type KlevuFetchQueryResult = KlevuQueryResult &
   KlevuResultEvent & {
     /** If there are multiple pages of results next function is defined. Calling this function will result new result  */
     next?: KlevuNextFunc

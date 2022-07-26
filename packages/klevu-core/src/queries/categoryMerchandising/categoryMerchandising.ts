@@ -19,6 +19,7 @@ const defaults: Options = {
 
 /**
  * Fetch products for a category listing page.
+ * Default result id is "categoryMerchandising".
  *
  * @category Query
  * @param category

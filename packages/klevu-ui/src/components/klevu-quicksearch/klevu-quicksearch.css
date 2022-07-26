@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+.content {
+  display: flex;
+}
+
+.content aside {
+  width: 200px;
+  padding-right: var(--klevu-spacing-normal);
+  border-right: 1px solid var(--klevu-color-border);
+  margin-right: var(--klevu-spacing-normal);
+}
+
+.content section {
+  max-width: 940px;
+}

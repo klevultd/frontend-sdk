@@ -1,4 +1,4 @@
-import { KlevuFetch, search, suggestions } from "@klevu/core"
+import { KlevuFetch, KlevuTypeOfRecord, search, suggestions } from "@klevu/core"
 import { clearOutput, debounce, printToOutput } from "./utils"
 
 // get the textfield

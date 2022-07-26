@@ -1,19 +1,57 @@
 {
   "name": "@klevu/ui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
-  "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "qoc": "echo 'No qoc'",
-    "test": "echo 'No tests'"
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/klevu-ui/klevu-ui.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionic-team/stencil-component-starter.git"
   },
-  "author": "Klevu",
-  "license": "MIT",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "build:watch": "stencil build --watch",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
   "dependencies": {
-    "@klevu/core": "file:../klevu-core"
-  }
+    "@klevu/core": "file:../klevu-core",
+    "@stencil/core": "^2.13.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@ljcl/storybook-addon-cssprops": "^2.3.5",
+    "@stencil/react-output-target": "^0.3.1",
+    "@stencil/vue-output-target": "^0.6.2",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/addon-notes": "^5.3.21",
+    "@storybook/builder-webpack4": "^6.5.9",
+    "@storybook/html": "^6.5.9",
+    "@storybook/manager-webpack4": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/jest": "^27.0.3",
+    "babel-loader": "^8.2.5",
+    "fast-glob": "^3.2.11",
+    "jest": "^27.4.5",
+    "jest-cli": "^27.4.5",
+    "puppeteer": "^10.0.0"
+  },
+  "license": "MIT"
 }
