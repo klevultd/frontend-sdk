@@ -8,9 +8,24 @@ import { getGlobalSettings, renderPrice } from "../../utils/utils"
   shadow: true,
 })
 export class KlevuProduct {
-  @Prop() product: KlevuRecord
+  @Prop() product?: KlevuRecord
 
   render() {
+    if (!this.product) {
+      return (
+        <Host>
+          <div class="container">
+            <div class="loading image"></div>
+            <div class="loading content">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </Host>
+      )
+    }
+
     const settings = getGlobalSettings()
     const isOnSale = this.product.price != this.product.salePrice
 

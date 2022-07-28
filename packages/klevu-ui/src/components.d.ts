@@ -7,13 +7,31 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { KlevuRecord } from "@klevu/core";
 export namespace Components {
+    interface KlevuInit {
+        "apiKey": string;
+        "url": string;
+    }
     interface KlevuProduct {
-        "product": KlevuRecord;
+        "product"?: KlevuRecord;
     }
     interface KlevuProductGrid {
+        "products": KlevuRecord[];
+    }
+    interface KlevuSearchField {
+        "placeholder": string;
     }
 }
+export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSearchFieldElement;
+}
 declare global {
+    interface HTMLKlevuInitElement extends Components.KlevuInit, HTMLStencilElement {
+    }
+    var HTMLKlevuInitElement: {
+        prototype: HTMLKlevuInitElement;
+        new (): HTMLKlevuInitElement;
+    };
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
     var HTMLKlevuProductElement: {
@@ -26,28 +44,49 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    interface HTMLKlevuSearchFieldElement extends Components.KlevuSearchField, HTMLStencilElement {
+    }
+    var HTMLKlevuSearchFieldElement: {
+        prototype: HTMLKlevuSearchFieldElement;
+        new (): HTMLKlevuSearchFieldElement;
+    };
     interface HTMLElementTagNameMap {
+        "klevu-init": HTMLKlevuInitElement;
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
+        "klevu-search-field": HTMLKlevuSearchFieldElement;
     }
 }
 declare namespace LocalJSX {
+    interface KlevuInit {
+        "apiKey": string;
+        "url": string;
+    }
     interface KlevuProduct {
         "product"?: KlevuRecord;
     }
     interface KlevuProductGrid {
+        "products"?: KlevuRecord[];
+    }
+    interface KlevuSearchField {
+        "onResults"?: (event: KlevuSearchFieldCustomEvent<KlevuRecord[]>) => void;
+        "placeholder"?: string;
     }
     interface IntrinsicElements {
+        "klevu-init": KlevuInit;
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
+        "klevu-search-field": KlevuSearchField;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
         }
     }
 }

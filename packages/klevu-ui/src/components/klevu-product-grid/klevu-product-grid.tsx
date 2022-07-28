@@ -1,4 +1,5 @@
-import { Component, Host, h } from "@stencil/core"
+import { KlevuRecord } from "@klevu/core"
+import { Component, Host, h, Prop } from "@stencil/core"
 
 @Component({
   tag: "klevu-product-grid",
@@ -6,10 +7,15 @@ import { Component, Host, h } from "@stencil/core"
   shadow: true,
 })
 export class KlevuProductGrid {
+  @Prop() products: KlevuRecord[] = []
   render() {
     return (
       <Host>
-        <slot></slot>
+        <slot>
+          {this.products.map((product) => (
+            <klevu-product product={product}></klevu-product>
+          ))}
+        </slot>
       </Host>
     )
   }

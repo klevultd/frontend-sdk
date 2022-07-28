@@ -26,3 +26,5 @@ export const WithHeavyModifications = WebComponentTemplate<HTMLKlevuProductEleme
     }
   `,
 })
+
+export const LoadingProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: {} })
