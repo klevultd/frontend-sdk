@@ -1,21 +1,26 @@
-import { KlevuRecord } from '@klevu/core';
-import { Component, Host, h, Prop } from '@stencil/core';
-import { renderPrice } from '../../utils/utils';
+import { KlevuRecord } from "@klevu/core"
+import { Component, Host, h, Prop } from "@stencil/core"
+import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 @Component({
-  tag: 'klevu-product',
-  styleUrl: 'klevu-product.css',
+  tag: "klevu-product",
+  styleUrl: "klevu-product.css",
   shadow: true,
 })
 export class KlevuProduct {
-  @Prop() product: KlevuRecord;
+  @Prop() product: KlevuRecord
 
   render() {
-    const isOnSale = this.product.price != this.product.salePrice;
+    const settings = getGlobalSettings()
+    const isOnSale = this.product.price != this.product.salePrice
 
     return (
       <Host>
-        <div class="container">
+        <a
+          href={settings?.generateProductUrl?.(this.product)}
+          onClick={settings?.onProductClick ? (e) => settings.onProductClick(this.product, e) : undefined}
+          class="container"
+        >
           <slot name="image">
             <div
               class="image"
@@ -37,8 +42,8 @@ export class KlevuProduct {
               </p>
             </div>
           </slot>
-        </div>
+        </a>
       </Host>
-    );
+    )
   }
 }

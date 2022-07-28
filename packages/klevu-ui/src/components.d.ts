@@ -10,6 +10,8 @@ export namespace Components {
     interface KlevuProduct {
         "product": KlevuRecord;
     }
+    interface KlevuProductGrid {
+    }
 }
 declare global {
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
@@ -18,16 +20,26 @@ declare global {
         prototype: HTMLKlevuProductElement;
         new (): HTMLKlevuProductElement;
     };
+    interface HTMLKlevuProductGridElement extends Components.KlevuProductGrid, HTMLStencilElement {
+    }
+    var HTMLKlevuProductGridElement: {
+        prototype: HTMLKlevuProductGridElement;
+        new (): HTMLKlevuProductGridElement;
+    };
     interface HTMLElementTagNameMap {
         "klevu-product": HTMLKlevuProductElement;
+        "klevu-product-grid": HTMLKlevuProductGridElement;
     }
 }
 declare namespace LocalJSX {
     interface KlevuProduct {
         "product"?: KlevuRecord;
     }
+    interface KlevuProductGrid {
+    }
     interface IntrinsicElements {
         "klevu-product": KlevuProduct;
+        "klevu-product-grid": KlevuProductGrid;
     }
 }
 export { LocalJSX as JSX };
@@ -35,6 +47,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
+            "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
         }
     }
 }

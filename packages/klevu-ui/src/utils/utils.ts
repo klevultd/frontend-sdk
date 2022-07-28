@@ -1,13 +1,18 @@
+import { KlevuRecord } from "@klevu/core"
+
 export function renderPrice(amount: number | string, currency: string): string {
-  const price = typeof amount === 'string' ? parseFloat(amount) : amount;
-  return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(price);
+  const price = typeof amount === "string" ? parseFloat(amount) : amount
+  return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(price)
 }
 
-type KlevuGlobalSettings = {};
+type KlevuGlobalSettings = {
+  onProductClick?: (product: KlevuRecord, event: MouseEvent) => void
+  generateProductUrl?: (product: KlevuRecord) => string
+}
 
 export function getGlobalSettings(): KlevuGlobalSettings | undefined {
   if (window) {
-    return window['klevu_settings'];
+    return window["klevu_settings"]
   }
-  return undefined;
+  return undefined
 }

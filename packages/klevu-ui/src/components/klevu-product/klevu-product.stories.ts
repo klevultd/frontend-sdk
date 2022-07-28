@@ -1,16 +1,16 @@
-import { css, html, products, WebComponentTemplate } from '../../storybookUtils';
-import './klevu-product.css';
+import { css, html, products, WebComponentTemplate } from "../../storybookUtils"
+import "./klevu-product.css"
 
-const product = products[0];
+const product = products[0]
 
 export default {
-  title: 'Components/Product',
-};
+  title: "Components/Product",
+}
 
-export const NormalProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: 'klevu-product', args: { product } });
+export const NormalProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: { product } })
 
 export const WithHeavyModifications = WebComponentTemplate<HTMLKlevuProductElement>({
-  tag: 'klevu-product',
+  tag: "klevu-product",
   args: { product },
   innerHTML: html`<p slot="info">This replaces name</p>`,
   style: css`
@@ -18,11 +18,11 @@ export const WithHeavyModifications = WebComponentTemplate<HTMLKlevuProductEleme
       border: 1px solid red;
     }
     klevu-product::part(image)::after {
-      content: '';
+      content: "";
       display: block;
       height: 30px;
       width: 30px;
       border: 1px solid blue;
     }
   `,
-});
+})

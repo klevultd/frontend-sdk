@@ -1,0 +1,12 @@
+<script>
+  window.klevu_settings = {
+    onProductClick: (product, event) => {
+      alert(product.name + " is clicked")
+      event.preventDefault()
+      return false
+    },
+    generateProductUrl: (product) => {
+      return "https://www.klevu.com/product/" + product.id
+    },
+  }
+</script>
