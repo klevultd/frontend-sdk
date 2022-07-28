@@ -1,5 +1,5 @@
 :host {
-  display: block;
+  display: inline-block;
 }
 
 .image {
@@ -9,3 +9,7 @@
   background-position: center center;
 }
 
+.container {
+  padding: var(--spacing);
+  border: 1px solid (--color-border, #ccc)
+}

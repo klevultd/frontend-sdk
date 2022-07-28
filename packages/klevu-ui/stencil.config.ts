@@ -4,6 +4,7 @@ import fg from 'fast-glob';
 
 export const config: Config = {
   namespace: 'klevu-ui',
+  globalStyle: 'src/global/global.css',
   outputTargets: [
     {
       type: 'dist',
@@ -27,6 +28,7 @@ export const config: Config = {
         name: 'watch-external',
         async buildStart() {
           const styleFiles = await fg(resolve(__dirname, './components/**/*.css'));
+          styleFiles.push(resolve(__dirname, './global/global.css'));
           for (let file of styleFiles) {
             this.addWatchFile(file);
           }
