@@ -18,5 +18,5 @@ Tools to operate results and get next results [KlevuFetchResponse](klevufetchres
 
 #### Defined in
 
-[connection/klevuFetch.ts:30](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/connection/klevuFetch.ts#L30)
+[connection/klevuFetch.ts:30](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/connection/klevuFetch.ts#L30)
 

@@ -20,6 +20,7 @@
 
 ### Methods
 
+- [getDefault](KlevuConfig.md#getdefault)
 - [init](KlevuConfig.md#init)
 
 ## Constructors
@@ -36,7 +37,7 @@
 
 #### Defined in
 
-[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L43)
+[config.ts:44](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L44)
 
 ## Properties
 
@@ -46,7 +47,7 @@
 
 #### Defined in
 
-[config.ts:36](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L36)
+[config.ts:37](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L37)
 
 ___
 
@@ -56,7 +57,7 @@ ___
 
 #### Defined in
 
-[config.ts:41](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L41)
+[config.ts:42](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L42)
 
 ___
 
@@ -66,7 +67,7 @@ ___
 
 #### Defined in
 
-[config.ts:38](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L38)
+[config.ts:39](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L39)
 
 ___
 
@@ -76,7 +77,7 @@ ___
 
 #### Defined in
 
-[config.ts:39](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L39)
+[config.ts:40](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L40)
 
 ___
 
@@ -86,7 +87,7 @@ ___
 
 #### Defined in
 
-[config.ts:40](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L40)
+[config.ts:41](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L41)
 
 ___
 
@@ -96,19 +97,33 @@ ___
 
 #### Defined in
 
-[config.ts:37](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L37)
+[config.ts:38](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L38)
 
 ___
 
 ### default
 
-▪ `Static` **default**: [`KlevuConfig`](KlevuConfig.md)
+▪ `Static` **default**: `undefined` \| [`KlevuConfig`](KlevuConfig.md)
 
 #### Defined in
 
-[config.ts:34](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L34)
+[config.ts:35](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L35)
 
 ## Methods
+
+### getDefault
+
+▸ `Static` **getDefault**(): [`KlevuConfig`](KlevuConfig.md)
+
+#### Returns
+
+[`KlevuConfig`](KlevuConfig.md)
+
+#### Defined in
+
+[config.ts:57](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L57)
+
+___
 
 ### init
 
@@ -126,4 +141,4 @@ ___
 
 #### Defined in
 
-[config.ts:52](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/config.ts#L52)
+[config.ts:53](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/config.ts#L53)

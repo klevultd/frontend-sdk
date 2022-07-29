@@ -4,5 +4,5 @@
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:124](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L124)
+[queries/kmcRecommendation/kmcRecommendation.ts:124](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L124)
 

@@ -15,18 +15,18 @@ Filter types Klevu support
 
 ### Options
 
-• **Options**
+• **Options** = ``"OPTIONS"``
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
+[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
 
 ___
 
 ### Slider
 
-• **Slider**
+• **Slider** = ``"SLIDER"``
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)
+[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)

@@ -19,78 +19,78 @@
 
 ### AlsoBought
 
-• **AlsoBought**
+• **AlsoBought** = ``"RECS_ALSO_BOUGHT"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:9](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L9)
+[models/KlevuTypeOfRequest.ts:9](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L9)
 
 ___
 
 ### AlsoViewed
 
-• **AlsoViewed**
+• **AlsoViewed** = ``"RECS_ALSO_VIEWED"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:8](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L8)
+[models/KlevuTypeOfRequest.ts:8](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L8)
 
 ___
 
 ### CategoryNavigation
 
-• **CategoryNavigation**
+• **CategoryNavigation** = ``"CATNAV"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:4](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L4)
+[models/KlevuTypeOfRequest.ts:4](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L4)
 
 ___
 
 ### NewArrivals
 
-• **NewArrivals**
+• **NewArrivals** = ``"RECS_NEW_ARRIVALS"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:5](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L5)
+[models/KlevuTypeOfRequest.ts:5](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L5)
 
 ___
 
 ### Search
 
-• **Search**
+• **Search** = ``"SEARCH"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:2](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L2)
+[models/KlevuTypeOfRequest.ts:2](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L2)
 
 ___
 
 ### SimilarProducts
 
-• **SimilarProducts**
+• **SimilarProducts** = ``"RECS_SIMILAR"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:6](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L6)
+[models/KlevuTypeOfRequest.ts:6](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L6)
 
 ___
 
 ### Suggestion
 
-• **Suggestion**
+• **Suggestion** = ``"AUTO_SUGGESTIONS"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:3](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L3)
+[models/KlevuTypeOfRequest.ts:3](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L3)
 
 ___
 
 ### Trending
 
-• **Trending**
+• **Trending** = ``"RECS_TRENDING"``
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:7](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L7)
+[models/KlevuTypeOfRequest.ts:7](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L7)

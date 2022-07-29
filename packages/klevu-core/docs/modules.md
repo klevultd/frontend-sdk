@@ -105,13 +105,14 @@ Global custom document events that @klevu/core sends Enumerations
 - [include](modules/include.md)
 - [injectFilterResult](modules/injectfilterresult.md)
 - [listFilters](modules/listfilters.md)
+- [overrideSettings](modules/overridesettings.md)
 - [personalisation](modules/personalisation.md)
 - [sendMerchandisingViewEvent](modules/sendmerchandisingviewevent.md)
 - [sendRecommendationViewEvent](modules/sendrecommendationviewevent.md)
 - [sendSearchEvent](modules/sendsearchevent.md)
 - [top](modules/top.md)
 
-### Other Functions
+### KlevuEvents Functions
 
 - [KlevuListenDomEvent](modules/klevulistendomevent.md)
 
