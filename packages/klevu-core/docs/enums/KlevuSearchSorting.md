@@ -20,107 +20,107 @@
 
 ### NameAsc
 
-• **NameAsc**
+• **NameAsc** = ``"NAME_ASC"``
 
 Sort the results by the name of each record, in alphabetical order.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:20](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L20)
+[models/KlevuSearchSorting.ts:20](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L20)
 
 ___
 
 ### NameDesc
 
-• **NameDesc**
+• **NameDesc** = ``"NAME_DESC"``
 
 Sort the results by the name of each record, in alphabetical order.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:24](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L24)
+[models/KlevuSearchSorting.ts:24](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L24)
 
 ___
 
 ### NewArrivalAsc
 
-• **NewArrivalAsc**
+• **NewArrivalAsc** = ``"NEW_ARRIVAL_ASC"``
 
 Sort your records based on their published date. Please see support article
 for important information about sorting by newness.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:39](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L39)
+[models/KlevuSearchSorting.ts:39](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L39)
 
 ___
 
 ### NewArrivalDesc
 
-• **NewArrivalDesc**
+• **NewArrivalDesc** = ``"NEW_ARRIVAL_DESC"``
 
 Sort your records based on their published date. Please see support article
 for important information about sorting by newness.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:44](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L44)
+[models/KlevuSearchSorting.ts:44](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L44)
 
 ___
 
 ### PriceAsc
 
-• **PriceAsc**
+• **PriceAsc** = ``"PRICE_ASC"``
 
 Sort the results by the salePrice value of each record.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:12](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L12)
+[models/KlevuSearchSorting.ts:12](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L12)
 
 ___
 
 ### PriceDesc
 
-• **PriceDesc**
+• **PriceDesc** = ``"PRICE_DESC"``
 
 Sort the results by the salePrice value of each record.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:16](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L16)
+[models/KlevuSearchSorting.ts:16](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L16)
 
 ___
 
 ### RatingAsc
 
-• **RatingAsc**
+• **RatingAsc** = ``"RATING_ASC"``
 
 Sort the results by each record's average rating, if this data has been
 indexed in your store.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:29](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L29)
+[models/KlevuSearchSorting.ts:29](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L29)
 
 ___
 
 ### RatingDesc
 
-• **RatingDesc**
+• **RatingDesc** = ``"RATING_DESC"``
 
 Sort the results by each record's average rating, if this data has been
 indexed in your store.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:34](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L34)
+[models/KlevuSearchSorting.ts:34](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L34)
 
 ___
 
 ### Relevance
 
-• **Relevance**
+• **Relevance** = ``"RELEVANCE"``
 
 This is the default sort order, which uses a combination of Klevu A.I. and
 your own merchandising configuration to determine the order of the results.
@@ -129,4 +129,4 @@ orders the results.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:8](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuSearchSorting.ts#L8)
+[models/KlevuSearchSorting.ts:8](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L8)

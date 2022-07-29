@@ -159,6 +159,7 @@ Some of the functions can be modified with modifier functions. Any number of the
 | `sendRecommendationViewEvent()` | Should be used with all recommendation queries. Send a analytical data about recommendation to Klevu |
 | `debug()`                       | Prints query results to console                                                                      |
 | `abTest()`                      | Enable A/B testing for the category merchandising                                                    |
+| `overrideSettings()`            | Allows to override any setting in query. ⚠️ Use with caution!                                        |
 
 ## Filter Manager
 

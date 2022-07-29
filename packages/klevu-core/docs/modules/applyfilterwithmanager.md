@@ -16,5 +16,5 @@ Apply filters to query based on Filter Manager
 
 #### Defined in
 
-[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
+[modifiers/applyFilterWithManager/applyFilterWithManager.ts:12](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/modifiers/applyFilterWithManager/applyFilterWithManager.ts#L12)
 

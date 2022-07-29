@@ -4,7 +4,9 @@
 
 Helper function to listen Klevu Dom events
 
-**`example`** ```ts
+**`Example`**
+
+```ts
 import { KlevuDomEvents, KlevuListenDomEvent } from '@klevu/core'
 
 // Event to listen
@@ -16,21 +18,18 @@ const stopListen = KlevuListenDomEvent(KlevuDomEvents.LastSearchUpdate, (event) 
 stopListen();
 ```
 
-@category KlevuEvents
-@param klevuDomEvent What event to listen
-@param callback What to do when event is fired
-@returns Function to stop listening
-
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `klevuDomEvent` | [`KlevuDomEvents`](enums/KlevuDomEvents.md) |
-| `callback` | (`event`: `Event`) => `void` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `klevuDomEvent` | [`KlevuDomEvents`](enums/KlevuDomEvents.md) | What event to listen |
+| `callback` | (`event`: `Event`) => `void` | What to do when event is fired |
 
 #### Returns
 
 `fn`
+
+Function to stop listening
 
 ▸ (): `void`
 
@@ -40,5 +39,5 @@ stopListen();
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:47](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuDomEvents.ts#L47)
+[events/KlevuDomEvents.ts:47](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/events/KlevuDomEvents.ts#L47)
 

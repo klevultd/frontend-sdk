@@ -16,5 +16,5 @@ If original query doesn't return enough results then fallback query is run added
 
 #### Defined in
 
-[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
+[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
 

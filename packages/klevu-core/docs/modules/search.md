@@ -18,5 +18,5 @@ Create a basic search to Klevu backend. Default ID for this query is `search`
 
 #### Defined in
 
-[queries/search/search.ts:38](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/search/search.ts#L38)
+[queries/search/search.ts:38](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/queries/search/search.ts#L38)
 

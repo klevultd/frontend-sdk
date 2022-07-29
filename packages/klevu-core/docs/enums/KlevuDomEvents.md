@@ -15,46 +15,46 @@
 
 ### ClickEventSent
 
-• **ClickEventSent**
+• **ClickEventSent** = ``"klevu-click-event-sent"``
 
 When any click event has been fired on the page
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuDomEvents.ts#L24)
+[events/KlevuDomEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/events/KlevuDomEvents.ts#L24)
 
 ___
 
 ### FilterSelectionUpdate
 
-• **FilterSelectionUpdate**
+• **FilterSelectionUpdate** = ``"klevu-filter-selection-updates"``
 
 When filter manager selection has changed
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:14](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuDomEvents.ts#L14)
+[events/KlevuDomEvents.ts:14](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/events/KlevuDomEvents.ts#L14)
 
 ___
 
 ### FiltersApplied
 
-• **FiltersApplied**
+• **FiltersApplied** = ``"klevu-filters-applied"``
 
 When filters have been applied from results
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:19](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuDomEvents.ts#L19)
+[events/KlevuDomEvents.ts:19](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/events/KlevuDomEvents.ts#L19)
 
 ___
 
 ### LastSearchUpdate
 
-• **LastSearchUpdate**
+• **LastSearchUpdate** = ``"klevu-last-search-update"``
 
 When list of last searched terms update
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/events/KlevuDomEvents.ts#L9)
+[events/KlevuDomEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/events/KlevuDomEvents.ts#L9)

@@ -18,5 +18,5 @@ Enable personlisation to the query
 
 #### Defined in
 
-[modifiers/personalisation/personalisation.ts:12](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/modifiers/personalisation/personalisation.ts#L12)
+[modifiers/personalisation/personalisation.ts:12](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/modifiers/personalisation/personalisation.ts#L12)
 

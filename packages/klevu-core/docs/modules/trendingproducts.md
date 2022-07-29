@@ -4,7 +4,9 @@
 
 Create a trending products search query. Id for this query is `trendingProducts`
 
-**`example`** Simple example
+**`Example`**
+
+Simple example
 ```
 const result = await KlevuFetch(
  trendingProducts()
@@ -17,16 +19,16 @@ console.log(result.getQueries("trendingProducts").records)
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> | [search](classes/KlevuEvents.md#search) |
+| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> | [search](search.md) |
 | `...modifiers` | `KlevuFetchModifer`[] | - |
 
 #### Returns
 
 [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
-See {@link KlevuFetchFunction}
+See KlevuFetchFunction
 
 #### Defined in
 
-[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
+[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
 

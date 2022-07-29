@@ -14,28 +14,28 @@
 
 ### Category
 
-• **Category**
+• **Category** = ``"KLEVU_CATEGORY"``
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
+[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
 
 ___
 
 ### Cms
 
-• **Cms**
+• **Cms** = ``"KLEVU_CMS"``
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
+[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
 
 ___
 
 ### Product
 
-• **Product**
+• **Product** = ``"KLEVU_PRODUCT"``
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:4](https://github.com/klevultd/frontend-sdk/blob/4665e27/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L4)
+[models/KlevuTypeOfRecord.ts:4](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L4)
