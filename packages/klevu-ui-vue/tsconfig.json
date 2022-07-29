@@ -5,6 +5,7 @@
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es6",
@@ -12,5 +13,5 @@
     "lib": ["es6"],
     "outDir": "dist"
   },
-  "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**", "dist"]
 }

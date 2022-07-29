@@ -7,9 +7,19 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { KlevuRecord } from "@klevu/core";
 export namespace Components {
+    interface KlevuFacet {
+    }
+    interface KlevuFacetList {
+    }
     interface KlevuInit {
         "apiKey": string;
         "url": string;
+    }
+    interface KlevuLatestSearches {
+    }
+    interface KlevuMerchandising {
+    }
+    interface KlevuPopularSearches {
     }
     interface KlevuProduct {
         "product"?: KlevuRecord;
@@ -17,20 +27,68 @@ export namespace Components {
     interface KlevuProductGrid {
         "products": KlevuRecord[];
     }
+    interface KlevuQuicksearch {
+    }
+    interface KlevuRecommendations {
+        /**
+          * The ID of the recommendation
+         */
+        "recommendationId": string;
+        /**
+          * Title of the recommendation
+         */
+        "recommendationTitle": string;
+    }
     interface KlevuSearchField {
         "placeholder": string;
     }
+    interface KlevuSearchLandingPage {
+    }
+}
+export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuProductElement;
 }
 export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSearchFieldElement;
 }
 declare global {
+    interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
+    }
+    var HTMLKlevuFacetElement: {
+        prototype: HTMLKlevuFacetElement;
+        new (): HTMLKlevuFacetElement;
+    };
+    interface HTMLKlevuFacetListElement extends Components.KlevuFacetList, HTMLStencilElement {
+    }
+    var HTMLKlevuFacetListElement: {
+        prototype: HTMLKlevuFacetListElement;
+        new (): HTMLKlevuFacetListElement;
+    };
     interface HTMLKlevuInitElement extends Components.KlevuInit, HTMLStencilElement {
     }
     var HTMLKlevuInitElement: {
         prototype: HTMLKlevuInitElement;
         new (): HTMLKlevuInitElement;
+    };
+    interface HTMLKlevuLatestSearchesElement extends Components.KlevuLatestSearches, HTMLStencilElement {
+    }
+    var HTMLKlevuLatestSearchesElement: {
+        prototype: HTMLKlevuLatestSearchesElement;
+        new (): HTMLKlevuLatestSearchesElement;
+    };
+    interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
+    }
+    var HTMLKlevuMerchandisingElement: {
+        prototype: HTMLKlevuMerchandisingElement;
+        new (): HTMLKlevuMerchandisingElement;
+    };
+    interface HTMLKlevuPopularSearchesElement extends Components.KlevuPopularSearches, HTMLStencilElement {
+    }
+    var HTMLKlevuPopularSearchesElement: {
+        prototype: HTMLKlevuPopularSearchesElement;
+        new (): HTMLKlevuPopularSearchesElement;
     };
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
@@ -44,49 +102,116 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    interface HTMLKlevuQuicksearchElement extends Components.KlevuQuicksearch, HTMLStencilElement {
+    }
+    var HTMLKlevuQuicksearchElement: {
+        prototype: HTMLKlevuQuicksearchElement;
+        new (): HTMLKlevuQuicksearchElement;
+    };
+    interface HTMLKlevuRecommendationsElement extends Components.KlevuRecommendations, HTMLStencilElement {
+    }
+    var HTMLKlevuRecommendationsElement: {
+        prototype: HTMLKlevuRecommendationsElement;
+        new (): HTMLKlevuRecommendationsElement;
+    };
     interface HTMLKlevuSearchFieldElement extends Components.KlevuSearchField, HTMLStencilElement {
     }
     var HTMLKlevuSearchFieldElement: {
         prototype: HTMLKlevuSearchFieldElement;
         new (): HTMLKlevuSearchFieldElement;
     };
+    interface HTMLKlevuSearchLandingPageElement extends Components.KlevuSearchLandingPage, HTMLStencilElement {
+    }
+    var HTMLKlevuSearchLandingPageElement: {
+        prototype: HTMLKlevuSearchLandingPageElement;
+        new (): HTMLKlevuSearchLandingPageElement;
+    };
     interface HTMLElementTagNameMap {
+        "klevu-facet": HTMLKlevuFacetElement;
+        "klevu-facet-list": HTMLKlevuFacetListElement;
         "klevu-init": HTMLKlevuInitElement;
+        "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
+        "klevu-merchandising": HTMLKlevuMerchandisingElement;
+        "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
+        "klevu-quicksearch": HTMLKlevuQuicksearchElement;
+        "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
+        "klevu-search-landing-page": HTMLKlevuSearchLandingPageElement;
     }
 }
 declare namespace LocalJSX {
+    interface KlevuFacet {
+    }
+    interface KlevuFacetList {
+    }
     interface KlevuInit {
         "apiKey": string;
         "url": string;
     }
+    interface KlevuLatestSearches {
+    }
+    interface KlevuMerchandising {
+    }
+    interface KlevuPopularSearches {
+    }
     interface KlevuProduct {
+        "onProductClick"?: (event: KlevuProductCustomEvent<{ product: KlevuRecord; originalEvent: MouseEvent }>) => void;
         "product"?: KlevuRecord;
     }
     interface KlevuProductGrid {
         "products"?: KlevuRecord[];
     }
+    interface KlevuQuicksearch {
+    }
+    interface KlevuRecommendations {
+        /**
+          * The ID of the recommendation
+         */
+        "recommendationId": string;
+        /**
+          * Title of the recommendation
+         */
+        "recommendationTitle": string;
+    }
     interface KlevuSearchField {
         "onResults"?: (event: KlevuSearchFieldCustomEvent<KlevuRecord[]>) => void;
         "placeholder"?: string;
     }
+    interface KlevuSearchLandingPage {
+    }
     interface IntrinsicElements {
+        "klevu-facet": KlevuFacet;
+        "klevu-facet-list": KlevuFacetList;
         "klevu-init": KlevuInit;
+        "klevu-latest-searches": KlevuLatestSearches;
+        "klevu-merchandising": KlevuMerchandising;
+        "klevu-popular-searches": KlevuPopularSearches;
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
+        "klevu-quicksearch": KlevuQuicksearch;
+        "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
+        "klevu-search-landing-page": KlevuSearchLandingPage;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
+            "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;
+            "klevu-latest-searches": LocalJSX.KlevuLatestSearches & JSXBase.HTMLAttributes<HTMLKlevuLatestSearchesElement>;
+            "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
+            "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            "klevu-quicksearch": LocalJSX.KlevuQuicksearch & JSXBase.HTMLAttributes<HTMLKlevuQuicksearchElement>;
+            "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
+            "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
         }
     }
 }

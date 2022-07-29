@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 @Component({
@@ -9,6 +9,34 @@ import { getGlobalSettings, renderPrice } from "../../utils/utils"
 })
 export class KlevuProduct {
   @Prop() product?: KlevuRecord
+  @Event({
+    composed: true,
+    cancelable: true,
+  })
+  productClick?: EventEmitter<{ product: KlevuRecord; originalEvent: MouseEvent }>
+
+  click(ev: MouseEvent) {
+    const settings = getGlobalSettings()
+    if (this.productClick) {
+      const sentEvent = this.productClick.emit({
+        product: this.product,
+        originalEvent: ev,
+      })
+
+      if (sentEvent.defaultPrevented) {
+        ev.preventDefault()
+        return false
+      }
+    }
+
+    if (settings?.onProductClick) {
+      const result = settings.onProductClick(this.product, ev)
+      if (result === false) {
+        ev.preventDefault()
+        return false
+      }
+    }
+  }
 
   render() {
     if (!this.product) {
@@ -31,11 +59,7 @@ export class KlevuProduct {
 
     return (
       <Host>
-        <a
-          href={settings?.generateProductUrl?.(this.product)}
-          onClick={settings?.onProductClick ? (e) => settings.onProductClick(this.product, e) : undefined}
-          class="container"
-        >
+        <a href={settings?.generateProductUrl?.(this.product)} onClick={this.click} class="container">
           <slot name="image">
             <div
               class="image"

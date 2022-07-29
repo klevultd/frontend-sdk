@@ -34,7 +34,14 @@ export function debounce<T extends unknown[], U>(callback: (...args: T) => Promi
  * Global settings that modify the way Klevu UI library works.
  */
 type KlevuGlobalSettings = {
-  onProductClick?: (product: KlevuRecord, event: MouseEvent) => void
+  /**
+   * When user clicks the product
+   *
+   * @param product Product that was clicked
+   * @param event Event that triggered the click
+   * @return false if the event should be prevented and stopped
+   */
+  onProductClick?: (product: KlevuRecord, event: MouseEvent) => boolean
   generateProductUrl?: (product: KlevuRecord) => string
 }
 

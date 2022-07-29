@@ -8,14 +8,30 @@ import type { JSX } from '@klevu/ui';
 
 
 
+export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-facet', undefined);
+
+
+export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>('klevu-facet-list', undefined);
+
+
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url'
 ]);
 
 
+export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatestSearches>('klevu-latest-searches', undefined);
+
+
+export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchandising>('klevu-merchandising', undefined);
+
+
+export const KlevuPopularSearches = /*@__PURE__*/ defineContainer<JSX.KlevuPopularSearches>('klevu-popular-searches', undefined);
+
+
 export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('klevu-product', undefined, [
-  'product'
+  'product',
+  'productClick'
 ]);
 
 
@@ -24,8 +40,20 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 ]);
 
 
+export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksearch>('klevu-quicksearch', undefined);
+
+
+export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecommendations>('klevu-recommendations', undefined, [
+  'recommendationTitle',
+  'recommendationId'
+]);
+
+
 export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchField>('klevu-search-field', undefined, [
   'placeholder',
   'results'
 ]);
+
+
+export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSearchLandingPage>('klevu-search-landing-page', undefined);
 

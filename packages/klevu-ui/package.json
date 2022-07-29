@@ -30,13 +30,13 @@
   },
   "dependencies": {
     "@klevu/core": "file:../klevu-core",
-    "@stencil/core": "^2.13.0",
-    "fast-glob": "^3.2.11"
+    "@stencil/core": "^2.13.0"
   },
   "devDependencies": {
+    "fast-glob": "^3.2.11",
     "@babel/core": "^7.18.9",
-    "@stencil/vue-output-target": "^0.6.2",
     "@stencil/react-output-target": "^0.3.1",
+    "@stencil/vue-output-target": "^0.6.2",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",

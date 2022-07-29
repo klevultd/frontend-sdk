@@ -14,22 +14,28 @@ import { KlevuRecord } from "@klevu/core"
  */
 export const WebComponentTemplate = <T>({
   tag,
+  attributes,
   args,
   style,
   innerHTML,
   childElements: childElement,
 }: {
   tag: string
-  args: {
+  args?: {
     [key in keyof Partial<T>]: T[key]
   }
+  attributes?: { [key: string]: any }
   style?: string
   innerHTML?: string
   childElements?: HTMLElement[]
 }) => {
   const func = (args) => {
     const element = document.createElement(tag)
-    for (const [key, value] of Object.entries(args)) {
+    for (const [key, value] of Object.entries(attributes ?? {})) {
+      console.log(key, value)
+      element.setAttribute(key, value)
+    }
+    for (const [key, value] of Object.entries(args ?? {})) {
       element[key] = value
     }
     if (innerHTML) {
@@ -44,6 +50,7 @@ export const WebComponentTemplate = <T>({
       styleElem.appendChild(document.createTextNode(style))
       element.insertBefore(styleElem, element.firstChild)
     }
+    console.log(element)
     return element
   }
 
@@ -81,19 +88,23 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1618.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_02_042_medium.jpg?v=1603183823",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_02_042_medium.jpg?v=1603183823",
     currency: "USD",
     inStock: "yes",
     id: "36800691929242",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_02_026_medium.jpg?v=1603183823",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_02_026_medium.jpg?v=1603183823",
     sku: "16351",
     brand: "Gianfranco Scotti",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_02_042_medium.jpg?v=1603183823",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_02_042_medium.jpg?v=1603183823",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1618.0",
-    swatchesInfo: "variantColor1:Black ;;;; variantId1:36800691896474 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
+    swatchesInfo:
+      "variantColor1:Black ;;;; variantId1:36800691896474 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
     weight: "",
     klevu_category: "KLEVU_PRODUCT;Products;;Women;;Men;;Catalog  @ku@kuCategory@ku@",
     totalVariants: 1,
@@ -129,7 +140,8 @@ export const products: KlevuRecord[] = [
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1598.0",
-    swatchesInfo: "variantColor1:Black ;;;; variantId1:36800914817178 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
+    swatchesInfo:
+      "variantColor1:Black ;;;; variantId1:36800914817178 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
     weight: "",
     klevu_category: "KLEVU_PRODUCT;Products;;Women;;Men;;Catalog  @ku@kuCategory@ku@",
     totalVariants: 0,
@@ -191,15 +203,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1678.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-07-08_Laydown_20632_24490_medium.jpg?v=1603185555&vid=36800956399770",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-07-08_Laydown_20632_24490_medium.jpg?v=1603185555&vid=36800956399770",
     currency: "USD",
     inStock: "yes",
     id: "36800956399770",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-07-08_Laydown_20632_24493_medium.jpg?v=1603185555",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-07-08_Laydown_20632_24493_medium.jpg?v=1603185555",
     sku: "20632",
     brand: "Guibert",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-07-08_Laydown_20632_24490_medium.jpg?v=1603185555&vid=36800956399770",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-07-08_Laydown_20632_24490_medium.jpg?v=1603185555&vid=36800956399770",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1678.0",
@@ -229,15 +244,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1528.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_11_Bag5_3479_medium.jpg?v=1603185546",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_11_Bag5_3479_medium.jpg?v=1603185546",
     currency: "USD",
     inStock: "yes",
     id: "36800955941018",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-03-05_Ashley_Look_01_32001_8761_medium.jpg?v=1603185546",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-03-05_Ashley_Look_01_32001_8761_medium.jpg?v=1603185546",
     sku: "20631",
     brand: "Guibert",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_11_Bag5_3479_medium.jpg?v=1603185546",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_11_Bag5_3479_medium.jpg?v=1603185546",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1528.0",
@@ -266,19 +284,23 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1528.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_10_Bag4_3469_medium.jpg?v=1603185539",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_10_Bag4_3469_medium.jpg?v=1603185539",
     currency: "USD",
     inStock: "yes",
     id: "36800954138778",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_10_Bag4_3470_medium.jpg?v=1603185539",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_10_Bag4_3470_medium.jpg?v=1603185539",
     sku: "20630",
     brand: "Guibert",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_10_Bag4_3469_medium.jpg?v=1603185539",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-13_Product_10_Bag4_3469_medium.jpg?v=1603185539",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1528.0",
-    swatchesInfo: "variantColor1:Red ;;;; variantId1:36800954138778 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/red.png?v=1603200804",
+    swatchesInfo:
+      "variantColor1:Red ;;;; variantId1:36800954138778 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/red.png?v=1603200804",
     weight: "",
     klevu_category: "KLEVU_PRODUCT;Products;;Women;;Men;;Catalog  @ku@kuCategory@ku@",
     totalVariants: 0,
@@ -288,7 +310,8 @@ export const products: KlevuRecord[] = [
     product_type: "women's bags",
     size: "One Size",
     name: "Pretty Grooming Bag",
-    shortDesc: "This is a demonstration store. You can purchase products like this from Baby & Company The Pretty Grooming Tote is a welcoming size for this 24/7 lifestyle",
+    shortDesc:
+      "This is a demonstration store. You can purchase products like this from Baby & Company The Pretty Grooming Tote is a welcoming size for this 24/7 lifestyle",
     category: "Women;;Men;;Catalog",
     typeOfRecord: "KLEVU_PRODUCT",
   },
@@ -302,19 +325,23 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1286.60",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-15_Addis_Look_02_13216_3920_medium.jpg?v=1603186935",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-15_Addis_Look_02_13216_3920_medium.jpg?v=1603186935",
     currency: "USD",
     inStock: "yes",
     id: "36801181221018",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-15_Addis_Look_02_13216_3926_medium.jpg?v=1603186935",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-15_Addis_Look_02_13216_3926_medium.jpg?v=1603186935",
     sku: "23700",
     brand: "Giorgio Brato",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-15_Addis_Look_02_13216_3920_medium.jpg?v=1603186935",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-02-15_Addis_Look_02_13216_3920_medium.jpg?v=1603186935",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1286.6",
-    swatchesInfo: "variantColor1:Black ;;;; variantId1:36801181188250 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
+    swatchesInfo:
+      "variantColor1:Black ;;;; variantId1:36801181188250 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
     weight: "",
     klevu_category: "KLEVU_PRODUCT;Products;;Men;;Catalog;;Clothing  @ku@kuCategory@ku@",
     totalVariants: 2,
@@ -339,15 +366,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1158.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_26_21638_17902_medium.jpg?v=1603184000",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_26_21638_17902_medium.jpg?v=1603184000",
     currency: "USD",
     inStock: "yes",
     id: "36800724893850",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014_08_10_Lana_Look8_26_medium.jpg?v=1603184000",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014_08_10_Lana_Look8_26_medium.jpg?v=1603184000",
     sku: "17007",
     brand: "Marsell",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_26_21638_17902_medium.jpg?v=1603184000",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_26_21638_17902_medium.jpg?v=1603184000",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1158.0",
@@ -376,15 +406,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1148.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_23_40641_17891_medium.jpg?v=1603189643",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_23_40641_17891_medium.jpg?v=1603189643",
     currency: "USD",
     inStock: "yes",
     id: "36801558675610",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_23_40641_17883_medium.jpg?v=1603189643",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_23_40641_17883_medium.jpg?v=1603189643",
     sku: "40641",
     brand: "Marsell",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_23_40641_17891_medium.jpg?v=1603189643",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-02_Accessories_23_40641_17891_medium.jpg?v=1603189643",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1148.0",
@@ -413,15 +446,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "1146.60",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-03_Jake_Look_07_21693_18012_medium.jpg?v=1603186464",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-03_Jake_Look_07_21693_18012_medium.jpg?v=1603186464",
     currency: "USD",
     inStock: "yes",
     id: "36801128333466",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-03_Jake_Look_07_21693_18005_medium.jpg?v=1603186464",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-03_Jake_Look_07_21693_18005_medium.jpg?v=1603186464",
     sku: "13264",
     brand: "Giorgio Brato",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-03_Jake_Look_07_21693_18012_medium.jpg?v=1603186464",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-03_Jake_Look_07_21693_18012_medium.jpg?v=1603186464",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "1146.6",
@@ -450,15 +486,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "998.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_13_359_medium.jpg?v=1603183817",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_13_359_medium.jpg?v=1603183817",
     currency: "USD",
     inStock: "yes",
     id: "36800691568794",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_13_355_medium.jpg?v=1603183817",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_13_355_medium.jpg?v=1603183817",
     sku: "16344",
     brand: "Gianfranco Scotti",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_13_359_medium.jpg?v=1603183817",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2014-08-02_Lana_Look_13_359_medium.jpg?v=1603183817",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "998.0",
@@ -486,15 +525,18 @@ export const products: KlevuRecord[] = [
     storeBaseCurrency: "USD",
     price: "998.00",
     toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-08_Ashley_Look2_40720_18592_medium.jpg?v=1603189691",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-08_Ashley_Look2_40720_18592_medium.jpg?v=1603189691",
     currency: "USD",
     inStock: "yes",
     id: "36801568506010",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-08_Ashley_Look2_40720_18623_medium.jpg?v=1603189691",
+    imageHover:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-08_Ashley_Look2_40720_18623_medium.jpg?v=1603189691",
     sku: "40720",
     brand: "La Prestic Ouiston",
     startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-08_Ashley_Look2_40720_18592_medium.jpg?v=1603189691",
+    image:
+      "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/2015-04-08_Ashley_Look2_40720_18592_medium.jpg?v=1603189691",
     deliveryInfo: "",
     hideAddToCart: "",
     salePrice: "998.0",
