@@ -1,0 +1,23 @@
+{
+  "name": "@klevu/ui-vue",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no tests",
+    "build": "npm run tsc",
+    "tsc": "tsc -p ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@klevu/ui": "file:../klevu-ui"
+  },
+  "devDependencies": {
+    "vue": "^3.2.37"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
