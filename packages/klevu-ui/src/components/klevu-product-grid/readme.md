@@ -14,6 +14,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [klevu-search-landing-page](../klevu-search-landing-page)
+
 ### Depends on
 
 - [klevu-product](../klevu-product)
@@ -22,6 +26,7 @@
 ```mermaid
 graph TD;
   klevu-product-grid --> klevu-product
+  klevu-search-landing-page --> klevu-product-grid
   style klevu-product-grid fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

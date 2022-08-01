@@ -1,3 +1,7 @@
 :host {
-  display: block;
+  display: flex; 
+}
+
+klevu-facet-list {
+  width: 500px;
 }

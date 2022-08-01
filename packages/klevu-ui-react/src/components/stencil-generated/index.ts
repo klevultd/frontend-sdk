@@ -8,6 +8,7 @@ import type { JSX } from '@klevu/ui';
 import { defineCustomElements } from '@klevu/ui/loader';
 
 defineCustomElements();
+export const KlevuButton = /*@__PURE__*/createReactComponent<JSX.KlevuButton, HTMLKlevuButtonElement>('klevu-button');
 export const KlevuFacet = /*@__PURE__*/createReactComponent<JSX.KlevuFacet, HTMLKlevuFacetElement>('klevu-facet');
 export const KlevuFacetList = /*@__PURE__*/createReactComponent<JSX.KlevuFacetList, HTMLKlevuFacetListElement>('klevu-facet-list');
 export const KlevuInit = /*@__PURE__*/createReactComponent<JSX.KlevuInit, HTMLKlevuInitElement>('klevu-init');

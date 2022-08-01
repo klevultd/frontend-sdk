@@ -5,11 +5,19 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { KlevuRecord } from "@klevu/core";
+import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuRecord } from "@klevu/core";
+import { KlevuProductOnProductClick } from "./components/klevu-product/klevu-product";
 export namespace Components {
+    interface KlevuButton {
+        "disabled": boolean;
+    }
     interface KlevuFacet {
+        "manager": FilterManager;
+        "option": KlevuFilterResultOptions;
+        "slider": KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        "manager": FilterManager;
     }
     interface KlevuInit {
         "apiKey": string;
@@ -43,6 +51,9 @@ export namespace Components {
         "placeholder": string;
     }
     interface KlevuSearchLandingPage {
+        "limit": number;
+        "results": KlevuRecord[];
+        "term": string;
     }
 }
 export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
@@ -54,6 +65,12 @@ export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     target: HTMLKlevuSearchFieldElement;
 }
 declare global {
+    interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
+    }
+    var HTMLKlevuButtonElement: {
+        prototype: HTMLKlevuButtonElement;
+        new (): HTMLKlevuButtonElement;
+    };
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
     var HTMLKlevuFacetElement: {
@@ -127,6 +144,7 @@ declare global {
         new (): HTMLKlevuSearchLandingPageElement;
     };
     interface HTMLElementTagNameMap {
+        "klevu-button": HTMLKlevuButtonElement;
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
         "klevu-init": HTMLKlevuInitElement;
@@ -142,9 +160,16 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface KlevuButton {
+        "disabled"?: boolean;
+    }
     interface KlevuFacet {
+        "manager": FilterManager;
+        "option"?: KlevuFilterResultOptions;
+        "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        "manager"?: FilterManager;
     }
     interface KlevuInit {
         "apiKey": string;
@@ -157,7 +182,7 @@ declare namespace LocalJSX {
     interface KlevuPopularSearches {
     }
     interface KlevuProduct {
-        "onProductClick"?: (event: KlevuProductCustomEvent<{ product: KlevuRecord; originalEvent: MouseEvent }>) => void;
+        "onProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
         "product"?: KlevuRecord;
     }
     interface KlevuProductGrid {
@@ -180,8 +205,12 @@ declare namespace LocalJSX {
         "placeholder"?: string;
     }
     interface KlevuSearchLandingPage {
+        "limit"?: number;
+        "results"?: KlevuRecord[];
+        "term": string;
     }
     interface IntrinsicElements {
+        "klevu-button": KlevuButton;
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
         "klevu-init": KlevuInit;
@@ -200,6 +229,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;

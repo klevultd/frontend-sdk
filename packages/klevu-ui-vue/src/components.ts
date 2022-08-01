@@ -8,10 +8,21 @@ import type { JSX } from '@klevu/ui';
 
 
 
-export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-facet', undefined);
+export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
+  'disabled'
+]);
 
 
-export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>('klevu-facet-list', undefined);
+export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-facet', undefined, [
+  'option',
+  'slider',
+  'manager'
+]);
+
+
+export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>('klevu-facet-list', undefined, [
+  'manager'
+]);
 
 
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
@@ -55,5 +66,9 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
 ]);
 
 
-export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSearchLandingPage>('klevu-search-landing-page', undefined);
+export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSearchLandingPage>('klevu-search-landing-page', undefined, [
+  'limit',
+  'term',
+  'results'
+]);
 

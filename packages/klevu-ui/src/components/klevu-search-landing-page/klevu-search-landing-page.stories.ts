@@ -7,5 +7,7 @@ export default {
 
 export const Default = WebComponentTemplate<HTMLKlevuSearchLandingPageElement>({
   tag: "klevu-search-landing-page",
-  args: {},
+  args: {
+    term: "shoes",
+  },
 })

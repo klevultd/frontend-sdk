@@ -32,7 +32,6 @@ export const WebComponentTemplate = <T>({
   const func = (args) => {
     const element = document.createElement(tag)
     for (const [key, value] of Object.entries(attributes ?? {})) {
-      console.log(key, value)
       element.setAttribute(key, value)
     }
     for (const [key, value] of Object.entries(args ?? {})) {
@@ -50,7 +49,6 @@ export const WebComponentTemplate = <T>({
       styleElem.appendChild(document.createTextNode(style))
       element.insertBefore(styleElem, element.firstChild)
     }
-    console.log(element)
     return element
   }
 

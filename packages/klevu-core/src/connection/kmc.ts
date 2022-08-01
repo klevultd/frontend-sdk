@@ -17,7 +17,11 @@ const ONE_DAY = 86_400_000
  * @param ignoreCache If true, will ignore cache and fetch data from server
  * @returns
  */
-export async function KlevuKMCSettings(ignoreCache?: boolean) {
+export async function KlevuKMCSettings(ignoreCache?: boolean): Promise<{
+  root?: KMCRootObject
+  banner?: KMCBannerRootObject
+  maps?: KMCMapsRootObject
+}> {
   if (isBrowser() && window.localStorage && ignoreCache !== true) {
     const ts = window.localStorage.getItem(STORAGE_TS_KEY)
     const res = window.localStorage.getItem(STORAGE_KEY)

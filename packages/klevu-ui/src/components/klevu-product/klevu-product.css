@@ -1,6 +1,7 @@
 :host {
   display: inline-block;
   --loading-animation-time: 5s;
+  width: 300px;
 }
 
 .image {
