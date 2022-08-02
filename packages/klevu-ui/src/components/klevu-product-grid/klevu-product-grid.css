@@ -2,4 +2,5 @@
   display: flex;
   flex-wrap: wrap;
   gap: calc(var(--spacing) * 4);
+  align-items: stretch;
 }

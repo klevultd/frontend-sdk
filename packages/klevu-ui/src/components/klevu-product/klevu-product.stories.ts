@@ -1,10 +1,13 @@
 import { css, html, products, WebComponentTemplate } from "../../storybookUtils"
 import "./klevu-product.css"
+// @ts-ignore
+import notes from "./readme.md"
 
 const product = products[0]
 
 export default {
   title: "Components/Product",
+  parameters: { notes },
 }
 
 export const NormalProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: { product } })

@@ -1,14 +1,13 @@
 import { WebComponentTemplate } from "../../storybookUtils"
 import "./klevu-search-field.css"
+// @ts-ignore
+import notes from "./readme.md"
 
 export default {
   title: "Components/SearchField",
   layout: "centered",
   parameters: {
-    actions: {
-      argTypesRegex: "^on.*",
-      handles: ["results"],
-    },
+    notes,
   },
 }
 

@@ -1,8 +1,11 @@
 import { WebComponentTemplate } from "../../storybookUtils"
 import "./klevu-recommendations.css"
+// @ts-ignore
+import notes from "./readme.md"
 
 export default {
   title: "Components/Recommendations",
+  parameters: { notes },
 }
 
 export const Default = WebComponentTemplate<HTMLKlevuRecommendationsElement>({

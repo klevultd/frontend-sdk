@@ -37,6 +37,10 @@ export class KlevuSearchLandingPage {
   private clickEvent: (id: string, variantId: string) => void
 
   async connectedCallback() {
+    await this.initialFetch()
+  }
+
+  async initialFetch() {
     const result = await KlevuFetch(
       search(
         this.term,
@@ -64,6 +68,11 @@ export class KlevuSearchLandingPage {
     if (this.clickEvent) {
       this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId)
     }
+  }
+
+  @Listen("klevu-filter-selection-updates", { target: "document" })
+  filterSelectionUpdate(event) {
+    this.initialFetch()
   }
 
   render() {

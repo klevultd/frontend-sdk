@@ -15,10 +15,16 @@ export class KlevuFacet {
     if (this.option) {
       return (
         <Host>
+          <h3>{this.option.label}</h3>
           <ul>
             {this.option.options.map((o) => (
               <li>
-                <input type="checkbox" value={o.value} checked={o.selected} />
+                <input
+                  type="checkbox"
+                  value={o.value}
+                  checked={o.selected}
+                  onClick={() => this.manager.toggleOption(this.option.key, o.name)}
+                />
                 {o.name}
               </li>
             ))}
@@ -30,6 +36,7 @@ export class KlevuFacet {
     if (this.slider) {
       return (
         <Host>
+          <h3>{this.slider.label}</h3>
           {this.slider.label} ({this.slider.min} - {this.slider.max})
           <input type="text" value={this.slider.start} /> - <input type="text" value={this.slider.end} />
         </Host>
