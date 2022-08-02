@@ -4,7 +4,6 @@ import {
   RecommendationViewEventMetaData,
 } from "../../events/index.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
-import { KlevuKMCRecommendations } from "../../queries/index.js"
 
 const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
   KlevuTypeOfRequest.AlsoBought,
