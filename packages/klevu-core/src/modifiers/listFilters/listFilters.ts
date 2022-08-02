@@ -63,7 +63,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
       }
       return copy
     },
-    onResult: (result, query) => {
+    onResult: (result) => {
       if (!options?.filterManager) {
         return result
       }

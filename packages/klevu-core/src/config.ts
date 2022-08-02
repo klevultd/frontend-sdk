@@ -1,5 +1,5 @@
 import type { AxiosStatic } from "axios"
-import { isBrowser } from "./utils"
+import { isBrowser } from "./utils/index.js"
 
 type KlevuConfiguration = {
   /**
@@ -67,6 +67,7 @@ function loadFromGlobal(): KlevuConfig | undefined {
     return undefined
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cfg = (window as any).KlevuConfig
 
   if (!cfg) {
