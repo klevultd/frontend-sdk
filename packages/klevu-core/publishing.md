@@ -8,6 +8,12 @@ Install globally `np` package
 > npm install -g np
 ```
 
+Login and authenticate your npm
+
+```
+> npm login
+```
+
 ## 1) Build a core
 
 In `klevu-core` folder run following command to build a version
