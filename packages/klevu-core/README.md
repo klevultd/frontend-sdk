@@ -135,7 +135,7 @@ Detailed information in [API reference.](./docs/modules.md#Queries-Functions)
 | `trendingCategoryProducts()` | Trending recommendation based for current user                                   | Recommendation |
 | `similarProducts()`          | Fetch similar products based on given ids                                        | Recommendation |
 | `alsoViewed()`               | Product recommendations what user should also check out                          | Recommendation |
-| `boughTogether()`            | On checkout page check what products are recommended to current cart products    | Recommendation |
+| `boughtTogether()`           | On checkout page check what products are recommended to current cart products    | Recommendation |
 
 ## Modifiers
 
