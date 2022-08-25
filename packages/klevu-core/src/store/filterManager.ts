@@ -86,14 +86,35 @@ export class FilterManager {
 
     this.options[optionIndex].options[subOptionIndex].selected = !prevSeleted
 
-    document.dispatchEvent(
-      new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
-        detail: {
-          key,
-          name,
-          selected: !prevSeleted,
-        },
-      })
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
+          detail: {
+            key,
+            name,
+            selected: !prevSeleted,
+          },
+        })
+      )
+    }
+  }
+
+  /**
+   * Sets `selected` key of all options to false
+   *
+   * @param key Optional key to lmit clearing to one option
+   * @returns
+   */
+  clearOptionSelections(key?: string) {
+    if (key) {
+      this.options
+        .find((o) => o.key === key)
+        ?.options.forEach((o) => (o.selected = false))
+      return
+    }
+
+    this.options.forEach((o) =>
+      o.options.forEach((o2) => (o2.selected = false))
     )
   }
 
@@ -116,16 +137,18 @@ export class FilterManager {
     this.sliders[slideIndex].start = min.toString()
     this.sliders[slideIndex].end = max.toString()
 
-    document.dispatchEvent(
-      new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
-        detail: {
-          key: key,
-          name: this.sliders[slideIndex].label,
-          start: min.toString(),
-          end: max.toString(),
-        },
-      })
-    )
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
+          detail: {
+            key: key,
+            name: this.sliders[slideIndex].label,
+            start: min.toString(),
+            end: max.toString(),
+          },
+        })
+      )
+    }
   }
 
   /**
