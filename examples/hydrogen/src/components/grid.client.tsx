@@ -1,44 +1,19 @@
 import React, { useState } from "react"
-import {
-  FetchResultEvents,
-  FilterManager,
-  KlevuQueryResult,
-  KlevuRecord,
-} from "@klevu/core"
+import { FilterManager, KlevuRecord } from "@klevu/core"
 import { Button, Container, Grid } from "@mui/material"
 import { FilterDrawer, Product } from "examples-react"
 import { useNavigate } from "@shopify/hydrogen"
 import { getRecordHandle } from "./klevu/utils"
 
 export function ProductGrid(props: {
-  result: KlevuQueryResult
   products: KlevuRecord[]
   manager: FilterManager
-  type: "search" | "categoryMerchandising" | "kmcRecommendation"
+  onClick: (product: KlevuRecord) => void
+  hasMoreResults: boolean
   loadMore: () => void
 }) {
   const navigate = useNavigate()
   const [filtersOpen, setFiltersOpen] = useState(false)
-
-  // Manually create result events since we received raw response from server component
-  const resultEvents = FetchResultEvents(props.result, {
-    klevuFunctionId: props.type,
-  })
-
-  // Decide what function we should use to get product click event
-  let clickEvent: (productId: string, variantId: string) => void
-  if (resultEvents.getSearchClickSendEvent) {
-    clickEvent = resultEvents.getSearchClickSendEvent()
-  } else if (resultEvents.getRecommendationClickSendEvent) {
-    clickEvent = resultEvents.getRecommendationClickSendEvent()
-  } else if (resultEvents.getCategoryMerchandisingClickSendEvent) {
-    clickEvent = resultEvents.getCategoryMerchandisingClickSendEvent()
-  }
-
-  // calculate this manually as there are no helpers from SDK due to server - client transfer
-  const hasMoreResults =
-    props.result.meta.totalResultsFound >
-    props.result.meta.offset + props.result.meta.noOfResults
 
   return (
     <Container maxWidth="lg">
@@ -58,7 +33,7 @@ export function ProductGrid(props: {
             <Product
               product={product}
               onClick={(event) => {
-                clickEvent(product.id, product.itemGroupId)
+                props.onClick(product)
                 navigate(`/products/${getRecordHandle(product)}`)
                 event.preventDefault()
                 return false
@@ -68,7 +43,7 @@ export function ProductGrid(props: {
           </Grid>
         ))}
       </Grid>
-      {hasMoreResults && (
+      {props.hasMoreResults && (
         <div
           style={{
             margin: "4rem auto",

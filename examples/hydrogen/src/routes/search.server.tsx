@@ -1,9 +1,12 @@
-import { KlevuFetch, listFilters, search, sendSearchEvent } from "@klevu/core"
+import { FilterManager, KlevuFetch, KlevuPackFetchResult } from "@klevu/core"
 import { useQuery } from "@shopify/hydrogen"
 import React, { Suspense } from "react"
 import { KlevuInit } from "../App.server"
 import { Header } from "../components/header.client"
 import { SearchResultPage } from "../components/searchResultPage.client"
+
+// Function that creates query that is used both in frontend and backend.
+import { searchQuery } from "../klevuQueries"
 
 export default function Search(params: { pathname: string; search: string }) {
   const term = decodeURIComponent(params.search.split("?q=")[1])
@@ -12,12 +15,10 @@ export default function Search(params: { pathname: string; search: string }) {
    * Fetch result in server side
    */
   const query = useQuery([term], async () => {
-    const result = await KlevuFetch(
-      search(term, { id: "search" }, listFilters(), sendSearchEvent())
-    )
+    const result = await KlevuFetch(...searchQuery(term, new FilterManager()))
 
-    // we need to get raw response since Hydrogen can't pass enriched response with helper functions
-    return result.apiResponse?.queryResults?.find((q) => q.id === "search")
+    /** pack query for transfering to client */
+    return KlevuPackFetchResult(result)
   })
 
   return (

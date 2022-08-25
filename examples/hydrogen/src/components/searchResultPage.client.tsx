@@ -1,22 +1,27 @@
 import {
-  applyFilterWithManager,
   FilterManager,
+  KlevuApiRawResponse,
   KlevuDomEvents,
   KlevuFetch,
+  KlevuFetchResponse,
+  KlevuHydratePackedFetchResult,
   KlevuListenDomEvent,
-  KlevuQueryResult,
   KlevuRecord,
-  search,
 } from "@klevu/core"
 import React from "react"
+import { searchQuery } from "../klevuQueries"
 import { ProductGrid } from "./grid.client"
 
 const manager = new FilterManager()
+let currentResult: KlevuFetchResponse
+let clickEvent: (productId: string, variantId?: string) => void
 
 export function SearchResultPage(props: {
-  serverResult: KlevuQueryResult
+  serverResult: KlevuApiRawResponse
   term: string
 }) {
+  const [products, setProducts] = React.useState<KlevuRecord[]>([])
+
   // this is used to prevent useless re-render in client after server
   const prevTermRef = React.useRef<string>()
   React.useEffect(() => {
@@ -24,39 +29,36 @@ export function SearchResultPage(props: {
   })
   const prevTerm = prevTermRef.current
 
-  const [products, setProducts] = React.useState<KlevuRecord[]>(
-    props.serverResult.records
-  )
-  const [result, setResult] = React.useState<KlevuQueryResult>(
-    props.serverResult
-  )
-  manager.initFromListFilters(props.serverResult.filters ?? [])
+  const hydrate = async () => {
+    currentResult = await KlevuHydratePackedFetchResult(
+      props.serverResult,
+      searchQuery(props.term, manager)
+    )
+    const searchResult = currentResult.queriesById("search")
+    if (searchResult) {
+      setProducts(searchResult.records)
+      if (searchResult.getSearchClickSendEvent) {
+        clickEvent = searchResult.getSearchClickSendEvent()
+      }
+    }
+  }
 
   const loadMore = async (replace = false) => {
-    const offset =
-      replace === true ? 0 : result.meta.offset + result.meta.noOfResults
-
-    const loadMoreResult = await KlevuFetch(
-      search(
-        props.term,
-        {
-          id: "search",
-          offset,
-          limit: result.meta.noOfResults,
-        },
-        applyFilterWithManager(manager)
-      )
-    )
-
-    const searchResult = loadMoreResult.queriesById("search")
-
+    if (replace) {
+      currentResult = await KlevuFetch(...searchQuery(props.term, manager))
+    } else if (currentResult.queriesById("search")?.next) {
+      currentResult = await currentResult.queriesById("search")!.next!()
+    }
+    const searchResult = currentResult?.queriesById("search")
     if (searchResult) {
       if (replace) {
         setProducts(searchResult.records)
       } else {
         setProducts([...products, ...searchResult.records])
       }
-      setResult(searchResult)
+      if (searchResult.getSearchClickSendEvent) {
+        clickEvent = searchResult.getSearchClickSendEvent()
+      }
     }
   }
 
@@ -65,6 +67,7 @@ export function SearchResultPage(props: {
   }
 
   React.useEffect(() => {
+    hydrate()
     const stop = KlevuListenDomEvent(
       KlevuDomEvents.FilterSelectionUpdate,
       handleFilterUpdate
@@ -87,10 +90,12 @@ export function SearchResultPage(props: {
 
   return (
     <ProductGrid
-      result={result}
       products={products}
       manager={manager}
-      type="search"
+      hasMoreResults={Boolean(currentResult?.queriesById("search")?.next)}
+      onClick={(product) => {
+        clickEvent(product.id, product.itemGroupId)
+      }}
       loadMore={() => loadMore(false)}
     />
   )

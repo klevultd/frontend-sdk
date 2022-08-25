@@ -1,6 +1,7 @@
 export * from "./config.js"
 export * from "./connection/klevuFetch.js"
 export * from "./connection/kmc.js"
+export * from "./connection/hydration.js"
 export * from "./events/index.js"
 export * from "./models/index.js"
 export * from "./modifiers/index.js"
