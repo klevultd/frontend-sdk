@@ -19,6 +19,7 @@ import {
   listFilters,
   sendMerchandisingViewEvent,
   sendRecommendationViewEvent,
+  overrideSettings,
 } from "@klevu/core"
 import { FilterAlt } from "@mui/icons-material"
 import {
@@ -33,7 +34,7 @@ import {
   Typography,
 } from "@mui/material"
 import React, { useCallback, useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, useLocation } from "react-router-dom"
 import { Product } from "../components/product"
 
 import { useSnackbar } from "notistack"
@@ -50,7 +51,16 @@ let recommendationClickManager: ReturnType<
   KlevuResultEvent["getRecommendationClickSendEvent"]
 >
 
+// A custom hook that builds on useLocation to parse
+// the query string for you.
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 export function CategoryPage() {
+  let query = useQuery();
   const params = useParams()
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
@@ -95,7 +105,10 @@ export function CategoryPage() {
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id),
         abTest(),
-        debug()
+        debug(),
+        overrideSettings({
+          campaignForCatNav: query.get("campaignId")
+        })
       ),
       kmcRecommendation(
         "k-c0013603-1783-4293-bf80-7b3002587dcb",
