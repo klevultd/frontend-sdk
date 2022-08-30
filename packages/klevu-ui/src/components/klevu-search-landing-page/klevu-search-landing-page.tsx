@@ -20,7 +20,8 @@ import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 export class KlevuSearchLandingPage {
   @Prop() limit: number = 24
   @Prop() term!: string
-  @Prop() results: KlevuRecord[] = [
+
+  @State() results: KlevuRecord[] = [
     undefined,
     undefined,
     undefined,
@@ -31,7 +32,6 @@ export class KlevuSearchLandingPage {
     undefined,
     undefined,
   ]
-
   @State() manager = new FilterManager()
 
   private resultObject: KlevuFetchQueryResult

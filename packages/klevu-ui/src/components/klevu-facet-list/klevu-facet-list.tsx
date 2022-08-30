@@ -8,18 +8,21 @@ import { globalExportedParts } from "../../utils/utils"
   shadow: true,
 })
 export class KlevuFacetList {
-  @Prop() manager: FilterManager
+  @Prop() manager!: FilterManager
   @State() options: KlevuFilterResultOptions[] = []
   @State() sliders: KlevuFilterResultSlider[] = []
 
   connectedCallback() {
+    if (!this.manager) {
+      return
+    }
+
     this.options = this.manager.options
     this.sliders = this.manager.sliders
   }
 
   @Listen("klevu-filters-applied", { target: "document" })
   filtersApplied(event) {
-    console.log("filtersapplied", event)
     this.options = this.manager.options
     this.sliders = this.manager.sliders
   }

@@ -21,7 +21,7 @@ export class KlevuMerchandising {
   @Prop() limit: number = 24
   @Prop() category!: string
   @Prop() categoryTitle!: string
-  @Prop() results: KlevuRecord[] = [
+  @State() results: KlevuRecord[] = [
     undefined,
     undefined,
     undefined,

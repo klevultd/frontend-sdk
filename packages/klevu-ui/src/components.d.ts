@@ -37,7 +37,6 @@ export namespace Components {
         "categoryTitle": string;
         "limit": number;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
-        "results": KlevuRecord[];
     }
     interface KlevuPopularSearches {
     }
@@ -77,7 +76,6 @@ export namespace Components {
     }
     interface KlevuSearchLandingPage {
         "limit": number;
-        "results": KlevuRecord[];
         "term": string;
     }
     interface KlevuTextfield {
@@ -229,7 +227,7 @@ declare namespace LocalJSX {
         "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
-        "manager"?: FilterManager;
+        "manager": FilterManager;
     }
     interface KlevuInit {
         "apiKey": string;
@@ -243,7 +241,6 @@ declare namespace LocalJSX {
         "categoryTitle": string;
         "limit"?: number;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
-        "results"?: KlevuRecord[];
     }
     interface KlevuPopularSearches {
     }
@@ -287,7 +284,6 @@ declare namespace LocalJSX {
     }
     interface KlevuSearchLandingPage {
         "limit"?: number;
-        "results"?: KlevuRecord[];
         "term": string;
     }
     interface KlevuTextfield {
