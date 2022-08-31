@@ -7,13 +7,12 @@
 
 ## Properties
 
-| Property                     | Attribute        | Description | Type                                    | Default                                                                                                                                        |
-| ---------------------------- | ---------------- | ----------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `category` _(required)_      | `category`       |             | `string`                                | `undefined`                                                                                                                                    |
-| `categoryTitle` _(required)_ | `category-title` |             | `string`                                | `undefined`                                                                                                                                    |
-| `limit`                      | `limit`          |             | `number`                                | `24`                                                                                                                                           |
-| `renderProduct`              | --               |             | `(product: KlevuRecord) => HTMLElement` | `undefined`                                                                                                                                    |
-| `results`                    | --               |             | `KlevuRecord[]`                         | `[     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,   ]` |
+| Property                     | Attribute        | Description | Type                                    | Default     |
+| ---------------------------- | ---------------- | ----------- | --------------------------------------- | ----------- |
+| `category` _(required)_      | `category`       |             | `string`                                | `undefined` |
+| `categoryTitle` _(required)_ | `category-title` |             | `string`                                | `undefined` |
+| `limit`                      | `limit`          |             | `number`                                | `24`        |
+| `renderProduct`              | --               |             | `(product: KlevuRecord) => HTMLElement` | `undefined` |
 
 
 ## Dependencies

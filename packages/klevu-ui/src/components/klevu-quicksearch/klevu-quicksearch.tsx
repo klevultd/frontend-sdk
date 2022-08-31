@@ -1,6 +1,7 @@
 import { KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
 import { Component, Host, h, State, Listen, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
+import { SearchResultsEvent } from "../klevu-search-field/klevu-search-field"
 
 @Component({
   tag: "klevu-quicksearch",
@@ -12,10 +13,11 @@ export class KlevuQuicksearch {
   @State() trendingProducts: KlevuRecord[] = [undefined, undefined, undefined, undefined, undefined, undefined]
   @State() suggestions: string[] = []
   @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+  @Prop() fallbackTerm?: string
 
   @Listen("searchResults")
-  async onResults(event: CustomEvent<KlevuRecord[]>) {
-    this.products = event.detail
+  async onResults(event: CustomEvent<SearchResultsEvent>) {
+    this.products = event.detail.records
   }
 
   @Listen("searchSuggestions")
@@ -39,7 +41,7 @@ export class KlevuQuicksearch {
     return (
       <Host>
         <klevu-popup>
-          <klevu-search-field limit={6} slot="origin"></klevu-search-field>
+          <klevu-search-field limit={6} slot="origin" fallback-term={this.fallbackTerm}></klevu-search-field>
           <div class="content" slot="content">
             <aside>
               <h3>Search suggestions</h3>

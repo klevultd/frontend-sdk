@@ -15,6 +15,7 @@ export const Default = WebComponentTemplate<HTMLKlevuSearchFieldElement>({
   tag: "klevu-search-field",
   args: {
     placeholder: "Custom placeholder",
+    fallbackTerm: "jeans",
   },
 })
 

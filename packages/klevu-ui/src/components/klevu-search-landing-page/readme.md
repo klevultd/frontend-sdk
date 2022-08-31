@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property            | Attribute | Description | Type            | Default                                                                                                                                        |
-| ------------------- | --------- | ----------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `limit`             | `limit`   |             | `number`        | `24`                                                                                                                                           |
-| `results`           | --        |             | `KlevuRecord[]` | `[     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,     undefined,   ]` |
-| `term` _(required)_ | `term`    |             | `string`        | `undefined`                                                                                                                                    |
+| Property            | Attribute | Description | Type     | Default     |
+| ------------------- | --------- | ----------- | -------- | ----------- |
+| `limit`             | `limit`   |             | `number` | `24`        |
+| `term` _(required)_ | `term`    |             | `string` | `undefined` |
 
 
 ## Dependencies

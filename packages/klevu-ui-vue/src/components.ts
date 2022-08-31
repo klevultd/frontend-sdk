@@ -46,7 +46,6 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'limit',
   'category',
   'categoryTitle',
-  'results',
   'renderProduct'
 ]);
 
@@ -76,7 +75,8 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 
 
 export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksearch>('klevu-quicksearch', undefined, [
-  'renderProduct'
+  'renderProduct',
+  'fallbackTerm'
 ]);
 
 
@@ -89,6 +89,7 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
 export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchField>('klevu-search-field', undefined, [
   'placeholder',
   'limit',
+  'fallbackTerm',
   'searchResults',
   'searchSuggestions',
   'searchClick'
@@ -97,8 +98,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
 
 export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSearchLandingPage>('klevu-search-landing-page', undefined, [
   'limit',
-  'term',
-  'results'
+  'term'
 ]);
 
 

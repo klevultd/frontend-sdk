@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property        | Attribute | Description | Type                                    | Default     |
-| --------------- | --------- | ----------- | --------------------------------------- | ----------- |
-| `renderProduct` | --        |             | `(product: KlevuRecord) => HTMLElement` | `undefined` |
+| Property        | Attribute       | Description | Type                                    | Default     |
+| --------------- | --------------- | ----------- | --------------------------------------- | ----------- |
+| `fallbackTerm`  | `fallback-term` |             | `string`                                | `undefined` |
+| `renderProduct` | --              |             | `(product: KlevuRecord) => HTMLElement` | `undefined` |
 
 
 ## Shadow Parts

@@ -1,6 +1,11 @@
-import { KlevuFetch, KlevuRecord, search, suggestions } from "@klevu/core"
+import { fallback, KlevuFetch, KlevuRecord, search, suggestions } from "@klevu/core"
 import { Component, Host, h, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { debounce } from "../../utils/utils"
+
+export type SearchResultsEvent = {
+  isFallback?: boolean
+  records: KlevuRecord[]
+}
 
 @Component({
   tag: "klevu-search-field",
@@ -15,7 +20,15 @@ export class KlevuSearchField {
    */
   @Prop() placeholder = "Search for products"
 
+  /**
+   * Maximum amount of results
+   */
   @Prop() limit = 10
+
+  /**
+   * Fallback term to use if there are no results
+   */
+  @Prop() fallbackTerm?
 
   @Event({
     composed: true,
@@ -23,7 +36,7 @@ export class KlevuSearchField {
   /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
-  searchResults: EventEmitter<KlevuRecord[]>
+  searchResults: EventEmitter<SearchResultsEvent>
 
   @Event({ composed: true })
   searchSuggestions: EventEmitter<string[]>
@@ -41,9 +54,32 @@ export class KlevuSearchField {
       return
     }
 
-    const result = await KlevuFetch(suggestions(term), search(term, { limit: this.limit }))
+    const searchModifiers = []
+    // if fallback term is defined use it to search
+    if (this.fallbackTerm) {
+      searchModifiers.push(
+        fallback(
+          search(this.fallbackTerm, {
+            limit: this.limit,
+          })
+        )
+      )
+    }
 
-    this.searchResults.emit(result.queriesById("search")?.records)
+    const result = await KlevuFetch(suggestions(term), search(term, { limit: this.limit }, ...searchModifiers))
+
+    const fallbackResult = result.queriesById("search-fallback")
+    if (fallbackResult) {
+      this.searchResults.emit({
+        isFallback: true,
+        records: fallbackResult.records,
+      })
+    } else {
+      this.searchResults.emit({
+        records: result.queriesById("search")?.records,
+      })
+    }
+
     this.searchSuggestions.emit(result.suggestionsById("suggestions").suggestions.map((s) => s.suggest))
   }, 500)
 

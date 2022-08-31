@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type            | Default     |
-| --------- | --------- | ----------- | --------------- | ----------- |
-| `manager` | --        |             | `FilterManager` | `undefined` |
+| Property               | Attribute | Description | Type            | Default     |
+| ---------------------- | --------- | ----------- | --------------- | ----------- |
+| `manager` _(required)_ | --        |             | `FilterManager` | `undefined` |
 
 
 ## Dependencies

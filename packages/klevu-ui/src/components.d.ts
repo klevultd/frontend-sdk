@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuRecord } from "@klevu/core";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductOnProductClick } from "./components/klevu-product/klevu-product";
+import { SearchResultsEvent } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuButton {
         "disabled": boolean;
@@ -55,6 +56,7 @@ export namespace Components {
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuQuicksearch {
+        "fallbackTerm"?: string;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuRecommendations {
@@ -68,6 +70,13 @@ export namespace Components {
         "recommendationTitle": string;
     }
     interface KlevuSearchField {
+        /**
+          * Fallback term to use if there are no results
+         */
+        "fallbackTerm"?: any;
+        /**
+          * Maximum amount of results
+         */
         "limit": number;
         /**
           * The placeholder text to display in the search field.
@@ -260,6 +269,7 @@ declare namespace LocalJSX {
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuQuicksearch {
+        "fallbackTerm"?: string;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuRecommendations {
@@ -273,9 +283,16 @@ declare namespace LocalJSX {
         "recommendationTitle": string;
     }
     interface KlevuSearchField {
+        /**
+          * Fallback term to use if there are no results
+         */
+        "fallbackTerm"?: any;
+        /**
+          * Maximum amount of results
+         */
         "limit"?: number;
         "onSearchClick"?: (event: KlevuSearchFieldCustomEvent<string>) => void;
-        "onSearchResults"?: (event: KlevuSearchFieldCustomEvent<KlevuRecord[]>) => void;
+        "onSearchResults"?: (event: KlevuSearchFieldCustomEvent<SearchResultsEvent>) => void;
         "onSearchSuggestions"?: (event: KlevuSearchFieldCustomEvent<string[]>) => void;
         /**
           * The placeholder text to display in the search field.

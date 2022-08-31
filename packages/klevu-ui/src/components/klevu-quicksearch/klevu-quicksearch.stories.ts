@@ -9,11 +9,17 @@ export default {
   parameters: { notes },
 }
 
-export const Default = WebComponentTemplate<HTMLKlevuQuicksearchElement>({ tag: "klevu-quicksearch", args: {} })
+export const Default = WebComponentTemplate<HTMLKlevuQuicksearchElement>({
+  tag: "klevu-quicksearch",
+  args: {
+    fallbackTerm: "shoes",
+  },
+})
 
 export const WithCustomProduct = WebComponentTemplate<HTMLKlevuQuicksearchElement>({
   tag: "klevu-quicksearch",
   args: {
+    fallbackTerm: "shoes",
     renderProduct: (product: KlevuRecord) => {
       const prod = document.createElement("klevu-product")
       prod.product = product
