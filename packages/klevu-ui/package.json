@@ -11,8 +11,7 @@
   "collection:main": "dist/collection/index.js",
   "unpkg": "dist/klevu-ui/klevu-ui.esm.js",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+    "type": "git"
   },
   "files": [
     "dist/",
@@ -26,7 +25,8 @@
     "test.watch": "stencil test --e2e --watchAll",
     "generate": "stencil generate",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=d4dd0d239c7f"
   },
   "dependencies": {
     "@klevu/core": "file:../klevu-core",
@@ -48,6 +48,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^27.0.3",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.8.0",
     "fast-glob": "^3.2.11",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
