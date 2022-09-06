@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2015",
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
@@ -8,9 +8,9 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2015",
     "sourceMap": true,
-    "lib": ["es6"],
+    "lib": ["dom", "es2015"],
     "outDir": "dist"
   },
   "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**", "dist"]

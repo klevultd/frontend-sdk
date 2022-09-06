@@ -1,12 +1,17 @@
 {
   "name": "@klevu/ui-vue",
+  "sideEffects": false,
   "version": "0.0.1",
-  "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "description": "Klevu UI components for Vue",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/klevultd/frontend-sdk.git"
+  },
   "scripts": {
-    "test": "echo \"Error: no tests",
-    "build": "npm run tsc",
+    "test": "echo 'No tests'",
+    "build": "rm -rf dist && npm run tsc",
     "tsc": "tsc -p ."
   },
   "author": "",

@@ -2,18 +2,18 @@
   "name": "@klevu/ui-react",
   "sideEffects": false,
   "version": "0.0.1",
-  "private": true,
-  "description": "React specific wrapper for component-library",
+  "description": "Klevu UI components for React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/ionic.git"
+    "url": "https://https://github.com/klevultd/frontend-sdk.git"
   },
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist",
     "compile": "npm run tsc",
     "tsc": "tsc -p .",
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "test": "echo 'No tests'"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -24,6 +24,8 @@
   "devDependencies": {
     "@types/jest": "23.3.9",
     "@types/node": "^15.12.2",
+    "@types/react": "^18.0.18",
+    "@types/react-dom": "^18.0.6",
     "jest": "^23.0.0",
     "jest-dom": "^3.0.2",
     "np": "^3.1.0",

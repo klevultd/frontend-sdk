@@ -6,10 +6,6 @@ describe("klevu-facet-list", () => {
   it("renders", async () => {
     const page = await newE2EPage()
     await page.setContent("<klevu-facet-list></klevu-facet-list>")
-    await page.$eval("klevu-facet-list", (elem: HTMLKlevuFacetListElement) => {
-      elem.manager = new FilterManager()
-    })
-    await page.waitForChanges()
 
     const element = await page.find("klevu-facet-list")
     expect(element).toHaveClass("hydrated")

@@ -10,8 +10,10 @@ export class KlevuPopularSearches {
   @State() popularSearches: string[]
 
   async connectedCallback() {
-    const settings = await KlevuKMCSettings()
-    this.popularSearches = settings.root?.klevu_webstorePopularTerms ?? []
+    try {
+      const settings = await KlevuKMCSettings()
+      this.popularSearches = settings.root?.klevu_webstorePopularTerms ?? []
+    } catch {}
   }
 
   render() {
