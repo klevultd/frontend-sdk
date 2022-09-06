@@ -1,0 +1,7 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--klevu-spacing-large);
+  align-items: stretch;
+  justify-content: center;
+}

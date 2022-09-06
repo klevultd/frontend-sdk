@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  padding: var(--klevu-spacing-normal);
+  border: 1px solid var(--klevu-color-border);
+  border-radius: var(--klevu-rounded-corners);
+}
+
+input:focus {
+  outline: 1px solid var(--klevu-color-primary-border);
+}
+
+input:disabled {
+  background-color: var(--klevu-color-dim-background);
+  cursor: not-allowed;
+}

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "sourceMap": true,
+    "lib": ["dom", "es2015"],
+    "outDir": "dist"
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**", "dist"]
+}

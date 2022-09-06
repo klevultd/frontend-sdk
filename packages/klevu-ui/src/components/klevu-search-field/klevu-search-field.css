@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+}
+
+klevu-textfield {
+  width: 100%;
+}
+
+klevu-button {
+  margin-left: var(--klevu-spacing-normal);
+}
