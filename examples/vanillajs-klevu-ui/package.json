@@ -1,0 +1,17 @@
+{
+  "name": "vanillajs-klevu-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite --port 3007 --host"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@klevu/ui": "^0.0.2"
+  },
+  "devDependencies": {
+    "vite": "^3.1.0"
+  }
+}
