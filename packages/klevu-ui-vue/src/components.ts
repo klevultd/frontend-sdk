@@ -57,7 +57,8 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'open',
   'openAtFocus',
   'closeAtOutsideClick',
-  'fullwidthContent'
+  'fullwidthContent',
+  'anchor'
 ]);
 
 
@@ -76,7 +77,8 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 
 export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksearch>('klevu-quicksearch', undefined, [
   'renderProduct',
-  'fallbackTerm'
+  'fallbackTerm',
+  'popupAnchor'
 ]);
 
 

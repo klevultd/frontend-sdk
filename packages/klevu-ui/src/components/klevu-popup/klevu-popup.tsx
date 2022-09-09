@@ -1,5 +1,7 @@
 import { Component, Host, h, Prop, Element } from "@stencil/core"
 
+export type KlevuPopupAnchor = "left" | "right"
+
 @Component({
   tag: "klevu-popup",
   styleUrl: "klevu-popup.css",
@@ -11,6 +13,7 @@ export class KlevuPopup {
   @Prop() openAtFocus = true
   @Prop() closeAtOutsideClick = true
   @Prop() fullwidthContent = false
+  @Prop() anchor: KlevuPopupAnchor = "right"
 
   private openEvent(event) {
     this.open = true
@@ -44,6 +47,8 @@ export class KlevuPopup {
             popup: true,
             show: this.open,
             fullwidth: this.fullwidthContent,
+            left: this.anchor === "left",
+            right: this.anchor === "right",
           }}
         >
           <slot name="content" />

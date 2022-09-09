@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property              | Attribute                | Description | Type      | Default |
-| --------------------- | ------------------------ | ----------- | --------- | ------- |
-| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean` | `true`  |
-| `fullwidthContent`    | `fullwidth-content`      |             | `boolean` | `false` |
-| `open`                | `open`                   |             | `boolean` | `false` |
-| `openAtFocus`         | `open-at-focus`          |             | `boolean` | `true`  |
+| Property              | Attribute                | Description | Type                | Default   |
+| --------------------- | ------------------------ | ----------- | ------------------- | --------- |
+| `anchor`              | `anchor`                 |             | `"left" \| "right"` | `"right"` |
+| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean`           | `true`    |
+| `fullwidthContent`    | `fullwidth-content`      |             | `boolean`           | `false`   |
+| `open`                | `open`                   |             | `boolean`           | `false`   |
+| `openAtFocus`         | `open-at-focus`          |             | `boolean`           | `true`    |
 
 
 ## Dependencies

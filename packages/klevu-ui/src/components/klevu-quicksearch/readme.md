@@ -10,6 +10,7 @@
 | Property        | Attribute       | Description | Type                                    | Default     |
 | --------------- | --------------- | ----------- | --------------------------------------- | ----------- |
 | `fallbackTerm`  | `fallback-term` |             | `string`                                | `undefined` |
+| `popupAnchor`   | `popup-anchor`  |             | `"left" \| "right"`                     | `undefined` |
 | `renderProduct` | --              |             | `(product: KlevuRecord) => HTMLElement` | `undefined` |
 
 

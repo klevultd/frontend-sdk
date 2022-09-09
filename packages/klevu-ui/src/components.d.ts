@@ -7,7 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuRecord } from "@klevu/core";
 import { KlevuUIGlobalSettings } from "./utils/utils";
+import { KlevuPopupAnchor } from "./components/klevu-popup/klevu-popup";
 import { KlevuProductOnProductClick } from "./components/klevu-product/klevu-product";
+import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
 import { SearchResultsEvent } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuButton {
@@ -42,6 +44,7 @@ export namespace Components {
     interface KlevuPopularSearches {
     }
     interface KlevuPopup {
+        "anchor": KlevuPopupAnchor;
         "closeAtOutsideClick": boolean;
         "fullwidthContent": boolean;
         "open": boolean;
@@ -57,6 +60,7 @@ export namespace Components {
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
+        "popupAnchor"?: KlevuPopupAnchor1;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuRecommendations {
@@ -254,6 +258,7 @@ declare namespace LocalJSX {
     interface KlevuPopularSearches {
     }
     interface KlevuPopup {
+        "anchor"?: KlevuPopupAnchor;
         "closeAtOutsideClick"?: boolean;
         "fullwidthContent"?: boolean;
         "open"?: boolean;
@@ -270,6 +275,7 @@ declare namespace LocalJSX {
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
+        "popupAnchor"?: KlevuPopupAnchor1;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuRecommendations {

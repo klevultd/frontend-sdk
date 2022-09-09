@@ -17,7 +17,7 @@
 .image {
   width: 100%;
   aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  background-size: cover;
+  background-size: var(--klevu-product-image-fill, cover);
   background-position: center center;
 }
 
