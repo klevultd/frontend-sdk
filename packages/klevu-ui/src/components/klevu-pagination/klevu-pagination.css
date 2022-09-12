@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  gap: var(--klevu-spacing-normal);
+}
+
+span {
+  display: block;
+  padding: var(--klevu-spacing-normal);
+  background: var(--klevu-color-dim-background);
+  border-radius: var(--klevu-rounded-corners);
+  cursor: pointer;
+}
+
+span.current {
+  font-weight: bold;
+}
+
+span.disabled {
+  color: var(--klevu-color-dim-text);
+}

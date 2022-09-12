@@ -3,12 +3,15 @@ import "./klevu-popup.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Atoms/Popup",
   parameters: {
     notes,
   },
 }
+export default meta
 
 export const StartOpen = WebComponentTemplate<HTMLKlevuPopupElement>({
   tag: "klevu-popup",
@@ -24,7 +27,7 @@ export const StartClosed = WebComponentTemplate<HTMLKlevuPopupElement>({
   tag: "klevu-popup",
   args: {
     open: false,
-    achor: "left",
+    anchor: "left",
   },
   innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>
     <div slot="content">Hello world popup</div>`,

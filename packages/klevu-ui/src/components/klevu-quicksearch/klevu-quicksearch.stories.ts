@@ -4,10 +4,13 @@ import "./klevu-quicksearch.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Apps/Quicksearch",
   parameters: { notes },
 }
+export default meta
 
 export const Default = WebComponentTemplate<HTMLKlevuQuicksearchElement>({
   tag: "klevu-quicksearch",
@@ -23,7 +26,7 @@ export const WithCustomProduct = WebComponentTemplate<HTMLKlevuQuicksearchElemen
     renderProduct: (product: KlevuRecord) => {
       const prod = document.createElement("klevu-product")
       prod.product = product
-      prod.addToCart = true
+      prod.variant = "small"
       return prod
     },
   },

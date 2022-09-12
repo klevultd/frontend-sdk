@@ -6,10 +6,13 @@ import notes from "./readme.md"
 
 const productElements = mockProducts.slice(0, 8).map((p) => KlevuProductElement(p))
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Components/ProductGrid",
   parameters: { notes },
 }
+export default meta
 
 export const Grid = WebComponentTemplate<HTMLKlevuProductGridElement>({
   tag: "klevu-product-grid",
@@ -24,7 +27,7 @@ export const GridWithCustomProduct = WebComponentTemplate<HTMLKlevuProductGridEl
     renderProduct: (product: KlevuRecord) => {
       const prod = document.createElement("klevu-product")
       prod.product = product
-      prod.addToCart = true
+      prod.variant = "small"
       return prod
     },
   },

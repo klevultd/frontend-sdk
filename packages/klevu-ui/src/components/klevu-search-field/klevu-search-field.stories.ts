@@ -3,26 +3,33 @@ import "./klevu-search-field.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Components/SearchField",
-  layout: "centered",
   parameters: {
     notes,
+    actions: {
+      handles: ["klevuSearchResults", "klevuSearchClick", "klevuSearchSuggestions"],
+    },
   },
 }
+export default meta
 
 export const Default = WebComponentTemplate<HTMLKlevuSearchFieldElement>({
   tag: "klevu-search-field",
   args: {
     placeholder: "Custom placeholder",
     fallbackTerm: "jeans",
+    searchCategories: false,
+    searchCmsPages: false,
   },
 })
 
 const searchField = document.createElement("klevu-search-field")
 const productGrid = document.createElement("klevu-product-grid")
-searchField.addEventListener("searchResults", (event: any) => {
-  productGrid.products = event.detail
+searchField.addEventListener("klevuSearchResults", (event: any) => {
+  productGrid.products = event.search?.records
 })
 
 export const WithResults = WebComponentTemplate({ tag: "div", args: {}, childElements: [searchField, productGrid] })
@@ -39,7 +46,7 @@ popup.openAtFocus = false
 popup.fullwidthContent = true
 popup.appendChild(suggestionsPopupSearchField)
 popup.appendChild(suggestionsList)
-popup.addEventListener("searchSuggestions", (event: any) => {
+popup.addEventListener("klevuSearchSuggestions", (event: any) => {
   suggestionsList.innerHTML = ""
   event.detail.forEach((suggestion: string) => {
     const suggestionItem = document.createElement("li")

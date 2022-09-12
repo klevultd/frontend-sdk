@@ -16,10 +16,10 @@
 
 ## Events
 
-| Event         | Description | Type                  |
-| ------------- | ----------- | --------------------- |
-| `textChanged` |             | `CustomEvent<string>` |
-| `textFocused` |             | `CustomEvent<void>`   |
+| Event              | Description | Type                  |
+| ------------------ | ----------- | --------------------- |
+| `klevuTextChanged` |             | `CustomEvent<string>` |
+| `klevuTextFocused` |             | `CustomEvent<void>`   |
 
 
 ## Dependencies

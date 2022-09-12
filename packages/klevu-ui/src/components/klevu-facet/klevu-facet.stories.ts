@@ -4,10 +4,13 @@ import "./klevu-facet.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Components/Facet",
   parameters: { notes },
 }
+export default meta
 
 const manager = new FilterManager()
 manager.initFromListFilters(fullMockRequest.queryResults[0].filters)
@@ -17,5 +20,25 @@ export const Default = WebComponentTemplate<HTMLKlevuFacetElement>({
   args: {
     manager,
     option: manager.options[0],
+    mode: "checkbox",
+  },
+})
+
+export const DefaultRadio = WebComponentTemplate<HTMLKlevuFacetElement>({
+  tag: "klevu-facet",
+  args: {
+    manager,
+    option: manager.options[0],
+    mode: "radio",
+  },
+})
+
+export const CustomSort = WebComponentTemplate<HTMLKlevuFacetElement>({
+  tag: "klevu-facet",
+  args: {
+    manager,
+    option: manager.options[0],
+    mode: "checkbox",
+    customOrder: ["Aqua Blue/Orange", "All Black"],
   },
 })

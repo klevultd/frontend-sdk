@@ -5,12 +5,35 @@ import notes from "./readme.md"
 
 const product = mockProducts[0]
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Components/Product",
-  parameters: { notes },
+  parameters: {
+    notes,
+    actions: {
+      handles: ["klevuProductClick"],
+    },
+  },
 }
+export default meta
 
 export const NormalProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: { product } })
+
+export const ListProduct = WebComponentTemplate<HTMLKlevuProductElement>({
+  tag: "klevu-product",
+  args: { product, variant: "line" },
+})
+
+export const LoadingListProduct = WebComponentTemplate<HTMLKlevuProductElement>({
+  tag: "klevu-product",
+  args: { variant: "line" },
+})
+
+export const SmallProduct = WebComponentTemplate<HTMLKlevuProductElement>({
+  tag: "klevu-product",
+  args: { product, variant: "small" },
+})
 
 export const WithHeavyModifications = WebComponentTemplate<HTMLKlevuProductElement>({
   tag: "klevu-product",

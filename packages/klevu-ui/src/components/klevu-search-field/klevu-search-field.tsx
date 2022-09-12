@@ -1,11 +1,23 @@
-import { fallback, KlevuFetch, KlevuRecord, search, suggestions } from "@klevu/core"
+import {
+  fallback,
+  KlevuFetch,
+  KlevuFetchQueryResult,
+  KlevuRecord,
+  KlevuTypeOfRecord,
+  search,
+  suggestions,
+} from "@klevu/core"
 import { Component, Host, h, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { debounce } from "../../utils/utils"
 
-export type SearchResultsEvent = {
-  isFallback?: boolean
-  records: KlevuRecord[]
+export type SearchResultsEventData = {
+  fallback?: KlevuFetchQueryResult
+  search?: KlevuFetchQueryResult
+  category?: KlevuFetchQueryResult
+  cms?: KlevuFetchQueryResult
 }
+
+export type SuggestionsEventData = string[]
 
 @Component({
   tag: "klevu-search-field",
@@ -30,24 +42,34 @@ export class KlevuSearchField {
    */
   @Prop() fallbackTerm?
 
-  @Event({
-    composed: true,
-  })
+  /**
+   * Should try to find categories as well
+   */
+  @Prop() searchCategories?: boolean
+
+  /**
+   * Should try to find cms pages as well
+   */
+  @Prop() searchCmsPages?: boolean
+
   /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
-  searchResults: EventEmitter<SearchResultsEvent>
-
-  @Event({ composed: true })
-  searchSuggestions: EventEmitter<string[]>
-
   @Event({
     composed: true,
   })
+  klevuSearchResults: EventEmitter<SearchResultsEventData>
+
+  @Event({ composed: true })
+  klevuSearchSuggestions: EventEmitter<SuggestionsEventData>
+
   /**
    * When user clicks search button. Returns the search term.
    */
-  searchClick: EventEmitter<string>
+  @Event({
+    composed: true,
+  })
+  klevuSearchClick: EventEmitter<string>
 
   private doSearch = debounce(async (term: string) => {
     if (term.length < 3) {
@@ -66,21 +88,30 @@ export class KlevuSearchField {
       )
     }
 
-    const result = await KlevuFetch(suggestions(term), search(term, { limit: this.limit }, ...searchModifiers))
-
-    const fallbackResult = result.queriesById("search-fallback")
-    if (fallbackResult) {
-      this.searchResults.emit({
-        isFallback: true,
-        records: fallbackResult.records,
-      })
-    } else {
-      this.searchResults.emit({
-        records: result.queriesById("search")?.records,
-      })
+    const allSearchQueries = [
+      search(term, { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product] }, ...searchModifiers),
+    ]
+    if (this.searchCmsPages) {
+      allSearchQueries.push(
+        search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms] })
+      )
+    }
+    if (this.searchCategories) {
+      allSearchQueries.push(
+        search(term, { id: "categorySearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Category] })
+      )
     }
 
-    this.searchSuggestions.emit(result.suggestionsById("suggestions").suggestions.map((s) => s.suggest))
+    const result = await KlevuFetch(suggestions(term), ...allSearchQueries)
+
+    this.klevuSearchResults.emit({
+      fallback: result.queriesById("search-fallback"),
+      search: result.queriesById("search"),
+      category: result.queriesById("categorySearch"),
+      cms: result.queriesById("cmsSearch"),
+    })
+
+    this.klevuSearchSuggestions.emit(result.suggestionsById("suggestions").suggestions.map((s) => s.suggest))
   }, 500)
 
   handleChange = (event: CustomEvent<string>) => {
@@ -89,7 +120,7 @@ export class KlevuSearchField {
   }
 
   handleSearchClick = (event) => {
-    this.searchClick.emit(this.term)
+    this.klevuSearchClick.emit(this.term)
   }
 
   render() {
@@ -98,7 +129,7 @@ export class KlevuSearchField {
         <klevu-textfield
           value={this.term}
           placeholder={this.placeholder}
-          onTextChanged={this.handleChange.bind(this)}
+          onKlevuTextChanged={this.handleChange.bind(this)}
         ></klevu-textfield>
         <klevu-button onClick={this.handleSearchClick.bind(this)}>Search</klevu-button>
       </Host>

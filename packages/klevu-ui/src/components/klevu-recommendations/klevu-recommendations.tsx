@@ -64,7 +64,7 @@ export class KlevuRecommendations {
       <Host>
         <div class="slides">
           {this.products.map((product) => (
-            <klevu-product onProductClick={this.productClick.bind(this)} product={product}></klevu-product>
+            <klevu-product onKlevuProductClick={this.productClick.bind(this)} product={product}></klevu-product>
           ))}
         </div>
       </Host>

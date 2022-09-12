@@ -8,6 +8,9 @@ import { KlevuRecord } from "@klevu/core"
  * @returns formatted price
  */
 export function renderPrice(amount: number | string, currency: string): string {
+  if (window && window["klevu_ui_settings"] && window["klevu_ui_settings"].renderPrice) {
+    return window["klevu_ui_settings"].renderPrice(amount, currency)
+  }
   const price = typeof amount === "string" ? parseFloat(amount) : amount
   return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(price)
 }
@@ -54,6 +57,8 @@ export type KlevuUIGlobalSettings = {
    * Function to generate url for product in case using default klevu-products
    */
   generateProductUrl?: (product: KlevuRecord) => string
+
+  renderPrice?: typeof renderPrice
 }
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {

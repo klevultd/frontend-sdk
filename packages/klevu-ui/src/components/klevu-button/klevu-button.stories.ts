@@ -3,12 +3,15 @@ import "./klevu-button.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Atoms/Button",
   parameters: {
     notes,
   },
 }
+export default meta
 
 export const Default = WebComponentTemplate<HTMLKlevuButtonElement>({
   tag: "klevu-button",

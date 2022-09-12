@@ -1,5 +1,5 @@
 import { KlevuKMCSettings } from "@klevu/core"
-import { Component, Host, h, State } from "@stencil/core"
+import { Component, Host, h, State, Prop } from "@stencil/core"
 
 @Component({
   tag: "klevu-popular-searches",
@@ -8,6 +8,7 @@ import { Component, Host, h, State } from "@stencil/core"
 })
 export class KlevuPopularSearches {
   @State() popularSearches: string[]
+  @Prop() caption = "Popular searches"
 
   async connectedCallback() {
     try {
@@ -19,7 +20,7 @@ export class KlevuPopularSearches {
   render() {
     return (
       <Host>
-        <h3>Popular searches</h3>
+        <klevu-heading variant="h2">{this.caption}</klevu-heading>
         <ul part="klevu-list">{this.popularSearches ? this.popularSearches.map((s) => <li>{s}</li>) : null}</ul>
       </Host>
     )

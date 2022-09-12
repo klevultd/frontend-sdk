@@ -3,6 +3,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 export type KlevuProductOnProductClick = { product: KlevuRecord; originalEvent: MouseEvent }
+export type KlevuProductVariant = "line" | "small" | "default"
 
 @Component({
   tag: "klevu-product",
@@ -10,18 +11,18 @@ export type KlevuProductOnProductClick = { product: KlevuRecord; originalEvent: 
   shadow: true,
 })
 export class KlevuProduct {
-  @Prop() addToCart?: boolean
+  @Prop() variant: KlevuProductVariant = "default"
   @Prop() product?: KlevuRecord
   @Event({
     composed: true,
     cancelable: true,
   })
-  productClick: EventEmitter<KlevuProductOnProductClick>
+  klevuProductClick: EventEmitter<KlevuProductOnProductClick>
 
   click(ev: MouseEvent) {
     const settings = getGlobalSettings()
 
-    const sentEvent = this.productClick.emit({
+    const sentEvent = this.klevuProductClick.emit({
       product: this.product,
       originalEvent: ev,
     })
@@ -47,10 +48,17 @@ export class KlevuProduct {
   }
 
   render() {
+    const coantainerClasses = {
+      container: true,
+      small: this.variant === "small",
+      line: this.variant === "line",
+      default: this.variant === "default",
+    }
+
     if (!this.product) {
       return (
         <Host>
-          <div class="container">
+          <div class={coantainerClasses}>
             <div class="loading image"></div>
             <div class="loading content">
               <div></div>
@@ -67,7 +75,11 @@ export class KlevuProduct {
 
     return (
       <Host>
-        <a href={settings?.generateProductUrl?.(this.product)} onClick={this.click.bind(this)} class="container">
+        <a
+          href={settings?.generateProductUrl?.(this.product)}
+          onClick={this.click.bind(this)}
+          class={coantainerClasses}
+        >
           <slot name="image">
             <div
               class="image"
@@ -77,8 +89,9 @@ export class KlevuProduct {
               }}
             ></div>
           </slot>
-          <slot name="info">
+          <div class="info" slot="info">
             <p class="productname">{this.product.name}</p>
+            <p class="description">{this.product.shortDesc}</p>
             <p
               class={{
                 isOnSale,
@@ -87,8 +100,7 @@ export class KlevuProduct {
             >
               {renderPrice(this.product.price, this.product.currency)}
             </p>
-          </slot>
-          {this.addToCart && <div>Add to cart</div>}
+          </div>
         </a>
       </Host>
     )

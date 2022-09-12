@@ -4,19 +4,66 @@
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+  display: block;
   padding: var(--klevu-spacing-normal);
   border: 1px solid var(--klevu-color-border);
-  width: var(--klevu-product-width, 300px);
   border-radius: var(--klevu-rounded-corners);
-  height: 100%;
   box-sizing: border-box;
 }
 
-.image {
+.container.default {
+  display: flex;
+  flex-direction: column;
+  width: var(--klevu-product-width, 300px);
+  height: 100%;
+}
+
+.container.small {
+  display: flex;
+  flex-direction: column;
+  width: var(--klevu-product-small-width, 300px);
+  height: 100%;
+}
+
+.default .image {
   width: 100%;
   aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
+  background-size: var(--klevu-product-image-fill, cover);
+  background-position: center center;
+}
+
+.small .image {
+  width: 100%;
+  aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
+  background-size: var(--klevu-product-image-fill, cover);
+  background-position: center center;
+}
+
+.container.line {
+  display: flex;
+  flex-direction: row;
+}
+
+.line .info {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--klevu-spacing-normal);
+}
+
+.line .info p {
+  display: block;
+  margin: 0;
+  text-align: right;
+}
+
+.line .info .price {
+  margin-top: auto;
+}
+
+.container.line .image {
+  width: 100px;
+  height: 100px;
+  aspect-ratio: 1;
   background-size: var(--klevu-product-image-fill, cover);
   background-position: center center;
 }
@@ -26,11 +73,40 @@
   overflow: hidden;
   max-height: 2.2em;
   text-align: left;
+  font-size: var(--klevu-h2-size);
+  font-weight: var(--klevu-h2-weight);
+}
+
+.small .productname {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 2.2em;
+}
+
+.container.small .description {
+  display: none;
 }
 
 .price {
   margin-top: auto;
   text-align: left;
+  font-size: var(--klevu-h2-size);
+  font-weight: var(--klevu-h2-weight);
+}
+
+.small .price {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.container.line .loading {
+  display: flex;
+  flex-direction: row;
 }
 
 .loading.image {

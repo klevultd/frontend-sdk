@@ -1,43 +1,21 @@
-import { css, html, WebComponentTemplate } from "../../storybookUtils"
+import { WebComponentTemplate } from "../../storybookUtils"
 import "./klevu-textfield.css"
 // @ts-ignore
 import notes from "./readme.md"
+import { Meta } from "@storybook/html"
 
-export default {
+const meta: Meta = {
   title: "Atoms/Textfield",
-  parameters: { notes },
+  parameters: {
+    notes,
+    actions: {
+      handles: ["klevuTextChanged", "klevuTextFocused"],
+    },
+  },
 }
+export default meta
 
 export const Default = WebComponentTemplate<HTMLKlevuTextfieldElement>({
   tag: "klevu-textfield",
   args: {},
-})
-
-export const InputWithCheckboxAndButton = WebComponentTemplate<HTMLDivElement>({
-  tag: "div",
-  style: css`
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-  `,
-  innerHTML: html`<klevu-textfield placeholder="Search something"></klevu-textfield><klevu-checkbox></klevu-checkbox
-    ><klevu-button>Button</klevu-button>`,
-})
-
-export const DisabledInputWithCheckboxAndButton = WebComponentTemplate<HTMLDivElement>({
-  tag: "div",
-  style: css`
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-  `,
-  innerHTML: html`<klevu-textfield disabled placeholder="Search something"></klevu-textfield
-    ><klevu-checkbox checked disabled></klevu-checkbox><klevu-checkbox disabled></klevu-checkbox
-    ><klevu-button disabled>Button</klevu-button>`,
 })

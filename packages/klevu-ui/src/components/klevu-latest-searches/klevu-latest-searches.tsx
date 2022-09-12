@@ -1,5 +1,5 @@
-import { KlevuLastClickedProducts, KlevuLastSearches } from "@klevu/core"
-import { Component, Host, h, State } from "@stencil/core"
+import { KlevuLastSearches } from "@klevu/core"
+import { Component, Host, h, State, Prop } from "@stencil/core"
 
 @Component({
   tag: "klevu-latest-searches",
@@ -7,6 +7,7 @@ import { Component, Host, h, State } from "@stencil/core"
   shadow: true,
 })
 export class KlevuLatestSearches {
+  @Prop() caption = "Last searches"
   @State() lastSearches: string[] = []
 
   async connectedCallback() {
@@ -16,7 +17,7 @@ export class KlevuLatestSearches {
   render() {
     return (
       <Host>
-        <h3>Last searches</h3>
+        <klevu-heading variant="h2">{this.caption}</klevu-heading>
         <ul part="klevu-list">
           {this.lastSearches.map((ls) => (
             <li>{ls}</li>
