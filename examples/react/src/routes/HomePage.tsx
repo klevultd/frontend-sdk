@@ -8,6 +8,7 @@ import {
 import { Container, Typography } from "@mui/material"
 import { Fragment, useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
+import { config } from "../config"
 
 let eventClick
 let eventClickNoPersonalisation
@@ -20,7 +21,7 @@ export function HomePage() {
   const fetchData = async () => {
     const result = await KlevuFetch(
       kmcRecommendation(
-        "k-b1c018f7-ee85-45c0-b65f-b9556f7dc15d",
+        config.homePageRecommendationId1,
         {
           id: "trendingrecs",
         },
@@ -29,7 +30,7 @@ export function HomePage() {
         )
       ),
       kmcRecommendation(
-        "k-97cece7f-34de-4b3a-b0bc-8e3bfec86e72",
+        config.homePageRecommendationId2,
         {
           id: "trendingrecs-nopersonalisation",
         },
@@ -41,15 +42,15 @@ export function HomePage() {
 
     eventClick = result
       .queriesById("trendingrecs")
-      .getRecommendationClickSendEvent()
+      ?.getRecommendationClickSendEvent?.()
 
-    eventClickNoPersonalisation = result.queriesById(
-      "trendingrecs-nopersonalisation"
-    ).getRecommendationClickSendEvent
+    eventClickNoPersonalisation = result
+      .queriesById("trendingrecs-nopersonalisation")
+      ?.getRecommendationClickSendEvent?.()
 
-    setTrendingRecs(result.queriesById("trendingrecs").records)
+    setTrendingRecs(result.queriesById("trendingrecs")?.records)
     setTrendingRecsNoPersonlisation(
-      result.queriesById("trendingrecs-nopersonalisation").records
+      result.queriesById("trendingrecs-nopersonalisation")?.records
     )
   }
 

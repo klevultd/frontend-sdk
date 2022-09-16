@@ -41,6 +41,7 @@ import { useSnackbar } from "notistack"
 import { links, pages } from "../components/appbar"
 import { FilterDrawer } from "../components/filterdrawer"
 import { RecommendationBanner } from "../components/recommendationBanner"
+import { config } from "../config"
 
 const manager = new FilterManager()
 let nextFunc: KlevuNextFunc
@@ -54,13 +55,13 @@ let recommendationClickManager: ReturnType<
 // A custom hook that builds on useLocation to parse
 // the query string for you.
 function useQuery() {
-  const { search } = useLocation();
+  const { search } = useLocation()
 
-  return React.useMemo(() => new URLSearchParams(search), [search]);
+  return React.useMemo(() => new URLSearchParams(search), [search])
 }
 
 export function CategoryPage() {
-  let query = useQuery();
+  let query = useQuery()
   const params = useParams()
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
@@ -107,11 +108,11 @@ export function CategoryPage() {
         abTest(),
         debug(),
         overrideSettings({
-          campaignForCatNav: query.get("campaignId")
-        })
+          campaignForCatNav: query.get("campaignId"),
+        } as any)
       ),
       kmcRecommendation(
-        "k-c0013603-1783-4293-bf80-7b3002587dcb",
+        config.categoryPageRecommendationId,
         {
           categoryPath: params.id,
           id: "recommendation",

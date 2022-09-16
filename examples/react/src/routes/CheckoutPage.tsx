@@ -13,6 +13,7 @@ import groupBy from "lodash.groupby"
 import { useSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
+import { config } from "../config"
 
 let eventClick
 
@@ -27,7 +28,7 @@ export function CheckoutPage() {
   const fetchData = async () => {
     const result = await KlevuFetch(
       kmcRecommendation(
-        "k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6",
+        config.checkoutPageRecommendationId,
         {
           id: "alsobought",
           cartProductIds: cart.items.map((p) => p.id),

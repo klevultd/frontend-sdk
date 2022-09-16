@@ -131,4 +131,9 @@ export enum KlevuSearchPreference {
    * Production environment, as performance will be impacted.
    */
   debugQuery = "debugQuery",
+
+  /**
+   * @TODO: Most probably ignores manual boostin. Needs proper documentation
+   */
+  ignoreManualBoosting = "ignoreManualBoosting",
 }

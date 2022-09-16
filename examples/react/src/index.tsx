@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { KlevuConfig, KlevuKMCSettings } from "@klevu/core"
 import { App } from "./app"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -11,16 +11,18 @@ import { SearchResultPage } from "./routes/SearchResultPage"
 import { CheckoutPage } from "./routes/CheckoutPage"
 import axios from "axios"
 import "swiper/css/bundle"
+import { config } from "./config"
 
 KlevuConfig.init({
-  url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
-  apiKey: "klevu-164651914788114877",
+  ...config,
   axios,
 })
 
 KlevuKMCSettings()
 
-ReactDOM.render(
+const container = document.getElementById("reactroot")
+const root = createRoot(container!)
+root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
@@ -39,6 +41,5 @@ ReactDOM.render(
         <Route path="cart" element={<CheckoutPage />} />
       </Route>
     </Routes>
-  </BrowserRouter>,
-  document.getElementById("reactroot")
+  </BrowserRouter>
 )

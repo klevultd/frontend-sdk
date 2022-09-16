@@ -4,6 +4,7 @@ import {
   KlevuRecord,
   products,
   similarProducts,
+  visuallySimilar,
   KMCRecommendationLogic,
   kmcRecommendation,
   sendRecommendationViewEvent,
@@ -16,6 +17,7 @@ import { useCart } from "../cartContext"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { useSnackbar } from "notistack"
 import { LoadingIndicator } from "../components/loadingIndicator"
+import { config } from "../config"
 
 let alsoviewedClick
 
@@ -23,6 +25,7 @@ export function ProductPage() {
   const [product, setProduct] = useState<KlevuRecord>()
   const [similar, setSimilar] = useState<KlevuRecord[]>([])
   const [alsoviewed, setAlsoBoought] = useState<KlevuRecord[]>([])
+  const [vSimilar, setVSimilar] = useState<KlevuRecord[]>([])
   const params = useParams()
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
@@ -31,8 +34,9 @@ export function ProductPage() {
     const res = await KlevuFetch(
       products([params.id]),
       similarProducts([params.id], {}, exclude([params.groupId])),
+      visuallySimilar([params.id]),
       kmcRecommendation(
-        "k-efd5337c-051e-44a2-810c-e23de2be513f",
+        config.productPageRecommendationId,
         {
           id: "alsoviewed",
           currentProductId: params.id,
@@ -41,14 +45,16 @@ export function ProductPage() {
         sendRecommendationViewEvent("Also viewed KMC recommendation")
       )
     )
+
     const product = res.queriesById("products")?.records?.[0]
     const sim = res.queriesById("similar")
     const also = res.queriesById("alsoviewed")
     setProduct(product)
     setSimilar(sim?.records)
     setAlsoBoought(also?.records)
+    setVSimilar(res.queriesById("visuallySimilar")?.records)
 
-    alsoviewedClick = also.getRecommendationClickSendEvent()
+    alsoviewedClick = also.getRecommendationClickSendEvent?.()
   }, [params.id])
 
   useEffect(() => {
@@ -145,6 +151,14 @@ export function ProductPage() {
             )
           }}
         />
+
+        {vSimilar.length > 0 && (
+          <RecommendationBanner
+            products={vSimilar}
+            title="Visually similar products"
+            productClick={() => {}}
+          />
+        )}
 
         <RecommendationBanner
           products={alsoviewed}
