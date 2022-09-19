@@ -10,7 +10,7 @@ RUN chmod +x /entrypoint.sh
 ADD . .
 
 RUN rm -f package-lock.json
-RUN npm install
+RUN npm install --force
 RUN npm run build
 
 ENTRYPOINT ["/entrypoint.sh"]
