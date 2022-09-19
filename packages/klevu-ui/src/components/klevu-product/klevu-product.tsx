@@ -13,6 +13,12 @@ export type KlevuProductVariant = "line" | "small" | "default"
 export class KlevuProduct {
   @Prop() variant: KlevuProductVariant = "default"
   @Prop() product?: KlevuRecord
+  @Prop() hidePrice?: boolean
+  @Prop() hideDescription?: boolean
+  @Prop() hideName?: boolean
+  @Prop() hideImage?: boolean
+  @Prop() hideBrand?: boolean
+
   @Event({
     composed: true,
     cancelable: true,
@@ -80,26 +86,31 @@ export class KlevuProduct {
           onClick={this.click.bind(this)}
           class={coantainerClasses}
         >
-          <slot name="image">
-            <div
-              class="image"
-              part="image"
-              style={{
-                backgroundImage: `url(${this.product.image})`,
-              }}
-            ></div>
-          </slot>
+          {this.hideImage ? null : (
+            <slot name="image">
+              <div
+                class="image"
+                part="image"
+                style={{
+                  backgroundImage: `url(${this.product.image})`,
+                }}
+              ></div>
+            </slot>
+          )}
           <div class="info" slot="info">
-            <p class="productname">{this.product.name}</p>
-            <p class="description">{this.product.shortDesc}</p>
-            <p
-              class={{
-                isOnSale,
-                price: true,
-              }}
-            >
-              {renderPrice(this.product.price, this.product.currency)}
-            </p>
+            {this.hideBrand ? null : <p class="brandname">{this.product.brand}</p>}
+            {this.hideName ? null : <p class="productname">{this.product.name}</p>}
+            {this.hideDescription ? null : <p class="description">{this.product.shortDesc}</p>}
+            {this.hidePrice ? null : (
+              <p
+                class={{
+                  isOnSale,
+                  price: true,
+                }}
+              >
+                {renderPrice(this.product.price, this.product.currency)}
+              </p>
+            )}
           </div>
         </a>
       </Host>

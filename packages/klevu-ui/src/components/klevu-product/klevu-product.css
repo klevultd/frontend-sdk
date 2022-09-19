@@ -68,6 +68,10 @@
   background-position: center center;
 }
 
+.brandname {
+  margin-bottom: 0;
+}
+
 .productname {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -77,15 +81,18 @@
   font-weight: var(--klevu-h2-weight);
 }
 
+.brandname + .productname {
+  margin-top: 0;
+}
+
 .small .productname {
   font-size: inherit;
-  font-weight: inherit;
 }
 
 .description {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-height: 2.2em;
+  max-height: 1.2em;
 }
 
 .container.small .description {

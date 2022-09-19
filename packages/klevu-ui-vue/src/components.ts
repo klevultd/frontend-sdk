@@ -108,6 +108,11 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
 export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('klevu-product', undefined, [
   'variant',
   'product',
+  'hidePrice',
+  'hideDescription',
+  'hideName',
+  'hideImage',
+  'hideBrand',
   'klevuProductClick'
 ]);
 
@@ -152,6 +157,11 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'filterCount',
   'filterCustomOrder',
   'renderProduct'
+]);
+
+
+export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined, [
+  'height'
 ]);
 
 

@@ -1,0 +1,19 @@
+:host {
+  margin: var(--klevu-spacing-large);
+  text-align: center;
+  border-radius: var(--klevu-rounded-corners);
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  gap: var(--klevu-spacing-large);
+  overflow-x: scroll;
+  position: relative;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.slides > * {
+  scroll-snap-align: center;
+}

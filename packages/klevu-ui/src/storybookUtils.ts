@@ -56,9 +56,14 @@ export const WebComponentTemplate = <T>({
   return func
 }
 
-export const KlevuProductElement = (product: KlevuRecord) => {
+export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
   element.product = product
+  if (args) {
+    for (const [key, value] of Object.entries(args)) {
+      element[key] = value
+    }
+  }
   return element
 }
 
