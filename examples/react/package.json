@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@klevu/core": "file:../../packages/klevu-core",
+    "@klevu/core": "^1.2.1",
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "axios": "^0.27.2",
