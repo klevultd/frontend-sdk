@@ -116,6 +116,12 @@ export class FilterManager {
     this.options.forEach((o) =>
       o.options.forEach((o2) => (o2.selected = false))
     )
+
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FilterSelectionUpdate)
+      )
+    }
   }
 
   /**
