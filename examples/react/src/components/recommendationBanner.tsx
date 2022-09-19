@@ -19,7 +19,7 @@ export function RecommendationBanner(props: {
 }) {
   const navigate = useNavigate()
 
-  if (props.products.length === 0) {
+  if (!props.products || props.products.length === 0) {
     return null
   }
 

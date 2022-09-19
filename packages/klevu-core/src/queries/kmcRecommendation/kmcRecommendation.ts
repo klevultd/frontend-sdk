@@ -139,11 +139,19 @@ export async function kmcRecommendation(
   options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
 ): Promise<KlevuFetchFunctionReturnValue> {
-  const kmcConfig = await get<KlevuKMCRecommendations>(
-    `https://config-cdn.ksearchnet.com/recommendations/${
-      KlevuConfig.getDefault().apiKey
-    }/settings/${recommendationId}`
-  )
+  let kmcConfig: KlevuKMCRecommendations | undefined
+  try {
+    kmcConfig = await get<KlevuKMCRecommendations>(
+      `https://config-cdn.ksearchnet.com/recommendations/${
+        KlevuConfig.getDefault().apiKey
+      }/settings/${recommendationId}`
+    )
+  } catch (e) {
+    console.warn("Failed to fetch given KMC recommendation")
+    return {
+      klevuFunctionId: "kmcRecommendation",
+    }
+  }
 
   if (!kmcConfig) {
     throw new Error("Couldn't fetch KMC config")

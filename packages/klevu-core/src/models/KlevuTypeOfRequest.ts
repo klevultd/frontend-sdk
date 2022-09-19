@@ -7,4 +7,5 @@ export enum KlevuTypeOfRequest {
   Trending = "RECS_TRENDING",
   AlsoViewed = "RECS_ALSO_VIEWED",
   AlsoBought = "RECS_ALSO_BOUGHT",
+  VisuallySimilar = "RECS_SIMILAR_IMAGES",
 }

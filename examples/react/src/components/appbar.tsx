@@ -8,14 +8,11 @@ import { QuickSearch } from "./quicksearch"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { CartButton } from "./cartbutton"
 import { Divider } from "@mui/material"
+import { config } from "../config"
 
-export const pages = ["Men", "Women", "Men's shoes"]
-export const links = ["Men", "Women", "men;shoes"]
-const emojis = {
-  Men: "🙎‍♂️",
-  Women: "🙍‍♀️",
-  "Men's shoes": "👞",
-}
+export const pages = config.nav.map((n) => n.label)
+export const links = config.nav.map((n) => n.key)
+const emojis = config.nav.reduce((a, v) => ({ ...a, [v.label]: v.emoji }), {})
 
 const ResponsiveAppBar = () => {
   const location = useLocation()

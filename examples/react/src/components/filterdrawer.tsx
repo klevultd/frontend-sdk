@@ -10,6 +10,7 @@ import {
   Checkbox,
   ListItemText,
   Slider,
+  Button,
 } from "@mui/material"
 import React from "react"
 import debounce from "lodash.debounce"
@@ -55,6 +56,10 @@ export function FilterDrawer(props: {
       <IconButton onClick={handleDrawerClose}>
         <ChevronLeft />
       </IconButton>
+      <Divider />
+      <Button onClick={() => props.manager.clearOptionSelections()}>
+        Clear selections
+      </Button>
       <Divider />
       {props.options.map((o, i) => (
         <React.Fragment key={i}>

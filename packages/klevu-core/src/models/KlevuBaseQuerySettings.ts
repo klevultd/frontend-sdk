@@ -165,7 +165,7 @@ export type KlevuBaseQuerySettings = {
      * recently viewed products). The most recently clicked record should be
      * the first element in the array.
      */
-    recentObjects: Array<{
+    recentObjects?: Array<{
       /**
        * Type of visited record
        */
@@ -174,6 +174,20 @@ export type KlevuBaseQuerySettings = {
        * Id's of records
        */
       records: Array<{ id: string }>
+    }>
+
+    /**
+     * Used with visually similar recommendation search
+     */
+    sourceObjects?: Array<{
+      /**
+       * Type of visited record
+       */
+      typeOfRecord: KlevuAnyTypeOfRecord
+      /**
+       * Id's of records
+       */
+      records: Array<{ itemGroupId: string }>
     }>
   }
 
