@@ -4,7 +4,6 @@ import {
   KlevuRecord,
   products,
   similarProducts,
-  visuallySimilar,
   KMCRecommendationLogic,
   kmcRecommendation,
   sendRecommendationViewEvent,
@@ -18,6 +17,7 @@ import { RecommendationBanner } from "../components/recommendationBanner"
 import { useSnackbar } from "notistack"
 import { LoadingIndicator } from "../components/loadingIndicator"
 import { config } from "../config"
+import { InspireMe } from "../components/inspireMe"
 
 let alsoviewedClick
 
@@ -25,7 +25,6 @@ export function ProductPage() {
   const [product, setProduct] = useState<KlevuRecord>()
   const [similar, setSimilar] = useState<KlevuRecord[]>([])
   const [alsoviewed, setAlsoBoought] = useState<KlevuRecord[]>([])
-  const [vSimilar, setVSimilar] = useState<KlevuRecord[]>([])
   const params = useParams()
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
@@ -33,8 +32,8 @@ export function ProductPage() {
   const fetchProduct = useCallback(async () => {
     const res = await KlevuFetch(
       products([params.id]),
-      similarProducts([params.id], {}, exclude([params.groupId])),
-      visuallySimilar([params.id]),
+      similarProducts([params.id], {}, exclude([params.groupId]))
+      /*
       kmcRecommendation(
         config.productPageRecommendationId,
         {
@@ -44,6 +43,7 @@ export function ProductPage() {
         },
         sendRecommendationViewEvent("Also viewed KMC recommendation")
       )
+      */
     )
 
     const product = res.queriesById("products")?.records?.[0]
@@ -52,7 +52,6 @@ export function ProductPage() {
     setProduct(product)
     setSimilar(sim?.records)
     setAlsoBoought(also?.records)
-    setVSimilar(res.queriesById("visuallySimilar")?.records)
 
     alsoviewedClick = also.getRecommendationClickSendEvent?.()
   }, [params.id])
@@ -82,11 +81,20 @@ export function ProductPage() {
           {product.name}
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} style={{ textAlign: "center" }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            style={{ textAlign: "center", position: "relative" }}
+          >
             <img
               src={product.image}
               alt={product.name}
-              style={{ maxWidth: "100%", border: "1px solid #ccc" }}
+              style={{ maxWidth: "100%", width: "100%" }}
+            />
+            <InspireMe
+              id={params.groupId}
+              style={{ position: "absolute", top: "0", right: "0" }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -151,14 +159,6 @@ export function ProductPage() {
             )
           }}
         />
-
-        {vSimilar.length > 0 && (
-          <RecommendationBanner
-            products={vSimilar}
-            title="Visually similar products"
-            productClick={() => {}}
-          />
-        )}
 
         <RecommendationBanner
           products={alsoviewed}
