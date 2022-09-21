@@ -1,9 +1,10 @@
-import { css, html, mockProducts, WebComponentTemplate } from "../../storybookUtils"
+import { css, fullMockRequest, html, mockProducts, WebComponentTemplate } from "../../storybookUtils"
 import "./klevu-product.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-const product = mockProducts[0]
+const product = fullMockRequest.queryResults[0].records[0]
+// const fullMockProducts = fullMockRequest.queryResults[0].records
 
 import { Meta } from "@storybook/html"
 
@@ -51,6 +52,11 @@ export const WithHeavyModifications = WebComponentTemplate<HTMLKlevuProductEleme
       border: 1px solid blue;
     }
   `,
+})
+
+export const HideSwatches = WebComponentTemplate<HTMLKlevuProductElement>({
+  tag: "klevu-product",
+  args: { product, hideSwatches: true },
 })
 
 export const LoadingProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: {} })

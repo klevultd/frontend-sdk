@@ -134,6 +134,7 @@ export namespace Components {
         "hideImage"?: boolean;
         "hideName"?: boolean;
         "hidePrice"?: boolean;
+        "hideSwatches"?: boolean;
         "product"?: KlevuRecord;
         "variant": KlevuProductVariant;
     }
@@ -514,6 +515,7 @@ declare namespace LocalJSX {
         "hideImage"?: boolean;
         "hideName"?: boolean;
         "hidePrice"?: boolean;
+        "hideSwatches"?: boolean;
         "onKlevuProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
         "product"?: KlevuRecord;
         "variant"?: KlevuProductVariant;

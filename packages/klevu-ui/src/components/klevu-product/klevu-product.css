@@ -143,6 +143,22 @@
   animation-delay: calc(var(--loading-animation-time) / 3);
 }
 
+.swatches {
+  display: none;
+  margin: var(--klevu-spacing-small) 0;
+}
+
+.swatches > div {
+  height: 32px;
+  width: 32px;
+  background-size: cover;
+}
+
+.container.default .swatches {
+  display: flex;
+  gap: var(--klevu-spacing-small);
+}
+
 @keyframes loadinggradient {
   0% {
     background-position: 0% 50%;

@@ -108,6 +108,7 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
 export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('klevu-product', undefined, [
   'variant',
   'product',
+  'hideSwatches',
   'hidePrice',
   'hideDescription',
   'hideName',

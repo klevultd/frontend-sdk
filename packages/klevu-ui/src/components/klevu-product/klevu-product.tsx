@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
+import { Component, Host, h, Prop, Event, EventEmitter, State } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 export type KlevuProductOnProductClick = { product: KlevuRecord; originalEvent: MouseEvent }
@@ -13,11 +13,14 @@ export type KlevuProductVariant = "line" | "small" | "default"
 export class KlevuProduct {
   @Prop() variant: KlevuProductVariant = "default"
   @Prop() product?: KlevuRecord
+  @Prop() hideSwatches?: boolean
   @Prop() hidePrice?: boolean
   @Prop() hideDescription?: boolean
   @Prop() hideName?: boolean
   @Prop() hideImage?: boolean
   @Prop() hideBrand?: boolean
+
+  @State() hoverImage?: string
 
   @Event({
     composed: true,
@@ -79,6 +82,31 @@ export class KlevuProduct {
     const settings = getGlobalSettings()
     const isOnSale = this.product.price != this.product.salePrice
 
+    const swatches: Array<{
+      Id?: string
+      Color?: string
+      Image?: string
+      SwatchImage?: string
+    }> = []
+    if (!this.hideSwatches) {
+      const swatchesParts = this.product.swatchesInfo.split(" ;;;; ")
+
+      for (const sPart of swatchesParts) {
+        const splitPos = sPart.indexOf(":")
+        const key = sPart.substring(0, splitPos)
+        const value = sPart.substring(splitPos + 1)
+        for (const keyStart of ["variantId", "variantColor", "variantImage", "variantSwatchImage"]) {
+          if (key.startsWith(keyStart)) {
+            const index = parseInt(key.substring(keyStart.length)) - 1
+            if (!swatches[index]) {
+              swatches[index] = {}
+            }
+            swatches[index][keyStart.substring("variant".length)] = value
+          }
+        }
+      }
+    }
+
     return (
       <Host>
         <a
@@ -92,11 +120,24 @@ export class KlevuProduct {
                 class="image"
                 part="image"
                 style={{
-                  backgroundImage: `url(${this.product.image})`,
+                  backgroundImage: `url(${this.hoverImage || this.product.image})`,
                 }}
               ></div>
             </slot>
           )}
+          {!this.hideSwatches && swatches.length > 1 ? (
+            <div class="swatches" onMouseLeave={() => (this.hoverImage = undefined)}>
+              {swatches.map((swatch) => (
+                <div
+                  style={{
+                    backgroundColor: swatch.Color,
+                    backgroundImage: `url(${swatch.SwatchImage || swatch.Image})`,
+                  }}
+                  onMouseEnter={() => (this.hoverImage = swatch.Image)}
+                ></div>
+              ))}
+            </div>
+          ) : null}
           <div class="info" slot="info">
             {this.hideBrand ? null : <p class="brandname">{this.product.brand}</p>}
             {this.hideName ? null : <p class="productname">{this.product.name}</p>}
