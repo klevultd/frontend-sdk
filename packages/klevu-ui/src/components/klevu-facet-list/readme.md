@@ -30,6 +30,7 @@
 graph TD;
   klevu-facet-list --> klevu-facet
   klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-slider
   klevu-merchandising --> klevu-facet-list
   klevu-search-landing-page --> klevu-facet-list
   style klevu-facet-list fill:#f9f,stroke:#333,stroke-width:4px

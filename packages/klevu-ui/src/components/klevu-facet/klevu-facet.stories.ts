@@ -1,4 +1,4 @@
-import { FilterManager } from "@klevu/core"
+import { FilterManager, KlevuFilterType } from "@klevu/core"
 import { fullMockRequest, WebComponentTemplate } from "../../storybookUtils"
 import "./klevu-facet.css"
 // @ts-ignore
@@ -40,5 +40,21 @@ export const CustomSort = WebComponentTemplate<HTMLKlevuFacetElement>({
     option: manager.options[0],
     mode: "checkbox",
     customOrder: ["Aqua Blue/Orange", "All Black"],
+  },
+})
+
+export const Slider = WebComponentTemplate<HTMLKlevuFacetElement>({
+  tag: "klevu-facet",
+  args: {
+    manager,
+    slider: {
+      type: KlevuFilterType.Slider,
+      min: "0",
+      max: "0",
+      start: "10",
+      end: "90",
+      key: "foo",
+      label: "Ranger slider",
+    },
   },
 })

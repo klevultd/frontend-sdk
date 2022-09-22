@@ -56,7 +56,16 @@ export class KlevuSearchLandingPage {
         this.term,
         { limit: this.limit, sort: this.sort },
         sendSearchEvent(),
-        listFilters({ filterManager: this.manager, limit: this.filterCount }),
+        listFilters({
+          filterManager: this.manager,
+          limit: this.filterCount,
+          rangeFilterSettings: [
+            {
+              key: "klevu_price",
+              minMax: true,
+            },
+          ],
+        }),
         applyFilterWithManager(this.manager)
       )
     )

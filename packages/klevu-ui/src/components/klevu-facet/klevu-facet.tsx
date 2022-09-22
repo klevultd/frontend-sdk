@@ -87,8 +87,17 @@ export class KlevuFacet {
       return (
         <Host>
           <h3>{this.slider.label}</h3>
-          {this.slider.label} ({this.slider.min} - {this.slider.max})
-          <input type="text" value={this.slider.start} /> - <input type="text" value={this.slider.end} />
+          <klevu-slider
+            showTooltips
+            min={parseFloat(this.slider.min)}
+            max={parseFloat(this.slider.max)}
+            start={this.slider.start ? parseFloat(this.slider.start) : undefined}
+            end={this.slider.end ? parseFloat(this.slider.end) : undefined}
+            onKlevuSliderChange={(event) => {
+              this.manager.updateSlide(this.slider.key, event.detail[0], event.detail[1])
+              console.log(event)
+            }}
+          ></klevu-slider>
         </Host>
       )
     }

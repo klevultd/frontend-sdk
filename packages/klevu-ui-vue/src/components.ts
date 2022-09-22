@@ -161,6 +161,16 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
 ]);
 
 
+export const KlevuSlider = /*@__PURE__*/ defineContainer<JSX.KlevuSlider>('klevu-slider', undefined, [
+  'min',
+  'max',
+  'start',
+  'end',
+  'showTooltips',
+  'klevuSliderChange'
+]);
+
+
 export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined, [
   'height'
 ]);

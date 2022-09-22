@@ -192,6 +192,13 @@ export namespace Components {
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
+    interface KlevuSlider {
+        "end"?: number;
+        "max": number;
+        "min": number;
+        "showTooltips"?: boolean;
+        "start"?: number;
+    }
     interface KlevuSlides {
         "height": string;
     }
@@ -222,6 +229,10 @@ export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSearchFieldElement;
+}
+export interface KlevuSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSliderElement;
 }
 export interface KlevuSortCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -346,6 +357,12 @@ declare global {
         prototype: HTMLKlevuSearchLandingPageElement;
         new (): HTMLKlevuSearchLandingPageElement;
     };
+    interface HTMLKlevuSliderElement extends Components.KlevuSlider, HTMLStencilElement {
+    }
+    var HTMLKlevuSliderElement: {
+        prototype: HTMLKlevuSliderElement;
+        new (): HTMLKlevuSliderElement;
+    };
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
     var HTMLKlevuSlidesElement: {
@@ -384,6 +401,7 @@ declare global {
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
         "klevu-search-landing-page": HTMLKlevuSearchLandingPageElement;
+        "klevu-slider": HTMLKlevuSliderElement;
         "klevu-slides": HTMLKlevuSlidesElement;
         "klevu-sort": HTMLKlevuSortElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
@@ -583,6 +601,14 @@ declare namespace LocalJSX {
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
+    interface KlevuSlider {
+        "end"?: number;
+        "max"?: number;
+        "min"?: number;
+        "onKlevuSliderChange"?: (event: KlevuSliderCustomEvent<[number, number]>) => void;
+        "showTooltips"?: boolean;
+        "start"?: number;
+    }
     interface KlevuSlides {
         "height"?: string;
     }
@@ -616,6 +642,7 @@ declare namespace LocalJSX {
         "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
         "klevu-search-landing-page": KlevuSearchLandingPage;
+        "klevu-slider": KlevuSlider;
         "klevu-slides": KlevuSlides;
         "klevu-sort": KlevuSort;
         "klevu-textfield": KlevuTextfield;
@@ -644,6 +671,7 @@ declare module "@stencil/core" {
             "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
+            "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;

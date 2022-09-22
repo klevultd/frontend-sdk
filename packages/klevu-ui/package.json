@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "@klevu/core": "1.2.0",
-    "@stencil/core": "^2.13.0"
+    "@stencil/core": "^2.13.0",
+    "nouislider": "15.6.1"
   },
   "contributors": [
     {

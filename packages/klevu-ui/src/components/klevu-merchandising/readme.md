@@ -36,6 +36,7 @@ graph TD;
   klevu-merchandising --> klevu-button
   klevu-facet-list --> klevu-facet
   klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-slider
   klevu-product-grid --> klevu-product
   style klevu-merchandising fill:#f9f,stroke:#333,stroke-width:4px
 ```
