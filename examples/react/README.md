@@ -332,6 +332,10 @@ In the example above, we pass in the ID of the product along with the category n
 
 In [Category page](./src/routes/CategoryPage.tsx) klevuFetch function there is a kmcRecommendation call included. It is created in KMC and it creates a product category recommendation. You need to pass current category id to it get correct results. Read more about [KMC recommendations](#kmc-recommendations).
 
+### Category CampaignID
+
+In [Category page](./src/routes/CategoryPage.tsx) we are looking for a parameter called `campaignId`; which is sent into the `categoryMerchandising` call. We are not storing it in this demo as it is just implemented for demonstration purposes, but in production this ID can be stores in localStorage, a cookie, or a server-side session variable. 
+
 ## Product fetch
 
 The Klevu SDK includes a convenient and simple search to quickly load a product called _products_ and passing in the ID of the product.

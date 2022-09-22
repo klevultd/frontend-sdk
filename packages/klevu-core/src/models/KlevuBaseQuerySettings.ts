@@ -220,4 +220,15 @@ export type KlevuBaseQuerySettings = {
    * and 'my_group_3', but not 'my_group_2'.
    */
   visibilityGroupID?: string
+
+    /**
+   * In KMC the user is able to create campaigns for collections; which are specific 
+   * rules that are tied to a start and end date. This allows a user to create rules 
+   * that assist in promoting or demoting products during a sale, event, season, etc.
+   * This parameter allows a user to pass in the ID of a campaign into a search.
+   * 
+   * The implementation can be handled any way the user chooses: URL paramters, cookie, 
+   * localStorage, session, DB, etc. 
+   */
+  campaignForCatNav?: string
 }

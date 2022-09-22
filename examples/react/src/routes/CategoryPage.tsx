@@ -92,6 +92,7 @@ export function CategoryPage() {
           id: "search",
           limit: itemsOnPage,
           sort: sorting,
+          campaignForCatNav: query.get("campaignId")
         },
         listFilters({
           include: ["color", "", "size", "designer"],
@@ -106,10 +107,7 @@ export function CategoryPage() {
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id),
         abTest(),
-        debug(),
-        overrideSettings({
-          campaignForCatNav: query.get("campaignId"),
-        } as any)
+        debug()
       ),
       kmcRecommendation(
         config.categoryPageRecommendationId,
