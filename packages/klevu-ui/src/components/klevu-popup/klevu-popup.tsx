@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element } from "@stencil/core"
+import { Component, Host, h, Prop, Element, State, Method } from "@stencil/core"
 
 export type KlevuPopupAnchor = "left" | "right"
 
@@ -9,11 +9,13 @@ export type KlevuPopupAnchor = "left" | "right"
 })
 export class KlevuPopup {
   @Element() el
-  @Prop() open = false
+  @Prop() startOpen?: boolean
   @Prop() openAtFocus = true
   @Prop() closeAtOutsideClick = true
   @Prop() fullwidthContent = false
   @Prop() anchor: KlevuPopupAnchor = "right"
+
+  @State() open = false
 
   private openEvent(event) {
     this.open = true
@@ -25,7 +27,20 @@ export class KlevuPopup {
     }
   }
 
+  @Method()
+  async openModal() {
+    this.open = true
+  }
+
+  @Method()
+  async closeModal() {
+    this.open = false
+  }
+
   connectedCallback() {
+    if (this.startOpen) {
+      this.open = true
+    }
     if (this.openAtFocus) {
       this.el.addEventListener("click", this.openEvent)
     }

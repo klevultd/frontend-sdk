@@ -16,19 +16,13 @@
 | `searchCmsPages`   | `search-cms-pages`  |             | `boolean`                               | `undefined` |
 
 
-## Shadow Parts
-
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
-
-
 ## Dependencies
 
 ### Depends on
 
 - [klevu-popup](../klevu-popup)
 - [klevu-search-field](../klevu-search-field)
+- [klevu-suggestions-list](../klevu-suggestions-list)
 - [klevu-latest-searches](../klevu-latest-searches)
 - [klevu-cms-list](../klevu-cms-list)
 - [klevu-product-grid](../klevu-product-grid)
@@ -38,6 +32,7 @@
 graph TD;
   klevu-quicksearch --> klevu-popup
   klevu-quicksearch --> klevu-search-field
+  klevu-quicksearch --> klevu-suggestions-list
   klevu-quicksearch --> klevu-latest-searches
   klevu-quicksearch --> klevu-cms-list
   klevu-quicksearch --> klevu-product-grid

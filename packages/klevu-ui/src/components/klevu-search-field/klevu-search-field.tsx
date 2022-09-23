@@ -1,6 +1,7 @@
 import {
   fallback,
   KlevuFetch,
+  KlevuFetchFunctionReturnValue,
   KlevuFetchQueryResult,
   KlevuRecord,
   KlevuTypeOfRecord,
@@ -43,6 +44,16 @@ export class KlevuSearchField {
   @Prop() fallbackTerm?
 
   /**
+   * Search products
+   */
+  @Prop() searchProducts?: boolean
+
+  /**
+   * Search suggestions
+   */
+  @Prop() searchSuggestions?: boolean
+
+  /**
    * Should try to find categories as well
    */
   @Prop() searchCategories?: boolean
@@ -78,7 +89,7 @@ export class KlevuSearchField {
 
     const searchModifiers = []
     // if fallback term is defined use it to search
-    if (this.fallbackTerm) {
+    if (this.fallbackTerm && this.searchProducts) {
       searchModifiers.push(
         fallback(
           search(this.fallbackTerm, {
@@ -88,9 +99,12 @@ export class KlevuSearchField {
       )
     }
 
-    const allSearchQueries = [
-      search(term, { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product] }, ...searchModifiers),
-    ]
+    const allSearchQueries: KlevuFetchFunctionReturnValue[] = []
+    if (this.searchProducts) {
+      allSearchQueries.push(
+        search(term, { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product] }, ...searchModifiers)
+      )
+    }
     if (this.searchCmsPages) {
       allSearchQueries.push(
         search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms] })
@@ -101,8 +115,15 @@ export class KlevuSearchField {
         search(term, { id: "categorySearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Category] })
       )
     }
+    if (this.searchSuggestions) {
+      allSearchQueries.push(suggestions(term))
+    }
 
-    const result = await KlevuFetch(suggestions(term), ...allSearchQueries)
+    if (allSearchQueries.length === 0) {
+      throw new Error("You need specify at least one thing to search")
+    }
+
+    const result = await KlevuFetch(...allSearchQueries)
 
     this.klevuSearchResults.emit({
       fallback: result.queriesById("search-fallback"),

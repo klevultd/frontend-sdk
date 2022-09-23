@@ -69,12 +69,10 @@ export class KlevuQuicksearch {
           ></klevu-search-field>
           <div class="content" slot="content">
             <aside>
-              <h3>Search suggestions</h3>
-              <ul part="klevu-list">
-                {this.suggestions.map((s) => (
-                  <li innerHTML={s}></li>
-                ))}
-              </ul>
+              <klevu-suggestions-list
+                exportparts={globalExportedParts}
+                suggestions={this.suggestions}
+              ></klevu-suggestions-list>
               <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
               {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
               {this.categories && <klevu-cms-list pages={this.categories} caption="Found pages"></klevu-cms-list>}

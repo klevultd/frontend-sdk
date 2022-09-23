@@ -97,7 +97,7 @@ export const KlevuPopularSearches = /*@__PURE__*/ defineContainer<JSX.KlevuPopul
 
 
 export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-popup', undefined, [
-  'open',
+  'startOpen',
   'openAtFocus',
   'closeAtOutsideClick',
   'fullwidthContent',
@@ -143,6 +143,8 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'placeholder',
   'limit',
   'fallbackTerm',
+  'searchProducts',
+  'searchSuggestions',
   'searchCategories',
   'searchCmsPages',
   'klevuSearchResults',
@@ -158,6 +160,11 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'filterCount',
   'filterCustomOrder',
   'renderProduct'
+]);
+
+
+export const KlevuSimpleSearch = /*@__PURE__*/ defineContainer<JSX.KlevuSimpleSearch>('klevu-simple-search', undefined, [
+  'klevuSuggestionClick'
 ]);
 
 
@@ -178,6 +185,12 @@ export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu
 
 export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sort', undefined, [
   'klevuSortChanged'
+]);
+
+
+export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSuggestionsList>('klevu-suggestions-list', undefined, [
+  'caption',
+  'suggestions'
 ]);
 
 

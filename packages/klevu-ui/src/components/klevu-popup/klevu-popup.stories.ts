@@ -16,7 +16,7 @@ export default meta
 export const StartOpen = WebComponentTemplate<HTMLKlevuPopupElement>({
   tag: "klevu-popup",
   args: {
-    open: true,
+    startOpen: true,
     anchor: "left",
   },
   innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>
@@ -26,7 +26,7 @@ export const StartOpen = WebComponentTemplate<HTMLKlevuPopupElement>({
 export const StartClosed = WebComponentTemplate<HTMLKlevuPopupElement>({
   tag: "klevu-popup",
   args: {
-    open: false,
+    startOpen: false,
     anchor: "left",
   },
   innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>

@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  display: block;
+  cursor: pointer;
+  padding: var(--klevu-spacing-small) 0;
+}
+
+li:hover {
+  background-color: var(--klevu-color-dim-background);
+}

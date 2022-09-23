@@ -13,6 +13,10 @@
   margin-right: var(--klevu-spacing-normal);
 }
 
+klevu-suggestions-list {
+  margin-bottom: var(--klevu-spacing-normal);
+}
+
 .content section {
   max-width: 940px;
 }

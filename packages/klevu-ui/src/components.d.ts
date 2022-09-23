@@ -124,9 +124,11 @@ export namespace Components {
     interface KlevuPopup {
         "anchor": KlevuPopupAnchor;
         "closeAtOutsideClick": boolean;
+        "closeModal": () => Promise<void>;
         "fullwidthContent": boolean;
-        "open": boolean;
         "openAtFocus": boolean;
+        "openModal": () => Promise<void>;
+        "startOpen"?: boolean;
     }
     interface KlevuProduct {
         "hideBrand"?: boolean;
@@ -180,6 +182,14 @@ export namespace Components {
           * Should try to find cms pages as well
          */
         "searchCmsPages"?: boolean;
+        /**
+          * Search products
+         */
+        "searchProducts"?: boolean;
+        /**
+          * Search suggestions
+         */
+        "searchSuggestions"?: boolean;
     }
     interface KlevuSearchLandingPage {
         "filterCount"?: number;
@@ -192,6 +202,8 @@ export namespace Components {
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
+    interface KlevuSimpleSearch {
+    }
     interface KlevuSlider {
         "end"?: number;
         "max": number;
@@ -203,6 +215,10 @@ export namespace Components {
         "height": string;
     }
     interface KlevuSort {
+    }
+    interface KlevuSuggestionsList {
+        "caption": string;
+        "suggestions": string[];
     }
     interface KlevuTextfield {
         "disabled": boolean;
@@ -229,6 +245,10 @@ export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSearchFieldElement;
+}
+export interface KlevuSimpleSearchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSimpleSearchElement;
 }
 export interface KlevuSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -357,6 +377,12 @@ declare global {
         prototype: HTMLKlevuSearchLandingPageElement;
         new (): HTMLKlevuSearchLandingPageElement;
     };
+    interface HTMLKlevuSimpleSearchElement extends Components.KlevuSimpleSearch, HTMLStencilElement {
+    }
+    var HTMLKlevuSimpleSearchElement: {
+        prototype: HTMLKlevuSimpleSearchElement;
+        new (): HTMLKlevuSimpleSearchElement;
+    };
     interface HTMLKlevuSliderElement extends Components.KlevuSlider, HTMLStencilElement {
     }
     var HTMLKlevuSliderElement: {
@@ -374,6 +400,12 @@ declare global {
     var HTMLKlevuSortElement: {
         prototype: HTMLKlevuSortElement;
         new (): HTMLKlevuSortElement;
+    };
+    interface HTMLKlevuSuggestionsListElement extends Components.KlevuSuggestionsList, HTMLStencilElement {
+    }
+    var HTMLKlevuSuggestionsListElement: {
+        prototype: HTMLKlevuSuggestionsListElement;
+        new (): HTMLKlevuSuggestionsListElement;
     };
     interface HTMLKlevuTextfieldElement extends Components.KlevuTextfield, HTMLStencilElement {
     }
@@ -401,9 +433,11 @@ declare global {
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
         "klevu-search-landing-page": HTMLKlevuSearchLandingPageElement;
+        "klevu-simple-search": HTMLKlevuSimpleSearchElement;
         "klevu-slider": HTMLKlevuSliderElement;
         "klevu-slides": HTMLKlevuSlidesElement;
         "klevu-sort": HTMLKlevuSortElement;
+        "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
     }
 }
@@ -524,8 +558,8 @@ declare namespace LocalJSX {
         "anchor"?: KlevuPopupAnchor;
         "closeAtOutsideClick"?: boolean;
         "fullwidthContent"?: boolean;
-        "open"?: boolean;
         "openAtFocus"?: boolean;
+        "startOpen"?: boolean;
     }
     interface KlevuProduct {
         "hideBrand"?: boolean;
@@ -589,6 +623,14 @@ declare namespace LocalJSX {
           * Should try to find cms pages as well
          */
         "searchCmsPages"?: boolean;
+        /**
+          * Search products
+         */
+        "searchProducts"?: boolean;
+        /**
+          * Search suggestions
+         */
+        "searchSuggestions"?: boolean;
     }
     interface KlevuSearchLandingPage {
         "filterCount"?: number;
@@ -600,6 +642,9 @@ declare namespace LocalJSX {
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
         "sort"?: KlevuSearchSorting;
         "term": string;
+    }
+    interface KlevuSimpleSearch {
+        "onKlevuSuggestionClick"?: (event: KlevuSimpleSearchCustomEvent<string>) => void;
     }
     interface KlevuSlider {
         "end"?: number;
@@ -614,6 +659,10 @@ declare namespace LocalJSX {
     }
     interface KlevuSort {
         "onKlevuSortChanged"?: (event: KlevuSortCustomEvent<KlevuSearchSorting>) => void;
+    }
+    interface KlevuSuggestionsList {
+        "caption"?: string;
+        "suggestions"?: string[];
     }
     interface KlevuTextfield {
         "disabled"?: boolean;
@@ -642,9 +691,11 @@ declare namespace LocalJSX {
         "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
         "klevu-search-landing-page": KlevuSearchLandingPage;
+        "klevu-simple-search": KlevuSimpleSearch;
         "klevu-slider": KlevuSlider;
         "klevu-slides": KlevuSlides;
         "klevu-sort": KlevuSort;
+        "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-textfield": KlevuTextfield;
     }
 }
@@ -671,9 +722,11 @@ declare module "@stencil/core" {
             "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
+            "klevu-simple-search": LocalJSX.KlevuSimpleSearch & JSXBase.HTMLAttributes<HTMLKlevuSimpleSearchElement>;
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
+            "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
         }
     }
