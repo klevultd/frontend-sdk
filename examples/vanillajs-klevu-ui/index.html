@@ -6,6 +6,7 @@
       rel="stylesheet"
       href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css"
     />
+    <script type="module" src="./config.ts"></script>
     <script
       type="module"
       src="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"
@@ -29,7 +30,11 @@
     >
       <nav>
         <h1>Klevu UI example</h1>
-        <klevu-quicksearch popup-anchor="right"></klevu-quicksearch>
+        <klevu-quicksearch
+          search-categories
+          search-cms-pages
+          popup-anchor="right"
+        ></klevu-quicksearch>
       </nav>
       <section>
         <klevu-merchandising category="Jeans & Trousers"></klevu-merchandising>

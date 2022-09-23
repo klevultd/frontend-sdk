@@ -1,5 +1,6 @@
 import { defineConfig } from "vite"
 
+/*
 export default defineConfig({
   optimizeDeps: {
     include: ["@klevu/ui"],
@@ -10,3 +11,4 @@ export default defineConfig({
     },
   },
 })
+*/

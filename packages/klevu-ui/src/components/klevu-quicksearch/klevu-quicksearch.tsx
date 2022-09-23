@@ -25,12 +25,15 @@ export class KlevuQuicksearch {
 
   clickEvent?: (productId: string, variantId?: string) => void
 
+  popup: HTMLKlevuPopupElement
+
   @Listen("klevuSearchResults")
   async onResults(event: CustomEvent<SearchResultsEventData>) {
     this.clickEvent = event.detail.search?.getSearchClickSendEvent?.()
     this.products = event.detail.search?.records
     this.cmsPages = event.detail.cms?.records
     this.categories = event.detail.category?.records
+    this.popup.openModal()
   }
 
   @Listen("klevuSearchSuggestions")
@@ -59,10 +62,12 @@ export class KlevuQuicksearch {
   render() {
     return (
       <Host>
-        <klevu-popup anchor={this.popupAnchor}>
+        <klevu-popup anchor={this.popupAnchor} ref={(el) => (this.popup = el)} fullwidthContent>
           <klevu-search-field
             limit={6}
             slot="origin"
+            searchProducts
+            searchSuggestions
             fallback-term={this.fallbackTerm}
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
@@ -75,7 +80,7 @@ export class KlevuQuicksearch {
               ></klevu-suggestions-list>
               <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
               {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
-              {this.categories && <klevu-cms-list pages={this.categories} caption="Found pages"></klevu-cms-list>}
+              {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
             </aside>
             {this.products.length > 0 ? (
               <section>
