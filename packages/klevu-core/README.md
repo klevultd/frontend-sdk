@@ -258,6 +258,59 @@ Currently A/B testing is supported only in the category merchandising. To enable
 For A/B testing to work correctly you need to provide correct event data to Klevu. Best way is to use `getCategoryMerchandisingClickSendEvent()` send event helper from [result object](./src/models/KlevuResultEvent.ts)
 .
 
+# SSR request packing and hydration
+
+Typically SSR frameworks (Next, Nuxt, Remix, etc) will transfer data from backend to frontend in JSON format. Passing KlevuFetch result object to frontend won't work as it is filled with functions that help the usage of results.
+
+There is an option to just pass raw JSON with `result.apiResponse` and build your logic on top of that.
+
+If you wish to keep using helper functions provided in results you can use `KlevuPackFetchResult()` function to pack result like:
+
+```ts
+const result = await KlevuFetch(search("hello world"))
+const dataToTransferFrontend = KlevuPackFetchResult(result)
+```
+
+And then you can hydrate it in frontend with `KlevuHydratePackedFetchResult()` function.
+
+```ts
+const resultObject = KlevuHydratePackedFetchResult(dataToTransferFrontend, [
+  search("hello world"),
+])
+```
+
+It's important to note that the second parameter of `KlevuHydratePackedFetchResult()` has to be the same as in backend call. You can create query functions in a separate file that can be called both in frontend and backend. For example:
+
+```ts
+// file: myquery.ts
+// a bit more compilicated query. Search term can be read in backend
+// from request parameters and in frontend it could be in url parameters
+const myQuery = (searchTerm: string, manager: FilterManager) => [
+  search(
+    searchTerm,
+    {},
+    listFilters(),
+    applyFilterwithManager(manager),
+    boostWithKeyword({ keyword: "foobar", weight: 1.2 })
+  ),
+  suggestions(searchTerm),
+]
+
+// file: backend.ts
+// in backend manager is not used to set anything so it can be just instanciated as param
+const result = await KlevuFetch(myQuery("hello world", new FilterManager()))
+const dataToTransferFrontend = KlevuPackFetchResult(result)
+
+// file: frontend.ts
+// in frontend we usually want to change and set filters with manager so it's used as separate variable
+const manager = new FilterManager()
+const resultObject = KlevuHydratePackedFetchResult(
+  dataToTransferFrontend,
+  myQuery("hello world", manager)
+)
+console.log(manager.options)
+```
+
 [npm-src]: https://badgen.net/npm/v/@klevu/core
 [npm-href]: https://www.npmjs.com/package/@klevu/core
 [bundlephobia-src]: https://badgen.net/bundlephobia/minzip/@klevu/core

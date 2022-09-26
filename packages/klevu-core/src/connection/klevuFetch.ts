@@ -13,7 +13,9 @@ import {
   KlevuBaseQuery,
   KlevuQueryResult,
   KlevuNextFunc,
+  KlevuFetchQueryResult,
 } from "../models/index.js"
+import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
 import { post } from "./fetch.js"
@@ -28,9 +30,7 @@ const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
  * @returns Tools to operate results and get next results {@link KlevuFetchResponse}
  */
 export async function KlevuFetch(
-  ...functionPromises: Array<
-    Promise<KlevuFetchFunctionReturnValue> | KlevuFetchFunctionReturnValue
-  >
+  ...functionPromises: KlevuFetchQueries
 ): Promise<KlevuFetchResponse> {
   if (functionPromises.length < 1) {
     throw new Error("At least one fetch function should be provided to fetch.")
@@ -72,29 +72,22 @@ export async function KlevuFetch(
     cache.cache(payload, response)
   }
 
+  return KlevuCreateResponseObject(response, functions)
+}
+
+export function KlevuCreateResponseObject(
+  response: KlevuApiRawResponse,
+  queries: KlevuFetchFunctionReturnValue[]
+): KlevuFetchResponse {
   let responseObject: KlevuFetchResponse = {
     apiResponse: response,
     suggestionsById: (id: string) =>
       response.suggestionResults?.find((q) => q.id === id),
-    queriesById: (id: string) => {
-      const res = response.queryResults?.find((s) => s.id === id)
-      if (!res) {
-        return undefined
-      }
-      const func = functions.find((f) => f.queries?.some((q) => q.id == res.id))
-      if (!func) {
-        return res
-      }
-      return {
-        ...FetchResultEvents(res, func),
-        next: fetchNextPageSingleFunc(response, func),
-        functionParams: func.params,
-      }
-    },
+    queriesById: (id: string) => KlevuQueriesById(id, response, queries),
   }
 
   // Send event to functions on result
-  for (const f of functions) {
+  for (const f of queries) {
     if (f.modifiers) {
       for (const modifier of f.modifiers) {
         if (modifier.onResult) {
@@ -105,6 +98,33 @@ export async function KlevuFetch(
   }
 
   return responseObject
+}
+
+/**
+ *
+ * @param id Id if response to find
+ * @param response Raw API response from server
+ * @param queries Queries used to create API response
+ * @returns
+ */
+function KlevuQueriesById(
+  id: string,
+  response: KlevuApiRawResponse,
+  queries: KlevuFetchFunctionReturnValue[]
+): KlevuFetchQueryResult | undefined {
+  const res = response.queryResults?.find((s) => s.id === id)
+  if (!res) {
+    return undefined
+  }
+  const func = queries.find((f) => f.queries?.some((q) => q.id == res.id))
+  if (!func) {
+    return res
+  }
+  return {
+    ...FetchResultEvents(res, func),
+    next: fetchNextPageSingleFunc(response, func),
+    functionParams: func.params,
+  }
 }
 
 function fetchNextPageSingleFunc(

@@ -1,20 +1,27 @@
 import {
-  applyFilterWithManager,
-  categoryMerchandising,
   FilterManager,
+  KlevuApiRawResponse,
   KlevuDomEvents,
   KlevuFetch,
+  KlevuFetchResponse,
+  KlevuHydratePackedFetchResult,
   KlevuListenDomEvent,
-  KlevuQueryResult,
   KlevuRecord,
 } from "@klevu/core"
 import React, { useEffect, useRef } from "react"
+import { merchandisingQuery } from "../klevuQueries"
 import { ProductGrid } from "./grid.client"
 
 const manager = new FilterManager()
+let currentResult: KlevuFetchResponse
+let clickEvent: (
+  productId: string,
+  categoryTitle: string,
+  variantId?: string
+) => void
 
 export function CategoryMerchandisingPage(props: {
-  serverResult: KlevuQueryResult
+  serverResult: KlevuApiRawResponse
   category: string
 }) {
   // this is used to prevent useless re-render in client after server
@@ -24,39 +31,41 @@ export function CategoryMerchandisingPage(props: {
   })
   const prevCategoryId = prevCategoryIdRef.current
 
-  const [products, setProducts] = React.useState<KlevuRecord[]>(
-    props.serverResult.records
-  )
-  const [result, setResult] = React.useState<KlevuQueryResult>(
-    props.serverResult
-  )
-  manager.initFromListFilters(props.serverResult.filters ?? [])
+  const [products, setProducts] = React.useState<KlevuRecord[]>([])
+
+  const hydrate = async () => {
+    currentResult = await KlevuHydratePackedFetchResult(
+      props.serverResult,
+      merchandisingQuery(props.category, manager)
+    )
+    const mercResult = currentResult.queriesById("categoryMerchandising")
+    if (mercResult) {
+      setProducts(mercResult.records)
+      if (mercResult.getCategoryMerchandisingClickSendEvent) {
+        clickEvent = mercResult.getCategoryMerchandisingClickSendEvent()
+      }
+    }
+  }
 
   const loadMore = async (replace = false) => {
-    const offset =
-      replace === true ? 0 : result.meta.offset + result.meta.noOfResults
-
-    const loadMoreResult = await KlevuFetch(
-      categoryMerchandising(
-        props.category,
-        {
-          id: "categoryMerchandising",
-          offset,
-          limit: result.meta.noOfResults,
-        },
-        applyFilterWithManager(manager)
+    if (replace) {
+      currentResult = await KlevuFetch(
+        ...merchandisingQuery(props.category, manager)
       )
-    )
-
-    const searchResult = loadMoreResult.queriesById("categoryMerchandising")
-
-    if (searchResult) {
+    } else if (currentResult.queriesById("categoryMerchandising")?.next) {
+      currentResult = await currentResult.queriesById("categoryMerchandising")!
+        .next!()
+    }
+    const mercResult = currentResult?.queriesById("categoryMerchandising")
+    if (mercResult) {
       if (replace) {
-        setProducts(searchResult.records)
+        setProducts(mercResult.records)
       } else {
-        setProducts([...products, ...searchResult.records])
+        setProducts([...products, ...mercResult.records])
       }
-      setResult(searchResult)
+      if (mercResult.getCategoryMerchandisingClickSendEvent) {
+        clickEvent = mercResult.getCategoryMerchandisingClickSendEvent()
+      }
     }
   }
 
@@ -65,6 +74,7 @@ export function CategoryMerchandisingPage(props: {
   }
 
   React.useEffect(() => {
+    hydrate()
     const stop = KlevuListenDomEvent(
       KlevuDomEvents.FilterSelectionUpdate,
       handleFilterUpdate
@@ -86,11 +96,15 @@ export function CategoryMerchandisingPage(props: {
 
   return (
     <ProductGrid
-      result={result}
       products={products}
       manager={manager}
-      type="categoryMerchandising"
       loadMore={() => loadMore(false)}
+      hasMoreResults={Boolean(
+        currentResult?.queriesById("categoryMerchandising")?.next
+      )}
+      onClick={(product) => {
+        clickEvent(product.id, "Category title", product.itemGroupId)
+      }}
     />
   )
 }
