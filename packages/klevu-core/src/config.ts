@@ -1,4 +1,5 @@
 import type { AxiosStatic } from "axios"
+import { runPendingRequests as runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
 
 type KlevuConfiguration = {
@@ -52,6 +53,7 @@ export class KlevuConfig {
 
   static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
+    runPendingAnalyticalRequests()
   }
 
   static getDefault(): KlevuConfig {
