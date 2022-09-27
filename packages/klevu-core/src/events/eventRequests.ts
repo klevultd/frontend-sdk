@@ -1,5 +1,8 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import { get, post } from "../connection/fetch.js"
+import { isBrowser } from "../utils/isBrowser.js"
+
+const KEY_PENDING_REQUESTS = "klevu-pending-analytics"
 
 export type V1SearchEvent = {
   /**
@@ -32,7 +35,12 @@ export async function KlevuEventV1Search(event: V1SearchEvent) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
   }n-search/search${objectToUrlParams(event)}`
-  return get(url, true)
+  const id = addPendingRequest(url)
+  const res = await get(url, true)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
 }
 
 export type V1ProductTrackingEvent = {
@@ -97,7 +105,12 @@ export async function KlevuEventV1ProductTracking(
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
-  return get(url, true)
+  const id = addPendingRequest(url)
+  const res = await get(url, true)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
 }
 
 export type V1CheckedOutProductsEvent = {
@@ -153,7 +166,12 @@ export async function KlevuEventV1CheckedOutProducts(
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
   }productTracking${objectToUrlParams(event)}`
-  return get(url, true)
+  const id = addPendingRequest(url)
+  const res = await get(url, true)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
 }
 
 export type KlevuV1CategoryProductsView = {
@@ -199,7 +217,12 @@ export async function KlevuEventV1CategoryView(
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
   }categoryProductViewTracking${objectToUrlParams(event)}`
-  return get(url, true)
+  const id = addPendingRequest(url)
+  const res = await get(url, true)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
 }
 
 export type KlevuV1CategoryProductsClick = {
@@ -264,7 +287,12 @@ export async function KlevuEventV1CategoryProductClick(
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
   }categoryProductClickTracking${objectToUrlParams(event)}`
-  return get(url, true)
+  const id = addPendingRequest(url)
+  const res = await get(url, true)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
 }
 
 function objectToUrlParams(event: object) {
@@ -365,5 +393,85 @@ export type KlevuEventV2Data = {
 }
 
 export async function KlevuEventV2(data: KlevuEventV2Data[]) {
-  return await post(KlevuConfig.getDefault().eventsApiV2Url, data, true)
+  const url = KlevuConfig.getDefault().eventsApiV2Url
+  const id = addPendingRequest(url, data)
+  const res = await post(url, data, true)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
+}
+
+type PendingRequest = {
+  id: string
+  url: string
+  data?: object
+}
+
+function addPendingRequest(url: string, data?: object): string | void {
+  if (!isBrowser()) {
+    return
+  }
+
+  let requests: PendingRequest[] = []
+  const old = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  if (old) {
+    try {
+      requests = JSON.parse(old)
+    } catch {
+      window.localStorage.removeItem(KEY_PENDING_REQUESTS)
+    }
+  }
+  const id = generateUID()
+  requests.push({ id, url, data })
+  window.localStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+  return id
+}
+
+function removePendingRequest(id: string) {
+  if (!isBrowser()) {
+    return
+  }
+
+  const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  if (!data) {
+    console.error("No pending requests!")
+    return
+  }
+  try {
+    const requests = JSON.parse(data) as PendingRequest[]
+    requests.splice(
+      requests.findIndex((r) => r.id === id),
+      1
+    )
+    window.localStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+  } catch (e) {
+    console.error("Failed to save pending request")
+  }
+}
+
+export async function runPendingRequests() {
+  const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  if (!data) {
+    return
+  }
+
+  const requests = JSON.parse(data) as PendingRequest[]
+
+  for await (const request of requests) {
+    if (request.data) {
+      await post(request.url, request.data, true)
+    } else {
+      await get(request.url, true)
+    }
+    removePendingRequest(request.id)
+  }
+}
+
+function generateUID(): string {
+  let firstPart: string | number = (Math.random() * 46656) | 0
+  let secondPart: string | number = (Math.random() * 46656) | 0
+  firstPart = ("000" + firstPart.toString(36)).slice(-3)
+  secondPart = ("000" + secondPart.toString(36)).slice(-3)
+  return firstPart + secondPart
 }
