@@ -65,6 +65,8 @@ export function RecommendationBanner(props: {
               onClick={(event) => {
                 props.productClick(p.id, p.itemGroupId, p, index + 1)
                 navigate(`/products/${p.itemGroupId}/${p.id}`)
+                //comment line above and uncomment this line to test full page reload and seeing that analytics will be called on next page load.
+                //window.location.href = `http://localhost:3001/products/${p.itemGroupId}/${p.id}`
                 event.preventDefault()
                 return false
               }}

@@ -80,6 +80,8 @@ const ResponsiveAppBar = () => {
             currentUrl={location.pathname}
             onProductClick={(p) => {
               navigate(`/products/${p.itemGroupId}/${p.id}`)
+              // comment line above and uncomment this to test full page reload. For testing analytical events caching
+              // window.location.href = `http://localhost:3001/products/${p.itemGroupId}/${p.id}`
             }}
             onSearchClick={(q) => {
               navigate(`/search?q=${encodeURIComponent(q)}`)
