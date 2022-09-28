@@ -451,6 +451,10 @@ function removePendingRequest(id: string) {
 }
 
 export async function runPendingRequests() {
+  if (!isBrowser()) {
+    return
+  }
+
   const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
   if (!data) {
     return
