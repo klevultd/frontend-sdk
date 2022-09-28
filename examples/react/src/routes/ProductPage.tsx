@@ -32,8 +32,7 @@ export function ProductPage() {
   const fetchProduct = useCallback(async () => {
     const res = await KlevuFetch(
       products([params.id]),
-      similarProducts([params.id], {}, exclude([params.groupId]))
-      /*
+      similarProducts([params.id], {}, exclude([params.groupId])),
       kmcRecommendation(
         config.productPageRecommendationId,
         {
@@ -43,7 +42,6 @@ export function ProductPage() {
         },
         sendRecommendationViewEvent("Also viewed KMC recommendation")
       )
-      */
     )
 
     const product = res.queriesById("products")?.records?.[0]
