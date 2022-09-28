@@ -116,7 +116,7 @@ test("Apply filters", () => {
 
   manager.toggleOption("test", "Red")
   const filters = manager.toApplyFilters()
-  console.log(filters)
+
   expect(filters[0].values).toEqual(["red"])
   expect(filters[1].values).toEqual(["3", "7"])
 })
