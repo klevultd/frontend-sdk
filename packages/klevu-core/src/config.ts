@@ -1,5 +1,5 @@
 import type { AxiosStatic } from "axios"
-import { runPendingRequests as runPendingAnalyticalRequests } from "./events/eventRequests.js"
+import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
 
 type KlevuConfiguration = {
