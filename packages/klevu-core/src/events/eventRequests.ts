@@ -450,7 +450,7 @@ function removePendingRequest(id: string) {
   }
 }
 
-export async function runPendingRequests() {
+export async function runPendingAnalyticalRequests() {
   if (!isBrowser()) {
     return
   }
