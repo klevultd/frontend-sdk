@@ -6,10 +6,12 @@ import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 
 type Options = {
+  id: string
   amount?: number
 }
 
 const defaultOptions: Options = {
+  id: "recentlyViewedProducts",
   amount: 10,
 }
 
@@ -34,7 +36,7 @@ export function recentlyViewed(
     opts.amount
   )
   const query: KlevuBaseQuery = {
-    id: "recentlyViewedProducts",
+    id: opts.id,
     typeOfRequest: KlevuTypeOfRequest.Search,
     settings: {
       limit: lastProducts.length,

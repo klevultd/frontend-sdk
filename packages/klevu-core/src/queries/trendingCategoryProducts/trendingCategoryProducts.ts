@@ -38,7 +38,7 @@ const defaultOptions: Options = {
  */
 export function trendingCategoryProducts(
   categoryPath: string,
-  options?: Options,
+  options?: Partial<Options>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunctionReturnValue {
   const params: Options = {
