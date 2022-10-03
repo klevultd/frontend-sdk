@@ -3,17 +3,21 @@ import "./klevu-popup.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Atoms/Popup",
   parameters: {
     notes,
   },
 }
+export default meta
 
 export const StartOpen = WebComponentTemplate<HTMLKlevuPopupElement>({
   tag: "klevu-popup",
   args: {
-    open: true,
+    startOpen: true,
+    anchor: "left",
   },
   innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>
     <div slot="content">Hello world popup</div>`,
@@ -22,7 +26,8 @@ export const StartOpen = WebComponentTemplate<HTMLKlevuPopupElement>({
 export const StartClosed = WebComponentTemplate<HTMLKlevuPopupElement>({
   tag: "klevu-popup",
   args: {
-    open: false,
+    startOpen: false,
+    anchor: "left",
   },
   innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>
     <div slot="content">Hello world popup</div>`,

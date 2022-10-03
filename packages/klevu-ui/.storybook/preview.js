@@ -8,19 +8,7 @@ export const parameters = {
     order: ["Atoms", "Components", "Apps"],
   },
   actions: {
-    argTypesRegex: "^on.*",
-    handles: [
-      "searchResults",
-      "searchSuggestions",
-      "productClick",
-      "searchClick",
-      "textChanged",
-      "textFocused",
-      "klevu-click-send-event",
-      "klevu-filter-selection-update",
-      "klevu-filters-applied",
-      "klevu-last-search-update",
-    ],
+    argTypesRegex: "^(on.*|klevu.*)",
   },
   controls: {
     matchers: {

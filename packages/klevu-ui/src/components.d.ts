@@ -5,10 +5,15 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuRecord } from "@klevu/core";
+import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
+import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
+import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
-import { KlevuProductOnProductClick } from "./components/klevu-product/klevu-product";
-import { SearchResultsEvent } from "./components/klevu-search-field/klevu-search-field";
+import { KlevuPopupAnchor } from "./components/klevu-popup/klevu-popup";
+import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
+import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuButton {
         "disabled": boolean;
@@ -18,13 +23,54 @@ export namespace Components {
         "disabled": boolean;
         "value": string;
     }
+    interface KlevuCmsList {
+        "caption": string;
+        "link"?: boolean;
+        "pages": Array<Partial<KlevuRecord>>;
+    }
+    interface KlevuDropdown {
+        "disabled"?: boolean;
+        "name": string;
+        "options": Array<{ value: string; text: String }>;
+    }
     interface KlevuFacet {
+        /**
+          * Set predefined order for options. Unfound values are in original order in end
+         */
+        "customOrder"?: string[];
+        /**
+          * Originating filter manager which to modify
+         */
         "manager": FilterManager;
+        /**
+          * Which mode should facets be in
+         */
+        "mode": KlevuFacetMode;
+        /**
+          * From which options to build facet
+         */
         "option": KlevuFilterResultOptions;
+        /**
+          * From which slider to build facet
+         */
         "slider": KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        /**
+          * Custom order keys for every facet
+         */
+        "customOrder": { [key: string]: string[] };
+        /**
+          * Filter managet from which the list is built from
+         */
         "manager": FilterManager;
+        /**
+          * Set mode for facets or if object is passed then define per key
+         */
+        "mode": KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+    }
+    interface KlevuHeading {
+        "variant": KlevuHeadingVariant;
     }
     interface KlevuInit {
         "apiKey": string;
@@ -32,24 +78,67 @@ export namespace Components {
         "url": string;
     }
     interface KlevuLatestSearches {
+        "caption": string;
     }
     interface KlevuMerchandising {
+        /**
+          * Which category products
+         */
         "category": string;
+        /**
+          * Category title
+         */
         "categoryTitle": string;
+        /**
+          * How many filters per facet to show
+         */
+        "filterCount"?: number;
+        /**
+          * Order filters in given order
+         */
+        "filterCustomOrder"?: { [key: string]: string[] };
+        /**
+          * Count of products for page
+         */
         "limit": number;
+        /**
+          * Custom rendering of product. Can pass any HTML element as return value
+         */
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        /**
+          * Order of results
+         */
+        "sort"?: KlevuSearchSorting;
+    }
+    interface KlevuPagination {
+        "current"?: number;
+        "max"?: number;
+        "min"?: number;
+        "nextNext": string;
+        "prevText": string;
+        "queryResult"?: KlevuQueryResult;
     }
     interface KlevuPopularSearches {
+        "caption": string;
     }
     interface KlevuPopup {
+        "anchor": KlevuPopupAnchor;
         "closeAtOutsideClick": boolean;
+        "closeModal": () => Promise<void>;
         "fullwidthContent": boolean;
-        "open": boolean;
         "openAtFocus": boolean;
+        "openModal": () => Promise<void>;
+        "startOpen"?: boolean;
     }
     interface KlevuProduct {
-        "addToCart"?: boolean;
+        "hideBrand"?: boolean;
+        "hideDescription"?: boolean;
+        "hideImage"?: boolean;
+        "hideName"?: boolean;
+        "hidePrice"?: boolean;
+        "hideSwatches"?: boolean;
         "product"?: KlevuRecord;
+        "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
         "products": KlevuRecord[];
@@ -57,7 +146,10 @@ export namespace Components {
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
+        "popupAnchor"?: KlevuPopupAnchor1;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "searchCategories"?: boolean;
+        "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
         /**
@@ -82,16 +174,69 @@ export namespace Components {
           * The placeholder text to display in the search field.
          */
         "placeholder": string;
+        /**
+          * Should try to find categories as well
+         */
+        "searchCategories"?: boolean;
+        /**
+          * Should try to find cms pages as well
+         */
+        "searchCmsPages"?: boolean;
+        /**
+          * Search products
+         */
+        "searchProducts"?: boolean;
+        /**
+          * Search suggestions
+         */
+        "searchSuggestions"?: boolean;
     }
     interface KlevuSearchLandingPage {
+        "filterCount"?: number;
+        "filterCustomOrder"?: { [key: string]: string[] };
         "limit": number;
+        /**
+          * Custom rendering of product. Can pass any HTML element as return value
+         */
+        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "sort"?: KlevuSearchSorting;
         "term": string;
+    }
+    interface KlevuSimpleSearch {
+    }
+    interface KlevuSlider {
+        "end"?: number;
+        "max": number;
+        "min": number;
+        "showTooltips"?: boolean;
+        "start"?: number;
+    }
+    interface KlevuSlides {
+        "height": string;
+    }
+    interface KlevuSort {
+    }
+    interface KlevuSuggestionsList {
+        "caption": string;
+        "suggestions": string[];
     }
     interface KlevuTextfield {
         "disabled": boolean;
         "placeholder": string;
         "value": string;
     }
+}
+export interface KlevuCmsListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuCmsListElement;
+}
+export interface KlevuDropdownCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuDropdownElement;
+}
+export interface KlevuPaginationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuPaginationElement;
 }
 export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -100,6 +245,18 @@ export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSearchFieldElement;
+}
+export interface KlevuSimpleSearchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSimpleSearchElement;
+}
+export interface KlevuSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSliderElement;
+}
+export interface KlevuSortCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSortElement;
 }
 export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -118,6 +275,18 @@ declare global {
         prototype: HTMLKlevuCheckboxElement;
         new (): HTMLKlevuCheckboxElement;
     };
+    interface HTMLKlevuCmsListElement extends Components.KlevuCmsList, HTMLStencilElement {
+    }
+    var HTMLKlevuCmsListElement: {
+        prototype: HTMLKlevuCmsListElement;
+        new (): HTMLKlevuCmsListElement;
+    };
+    interface HTMLKlevuDropdownElement extends Components.KlevuDropdown, HTMLStencilElement {
+    }
+    var HTMLKlevuDropdownElement: {
+        prototype: HTMLKlevuDropdownElement;
+        new (): HTMLKlevuDropdownElement;
+    };
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
     var HTMLKlevuFacetElement: {
@@ -129,6 +298,12 @@ declare global {
     var HTMLKlevuFacetListElement: {
         prototype: HTMLKlevuFacetListElement;
         new (): HTMLKlevuFacetListElement;
+    };
+    interface HTMLKlevuHeadingElement extends Components.KlevuHeading, HTMLStencilElement {
+    }
+    var HTMLKlevuHeadingElement: {
+        prototype: HTMLKlevuHeadingElement;
+        new (): HTMLKlevuHeadingElement;
     };
     interface HTMLKlevuInitElement extends Components.KlevuInit, HTMLStencilElement {
     }
@@ -147,6 +322,12 @@ declare global {
     var HTMLKlevuMerchandisingElement: {
         prototype: HTMLKlevuMerchandisingElement;
         new (): HTMLKlevuMerchandisingElement;
+    };
+    interface HTMLKlevuPaginationElement extends Components.KlevuPagination, HTMLStencilElement {
+    }
+    var HTMLKlevuPaginationElement: {
+        prototype: HTMLKlevuPaginationElement;
+        new (): HTMLKlevuPaginationElement;
     };
     interface HTMLKlevuPopularSearchesElement extends Components.KlevuPopularSearches, HTMLStencilElement {
     }
@@ -196,6 +377,36 @@ declare global {
         prototype: HTMLKlevuSearchLandingPageElement;
         new (): HTMLKlevuSearchLandingPageElement;
     };
+    interface HTMLKlevuSimpleSearchElement extends Components.KlevuSimpleSearch, HTMLStencilElement {
+    }
+    var HTMLKlevuSimpleSearchElement: {
+        prototype: HTMLKlevuSimpleSearchElement;
+        new (): HTMLKlevuSimpleSearchElement;
+    };
+    interface HTMLKlevuSliderElement extends Components.KlevuSlider, HTMLStencilElement {
+    }
+    var HTMLKlevuSliderElement: {
+        prototype: HTMLKlevuSliderElement;
+        new (): HTMLKlevuSliderElement;
+    };
+    interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
+    }
+    var HTMLKlevuSlidesElement: {
+        prototype: HTMLKlevuSlidesElement;
+        new (): HTMLKlevuSlidesElement;
+    };
+    interface HTMLKlevuSortElement extends Components.KlevuSort, HTMLStencilElement {
+    }
+    var HTMLKlevuSortElement: {
+        prototype: HTMLKlevuSortElement;
+        new (): HTMLKlevuSortElement;
+    };
+    interface HTMLKlevuSuggestionsListElement extends Components.KlevuSuggestionsList, HTMLStencilElement {
+    }
+    var HTMLKlevuSuggestionsListElement: {
+        prototype: HTMLKlevuSuggestionsListElement;
+        new (): HTMLKlevuSuggestionsListElement;
+    };
     interface HTMLKlevuTextfieldElement extends Components.KlevuTextfield, HTMLStencilElement {
     }
     var HTMLKlevuTextfieldElement: {
@@ -205,11 +416,15 @@ declare global {
     interface HTMLElementTagNameMap {
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
+        "klevu-cms-list": HTMLKlevuCmsListElement;
+        "klevu-dropdown": HTMLKlevuDropdownElement;
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
+        "klevu-heading": HTMLKlevuHeadingElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
+        "klevu-pagination": HTMLKlevuPaginationElement;
         "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
         "klevu-popup": HTMLKlevuPopupElement;
         "klevu-product": HTMLKlevuProductElement;
@@ -218,6 +433,11 @@ declare global {
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
         "klevu-search-landing-page": HTMLKlevuSearchLandingPageElement;
+        "klevu-simple-search": HTMLKlevuSimpleSearchElement;
+        "klevu-slider": HTMLKlevuSliderElement;
+        "klevu-slides": HTMLKlevuSlidesElement;
+        "klevu-sort": HTMLKlevuSortElement;
+        "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
     }
 }
@@ -230,13 +450,56 @@ declare namespace LocalJSX {
         "disabled"?: boolean;
         "value"?: string;
     }
+    interface KlevuCmsList {
+        "caption"?: string;
+        "link"?: boolean;
+        "onKlevuCmsPageClick"?: (event: KlevuCmsListCustomEvent<Partial<KlevuRecord>>) => void;
+        "pages"?: Array<Partial<KlevuRecord>>;
+    }
+    interface KlevuDropdown {
+        "disabled"?: boolean;
+        "name": string;
+        "onKlevuDropdownChanged"?: (event: KlevuDropdownCustomEvent<string>) => void;
+        "options": Array<{ value: string; text: String }>;
+    }
     interface KlevuFacet {
+        /**
+          * Set predefined order for options. Unfound values are in original order in end
+         */
+        "customOrder"?: string[];
+        /**
+          * Originating filter manager which to modify
+         */
         "manager": FilterManager;
+        /**
+          * Which mode should facets be in
+         */
+        "mode"?: KlevuFacetMode;
+        /**
+          * From which options to build facet
+         */
         "option"?: KlevuFilterResultOptions;
+        /**
+          * From which slider to build facet
+         */
         "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        /**
+          * Custom order keys for every facet
+         */
+        "customOrder"?: { [key: string]: string[] };
+        /**
+          * Filter managet from which the list is built from
+         */
         "manager": FilterManager;
+        /**
+          * Set mode for facets or if object is passed then define per key
+         */
+        "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+    }
+    interface KlevuHeading {
+        "variant"?: KlevuHeadingVariant;
     }
     interface KlevuInit {
         "apiKey": string;
@@ -244,25 +507,70 @@ declare namespace LocalJSX {
         "url": string;
     }
     interface KlevuLatestSearches {
+        "caption"?: string;
     }
     interface KlevuMerchandising {
+        /**
+          * Which category products
+         */
         "category": string;
+        /**
+          * Category title
+         */
         "categoryTitle": string;
+        /**
+          * How many filters per facet to show
+         */
+        "filterCount"?: number;
+        /**
+          * Order filters in given order
+         */
+        "filterCustomOrder"?: { [key: string]: string[] };
+        /**
+          * Count of products for page
+         */
         "limit"?: number;
+        /**
+          * Custom rendering of product. Can pass any HTML element as return value
+         */
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        /**
+          * Order of results
+         */
+        "sort"?: KlevuSearchSorting;
+    }
+    interface KlevuPagination {
+        "current"?: number;
+        "max"?: number;
+        "min"?: number;
+        "nextNext"?: string;
+        /**
+          * Page that was changed into
+         */
+        "onKlevuPaginationChange"?: (event: KlevuPaginationCustomEvent<number>) => void;
+        "prevText"?: string;
+        "queryResult"?: KlevuQueryResult;
     }
     interface KlevuPopularSearches {
+        "caption"?: string;
     }
     interface KlevuPopup {
+        "anchor"?: KlevuPopupAnchor;
         "closeAtOutsideClick"?: boolean;
         "fullwidthContent"?: boolean;
-        "open"?: boolean;
         "openAtFocus"?: boolean;
+        "startOpen"?: boolean;
     }
     interface KlevuProduct {
-        "addToCart"?: boolean;
-        "onProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
+        "hideBrand"?: boolean;
+        "hideDescription"?: boolean;
+        "hideImage"?: boolean;
+        "hideName"?: boolean;
+        "hidePrice"?: boolean;
+        "hideSwatches"?: boolean;
+        "onKlevuProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
         "product"?: KlevuRecord;
+        "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
         "products"?: KlevuRecord[];
@@ -270,7 +578,10 @@ declare namespace LocalJSX {
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
+        "popupAnchor"?: KlevuPopupAnchor1;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "searchCategories"?: boolean;
+        "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
         /**
@@ -291,33 +602,87 @@ declare namespace LocalJSX {
           * Maximum amount of results
          */
         "limit"?: number;
-        "onSearchClick"?: (event: KlevuSearchFieldCustomEvent<string>) => void;
-        "onSearchResults"?: (event: KlevuSearchFieldCustomEvent<SearchResultsEvent>) => void;
-        "onSearchSuggestions"?: (event: KlevuSearchFieldCustomEvent<string[]>) => void;
+        /**
+          * When user clicks search button. Returns the search term.
+         */
+        "onKlevuSearchClick"?: (event: KlevuSearchFieldCustomEvent<string>) => void;
+        /**
+          * When results come from after typing in the search field. This is debounced to avoid excessive requests.
+         */
+        "onKlevuSearchResults"?: (event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) => void;
+        "onKlevuSearchSuggestions"?: (event: KlevuSearchFieldCustomEvent<SuggestionsEventData>) => void;
         /**
           * The placeholder text to display in the search field.
          */
         "placeholder"?: string;
+        /**
+          * Should try to find categories as well
+         */
+        "searchCategories"?: boolean;
+        /**
+          * Should try to find cms pages as well
+         */
+        "searchCmsPages"?: boolean;
+        /**
+          * Search products
+         */
+        "searchProducts"?: boolean;
+        /**
+          * Search suggestions
+         */
+        "searchSuggestions"?: boolean;
     }
     interface KlevuSearchLandingPage {
+        "filterCount"?: number;
+        "filterCustomOrder"?: { [key: string]: string[] };
         "limit"?: number;
+        /**
+          * Custom rendering of product. Can pass any HTML element as return value
+         */
+        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "sort"?: KlevuSearchSorting;
         "term": string;
+    }
+    interface KlevuSimpleSearch {
+        "onKlevuSuggestionClick"?: (event: KlevuSimpleSearchCustomEvent<string>) => void;
+    }
+    interface KlevuSlider {
+        "end"?: number;
+        "max"?: number;
+        "min"?: number;
+        "onKlevuSliderChange"?: (event: KlevuSliderCustomEvent<[number, number]>) => void;
+        "showTooltips"?: boolean;
+        "start"?: number;
+    }
+    interface KlevuSlides {
+        "height"?: string;
+    }
+    interface KlevuSort {
+        "onKlevuSortChanged"?: (event: KlevuSortCustomEvent<KlevuSearchSorting>) => void;
+    }
+    interface KlevuSuggestionsList {
+        "caption"?: string;
+        "suggestions"?: string[];
     }
     interface KlevuTextfield {
         "disabled"?: boolean;
-        "onTextChanged"?: (event: KlevuTextfieldCustomEvent<string>) => void;
-        "onTextFocused"?: (event: KlevuTextfieldCustomEvent<void>) => void;
+        "onKlevuTextChanged"?: (event: KlevuTextfieldCustomEvent<string>) => void;
+        "onKlevuTextFocused"?: (event: KlevuTextfieldCustomEvent<void>) => void;
         "placeholder"?: string;
         "value"?: string;
     }
     interface IntrinsicElements {
         "klevu-button": KlevuButton;
         "klevu-checkbox": KlevuCheckbox;
+        "klevu-cms-list": KlevuCmsList;
+        "klevu-dropdown": KlevuDropdown;
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
+        "klevu-heading": KlevuHeading;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-merchandising": KlevuMerchandising;
+        "klevu-pagination": KlevuPagination;
         "klevu-popular-searches": KlevuPopularSearches;
         "klevu-popup": KlevuPopup;
         "klevu-product": KlevuProduct;
@@ -326,6 +691,11 @@ declare namespace LocalJSX {
         "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
         "klevu-search-landing-page": KlevuSearchLandingPage;
+        "klevu-simple-search": KlevuSimpleSearch;
+        "klevu-slider": KlevuSlider;
+        "klevu-slides": KlevuSlides;
+        "klevu-sort": KlevuSort;
+        "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-textfield": KlevuTextfield;
     }
 }
@@ -335,11 +705,15 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
+            "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
+            "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
+            "klevu-heading": LocalJSX.KlevuHeading & JSXBase.HTMLAttributes<HTMLKlevuHeadingElement>;
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;
             "klevu-latest-searches": LocalJSX.KlevuLatestSearches & JSXBase.HTMLAttributes<HTMLKlevuLatestSearchesElement>;
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
+            "klevu-pagination": LocalJSX.KlevuPagination & JSXBase.HTMLAttributes<HTMLKlevuPaginationElement>;
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
@@ -348,6 +722,11 @@ declare module "@stencil/core" {
             "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
+            "klevu-simple-search": LocalJSX.KlevuSimpleSearch & JSXBase.HTMLAttributes<HTMLKlevuSimpleSearchElement>;
+            "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
+            "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
+            "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
+            "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
         }
     }

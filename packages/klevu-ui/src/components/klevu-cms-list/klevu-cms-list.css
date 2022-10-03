@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+ul {
+  margin-top: var(--klevu-spacing-normal);
+}

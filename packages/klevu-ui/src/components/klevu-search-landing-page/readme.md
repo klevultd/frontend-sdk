@@ -7,10 +7,14 @@
 
 ## Properties
 
-| Property            | Attribute | Description | Type     | Default     |
-| ------------------- | --------- | ----------- | -------- | ----------- |
-| `limit`             | `limit`   |             | `number` | `24`        |
-| `term` _(required)_ | `term`    |             | `string` | `undefined` |
+| Property            | Attribute      | Description                                                            | Type                                                                                                                                                                                                                                                                                                 | Default     |
+| ------------------- | -------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `filterCount`       | `filter-count` |                                                                        | `number`                                                                                                                                                                                                                                                                                             | `undefined` |
+| `filterCustomOrder` | --             |                                                                        | `{ [key: string]: string[]; }`                                                                                                                                                                                                                                                                       | `undefined` |
+| `limit`             | `limit`        |                                                                        | `number`                                                                                                                                                                                                                                                                                             | `24`        |
+| `renderProduct`     | --             | Custom rendering of product. Can pass any HTML element as return value | `(product: KlevuRecord) => HTMLElement`                                                                                                                                                                                                                                                              | `undefined` |
+| `sort`              | `sort`         |                                                                        | `KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance` | `undefined` |
+| `term` _(required)_ | `term`         |                                                                        | `string`                                                                                                                                                                                                                                                                                             | `undefined` |
 
 
 ## Dependencies
@@ -29,6 +33,7 @@ graph TD;
   klevu-search-landing-page --> klevu-button
   klevu-facet-list --> klevu-facet
   klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-slider
   klevu-product-grid --> klevu-product
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```

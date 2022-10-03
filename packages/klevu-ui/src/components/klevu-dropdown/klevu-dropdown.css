@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+select {
+  appearance: none;
+  padding: var(--klevu-spacing-normal);
+  width: 100%;
+  min-width: 80px;
+  border: none;
+  border-radius: var(--klevu-rounded-corners);
+}
+
+.select {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--klevu-color-border);
+  border-radius: var(--klevu-rounded-corners);
+}
+
+.select:has(select:active) {
+  border: 1px solid var(--klevu-color-primary-border);
+}
+
+.triangle {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 1rem;
+  height: 0.6rem;
+  background-color: var(--klevu-color-primary);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.select.disabled {
+  cursor: not-allowed;
+}
+
+.select.disabled select {
+  cursor: not-allowed;
+}
+
+.select.disabled .triangle {
+  background-color: var(--klevu-color-border);
+}

@@ -7,6 +7,7 @@ import {
   applyFilterWithManager,
   categoryMerchandising,
   sendMerchandisingViewEvent,
+  KlevuSearchSorting,
 } from "@klevu/core"
 import { Component, Host, h, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
@@ -18,9 +19,41 @@ import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
   shadow: true,
 })
 export class KlevuMerchandising {
+  /**
+   * Count of products for page
+   */
   @Prop() limit: number = 24
+
+  /**
+   * Which category products
+   */
   @Prop() category!: string
+
+  /**
+   * Category title
+   */
   @Prop() categoryTitle!: string
+
+  /**
+   * Custom rendering of product. Can pass any HTML element as return value
+   */
+  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+
+  /**
+   * Order of results
+   */
+  @Prop() sort?: KlevuSearchSorting
+
+  /**
+   * How many filters per facet to show
+   */
+  @Prop() filterCount?: number
+
+  /**
+   * Order filters in given order
+   */
+  @Prop() filterCustomOrder?: { [key: string]: string[] }
+
   @State() results: KlevuRecord[] = [
     undefined,
     undefined,
@@ -32,8 +65,6 @@ export class KlevuMerchandising {
     undefined,
     undefined,
   ]
-  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
-
   @State() manager = new FilterManager()
 
   private resultObject: KlevuFetchQueryResult
@@ -47,9 +78,9 @@ export class KlevuMerchandising {
     const result = await KlevuFetch(
       categoryMerchandising(
         this.category,
-        { limit: this.limit },
+        { limit: this.limit, sort: this.sort },
         sendMerchandisingViewEvent(this.categoryTitle),
-        listFilters({ filterManager: this.manager }),
+        listFilters({ filterManager: this.manager, limit: this.filterCount }),
         applyFilterWithManager(this.manager)
       )
     )
@@ -81,8 +112,13 @@ export class KlevuMerchandising {
   render() {
     return (
       <Host>
-        <klevu-facet-list exportparts={globalExportedParts} manager={this.manager}></klevu-facet-list>
+        <klevu-facet-list
+          customOrder={this.filterCustomOrder}
+          exportparts={globalExportedParts}
+          manager={this.manager}
+        ></klevu-facet-list>
         <section>
+          <klevu-heading variant="h1">{this.categoryTitle}</klevu-heading>
           <klevu-product-grid renderProduct={this.renderProduct} products={this.results}></klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">

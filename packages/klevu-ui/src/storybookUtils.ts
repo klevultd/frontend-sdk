@@ -56,9 +56,14 @@ export const WebComponentTemplate = <T>({
   return func
 }
 
-export const KlevuProductElement = (product: KlevuRecord) => {
+export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
   element.product = product
+  if (args) {
+    for (const [key, value] of Object.entries(args)) {
+      element[key] = value
+    }
+  }
   return element
 }
 
@@ -76,6 +81,44 @@ export const html = (i: TemplateStringsArray): string => i.toString()
  */
 
 export const mockProducts: KlevuRecord[] = [
+  {
+    color: "Black",
+    discount: "",
+    hideGroupPrices: "",
+    type: "women's bags",
+    itemGroupId: "5860507091098",
+    freeShipping: "",
+    storeBaseCurrency: "USD",
+    price: "1598.00",
+    toPrice: "",
+    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/Marsell_6933_medium.jpg?v=1603185275",
+    currency: "USD",
+    inStock: "yes",
+    id: "36800914817178",
+    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/Marsell_6931_medium.jpg?v=1603185275",
+    sku: "20406",
+    brand: "Marsell",
+    startPrice: "",
+    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/Marsell_6933_medium.jpg?v=1603185275",
+    deliveryInfo: "",
+    hideAddToCart: "",
+    salePrice: "1598.0",
+    swatchesInfo:
+      "variantColor1:Black ;;;; variantId1:36800914817178 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
+    weight: "",
+    klevu_category: "KLEVU_PRODUCT;Products;;Women;;Men;;Catalog  @ku@kuCategory@ku@",
+    totalVariants: 0,
+    groupPrices: "",
+    url: "https://klevu-jsv2-integreation.myshopify.com/products/circle-bag-in-black",
+    tags: "12/1, accessories, arrivals, AW15, bag, gift guide, last, marsell, mothermoon, nightout, one, Signature, spring3, visible, woman",
+    product_type: "women's bags",
+    size: "One Size",
+    name: "Circle Bag in Black",
+    shortDesc:
+      "Married aesthetics of innovation and tradition, Marséll crafts leatherwear of mastering technique. Where modern classism takes wearable shape, anticipate artistic expression epitomized in leather footwear and bags. This enticing piece presents ",
+    category: "Women;;Men;;Catalog",
+    typeOfRecord: "KLEVU_PRODUCT",
+  },
   {
     color: "Black",
     discount: "",
@@ -113,44 +156,6 @@ export const mockProducts: KlevuRecord[] = [
     size: "French 38",
     name: "Shahmeena Cocoon Coat in Black",
     shortDesc: "",
-    category: "Women;;Men;;Catalog",
-    typeOfRecord: "KLEVU_PRODUCT",
-  },
-  {
-    color: "Black",
-    discount: "",
-    hideGroupPrices: "",
-    type: "women's bags",
-    itemGroupId: "5860507091098",
-    freeShipping: "",
-    storeBaseCurrency: "USD",
-    price: "1598.00",
-    toPrice: "",
-    imageUrl: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/Marsell_6933_medium.jpg?v=1603185275",
-    currency: "USD",
-    inStock: "yes",
-    id: "36800914817178",
-    imageHover: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/Marsell_6931_medium.jpg?v=1603185275",
-    sku: "20406",
-    brand: "Marsell",
-    startPrice: "",
-    image: "https://cdn.shopify.com/s/files/1/0504/5364/3418/products/Marsell_6933_medium.jpg?v=1603185275",
-    deliveryInfo: "",
-    hideAddToCart: "",
-    salePrice: "1598.0",
-    swatchesInfo:
-      "variantColor1:Black ;;;; variantId1:36800914817178 ;;;; variantSwatchImage1:https://cdn.shopify.com/s/files/1/0504/5364/3418/t/2/assets/black.jpg?v=1603200797",
-    weight: "",
-    klevu_category: "KLEVU_PRODUCT;Products;;Women;;Men;;Catalog  @ku@kuCategory@ku@",
-    totalVariants: 0,
-    groupPrices: "",
-    url: "https://klevu-jsv2-integreation.myshopify.com/products/circle-bag-in-black",
-    tags: "12/1, accessories, arrivals, AW15, bag, gift guide, last, marsell, mothermoon, nightout, one, Signature, spring3, visible, woman",
-    product_type: "women's bags",
-    size: "One Size",
-    name: "Circle Bag in Black",
-    shortDesc:
-      "Married aesthetics of innovation and tradition, Marséll crafts leatherwear of mastering technique. Where modern classism takes wearable shape, anticipate artistic expression epitomized in leather footwear and bags. This enticing piece presents ",
     category: "Women;;Men;;Catalog",
     typeOfRecord: "KLEVU_PRODUCT",
   },

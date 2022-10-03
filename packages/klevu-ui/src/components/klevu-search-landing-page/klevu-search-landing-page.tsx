@@ -7,6 +7,7 @@ import {
   FilterManager,
   listFilters,
   applyFilterWithManager,
+  KlevuSearchSorting,
 } from "@klevu/core"
 import { Component, Host, h, Prop, Listen, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
@@ -20,6 +21,14 @@ import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 export class KlevuSearchLandingPage {
   @Prop() limit: number = 24
   @Prop() term!: string
+  @Prop() sort?: KlevuSearchSorting
+  @Prop() filterCount?: number
+  @Prop() filterCustomOrder?: { [key: string]: string[] }
+
+  /**
+   * Custom rendering of product. Can pass any HTML element as return value
+   */
+  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
 
   @State() results: KlevuRecord[] = [
     undefined,
@@ -45,9 +54,18 @@ export class KlevuSearchLandingPage {
     const result = await KlevuFetch(
       search(
         this.term,
-        { limit: this.limit },
+        { limit: this.limit, sort: this.sort },
         sendSearchEvent(),
-        listFilters({ filterManager: this.manager }),
+        listFilters({
+          filterManager: this.manager,
+          limit: this.filterCount,
+          rangeFilterSettings: [
+            {
+              key: "klevu_price",
+              minMax: true,
+            },
+          ],
+        }),
         applyFilterWithManager(this.manager)
       )
     )
@@ -79,9 +97,13 @@ export class KlevuSearchLandingPage {
   render() {
     return (
       <Host>
-        <klevu-facet-list exportparts={globalExportedParts} manager={this.manager}></klevu-facet-list>
+        <klevu-facet-list
+          customOrder={this.filterCustomOrder}
+          exportparts={globalExportedParts}
+          manager={this.manager}
+        ></klevu-facet-list>
         <section>
-          <klevu-product-grid products={this.results}></klevu-product-grid>
+          <klevu-product-grid renderProduct={this.renderProduct} products={this.results}></klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">
               <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>

@@ -2,7 +2,7 @@
   display: block;
 }
 
-input {
+input[type="text"] {
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -12,11 +12,11 @@ input {
   border-radius: var(--klevu-rounded-corners);
 }
 
-input:focus {
+input[type="text"]:focus {
   outline: 1px solid var(--klevu-color-primary-border);
 }
 
-input:disabled {
+input[type="text"]:disabled {
   background-color: var(--klevu-color-dim-background);
   cursor: not-allowed;
 }

@@ -22,12 +22,12 @@ export class KlevuTextfield {
   @Event({
     composed: true,
   })
-  textChanged: EventEmitter<string>
+  klevuTextChanged: EventEmitter<string>
 
   @Event({
     composed: true,
   })
-  textFocused: EventEmitter<void>
+  klevuTextFocused: EventEmitter<void>
 
   render() {
     return (
@@ -37,11 +37,11 @@ export class KlevuTextfield {
         value={this.value}
         disabled={this.disabled}
         placeholder={this.placeholder}
-        onFocus={() => this.textFocused.emit()}
+        onFocus={() => this.klevuTextFocused.emit()}
         onInput={(e) => {
           const el = e.target as HTMLInputElement
           this.value = el.value
-          this.textChanged.emit(el.value)
+          this.klevuTextChanged.emit(el.value)
         }}
       />
     )

@@ -3,10 +3,13 @@ import "./klevu-recommendations.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-export default {
+import { Meta } from "@storybook/html"
+
+const meta: Meta = {
   title: "Apps/Recommendations",
   parameters: { notes },
 }
+export default meta
 
 export const Default = WebComponentTemplate<HTMLKlevuRecommendationsElement>({
   tag: "klevu-recommendations",

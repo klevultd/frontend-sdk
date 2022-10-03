@@ -17,11 +17,13 @@
 
 ### Depends on
 
+- [klevu-slides](../klevu-slides)
 - [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-recommendations --> klevu-slides
   klevu-recommendations --> klevu-product
   style klevu-recommendations fill:#f9f,stroke:#333,stroke-width:4px
 ```
