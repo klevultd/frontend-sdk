@@ -1,6 +1,6 @@
 import { FetchResultEvents } from "../events/FetchResultEvents.js"
 import {
-  applyFilterWithManager,
+  applyFilterWithManager, KlevuAnnotations,
   KlevuConfig,
   KlevuFetchFunctionReturnValue,
 } from "../index.js"
@@ -18,7 +18,8 @@ import {
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
-import { post } from "./fetch.js"
+import { post,get } from "./fetch.js"
+import { objectToQueryParameters } from "../utils/index.js"
 
 const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
 
@@ -84,6 +85,7 @@ export function KlevuCreateResponseObject(
     suggestionsById: (id: string) =>
       response.suggestionResults?.find((q) => q.id === id),
     queriesById: (id: string) => KlevuQueriesById(id, response, queries),
+    annotationsById: (id: string,product:string,languageCode:string) => getAnnotationsForProduct(id,response,product,languageCode)
   }
 
   // Send event to functions on result
@@ -126,6 +128,37 @@ function KlevuQueriesById(
     next: fetchNextPageSingleFunc(response, func),
     functionParams: func.params,
   }
+}
+/**
+ *
+ * @param id Id of query response to find
+ * @param response Raw API response from server
+ * @param product Id of product to find
+ * @param languageCode Language code to process in
+ * @returns
+ */
+async function getAnnotationsForProduct(id: string, response: KlevuApiRawResponse, product: string, languageCode: string) {
+  const res = response.queryResults?.find((s) => s.id === id)
+  if (!res) {
+    return undefined
+  }
+
+  const prod = res.records?.find((s) => s.id === product);
+  if (!prod) {
+    return undefined
+  }
+
+  const paramaters = {
+    "query": res.meta.searchedTerm,
+    "title": prod.name,
+    "category": prod.category,
+    "languageCode": languageCode
+  }
+  const url = "https://nlp-services.ksearchnet.com/" + KlevuConfig.getDefault().apiKey + "/annotations" + objectToQueryParameters(paramaters);
+
+  return await get<KlevuAnnotations>(
+      url
+  )
 }
 
 function fetchNextPageSingleFunc(

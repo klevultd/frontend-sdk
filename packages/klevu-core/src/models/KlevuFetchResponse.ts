@@ -32,7 +32,24 @@ export type KlevuFetchQueryResult = KlevuQueryResult &
      */
     functionParams?: KlevuFecthFunctionParams
   }
-
+/**
+ * Fetch query results
+ */
+export type KlevuAnnotations = {
+        /** Api key that was used  */
+        apiKey?: string,
+        /** Object containing the processed data  */
+        annotations?: {
+            /** Full term extracted from query  */
+            fullTerm?: string,
+            /** Subjects extracted from query  */
+            subjects?: Array<string>
+        },
+        /**  Response Message to for error processing */
+        responseMessage?: string,
+        /**  Query time for error processing */
+        qTime?: number
+}
 /**
  * Tools for operating results in easier way.
  */
@@ -49,4 +66,8 @@ export type KlevuFetchResponse = {
    * Get query result by id
    */
   queriesById: (id: string) => KlevuFetchQueryResult | undefined
+    /**
+     * Get annotations result by query id, product id and language code
+     */
+  annotationsById:(id: string,product:string,languageCode:string)=> Promise<undefined | KlevuAnnotations>
 }
