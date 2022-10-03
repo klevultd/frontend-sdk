@@ -11,7 +11,7 @@ describe("klevu-search-landing-page", () => {
         ></klevu-init
         ><klevu-search-landing-page term="jeans"></klevu-search-landing-page>`
     )
-    await page.waitForChanges()
+
     const element = await page.find("klevu-search-landing-page")
     expect(element).toHaveClass("hydrated")
   })

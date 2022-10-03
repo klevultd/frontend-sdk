@@ -11,7 +11,7 @@ describe("klevu-quicksearch", () => {
         ></klevu-init
         ><klevu-quicksearch></klevu-quicksearch>`
     )
-    await page.waitForChanges()
+
     const element = await page.find("klevu-quicksearch")
     expect(element).toHaveClass("hydrated")
   })

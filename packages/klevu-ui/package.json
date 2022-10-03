@@ -22,7 +22,7 @@
     "build": "stencil build --docs",
     "build:watch": "stencil build --watch",
     "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --e2e",
+    "test": "stencil test --e2e --max-workers 1",
     "test.watch": "stencil test --e2e --watchAll",
     "generate": "stencil generate",
     "storybook": "start-storybook -p 6006",
@@ -31,7 +31,7 @@
     "push-npm": "npm publish --access public"
   },
   "dependencies": {
-    "@klevu/core": "1.2.0",
+    "@klevu/core": "1.3.0",
     "@stencil/core": "^2.13.0",
     "nouislider": "15.6.1"
   },
