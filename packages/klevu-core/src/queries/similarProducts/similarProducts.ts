@@ -6,10 +6,12 @@ import {
 } from "../../index.js"
 
 type Options = {
+  id: string
   limit: number
 }
 
 const defaultOptions: Options = {
+  id: "similar",
   limit: 5,
 }
 
@@ -36,7 +38,7 @@ export function similarProducts(
     modifiers,
     queries: [
       {
-        id: "similar",
+        id: params.id,
         typeOfRequest: KlevuTypeOfRequest.SimilarProducts,
         settings: {
           limit: params.limit,

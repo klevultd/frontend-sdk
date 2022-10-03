@@ -8,9 +8,16 @@ export class KlevuFetchCache<T extends object, K extends object> {
   _cache = new Map<number, string>()
   _timestamp = new Map<number, number>()
 
-  check(key: T): K | undefined {
+  /**
+   * checks if cache has value and returns it
+   *
+   * @param key
+   * @param force For testing purposes
+   * @returns
+   */
+  check(key: T, force = false): K | undefined {
     // never cache on node server
-    if (!isBrowser()) {
+    if (!force && !isBrowser()) {
       return undefined
     }
 

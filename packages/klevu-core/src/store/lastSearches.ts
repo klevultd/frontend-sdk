@@ -14,6 +14,8 @@ if (isBrowser()) {
   }
 }
 
+const MAX_COUNT = 5
+
 export const KlevuLastSearches = {
   /**
    * Saves last searched term. If there is previous it's moved to as last item
@@ -32,6 +34,10 @@ export const KlevuLastSearches = {
       term: term,
     })
 
+    if (lastSearches.length > MAX_COUNT * 2) {
+      lastSearches = lastSearches.slice(MAX_COUNT * -2)
+    }
+
     if (isBrowser()) {
       document.dispatchEvent(new CustomEvent(KlevuDomEvents.LastSearchUpdate))
       window.localStorage.setItem(SAVE_KEY, JSON.stringify(lastSearches))
@@ -43,6 +49,6 @@ export const KlevuLastSearches = {
    * @returns five latests searches
    */
   get: () => {
-    return lastSearches.slice(-5)
+    return lastSearches.slice(MAX_COUNT * -1)
   },
 }
