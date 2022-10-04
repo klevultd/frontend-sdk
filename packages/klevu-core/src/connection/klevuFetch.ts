@@ -18,7 +18,7 @@ import {
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
-import { post,get } from "./fetch.js"
+import { post, get } from "./fetch.js"
 import { objectToQueryParameters } from "../utils/index.js"
 
 const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
@@ -39,7 +39,7 @@ export async function KlevuFetch(
 
   const functions = await Promise.all(functionPromises)
 
-  const { recordQueries, suggestionQueries } = await cleanAndProcessFunctions(
+  const {recordQueries, suggestionQueries} = await cleanAndProcessFunctions(
     functions
   )
 
@@ -85,7 +85,7 @@ export function KlevuCreateResponseObject(
     suggestionsById: (id: string) =>
       response.suggestionResults?.find((q) => q.id === id),
     queriesById: (id: string) => KlevuQueriesById(id, response, queries),
-    annotationsById: (id: string,product:string,languageCode:string) => getAnnotationsForProduct(id,response,product,languageCode)
+    annotationsById: (id: string, productId: string, languageCode: string) => getAnnotationsForProduct(id, response, productId, languageCode)
   }
 
   // Send event to functions on result
@@ -129,6 +129,7 @@ function KlevuQueriesById(
     functionParams: func.params,
   }
 }
+
 /**
  *
  * @param id Id of query response to find
@@ -137,13 +138,13 @@ function KlevuQueriesById(
  * @param languageCode Language code to process in
  * @returns
  */
-async function getAnnotationsForProduct(id: string, response: KlevuApiRawResponse, product: string, languageCode: string) {
+async function getAnnotationsForProduct(id: string, response: KlevuApiRawResponse, productId: string, languageCode: string) {
   const res = response.queryResults?.find((s) => s.id === id)
   if (!res) {
     return undefined
   }
 
-  const prod = res.records?.find((s) => s.id === product);
+  const prod = res.records?.find((s) => s.id === productId);
   if (!prod) {
     return undefined
   }
@@ -157,7 +158,7 @@ async function getAnnotationsForProduct(id: string, response: KlevuApiRawRespons
   const url = "https://nlp-services.ksearchnet.com/" + KlevuConfig.getDefault().apiKey + "/annotations" + objectToQueryParameters(paramaters);
 
   return await get<KlevuAnnotations>(
-      url
+    url
   )
 }
 

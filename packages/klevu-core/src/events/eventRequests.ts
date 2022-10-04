@@ -1,6 +1,7 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import { get, post } from "../connection/fetch.js"
 import { isBrowser } from "../utils/isBrowser.js"
+import { objectToQueryParameters } from "../utils/index.js"
 
 const KEY_PENDING_REQUESTS = "klevu-pending-analytics"
 
@@ -34,7 +35,7 @@ export type V1SearchEvent = {
 export async function KlevuEventV1Search(event: V1SearchEvent) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }n-search/search${objectToUrlParams(event)}`
+  }n-search/search${objectToQueryParameters(event)}`
   const id = addPendingRequest(url)
   const res = await get(url, true)
   if (id) {
@@ -104,7 +105,7 @@ export async function KlevuEventV1ProductTracking(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }productTracking${objectToUrlParams(event)}`
+  }productTracking${objectToQueryParameters(event)}`
   const id = addPendingRequest(url)
   const res = await get(url, true)
   if (id) {
@@ -165,7 +166,7 @@ export async function KlevuEventV1CheckedOutProducts(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }productTracking${objectToUrlParams(event)}`
+  }productTracking${objectToQueryParameters(event)}`
   const id = addPendingRequest(url)
   const res = await get(url, true)
   if (id) {
@@ -216,7 +217,7 @@ export async function KlevuEventV1CategoryView(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }categoryProductViewTracking${objectToUrlParams(event)}`
+  }categoryProductViewTracking${objectToQueryParameters(event)}`
   const id = addPendingRequest(url)
   const res = await get(url, true)
   if (id) {
@@ -286,21 +287,13 @@ export async function KlevuEventV1CategoryProductClick(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }categoryProductClickTracking${objectToUrlParams(event)}`
+  }categoryProductClickTracking${objectToQueryParameters(event)}`
   const id = addPendingRequest(url)
   const res = await get(url, true)
   if (id) {
     removePendingRequest(id)
   }
   return res
-}
-
-function objectToUrlParams(event: object) {
-  let urlData = "?"
-  for (const [key, value] of Object.entries(event)) {
-    urlData += `${key}=${encodeURIComponent(value)}&`
-  }
-  return urlData
 }
 
 export type KlevuEventV2Data = {
