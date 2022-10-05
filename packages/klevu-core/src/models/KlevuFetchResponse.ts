@@ -25,28 +25,28 @@ export type KlevuNextFunc = (override?: {
  */
 export type KlevuFetchQueryResult = KlevuQueryResult &
   KlevuResultEvent & {
-  /** If there are multiple pages of results next function is defined. Calling this function will result new result  */
-  next?: KlevuNextFunc
-  /**
-   * All parameters defined in that query function
-   */
-  functionParams?: KlevuFecthFunctionParams
-}
+    /** If there are multiple pages of results next function is defined. Calling this function will result new result  */
+    next?: KlevuNextFunc
+    /**
+     * All parameters defined in that query function
+     */
+    functionParams?: KlevuFecthFunctionParams
+  }
 /**
  * Fetch query results
  */
 export type KlevuAnnotations = {
   /** Api key that was used  */
-  apiKey?: string,
+  apiKey?: string
   /** Object containing the processed data  */
   annotations?: {
     /** Full term extracted from query  */
-    fullTerm?: string,
+    fullTerm?: string
     /** Subjects extracted from query  */
     subjects?: Array<string>
-  },
+  }
   /**  Response Message to for error processing */
-  responseMessage?: string,
+  responseMessage?: string
   /**  Query time for error processing */
   qTime?: number
 }
@@ -69,5 +69,9 @@ export type KlevuFetchResponse = {
   /**
    * Get annotations result by query id, product id and language code
    */
-  annotationsById: (id: string, productId: string, languageCode: string) => Promise<undefined | KlevuAnnotations>
+  annotationsById: (
+    id: string,
+    productId: string,
+    languageCode: string
+  ) => Promise<undefined | KlevuAnnotations>
 }
