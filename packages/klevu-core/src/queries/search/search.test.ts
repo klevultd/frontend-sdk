@@ -23,14 +23,18 @@ test("Basic search", async () => {
 
 test("Basic annotationsById", async () => {
   const result = await KlevuFetch(
-      search("blue", {
-        id: "test",
-      })
+    search("blue", {
+      id: "test",
+    })
   )
 
   expect(result.queriesById("test")).toBeDefined()
   expect(result.queriesById("test")?.records.length).toBeGreaterThan(0)
-  const resultAnnotation = await result.annotationsById("test","36800798556314","en")
+  const resultAnnotation = await result.annotationsById(
+    "test",
+    "36800798556314",
+    "en"
+  )
   expect(resultAnnotation?.annotations?.subjects?.length).toBeGreaterThan(0)
 })
 
