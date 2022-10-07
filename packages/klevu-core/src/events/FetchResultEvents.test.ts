@@ -7,6 +7,7 @@ import {
   search,
 } from "../index.js"
 import axios from "axios"
+import { jest } from "@jest/globals"
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -86,6 +87,45 @@ test("Recommendation click event", async () => {
   const product = query!.records[0]
 
   query?.getRecommendationClickSendEvent?.()(product.id, product.itemGroupId)
+
+  expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
+    product.id
+  )
+})
+
+test("Override user IP for request", async () => {
+  const result = await KlevuFetch(categoryMerchandising("Women"))
+
+  const query = result.queriesById("categoryMerchandising")
+
+  expect(query).toBeDefined()
+  expect(query?.getCategoryMerchandisingClickSendEvent).toBeDefined()
+  expect(query?.getSearchClickSendEvent).toBeUndefined()
+  expect(query?.getRecommendationClickSendEvent).toBeUndefined()
+
+  const product = query!.records[0]
+
+  const getSpySuccess = jest.spyOn(axios, "get").mockImplementation(() => {
+    return new Promise((resolve, reject) => {
+      return resolve({
+        data: {},
+      })
+    })
+  })
+
+  query?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+  )
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
