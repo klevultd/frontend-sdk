@@ -1,7 +1,7 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import { get, post } from "../connection/fetch.js"
 
-type V1SearchEvent = {
+export type V1SearchEvent = {
   /**
    * This is your Klevu JS API Key.
    */
@@ -275,7 +275,7 @@ function objectToUrlParams(event: object) {
   return urlData
 }
 
-type KlevuEventV2 = {
+export type KlevuEventV2Data = {
   /**
    * Please use the appropriate value for each event type, detailed within each
    * section below. eg. view_recs_list.
@@ -364,6 +364,6 @@ type KlevuEventV2 = {
   }>
 }
 
-export async function KlevuEventV2(data: KlevuEventV2[]) {
+export async function KlevuEventV2(data: KlevuEventV2Data[]) {
   return await post(KlevuConfig.getDefault().eventsApiV2Url, data, true)
 }

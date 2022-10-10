@@ -121,6 +121,7 @@ function KlevuQueriesById(
     return res
   }
   return {
+    ...res,
     ...FetchResultEvents(res, func),
     next: fetchNextPageSingleFunc(response, func),
     functionParams: func.params,
