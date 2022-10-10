@@ -35,19 +35,23 @@ export class KlevuEvents {
   static buy(
     items: Array<{
       amount: number
-      product: KlevuRecord
+      product: Partial<KlevuRecord>
       variantId?: string
     }>
   ) {
     for (const i of items) {
       const p = i.product
 
+      if (!p.id) {
+        throw new Error("Cannot send event without product id")
+      }
+
       const data: V1CheckedOutProductsEvent = {
         klevu_apiKey: KlevuConfig.getDefault().apiKey,
-        klevu_currency: p.currency,
-        klevu_productGroupId: p.itemGroupId,
+        klevu_currency: p.currency ?? "usd",
+        klevu_productGroupId: p.itemGroupId || p.id,
         klevu_productId: p.id,
-        klevu_salePrice: parseFloat(p.salePrice),
+        klevu_salePrice: parseFloat(p.salePrice ?? "0"),
         klevu_productVariantId: i.variantId || p.id,
         klevu_type: "checkout",
         klevu_unit: i.amount,
@@ -65,7 +69,7 @@ export class KlevuEvents {
    */
   static recommendationView(
     recommendationMetadata: RecommendationViewEventMetaData,
-    products: KlevuRecord[]
+    products: Array<Partial<KlevuRecord>>
   ) {
     KlevuEventV2([
       {
@@ -74,17 +78,22 @@ export class KlevuEvents {
         event_list_id: recommendationMetadata.recsKey,
         event_list_logic: recommendationMetadata.logic,
         event_list_name: recommendationMetadata.title,
-        items: products.map((p, index) => ({
-          index: index + 1,
-          item_id: p.id,
-          item_group_id: p.itemGroupId || p.id,
-          item_name: p.name,
-          item_variant_id: p.itemGroupId || p.id,
-          price: p.price,
-          currency: p.currency,
-          item_brand: p.brand,
-          item_category: p.category,
-        })),
+        items: products.map((p, index) => {
+          if (!p.id) {
+            throw new Error("Cannot send event without product id")
+          }
+          return {
+            index: index + 1,
+            item_id: p.id,
+            item_group_id: p.itemGroupId || p.id,
+            item_name: p.name ?? "unknown",
+            item_variant_id: p.itemGroupId || p.id,
+            price: p.price ?? "0",
+            currency: p.currency,
+            item_brand: p.brand,
+            item_category: p.category,
+          }
+        }),
       },
     ])
   }
@@ -98,9 +107,13 @@ export class KlevuEvents {
    */
   static recommendationClick(
     recommendationMetadata: RecommendationViewEventMetaData,
-    product: KlevuRecord,
+    product: Partial<KlevuRecord>,
     productIndexInList: number
   ) {
+    if (!product.id) {
+      throw new Error("Cannot send event without product id")
+    }
+
     KlevuLastClickedProducts.click(product.id, product)
     KlevuEventV2([
       {
@@ -114,9 +127,9 @@ export class KlevuEvents {
             index: productIndexInList,
             item_id: product.id,
             item_group_id: product.itemGroupId || product.id,
-            item_name: product.name,
+            item_name: product.name ?? "unknown",
             item_variant_id: product.itemGroupId || product.id,
-            price: product.price,
+            price: product.price ?? "0",
             currency: product.currency,
             item_brand: product.brand,
             item_category: product.category,
@@ -133,19 +146,22 @@ export class KlevuEvents {
    * @param product
    */
   static searchProductClick(
-    product: KlevuRecord,
+    product: Partial<KlevuRecord>,
     searchTerm?: string,
     variantId?: string
   ) {
+    if (!product.id) {
+      throw new Error("Cannot send event without product id")
+    }
     KlevuLastClickedProducts.click(product.id, product)
     KlevuEventV1ProductTracking({
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_type: "clicked",
       klevu_keywords: searchTerm,
-      klevu_productGroupId: product.itemGroupId,
+      klevu_productGroupId: product.itemGroupId || product.id,
       klevu_productId: product.id,
-      klevu_productName: product.name,
-      klevu_productUrl: product.url,
+      klevu_productName: product.name ?? "unknown",
+      klevu_productUrl: product.url ?? "",
       klevu_productVariantId: variantId || product.id,
     })
   }
@@ -213,7 +229,7 @@ export class KlevuEvents {
    * @param productPosition Position of the product on the category page when it was clicked. For example, the value would be 0 if it is the first product on the first page. The value will be 30, if it is the first product on the 2nd page with 30 products being displayed per page.
    */
   static categoryMerchandisingProductClick(
-    product: KlevuRecord,
+    product: Partial<KlevuRecord>,
     categoryTitle: string,
     klevuCategory: string,
     variantId?: string,
@@ -221,11 +237,15 @@ export class KlevuEvents {
     abTestId?: string,
     abTestVariantId?: string
   ) {
+    if (!product.id) {
+      throw new Error("Cannot send event without product id")
+    }
+
     KlevuLastClickedProducts.click(product.id, product)
     let data: KlevuV1CategoryProductsClick = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
-      klevu_productGroupId: product.itemGroupId,
+      klevu_productGroupId: product.itemGroupId || product.id,
       klevu_productVariantId: variantId || product.id,
       klevu_categoryPath: klevuCategory,
       klevu_productId: product.id,

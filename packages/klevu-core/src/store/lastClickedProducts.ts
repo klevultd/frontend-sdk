@@ -20,7 +20,7 @@ class LastClickedProducts {
   private clicks: Array<{
     ts: Date
     id: string
-    product?: KlevuRecord
+    product?: Partial<KlevuRecord>
   }> = []
 
   private save() {
@@ -47,7 +47,7 @@ class LastClickedProducts {
    *
    * @param productId
    */
-  click(productId: string, product?: KlevuRecord) {
+  click(productId: string, product?: Partial<KlevuRecord>) {
     this.clicks.push({
       ts: new Date(),
       id: productId,
