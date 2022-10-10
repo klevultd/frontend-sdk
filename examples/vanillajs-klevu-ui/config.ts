@@ -1,6 +1,11 @@
-import { KlevuConfig } from "@klevu/core"
+const klevu_ui_settings = {
+  onProductClick: (product, event) => {
+    alert(product.name + " is clicked")
+  },
+  generateProductUrl: (product) => {
+    return undefined
+  },
+}
 
-KlevuConfig.init({
-  url: "https://eucs30v2.ksearchnet.com/cs/v2/search",
-  apiKey: "klevu-165829460115715456",
-})
+// @ts-expect-error
+window.klevu_ui_settings = klevu_ui_settings

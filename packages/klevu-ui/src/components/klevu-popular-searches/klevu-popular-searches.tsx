@@ -1,5 +1,6 @@
 import { KlevuKMCSettings } from "@klevu/core"
 import { Component, Host, h, State, Prop } from "@stencil/core"
+import { KlevuInit } from "../klevu-init/klevu-init"
 
 @Component({
   tag: "klevu-popular-searches",
@@ -11,6 +12,7 @@ export class KlevuPopularSearches {
   @Prop() caption = "Popular searches"
 
   async connectedCallback() {
+    await KlevuInit.ready()
     try {
       const settings = await KlevuKMCSettings()
       this.popularSearches = settings.root?.klevu_webstorePopularTerms ?? []

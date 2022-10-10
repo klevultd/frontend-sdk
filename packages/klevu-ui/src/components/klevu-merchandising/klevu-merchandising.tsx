@@ -11,6 +11,7 @@ import {
 } from "@klevu/core"
 import { Component, Host, h, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
+import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 
 @Component({
@@ -71,6 +72,7 @@ export class KlevuMerchandising {
   private clickEvent: (id: string, categoryTitle: string, variantId: string) => void
 
   async connectedCallback() {
+    await KlevuInit.ready()
     await this.initialFetch()
   }
 

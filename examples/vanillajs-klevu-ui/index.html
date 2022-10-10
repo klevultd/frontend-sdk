@@ -12,16 +12,6 @@
       src="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"
     ></script>
     <link rel="stylesheet" href="./style.css" />
-    <script type="module">
-      window.klevu_ui_settings = {
-        onProductClick: (product, event) => {
-          alert(product.name + " is clicked")
-        },
-        generateProductUrl: (product) => {
-          return undefined
-        },
-      }
-    </script>
   </head>
   <body>
     <klevu-init

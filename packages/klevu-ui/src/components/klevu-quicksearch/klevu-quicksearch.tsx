@@ -1,6 +1,7 @@
 import { KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
 import { Component, Host, h, State, Listen, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
+import { KlevuInit } from "../klevu-init/klevu-init"
 import type { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
@@ -48,6 +49,7 @@ export class KlevuQuicksearch {
   }
 
   async connectedCallback() {
+    await KlevuInit.ready()
     const trendingProductsQuery = await KlevuFetch(
       trendingProducts({
         limit: 6,

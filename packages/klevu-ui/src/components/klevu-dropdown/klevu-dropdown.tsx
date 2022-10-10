@@ -29,7 +29,7 @@ export class KlevuDropdown {
           }}
         >
           <select name={this.name} disabled={this.disabled} onChange={this.onChange}>
-            {this.options.map((o) => (
+            {this.options?.map((o) => (
               <option value={o.value}>{o.text}</option>
             ))}
           </select>

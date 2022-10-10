@@ -11,7 +11,7 @@ export class KlevuInit {
   @Prop() url!: string
   @Prop() settings?: KlevuUIGlobalSettings
 
-  connectedCallback() {
+  async connectedCallback() {
     KlevuConfig.init({
       apiKey: this.apiKey,
       url: this.url,
@@ -20,6 +20,10 @@ export class KlevuInit {
     if (this.settings) {
       window["klevu_ui_settings"] = this.settings
     }
+  }
+
+  static ready() {
+    return document.querySelector("klevu-init").componentOnReady()
   }
 
   render() {

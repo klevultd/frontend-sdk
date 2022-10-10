@@ -1,5 +1,6 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, Host, h, Prop, State } from "@stencil/core"
+import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProduct } from "../klevu-product/klevu-product"
 
 @Component({
@@ -25,6 +26,8 @@ export class KlevuRecommendations {
   @State() clickEvent?: (productId: string, variantId?: string) => void
 
   async connectedCallback() {
+    await KlevuInit.ready()
+
     if (!this.recommendationId) {
       throw new Error("recommendationId is required")
     }

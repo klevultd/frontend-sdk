@@ -10,6 +10,7 @@ import {
 } from "@klevu/core"
 import { Component, Host, h, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { debounce } from "../../utils/utils"
+import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type SearchResultsEventData = {
   fallback?: KlevuFetchQueryResult
@@ -81,6 +82,10 @@ export class KlevuSearchField {
     composed: true,
   })
   klevuSearchClick: EventEmitter<string>
+
+  async connectedCallback() {
+    await KlevuInit.ready()
+  }
 
   private doSearch = debounce(async (term: string) => {
     if (term.length < 3) {
