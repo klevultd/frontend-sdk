@@ -10,19 +10,19 @@
   "dependencies": {
     "@klevu/core": "file:../../packages/klevu-core",
     "css.gg": "^2.0.0",
-    "daisyui": "^2.14.1",
+    "daisyui": "^2.31.0",
     "lodash.debounce": "^4.0.8",
-    "multi-range-slider-vue": "^1.1.3",
-    "pinia": "^2.0.11",
-    "vue": "^3.2.25",
-    "vue-router": "^4.0.14",
-    "vue3-carousel": "^0.1.38"
+    "multi-range-slider-vue": "^1.1.4",
+    "pinia": "^2.0.23",
+    "vue": "^3.2.40",
+    "vue-router": "^4.1.5",
+    "vue3-carousel": "^0.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.2.0",
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.8",
-    "tailwindcss": "^3.0.23",
-    "vite": "^2.8.0"
+    "@vitejs/plugin-vue": "^3.1.2",
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.1.7"
   }
 }
