@@ -16,5 +16,5 @@ Raw response from Klevu API
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:146](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L146)
+[models/KlevuApiRawResponse.ts:146](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L146)
 

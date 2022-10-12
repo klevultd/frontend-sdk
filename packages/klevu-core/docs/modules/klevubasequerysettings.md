@@ -6,8 +6,10 @@
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `context?` | { `recentObjects`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md)  }[]  } | - |
-| `context.recentObjects` | { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md)  }[] | @TODO: Rewrite this doc. Describe how personalisation works  Use this object to specify the records (e.g. products, categories, etc.) that were recently interacted with by a customer.  Please only specify one recentObject object per record type, one for all KLEVU_PRODUCT entries, another for all KLEVU_CMS pages visited, etc.  Each recentObject object may contain multiple record objects (e.g. 5 recently viewed products). The most recently clicked record should be the first element in the array. |
+| `campaignForCatNav?` | `string` | In KMC the user is able to create campaigns for collections; which are specific  rules that are tied to a start and end date. This allows a user to create rules  that assist in promoting or demoting products during a sale, event, season, etc. This parameter allows a user to pass in the ID of a campaign into a search.  The implementation can be handled any way the user chooses: URL paramters, cookie,  localStorage, session, DB, etc. |
+| `context?` | { `recentObjects?`: { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md)  }[] ; `sourceObjects?`: { `records`: { `itemGroupId`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md)  }[]  } | - |
+| `context.recentObjects?` | { `records`: { `id`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md)  }[] | @TODO: Rewrite this doc. Describe how personalisation works  Use this object to specify the records (e.g. products, categories, etc.) that were recently interacted with by a customer.  Please only specify one recentObject object per record type, one for all KLEVU_PRODUCT entries, another for all KLEVU_CMS pages visited, etc.  Each recentObject object may contain multiple record objects (e.g. 5 recently viewed products). The most recently clicked record should be the first element in the array. |
+| `context.sourceObjects?` | { `records`: { `itemGroupId`: `string`  }[] ; `typeOfRecord`: [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md)  }[] | Used with visually similar recommendation search |
 | `customeANDQuery?` | `string` | The custom query you would like to fire, which Klevu automatically converts into an appropriate query to be included with the request. Use a - character before the parenthesis to exclude records matching the contained condition.  This is advanced usage of our API and you may need some help with building these queries, so when you need support please reach out to us via the Community Forum. |
 | `excludeIds?` | { `key`: `string` ; `value`: `string`  }[] | Use this field to exclude certain records from the search results. You can specify a record id to control this at variant level, or an itemGroupId to control this at compound level. |
 | `fallbackQueryId?` | `string` | The ID of another query which should be fired if the current query yields too few results. |
@@ -31,5 +33,5 @@
 
 #### Defined in
 
-[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
+[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
 

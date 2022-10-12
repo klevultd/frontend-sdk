@@ -11,7 +11,7 @@
 
 #### Defined in
 
-[store/lastSearches.ts:17](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/store/lastSearches.ts#L17)
+[store/lastSearches.ts:19](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/lastSearches.ts#L19)
 
 ## KlevuFetch Functions
 
@@ -25,7 +25,7 @@ Function that makes query to KlevuBackend. It can take amount of queries.
 
 | Name | Type |
 | :------ | :------ |
-| `...functionPromises` | ([`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md) \| `Promise`<[`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)\>)[] |
+| `...functionPromises` | [`KlevuFetchQueries`](klevufetchqueries.md) |
 
 #### Returns
 
@@ -35,5 +35,5 @@ Tools to operate results and get next results [KlevuFetchResponse](klevufetchres
 
 #### Defined in
 
-[connection/klevuFetch.ts:30](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/connection/klevuFetch.ts#L30)
+[connection/klevuFetch.ts:32](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/connection/klevuFetch.ts#L32)
 

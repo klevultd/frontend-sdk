@@ -12,5 +12,5 @@ Currently not supported in server side rendering.
 
 #### Defined in
 
-[modifiers/abTest/abTest.ts:20](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/modifiers/abTest/abTest.ts#L20)
+[modifiers/abTest/abTest.ts:20](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/modifiers/abTest/abTest.ts#L20)
 

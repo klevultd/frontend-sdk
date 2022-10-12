@@ -22,5 +22,5 @@ Generic
 
 #### Defined in
 
-[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
+[models/KlevuBaseQuery.ts:11](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuBaseQuery.ts#L11)
 

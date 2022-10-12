@@ -11,5 +11,5 @@ all results from search.
 
 #### Defined in
 
-[modifiers/sendSearchEvent/sendSearchEvent.ts:11](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/modifiers/sendSearchEvent/sendSearchEvent.ts#L11)
+[modifiers/sendSearchEvent/sendSearchEvent.ts:11](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/modifiers/sendSearchEvent/sendSearchEvent.ts#L11)
 

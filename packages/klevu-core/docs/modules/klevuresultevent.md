@@ -6,11 +6,11 @@
 
 | Name | Type |
 | :------ | :------ |
-| `getCategoryMerchandisingClickSendEvent?` | () => (`productId`: `string`, `categoryTitle`: `string`, `variantId?`: `string`) => `void` |
-| `getRecommendationClickSendEvent?` | () => (`productId`: `string`, `variantId?`: `string`) => `void` |
-| `getSearchClickSendEvent?` | () => (`productId`: `string`, `variantId?`: `string`) => `void` |
+| `getCategoryMerchandisingClickSendEvent?` | () => (`productId`: `string`, `categoryTitle`: `string`, `variantId?`: `string`, `override?`: `Partial`<`KlevuV1CategoryProductsView`\>) => `void` |
+| `getRecommendationClickSendEvent?` | () => (`productId`: `string`, `variantId?`: `string`, `override?`: `Partial`<`KlevuEventV2Data`\>) => `void` |
+| `getSearchClickSendEvent?` | () => (`productId`: `string`, `variantId?`: `string`, `override?`: `Partial`<`V1SearchEvent`\>) => `void` |
 
 #### Defined in
 
-[models/KlevuResultEvent.ts:1](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuResultEvent.ts#L1)
+[models/KlevuResultEvent.ts:7](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuResultEvent.ts#L7)
 

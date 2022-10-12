@@ -18,5 +18,5 @@ Get new arrival recommendations
 
 #### Defined in
 
-[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
+[queries/newarrivals/newarrivals.ts:21](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/newarrivals/newarrivals.ts#L21)
 

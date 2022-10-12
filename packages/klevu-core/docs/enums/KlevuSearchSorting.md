@@ -26,7 +26,7 @@ Sort the results by the name of each record, in alphabetical order.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:20](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L20)
+[models/KlevuSearchSorting.ts:20](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L20)
 
 ___
 
@@ -38,7 +38,7 @@ Sort the results by the name of each record, in alphabetical order.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:24](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L24)
+[models/KlevuSearchSorting.ts:24](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L24)
 
 ___
 
@@ -51,7 +51,7 @@ for important information about sorting by newness.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:39](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L39)
+[models/KlevuSearchSorting.ts:39](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L39)
 
 ___
 
@@ -64,7 +64,7 @@ for important information about sorting by newness.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:44](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L44)
+[models/KlevuSearchSorting.ts:44](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L44)
 
 ___
 
@@ -76,7 +76,7 @@ Sort the results by the salePrice value of each record.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:12](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L12)
+[models/KlevuSearchSorting.ts:12](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L12)
 
 ___
 
@@ -88,7 +88,7 @@ Sort the results by the salePrice value of each record.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:16](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L16)
+[models/KlevuSearchSorting.ts:16](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L16)
 
 ___
 
@@ -101,7 +101,7 @@ indexed in your store.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:29](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L29)
+[models/KlevuSearchSorting.ts:29](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L29)
 
 ___
 
@@ -114,7 +114,7 @@ indexed in your store.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:34](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L34)
+[models/KlevuSearchSorting.ts:34](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L34)
 
 ___
 
@@ -129,4 +129,4 @@ orders the results.
 
 #### Defined in
 
-[models/KlevuSearchSorting.ts:8](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuSearchSorting.ts#L8)
+[models/KlevuSearchSorting.ts:8](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSearchSorting.ts#L8)

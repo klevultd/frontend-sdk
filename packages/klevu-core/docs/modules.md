@@ -49,6 +49,8 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuBaseQuerySettingsQuery](modules/klevubasequerysettingsquery.md)
 - [KlevuFecthFunctionParams](modules/klevufecthfunctionparams.md)
 - [KlevuFetchFunctionReturnValue](modules/klevufetchfunctionreturnvalue.md)
+- [KlevuFetchQueries](modules/klevufetchqueries.md)
+- [KlevuFetchQueryResult](modules/klevufetchqueryresult.md)
 - [KlevuFetchResponse](modules/klevufetchresponse.md)
 - [KlevuFilterResultOptions](modules/klevufilterresultoptions.md)
 - [KlevuFilterResultSlider](modules/klevufilterresultslider.md)
@@ -89,6 +91,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [searchCms](modules/searchcms.md)
 - [similarProducts](modules/similarproducts.md)
 - [trendingCategoryProducts](modules/trendingcategoryproducts.md)
+- [visuallySimilar](modules/visuallysimilar.md)
 
 ### Modifier Functions
 
@@ -115,6 +118,12 @@ Global custom document events that @klevu/core sends Enumerations
 ### KlevuEvents Functions
 
 - [KlevuListenDomEvent](modules/klevulistendomevent.md)
+
+### Other Functions
+
+- [KlevuCreateResponseObject](modules/klevucreateresponseobject.md)
+- [KlevuHydratePackedFetchResult](modules/klevuhydratepackedfetchresult.md)
+- [KlevuPackFetchResult](modules/klevupackfetchresult.md)
 
 ### Query Functions
 

@@ -17,5 +17,5 @@ Recently viewed products
 
 #### Defined in
 
-[queries/recentlyViewedProducts/recentlyViewedProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/queries/recentlyViewedProducts/recentlyViewedProducts.ts#L24)
+[queries/recentlyViewedProducts/recentlyViewedProducts.ts:26](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/recentlyViewedProducts/recentlyViewedProducts.ts#L26)
 

@@ -50,5 +50,5 @@
 
 #### Defined in
 
-[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuRecord.ts#L3)
+[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuRecord.ts#L3)
 

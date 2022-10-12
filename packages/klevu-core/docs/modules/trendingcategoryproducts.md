@@ -9,7 +9,7 @@ Return trending recommendations
 | Name | Type |
 | :------ | :------ |
 | `categoryPath` | `string` |
-| `options?` | `Options` |
+| `options?` | `Partial`<`Options`\> |
 | `...modifiers` | `KlevuFetchModifer`[] |
 
 #### Returns
@@ -18,5 +18,5 @@ Return trending recommendations
 
 #### Defined in
 
-[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
+[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
 

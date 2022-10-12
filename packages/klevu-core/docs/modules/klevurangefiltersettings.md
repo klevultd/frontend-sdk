@@ -12,5 +12,5 @@
 
 #### Defined in
 
-[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
+[models/KlevuRangeFilterSettings.ts:1](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuRangeFilterSettings.ts#L1)
 

@@ -6,5 +6,5 @@ Backend API parameters relevat for Also Bought Recommendation query
 
 #### Defined in
 
-[models/KlevuAlsoBoughtQuery.ts:8](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/models/KlevuAlsoBoughtQuery.ts#L8)
+[models/KlevuAlsoBoughtQuery.ts:8](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuAlsoBoughtQuery.ts#L8)
 

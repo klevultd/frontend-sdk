@@ -11,5 +11,5 @@
 
 #### Defined in
 
-[store/lastSearches.ts:4](https://github.com/klevultd/frontend-sdk/blob/db7f697/packages/klevu-core/src/store/lastSearches.ts#L4)
+[store/lastSearches.ts:4](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/lastSearches.ts#L4)
 
