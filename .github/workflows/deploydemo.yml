@@ -3,6 +3,9 @@ name: Deploy demo to ECR
 on:
   workflow_dispatch:
 
+runs:
+  using: "node16"
+
 env:
   AWS_REGION: eu-west-1
   ECR_REPOSITORY: klevu/headless
