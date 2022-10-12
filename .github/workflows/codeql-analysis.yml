@@ -11,9 +11,6 @@
 #
 name: "CodeQL"
 
-runs:
-  using: "node16"
-
 on:
   push:
     branches: [master]
