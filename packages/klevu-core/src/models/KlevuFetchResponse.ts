@@ -31,6 +31,13 @@ export type KlevuFetchQueryResult = KlevuQueryResult &
      * All parameters defined in that query function
      */
     functionParams?: KlevuFecthFunctionParams
+    /**
+     * Get annotations result by query id, product id and language code
+     */
+    annotationsById?: (
+      productId: string,
+      languageCode: string
+    ) => Promise<undefined | KlevuAnnotations>
   }
 /**
  * Fetch query results
@@ -66,12 +73,4 @@ export type KlevuFetchResponse = {
    * Get query result by id
    */
   queriesById: (id: string) => KlevuFetchQueryResult | undefined
-  /**
-   * Get annotations result by query id, product id and language code
-   */
-  annotationsById: (
-    id: string,
-    productId: string,
-    languageCode: string
-  ) => Promise<undefined | KlevuAnnotations>
 }
