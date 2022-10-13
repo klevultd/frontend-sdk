@@ -86,8 +86,6 @@ export function KlevuCreateResponseObject(
     suggestionsById: (id: string) =>
       response.suggestionResults?.find((q) => q.id === id),
     queriesById: (id: string) => KlevuQueriesById(id, response, queries),
-    annotationsById: (id: string, productId: string, languageCode: string) =>
-      getAnnotationsForProduct(id, response, productId, languageCode),
   }
 
   // Send event to functions on result
@@ -129,6 +127,8 @@ function KlevuQueriesById(
     ...FetchResultEvents(res, func),
     next: fetchNextPageSingleFunc(response, func),
     functionParams: func.params,
+    annotationsById: (productId: string, languageCode: string) =>
+      getAnnotationsForProduct(res, productId, languageCode),
   }
 }
 
@@ -141,23 +141,17 @@ function KlevuQueriesById(
  * @returns
  */
 async function getAnnotationsForProduct(
-  id: string,
-  response: KlevuApiRawResponse,
+  response: KlevuQueryResult,
   productId: string,
   languageCode: string
 ) {
-  const res = response.queryResults?.find((s) => s.id === id)
-  if (!res) {
-    return undefined
-  }
-
-  const prod = res.records?.find((s) => s.id === productId)
+  const prod = response.records?.find((s) => s.id === productId)
   if (!prod) {
     return undefined
   }
 
   const paramaters = {
-    query: res.meta.searchedTerm,
+    query: response.meta.searchedTerm,
     title: prod.name,
     category: prod.category,
     languageCode: languageCode,
