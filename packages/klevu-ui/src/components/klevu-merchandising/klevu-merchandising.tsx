@@ -89,7 +89,7 @@ export class KlevuMerchandising {
     this.resultObject = result.queriesById("categoryMerchandising")
 
     this.results = this.resultObject?.records ?? []
-    this.clickEvent = this.resultObject?.getSearchClickSendEvent?.()
+    this.clickEvent = this.resultObject?.getCategoryMerchandisingClickSendEvent?.()
   }
 
   async loadMore() {

@@ -1,0 +1,21 @@
+{
+  "name": "react-klevu-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite --port 3007 --host"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@klevu/core": "^1.4.0",
+    "@klevu/ui": "^0.0.5",
+    "@klevu/ui-react": "^0.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "vite": "^3.1.8"
+  }
+}
