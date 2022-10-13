@@ -79,5 +79,37 @@ const fetch = debounce(async function load() {
       })
       printToOutput(printOut)
     }
+  } else {
+    const secondQuery = result.queriesById("search-fallback") //search-fallback
+    const recordsFallback = result.queriesById("search-fallback")?.records
+    if (recordsFallback.length > 0) {
+      const product = recordsFallback[0]
+      const annotations = await secondQuery.annotationsById(product.id, "en")
+      if (annotations.responseMessage === "SUCCESS") {
+        let printOut = {
+          "Search Term": firstQuery.meta.searchedTerm,
+          "Search Term(full)": annotations.annotations.fullTerm,
+          Subjects: annotations.annotations.subjects,
+          "Total Number of Product Results": firstQuery.meta.totalResultsFound,
+          "Product Clicked": {
+            name: product.name,
+            id: product.id,
+            url: product.url,
+            image: product.image,
+            price: product.price,
+            salePrice: product.salePrice,
+          },
+          "Recommended results": [],
+        }
+        let numProductAdded = 0
+        recordsFallback.forEach((element) => {
+          if (numProductAdded < 10) {
+            printOut["Recommended results"].push(element)
+            numProductAdded++
+          }
+        })
+        printToOutput(printOut)
+      }
+    }
   }
 }, 300)
