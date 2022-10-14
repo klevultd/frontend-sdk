@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/core": "^1.1.2"
+    "@klevu/core": "file:../../packages/klevu-core"
   },
   "devDependencies": {
     "vite": "^2.9.1"

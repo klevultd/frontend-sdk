@@ -1,6 +1,5 @@
 import {
   KlevuFetch,
-  KlevuTypeOfRecord,
   search,
   suggestions,
   fallback,
@@ -49,16 +48,21 @@ const fetch = debounce(async function load() {
       fallback(trendingProducts())
     )
   )
-  const firstQuery = result.queriesById("search") //search-fallback
-  const records = result.queriesById("search")?.records
+  const firstQuery = result.queriesById("search")
+  const records = result.queriesById("search")?.records ?? []
+
+  if (!firstQuery) {
+    return
+  }
+
   if (records.length > 0) {
     const product = records[0]
-    const annotations = await firstQuery.annotationsById(product.id, "en")
-    if (annotations.responseMessage === "SUCCESS") {
+    const annotations = await firstQuery.annotationsById?.(product.id, "en")
+    if (annotations?.responseMessage === "SUCCESS") {
       let printOut = {
         "Search Term": firstQuery.meta.searchedTerm,
-        "Search Term(full)": annotations.annotations.fullTerm,
-        Subjects: annotations.annotations.subjects,
+        "Search Term(full)": annotations.annotations?.fullTerm,
+        Subjects: annotations.annotations?.subjects,
         "Total Number of Product Results": firstQuery.meta.totalResultsFound,
         "Product Clicked": {
           name: product.name,
@@ -68,28 +72,22 @@ const fetch = debounce(async function load() {
           price: product.price,
           salePrice: product.salePrice,
         },
-        "Search Results": [],
       }
-      let numProductAdded = 0
-      records.forEach((element) => {
-        if (numProductAdded < 10) {
-          printOut["Search Results"].push(element)
-          numProductAdded++
-        }
-      })
+      printOut["Search Results"] = records.slice(0, 10)
       printToOutput(printOut)
     }
   } else {
-    const secondQuery = result.queriesById("search-fallback") //search-fallback
-    const recordsFallback = result.queriesById("search-fallback")?.records
+    const secondQuery = result.queriesById("search-fallback")! //search-fallback
+    const recordsFallback = result.queriesById("search-fallback")?.records ?? []
+
     if (recordsFallback.length > 0) {
       const product = recordsFallback[0]
-      const annotations = await secondQuery.annotationsById(product.id, "en")
-      if (annotations.responseMessage === "SUCCESS") {
+      const annotations = await secondQuery.annotationsById?.(product.id, "en")
+      if (annotations?.responseMessage === "SUCCESS") {
         let printOut = {
           "Search Term": firstQuery.meta.searchedTerm,
-          "Search Term(full)": annotations.annotations.fullTerm,
-          Subjects: annotations.annotations.subjects,
+          "Search Term(full)": annotations.annotations?.fullTerm,
+          Subjects: annotations.annotations?.subjects,
           "Total Number of Product Results": firstQuery.meta.totalResultsFound,
           "Product Clicked": {
             name: product.name,
@@ -100,14 +98,8 @@ const fetch = debounce(async function load() {
             salePrice: product.salePrice,
           },
           "Recommended results": [],
-        }
-        let numProductAdded = 0
-        recordsFallback.forEach((element) => {
-          if (numProductAdded < 10) {
-            printOut["Recommended results"].push(element)
-            numProductAdded++
-          }
-        })
+        } as any
+        printOut["Recommended results"] = recordsFallback.slice(0, 10)
         printToOutput(printOut)
       }
     }
