@@ -120,7 +120,11 @@ function KlevuQueriesById(
   }
   const func = queries.find((f) => f.queries?.some((q) => q.id == res.id))
   if (!func) {
-    return res
+    return {
+      ...res,
+      annotationsById: (productId: string, languageCode: string) =>
+        getAnnotationsForProduct(res, productId, languageCode),
+    }
   }
   return {
     ...res,
