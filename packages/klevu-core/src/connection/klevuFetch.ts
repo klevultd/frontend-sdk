@@ -1,26 +1,20 @@
-import { FetchResultEvents } from "../events/FetchResultEvents.js"
-import {
-  applyFilterWithManager,
-  KlevuAnnotations,
-  KlevuConfig,
-  KlevuFetchFunctionReturnValue,
-} from "../index.js"
+import { KlevuConfig, KlevuFetchFunctionReturnValue } from "../index.js"
 import {
   KlevuAllRecordQueries,
   KlevuPayload,
   KlevuApiRawResponse,
   KlevuFetchResponse,
   KlevuSuggestionQuery,
-  KlevuBaseQuery,
   KlevuQueryResult,
-  KlevuNextFunc,
   KlevuFetchQueryResult,
 } from "../models/index.js"
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
-import { post, get } from "./fetch.js"
-import { objectToQueryParameters } from "../utils/index.js"
+import { post } from "./fetch.js"
+import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
+import { fetchNextPage } from "./resultHelpers/fetchNextPage.js"
+import { FetchResultEvents } from "./resultHelpers/FetchResultEvents.js"
 
 const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
 
@@ -129,103 +123,11 @@ function KlevuQueriesById(
   return {
     ...res,
     ...FetchResultEvents(res, func),
-    next: fetchNextPageSingleFunc(response, func),
+    next: fetchNextPage(response, func),
     functionParams: func.params,
     annotationsById: (productId: string, languageCode: string) =>
       getAnnotationsForProduct(res, productId, languageCode),
   }
-}
-
-/**
- *
- * @param id Id of query response to find
- * @param response Raw API response from server
- * @param product Id of product to find
- * @param languageCode Language code to process in
- * @returns
- */
-async function getAnnotationsForProduct(
-  response: KlevuQueryResult,
-  productId: string,
-  languageCode: string
-) {
-  const prod = response.records?.find((s) => s.id === productId)
-  if (!prod) {
-    return undefined
-  }
-
-  const paramaters = {
-    query: response.meta.searchedTerm,
-    title: prod.name,
-    category: prod.category,
-    languageCode: languageCode,
-  }
-  const url =
-    "https://nlp-services.ksearchnet.com/" +
-    KlevuConfig.getDefault().apiKey +
-    "/annotations" +
-    objectToQueryParameters(paramaters)
-
-  return await get<KlevuAnnotations>(url)
-}
-
-function fetchNextPageSingleFunc(
-  response: KlevuApiRawResponse,
-  func: KlevuFetchFunctionReturnValue
-) {
-  if (!func.queries) {
-    return undefined
-  }
-
-  const queryIndex = func.queries.findIndex((q) => !q.isFallbackQuery)
-
-  if (queryIndex === -1) {
-    return undefined
-  }
-
-  const prevQuery: KlevuBaseQuery = func.queries[queryIndex] as KlevuBaseQuery
-
-  const prevQueryResponse = response.queryResults?.find(
-    (q) => q.id === prevQuery.id
-  )
-
-  if (!prevQueryResponse) {
-    return undefined
-  }
-
-  // no more pages
-  if (
-    prevQueryResponse.meta.totalResultsFound <=
-    prevQueryResponse.meta.offset + prevQueryResponse.meta.noOfResults
-  ) {
-    return undefined
-  }
-
-  const nextFunc: KlevuNextFunc = async (override?) => {
-    if (!prevQuery.settings) {
-      prevQuery.settings = {}
-    }
-
-    prevQuery.settings.offset =
-      prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
-    prevQuery.settings.limit = override?.limit ?? prevQuery.settings?.limit ?? 5
-
-    // existance of prevQuery has checked in function before
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    func.queries![queryIndex] = prevQuery
-
-    // add previous filters with manager
-    if (override?.filterManager) {
-      if (!func.modifiers) {
-        func.modifiers = []
-      }
-      func.modifiers.push(applyFilterWithManager(override.filterManager))
-    }
-
-    return await KlevuFetch(removeListFilters(func, prevQueryResponse))
-  }
-
-  return nextFunc
 }
 
 async function cleanAndProcessFunctions(
@@ -265,7 +167,7 @@ async function cleanAndProcessFunctions(
   }
 }
 
-function removeListFilters(
+export function removeListFilters(
   f: KlevuFetchFunctionReturnValue,
   prevQueryResult: KlevuQueryResult
 ): KlevuFetchFunctionReturnValue {

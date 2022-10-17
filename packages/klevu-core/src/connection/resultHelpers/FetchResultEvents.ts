@@ -1,7 +1,7 @@
-import { KlevuQueryResult } from "../models/index.js"
-import { KlevuResultEvent } from "../models/KlevuResultEvent.js"
-import { KlevuFetchFunctionReturnValue } from "../queries/index.js"
-import { KlevuEvents } from "./KlevuEvents.js"
+import { KlevuQueryResult } from "../../models/index.js"
+import { KlevuResultEvent } from "../../models/KlevuResultEvent.js"
+import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
+import { KlevuEvents } from "../../events/KlevuEvents.js"
 
 /**
  * Automatically injects events helpers to klevuFetch result object.

@@ -5,7 +5,7 @@ import {
   KlevuLastClickedProducts,
   kmcRecommendation,
   search,
-} from "../index.js"
+} from "../../index.js"
 import axios from "axios"
 import { jest } from "@jest/globals"
 
