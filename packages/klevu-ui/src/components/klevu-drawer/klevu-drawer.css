@@ -1,0 +1,55 @@
+:host {
+  display: block;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  max-width: 500px;
+  z-index: 1000;
+  background: #fff;
+  transition: left 0.4s, right 0.4s;
+}
+
+.drawer.left {
+  left: -100%;
+  border-right: 1px solid var(--klevu-color-border);
+  padding-right: var(--klevu-spacing-normal);
+  /*box-shadow: var(--klevu-spacing-small) 0 var(--klevu-spacing-small) var(--klevu-color-shadow);*/
+}
+
+.drawer.right {
+  right: -100%;
+  border-left: 1px solid var(--klevu-color-border);
+  padding-left: var(--klevu-spacing-normal);
+}
+
+.drawer.left.show {
+  left: 0;
+}
+
+.drawer.right.show {
+  right: 0;
+}
+
+.background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.background.show {
+  display: block;
+}
+
+.innercontainer {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+}

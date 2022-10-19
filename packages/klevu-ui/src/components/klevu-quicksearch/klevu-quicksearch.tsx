@@ -87,13 +87,30 @@ export class KlevuQuicksearch {
             {this.products.length > 0 ? (
               <section>
                 <h3>Search results</h3>
-                <klevu-product-grid renderProduct={this.renderProduct} products={this.products}></klevu-product-grid>
+                <klevu-product-grid
+                  class="desktop"
+                  renderProduct={this.renderProduct}
+                  products={this.products}
+                ></klevu-product-grid>
+                <klevu-product-grid
+                  class="mobile"
+                  renderProduct={this.renderProduct}
+                  productProps={{ variant: "line" }}
+                  products={this.products}
+                ></klevu-product-grid>
               </section>
             ) : this.products.length === 0 && this.trendingProducts.length > 0 ? (
               <section>
                 <h3>Trending products</h3>
                 <klevu-product-grid
+                  class="desktop"
                   renderProduct={this.renderProduct}
+                  products={this.trendingProducts}
+                ></klevu-product-grid>
+                <klevu-product-grid
+                  class="mobile"
+                  renderProduct={this.renderProduct}
+                  productProps={{ variant: "line" }}
                   products={this.trendingProducts}
                 ></klevu-product-grid>
               </section>

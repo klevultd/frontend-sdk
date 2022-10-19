@@ -1,7 +1,6 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, Host, h, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuProduct } from "../klevu-product/klevu-product"
 
 @Component({
   tag: "klevu-recommendations",
@@ -67,7 +66,11 @@ export class KlevuRecommendations {
       <Host>
         <klevu-slides>
           {this.products.map((product) => (
-            <klevu-product onKlevuProductClick={this.productClick.bind(this)} product={product}></klevu-product>
+            <klevu-product
+              fixedWidth
+              onKlevuProductClick={this.productClick.bind(this)}
+              product={product}
+            ></klevu-product>
           ))}
         </klevu-slides>
       </Host>

@@ -22,15 +22,19 @@
 ### Depends on
 
 - [klevu-facet-list](../klevu-facet-list)
-- [klevu-product-grid](../klevu-product-grid)
+- [klevu-heading](../klevu-heading)
+- [klevu-drawer](../klevu-drawer)
 - [klevu-button](../klevu-button)
+- [klevu-product-grid](../klevu-product-grid)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-search-landing-page --> klevu-facet-list
-  klevu-search-landing-page --> klevu-product-grid
+  klevu-search-landing-page --> klevu-heading
+  klevu-search-landing-page --> klevu-drawer
   klevu-search-landing-page --> klevu-button
+  klevu-search-landing-page --> klevu-product-grid
   klevu-facet-list --> klevu-facet
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider

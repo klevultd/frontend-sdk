@@ -19,6 +19,10 @@ export class KlevuProduct {
   @Prop() hideName?: boolean
   @Prop() hideImage?: boolean
   @Prop() hideBrand?: boolean
+  /**
+   * Force certain width for product. Do not use max-width
+   */
+  @Prop() fixedWidth?: boolean
 
   @State() hoverImage?: string
 
@@ -62,6 +66,7 @@ export class KlevuProduct {
       small: this.variant === "small",
       line: this.variant === "line",
       default: this.variant === "default",
+      fixedWidth: this.fixedWidth,
     }
 
     if (!this.product) {

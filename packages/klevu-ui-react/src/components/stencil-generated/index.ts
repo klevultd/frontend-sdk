@@ -11,6 +11,7 @@ defineCustomElements();
 export const KlevuButton = /*@__PURE__*/createReactComponent<JSX.KlevuButton, HTMLKlevuButtonElement>('klevu-button');
 export const KlevuCheckbox = /*@__PURE__*/createReactComponent<JSX.KlevuCheckbox, HTMLKlevuCheckboxElement>('klevu-checkbox');
 export const KlevuCmsList = /*@__PURE__*/createReactComponent<JSX.KlevuCmsList, HTMLKlevuCmsListElement>('klevu-cms-list');
+export const KlevuDrawer = /*@__PURE__*/createReactComponent<JSX.KlevuDrawer, HTMLKlevuDrawerElement>('klevu-drawer');
 export const KlevuDropdown = /*@__PURE__*/createReactComponent<JSX.KlevuDropdown, HTMLKlevuDropdownElement>('klevu-dropdown');
 export const KlevuFacet = /*@__PURE__*/createReactComponent<JSX.KlevuFacet, HTMLKlevuFacetElement>('klevu-facet');
 export const KlevuFacetList = /*@__PURE__*/createReactComponent<JSX.KlevuFacetList, HTMLKlevuFacetListElement>('klevu-facet-list');

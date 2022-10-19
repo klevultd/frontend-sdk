@@ -23,6 +23,16 @@
   --klevu-product-image-fill: cover; /* cover, contain */
 }
 
+@media (max-width: 600) {
+  :root {
+    --klevu-h1-size: 1.3rem;
+    --klevu-h1-weight: bold;
+    --klevu-h2-size: 1.1rem;
+    --klevu-h2-weight: bold;
+    --klevu-h3-size: 1rem;
+  }
+}
+
 /**
  * Global style
  */

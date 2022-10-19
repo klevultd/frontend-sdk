@@ -12,3 +12,36 @@
   justify-content: center;
   margin: var(--klevu-spacing-large);
 }
+
+.mobileheader {
+  display: none;
+  justify-content: space-between;
+  margin: var(--klevu-spacing-normal) 0;
+}
+
+.mobileheader klevu-facet-list {
+  padding: var(--klevu-spacing-normal);
+}
+
+.desktop {
+  display: block;
+}
+
+.desktop.title {
+  margin: var(--klevu-spacing-large) 0;
+}
+
+@media (max-width: 600px) {
+  :host {
+    display: block;
+    gap: 0;
+  }
+
+  .mobileheader {
+    display: flex;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
