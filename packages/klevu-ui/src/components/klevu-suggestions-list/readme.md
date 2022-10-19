@@ -26,9 +26,14 @@
 
  - [klevu-quicksearch](../klevu-quicksearch)
 
+### Depends on
+
+- [klevu-heading](../klevu-heading)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-suggestions-list --> klevu-heading
   klevu-quicksearch --> klevu-suggestions-list
   style klevu-suggestions-list fill:#f9f,stroke:#333,stroke-width:4px
 ```

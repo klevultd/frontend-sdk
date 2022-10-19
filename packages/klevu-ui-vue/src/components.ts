@@ -28,6 +28,14 @@ export const KlevuCmsList = /*@__PURE__*/ defineContainer<JSX.KlevuCmsList>('kle
 ]);
 
 
+export const KlevuDrawer = /*@__PURE__*/ defineContainer<JSX.KlevuDrawer>('klevu-drawer', undefined, [
+  'startOpen',
+  'background',
+  'closeAtOutsideClick',
+  'anchor'
+]);
+
+
 export const KlevuDropdown = /*@__PURE__*/ defineContainer<JSX.KlevuDropdown>('klevu-dropdown', undefined, [
   'name',
   'options',
@@ -114,13 +122,15 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
   'hideName',
   'hideImage',
   'hideBrand',
+  'fixedWidth',
   'klevuProductClick'
 ]);
 
 
 export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGrid>('klevu-product-grid', undefined, [
   'products',
-  'renderProduct'
+  'renderProduct',
+  'productProps'
 ]);
 
 

@@ -1,5 +1,6 @@
 import { KlevuRecord } from "@klevu/core"
 import { Component, Host, h, Prop, Element } from "@stencil/core"
+import type { KlevuProductVariant } from "../klevu-product/klevu-product"
 
 @Component({
   tag: "klevu-product-grid",
@@ -9,6 +10,9 @@ import { Component, Host, h, Prop, Element } from "@stencil/core"
 export class KlevuProductGrid {
   @Prop() products: KlevuRecord[] = []
   @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+  @Prop() productProps?: Partial<{
+    variant: KlevuProductVariant
+  }>
   @Element() el: HTMLElement
   render() {
     if (this.renderProduct) {
@@ -21,7 +25,7 @@ export class KlevuProductGrid {
       <Host>
         <slot>
           {this.products.map((product) => (
-            <klevu-product product={product}></klevu-product>
+            <klevu-product product={product} variant={this.productProps?.variant}></klevu-product>
           ))}
         </slot>
       </Host>

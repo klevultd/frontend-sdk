@@ -12,7 +12,7 @@ export class KlevuSuggestionsList {
   render() {
     return (
       <Host>
-        <h3>{this.caption}</h3>
+        <klevu-heading variant="h2">{this.caption}</klevu-heading>
         <ul part="klevu-list">
           {this.suggestions?.map((s) => (
             <li innerHTML={s}></li>

@@ -1,6 +1,5 @@
 :host {
   margin: var(--klevu-spacing-large);
-  text-align: center;
   border-radius: var(--klevu-rounded-corners);
   position: relative;
 }

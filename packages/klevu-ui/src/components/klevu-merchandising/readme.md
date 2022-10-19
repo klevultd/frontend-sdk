@@ -24,16 +24,18 @@
 
 - [klevu-facet-list](../klevu-facet-list)
 - [klevu-heading](../klevu-heading)
-- [klevu-product-grid](../klevu-product-grid)
+- [klevu-drawer](../klevu-drawer)
 - [klevu-button](../klevu-button)
+- [klevu-product-grid](../klevu-product-grid)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-merchandising --> klevu-facet-list
   klevu-merchandising --> klevu-heading
-  klevu-merchandising --> klevu-product-grid
+  klevu-merchandising --> klevu-drawer
   klevu-merchandising --> klevu-button
+  klevu-merchandising --> klevu-product-grid
   klevu-facet-list --> klevu-facet
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider

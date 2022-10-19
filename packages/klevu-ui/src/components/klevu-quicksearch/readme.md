@@ -38,6 +38,7 @@ graph TD;
   klevu-quicksearch --> klevu-product-grid
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
+  klevu-suggestions-list --> klevu-heading
   klevu-latest-searches --> klevu-heading
   klevu-cms-list --> klevu-heading
   klevu-product-grid --> klevu-product

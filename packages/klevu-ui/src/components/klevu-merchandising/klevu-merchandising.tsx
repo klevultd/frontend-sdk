@@ -115,12 +115,27 @@ export class KlevuMerchandising {
     return (
       <Host>
         <klevu-facet-list
+          class="desktop"
           customOrder={this.filterCustomOrder}
           exportparts={globalExportedParts}
           manager={this.manager}
         ></klevu-facet-list>
-        <section>
+        <div class="mobileheader">
           <klevu-heading variant="h1">{this.categoryTitle}</klevu-heading>
+          <klevu-drawer anchor="right" background>
+            <klevu-button slot="origin">Filters</klevu-button>
+            <klevu-facet-list
+              slot="content"
+              customOrder={this.filterCustomOrder}
+              exportparts={globalExportedParts}
+              manager={this.manager}
+            ></klevu-facet-list>
+          </klevu-drawer>
+        </div>
+        <section>
+          <klevu-heading class="desktop title" variant="h1">
+            {this.categoryTitle}
+          </klevu-heading>
           <klevu-product-grid renderProduct={this.renderProduct} products={this.results}></klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">

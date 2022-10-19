@@ -6,13 +6,14 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { KlevuPopupAnchor } from "./components/klevu-popup/klevu-popup";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
-import { KlevuPopupAnchor } from "./components/klevu-popup/klevu-popup";
-import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
+import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+import { KlevuProductVariant as KlevuProductVariant1 } from "./components/klevu-product/klevu-product";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuButton {
@@ -27,6 +28,14 @@ export namespace Components {
         "caption": string;
         "link"?: boolean;
         "pages": Array<Partial<KlevuRecord>>;
+    }
+    interface KlevuDrawer {
+        "anchor": KlevuPopupAnchor;
+        "background"?: boolean;
+        "closeAtOutsideClick": boolean;
+        "closeModal": () => Promise<void>;
+        "openModal": () => Promise<void>;
+        "startOpen"?: boolean;
     }
     interface KlevuDropdown {
         "disabled"?: boolean;
@@ -131,6 +140,10 @@ export namespace Components {
         "startOpen"?: boolean;
     }
     interface KlevuProduct {
+        /**
+          * Force certain width for product. Do not use max-width
+         */
+        "fixedWidth"?: boolean;
         "hideBrand"?: boolean;
         "hideDescription"?: boolean;
         "hideImage"?: boolean;
@@ -141,12 +154,15 @@ export namespace Components {
         "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
+        "productProps"?: Partial<{
+    variant: KlevuProductVariant1
+  }>;
         "products": KlevuRecord[];
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
-        "popupAnchor"?: KlevuPopupAnchor1;
+        "popupAnchor"?: KlevuPopupAnchor;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
@@ -280,6 +296,12 @@ declare global {
     var HTMLKlevuCmsListElement: {
         prototype: HTMLKlevuCmsListElement;
         new (): HTMLKlevuCmsListElement;
+    };
+    interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
+    }
+    var HTMLKlevuDrawerElement: {
+        prototype: HTMLKlevuDrawerElement;
+        new (): HTMLKlevuDrawerElement;
     };
     interface HTMLKlevuDropdownElement extends Components.KlevuDropdown, HTMLStencilElement {
     }
@@ -417,6 +439,7 @@ declare global {
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
+        "klevu-drawer": HTMLKlevuDrawerElement;
         "klevu-dropdown": HTMLKlevuDropdownElement;
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
@@ -455,6 +478,12 @@ declare namespace LocalJSX {
         "link"?: boolean;
         "onKlevuCmsPageClick"?: (event: KlevuCmsListCustomEvent<Partial<KlevuRecord>>) => void;
         "pages"?: Array<Partial<KlevuRecord>>;
+    }
+    interface KlevuDrawer {
+        "anchor"?: KlevuPopupAnchor;
+        "background"?: boolean;
+        "closeAtOutsideClick"?: boolean;
+        "startOpen"?: boolean;
     }
     interface KlevuDropdown {
         "disabled"?: boolean;
@@ -562,6 +591,10 @@ declare namespace LocalJSX {
         "startOpen"?: boolean;
     }
     interface KlevuProduct {
+        /**
+          * Force certain width for product. Do not use max-width
+         */
+        "fixedWidth"?: boolean;
         "hideBrand"?: boolean;
         "hideDescription"?: boolean;
         "hideImage"?: boolean;
@@ -573,12 +606,15 @@ declare namespace LocalJSX {
         "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
+        "productProps"?: Partial<{
+    variant: KlevuProductVariant1
+  }>;
         "products"?: KlevuRecord[];
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
-        "popupAnchor"?: KlevuPopupAnchor1;
+        "popupAnchor"?: KlevuPopupAnchor;
         "renderProduct"?: (product: KlevuRecord) => HTMLElement;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
@@ -675,6 +711,7 @@ declare namespace LocalJSX {
         "klevu-button": KlevuButton;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-cms-list": KlevuCmsList;
+        "klevu-drawer": KlevuDrawer;
         "klevu-dropdown": KlevuDropdown;
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
@@ -706,6 +743,7 @@ declare module "@stencil/core" {
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
+            "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;

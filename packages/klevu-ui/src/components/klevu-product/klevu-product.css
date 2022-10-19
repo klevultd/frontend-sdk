@@ -14,15 +14,25 @@
 .container.default {
   display: flex;
   flex-direction: column;
-  width: var(--klevu-product-width, 300px);
+  max-width: var(--klevu-product-width, 300px);
   height: 100%;
+}
+
+.container.default.fixedWidth {
+  max-width: auto;
+  width: var(--klevu-product-width, 300px);
 }
 
 .container.small {
   display: flex;
   flex-direction: column;
-  width: var(--klevu-product-small-width, 300px);
+  max-width: var(--klevu-product-small-width, 300px);
   height: 100%;
+}
+
+.container.small.fixedWidth {
+  max-width: auto;
+  width: var(--klevu-product-small-width, 300px);
 }
 
 .default .image {
