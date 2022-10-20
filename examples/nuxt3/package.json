@@ -7,19 +7,23 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^1.2.1",
     "@nuxtjs/tailwindcss": "^5.1.2",
-    "@pinia/nuxt": "^0.1.9",
+    "@pinia/nuxt": "^0.4.2",
     "@vueuse/nuxt": "^8.5.0",
     "daisyui": "^2.15.0",
-    "epic-spinners": "^1.1.0",
     "naive-ui": "^2.29.0",
-    "nuxt": "3.0.0-rc.3",
-    "pinia": "^2.0.14"
+    "nuxt": "^3.0.0-rc.11",
+    "pinia": "^2.0.22",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.0.2"
   },
   "dependencies": {
-    "@klevu/core": "^1.1.2",
+    "@klevu/core": "file:../../packages/klevu-core",
     "@tailwindcss/forms": "^0.5.2",
+    "install": "^0.13.0",
     "multi-range-slider-vue": "^1.1.4",
+    "npm": "^8.19.2",
     "vue3-carousel": "^0.1.40"
   }
 }
