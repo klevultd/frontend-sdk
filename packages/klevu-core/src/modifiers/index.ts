@@ -1,4 +1,4 @@
-import { LiteralUnion } from "type-fest"
+import type { LiteralUnion } from "type-fest"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
 import { KlevuFetchResponse } from "../models/KlevuFetchResponse.js"

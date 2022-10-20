@@ -1,22 +1,22 @@
-import { SetRequired } from "type-fest"
 import { KlevuFetchModifer } from "../index.js"
 import { KlevuApplyFilter } from "../../models/KlevuApplyFilter.js"
-import { KlevuListFilter } from "../../models/KlevuListFilter.js"
+import type {
+  KlevuListFilter,
+  KlevuListFiltersToReturn,
+} from "../../models/KlevuListFilter.js"
 import { KlevuFilterOrder } from "../../models/KlevuFilterOrder.js"
 import { FilterManager } from "../../store/filterManager.js"
-
-type FilterType = SetRequired<
-  KlevuListFilter,
-  "filtersToReturn"
->["filtersToReturn"]
 
 type Options = {
   /**
    * Automatically apply filters to manager
    */
   filterManager?: FilterManager
-} & Pick<FilterType, "include" | "exclude" | "rangeFilterSettings"> &
-  FilterType["options"]
+} & Pick<
+  KlevuListFiltersToReturn,
+  "include" | "exclude" | "rangeFilterSettings"
+> &
+  KlevuListFiltersToReturn["options"]
 
 const defaults: Options = {
   order: KlevuFilterOrder.Index,

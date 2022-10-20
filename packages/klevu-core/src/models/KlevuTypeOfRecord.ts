@@ -1,4 +1,4 @@
-import { LiteralUnion, ValueOf } from "type-fest"
+import type { LiteralUnion, ValueOf } from "type-fest"
 
 export enum KlevuTypeOfRecord {
   Product = "KLEVU_PRODUCT",
