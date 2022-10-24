@@ -1,7 +1,7 @@
-import type { LiteralUnion } from "type-fest"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
 import { KlevuFetchResponse } from "../models/KlevuFetchResponse.js"
+import { LiteralUnion } from "../utils/literalUnion.js"
 
 /**
  * @ignore
