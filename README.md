@@ -107,6 +107,15 @@ Node.js and npm is required to be installed on your system before starting. This
 
 In the root of this repository run npm to install all packages
 
+Go in the each package folder you wish to develop
+
+- packages/klevu-core
+- packages/klevu-ui
+- packages/klevu-ui-react
+- packages/klevu-ui-vue
+
+And first install dependencies
+
 > npm install
 
 Run build once to make sure everything is good to go.

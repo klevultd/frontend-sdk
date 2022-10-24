@@ -29,7 +29,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "@klevu/ui": "0.0.7"
+    "@klevu/ui": "file:../klevu-ui"
   },
   "jest": {
     "preset": "ts-jest",
