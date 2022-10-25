@@ -24,7 +24,7 @@ export const GridWithCustomProduct = WebComponentTemplate<HTMLKlevuProductGridEl
   tag: "klevu-product-grid",
   args: {
     products: mockProducts.slice(0, 3),
-    renderProduct: (product: KlevuRecord) => {
+    renderProduct: (product: KlevuRecord | undefined) => {
       const prod = document.createElement("klevu-product")
       prod.product = product
       prod.variant = "small"

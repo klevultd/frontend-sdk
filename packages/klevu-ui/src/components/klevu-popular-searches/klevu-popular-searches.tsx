@@ -8,7 +8,7 @@ import { KlevuInit } from "../klevu-init/klevu-init"
   shadow: true,
 })
 export class KlevuPopularSearches {
-  @State() popularSearches: string[]
+  @State() popularSearches?: string[]
   @Prop() caption = "Popular searches"
 
   async connectedCallback() {

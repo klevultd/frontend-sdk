@@ -29,9 +29,9 @@ export class KlevuSearchLandingPage {
   /**
    * Custom rendering of product. Can pass any HTML element as return value
    */
-  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
 
-  @State() results: KlevuRecord[] = [
+  @State() results: Array<KlevuRecord | undefined> = [
     undefined,
     undefined,
     undefined,
@@ -44,8 +44,8 @@ export class KlevuSearchLandingPage {
   ]
   @State() manager = new FilterManager()
 
-  private resultObject: KlevuFetchQueryResult
-  private clickEvent: (id: string, variantId: string) => void
+  private resultObject?: KlevuFetchQueryResult
+  private clickEvent?: (id: string, variantId: string) => void
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -78,10 +78,13 @@ export class KlevuSearchLandingPage {
   }
 
   async loadMore() {
+    if (!this.resultObject?.next) {
+      return
+    }
     const nextResultObject = await this.resultObject.next()
     this.resultObject = nextResultObject.queriesById("search")
     this.results = [...this.results, ...(this.resultObject?.records ?? [])]
-    this.clickEvent = this.resultObject.getSearchClickSendEvent?.()
+    this.clickEvent = this.resultObject!.getSearchClickSendEvent?.()
   }
 
   @Listen("productClick")
@@ -92,7 +95,7 @@ export class KlevuSearchLandingPage {
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate(event) {
+  filterSelectionUpdate() {
     this.initialFetch()
   }
 

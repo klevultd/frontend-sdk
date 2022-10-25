@@ -13,7 +13,7 @@ export class KlevuDropdown {
   @Event({
     composed: true,
   })
-  klevuDropdownChanged: EventEmitter<string>
+  klevuDropdownChanged!: EventEmitter<string>
 
   onChange(event: any) {
     this.klevuDropdownChanged.emit(event.target.value)
@@ -25,7 +25,7 @@ export class KlevuDropdown {
         <div
           class={{
             select: true,
-            disabled: this.disabled,
+            disabled: Boolean(this.disabled),
           }}
         >
           <select name={this.name} disabled={this.disabled} onChange={this.onChange}>

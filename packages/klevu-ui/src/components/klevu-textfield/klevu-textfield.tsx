@@ -9,25 +9,27 @@ export class KlevuTextfield {
   textInput!: HTMLInputElement
 
   @Prop({ mutable: true })
-  value: string
+  value!: string
+
   @Prop({
     reflect: true,
   })
   disabled: boolean = false
+
   @Prop({
     reflect: true,
   })
-  placeholder: string
+  placeholder?: string
 
   @Event({
     composed: true,
   })
-  klevuTextChanged: EventEmitter<string>
+  klevuTextChanged!: EventEmitter<string>
 
   @Event({
     composed: true,
   })
-  klevuTextFocused: EventEmitter<void>
+  klevuTextFocused!: EventEmitter<void>
 
   render() {
     return (

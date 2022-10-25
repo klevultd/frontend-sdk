@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property              | Attribute                | Description | Type                | Default     |
-| --------------------- | ------------------------ | ----------- | ------------------- | ----------- |
-| `anchor`              | `anchor`                 |             | `"left" \| "right"` | `"right"`   |
-| `background`          | `background`             |             | `boolean`           | `undefined` |
-| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean`           | `true`      |
-| `startOpen`           | `start-open`             |             | `boolean`           | `undefined` |
+| Property              | Attribute                | Description | Type                   | Default     |
+| --------------------- | ------------------------ | ----------- | ---------------------- | ----------- |
+| `anchor`              | `anchor`                 |             | `"left" \| "right"`    | `"right"`   |
+| `background`          | `background`             |             | `boolean \| undefined` | `undefined` |
+| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean`              | `true`      |
+| `startOpen`           | `start-open`             |             | `boolean \| undefined` | `undefined` |
 
 
 ## Methods

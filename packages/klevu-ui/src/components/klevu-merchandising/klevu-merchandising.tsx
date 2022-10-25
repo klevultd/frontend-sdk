@@ -38,7 +38,7 @@ export class KlevuMerchandising {
   /**
    * Custom rendering of product. Can pass any HTML element as return value
    */
-  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
 
   /**
    * Order of results
@@ -55,7 +55,7 @@ export class KlevuMerchandising {
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
 
-  @State() results: KlevuRecord[] = [
+  @State() results: Array<KlevuRecord | undefined> = [
     undefined,
     undefined,
     undefined,
@@ -68,8 +68,8 @@ export class KlevuMerchandising {
   ]
   @State() manager = new FilterManager()
 
-  private resultObject: KlevuFetchQueryResult
-  private clickEvent: (id: string, categoryTitle: string, variantId: string) => void
+  private resultObject?: KlevuFetchQueryResult
+  private clickEvent?: (id: string, categoryTitle: string, variantId: string) => void
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -93,10 +93,13 @@ export class KlevuMerchandising {
   }
 
   async loadMore() {
+    if (!this.resultObject?.next) {
+      return
+    }
     const nextResultObject = await this.resultObject.next()
     this.resultObject = nextResultObject.queriesById("categoryMerchandising")
     this.results = [...this.results, ...(this.resultObject?.records ?? [])]
-    this.clickEvent = this.resultObject.getCategoryMerchandisingClickSendEvent?.()
+    this.clickEvent = this.resultObject?.getCategoryMerchandisingClickSendEvent?.()
   }
 
   @Listen("productClick")
@@ -107,7 +110,7 @@ export class KlevuMerchandising {
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate(event) {
+  filterSelectionUpdate() {
     this.initialFetch()
   }
 
@@ -136,7 +139,7 @@ export class KlevuMerchandising {
           <klevu-heading class="desktop title" variant="h1">
             {this.categoryTitle}
           </klevu-heading>
-          <klevu-product-grid renderProduct={this.renderProduct} products={this.results}></klevu-product-grid>
+          <klevu-product-grid renderProduct={this.renderProduct} products={this.results ?? []}></klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">
               <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>

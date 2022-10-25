@@ -8,7 +8,9 @@ import { KlevuRecord } from "@klevu/core"
  * @returns formatted price
  */
 export function renderPrice(amount: number | string, currency: string): string {
-  if (window && window["klevu_ui_settings"] && window["klevu_ui_settings"].renderPrice) {
+  // @ts-expect-error
+  if (window?.["klevu_ui_settings"]?.renderPrice) {
+    // @ts-expect-error
     return window["klevu_ui_settings"].renderPrice(amount, currency)
   }
   const price = typeof amount === "string" ? parseFloat(amount) : amount
@@ -63,6 +65,7 @@ export type KlevuUIGlobalSettings = {
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {
   if (window) {
+    // @ts-expect-error
     return window["klevu_ui_settings"]
   }
   return undefined

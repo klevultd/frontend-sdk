@@ -7,14 +7,14 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
   shadow: true,
 })
 export class KlevuCmsList {
-  @Prop() pages: Array<Partial<KlevuRecord>>
+  @Prop() pages!: Array<Partial<KlevuRecord>>
   @Prop() link?: boolean
   @Prop() caption = "CMS pages"
 
   @Event({
     composed: true,
   })
-  klevuCmsPageClick: EventEmitter<Partial<KlevuRecord>>
+  klevuCmsPageClick!: EventEmitter<Partial<KlevuRecord>>
 
   render() {
     return (

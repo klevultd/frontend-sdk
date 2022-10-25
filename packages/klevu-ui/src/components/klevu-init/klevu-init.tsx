@@ -18,12 +18,13 @@ export class KlevuInit {
     })
 
     if (this.settings) {
+      // @ts-expect-error
       window["klevu_ui_settings"] = this.settings
     }
   }
 
   static ready() {
-    return document.querySelector("klevu-init").componentOnReady()
+    return document.querySelector("klevu-init")?.componentOnReady()
   }
 
   render() {

@@ -30,10 +30,14 @@ export class KlevuProduct {
     composed: true,
     cancelable: true,
   })
-  klevuProductClick: EventEmitter<KlevuProductOnProductClick>
+  klevuProductClick!: EventEmitter<KlevuProductOnProductClick>
 
   click(ev: MouseEvent) {
     const settings = getGlobalSettings()
+
+    if (!this.product) {
+      return
+    }
 
     const sentEvent = this.klevuProductClick.emit({
       product: this.product,
@@ -61,18 +65,18 @@ export class KlevuProduct {
   }
 
   render() {
-    const coantainerClasses = {
+    const containerClasses = {
       container: true,
       small: this.variant === "small",
       line: this.variant === "line",
       default: this.variant === "default",
-      fixedWidth: this.fixedWidth,
+      fixedWidth: Boolean(this.fixedWidth),
     }
 
     if (!this.product) {
       return (
         <Host>
-          <div class={coantainerClasses}>
+          <div class={containerClasses}>
             <div class="loading image"></div>
             <div class="loading content">
               <div></div>
@@ -106,6 +110,7 @@ export class KlevuProduct {
             if (!swatches[index]) {
               swatches[index] = {}
             }
+            // @ts-expect-error
             swatches[index][keyStart.substring("variant".length)] = value
           }
         }
@@ -114,11 +119,7 @@ export class KlevuProduct {
 
     return (
       <Host>
-        <a
-          href={settings?.generateProductUrl?.(this.product)}
-          onClick={this.click.bind(this)}
-          class={coantainerClasses}
-        >
+        <a href={settings?.generateProductUrl?.(this.product)} onClick={this.click.bind(this)} class={containerClasses}>
           {this.hideImage ? null : (
             <slot name="image">
               <div

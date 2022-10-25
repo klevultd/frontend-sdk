@@ -12,21 +12,28 @@ import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-fi
   shadow: true,
 })
 export class KlevuQuicksearch {
-  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
   @Prop() fallbackTerm?: string
   @Prop() popupAnchor?: KlevuPopupAnchor
   @Prop() searchCategories?: boolean
   @Prop() searchCmsPages?: boolean
 
-  @State() products: KlevuRecord[] = []
-  @State() trendingProducts: KlevuRecord[] = [undefined, undefined, undefined, undefined, undefined, undefined]
+  @State() products?: KlevuRecord[] = []
+  @State() trendingProducts: Array<KlevuRecord | undefined> = [
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+  ]
   @State() suggestions: string[] = []
   @State() cmsPages?: KlevuRecord[]
   @State() categories?: KlevuRecord[]
 
   clickEvent?: (productId: string, variantId?: string) => void
 
-  popup: HTMLKlevuPopupElement
+  popup?: HTMLKlevuPopupElement
 
   @Listen("klevuSearchResults")
   async onResults(event: CustomEvent<SearchResultsEventData>) {
@@ -34,7 +41,7 @@ export class KlevuQuicksearch {
     this.products = event.detail.search?.records
     this.cmsPages = event.detail.cms?.records
     this.categories = event.detail.category?.records
-    this.popup.openModal()
+    this.popup?.openModal()
   }
 
   @Listen("klevuSearchSuggestions")
@@ -45,7 +52,7 @@ export class KlevuQuicksearch {
   @Listen("klevuProductClick")
   onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
     const { product } = event.detail
-    this.clickEvent(product.id, product.itemGroupId)
+    this.clickEvent?.(product.id, product.itemGroupId)
   }
 
   async connectedCallback() {
@@ -84,7 +91,7 @@ export class KlevuQuicksearch {
               {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
               {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
             </aside>
-            {this.products.length > 0 ? (
+            {(this.products ?? []).length > 0 ? (
               <section>
                 <h3>Search results</h3>
                 <klevu-product-grid
@@ -99,7 +106,7 @@ export class KlevuQuicksearch {
                   products={this.products}
                 ></klevu-product-grid>
               </section>
-            ) : this.products.length === 0 && this.trendingProducts.length > 0 ? (
+            ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (
               <section>
                 <h3>Trending products</h3>
                 <klevu-product-grid

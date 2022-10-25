@@ -13,7 +13,7 @@ const meta: Meta = {
 export default meta
 
 const manager = new FilterManager()
-manager.initFromListFilters(fullMockRequest.queryResults[0].filters)
+manager.initFromListFilters(fullMockRequest.queryResults?.[0].filters as any)
 
 export const Default = WebComponentTemplate<HTMLKlevuFacetElement>({
   tag: "klevu-facet",

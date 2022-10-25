@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type                                    | Default     |
-| ------------------ | ------------------- | ----------- | --------------------------------------- | ----------- |
-| `fallbackTerm`     | `fallback-term`     |             | `string`                                | `undefined` |
-| `popupAnchor`      | `popup-anchor`      |             | `"left" \| "right"`                     | `undefined` |
-| `renderProduct`    | --                  |             | `(product: KlevuRecord) => HTMLElement` | `undefined` |
-| `searchCategories` | `search-categories` |             | `boolean`                               | `undefined` |
-| `searchCmsPages`   | `search-cms-pages`  |             | `boolean`                               | `undefined` |
+| Property           | Attribute           | Description | Type                                                                | Default     |
+| ------------------ | ------------------- | ----------- | ------------------------------------------------------------------- | ----------- |
+| `fallbackTerm`     | `fallback-term`     |             | `string \| undefined`                                               | `undefined` |
+| `popupAnchor`      | `popup-anchor`      |             | `"left" \| "right" \| undefined`                                    | `undefined` |
+| `renderProduct`    | --                  |             | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined` | `undefined` |
+| `searchCategories` | `search-categories` |             | `boolean \| undefined`                                              | `undefined` |
+| `searchCmsPages`   | `search-cms-pages`  |             | `boolean \| undefined`                                              | `undefined` |
 
 
 ## Dependencies

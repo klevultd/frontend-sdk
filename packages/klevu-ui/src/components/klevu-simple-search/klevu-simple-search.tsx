@@ -8,24 +8,24 @@ import { SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
   shadow: true,
 })
 export class KlevuSimpleSearch {
-  popupElement: HTMLKlevuPopupElement
+  popupElement?: HTMLKlevuPopupElement
 
   @State() suggestions: string[] = []
 
   @Event()
-  klevuSuggestionClick: EventEmitter<string>
+  klevuSuggestionClick!: EventEmitter<string>
 
   suggestionClick(suggestionWithHTML: string) {
     // strip HTML
     const tmp = document.createElement("div")
     tmp.innerHTML = suggestionWithHTML
     this.klevuSuggestionClick.emit(tmp.textContent || tmp.innerText)
-    this.popupElement.closeModal()
+    this.popupElement?.closeModal()
   }
 
   private onSuggestions(ev: KlevuSearchFieldCustomEvent<SuggestionsEventData>) {
     this.suggestions = ev.detail
-    this.popupElement.openModal()
+    this.popupElement?.openModal()
   }
 
   render() {

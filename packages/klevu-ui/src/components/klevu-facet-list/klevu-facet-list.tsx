@@ -16,12 +16,12 @@ export class KlevuFacetList {
   /**
    * Set mode for facets or if object is passed then define per key
    */
-  @Prop() mode: KlevuFacetMode | { [key: string]: KlevuFacetMode }
+  @Prop() mode?: KlevuFacetMode | { [key: string]: KlevuFacetMode }
 
   /**
    * Custom order keys for every facet
    */
-  @Prop() customOrder: { [key: string]: string[] }
+  @Prop() customOrder?: { [key: string]: string[] }
 
   @State() options: KlevuFilterResultOptions[] = []
   @State() sliders: KlevuFilterResultSlider[] = []
@@ -36,13 +36,13 @@ export class KlevuFacetList {
   }
 
   @Listen("klevu-filters-applied", { target: "document" })
-  filtersApplied(event) {
+  filtersApplied() {
     this.options = this.manager.options
     this.sliders = this.manager.sliders
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate(event) {
+  filterSelectionUpdate() {
     this.options = this.manager.options
     this.sliders = this.manager.sliders
   }

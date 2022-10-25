@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property      | Attribute | Description | Type       | Default                |
-| ------------- | --------- | ----------- | ---------- | ---------------------- |
-| `caption`     | `caption` |             | `string`   | `"Search suggestions"` |
-| `suggestions` | --        |             | `string[]` | `undefined`            |
+| Property                   | Attribute | Description | Type       | Default                |
+| -------------------------- | --------- | ----------- | ---------- | ---------------------- |
+| `caption`                  | `caption` |             | `string`   | `"Search suggestions"` |
+| `suggestions` _(required)_ | --        |             | `string[]` | `undefined`            |
 
 
 ## Shadow Parts

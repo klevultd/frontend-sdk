@@ -27,6 +27,6 @@ export const Default = WebComponentTemplate<HTMLKlevuPaginationElement>({
 export const FromRequest = WebComponentTemplate<HTMLKlevuPaginationElement>({
   tag: "klevu-pagination",
   args: {
-    queryResult: fullMockRequest.queryResults[0],
+    queryResult: fullMockRequest.queryResults?.[0],
   },
 })

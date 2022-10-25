@@ -8,7 +8,7 @@ export type KlevuPopupAnchor = "left" | "right"
   shadow: true,
 })
 export class KlevuPopup {
-  @Element() el
+  @Element() el?: HTMLKlevuPopupElement
   @Prop() startOpen?: boolean
   @Prop() openAtFocus = true
   @Prop() closeAtOutsideClick = true
@@ -17,12 +17,12 @@ export class KlevuPopup {
 
   @State() open = false
 
-  private openEvent(event) {
+  private openEvent() {
     this.open = true
   }
 
-  private closeEvent(event) {
-    if (!event.composedPath().some((el) => el === this.el)) {
+  private closeEvent(event: any) {
+    if (!event.composedPath().some((el: HTMLElement) => el === this.el)) {
       this.open = false
     }
   }
@@ -42,7 +42,7 @@ export class KlevuPopup {
       this.open = true
     }
     if (this.openAtFocus) {
-      this.el.addEventListener("click", this.openEvent)
+      this.el?.addEventListener("click", this.openEvent)
     }
     if (this.closeAtOutsideClick) {
       document.addEventListener("click", this.closeEvent.bind(this))

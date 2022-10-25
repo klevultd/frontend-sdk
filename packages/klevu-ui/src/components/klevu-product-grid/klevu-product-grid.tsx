@@ -8,16 +8,18 @@ import type { KlevuProductVariant } from "../klevu-product/klevu-product"
   shadow: true,
 })
 export class KlevuProductGrid {
-  @Prop() products: KlevuRecord[] = []
-  @Prop() renderProduct?: (product: KlevuRecord) => HTMLElement
+  @Prop() products: Array<KlevuRecord | undefined> = []
+  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
   @Prop() productProps?: Partial<{
     variant: KlevuProductVariant
   }>
-  @Element() el: HTMLElement
+  @Element() el?: HTMLKlevuProductGridElement
   render() {
     if (this.renderProduct) {
-      const elementList = this.products.map((product) => this.renderProduct(product))
-      this.el.shadowRoot.append(...elementList)
+      const elementList = this.products.map((product) => {
+        return this.renderProduct!(product)
+      })
+      this.el?.shadowRoot?.append(...elementList)
       return
     }
 

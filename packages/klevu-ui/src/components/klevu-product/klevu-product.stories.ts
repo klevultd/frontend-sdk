@@ -3,7 +3,7 @@ import "./klevu-product.css"
 // @ts-ignore
 import notes from "./readme.md"
 
-const product = fullMockRequest.queryResults[0].records[0]
+const product = fullMockRequest.queryResults?.[0].records[0]
 // const fullMockProducts = fullMockRequest.queryResults[0].records
 
 import { Meta } from "@storybook/html"

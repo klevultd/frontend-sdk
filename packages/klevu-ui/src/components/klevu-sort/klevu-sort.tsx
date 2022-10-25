@@ -10,7 +10,7 @@ export class KlevuSort {
   @Event({
     composed: true,
   })
-  klevuSortChanged: EventEmitter<KlevuSearchSorting>
+  klevuSortChanged!: EventEmitter<KlevuSearchSorting>
 
   render() {
     const options: Array<{ value: KlevuSearchSorting; text: string }> = [

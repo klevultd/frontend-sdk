@@ -7,7 +7,7 @@ import { Component, Host, h, Event, Prop } from "@stencil/core"
 })
 export class KlevuButton {
   @Prop({ reflect: true })
-  disabled: boolean
+  disabled?: boolean
 
   render() {
     return (

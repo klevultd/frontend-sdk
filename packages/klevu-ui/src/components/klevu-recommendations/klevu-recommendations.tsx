@@ -20,7 +20,7 @@ export class KlevuRecommendations {
   /**
    * The products to display. By default show 5 loading products.
    */
-  @State() products: KlevuRecord[] = [undefined, undefined, undefined, undefined, undefined]
+  @State() products: Array<KlevuRecord | undefined> = [undefined, undefined, undefined, undefined, undefined]
 
   @State() clickEvent?: (productId: string, variantId?: string) => void
 
