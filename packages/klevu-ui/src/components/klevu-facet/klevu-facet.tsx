@@ -12,11 +12,11 @@ export class KlevuFacet {
   /**
    * From which options to build facet
    */
-  @Prop() option: KlevuFilterResultOptions
+  @Prop() option?: KlevuFilterResultOptions
   /**
    * From which slider to build facet
    */
-  @Prop() slider: KlevuFilterResultSlider
+  @Prop() slider?: KlevuFilterResultSlider
   /**
    * Originating filter manager which to modify
    */
@@ -36,8 +36,8 @@ export class KlevuFacet {
       const opts = [...this.option.options]
       if (this.customOrder) {
         opts.sort((a, b) => {
-          const aio = this.customOrder.indexOf(a.value)
-          const bio = this.customOrder.indexOf(b.value)
+          const aio = this.customOrder!.indexOf(a.value)
+          const bio = this.customOrder!.indexOf(b.value)
 
           if (aio === -1 && bio !== -1) {
             return 1
@@ -60,17 +60,17 @@ export class KlevuFacet {
                   <klevu-checkbox
                     value={o.value}
                     checked={o.selected}
-                    onClick={() => this.manager.toggleOption(this.option.key, o.name)}
+                    onClick={() => this.manager.toggleOption(this.option!.key, o.name)}
                   ></klevu-checkbox>
                 ) : (
                   <input
                     type="radio"
-                    name={this.option.key}
+                    name={this.option!.key}
                     value={o.value}
                     checked={o.selected}
                     onClick={() => {
-                      this.manager.clearOptionSelections(this.option.key)
-                      this.manager.toggleOption(this.option.key, o.name)
+                      this.manager.clearOptionSelections(this.option!.key)
+                      this.manager.toggleOption(this.option!.key, o.name)
                     }}
                   />
                 )}
@@ -94,7 +94,7 @@ export class KlevuFacet {
             start={this.slider.start ? parseFloat(this.slider.start) : undefined}
             end={this.slider.end ? parseFloat(this.slider.end) : undefined}
             onKlevuSliderChange={(event) => {
-              this.manager.updateSlide(this.slider.key, event.detail[0], event.detail[1])
+              this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
               console.log(event)
             }}
           ></klevu-slider>

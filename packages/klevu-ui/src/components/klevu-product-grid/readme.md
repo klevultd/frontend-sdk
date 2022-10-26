@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property        | Attribute | Description | Type                                    | Default     |
-| --------------- | --------- | ----------- | --------------------------------------- | ----------- |
-| `productProps`  | --        |             | `{ variant?: KlevuProductVariant; }`    | `undefined` |
-| `products`      | --        |             | `KlevuRecord[]`                         | `[]`        |
-| `renderProduct` | --        |             | `(product: KlevuRecord) => HTMLElement` | `undefined` |
+| Property        | Attribute | Description | Type                                                                | Default     |
+| --------------- | --------- | ----------- | ------------------------------------------------------------------- | ----------- |
+| `productProps`  | --        |             | `undefined \| { variant?: KlevuProductVariant \| undefined; }`      | `undefined` |
+| `products`      | --        |             | `(KlevuRecord \| undefined)[]`                                      | `[]`        |
+| `renderProduct` | --        |             | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined` | `undefined` |
 
 
 ## Dependencies

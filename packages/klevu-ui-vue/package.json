@@ -1,25 +1,38 @@
 {
   "name": "@klevu/ui-vue",
   "sideEffects": false,
-  "version": "0.0.1",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "module": "dist/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
   "description": "Klevu UI components for Vue",
   "repository": {
     "type": "git",
     "url": "https://https://github.com/klevultd/frontend-sdk.git"
   },
+  "type": "module",
   "scripts": {
     "test": "echo 'No tests'",
-    "build": "rm -rf dist && npm run tsc",
-    "tsc": "tsc -p ."
+    "build": "npm run clean && npm run tsc && npm run bundle",
+    "tsc": "tsc -p .",
+    "clean": "rm -rf dist && rm -rf dist-transpiled",
+    "bundle": "rollup --config rollup.config.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/ui": "file:../klevu-ui"
+    "@klevu/ui": "0.0.8"
   },
   "devDependencies": {
+    "@babel/types": "^7.19.4",
+    "rollup": "^3.2.3",
+    "typescript": "^4.8.4",
     "vue": "^3.2.41"
   },
   "publishConfig": {

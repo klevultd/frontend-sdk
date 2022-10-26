@@ -29,12 +29,13 @@ export const WebComponentTemplate = <T>({
   innerHTML?: string
   childElements?: HTMLElement[]
 }) => {
-  const func = (args) => {
+  const func = (args: any) => {
     const element = document.createElement(tag)
     for (const [key, value] of Object.entries(attributes ?? {})) {
       element.setAttribute(key, value)
     }
     for (const [key, value] of Object.entries(args ?? {})) {
+      // @ts-expect-error
       element[key] = value
     }
     if (innerHTML) {
@@ -61,6 +62,7 @@ export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   element.product = product
   if (args) {
     for (const [key, value] of Object.entries(args)) {
+      // @ts-expect-error
       element[key] = value
     }
   }

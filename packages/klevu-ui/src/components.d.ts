@@ -17,12 +17,12 @@ import { KlevuProductVariant as KlevuProductVariant1 } from "./components/klevu-
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuButton {
-        "disabled": boolean;
+        "disabled"?: boolean;
     }
     interface KlevuCheckbox {
-        "checked": boolean;
-        "disabled": boolean;
-        "value": string;
+        "checked"?: boolean;
+        "disabled"?: boolean;
+        "value"?: string;
     }
     interface KlevuCmsList {
         "caption": string;
@@ -58,17 +58,17 @@ export namespace Components {
         /**
           * From which options to build facet
          */
-        "option": KlevuFilterResultOptions;
+        "option"?: KlevuFilterResultOptions;
         /**
           * From which slider to build facet
          */
-        "slider": KlevuFilterResultSlider;
+        "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
         /**
           * Custom order keys for every facet
          */
-        "customOrder": { [key: string]: string[] };
+        "customOrder"?: { [key: string]: string[] };
         /**
           * Filter managet from which the list is built from
          */
@@ -76,7 +76,7 @@ export namespace Components {
         /**
           * Set mode for facets or if object is passed then define per key
          */
-        "mode": KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+        "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
     }
     interface KlevuHeading {
         "variant": KlevuHeadingVariant;
@@ -113,7 +113,7 @@ export namespace Components {
         /**
           * Custom rendering of product. Can pass any HTML element as return value
          */
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
         /**
           * Order of results
          */
@@ -157,13 +157,13 @@ export namespace Components {
         "productProps"?: Partial<{
     variant: KlevuProductVariant1
   }>;
-        "products": KlevuRecord[];
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "products": Array<KlevuRecord | undefined>;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
     }
@@ -181,7 +181,7 @@ export namespace Components {
         /**
           * Fallback term to use if there are no results
          */
-        "fallbackTerm"?: any;
+        "fallbackTerm"?: string;
         /**
           * Maximum amount of results
          */
@@ -214,7 +214,7 @@ export namespace Components {
         /**
           * Custom rendering of product. Can pass any HTML element as return value
          */
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
@@ -238,7 +238,7 @@ export namespace Components {
     }
     interface KlevuTextfield {
         "disabled": boolean;
-        "placeholder": string;
+        "placeholder"?: string;
         "value": string;
     }
 }
@@ -477,7 +477,7 @@ declare namespace LocalJSX {
         "caption"?: string;
         "link"?: boolean;
         "onKlevuCmsPageClick"?: (event: KlevuCmsListCustomEvent<Partial<KlevuRecord>>) => void;
-        "pages"?: Array<Partial<KlevuRecord>>;
+        "pages": Array<Partial<KlevuRecord>>;
     }
     interface KlevuDrawer {
         "anchor"?: KlevuPopupAnchor;
@@ -562,7 +562,7 @@ declare namespace LocalJSX {
         /**
           * Custom rendering of product. Can pass any HTML element as return value
          */
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
         /**
           * Order of results
          */
@@ -609,13 +609,13 @@ declare namespace LocalJSX {
         "productProps"?: Partial<{
     variant: KlevuProductVariant1
   }>;
-        "products"?: KlevuRecord[];
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "products"?: Array<KlevuRecord | undefined>;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
     }
@@ -633,7 +633,7 @@ declare namespace LocalJSX {
         /**
           * Fallback term to use if there are no results
          */
-        "fallbackTerm"?: any;
+        "fallbackTerm"?: string;
         /**
           * Maximum amount of results
          */
@@ -675,7 +675,7 @@ declare namespace LocalJSX {
         /**
           * Custom rendering of product. Can pass any HTML element as return value
          */
-        "renderProduct"?: (product: KlevuRecord) => HTMLElement;
+        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
@@ -684,8 +684,8 @@ declare namespace LocalJSX {
     }
     interface KlevuSlider {
         "end"?: number;
-        "max"?: number;
-        "min"?: number;
+        "max": number;
+        "min": number;
         "onKlevuSliderChange"?: (event: KlevuSliderCustomEvent<[number, number]>) => void;
         "showTooltips"?: boolean;
         "start"?: number;
@@ -698,14 +698,14 @@ declare namespace LocalJSX {
     }
     interface KlevuSuggestionsList {
         "caption"?: string;
-        "suggestions"?: string[];
+        "suggestions": string[];
     }
     interface KlevuTextfield {
         "disabled"?: boolean;
         "onKlevuTextChanged"?: (event: KlevuTextfieldCustomEvent<string>) => void;
         "onKlevuTextFocused"?: (event: KlevuTextfieldCustomEvent<void>) => void;
         "placeholder"?: string;
-        "value"?: string;
+        "value": string;
     }
     interface IntrinsicElements {
         "klevu-button": KlevuButton;

@@ -42,7 +42,7 @@ export class KlevuSearchField {
   /**
    * Fallback term to use if there are no results
    */
-  @Prop() fallbackTerm?
+  @Prop() fallbackTerm?: string
 
   /**
    * Search products
@@ -70,10 +70,10 @@ export class KlevuSearchField {
   @Event({
     composed: true,
   })
-  klevuSearchResults: EventEmitter<SearchResultsEventData>
+  klevuSearchResults!: EventEmitter<SearchResultsEventData>
 
   @Event({ composed: true })
-  klevuSearchSuggestions: EventEmitter<SuggestionsEventData>
+  klevuSearchSuggestions!: EventEmitter<SuggestionsEventData>
 
   /**
    * When user clicks search button. Returns the search term.
@@ -81,7 +81,7 @@ export class KlevuSearchField {
   @Event({
     composed: true,
   })
-  klevuSearchClick: EventEmitter<string>
+  klevuSearchClick!: EventEmitter<string>
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -137,7 +137,11 @@ export class KlevuSearchField {
       cms: result.queriesById("cmsSearch"),
     })
 
-    this.klevuSearchSuggestions.emit(result.suggestionsById("suggestions").suggestions.map((s) => s.suggest))
+    const suggestionsResult = result.suggestionsById("suggestions")
+
+    if (suggestionsResult) {
+      this.klevuSearchSuggestions.emit(suggestionsResult.suggestions.map((s) => s.suggest))
+    }
   }, 500)
 
   handleChange = (event: CustomEvent<string>) => {
@@ -145,7 +149,7 @@ export class KlevuSearchField {
     this.doSearch(event.detail)
   }
 
-  handleSearchClick = (event) => {
+  handleSearchClick = () => {
     this.klevuSearchClick.emit(this.term)
   }
 

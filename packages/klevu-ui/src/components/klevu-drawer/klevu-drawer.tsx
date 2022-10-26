@@ -7,7 +7,7 @@ import { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
   shadow: true,
 })
 export class KlevuDrawer {
-  @Element() el
+  @Element() el?: HTMLKlevuDrawerElement
   @Prop() startOpen?: boolean
   @Prop() background?: boolean
   @Prop() closeAtOutsideClick = true
@@ -17,14 +17,14 @@ export class KlevuDrawer {
 
   private originalOverflow: any
 
-  private openEvent(event) {
-    if (event.composedPath().some((el) => el.name === "origin")) {
+  private openEvent(event: MouseEvent) {
+    if (event.composedPath().some((el: any) => el.name === "origin")) {
       this.openModal()
     }
   }
 
-  private closeEvent(event) {
-    if (!event.composedPath().some((el) => el === this.el)) {
+  private closeEvent(event: MouseEvent) {
+    if (!event.composedPath().some((el: any) => el === this.el)) {
       this.closeModal()
     }
   }
@@ -47,7 +47,7 @@ export class KlevuDrawer {
       this.openModal()
     }
 
-    this.el.addEventListener("click", this.openEvent.bind(this))
+    this.el?.addEventListener("click", this.openEvent.bind(this))
 
     if (this.closeAtOutsideClick) {
       document.addEventListener("click", this.closeEvent.bind(this))
@@ -56,7 +56,7 @@ export class KlevuDrawer {
 
   detachedCallback() {
     document.removeEventListener("click", this.closeEvent)
-    this.el.removeEventListener("click", this.openEvent)
+    this.el?.removeEventListener("click", this.openEvent)
   }
 
   render() {

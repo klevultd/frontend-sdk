@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-transpiled
 .swc
 coverage
 .DS_Store

@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property               | Attribute | Description                                                    | Type                                                          | Default     |
-| ---------------------- | --------- | -------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
-| `customOrder`          | --        | Custom order keys for every facet                              | `{ [key: string]: string[]; }`                                | `undefined` |
-| `manager` _(required)_ | --        | Filter managet from which the list is built from               | `FilterManager`                                               | `undefined` |
-| `mode`                 | `mode`    | Set mode for facets or if object is passed then define per key | `"checkbox" \| "radio" \| { [key: string]: KlevuFacetMode; }` | `undefined` |
+| Property               | Attribute | Description                                                    | Type                                                                       | Default     |
+| ---------------------- | --------- | -------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
+| `customOrder`          | --        | Custom order keys for every facet                              | `undefined \| { [key: string]: string[]; }`                                | `undefined` |
+| `manager` _(required)_ | --        | Filter managet from which the list is built from               | `FilterManager`                                                            | `undefined` |
+| `mode`                 | `mode`    | Set mode for facets or if object is passed then define per key | `"checkbox" \| "radio" \| undefined \| { [key: string]: KlevuFacetMode; }` | `undefined` |
 
 
 ## Dependencies

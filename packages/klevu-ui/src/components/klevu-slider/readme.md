@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property       | Attribute       | Description | Type      | Default     |
-| -------------- | --------------- | ----------- | --------- | ----------- |
-| `end`          | `end`           |             | `number`  | `undefined` |
-| `max`          | `max`           |             | `number`  | `undefined` |
-| `min`          | `min`           |             | `number`  | `undefined` |
-| `showTooltips` | `show-tooltips` |             | `boolean` | `undefined` |
-| `start`        | `start`         |             | `number`  | `undefined` |
+| Property           | Attribute       | Description | Type                   | Default     |
+| ------------------ | --------------- | ----------- | ---------------------- | ----------- |
+| `end`              | `end`           |             | `number \| undefined`  | `undefined` |
+| `max` _(required)_ | `max`           |             | `number`               | `undefined` |
+| `min` _(required)_ | `min`           |             | `number`               | `undefined` |
+| `showTooltips`     | `show-tooltips` |             | `boolean \| undefined` | `undefined` |
+| `start`            | `start`         |             | `number \| undefined`  | `undefined` |
 
 
 ## Events

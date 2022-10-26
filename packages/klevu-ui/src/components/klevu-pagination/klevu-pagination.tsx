@@ -20,10 +20,10 @@ export class KlevuPagination {
   @Event({
     composed: true,
   })
-  klevuPaginationChange: EventEmitter<number>
+  klevuPaginationChange!: EventEmitter<number>
 
   render() {
-    let min, max, current
+    let min: number, max: number, current: number
     if (this.queryResult) {
       min = 1
       max = Math.floor(this.queryResult.meta.totalResultsFound / this.queryResult.meta.noOfResults) + 1
@@ -32,9 +32,9 @@ export class KlevuPagination {
       if ([this.current, this.max, this.min].some((i) => i === undefined)) {
         throw new Error("queryResult or current, min & max needs to be defined")
       }
-      min = this.min
-      max = this.max
-      current = this.current
+      min = this.min!
+      max = this.max!
+      current = this.current!
     }
 
     const pages: number[] = []

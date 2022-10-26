@@ -7,20 +7,23 @@ import noUiSlider from "nouislider"
   shadow: true,
 })
 export class KlevuSlider {
-  @Prop() min: number
-  @Prop() max: number
+  @Prop() min!: number
+  @Prop() max!: number
   @Prop() start?: number
   @Prop() end?: number
   @Prop() showTooltips?: boolean
 
-  @Element() el: HTMLElement
+  @Element() el?: HTMLKlevuSliderElement
 
   @Event({
     composed: true,
   })
-  klevuSliderChange: EventEmitter<[number, number]>
+  klevuSliderChange!: EventEmitter<[number, number]>
 
-  initNoUISlider(el: HTMLDivElement) {
+  initNoUISlider(el: HTMLDivElement | undefined) {
+    if (!el) {
+      return
+    }
     noUiSlider.create(el, {
       connect: true,
       tooltips: this.showTooltips,
@@ -43,7 +46,7 @@ export class KlevuSlider {
         <div
           class={{
             outerContainer: true,
-            hasTooltips: this.showTooltips,
+            hasTooltips: Boolean(this.showTooltips),
           }}
         >
           <div class="container" ref={this.initNoUISlider.bind(this)}></div>

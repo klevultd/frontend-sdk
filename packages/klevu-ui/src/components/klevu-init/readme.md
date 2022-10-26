@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property              | Attribute | Description | Type                                                                                                                                                                                                      | Default     |
-| --------------------- | --------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `apiKey` _(required)_ | `api-key` |             | `string`                                                                                                                                                                                                  | `undefined` |
-| `settings`            | --        |             | `{ onProductClick?: (product: KlevuRecord, event: MouseEvent) => boolean; generateProductUrl?: (product: KlevuRecord) => string; renderPrice?: (amount: string \| number, currency: string) => string; }` | `undefined` |
-| `url` _(required)_    | `url`     |             | `string`                                                                                                                                                                                                  | `undefined` |
+| Property              | Attribute | Description | Type                                                                                                                                                                                                                                                                  | Default     |
+| --------------------- | --------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `apiKey` _(required)_ | `api-key` |             | `string`                                                                                                                                                                                                                                                              | `undefined` |
+| `settings`            | --        |             | `undefined \| ({ onProductClick?: ((product: KlevuRecord, event: MouseEvent) => boolean) \| undefined; generateProductUrl?: ((product: KlevuRecord) => string) \| undefined; renderPrice?: ((amount: string \| number, currency: string) => string) \| undefined; })` | `undefined` |
+| `url` _(required)_    | `url`     |             | `string`                                                                                                                                                                                                                                                              | `undefined` |
 
 
 ----------------------------------------------

@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property              | Attribute                | Description | Type                | Default     |
-| --------------------- | ------------------------ | ----------- | ------------------- | ----------- |
-| `anchor`              | `anchor`                 |             | `"left" \| "right"` | `"right"`   |
-| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean`           | `true`      |
-| `fullwidthContent`    | `fullwidth-content`      |             | `boolean`           | `false`     |
-| `openAtFocus`         | `open-at-focus`          |             | `boolean`           | `true`      |
-| `startOpen`           | `start-open`             |             | `boolean`           | `undefined` |
+| Property              | Attribute                | Description | Type                   | Default     |
+| --------------------- | ------------------------ | ----------- | ---------------------- | ----------- |
+| `anchor`              | `anchor`                 |             | `"left" \| "right"`    | `"right"`   |
+| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean`              | `true`      |
+| `fullwidthContent`    | `fullwidth-content`      |             | `boolean`              | `false`     |
+| `openAtFocus`         | `open-at-focus`          |             | `boolean`              | `true`      |
+| `startOpen`           | `start-open`             |             | `boolean \| undefined` | `undefined` |
 
 
 ## Methods

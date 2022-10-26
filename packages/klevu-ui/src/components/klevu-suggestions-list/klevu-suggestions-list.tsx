@@ -7,7 +7,7 @@ import { Component, Host, h, Prop } from "@stencil/core"
 })
 export class KlevuSuggestionsList {
   @Prop() caption = "Search suggestions"
-  @Prop() suggestions: string[]
+  @Prop() suggestions!: string[]
 
   render() {
     return (

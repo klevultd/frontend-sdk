@@ -23,7 +23,7 @@ export const WithCustomProduct = WebComponentTemplate<HTMLKlevuQuicksearchElemen
   tag: "klevu-quicksearch",
   args: {
     fallbackTerm: "shoes",
-    renderProduct: (product: KlevuRecord) => {
+    renderProduct: (product: KlevuRecord | undefined) => {
       const prod = document.createElement("klevu-product")
       prod.product = product
       prod.variant = "small"

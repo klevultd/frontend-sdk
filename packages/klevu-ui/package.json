@@ -1,6 +1,6 @@
 {
   "name": "@klevu/ui",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Klevu UI components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -21,11 +21,12 @@
   "scripts": {
     "build": "stencil build --docs",
     "build:watch": "stencil build --watch",
+    "build:all": "npm run build && cd ../klevu-ui-react && npm run build && cd ../klevu-ui-vue && npm run build && cd ../klevu-ui",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --e2e",
     "test.watch": "stencil test --e2e --watchAll",
     "generate": "stencil generate",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=d4dd0d239c7f",
     "push-npm": "npm publish --access public"
@@ -43,23 +44,23 @@
     }
   ],
   "devDependencies": {
-    "@babel/core": "^7.19.3",
+    "@babel/core": "^7.19.6",
     "@ljcl/storybook-addon-cssprops": "^2.3.5",
     "@stencil/react-output-target": "^0.3.1",
     "@stencil/vue-output-target": "^0.6.2",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
+    "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-interactions": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
     "@storybook/addon-notes": "^5.3.21",
-    "@storybook/builder-webpack4": "^6.5.12",
-    "@storybook/html": "^6.5.12",
-    "@storybook/manager-webpack4": "^6.5.12",
+    "@storybook/builder-webpack4": "^6.5.13",
+    "@storybook/html": "^6.5.13",
+    "@storybook/manager-webpack4": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.2.5",
-    "chromatic": "^6.10.1",
+    "chromatic": "^6.10.5",
     "fast-glob": "^3.2.12",
-    "puppeteer": "^18.2.1"
+    "puppeteer": "^19.1.0"
   },
   "license": "MIT"
 }

@@ -7,3 +7,4 @@ coverage
 docs
 tsconfig*
 fixup
+dist-transpiled

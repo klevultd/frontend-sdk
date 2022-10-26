@@ -9,7 +9,7 @@
 
 | Property               | Attribute  | Description | Type                                 | Default     |
 | ---------------------- | ---------- | ----------- | ------------------------------------ | ----------- |
-| `disabled`             | `disabled` |             | `boolean`                            | `undefined` |
+| `disabled`             | `disabled` |             | `boolean \| undefined`               | `undefined` |
 | `name` _(required)_    | `name`     |             | `string`                             | `undefined` |
 | `options` _(required)_ | --         |             | `{ value: string; text: String; }[]` | `undefined` |
 
