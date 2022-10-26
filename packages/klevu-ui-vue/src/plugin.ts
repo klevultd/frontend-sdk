@@ -1,7 +1,7 @@
 import { Plugin } from "vue"
 import { applyPolyfills, defineCustomElements } from "@klevu/ui/loader"
 
-export const ComponentLibrary: Plugin = {
+export const KlevuComponents: Plugin = {
   async install() {
     applyPolyfills().then(() => {
       defineCustomElements()
