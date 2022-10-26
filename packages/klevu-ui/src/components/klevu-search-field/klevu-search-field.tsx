@@ -84,7 +84,6 @@ export class KlevuSearchField {
   klevuSearchClick!: EventEmitter<string>
 
   async connectedCallback() {
-    console.log("search field connected", this)
     await KlevuInit.ready()
   }
 

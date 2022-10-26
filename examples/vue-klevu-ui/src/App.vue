@@ -1,33 +1,9 @@
 <script setup lang="ts">
-import {
-  KlevuInit,
-  KlevuSearchField,
-  KlevuProductGrid,
-  KlevuButton,
-} from "@klevu/ui-vue";
 import type { KlevuRecord } from "@klevu/core";
-
-/*
-import { ref, onMounted } from "vue";
-
-const test = ref<any>(null);
-
-onMounted(() => {
-  console.log("hep!", test);
-  test.value.$el.searchProducts = true;
-  test.value.$el.searchSuggestions = true;
-});
-*/
 </script>
 
 <script lang="ts">
 export default {
-  components: {
-    KlevuButton,
-    KlevuInit,
-    KlevuSearchField,
-    KlevuProductGrid,
-  },
   data() {
     return {
       products: [] as KlevuRecord[],
@@ -35,14 +11,17 @@ export default {
   },
   methods: {
     klevuResults(event: any) {
-      console.log("hello!");
       this.products = event.detail.search?.records ?? [];
     },
     klevuSuggestions(event: any) {
-      console.log("suggetions", event);
+      console.log("suggetions", event.detail);
     },
     test() {
-      console.log("test!");
+      console.log("hello world!");
+    },
+    productclick(product: KlevuRecord) {
+      console.log("clicked product", product.id);
+      // here could be some routing logic
     },
   },
 };
@@ -53,9 +32,9 @@ export default {
     <klevu-init
       url="https://eucs30v2.ksearchnet.com/cs/v2/search"
       api-key="klevu-165829460115715456"
-      :settings="{
+      :settings.prop="{
         onProductClick(product, event) {
-          alert(`should redirect to product id ${product.id}`);
+          productclick(product);
           return false;
         },
       }"
@@ -65,10 +44,10 @@ export default {
         search-suggestions
         placeholder="Test placeholder"
         fallback-term="hoodies"
-        v-on:klevu-search-results="klevuResults($event)"
-        v-on:klevu-search-suggestions="klevuSuggestions($event)"
+        @klevuSearchResults="klevuResults($event)"
+        @klevuSearchSuggestions="klevuSuggestions($event)"
       ></klevu-search-field>
-      <KlevuProductGrid :products="products"></KlevuProductGrid>
+      <klevu-product-grid :products="products"></klevu-product-grid>
 
       <h1>Just a button</h1>
       <klevu-button v-on:click="test()">Hello Button</klevu-button>
