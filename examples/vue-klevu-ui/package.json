@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@klevu/core": "^1.6.0",
-    "@klevu/ui": "^0.0.7",
-    "@klevu/ui-vue": "file:../../packages/klevu-ui-vue",
+    "@klevu/ui": "^0.0.8",
+    "@klevu/ui-vue": "^0.0.8",
     "vue": "^3.2.41"
   },
   "devDependencies": {
