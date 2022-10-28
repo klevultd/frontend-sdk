@@ -1,6 +1,6 @@
 import typescript from "@rollup/plugin-typescript"
 
-const external = ["vue", "vue-router"]
+const external = ["react", "react-dom"]
 
 export default {
   input: "src/index.ts",
