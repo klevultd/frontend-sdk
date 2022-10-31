@@ -1,20 +1,15 @@
 // import { KlevuConfig, KlevuKMCSettings } from "@klevu/core"
 import useQuickSearch from "../stores/quickSearchStore"
+import useSearch from "../stores/searchStore"
 
 import {
   KlevuConfig,
   KlevuKMCSettings,
-  applyFilterWithManager,
-  categoryMerchandising,
+  KlevuFetch,
   FilterManager,
-  // KlevuFetchQueries,
-  listFilters,
-  search,
-  sendMerchandisingViewEvent,
-  sendSearchEvent,
+  KlevuPackFetchResult,
+  KlevuHydratePackedFetchResult,
 } from "@klevu/core"
-
-let counter = 0
 
 const useHydration = (key, get, set) => {
   const nuxt = useNuxtApp()
@@ -36,20 +31,21 @@ export default defineNuxtPlugin((nuxtApp) => {
   const route = useRoute()
 
   if (process.server) {
-    console.log("SERVER process detected")
+    // console.log("SERVER process detected")
   }
 
   if (process.client) {
-    console.log("CLIENT process detected")
+    // console.log("CLIENT process detected")
   }
 
-  // useHydration(
-  //   "klevu",
-  //   () => `my ${counter++} search`,
-  //   (mySearch) => {
-  //     console.log(`this is the client-side hydration: ${mySearch}`)
-  //   }
-  // )
+  let searchResults = []
+  useHydration(
+    "klevu",
+    () => `my apples search`,
+    (mySearch) => {
+      console.log(`this is the client-side hydration: ${mySearch}`)
+    }
+  )
 
   if (!KlevuConfig.default) {
     KlevuConfig.init({
@@ -61,20 +57,53 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // when loading Pinia in a plugin, you must pass in the $pinia instance from nuxtApp
   const quickSearchStore = useQuickSearch(nuxtApp.$pinia)
+  const searchStore = useSearch(nuxtApp.$pinia)
 
   // this is server-side (on refresh)
-  nuxtApp.hook("app:rendered", (renderContext) => {
-    // console.log("just checking event: app:rendered")
-    // console.log("renderContext")
-    // console.log(renderContext)
-    // renderContext.ssrContext.event.res.klevuSearch = {
-    //   ssr: true,
-    // }
+  nuxtApp.hook("app:rendered", async (renderContext) => {
+    console.log("just checking event: app:rendered")
   })
 
   // this is client-side (on refresh)
-  nuxtApp.hook("app:mounted", (vueApp) => {
-    // console.log("just checking event: app:mounted")
+  nuxtApp.hook("app:created", async (vueApp) => {
+    console.log("just checking event: app:created")
+
+    if (route.matched && route.matched.length) {
+      if (route.matched[0].name == "search") {
+        const result = await KlevuFetch(
+          searchQuery(route.query.q, searchStore.sorting, new FilterManager())
+        )
+        const searchResult = KlevuPackFetchResult(result)
+        console.log(searchResult)
+        nuxtApp.provide("dataToTransferFrontend", searchResult.data)
+      } else if (route.matched[0].name == "collections-handle") {
+        const result = await KlevuFetch(
+          merchandisingQuery(
+            route.params.handle,
+            searchStore.sorting,
+            new FilterManager()
+          )
+        )
+        const searchResult = KlevuPackFetchResult(result)
+        console.log(searchResult)
+        nuxtApp.provide("dataToTransferFrontend", searchResult.data)
+      }
+    }
+  })
+
+  // this is client-side (on refresh) - only on hydration
+  nuxtApp.hook("app:mounted", async (vueApp) => {
+    console.log("just checking event: app:mounted")
+
+    console.log("nuxtApp.$dataToTransferFrontend")
+    console.log(typeof nuxtApp.$dataToTransferFrontend)
+
+    resultObject = await KlevuHydratePackedFetchResult(
+      nuxtApp.$dataToTransferFrontend,
+      searchQuery(route.query.q, searchStore.sorting, manager)
+    )
+    console.log(resultObject.queriesById("search"))
+
     // console.log("vueApp")
     // console.log(vueApp)
   })
@@ -116,28 +145,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         console.log(Object.keys(nuxtApp))
         return "this should be server side rendered"
       },
-      merchandisingQuery: (category, manager) => [
-        categoryMerchandising(
-          category,
-          {
-            id: "categoryMerchandising",
-          },
-          applyFilterWithManager(manager),
-          listFilters({
-            filterManager: manager,
-          }),
-          sendMerchandisingViewEvent(category)
-        ),
-      ],
-      searchQuery: (term, manager) => [
-        search(
-          term,
-          { id: "search" },
-          applyFilterWithManager(manager),
-          listFilters({ filterManager: manager }),
-          sendSearchEvent()
-        ),
-      ],
     },
   }
 })

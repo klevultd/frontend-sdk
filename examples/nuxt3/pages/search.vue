@@ -42,7 +42,11 @@ import useSearch from "../stores/searchStore"
 
 const searchStore = useSearch()
 const route = useRoute()
+const nuxtApp = useNuxtApp()
+
+
 const manager = new FilterManager()
+let resultObject
 let prevRes
 
 definePageMeta({
