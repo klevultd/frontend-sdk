@@ -10,9 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@klevu/core": "^1.6.0",
-    "@klevu/ui": "^0.0.8",
-    "@klevu/ui-vue": "^0.0.8",
+    "@klevu/ui-vue": "0.0.9",
     "vue": "^3.2.41"
   },
   "devDependencies": {

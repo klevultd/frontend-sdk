@@ -1,17 +1,31 @@
 <script setup lang="ts">
 import type { KlevuRecord } from "@klevu/core";
+import {
+  KlevuButton,
+  KlevuInit,
+  KlevuProductGrid,
+  KlevuSearchField,
+} from "@klevu/ui-vue";
 </script>
 
 <script lang="ts">
 export default {
+  // Importing components is optional
+  // It gives you typings in Typescript!
+  components: {
+    KlevuInit,
+    KlevuSearchField,
+    KlevuProductGrid,
+    KlevuButton,
+  },
   data() {
     return {
       products: [] as KlevuRecord[],
     };
   },
   methods: {
-    klevuResults(event: any) {
-      this.products = event.detail.search?.records ?? [];
+    klevuResults(records: KlevuRecord[]) {
+      this.products = records;
     },
     klevuSuggestions(event: any) {
       console.log("suggetions", event.detail);
@@ -33,7 +47,8 @@ export default {
       url="https://eucs30v2.ksearchnet.com/cs/v2/search"
       api-key="klevu-165829460115715456"
       :settings.prop="{
-        onProductClick(product, event) {
+        onProductClick(product: any, event: any) {
+          // @ts-ignore - Typescript doesn't seem to find local method even though it exists
           productclick(product);
           return false;
         },
@@ -44,7 +59,9 @@ export default {
         search-suggestions
         placeholder="Test placeholder"
         fallback-term="hoodies"
-        @klevuSearchResults="klevuResults($event)"
+        @klevuSearchResults="
+          klevuResults(($event.detail.search?.records as KlevuRecord[]) ?? [])
+        "
         @klevuSearchSuggestions="klevuSuggestions($event)"
       ></klevu-search-field>
       <klevu-product-grid :products="products"></klevu-product-grid>

@@ -11,7 +11,7 @@
     "target": "es2015",
     "sourceMap": true,
     "lib": ["dom", "es2015"],
-    "outDir": "dist-transpiled"
+    "outDir": "dist"
   },
   "exclude": ["node_modules", "**/*.spec.ts", "**/__tests__/**", "dist"]
 }

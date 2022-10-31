@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "vite --port 3007 --host"
+    "start": "vite --port 3007 --host",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/core": "^1.5.0",
-    "@klevu/ui": "0.0.6",
-    "@klevu/ui-react": "0.0.6",
+    "@klevu/ui-react": "0.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
