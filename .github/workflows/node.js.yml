@@ -21,5 +21,6 @@ jobs:
         with:
           node-version: "16"
           cache: "npm"
+          cache-dependency-path: packages/klevu-core/package-lock.json
       - run: npm install
       - run: npm test
