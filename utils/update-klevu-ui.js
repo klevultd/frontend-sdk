@@ -147,9 +147,13 @@ async function main() {
   ui.log.write("🟢 Build succeeded")
   ui.log.write("🟡 Deploying @klevu/ui")
 
-  shelljs.exec("npm publish --access public --dry-run")
+  shelljs.exec(`npm publish --access public --otp ${await getOTP()}`)
 
   ui.log.write("🟢 Deploy succeeded")
+  ui.log.write("🟡 Waiting for little bit for NPM to register updated version")
+
+  await new Promise((resolve) => setTimeout(resolve, 10000))
+
   ui.log.write(
     "🆘🆘🆘🆘 Failures after this stage lead to manual fixes 🆘🆘🆘🆘"
   )
@@ -167,13 +171,13 @@ async function main() {
   ui.log.write("🟡 Publish React")
   shelljs.cd("../klevu-ui-react")
   shelljs.exec("npm install")
-  shelljs.exec("npm publish --access public --dry-run")
+  shelljs.exec(`npm publish --access public --otp ${await getOTP()}`)
   ui.log.write("🟢 React published")
 
   ui.log.write("🟡 Publish Vue")
   shelljs.cd("../klevu-ui-vue")
   shelljs.exec("npm install")
-  shelljs.exec("npm publish --access public --dry-run")
+  shelljs.exec(`npm publish --access public --otp ${await getOTP()}`)
   ui.log.write("🟢 Vue published")
 
   ui.log.write("🟡 Create commit")
@@ -191,6 +195,17 @@ function abortWithMessage(message) {
   ui.log.write(`🔴  ${message}`)
   process.exit(1)
   throw new Error("Aborted")
+}
+
+async function getOTP() {
+  const input = await inquirer.prompt([
+    {
+      type: "input",
+      name: "otp",
+      message: "NPM one time password",
+    },
+  ])
+  return input.otp
 }
 
 function updateVersion(version, toUpdate) {
