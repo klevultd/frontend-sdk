@@ -1,13 +1,9 @@
 {
   "name": "utils",
   "version": "1.0.0",
-  "description": "",
+  "description": "Repository utilities",
   "type": "module",
-  "main": "update-klevu-ui.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Klevu",
   "license": "ISC",
   "dependencies": {
     "edit-package-json": "^0.7.10",
