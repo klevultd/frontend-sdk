@@ -1,8 +1,12 @@
+#!/usr/bin/env node
+
 import inquirer from "inquirer"
 import { set } from "edit-package-json"
 import fs from "fs"
 import { resolve } from "path"
 import shelljs from "shelljs"
+import yargs from "yargs"
+import { hideBin } from "yargs/helpers"
 
 const ui = new inquirer.ui.BottomBar()
 
@@ -22,7 +26,7 @@ const newMajor = updateVersion(oldUiVersion, "major")
 const newMinor = updateVersion(oldUiVersion, "minor")
 const newPatch = updateVersion(oldUiVersion, "patch")
 
-async function main() {
+async function main(args) {
   const currentBranch = shelljs
     .exec("git rev-parse --abbrev-ref HEAD", {
       silent: true,
@@ -30,15 +34,15 @@ async function main() {
     })
     .stdout.trim()
 
-  /*
-  if (currentBranch !== "master") {
+  if (args.ignoreBranch !== true && currentBranch !== "master") {
     abortWithMessage("Script is allowed to run only in master branch!")
   }
-  */
 
   let version
-  if (["major", "minor", "patch"].includes(process.argv.at(2))) {
+  if (args.type && ["major", "minor", "patch"].includes(args.type)) {
     version = updateVersion(oldUiVersion, process.argv.at(2))
+  } else if (args.type) {
+    abortWithMessage(`Unknown update type "${args.type}"`)
   } else {
     const result = await inquirer.prompt([
       {
@@ -103,9 +107,11 @@ async function main() {
     "dependencies.@klevu/ui",
     "file:../klevu-ui"
   )
-  fs.writeFileSync(fileUiPackage, dataUiPackage)
-  fs.writeFileSync(fileReactPackage, dataReactPackage)
-  fs.writeFileSync(fileVuePackage, dataVuePackage)
+  if (!args.dryRun) {
+    fs.writeFileSync(fileUiPackage, dataUiPackage)
+    fs.writeFileSync(fileReactPackage, dataReactPackage)
+    fs.writeFileSync(fileVuePackage, dataVuePackage)
+  }
   ui.log.write("🟢 Updated @klevu/ui version and linked react&vue packages")
 
   shelljs.cd("../packages/klevu-ui-react")
@@ -147,7 +153,11 @@ async function main() {
   ui.log.write("🟢 Build succeeded")
   ui.log.write("🟡 Deploying @klevu/ui")
 
-  shelljs.exec(`npm publish --access public --otp ${await getOTP()}`)
+  shelljs.exec(
+    `npm publish --access public ${await getOTP(args)} ${
+      args.dryRun ? "--dry-run" : ""
+    }`
+  )
 
   ui.log.write("🟢 Deploy succeeded")
   ui.log.write("🟡 Waiting for little bit for NPM to register updated version")
@@ -163,30 +173,45 @@ async function main() {
   dataReactPackage = set(dataReactPackage, "version", version)
   dataVuePackage = set(dataVuePackage, "dependencies.@klevu/ui", version)
   dataVuePackage = set(dataVuePackage, "version", version)
-  fs.writeFileSync(fileUiPackage, dataUiPackage)
-  fs.writeFileSync(fileReactPackage, dataReactPackage)
-  fs.writeFileSync(fileVuePackage, dataVuePackage)
+
+  if (!args.dryRun) {
+    fs.writeFileSync(fileUiPackage, dataUiPackage)
+    fs.writeFileSync(fileReactPackage, dataReactPackage)
+    fs.writeFileSync(fileVuePackage, dataVuePackage)
+  }
   ui.log.write("🟢 Versions changed")
 
   ui.log.write("🟡 Publish React")
   shelljs.cd("../klevu-ui-react")
   shelljs.exec("npm install")
-  shelljs.exec(`npm publish --access public --otp ${await getOTP()}`)
+  shelljs.exec(
+    `npm publish --access public ${await getOTP(args)} ${
+      args.dryRun ? "--dry-run" : ""
+    }`
+  )
   ui.log.write("🟢 React published")
 
   ui.log.write("🟡 Publish Vue")
   shelljs.cd("../klevu-ui-vue")
   shelljs.exec("npm install")
-  shelljs.exec(`npm publish --access public --otp ${await getOTP()}`)
+  shelljs.exec(
+    `npm publish --access public ${await getOTP(args)} ${
+      args.dryRun ? "--dry-run" : ""
+    }`
+  )
   ui.log.write("🟢 Vue published")
 
-  ui.log.write("🟡 Create commit")
-  shelljs.cd("../..")
-  shelljs.exec("git add -A .")
-  shelljs.exec(`git commit -m "Bumped UI to version ${version}"`)
-  ui.log.write("🟢 Commit created\n")
+  if (!args.dryRun) {
+    ui.log.write("🟡 Create commit")
+    shelljs.cd("../..")
+    shelljs.exec("git add -A .")
+    shelljs.exec(`git commit -m "Bumped UI to version ${version}"`)
+    ui.log.write("🟢 Commit created\n")
+  } else {
+    ui.log.write("🟡 Dry run. Ignore commit")
+  }
 
-  ui.log.write("Release done! Now just push changes with ´git push`")
+  ui.log.write("🟢 Release done! Now just push changes with ´git push`")
 
   process.exit(0)
 }
@@ -194,10 +219,17 @@ async function main() {
 function abortWithMessage(message) {
   ui.log.write(`🔴  ${message}`)
   process.exit(1)
-  throw new Error("Aborted")
 }
 
-async function getOTP() {
+async function getOTP(args) {
+  if (args.dryRun) {
+    return ""
+  }
+
+  if (process.env.NPM_TOKEN) {
+    return `--otp ${process.env.NPM_TOKEN}`
+  }
+
   const input = await inquirer.prompt([
     {
       type: "input",
@@ -205,7 +237,7 @@ async function getOTP() {
       message: "NPM one time password",
     },
   ])
-  return input.otp
+  return `--otp ${input.otp}`
 }
 
 function updateVersion(version, toUpdate) {
@@ -225,4 +257,20 @@ function updateVersion(version, toUpdate) {
   }
 }
 
-main()
+const args = yargs(hideBin(process.argv))
+  .option("type", {
+    type: "string",
+    description: "Which kind of update (major|minor|patch)",
+  })
+  .option("dry-run", {
+    alias: "dr",
+    type: "boolean",
+    description: "Do not actully do anything",
+  })
+  .option("ignore-branch", {
+    type: "boolean",
+    description: "Ignore 'master' branch restriction",
+  })
+  .parse()
+
+main(args)

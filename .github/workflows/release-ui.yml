@@ -1,0 +1,39 @@
+name: Update versions and release UI packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        description: Which update to do
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  deploy:
+    name: Release
+    runs-on: ubuntu-latest
+    environment: production
+    runs:
+      using: "node16"
+    defaults:
+      run:
+        working-directory: ./utils/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "npm"
+          cache-dependency-path: utils/package-lock.json
+
+      - name: Make Release
+        id: make-release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: ./update-klevu-ui.js --dry-run --type ${{ github.event.inputs.type }} --ignore-branch
