@@ -1,12 +1,5 @@
 <template>
   <div>
-    <trinity-rings-spinner
-      v-if="searchStore.loading"
-      class="mx-auto my-12"
-      :animation-duration="1500"
-      :size="60"
-      color="#97C73E"
-    />
     <div
       v-for="product in searchStore.products"
       :key="product.id"
@@ -80,7 +73,6 @@ import {
 } from "@klevu/core"
 import useSearch from "../../stores/searchStore"
 import useCart from "../../stores/cartStore"
-import { TrinityRingsSpinner } from "epic-spinners"
 
 const route = useRoute()
 const searchStore = useSearch()

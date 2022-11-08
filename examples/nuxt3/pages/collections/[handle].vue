@@ -1,12 +1,5 @@
 <template>
   <div>
-    <trinity-rings-spinner
-      v-if="searchStore.loading"
-      class="mx-auto my-12"
-      :animation-duration="1500"
-      :size="60"
-      color="#97C73E"
-    />
     <div
       class="loading-message"
       v-show="!searchStore.products.length && !searchStore.loading"
@@ -47,7 +40,6 @@ import {
   kmcRecommendation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
-import { TrinityRingsSpinner } from "epic-spinners"
 
 definePageMeta({
   layout: "search-results",
