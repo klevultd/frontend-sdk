@@ -8,19 +8,11 @@
       <QuickSearchProducts />
       <QuickSearchTrendingProducts />
     </div>
-    <trinity-rings-spinner
-      v-if="quickSearchStore.loading"
-      class="mx-auto my-12"
-      :animation-duration="1500"
-      :size="60"
-      color="#97C73E"
-    />
   </div>
 </template>
 
 <script setup>
 import useQuickSearch from "../stores/quickSearchStore"
-import { TrinityRingsSpinner } from "epic-spinners"
 
 const quickSearchStore = useQuickSearch()
 
