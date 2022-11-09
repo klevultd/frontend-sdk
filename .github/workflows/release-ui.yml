@@ -32,4 +32,4 @@ jobs:
         run: |
           cd utils
           npm install
-          node ./update-klevu-ui.js --dry-run --type ${{ github.event.inputs.type }}
+          node ./update-klevu-ui.js --type ${{ inputs.type }} --dry-run
