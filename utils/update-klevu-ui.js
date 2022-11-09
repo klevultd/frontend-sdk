@@ -242,7 +242,7 @@ async function getOTP(args) {
 
 function updateVersion(version, toUpdate) {
   let [major, minor, patch] = version.split(".")
-  switch (toUpdate) {
+  switch (toUpdate.trim()) {
     case "major":
       major++
       return `${major}.0.0`
@@ -253,7 +253,8 @@ function updateVersion(version, toUpdate) {
       patch++
       return `${major}.${minor}.${patch}`
     default:
-      throw new Error(`Unknown version "${toUpdate}" to update`)
+      console.error(`Unknown version "${toUpdate.trim()}" to update`)
+      throw new Error("Version selection failed")
   }
 }
 
