@@ -25,19 +25,11 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Go to utils folder
-        run: cd utils
-
-      - name: NPM install
-        run: npm install
-
-      - name: Test things
-        run: |
-          node --version
-          node -e "console.log('hello')"
-
       - name: Make Release
         id: make-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: node ./update-klevu-ui.js --dry-run --type ${{ github.event.inputs.type }}
+        run: |
+          cd utils
+          npm install
+          node ./update-klevu-ui.js --dry-run --type ${{ github.event.inputs.type }}
