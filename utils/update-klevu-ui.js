@@ -50,8 +50,7 @@ async function main(args) {
     ])
     version = result.version
   }
-  console.log(`🟢 Updating with version ${version}`)
-  shelljs.exec(`echo "version=${version}" >> $GITHUB_OUTPUT`)
+
   console.log(`🟡 Checking version before trying to update`)
 
   if (oldUiVersion !== oldReactVersion || oldUiVersion !== oldVueVersion) {
@@ -93,6 +92,8 @@ async function main(args) {
   console.log("🟢 Version checks OK. Can continue with automated process")
 
   console.log(`🟡 Updating to version ${version}`)
+  console.log(`::set-output name=version::${version}`)
+
   dataUiPackage = set(dataUiPackage, "version", version)
   dataReactPackage = set(
     dataReactPackage,

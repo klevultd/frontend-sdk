@@ -17,9 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
-    outputs:
-      version: ${{ steps.make-release.outputs.version }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -29,7 +26,7 @@ jobs:
           node-version: "18"
 
       - name: Make Release
-        id: make-release
+        id: release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
@@ -38,7 +35,7 @@ jobs:
           node ./update-klevu-ui.js --type ${{ inputs.type }} --dry-run
 
       - name: Print
-        run: echo ${{needs.deploy.outputs.version}}
+        run: echo ${{steps.release.outputs.version}}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
@@ -46,8 +43,8 @@ jobs:
           commit-message: "Automatic @klevu/ui release"
           committer: GitHub action [bot] <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: release/ui-${{ needs.deploy.outputs.version }}
-          title: "@klevu/ui release ${{ needs.deploy.outputs.version }}"
+          branch: release/ui-${{steps.release.outputs.version}}
+          title: "@klevu/ui release ${{steps.release.outputs.version}}"
           body: |
             This is automatic update of package versions. 
             NPM release has been already made and this is just update to repository.
