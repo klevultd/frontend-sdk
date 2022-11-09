@@ -32,7 +32,7 @@ jobs:
         run: |
           cd utils
           npm install
-          node ./update-klevu-ui.js --type ${{ inputs.type }} --dry-run
+          node ./update-klevu-ui.js --type ${{ inputs.type }}
 
       - name: Print
         run: echo ${{steps.release.outputs.version}}
@@ -41,8 +41,6 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "Automatic @klevu/ui release"
-          committer: GitHub action [bot] <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: release/ui-${{steps.release.outputs.version}}
           title: "@klevu/ui release ${{steps.release.outputs.version}}"
           body: |
