@@ -9,7 +9,7 @@ beforeEach(() => {
   })
 })
 
-test("Basic annotationsById", async () => {
+test.skip("Basic annotationsById", async () => {
   const result = await KlevuFetch(
     search("blue", {
       id: "test",
