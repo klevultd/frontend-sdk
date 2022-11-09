@@ -16,9 +16,6 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     environment: production
-    defaults:
-      run:
-        working-directory: ./utils/
 
     steps:
       - name: Checkout
@@ -26,15 +23,20 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
-          cache: "npm"
-          cache-dependency-path: utils/package-lock.json
+          node-version: "18"
+
+      - name: Go to utils folder
+        run: cd utils
 
       - name: NPM install
         run: npm install
+
+      - name: Test things
+        run: node --version
+        run: node -e "console.log('hello')"
 
       - name: Make Release
         id: make-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: ls -la && node ./update-klevu-ui.js --dry-run --type ${{ github.event.inputs.type }}
+        run: node ./update-klevu-ui.js --dry-run --type ${{ github.event.inputs.type }}

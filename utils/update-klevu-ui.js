@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import inquirer from "inquirer"
 import { set } from "edit-package-json"
 import fs from "fs"
