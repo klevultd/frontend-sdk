@@ -32,8 +32,9 @@ jobs:
         run: npm install
 
       - name: Test things
-        run: node --version
-        run: node -e "console.log('hello')"
+        run: |
+          node --version
+          node -e "console.log('hello')"
 
       - name: Make Release
         id: make-release
