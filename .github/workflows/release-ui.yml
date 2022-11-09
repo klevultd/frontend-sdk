@@ -30,6 +30,9 @@ jobs:
           cache: "npm"
           cache-dependency-path: utils/package-lock.json
 
+      - name: NPM install
+        run: npm install
+
       - name: Make Release
         id: make-release
         env:
