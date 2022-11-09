@@ -16,8 +16,6 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     environment: production
-    runs:
-      using: "node16"
     defaults:
       run:
         working-directory: ./utils/
