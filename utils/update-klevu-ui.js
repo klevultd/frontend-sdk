@@ -6,8 +6,6 @@ import shelljs from "shelljs"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 
-console.log("Starting script")
-
 const fileUiPackage = resolve("../packages/klevu-ui/package.json")
 const fileReactPackage = resolve("../packages/klevu-ui-react/package.json")
 const fileVuePackage = resolve("../packages/klevu-ui-vue/package.json")
@@ -24,8 +22,6 @@ const newMajor = updateVersion(oldUiVersion, "major")
 const newMinor = updateVersion(oldUiVersion, "minor")
 const newPatch = updateVersion(oldUiVersion, "patch")
 
-console.log("Read files")
-
 async function main(args) {
   const currentBranch = shelljs
     .exec("git rev-parse --abbrev-ref HEAD", {
@@ -40,7 +36,7 @@ async function main(args) {
 
   let version
   if (args.type && ["major", "minor", "patch"].includes(args.type)) {
-    version = updateVersion(oldUiVersion, process.argv.at(2))
+    version = updateVersion(oldUiVersion, args.type)
   } else if (args.type) {
     abortWithMessage(`Unknown update type "${args.type}"`)
   } else {
