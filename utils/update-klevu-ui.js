@@ -131,6 +131,7 @@ async function main(args) {
   shelljs.cd("../klevu-ui")
 
   console.log("🟡 Testing @klevu/ui library")
+  shelljs.exec("npm install")
   if (shelljs.exec("npm test", { fatal: true }).code !== 0) {
     abortWithMessage("Testing failed.")
   }
