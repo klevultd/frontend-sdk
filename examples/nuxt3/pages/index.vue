@@ -1,4 +1,50 @@
-<script setup></script>
+<script setup>
+// import {
+//   KlevuFetch,
+//   kmcRecommendation,
+//   sendRecommendationViewEvent,
+// } from "@klevu/core"
+// import useSearch from "../stores/searchStore"
+
+// const searchStore = useSearch()
+// const route = useRoute()
+
+// let eventClick
+
+// const initialFetch = async () => {
+//   searchStore.clearSearchResults()
+//   await nextTick()
+//   searchStore.loading = true
+
+//   const res = await KlevuFetch(
+//     kmcRecommendation(
+//       'k-d27f0675-f1b3-49aa-a66b-2dab27a3f698',
+//       {
+//         id: "advFilteredRecs",
+//         currentProductId: '32878357151849',
+//         itemGroupId: '4705773027433',
+//       },
+//       sendRecommendationViewEvent("advanced filtered recommendations"),
+//     )
+//   )
+
+//   const recs = res.queriesById("advFilteredRecs")
+//   console.log(recs);
+//   if (!recs) {
+//     return
+//   }
+
+//   eventClick = recs?.getRecommendationClickSendEvent?.()
+//   searchStore.setProducts(recs.records ?? [])
+//   await nextTick()
+// }
+
+// const productClickHandler = (p) => {
+//   eventClick(p.id, p.itemGroupId, p)
+// }
+
+// initialFetch()
+</script>
 
 <template>
   <div class="">
@@ -26,6 +72,13 @@
         </div>
       </div>
     </div>
+    <Product
+      v-for="product in searchStore.products"
+      :key="product.id"
+      :product="product"
+      @clickHandler="productClickHandler(product)"
+      classes="p-2 md:w-1/3 lg:w-1/4 xl:w-1/5 mb-5"
+    />
   </div>
 </template>
 

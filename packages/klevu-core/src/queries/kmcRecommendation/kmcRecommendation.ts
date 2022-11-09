@@ -141,10 +141,18 @@ export async function kmcRecommendation(
 ): Promise<KlevuFetchFunctionReturnValue> {
   let kmcConfig: KlevuKMCRecommendations | undefined
   try {
+    let advFilterParams = '';
+    if (options?.categoryPath || options?.currentProductId || options?.itemGroupId) {
+      advFilterParams = '?';
+      advFilterParams += options.categoryPath ? `&cp=${options.categoryPath}`: '';
+      advFilterParams += options.currentProductId ? `&pid=${options.currentProductId}`: '';
+      advFilterParams += options.itemGroupId ? `&gpid=${options.itemGroupId}`: '';
+    } 
+    
     kmcConfig = await get<KlevuKMCRecommendations>(
       `https://config-cdn.ksearchnet.com/recommendations/${
         KlevuConfig.getDefault().apiKey
-      }/settings/${recommendationId}`
+      }/settings/${recommendationId}${advFilterParams}`
     )
   } catch (e) {
     console.warn("Failed to fetch given KMC recommendation")
