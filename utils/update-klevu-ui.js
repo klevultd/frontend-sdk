@@ -6,7 +6,7 @@ import shelljs from "shelljs"
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 
-const ui = new inquirer.ui.BottomBar()
+console.log("Starting script")
 
 const fileUiPackage = resolve("../packages/klevu-ui/package.json")
 const fileReactPackage = resolve("../packages/klevu-ui-react/package.json")
@@ -23,6 +23,8 @@ const oldVueVersion = JSON.parse(dataVuePackage).version
 const newMajor = updateVersion(oldUiVersion, "major")
 const newMinor = updateVersion(oldUiVersion, "minor")
 const newPatch = updateVersion(oldUiVersion, "patch")
+
+console.log("Read files")
 
 async function main(args) {
   const currentBranch = shelljs
@@ -53,7 +55,7 @@ async function main(args) {
     version = result.version
   }
 
-  ui.log.write(`🟡 Checking version before trying to update`)
+  console.log(`🟡 Checking version before trying to update`)
 
   if (oldUiVersion !== oldReactVersion || oldUiVersion !== oldVueVersion) {
     abortWithMessage(
@@ -91,9 +93,9 @@ async function main(args) {
     > @klevu/ui-vue ${npmVueVersion}
     `)
   }
-  ui.log.write("🟢 Version checks OK. Can continue with automated process")
+  console.log("🟢 Version checks OK. Can continue with automated process")
 
-  ui.log.write(`🟡 Updating to version ${version}`)
+  console.log(`🟡 Updating to version ${version}`)
   dataUiPackage = set(dataUiPackage, "version", version)
   dataReactPackage = set(
     dataReactPackage,
@@ -110,7 +112,7 @@ async function main(args) {
     fs.writeFileSync(fileReactPackage, dataReactPackage)
     fs.writeFileSync(fileVuePackage, dataVuePackage)
   }
-  ui.log.write("🟢 Updated @klevu/ui version and linked react&vue packages")
+  console.log("🟢 Updated @klevu/ui version and linked react&vue packages")
 
   shelljs.cd("../packages/klevu-ui-react")
   if (
@@ -132,13 +134,13 @@ async function main(args) {
 
   shelljs.cd("../klevu-ui")
 
-  ui.log.write("🟡 Testing @klevu/ui library")
+  console.log("🟡 Testing @klevu/ui library")
   if (shelljs.exec("npm test", { fatal: true }).code !== 0) {
     abortWithMessage("Testing failed.")
   }
-  ui.log.write("🟢 Testing @klevu/ui passed")
+  console.log("🟢 Testing @klevu/ui passed")
 
-  ui.log.write("🟡 Building @klevu/ui library")
+  console.log("🟡 Building @klevu/ui library")
 
   if (
     shelljs.exec("npm run build:all", {
@@ -148,8 +150,8 @@ async function main(args) {
     abortWithMessage("Build failed.")
   }
 
-  ui.log.write("🟢 Build succeeded")
-  ui.log.write("🟡 Deploying @klevu/ui")
+  console.log("🟢 Build succeeded")
+  console.log("🟡 Deploying @klevu/ui")
 
   shelljs.exec(
     `npm publish --access public ${await getOTP(args)} ${
@@ -157,16 +159,16 @@ async function main(args) {
     }`
   )
 
-  ui.log.write("🟢 Deploy succeeded")
-  ui.log.write("🟡 Waiting for little bit for NPM to register updated version")
+  console.log("🟢 Deploy succeeded")
+  console.log("🟡 Waiting for little bit for NPM to register updated version")
 
   await new Promise((resolve) => setTimeout(resolve, 10000))
 
-  ui.log.write(
+  console.log(
     "🆘🆘🆘🆘 Failures after this stage lead to manual fixes 🆘🆘🆘🆘"
   )
 
-  ui.log.write("🟡 Changing child library versions")
+  console.log("🟡 Changing child library versions")
   dataReactPackage = set(dataReactPackage, "dependencies.@klevu/ui", version)
   dataReactPackage = set(dataReactPackage, "version", version)
   dataVuePackage = set(dataVuePackage, "dependencies.@klevu/ui", version)
@@ -177,9 +179,9 @@ async function main(args) {
     fs.writeFileSync(fileReactPackage, dataReactPackage)
     fs.writeFileSync(fileVuePackage, dataVuePackage)
   }
-  ui.log.write("🟢 Versions changed")
+  console.log("🟢 Versions changed")
 
-  ui.log.write("🟡 Publish React")
+  console.log("🟡 Publish React")
   shelljs.cd("../klevu-ui-react")
   shelljs.exec("npm install")
   shelljs.exec(
@@ -187,9 +189,9 @@ async function main(args) {
       args.dryRun ? "--dry-run" : ""
     }`
   )
-  ui.log.write("🟢 React published")
+  console.log("🟢 React published")
 
-  ui.log.write("🟡 Publish Vue")
+  console.log("🟡 Publish Vue")
   shelljs.cd("../klevu-ui-vue")
   shelljs.exec("npm install")
   shelljs.exec(
@@ -197,25 +199,25 @@ async function main(args) {
       args.dryRun ? "--dry-run" : ""
     }`
   )
-  ui.log.write("🟢 Vue published")
+  console.log("🟢 Vue published")
 
   if (!args.dryRun) {
-    ui.log.write("🟡 Create commit")
+    console.log("🟡 Create commit")
     shelljs.cd("../..")
     shelljs.exec("git add -A .")
     shelljs.exec(`git commit -m "Bumped UI to version ${version}"`)
-    ui.log.write("🟢 Commit created\n")
+    console.log("🟢 Commit created\n")
   } else {
-    ui.log.write("🟡 Dry run. Ignore commit")
+    console.log("🟡 Dry run. Ignore commit")
   }
 
-  ui.log.write("🟢 Release done! Now just push changes with ´git push`")
+  console.log("🟢 Release done! Now just push changes with ´git push`")
 
   process.exit(0)
 }
 
 function abortWithMessage(message) {
-  ui.log.write(`🔴  ${message}`)
+  console.log(`🔴  ${message}`)
   process.exit(1)
 }
 
