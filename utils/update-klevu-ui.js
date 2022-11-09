@@ -50,7 +50,8 @@ async function main(args) {
     ])
     version = result.version
   }
-
+  console.log(`🟢 Updating with version ${version}`)
+  shelljs.exec(`echo "version=${version}" >> $GITHUB_OUTPUT`)
   console.log(`🟡 Checking version before trying to update`)
 
   if (oldUiVersion !== oldReactVersion || oldUiVersion !== oldVueVersion) {
@@ -198,17 +199,19 @@ async function main(args) {
   )
   console.log("🟢 Vue published")
 
-  if (!args.dryRun) {
+  if (!args.dryRun && args.createCommit) {
     console.log("🟡 Create commit")
     shelljs.cd("../..")
+    shelljs.exec(`git checkout -b release/ui-${version}`)
     shelljs.exec("git add -A .")
     shelljs.exec(`git commit -m "Bumped UI to version ${version}"`)
-    console.log("🟢 Commit created\n")
+    console.log("🟢 Commit created")
+    console.log("🟢 Now just push changes with ´git push`")
   } else {
     console.log("🟡 Dry run. Ignore commit")
   }
 
-  console.log("🟢 Release done! Now just push changes with ´git push`")
+  console.log("🟢 Release done!")
 
   process.exit(0)
 }
@@ -264,6 +267,11 @@ const args = yargs(hideBin(process.argv))
     alias: "dr",
     type: "boolean",
     description: "Do not actully do anything",
+  })
+  .option("create-commit", {
+    type: "boolean",
+    alias: "cc",
+    description: "Create git branch and commit from changes",
   })
   .option("ignore-branch", {
     type: "boolean",
