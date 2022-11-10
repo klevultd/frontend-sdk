@@ -141,14 +141,24 @@ export async function kmcRecommendation(
 ): Promise<KlevuFetchFunctionReturnValue> {
   let kmcConfig: KlevuKMCRecommendations | undefined
   try {
-    let advFilterParams = '';
-    if (options?.categoryPath || options?.currentProductId || options?.itemGroupId) {
-      advFilterParams = '?';
-      advFilterParams += options.categoryPath ? `&cp=${options.categoryPath}`: '';
-      advFilterParams += options.currentProductId ? `&pid=${options.currentProductId}`: '';
-      advFilterParams += options.itemGroupId ? `&gpid=${options.itemGroupId}`: '';
-    } 
-    
+    let advFilterParams = ""
+    if (
+      options?.categoryPath ||
+      options?.currentProductId ||
+      options?.itemGroupId
+    ) {
+      advFilterParams = "?"
+      advFilterParams += options.categoryPath
+        ? `&cp=${options.categoryPath}`
+        : ""
+      advFilterParams += options.currentProductId
+        ? `&pid=${options.currentProductId}`
+        : ""
+      advFilterParams += options.itemGroupId
+        ? `&gpid=${options.itemGroupId}`
+        : ""
+    }
+
     kmcConfig = await get<KlevuKMCRecommendations>(
       `https://config-cdn.ksearchnet.com/recommendations/${
         KlevuConfig.getDefault().apiKey
@@ -288,6 +298,22 @@ export async function kmcRecommendation(
         },
       ]
     }
+  }
+
+  if (kmcConfig.metadata.productThreshold) {
+    modifiers.push({
+      klevuModifierId: "kmcThreshold",
+      onResult: (response) => {
+        const copy = { ...response }
+        for (const qr of copy.apiResponse?.queryResults ?? []) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          if (qr.records.length < kmcConfig!.metadata.productThreshold) {
+            qr.records = []
+          }
+        }
+        return response
+      },
+    })
   }
 
   return {
