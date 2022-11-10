@@ -42,4 +42,9 @@ export enum KlevuSearchSorting {
    * for important information about sorting by newness.
    */
   NewArrivalDesc = "NEW_ARRIVAL_DESC",
+
+  /**
+   * Advanced sorting method that requires list of keys to be sorted with. Recommended use `advancedSorting()` modifier instead of specifying this
+   */
+  AdvancedSorting = "ADVANCED_SORT",
 }

@@ -147,6 +147,7 @@ export type KlevuApiRawResponse = {
   meta: {
     qTime: number
     responseCode: number
+    error?: any
   }
   suggestionResults?: KlevuSuggestionResult[]
   queryResults?: KlevuQueryResult[]

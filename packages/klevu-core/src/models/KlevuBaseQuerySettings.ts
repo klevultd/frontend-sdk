@@ -39,6 +39,15 @@ export type KlevuBaseQuerySettings = {
   sort?: KlevuSearchSorting
 
   /**
+   * If sort has been set to ADVANCED_SORT then following object is used to define sorting
+   */
+  advancedSorting?: Array<{
+    type: "FIELD"
+    key: string
+    order: AdvancedSortingDiretion
+  }>
+
+  /**
    * Specify the number of record you would like to display per page.
    */
   limit?: number
@@ -231,4 +240,9 @@ export type KlevuBaseQuerySettings = {
    * localStorage, session, DB, etc.
    */
   campaignForCatNav?: string
+}
+
+export enum AdvancedSortingDiretion {
+  Ascending = "ASC",
+  Descending = "DESC",
 }
