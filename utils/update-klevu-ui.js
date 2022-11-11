@@ -223,7 +223,7 @@ function abortWithMessage(message) {
 }
 
 async function getOTP(args) {
-  if (args.dryRun || args.noOtp) {
+  if (args.dryRun || args.otp === false) {
     return ""
   }
 
