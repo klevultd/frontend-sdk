@@ -31,12 +31,14 @@
 
 ### Depends on
 
+- [klevu-heading](../klevu-heading)
 - [klevu-checkbox](../klevu-checkbox)
 - [klevu-slider](../klevu-slider)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-facet --> klevu-heading
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider
   klevu-facet-list --> klevu-facet

@@ -11,6 +11,7 @@ import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
+import { ProductSlot } from "./components/klevu-merchandising/klevu-merchandising";
 import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { KlevuProductVariant as KlevuProductVariant1 } from "./components/klevu-product/klevu-product";
@@ -22,6 +23,7 @@ export namespace Components {
     interface KlevuCheckbox {
         "checked"?: boolean;
         "disabled"?: boolean;
+        "name"?: string;
         "value"?: string;
     }
     interface KlevuCmsList {
@@ -114,6 +116,7 @@ export namespace Components {
           * Custom rendering of product. Can pass any HTML element as return value
          */
         "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: ProductSlot) => HTMLElement | string;
         /**
           * Order of results
          */
@@ -150,14 +153,14 @@ export namespace Components {
         "hideName"?: boolean;
         "hidePrice"?: boolean;
         "hideSwatches"?: boolean;
-        "product"?: KlevuRecord;
+        "product"?: Partial<KlevuRecord>;
         "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
         "productProps"?: Partial<{
     variant: KlevuProductVariant1
   }>;
-        "products": Array<KlevuRecord | undefined>;
+        "products"?: Array<KlevuRecord | undefined>;
         "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
@@ -168,6 +171,22 @@ export namespace Components {
         "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
+        /**
+          * For cart recommendation you need to provide product id's in cart
+         */
+        "cartProductIds"?: string[];
+        /**
+          * For category product recommendation you need to provide categery path
+         */
+        "categoryPath"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "currentProductId"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "itemGroupId"?: string;
         /**
           * The ID of the recommendation
          */
@@ -471,6 +490,7 @@ declare namespace LocalJSX {
     interface KlevuCheckbox {
         "checked"?: boolean;
         "disabled"?: boolean;
+        "name"?: string;
         "value"?: string;
     }
     interface KlevuCmsList {
@@ -563,6 +583,7 @@ declare namespace LocalJSX {
           * Custom rendering of product. Can pass any HTML element as return value
          */
         "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: ProductSlot) => HTMLElement | string;
         /**
           * Order of results
          */
@@ -602,7 +623,7 @@ declare namespace LocalJSX {
         "hidePrice"?: boolean;
         "hideSwatches"?: boolean;
         "onKlevuProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
-        "product"?: KlevuRecord;
+        "product"?: Partial<KlevuRecord>;
         "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
@@ -620,6 +641,22 @@ declare namespace LocalJSX {
         "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
+        /**
+          * For cart recommendation you need to provide product id's in cart
+         */
+        "cartProductIds"?: string[];
+        /**
+          * For category product recommendation you need to provide categery path
+         */
+        "categoryPath"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "currentProductId"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "itemGroupId"?: string;
         /**
           * The ID of the recommendation
          */

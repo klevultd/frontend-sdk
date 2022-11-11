@@ -15,6 +15,7 @@
 | `filterCustomOrder`          | --               | Order filters in given order                                           | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                       | `undefined` |
 | `limit`                      | `limit`          | Count of products for page                                             | `number`                                                                                                                                                                                                                                                                                                          | `24`        |
 | `renderProduct`              | --               | Custom rendering of product. Can pass any HTML element as return value | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined`                                                                                                                                                                                                                                               | `undefined` |
+| `renderProductSlot`          | --               |                                                                        | `((product: KlevuRecord, productSlot: ProductSlot) => string \| HTMLElement) \| undefined`                                                                                                                                                                                                                        | `undefined` |
 | `sort`                       | `sort`           | Order of results                                                       | `KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined` |
 
 
@@ -27,6 +28,7 @@
 - [klevu-drawer](../klevu-drawer)
 - [klevu-button](../klevu-button)
 - [klevu-product-grid](../klevu-product-grid)
+- [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
@@ -36,7 +38,9 @@ graph TD;
   klevu-merchandising --> klevu-drawer
   klevu-merchandising --> klevu-button
   klevu-merchandising --> klevu-product-grid
+  klevu-merchandising --> klevu-product
   klevu-facet-list --> klevu-facet
+  klevu-facet --> klevu-heading
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider
   klevu-product-grid --> klevu-product

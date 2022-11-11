@@ -52,7 +52,7 @@ export class KlevuFacet {
 
       return (
         <Host>
-          <h3>{this.option.label}</h3>
+          <klevu-heading variant="h3">{this.option.label}</klevu-heading>
           <ul part="klevu-list">
             {opts.map((o) => (
               <li>
@@ -60,11 +60,13 @@ export class KlevuFacet {
                   <klevu-checkbox
                     value={o.value}
                     checked={o.selected}
+                    name={this.option!.key}
                     onClick={() => this.manager.toggleOption(this.option!.key, o.name)}
                   ></klevu-checkbox>
                 ) : (
                   <input
                     type="radio"
+                    id={this.option!.key}
                     name={this.option!.key}
                     value={o.value}
                     checked={o.selected}
@@ -74,7 +76,9 @@ export class KlevuFacet {
                     }}
                   />
                 )}
-                <span class="name">{o.name}</span>
+                <label htmlFor={this.option!.key} class="name">
+                  {o.name}
+                </label>
                 <span class="count">{o.count}</span>
               </li>
             ))}

@@ -9,10 +9,12 @@ import {
   sendMerchandisingViewEvent,
   KlevuSearchSorting,
 } from "@klevu/core"
-import { Component, Host, h, Listen, Prop, State } from "@stencil/core"
+import { Component, Host, h, Listen, Prop, State, Watch, Fragment, Element } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
+
+export type ProductSlot = "top" | "bottom" | "image" | "info"
 
 @Component({
   tag: "klevu-merchandising",
@@ -55,6 +57,8 @@ export class KlevuMerchandising {
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
 
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: ProductSlot) => HTMLElement | string
+
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
     undefined,
@@ -68,12 +72,22 @@ export class KlevuMerchandising {
   ]
   @State() manager = new FilterManager()
 
+  @Element() el!: HTMLElement
+
   private resultObject?: KlevuFetchQueryResult
   private clickEvent?: (id: string, categoryTitle: string, variantId: string) => void
 
   async connectedCallback() {
     await KlevuInit.ready()
     await this.initialFetch()
+  }
+
+  @Watch("category")
+  async watchPropHandler(newValue: string, oldValue: string) {
+    if (newValue !== oldValue) {
+      this.manager.clear()
+      await this.initialFetch()
+    }
   }
 
   async initialFetch() {
@@ -104,14 +118,35 @@ export class KlevuMerchandising {
 
   @Listen("productClick")
   productClickHandler(event: CustomEvent<KlevuProductOnProductClick>) {
+    if (!event.detail.product.id || !event.detail.product.itemGroupId) {
+      return
+    }
     if (this.clickEvent) {
-      this.clickEvent(event.detail.product.id, this.categoryTitle, event.detail.product.itemGroupId)
+      this.clickEvent(event.detail.product?.id, this.categoryTitle, event.detail.product.itemGroupId)
     }
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate() {
     this.initialFetch()
+  }
+
+  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: ProductSlot) {
+    if (!this.renderProductSlot || !product) {
+      return null
+    }
+
+    const content = this.renderProductSlot(product, slot)
+
+    if (content === null) {
+      return null
+    }
+
+    if (typeof content === "string") {
+      return <div slot={slot} innerHTML={content}></div>
+    }
+
+    return <div slot={slot}>{content}</div>
   }
 
   render() {
@@ -139,7 +174,20 @@ export class KlevuMerchandising {
           <klevu-heading class="desktop title" variant="h1">
             {this.categoryTitle}
           </klevu-heading>
-          <klevu-product-grid renderProduct={this.renderProduct} products={this.results ?? []}></klevu-product-grid>
+          <klevu-product-grid renderProduct={this.renderProduct}>
+            {!this.renderProduct && this.results && this.results.length > 0 ? (
+              <Fragment>
+                {this.results.map((p) => (
+                  <klevu-product product={p} fixedWidth>
+                    {this.internalRenderProductSlot(p, "top")}
+                    {this.internalRenderProductSlot(p, "image")}
+                    {this.internalRenderProductSlot(p, "info")}
+                    {this.internalRenderProductSlot(p, "bottom")}
+                  </klevu-product>
+                ))}
+              </Fragment>
+            ) : null}
+          </klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">
               <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>

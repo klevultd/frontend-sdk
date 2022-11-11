@@ -52,7 +52,9 @@ export class KlevuQuicksearch {
   @Listen("klevuProductClick")
   onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
     const { product } = event.detail
-    this.clickEvent?.(product.id, product.itemGroupId)
+    if (product.id) {
+      this.clickEvent?.(product.id, product.itemGroupId || product.id)
+    }
   }
 
   async connectedCallback() {
@@ -97,6 +99,7 @@ export class KlevuQuicksearch {
                 <klevu-product-grid
                   class="desktop"
                   renderProduct={this.renderProduct}
+                  productProps={{ variant: "small" }}
                   products={this.products}
                 ></klevu-product-grid>
                 <klevu-product-grid
@@ -112,6 +115,7 @@ export class KlevuQuicksearch {
                 <klevu-product-grid
                   class="desktop"
                   renderProduct={this.renderProduct}
+                  productProps={{ variant: "small" }}
                   products={this.trendingProducts}
                 ></klevu-product-grid>
                 <klevu-product-grid

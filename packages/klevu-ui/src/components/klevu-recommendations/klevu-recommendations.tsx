@@ -18,9 +18,29 @@ export class KlevuRecommendations {
   @Prop() recommendationId!: string
 
   /**
-   * The products to display. By default show 5 loading products.
+   * For cart recommendation you need to provide product id's in cart
    */
-  @State() products: Array<KlevuRecord | undefined> = [undefined, undefined, undefined, undefined, undefined]
+  @Prop() cartProductIds?: string[]
+
+  /**
+   * For category product recommendation you need to provide categery path
+   */
+  @Prop() categoryPath?: string
+
+  /**
+   * For similiar products recommendation you need to provide productId and itemGroupId
+   */
+  @Prop() currentProductId?: string
+
+  /**
+   * For similiar products recommendation you need to provide productId and itemGroupId
+   */
+  @Prop() itemGroupId?: string
+
+  /**
+   * The products to display
+   */
+  @State() products: Array<KlevuRecord> = []
 
   @State() clickEvent?: (productId: string, variantId?: string) => void
 
@@ -36,6 +56,10 @@ export class KlevuRecommendations {
         this.recommendationId,
         {
           id: "recommendation",
+          cartProductIds: this.cartProductIds,
+          categoryPath: this.categoryPath,
+          currentProductId: this.currentProductId,
+          itemGroupId: this.itemGroupId,
         },
         sendRecommendationViewEvent(this.recommendationTitle)
       )
@@ -52,16 +76,20 @@ export class KlevuRecommendations {
 
   productClick(
     event: CustomEvent<{
-      product: KlevuRecord
+      product: Partial<KlevuRecord>
       originalEvent: MouseEvent
     }>
   ) {
-    if (this.clickEvent) {
-      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId)
+    if (this.clickEvent && event.detail.product.id) {
+      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
     }
   }
 
   render() {
+    if (this.products.length === 0) {
+      return null
+    }
+
     return (
       <Host>
         <klevu-slides>

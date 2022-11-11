@@ -10,7 +10,7 @@
 | Property        | Attribute | Description | Type                                                                | Default     |
 | --------------- | --------- | ----------- | ------------------------------------------------------------------- | ----------- |
 | `productProps`  | --        |             | `undefined \| { variant?: KlevuProductVariant \| undefined; }`      | `undefined` |
-| `products`      | --        |             | `(KlevuRecord \| undefined)[]`                                      | `[]`        |
+| `products`      | --        |             | `(KlevuRecord \| undefined)[] \| undefined`                         | `[]`        |
 | `renderProduct` | --        |             | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined` | `undefined` |
 
 

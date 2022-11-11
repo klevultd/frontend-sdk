@@ -29,6 +29,7 @@
 ```mermaid
 graph TD;
   klevu-facet-list --> klevu-facet
+  klevu-facet --> klevu-heading
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider
   klevu-merchandising --> klevu-facet-list

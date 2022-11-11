@@ -36,6 +36,7 @@ graph TD;
   klevu-search-landing-page --> klevu-button
   klevu-search-landing-page --> klevu-product-grid
   klevu-facet-list --> klevu-facet
+  klevu-facet --> klevu-heading
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider
   klevu-product-grid --> klevu-product

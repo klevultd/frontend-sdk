@@ -11,6 +11,7 @@
 | ---------- | ---------- | ----------- | ---------------------- | ----------- |
 | `checked`  | `checked`  |             | `boolean \| undefined` | `undefined` |
 | `disabled` | `disabled` |             | `boolean \| undefined` | `undefined` |
+| `name`     | `name`     |             | `string \| undefined`  | `undefined` |
 | `value`    | `value`    |             | `string \| undefined`  | `undefined` |
 
 

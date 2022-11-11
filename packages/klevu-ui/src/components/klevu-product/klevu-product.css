@@ -3,6 +3,12 @@
   --loading-animation-time: 5s;
 }
 
+:host a {
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
 .container {
   display: block;
   padding: var(--klevu-spacing-normal);
@@ -15,7 +21,6 @@
   display: flex;
   flex-direction: column;
   max-width: var(--klevu-product-width, 300px);
-  height: 100%;
 }
 
 .container.default.fixedWidth {
@@ -27,7 +32,6 @@
   display: flex;
   flex-direction: column;
   max-width: var(--klevu-product-small-width, 300px);
-  height: 100%;
 }
 
 .container.small.fixedWidth {
@@ -40,6 +44,7 @@
   aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
   background-size: var(--klevu-product-image-fill, cover);
   background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .small .image {
@@ -47,6 +52,7 @@
   aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
   background-size: var(--klevu-product-image-fill, cover);
   background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .container.line {
@@ -83,12 +89,18 @@
 }
 
 .productname {
+  display: block;
+  display: -webkit-box;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.2;
   overflow: hidden;
-  max-height: 2.2em;
+  height: calc(var(--klevu-h3-size) * 1.2 * 2);
   text-align: left;
-  font-size: var(--klevu-h2-size);
-  font-weight: var(--klevu-h2-weight);
+  font-size: var(--klevu-h3-size);
+  font-weight: var(--klevu-h3-weight);
+  color: var(--klevu-h3-color);
 }
 
 .brandname + .productname {

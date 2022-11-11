@@ -89,8 +89,8 @@ export class KlevuSearchLandingPage {
 
   @Listen("productClick")
   productClickHandler(event: CustomEvent<KlevuProductOnProductClick>) {
-    if (this.clickEvent) {
-      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId)
+    if (this.clickEvent && event.detail.product.id) {
+      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
     }
   }
 

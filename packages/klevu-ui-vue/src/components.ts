@@ -16,7 +16,8 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
 export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('klevu-checkbox', undefined, [
   'checked',
   'value',
-  'disabled'
+  'disabled',
+  'name'
 ]);
 
 
@@ -84,7 +85,8 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'renderProduct',
   'sort',
   'filterCount',
-  'filterCustomOrder'
+  'filterCustomOrder',
+  'renderProductSlot'
 ]);
 
 
@@ -145,7 +147,11 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
 
 export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecommendations>('klevu-recommendations', undefined, [
   'recommendationTitle',
-  'recommendationId'
+  'recommendationId',
+  'cartProductIds',
+  'categoryPath',
+  'currentProductId',
+  'itemGroupId'
 ]);
 
 
