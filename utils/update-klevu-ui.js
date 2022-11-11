@@ -51,7 +51,9 @@ async function main(args) {
     version = result.version
   }
 
-  const npmrc = fs.readFileSync(resolve("~/.npmrc")).toString()
+  const npmrc = fs
+    .readFileSync(resolve(`${process.env.HOME}/.npmrc`))
+    .toString()
   if (
     args.otp === false &&
     npmrc.length < "//npm.pkg.github.com/:_authToken=".length + 3
