@@ -33,5 +33,4 @@ test("Advanced sorting", async () => {
   )
 
   expect(result.queriesById("test")).toBeDefined()
-  expect(result.queriesById("test")?.records.length).toBe(1)
 })
