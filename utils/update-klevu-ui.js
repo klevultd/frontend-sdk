@@ -51,6 +51,14 @@ async function main(args) {
     version = result.version
   }
 
+  const npmrc = fs.readFileSync(resolve("~/.npmrc")).toString()
+  if (
+    args.otp === false &&
+    npmrc.length < "//npm.pkg.github.com/:_authToken=".length + 3
+  ) {
+    abortWithMessage(".npmrc not properly initialized to work without OTP")
+  }
+
   console.log(`🟡 Checking version before trying to update`)
 
   if (oldUiVersion !== oldReactVersion || oldUiVersion !== oldVueVersion) {
@@ -152,11 +160,15 @@ async function main(args) {
   console.log("🟢 Build succeeded")
   console.log("🟡 Deploying @klevu/ui")
 
-  shelljs.exec(
-    `npm publish --access public ${await getOTP(args)} ${
-      args.dryRun ? "--dry-run" : ""
-    }`
-  )
+  if (
+    shelljs.exec(
+      `npm publish --access public ${await getOTP(args)} ${
+        args.dryRun ? "--dry-run" : ""
+      }`
+    ).code !== 0
+  ) {
+    abortWithMessage("@klevu/ui deployment failed")
+  }
 
   console.log("🟢 Deploy succeeded")
   console.log("🟡 Waiting for little bit for NPM to register updated version")
