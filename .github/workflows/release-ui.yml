@@ -24,14 +24,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-
-      - name: Set NPM token
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: ./utils/generateNPMRC.sh
+          registry-url: "https://registry.npmjs.org"
 
       - name: Make Release
         id: release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd utils
           npm install

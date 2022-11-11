@@ -51,6 +51,7 @@ async function main(args) {
     version = result.version
   }
 
+  /*
   const npmrc = fs
     .readFileSync(resolve(`${process.env.HOME}/.npmrc`))
     .toString()
@@ -60,6 +61,7 @@ async function main(args) {
   ) {
     abortWithMessage(".npmrc not properly initialized to work without OTP")
   }
+  */
 
   console.log(`🟡 Checking version before trying to update`)
 
