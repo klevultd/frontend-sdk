@@ -4,3 +4,4 @@ dist-transpiled
 .swc
 coverage
 .DS_Store
+.npmrc

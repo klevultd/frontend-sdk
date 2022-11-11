@@ -25,14 +25,17 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Make Release
-        id: release
+      - name: Set NPM token
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: ./utils/generateNPMRC.sh
+
+      - name: Make Release
+        id: release
         run: |
           cd utils
           npm install
-          node ./update-klevu-ui.js --type ${{ inputs.type }}
+          node ./update-klevu-ui.js --type ${{ inputs.type }} --no-otp
 
       - name: Print
         run: echo ${{steps.release.outputs.version}}

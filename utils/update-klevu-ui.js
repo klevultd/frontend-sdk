@@ -223,12 +223,8 @@ function abortWithMessage(message) {
 }
 
 async function getOTP(args) {
-  if (args.dryRun) {
+  if (args.dryRun || args.noOtp) {
     return ""
-  }
-
-  if (process.env.NPM_TOKEN) {
-    return `--otp ${process.env.NPM_TOKEN}`
   }
 
   const input = await inquirer.prompt([
@@ -277,6 +273,10 @@ const args = yargs(hideBin(process.argv))
   .option("ignore-branch", {
     type: "boolean",
     description: "Ignore 'master' branch restriction",
+  })
+  .option("no-otp", {
+    type: "boolean",
+    description: "Do not use NPM one-time-password",
   })
   .parse()
 
