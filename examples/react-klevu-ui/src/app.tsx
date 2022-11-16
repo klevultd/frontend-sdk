@@ -1,6 +1,7 @@
 import { KlevuConfig } from "@klevu/core"
 import { KlevuButton, KlevuInit, KlevuQuicksearch } from "@klevu/ui-react"
 import React from "react"
+import { createRoot } from "react-dom/client"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import { useCart } from "./cartContext"
 
@@ -63,7 +64,24 @@ export function App() {
               ))}
             </ul>
 
-            <KlevuQuicksearch />
+            <KlevuQuicksearch
+              renderProductSlot={(product, slot) => {
+                if (slot === "bottom") {
+                  const div = document.createElement("div")
+                  createRoot(div).render(
+                    <KlevuButton
+                      onClick={() => {
+                        cart.add(product)
+                      }}
+                    >
+                      Add to cart
+                    </KlevuButton>
+                  )
+                  return div
+                }
+                return null
+              }}
+            />
             <KlevuButton
               onClick={() => navigate("/cart")}
               style={{ whiteSpace: "nowrap" }}

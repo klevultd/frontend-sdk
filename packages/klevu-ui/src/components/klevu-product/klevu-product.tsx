@@ -4,6 +4,7 @@ import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; originalEvent: MouseEvent }
 export type KlevuProductVariant = "line" | "small" | "default"
+export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
 
 @Component({
   tag: "klevu-product",

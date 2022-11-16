@@ -11,10 +11,9 @@ import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
-import { ProductSlot } from "./components/klevu-merchandising/klevu-merchandising";
+import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
-import { KlevuProductVariant as KlevuProductVariant1 } from "./components/klevu-product/klevu-product";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuButton {
@@ -112,11 +111,7 @@ export namespace Components {
           * Count of products for page
          */
         "limit": number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
-        "renderProductSlot"?: (product: KlevuRecord, productSlot: ProductSlot) => HTMLElement | string;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         /**
           * Order of results
          */
@@ -157,16 +152,11 @@ export namespace Components {
         "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
-        "productProps"?: Partial<{
-    variant: KlevuProductVariant1
-  }>;
-        "products"?: Array<KlevuRecord | undefined>;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
     }
@@ -195,6 +185,7 @@ export namespace Components {
           * Title of the recommendation
          */
         "recommendationTitle": string;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
     }
     interface KlevuSearchField {
         /**
@@ -230,10 +221,7 @@ export namespace Components {
         "filterCount"?: number;
         "filterCustomOrder"?: { [key: string]: string[] };
         "limit": number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
@@ -579,11 +567,7 @@ declare namespace LocalJSX {
           * Count of products for page
          */
         "limit"?: number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
-        "renderProductSlot"?: (product: KlevuRecord, productSlot: ProductSlot) => HTMLElement | string;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         /**
           * Order of results
          */
@@ -627,16 +611,11 @@ declare namespace LocalJSX {
         "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
-        "productProps"?: Partial<{
-    variant: KlevuProductVariant1
-  }>;
-        "products"?: Array<KlevuRecord | undefined>;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
     }
@@ -665,6 +644,7 @@ declare namespace LocalJSX {
           * Title of the recommendation
          */
         "recommendationTitle": string;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
     }
     interface KlevuSearchField {
         /**
@@ -709,10 +689,7 @@ declare namespace LocalJSX {
         "filterCount"?: number;
         "filterCustomOrder"?: { [key: string]: string[] };
         "limit"?: number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "sort"?: KlevuSearchSorting;
         "term": string;
     }

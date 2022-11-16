@@ -3,7 +3,7 @@ import { Component, Host, h, State, Listen, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import type { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
-import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
+import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
 
 @Component({
@@ -12,7 +12,6 @@ import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-fi
   shadow: true,
 })
 export class KlevuQuicksearch {
-  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
   @Prop() fallbackTerm?: string
   @Prop() popupAnchor?: KlevuPopupAnchor
   @Prop() searchCategories?: boolean
@@ -30,6 +29,7 @@ export class KlevuQuicksearch {
   @State() suggestions: string[] = []
   @State() cmsPages?: KlevuRecord[]
   @State() categories?: KlevuRecord[]
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
 
   clickEvent?: (productId: string, variantId?: string) => void
 
@@ -52,6 +52,7 @@ export class KlevuQuicksearch {
   @Listen("klevuProductClick")
   onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
     const { product } = event.detail
+    this.popup?.closeModal()
     if (product.id) {
       this.clickEvent?.(product.id, product.itemGroupId || product.id)
     }
@@ -70,10 +71,39 @@ export class KlevuQuicksearch {
     }
   }
 
+  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+    if (!this.renderProductSlot || !product) {
+      return null
+    }
+
+    const content = this.renderProductSlot(product, slot)
+
+    if (content === null) {
+      return null
+    }
+
+    if (typeof content === "string") {
+      return <div slot={slot} innerHTML={content}></div>
+    }
+
+    return (
+      <div
+        slot={slot}
+        ref={(el) => {
+          if (!el) {
+            return
+          }
+          el.innerHTML = ""
+          el.appendChild(content)
+        }}
+      ></div>
+    )
+  }
+
   render() {
     return (
       <Host>
-        <klevu-popup anchor={this.popupAnchor} ref={(el) => (this.popup = el)} fullwidthContent>
+        <klevu-popup anchor={this.popupAnchor} ref={(el) => (this.popup = el)} fullwidthContent openAtFocus>
           <klevu-search-field
             limit={6}
             slot="origin"
@@ -82,6 +112,7 @@ export class KlevuQuicksearch {
             fallback-term={this.fallbackTerm}
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
+            onFocus={() => this.popup?.openModal()}
           ></klevu-search-field>
           <div class="content" slot="content">
             <aside>
@@ -96,34 +127,50 @@ export class KlevuQuicksearch {
             {(this.products ?? []).length > 0 ? (
               <section>
                 <h3>Search results</h3>
-                <klevu-product-grid
-                  class="desktop"
-                  renderProduct={this.renderProduct}
-                  productProps={{ variant: "small" }}
-                  products={this.products}
-                ></klevu-product-grid>
-                <klevu-product-grid
-                  class="mobile"
-                  renderProduct={this.renderProduct}
-                  productProps={{ variant: "line" }}
-                  products={this.products}
-                ></klevu-product-grid>
+                <klevu-product-grid class="desktop">
+                  {this.products?.map((p) => (
+                    <klevu-product product={p} fixedWidth variant="small">
+                      {this.internalRenderProductSlot(p, "top")}
+                      {this.internalRenderProductSlot(p, "image")}
+                      {this.internalRenderProductSlot(p, "info")}
+                      {this.internalRenderProductSlot(p, "bottom")}
+                    </klevu-product>
+                  ))}
+                </klevu-product-grid>
+                <klevu-product-grid class="mobile">
+                  {this.products?.map((p) => (
+                    <klevu-product product={p} fixedWidth variant="line">
+                      {this.internalRenderProductSlot(p, "top")}
+                      {this.internalRenderProductSlot(p, "image")}
+                      {this.internalRenderProductSlot(p, "info")}
+                      {this.internalRenderProductSlot(p, "bottom")}
+                    </klevu-product>
+                  ))}
+                </klevu-product-grid>
               </section>
             ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (
               <section>
                 <h3>Trending products</h3>
-                <klevu-product-grid
-                  class="desktop"
-                  renderProduct={this.renderProduct}
-                  productProps={{ variant: "small" }}
-                  products={this.trendingProducts}
-                ></klevu-product-grid>
-                <klevu-product-grid
-                  class="mobile"
-                  renderProduct={this.renderProduct}
-                  productProps={{ variant: "line" }}
-                  products={this.trendingProducts}
-                ></klevu-product-grid>
+                <klevu-product-grid class="desktop">
+                  {this.trendingProducts?.map((p) => (
+                    <klevu-product product={p} fixedWidth variant="small">
+                      {this.internalRenderProductSlot(p, "top")}
+                      {this.internalRenderProductSlot(p, "image")}
+                      {this.internalRenderProductSlot(p, "info")}
+                      {this.internalRenderProductSlot(p, "bottom")}
+                    </klevu-product>
+                  ))}
+                </klevu-product-grid>
+                <klevu-product-grid class="mobile">
+                  {this.trendingProducts?.map((p) => (
+                    <klevu-product product={p} fixedWidth variant="line">
+                      {this.internalRenderProductSlot(p, "top")}
+                      {this.internalRenderProductSlot(p, "image")}
+                      {this.internalRenderProductSlot(p, "info")}
+                      {this.internalRenderProductSlot(p, "bottom")}
+                    </klevu-product>
+                  ))}
+                </klevu-product-grid>
               </section>
             ) : null}
           </div>

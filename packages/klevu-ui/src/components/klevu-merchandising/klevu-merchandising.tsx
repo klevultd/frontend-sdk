@@ -12,9 +12,7 @@ import {
 import { Component, Host, h, Listen, Prop, State, Watch, Fragment, Element } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
-
-export type ProductSlot = "top" | "bottom" | "image" | "info"
+import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 
 @Component({
   tag: "klevu-merchandising",
@@ -38,11 +36,6 @@ export class KlevuMerchandising {
   @Prop() categoryTitle!: string
 
   /**
-   * Custom rendering of product. Can pass any HTML element as return value
-   */
-  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
-
-  /**
    * Order of results
    */
   @Prop() sort?: KlevuSearchSorting
@@ -56,8 +49,6 @@ export class KlevuMerchandising {
    * Order filters in given order
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
-
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: ProductSlot) => HTMLElement | string
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
@@ -131,7 +122,8 @@ export class KlevuMerchandising {
     this.initialFetch()
   }
 
-  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: ProductSlot) {
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null
     }
@@ -146,7 +138,18 @@ export class KlevuMerchandising {
       return <div slot={slot} innerHTML={content}></div>
     }
 
-    return <div slot={slot}>{content}</div>
+    return (
+      <div
+        slot={slot}
+        ref={(el) => {
+          if (!el) {
+            return
+          }
+          el.innerHTML = ""
+          el.appendChild(content)
+        }}
+      ></div>
+    )
   }
 
   render() {
@@ -174,19 +177,15 @@ export class KlevuMerchandising {
           <klevu-heading class="desktop title" variant="h1">
             {this.categoryTitle}
           </klevu-heading>
-          <klevu-product-grid renderProduct={this.renderProduct}>
-            {!this.renderProduct && this.results && this.results.length > 0 ? (
-              <Fragment>
-                {this.results.map((p) => (
-                  <klevu-product product={p} fixedWidth>
-                    {this.internalRenderProductSlot(p, "top")}
-                    {this.internalRenderProductSlot(p, "image")}
-                    {this.internalRenderProductSlot(p, "info")}
-                    {this.internalRenderProductSlot(p, "bottom")}
-                  </klevu-product>
-                ))}
-              </Fragment>
-            ) : null}
+          <klevu-product-grid>
+            {this.results.map((p) => (
+              <klevu-product product={p} fixedWidth>
+                {this.internalRenderProductSlot(p, "top")}
+                {this.internalRenderProductSlot(p, "image")}
+                {this.internalRenderProductSlot(p, "info")}
+                {this.internalRenderProductSlot(p, "bottom")}
+              </klevu-product>
+            ))}
           </klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">

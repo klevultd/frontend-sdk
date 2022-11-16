@@ -5,15 +5,6 @@
 <!-- Auto Generated Below -->
 
 
-## Properties
-
-| Property        | Attribute | Description | Type                                                                | Default     |
-| --------------- | --------- | ----------- | ------------------------------------------------------------------- | ----------- |
-| `productProps`  | --        |             | `undefined \| { variant?: KlevuProductVariant \| undefined; }`      | `undefined` |
-| `products`      | --        |             | `(KlevuRecord \| undefined)[] \| undefined`                         | `[]`        |
-| `renderProduct` | --        |             | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined` | `undefined` |
-
-
 ## Dependencies
 
 ### Used by
@@ -22,14 +13,9 @@
  - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-search-landing-page](../klevu-search-landing-page)
 
-### Depends on
-
-- [klevu-product](../klevu-product)
-
 ### Graph
 ```mermaid
 graph TD;
-  klevu-product-grid --> klevu-product
   klevu-merchandising --> klevu-product-grid
   klevu-quicksearch --> klevu-product-grid
   klevu-search-landing-page --> klevu-product-grid

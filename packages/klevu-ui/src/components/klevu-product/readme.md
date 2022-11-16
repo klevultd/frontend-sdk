@@ -39,15 +39,17 @@
 ### Used by
 
  - [klevu-merchandising](../klevu-merchandising)
- - [klevu-product-grid](../klevu-product-grid)
+ - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-recommendations](../klevu-recommendations)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-merchandising --> klevu-product
-  klevu-product-grid --> klevu-product
+  klevu-quicksearch --> klevu-product
   klevu-recommendations --> klevu-product
+  klevu-search-landing-page --> klevu-product
   style klevu-product fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

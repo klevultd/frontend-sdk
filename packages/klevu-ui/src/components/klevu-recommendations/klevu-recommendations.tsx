@@ -1,6 +1,7 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, Host, h, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { KlevuProductSlots } from "../klevu-product/klevu-product"
 
 @Component({
   tag: "klevu-recommendations",
@@ -43,6 +44,36 @@ export class KlevuRecommendations {
   @State() products: Array<KlevuRecord> = []
 
   @State() clickEvent?: (productId: string, variantId?: string) => void
+
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+    if (!this.renderProductSlot || !product) {
+      return null
+    }
+
+    const content = this.renderProductSlot(product, slot)
+
+    if (content === null) {
+      return null
+    }
+
+    if (typeof content === "string") {
+      return <div slot={slot} innerHTML={content}></div>
+    }
+
+    return (
+      <div
+        slot={slot}
+        ref={(el) => {
+          if (!el) {
+            return
+          }
+          el.innerHTML = ""
+          el.appendChild(content)
+        }}
+      ></div>
+    )
+  }
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -94,11 +125,12 @@ export class KlevuRecommendations {
       <Host>
         <klevu-slides>
           {this.products.map((product) => (
-            <klevu-product
-              fixedWidth
-              onKlevuProductClick={this.productClick.bind(this)}
-              product={product}
-            ></klevu-product>
+            <klevu-product fixedWidth onKlevuProductClick={this.productClick.bind(this)} product={product}>
+              {this.internalRenderProductSlot(product, "top")}
+              {this.internalRenderProductSlot(product, "image")}
+              {this.internalRenderProductSlot(product, "info")}
+              {this.internalRenderProductSlot(product, "bottom")}
+            </klevu-product>
           ))}
         </klevu-slides>
       </Host>
