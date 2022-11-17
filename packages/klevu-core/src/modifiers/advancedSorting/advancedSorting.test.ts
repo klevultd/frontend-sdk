@@ -15,7 +15,7 @@ beforeEach(() => {
   })
 })
 
-test("Advanced sorting", async () => {
+test.skip("Advanced sorting", async () => {
   const result = await KlevuFetch(
     search(
       "*",

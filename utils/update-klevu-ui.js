@@ -51,18 +51,6 @@ async function main(args) {
     version = result.version
   }
 
-  /*
-  const npmrc = fs
-    .readFileSync(resolve(`${process.env.HOME}/.npmrc`))
-    .toString()
-  if (
-    args.otp === false &&
-    npmrc.length < "//npm.pkg.github.com/:_authToken=".length + 3
-  ) {
-    abortWithMessage(".npmrc not properly initialized to work without OTP")
-  }
-  */
-
   console.log(`🟡 Checking version before trying to update`)
 
   if (oldUiVersion !== oldReactVersion || oldUiVersion !== oldVueVersion) {
@@ -131,6 +119,10 @@ async function main(args) {
     }).code !== 0
   ) {
     abortWithMessage("Installing failed in @klevu/ui-react.")
+  }
+
+  if (shelljs.exec("mkdir dist").code !== 0) {
+    abortWithMessage("Failed to create UI dist folder")
   }
 
   shelljs.cd("../klevu-ui-vue")
