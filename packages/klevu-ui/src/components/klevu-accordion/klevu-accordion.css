@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s;
+}
+
+label {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input:checked ~ .content {
+  max-height: 600px;
+}
+
+svg {
+  fill: var(--klevu-h3-color);
+  transition: transform 0.3s;
+}
+
+input:checked + label svg {
+  transform: rotate(90deg);
+}

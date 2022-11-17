@@ -8,6 +8,12 @@ import type { JSX } from '@klevu/ui';
 
 
 
+export const KlevuAccordion = /*@__PURE__*/ defineContainer<JSX.KlevuAccordion>('klevu-accordion', undefined, [
+  'open',
+  'startOpen'
+]);
+
+
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
   'disabled'
 ]);
@@ -16,7 +22,8 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
 export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('klevu-checkbox', undefined, [
   'checked',
   'value',
-  'disabled'
+  'disabled',
+  'name'
 ]);
 
 
@@ -49,14 +56,17 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'slider',
   'manager',
   'mode',
-  'customOrder'
+  'customOrder',
+  'accordion',
+  'accordionStartOpen'
 ]);
 
 
 export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>('klevu-facet-list', undefined, [
   'manager',
   'mode',
-  'customOrder'
+  'customOrder',
+  'accordion'
 ]);
 
 
@@ -81,10 +91,10 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'limit',
   'category',
   'categoryTitle',
-  'renderProduct',
   'sort',
   'filterCount',
-  'filterCustomOrder'
+  'filterCustomOrder',
+  'renderProductSlot'
 ]);
 
 
@@ -127,25 +137,26 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
 ]);
 
 
-export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGrid>('klevu-product-grid', undefined, [
-  'products',
-  'renderProduct',
-  'productProps'
-]);
+export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGrid>('klevu-product-grid', undefined);
 
 
 export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksearch>('klevu-quicksearch', undefined, [
-  'renderProduct',
   'fallbackTerm',
   'popupAnchor',
   'searchCategories',
-  'searchCmsPages'
+  'searchCmsPages',
+  'renderProductSlot'
 ]);
 
 
 export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecommendations>('klevu-recommendations', undefined, [
   'recommendationTitle',
-  'recommendationId'
+  'recommendationId',
+  'cartProductIds',
+  'categoryPath',
+  'currentProductId',
+  'itemGroupId',
+  'renderProductSlot'
 ]);
 
 
@@ -169,7 +180,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'sort',
   'filterCount',
   'filterCustomOrder',
-  'renderProduct'
+  'renderProductSlot'
 ]);
 
 

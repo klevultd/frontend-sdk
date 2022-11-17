@@ -33,7 +33,11 @@ searchField.setAttribute("search-products", "")
 searchField.setAttribute("search-suggestions", "")
 const productGrid = document.createElement("klevu-product-grid")
 searchField.addEventListener("klevuSearchResults", (event: any) => {
-  productGrid.products = event.search?.records
+  for (const r of event.search.records) {
+    const p = document.createElement("klevu-product")
+    p.product = p
+    productGrid.appendChild(p)
+  }
 })
 
 export const WithResults = WebComponentTemplate({ tag: "div", args: {}, childElements: [searchField, productGrid] })

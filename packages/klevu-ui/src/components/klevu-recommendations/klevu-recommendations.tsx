@@ -1,6 +1,7 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, Host, h, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { KlevuProductSlots } from "../klevu-product/klevu-product"
 
 @Component({
   tag: "klevu-recommendations",
@@ -18,11 +19,61 @@ export class KlevuRecommendations {
   @Prop() recommendationId!: string
 
   /**
-   * The products to display. By default show 5 loading products.
+   * For cart recommendation you need to provide product id's in cart
    */
-  @State() products: Array<KlevuRecord | undefined> = [undefined, undefined, undefined, undefined, undefined]
+  @Prop() cartProductIds?: string[]
+
+  /**
+   * For category product recommendation you need to provide categery path
+   */
+  @Prop() categoryPath?: string
+
+  /**
+   * For similiar products recommendation you need to provide productId and itemGroupId
+   */
+  @Prop() currentProductId?: string
+
+  /**
+   * For similiar products recommendation you need to provide productId and itemGroupId
+   */
+  @Prop() itemGroupId?: string
+
+  /**
+   * The products to display
+   */
+  @State() products: Array<KlevuRecord> = []
 
   @State() clickEvent?: (productId: string, variantId?: string) => void
+
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+    if (!this.renderProductSlot || !product) {
+      return null
+    }
+
+    const content = this.renderProductSlot(product, slot)
+
+    if (content === null) {
+      return null
+    }
+
+    if (typeof content === "string") {
+      return <div slot={slot} innerHTML={content}></div>
+    }
+
+    return (
+      <div
+        slot={slot}
+        ref={(el) => {
+          if (!el) {
+            return
+          }
+          el.innerHTML = ""
+          el.appendChild(content)
+        }}
+      ></div>
+    )
+  }
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -36,6 +87,10 @@ export class KlevuRecommendations {
         this.recommendationId,
         {
           id: "recommendation",
+          cartProductIds: this.cartProductIds,
+          categoryPath: this.categoryPath,
+          currentProductId: this.currentProductId,
+          itemGroupId: this.itemGroupId,
         },
         sendRecommendationViewEvent(this.recommendationTitle)
       )
@@ -52,25 +107,30 @@ export class KlevuRecommendations {
 
   productClick(
     event: CustomEvent<{
-      product: KlevuRecord
+      product: Partial<KlevuRecord>
       originalEvent: MouseEvent
     }>
   ) {
-    if (this.clickEvent) {
-      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId)
+    if (this.clickEvent && event.detail.product.id) {
+      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
     }
   }
 
   render() {
+    if (this.products.length === 0) {
+      return null
+    }
+
     return (
       <Host>
         <klevu-slides>
           {this.products.map((product) => (
-            <klevu-product
-              fixedWidth
-              onKlevuProductClick={this.productClick.bind(this)}
-              product={product}
-            ></klevu-product>
+            <klevu-product fixedWidth onKlevuProductClick={this.productClick.bind(this)} product={product}>
+              {this.internalRenderProductSlot(product, "top")}
+              {this.internalRenderProductSlot(product, "image")}
+              {this.internalRenderProductSlot(product, "info")}
+              {this.internalRenderProductSlot(product, "bottom")}
+            </klevu-product>
           ))}
         </klevu-slides>
       </Host>

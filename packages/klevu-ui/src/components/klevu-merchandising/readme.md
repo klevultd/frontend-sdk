@@ -7,15 +7,15 @@
 
 ## Properties
 
-| Property                     | Attribute        | Description                                                            | Type                                                                                                                                                                                                                                                                                                              | Default     |
-| ---------------------------- | ---------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `category` _(required)_      | `category`       | Which category products                                                | `string`                                                                                                                                                                                                                                                                                                          | `undefined` |
-| `categoryTitle` _(required)_ | `category-title` | Category title                                                         | `string`                                                                                                                                                                                                                                                                                                          | `undefined` |
-| `filterCount`                | `filter-count`   | How many filters per facet to show                                     | `number \| undefined`                                                                                                                                                                                                                                                                                             | `undefined` |
-| `filterCustomOrder`          | --               | Order filters in given order                                           | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                       | `undefined` |
-| `limit`                      | `limit`          | Count of products for page                                             | `number`                                                                                                                                                                                                                                                                                                          | `24`        |
-| `renderProduct`              | --               | Custom rendering of product. Can pass any HTML element as return value | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined`                                                                                                                                                                                                                                               | `undefined` |
-| `sort`                       | `sort`           | Order of results                                                       | `KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined` |
+| Property                     | Attribute        | Description                        | Type                                                                                                                                                                                                                                                                                                              | Default     |
+| ---------------------------- | ---------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `category` _(required)_      | `category`       | Which category products            | `string`                                                                                                                                                                                                                                                                                                          | `undefined` |
+| `categoryTitle` _(required)_ | `category-title` | Category title                     | `string`                                                                                                                                                                                                                                                                                                          | `undefined` |
+| `filterCount`                | `filter-count`   | How many filters per facet to show | `number \| undefined`                                                                                                                                                                                                                                                                                             | `undefined` |
+| `filterCustomOrder`          | --               | Order filters in given order       | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                       | `undefined` |
+| `limit`                      | `limit`          | Count of products for page         | `number`                                                                                                                                                                                                                                                                                                          | `24`        |
+| `renderProductSlot`          | --               |                                    | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement) \| undefined`                                                                                                                                                                                                                  | `undefined` |
+| `sort`                       | `sort`           | Order of results                   | `KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined` |
 
 
 ## Dependencies
@@ -27,6 +27,7 @@
 - [klevu-drawer](../klevu-drawer)
 - [klevu-button](../klevu-button)
 - [klevu-product-grid](../klevu-product-grid)
+- [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
@@ -36,10 +37,12 @@ graph TD;
   klevu-merchandising --> klevu-drawer
   klevu-merchandising --> klevu-button
   klevu-merchandising --> klevu-product-grid
+  klevu-merchandising --> klevu-product
   klevu-facet-list --> klevu-facet
-  klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-heading
   klevu-facet --> klevu-slider
-  klevu-product-grid --> klevu-product
+  klevu-facet --> klevu-checkbox
   style klevu-merchandising fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

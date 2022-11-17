@@ -31,77 +31,122 @@ export class KlevuFacet {
    */
   @Prop() customOrder?: string[]
 
+  /**
+   * Should the facet be in accordion
+   */
+  @Prop() accordion?: boolean
+
+  /**
+   * Start accordion open
+   */
+  @Prop() accordionStartOpen?: boolean
+
   render() {
-    if (this.option) {
-      const opts = [...this.option.options]
-      if (this.customOrder) {
-        opts.sort((a, b) => {
-          const aio = this.customOrder!.indexOf(a.value)
-          const bio = this.customOrder!.indexOf(b.value)
+    return (
+      <Host>
+        {this.option ? (
+          <Fragment>
+            {this.accordion ? (
+              <klevu-accordion startOpen={this.accordionStartOpen}>{this.renderOptions()}</klevu-accordion>
+            ) : (
+              this.renderOptions()
+            )}
+          </Fragment>
+        ) : this.slider ? (
+          <Fragment>
+            {this.accordion ? (
+              <klevu-accordion startOpen={this.accordionStartOpen}>{this.renderSlider()}</klevu-accordion>
+            ) : (
+              this.renderSlider()
+            )}
+          </Fragment>
+        ) : null}
+      </Host>
+    )
+  }
 
-          if (aio === -1 && bio !== -1) {
-            return 1
-          }
-          if (aio !== -1 && bio === -1) {
-            return -1
-          }
+  renderSlider() {
+    if (!this.slider) {
+      return null
+    }
+    return (
+      <Fragment>
+        <klevu-heading slot="header" variant="h3">
+          {this.slider.label}
+        </klevu-heading>
+        <klevu-slider
+          slot="content"
+          showTooltips
+          min={parseFloat(this.slider.min)}
+          max={parseFloat(this.slider.max)}
+          start={this.slider.start ? parseFloat(this.slider.start) : undefined}
+          end={this.slider.end ? parseFloat(this.slider.end) : undefined}
+          onKlevuSliderChange={(event) => {
+            this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
+            console.log(event)
+          }}
+        ></klevu-slider>
+      </Fragment>
+    )
+  }
 
-          return aio - bio
-        })
-      }
+  renderOptions() {
+    if (!this.option) {
+      return null
+    }
+    const opts = [...this.option.options]
+    if (this.customOrder) {
+      opts.sort((a, b) => {
+        const aio = this.customOrder!.indexOf(a.value)
+        const bio = this.customOrder!.indexOf(b.value)
 
-      return (
-        <Host>
-          <h3>{this.option.label}</h3>
-          <ul part="klevu-list">
-            {opts.map((o) => (
-              <li>
-                {this.mode === "checkbox" ? (
-                  <klevu-checkbox
-                    value={o.value}
-                    checked={o.selected}
-                    onClick={() => this.manager.toggleOption(this.option!.key, o.name)}
-                  ></klevu-checkbox>
-                ) : (
-                  <input
-                    type="radio"
-                    name={this.option!.key}
-                    value={o.value}
-                    checked={o.selected}
-                    onClick={() => {
-                      this.manager.clearOptionSelections(this.option!.key)
-                      this.manager.toggleOption(this.option!.key, o.name)
-                    }}
-                  />
-                )}
-                <span class="name">{o.name}</span>
-                <span class="count">{o.count}</span>
-              </li>
-            ))}
-          </ul>
-        </Host>
-      )
+        if (aio === -1 && bio !== -1) {
+          return 1
+        }
+        if (aio !== -1 && bio === -1) {
+          return -1
+        }
+
+        return aio - bio
+      })
     }
 
-    if (this.slider) {
-      return (
-        <Host>
-          <h3>{this.slider.label}</h3>
-          <klevu-slider
-            showTooltips
-            min={parseFloat(this.slider.min)}
-            max={parseFloat(this.slider.max)}
-            start={this.slider.start ? parseFloat(this.slider.start) : undefined}
-            end={this.slider.end ? parseFloat(this.slider.end) : undefined}
-            onKlevuSliderChange={(event) => {
-              this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
-              console.log(event)
-            }}
-          ></klevu-slider>
-        </Host>
-      )
-    }
-
-    return null
+    return (
+      <Fragment>
+        <klevu-heading slot="header" variant="h3">
+          {this.option.label}
+        </klevu-heading>
+        <ul slot="content" part="klevu-list">
+          {opts.map((o) => (
+            <li>
+              {this.mode === "checkbox" ? (
+                <klevu-checkbox
+                  value={o.value}
+                  checked={o.selected}
+                  name={this.option!.key}
+                  onClick={() => this.manager.toggleOption(this.option!.key, o.name)}
+                ></klevu-checkbox>
+              ) : (
+                <input
+                  type="radio"
+                  id={this.option!.key}
+                  name={this.option!.key}
+                  value={o.value}
+                  checked={o.selected}
+                  onClick={() => {
+                    this.manager.clearOptionSelections(this.option!.key)
+                    this.manager.toggleOption(this.option!.key, o.name)
+                  }}
+                />
+              )}
+              <label htmlFor={this.option!.key} class="name">
+                {o.name}
+              </label>
+              <span class="count">{o.count}</span>
+            </li>
+          ))}
+        </ul>
+      </Fragment>
+    )
   }
 }

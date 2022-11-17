@@ -12,7 +12,7 @@ import {
 import { Component, Host, h, Prop, Listen, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
+import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 
 @Component({
   tag: "klevu-search-landing-page",
@@ -25,11 +25,6 @@ export class KlevuSearchLandingPage {
   @Prop() sort?: KlevuSearchSorting
   @Prop() filterCount?: number
   @Prop() filterCustomOrder?: { [key: string]: string[] }
-
-  /**
-   * Custom rendering of product. Can pass any HTML element as return value
-   */
-  @Prop() renderProduct?: (product: KlevuRecord | undefined) => HTMLElement
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
@@ -87,16 +82,47 @@ export class KlevuSearchLandingPage {
     this.clickEvent = this.resultObject!.getSearchClickSendEvent?.()
   }
 
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+
   @Listen("productClick")
   productClickHandler(event: CustomEvent<KlevuProductOnProductClick>) {
-    if (this.clickEvent) {
-      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId)
+    if (this.clickEvent && event.detail.product.id) {
+      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
     }
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate() {
     this.initialFetch()
+  }
+
+  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+    if (!this.renderProductSlot || !product) {
+      return null
+    }
+
+    const content = this.renderProductSlot(product, slot)
+
+    if (content === null) {
+      return null
+    }
+
+    if (typeof content === "string") {
+      return <div slot={slot} innerHTML={content}></div>
+    }
+
+    return (
+      <div
+        slot={slot}
+        ref={(el) => {
+          if (!el) {
+            return
+          }
+          el.innerHTML = ""
+          el.appendChild(content)
+        }}
+      ></div>
+    )
   }
 
   render() {
@@ -124,7 +150,16 @@ export class KlevuSearchLandingPage {
           <klevu-heading class="desktop title" variant="h1">
             Searching term "{this.term}"
           </klevu-heading>
-          <klevu-product-grid renderProduct={this.renderProduct} products={this.results}></klevu-product-grid>
+          <klevu-product-grid>
+            {this.results?.map((p) => (
+              <klevu-product product={p} fixedWidth variant="small">
+                {this.internalRenderProductSlot(p, "top")}
+                {this.internalRenderProductSlot(p, "image")}
+                {this.internalRenderProductSlot(p, "info")}
+                {this.internalRenderProductSlot(p, "bottom")}
+              </klevu-product>
+            ))}
+          </klevu-product-grid>
           {this.resultObject?.next ? (
             <div class="loadmorebuttoncontainer">
               <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>

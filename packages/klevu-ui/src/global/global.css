@@ -2,10 +2,13 @@
   font-family: Arial, Helvetica, sans-serif;
   --klevu-h1-size: 1.5rem;
   --klevu-h1-weight: bold;
+  --klevu-h1-color: black;
   --klevu-h2-size: 1.2rem;
   --klevu-h2-weight: bold;
+  --klevu-h2-color: black;
   --klevu-h3-size: 1.1rem;
   --klevu-h3-weight: normal;
+  --klevu-h3-color: black;
   --klevu-color-primary: #00a0e9;
   --klevu-color-primary-border: #0675a8;
   --klevu-color-primary-text: #ffffff;

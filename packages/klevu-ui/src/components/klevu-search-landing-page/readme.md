@@ -7,14 +7,14 @@
 
 ## Properties
 
-| Property            | Attribute      | Description                                                            | Type                                                                                                                                                                                                                                                                                                              | Default     |
-| ------------------- | -------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `filterCount`       | `filter-count` |                                                                        | `number \| undefined`                                                                                                                                                                                                                                                                                             | `undefined` |
-| `filterCustomOrder` | --             |                                                                        | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                       | `undefined` |
-| `limit`             | `limit`        |                                                                        | `number`                                                                                                                                                                                                                                                                                                          | `24`        |
-| `renderProduct`     | --             | Custom rendering of product. Can pass any HTML element as return value | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined`                                                                                                                                                                                                                                               | `undefined` |
-| `sort`              | `sort`         |                                                                        | `KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined` |
-| `term` _(required)_ | `term`         |                                                                        | `string`                                                                                                                                                                                                                                                                                                          | `undefined` |
+| Property            | Attribute      | Description | Type                                                                                                                                                                                                                                                                                                              | Default     |
+| ------------------- | -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `filterCount`       | `filter-count` |             | `number \| undefined`                                                                                                                                                                                                                                                                                             | `undefined` |
+| `filterCustomOrder` | --             |             | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                       | `undefined` |
+| `limit`             | `limit`        |             | `number`                                                                                                                                                                                                                                                                                                          | `24`        |
+| `renderProductSlot` | --             |             | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement) \| undefined`                                                                                                                                                                                                                  | `undefined` |
+| `sort`              | `sort`         |             | `KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined` |
+| `term` _(required)_ | `term`         |             | `string`                                                                                                                                                                                                                                                                                                          | `undefined` |
 
 
 ## Dependencies
@@ -26,6 +26,7 @@
 - [klevu-drawer](../klevu-drawer)
 - [klevu-button](../klevu-button)
 - [klevu-product-grid](../klevu-product-grid)
+- [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
@@ -35,10 +36,12 @@ graph TD;
   klevu-search-landing-page --> klevu-drawer
   klevu-search-landing-page --> klevu-button
   klevu-search-landing-page --> klevu-product-grid
+  klevu-search-landing-page --> klevu-product
   klevu-facet-list --> klevu-facet
-  klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-heading
   klevu-facet --> klevu-slider
-  klevu-product-grid --> klevu-product
+  klevu-facet --> klevu-checkbox
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

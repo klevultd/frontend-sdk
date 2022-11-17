@@ -54,11 +54,11 @@ export type KlevuUIGlobalSettings = {
    * @param event Event that triggered the click
    * @return false if the event should be prevented and stopped
    */
-  onProductClick?: (product: KlevuRecord, event: MouseEvent) => boolean
+  onProductClick?: (product: Partial<KlevuRecord>, event: MouseEvent) => boolean
   /**
    * Function to generate url for product in case using default klevu-products
    */
-  generateProductUrl?: (product: KlevuRecord) => string
+  generateProductUrl?: (product: Partial<KlevuRecord>) => string
 
   renderPrice?: typeof renderPrice
 }

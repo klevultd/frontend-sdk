@@ -1,4 +1,4 @@
-:host {
+.container {
   display: flex;
   flex-wrap: wrap;
   gap: var(--klevu-spacing-large);

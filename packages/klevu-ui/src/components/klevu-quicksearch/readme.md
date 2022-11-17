@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property           | Attribute           | Description | Type                                                                | Default     |
-| ------------------ | ------------------- | ----------- | ------------------------------------------------------------------- | ----------- |
-| `fallbackTerm`     | `fallback-term`     |             | `string \| undefined`                                               | `undefined` |
-| `popupAnchor`      | `popup-anchor`      |             | `"left" \| "right" \| undefined`                                    | `undefined` |
-| `renderProduct`    | --                  |             | `((product: KlevuRecord \| undefined) => HTMLElement) \| undefined` | `undefined` |
-| `searchCategories` | `search-categories` |             | `boolean \| undefined`                                              | `undefined` |
-| `searchCmsPages`   | `search-cms-pages`  |             | `boolean \| undefined`                                              | `undefined` |
+| Property            | Attribute           | Description | Type                                                                                             | Default     |
+| ------------------- | ------------------- | ----------- | ------------------------------------------------------------------------------------------------ | ----------- |
+| `fallbackTerm`      | `fallback-term`     |             | `string \| undefined`                                                                            | `undefined` |
+| `popupAnchor`       | `popup-anchor`      |             | `"left" \| "right" \| undefined`                                                                 | `undefined` |
+| `renderProductSlot` | --                  |             | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement) \| undefined` | `undefined` |
+| `searchCategories`  | `search-categories` |             | `boolean \| undefined`                                                                           | `undefined` |
+| `searchCmsPages`    | `search-cms-pages`  |             | `boolean \| undefined`                                                                           | `undefined` |
 
 
 ## Dependencies
@@ -26,6 +26,7 @@
 - [klevu-latest-searches](../klevu-latest-searches)
 - [klevu-cms-list](../klevu-cms-list)
 - [klevu-product-grid](../klevu-product-grid)
+- [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
@@ -36,12 +37,12 @@ graph TD;
   klevu-quicksearch --> klevu-latest-searches
   klevu-quicksearch --> klevu-cms-list
   klevu-quicksearch --> klevu-product-grid
+  klevu-quicksearch --> klevu-product
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
   klevu-suggestions-list --> klevu-heading
   klevu-latest-searches --> klevu-heading
   klevu-cms-list --> klevu-heading
-  klevu-product-grid --> klevu-product
   style klevu-quicksearch fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
