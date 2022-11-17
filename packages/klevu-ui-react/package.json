@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npm run clean && npm run compile",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist && mkdir dist",
     "compile": "cp node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css dist && rollup --config rollup.config.js",
     "compile:watch": "cp node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css dist && rollup --config rollup.config.js -w",
     "tsc": "tsc -p .",

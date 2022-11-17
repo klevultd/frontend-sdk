@@ -121,10 +121,6 @@ async function main(args) {
     abortWithMessage("Installing failed in @klevu/ui-react.")
   }
 
-  if (shelljs.exec("mkdir dist").code !== 0) {
-    abortWithMessage("Failed to create UI dist folder")
-  }
-
   shelljs.cd("../klevu-ui-vue")
   if (
     shelljs.exec("npm install", {
