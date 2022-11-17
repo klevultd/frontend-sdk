@@ -1,5 +1,6 @@
 :host {
   display: block;
+  /*container-type: inline-size;*/
 }
 
 .content {
@@ -44,6 +45,8 @@ klevu-suggestions-list {
 
   .content {
     flex-direction: column;
+    left: 0;
+    width: 100vw;
   }
 
   .content aside {

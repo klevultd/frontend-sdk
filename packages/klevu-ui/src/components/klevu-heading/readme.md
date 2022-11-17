@@ -17,6 +17,7 @@
 ### Used by
 
  - [klevu-cms-list](../klevu-cms-list)
+ - [klevu-facet](../klevu-facet)
  - [klevu-latest-searches](../klevu-latest-searches)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-popular-searches](../klevu-popular-searches)
@@ -27,6 +28,7 @@
 ```mermaid
 graph TD;
   klevu-cms-list --> klevu-heading
+  klevu-facet --> klevu-heading
   klevu-latest-searches --> klevu-heading
   klevu-merchandising --> klevu-heading
   klevu-popular-searches --> klevu-heading

@@ -11,17 +11,28 @@ import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
+import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
-import { KlevuProductVariant as KlevuProductVariant1 } from "./components/klevu-product/klevu-product";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
+    interface KlevuAccordion {
+        /**
+          * is accordion open
+         */
+        "open": boolean;
+        /**
+          * Should it initially be open
+         */
+        "startOpen"?: boolean;
+    }
     interface KlevuButton {
         "disabled"?: boolean;
     }
     interface KlevuCheckbox {
         "checked"?: boolean;
         "disabled"?: boolean;
+        "name"?: string;
         "value"?: string;
     }
     interface KlevuCmsList {
@@ -44,6 +55,14 @@ export namespace Components {
     }
     interface KlevuFacet {
         /**
+          * Should the facet be in accordion
+         */
+        "accordion"?: boolean;
+        /**
+          * Start accordion open
+         */
+        "accordionStartOpen"?: boolean;
+        /**
           * Set predefined order for options. Unfound values are in original order in end
          */
         "customOrder"?: string[];
@@ -65,6 +84,10 @@ export namespace Components {
         "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        /**
+          * Should use accordions to for facets
+         */
+        "accordion"?: boolean;
         /**
           * Custom order keys for every facet
          */
@@ -110,10 +133,7 @@ export namespace Components {
           * Count of products for page
          */
         "limit": number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         /**
           * Order of results
          */
@@ -150,24 +170,35 @@ export namespace Components {
         "hideName"?: boolean;
         "hidePrice"?: boolean;
         "hideSwatches"?: boolean;
-        "product"?: KlevuRecord;
+        "product"?: Partial<KlevuRecord>;
         "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
-        "productProps"?: Partial<{
-    variant: KlevuProductVariant1
-  }>;
-        "products": Array<KlevuRecord | undefined>;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
+        /**
+          * For cart recommendation you need to provide product id's in cart
+         */
+        "cartProductIds"?: string[];
+        /**
+          * For category product recommendation you need to provide categery path
+         */
+        "categoryPath"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "currentProductId"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "itemGroupId"?: string;
         /**
           * The ID of the recommendation
          */
@@ -176,6 +207,7 @@ export namespace Components {
           * Title of the recommendation
          */
         "recommendationTitle": string;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
     }
     interface KlevuSearchField {
         /**
@@ -211,10 +243,7 @@ export namespace Components {
         "filterCount"?: number;
         "filterCustomOrder"?: { [key: string]: string[] };
         "limit": number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
@@ -279,6 +308,12 @@ export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
     target: HTMLKlevuTextfieldElement;
 }
 declare global {
+    interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
+    }
+    var HTMLKlevuAccordionElement: {
+        prototype: HTMLKlevuAccordionElement;
+        new (): HTMLKlevuAccordionElement;
+    };
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
     var HTMLKlevuButtonElement: {
@@ -436,6 +471,7 @@ declare global {
         new (): HTMLKlevuTextfieldElement;
     };
     interface HTMLElementTagNameMap {
+        "klevu-accordion": HTMLKlevuAccordionElement;
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -465,12 +501,23 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface KlevuAccordion {
+        /**
+          * is accordion open
+         */
+        "open"?: boolean;
+        /**
+          * Should it initially be open
+         */
+        "startOpen"?: boolean;
+    }
     interface KlevuButton {
         "disabled"?: boolean;
     }
     interface KlevuCheckbox {
         "checked"?: boolean;
         "disabled"?: boolean;
+        "name"?: string;
         "value"?: string;
     }
     interface KlevuCmsList {
@@ -493,6 +540,14 @@ declare namespace LocalJSX {
     }
     interface KlevuFacet {
         /**
+          * Should the facet be in accordion
+         */
+        "accordion"?: boolean;
+        /**
+          * Start accordion open
+         */
+        "accordionStartOpen"?: boolean;
+        /**
           * Set predefined order for options. Unfound values are in original order in end
          */
         "customOrder"?: string[];
@@ -514,6 +569,10 @@ declare namespace LocalJSX {
         "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        /**
+          * Should use accordions to for facets
+         */
+        "accordion"?: boolean;
         /**
           * Custom order keys for every facet
          */
@@ -559,10 +618,7 @@ declare namespace LocalJSX {
           * Count of products for page
          */
         "limit"?: number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         /**
           * Order of results
          */
@@ -602,24 +658,35 @@ declare namespace LocalJSX {
         "hidePrice"?: boolean;
         "hideSwatches"?: boolean;
         "onKlevuProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
-        "product"?: KlevuRecord;
+        "product"?: Partial<KlevuRecord>;
         "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
-        "productProps"?: Partial<{
-    variant: KlevuProductVariant1
-  }>;
-        "products"?: Array<KlevuRecord | undefined>;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
     }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "searchCategories"?: boolean;
         "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
+        /**
+          * For cart recommendation you need to provide product id's in cart
+         */
+        "cartProductIds"?: string[];
+        /**
+          * For category product recommendation you need to provide categery path
+         */
+        "categoryPath"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "currentProductId"?: string;
+        /**
+          * For similiar products recommendation you need to provide productId and itemGroupId
+         */
+        "itemGroupId"?: string;
         /**
           * The ID of the recommendation
          */
@@ -628,6 +695,7 @@ declare namespace LocalJSX {
           * Title of the recommendation
          */
         "recommendationTitle": string;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
     }
     interface KlevuSearchField {
         /**
@@ -672,10 +740,7 @@ declare namespace LocalJSX {
         "filterCount"?: number;
         "filterCustomOrder"?: { [key: string]: string[] };
         "limit"?: number;
-        /**
-          * Custom rendering of product. Can pass any HTML element as return value
-         */
-        "renderProduct"?: (product: KlevuRecord | undefined) => HTMLElement;
+        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
         "sort"?: KlevuSearchSorting;
         "term": string;
     }
@@ -708,6 +773,7 @@ declare namespace LocalJSX {
         "value": string;
     }
     interface IntrinsicElements {
+        "klevu-accordion": KlevuAccordion;
         "klevu-button": KlevuButton;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-cms-list": KlevuCmsList;
@@ -740,6 +806,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;

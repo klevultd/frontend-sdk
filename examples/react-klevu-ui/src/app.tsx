@@ -1,30 +1,100 @@
-import React, { useState } from "react"
-import { KlevuInit, KlevuProductGrid, KlevuSearchField } from "@klevu/ui-react"
-import { KlevuRecord } from "@klevu/core"
+import { KlevuConfig } from "@klevu/core"
+import { KlevuButton, KlevuInit, KlevuQuicksearch } from "@klevu/ui-react"
+import React from "react"
+import { createRoot } from "react-dom/client"
+import { Link, Outlet, useNavigate } from "react-router-dom"
+import { useCart } from "./cartContext"
+
+// This is only for product page data fetching
+KlevuConfig.init({
+  url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+  apiKey: "klevu-164651914788114877",
+})
+
+export const nav = [
+  {
+    key: "men",
+    label: "Men",
+    emoji: "🙎‍♂️",
+  },
+  {
+    key: "women",
+    label: "Women",
+    emoji: "🙍‍♀️",
+  },
+  {
+    key: "men;shoes",
+    label: "Men's shoes",
+    emoji: "👞",
+  },
+]
 
 export function App() {
-  const [products, setProducts] = useState<KlevuRecord[]>([])
+  const navigate = useNavigate()
+  const cart = useCart()
 
   return (
     <KlevuInit
-      url="https://eucs30v2.ksearchnet.com/cs/v2/search"
-      apiKey="klevu-165829460115715456"
+      url="https://eucs29v2.ksearchnet.com/cs/v2/search"
+      apiKey="klevu-164651914788114877"
       settings={{
         onProductClick(product, event) {
-          alert(`should redirect to product id ${product.id}`)
+          navigate(`/products/${product.itemGroupId}/${product.id}`)
+          event.preventDefault()
           return false
+        },
+        generateProductUrl(product) {
+          return `/products/${product.itemGroupId}/${product.id}`
         },
       }}
     >
-      <KlevuSearchField
-        searchProducts
-        searchCategories
-        searchSuggestions
-        onKlevuSearchResults={(event) => {
-          setProducts(event.detail.search.records ?? [])
-        }}
-      ></KlevuSearchField>
-      <KlevuProductGrid products={products}></KlevuProductGrid>
+      <div>
+        <header>
+          <div className="container">
+            <Link to="/">
+              <img src="/assets/logo-green.png" alt="Klevu" />
+            </Link>
+            <ul>
+              {nav.map((n) => (
+                <li key={n.key}>
+                  <Link to={`/category/${n.key}`}>
+                    {n.emoji} {n.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <KlevuQuicksearch
+              renderProductSlot={(product, slot) => {
+                if (slot === "bottom") {
+                  const div = document.createElement("div")
+                  createRoot(div).render(
+                    <KlevuButton
+                      onClick={() => {
+                        cart.add(product)
+                      }}
+                    >
+                      Add to cart
+                    </KlevuButton>
+                  )
+                  return div
+                }
+                return null
+              }}
+            />
+            <KlevuButton
+              onClick={() => navigate("/cart")}
+              style={{ whiteSpace: "nowrap" }}
+            >
+              Cart ({cart.items.length})
+            </KlevuButton>
+          </div>
+        </header>
+        <main>
+          <Outlet />
+        </main>
+        <footer></footer>
+      </div>
     </KlevuInit>
   )
 }

@@ -18,16 +18,3 @@ export const Default = WebComponentTemplate<HTMLKlevuQuicksearchElement>({
     fallbackTerm: "shoes",
   },
 })
-
-export const WithCustomProduct = WebComponentTemplate<HTMLKlevuQuicksearchElement>({
-  tag: "klevu-quicksearch",
-  args: {
-    fallbackTerm: "shoes",
-    renderProduct: (product: KlevuRecord | undefined) => {
-      const prod = document.createElement("klevu-product")
-      prod.product = product
-      prod.variant = "small"
-      return prod
-    },
-  },
-})

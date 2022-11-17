@@ -1,10 +1,1 @@
 node_modules
-src
-typedoc.json
-tsconfig.json
-jest.config.cjs
-coverage
-docs
-tsconfig*
-fixup
-dist-transpiled

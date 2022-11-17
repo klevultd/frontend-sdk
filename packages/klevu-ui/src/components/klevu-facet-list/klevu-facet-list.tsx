@@ -1,5 +1,5 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Host, h, Prop, Listen, State } from "@stencil/core"
+import { Component, Host, h, Prop, Listen, State, Fragment } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
@@ -22,6 +22,11 @@ export class KlevuFacetList {
    * Custom order keys for every facet
    */
   @Prop() customOrder?: { [key: string]: string[] }
+
+  /**
+   * Should use accordions to for facets
+   */
+  @Prop() accordion?: boolean
 
   @State() options: KlevuFilterResultOptions[] = []
   @State() sliders: KlevuFilterResultSlider[] = []
@@ -50,7 +55,7 @@ export class KlevuFacetList {
   render() {
     return (
       <Host>
-        {this.options.map((o) => {
+        {this.options.map((o, index) => {
           let mode
           if (this.mode && typeof this.mode === "string") {
             mode = this.mode
@@ -60,6 +65,8 @@ export class KlevuFacetList {
 
           return (
             <klevu-facet
+              accordion={this.accordion}
+              accordionStartOpen={index === 0}
               customOrder={this.customOrder?.[o.key]}
               exportparts={globalExportedParts}
               manager={this.manager}
@@ -69,7 +76,12 @@ export class KlevuFacetList {
           )
         })}
         {this.sliders.map((s) => (
-          <klevu-facet exportparts={globalExportedParts} manager={this.manager} slider={s}></klevu-facet>
+          <klevu-facet
+            accordion={this.accordion}
+            exportparts={globalExportedParts}
+            manager={this.manager}
+            slider={s}
+          ></klevu-facet>
         ))}
       </Host>
     )
