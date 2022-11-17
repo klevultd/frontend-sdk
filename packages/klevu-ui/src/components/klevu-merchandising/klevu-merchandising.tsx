@@ -156,6 +156,7 @@ export class KlevuMerchandising {
     return (
       <Host>
         <klevu-facet-list
+          accordion
           class="desktop"
           customOrder={this.filterCustomOrder}
           exportparts={globalExportedParts}
@@ -167,6 +168,7 @@ export class KlevuMerchandising {
             <klevu-button slot="origin">Filters</klevu-button>
             <klevu-facet-list
               slot="content"
+              accordion
               customOrder={this.filterCustomOrder}
               exportparts={globalExportedParts}
               manager={this.manager}

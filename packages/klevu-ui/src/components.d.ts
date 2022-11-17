@@ -16,6 +16,16 @@ import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
+    interface KlevuAccordion {
+        /**
+          * is accordion open
+         */
+        "open": boolean;
+        /**
+          * Should it initially be open
+         */
+        "startOpen"?: boolean;
+    }
     interface KlevuButton {
         "disabled"?: boolean;
     }
@@ -45,6 +55,14 @@ export namespace Components {
     }
     interface KlevuFacet {
         /**
+          * Should the facet be in accordion
+         */
+        "accordion"?: boolean;
+        /**
+          * Start accordion open
+         */
+        "accordionStartOpen"?: boolean;
+        /**
           * Set predefined order for options. Unfound values are in original order in end
          */
         "customOrder"?: string[];
@@ -66,6 +84,10 @@ export namespace Components {
         "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        /**
+          * Should use accordions to for facets
+         */
+        "accordion"?: boolean;
         /**
           * Custom order keys for every facet
          */
@@ -286,6 +308,12 @@ export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
     target: HTMLKlevuTextfieldElement;
 }
 declare global {
+    interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
+    }
+    var HTMLKlevuAccordionElement: {
+        prototype: HTMLKlevuAccordionElement;
+        new (): HTMLKlevuAccordionElement;
+    };
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
     var HTMLKlevuButtonElement: {
@@ -443,6 +471,7 @@ declare global {
         new (): HTMLKlevuTextfieldElement;
     };
     interface HTMLElementTagNameMap {
+        "klevu-accordion": HTMLKlevuAccordionElement;
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -472,6 +501,16 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface KlevuAccordion {
+        /**
+          * is accordion open
+         */
+        "open"?: boolean;
+        /**
+          * Should it initially be open
+         */
+        "startOpen"?: boolean;
+    }
     interface KlevuButton {
         "disabled"?: boolean;
     }
@@ -501,6 +540,14 @@ declare namespace LocalJSX {
     }
     interface KlevuFacet {
         /**
+          * Should the facet be in accordion
+         */
+        "accordion"?: boolean;
+        /**
+          * Start accordion open
+         */
+        "accordionStartOpen"?: boolean;
+        /**
           * Set predefined order for options. Unfound values are in original order in end
          */
         "customOrder"?: string[];
@@ -522,6 +569,10 @@ declare namespace LocalJSX {
         "slider"?: KlevuFilterResultSlider;
     }
     interface KlevuFacetList {
+        /**
+          * Should use accordions to for facets
+         */
+        "accordion"?: boolean;
         /**
           * Custom order keys for every facet
          */
@@ -722,6 +773,7 @@ declare namespace LocalJSX {
         "value": string;
     }
     interface IntrinsicElements {
+        "klevu-accordion": KlevuAccordion;
         "klevu-button": KlevuButton;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-cms-list": KlevuCmsList;
@@ -754,6 +806,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;

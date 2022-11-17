@@ -37,9 +37,7 @@ export function CheckoutPage() {
 
       <KlevuProductGrid>
         {cart.items.map((p, i) => (
-          <KlevuProduct product={p} key={i}>
-            <div slot="bottom">Hello</div>
-          </KlevuProduct>
+          <KlevuProduct product={p} key={i} fixedWidth />
         ))}
       </KlevuProductGrid>
 

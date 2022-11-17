@@ -8,6 +8,12 @@ import type { JSX } from '@klevu/ui';
 
 
 
+export const KlevuAccordion = /*@__PURE__*/ defineContainer<JSX.KlevuAccordion>('klevu-accordion', undefined, [
+  'open',
+  'startOpen'
+]);
+
+
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
   'disabled'
 ]);
@@ -50,14 +56,17 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'slider',
   'manager',
   'mode',
-  'customOrder'
+  'customOrder',
+  'accordion',
+  'accordionStartOpen'
 ]);
 
 
 export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>('klevu-facet-list', undefined, [
   'manager',
   'mode',
-  'customOrder'
+  'customOrder',
+  'accordion'
 ]);
 
 

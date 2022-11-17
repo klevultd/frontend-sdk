@@ -38,9 +38,10 @@ graph TD;
   klevu-search-landing-page --> klevu-product-grid
   klevu-search-landing-page --> klevu-product
   klevu-facet-list --> klevu-facet
+  klevu-facet --> klevu-accordion
   klevu-facet --> klevu-heading
-  klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-slider
+  klevu-facet --> klevu-checkbox
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

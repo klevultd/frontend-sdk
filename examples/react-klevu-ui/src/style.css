@@ -93,7 +93,7 @@ header ul a {
   display: block;
   text-decoration: none;
   color: inherit;
-  padding: 6px;
+  padding: 3px 6px;
   border: 1px solid var(--klevu-color-primary);
   border-radius: var(--klevu-rounded-corners);
   white-space: nowrap;
