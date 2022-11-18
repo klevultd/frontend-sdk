@@ -7,8 +7,17 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
   shadow: true,
 })
 export class KlevuCmsList {
+  /**
+   * List of Klevu results records with type of Page
+   */
   @Prop() pages!: Array<Partial<KlevuRecord>>
+  /**
+   * Should use url parameter from link to create anchor
+   */
   @Prop() link?: boolean
+  /**
+   * Caption of the listing
+   */
   @Prop() caption = "CMS pages"
 
   @Event({

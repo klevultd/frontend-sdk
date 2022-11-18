@@ -9,9 +9,17 @@ import { Component, Host, h, Prop } from "@stencil/core"
   shadow: true,
 })
 export class KlevuCheckbox {
+  /**
+   * Is checkbox checked
+   */
   @Prop({ reflect: true }) checked?: boolean
-  @Prop({ reflect: true }) value?: string
+  /**
+   * Is disabled
+   */
   @Prop({ reflect: true }) disabled?: boolean
+  /**
+   * Name of the checkbox
+   */
   @Prop({ reflect: true }) name?: string
 
   render() {

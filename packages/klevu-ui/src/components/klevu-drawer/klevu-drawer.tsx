@@ -8,9 +8,22 @@ import { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 })
 export class KlevuDrawer {
   @Element() el?: HTMLKlevuDrawerElement
+  /**
+   * Start side drawer open
+   */
   @Prop() startOpen?: boolean
+  /**
+   * Display dim background on top of other content
+   */
   @Prop() background?: boolean
+  /**
+   * Close by clicking outside of drawer
+   */
   @Prop() closeAtOutsideClick = true
+
+  /**
+   * Anchor to right or left side of the page
+   */
   @Prop() anchor: KlevuPopupAnchor = "right"
 
   @State() open = false
