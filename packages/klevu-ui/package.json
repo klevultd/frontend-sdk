@@ -28,7 +28,6 @@
     "generate": "stencil generate",
     "storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=d4dd0d239c7f",
     "push-npm": "npm publish --access public"
   },
   "dependencies": {
