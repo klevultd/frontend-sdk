@@ -12,7 +12,7 @@ import { cleanSearchQuery } from "../../utils/index.js"
 /**
  * Search options to modify the search query.
  */
-export type SearchOptions = {
+export type KlevuSearchOptions = {
   id: string
   /**
    * The type of records to search for.
@@ -20,7 +20,7 @@ export type SearchOptions = {
   typeOfRecords: KlevuAnyTypeOfRecord[]
 } & Omit<KlevuBaseQuerySettings, "query">
 
-const defaults: SearchOptions = {
+const defaults: KlevuSearchOptions = {
   id: "search",
   limit: 5,
   typeOfRecords: [KlevuTypeOfRecord.Product],
@@ -32,15 +32,15 @@ const defaults: SearchOptions = {
  *
  * @category Query
  * @param term Search term from input
- * @param options {@link SearchOptions}
+ * @param options {@link KlevuSearchOptions}
  * @returns
  */
 export function search(
   term: string,
-  options?: Partial<SearchOptions>,
+  options?: Partial<KlevuSearchOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunctionReturnValue {
-  const params: SearchOptions = {
+  const params: KlevuSearchOptions = {
     ...defaults,
     ...options,
   }

@@ -1,5 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useMemo } from "react"
-import ServerDom from "react-dom/server"
+import React, { Fragment, useCallback } from "react"
 import { createRoot } from "react-dom/client"
 import { useParams } from "react-router-dom"
 import { KlevuButton, KlevuMerchandising } from "@klevu/ui-react"

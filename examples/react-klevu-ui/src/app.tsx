@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import { useCart } from "./cartContext"
 
-// This is only for product page data fetching
+// This is only for product page data fetching and custom page example
 KlevuConfig.init({
   url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
   apiKey: "klevu-164651914788114877",

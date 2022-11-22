@@ -14,6 +14,7 @@ import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export namespace Components {
     interface KlevuAccordion {
@@ -27,25 +28,57 @@ export namespace Components {
         "startOpen"?: boolean;
     }
     interface KlevuButton {
+        /**
+          * Is button disabled
+         */
         "disabled"?: boolean;
     }
     interface KlevuCheckbox {
+        /**
+          * Is checkbox checked
+         */
         "checked"?: boolean;
+        /**
+          * Is disabled
+         */
         "disabled"?: boolean;
+        /**
+          * Name of the checkbox
+         */
         "name"?: string;
-        "value"?: string;
     }
     interface KlevuCmsList {
+        /**
+          * Caption of the listing
+         */
         "caption": string;
+        /**
+          * Should use url parameter from link to create anchor
+         */
         "link"?: boolean;
+        /**
+          * List of Klevu results records with type of Page
+         */
         "pages": Array<Partial<KlevuRecord>>;
     }
     interface KlevuDrawer {
+        /**
+          * Anchor to right or left side of the page
+         */
         "anchor": KlevuPopupAnchor;
+        /**
+          * Display dim background on top of other content
+         */
         "background"?: boolean;
+        /**
+          * Close by clicking outside of drawer
+         */
         "closeAtOutsideClick": boolean;
         "closeModal": () => Promise<void>;
         "openModal": () => Promise<void>;
+        /**
+          * Start side drawer open
+         */
         "startOpen"?: boolean;
     }
     interface KlevuDropdown {
@@ -175,6 +208,42 @@ export namespace Components {
     }
     interface KlevuProductGrid {
     }
+    interface KlevuQuery {
+        "category"?: string;
+        "categoryTitle"?: string;
+        /**
+          * Force component to fetch results again
+         */
+        "fetchAgain": () => Promise<void>;
+        /**
+          * To how many filters limit results to
+         */
+        "filterCount"?: number;
+        /**
+          * What's the limit on page
+         */
+        "limit"?: number;
+        "manager": FilterManager;
+        /**
+          * Offset of results
+         */
+        "offset"?: number;
+        /**
+          * Overriden
+         */
+        "options"?: AllQueryOptions;
+        "recommendationId"?: string;
+        "searchTerm"?: string;
+        /**
+          * How to sort
+         */
+        "sort"?: KlevuSearchSorting;
+        /**
+          * What kind of query
+         */
+        "type": "search" | "merchandising" | "recommendation";
+        "updateOnFilterChange"?: boolean;
+    }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
@@ -286,6 +355,10 @@ export interface KlevuPaginationCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuProductElement;
+}
+export interface KlevuQueryCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuQueryElement;
 }
 export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -410,6 +483,12 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    interface HTMLKlevuQueryElement extends Components.KlevuQuery, HTMLStencilElement {
+    }
+    var HTMLKlevuQueryElement: {
+        prototype: HTMLKlevuQueryElement;
+        new (): HTMLKlevuQueryElement;
+    };
     interface HTMLKlevuQuicksearchElement extends Components.KlevuQuicksearch, HTMLStencilElement {
     }
     var HTMLKlevuQuicksearchElement: {
@@ -488,6 +567,7 @@ declare global {
         "klevu-popup": HTMLKlevuPopupElement;
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
+        "klevu-query": HTMLKlevuQueryElement;
         "klevu-quicksearch": HTMLKlevuQuicksearchElement;
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
@@ -512,24 +592,56 @@ declare namespace LocalJSX {
         "startOpen"?: boolean;
     }
     interface KlevuButton {
+        /**
+          * Is button disabled
+         */
         "disabled"?: boolean;
     }
     interface KlevuCheckbox {
+        /**
+          * Is checkbox checked
+         */
         "checked"?: boolean;
+        /**
+          * Is disabled
+         */
         "disabled"?: boolean;
+        /**
+          * Name of the checkbox
+         */
         "name"?: string;
-        "value"?: string;
     }
     interface KlevuCmsList {
+        /**
+          * Caption of the listing
+         */
         "caption"?: string;
+        /**
+          * Should use url parameter from link to create anchor
+         */
         "link"?: boolean;
         "onKlevuCmsPageClick"?: (event: KlevuCmsListCustomEvent<Partial<KlevuRecord>>) => void;
+        /**
+          * List of Klevu results records with type of Page
+         */
         "pages": Array<Partial<KlevuRecord>>;
     }
     interface KlevuDrawer {
+        /**
+          * Anchor to right or left side of the page
+         */
         "anchor"?: KlevuPopupAnchor;
+        /**
+          * Display dim background on top of other content
+         */
         "background"?: boolean;
+        /**
+          * Close by clicking outside of drawer
+         */
         "closeAtOutsideClick"?: boolean;
+        /**
+          * Start side drawer open
+         */
         "startOpen"?: boolean;
     }
     interface KlevuDropdown {
@@ -663,6 +775,42 @@ declare namespace LocalJSX {
     }
     interface KlevuProductGrid {
     }
+    interface KlevuQuery {
+        "category"?: string;
+        "categoryTitle"?: string;
+        /**
+          * To how many filters limit results to
+         */
+        "filterCount"?: number;
+        /**
+          * What's the limit on page
+         */
+        "limit"?: number;
+        "manager"?: FilterManager;
+        /**
+          * Offset of results
+         */
+        "offset"?: number;
+        "onKlevuQueryResult"?: (event: KlevuQueryCustomEvent<{
+    result: KlevuQueryResult
+    manager: FilterManager
+  }>) => void;
+        /**
+          * Overriden
+         */
+        "options"?: AllQueryOptions;
+        "recommendationId"?: string;
+        "searchTerm"?: string;
+        /**
+          * How to sort
+         */
+        "sort"?: KlevuSearchSorting;
+        /**
+          * What kind of query
+         */
+        "type": "search" | "merchandising" | "recommendation";
+        "updateOnFilterChange"?: boolean;
+    }
     interface KlevuQuicksearch {
         "fallbackTerm"?: string;
         "popupAnchor"?: KlevuPopupAnchor;
@@ -790,6 +938,7 @@ declare namespace LocalJSX {
         "klevu-popup": KlevuPopup;
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
+        "klevu-query": KlevuQuery;
         "klevu-quicksearch": KlevuQuicksearch;
         "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
@@ -823,6 +972,7 @@ declare module "@stencil/core" {
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            "klevu-query": LocalJSX.KlevuQuery & JSXBase.HTMLAttributes<HTMLKlevuQueryElement>;
             "klevu-quicksearch": LocalJSX.KlevuQuicksearch & JSXBase.HTMLAttributes<HTMLKlevuQuicksearchElement>;
             "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;

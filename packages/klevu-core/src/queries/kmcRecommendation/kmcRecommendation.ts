@@ -8,7 +8,7 @@ import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { get } from "../../connection/fetch.js"
 
-type Options = {
+export type KlevuKMCRecommendationOptions = {
   id: string
 
   /**
@@ -136,7 +136,7 @@ export type KlevuKMCRecommendations =
  */
 export async function kmcRecommendation(
   recommendationId: string,
-  options?: Partial<Options>,
+  options?: Partial<KlevuKMCRecommendationOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): Promise<KlevuFetchFunctionReturnValue> {
   let kmcConfig: KlevuKMCRecommendations | undefined

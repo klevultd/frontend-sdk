@@ -7,12 +7,11 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type                   | Default     |
-| ---------- | ---------- | ----------- | ---------------------- | ----------- |
-| `checked`  | `checked`  |             | `boolean \| undefined` | `undefined` |
-| `disabled` | `disabled` |             | `boolean \| undefined` | `undefined` |
-| `name`     | `name`     |             | `string \| undefined`  | `undefined` |
-| `value`    | `value`    |             | `string \| undefined`  | `undefined` |
+| Property   | Attribute  | Description          | Type                   | Default     |
+| ---------- | ---------- | -------------------- | ---------------------- | ----------- |
+| `checked`  | `checked`  | Is checkbox checked  | `boolean \| undefined` | `undefined` |
+| `disabled` | `disabled` | Is disabled          | `boolean \| undefined` | `undefined` |
+| `name`     | `name`     | Name of the checkbox | `string \| undefined`  | `undefined` |
 
 
 ## Dependencies

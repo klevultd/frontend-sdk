@@ -121,7 +121,6 @@ export class KlevuFacet {
             <li>
               {this.mode === "checkbox" ? (
                 <klevu-checkbox
-                  value={o.value}
                   checked={o.selected}
                   name={this.option!.key}
                   onClick={() => this.manager.toggleOption(this.option!.key, o.name)}

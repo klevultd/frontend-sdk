@@ -1,6 +1,6 @@
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuTypeOfRecord } from "../../index.js"
-import { search, SearchOptions } from "../search/search.js"
+import { search, KlevuSearchOptions } from "../search/search.js"
 
 /**
  * Search helper function that sets correct settings
@@ -12,7 +12,7 @@ import { search, SearchOptions } from "../search/search.js"
  */
 export function searchCms(
   term: string,
-  options?: Partial<SearchOptions>
+  options?: Partial<KlevuSearchOptions>
 ): KlevuFetchFunctionReturnValue {
   return search(term, {
     typeOfRecords: [KlevuTypeOfRecord.Cms],

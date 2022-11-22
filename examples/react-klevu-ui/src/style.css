@@ -132,3 +132,19 @@ main {
   display: flex;
   gap: 16px;
 }
+
+/** custom page styles */
+
+.customcategorypage {
+  display: flex;
+}
+
+.customcategorypage .gridcontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.customcategorypage .gridcontent klevu-pagination {
+  margin: var(--klevu-spacing-large) 0;
+}

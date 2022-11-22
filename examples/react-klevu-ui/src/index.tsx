@@ -5,6 +5,7 @@ import { App } from "./app"
 import { CartContextProvider } from "./cartContext"
 import { CategoryPage } from "./routes/CategoryPage"
 import { CheckoutPage } from "./routes/CheckoutPage"
+import { CustomCategoryPage } from "./routes/CustomCategoryPage"
 import { HomePage } from "./routes/HomePage"
 import { ProductPage } from "./routes/ProductPage"
 import { ProductsPage } from "./routes/ProductsPage"
@@ -24,6 +25,9 @@ root.render(
           </Route>
           <Route path="category" element={<CategoryPage />}>
             <Route path=":id" element={<CategoryPage />} />
+          </Route>
+          <Route path="customcategory" element={<CustomCategoryPage />}>
+            <Route path=":id" element={<CustomCategoryPage />} />
           </Route>
           <Route path="search" element={<SearchResultPage />} />
           <Route path="cart" element={<CheckoutPage />} />
