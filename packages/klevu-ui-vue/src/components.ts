@@ -46,6 +46,7 @@ export const KlevuDropdown = /*@__PURE__*/ defineContainer<JSX.KlevuDropdown>('k
   'name',
   'options',
   'disabled',
+  'selected',
   'klevuDropdownChanged'
 ]);
 

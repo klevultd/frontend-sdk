@@ -1,7 +1,8 @@
 import {
   FilterManager,
+  KlevuDomEvents,
+  KlevuListenDomEvent,
   KlevuQueryResult,
-  KlevuRecord,
   KlevuSearchSorting,
 } from "@klevu/core"
 import {
@@ -13,7 +14,7 @@ import {
   KlevuQuery,
   KlevuSort,
 } from "@klevu/ui-react"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { nav } from "../app"
 import { useCart } from "../cartContext"
@@ -33,6 +34,18 @@ export function CustomCategoryPage() {
     setOffset((event.detail - 1) * limit)
   }
 
+  useEffect(() => {
+    const stop = KlevuListenDomEvent(
+      KlevuDomEvents.FilterSelectionUpdate,
+      () => {
+        setOffset(0)
+      }
+    )
+    return () => {
+      stop()
+    }
+  }, [])
+
   return (
     <div className="customcategorypage">
       <KlevuQuery
@@ -50,11 +63,6 @@ export function CustomCategoryPage() {
       />
       <KlevuFacetList manager={manager} />
       <div className="gridcontent">
-        <KlevuSort
-          onKlevuSortChanged={(e) => {
-            setSort(e.detail)
-          }}
-        />
         <KlevuProductGrid>
           {queryResult?.records.map((p) => (
             <KlevuProduct product={p} key={p.id} fixedWidth variant="small">
@@ -70,12 +78,20 @@ export function CustomCategoryPage() {
             </KlevuProduct>
           ))}
         </KlevuProductGrid>
-        {queryResult ? (
-          <KlevuPagination
-            onKlevuPaginationChange={onPageChange}
-            queryResult={queryResult}
+        <div className="gridcontentbottom">
+          {queryResult ? (
+            <KlevuPagination
+              onKlevuPaginationChange={onPageChange}
+              queryResult={queryResult}
+            />
+          ) : null}
+          <KlevuSort
+            onKlevuSortChanged={(e) => {
+              setOffset(0)
+              setSort(e.detail)
+            }}
           />
-        ) : null}
+        </div>
       </div>
     </div>
   )

@@ -85,6 +85,7 @@ export namespace Components {
         "disabled"?: boolean;
         "name": string;
         "options": Array<{ value: string; text: String }>;
+        "selected": string;
     }
     interface KlevuFacet {
         /**
@@ -649,6 +650,7 @@ declare namespace LocalJSX {
         "name": string;
         "onKlevuDropdownChanged"?: (event: KlevuDropdownCustomEvent<string>) => void;
         "options": Array<{ value: string; text: String }>;
+        "selected": string;
     }
     interface KlevuFacet {
         /**

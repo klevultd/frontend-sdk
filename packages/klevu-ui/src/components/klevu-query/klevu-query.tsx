@@ -15,8 +15,9 @@ import {
   KlevuKMCRecommendationOptions,
   KlevuSearchOptions,
 } from "@klevu/core"
-import { Component, Host, h, Prop, Event, EventEmitter, Method, Watch } from "@stencil/core"
+import { Component, Host, h, Prop, Event, EventEmitter, Method, Watch, Listen } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 
 export type AllQueryOptions = KlevuMerchandisingOptions | KlevuKMCRecommendationOptions | KlevuSearchOptions
 
@@ -132,6 +133,30 @@ export class KlevuQuery {
     }
   }
 
+  @Listen("klevu-product-click", {
+    capture: true,
+  })
+  onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
+    console.log("hello?")
+    const product = event.detail.product
+    switch (this.type) {
+      case "merchandising":
+        if (product.id && this.categoryTitle) {
+          this.mercClick?.(product.id, this.categoryTitle, product.itemGroupId)
+        }
+        break
+      case "recommendation":
+        break
+      case "search":
+        break
+      default:
+        const e: never = this.type
+        throw new Error(e)
+    }
+  }
+
+  private mercClick?: (productId: string, categoryTitle: string, variantId?: string, override?: any) => void
+
   private async fetch() {
     const options: AllQueryOptions = {
       limit: this.limit,
@@ -157,6 +182,7 @@ export class KlevuQuery {
           )
         )
         const resultObject = result.queriesById("klevuquery")
+        this.mercClick = resultObject?.getCategoryMerchandisingClickSendEvent?.()
 
         if (!resultObject) {
           console.error("KlevuQuery: Response meta", result.apiResponse?.meta)

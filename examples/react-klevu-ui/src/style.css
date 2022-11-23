@@ -137,6 +137,7 @@ main {
 
 .customcategorypage {
   display: flex;
+  align-items: flex-start;
 }
 
 .customcategorypage .gridcontent {
@@ -147,4 +148,10 @@ main {
 
 .customcategorypage .gridcontent klevu-pagination {
   margin: var(--klevu-spacing-large) 0;
+}
+
+.customcategorypage .gridcontent .gridcontentbottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

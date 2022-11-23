@@ -43,10 +43,10 @@ export class KlevuPagination {
     }
 
     if (pages.length > 8) {
-      let startIndex = min + 2
-      let endIndex = max - 2
-      let currentStartIndex = Math.min(current - 2, 0)
-      let currentEndIndex = currentStartIndex + 2
+      let startIndex = min + 1
+      let endIndex = max - 1
+      let currentStartIndex = current > 3 ? current - 1 : 0
+      let currentEndIndex = current < endIndex - 1 ? currentStartIndex + 2 : endIndex - 1
 
       if (currentStartIndex < startIndex) {
         currentStartIndex = startIndex + 1

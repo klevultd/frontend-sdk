@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property               | Attribute  | Description | Type                                 | Default     |
-| ---------------------- | ---------- | ----------- | ------------------------------------ | ----------- |
-| `disabled`             | `disabled` |             | `boolean \| undefined`               | `undefined` |
-| `name` _(required)_    | `name`     |             | `string`                             | `undefined` |
-| `options` _(required)_ | --         |             | `{ value: string; text: String; }[]` | `undefined` |
+| Property                | Attribute  | Description | Type                                 | Default     |
+| ----------------------- | ---------- | ----------- | ------------------------------------ | ----------- |
+| `disabled`              | `disabled` |             | `boolean \| undefined`               | `undefined` |
+| `name` _(required)_     | `name`     |             | `string`                             | `undefined` |
+| `options` _(required)_  | --         |             | `{ value: string; text: String; }[]` | `undefined` |
+| `selected` _(required)_ | `selected` |             | `string`                             | `undefined` |
 
 
 ## Events

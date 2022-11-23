@@ -7,8 +7,10 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
 })
 export class KlevuDropdown {
   @Prop() name!: string
+
   @Prop() options!: Array<{ value: string; text: String }>
   @Prop() disabled?: boolean
+  @Prop() selected!: string
 
   @Event({
     composed: true,
@@ -28,9 +30,11 @@ export class KlevuDropdown {
             disabled: Boolean(this.disabled),
           }}
         >
-          <select name={this.name} disabled={this.disabled} onChange={this.onChange}>
+          <select name={this.name} disabled={this.disabled} onChange={this.onChange.bind(this)}>
             {this.options?.map((o) => (
-              <option value={o.value}>{o.text}</option>
+              <option selected={this.selected === o.value} value={o.value}>
+                {o.text}
+              </option>
             ))}
           </select>
           <div class="triangle"></div>
