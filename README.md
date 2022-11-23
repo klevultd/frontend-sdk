@@ -1,4 +1,5 @@
 ![Klevu](images/klevu_header.jpg?raw=true "Klevu")
+[![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
 
 # Headless product discovery, for every body
 
