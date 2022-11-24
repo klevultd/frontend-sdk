@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css"
+    />
+    <script type="module" src="./config.ts"></script>
+    <script
+      type="module"
+      src="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <klevu-init
+      url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+      api-key="klevu-165829460115715456"
+    >
+      <nav>
+        <h1>Klevu UI example</h1>
+        <ul>
+          <li><a href="index.html">Basic example</a></li>
+          <li><a href="custom.html">Custom example</a></li>
+        </ul>
+      </nav>
+      <section>
+        <klevu-query
+          id="thequery"
+          type="merchandising"
+          category="Jeans & Trousers"
+          category-title="Jeans & Trousers"
+          update-on-filter-change
+        ></klevu-query>
+        <div id="results" style="display: flex; flex-direction: column"></div>
+        <klevu-facet-list id="facetlist"></klevu-facet-list>
+      </section>
+    </klevu-init>
+    <script type="module">
+      import { FilterManager } from "@klevu/core"
+
+      const queryEl = document.getElementById("thequery")
+      const resultsEl = document.getElementById("results")
+      const facetlistEl = document.getElementById("facetlist")
+
+      const manager = new FilterManager()
+      queryEl.manager = manager
+      facetlistEl.manager = manager
+      queryEl.addEventListener("klevuQueryResult", (event) => {
+        resultsEl.innerHTML = ""
+        console.log(event.detail.result)
+        for (const product of event.detail.result.records) {
+          const productEl = document.createElement("klevu-product")
+          productEl.product = product
+          productEl.variant = "line"
+          productEl.fullWidth = true
+
+          /*
+          const bottomSlot = document.createElement("div")
+          bottomSlot.slot = "bottom"
+          bottomSlot.innerHTML = "Hello world"
+          productEl.append(bottomSlot)
+          */
+
+          resultsEl.append(productEl)
+        }
+      })
+    </script>
+  </body>
+</html>
