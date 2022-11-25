@@ -1,15 +1,15 @@
 import {
+  applyFilterWithManager,
+  FilterManager,
   KlevuFetch,
+  KlevuFetchQueryResult,
   KlevuRecord,
+  KlevuSearchSorting,
+  listFilters,
   search,
   sendSearchEvent,
-  KlevuFetchQueryResult,
-  FilterManager,
-  listFilters,
-  applyFilterWithManager,
-  KlevuSearchSorting,
 } from "@klevu/core"
-import { Component, Host, h, Prop, Listen, State } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"

@@ -1,4 +1,4 @@
-import { Component, Host, h, Element } from "@stencil/core"
+import { Component, Element, h, Host } from "@stencil/core"
 
 @Component({
   tag: "klevu-product-grid",

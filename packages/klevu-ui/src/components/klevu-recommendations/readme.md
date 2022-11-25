@@ -1,7 +1,5 @@
 # klevu-recommendations
 
-
-
 <!-- Auto Generated Below -->
 
 

@@ -1,7 +1,5 @@
 # klevu-merchandising
 
-
-
 <!-- Auto Generated Below -->
 
 

@@ -3,12 +3,11 @@ import {
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
   KlevuFetchQueryResult,
-  KlevuRecord,
   KlevuTypeOfRecord,
   search,
   suggestions,
 } from "@klevu/core"
-import { Component, Host, h, Prop, State, Event, EventEmitter } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 

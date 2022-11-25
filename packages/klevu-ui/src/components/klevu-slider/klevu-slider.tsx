@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element, Listen, Event, EventEmitter } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 import noUiSlider from "nouislider"
 
 @Component({

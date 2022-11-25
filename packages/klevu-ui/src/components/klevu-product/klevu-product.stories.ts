@@ -1,7 +1,7 @@
 import { html } from "lit-html"
-import { fullMockRequest, autofillMeta } from "../../storybookUtils"
+import { autofillMeta, fullMockRequest } from "../../storybookUtils"
 
-// @ts-ignore
+//
 import notes from "./readme.md"
 
 const product = fullMockRequest.queryResults?.[0].records[0]

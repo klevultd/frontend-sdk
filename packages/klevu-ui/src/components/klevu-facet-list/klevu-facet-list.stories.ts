@@ -1,42 +1,42 @@
 import { FilterManager } from "@klevu/core"
-import { fullMockRequest, WebComponentTemplate } from "../../storybookUtils"
+import { autofillMeta, fullMockRequest } from "../../storybookUtils"
 
-// @ts-ignore
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
 
-const meta: Meta = {
+export default autofillMeta("klevu-facet-list", {
   title: "Components/FacetList",
   parameters: { notes },
-}
-export default meta
+})
 
 const manager = new FilterManager()
 manager.initFromListFilters(fullMockRequest.queryResults?.[0].filters as any)
 
-export const Default = WebComponentTemplate<HTMLKlevuFacetListElement>({
-  tag: "klevu-facet-list",
-  args: {
-    manager,
-  },
-})
+const Template: Story<HTMLKlevuFacetListElement> = (args) =>
+  html`<klevu-facet-list
+    .accordion=${args.accordion}
+    .customOrder=${args.customOrder}
+    .manager=${args.manager}
+    .mode=${args.mode}
+  ></klevu-facet-list>`
 
-export const Radio = WebComponentTemplate<HTMLKlevuFacetListElement>({
-  tag: "klevu-facet-list",
-  args: {
-    manager,
-    mode: "radio",
+export const Default = Template.bind({})
+Default.args = {
+  manager,
+}
+export const Radio = Template.bind({})
+Radio.args = {
+  manager,
+  mode: "radio",
+}
+export const ModePerKey = Template.bind({})
+ModePerKey.args = {
+  manager,
+  mode: {
+    category: "radio",
+    brand: "radio",
   },
-})
-
-export const ModePerKey = WebComponentTemplate<HTMLKlevuFacetListElement>({
-  tag: "klevu-facet-list",
-  args: {
-    manager,
-    mode: {
-      category: "radio",
-      brand: "radio",
-    },
-  },
-})
+}

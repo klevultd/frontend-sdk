@@ -1,5 +1,5 @@
 import { html } from "lit-html"
-// @ts-ignore
+//
 import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"

@@ -1,34 +1,36 @@
-import { html, WebComponentTemplate } from "../../storybookUtils"
-
-// @ts-ignore
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 
-const meta: Meta = {
+export default autofillMeta("klevu-drawer", {
   title: "Atoms/Drawer",
   parameters: {
     notes,
   },
+})
+
+const Template: Story<HTMLKlevuDrawerElement> = (args) =>
+  html`<klevu-drawer
+    .anchor=${args.anchor}
+    .background=${args.background}
+    .closeAtOutsideClick=${args.closeAtOutsideClick}
+    .startOpen=${args.startOpen}
+  >
+    <klevu-button slot="origin">Open drawer</klevu-button>
+    <div slot="content">Hello world drawer</div>
+  </klevu-drawer>`
+
+export const StartClosed = Template.bind({})
+StartClosed.args = {
+  startOpen: false,
+  anchor: "left",
 }
-export default meta
 
-export const StartClosed = WebComponentTemplate<HTMLKlevuDrawerElement>({
-  tag: "klevu-drawer",
-  args: {
-    startOpen: false,
-    anchor: "left",
-  },
-  innerHTML: html`<klevu-button slot="origin">Open drawer</klevu-button>
-    <div slot="content">Hello world drawer</div>`,
-})
-
-export const StartOpen = WebComponentTemplate<HTMLKlevuDrawerElement>({
-  tag: "klevu-drawer",
-  args: {
-    startOpen: true,
-    anchor: "right",
-  },
-  innerHTML: html`<klevu-button slot="origin">Open drawer</klevu-button>
-    <div slot="content">Hello world drawer</div>`,
-})
+export const StartOpen = Template.bind({})
+StartOpen.args = {
+  startOpen: true,
+  anchor: "right",
+}

@@ -1,60 +1,63 @@
 import { FilterManager, KlevuFilterType } from "@klevu/core"
-import { fullMockRequest, WebComponentTemplate } from "../../storybookUtils"
+import { autofillMeta, fullMockRequest } from "../../storybookUtils"
 
-// @ts-ignore
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
 
-const meta: Meta = {
+export default autofillMeta("klevu-facet", {
   title: "Components/Facet",
   parameters: { notes },
-}
-export default meta
+})
 
 const manager = new FilterManager()
 manager.initFromListFilters(fullMockRequest.queryResults?.[0].filters as any)
 
-export const Default = WebComponentTemplate<HTMLKlevuFacetElement>({
-  tag: "klevu-facet",
-  args: {
-    manager,
-    option: manager.options[0],
-    mode: "checkbox",
-  },
-})
+const Template: Story<HTMLKlevuFacetElement> = (args) =>
+  html`<klevu-facet
+    .accordion=${args.accordion}
+    .accordionStartOpen=${args.accordionStartOpen}
+    .customOrder=${args.customOrder}
+    .manager=${args.manager}
+    .mode=${args.mode}
+    .option=${args.option}
+    .slider=${args.slider}
+  ></klevu-facet>`
 
-export const DefaultRadio = WebComponentTemplate<HTMLKlevuFacetElement>({
-  tag: "klevu-facet",
-  args: {
-    manager,
-    option: manager.options[0],
-    mode: "radio",
-  },
-})
+export const Default = Template.bind({})
+Default.args = {
+  manager,
+  option: manager.options[0],
+  mode: "checkbox",
+}
 
-export const CustomSort = WebComponentTemplate<HTMLKlevuFacetElement>({
-  tag: "klevu-facet",
-  args: {
-    manager,
-    option: manager.options[0],
-    mode: "checkbox",
-    customOrder: ["Aqua Blue/Orange", "All Black"],
-  },
-})
+export const DefaultRadio = Template.bind({})
+DefaultRadio.args = {
+  manager,
+  option: manager.options[0],
+  mode: "radio",
+}
 
-export const Slider = WebComponentTemplate<HTMLKlevuFacetElement>({
-  tag: "klevu-facet",
-  args: {
-    manager,
-    slider: {
-      type: KlevuFilterType.Slider,
-      min: "0",
-      max: "0",
-      start: "10",
-      end: "90",
-      key: "foo",
-      label: "Ranger slider",
-    },
+export const CustomSort = Template.bind({})
+CustomSort.args = {
+  manager,
+  option: manager.options[0],
+  mode: "checkbox",
+  customOrder: ["Aqua Blue/Orange", "All Black"],
+}
+
+export const Slider = Template.bind({})
+Slider.args = {
+  manager,
+  slider: {
+    type: KlevuFilterType.Slider,
+    min: "0",
+    max: "0",
+    start: "10",
+    end: "90",
+    key: "foo",
+    label: "Ranger slider",
   },
-})
+}

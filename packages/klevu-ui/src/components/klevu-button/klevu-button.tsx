@@ -1,4 +1,4 @@
-import { Component, Host, h, Event, Prop } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 
 @Component({
   tag: "klevu-button",

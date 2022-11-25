@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Event, EventEmitter } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
 import { KlevuSearchFieldCustomEvent } from "../../components"
 import { SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
 

@@ -1,4 +1,4 @@
-import { Component, Host, h, Method, Prop, State, Element } from "@stencil/core"
+import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
 import { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 
 @Component({

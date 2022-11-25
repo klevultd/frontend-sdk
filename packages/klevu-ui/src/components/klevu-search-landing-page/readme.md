@@ -1,7 +1,5 @@
 # klevu-search-landing-page
 
-
-
 <!-- Auto Generated Below -->
 
 

@@ -1,7 +1,5 @@
 # klevu-search-field
 
-
-
 <!-- Auto Generated Below -->
 
 

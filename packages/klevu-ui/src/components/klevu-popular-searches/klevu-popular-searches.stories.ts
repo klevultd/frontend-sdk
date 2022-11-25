@@ -1,17 +1,17 @@
-import { WebComponentTemplate } from "../../storybookUtils"
+import { autofillMeta } from "../../storybookUtils"
 
-// @ts-ignore
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
 
-const meta: Meta = {
+export default autofillMeta("klevu-popular-searches", {
   title: "Components/PopularSearches",
   parameters: { notes },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuPopularSearchesElement>({
-  tag: "klevu-popular-searches",
-  args: {},
 })
+
+const Template: Story<HTMLKlevuPopularSearchesElement> = (args) =>
+  html`<klevu-popular-searches .caption=${args.caption}></klevu-popular-searches>`
+
+export const Default = Template.bind({})

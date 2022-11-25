@@ -1,5 +1,5 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Host, h, Prop, Listen, State, Fragment } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 

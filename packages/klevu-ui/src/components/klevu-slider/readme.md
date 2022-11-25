@@ -1,7 +1,5 @@
 # klevu-slider
 
-
-
 <!-- Auto Generated Below -->
 
 

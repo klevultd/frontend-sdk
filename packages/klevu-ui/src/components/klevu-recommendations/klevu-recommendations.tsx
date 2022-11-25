@@ -1,5 +1,5 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
-import { Component, Host, h, Prop, State } from "@stencil/core"
+import { Component, h, Host, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductSlots } from "../klevu-product/klevu-product"
 

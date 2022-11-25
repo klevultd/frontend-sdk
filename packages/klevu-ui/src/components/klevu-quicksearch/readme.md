@@ -1,7 +1,5 @@
 # klevu-quicksearch
 
-
-
 <!-- Auto Generated Below -->
 
 

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element, State, Method } from "@stencil/core"
+import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
 
 export type KlevuPopupAnchor = "left" | "right"
 

@@ -1,5 +1,4 @@
 import { newE2EPage } from "@stencil/core/testing"
-import { html } from "../../../storybookUtils"
 
 describe("klevu-merchandising", () => {
   it("renders", async () => {

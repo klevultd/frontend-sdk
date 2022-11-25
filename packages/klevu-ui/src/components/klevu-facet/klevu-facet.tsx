@@ -1,5 +1,5 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Host, h, Prop, Fragment } from "@stencil/core"
+import { Component, Fragment, h, Host, Prop } from "@stencil/core"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 

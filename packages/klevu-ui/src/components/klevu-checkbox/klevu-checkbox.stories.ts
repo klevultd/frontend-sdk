@@ -1,7 +1,7 @@
-import { autofillMeta, WebComponentTemplate } from "../../storybookUtils"
 import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 
-// @ts-ignore
+//
 import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"

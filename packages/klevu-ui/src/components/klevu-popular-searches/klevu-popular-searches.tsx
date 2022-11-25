@@ -1,5 +1,5 @@
 import { KlevuKMCSettings } from "@klevu/core"
-import { Component, Host, h, State, Prop } from "@stencil/core"
+import { Component, h, Host, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 @Component({

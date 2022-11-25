@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "klevu-cms-list",

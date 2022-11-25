@@ -1,7 +1,5 @@
 # klevu-query
 
-
-
 <!-- Auto Generated Below -->
 
 

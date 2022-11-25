@@ -1,9 +1,9 @@
 import { html } from "lit-html"
 
-// @ts-ignore
-import notes from "./readme.md"
-import { autofillMeta } from "../../storybookUtils"
+//
 import { Story } from "@storybook/web-components"
+import { autofillMeta } from "../../storybookUtils"
+import notes from "./readme.md"
 
 export default autofillMeta("klevu-accordion", {
   title: "Atoms/Accordion",

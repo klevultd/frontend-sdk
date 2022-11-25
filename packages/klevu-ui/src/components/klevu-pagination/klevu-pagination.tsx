@@ -1,5 +1,5 @@
 import { KlevuQueryResult } from "@klevu/core"
-import { Component, Host, h, Event, EventEmitter, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 @Component({
   tag: "klevu-pagination",

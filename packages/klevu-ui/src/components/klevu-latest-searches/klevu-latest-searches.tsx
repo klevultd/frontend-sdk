@@ -1,5 +1,5 @@
 import { KlevuLastSearches } from "@klevu/core"
-import { Component, Host, h, State, Prop } from "@stencil/core"
+import { Component, h, Host, Prop, State } from "@stencil/core"
 
 @Component({
   tag: "klevu-latest-searches",

@@ -1,19 +1,24 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-search-landing-page", {
   title: "Apps/SearchLandingPage",
   parameters: { notes },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuSearchLandingPageElement>({
-  tag: "klevu-search-landing-page",
-  args: {
-    term: "shoes",
-  },
 })
+
+const Template: Story<HTMLKlevuSearchLandingPageElement> = (args) =>
+  html`<klevu-search-landing-page
+    .filterCount=${args.filterCount}
+    .filterCustomOrder=${args.filterCustomOrder}
+    .limit=${args.limit}
+    .renderProductSlot=${args.renderProductSlot}
+    .sort=${args.sort}
+    .term=${args.term}
+  ></klevu-search-landing-page>`
+
+export const Default = Template.bind({})
+Default.args = {
+  term: "shoes",
+}

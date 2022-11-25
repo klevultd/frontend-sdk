@@ -1,21 +1,21 @@
 import {
-  KlevuFetch,
-  categoryMerchandising,
-  sendMerchandisingViewEvent,
-  listFilters,
   applyFilterWithManager,
-  KlevuSearchSorting,
+  categoryMerchandising,
   FilterManager,
-  KlevuQueryResult,
-  search,
-  kmcRecommendation,
-  KlevuListenDomEvent,
   KlevuDomEvents,
-  KlevuMerchandisingOptions,
+  KlevuFetch,
   KlevuKMCRecommendationOptions,
+  KlevuListenDomEvent,
+  KlevuMerchandisingOptions,
+  KlevuQueryResult,
   KlevuSearchOptions,
+  KlevuSearchSorting,
+  kmcRecommendation,
+  listFilters,
+  search,
+  sendMerchandisingViewEvent,
 } from "@klevu/core"
-import { Component, Host, h, Prop, Event, EventEmitter, Method, Watch, Listen } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 

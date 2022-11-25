@@ -1,7 +1,5 @@
 # klevu-pagination
 
-
-
 <!-- Auto Generated Below -->
 
 

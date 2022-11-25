@@ -1,5 +1,5 @@
 import { KlevuSearchSorting } from "@klevu/core"
-import { Component, Host, h, Event, EventEmitter } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host } from "@stencil/core"
 
 @Component({
   tag: "klevu-sort",

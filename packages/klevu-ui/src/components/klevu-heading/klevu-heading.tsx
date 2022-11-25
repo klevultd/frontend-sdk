@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 
 export type KlevuHeadingVariant = "h1" | "h2" | "h3"
 

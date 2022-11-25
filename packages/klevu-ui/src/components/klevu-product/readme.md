@@ -1,7 +1,5 @@
 # klevu-product
 
-
-
 <!-- Auto Generated Below -->
 
 

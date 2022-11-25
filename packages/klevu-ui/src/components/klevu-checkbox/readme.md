@@ -1,7 +1,5 @@
 # klevu-checkbox
 
-
-
 <!-- Auto Generated Below -->
 
 

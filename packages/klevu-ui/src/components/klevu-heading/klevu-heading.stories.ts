@@ -1,36 +1,18 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-heading", {
   title: "Atoms/Heading",
   parameters: { notes },
-}
-export default meta
-
-export const H1 = WebComponentTemplate<HTMLKlevuHeadingElement>({
-  tag: "klevu-heading",
-  args: {
-    variant: "h1",
-  },
-  innerHTML: "Heading 1",
 })
 
-export const H2 = WebComponentTemplate<HTMLKlevuHeadingElement>({
-  tag: "klevu-heading",
-  args: {
-    variant: "h2",
-  },
-  innerHTML: "Heading 2",
-})
-
-export const H3 = WebComponentTemplate<HTMLKlevuHeadingElement>({
-  tag: "klevu-heading",
-  args: {
-    variant: "h3",
-  },
-  innerHTML: "Heading 3",
-})
+const Template: Story<HTMLKlevuHeadingElement> = (args) =>
+  html`<klevu-heading .variant=${args.variant}>The quick brown fox jumps over the lazy dog</klevu-heading>`
+export const H1 = Template.bind({})
+H1.args = { variant: "h1" }
+export const H2 = Template.bind({})
+H2.args = { variant: "h2" }
+export const H3 = Template.bind({})
+H3.args = { variant: "h3" }

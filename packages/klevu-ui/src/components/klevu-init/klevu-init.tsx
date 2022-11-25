@@ -1,5 +1,5 @@
 import { KlevuConfig } from "@klevu/core"
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 
 @Component({

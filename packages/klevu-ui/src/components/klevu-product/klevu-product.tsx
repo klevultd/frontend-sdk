@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Host, h, Prop, Event, EventEmitter, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; originalEvent: MouseEvent }

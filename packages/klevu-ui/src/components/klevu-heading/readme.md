@@ -1,7 +1,5 @@
 # klevu-heading
 
-
-
 <!-- Auto Generated Below -->
 
 

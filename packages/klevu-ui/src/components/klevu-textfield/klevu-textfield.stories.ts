@@ -1,21 +1,20 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
-import { Meta } from "@storybook/html"
 
-const meta: Meta = {
+export default autofillMeta("klevu-textfield", {
   title: "Atoms/Textfield",
   parameters: {
     notes,
-    actions: {
-      handles: ["klevuTextChanged", "klevuTextFocused"],
-    },
   },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuTextfieldElement>({
-  tag: "klevu-textfield",
-  args: {},
 })
+
+const Template: Story<HTMLKlevuTextfieldElement> = (args) =>
+  html`<klevu-textfield
+    .disabled=${args.disabled}
+    .placeholder=${args.placeholder}
+    .value=${args.value}
+  ></klevu-textfield>`
+
+export const Default = Template.bind({})

@@ -1,6 +1,4 @@
-import { FilterManager } from "@klevu/core"
 import { newE2EPage } from "@stencil/core/testing"
-import { KlevuFacetList } from "../klevu-facet-list"
 
 describe("klevu-facet-list", () => {
   it("renders", async () => {

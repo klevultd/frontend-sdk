@@ -1,7 +1,5 @@
 # klevu-dropdown
 
-
-
 <!-- Auto Generated Below -->
 
 

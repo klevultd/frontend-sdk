@@ -9,59 +9,6 @@ import { ArgTypes, Meta } from "@storybook/web-components"
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import merge from "lodash.merge"
 
-/**
- * Helper function to create Storybook stories with web components.
- *
- * @param tag Tag of web component
- * @param args Arguments to pass to web component
- * @param style External style to inject DOM outside the web component. For testing user styles.
- * @returns
- */
-export const WebComponentTemplate = <T>({
-  tag,
-  attributes,
-  args,
-  style,
-  innerHTML,
-  childElements: childElement,
-}: {
-  tag: string
-  args?: {
-    [key in keyof Partial<T>]: T[key]
-  }
-  attributes?: { [key: string]: any }
-  style?: string
-  innerHTML?: string
-  childElements?: HTMLElement[]
-}) => {
-  const func = (args: any) => {
-    const element = document.createElement(tag)
-    for (const [key, value] of Object.entries(attributes ?? {})) {
-      element.setAttribute(key, value)
-    }
-    for (const [key, value] of Object.entries(args ?? {})) {
-      // @ts-expect-error
-      element[key] = value
-    }
-    if (innerHTML) {
-      element.innerHTML = innerHTML
-    }
-    if (childElement) {
-      element.append(...childElement)
-    }
-    if (style) {
-      const styleElem = document.createElement("style")
-      styleElem.type = "text/css"
-      styleElem.appendChild(document.createTextNode(style))
-      element.insertBefore(styleElem, element.firstChild)
-    }
-    return element
-  }
-
-  func.args = args
-  return func
-}
-
 export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
   element.product = product
@@ -73,15 +20,6 @@ export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   }
   return element
 }
-
-/**
- * Helper to allow syntax highlighting in VS Code.
- *
- * @param i
- * @returns
- */
-export const css = (i: TemplateStringsArray): string => i.toString()
-export const html = (i: TemplateStringsArray): string => i.toString()
 
 export function autofillMeta(tag: string, meta: Meta): Meta {
   const data: JsonDocs = jsdocs as any
@@ -102,14 +40,14 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     argTypes[a.name] = {
       name: a.name,
       description: a.docs,
+      defaultValue: a.default,
       table: {
+        description: a.docs,
+        category: "Attributes",
         summary: a.docs,
       },
       required: a.required,
       type: noUndefinedValues.length === 1 ? noUndefinedValues[0].type : ("string" as any),
-      table: {
-        category: "Props",
-      },
     }
 
     if (isOptions) {
