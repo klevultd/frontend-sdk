@@ -1,6 +1,12 @@
 import { defineCustomElements } from "../loader"
 import "../src/global/global.css"
 
+/*
+import { extractArgTypes, extractComponentDescription, setStencilDocJson } from "@pxtrn/storybook-addon-docs-stencil"
+import docJson from "../dist/docs/klevu-ui-docs.json"
+if (docJson) setStencilDocJson(docJson)
+*/
+
 defineCustomElements()
 
 export const parameters = {

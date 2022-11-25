@@ -12,13 +12,37 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
   shadow: true,
 })
 export class KlevuProduct {
+  /**
+   * What variant of product to render
+   */
   @Prop() variant: KlevuProductVariant = "default"
+  /**
+   * Product data
+   */
   @Prop() product?: Partial<KlevuRecord>
+  /**
+   * Do not show swatches in products
+   */
   @Prop() hideSwatches?: boolean
+  /**
+   * Hides price from info
+   */
   @Prop() hidePrice?: boolean
+  /**
+   * Hides description from info
+   */
   @Prop() hideDescription?: boolean
+  /**
+   * Hides name from info
+   */
   @Prop() hideName?: boolean
+  /**
+   * Hides image
+   */
   @Prop() hideImage?: boolean
+  /**
+   * Hides brand information
+   */
   @Prop() hideBrand?: boolean
   /**
    * Force certain width for product. Do not use max-width
@@ -27,6 +51,9 @@ export class KlevuProduct {
 
   @State() hoverImage?: string
 
+  /**
+   * When products has been clicked
+   */
   @Event({
     composed: true,
     cancelable: true,

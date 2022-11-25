@@ -1,5 +1,5 @@
 import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-recommendations.css"
+
 // @ts-ignore
 import notes from "./readme.md"
 

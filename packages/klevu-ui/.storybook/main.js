@@ -3,9 +3,8 @@ module.exports = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
     "@storybook/addon-notes/register",
     "@ljcl/storybook-addon-cssprops",
   ],
-  framework: "@storybook/html",
+  framework: "@storybook/web-components",
 }

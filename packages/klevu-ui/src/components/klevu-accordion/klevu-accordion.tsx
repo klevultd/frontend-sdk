@@ -6,10 +6,14 @@ import { Component, Host, h, Prop } from "@stencil/core"
   shadow: true,
 })
 export class KlevuAccordion {
-  /** is accordion open */
+  /**
+   * is accordion open
+   */
   @Prop({ reflect: true }) open = false
 
-  /** Should it initially be open */
+  /**
+   * Should it initially be open
+   */
   @Prop() startOpen?: boolean
 
   private id: string

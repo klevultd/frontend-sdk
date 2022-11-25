@@ -1,6 +1,6 @@
 import type { KlevuRecord } from "@klevu/core"
 import { KlevuProductElement, mockProducts, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-slides.css"
+
 // @ts-ignore
 import notes from "./readme.md"
 

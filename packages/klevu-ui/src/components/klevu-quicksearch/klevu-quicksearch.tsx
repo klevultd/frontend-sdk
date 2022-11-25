@@ -12,10 +12,27 @@ import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-fi
   shadow: true,
 })
 export class KlevuQuicksearch {
+  /**
+   * What term should be used if there isn't enough results
+   */
   @Prop() fallbackTerm?: string
+  /**
+   * Anchor popup to witch side
+   */
   @Prop() popupAnchor?: KlevuPopupAnchor
+  /**
+   * Should component search for categories too
+   */
   @Prop() searchCategories?: boolean
+  /**
+   * Should component search for CMS pages too
+   */
   @Prop() searchCmsPages?: boolean
+
+  /**
+   * Function render custom products. Result has to be native HTML element or a string
+   */
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: Array<KlevuRecord | undefined> = [
@@ -29,7 +46,6 @@ export class KlevuQuicksearch {
   @State() suggestions: string[] = []
   @State() cmsPages?: KlevuRecord[]
   @State() categories?: KlevuRecord[]
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
 
   clickEvent?: (productId: string, variantId?: string) => void
 

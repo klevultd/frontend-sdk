@@ -1,17 +1,14 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-button.css"
+import { autofillMeta, WebComponentTemplate } from "../../storybookUtils"
+
 // @ts-ignore
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-button", {
   title: "Atoms/Button",
   parameters: {
     notes,
   },
-}
-export default meta
+})
 
 export const Default = WebComponentTemplate<HTMLKlevuButtonElement>({
   tag: "klevu-button",

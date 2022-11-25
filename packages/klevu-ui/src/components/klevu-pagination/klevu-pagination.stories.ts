@@ -1,6 +1,6 @@
 import { fullMockRequest, WebComponentTemplate } from "../../storybookUtils"
 import { Meta } from "@storybook/html"
-import "./klevu-pagination.css"
+
 // @ts-ignore
 import notes from "./readme.md"
 

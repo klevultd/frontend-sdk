@@ -3,6 +3,11 @@
  */
 
 import { KlevuApiRawResponse, KlevuRecord } from "@klevu/core"
+import { JsonDocs } from "@stencil/core/internal"
+import { ArgTypes, Meta } from "@storybook/web-components"
+// @ts-inore
+import jsdocs from "../dist/docs/klevu-ui-docs.json"
+import merge from "lodash.merge"
 
 /**
  * Helper function to create Storybook stories with web components.
@@ -77,6 +82,64 @@ export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
  */
 export const css = (i: TemplateStringsArray): string => i.toString()
 export const html = (i: TemplateStringsArray): string => i.toString()
+
+export function autofillMeta(tag: string, meta: Meta): Meta {
+  const data: JsonDocs = jsdocs as any
+  const comp = data.components.find((c) => c.tag == tag)
+  if (!comp) {
+    return {}
+  }
+  const argTypes: ArgTypes = {}
+  for (const a of comp.props) {
+    if (!a.attr) {
+      continue
+    }
+
+    const noUndefinedValues = a.values.filter((v) => v.type !== "undefined")
+
+    const isOptions = Boolean(noUndefinedValues[0].value) && noUndefinedValues[0].type === "string"
+
+    argTypes[a.name] = {
+      name: a.name,
+      description: a.docs,
+      table: {
+        summary: a.docs,
+      },
+      required: a.required,
+      type: noUndefinedValues.length === 1 ? noUndefinedValues[0].type : ("string" as any),
+      table: {
+        category: "Props",
+      },
+    }
+
+    if (isOptions) {
+      argTypes[a.name].options = noUndefinedValues.map((o) => o.value)
+      argTypes[a.name].control = "radio"
+    }
+  }
+  const handles: string[] = []
+  for (const e of comp.events) {
+    handles.push(e.event)
+    argTypes[e.event] = {
+      action: e.docs,
+      table: {
+        category: "Events",
+      },
+    }
+  }
+  if (comp.tag === "klevu-product") {
+    console.log(comp, argTypes)
+  }
+  return merge(meta, {
+    component: tag,
+    parameters: {
+      actions: {
+        handles,
+      },
+    },
+    argTypes,
+  })
+}
 
 /**
  * Temporary testing data

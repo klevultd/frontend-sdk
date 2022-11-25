@@ -198,13 +198,37 @@ export namespace Components {
           * Force certain width for product. Do not use max-width
          */
         "fixedWidth"?: boolean;
+        /**
+          * Hides brand information
+         */
         "hideBrand"?: boolean;
+        /**
+          * Hides description from info
+         */
         "hideDescription"?: boolean;
+        /**
+          * Hides image
+         */
         "hideImage"?: boolean;
+        /**
+          * Hides name from info
+         */
         "hideName"?: boolean;
+        /**
+          * Hides price from info
+         */
         "hidePrice"?: boolean;
+        /**
+          * Do not show swatches in products
+         */
         "hideSwatches"?: boolean;
+        /**
+          * Product data
+         */
         "product"?: Partial<KlevuRecord>;
+        /**
+          * What variant of product to render
+         */
         "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
@@ -246,10 +270,25 @@ export namespace Components {
         "updateOnFilterChange"?: boolean;
     }
     interface KlevuQuicksearch {
+        /**
+          * What term should be used if there isn't enough results
+         */
         "fallbackTerm"?: string;
+        /**
+          * Anchor popup to witch side
+         */
         "popupAnchor"?: KlevuPopupAnchor;
+        /**
+          * Function render custom products. Result has to be native HTML element or a string
+         */
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
+        /**
+          * Should component search for categories too
+         */
         "searchCategories"?: boolean;
+        /**
+          * Should component search for CMS pages too
+         */
         "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {
@@ -765,14 +804,41 @@ declare namespace LocalJSX {
           * Force certain width for product. Do not use max-width
          */
         "fixedWidth"?: boolean;
+        /**
+          * Hides brand information
+         */
         "hideBrand"?: boolean;
+        /**
+          * Hides description from info
+         */
         "hideDescription"?: boolean;
+        /**
+          * Hides image
+         */
         "hideImage"?: boolean;
+        /**
+          * Hides name from info
+         */
         "hideName"?: boolean;
+        /**
+          * Hides price from info
+         */
         "hidePrice"?: boolean;
+        /**
+          * Do not show swatches in products
+         */
         "hideSwatches"?: boolean;
+        /**
+          * When products has been clicked
+         */
         "onKlevuProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
+        /**
+          * Product data
+         */
         "product"?: Partial<KlevuRecord>;
+        /**
+          * What variant of product to render
+         */
         "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
@@ -814,10 +880,25 @@ declare namespace LocalJSX {
         "updateOnFilterChange"?: boolean;
     }
     interface KlevuQuicksearch {
+        /**
+          * What term should be used if there isn't enough results
+         */
         "fallbackTerm"?: string;
+        /**
+          * Anchor popup to witch side
+         */
         "popupAnchor"?: KlevuPopupAnchor;
+        /**
+          * Function render custom products. Result has to be native HTML element or a string
+         */
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string;
+        /**
+          * Should component search for categories too
+         */
         "searchCategories"?: boolean;
+        /**
+          * Should component search for CMS pages too
+         */
         "searchCmsPages"?: boolean;
     }
     interface KlevuRecommendations {

@@ -1,62 +1,44 @@
-import { css, fullMockRequest, html, mockProducts, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-product.css"
+import { html } from "lit-html"
+import { fullMockRequest, autofillMeta } from "../../storybookUtils"
+
 // @ts-ignore
 import notes from "./readme.md"
 
 const product = fullMockRequest.queryResults?.[0].records[0]
-// const fullMockProducts = fullMockRequest.queryResults[0].records
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
 
-const meta: Meta = {
+export default autofillMeta("klevu-product", {
   title: "Components/Product",
   parameters: {
     notes,
-    actions: {
-      handles: ["klevuProductClick"],
-    },
   },
+  args: {
+    product,
+  },
+})
+
+const Template: Story<HTMLKlevuProductElement> = (args) =>
+  html`
+    <klevu-product
+      .product=${args.product}
+      .variant=${args.variant}
+      .fixedWidth=${args.fixedWidth}
+      .hideBrand=${args.hideBrand}
+      .hideDescription=${args.hideDescription}
+      .hideImage=${args.hideImage}
+      .hideName=${args.hideName}
+      .hidePrice=${args.hideName}
+      .hideSwatches=${args.hideSwatches}
+    ></klevu-product>
+  `
+
+export const NormalProduct = Template.bind({})
+export const ListProduct = Template.bind({})
+ListProduct.args = {
+  variant: "line",
 }
-export default meta
-
-export const NormalProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: { product } })
-
-export const ListProduct = WebComponentTemplate<HTMLKlevuProductElement>({
-  tag: "klevu-product",
-  args: { product, variant: "line" },
-})
-
-export const LoadingListProduct = WebComponentTemplate<HTMLKlevuProductElement>({
-  tag: "klevu-product",
-  args: { variant: "line" },
-})
-
-export const SmallProduct = WebComponentTemplate<HTMLKlevuProductElement>({
-  tag: "klevu-product",
-  args: { product, variant: "small" },
-})
-
-export const WithHeavyModifications = WebComponentTemplate<HTMLKlevuProductElement>({
-  tag: "klevu-product",
-  args: { product },
-  innerHTML: html`<p slot="info">This replaces name</p>`,
-  style: css`
-    klevu-product::part(image) {
-      border: 1px solid red;
-    }
-    klevu-product::part(image)::after {
-      content: "";
-      display: block;
-      height: 30px;
-      width: 30px;
-      border: 1px solid blue;
-    }
-  `,
-})
-
-export const HideSwatches = WebComponentTemplate<HTMLKlevuProductElement>({
-  tag: "klevu-product",
-  args: { product, hideSwatches: true },
-})
-
-export const LoadingProduct = WebComponentTemplate<HTMLKlevuProductElement>({ tag: "klevu-product", args: {} })
+export const LoadingProduct = Template.bind({})
+LoadingProduct.args = {
+  product: undefined,
+}

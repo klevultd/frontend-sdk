@@ -1,6 +1,6 @@
 import { FilterManager, KlevuFilterType } from "@klevu/core"
 import { fullMockRequest, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-facet.css"
+
 // @ts-ignore
 import notes from "./readme.md"
 

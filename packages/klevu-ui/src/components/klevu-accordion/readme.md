@@ -1,7 +1,5 @@
 # klevu-accordion
 
-
-
 <!-- Auto Generated Below -->
 
 

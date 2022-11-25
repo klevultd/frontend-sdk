@@ -30,6 +30,14 @@ export const config: Config = {
     {
       type: "docs-readme",
     },
+    {
+      type: "docs-json",
+      file: "dist/docs/klevu-ui-docs.json",
+    },
+    {
+      type: "docs-vscode",
+      file: "dist/docs/vscode-data.json",
+    },
   ],
   rollupPlugins: {
     before: [

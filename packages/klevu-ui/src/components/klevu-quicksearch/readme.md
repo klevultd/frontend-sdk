@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property            | Attribute           | Description | Type                                                                                             | Default     |
-| ------------------- | ------------------- | ----------- | ------------------------------------------------------------------------------------------------ | ----------- |
-| `fallbackTerm`      | `fallback-term`     |             | `string \| undefined`                                                                            | `undefined` |
-| `popupAnchor`       | `popup-anchor`      |             | `"left" \| "right" \| undefined`                                                                 | `undefined` |
-| `renderProductSlot` | --                  |             | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement) \| undefined` | `undefined` |
-| `searchCategories`  | `search-categories` |             | `boolean \| undefined`                                                                           | `undefined` |
-| `searchCmsPages`    | `search-cms-pages`  |             | `boolean \| undefined`                                                                           | `undefined` |
+| Property            | Attribute           | Description                                                                       | Type                                                                                             | Default     |
+| ------------------- | ------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------- |
+| `fallbackTerm`      | `fallback-term`     | What term should be used if there isn't enough results                            | `string \| undefined`                                                                            | `undefined` |
+| `popupAnchor`       | `popup-anchor`      | Anchor popup to witch side                                                        | `"left" \| "right" \| undefined`                                                                 | `undefined` |
+| `renderProductSlot` | --                  | Function render custom products. Result has to be native HTML element or a string | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement) \| undefined` | `undefined` |
+| `searchCategories`  | `search-categories` | Should component search for categories too                                        | `boolean \| undefined`                                                                           | `undefined` |
+| `searchCmsPages`    | `search-cms-pages`  | Should component search for CMS pages too                                         | `boolean \| undefined`                                                                           | `undefined` |
 
 
 ## Dependencies
