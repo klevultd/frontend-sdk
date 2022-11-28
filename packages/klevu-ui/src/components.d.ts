@@ -82,9 +82,21 @@ export namespace Components {
         "startOpen"?: boolean;
     }
     interface KlevuDropdown {
+        /**
+          * Is element disabled
+         */
         "disabled"?: boolean;
+        /**
+          * Form name
+         */
         "name": string;
+        /**
+          * Options to display in dropdown
+         */
         "options": Array<{ value: string; text: String }>;
+        /**
+          * Which element value is selected
+         */
         "selected": string;
     }
     interface KlevuFacet {
@@ -136,11 +148,23 @@ export namespace Components {
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
     }
     interface KlevuHeading {
+        /**
+          * Varint of heading
+         */
         "variant": KlevuHeadingVariant;
     }
     interface KlevuInit {
+        /**
+          * Read only API key to Klevu
+         */
         "apiKey": string;
+        /**
+          * Global settings
+         */
         "settings"?: KlevuUIGlobalSettings;
+        /**
+          * Klevu Server URL
+         */
         "url": string;
     }
     interface KlevuLatestSearches {
@@ -685,10 +709,25 @@ declare namespace LocalJSX {
         "startOpen"?: boolean;
     }
     interface KlevuDropdown {
+        /**
+          * Is element disabled
+         */
         "disabled"?: boolean;
+        /**
+          * Form name
+         */
         "name": string;
+        /**
+          * When dropdown item has been changed
+         */
         "onKlevuDropdownChanged"?: (event: KlevuDropdownCustomEvent<string>) => void;
+        /**
+          * Options to display in dropdown
+         */
         "options": Array<{ value: string; text: String }>;
+        /**
+          * Which element value is selected
+         */
         "selected": string;
     }
     interface KlevuFacet {
@@ -740,11 +779,23 @@ declare namespace LocalJSX {
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
     }
     interface KlevuHeading {
+        /**
+          * Varint of heading
+         */
         "variant"?: KlevuHeadingVariant;
     }
     interface KlevuInit {
+        /**
+          * Read only API key to Klevu
+         */
         "apiKey": string;
+        /**
+          * Global settings
+         */
         "settings"?: KlevuUIGlobalSettings;
+        /**
+          * Klevu Server URL
+         */
         "url": string;
     }
     interface KlevuLatestSearches {

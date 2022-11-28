@@ -27,9 +27,14 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
   if (!comp) {
     return {}
   }
+
+  if (tag === "klevu-init") {
+    console.log(comp)
+  }
+
   const argTypes: ArgTypes = {}
   for (const a of comp.props) {
-    if (!a.attr) {
+    if (!a.name) {
       continue
     }
 
@@ -40,12 +45,22 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     argTypes[a.name] = {
       name: a.name,
       description: a.docs,
-      defaultValue: a.default,
       table: {
         category: "Attributes",
+        type: {
+          summary: a.type,
+        },
+        defaultValue: {
+          summary: a.default,
+        },
       },
       required: a.required,
       type: noUndefinedValues.length === 1 ? noUndefinedValues[0].type : ("string" as any),
+    }
+
+    if (!a.attr) {
+      argTypes[a.name].type = undefined
+      argTypes[a.name].control = "object"
     }
 
     if (isOptions) {
@@ -61,6 +76,14 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
       description: e.docs,
       table: {
         category: "Events",
+      },
+    }
+  }
+  for (const s of comp.slots) {
+    argTypes[s.name] = {
+      description: s.docs,
+      table: {
+        category: "Slots",
       },
     }
   }

@@ -1,14 +1,9 @@
 import { defineCustomElements } from "../loader"
 import "../src/global/global.css"
 
-/*
-import { extractArgTypes, extractComponentDescription, setStencilDocJson } from "@pxtrn/storybook-addon-docs-stencil"
-import docJson from "../dist/docs/klevu-ui-docs.json"
-if (docJson) setStencilDocJson(docJson)
-*/
-
 defineCustomElements()
 
+/*
 const klevuStyles = Array.from(document.styleSheets)
   .filter((sheet) => sheet.href === null || sheet.href.startsWith(window.location.origin))
   .reduce(
@@ -21,17 +16,18 @@ const klevuStyles = Array.from(document.styleSheets)
               rule.selectorText === ":root"
                 ? [...def, ...Array.from(rule.style).filter((name) => name.startsWith("--klevu"))]
                 : def),
-          []
+          [] as any[]
         ),
       ]),
-    []
+    [] as any[]
   )
-
-console.log(klevuStyles)
+  */
 
 export const parameters = {
   options: {
-    order: ["Atoms", "Components", "Apps"],
+    storySort: {
+      order: ["Start", "Atoms", "Components", "Apps"],
+    },
   },
   actions: {
     argTypesRegex: "^(on.*|klevu.*)",
@@ -41,6 +37,7 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+    expanded: true,
   },
   cssprops: {
     "klevu-color-primary": { value: "#00a0e9", description: "Main color of components" },

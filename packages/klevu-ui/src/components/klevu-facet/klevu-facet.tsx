@@ -3,6 +3,9 @@ import { Component, Fragment, h, Host, Prop } from "@stencil/core"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
+/**
+ * Rendering items of single facet
+ */
 @Component({
   tag: "klevu-facet",
   styleUrl: "klevu-facet.css",

@@ -54,6 +54,7 @@
     "@storybook/builder-webpack4": "^6.5.13",
     "@storybook/manager-webpack4": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
+    "@storybook/theming": "^6.5.13",
     "@storybook/web-components": "^6.5.13",
     "@types/jest": "^27.0.3",
     "@types/lodash.merge": "^4.6.7",

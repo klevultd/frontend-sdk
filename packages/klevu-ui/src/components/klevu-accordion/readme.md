@@ -11,6 +11,14 @@
 | `startOpen` | `start-open` | Should it initially be open | `boolean \| undefined` | `undefined` |
 
 
+## Slots
+
+| Slot        | Description                                 |
+| ----------- | ------------------------------------------- |
+| `"content"` | Element containing content of the accordion |
+| `"header"`  | Element that has title that can be clicked  |
+
+
 ## Dependencies
 
 ### Used by

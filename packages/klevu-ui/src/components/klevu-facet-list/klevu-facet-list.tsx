@@ -3,6 +3,9 @@ import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
+/**
+ * Render all facets of filter manager
+ */
 @Component({
   tag: "klevu-facet-list",
   styleUrl: "klevu-facet-list.css",

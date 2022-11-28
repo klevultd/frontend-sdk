@@ -11,7 +11,9 @@ export default autofillMeta("klevu-quicksearch", {
 })
 
 const Template: Story<HTMLKlevuQuicksearchElement> = (args) =>
-  html` <klevu-quicksearch .fallbackTerm=${args.fallbackTerm}></klevu-quicksearch>`
+  html` <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+    ><klevu-quicksearch .fallbackTerm=${args.fallbackTerm}></klevu-quicksearch
+  ></klevu-init>`
 
 export const Default = Template.bind({})
 

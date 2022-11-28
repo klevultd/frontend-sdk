@@ -1,17 +1,35 @@
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
+/**
+ * Simple native dropdown component for dropdown
+ */
 @Component({
   tag: "klevu-dropdown",
   styleUrl: "klevu-dropdown.css",
   shadow: true,
 })
 export class KlevuDropdown {
+  /**
+   * Form name
+   */
   @Prop() name!: string
 
+  /**
+   * Options to display in dropdown
+   */
   @Prop() options!: Array<{ value: string; text: String }>
+  /**
+   * Is element disabled
+   */
   @Prop() disabled?: boolean
+  /**
+   * Which element value is selected
+   */
   @Prop() selected!: string
 
+  /**
+   * When dropdown item has been changed
+   */
   @Event({
     composed: true,
   })

@@ -6,6 +6,15 @@ export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; origin
 export type KlevuProductVariant = "line" | "small" | "default"
 export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
 
+/**
+ * Generic product component that renders product based on KlevuRecord of @klevu/core
+ * All parts of the component can be replaced with slots.
+ *
+ * @slot top - Empty are before any product content
+ * @slot image - Image region of component
+ * @slot info - Swatches, titles, brands and prices slot
+ * @slot bototm - Empty are after product content
+ */
 @Component({
   tag: "klevu-product",
   styleUrl: "klevu-product.css",

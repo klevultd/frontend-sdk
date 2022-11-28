@@ -25,6 +25,16 @@
 | `klevuProductClick` | When products has been clicked | `CustomEvent<{ product: Partial<KlevuRecord>; originalEvent: MouseEvent; }>` |
 
 
+## Slots
+
+| Slot       | Description                              |
+| ---------- | ---------------------------------------- |
+| `"bototm"` | Empty are after product content          |
+| `"image"`  | Image region of component                |
+| `"info"`   | Swatches, titles, brands and prices slot |
+| `"top"`    | Empty are before any product content     |
+
+
 ## Shadow Parts
 
 | Part      | Description |

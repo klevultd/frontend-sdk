@@ -1,5 +1,8 @@
 import { Component, h, Prop } from "@stencil/core"
 
+/**
+ * Basic button component
+ */
 @Component({
   tag: "klevu-button",
   styleUrl: "klevu-button.css",

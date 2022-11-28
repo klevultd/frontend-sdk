@@ -36,6 +36,14 @@ Type: `Promise<void>`
 
 
 
+## Slots
+
+| Slot        | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `"content"` | Content to display in drawer                         |
+| `"origin"`  | When origin element is clicked then content is shown |
+
+
 ## Dependencies
 
 ### Used by

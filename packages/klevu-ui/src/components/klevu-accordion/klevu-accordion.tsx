@@ -1,5 +1,11 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
+/**
+ * Component that wrap two slots to create accordion element
+ *
+ * @slot header - Element that has title that can be clicked
+ * @slot content - Element containing content of the accordion
+ */
 @Component({
   tag: "klevu-accordion",
   styleUrl: "klevu-accordion.css",
