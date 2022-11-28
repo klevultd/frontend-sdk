@@ -42,9 +42,7 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
       description: a.docs,
       defaultValue: a.default,
       table: {
-        description: a.docs,
         category: "Attributes",
-        summary: a.docs,
       },
       required: a.required,
       type: noUndefinedValues.length === 1 ? noUndefinedValues[0].type : ("string" as any),
@@ -60,13 +58,11 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     handles.push(e.event)
     argTypes[e.event] = {
       action: e.docs,
+      description: e.docs,
       table: {
         category: "Events",
       },
     }
-  }
-  if (comp.tag === "klevu-product") {
-    console.log(comp, argTypes)
   }
   return merge(meta, {
     component: tag,

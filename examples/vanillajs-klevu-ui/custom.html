@@ -49,7 +49,6 @@
       facetlistEl.manager = manager
       queryEl.addEventListener("klevuQueryResult", (event) => {
         resultsEl.innerHTML = ""
-        console.log(event.detail.result)
         for (const product of event.detail.result.records) {
           const productEl = document.createElement("klevu-product")
           productEl.product = product

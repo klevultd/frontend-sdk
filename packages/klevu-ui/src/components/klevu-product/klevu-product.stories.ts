@@ -1,12 +1,9 @@
 import { html } from "lit-html"
 import { autofillMeta, fullMockRequest } from "../../storybookUtils"
-
-//
 import notes from "./readme.md"
+import { Story } from "@storybook/web-components"
 
 const product = fullMockRequest.queryResults?.[0].records[0]
-
-import { Story } from "@storybook/web-components"
 
 export default autofillMeta("klevu-product", {
   title: "Components/Product",
@@ -34,6 +31,9 @@ const Template: Story<HTMLKlevuProductElement> = (args) =>
   `
 
 export const NormalProduct = Template.bind({})
+NormalProduct.args = {
+  variant: "default",
+}
 export const ListProduct = Template.bind({})
 ListProduct.args = {
   variant: "line",
