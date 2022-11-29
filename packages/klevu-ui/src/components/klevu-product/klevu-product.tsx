@@ -13,7 +13,7 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @slot top - Empty are before any product content
  * @slot image - Image region of component
  * @slot info - Swatches, titles, brands and prices slot
- * @slot bototm - Empty are after product content
+ * @slot bottom - Empty are after product content
  */
 @Component({
   tag: "klevu-product",

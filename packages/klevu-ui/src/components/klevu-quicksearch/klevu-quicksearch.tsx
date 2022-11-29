@@ -6,6 +6,9 @@ import type { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
 
+/**
+ * Full app to create search bar that popups trending products and search results.
+ */
 @Component({
   tag: "klevu-quicksearch",
   styleUrl: "klevu-quicksearch.css",
@@ -30,9 +33,11 @@ export class KlevuQuicksearch {
   @Prop() searchCmsPages?: boolean
 
   /**
-   * Function render custom products. Result has to be native HTML element or a string
+   * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
+   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
+   * slot requested. Return null for slots that you do not want to render.
    */
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: Array<KlevuRecord | undefined> = [

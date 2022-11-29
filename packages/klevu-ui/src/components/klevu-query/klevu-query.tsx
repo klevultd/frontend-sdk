@@ -21,6 +21,9 @@ import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 
 export type AllQueryOptions = KlevuMerchandisingOptions | KlevuKMCRecommendationOptions | KlevuSearchOptions
 
+/**
+ * Abstract helper component that queries
+ */
 @Component({
   tag: "klevu-query",
   shadow: false,
@@ -32,7 +35,7 @@ export class KlevuQuery {
   @Prop() type!: "search" | "merchandising" | "recommendation"
 
   /**
-   * Overriden
+   * Object to override and settings on search options
    */
   @Prop() options?: AllQueryOptions
 
@@ -57,30 +60,33 @@ export class KlevuQuery {
   @Prop() filterCount?: number
 
   /**
-   *
+   * Which category to do merchandising. Required for "merchandising" type
    */
   @Prop() category?: string
 
   /**
-   *
+   * Which category title to have on page. Required for "merchandising" type
    */
   @Prop() categoryTitle?: string
 
   /**
-   *
+   * What to search. Required for "search" type.
    */
   @Prop() searchTerm?: string
 
   /**
-   *
+   * Which recommendation to fetch from Klevu Merchant Center. Required for "recommendation" type
    */
   @Prop() recommendationId?: string
 
   /**
-   *
+   * Manager used for filters
    */
   @Prop() manager: FilterManager = new FilterManager()
 
+  /**
+   * Should component listen to changes to filters
+   */
   @Prop() updateOnFilterChange?: boolean
 
   @Watch("manager")

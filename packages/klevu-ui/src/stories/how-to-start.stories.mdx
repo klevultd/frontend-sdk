@@ -13,7 +13,7 @@ Here is a example of `klevu-quicksearch` component:
 
 ` `
 
-Currently components can be used either with vanilla JS (`@klevu/ui`), react (`@klevu/ui-react`) or Vue (`@klevu/ui-vue`).
+Currently components can be used either with vanilla JS (`@klevu/ui`), React (`@klevu/ui-react`) or Vue (`@klevu/ui-vue`).
 Each of them have slightly different initialization.
 
 ## @klevu/ui
@@ -59,6 +59,12 @@ In your React application add `@klevu/ui-react` package.
 npm install @klevu/ui-react
 ```
 
+And add CSS variables templates to your `head` tag. These can be replace with your own values if you wish.
+
+```html
+<link rel="stylesheet" href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css" />
+```
+
 Now you can use React components from package. First wrap everything with `KlevuInit` component and then use other components.
 
 ```ts
@@ -79,6 +85,64 @@ As you can see syntax is almost same as in default web components version. Only 
 ## @klevu/ui-vue
 
 Web components automatically compiled into Vue components. Use Vue syntax to embed components into your code.
+
+In your Vue application add `@klevu/ui-vue` package.
+
+```bash
+npm install @klevu/ui-vue
+```
+
+And add CSS variables templates to your `head` tag. These can be replace with your own values if you wish.
+
+```html
+<link rel="stylesheet" href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css" />
+```
+
+Add KlevuComponents with `use()` when mounting app.
+
+```ts
+import { createApp } from "vue"
+import App from "./App.vue"
+import { KlevuComponents } from "@klevu/ui-vue"
+
+createApp(App).use(KlevuComponents).mount("#app")
+```
+
+Then just use the components in your components:
+
+```html
+<template>
+  <klevu-init
+    url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+    api-key="klevu-165829460115715456"
+    :settings.prop="{
+      onProductClick(product: any, event: any) {
+        console.log("clicked", product)
+        return false;
+      },
+    }"
+  >
+    <klevu-quicksearch></klevu-quicksearch>
+  </klevu-init>
+</template>
+```
+
+Optional: To get code autocomplete in VSCode you can import the Klevu components to your component.
+
+```html
+<script setup lang="ts">
+  import { KlevuInit, KlevuQuickSearch } from "@klevu/ui-vue"
+</script>
+
+<script lang="ts">
+  export default {
+    components: {
+      KlevuInit,
+      KlevuQuickSearch,
+    },
+  }
+</script>
+```
 
 # KlevuInit component
 

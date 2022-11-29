@@ -2,14 +2,20 @@ import { KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
+/**
+ * Fetches and displays most popular searches from Klevu Merchant center
+ */
 @Component({
   tag: "klevu-popular-searches",
   styleUrl: "klevu-popular-searches.css",
   shadow: true,
 })
 export class KlevuPopularSearches {
-  @State() popularSearches?: string[]
+  /**
+   * Caption of the list
+   */
   @Prop() caption = "Popular searches"
+  @State() popularSearches?: string[]
 
   async connectedCallback() {
     await KlevuInit.ready()

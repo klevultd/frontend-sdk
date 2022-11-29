@@ -104,7 +104,7 @@ export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination
   'max',
   'queryResult',
   'prevText',
-  'nextNext',
+  'nextText',
   'klevuPaginationChange'
 ]);
 

@@ -5,19 +5,19 @@
 
 ## Properties
 
-| Property             | Attribute     | Description | Type                  | Default     |
-| -------------------- | ------------- | ----------- | --------------------- | ----------- |
-| `disabled`           | `disabled`    |             | `boolean`             | `false`     |
-| `placeholder`        | `placeholder` |             | `string \| undefined` | `undefined` |
-| `value` _(required)_ | `value`       |             | `string`              | `undefined` |
+| Property             | Attribute     | Description                    | Type                  | Default     |
+| -------------------- | ------------- | ------------------------------ | --------------------- | ----------- |
+| `disabled`           | `disabled`    | Is field disabled              | `boolean`             | `false`     |
+| `placeholder`        | `placeholder` | Placeholder value of the field | `string \| undefined` | `undefined` |
+| `value` _(required)_ | `value`       | Current value of the field     | `string`              | `undefined` |
 
 
 ## Events
 
-| Event              | Description | Type                  |
-| ------------------ | ----------- | --------------------- |
-| `klevuTextChanged` |             | `CustomEvent<string>` |
-| `klevuTextFocused` |             | `CustomEvent<void>`   |
+| Event              | Description                | Type                  |
+| ------------------ | -------------------------- | --------------------- |
+| `klevuTextChanged` | When text changes in field | `CustomEvent<string>` |
+| `klevuTextFocused` | When textfield is focused  | `CustomEvent<void>`   |
 
 
 ## Dependencies

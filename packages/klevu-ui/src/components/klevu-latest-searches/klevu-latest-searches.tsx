@@ -1,12 +1,18 @@
 import { KlevuLastSearches } from "@klevu/core"
 import { Component, h, Host, Prop, State } from "@stencil/core"
 
+/**
+ * Lists latest searches user has made on the site
+ */
 @Component({
   tag: "klevu-latest-searches",
   styleUrl: "klevu-latest-searches.css",
   shadow: true,
 })
 export class KlevuLatestSearches {
+  /**
+   * Caption of the list
+   */
   @Prop() caption = "Last searches"
   @State() lastSearches: string[] = []
 

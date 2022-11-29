@@ -5,9 +5,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type     | Default              |
-| --------- | --------- | ----------- | -------- | -------------------- |
-| `caption` | `caption` |             | `string` | `"Popular searches"` |
+| Property  | Attribute | Description         | Type     | Default              |
+| --------- | --------- | ------------------- | -------- | -------------------- |
+| `caption` | `caption` | Caption of the list | `string` | `"Popular searches"` |
 
 
 ## Shadow Parts

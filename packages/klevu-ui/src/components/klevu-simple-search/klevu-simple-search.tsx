@@ -2,6 +2,9 @@ import { Component, Event, EventEmitter, h, Host, State } from "@stencil/core"
 import { KlevuSearchFieldCustomEvent } from "../../components"
 import { SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
 
+/**
+ * Simplified application that shows search box where typing text displays suggestions.
+ */
 @Component({
   tag: "klevu-simple-search",
   styleUrl: "klevu-simple-search.css",
@@ -12,6 +15,9 @@ export class KlevuSimpleSearch {
 
   @State() suggestions: string[] = []
 
+  /**
+   * When any of suggestions has been clicked
+   */
   @Event()
   klevuSuggestionClick!: EventEmitter<string>
 

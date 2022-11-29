@@ -29,7 +29,7 @@
 
 | Slot       | Description                              |
 | ---------- | ---------------------------------------- |
-| `"bototm"` | Empty are after product content          |
+| `"bottom"` | Empty are after product content          |
 | `"image"`  | Image region of component                |
 | `"info"`   | Swatches, titles, brands and prices slot |
 | `"top"`    | Empty are before any product content     |

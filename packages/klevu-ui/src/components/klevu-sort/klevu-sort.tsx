@@ -1,12 +1,18 @@
 import { KlevuSearchSorting } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host } from "@stencil/core"
 
+/**
+ * Sort dropdown. User can select what kind of sorting they want
+ */
 @Component({
   tag: "klevu-sort",
   styleUrl: "klevu-sort.css",
   shadow: true,
 })
 export class KlevuSort {
+  /**
+   * When the sorting changes
+   */
   @Event({
     composed: true,
   })

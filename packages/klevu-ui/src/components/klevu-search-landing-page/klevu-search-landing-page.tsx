@@ -14,16 +14,34 @@ import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 
+/**
+ * Full app component for search landing page
+ */
 @Component({
   tag: "klevu-search-landing-page",
   styleUrl: "klevu-search-landing-page.css",
   shadow: true,
 })
 export class KlevuSearchLandingPage {
+  /**
+   * How many results to display on a page
+   */
   @Prop() limit: number = 24
+  /**
+   * What term was used for search
+   */
   @Prop() term!: string
+  /**
+   * In which order to set the products
+   */
   @Prop() sort?: KlevuSearchSorting
+  /**
+   * How many products to display in filters
+   */
   @Prop() filterCount?: number
+  /**
+   * Order filters in a customer order
+   */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
 
   @State() results: Array<KlevuRecord | undefined> = [
@@ -82,8 +100,6 @@ export class KlevuSearchLandingPage {
     this.clickEvent = this.resultObject!.getSearchClickSendEvent?.()
   }
 
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
-
   @Listen("productClick")
   productClickHandler(event: CustomEvent<KlevuProductOnProductClick>) {
     if (this.clickEvent && event.detail.product.id) {
@@ -96,6 +112,12 @@ export class KlevuSearchLandingPage {
     this.initialFetch()
   }
 
+  /**
+   * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered.
+   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
+   * slot requested. Return null for slots that you do not want to render.
+   */
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
   private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null

@@ -28,7 +28,7 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     return {}
   }
 
-  if (tag === "klevu-init") {
+  if (tag === "klevu-popup") {
     console.log(comp)
   }
 
@@ -84,6 +84,17 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
       description: s.docs,
       table: {
         category: "Slots",
+      },
+    }
+  }
+  for (const m of comp.methods) {
+    argTypes[m.name] = {
+      description: m.docs,
+      table: {
+        category: "Methods",
+        type: {
+          summary: m.signature,
+        },
       },
     }
   }

@@ -14,6 +14,9 @@ import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 
+/**
+ * Full merchandising app to power up your product grid pages
+ */
 @Component({
   tag: "klevu-merchandising",
   styleUrl: "klevu-merchandising.css",
@@ -122,7 +125,12 @@ export class KlevuMerchandising {
     this.initialFetch()
   }
 
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+  /**
+   * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered.
+   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
+   * slot requested. Return null for slots that you do not want to render.
+   */
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
   private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null
