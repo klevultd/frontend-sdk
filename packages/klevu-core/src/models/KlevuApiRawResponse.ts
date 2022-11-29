@@ -147,6 +147,7 @@ export type KlevuApiRawResponse = {
   meta: {
     qTime: number
     responseCode: number
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error?: any
   }
   suggestionResults?: KlevuSuggestionResult[]
