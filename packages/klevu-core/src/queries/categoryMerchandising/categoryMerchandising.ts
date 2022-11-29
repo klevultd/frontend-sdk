@@ -7,12 +7,12 @@ import {
   KlevuTypeOfRequest,
 } from "../../models/index.js"
 
-type Options = { id: string; searchTerm: string } & Omit<
-  KlevuBaseQuerySettings,
-  "query"
->
+export type KlevuMerchandisingOptions = {
+  id: string
+  searchTerm: string
+} & Omit<KlevuBaseQuerySettings, "query">
 
-const defaults: Options = {
+const defaults: KlevuMerchandisingOptions = {
   id: "categoryMerchandising",
   searchTerm: "*",
 }
@@ -28,10 +28,10 @@ const defaults: Options = {
  */
 export function categoryMerchandising(
   category: KlevuBaseQuerySettingsQuery["categoryPath"],
-  options?: Partial<Options>,
+  options?: Partial<KlevuMerchandisingOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunctionReturnValue {
-  const params: Options = {
+  const params: KlevuMerchandisingOptions = {
     ...defaults,
     ...options,
   }

@@ -1,6 +1,12 @@
-import { Component, Host, h, Method, Prop, State, Element } from "@stencil/core"
+import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
 import { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 
+/**
+ * Component to create offscreen drawer on left or right side of the screen
+ *
+ * @slot origin - When origin element is clicked then content is shown
+ * @slot content - Content to display in drawer
+ */
 @Component({
   tag: "klevu-drawer",
   styleUrl: "klevu-drawer.css",

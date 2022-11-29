@@ -3,59 +3,11 @@
  */
 
 import { KlevuApiRawResponse, KlevuRecord } from "@klevu/core"
-
-/**
- * Helper function to create Storybook stories with web components.
- *
- * @param tag Tag of web component
- * @param args Arguments to pass to web component
- * @param style External style to inject DOM outside the web component. For testing user styles.
- * @returns
- */
-export const WebComponentTemplate = <T>({
-  tag,
-  attributes,
-  args,
-  style,
-  innerHTML,
-  childElements: childElement,
-}: {
-  tag: string
-  args?: {
-    [key in keyof Partial<T>]: T[key]
-  }
-  attributes?: { [key: string]: any }
-  style?: string
-  innerHTML?: string
-  childElements?: HTMLElement[]
-}) => {
-  const func = (args: any) => {
-    const element = document.createElement(tag)
-    for (const [key, value] of Object.entries(attributes ?? {})) {
-      element.setAttribute(key, value)
-    }
-    for (const [key, value] of Object.entries(args ?? {})) {
-      // @ts-expect-error
-      element[key] = value
-    }
-    if (innerHTML) {
-      element.innerHTML = innerHTML
-    }
-    if (childElement) {
-      element.append(...childElement)
-    }
-    if (style) {
-      const styleElem = document.createElement("style")
-      styleElem.type = "text/css"
-      styleElem.appendChild(document.createTextNode(style))
-      element.insertBefore(styleElem, element.firstChild)
-    }
-    return element
-  }
-
-  func.args = args
-  return func
-}
+import { JsonDocs } from "@stencil/core/internal"
+import { ArgTypes, Meta } from "@storybook/web-components"
+// @ts-inore
+import jsdocs from "../dist/docs/klevu-ui-docs.json"
+import merge from "lodash.merge"
 
 export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
@@ -69,14 +21,89 @@ export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   return element
 }
 
-/**
- * Helper to allow syntax highlighting in VS Code.
- *
- * @param i
- * @returns
- */
-export const css = (i: TemplateStringsArray): string => i.toString()
-export const html = (i: TemplateStringsArray): string => i.toString()
+export function autofillMeta(tag: string, meta: Meta): Meta {
+  const data: JsonDocs = jsdocs as any
+  const comp = data.components.find((c) => c.tag == tag)
+  if (!comp) {
+    return {}
+  }
+
+  const argTypes: ArgTypes = {}
+  for (const a of comp.props) {
+    if (!a.name) {
+      continue
+    }
+
+    const noUndefinedValues = a.values.filter((v) => v.type !== "undefined")
+
+    const isOptions = Boolean(noUndefinedValues[0].value) && noUndefinedValues[0].type === "string"
+
+    argTypes[a.name] = {
+      name: a.name,
+      description: a.docs,
+      table: {
+        category: "Attributes",
+        type: {
+          summary: a.type,
+        },
+        defaultValue: {
+          summary: a.default,
+        },
+      },
+      required: a.required,
+      type: noUndefinedValues.length === 1 ? noUndefinedValues[0].type : ("string" as any),
+    }
+
+    if (!a.attr) {
+      argTypes[a.name].type = undefined
+      argTypes[a.name].control = "object"
+    }
+
+    if (isOptions) {
+      argTypes[a.name].options = noUndefinedValues.map((o) => o.value)
+      argTypes[a.name].control = "radio"
+    }
+  }
+  const handles: string[] = []
+  for (const e of comp.events) {
+    handles.push(e.event)
+    argTypes[e.event] = {
+      action: e.docs,
+      description: e.docs,
+      table: {
+        category: "Events",
+      },
+    }
+  }
+  for (const s of comp.slots) {
+    argTypes[s.name] = {
+      description: s.docs,
+      table: {
+        category: "Slots",
+      },
+    }
+  }
+  for (const m of comp.methods) {
+    argTypes[m.name] = {
+      description: m.docs,
+      table: {
+        category: "Methods",
+        type: {
+          summary: m.signature,
+        },
+      },
+    }
+  }
+  return merge(meta, {
+    component: tag,
+    parameters: {
+      actions: {
+        handles,
+      },
+    },
+    argTypes,
+  })
+}
 
 /**
  * Temporary testing data

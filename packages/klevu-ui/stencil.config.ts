@@ -7,6 +7,7 @@ import { vueOutputTarget as vue } from "@stencil/vue-output-target"
 export const config: Config = {
   namespace: "klevu-ui",
   globalStyle: "src/global/global.css",
+  tsconfig: "tsconfig.build.json",
   extras: {
     experimentalImportInjection: true,
   },
@@ -29,6 +30,14 @@ export const config: Config = {
     },
     {
       type: "docs-readme",
+    },
+    {
+      type: "docs-json",
+      file: "dist/docs/klevu-ui-docs.json",
+    },
+    {
+      type: "docs-vscode",
+      file: "dist/docs/vscode-data.json",
     },
   ],
   rollupPlugins: {

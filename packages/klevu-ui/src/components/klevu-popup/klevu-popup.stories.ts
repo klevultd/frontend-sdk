@@ -1,34 +1,36 @@
-import { html, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-popup.css"
-// @ts-ignore
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 
-const meta: Meta = {
+export default autofillMeta("klevu-popup", {
   title: "Atoms/Popup",
   parameters: {
     notes,
   },
+})
+
+const Template: Story<HTMLKlevuPopupElement> = (args) => html`<klevu-popup
+  .anchor=${args.anchor}
+  .closeAtOutsideClick=${args.closeAtOutsideClick}
+  .fullwidthContent=${args.fullwidthContent}
+  .openAtFocus=${args.openAtFocus}
+  .startOpen=${args.startOpen}
+>
+  <klevu-search-field slot="origin"></klevu-search-field>
+  <div slot="content">Hello world popup</div>
+</klevu-popup>`
+
+export const StartOpen = Template.bind({})
+StartOpen.args = {
+  startOpen: true,
+  anchor: "left",
 }
-export default meta
 
-export const StartOpen = WebComponentTemplate<HTMLKlevuPopupElement>({
-  tag: "klevu-popup",
-  args: {
-    startOpen: true,
-    anchor: "left",
-  },
-  innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>
-    <div slot="content">Hello world popup</div>`,
-})
-
-export const StartClosed = WebComponentTemplate<HTMLKlevuPopupElement>({
-  tag: "klevu-popup",
-  args: {
-    startOpen: false,
-    anchor: "left",
-  },
-  innerHTML: html`<klevu-search-field slot="origin"></klevu-search-field>
-    <div slot="content">Hello world popup</div>`,
-})
+export const StartClosed = Template.bind({})
+StartClosed.args = {
+  startOpen: false,
+  anchor: "left",
+}

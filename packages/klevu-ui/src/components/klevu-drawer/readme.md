@@ -1,18 +1,16 @@
 # klevu-drawer
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property              | Attribute                | Description | Type                   | Default     |
-| --------------------- | ------------------------ | ----------- | ---------------------- | ----------- |
-| `anchor`              | `anchor`                 |             | `"left" \| "right"`    | `"right"`   |
-| `background`          | `background`             |             | `boolean \| undefined` | `undefined` |
-| `closeAtOutsideClick` | `close-at-outside-click` |             | `boolean`              | `true`      |
-| `startOpen`           | `start-open`             |             | `boolean \| undefined` | `undefined` |
+| Property              | Attribute                | Description                                    | Type                   | Default     |
+| --------------------- | ------------------------ | ---------------------------------------------- | ---------------------- | ----------- |
+| `anchor`              | `anchor`                 | Anchor to right or left side of the page       | `"left" \| "right"`    | `"right"`   |
+| `background`          | `background`             | Display dim background on top of other content | `boolean \| undefined` | `undefined` |
+| `closeAtOutsideClick` | `close-at-outside-click` | Close by clicking outside of drawer            | `boolean`              | `true`      |
+| `startOpen`           | `start-open`             | Start side drawer open                         | `boolean \| undefined` | `undefined` |
 
 
 ## Methods
@@ -36,6 +34,14 @@ Type: `Promise<void>`
 Type: `Promise<void>`
 
 
+
+
+## Slots
+
+| Slot        | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `"content"` | Content to display in drawer                         |
+| `"origin"`  | When origin element is clicked then content is shown |
 
 
 ## Dependencies

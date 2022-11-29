@@ -1,20 +1,26 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-merchandising.css"
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-merchandising", {
   title: "Apps/Merchandising",
   parameters: { notes },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuMerchandisingElement>({
-  tag: "klevu-merchandising",
-  args: {
-    category: "Apparel",
-    categoryTitle: "Apparels",
-  },
 })
+
+const Template: Story<HTMLKlevuMerchandisingElement> = (args) =>
+  html`<klevu-merchandising
+    .category=${args.category}
+    .categoryTitle=${args.categoryTitle}
+    .filterCount=${args.filterCount}
+    .filterCustomOrder=${args.filterCustomOrder}
+    .limit=${args.limit}
+    .renderProductSlot=${args.renderProductSlot}
+    .sort=${args.sort}
+  ></klevu-merchandising>`
+
+export const Default = Template.bind({})
+Default.args = {
+  category: "Apparel",
+  categoryTitle: "Apparels",
+}

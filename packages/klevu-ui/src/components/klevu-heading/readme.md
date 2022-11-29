@@ -1,15 +1,13 @@
 # klevu-heading
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property  | Attribute | Description | Type                   | Default |
-| --------- | --------- | ----------- | ---------------------- | ------- |
-| `variant` | `variant` |             | `"h1" \| "h2" \| "h3"` | `"h2"`  |
+| Property  | Attribute | Description       | Type                   | Default |
+| --------- | --------- | ----------------- | ---------------------- | ------- |
+| `variant` | `variant` | Varint of heading | `"h1" \| "h2" \| "h3"` | `"h1"`  |
 
 
 ## Dependencies

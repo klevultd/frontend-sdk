@@ -1,6 +1,7 @@
 :host {
   display: flex;
   gap: var(--klevu-spacing-normal);
+  justify-content: center;
 }
 
 span {
@@ -13,8 +14,12 @@ span {
 
 span.current {
   font-weight: bold;
+  cursor: inherit;
+  background: var(--klevu-color-primary);
+  color: var(--klevu-color-primary-text);
 }
 
 span.disabled {
   color: var(--klevu-color-dim-text);
+  cursor: inherit;
 }

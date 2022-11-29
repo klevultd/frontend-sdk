@@ -1,20 +1,42 @@
-import { Component, Host, h, Prop, Element, Listen, Event, EventEmitter } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 import noUiSlider from "nouislider"
 
+/**
+ * Horizontal slider component. Used for price range
+ */
 @Component({
   tag: "klevu-slider",
   styleUrl: "klevu-slider.css",
   shadow: true,
 })
 export class KlevuSlider {
+  /**
+   * Min value of the range
+   */
   @Prop() min!: number
+  /**
+   * Max value of the range
+   */
   @Prop() max!: number
+  /**
+   * Current start value of the range
+   */
   @Prop() start?: number
+  /**
+   * Current end value of the range
+   */
   @Prop() end?: number
+
+  /**
+   * Show tooltips on top of slider
+   */
   @Prop() showTooltips?: boolean
 
   @Element() el?: HTMLKlevuSliderElement
 
+  /**
+   * When values change
+   */
   @Event({
     composed: true,
   })

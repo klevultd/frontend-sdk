@@ -1,18 +1,39 @@
 import { KlevuQueryResult } from "@klevu/core"
-import { Component, Host, h, Event, EventEmitter, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
+/**
+ * Pagination component. Either provide numbers or query result to display the component.
+ */
 @Component({
   tag: "klevu-pagination",
   styleUrl: "klevu-pagination.css",
   shadow: true,
 })
 export class KlevuPagination {
+  /**
+   * Current page
+   */
   @Prop() current?: number
+  /**
+   * Min page
+   */
   @Prop() min?: number
+  /**
+   * Max page
+   * */
   @Prop() max?: number
+  /**
+   * Query results used to build min, max and current
+   */
   @Prop() queryResult?: KlevuQueryResult
+  /**
+   * Button text for previous button
+   */
   @Prop() prevText = "Previous"
-  @Prop() nextNext = "Next"
+  /**
+   * Button text for next button
+   */
+  @Prop() nextText = "Next"
 
   /**
    * Page that was changed into
@@ -37,9 +58,38 @@ export class KlevuPagination {
       current = this.current!
     }
 
-    const pages: number[] = []
+    let pages: number[] = []
     for (let i = min; i <= max; i++) {
       pages.push(i)
+    }
+
+    if (pages.length > 8) {
+      let startIndex = min + 1
+      let endIndex = max - 1
+      let currentStartIndex = current > 3 ? current - 1 : 0
+      let currentEndIndex = current < endIndex - 1 ? currentStartIndex + 2 : endIndex - 1
+
+      if (currentStartIndex < startIndex) {
+        currentStartIndex = startIndex + 1
+        currentEndIndex = currentStartIndex + 2
+      }
+
+      pages = []
+      for (let i = min; i <= startIndex; i++) {
+        pages.push(i)
+      }
+      if (startIndex + 1 < currentStartIndex) {
+        pages.push(-1)
+      }
+      for (let i = currentStartIndex; i <= currentEndIndex; i++) {
+        pages.push(i)
+      }
+      if (currentEndIndex + 1 < endIndex) {
+        pages.push(-1)
+      }
+      for (let i = endIndex; i <= max; i++) {
+        pages.push(i)
+      }
     }
 
     return (
@@ -52,23 +102,29 @@ export class KlevuPagination {
         >
           {this.prevText}
         </span>
-        {pages.map((i) => (
-          <span
-            class={{
-              current: current === i,
-            }}
-            onClick={() => this.klevuPaginationChange.emit(i)}
-          >
-            {i}
-          </span>
-        ))}
+        {pages.map((i) => {
+          if (i == -1) {
+            return <span class="disabled">...</span>
+          }
+
+          return (
+            <span
+              class={{
+                current: current === i,
+              }}
+              onClick={() => current !== i && this.klevuPaginationChange.emit(i)}
+            >
+              {i}
+            </span>
+          )
+        })}
         <span
           class={{
             disabled: current === max,
           }}
           onClick={() => current !== max && this.klevuPaginationChange.emit(current + 1)}
         >
-          {this.nextNext}
+          {this.nextText}
         </span>
       </Host>
     )

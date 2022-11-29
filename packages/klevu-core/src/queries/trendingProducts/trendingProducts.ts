@@ -1,4 +1,4 @@
-import { search, SearchOptions } from "../search/search.js"
+import { search, KlevuSearchOptions } from "../search/search.js"
 import {
   KlevuFetchFunctionReturnValue,
   KlevuFetchModifer,
@@ -22,7 +22,7 @@ import {
  * ```
  */
 export function trendingProducts(
-  options?: Partial<SearchOptions>,
+  options?: Partial<KlevuSearchOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): KlevuFetchFunctionReturnValue {
   return search(

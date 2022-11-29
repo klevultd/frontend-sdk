@@ -1,20 +1,22 @@
-import { KlevuRecord } from "@klevu/core"
-import { html, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-quicksearch.css"
-// @ts-ignore
+import { html } from "lit-html"
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { autofillMeta } from "../../storybookUtils"
 
-const meta: Meta = {
+export default autofillMeta("klevu-quicksearch", {
   title: "Apps/Quicksearch",
   parameters: { notes },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuQuicksearchElement>({
-  tag: "klevu-quicksearch",
-  args: {
-    fallbackTerm: "shoes",
-  },
 })
+
+const Template: Story<HTMLKlevuQuicksearchElement> = (args) =>
+  html` <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+    ><klevu-quicksearch .fallbackTerm=${args.fallbackTerm}></klevu-quicksearch
+  ></klevu-init>`
+
+export const Default = Template.bind({})
+
+Default.args = {
+  fallbackTerm: "shoes",
+}

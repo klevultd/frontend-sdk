@@ -1,15 +1,13 @@
 # klevu-slides
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default   |
-| -------- | --------- | ----------- | -------- | --------- |
-| `height` | `height`  |             | `string` | `"400px"` |
+| Property | Attribute | Description          | Type     | Default   |
+| -------- | --------- | -------------------- | -------- | --------- |
+| `height` | `height`  | Height of the slides | `string` | `"400px"` |
 
 
 ## Dependencies

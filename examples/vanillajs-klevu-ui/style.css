@@ -13,10 +13,11 @@
   --klevu-product-width: 300px;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 nav {
@@ -39,4 +40,15 @@ nav klevu-quicksearch {
 section {
   max-width: 1140px;
   margin: 12px auto;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  gap: 16px;
+}
+
+nav ul a {
+  color: white;
+  text-decoration: none;
 }

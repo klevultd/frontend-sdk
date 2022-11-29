@@ -1,21 +1,43 @@
 import { KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
-import { Component, Host, h, State, Listen, Prop } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import type { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
 
+/**
+ * Full app to create search bar that popups trending products and search results.
+ */
 @Component({
   tag: "klevu-quicksearch",
   styleUrl: "klevu-quicksearch.css",
   shadow: true,
 })
 export class KlevuQuicksearch {
+  /**
+   * What term should be used if there isn't enough results
+   */
   @Prop() fallbackTerm?: string
+  /**
+   * Anchor popup to witch side
+   */
   @Prop() popupAnchor?: KlevuPopupAnchor
+  /**
+   * Should component search for categories too
+   */
   @Prop() searchCategories?: boolean
+  /**
+   * Should component search for CMS pages too
+   */
   @Prop() searchCmsPages?: boolean
+
+  /**
+   * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
+   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
+   * slot requested. Return null for slots that you do not want to render.
+   */
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: Array<KlevuRecord | undefined> = [
@@ -29,7 +51,6 @@ export class KlevuQuicksearch {
   @State() suggestions: string[] = []
   @State() cmsPages?: KlevuRecord[]
   @State() categories?: KlevuRecord[]
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
 
   clickEvent?: (productId: string, variantId?: string) => void
 

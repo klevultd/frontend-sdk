@@ -1,21 +1,19 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-suggestions-list.css"
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-suggestions-list", {
   title: "Components/SuggestionsList",
   parameters: {
     notes,
   },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuSuggestionsListElement>({
-  tag: "klevu-suggestions-list",
-  args: {
-    suggestions: ["<strong>shoe</strong>s", "leather <strong>shoe</strong>s"],
-  },
 })
+
+const Template: Story<HTMLKlevuSuggestionsListElement> = (args) =>
+  html`<klevu-suggestions-list .caption=${args.caption} .suggestions=${args.suggestions}></klevu-suggestions-list>`
+
+export const Default = Template.bind({})
+Default.args = {
+  suggestions: ["<strong>shoe</strong>s", "leather <strong>shoe</strong>s"],
+}

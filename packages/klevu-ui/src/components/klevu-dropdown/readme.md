@@ -1,24 +1,23 @@
 # klevu-dropdown
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property               | Attribute  | Description | Type                                 | Default     |
-| ---------------------- | ---------- | ----------- | ------------------------------------ | ----------- |
-| `disabled`             | `disabled` |             | `boolean \| undefined`               | `undefined` |
-| `name` _(required)_    | `name`     |             | `string`                             | `undefined` |
-| `options` _(required)_ | --         |             | `{ value: string; text: String; }[]` | `undefined` |
+| Property                | Attribute  | Description                     | Type                                 | Default     |
+| ----------------------- | ---------- | ------------------------------- | ------------------------------------ | ----------- |
+| `disabled`              | `disabled` | Is element disabled             | `boolean \| undefined`               | `undefined` |
+| `name` _(required)_     | `name`     | Form name                       | `string`                             | `undefined` |
+| `options` _(required)_  | --         | Options to display in dropdown  | `{ value: string; text: String; }[]` | `undefined` |
+| `selected` _(required)_ | `selected` | Which element value is selected | `string`                             | `undefined` |
 
 
 ## Events
 
-| Event                  | Description | Type                  |
-| ---------------------- | ----------- | --------------------- |
-| `klevuDropdownChanged` |             | `CustomEvent<string>` |
+| Event                  | Description                         | Type                  |
+| ---------------------- | ----------------------------------- | --------------------- |
+| `klevuDropdownChanged` | When dropdown item has been changed | `CustomEvent<string>` |
 
 
 ## Dependencies

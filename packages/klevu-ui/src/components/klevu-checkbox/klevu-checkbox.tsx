@@ -1,8 +1,11 @@
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, h, Prop } from "@stencil/core"
 
 // this component needs to implement new ElementInternals as soon as it's implemented
 // https://github.com/ionic-team/stencil/issues/2284
 
+/**
+ * Checkbox component
+ */
 @Component({
   tag: "klevu-checkbox",
   styleUrl: "klevu-checkbox.css",

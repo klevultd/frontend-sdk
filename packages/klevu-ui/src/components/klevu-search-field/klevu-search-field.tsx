@@ -3,12 +3,11 @@ import {
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
   KlevuFetchQueryResult,
-  KlevuRecord,
   KlevuTypeOfRecord,
   search,
   suggestions,
 } from "@klevu/core"
-import { Component, Host, h, Prop, State, Event, EventEmitter } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
@@ -21,6 +20,9 @@ export type SearchResultsEventData = {
 
 export type SuggestionsEventData = string[]
 
+/**
+ * Plain textfield that does the searching
+ */
 @Component({
   tag: "klevu-search-field",
   styleUrl: "klevu-search-field.css",
@@ -45,12 +47,12 @@ export class KlevuSearchField {
   @Prop() fallbackTerm?: string
 
   /**
-   * Search products
+   * Should search products
    */
   @Prop() searchProducts?: boolean
 
   /**
-   * Search suggestions
+   * Should search suggestions
    */
   @Prop() searchSuggestions?: boolean
 
@@ -72,6 +74,9 @@ export class KlevuSearchField {
   })
   klevuSearchResults!: EventEmitter<SearchResultsEventData>
 
+  /**
+   * When searchfield gives some suggestions
+   */
   @Event({ composed: true })
   klevuSearchSuggestions!: EventEmitter<SuggestionsEventData>
 

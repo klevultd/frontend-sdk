@@ -1,23 +1,24 @@
-import { html, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-accordion.css"
-// @ts-ignore
+import { html } from "lit-html"
+
+//
+import { Story } from "@storybook/web-components"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-accordion", {
   title: "Atoms/Accordion",
   parameters: {
     notes,
   },
-}
-export default meta
-
-export const StartOpen = WebComponentTemplate<HTMLKlevuAccordionElement>({
-  tag: "klevu-accordion",
-  args: {
-    startOpen: true,
-  },
-  innerHTML: html`<klevu-heading slot="header" variant="h2">Heading</klevu-heading>
-    <div slot="content">Hello world accordion</div>`,
 })
+
+const Template: Story<HTMLKlevuAccordionElement> = (args) => html` <klevu-accordion .startOpen=${args.startOpen}>
+  <klevu-heading slot="header" variant="h2">Heading</klevu-heading>
+  <div slot="content">Hello world accordion</div>
+</klevu-accordion>`
+
+export const Default: any = Template.bind({})
+
+Default.args = {
+  startOpen: true,
+}

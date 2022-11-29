@@ -1,26 +1,24 @@
 # klevu-slider
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property           | Attribute       | Description | Type                   | Default     |
-| ------------------ | --------------- | ----------- | ---------------------- | ----------- |
-| `end`              | `end`           |             | `number \| undefined`  | `undefined` |
-| `max` _(required)_ | `max`           |             | `number`               | `undefined` |
-| `min` _(required)_ | `min`           |             | `number`               | `undefined` |
-| `showTooltips`     | `show-tooltips` |             | `boolean \| undefined` | `undefined` |
-| `start`            | `start`         |             | `number \| undefined`  | `undefined` |
+| Property           | Attribute       | Description                      | Type                   | Default     |
+| ------------------ | --------------- | -------------------------------- | ---------------------- | ----------- |
+| `end`              | `end`           | Current end value of the range   | `number \| undefined`  | `undefined` |
+| `max` _(required)_ | `max`           | Max value of the range           | `number`               | `undefined` |
+| `min` _(required)_ | `min`           | Min value of the range           | `number`               | `undefined` |
+| `showTooltips`     | `show-tooltips` | Show tooltips on top of slider   | `boolean \| undefined` | `undefined` |
+| `start`            | `start`         | Current start value of the range | `number \| undefined`  | `undefined` |
 
 
 ## Events
 
-| Event               | Description | Type                            |
-| ------------------- | ----------- | ------------------------------- |
-| `klevuSliderChange` |             | `CustomEvent<[number, number]>` |
+| Event               | Description        | Type                            |
+| ------------------- | ------------------ | ------------------------------- |
+| `klevuSliderChange` | When values change | `CustomEvent<[number, number]>` |
 
 
 ## Dependencies

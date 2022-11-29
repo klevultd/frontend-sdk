@@ -4,9 +4,11 @@
 }
 
 :host a {
+  display: block;
   text-decoration: none;
   color: inherit;
   height: 100%;
+  width: 100%;
 }
 
 .container {
@@ -55,9 +57,10 @@
   background-repeat: no-repeat;
 }
 
-.container.line {
+.container.line a {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .line .info {

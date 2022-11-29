@@ -1,15 +1,13 @@
 # klevu-simple-search
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Events
 
-| Event                  | Description | Type                  |
-| ---------------------- | ----------- | --------------------- |
-| `klevuSuggestionClick` |             | `CustomEvent<string>` |
+| Event                  | Description                              | Type                  |
+| ---------------------- | ---------------------------------------- | --------------------- |
+| `klevuSuggestionClick` | When any of suggestions has been clicked | `CustomEvent<string>` |
 
 
 ## Dependencies

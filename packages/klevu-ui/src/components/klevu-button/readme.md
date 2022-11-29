@@ -1,15 +1,13 @@
 # klevu-button
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property   | Attribute  | Description | Type                   | Default     |
-| ---------- | ---------- | ----------- | ---------------------- | ----------- |
-| `disabled` | `disabled` |             | `boolean \| undefined` | `undefined` |
+| Property   | Attribute  | Description        | Type                   | Default     |
+| ---------- | ---------- | ------------------ | ---------------------- | ----------- |
+| `disabled` | `disabled` | Is button disabled | `boolean \| undefined` | `undefined` |
 
 
 ## Dependencies

@@ -1,8 +1,11 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Host, h, Prop, Fragment } from "@stencil/core"
+import { Component, Fragment, h, Host, Prop } from "@stencil/core"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
+/**
+ * Rendering items of single facet
+ */
 @Component({
   tag: "klevu-facet",
   styleUrl: "klevu-facet.css",
@@ -121,7 +124,6 @@ export class KlevuFacet {
             <li>
               {this.mode === "checkbox" ? (
                 <klevu-checkbox
-                  value={o.value}
                   checked={o.selected}
                   name={this.option!.key}
                   onClick={() => this.manager.toggleOption(this.option!.key, o.name)}

@@ -1,21 +1,15 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-simple-search.css"
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-simple-search", {
   title: "Apps/SimpleSearch",
   parameters: {
     notes,
-    actions: {
-      handles: ["klevuSuggestionClick"],
-    },
   },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuSimpleSearchElement>({
-  tag: "klevu-simple-search",
 })
+
+const Template: Story<HTMLKlevuSimpleSearchElement> = (args) => html`<klevu-simple-search></klevu-simple-search>`
+
+export const Default = Template.bind({})

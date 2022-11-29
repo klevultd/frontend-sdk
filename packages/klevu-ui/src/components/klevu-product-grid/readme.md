@@ -1,7 +1,5 @@
 # klevu-product-grid
 
-
-
 <!-- Auto Generated Below -->
 
 

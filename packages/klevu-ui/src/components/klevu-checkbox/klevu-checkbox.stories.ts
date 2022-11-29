@@ -1,19 +1,16 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-checkbox.css"
-// @ts-ignore
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
+import { Story } from "@storybook/web-components"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-checkbox", {
   title: "Atoms/Checkbox",
   parameters: { notes },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuCheckboxElement>({
-  tag: "klevu-checkbox",
-  attributes: {
-    checked: true,
-  },
 })
+
+const Template: Story<HTMLKlevuCheckboxElement> = (args) =>
+  html`<klevu-checkbox .checked=${args.checked} .disabled=${args.disabled} .name=${args.name}></klevu-checkbox>`
+export const Default = Template.bind({})
+Default.args = {
+  checked: true,
+}

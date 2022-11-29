@@ -1,8 +1,11 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
-import { Component, Host, h, Prop, State } from "@stencil/core"
+import { Component, h, Host, Prop, State } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductSlots } from "../klevu-product/klevu-product"
 
+/**
+ * Full recommendation banner solution
+ */
 @Component({
   tag: "klevu-recommendations",
   styleUrl: "klevu-recommendations.css",
@@ -45,7 +48,12 @@ export class KlevuRecommendations {
 
   @State() clickEvent?: (productId: string, variantId?: string) => void
 
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string
+  /**
+   * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered.
+   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
+   * slot requested. Return null for slots that you do not want to render.
+   */
+  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
   private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null

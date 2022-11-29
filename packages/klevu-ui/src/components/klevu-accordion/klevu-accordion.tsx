@@ -1,15 +1,25 @@
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
+/**
+ * Component that wrap two slots to create accordion element
+ *
+ * @slot header - Element that has title that can be clicked
+ * @slot content - Element containing content of the accordion
+ */
 @Component({
   tag: "klevu-accordion",
   styleUrl: "klevu-accordion.css",
   shadow: true,
 })
 export class KlevuAccordion {
-  /** is accordion open */
+  /**
+   * is accordion open
+   */
   @Prop({ reflect: true }) open = false
 
-  /** Should it initially be open */
+  /**
+   * Should it initially be open
+   */
   @Prop() startOpen?: boolean
 
   private id: string

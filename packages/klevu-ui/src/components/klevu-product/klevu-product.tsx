@@ -1,24 +1,57 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Host, h, Prop, Event, EventEmitter, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 
 export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; originalEvent: MouseEvent }
 export type KlevuProductVariant = "line" | "small" | "default"
 export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
 
+/**
+ * Generic product component that renders product based on KlevuRecord of @klevu/core
+ * All parts of the component can be replaced with slots.
+ *
+ * @slot top - Empty are before any product content
+ * @slot image - Image region of component
+ * @slot info - Swatches, titles, brands and prices slot
+ * @slot bottom - Empty are after product content
+ */
 @Component({
   tag: "klevu-product",
   styleUrl: "klevu-product.css",
   shadow: true,
 })
 export class KlevuProduct {
+  /**
+   * What variant of product to render
+   */
   @Prop() variant: KlevuProductVariant = "default"
+  /**
+   * Product data
+   */
   @Prop() product?: Partial<KlevuRecord>
+  /**
+   * Do not show swatches in products
+   */
   @Prop() hideSwatches?: boolean
+  /**
+   * Hides price from info
+   */
   @Prop() hidePrice?: boolean
+  /**
+   * Hides description from info
+   */
   @Prop() hideDescription?: boolean
+  /**
+   * Hides name from info
+   */
   @Prop() hideName?: boolean
+  /**
+   * Hides image
+   */
   @Prop() hideImage?: boolean
+  /**
+   * Hides brand information
+   */
   @Prop() hideBrand?: boolean
   /**
    * Force certain width for product. Do not use max-width
@@ -27,6 +60,9 @@ export class KlevuProduct {
 
   @State() hoverImage?: string
 
+  /**
+   * When products has been clicked
+   */
   @Event({
     composed: true,
     cancelable: true,

@@ -1,21 +1,24 @@
-import type { KlevuRecord } from "@klevu/core"
-import { KlevuProductElement, mockProducts, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-product-grid.css"
-// @ts-ignore
+import { autofillMeta, KlevuProductElement, mockProducts } from "../../storybookUtils"
+
+//
 import notes from "./readme.md"
 
-const productElements = mockProducts.slice(0, 8).map((p) => KlevuProductElement(p))
+const productElements = mockProducts.slice(0, 8).map((p) =>
+  KlevuProductElement(p, {
+    fixedWidth: true,
+  })
+)
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
 
-const meta: Meta = {
+export default autofillMeta("klevu-product-grid", {
   title: "Components/ProductGrid",
   parameters: { notes },
-}
-export default meta
-
-export const Grid = WebComponentTemplate<HTMLKlevuProductGridElement>({
-  tag: "klevu-product-grid",
-  args: {},
-  childElements: productElements,
 })
+
+const Template: Story<HTMLKlevuProductGridElement> = (args) => html`<klevu-product-grid>
+  ${productElements}
+</klevu-product-grid>`
+
+export const Grid = Template.bind({})

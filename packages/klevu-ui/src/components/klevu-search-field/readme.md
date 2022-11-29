@@ -1,7 +1,5 @@
 # klevu-search-field
 
-
-
 <!-- Auto Generated Below -->
 
 
@@ -14,8 +12,8 @@
 | `placeholder`       | `placeholder`        | The placeholder text to display in the search field. | `string`               | `"Search for products"` |
 | `searchCategories`  | `search-categories`  | Should try to find categories as well                | `boolean \| undefined` | `undefined`             |
 | `searchCmsPages`    | `search-cms-pages`   | Should try to find cms pages as well                 | `boolean \| undefined` | `undefined`             |
-| `searchProducts`    | `search-products`    | Search products                                      | `boolean \| undefined` | `undefined`             |
-| `searchSuggestions` | `search-suggestions` | Search suggestions                                   | `boolean \| undefined` | `undefined`             |
+| `searchProducts`    | `search-products`    | Should search products                               | `boolean \| undefined` | `undefined`             |
+| `searchSuggestions` | `search-suggestions` | Should search suggestions                            | `boolean \| undefined` | `undefined`             |
 
 
 ## Events
@@ -24,7 +22,7 @@
 | ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `klevuSearchClick`       | When user clicks search button. Returns the search term.                                                | `CustomEvent<string>`                                                                                                                                                                                   |
 | `klevuSearchResults`     | When results come from after typing in the search field. This is debounced to avoid excessive requests. | `CustomEvent<{ fallback?: KlevuFetchQueryResult \| undefined; search?: KlevuFetchQueryResult \| undefined; category?: KlevuFetchQueryResult \| undefined; cms?: KlevuFetchQueryResult \| undefined; }>` |
-| `klevuSearchSuggestions` |                                                                                                         | `CustomEvent<string[]>`                                                                                                                                                                                 |
+| `klevuSearchSuggestions` | When searchfield gives some suggestions                                                                 | `CustomEvent<string[]>`                                                                                                                                                                                 |
 
 
 ## Dependencies

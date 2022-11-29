@@ -1,21 +1,15 @@
-import { html, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-sort.css"
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-sort", {
   title: "Components/Sort",
   parameters: {
     notes,
-    action: {
-      handles: ["klevuSortChanged"],
-    },
   },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuSortElement>({
-  tag: "klevu-sort",
 })
+
+const Template: Story<HTMLKlevuSortElement> = (args) => html`<klevu-sort></klevu-sort>`
+
+export const Default = Template.bind({})

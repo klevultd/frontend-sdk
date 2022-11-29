@@ -1,21 +1,19 @@
-import type { KlevuRecord } from "@klevu/core"
-import { KlevuProductElement, mockProducts, WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-slides.css"
-// @ts-ignore
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
+import { autofillMeta, KlevuProductElement, mockProducts } from "../../storybookUtils"
 import notes from "./readme.md"
 
-const productElements = mockProducts.slice(0, 8).map((p) => KlevuProductElement(p, { variant: "small" }))
+const productElements = mockProducts
+  .slice(0, 8)
+  .map((p) => KlevuProductElement(p, { variant: "small", fixedWidth: true }))
 
-import { Meta } from "@storybook/html"
-
-const meta: Meta = {
+export default autofillMeta("klevu-slides", {
   title: "Components/Slides",
   parameters: { notes },
-}
-export default meta
-
-export const WithProducts = WebComponentTemplate<HTMLKlevuSlidesElement>({
-  tag: "klevu-slides",
-  args: {},
-  childElements: productElements,
 })
+
+const Template: Story<HTMLKlevuSlidesElement> = (args) => html`<klevu-slides .height=${args.height}>
+  ${productElements}</klevu-slides
+>`
+
+export const WithProducts = Template.bind({})

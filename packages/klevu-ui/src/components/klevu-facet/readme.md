@@ -1,7 +1,5 @@
 # klevu-facet
 
-
-
 <!-- Auto Generated Below -->
 
 

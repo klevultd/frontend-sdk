@@ -1,17 +1,15 @@
 # klevu-cms-list
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property             | Attribute | Description | Type                     | Default       |
-| -------------------- | --------- | ----------- | ------------------------ | ------------- |
-| `caption`            | `caption` |             | `string`                 | `"CMS pages"` |
-| `link`               | `link`    |             | `boolean \| undefined`   | `undefined`   |
-| `pages` _(required)_ | --        |             | `Partial<KlevuRecord>[]` | `undefined`   |
+| Property             | Attribute | Description                                         | Type                     | Default       |
+| -------------------- | --------- | --------------------------------------------------- | ------------------------ | ------------- |
+| `caption`            | `caption` | Caption of the listing                              | `string`                 | `"CMS pages"` |
+| `link`               | `link`    | Should use url parameter from link to create anchor | `boolean \| undefined`   | `undefined`   |
+| `pages` _(required)_ | --        | List of Klevu results records with type of Page     | `Partial<KlevuRecord>[]` | `undefined`   |
 
 
 ## Events

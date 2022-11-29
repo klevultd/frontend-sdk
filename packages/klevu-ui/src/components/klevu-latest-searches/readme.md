@@ -1,15 +1,13 @@
 # klevu-latest-searches
 
-
-
 <!-- Auto Generated Below -->
 
 
 ## Properties
 
-| Property  | Attribute | Description | Type     | Default           |
-| --------- | --------- | ----------- | -------- | ----------------- |
-| `caption` | `caption` |             | `string` | `"Last searches"` |
+| Property  | Attribute | Description         | Type     | Default           |
+| --------- | --------- | ------------------- | -------- | ----------------- |
+| `caption` | `caption` | Caption of the list | `string` | `"Last searches"` |
 
 
 ## Shadow Parts

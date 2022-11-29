@@ -1,24 +1,29 @@
-import { WebComponentTemplate } from "../../storybookUtils"
-import "./klevu-recommendations.css"
-// @ts-ignore
+import { autofillMeta } from "../../storybookUtils"
+
+//
 import notes from "./readme.md"
 
-import { Meta } from "@storybook/html"
+import { Story } from "@storybook/web-components"
+import { html } from "lit-html"
 
-const meta: Meta = {
+export default autofillMeta("klevu-recommendations", {
   title: "Apps/Recommendations",
   parameters: { notes },
-}
-export default meta
-
-export const Default = WebComponentTemplate<HTMLKlevuRecommendationsElement>({
-  tag: "klevu-recommendations",
-  args: {
-    recommendationId: "k-4c963fdd-df37-4819-becd-bc6015307ba6",
-    recommendationTitle: "The title",
-  },
-  attributes: {
-    recommendationId: "k-4c963fdd-df37-4819-becd-bc6015307ba6",
-    recommendationTitle: "The title",
-  },
 })
+
+const Template: Story<HTMLKlevuRecommendationsElement> = (args) =>
+  html`<klevu-recommendations
+    .cartProductIds=${args.cartProductIds}
+    .categoryPath=${args.categoryPath}
+    .currentProductId=${args.currentProductId}
+    .itemGroupId=${args.itemGroupId}
+    .recommendationId=${args.recommendationId}
+    .recommendationTitle=${args.recommendationTitle}
+    .renderProductSlot=${args.renderProductSlot}
+  ></klevu-recommendations>`
+
+export const Default = Template.bind({})
+Default.args = {
+  recommendationId: "k-4c963fdd-df37-4819-becd-bc6015307ba6",
+  recommendationTitle: "The title",
+}

@@ -132,3 +132,26 @@ main {
   display: flex;
   gap: 16px;
 }
+
+/** custom page styles */
+
+.customcategorypage {
+  display: flex;
+  align-items: flex-start;
+}
+
+.customcategorypage .gridcontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.customcategorypage .gridcontent klevu-pagination {
+  margin: var(--klevu-spacing-large) 0;
+}
+
+.customcategorypage .gridcontent .gridcontentbottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
