@@ -1,5 +1,6 @@
 ![Klevu](images/klevu_header.jpg?raw=true "Klevu")
-[![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
+
+Come and chat with us: [![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
 
 # Headless product discovery, for every body
 
@@ -19,7 +20,7 @@ Here are the links to different projects.
 - [Nuxt example](examples/nuxt3/) Nuxt 3 example.
 - [Remix example](examples/remix/) Remix is a React-based example of using Klevu with Server Side Rendering.
 - [Vanilla JavaScript example](examples/vanillajs/) - Minimal JavaScript example.
-- [Shopify Hydrogen example](examles/hydrogen/) - Small Hydrogen example
+- [Shopify Hydrogen example](examples/hydrogen/) - Small Hydrogen example
 
 # Integrate Klevu into your application with ease. We do all the heavy lifting.
 

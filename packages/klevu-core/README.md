@@ -7,6 +7,8 @@
 ![github stars][github-stars-src]
 ![github issues][github-issues-src]
 
+Come and chat with us: [![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
+
 # `@klevu/core`
 
 Klevu core is a library that helps developers to interact with Klevu API. It includes a fetching function, easy-to-use functions to perform queries, state management for filters, data transformations and event tracking for easier usage.
