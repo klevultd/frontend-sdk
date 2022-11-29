@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@klevu/core": "^1.7.0",
-    "@klevu/ui": "file:../../packages/klevu-ui"
+    "@klevu/ui": "0.0.13"
   },
   "devDependencies": {
     "vite": "^3.1.7"
