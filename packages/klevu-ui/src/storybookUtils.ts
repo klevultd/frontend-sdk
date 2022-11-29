@@ -28,10 +28,6 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     return {}
   }
 
-  if (tag === "klevu-popup") {
-    console.log(comp)
-  }
-
   const argTypes: ArgTypes = {}
   for (const a of comp.props) {
     if (!a.name) {
