@@ -10,7 +10,7 @@ Default result id is "categoryMerchandising".
 | Name | Type |
 | :------ | :------ |
 | `category` | `undefined` \| `string` |
-| `options?` | `Partial`<`Options`\> |
+| `options?` | `Partial`<[`KlevuMerchandisingOptions`](klevumerchandisingoptions.md)\> |
 | `...modifiers` | `KlevuFetchModifer`[] |
 
 #### Returns
@@ -19,5 +19,5 @@ Default result id is "categoryMerchandising".
 
 #### Defined in
 
-[queries/categoryMerchandising/categoryMerchandising.ts:29](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L29)
+[queries/categoryMerchandising/categoryMerchandising.ts:29](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L29)
 

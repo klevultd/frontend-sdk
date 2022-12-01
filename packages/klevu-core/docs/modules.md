@@ -11,6 +11,7 @@ Global custom document events that @klevu/core sends Enumerations
 
 ### Other Enumerations
 
+- [AdvancedSortingDiretion](enums/AdvancedSortingDiretion.md)
 - [KMCRecommendationLogic](enums/KMCRecommendationLogic.md)
 - [KlevuFilterOrder](enums/KlevuFilterOrder.md)
 - [KlevuFilterType](enums/KlevuFilterType.md)
@@ -41,6 +42,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuAllRecordQueries](modules/klevuallrecordqueries.md)
 - [KlevuAlsoBoughtQuery](modules/klevualsoboughtquery.md)
 - [KlevuAlsoViewedQuery](modules/klevualsoviewedquery.md)
+- [KlevuAnnotations](modules/klevuannotations.md)
 - [KlevuAnyTypeOfRecord](modules/klevuanytypeofrecord.md)
 - [KlevuApiRawResponse](modules/klevuapirawresponse.md)
 - [KlevuApplyFilter](modules/klevuapplyfilter.md)
@@ -54,9 +56,12 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuFetchResponse](modules/klevufetchresponse.md)
 - [KlevuFilterResultOptions](modules/klevufilterresultoptions.md)
 - [KlevuFilterResultSlider](modules/klevufilterresultslider.md)
+- [KlevuKMCRecommendationOptions](modules/klevukmcrecommendationoptions.md)
 - [KlevuKMCRecommendations](modules/klevukmcrecommendations.md)
 - [KlevuLastSearch](modules/klevulastsearch.md)
 - [KlevuListFilter](modules/klevulistfilter.md)
+- [KlevuListFiltersToReturn](modules/klevulistfilterstoreturn.md)
+- [KlevuMerchandisingOptions](modules/klevumerchandisingoptions.md)
 - [KlevuNextFunc](modules/klevunextfunc.md)
 - [KlevuPayload](modules/klevupayload.md)
 - [KlevuQueryResult](modules/klevuqueryresult.md)
@@ -64,12 +69,12 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuRecord](modules/klevurecord.md)
 - [KlevuRecordFields](modules/klevurecordfields.md)
 - [KlevuResultEvent](modules/klevuresultevent.md)
+- [KlevuSearchOptions](modules/klevusearchoptions.md)
 - [KlevuSimilarProductsQuery](modules/klevusimilarproductsquery.md)
 - [KlevuSuggestionQuery](modules/klevusuggestionquery.md)
 - [KlevuSuggestionResult](modules/klevusuggestionresult.md)
 - [KlevuTrendingProductsQuery](modules/klevutrendingproductsquery.md)
 - [RecommendationViewEventMetaData](modules/recommendationvieweventmetadata.md)
-- [SearchOptions](modules/searchoptions.md)
 
 ### Variables
 
@@ -96,6 +101,7 @@ Global custom document events that @klevu/core sends Enumerations
 ### Modifier Functions
 
 - [abTest](modules/abtest.md)
+- [advancedSorting](modules/advancedsorting.md)
 - [applyFilterWithManager](modules/applyfilterwithmanager.md)
 - [applyFilters](modules/applyfilters.md)
 - [boostWithFilterManager](modules/boostwithfiltermanager.md)
@@ -124,6 +130,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuCreateResponseObject](modules/klevucreateresponseobject.md)
 - [KlevuHydratePackedFetchResult](modules/klevuhydratepackedfetchresult.md)
 - [KlevuPackFetchResult](modules/klevupackfetchresult.md)
+- [removeListFilters](modules/removelistfilters.md)
 
 ### Query Functions
 

@@ -4,5 +4,5 @@
 
 #### Defined in
 
-[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
+[models/KlevuSimilarProductsQuery.ts:4](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuSimilarProductsQuery.ts#L4)
 

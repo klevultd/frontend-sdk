@@ -60,7 +60,7 @@ optional override any settings of sent data
 
 #### Defined in
 
-[events/KlevuEvents.ts:43](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L43)
+[events/KlevuEvents.ts:43](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L43)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:276](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L276)
+[events/KlevuEvents.ts:276](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L276)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:238](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L238)
+[events/KlevuEvents.ts:238](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L238)
 
 ___
 
@@ -139,7 +139,7 @@ When product has been clicked in the recommendation banner
 
 #### Defined in
 
-[events/KlevuEvents.ts:128](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L128)
+[events/KlevuEvents.ts:128](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L128)
 
 ___
 
@@ -163,7 +163,7 @@ When recommendation banner is shown in the page
 
 #### Defined in
 
-[events/KlevuEvents.ts:83](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L83)
+[events/KlevuEvents.ts:83](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L83)
 
 ___
 
@@ -189,7 +189,7 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Defined in
 
-[events/KlevuEvents.ts:209](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L209)
+[events/KlevuEvents.ts:209](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L209)
 
 ___
 
@@ -214,4 +214,4 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/KlevuEvents.ts:174](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L174)
+[events/KlevuEvents.ts:174](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L174)

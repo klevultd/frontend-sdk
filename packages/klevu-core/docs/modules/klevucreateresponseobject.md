@@ -15,5 +15,5 @@
 
 #### Defined in
 
-[connection/klevuFetch.ts:78](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/connection/klevuFetch.ts#L78)
+[connection/klevuFetch.ts:74](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/connection/klevuFetch.ts#L74)
 

@@ -8,7 +8,8 @@ Raw response from Klevu API
 
 | Name | Type |
 | :------ | :------ |
-| `meta` | { `qTime`: `number` ; `responseCode`: `number`  } |
+| `meta` | { `error?`: `any` ; `qTime`: `number` ; `responseCode`: `number`  } |
+| `meta.error?` | `any` |
 | `meta.qTime` | `number` |
 | `meta.responseCode` | `number` |
 | `queryResults?` | [`KlevuQueryResult`](klevuqueryresult.md)[] |
@@ -16,5 +17,5 @@ Raw response from Klevu API
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:146](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L146)
+[models/KlevuApiRawResponse.ts:146](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L146)
 

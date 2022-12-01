@@ -18,5 +18,5 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithKeywords/boostWithKeywords.ts:10](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/modifiers/boostWithKeywords/boostWithKeywords.ts#L10)
+[modifiers/boostWithKeywords/boostWithKeywords.ts:10](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/boostWithKeywords/boostWithKeywords.ts#L10)
 

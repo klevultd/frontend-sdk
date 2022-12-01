@@ -12,5 +12,5 @@
 
 #### Defined in
 
-[models/KlevuResultEvent.ts:7](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuResultEvent.ts#L7)
+[models/KlevuResultEvent.ts:7](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuResultEvent.ts#L7)
 

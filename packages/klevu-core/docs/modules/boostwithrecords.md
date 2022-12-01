@@ -18,5 +18,5 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithRecords/boostWithRecords.ts:10](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/modifiers/boostWithRecords/boostWithRecords.ts#L10)
+[modifiers/boostWithRecords/boostWithRecords.ts:10](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/boostWithRecords/boostWithRecords.ts#L10)
 

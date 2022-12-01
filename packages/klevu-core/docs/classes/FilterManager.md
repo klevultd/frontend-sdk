@@ -41,7 +41,7 @@ It can be easily used with applyFilterWithFilterManager() and listFilters() modi
 
 #### Defined in
 
-[store/filterManager.ts:16](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L16)
+[store/filterManager.ts:16](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L16)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:17](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L17)
+[store/filterManager.ts:17](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L17)
 
 ## Methods
 
@@ -67,7 +67,7 @@ clear current options and sliders
 
 #### Defined in
 
-[store/filterManager.ts:54](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L54)
+[store/filterManager.ts:54](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L54)
 
 ___
 
@@ -89,7 +89,7 @@ Sets `selected` key of all options to false
 
 #### Defined in
 
-[store/filterManager.ts:108](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L108)
+[store/filterManager.ts:108](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L108)
 
 ___
 
@@ -111,7 +111,7 @@ Get current selection by key
 
 #### Defined in
 
-[store/filterManager.ts:203](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L203)
+[store/filterManager.ts:203](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L203)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:19](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L19)
+[store/filterManager.ts:19](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L19)
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:45](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L45)
+[store/filterManager.ts:45](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L45)
 
 ___
 
@@ -161,7 +161,7 @@ Populate filter manager with filters from Klevu API
 
 #### Defined in
 
-[store/filterManager.ts:164](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L164)
+[store/filterManager.ts:164](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L164)
 
 ___
 
@@ -186,7 +186,7 @@ Sends a Dom event on change
 
 #### Defined in
 
-[store/filterManager.ts:67](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L67)
+[store/filterManager.ts:67](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L67)
 
 ___
 
@@ -212,4 +212,4 @@ Sends a Dom event on change
 
 #### Defined in
 
-[store/filterManager.ts:136](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/store/filterManager.ts#L136)
+[store/filterManager.ts:136](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L136)

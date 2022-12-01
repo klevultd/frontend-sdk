@@ -9,7 +9,7 @@ Create a basic search to Klevu backend. Default ID for this query is `search`
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `term` | `string` | Search term from input |
-| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> | [SearchOptions](searchoptions.md) |
+| `options?` | `Partial`<[`KlevuSearchOptions`](klevusearchoptions.md)\> | [KlevuSearchOptions](klevusearchoptions.md) |
 | `...modifiers` | `KlevuFetchModifer`[] | - |
 
 #### Returns
@@ -18,5 +18,5 @@ Create a basic search to Klevu backend. Default ID for this query is `search`
 
 #### Defined in
 
-[queries/search/search.ts:38](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/search/search.ts#L38)
+[queries/search/search.ts:38](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/search/search.ts#L38)
 

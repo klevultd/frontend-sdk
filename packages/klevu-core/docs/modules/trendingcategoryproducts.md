@@ -18,5 +18,5 @@ Return trending recommendations
 
 #### Defined in
 
-[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
+[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
 

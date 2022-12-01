@@ -9,7 +9,7 @@ Fetches products based on KMC recommendation. Provide id created in KMC
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `recommendationId` | `string` | Id of recommendation in the backend |
-| `options?` | `Partial`<`Options`\> | - |
+| `options?` | `Partial`<[`KlevuKMCRecommendationOptions`](klevukmcrecommendationoptions.md)\> | - |
 | `...modifiers` | `KlevuFetchModifer`[] | - |
 
 #### Returns
@@ -18,5 +18,5 @@ Fetches products based on KMC recommendation. Provide id created in KMC
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:137](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L137)
+[queries/kmcRecommendation/kmcRecommendation.ts:137](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L137)
 

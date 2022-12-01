@@ -9,7 +9,7 @@ Search helper function that sets correct settings
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `term` | `string` | category to find |
-| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> |  |
+| `options?` | `Partial`<[`KlevuSearchOptions`](klevusearchoptions.md)\> |  |
 
 #### Returns
 
@@ -17,5 +17,5 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
+[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
 

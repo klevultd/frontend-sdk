@@ -4,5 +4,15 @@
 
 #### Defined in
 
-[events/KlevuEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/events/KlevuEvents.ts#L24)
+[events/KlevuEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/events/KlevuEvents.ts#L24)
+
+## Variables
+
+### KlevuLastClickedProducts
+
+• `Const` **KlevuLastClickedProducts**: `LastClickedProducts`
+
+#### Defined in
+
+[store/lastClickedProducts.ts:130](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/lastClickedProducts.ts#L130)
 

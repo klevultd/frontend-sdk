@@ -21,5 +21,5 @@ KlevuFetch response without making any request to servers
 
 #### Defined in
 
-[connection/hydration.ts:30](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/connection/hydration.ts#L30)
+[connection/hydration.ts:30](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/connection/hydration.ts#L30)
 

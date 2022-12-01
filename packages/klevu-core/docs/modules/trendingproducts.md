@@ -19,7 +19,7 @@ console.log(result.getQueries("trendingProducts").records)
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options?` | `Partial`<[`SearchOptions`](searchoptions.md)\> | [search](search.md) |
+| `options?` | `Partial`<[`KlevuSearchOptions`](klevusearchoptions.md)\> | [search](search.md) |
 | `...modifiers` | `KlevuFetchModifer`[] | - |
 
 #### Returns
@@ -30,5 +30,5 @@ See KlevuFetchFunction
 
 #### Defined in
 
-[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
+[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
 

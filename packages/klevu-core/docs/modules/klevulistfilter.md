@@ -6,17 +6,9 @@
 
 | Name | Type |
 | :------ | :------ |
-| `filtersToReturn?` | { `enabled`: `boolean` ; `exclude?`: `string`[] ; `include?`: `string`[] ; `options`: { `limit?`: `number` ; `mincount?`: `number` ; `order`: [`KlevuFilterOrder`](enums/KlevuFilterOrder.md)  } ; `rangeFilterSettings?`: [`KlevuRangeFilterSettings`](klevurangefiltersettings.md)[]  } |
-| `filtersToReturn.enabled` | `boolean` |
-| `filtersToReturn.exclude?` | `string`[] |
-| `filtersToReturn.include?` | `string`[] |
-| `filtersToReturn.options` | { `limit?`: `number` ; `mincount?`: `number` ; `order`: [`KlevuFilterOrder`](enums/KlevuFilterOrder.md)  } |
-| `filtersToReturn.options.limit?` | `number` |
-| `filtersToReturn.options.mincount?` | `number` |
-| `filtersToReturn.options.order` | [`KlevuFilterOrder`](enums/KlevuFilterOrder.md) |
-| `filtersToReturn.rangeFilterSettings?` | [`KlevuRangeFilterSettings`](klevurangefiltersettings.md)[] |
+| `filtersToReturn?` | [`KlevuListFiltersToReturn`](klevulistfilterstoreturn.md) |
 
 #### Defined in
 
-[models/KlevuListFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuListFilter.ts#L4)
+[models/KlevuListFilter.ts:55](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuListFilter.ts#L55)
 

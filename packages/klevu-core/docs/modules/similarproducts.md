@@ -18,5 +18,5 @@ Fetch similiar products based on list of ids
 
 #### Defined in
 
-[queries/similarProducts/similarProducts.ts:26](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L26)
+[queries/similarProducts/similarProducts.ts:26](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/similarProducts/similarProducts.ts#L26)
 

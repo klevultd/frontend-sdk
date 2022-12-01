@@ -6,5 +6,5 @@ All possible record queries that can be used with [KlevuFetch](klevufetch.md) fu
 
 #### Defined in
 
-[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/58d63d7/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
+[models/KlevuAllRecordQueries.ts:9](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuAllRecordQueries.ts#L9)
 
