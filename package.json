@@ -5,5 +5,8 @@
   "scripts": {},
   "author": "Klevu",
   "license": "MIT",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/jest": "^29.2.3"
+  }
 }

@@ -13,7 +13,7 @@ export class KlevuFetchCache<T extends object, K extends object> {
    *
    * @param key
    * @param force For testing purposes
-   * @returns
+   * @returns undefined if not cached
    */
   check(key: T, force = false): K | undefined {
     // never cache on node server

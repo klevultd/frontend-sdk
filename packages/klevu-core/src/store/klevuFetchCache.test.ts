@@ -1,6 +1,8 @@
 import { KlevuConfig } from "../config.js"
 import { KlevuFetchCache } from "./klevuFetchCache.js"
 import axios from "axios"
+import { search, KlevuFetch, klevuFetchCache } from "../index.js"
+import { jest } from "@jest/globals"
 
 type TestKey = {
   key: string
@@ -43,4 +45,26 @@ test("Cache time", async () => {
   cache.cache(key, data, 500)
   await new Promise((r) => setTimeout(r, 50))
   expect(cache.check(key, true)).toEqual(data)
+})
+
+test("Cache succesfull requests", async () => {
+  await KlevuFetch(search("hoodies"))
+  await KlevuFetch(search("hoodies"))
+  expect(klevuFetchCache._cache.size).toBe(1)
+})
+
+test("Do not cache failed request", async () => {
+  await KlevuFetch(
+    search("hoodies", {
+      sort: "foobar" as any,
+    })
+  )
+
+  await KlevuFetch(
+    search("hoodies", {
+      sort: "foobar" as any,
+    })
+  )
+
+  expect(klevuFetchCache._cache.size).toBe(1)
 })

@@ -31,15 +31,20 @@ export async function post<T>(
 ): Promise<T | undefined> {
   const axios = KlevuConfig.getDefault().axios
   if (axios) {
-    return await axios
-      .post<T>(url, data, {
+    try {
+      const res = await axios.post<T>(url, data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
-      .then((res) => res.data)
+      return res.data
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      return error.response.data
+    }
   }
 
+  // Fetch will always return value. Even with 500 errors.
   const res = await fetch(url, {
     method: "POST",
     headers: {

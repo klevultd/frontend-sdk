@@ -105,13 +105,15 @@ test("Override user IP for request", async () => {
 
   const product = query!.records[0]
 
-  const getSpySuccess = jest.spyOn(axios, "get").mockImplementation(() => {
-    return new Promise((resolve, reject) => {
-      return resolve({
-        data: {},
+  const getSpySuccess = jest
+    .spyOn(KlevuConfig.default!.axios!, "get")
+    .mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        return resolve({
+          data: {},
+        })
       })
     })
-  })
 
   query?.getCategoryMerchandisingClickSendEvent?.()(
     product.id,
