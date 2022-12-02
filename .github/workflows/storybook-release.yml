@@ -1,0 +1,31 @@
+name: Publish storybook
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/storybook-release.yml"
+      - "packages/klevu-ui/src/**"
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/klevu-ui
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: packages/klevu-ui/package-lock.json
+      - run: npm install
+      - run: npm storybook-build
+      - uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_STORYBOOK_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_STORYBOOK_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_STORYBOOK_BUCKET }}
+          source_dir: "packages/klevu-ui/storybook-static/"
+          destination_dir: ""

@@ -27,7 +27,7 @@
     "test.watch": "stencil test --e2e --watchAll",
     "generate": "stencil generate",
     "storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
     "push-npm": "npm publish --access public"
   },
   "dependencies": {
