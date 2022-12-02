@@ -21,7 +21,7 @@ jobs:
           cache: "npm"
           cache-dependency-path: packages/klevu-ui/package-lock.json
       - run: npm install
-      - run: npm storybook-build
+      - run: npm run storybook-build
       - uses: shallwefootball/s3-upload-action@master
         with:
           aws_key_id: ${{ secrets.AWS_STORYBOOK_KEY_ID }}
