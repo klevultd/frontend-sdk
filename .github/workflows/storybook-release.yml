@@ -21,6 +21,7 @@ jobs:
           cache: "npm"
           cache-dependency-path: packages/klevu-ui/package-lock.json
       - run: npm install
+      - run: npm run build
       - run: npm run build-storybook
       - uses: shallwefootball/s3-upload-action@master
         with:
