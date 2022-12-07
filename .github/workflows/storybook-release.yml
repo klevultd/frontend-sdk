@@ -23,10 +23,13 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run build-storybook
-      - uses: shallwefootball/s3-upload-action@master
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_key_id: ${{ secrets.AWS_STORYBOOK_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_STORYBOOK_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_STORYBOOK_BUCKET }}
-          source_dir: "packages/klevu-ui/storybook-static/"
-          destination_dir: ""
+          aws-access-key-id: ${{ secrets.AWS_STORYBOOK_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_STORYBOOK_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      - name: Copy files with the AWS CLI
+        run: |
+          aws s3 sync packages/klevu-ui/storybook-static/ s3://storybook.klevu.com
