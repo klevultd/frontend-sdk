@@ -38,6 +38,6 @@ export default create({
 
   brandTitle: "Klevu Web Components",
   brandUrl: "https://developers.klevu.com",
-  // brandImage: "https://websitecdn.klevu.com/wp-content/uploads/2022/07/klevu-color.svg",
+  brandImage: "/klevu-color.svg",
   brandTarget: "_self",
 })
