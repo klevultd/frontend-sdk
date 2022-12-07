@@ -32,4 +32,4 @@ jobs:
 
       - name: Copy files with the AWS CLI
         run: |
-          aws s3 sync packages/klevu-ui/storybook-static/ s3://storybook.klevu.com
+          aws s3 sync storybook-static/ s3://storybook.klevu.com
