@@ -1,6 +1,6 @@
 ![Klevu](images/klevu_header.jpg?raw=true "Klevu")
 
-Come and chat with us: [![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
+[![](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/Jrud6Zj5Hy)
 
 # Headless product discovery, for every body
 

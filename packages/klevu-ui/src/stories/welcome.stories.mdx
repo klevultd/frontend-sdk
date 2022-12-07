@@ -2,17 +2,18 @@ import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
 
 <Meta title="Start/Welcome" />
 
-# Welcome to Klevu Web components
+# Welcome to Klevu Web components (Alpha!)
 
 With Klevu Web components, developers can create unique e-commerce experiences quickly and easily.
 Our suite of tools offers three NPM packages to simplify the process - making it effortless for innovators to take advantage of our advanced discovery capabilities!
 
 - Works with all frameworks
-- Fully customizable with CSS variables
+- Fully customizable with CSS variables and parts
 - React components
 - Vue components
 - Open source
 
+[![](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/Jrud6Zj5Hy)
 [![](https://data.jsdelivr.com/v1/package/npm/@klevu/ui/badge)](https://www.jsdelivr.com/package/npm/@klevu/ui)
 [![npm version][npm-src]][npm-href]
 [![Bundle size][bundlephobia-src]][bundlephobia-href]
@@ -20,7 +21,6 @@ Our suite of tools offers three NPM packages to simplify the process - making it
 [![npm weekly downloads][npm-weekly-downloads]][npm-href]
 ![github stars][github-stars-src]
 ![github issues][github-issues-src]
-
 [npm-src]: https://badgen.net/npm/v/@klevu/ui
 [npm-href]: https://www.npmjs.com/package/@klevu/ui
 [bundlephobia-src]: https://badgen.net/bundlephobia/minzip/@klevu/ui
@@ -174,10 +174,11 @@ Optional: To get code autocomplete in VSCode you can import the Klevu components
 
 # KlevuInit component
 
-KlevuInit is a component used to initialize settings for all components that fetch data from Klevu backend. Currently only one
-KlevuInit is supported by the library. It defines global configuration for all components in whole DOM tree.
+KlevuInit is an essential component that can be used to set up any components within the DOM tree, ensuring all data
+from Klevu's backend is accessed. Through a single instance of KlevuInit, global configurations for various components
+are defined - as demonstrated by its usage in VanillaJS. Currently only one KlevuInit is allowed in the document.
 
-Here is example in VanillaJS how to use it:
+Here is a simple example.
 
 ```html
 <klevu-init api-key="mykey" url="https://eucsXXv2.ksearchnet.com/cs/v2/search">

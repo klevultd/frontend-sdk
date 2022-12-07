@@ -90,7 +90,16 @@ export class KlevuMerchandising {
         this.category,
         { limit: this.limit, sort: this.sort },
         sendMerchandisingViewEvent(this.categoryTitle),
-        listFilters({ filterManager: this.manager, limit: this.filterCount }),
+        listFilters({
+          filterManager: this.manager,
+          limit: this.filterCount,
+          rangeFilterSettings: [
+            {
+              key: "klevu_price",
+              minMax: true,
+            },
+          ],
+        }),
         applyFilterWithManager(this.manager)
       )
     )

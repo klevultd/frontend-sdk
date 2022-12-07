@@ -1,5 +1,6 @@
 ![Klevu](../../images/klevu_header.jpg?raw=true "Klevu")
 
+[![](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/Jrud6Zj5Hy)
 [![npm version][npm-src]][npm-href]
 [![Bundle size][bundlephobia-src]][bundlephobia-href]
 [![npm total downloads][npm-total-downloads]][npm-href]
