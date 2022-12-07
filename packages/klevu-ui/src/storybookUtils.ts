@@ -94,6 +94,21 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
       },
     }
   }
+
+  const cssprops = comp.docsTags.filter((d) => d.name === "cssprop")
+  for (const prop of cssprops) {
+    if (!prop.text) {
+      continue
+    }
+    const [variable, desc] = prop.text.split(" - ")
+    argTypes[variable] = {
+      description: desc,
+      table: {
+        category: "CSS Properties",
+      },
+    }
+  }
+
   return merge(meta, {
     component: tag,
     parameters: {
