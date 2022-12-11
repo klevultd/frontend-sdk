@@ -50,6 +50,8 @@ export class KlevuDrawer {
 
   @Method()
   async openModal() {
+    document.body.style.overflowX = "inherit"
+
     this.open = true
     this.originalOverflow = document.body.style.overflow
     document.body.style.overflow = "hidden"
@@ -57,6 +59,8 @@ export class KlevuDrawer {
 
   @Method()
   async closeModal() {
+    document.body.style.overflowX = "none"
+
     this.open = false
     document.body.style.overflow = this.originalOverflow
   }

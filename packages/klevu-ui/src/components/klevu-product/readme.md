@@ -37,9 +37,10 @@
 
 ## Shadow Parts
 
-| Part      | Description |
-| --------- | ----------- |
-| `"image"` |             |
+| Part          | Description |
+| ------------- | ----------- |
+| `"container"` |             |
+| `"image"`     |             |
 
 
 ## Dependencies

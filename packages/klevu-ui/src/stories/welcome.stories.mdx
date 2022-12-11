@@ -2,10 +2,14 @@ import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
 
 <Meta title="Start/Welcome" />
 
-# Welcome to Klevu Web components (Alpha!)
+# Welcome to Klevu Web Components (Alpha!)
 
-With Klevu Web components, developers can create unique e-commerce experiences quickly and easily using Klevu services.
+With Klevu Web Components, developers can create unique e-commerce experiences quickly and easily using Klevu services.
 Our suite of tools offers three NPM packages to simplify the process - making it effortless for innovators to take advantage of our advanced discovery capabilities!
+
+Klevu Web Components provide developers with the ability to customize their website by selecting from
+a variety of smaller pieces of functionality. For even more ease-of-use, Klevu has created ready made
+libraries for both React and Vue – enabling easy integration into any framework!
 
 - Works with all frameworks
 - Fully customizable with CSS variables and parts
@@ -47,7 +51,51 @@ Here is a example of `klevu-quicksearch` component:
   <Story height="700px" id="apps-quicksearch--default" />
 </Canvas>
 
-# Available packages
+# Installing with CDN url (VanillaJS)
+
+Simplest way to get started is to use jsdelivr.net CDN to get sources and import loader in the `head`
+of the document. It will automatically add polyfills and lazy load custom element code when they
+are found in the HTML source.
+
+```ts
+import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
+defineCustomElements()
+```
+
+And it's important to embed CSS styles too:
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css" rel="stylesheet" />
+```
+
+**Warning:** These links will always load latest version of the library. Breaking changes will brake your site.
+To lock the version one should use versioned URL's by adding version number by adding
+`@version` after `@klevu/ui`. For example `...npm/@klevu/ui@0.0.13/loader/...`
+
+Full example with HTML file:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klevu UI CDN example</title>
+    <meta charset="UTF-8" />
+    <script type="module">
+      import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
+      defineCustomElements()
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search">
+      <klevu-quicksearch></klevu-quicksearch>
+    </klevu-init>
+  </body>
+</html>
+```
+
+# Installing with NPM packages
 
 Currently components can be used either with vanilla JS (`@klevu/ui`), React (`@klevu/ui-react`) or Vue (`@klevu/ui-vue`).
 Each of them have slightly different initialization.
@@ -182,8 +230,8 @@ Optional: To get code autocomplete in VSCode you can import the Klevu components
 
 # KlevuInit component
 
-KlevuInit is an essential component that can be used to set up any components within the DOM tree, ensuring all data
-from Klevu's backend is accessed. Through a single instance of KlevuInit, global configurations for various components
+KlevuInit is an essential component that can be used to set backend configuration for any Klevu Components within the DOM tree.
+Through a single instance of KlevuInit, global configurations for various components
 are defined - as demonstrated by its usage in VanillaJS. Currently only one KlevuInit is allowed in the document.
 
 Here is a simple example.

@@ -39,3 +39,37 @@ Here is the list of available variables. Replace the values with the ones you tw
   --klevu-product-image-fill: cover; /* cover, contain */
 }
 ```
+
+# Slots
+
+The web components library offers an variety of options for customization, with
+[slot elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/) allowing developers to
+alter and personalize the contents of their components - whether partially or fully.
+
+These slots can be found in addons panel's control sections.
+
+Product example:
+
+```html
+<klevu-product>
+  <div slot="image">This element replaces product image</div>
+  <div slot="bottom">This is appended to end of the product</div>
+</klevu-product>
+```
+
+# ::part
+
+To modify the style and looks of components without replacing HTML content of components there are parts
+defined in the components. You can modify the these parts with [::part pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part)
+CSS selector.
+
+These parts can be found in addons panel's control sections.
+
+Product example:
+
+```css
+/* this allows to modify the container div of product */
+klevu-product::part(container) {
+  border: 3px dashed orange;
+}
+```
