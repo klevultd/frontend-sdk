@@ -50,16 +50,20 @@ export type KlevuUIGlobalSettings = {
   /**
    * When user clicks the product
    *
-   * @param product Product that was clicked
+   * @param item Product that was clicked
    * @param event Event that triggered the click
    * @return false if the event should be prevented and stopped
    */
-  onProductClick?: (product: Partial<KlevuRecord>, event: MouseEvent) => boolean
+  onItemClick?: (item: Partial<KlevuRecord>, event: MouseEvent) => boolean
+
   /**
    * Function to generate url for product in case using default klevu-products
    */
   generateProductUrl?: (product: Partial<KlevuRecord>) => string
 
+  /**
+   * Generic way to render prices. By default browser currency renderer is used
+   */
   renderPrice?: typeof renderPrice
 }
 

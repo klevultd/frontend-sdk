@@ -38,7 +38,7 @@ export function App() {
       url="https://eucs29v2.ksearchnet.com/cs/v2/search"
       apiKey="klevu-164651914788114877"
       settings={{
-        onProductClick(product, event) {
+        onItemClick(product, event) {
           navigate(`/products/${product.itemGroupId}/${product.id}`)
           event.preventDefault()
           return false

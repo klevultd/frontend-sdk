@@ -48,6 +48,8 @@ export const parameters = {
     storySort: {
       order: ["Start", ["Welcome", "Styles"], "Atoms", "Components", "Apps"],
     },
+    showPanel: true,
+    panelPosition: "bottom",
   },
   actions: {
     argTypesRegex: "^(on.*|klevu.*)",
