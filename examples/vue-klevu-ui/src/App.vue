@@ -47,7 +47,7 @@ export default {
       url="https://eucs30v2.ksearchnet.com/cs/v2/search"
       api-key="klevu-165829460115715456"
       :settings.prop="{
-        onProductClick(product: any, event: any) {
+        onItemClick(product: any, event: any) {
           // @ts-ignore - Typescript doesn't seem to find local method even though it exists
           productclick(product);
           return false;

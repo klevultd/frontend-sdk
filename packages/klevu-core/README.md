@@ -1,11 +1,13 @@
 ![Klevu](../../images/klevu_header.jpg?raw=true "Klevu")
 
+[![](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/Jrud6Zj5Hy)
 [![npm version][npm-src]][npm-href]
 [![Bundle size][bundlephobia-src]][bundlephobia-href]
 [![npm total downloads][npm-total-downloads]][npm-href]
 [![npm weekly downloads][npm-weekly-downloads]][npm-href]
 ![github stars][github-stars-src]
 ![github issues][github-issues-src]
+[![](https://data.jsdelivr.com/v1/package/npm/@klevu/core/badge)](https://www.jsdelivr.com/package/npm/@klevu/core)
 
 Come and chat with us: [![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
 

@@ -1,5 +1,5 @@
 const klevu_ui_settings = {
-  onProductClick: (product, event) => {
+  onItemClick: (product, event) => {
     alert(product.name + " is clicked")
   },
   generateProductUrl: (product) => {

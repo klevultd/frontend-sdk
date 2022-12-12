@@ -4,6 +4,18 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
 
 /**
  * Initializes components to fetch data from correct Klevu backend
+ *
+ * @cssprop --klevu-color-primary - Main color of components
+ * @cssprop --klevu-color-primary-text - Text color on top primary color
+ * @cssprop --klevu-color-primary-border - Border color related to primary color
+ * @cssprop --klevu-color-border - Standard border color used to separate items
+ * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
+ * @cssprop --klevu-color-dim-text - Secondary dimmed texts
+ * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
+ * @cssprop --klevu-spacing-small - Small spacing
+ * @cssprop --klevu-spacing-normal - Normal spacing
+ * @cssprop --klevu-spacing-large - Large spacing
+ * @cssprop --klevu-rounded-corners - Rounded corners
  */
 @Component({
   tag: "klevu-init",
