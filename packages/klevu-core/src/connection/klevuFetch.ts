@@ -16,7 +16,10 @@ import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProdu
 import { fetchNextPage } from "./resultHelpers/fetchNextPage.js"
 import { FetchResultEvents } from "./resultHelpers/FetchResultEvents.js"
 
-const cache = new KlevuFetchCache<KlevuPayload, KlevuApiRawResponse>()
+export const klevuFetchCache = new KlevuFetchCache<
+  KlevuPayload,
+  KlevuApiRawResponse
+>()
 
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.
@@ -50,7 +53,7 @@ export async function KlevuFetch(
     suggestions: suggestionQueries.length > 0 ? suggestionQueries : undefined,
   }
 
-  const cached = cache.check(payload)
+  const cached = klevuFetchCache.check(payload)
   let response: KlevuApiRawResponse
   if (cached) {
     response = cached
@@ -65,7 +68,9 @@ export async function KlevuFetch(
     }
 
     response = res
-    cache.cache(payload, response)
+    if (res.meta?.responseCode == 200) {
+      klevuFetchCache.cache(payload, response)
+    }
   }
 
   return KlevuCreateResponseObject(response, functions)

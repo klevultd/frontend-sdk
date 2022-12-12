@@ -1,4 +1,4 @@
-import type { AxiosStatic } from "axios"
+import type { AxiosInstance, AxiosStatic } from "axios"
 import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
 
@@ -40,7 +40,7 @@ export class KlevuConfig {
   cacheMaxTTL = 600_000
   eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
-  axios?: AxiosStatic
+  axios?: AxiosInstance
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -48,7 +48,9 @@ export class KlevuConfig {
     if (config.cacheMaxTTL) {
       this.cacheMaxTTL = config.cacheMaxTTL
     }
-    this.axios = config.axios
+    if (config.axios) {
+      this.axios = config.axios.create()
+    }
   }
 
   static init(config: KlevuConfiguration) {
