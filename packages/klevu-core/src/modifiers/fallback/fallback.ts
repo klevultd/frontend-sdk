@@ -2,6 +2,10 @@ import { KlevuFetchModifer } from "../index.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
 
+export type KlevuFallbackQueryOptions = {
+  runWhenLessThanResults: number
+}
+
 /**
  * If original query doesn't return enough results then fallback query is run added to results
  *
@@ -10,7 +14,8 @@ import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
  * @returns
  */
 export function fallback(
-  func: KlevuFetchFunctionReturnValue
+  func: KlevuFetchFunctionReturnValue,
+  options?: KlevuFallbackQueryOptions
 ): KlevuFetchModifer {
   if (func.queries?.length !== 1) {
     throw new Error("Fallback modifier can only be applied to single query")
@@ -33,6 +38,8 @@ export function fallback(
           query.settings = {}
         }
         query.settings.fallbackQueryId = fallbackQuery.id
+        query.settings.fallbackWhenCountLessThan =
+          options?.runWhenLessThanResults
         copy.push(fallbackQuery)
       }
       return copy

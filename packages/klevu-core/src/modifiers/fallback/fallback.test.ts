@@ -21,9 +21,10 @@ test("Fallback query", async () => {
       "asdfgsdjug8isujgosidgjidsogjsdiogjsdiog",
       {
         id: "wrong-search",
-        fallbackWhenCountLessThan: 300,
       },
-      fallback(trendingProducts())
+      fallback(trendingProducts(), {
+        runWhenLessThanResults: 300,
+      })
     )
   )
 
@@ -40,9 +41,10 @@ test("No fallback when enough results", async () => {
       "shirts",
       {
         id: "no-fallback",
-        fallbackWhenCountLessThan: 2,
       },
-      fallback(trendingProducts())
+      fallback(trendingProducts(), {
+        runWhenLessThanResults: 2,
+      })
     )
   )
 
