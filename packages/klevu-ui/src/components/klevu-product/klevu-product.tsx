@@ -14,6 +14,14 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @slot image - Image region of component
  * @slot info - Swatches, titles, brands and prices slot
  * @slot bottom - Empty are after product content
+ *
+ * @csspart image - The image element of component
+ * @csspart container - The container element of whole
+ *
+ * @cssprop --klevu-product-width - Width of the product
+ * @cssprop --klevu-product-small-width - Width of the product when small variant is used
+ * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
+ * @cssprop --klevu-product-image-fill - How to fill image to it's space.
  */
 @Component({
   tag: "klevu-product",
@@ -86,9 +94,9 @@ export class KlevuProduct {
       return false
     }
 
-    if (settings?.onProductClick) {
+    if (settings?.onItemClick) {
       try {
-        const result = settings.onProductClick(this.product, ev)
+        const result = settings.onItemClick(this.product, ev)
         if (result === false) {
           ev.preventDefault()
           return false
@@ -156,7 +164,7 @@ export class KlevuProduct {
 
     return (
       <Host>
-        <div class={containerClasses}>
+        <div part="container" class={containerClasses}>
           <slot name="top"></slot>
           <a href={settings?.generateProductUrl?.(this.product)} onClick={this.click.bind(this)}>
             {this.hideImage ? null : (

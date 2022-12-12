@@ -6,7 +6,9 @@ export default create({
   colorPrimary: "#97C73E",
   colorSecondary: "#97C73E",
 
-  fontBase: "'Poppins', sans-serif",
+  // Typography
+  fontBase: "'Poppins', sans-serif !important",
+  fontCode: "'Source Code Pro', monospace",
 
   /*
   // UI
@@ -15,9 +17,6 @@ export default create({
   appBorderColor: "grey",
   appBorderRadius: 4,
 
-  // Typography
-  fontCode: "monospace",
-
   // Text colors
   textColor: "black",
   textInverseColor: "white",
@@ -25,8 +24,8 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: "#eee",
-  barSelectedColor: "#333",
-  barBg: "#97C73E",
+  barSelectedColor: "#e5e5e5",
+  barBg: "#0A4563",
 
   /*
   // Form colors
@@ -38,6 +37,6 @@ export default create({
 
   brandTitle: "Klevu Web Components",
   brandUrl: "https://developers.klevu.com",
-  // brandImage: "https://websitecdn.klevu.com/wp-content/uploads/2022/07/klevu-color.svg",
+  brandImage: "/klevu-color.svg",
   brandTarget: "_self",
 })

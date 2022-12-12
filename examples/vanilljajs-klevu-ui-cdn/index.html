@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klevu UI CDN example</title>
+    <meta charset="UTF-8" />
+    <script type="module">
+      import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
+      defineCustomElements()
+    </script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@klevu/ui@0.0.13/dist/klevu-ui/klevu-ui.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <klevu-init
+      api-key="klevu-165829460115715456"
+      url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+    >
+      <klevu-quicksearch></klevu-quicksearch>
+    </klevu-init>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
+
+<Meta title="Start/Styles" />
+
+# Styling components
+
+Klevu Components are designed to be easy and flexible, allowing you to customize your project in just a few clicks in this Storybook.
+With our extensive selection of CSS variables – accessible from the 'CSS custom properties' tab – tweaking any component is effortless so you can quickly
+make modifications and get precisely the look that best suits your needs.
+
+Here is the list of available variables. Replace the values with the ones you tweaked in here Storybook and place this top of your main CSS file.
+
+```css
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  --klevu-h1-size: 1.5rem;
+  --klevu-h1-weight: bold;
+  --klevu-h1-color: black;
+  --klevu-h2-size: 1.2rem;
+  --klevu-h2-weight: bold;
+  --klevu-h2-color: black;
+  --klevu-h3-size: 1.1rem;
+  --klevu-h3-weight: normal;
+  --klevu-h3-color: black;
+  --klevu-color-primary: #00a0e9;
+  --klevu-color-primary-border: #0675a8;
+  --klevu-color-primary-text: #ffffff;
+  --klevu-color-border: #e0e0e0;
+  --klevu-color-dim-background: #fafafa;
+  --klevu-color-dim-text: #666666;
+  --klevu-color-shadow: rgba(0, 160, 233, 0.2);
+  --klevu-rounded-corners: 4px;
+  --klevu-spacing-small: 4px;
+  --klevu-spacing-normal: 8px;
+  --klevu-spacing-large: 12px;
+  --klevu-product-image-aspect-ratio: 1.3 / 1;
+  --klevu-product-width: 300px;
+  --klevu-product-small-width: 200px;
+  --klevu-product-image-fill: cover; /* cover, contain */
+}
+```
+
+# Slots
+
+The web components library offers an variety of options for customization, with
+[slot elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/) allowing developers to
+alter and personalize the contents of their components - whether partially or fully.
+
+These slots can be found in addons panel's control sections.
+
+Product example:
+
+```html
+<klevu-product>
+  <div slot="image">This element replaces product image</div>
+  <div slot="bottom">This is appended to end of the product</div>
+</klevu-product>
+```
+
+# ::part
+
+To modify the style and looks of components without replacing HTML content of components there are parts
+defined in the components. You can modify the these parts with [::part pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part)
+CSS selector.
+
+These parts can be found in addons panel's control sections.
+
+Product example:
+
+```css
+/* this allows to modify the container div of product */
+klevu-product::part(container) {
+  border: 3px dashed orange;
+}
+```
