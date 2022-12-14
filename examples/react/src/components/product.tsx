@@ -85,7 +85,7 @@ export function Product(props: {
         {new Intl.NumberFormat(undefined, {
           style: "currency",
           currency: p.currency,
-        }).format(parseFloat(p.price))}
+        }).format(parseFloat(p.salePricex))}
       </Typography>
       {props.hideAddToCart ? null : (
         <Button variant="contained" color="primary" onClick={addToCart}>
