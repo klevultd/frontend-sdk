@@ -7,8 +7,10 @@ import {
 } from "@klevu/core"
 import {
   KlevuButton,
+  KlevuDrawer,
   KlevuFacetList,
   KlevuPagination,
+  KlevuPopup,
   KlevuProduct,
   KlevuProductGrid,
   KlevuQuery,
@@ -78,19 +80,26 @@ export function CustomCategoryPage() {
             </KlevuProduct>
           ))}
         </KlevuProductGrid>
-        <div className="gridcontentbottom">
-          {queryResult ? (
-            <KlevuPagination
-              onKlevuPaginationChange={onPageChange}
-              queryResult={queryResult}
-            />
-          ) : null}
-          <KlevuSort
-            onKlevuSortChanged={(e) => {
-              setOffset(0)
-              setSort(e.detail)
-            }}
-          />
+        <div
+          style={{ display: "flex", justifyContent: "center", margin: "20px" }}
+        >
+          <KlevuPopup openAtFocus anchor="top" closeAtOutsideClick>
+            <KlevuButton slot="origin">Open pagination popup</KlevuButton>
+            <div slot="content" className="gridcontentbottom">
+              {queryResult ? (
+                <KlevuPagination
+                  onKlevuPaginationChange={onPageChange}
+                  queryResult={queryResult}
+                />
+              ) : null}
+              <KlevuSort
+                onKlevuSortChanged={(e) => {
+                  setOffset(0)
+                  setSort(e.detail)
+                }}
+              />
+            </div>
+          </KlevuPopup>
         </div>
       </div>
     </div>

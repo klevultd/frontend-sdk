@@ -5,3 +5,8 @@
   align-items: stretch;
   justify-content: center;
 }
+
+.gridcontainer {
+  display: grid;
+  grid-gap: var(--klevu-spacing-large);
+}

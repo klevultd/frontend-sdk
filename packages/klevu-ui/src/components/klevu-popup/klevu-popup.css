@@ -1,19 +1,23 @@
 :host {
   display: block;
-  position: relative;
+}
+
+.originContainer {
+  display: inline-block;
 }
 
 .popup {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
   visibility: hidden;
   box-sizing: border-box;
-  bottom: 0;
-  box-shadow: 0px 10px 15px var(--klevu-color-shadow, rgba(0, 0, 0, 0.2));
+  box-shadow: 0px 1px 5px var(--klevu-color-shadow, rgba(0, 0, 0, 0.2));
   padding: var(--klevu-spacing-normal);
   border-radius: var(--klevu-rounded-corners);
-  transition: opacity 0.4s, visibility 0.4s, transform 0.2s;
+  transition: opacity 0.4s, visibility 0.4s;
   opacity: 0;
-  transform: translateY(100%);
   z-index: 1000;
   background: white;
 }
@@ -29,7 +33,6 @@
 .popup.show {
   visibility: visible;
   opacity: 1;
-  transform: translateY(calc(100% + var(--klevu-spacing-normal)));
 }
 
 .popup.fullwidth {

@@ -6,13 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
-import { KlevuPopupAnchor } from "./components/klevu-popup/klevu-popup";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
-import { KlevuPopupAnchor as KlevuPopupAnchor1 } from "./components/klevu-popup/klevu-popup";
+import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
@@ -65,7 +64,7 @@ export namespace Components {
         /**
           * Anchor to right or left side of the page
          */
-        "anchor": KlevuPopupAnchor;
+        "anchor": "right" | "left";
         /**
           * Display dim background on top of other content
          */
@@ -239,7 +238,7 @@ export namespace Components {
         /**
           * Anchor popup to left or right of page
          */
-        "anchor": KlevuPopupAnchor;
+        "anchor": Placement;
         /**
           * Close popup when clicking outside content area
          */
@@ -304,6 +303,10 @@ export namespace Components {
         "variant": KlevuProductVariant;
     }
     interface KlevuProductGrid {
+        /**
+          * Place products in grid with this many products
+         */
+        "itemsPerRow"?: number;
     }
     interface KlevuQuery {
         /**
@@ -367,7 +370,7 @@ export namespace Components {
         /**
           * Anchor popup to witch side
          */
-        "popupAnchor"?: KlevuPopupAnchor;
+        "popupAnchor"?: Placement;
         /**
           * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
          */
@@ -814,7 +817,7 @@ declare namespace LocalJSX {
         /**
           * Anchor to right or left side of the page
          */
-        "anchor"?: KlevuPopupAnchor;
+        "anchor"?: "right" | "left";
         /**
           * Display dim background on top of other content
          */
@@ -994,7 +997,7 @@ declare namespace LocalJSX {
         /**
           * Anchor popup to left or right of page
          */
-        "anchor"?: KlevuPopupAnchor;
+        "anchor"?: Placement;
         /**
           * Close popup when clicking outside content area
          */
@@ -1055,6 +1058,10 @@ declare namespace LocalJSX {
         "variant"?: KlevuProductVariant;
     }
     interface KlevuProductGrid {
+        /**
+          * Place products in grid with this many products
+         */
+        "itemsPerRow"?: number;
     }
     interface KlevuQuery {
         /**
@@ -1118,7 +1125,7 @@ declare namespace LocalJSX {
         /**
           * Anchor popup to witch side
          */
-        "popupAnchor"?: KlevuPopupAnchor;
+        "popupAnchor"?: Placement;
         /**
           * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
          */

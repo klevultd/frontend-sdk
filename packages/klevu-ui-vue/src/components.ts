@@ -137,7 +137,9 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
 ]);
 
 
-export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGrid>('klevu-product-grid', undefined);
+export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGrid>('klevu-product-grid', undefined, [
+  'itemsPerRow'
+]);
 
 
 export const KlevuQuery = /*@__PURE__*/ defineContainer<JSX.KlevuQuery>('klevu-query', undefined, [

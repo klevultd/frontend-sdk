@@ -1,5 +1,4 @@
 import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
-import { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 
 /**
  * Component to create offscreen drawer on left or right side of the screen
@@ -30,7 +29,7 @@ export class KlevuDrawer {
   /**
    * Anchor to right or left side of the page
    */
-  @Prop() anchor: KlevuPopupAnchor = "right"
+  @Prop() anchor: "right" | "left" = "right"
 
   @State() open = false
 
