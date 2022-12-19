@@ -2,6 +2,9 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 /**
  * Simple native dropdown component for dropdown
+ *
+ * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
+ * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
  */
 @Component({
   tag: "klevu-dropdown",

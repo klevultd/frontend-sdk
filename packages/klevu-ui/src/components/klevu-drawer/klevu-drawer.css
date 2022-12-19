@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   height: 100vh;
-  max-width: 500px;
+  max-width: var(--klevu-drawer-max-width, max-content);
   z-index: 1000;
   background: #fff;
   transition: left 0.4s, right 0.4s;
@@ -16,7 +16,6 @@
   left: -100%;
   border-right: 1px solid var(--klevu-color-border);
   padding-right: var(--klevu-spacing-normal);
-  /*box-shadow: var(--klevu-spacing-small) 0 var(--klevu-spacing-small) var(--klevu-color-shadow);*/
 }
 
 .drawer.right {
@@ -40,7 +39,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--klevu-drawer-background-color, rgba(0, 0, 0, 0.2));
   z-index: 999;
 }
 

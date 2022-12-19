@@ -5,6 +5,8 @@ import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
  *
  * @slot origin - When origin element is clicked then content is shown
  * @slot content - Content to display in drawer
+ * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
+ * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
  */
 @Component({
   tag: "klevu-drawer",

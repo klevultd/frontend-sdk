@@ -2,6 +2,8 @@ import { Component, h, Host, Prop } from "@stencil/core"
 
 /**
  * Component to place products on grid
+ *
+ * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
  */
 @Component({
   tag: "klevu-product-grid",
