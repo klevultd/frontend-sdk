@@ -86,7 +86,6 @@ export class KlevuFacet {
           end={this.slider.end ? parseFloat(this.slider.end) : undefined}
           onKlevuSliderChange={(event) => {
             this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
-            console.log(event)
           }}
         ></klevu-slider>
       </Fragment>

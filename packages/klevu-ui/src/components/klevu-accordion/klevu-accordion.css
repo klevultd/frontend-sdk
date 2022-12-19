@@ -19,14 +19,15 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: var(--klevu-accordion-background);
 }
 
 input:checked ~ .content {
-  max-height: 600px;
+  max-height: var(--klevu-accordion-content-height, 600px);
 }
 
 svg {
-  fill: var(--klevu-h3-color);
+  fill: var(--klevu-accordion-icon-color, var(--klevu-h3-color));
   transition: transform 0.3s;
 }
 

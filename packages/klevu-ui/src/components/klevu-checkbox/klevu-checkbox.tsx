@@ -5,6 +5,8 @@ import { Component, h, Prop } from "@stencil/core"
 
 /**
  * Checkbox component
+ * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
+ * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
  */
 @Component({
   tag: "klevu-checkbox",

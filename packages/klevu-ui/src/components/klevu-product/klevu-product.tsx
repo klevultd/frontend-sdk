@@ -197,14 +197,14 @@ export class KlevuProduct {
                 {this.hideBrand ? null : <p class="brandname">{this.product.brand}</p>}
                 {this.hideName ? null : <p class="productname">{this.product.name}</p>}
                 {this.hideDescription ? null : <p class="description">{this.product.shortDesc}</p>}
-                {this.hidePrice || !this.product.price || !this.product.currency ? null : (
+                {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
                   <p
                     class={{
                       isOnSale,
                       price: true,
                     }}
                   >
-                    {renderPrice(this.product.price, this.product.currency)}
+                    {renderPrice(this.product.salePrice, this.product.currency)}
                   </p>
                 )}
               </div>

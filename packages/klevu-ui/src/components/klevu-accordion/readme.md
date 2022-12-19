@@ -17,6 +17,7 @@
 | ----------- | ------------------------------------------- |
 | `"content"` | Element containing content of the accordion |
 | `"header"`  | Element that has title that can be clicked  |
+| `"icon"`    | Icon element                                |
 
 
 ## Dependencies

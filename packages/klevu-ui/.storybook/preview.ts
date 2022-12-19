@@ -26,20 +26,34 @@ const klevuStyles: string[] = Array.from(document.styleSheets)
     [] as any[]
   )
 
-const documentedCssProps = Object.fromEntries(
-  new Map(
-    jsdocs.components.flatMap((c) =>
-      c.docsTags.filter((t) => t.name === "cssprop").map((t) => t.text.split(" - "))
-    ) as any
-  )
+const documentedCssProps = jsdocs.components.flatMap((c) =>
+  c.docsTags
+    .filter((t) => t.name === "cssprop")
+    .map((t) => {
+      const [variable, defaultVal, ...desc] = t.text.split(" ")
+      return {
+        variable,
+        defaultVal,
+        desc: desc.join(" "),
+      }
+    })
 )
-console.log(documentedCssProps)
 
 const cssprops = {}
 for (const prop of klevuStyles) {
   cssprops[prop.substring(2)] = {
     value: getComputedStyle(document.documentElement).getPropertyValue(prop),
-    description: documentedCssProps[prop],
+    description: documentedCssProps.find((p) => p.variable === prop)?.desc,
+    category: "Generic defined styles",
+  }
+}
+for (const prop of documentedCssProps) {
+  if (cssprops[prop.variable.substring(2)]) {
+    continue
+  }
+  cssprops[prop.variable.substring(2)] = {
+    description: `${prop.desc} \n *default:* \`${prop.defaultVal}\``,
+    category: "Component specific styles",
   }
 }
 
