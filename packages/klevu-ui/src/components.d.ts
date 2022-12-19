@@ -495,10 +495,6 @@ export namespace Components {
         "start"?: number;
     }
     interface KlevuSlides {
-        /**
-          * Height of the slides
-         */
-        "height": string;
     }
     interface KlevuSort {
     }
@@ -1270,10 +1266,6 @@ declare namespace LocalJSX {
         "start"?: number;
     }
     interface KlevuSlides {
-        /**
-          * Height of the slides
-         */
-        "height"?: string;
     }
     interface KlevuSort {
         /**

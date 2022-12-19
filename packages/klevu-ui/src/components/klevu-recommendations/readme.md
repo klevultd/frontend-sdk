@@ -28,6 +28,7 @@
 graph TD;
   klevu-recommendations --> klevu-slides
   klevu-recommendations --> klevu-product
+  klevu-slides --> klevu-button
   style klevu-recommendations fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

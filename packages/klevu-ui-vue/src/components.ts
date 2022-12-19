@@ -218,9 +218,7 @@ export const KlevuSlider = /*@__PURE__*/ defineContainer<JSX.KlevuSlider>('klevu
 ]);
 
 
-export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined, [
-  'height'
-]);
+export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined);
 
 
 export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sort', undefined, [
