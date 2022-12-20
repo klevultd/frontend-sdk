@@ -19,6 +19,7 @@
  - [klevu-latest-searches](../klevu-latest-searches)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-popular-searches](../klevu-popular-searches)
+ - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-search-landing-page](../klevu-search-landing-page)
  - [klevu-suggestions-list](../klevu-suggestions-list)
 
@@ -30,6 +31,7 @@ graph TD;
   klevu-latest-searches --> klevu-heading
   klevu-merchandising --> klevu-heading
   klevu-popular-searches --> klevu-heading
+  klevu-quicksearch --> klevu-heading
   klevu-search-landing-page --> klevu-heading
   klevu-suggestions-list --> klevu-heading
   style klevu-heading fill:#f9f,stroke:#333,stroke-width:4px

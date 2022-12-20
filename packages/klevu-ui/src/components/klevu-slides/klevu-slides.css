@@ -1,16 +1,49 @@
 :host {
+  display: block;
   margin: var(--klevu-spacing-large);
   border-radius: var(--klevu-rounded-corners);
   position: relative;
 }
 
+.prev,
+.next {
+  top: 50%;
+  position: absolute;
+  display: block;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: var(--klevu-color-primary-text);
+  box-shadow: 1px 1px 5px var(--klevu-color-shadow);
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+}
+
+klevu-button {
+  --klevu-rounded-corners: 50%;
+  --klevu-button-padding: var(--klevu-spacing-normal) var(--klevu-spacing-large);
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
 .slides {
   display: flex;
+  margin: 0 calc(var(--klevu-spacing-large) * 2);
   gap: var(--klevu-spacing-large);
   overflow-x: scroll;
   position: relative;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+}
+
+.slides.hideNextPrev {
+  margin: 0;
 }
 
 .slides > * {

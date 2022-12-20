@@ -100,11 +100,14 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     if (!prop.text) {
       continue
     }
-    const [variable, desc] = prop.text.split(" - ")
+    const [variable, defaultVal, ...desc] = prop.text.split(" ")
     argTypes[variable] = {
-      description: desc,
+      description: desc.join(" "),
       table: {
         category: "CSS Properties",
+        defaultValue: {
+          summary: defaultVal,
+        },
       },
     }
   }
@@ -114,11 +117,14 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     if (!part.text) {
       continue
     }
-    const [variable, desc] = part.text.split(" - ")
+    const [variable, defaultVal, ...desc] = part.text.split(" ")
     argTypes[variable] = {
-      description: desc,
+      description: desc.join(" "),
       table: {
         category: "CSS Parts",
+        defaultValue: {
+          summary: defaultVal,
+        },
       },
     }
   }

@@ -4,6 +4,8 @@ import {
   FilterManager,
   KlevuDomEvents,
   KlevuFetch,
+  KlevuFetchQueryResult,
+  KlevuFetchResponse,
   KlevuKMCRecommendationOptions,
   KlevuListenDomEvent,
   KlevuMerchandisingOptions,
@@ -139,21 +141,31 @@ export class KlevuQuery {
     }
   }
 
-  @Listen("klevu-product-click", {
+  @Listen("klevuProductClick", {
     capture: true,
+    target: "body",
   })
   onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
-    console.log("hello?")
     const product = event.detail.product
+    if (!this.lastResult || !product.id) {
+      return
+    }
+
     switch (this.type) {
       case "merchandising":
-        if (product.id && this.categoryTitle) {
-          this.mercClick?.(product.id, this.categoryTitle, product.itemGroupId)
+        if (this.categoryTitle) {
+          this.lastResult.getCategoryMerchandisingClickSendEvent?.()(
+            product.id,
+            this.categoryTitle,
+            product.itemGroupId
+          )
         }
         break
       case "recommendation":
+        this.lastResult.getRecommendationClickSendEvent?.()(product.id, product.itemGroupId)
         break
       case "search":
+        this.lastResult.getSearchClickSendEvent?.()(product.id, product.itemGroupId)
         break
       default:
         const e: never = this.type
@@ -161,7 +173,7 @@ export class KlevuQuery {
     }
   }
 
-  private mercClick?: (productId: string, categoryTitle: string, variantId?: string, override?: any) => void
+  private lastResult?: KlevuFetchQueryResult
 
   private async fetch() {
     const options: AllQueryOptions = {
@@ -188,13 +200,13 @@ export class KlevuQuery {
           )
         )
         const resultObject = result.queriesById("klevuquery")
-        this.mercClick = resultObject?.getCategoryMerchandisingClickSendEvent?.()
 
         if (!resultObject) {
           console.error("KlevuQuery: Response meta", result.apiResponse?.meta)
           throw new Error("KlevuQuery: Couldn't do fetch.")
         }
 
+        this.lastResult = resultObject
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,
@@ -213,6 +225,7 @@ export class KlevuQuery {
           throw new Error("KlevuQuery: Couldn't do fetch.")
         }
 
+        this.lastResult = resultObject
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,
@@ -231,6 +244,7 @@ export class KlevuQuery {
           throw new Error("KlevuQuery: Couldn't do fetch.")
         }
 
+        this.lastResult = resultObject
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,

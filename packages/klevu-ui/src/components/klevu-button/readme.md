@@ -17,6 +17,7 @@
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-search-field](../klevu-search-field)
  - [klevu-search-landing-page](../klevu-search-landing-page)
+ - [klevu-slides](../klevu-slides)
 
 ### Graph
 ```mermaid
@@ -24,6 +25,7 @@ graph TD;
   klevu-merchandising --> klevu-button
   klevu-search-field --> klevu-button
   klevu-search-landing-page --> klevu-button
+  klevu-slides --> klevu-button
   style klevu-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

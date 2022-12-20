@@ -1,4 +1,4 @@
 :host {
   display: block;
-  width: 200px;
+  width: var(--klevu-facet-list-width, 200px);
 }

@@ -30,8 +30,8 @@ select {
   display: block;
   width: 1rem;
   height: 0.6rem;
-  background-color: var(--klevu-color-primary);
-  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  background-color: var(--klevu-dropdown-icon-color, var(--klevu-color-primary));
+  clip-path: var(--klevu-dropdown-icon-clip-path, polygon(100% 0%, 0 0%, 50% 100%));
 }
 
 .select.disabled {

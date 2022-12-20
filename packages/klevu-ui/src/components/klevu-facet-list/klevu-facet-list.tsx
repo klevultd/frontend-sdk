@@ -5,6 +5,8 @@ import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
 /**
  * Render all facets of filter manager
+ *
+ * @cssprop --klevu-face-list-width 200px Width of the facet listing
  */
 @Component({
   tag: "klevu-facet-list",

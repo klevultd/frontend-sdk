@@ -12,7 +12,11 @@ export default autofillMeta("klevu-slides", {
   parameters: { notes },
 })
 
-const Template: Story<HTMLKlevuSlidesElement> = (args) => html`<klevu-slides .height=${args.height}>
+const Template: Story<HTMLKlevuSlidesElement> = (args) => html`<klevu-slides
+  .slideFullWidth=${args.slideFullWidth}
+  .hideNextPrev=${args.hideNextPrev}
+  .height=${args.height}
+>
   ${productElements}</klevu-slides
 >`
 

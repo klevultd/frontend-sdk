@@ -7,7 +7,8 @@
 span {
   display: block;
   padding: var(--klevu-spacing-normal);
-  background: var(--klevu-color-dim-background);
+  background: var(--klevu-pagination-background-color, var(--klevu-color-dim-background));
+  color: var(--klevu-pagination-text-color);
   border-radius: var(--klevu-rounded-corners);
   cursor: pointer;
 }
@@ -15,8 +16,8 @@ span {
 span.current {
   font-weight: bold;
   cursor: inherit;
-  background: var(--klevu-color-primary);
-  color: var(--klevu-color-primary-text);
+  background: var(--klevu-pagination-selected-background-color, var(--klevu-color-primary));
+  color: var(--klevu-pagination-selected-text-color, var(--klevu-color-primary-text));
 }
 
 span.disabled {

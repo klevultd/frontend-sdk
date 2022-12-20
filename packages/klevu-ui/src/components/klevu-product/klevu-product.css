@@ -17,6 +17,7 @@
   border: 1px solid var(--klevu-color-border);
   border-radius: var(--klevu-rounded-corners);
   box-sizing: border-box;
+  height: 100%;
 }
 
 .container.default {
@@ -28,6 +29,12 @@
 .container.default.fixedWidth {
   max-width: auto;
   width: var(--klevu-product-width, 300px);
+}
+
+@media (max-width: 500px) {
+  .container.default.fixedWidth {
+    width: auto;
+  }
 }
 
 .container.small {
@@ -85,6 +92,13 @@
   aspect-ratio: 1;
   background-size: var(--klevu-product-image-fill, cover);
   background-position: center center;
+}
+
+@media (max-width: 400px) {
+  .container.line .image {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .brandname {

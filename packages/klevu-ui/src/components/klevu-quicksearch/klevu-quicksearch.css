@@ -18,6 +18,10 @@ klevu-suggestions-list {
   margin-bottom: var(--klevu-spacing-normal);
 }
 
+klevu-product-grid.desktop {
+  width: 600px;
+}
+
 .content section {
   max-width: 940px;
 }

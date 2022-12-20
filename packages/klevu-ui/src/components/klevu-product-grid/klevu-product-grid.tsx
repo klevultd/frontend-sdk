@@ -1,7 +1,9 @@
-import { Component, Element, h, Host } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
 
 /**
  * Component to place products on grid
+ *
+ * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
  */
 @Component({
   tag: "klevu-product-grid",
@@ -9,8 +11,26 @@ import { Component, Element, h, Host } from "@stencil/core"
   shadow: true,
 })
 export class KlevuProductGrid {
-  @Element() el?: HTMLKlevuProductGridElement
+  /**
+   * Place products in grid with this many products
+   */
+  @Prop() itemsPerRow?: number
   render() {
+    if (this.itemsPerRow) {
+      return (
+        <Host>
+          <div
+            class="gridcontainer"
+            style={{
+              gridTemplateColumns: `repeat(${this.itemsPerRow}, 1fr)`,
+            }}
+          >
+            <slot />
+          </div>
+        </Host>
+      )
+    }
+
     return (
       <Host>
         <div class="container">

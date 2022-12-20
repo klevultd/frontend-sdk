@@ -1,13 +1,15 @@
+import { Placement } from "@floating-ui/dom"
 import { KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import type { KlevuPopupAnchor } from "../klevu-popup/klevu-popup"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
 
 /**
  * Full app to create search bar that popups trending products and search results.
+ *
+ * @slot content - Popup content
  */
 @Component({
   tag: "klevu-quicksearch",
@@ -22,7 +24,7 @@ export class KlevuQuicksearch {
   /**
    * Anchor popup to witch side
    */
-  @Prop() popupAnchor?: KlevuPopupAnchor
+  @Prop() popupAnchor?: Placement = "bottom-end"
   /**
    * Should component search for categories too
    */
@@ -147,8 +149,8 @@ export class KlevuQuicksearch {
             </aside>
             {(this.products ?? []).length > 0 ? (
               <section>
-                <h3>Search results</h3>
-                <klevu-product-grid class="desktop">
+                <klevu-heading variant="h3">Search results</klevu-heading>
+                <klevu-product-grid class="desktop" itemsPerRow={3}>
                   {this.products?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="small">
                       {this.internalRenderProductSlot(p, "top")}
@@ -171,8 +173,8 @@ export class KlevuQuicksearch {
               </section>
             ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (
               <section>
-                <h3>Trending products</h3>
-                <klevu-product-grid class="desktop">
+                <klevu-heading variant="h3">Trending products</klevu-heading>
+                <klevu-product-grid class="desktop" itemsPerRow={3}>
                   {this.trendingProducts?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="small">
                       {this.internalRenderProductSlot(p, "top")}

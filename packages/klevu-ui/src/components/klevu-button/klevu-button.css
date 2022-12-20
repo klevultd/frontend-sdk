@@ -3,11 +3,11 @@
 }
 
 button {
-  background: var(--klevu-color-primary);
-  padding: var(--klevu-spacing-normal);
-  border: 1px solid var(--klevu-color-primary-border);
+  background: var(--klevu-button-background-color, var(--klevu-color-primary));
+  padding: var(--klevu-button-padding, var(--klevu-spacing-normal));
+  border: 1px solid var(--klevu-button-border, var(--klevu-color-primary-border));
   border-radius: var(--klevu-rounded-corners);
-  color: var(--klevu-color-primary-text);
+  color: var(--klevu-button-text-color, var(--klevu-color-primary-text));
   transition: transform 100ms;
 }
 
