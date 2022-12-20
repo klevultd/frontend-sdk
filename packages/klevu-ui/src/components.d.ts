@@ -495,6 +495,18 @@ export namespace Components {
         "start"?: number;
     }
     interface KlevuSlides {
+        /**
+          * Height of the slider
+         */
+        "height": number;
+        /**
+          * Hides next and previous buttons
+         */
+        "hideNextPrev"?: boolean;
+        /**
+          * When clicking next/prev buttons should scroll full width of container
+         */
+        "slideFullWidth"?: boolean;
     }
     interface KlevuSort {
     }
@@ -1266,6 +1278,18 @@ declare namespace LocalJSX {
         "start"?: number;
     }
     interface KlevuSlides {
+        /**
+          * Height of the slider
+         */
+        "height"?: number;
+        /**
+          * Hides next and previous buttons
+         */
+        "hideNextPrev"?: boolean;
+        /**
+          * When clicking next/prev buttons should scroll full width of container
+         */
+        "slideFullWidth"?: boolean;
     }
     interface KlevuSort {
         /**

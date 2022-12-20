@@ -42,6 +42,10 @@ klevu-button {
   scroll-snap-type: x mandatory;
 }
 
+.slides.hideNextPrev {
+  margin: 0;
+}
+
 .slides > * {
   scroll-snap-align: center;
 }

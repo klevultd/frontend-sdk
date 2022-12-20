@@ -68,7 +68,6 @@ export class KlevuPopup {
         shift(),
         size({
           apply({ availableWidth, availableHeight, elements }) {
-            // Do things with the data, e.g.
             Object.assign(elements.floating.style, {
               maxWidth: `${availableWidth}px`,
               maxHeight: `${availableHeight}px`,
