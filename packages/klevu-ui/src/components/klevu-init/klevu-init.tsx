@@ -5,6 +5,8 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
 /**
  * Initializes components to fetch data from correct Klevu backend
  *
+ *
+ * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
  * @cssprop --klevu-color-primary - Main color of components
  * @cssprop --klevu-color-primary-text - Text color on top primary color
  * @cssprop --klevu-color-primary-border - Border color related to primary color
