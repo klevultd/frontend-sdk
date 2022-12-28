@@ -21,7 +21,7 @@
     "build": "npm run clean && npm run bundle",
     "tsc": "tsc -p .",
     "clean": "rm -rf dist && mkdir dist",
-    "bundle": "rollup --config rollup.config.js && cp node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css dist"
+    "bundle": "rollup --config rollup.config.js --bundleConfigAsCjs && cp node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css dist"
   },
   "author": "",
   "license": "ISC",
