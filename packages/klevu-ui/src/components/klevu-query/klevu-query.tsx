@@ -4,8 +4,8 @@ import {
   FilterManager,
   KlevuDomEvents,
   KlevuFetch,
+  KlevuFetchModifer,
   KlevuFetchQueryResult,
-  KlevuFetchResponse,
   KlevuKMCRecommendationOptions,
   KlevuListenDomEvent,
   KlevuMerchandisingOptions,
@@ -16,6 +16,7 @@ import {
   listFilters,
   search,
   sendMerchandisingViewEvent,
+  sendSearchEvent,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -35,6 +36,12 @@ export class KlevuQuery {
    * What kind of query
    */
   @Prop() type!: "search" | "merchandising" | "recommendation"
+
+  /**
+   * Should search view event be sent. View event is important for analytical cases.
+   * In case of a search this should be used only when creating a landing page for search.
+   */
+  @Prop() sendSearchViewEvent?: boolean
 
   /**
    * Object to override and settings on search options
@@ -236,7 +243,13 @@ export class KlevuQuery {
         if (!this.searchTerm) {
           throw new Error("Search query requires search term")
         }
-        const result = await KlevuFetch(search(this.searchTerm, options))
+
+        const modifiers: KlevuFetchModifer[] = []
+        if (this.sendSearchViewEvent) {
+          modifiers.push(sendSearchEvent())
+        }
+
+        const result = await KlevuFetch(search(this.searchTerm, options, ...modifiers))
         const resultObject = result.queriesById("klevuquery")
 
         if (!resultObject) {

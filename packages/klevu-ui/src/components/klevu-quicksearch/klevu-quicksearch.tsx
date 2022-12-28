@@ -1,5 +1,5 @@
 import { Placement } from "@floating-ui/dom"
-import { KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
+import { KlevuEvents, KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -33,6 +33,14 @@ export class KlevuQuicksearch {
    * Should component search for CMS pages too
    */
   @Prop() searchCmsPages?: boolean
+  /**
+   * Placeholder for input text
+   */
+  @Prop() placeholder?: string
+  /**
+   * Text of search button
+   */
+  @Prop() searchText?: string
 
   /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
@@ -132,6 +140,8 @@ export class KlevuQuicksearch {
             slot="origin"
             searchProducts
             searchSuggestions
+            searchText={this.searchText}
+            placeholder={this.placeholder}
             fallback-term={this.fallbackTerm}
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}

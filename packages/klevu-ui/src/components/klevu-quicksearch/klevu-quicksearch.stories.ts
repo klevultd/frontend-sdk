@@ -12,7 +12,13 @@ export default autofillMeta("klevu-quicksearch", {
 
 const Template: Story<HTMLKlevuQuicksearchElement> = (args) =>
   html` <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"
-    ><klevu-quicksearch .fallbackTerm=${args.fallbackTerm}></klevu-quicksearch
+    ><klevu-quicksearch
+      .fallbackTerm=${args.fallbackTerm}
+      .popupAnchor=${args.popupAnchor}
+      .searchCategories=${args.searchCategories}
+      .searchCmsPages=${args.searchCmsPages}
+      .placeholder=${args.placeholder}
+    ></klevu-quicksearch
   ></klevu-init>`
 
 export const Default = Template.bind({})

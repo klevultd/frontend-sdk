@@ -16,7 +16,6 @@
     "type": "git",
     "url": "https://https://github.com/klevultd/frontend-sdk.git"
   },
-  "type": "module",
   "scripts": {
     "test": "echo 'No tests'",
     "build": "npm run clean && npm run bundle",

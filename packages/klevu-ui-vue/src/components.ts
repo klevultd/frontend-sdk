@@ -144,6 +144,7 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 
 export const KlevuQuery = /*@__PURE__*/ defineContainer<JSX.KlevuQuery>('klevu-query', undefined, [
   'type',
+  'sendSearchViewEvent',
   'options',
   'sort',
   'limit',
@@ -164,6 +165,8 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'popupAnchor',
   'searchCategories',
   'searchCmsPages',
+  'placeholder',
+  'searchText',
   'renderProductSlot'
 ]);
 
@@ -181,6 +184,7 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
 
 export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchField>('klevu-search-field', undefined, [
   'placeholder',
+  'searchText',
   'limit',
   'fallbackTerm',
   'searchProducts',

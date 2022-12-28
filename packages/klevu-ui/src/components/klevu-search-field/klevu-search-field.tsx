@@ -37,6 +37,11 @@ export class KlevuSearchField {
   @Prop() placeholder = "Search for products"
 
   /**
+   * Button text
+   */
+  @Prop() searchText = "Search"
+
+  /**
    * Maximum amount of results
    */
   @Prop() limit = 10
@@ -166,7 +171,7 @@ export class KlevuSearchField {
           placeholder={this.placeholder}
           onKlevuTextChanged={this.handleChange.bind(this)}
         ></klevu-textfield>
-        <klevu-button onClick={this.handleSearchClick.bind(this)}>Search</klevu-button>
+        <klevu-button onClick={this.handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
       </Host>
     )
   }
