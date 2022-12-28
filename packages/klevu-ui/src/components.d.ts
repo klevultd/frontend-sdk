@@ -350,6 +350,10 @@ export namespace Components {
          */
         "searchTerm"?: string;
         /**
+          * Should search view event be sent. View event is important for analytical cases. In case of a search this should be used only when creating a landing page for search.
+         */
+        "sendSearchViewEvent"?: boolean;
+        /**
           * How to sort
          */
         "sort"?: KlevuSearchSorting;
@@ -368,6 +372,10 @@ export namespace Components {
          */
         "fallbackTerm"?: string;
         /**
+          * Placeholder for input text
+         */
+        "placeholder"?: string;
+        /**
           * Anchor popup to witch side
          */
         "popupAnchor"?: Placement;
@@ -383,6 +391,10 @@ export namespace Components {
           * Should component search for CMS pages too
          */
         "searchCmsPages"?: boolean;
+        /**
+          * Text of search button
+         */
+        "searchText"?: string;
     }
     interface KlevuRecommendations {
         /**
@@ -443,6 +455,10 @@ export namespace Components {
           * Should search suggestions
          */
         "searchSuggestions"?: boolean;
+        /**
+          * Button text
+         */
+        "searchText": string;
     }
     interface KlevuSearchLandingPage {
         /**
@@ -1113,6 +1129,10 @@ declare namespace LocalJSX {
          */
         "searchTerm"?: string;
         /**
+          * Should search view event be sent. View event is important for analytical cases. In case of a search this should be used only when creating a landing page for search.
+         */
+        "sendSearchViewEvent"?: boolean;
+        /**
           * How to sort
          */
         "sort"?: KlevuSearchSorting;
@@ -1131,6 +1151,10 @@ declare namespace LocalJSX {
          */
         "fallbackTerm"?: string;
         /**
+          * Placeholder for input text
+         */
+        "placeholder"?: string;
+        /**
           * Anchor popup to witch side
          */
         "popupAnchor"?: Placement;
@@ -1146,6 +1170,10 @@ declare namespace LocalJSX {
           * Should component search for CMS pages too
          */
         "searchCmsPages"?: boolean;
+        /**
+          * Text of search button
+         */
+        "searchText"?: string;
     }
     interface KlevuRecommendations {
         /**
@@ -1218,6 +1246,10 @@ declare namespace LocalJSX {
           * Should search suggestions
          */
         "searchSuggestions"?: boolean;
+        /**
+          * Button text
+         */
+        "searchText"?: string;
     }
     interface KlevuSearchLandingPage {
         /**

@@ -14,6 +14,7 @@
 | `searchCmsPages`    | `search-cms-pages`   | Should try to find cms pages as well                 | `boolean \| undefined` | `undefined`             |
 | `searchProducts`    | `search-products`    | Should search products                               | `boolean \| undefined` | `undefined`             |
 | `searchSuggestions` | `search-suggestions` | Should search suggestions                            | `boolean \| undefined` | `undefined`             |
+| `searchText`        | `search-text`        | Button text                                          | `string`               | `"Search"`              |
 
 
 ## Events

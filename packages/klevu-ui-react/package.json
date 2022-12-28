@@ -27,7 +27,6 @@
   "files": [
     "dist/"
   ],
-  "type": "module",
   "devDependencies": {
     "@types/node": "^18.8.4",
     "@types/react": "^18.0.21",
