@@ -18,6 +18,11 @@ export type KlevuNextFunc = (override?: {
    * Filter manager to apply for next function
    */
   filterManager?: FilterManager
+
+  /**
+   * Use page index to load certain page instead of next available. 0 is first page
+   */
+  pageIndex?: number
 }) => Promise<KlevuFetchResponse>
 
 /**
@@ -25,8 +30,17 @@ export type KlevuNextFunc = (override?: {
  */
 export type KlevuFetchQueryResult = KlevuQueryResult &
   KlevuResultEvent & {
-    /** If there are multiple pages of results next function is defined. Calling this function will result new result  */
+    /**
+     * If there are multiple pages of results next function is defined. Calling this function will result new result
+     *
+     * @deprecated use `getPage()` function instead of next
+     */
     next?: KlevuNextFunc
+
+    /**
+     * Same as next function, but it is always returned even on the last page. Without parameters returns next page.
+     */
+    getPage?: KlevuNextFunc
     /**
      * All parameters defined in that query function
      */

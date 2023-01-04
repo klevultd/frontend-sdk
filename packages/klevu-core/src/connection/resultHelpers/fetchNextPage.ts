@@ -11,7 +11,8 @@ import { KlevuFetch, removeListFilters } from "../klevuFetch.js"
 
 export function fetchNextPage(
   response: KlevuApiRawResponse,
-  func: KlevuFetchFunctionReturnValue
+  func: KlevuFetchFunctionReturnValue,
+  ignoreLastPageUndefined = false
 ) {
   if (!func.queries) {
     return undefined
@@ -35,8 +36,9 @@ export function fetchNextPage(
 
   // no more pages
   if (
+    !ignoreLastPageUndefined &&
     prevQueryResponse.meta.totalResultsFound <=
-    prevQueryResponse.meta.offset + prevQueryResponse.meta.noOfResults
+      prevQueryResponse.meta.offset + prevQueryResponse.meta.noOfResults
   ) {
     return undefined
   }
@@ -46,8 +48,13 @@ export function fetchNextPage(
       prevQuery.settings = {}
     }
 
-    prevQuery.settings.offset =
-      prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
+    if (override?.pageIndex !== undefined) {
+      prevQuery.settings.offset =
+        prevQueryResponse.meta.noOfResults * override.pageIndex
+    } else {
+      prevQuery.settings.offset =
+        prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
+    }
     prevQuery.settings.limit = override?.limit ?? prevQuery.settings?.limit ?? 5
 
     // existance of prevQuery has checked in function before
