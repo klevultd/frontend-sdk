@@ -1,5 +1,5 @@
 import { KlevuConfig, KlevuFetch, search } from "../../index.js"
-import { listFilters } from "../../modifiers/index.js"
+import { debug, listFilters } from "../../modifiers/index.js"
 import axios from "axios"
 
 beforeEach(() => {
@@ -10,7 +10,7 @@ beforeEach(() => {
   })
 })
 
-test("Pagination test", async () => {
+test("Next page pagination test", async () => {
   const limit = 2
 
   const result = await KlevuFetch(
@@ -52,4 +52,43 @@ test("Pagination test", async () => {
   expect(nextNextSearchResult?.filters?.length).toBeGreaterThan(0)
   expect(nextNextSearchResult?.meta.offset).toBe(2 * limit)
   expect(nextNextSearchResult?.meta.noOfResults).toBe(limit)
+})
+
+test("Jump to pages test", async () => {
+  const limit = 2
+
+  const result = await KlevuFetch(
+    search(
+      "*",
+      {
+        limit,
+      },
+      listFilters()
+    )
+  )
+
+  const searchResult = result.queriesById("search")
+
+  expect(searchResult?.records.length).toBe(2)
+  expect(searchResult?.getPage).toBeDefined()
+  expect(searchResult?.filters?.length).toBeGreaterThan(0)
+  expect(searchResult?.meta.offset).toBe(0 * limit)
+  expect(searchResult?.meta.noOfResults).toBe(limit)
+
+  const page3Results = await searchResult?.getPage?.({ pageIndex: 2 })
+  const page3SearchResult = page3Results?.queriesById("search")
+  expect(page3SearchResult?.records.length).toBe(2)
+  expect(page3SearchResult?.getPage).toBeDefined()
+  expect(page3SearchResult?.filters?.length).toBeGreaterThan(0)
+  expect(page3SearchResult?.meta.offset).toBe(2 * limit)
+
+  const page1AgainResult = await page3SearchResult?.getPage?.({ pageIndex: 0 })
+  const page1AgainSearchResult = page1AgainResult?.queriesById("search")
+  expect(page1AgainSearchResult?.meta.offset).toBe(0)
+  expect(searchResult?.records).toEqual(page1AgainSearchResult?.records)
+
+  const page1AgainResult2 = await searchResult?.getPage?.({ pageIndex: 0 })
+  const page1AgainSearchResult2 = page1AgainResult2?.queriesById("search")
+  expect(page1AgainSearchResult2?.meta.offset).toBe(0)
+  expect(searchResult?.records).toEqual(page1AgainSearchResult2?.records)
 })

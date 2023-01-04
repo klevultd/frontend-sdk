@@ -129,6 +129,7 @@ function KlevuQueriesById(
     ...res,
     ...FetchResultEvents(res, func),
     next: fetchNextPage(response, func),
+    getPage: fetchNextPage(response, func, true),
     functionParams: func.params,
     annotationsById: (productId: string, languageCode: string) =>
       getAnnotationsForProduct(res, productId, languageCode),
@@ -172,6 +173,13 @@ async function cleanAndProcessFunctions(
   }
 }
 
+/**
+ * Removes list filters from query
+ *
+ * @param f
+ * @param prevQueryResult
+ * @returns
+ */
 export function removeListFilters(
   f: KlevuFetchFunctionReturnValue,
   prevQueryResult: KlevuQueryResult
