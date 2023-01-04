@@ -120,3 +120,24 @@ test("Apply filters", () => {
   expect(filters[0].values).toEqual(["red"])
   expect(filters[1].values).toEqual(["3", "7"])
 })
+
+test("Save and restore state", () => {
+  const manager = new FilterManager()
+  manager.initFromListFilters(mockFilterData())
+  manager.toggleOption("test", "Red")
+
+  const state = manager.getCurrentState()
+
+  const anotherManager = new FilterManager(state)
+  expect(manager.options).toEqual(anotherManager.options)
+  expect(manager.sliders).toEqual(anotherManager.sliders)
+
+  manager.clear()
+
+  expect(manager.options).not.toEqual(anotherManager.options)
+  expect(manager.sliders).not.toEqual(anotherManager.sliders)
+
+  manager.setState(state)
+  expect(manager.options).toEqual(anotherManager.options)
+  expect(manager.sliders).toEqual(anotherManager.sliders)
+})

@@ -8,6 +8,11 @@ import {
 } from "../models/KlevuApiRawResponse.js"
 import { isBrowser } from "../utils/isBrowser.js"
 
+type FilterManagerState = {
+  options: KlevuFilterResultOptions[]
+  sliders: KlevuFilterResultSlider[]
+}
+
 /**
  * Filter manager is used to store and handle filters (facets) in the results easily.
  * It can be easily used with applyFilterWithFilterManager() and listFilters() modifiers
@@ -15,6 +20,16 @@ import { isBrowser } from "../utils/isBrowser.js"
 export class FilterManager {
   options: KlevuFilterResultOptions[] = []
   sliders: KlevuFilterResultSlider[] = []
+
+  /**
+   * Manager can be initialized with existing options and sliders
+   *
+   * @param initialValues initialize manager with values
+   */
+  constructor(initialValues?: Partial<FilterManagerState>) {
+    this.options = initialValues?.options ?? []
+    this.sliders = initialValues?.sliders ?? []
+  }
 
   initFromListFilters(
     filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider>
@@ -54,6 +69,23 @@ export class FilterManager {
   clear() {
     this.options = []
     this.sliders = []
+  }
+
+  /**
+   * Gets current state of filters
+   *
+   * @returns current state
+   */
+  getCurrentState(): FilterManagerState {
+    return {
+      options: this.options,
+      sliders: this.sliders,
+    }
+  }
+
+  setState(state: FilterManagerState): void {
+    this.options = state.options
+    this.sliders = state.sliders
   }
 
   /**
