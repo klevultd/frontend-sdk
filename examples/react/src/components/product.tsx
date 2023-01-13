@@ -53,8 +53,6 @@ export function Product(props: {
 }) {
   const p = props.product
 
-  console.log(p.salePrice)
-
   const cart = useCart()
 
   const addToCart: React.MouseEventHandler<HTMLButtonElement> = (event) => {
