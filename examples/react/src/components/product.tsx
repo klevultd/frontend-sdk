@@ -52,6 +52,9 @@ export function Product(props: {
   hideAddToCart?: boolean
 }) {
   const p = props.product
+
+  console.log(p.salePrice)
+
   const cart = useCart()
 
   const addToCart: React.MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -85,7 +88,7 @@ export function Product(props: {
         {new Intl.NumberFormat(undefined, {
           style: "currency",
           currency: p.currency,
-        }).format(parseFloat(p.salePricex))}
+        }).format(parseFloat(p.salePrice))}
       </Typography>
       {props.hideAddToCart ? null : (
         <Button variant="contained" color="primary" onClick={addToCart}>
