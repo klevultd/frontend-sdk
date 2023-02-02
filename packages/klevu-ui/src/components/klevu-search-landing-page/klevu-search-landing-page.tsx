@@ -10,6 +10,8 @@ import {
   sendSearchEvent,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
+import { KlevuProductCustomEvent } from "../../components"
+import { KlevuPaginationCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
@@ -43,6 +45,11 @@ export class KlevuSearchLandingPage {
    * Order filters in a customer order
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
+
+  /**
+   * Use pagination instead of loading more
+   */
+  @Prop() usePagination?: boolean
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
@@ -100,8 +107,18 @@ export class KlevuSearchLandingPage {
     this.clickEvent = this.resultObject!.getSearchClickSendEvent?.()
   }
 
+  async paginationChange(event: KlevuPaginationCustomEvent<number>) {
+    if (!this.resultObject?.getPage) {
+      return
+    }
+    const nextResultObject = await this.resultObject.getPage({ pageIndex: event.detail - 1 })
+    this.resultObject = nextResultObject.queriesById("search")
+    this.results = this.resultObject?.records ?? []
+    this.clickEvent = this.resultObject?.getSearchClickSendEvent?.()
+  }
+
   @Listen("productClick")
-  productClickHandler(event: CustomEvent<KlevuProductOnProductClick>) {
+  productClickHandler(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
     if (this.clickEvent && event.detail.product.id) {
       this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
     }
@@ -150,29 +167,17 @@ export class KlevuSearchLandingPage {
   render() {
     return (
       <Host>
-        <klevu-facet-list
-          class="desktop"
-          customOrder={this.filterCustomOrder}
-          exportparts={globalExportedParts}
-          manager={this.manager}
-        ></klevu-facet-list>
-        <div class="mobileheader">
-          <klevu-heading variant="h1">Searching term "{this.term}"</klevu-heading>
-          <klevu-drawer anchor="right" background>
-            <klevu-button slot="origin">Filters</klevu-button>
-            <klevu-facet-list
-              slot="content"
-              customOrder={this.filterCustomOrder}
-              exportparts={globalExportedParts}
-              manager={this.manager}
-            ></klevu-facet-list>
-          </klevu-drawer>
-        </div>
-        <section>
-          <klevu-heading class="desktop title" variant="h1">
+        <klevu-layout-results>
+          <klevu-facet-list
+            slot="sidebar"
+            customOrder={this.filterCustomOrder}
+            exportparts={globalExportedParts}
+            manager={this.manager}
+          ></klevu-facet-list>
+          <klevu-heading slot="header" variant="h1">
             Searching term "{this.term}"
           </klevu-heading>
-          <klevu-product-grid>
+          <klevu-product-grid slot="content">
             {this.results?.map((p) => (
               <klevu-product product={p} fixedWidth variant="small">
                 {this.internalRenderProductSlot(p, "top")}
@@ -182,12 +187,17 @@ export class KlevuSearchLandingPage {
               </klevu-product>
             ))}
           </klevu-product-grid>
-          {this.resultObject?.next ? (
-            <div class="loadmorebuttoncontainer">
+          <div slot="footer">
+            {this.usePagination && this.resultObject ? (
+              <klevu-pagination
+                queryResult={this.resultObject}
+                onKlevuPaginationChange={this.paginationChange.bind(this)}
+              ></klevu-pagination>
+            ) : this.resultObject?.next ? (
               <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>
-            </div>
-          ) : null}
-        </section>
+            ) : null}
+          </div>
+        </klevu-layout-results>
       </Host>
     )
   }

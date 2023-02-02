@@ -1,6 +1,8 @@
 import { Placement } from "@floating-ui/dom"
 import { KlevuEvents, KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
+import { KlevuSearchFieldCustomEvent } from "../../components"
+import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
@@ -67,7 +69,7 @@ export class KlevuQuicksearch {
   popup?: HTMLKlevuPopupElement
 
   @Listen("klevuSearchResults")
-  async onResults(event: CustomEvent<SearchResultsEventData>) {
+  async onResults(event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) {
     this.clickEvent = event.detail.search?.getSearchClickSendEvent?.()
     this.products = event.detail.search?.records
     this.cmsPages = event.detail.cms?.records
@@ -76,12 +78,12 @@ export class KlevuQuicksearch {
   }
 
   @Listen("klevuSearchSuggestions")
-  async onSuggestions(event: CustomEvent<SuggestionsEventData>) {
+  async onSuggestions(event: KlevuSearchFieldCustomEvent<SuggestionsEventData>) {
     this.suggestions = event.detail
   }
 
   @Listen("klevuProductClick")
-  onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
+  onProductClick(event: KlevuSearchFieldCustomEvent<KlevuProductOnProductClick>) {
     const { product } = event.detail
     this.popup?.closeModal()
     if (product.id) {

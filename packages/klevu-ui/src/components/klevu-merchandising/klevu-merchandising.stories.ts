@@ -17,10 +17,17 @@ const Template: Story<HTMLKlevuMerchandisingElement> = (args) =>
     .limit=${args.limit}
     .renderProductSlot=${args.renderProductSlot}
     .sort=${args.sort}
+    .usePagination=${args.usePagination}
   ></klevu-merchandising>`
 
 export const Default = Template.bind({})
 Default.args = {
   category: "Apparel",
   categoryTitle: "Apparels",
+}
+
+export const Pagination = Template.bind({})
+Pagination.args = {
+  usePagination: true,
+  limit: 10,
 }

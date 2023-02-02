@@ -1,5 +1,6 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, h, Host, Prop, State } from "@stencil/core"
+import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductSlots } from "../klevu-product/klevu-product"
 
@@ -114,7 +115,7 @@ export class KlevuRecommendations {
   }
 
   productClick(
-    event: CustomEvent<{
+    event: KlevuProductCustomEvent<{
       product: Partial<KlevuRecord>
       originalEvent: MouseEvent
     }>

@@ -48,14 +48,12 @@ Type: `Promise<void>`
 
 ### Used by
 
- - [klevu-merchandising](../klevu-merchandising)
- - [klevu-search-landing-page](../klevu-search-landing-page)
+ - [klevu-layout-results](../klevu-layout-results)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-merchandising --> klevu-drawer
-  klevu-search-landing-page --> klevu-drawer
+  klevu-layout-results --> klevu-drawer
   style klevu-drawer fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

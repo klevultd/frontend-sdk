@@ -87,7 +87,11 @@ export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatest
 ]);
 
 
+export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutResults>('klevu-layout-results', undefined);
+
+
 export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchandising>('klevu-merchandising', undefined, [
+  'usePagination',
   'limit',
   'category',
   'categoryTitle',
@@ -203,6 +207,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'sort',
   'filterCount',
   'filterCustomOrder',
+  'usePagination',
   'renderProductSlot'
 ]);
 
@@ -246,5 +251,11 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
   'placeholder',
   'klevuTextChanged',
   'klevuTextFocused'
+]);
+
+
+export const KlevuUtilViewport = /*@__PURE__*/ defineContainer<JSX.KlevuUtilViewport>('klevu-util-viewport', undefined, [
+  'sizes',
+  'sizeChanged'
 ]);
 

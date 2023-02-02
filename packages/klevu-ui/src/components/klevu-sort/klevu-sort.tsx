@@ -1,5 +1,6 @@
 import { KlevuSearchSorting } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host } from "@stencil/core"
+import { KlevuDropdownCustomEvent } from "../../components"
 
 /**
  * Sort dropdown. User can select what kind of sorting they want
@@ -32,7 +33,7 @@ export class KlevuSort {
 
   private selected = KlevuSearchSorting.Relevance
 
-  private onChange(event: CustomEvent<string>) {
+  private onChange(event: KlevuDropdownCustomEvent<string>) {
     const newSort = event.detail as KlevuSearchSorting
     this.selected = newSort
     this.klevuSortChanged.emit(newSort)

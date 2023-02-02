@@ -15,6 +15,7 @@ import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export namespace Components {
     interface KlevuAccordion {
         /**
@@ -172,6 +173,8 @@ export namespace Components {
          */
         "caption": string;
     }
+    interface KlevuLayoutResults {
+    }
     interface KlevuMerchandising {
         /**
           * Which category products
@@ -201,6 +204,7 @@ export namespace Components {
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
+        "usePagination"?: boolean;
     }
     interface KlevuPagination {
         /**
@@ -485,6 +489,10 @@ export namespace Components {
           * What term was used for search
          */
         "term": string;
+        /**
+          * Use pagination instead of loading more
+         */
+        "usePagination"?: boolean;
     }
     interface KlevuSimpleSearch {
     }
@@ -550,6 +558,10 @@ export namespace Components {
          */
         "value": string;
     }
+    interface KlevuUtilViewport {
+        "getCurrentSize": () => Promise<ViewportSize | undefined>;
+        "sizes": ViewportSize[];
+    }
 }
 export interface KlevuCmsListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -590,6 +602,10 @@ export interface KlevuSortCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuTextfieldElement;
+}
+export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuUtilViewportElement;
 }
 declare global {
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
@@ -657,6 +673,12 @@ declare global {
     var HTMLKlevuLatestSearchesElement: {
         prototype: HTMLKlevuLatestSearchesElement;
         new (): HTMLKlevuLatestSearchesElement;
+    };
+    interface HTMLKlevuLayoutResultsElement extends Components.KlevuLayoutResults, HTMLStencilElement {
+    }
+    var HTMLKlevuLayoutResultsElement: {
+        prototype: HTMLKlevuLayoutResultsElement;
+        new (): HTMLKlevuLayoutResultsElement;
     };
     interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
     }
@@ -760,6 +782,12 @@ declare global {
         prototype: HTMLKlevuTextfieldElement;
         new (): HTMLKlevuTextfieldElement;
     };
+    interface HTMLKlevuUtilViewportElement extends Components.KlevuUtilViewport, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilViewportElement: {
+        prototype: HTMLKlevuUtilViewportElement;
+        new (): HTMLKlevuUtilViewportElement;
+    };
     interface HTMLElementTagNameMap {
         "klevu-accordion": HTMLKlevuAccordionElement;
         "klevu-button": HTMLKlevuButtonElement;
@@ -772,6 +800,7 @@ declare global {
         "klevu-heading": HTMLKlevuHeadingElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
+        "klevu-layout-results": HTMLKlevuLayoutResultsElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
         "klevu-pagination": HTMLKlevuPaginationElement;
         "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
@@ -789,6 +818,7 @@ declare global {
         "klevu-sort": HTMLKlevuSortElement;
         "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
+        "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
 }
 declare namespace LocalJSX {
@@ -951,6 +981,8 @@ declare namespace LocalJSX {
          */
         "caption"?: string;
     }
+    interface KlevuLayoutResults {
+    }
     interface KlevuMerchandising {
         /**
           * Which category products
@@ -980,6 +1012,7 @@ declare namespace LocalJSX {
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
+        "usePagination"?: boolean;
     }
     interface KlevuPagination {
         /**
@@ -1276,6 +1309,10 @@ declare namespace LocalJSX {
           * What term was used for search
          */
         "term": string;
+        /**
+          * Use pagination instead of loading more
+         */
+        "usePagination"?: boolean;
     }
     interface KlevuSimpleSearch {
         /**
@@ -1361,6 +1398,10 @@ declare namespace LocalJSX {
          */
         "value": string;
     }
+    interface KlevuUtilViewport {
+        "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
+        "sizes"?: ViewportSize[];
+    }
     interface IntrinsicElements {
         "klevu-accordion": KlevuAccordion;
         "klevu-button": KlevuButton;
@@ -1373,6 +1414,7 @@ declare namespace LocalJSX {
         "klevu-heading": KlevuHeading;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
+        "klevu-layout-results": KlevuLayoutResults;
         "klevu-merchandising": KlevuMerchandising;
         "klevu-pagination": KlevuPagination;
         "klevu-popular-searches": KlevuPopularSearches;
@@ -1390,6 +1432,7 @@ declare namespace LocalJSX {
         "klevu-sort": KlevuSort;
         "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-textfield": KlevuTextfield;
+        "klevu-util-viewport": KlevuUtilViewport;
     }
 }
 export { LocalJSX as JSX };
@@ -1407,6 +1450,7 @@ declare module "@stencil/core" {
             "klevu-heading": LocalJSX.KlevuHeading & JSXBase.HTMLAttributes<HTMLKlevuHeadingElement>;
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;
             "klevu-latest-searches": LocalJSX.KlevuLatestSearches & JSXBase.HTMLAttributes<HTMLKlevuLatestSearchesElement>;
+            "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
             "klevu-pagination": LocalJSX.KlevuPagination & JSXBase.HTMLAttributes<HTMLKlevuPaginationElement>;
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
@@ -1424,6 +1468,7 @@ declare module "@stencil/core" {
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
+            "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }
     }
 }

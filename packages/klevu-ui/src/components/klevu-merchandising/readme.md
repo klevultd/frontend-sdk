@@ -14,33 +14,42 @@
 | `limit`                      | `limit`          | Count of products for page                                                                                                                                                                                                                                                                        | `number`                                                                                                                                                                                                                                                                                                                                                | `24`        |
 | `renderProductSlot`          | --               | Rendering function created to put custom content to klevu-product slots. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render. | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement \| null) \| undefined`                                                                                                                                                                                                                                                | `undefined` |
 | `sort`                       | `sort`           | Order of results                                                                                                                                                                                                                                                                                  | `KlevuSearchSorting.AdvancedSorting \| KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined` |
+| `usePagination`              | `use-pagination` |                                                                                                                                                                                                                                                                                                   | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined` |
 
 
 ## Dependencies
 
 ### Depends on
 
+- [klevu-layout-results](../klevu-layout-results)
 - [klevu-facet-list](../klevu-facet-list)
 - [klevu-heading](../klevu-heading)
-- [klevu-drawer](../klevu-drawer)
-- [klevu-button](../klevu-button)
+- [klevu-sort](../klevu-sort)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
+- [klevu-pagination](../klevu-pagination)
+- [klevu-button](../klevu-button)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-merchandising --> klevu-layout-results
   klevu-merchandising --> klevu-facet-list
   klevu-merchandising --> klevu-heading
-  klevu-merchandising --> klevu-drawer
-  klevu-merchandising --> klevu-button
+  klevu-merchandising --> klevu-sort
   klevu-merchandising --> klevu-product-grid
   klevu-merchandising --> klevu-product
+  klevu-merchandising --> klevu-pagination
+  klevu-merchandising --> klevu-button
+  klevu-layout-results --> klevu-util-viewport
+  klevu-layout-results --> klevu-drawer
+  klevu-layout-results --> klevu-button
   klevu-facet-list --> klevu-facet
   klevu-facet --> klevu-accordion
   klevu-facet --> klevu-heading
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
+  klevu-sort --> klevu-dropdown
   style klevu-merchandising fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

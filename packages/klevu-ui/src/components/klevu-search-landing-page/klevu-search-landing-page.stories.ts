@@ -16,6 +16,7 @@ const Template: Story<HTMLKlevuSearchLandingPageElement> = (args) =>
     .renderProductSlot=${args.renderProductSlot}
     .sort=${args.sort}
     .term=${args.term}
+    .usePagination=${args.usePagination}
   ></klevu-search-landing-page>`
 
 export const Default = Template.bind({})

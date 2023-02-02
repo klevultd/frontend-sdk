@@ -2,6 +2,7 @@
   display: flex;
   gap: var(--klevu-spacing-normal);
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 span {

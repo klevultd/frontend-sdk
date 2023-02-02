@@ -12,6 +12,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [klevu-merchandising](../klevu-merchandising)
+
 ### Depends on
 
 - [klevu-dropdown](../klevu-dropdown)
@@ -20,6 +24,7 @@
 ```mermaid
 graph TD;
   klevu-sort --> klevu-dropdown
+  klevu-merchandising --> klevu-sort
   style klevu-sort fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

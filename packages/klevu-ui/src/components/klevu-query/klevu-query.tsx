@@ -19,6 +19,7 @@ import {
   sendSearchEvent,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
+import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 
@@ -152,7 +153,7 @@ export class KlevuQuery {
     capture: true,
     target: "body",
   })
-  onProductClick(event: CustomEvent<KlevuProductOnProductClick>) {
+  onProductClick(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
     const product = event.detail.product
     if (!this.lastResult || !product.id) {
       return

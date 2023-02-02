@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: var(--klevu-spacing-normal);
+}
+
+.sidebar {
+  width: 300px;
+}
+
+section {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: var(--klevu-spacing-normal);
+}
+
+.footer {
+  margin-top: var(--klevu-spacing-normal);
+}
+
+@media (max-width: 400px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}
