@@ -37,11 +37,13 @@ Type: `Promise<ViewportSize | undefined>`
 ### Used by
 
  - [klevu-layout-results](../klevu-layout-results)
+ - [klevu-merchandising](../klevu-merchandising)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-layout-results --> klevu-util-viewport
+  klevu-merchandising --> klevu-util-viewport
   style klevu-util-viewport fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -1,5 +1,5 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Fragment, h, Host, Prop } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate } from "@stencil/core"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
@@ -12,6 +12,9 @@ export type KlevuFacetMode = "checkbox" | "radio"
   shadow: true,
 })
 export class KlevuFacet {
+  @Element()
+  el!: HTMLKlevuFacetElement
+
   /**
    * From which options to build facet
    */
@@ -43,6 +46,11 @@ export class KlevuFacet {
    * Start accordion open
    */
   @Prop() accordionStartOpen?: boolean
+
+  @Listen("klevu-filter-selection-updates", { target: "document" })
+  filterSelectionUpdate(event: any) {
+    forceUpdate(this.el)
+  }
 
   render() {
     return (
@@ -125,7 +133,9 @@ export class KlevuFacet {
                 <klevu-checkbox
                   checked={o.selected}
                   name={this.option!.key}
-                  onClick={() => this.manager.toggleOption(this.option!.key, o.name)}
+                  onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
+                    this.manager.toggleOption(this.option!.key, o.name)
+                  }}
                 ></klevu-checkbox>
               ) : (
                 <input

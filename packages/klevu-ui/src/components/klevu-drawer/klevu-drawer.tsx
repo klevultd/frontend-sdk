@@ -51,7 +51,6 @@ export class KlevuDrawer {
 
   @Method()
   async openModal() {
-    console.log("open modal!", this.open)
     document.body.style.overflowX = "inherit"
 
     this.open = true

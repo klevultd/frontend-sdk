@@ -2,3 +2,14 @@
   display: block;
   width: var(--klevu-facet-list-width, 200px);
 }
+
+.applybar {
+  display: flex;
+  justify-content: space-between;
+  margin: var(--klevu-spacing-normal) 0;
+  gap: var(--klevu-spacing-large);
+}
+
+.applybar .apply {
+  width: 100%;
+}

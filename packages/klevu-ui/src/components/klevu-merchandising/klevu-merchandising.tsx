@@ -10,10 +10,16 @@ import {
   sendMerchandisingViewEvent,
 } from "@klevu/core"
 import { Component, Element, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { KlevuPaginationCustomEvent, KlevuProductCustomEvent, KlevuSortCustomEvent } from "../../components"
+import {
+  KlevuPaginationCustomEvent,
+  KlevuProductCustomEvent,
+  KlevuSortCustomEvent,
+  KlevuUtilViewportCustomEvent,
+} from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
+import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 
 /**
  * Full merchandising app to power up your product grid pages
@@ -24,6 +30,9 @@ import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/
   shadow: true,
 })
 export class KlevuMerchandising {
+  /**
+   * Should display pagination instead of load next
+   */
   @Prop() usePagination?: boolean
 
   /**
@@ -55,6 +64,11 @@ export class KlevuMerchandising {
    * Order filters in given order
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
+
+  @State() currentViewPortSize?: ViewportSize
+
+  viewportUtil!: HTMLKlevuUtilViewportElement
+  layoutElement!: HTMLKlevuLayoutResultsElement
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
@@ -147,9 +161,17 @@ export class KlevuMerchandising {
     }
   }
 
-  @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate() {
+  #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
+    this.currentViewPortSize = event.detail
+  }
+
+  #applyFilters() {
     this.#initialFetch()
+    this.layoutElement.closeDrawer()
+  }
+
+  async componentDidLoad() {
+    this.currentViewPortSize = await this.viewportUtil.getCurrentSize()
   }
 
   /**
@@ -188,17 +210,25 @@ export class KlevuMerchandising {
   }
 
   render() {
+    const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+
     return (
       <Host>
-        <klevu-layout-results>
+        <klevu-util-viewport
+          onSizeChanged={this.#sizeChange.bind(this)}
+          ref={(el) => (this.viewportUtil = el as HTMLKlevuUtilViewportElement)}
+        ></klevu-util-viewport>
+        <klevu-layout-results ref={(el) => (this.layoutElement = el as HTMLKlevuLayoutResultsElement)}>
           <klevu-facet-list
             slot="sidebar"
             accordion
             customOrder={this.filterCustomOrder}
             exportparts={globalExportedParts}
             manager={this.manager}
+            useApplyButton={isMobile}
+            onKlevuApplyFilters={this.#applyFilters.bind(this)}
           ></klevu-facet-list>
-          <div slot="header">
+          <div slot="header" class="header">
             <klevu-heading slot="header" variant="h1">
               {this.categoryTitle}
             </klevu-heading>
@@ -214,7 +244,7 @@ export class KlevuMerchandising {
               </klevu-product>
             ))}
           </klevu-product-grid>
-          <div slot="footer">
+          <div slot="footer" class="footer">
             {this.usePagination && this.resultObject ? (
               <klevu-pagination
                 queryResult={this.resultObject}

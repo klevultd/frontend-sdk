@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-large));
   align-items: stretch;
+  justify-content: space-between;
 }
 
 .gridcontainer {

@@ -1,5 +1,5 @@
-import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
+import { FilterManager, KlevuDomEvents, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
+import { Component, EventEmitter, h, Host, Listen, Prop, State, Event, forceUpdate, Element } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
@@ -14,6 +14,9 @@ import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
   shadow: true,
 })
 export class KlevuFacetList {
+  @Element()
+  el!: HTMLKlevuFacetListElement
+
   /**
    * Filter managet from which the list is built from
    */
@@ -33,28 +36,65 @@ export class KlevuFacetList {
    */
   @Prop() accordion?: boolean
 
+  /**
+   * Display "apply filters" button in the end. And do not apply filters until this button is pressed
+   */
+  @Prop() useApplyButton?: boolean
+
+  /**
+   * When filters are applied
+   */
+  @Event({ composed: true })
+  klevuApplyFilters!: EventEmitter<void>
+
   @State() options: KlevuFilterResultOptions[] = []
   @State() sliders: KlevuFilterResultSlider[] = []
+
+  #applyManager = new FilterManager()
 
   connectedCallback() {
     if (!this.manager) {
       return
     }
 
-    this.options = this.manager.options
-    this.sliders = this.manager.sliders
+    this.#applyManager = new FilterManager()
+    this.#applyManager.setState(this.manager.getCurrentState())
+    if (this.useApplyButton) {
+      this.options = this.#applyManager.options
+      this.sliders = this.#applyManager.sliders
+    } else {
+      this.options = this.manager.options
+      this.sliders = this.manager.sliders
+    }
   }
 
   @Listen("klevu-filters-applied", { target: "document" })
   filtersApplied() {
-    this.options = this.manager.options
-    this.sliders = this.manager.sliders
+    this.#applyManager.setState(this.manager.getCurrentState())
+    if (!this.useApplyButton) {
+      this.options = this.manager.options
+      this.sliders = this.manager.sliders
+    }
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate() {
-    this.options = this.manager.options
-    this.sliders = this.manager.sliders
+    if (!this.useApplyButton) {
+      this.options = this.manager.options
+      this.sliders = this.manager.sliders
+      this.klevuApplyFilters.emit()
+    }
+  }
+
+  #applySettings() {
+    this.manager.setState(this.#applyManager.getCurrentState())
+    this.klevuApplyFilters.emit()
+  }
+
+  #clear() {
+    this.#applyManager.clearOptionSelections()
+    this.options = this.#applyManager.options
+    this.sliders = this.#applyManager.sliders
   }
 
   render() {
@@ -74,7 +114,7 @@ export class KlevuFacetList {
               accordionStartOpen={index === 0}
               customOrder={this.customOrder?.[o.key]}
               exportparts={globalExportedParts}
-              manager={this.manager}
+              manager={this.useApplyButton ? this.#applyManager : this.manager}
               option={o}
               mode={mode}
             ></klevu-facet>
@@ -84,10 +124,20 @@ export class KlevuFacetList {
           <klevu-facet
             accordion={this.accordion}
             exportparts={globalExportedParts}
-            manager={this.manager}
+            manager={this.useApplyButton ? this.#applyManager : this.manager}
             slider={s}
           ></klevu-facet>
         ))}
+        {this.useApplyButton ? (
+          <div class="applybar">
+            <klevu-button isSecondary onClick={() => this.#clear()}>
+              Clear
+            </klevu-button>
+            <klevu-button fullWidth class="apply" onClick={() => this.#applySettings()}>
+              Apply
+            </klevu-button>
+          </div>
+        ) : null}
       </Host>
     )
   }

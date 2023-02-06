@@ -1,4 +1,4 @@
-import { Component, Host, h, State } from "@stencil/core"
+import { Component, Host, h, State, Method } from "@stencil/core"
 import { KlevuUtilViewportCustomEvent } from "../../components"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 
@@ -18,6 +18,11 @@ export class KlevuLayoutResults {
 
   async componentDidLoad() {
     this.currentViewPortSize = await this.viewportUtil.getCurrentSize()
+  }
+
+  @Method()
+  async closeDrawer() {
+    this.drawerElement.closeModal()
   }
 
   render() {
@@ -51,7 +56,7 @@ export class KlevuLayoutResults {
                     return false
                   }}
                 >
-                  Open menu
+                  Open&nbsp;menu
                 </klevu-button>
               ) : null}
             </div>

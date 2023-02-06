@@ -25,3 +25,14 @@ button:disabled {
 button:active:not(:disabled) {
   transform: translateY(1px);
 }
+
+button.secondary {
+  background: var(--klevu-button-background-color, var(--klevu-color-secondary));
+  padding: var(--klevu-button-padding, var(--klevu-spacing-normal));
+  border: 1px solid var(--klevu-button-border, var(--klevu-color-secondary-border));
+}
+
+button.fullwidth {
+  display: block;
+  width: 100%;
+}

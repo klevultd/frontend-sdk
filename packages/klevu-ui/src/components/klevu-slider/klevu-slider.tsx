@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
-import noUiSlider from "nouislider"
+import noUiSlider, { API } from "nouislider"
 
 /**
  * Horizontal slider component. Used for price range
@@ -34,6 +34,8 @@ export class KlevuSlider {
 
   @Element() el?: HTMLKlevuSliderElement
 
+  sliderInstance?: API
+
   /**
    * When values change
    */
@@ -46,7 +48,13 @@ export class KlevuSlider {
     if (!el) {
       return
     }
-    noUiSlider.create(el, {
+
+    if (this.sliderInstance) {
+      this.sliderInstance.set([this.start || this.min, this.end || this.max])
+      return
+    }
+
+    this.sliderInstance = noUiSlider.create(el, {
       connect: true,
       tooltips: this.showTooltips,
       step: 1,

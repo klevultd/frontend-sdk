@@ -21,6 +21,7 @@ const Template: Story<HTMLKlevuFacetListElement> = (args) =>
     .customOrder=${args.customOrder}
     .manager=${args.manager}
     .mode=${args.mode}
+    .useApplyButton=${args.useApplyButton}
   ></klevu-facet-list>`
 
 export const Default = Template.bind({})

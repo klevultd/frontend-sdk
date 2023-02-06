@@ -5,15 +5,18 @@
 
 ## Properties
 
-| Property   | Attribute  | Description        | Type                   | Default     |
-| ---------- | ---------- | ------------------ | ---------------------- | ----------- |
-| `disabled` | `disabled` | Is button disabled | `boolean \| undefined` | `undefined` |
+| Property      | Attribute      | Description        | Type                   | Default     |
+| ------------- | -------------- | ------------------ | ---------------------- | ----------- |
+| `disabled`    | `disabled`     | Is button disabled | `boolean \| undefined` | `undefined` |
+| `fullWidth`   | `full-width`   |                    | `boolean \| undefined` | `undefined` |
+| `isSecondary` | `is-secondary` |                    | `boolean \| undefined` | `undefined` |
 
 
 ## Dependencies
 
 ### Used by
 
+ - [klevu-facet-list](../klevu-facet-list)
  - [klevu-layout-results](../klevu-layout-results)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-search-field](../klevu-search-field)
@@ -23,6 +26,7 @@
 ### Graph
 ```mermaid
 graph TD;
+  klevu-facet-list --> klevu-button
   klevu-layout-results --> klevu-button
   klevu-merchandising --> klevu-button
   klevu-search-field --> klevu-button

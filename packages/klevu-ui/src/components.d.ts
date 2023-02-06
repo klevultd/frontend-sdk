@@ -32,6 +32,8 @@ export namespace Components {
           * Is button disabled
          */
         "disabled"?: boolean;
+        "fullWidth"?: boolean;
+        "isSecondary"?: boolean;
     }
     interface KlevuCheckbox {
         /**
@@ -146,6 +148,10 @@ export namespace Components {
           * Set mode for facets or if object is passed then define per key
          */
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+        /**
+          * Display "apply filters" button in the end. And do not apply filters until this button is pressed
+         */
+        "useApplyButton"?: boolean;
     }
     interface KlevuHeading {
         /**
@@ -174,6 +180,7 @@ export namespace Components {
         "caption": string;
     }
     interface KlevuLayoutResults {
+        "closeDrawer": () => Promise<void>;
     }
     interface KlevuMerchandising {
         /**
@@ -204,6 +211,9 @@ export namespace Components {
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Should display pagination instead of load next
+         */
         "usePagination"?: boolean;
     }
     interface KlevuPagination {
@@ -563,6 +573,10 @@ export namespace Components {
         "sizes": ViewportSize[];
     }
 }
+export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuCheckboxElement;
+}
 export interface KlevuCmsListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCmsListElement;
@@ -570,6 +584,10 @@ export interface KlevuCmsListCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuDropdownElement;
+}
+export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuFacetListElement;
 }
 export interface KlevuPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -837,6 +855,8 @@ declare namespace LocalJSX {
           * Is button disabled
          */
         "disabled"?: boolean;
+        "fullWidth"?: boolean;
+        "isSecondary"?: boolean;
     }
     interface KlevuCheckbox {
         /**
@@ -851,6 +871,7 @@ declare namespace LocalJSX {
           * Name of the checkbox
          */
         "name"?: string;
+        "onKlevuCheckboxChange"?: (event: KlevuCheckboxCustomEvent<boolean>) => void;
     }
     interface KlevuCmsList {
         /**
@@ -954,6 +975,14 @@ declare namespace LocalJSX {
           * Set mode for facets or if object is passed then define per key
          */
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+        /**
+          * When filters are applied
+         */
+        "onKlevuApplyFilters"?: (event: KlevuFacetListCustomEvent<void>) => void;
+        /**
+          * Display "apply filters" button in the end. And do not apply filters until this button is pressed
+         */
+        "useApplyButton"?: boolean;
     }
     interface KlevuHeading {
         /**
@@ -1012,6 +1041,9 @@ declare namespace LocalJSX {
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Should display pagination instead of load next
+         */
         "usePagination"?: boolean;
     }
     interface KlevuPagination {

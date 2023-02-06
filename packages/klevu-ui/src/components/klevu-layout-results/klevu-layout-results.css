@@ -28,6 +28,11 @@ section {
   margin-top: var(--klevu-spacing-normal);
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 400px) {
   .container {
     flex-direction: column;

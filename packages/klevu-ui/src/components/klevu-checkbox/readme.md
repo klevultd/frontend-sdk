@@ -12,6 +12,13 @@
 | `name`     | `name`     | Name of the checkbox | `string \| undefined`  | `undefined` |
 
 
+## Events
+
+| Event                 | Description | Type                   |
+| --------------------- | ----------- | ---------------------- |
+| `klevuCheckboxChange` |             | `CustomEvent<boolean>` |
+
+
 ## Dependencies
 
 ### Used by

@@ -42,6 +42,7 @@ graph TD;
   klevu-layout-results --> klevu-drawer
   klevu-layout-results --> klevu-button
   klevu-facet-list --> klevu-facet
+  klevu-facet-list --> klevu-button
   klevu-facet --> klevu-accordion
   klevu-facet --> klevu-heading
   klevu-facet --> klevu-slider

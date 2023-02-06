@@ -15,14 +15,17 @@ export const KlevuAccordion = /*@__PURE__*/ defineContainer<JSX.KlevuAccordion>(
 
 
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
-  'disabled'
+  'disabled',
+  'isSecondary',
+  'fullWidth'
 ]);
 
 
 export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('klevu-checkbox', undefined, [
   'checked',
   'disabled',
-  'name'
+  'name',
+  'klevuCheckboxChange'
 ]);
 
 
@@ -66,7 +69,9 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
   'manager',
   'mode',
   'customOrder',
-  'accordion'
+  'accordion',
+  'useApplyButton',
+  'klevuApplyFilters'
 ]);
 
 

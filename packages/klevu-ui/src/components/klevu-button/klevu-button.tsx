@@ -18,9 +18,21 @@ export class KlevuButton {
   @Prop({ reflect: true })
   disabled?: boolean
 
+  @Prop()
+  isSecondary?: boolean
+
+  @Prop()
+  fullWidth?: boolean
+
   render() {
     return (
-      <button disabled={this.disabled}>
+      <button
+        disabled={this.disabled}
+        class={{
+          secondary: Boolean(this.isSecondary),
+          fullwidth: Boolean(this.fullWidth),
+        }}
+      >
         <slot />
       </button>
     )

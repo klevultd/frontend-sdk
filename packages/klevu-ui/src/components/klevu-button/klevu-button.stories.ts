@@ -11,6 +11,8 @@ export default autofillMeta("klevu-button", {
 })
 
 const Template: Story<HTMLKlevuButtonElement> = (args) =>
-  html`<klevu-button .disabled=${args.disabled}>Hello Button</klevu-button>`
+  html`<klevu-button .disabled=${args.disabled} .fullWidth=${args.fullWidth} .isSecondary=${args.isSecondary}
+    >Hello Button</klevu-button
+  >`
 
 export const Default = Template.bind({})
