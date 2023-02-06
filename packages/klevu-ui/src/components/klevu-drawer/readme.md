@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Component to create offscreen drawer on left or right side of the screen
+
 ## Properties
 
 | Property              | Attribute                | Description                                    | Type                   | Default     |

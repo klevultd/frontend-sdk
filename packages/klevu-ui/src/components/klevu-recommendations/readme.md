@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Full recommendation banner solution
+
 ## Properties
 
 | Property                           | Attribute              | Description                                                                                                                                                                                                                                                                                       | Type                                                                                                     | Default     |

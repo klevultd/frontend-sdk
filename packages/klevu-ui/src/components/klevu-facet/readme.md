@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Rendering items of single facet
+
 ## Properties
 
 | Property               | Attribute              | Description                                                                   | Type                                                                                                                                                 | Default      |

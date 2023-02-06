@@ -3,6 +3,11 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Generic product component that renders product based on KlevuRecord of @klevu/core
+All parts of the component can be replaced with slots.
+
 ## Properties
 
 | Property          | Attribute          | Description                                           | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default     |

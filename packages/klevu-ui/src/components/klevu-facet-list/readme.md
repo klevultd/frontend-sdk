@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Render all facets of filter manager
+
 ## Properties
 
 | Property               | Attribute          | Description                                                                                      | Type                                                                       | Default     |

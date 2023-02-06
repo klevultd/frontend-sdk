@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Sort dropdown. User can select what kind of sorting they want
+
 ## Events
 
 | Event              | Description              | Type                                                                                                                                                                                                                                                                                                                                                    |

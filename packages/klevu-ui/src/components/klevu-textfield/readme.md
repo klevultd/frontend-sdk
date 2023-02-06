@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Branded text field component
+
 ## Properties
 
 | Property             | Attribute     | Description                    | Type                  | Default     |

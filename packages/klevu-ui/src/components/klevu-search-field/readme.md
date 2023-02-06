@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Plain textfield that does the searching
+
 ## Properties
 
 | Property            | Attribute            | Description                                          | Type                   | Default                 |

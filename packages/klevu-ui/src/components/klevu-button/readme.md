@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Basic button component
+
 ## Properties
 
 | Property      | Attribute      | Description        | Type                   | Default     |

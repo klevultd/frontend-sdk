@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Simple native dropdown component for dropdown
+
 ## Properties
 
 | Property                | Attribute  | Description                     | Type                                 | Default     |

@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Horizontal slides component
+
 ## Properties
 
 | Property         | Attribute          | Description                                                           | Type                   | Default     |

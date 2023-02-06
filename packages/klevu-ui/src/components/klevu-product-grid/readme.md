@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Component to place products on grid
+
 ## Properties
 
 | Property      | Attribute       | Description                                    | Type                  | Default     |

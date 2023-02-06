@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Pagination component. Either provide numbers or query result to display the component.
+
 ## Properties
 
 | Property      | Attribute   | Description                                      | Type                                                                                                                                                                                                                                                                                                                                                                                                          | Default      |

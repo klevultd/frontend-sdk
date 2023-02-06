@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Component to display list of CMS page results
+
 ## Properties
 
 | Property             | Attribute | Description                                         | Type                     | Default       |

@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Component that wrap two slots to create accordion element
+
 ## Properties
 
 | Property    | Attribute    | Description                 | Type                   | Default     |

@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Horizontal slider component. Used for price range
+
 ## Properties
 
 | Property           | Attribute       | Description                      | Type                   | Default     |

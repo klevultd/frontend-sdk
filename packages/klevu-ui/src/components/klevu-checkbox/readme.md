@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Checkbox component
+
 ## Properties
 
 | Property   | Attribute  | Description          | Type                   | Default     |

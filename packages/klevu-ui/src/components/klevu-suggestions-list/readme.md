@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Simple component to list suggestions
+
 ## Properties
 
 | Property                   | Attribute | Description                   | Type       | Default                |

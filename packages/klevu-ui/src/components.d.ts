@@ -16,7 +16,24 @@ import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/kl
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
+export { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
+export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
+export { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
+export { KlevuUIGlobalSettings } from "./utils/utils";
+export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
+export { Placement } from "@floating-ui/dom";
+export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+export { AllQueryOptions } from "./components/klevu-query/klevu-query";
+export { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export namespace Components {
+    /**
+     * Component that wrap two slots to create accordion element
+     * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
+     * @cssprop --klevu-accordion-background transparent Header background
+     * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     */
     interface KlevuAccordion {
         /**
           * is accordion open
@@ -27,6 +44,13 @@ export namespace Components {
          */
         "startOpen"?: boolean;
     }
+    /**
+     * Basic button component
+     * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
+     * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
+     * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
+     * @cssprop --klebu-button-padding --klevu-spacing-normal Padding on button
+     */
     interface KlevuButton {
         /**
           * Is button disabled
@@ -35,6 +59,11 @@ export namespace Components {
         "fullWidth"?: boolean;
         "isSecondary"?: boolean;
     }
+    /**
+     * Checkbox component
+     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
+     * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+     */
     interface KlevuCheckbox {
         /**
           * Is checkbox checked
@@ -49,6 +78,9 @@ export namespace Components {
          */
         "name"?: string;
     }
+    /**
+     * Component to display list of CMS page results
+     */
     interface KlevuCmsList {
         /**
           * Caption of the listing
@@ -63,6 +95,11 @@ export namespace Components {
          */
         "pages": Array<Partial<KlevuRecord>>;
     }
+    /**
+     * Component to create offscreen drawer on left or right side of the screen
+     * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
+     * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     */
     interface KlevuDrawer {
         /**
           * Anchor to right or left side of the page
@@ -83,6 +120,11 @@ export namespace Components {
          */
         "startOpen"?: boolean;
     }
+    /**
+     * Simple native dropdown component for dropdown
+     * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
+     * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+     */
     interface KlevuDropdown {
         /**
           * Is element disabled
@@ -101,6 +143,9 @@ export namespace Components {
          */
         "selected": string;
     }
+    /**
+     * Rendering items of single facet
+     */
     interface KlevuFacet {
         /**
           * Should the facet be in accordion
@@ -131,6 +176,10 @@ export namespace Components {
          */
         "slider"?: KlevuFilterResultSlider;
     }
+    /**
+     * Render all facets of filter manager
+     * @cssprop --klevu-face-list-width 200px Width of the facet listing
+     */
     interface KlevuFacetList {
         /**
           * Should use accordions to for facets
@@ -153,12 +202,39 @@ export namespace Components {
          */
         "useApplyButton"?: boolean;
     }
+    /**
+     * Heading element
+     * @cssprop --klevu-h1-size - H1 heading size
+     * @cssprop --klevu-h1-weight - H1 font weight
+     * @cssprop --klevu-h1-color - H1 font color
+     * @cssprop --klevu-h2-size - H2 heading size
+     * @cssprop --klevu-h2-weight - H2 font weight
+     * @cssprop --klevu-h2-color - H3 font color
+     * @cssprop --klevu-h3-size - H3 heading size
+     * @cssprop --klevu-h3-weight - H3 font weight
+     * @cssprop --klevu-h3-color - H3 font color
+     */
     interface KlevuHeading {
         /**
           * Varint of heading
          */
         "variant": KlevuHeadingVariant;
     }
+    /**
+     * Initializes components to fetch data from correct Klevu backend
+     * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
+     * @cssprop --klevu-color-primary - Main color of components
+     * @cssprop --klevu-color-primary-text - Text color on top primary color
+     * @cssprop --klevu-color-primary-border - Border color related to primary color
+     * @cssprop --klevu-color-border - Standard border color used to separate items
+     * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
+     * @cssprop --klevu-color-dim-text - Secondary dimmed texts
+     * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
+     * @cssprop --klevu-spacing-small - Small spacing
+     * @cssprop --klevu-spacing-normal - Normal spacing
+     * @cssprop --klevu-spacing-large - Large spacing
+     * @cssprop --klevu-rounded-corners - Rounded corners
+     */
     interface KlevuInit {
         /**
           * Read only API key to Klevu
@@ -173,6 +249,9 @@ export namespace Components {
          */
         "url": string;
     }
+    /**
+     * Lists latest searches user has made on the site
+     */
     interface KlevuLatestSearches {
         /**
           * Caption of the list
@@ -182,6 +261,9 @@ export namespace Components {
     interface KlevuLayoutResults {
         "closeDrawer": () => Promise<void>;
     }
+    /**
+     * Full merchandising app to power up your product grid pages
+     */
     interface KlevuMerchandising {
         /**
           * Which category products
@@ -216,6 +298,13 @@ export namespace Components {
          */
         "usePagination"?: boolean;
     }
+    /**
+     * Pagination component. Either provide numbers or query result to display the component.
+     * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
+     * @cssprop --klevu-pagination-text-color - text color of item
+     * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
+     * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+     */
     interface KlevuPagination {
         /**
           * Current page
@@ -242,12 +331,18 @@ export namespace Components {
          */
         "queryResult"?: KlevuQueryResult;
     }
+    /**
+     * Fetches and displays most popular searches from Klevu Merchant center
+     */
     interface KlevuPopularSearches {
         /**
           * Caption of the list
          */
         "caption": string;
     }
+    /**
+     * Popup component where clicking origin component popups the the content
+     */
     interface KlevuPopup {
         /**
           * Anchor popup to left or right of page
@@ -278,6 +373,16 @@ export namespace Components {
          */
         "startOpen"?: boolean;
     }
+    /**
+     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * All parts of the component can be replaced with slots.
+     * @csspart image - The image element of component
+     * @csspart container - The container element of whole
+     * @cssprop --klevu-product-width - Width of the product
+     * @cssprop --klevu-product-small-width - Width of the product when small variant is used
+     * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
+     * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     */
     interface KlevuProduct {
         /**
           * Force certain width for product. Do not use max-width
@@ -316,12 +421,19 @@ export namespace Components {
          */
         "variant": KlevuProductVariant;
     }
+    /**
+     * Component to place products on grid
+     * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+     */
     interface KlevuProductGrid {
         /**
           * Place products in grid with this many products
          */
         "itemsPerRow"?: number;
     }
+    /**
+     * Abstract helper component that queries
+     */
     interface KlevuQuery {
         /**
           * Which category to do merchandising. Required for "merchandising" type
@@ -380,6 +492,9 @@ export namespace Components {
          */
         "updateOnFilterChange"?: boolean;
     }
+    /**
+     * Full app to create search bar that popups trending products and search results.
+     */
     interface KlevuQuicksearch {
         /**
           * What term should be used if there isn't enough results
@@ -410,6 +525,9 @@ export namespace Components {
          */
         "searchText"?: string;
     }
+    /**
+     * Full recommendation banner solution
+     */
     interface KlevuRecommendations {
         /**
           * For cart recommendation you need to provide product id's in cart
@@ -440,6 +558,9 @@ export namespace Components {
          */
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
     }
+    /**
+     * Plain textfield that does the searching
+     */
     interface KlevuSearchField {
         /**
           * Fallback term to use if there are no results
@@ -474,6 +595,9 @@ export namespace Components {
          */
         "searchText": string;
     }
+    /**
+     * Full app component for search landing page
+     */
     interface KlevuSearchLandingPage {
         /**
           * How many products to display in filters
@@ -504,8 +628,14 @@ export namespace Components {
          */
         "usePagination"?: boolean;
     }
+    /**
+     * Simplified application that shows search box where typing text displays suggestions.
+     */
     interface KlevuSimpleSearch {
     }
+    /**
+     * Horizontal slider component. Used for price range
+     */
     interface KlevuSlider {
         /**
           * Current end value of the range
@@ -528,6 +658,9 @@ export namespace Components {
          */
         "start"?: number;
     }
+    /**
+     * Horizontal slides component
+     */
     interface KlevuSlides {
         /**
           * Height of the slider
@@ -542,8 +675,14 @@ export namespace Components {
          */
         "slideFullWidth"?: boolean;
     }
+    /**
+     * Sort dropdown. User can select what kind of sorting they want
+     */
     interface KlevuSort {
     }
+    /**
+     * Simple component to list suggestions
+     */
     interface KlevuSuggestionsList {
         /**
           * Caption on the list
@@ -554,6 +693,9 @@ export namespace Components {
          */
         "suggestions": string[];
     }
+    /**
+     * Branded text field component
+     */
     interface KlevuTextfield {
         /**
           * Is field disabled
@@ -626,66 +768,134 @@ export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
     target: HTMLKlevuUtilViewportElement;
 }
 declare global {
+    /**
+     * Component that wrap two slots to create accordion element
+     * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
+     * @cssprop --klevu-accordion-background transparent Header background
+     * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     */
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
     }
     var HTMLKlevuAccordionElement: {
         prototype: HTMLKlevuAccordionElement;
         new (): HTMLKlevuAccordionElement;
     };
+    /**
+     * Basic button component
+     * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
+     * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
+     * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
+     * @cssprop --klebu-button-padding --klevu-spacing-normal Padding on button
+     */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
     var HTMLKlevuButtonElement: {
         prototype: HTMLKlevuButtonElement;
         new (): HTMLKlevuButtonElement;
     };
+    /**
+     * Checkbox component
+     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
+     * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+     */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
     var HTMLKlevuCheckboxElement: {
         prototype: HTMLKlevuCheckboxElement;
         new (): HTMLKlevuCheckboxElement;
     };
+    /**
+     * Component to display list of CMS page results
+     */
     interface HTMLKlevuCmsListElement extends Components.KlevuCmsList, HTMLStencilElement {
     }
     var HTMLKlevuCmsListElement: {
         prototype: HTMLKlevuCmsListElement;
         new (): HTMLKlevuCmsListElement;
     };
+    /**
+     * Component to create offscreen drawer on left or right side of the screen
+     * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
+     * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
     var HTMLKlevuDrawerElement: {
         prototype: HTMLKlevuDrawerElement;
         new (): HTMLKlevuDrawerElement;
     };
+    /**
+     * Simple native dropdown component for dropdown
+     * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
+     * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+     */
     interface HTMLKlevuDropdownElement extends Components.KlevuDropdown, HTMLStencilElement {
     }
     var HTMLKlevuDropdownElement: {
         prototype: HTMLKlevuDropdownElement;
         new (): HTMLKlevuDropdownElement;
     };
+    /**
+     * Rendering items of single facet
+     */
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
     var HTMLKlevuFacetElement: {
         prototype: HTMLKlevuFacetElement;
         new (): HTMLKlevuFacetElement;
     };
+    /**
+     * Render all facets of filter manager
+     * @cssprop --klevu-face-list-width 200px Width of the facet listing
+     */
     interface HTMLKlevuFacetListElement extends Components.KlevuFacetList, HTMLStencilElement {
     }
     var HTMLKlevuFacetListElement: {
         prototype: HTMLKlevuFacetListElement;
         new (): HTMLKlevuFacetListElement;
     };
+    /**
+     * Heading element
+     * @cssprop --klevu-h1-size - H1 heading size
+     * @cssprop --klevu-h1-weight - H1 font weight
+     * @cssprop --klevu-h1-color - H1 font color
+     * @cssprop --klevu-h2-size - H2 heading size
+     * @cssprop --klevu-h2-weight - H2 font weight
+     * @cssprop --klevu-h2-color - H3 font color
+     * @cssprop --klevu-h3-size - H3 heading size
+     * @cssprop --klevu-h3-weight - H3 font weight
+     * @cssprop --klevu-h3-color - H3 font color
+     */
     interface HTMLKlevuHeadingElement extends Components.KlevuHeading, HTMLStencilElement {
     }
     var HTMLKlevuHeadingElement: {
         prototype: HTMLKlevuHeadingElement;
         new (): HTMLKlevuHeadingElement;
     };
+    /**
+     * Initializes components to fetch data from correct Klevu backend
+     * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
+     * @cssprop --klevu-color-primary - Main color of components
+     * @cssprop --klevu-color-primary-text - Text color on top primary color
+     * @cssprop --klevu-color-primary-border - Border color related to primary color
+     * @cssprop --klevu-color-border - Standard border color used to separate items
+     * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
+     * @cssprop --klevu-color-dim-text - Secondary dimmed texts
+     * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
+     * @cssprop --klevu-spacing-small - Small spacing
+     * @cssprop --klevu-spacing-normal - Normal spacing
+     * @cssprop --klevu-spacing-large - Large spacing
+     * @cssprop --klevu-rounded-corners - Rounded corners
+     */
     interface HTMLKlevuInitElement extends Components.KlevuInit, HTMLStencilElement {
     }
     var HTMLKlevuInitElement: {
         prototype: HTMLKlevuInitElement;
         new (): HTMLKlevuInitElement;
     };
+    /**
+     * Lists latest searches user has made on the site
+     */
     interface HTMLKlevuLatestSearchesElement extends Components.KlevuLatestSearches, HTMLStencilElement {
     }
     var HTMLKlevuLatestSearchesElement: {
@@ -698,102 +908,165 @@ declare global {
         prototype: HTMLKlevuLayoutResultsElement;
         new (): HTMLKlevuLayoutResultsElement;
     };
+    /**
+     * Full merchandising app to power up your product grid pages
+     */
     interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
     }
     var HTMLKlevuMerchandisingElement: {
         prototype: HTMLKlevuMerchandisingElement;
         new (): HTMLKlevuMerchandisingElement;
     };
+    /**
+     * Pagination component. Either provide numbers or query result to display the component.
+     * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
+     * @cssprop --klevu-pagination-text-color - text color of item
+     * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
+     * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+     */
     interface HTMLKlevuPaginationElement extends Components.KlevuPagination, HTMLStencilElement {
     }
     var HTMLKlevuPaginationElement: {
         prototype: HTMLKlevuPaginationElement;
         new (): HTMLKlevuPaginationElement;
     };
+    /**
+     * Fetches and displays most popular searches from Klevu Merchant center
+     */
     interface HTMLKlevuPopularSearchesElement extends Components.KlevuPopularSearches, HTMLStencilElement {
     }
     var HTMLKlevuPopularSearchesElement: {
         prototype: HTMLKlevuPopularSearchesElement;
         new (): HTMLKlevuPopularSearchesElement;
     };
+    /**
+     * Popup component where clicking origin component popups the the content
+     */
     interface HTMLKlevuPopupElement extends Components.KlevuPopup, HTMLStencilElement {
     }
     var HTMLKlevuPopupElement: {
         prototype: HTMLKlevuPopupElement;
         new (): HTMLKlevuPopupElement;
     };
+    /**
+     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * All parts of the component can be replaced with slots.
+     * @csspart image - The image element of component
+     * @csspart container - The container element of whole
+     * @cssprop --klevu-product-width - Width of the product
+     * @cssprop --klevu-product-small-width - Width of the product when small variant is used
+     * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
+     * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     */
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
     var HTMLKlevuProductElement: {
         prototype: HTMLKlevuProductElement;
         new (): HTMLKlevuProductElement;
     };
+    /**
+     * Component to place products on grid
+     * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+     */
     interface HTMLKlevuProductGridElement extends Components.KlevuProductGrid, HTMLStencilElement {
     }
     var HTMLKlevuProductGridElement: {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    /**
+     * Abstract helper component that queries
+     */
     interface HTMLKlevuQueryElement extends Components.KlevuQuery, HTMLStencilElement {
     }
     var HTMLKlevuQueryElement: {
         prototype: HTMLKlevuQueryElement;
         new (): HTMLKlevuQueryElement;
     };
+    /**
+     * Full app to create search bar that popups trending products and search results.
+     */
     interface HTMLKlevuQuicksearchElement extends Components.KlevuQuicksearch, HTMLStencilElement {
     }
     var HTMLKlevuQuicksearchElement: {
         prototype: HTMLKlevuQuicksearchElement;
         new (): HTMLKlevuQuicksearchElement;
     };
+    /**
+     * Full recommendation banner solution
+     */
     interface HTMLKlevuRecommendationsElement extends Components.KlevuRecommendations, HTMLStencilElement {
     }
     var HTMLKlevuRecommendationsElement: {
         prototype: HTMLKlevuRecommendationsElement;
         new (): HTMLKlevuRecommendationsElement;
     };
+    /**
+     * Plain textfield that does the searching
+     */
     interface HTMLKlevuSearchFieldElement extends Components.KlevuSearchField, HTMLStencilElement {
     }
     var HTMLKlevuSearchFieldElement: {
         prototype: HTMLKlevuSearchFieldElement;
         new (): HTMLKlevuSearchFieldElement;
     };
+    /**
+     * Full app component for search landing page
+     */
     interface HTMLKlevuSearchLandingPageElement extends Components.KlevuSearchLandingPage, HTMLStencilElement {
     }
     var HTMLKlevuSearchLandingPageElement: {
         prototype: HTMLKlevuSearchLandingPageElement;
         new (): HTMLKlevuSearchLandingPageElement;
     };
+    /**
+     * Simplified application that shows search box where typing text displays suggestions.
+     */
     interface HTMLKlevuSimpleSearchElement extends Components.KlevuSimpleSearch, HTMLStencilElement {
     }
     var HTMLKlevuSimpleSearchElement: {
         prototype: HTMLKlevuSimpleSearchElement;
         new (): HTMLKlevuSimpleSearchElement;
     };
+    /**
+     * Horizontal slider component. Used for price range
+     */
     interface HTMLKlevuSliderElement extends Components.KlevuSlider, HTMLStencilElement {
     }
     var HTMLKlevuSliderElement: {
         prototype: HTMLKlevuSliderElement;
         new (): HTMLKlevuSliderElement;
     };
+    /**
+     * Horizontal slides component
+     */
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
     var HTMLKlevuSlidesElement: {
         prototype: HTMLKlevuSlidesElement;
         new (): HTMLKlevuSlidesElement;
     };
+    /**
+     * Sort dropdown. User can select what kind of sorting they want
+     */
     interface HTMLKlevuSortElement extends Components.KlevuSort, HTMLStencilElement {
     }
     var HTMLKlevuSortElement: {
         prototype: HTMLKlevuSortElement;
         new (): HTMLKlevuSortElement;
     };
+    /**
+     * Simple component to list suggestions
+     */
     interface HTMLKlevuSuggestionsListElement extends Components.KlevuSuggestionsList, HTMLStencilElement {
     }
     var HTMLKlevuSuggestionsListElement: {
         prototype: HTMLKlevuSuggestionsListElement;
         new (): HTMLKlevuSuggestionsListElement;
     };
+    /**
+     * Branded text field component
+     */
     interface HTMLKlevuTextfieldElement extends Components.KlevuTextfield, HTMLStencilElement {
     }
     var HTMLKlevuTextfieldElement: {
@@ -840,6 +1113,12 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    /**
+     * Component that wrap two slots to create accordion element
+     * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
+     * @cssprop --klevu-accordion-background transparent Header background
+     * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     */
     interface KlevuAccordion {
         /**
           * is accordion open
@@ -850,6 +1129,13 @@ declare namespace LocalJSX {
          */
         "startOpen"?: boolean;
     }
+    /**
+     * Basic button component
+     * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
+     * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
+     * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
+     * @cssprop --klebu-button-padding --klevu-spacing-normal Padding on button
+     */
     interface KlevuButton {
         /**
           * Is button disabled
@@ -858,6 +1144,11 @@ declare namespace LocalJSX {
         "fullWidth"?: boolean;
         "isSecondary"?: boolean;
     }
+    /**
+     * Checkbox component
+     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
+     * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+     */
     interface KlevuCheckbox {
         /**
           * Is checkbox checked
@@ -873,6 +1164,9 @@ declare namespace LocalJSX {
         "name"?: string;
         "onKlevuCheckboxChange"?: (event: KlevuCheckboxCustomEvent<boolean>) => void;
     }
+    /**
+     * Component to display list of CMS page results
+     */
     interface KlevuCmsList {
         /**
           * Caption of the listing
@@ -888,6 +1182,11 @@ declare namespace LocalJSX {
          */
         "pages": Array<Partial<KlevuRecord>>;
     }
+    /**
+     * Component to create offscreen drawer on left or right side of the screen
+     * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
+     * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     */
     interface KlevuDrawer {
         /**
           * Anchor to right or left side of the page
@@ -906,6 +1205,11 @@ declare namespace LocalJSX {
          */
         "startOpen"?: boolean;
     }
+    /**
+     * Simple native dropdown component for dropdown
+     * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
+     * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+     */
     interface KlevuDropdown {
         /**
           * Is element disabled
@@ -928,6 +1232,9 @@ declare namespace LocalJSX {
          */
         "selected": string;
     }
+    /**
+     * Rendering items of single facet
+     */
     interface KlevuFacet {
         /**
           * Should the facet be in accordion
@@ -958,6 +1265,10 @@ declare namespace LocalJSX {
          */
         "slider"?: KlevuFilterResultSlider;
     }
+    /**
+     * Render all facets of filter manager
+     * @cssprop --klevu-face-list-width 200px Width of the facet listing
+     */
     interface KlevuFacetList {
         /**
           * Should use accordions to for facets
@@ -984,12 +1295,39 @@ declare namespace LocalJSX {
          */
         "useApplyButton"?: boolean;
     }
+    /**
+     * Heading element
+     * @cssprop --klevu-h1-size - H1 heading size
+     * @cssprop --klevu-h1-weight - H1 font weight
+     * @cssprop --klevu-h1-color - H1 font color
+     * @cssprop --klevu-h2-size - H2 heading size
+     * @cssprop --klevu-h2-weight - H2 font weight
+     * @cssprop --klevu-h2-color - H3 font color
+     * @cssprop --klevu-h3-size - H3 heading size
+     * @cssprop --klevu-h3-weight - H3 font weight
+     * @cssprop --klevu-h3-color - H3 font color
+     */
     interface KlevuHeading {
         /**
           * Varint of heading
          */
         "variant"?: KlevuHeadingVariant;
     }
+    /**
+     * Initializes components to fetch data from correct Klevu backend
+     * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
+     * @cssprop --klevu-color-primary - Main color of components
+     * @cssprop --klevu-color-primary-text - Text color on top primary color
+     * @cssprop --klevu-color-primary-border - Border color related to primary color
+     * @cssprop --klevu-color-border - Standard border color used to separate items
+     * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
+     * @cssprop --klevu-color-dim-text - Secondary dimmed texts
+     * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
+     * @cssprop --klevu-spacing-small - Small spacing
+     * @cssprop --klevu-spacing-normal - Normal spacing
+     * @cssprop --klevu-spacing-large - Large spacing
+     * @cssprop --klevu-rounded-corners - Rounded corners
+     */
     interface KlevuInit {
         /**
           * Read only API key to Klevu
@@ -1004,6 +1342,9 @@ declare namespace LocalJSX {
          */
         "url": string;
     }
+    /**
+     * Lists latest searches user has made on the site
+     */
     interface KlevuLatestSearches {
         /**
           * Caption of the list
@@ -1012,6 +1353,9 @@ declare namespace LocalJSX {
     }
     interface KlevuLayoutResults {
     }
+    /**
+     * Full merchandising app to power up your product grid pages
+     */
     interface KlevuMerchandising {
         /**
           * Which category products
@@ -1046,6 +1390,13 @@ declare namespace LocalJSX {
          */
         "usePagination"?: boolean;
     }
+    /**
+     * Pagination component. Either provide numbers or query result to display the component.
+     * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
+     * @cssprop --klevu-pagination-text-color - text color of item
+     * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
+     * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+     */
     interface KlevuPagination {
         /**
           * Current page
@@ -1076,12 +1427,18 @@ declare namespace LocalJSX {
          */
         "queryResult"?: KlevuQueryResult;
     }
+    /**
+     * Fetches and displays most popular searches from Klevu Merchant center
+     */
     interface KlevuPopularSearches {
         /**
           * Caption of the list
          */
         "caption"?: string;
     }
+    /**
+     * Popup component where clicking origin component popups the the content
+     */
     interface KlevuPopup {
         /**
           * Anchor popup to left or right of page
@@ -1104,6 +1461,16 @@ declare namespace LocalJSX {
          */
         "startOpen"?: boolean;
     }
+    /**
+     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * All parts of the component can be replaced with slots.
+     * @csspart image - The image element of component
+     * @csspart container - The container element of whole
+     * @cssprop --klevu-product-width - Width of the product
+     * @cssprop --klevu-product-small-width - Width of the product when small variant is used
+     * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
+     * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     */
     interface KlevuProduct {
         /**
           * Force certain width for product. Do not use max-width
@@ -1146,12 +1513,19 @@ declare namespace LocalJSX {
          */
         "variant"?: KlevuProductVariant;
     }
+    /**
+     * Component to place products on grid
+     * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+     */
     interface KlevuProductGrid {
         /**
           * Place products in grid with this many products
          */
         "itemsPerRow"?: number;
     }
+    /**
+     * Abstract helper component that queries
+     */
     interface KlevuQuery {
         /**
           * Which category to do merchandising. Required for "merchandising" type
@@ -1210,6 +1584,9 @@ declare namespace LocalJSX {
          */
         "updateOnFilterChange"?: boolean;
     }
+    /**
+     * Full app to create search bar that popups trending products and search results.
+     */
     interface KlevuQuicksearch {
         /**
           * What term should be used if there isn't enough results
@@ -1240,6 +1617,9 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
     }
+    /**
+     * Full recommendation banner solution
+     */
     interface KlevuRecommendations {
         /**
           * For cart recommendation you need to provide product id's in cart
@@ -1270,6 +1650,9 @@ declare namespace LocalJSX {
          */
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
     }
+    /**
+     * Plain textfield that does the searching
+     */
     interface KlevuSearchField {
         /**
           * Fallback term to use if there are no results
@@ -1316,6 +1699,9 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
     }
+    /**
+     * Full app component for search landing page
+     */
     interface KlevuSearchLandingPage {
         /**
           * How many products to display in filters
@@ -1346,12 +1732,18 @@ declare namespace LocalJSX {
          */
         "usePagination"?: boolean;
     }
+    /**
+     * Simplified application that shows search box where typing text displays suggestions.
+     */
     interface KlevuSimpleSearch {
         /**
           * When any of suggestions has been clicked
          */
         "onKlevuSuggestionClick"?: (event: KlevuSimpleSearchCustomEvent<string>) => void;
     }
+    /**
+     * Horizontal slider component. Used for price range
+     */
     interface KlevuSlider {
         /**
           * Current end value of the range
@@ -1378,6 +1770,9 @@ declare namespace LocalJSX {
          */
         "start"?: number;
     }
+    /**
+     * Horizontal slides component
+     */
     interface KlevuSlides {
         /**
           * Height of the slider
@@ -1392,12 +1787,18 @@ declare namespace LocalJSX {
          */
         "slideFullWidth"?: boolean;
     }
+    /**
+     * Sort dropdown. User can select what kind of sorting they want
+     */
     interface KlevuSort {
         /**
           * When the sorting changes
          */
         "onKlevuSortChanged"?: (event: KlevuSortCustomEvent<KlevuSearchSorting>) => void;
     }
+    /**
+     * Simple component to list suggestions
+     */
     interface KlevuSuggestionsList {
         /**
           * Caption on the list
@@ -1408,6 +1809,9 @@ declare namespace LocalJSX {
          */
         "suggestions": string[];
     }
+    /**
+     * Branded text field component
+     */
     interface KlevuTextfield {
         /**
           * Is field disabled
@@ -1471,34 +1875,165 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Component that wrap two slots to create accordion element
+             * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
+             * @cssprop --klevu-accordion-background transparent Header background
+             * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+             */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
+            /**
+             * Basic button component
+             * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
+             * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
+             * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
+             * @cssprop --klebu-button-padding --klevu-spacing-normal Padding on button
+             */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
+            /**
+             * Checkbox component
+             * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
+             * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+             */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
+            /**
+             * Component to display list of CMS page results
+             */
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
+            /**
+             * Component to create offscreen drawer on left or right side of the screen
+             * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
+             * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+             */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
+            /**
+             * Simple native dropdown component for dropdown
+             * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
+             * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+             */
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
+            /**
+             * Rendering items of single facet
+             */
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
+            /**
+             * Render all facets of filter manager
+             * @cssprop --klevu-face-list-width 200px Width of the facet listing
+             */
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
+            /**
+             * Heading element
+             * @cssprop --klevu-h1-size - H1 heading size
+             * @cssprop --klevu-h1-weight - H1 font weight
+             * @cssprop --klevu-h1-color - H1 font color
+             * @cssprop --klevu-h2-size - H2 heading size
+             * @cssprop --klevu-h2-weight - H2 font weight
+             * @cssprop --klevu-h2-color - H3 font color
+             * @cssprop --klevu-h3-size - H3 heading size
+             * @cssprop --klevu-h3-weight - H3 font weight
+             * @cssprop --klevu-h3-color - H3 font color
+             */
             "klevu-heading": LocalJSX.KlevuHeading & JSXBase.HTMLAttributes<HTMLKlevuHeadingElement>;
+            /**
+             * Initializes components to fetch data from correct Klevu backend
+             * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
+             * @cssprop --klevu-color-primary - Main color of components
+             * @cssprop --klevu-color-primary-text - Text color on top primary color
+             * @cssprop --klevu-color-primary-border - Border color related to primary color
+             * @cssprop --klevu-color-border - Standard border color used to separate items
+             * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
+             * @cssprop --klevu-color-dim-text - Secondary dimmed texts
+             * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
+             * @cssprop --klevu-spacing-small - Small spacing
+             * @cssprop --klevu-spacing-normal - Normal spacing
+             * @cssprop --klevu-spacing-large - Large spacing
+             * @cssprop --klevu-rounded-corners - Rounded corners
+             */
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;
+            /**
+             * Lists latest searches user has made on the site
+             */
             "klevu-latest-searches": LocalJSX.KlevuLatestSearches & JSXBase.HTMLAttributes<HTMLKlevuLatestSearchesElement>;
             "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
+            /**
+             * Full merchandising app to power up your product grid pages
+             */
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
+            /**
+             * Pagination component. Either provide numbers or query result to display the component.
+             * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
+             * @cssprop --klevu-pagination-text-color - text color of item
+             * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
+             * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+             */
             "klevu-pagination": LocalJSX.KlevuPagination & JSXBase.HTMLAttributes<HTMLKlevuPaginationElement>;
+            /**
+             * Fetches and displays most popular searches from Klevu Merchant center
+             */
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
+            /**
+             * Popup component where clicking origin component popups the the content
+             */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
+            /**
+             * Generic product component that renders product based on KlevuRecord of @klevu/core
+             * All parts of the component can be replaced with slots.
+             * @csspart image - The image element of component
+             * @csspart container - The container element of whole
+             * @cssprop --klevu-product-width - Width of the product
+             * @cssprop --klevu-product-small-width - Width of the product when small variant is used
+             * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
+             * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+             */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
+            /**
+             * Component to place products on grid
+             * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+             */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            /**
+             * Abstract helper component that queries
+             */
             "klevu-query": LocalJSX.KlevuQuery & JSXBase.HTMLAttributes<HTMLKlevuQueryElement>;
+            /**
+             * Full app to create search bar that popups trending products and search results.
+             */
             "klevu-quicksearch": LocalJSX.KlevuQuicksearch & JSXBase.HTMLAttributes<HTMLKlevuQuicksearchElement>;
+            /**
+             * Full recommendation banner solution
+             */
             "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
+            /**
+             * Plain textfield that does the searching
+             */
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
+            /**
+             * Full app component for search landing page
+             */
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
+            /**
+             * Simplified application that shows search box where typing text displays suggestions.
+             */
             "klevu-simple-search": LocalJSX.KlevuSimpleSearch & JSXBase.HTMLAttributes<HTMLKlevuSimpleSearchElement>;
+            /**
+             * Horizontal slider component. Used for price range
+             */
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
+            /**
+             * Horizontal slides component
+             */
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
+            /**
+             * Sort dropdown. User can select what kind of sorting they want
+             */
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
+            /**
+             * Simple component to list suggestions
+             */
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
+            /**
+             * Branded text field component
+             */
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }

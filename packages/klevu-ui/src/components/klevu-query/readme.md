@@ -7,6 +7,10 @@ This components gives you ability to create any kind of UI with Klevu components
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Abstract helper component that queries
+
 ## Properties
 
 | Property               | Attribute                 | Description                                                                                                                                                           | Type                                                                                                                                                                                                                                                                                                                                                                   | Default               |

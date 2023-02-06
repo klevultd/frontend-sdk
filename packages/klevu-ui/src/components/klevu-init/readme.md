@@ -3,6 +3,13 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Initializes components to fetch data from correct Klevu backend
+
+
+Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
+
 ## Properties
 
 | Property              | Attribute | Description                | Type                                                                                                                                                                                                                                                                              | Default     |

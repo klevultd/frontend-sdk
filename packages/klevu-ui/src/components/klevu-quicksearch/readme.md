@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Full app to create search bar that popups trending products and search results.
+
 ## Properties
 
 | Property            | Attribute           | Description                                                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                              | Default        |
