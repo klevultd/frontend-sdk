@@ -60,7 +60,7 @@ for (const prop of documentedCssProps) {
 export const parameters = {
   options: {
     storySort: {
-      order: ["Start", ["Welcome", "Styles"], "Atoms", "Components", "Apps"],
+      order: ["Start", ["Welcome", "Installation", "Styles"], "Atoms", "Components", "Layout", "Apps"],
     },
     showPanel: true,
     panelPosition: "bottom",

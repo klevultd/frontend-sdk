@@ -18,24 +18,18 @@ main {
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
   margin-bottom: var(--klevu-spacing-normal);
 }
 
 .footer {
   margin-top: var(--klevu-spacing-normal);
-}
-
-.content {
-  display: flex;
-  justify-content: center;
+  width: 100%;
 }
 
 @media (max-width: 400px) {
   .container {
     flex-direction: column;
+    gap: 0;
   }
 
   .sidebar {
