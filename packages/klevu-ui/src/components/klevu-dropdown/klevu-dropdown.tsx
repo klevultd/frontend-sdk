@@ -38,7 +38,7 @@ export class KlevuDropdown {
   })
   klevuDropdownChanged!: EventEmitter<string>
 
-  onChange(event: any) {
+  #onChange(event: any) {
     this.klevuDropdownChanged.emit(event.target.value)
   }
 
@@ -51,7 +51,7 @@ export class KlevuDropdown {
             disabled: Boolean(this.disabled),
           }}
         >
-          <select name={this.name} disabled={this.disabled} onChange={this.onChange.bind(this)}>
+          <select name={this.name} disabled={this.disabled} onChange={this.#onChange.bind(this)}>
             {this.options?.map((o) => (
               <option selected={this.selected === o.value} value={o.value}>
                 {o.text}

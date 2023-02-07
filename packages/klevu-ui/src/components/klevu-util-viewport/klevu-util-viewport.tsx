@@ -22,7 +22,7 @@ export class KlevuUtilViewport {
     for (const size of this.sizes) {
       window
         .matchMedia(`(min-width: ${size.minWidth}px) and (max-width: ${size.maxWidth}px)`)
-        .addEventListener("change", this.handleMatchMediaChange.bind(this))
+        .addEventListener("change", this.#handleMatchMediaChange.bind(this))
     }
   }
 
@@ -30,7 +30,7 @@ export class KlevuUtilViewport {
     for (const size of this.sizes) {
       window
         .matchMedia(`(min-width: ${size.minWidth}px) and (max-width: ${size.maxWidth}px)`)
-        .removeEventListener("change", this.handleMatchMediaChange.bind(this))
+        .removeEventListener("change", this.#handleMatchMediaChange.bind(this))
     }
   }
 
@@ -44,7 +44,7 @@ export class KlevuUtilViewport {
     }
   }
 
-  handleMatchMediaChange(q: MediaQueryListEvent) {
+  #handleMatchMediaChange(q: MediaQueryListEvent) {
     if (!q.matches) {
       return
     }

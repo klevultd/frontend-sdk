@@ -200,6 +200,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'searchSuggestions',
   'searchCategories',
   'searchCmsPages',
+  'sendAnalytics',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'

@@ -55,7 +55,7 @@ export class KlevuRecommendations {
    * slot requested. Return null for slots that you do not want to render.
    */
   @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
-  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null
     }
@@ -114,7 +114,7 @@ export class KlevuRecommendations {
     }
   }
 
-  productClick(
+  #productClick(
     event: KlevuProductCustomEvent<{
       product: Partial<KlevuRecord>
       originalEvent: MouseEvent
@@ -134,11 +134,11 @@ export class KlevuRecommendations {
       <Host>
         <klevu-slides>
           {this.products.map((product) => (
-            <klevu-product fixedWidth onKlevuProductClick={this.productClick.bind(this)} product={product}>
-              {this.internalRenderProductSlot(product, "top")}
-              {this.internalRenderProductSlot(product, "image")}
-              {this.internalRenderProductSlot(product, "info")}
-              {this.internalRenderProductSlot(product, "bottom")}
+            <klevu-product fixedWidth onKlevuProductClick={this.#productClick.bind(this)} product={product}>
+              {this.#internalRenderProductSlot(product, "top")}
+              {this.#internalRenderProductSlot(product, "image")}
+              {this.#internalRenderProductSlot(product, "info")}
+              {this.#internalRenderProductSlot(product, "bottom")}
             </klevu-product>
           ))}
         </klevu-slides>

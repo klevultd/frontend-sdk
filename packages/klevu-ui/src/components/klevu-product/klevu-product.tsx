@@ -77,7 +77,7 @@ export class KlevuProduct {
   })
   klevuProductClick!: EventEmitter<KlevuProductOnProductClick>
 
-  click(ev: MouseEvent) {
+  #click(ev: MouseEvent) {
     const settings = getGlobalSettings()
 
     if (!this.product) {
@@ -166,7 +166,7 @@ export class KlevuProduct {
       <Host>
         <div part="container" class={containerClasses}>
           <slot name="top"></slot>
-          <a href={settings?.generateProductUrl?.(this.product)} onClick={this.click.bind(this)}>
+          <a href={settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
             {this.hideImage ? null : (
               <slot name="image">
                 <div

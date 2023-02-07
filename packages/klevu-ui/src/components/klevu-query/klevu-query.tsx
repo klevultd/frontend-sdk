@@ -119,10 +119,10 @@ export class KlevuQuery {
    */
   @Method()
   async fetchAgain() {
-    await this.fetch()
+    await this.#fetch()
   }
 
-  private stopFilterListening?: Function
+  #stopFilterListening?: Function
 
   @Event({
     composed: true,
@@ -134,18 +134,18 @@ export class KlevuQuery {
 
   async connectedCallback() {
     await KlevuInit.ready()
-    await this.fetch()
+    await this.#fetch()
 
     if (this.updateOnFilterChange) {
-      this.stopFilterListening = KlevuListenDomEvent(KlevuDomEvents.FilterSelectionUpdate, async () => {
-        await this.fetch()
+      this.#stopFilterListening = KlevuListenDomEvent(KlevuDomEvents.FilterSelectionUpdate, async () => {
+        await this.#fetch()
       })
     }
   }
 
   disconnectedCallback() {
-    if (this.stopFilterListening) {
-      this.stopFilterListening()
+    if (this.#stopFilterListening) {
+      this.#stopFilterListening()
     }
   }
 
@@ -155,14 +155,14 @@ export class KlevuQuery {
   })
   onProductClick(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
     const product = event.detail.product
-    if (!this.lastResult || !product.id) {
+    if (!this.#lastResult || !product.id) {
       return
     }
 
     switch (this.type) {
       case "merchandising":
         if (this.categoryTitle) {
-          this.lastResult.getCategoryMerchandisingClickSendEvent?.()(
+          this.#lastResult.getCategoryMerchandisingClickSendEvent?.()(
             product.id,
             this.categoryTitle,
             product.itemGroupId
@@ -170,10 +170,10 @@ export class KlevuQuery {
         }
         break
       case "recommendation":
-        this.lastResult.getRecommendationClickSendEvent?.()(product.id, product.itemGroupId)
+        this.#lastResult.getRecommendationClickSendEvent?.()(product.id, product.itemGroupId)
         break
       case "search":
-        this.lastResult.getSearchClickSendEvent?.()(product.id, product.itemGroupId)
+        this.#lastResult.getSearchClickSendEvent?.()(product.id, product.itemGroupId)
         break
       default:
         const e: never = this.type
@@ -181,9 +181,9 @@ export class KlevuQuery {
     }
   }
 
-  private lastResult?: KlevuFetchQueryResult
+  #lastResult?: KlevuFetchQueryResult
 
-  private async fetch() {
+  async #fetch() {
     const options: AllQueryOptions = {
       limit: this.limit,
       sort: this.sort,
@@ -214,7 +214,7 @@ export class KlevuQuery {
           throw new Error("KlevuQuery: Couldn't do fetch.")
         }
 
-        this.lastResult = resultObject
+        this.#lastResult = resultObject
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,
@@ -233,7 +233,7 @@ export class KlevuQuery {
           throw new Error("KlevuQuery: Couldn't do fetch.")
         }
 
-        this.lastResult = resultObject
+        this.#lastResult = resultObject
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,
@@ -258,7 +258,7 @@ export class KlevuQuery {
           throw new Error("KlevuQuery: Couldn't do fetch.")
         }
 
-        this.lastResult = resultObject
+        this.#lastResult = resultObject
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,

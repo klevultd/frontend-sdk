@@ -26,10 +26,10 @@ export class KlevuAccordion {
    */
   @Prop() startOpen?: boolean
 
-  private id: string
+  #id: string
 
   constructor() {
-    this.id = `chk${Math.floor(Math.random() * 1000000)}`
+    this.#id = `chk${Math.floor(Math.random() * 1000000)}`
   }
 
   connectedCallback() {
@@ -41,8 +41,8 @@ export class KlevuAccordion {
   render() {
     return (
       <Host>
-        <input type="checkbox" id={this.id} checked={this.open} onChange={() => (this.open = !this.open)} />
-        <label htmlFor={this.id}>
+        <input type="checkbox" id={this.#id} checked={this.open} onChange={() => (this.open = !this.open)} />
+        <label htmlFor={this.#id}>
           <slot name="header"></slot>
           <svg
             slot="icon"

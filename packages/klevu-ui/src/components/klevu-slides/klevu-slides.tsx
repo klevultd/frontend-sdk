@@ -27,45 +27,45 @@ export class KlevuSlides {
   @Prop()
   hideNextPrev?: boolean
 
-  private gap = 0
-  private containerDiv?: HTMLDivElement
-  private slotElement?: HTMLSlotElement
+  #gap = 0
+  #containerDiv?: HTMLDivElement
+  #slotElement?: HTMLSlotElement
 
-  private prev = () => {
-    if (!this.containerDiv) {
+  #prev = () => {
+    if (!this.#containerDiv) {
       return
     }
 
-    this.containerDiv.scrollLeft -= this.calcAmountToSlide()
+    this.#containerDiv.scrollLeft -= this.#calcAmountToSlide()
   }
 
-  private next = () => {
-    if (!this.containerDiv) {
+  #next = () => {
+    if (!this.#containerDiv) {
       return
     }
-    this.containerDiv.scrollLeft += this.calcAmountToSlide()
+    this.#containerDiv.scrollLeft += this.#calcAmountToSlide()
   }
 
-  private calcAmountToSlide(): number {
+  #calcAmountToSlide(): number {
     let w: number | undefined
     if (this.slideFullWidth) {
-      w = this.containerDiv?.clientWidth
+      w = this.#containerDiv?.clientWidth
     } else {
-      w = (this.slotElement?.assignedElements().at(0)?.clientWidth ?? 300) + this.gap
+      w = (this.#slotElement?.assignedElements().at(0)?.clientWidth ?? 300) + this.#gap
     }
 
     return w ?? 300
   }
 
   connectedCallback() {
-    this.gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--klevu-spacing-large"))
+    this.#gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--klevu-spacing-large"))
   }
 
   render() {
     return (
       <Host style={{ height: `${this.height}px` }}>
         {this.hideNextPrev ? null : (
-          <klevu-button class="prev" onClick={this.prev.bind(this)}>
+          <klevu-button class="prev" onClick={this.#prev.bind(this)}>
             &lt;
           </klevu-button>
         )}
@@ -74,12 +74,12 @@ export class KlevuSlides {
             slides: true,
             hideNextPrev: Boolean(this.hideNextPrev),
           }}
-          ref={(el) => (this.containerDiv = el)}
+          ref={(el) => (this.#containerDiv = el)}
         >
-          <slot ref={(el) => (this.slotElement = el as HTMLSlotElement)}></slot>
+          <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
         </div>
         {this.hideNextPrev ? null : (
-          <klevu-button class="next" onClick={this.next.bind(this)}>
+          <klevu-button class="next" onClick={this.#next.bind(this)}>
             &gt;
           </klevu-button>
         )}

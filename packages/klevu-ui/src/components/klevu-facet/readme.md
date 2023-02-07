@@ -20,13 +20,6 @@ Rendering items of single facet
 | `slider`               | --                     | From which slider to build facet                                              | `KlevuFilterResult & { type: KlevuFilterType.Slider; min: string; max: string; start: string; end: string; } \| undefined`                           | `undefined`  |
 
 
-## Shadow Parts
-
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
-
-
 ## Dependencies
 
 ### Used by

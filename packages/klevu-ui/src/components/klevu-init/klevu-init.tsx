@@ -52,6 +52,18 @@ export class KlevuInit {
     }
   }
 
+  /**
+   * To make sure that components in the page wait for klevu-init to run and set the settings this method is required to use.
+   * In `connectedCallback()` function should call this method. So for example:
+   *
+   * ```
+   * async connectedCallback() {
+   *   await KlevuInit.ready()
+   * }
+   * ```
+   *
+   * @returns Promise when klevu-init is loaded
+   */
   static ready() {
     return document.querySelector("klevu-init")?.componentOnReady()
   }

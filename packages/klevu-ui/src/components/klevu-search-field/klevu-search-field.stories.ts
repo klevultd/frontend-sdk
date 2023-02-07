@@ -23,6 +23,7 @@ const Template: Story<HTMLKlevuSearchFieldElement> = (args) =>
     .searchProducts=${args.searchProducts}
     .searchSuggestions=${args.searchSuggestions}
     .searchText=${args.searchText}
+    .sendAnalytics=${args.sendAnalytics}
   ></klevu-search-field>`
 
 export const Default = Template.bind({})

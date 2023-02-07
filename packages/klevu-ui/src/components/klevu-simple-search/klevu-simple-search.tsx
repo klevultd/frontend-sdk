@@ -21,7 +21,7 @@ export class KlevuSimpleSearch {
   @Event()
   klevuSuggestionClick!: EventEmitter<string>
 
-  suggestionClick(suggestionWithHTML: string) {
+  #suggestionClick(suggestionWithHTML: string) {
     // strip HTML
     const tmp = document.createElement("div")
     tmp.innerHTML = suggestionWithHTML
@@ -29,7 +29,7 @@ export class KlevuSimpleSearch {
     this.popupElement?.closeModal()
   }
 
-  private onSuggestions(ev: KlevuSearchFieldCustomEvent<SuggestionsEventData>) {
+  #onSuggestions(ev: KlevuSearchFieldCustomEvent<SuggestionsEventData>) {
     this.suggestions = ev.detail
     this.popupElement?.openModal()
   }
@@ -41,12 +41,12 @@ export class KlevuSimpleSearch {
           <klevu-search-field
             slot="origin"
             searchSuggestions
-            onKlevuSearchSuggestions={this.onSuggestions.bind(this)}
+            onKlevuSearchSuggestions={this.#onSuggestions.bind(this)}
           ></klevu-search-field>
           <div slot="content">
             <ul>
               {this.suggestions.map((s) => (
-                <li onClick={() => this.suggestionClick(s)} innerHTML={s}></li>
+                <li onClick={() => this.#suggestionClick(s)} innerHTML={s}></li>
               ))}
             </ul>
           </div>

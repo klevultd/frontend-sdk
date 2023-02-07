@@ -104,7 +104,7 @@ export class KlevuQuicksearch {
     }
   }
 
-  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null
     }
@@ -165,20 +165,20 @@ export class KlevuQuicksearch {
                 <klevu-product-grid class="desktop" itemsPerRow={3}>
                   {this.products?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="small">
-                      {this.internalRenderProductSlot(p, "top")}
-                      {this.internalRenderProductSlot(p, "image")}
-                      {this.internalRenderProductSlot(p, "info")}
-                      {this.internalRenderProductSlot(p, "bottom")}
+                      {this.#internalRenderProductSlot(p, "top")}
+                      {this.#internalRenderProductSlot(p, "image")}
+                      {this.#internalRenderProductSlot(p, "info")}
+                      {this.#internalRenderProductSlot(p, "bottom")}
                     </klevu-product>
                   ))}
                 </klevu-product-grid>
                 <klevu-product-grid class="mobile">
                   {this.products?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="line">
-                      {this.internalRenderProductSlot(p, "top")}
-                      {this.internalRenderProductSlot(p, "image")}
-                      {this.internalRenderProductSlot(p, "info")}
-                      {this.internalRenderProductSlot(p, "bottom")}
+                      {this.#internalRenderProductSlot(p, "top")}
+                      {this.#internalRenderProductSlot(p, "image")}
+                      {this.#internalRenderProductSlot(p, "info")}
+                      {this.#internalRenderProductSlot(p, "bottom")}
                     </klevu-product>
                   ))}
                 </klevu-product-grid>
@@ -189,20 +189,20 @@ export class KlevuQuicksearch {
                 <klevu-product-grid class="desktop" itemsPerRow={3}>
                   {this.trendingProducts?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="small">
-                      {this.internalRenderProductSlot(p, "top")}
-                      {this.internalRenderProductSlot(p, "image")}
-                      {this.internalRenderProductSlot(p, "info")}
-                      {this.internalRenderProductSlot(p, "bottom")}
+                      {this.#internalRenderProductSlot(p, "top")}
+                      {this.#internalRenderProductSlot(p, "image")}
+                      {this.#internalRenderProductSlot(p, "info")}
+                      {this.#internalRenderProductSlot(p, "bottom")}
                     </klevu-product>
                   ))}
                 </klevu-product-grid>
                 <klevu-product-grid class="mobile">
                   {this.trendingProducts?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="line">
-                      {this.internalRenderProductSlot(p, "top")}
-                      {this.internalRenderProductSlot(p, "image")}
-                      {this.internalRenderProductSlot(p, "info")}
-                      {this.internalRenderProductSlot(p, "bottom")}
+                      {this.#internalRenderProductSlot(p, "top")}
+                      {this.#internalRenderProductSlot(p, "image")}
+                      {this.#internalRenderProductSlot(p, "info")}
+                      {this.#internalRenderProductSlot(p, "bottom")}
                     </klevu-product>
                   ))}
                 </klevu-product-grid>

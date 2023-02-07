@@ -2,9 +2,11 @@ import {
   fallback,
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
+  KlevuFetchModifer,
   KlevuFetchQueryResult,
   KlevuTypeOfRecord,
   search,
+  sendSearchEvent,
   suggestions,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
@@ -72,6 +74,11 @@ export class KlevuSearchField {
   @Prop() searchCmsPages?: boolean
 
   /**
+   * Sends analytics when making query
+   */
+  @Prop() sendAnalytics?: boolean
+
+  /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
   @Event({
@@ -97,12 +104,12 @@ export class KlevuSearchField {
     await KlevuInit.ready()
   }
 
-  private doSearch = debounce(async (term: string) => {
+  #doSearch = debounce(async (term: string) => {
     if (term.length < 3) {
       return
     }
 
-    const searchModifiers = []
+    const searchModifiers: KlevuFetchModifer[] = []
     // if fallback term is defined use it to search
     if (this.fallbackTerm && this.searchProducts) {
       searchModifiers.push(
@@ -114,6 +121,10 @@ export class KlevuSearchField {
       )
     }
 
+    if (this.sendAnalytics) {
+      searchModifiers.push(sendSearchEvent())
+    }
+
     const allSearchQueries: KlevuFetchFunctionReturnValue[] = []
     if (this.searchProducts) {
       allSearchQueries.push(
@@ -122,12 +133,16 @@ export class KlevuSearchField {
     }
     if (this.searchCmsPages) {
       allSearchQueries.push(
-        search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms] })
+        search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms] }, ...searchModifiers)
       )
     }
     if (this.searchCategories) {
       allSearchQueries.push(
-        search(term, { id: "categorySearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Category] })
+        search(
+          term,
+          { id: "categorySearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Category] },
+          ...searchModifiers
+        )
       )
     }
     if (this.searchSuggestions) {
@@ -154,12 +169,12 @@ export class KlevuSearchField {
     }
   }, 500)
 
-  handleChange = (event: CustomEvent<string>) => {
+  #handleChange = (event: CustomEvent<string>) => {
     this.term = event.detail
-    this.doSearch(event.detail)
+    this.#doSearch(event.detail)
   }
 
-  handleSearchClick = () => {
+  #handleSearchClick = () => {
     this.klevuSearchClick.emit(this.term)
   }
 
@@ -169,9 +184,9 @@ export class KlevuSearchField {
         <klevu-textfield
           value={this.term}
           placeholder={this.placeholder}
-          onKlevuTextChanged={this.handleChange.bind(this)}
+          onKlevuTextChanged={this.#handleChange.bind(this)}
         ></klevu-textfield>
-        <klevu-button onClick={this.handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
+        <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
       </Host>
     )
   }

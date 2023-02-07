@@ -24,9 +24,11 @@ Full app component for search landing page
 
 ### Depends on
 
+- [klevu-util-viewport](../klevu-util-viewport)
 - [klevu-layout-results](../klevu-layout-results)
 - [klevu-facet-list](../klevu-facet-list)
 - [klevu-heading](../klevu-heading)
+- [klevu-sort](../klevu-sort)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-pagination](../klevu-pagination)
@@ -35,9 +37,11 @@ Full app component for search landing page
 ### Graph
 ```mermaid
 graph TD;
+  klevu-search-landing-page --> klevu-util-viewport
   klevu-search-landing-page --> klevu-layout-results
   klevu-search-landing-page --> klevu-facet-list
   klevu-search-landing-page --> klevu-heading
+  klevu-search-landing-page --> klevu-sort
   klevu-search-landing-page --> klevu-product-grid
   klevu-search-landing-page --> klevu-product
   klevu-search-landing-page --> klevu-pagination
@@ -51,6 +55,7 @@ graph TD;
   klevu-facet --> klevu-heading
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
+  klevu-sort --> klevu-dropdown
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

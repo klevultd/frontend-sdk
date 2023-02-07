@@ -58,17 +58,17 @@ export class KlevuFacet {
         {this.option ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.renderOptions()}</klevu-accordion>
+              <klevu-accordion startOpen={this.accordionStartOpen}>{this.#renderOptions()}</klevu-accordion>
             ) : (
-              this.renderOptions()
+              this.#renderOptions()
             )}
           </Fragment>
         ) : this.slider ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.renderSlider()}</klevu-accordion>
+              <klevu-accordion startOpen={this.accordionStartOpen}>{this.#renderSlider()}</klevu-accordion>
             ) : (
-              this.renderSlider()
+              this.#renderSlider()
             )}
           </Fragment>
         ) : null}
@@ -76,7 +76,7 @@ export class KlevuFacet {
     )
   }
 
-  renderSlider() {
+  #renderSlider() {
     if (!this.slider) {
       return null
     }
@@ -100,7 +100,7 @@ export class KlevuFacet {
     )
   }
 
-  renderOptions() {
+  #renderOptions() {
     if (!this.option) {
       return null
     }

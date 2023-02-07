@@ -35,15 +35,15 @@ export class KlevuDrawer {
 
   @State() open = false
 
-  private originalOverflow: any
+  #originalOverflow: any
 
-  private openEvent(event: MouseEvent) {
+  #openEvent(event: MouseEvent) {
     if (event.composedPath().some((el: any) => el.name === "origin")) {
       this.openModal()
     }
   }
 
-  private closeEvent(event: MouseEvent) {
+  #closeEvent(event: MouseEvent) {
     if (!event.composedPath().some((el: any) => el === this.el)) {
       this.closeModal()
     }
@@ -54,7 +54,7 @@ export class KlevuDrawer {
     document.body.style.overflowX = "inherit"
 
     this.open = true
-    this.originalOverflow = document.body.style.overflow
+    this.#originalOverflow = document.body.style.overflow
     document.body.style.overflow = "hidden"
   }
 
@@ -63,7 +63,7 @@ export class KlevuDrawer {
     document.body.style.overflowX = "none"
 
     this.open = false
-    document.body.style.overflow = this.originalOverflow
+    document.body.style.overflow = this.#originalOverflow
   }
 
   connectedCallback() {
@@ -71,16 +71,16 @@ export class KlevuDrawer {
       this.openModal()
     }
 
-    this.el?.addEventListener("click", this.openEvent.bind(this))
+    this.el?.addEventListener("click", this.#openEvent.bind(this))
 
     if (this.closeAtOutsideClick) {
-      document.addEventListener("click", this.closeEvent.bind(this))
+      document.addEventListener("click", this.#closeEvent.bind(this))
     }
   }
 
   detachedCallback() {
-    document.removeEventListener("click", this.closeEvent)
-    this.el?.removeEventListener("click", this.openEvent)
+    document.removeEventListener("click", this.#closeEvent)
+    this.el?.removeEventListener("click", this.#openEvent)
   }
 
   render() {

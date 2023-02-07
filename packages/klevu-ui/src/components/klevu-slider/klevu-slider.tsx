@@ -44,7 +44,7 @@ export class KlevuSlider {
   })
   klevuSliderChange!: EventEmitter<[number, number]>
 
-  initNoUISlider(el: HTMLDivElement | undefined) {
+  #initNoUISlider(el: HTMLDivElement | undefined) {
     if (!el) {
       return
     }
@@ -79,7 +79,7 @@ export class KlevuSlider {
             hasTooltips: Boolean(this.showTooltips),
           }}
         >
-          <div class="container" ref={this.initNoUISlider.bind(this)}></div>
+          <div class="container" ref={this.#initNoUISlider.bind(this)}></div>
         </div>
       </Host>
     )

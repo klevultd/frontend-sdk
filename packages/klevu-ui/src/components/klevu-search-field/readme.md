@@ -19,6 +19,7 @@ Plain textfield that does the searching
 | `searchProducts`    | `search-products`    | Should search products                               | `boolean \| undefined` | `undefined`             |
 | `searchSuggestions` | `search-suggestions` | Should search suggestions                            | `boolean \| undefined` | `undefined`             |
 | `searchText`        | `search-text`        | Button text                                          | `string`               | `"Search"`              |
+| `sendAnalytics`     | `send-analytics`     | Sends analytics when making query                    | `boolean \| undefined` | `undefined`             |
 
 
 ## Events

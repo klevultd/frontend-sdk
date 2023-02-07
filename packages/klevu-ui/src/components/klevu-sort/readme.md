@@ -19,6 +19,7 @@ Sort dropdown. User can select what kind of sorting they want
 ### Used by
 
  - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
 
 ### Depends on
 
@@ -29,6 +30,7 @@ Sort dropdown. User can select what kind of sorting they want
 graph TD;
   klevu-sort --> klevu-dropdown
   klevu-merchandising --> klevu-sort
+  klevu-search-landing-page --> klevu-sort
   style klevu-sort fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
