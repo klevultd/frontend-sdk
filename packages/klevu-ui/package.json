@@ -46,8 +46,8 @@
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@ljcl/storybook-addon-cssprops": "^2.3.5",
-    "@stencil/react-output-target": "^0.3.1",
-    "@stencil/vue-output-target": "^0.6.2",
+    "@stencil/react-output-target": "^0.4.0",
+    "@stencil/vue-output-target": "^0.7.0",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",

@@ -10,6 +10,9 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
  * @cssprop --klevu-color-primary - Main color of components
  * @cssprop --klevu-color-primary-text - Text color on top primary color
  * @cssprop --klevu-color-primary-border - Border color related to primary color
+ * @cssprop --klevu-color-secondary - Main color of components
+ * @cssprop --klevu-color-secondary-text - Text color on top primary color
+ * @cssprop --klevu-color-secondary-border - Border color related to primary color
  * @cssprop --klevu-color-border - Standard border color used to separate items
  * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
  * @cssprop --klevu-color-dim-text - Secondary dimmed texts
