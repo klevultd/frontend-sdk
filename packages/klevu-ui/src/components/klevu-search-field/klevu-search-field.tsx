@@ -185,6 +185,7 @@ export class KlevuSearchField {
           value={this.term}
           placeholder={this.placeholder}
           onKlevuTextChanged={this.#handleChange.bind(this)}
+          aria-role="search"
         ></klevu-textfield>
         <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
       </Host>

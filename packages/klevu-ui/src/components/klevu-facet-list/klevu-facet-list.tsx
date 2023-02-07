@@ -42,6 +42,16 @@ export class KlevuFacetList {
   @Prop() useApplyButton?: boolean
 
   /**
+   * Button text for Apply button when using `useApplyButton`
+   */
+  @Prop() applyButtonText = "Apply"
+
+  /**
+   * Button text for Clear button when using `useApplyButton`
+   */
+  @Prop() clearButtonText = "Clear"
+
+  /**
    * When filters are applied
    */
   @Event({ composed: true })
@@ -131,10 +141,10 @@ export class KlevuFacetList {
         {this.useApplyButton ? (
           <div class="applybar">
             <klevu-button isSecondary onClick={() => this.#clear()}>
-              Clear
+              {this.clearButtonText}
             </klevu-button>
             <klevu-button fullWidth class="apply" onClick={() => this.#applySettings()}>
-              Apply
+              {this.applyButtonText}
             </klevu-button>
           </div>
         ) : null}

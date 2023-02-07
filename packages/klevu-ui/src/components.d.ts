@@ -186,6 +186,14 @@ export namespace Components {
          */
         "accordion"?: boolean;
         /**
+          * Button text for Apply button when using `useApplyButton`
+         */
+        "applyButtonText": string;
+        /**
+          * Button text for Clear button when using `useApplyButton`
+         */
+        "clearButtonText": string;
+        /**
           * Custom order keys for every facet
          */
         "customOrder"?: { [key: string]: string[] };
@@ -1290,6 +1298,14 @@ declare namespace LocalJSX {
           * Should use accordions to for facets
          */
         "accordion"?: boolean;
+        /**
+          * Button text for Apply button when using `useApplyButton`
+         */
+        "applyButtonText"?: string;
+        /**
+          * Button text for Clear button when using `useApplyButton`
+         */
+        "clearButtonText"?: string;
         /**
           * Custom order keys for every facet
          */

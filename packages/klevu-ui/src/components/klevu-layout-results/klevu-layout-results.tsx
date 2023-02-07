@@ -53,8 +53,8 @@ export class KlevuLayoutResults {
             </aside>
           )}
 
-          <section>
-            <div class="header">
+          <main>
+            <header class="header">
               <slot name="header"></slot>
               {isMobile ? (
                 <klevu-button
@@ -67,14 +67,14 @@ export class KlevuLayoutResults {
                   Open&nbsp;menu
                 </klevu-button>
               ) : null}
-            </div>
-            <div class="content">
+            </header>
+            <section class="content">
               <slot name="content"></slot>
-            </div>
-            <div class="footer">
+            </section>
+            <footer class="footer">
               <slot name="footer"></slot>
-            </div>
-          </section>
+            </footer>
+          </main>
         </div>
       </Host>
     )

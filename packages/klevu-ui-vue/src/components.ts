@@ -71,6 +71,8 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
   'customOrder',
   'accordion',
   'useApplyButton',
+  'applyButtonText',
+  'clearButtonText',
   'klevuApplyFilters'
 ]);
 
