@@ -2,6 +2,14 @@ import { Component, Host, h, State, Method } from "@stencil/core"
 import { KlevuUtilViewportCustomEvent } from "../../components"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 
+/**
+ * Generic layout used in merchansiding and search landing page
+ *
+ * @slot sidebar - Sidebar
+ * @slot header - Header area above the content
+ * @slot content - Main content
+ * @slot footer - Footer are below the content
+ */
 @Component({
   tag: "klevu-layout-results",
   styleUrl: "klevu-layout-results.css",

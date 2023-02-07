@@ -261,6 +261,9 @@ export namespace Components {
          */
         "caption": string;
     }
+    /**
+     * Generic layout used in merchansiding and search landing page
+     */
     interface KlevuLayoutResults {
         "closeDrawer": () => Promise<void>;
     }
@@ -912,6 +915,9 @@ declare global {
         prototype: HTMLKlevuLatestSearchesElement;
         new (): HTMLKlevuLatestSearchesElement;
     };
+    /**
+     * Generic layout used in merchansiding and search landing page
+     */
     interface HTMLKlevuLayoutResultsElement extends Components.KlevuLayoutResults, HTMLStencilElement {
     }
     var HTMLKlevuLayoutResultsElement: {
@@ -1364,6 +1370,9 @@ declare namespace LocalJSX {
          */
         "caption"?: string;
     }
+    /**
+     * Generic layout used in merchansiding and search landing page
+     */
     interface KlevuLayoutResults {
     }
     /**
@@ -1974,6 +1983,9 @@ declare module "@stencil/core" {
              * Lists latest searches user has made on the site
              */
             "klevu-latest-searches": LocalJSX.KlevuLatestSearches & JSXBase.HTMLAttributes<HTMLKlevuLatestSearchesElement>;
+            /**
+             * Generic layout used in merchansiding and search landing page
+             */
             "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
             /**
              * Full merchandising app to power up your product grid pages
