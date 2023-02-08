@@ -9,7 +9,7 @@ import {
   search,
   sendSearchEvent,
 } from "@klevu/core"
-import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
 import {
   KlevuPaginationCustomEvent,
   KlevuProductCustomEvent,
@@ -79,6 +79,12 @@ export class KlevuSearchLandingPage {
   async connectedCallback() {
     await KlevuInit.ready()
     await this.#initialFetch()
+  }
+
+  @Watch("term")
+  termChanged(oldValue: string, newValue: string) {
+    console.log(oldValue, newValue)
+    //this.#initialFetch()
   }
 
   async #initialFetch() {

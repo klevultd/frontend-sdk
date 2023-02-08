@@ -29,6 +29,11 @@ export class KlevuDrawer {
   @Prop() closeAtOutsideClick = true
 
   /**
+   * Add little bit of padding to content of drawer
+   */
+  @Prop() insertYPadding?: boolean
+
+  /**
    * Anchor to right or left side of the page
    */
   @Prop() anchor: "right" | "left" = "right"
@@ -95,7 +100,7 @@ export class KlevuDrawer {
             right: this.anchor === "right",
           }}
         >
-          <div class="innercontainer">
+          <div class={{ innercontainer: true, insertypadding: Boolean(this.insertYPadding) }}>
             <slot name="content" />
           </div>
         </div>

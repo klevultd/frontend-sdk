@@ -114,6 +114,10 @@ export namespace Components {
          */
         "closeAtOutsideClick": boolean;
         "closeModal": () => Promise<void>;
+        /**
+          * Add little bit of padding to content of drawer
+         */
+        "insertYPadding"?: boolean;
         "openModal": () => Promise<void>;
         /**
           * Start side drawer open
@@ -1224,6 +1228,10 @@ declare namespace LocalJSX {
           * Close by clicking outside of drawer
          */
         "closeAtOutsideClick"?: boolean;
+        /**
+          * Add little bit of padding to content of drawer
+         */
+        "insertYPadding"?: boolean;
         /**
           * Start side drawer open
          */

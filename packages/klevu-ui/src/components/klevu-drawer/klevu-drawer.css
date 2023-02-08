@@ -50,5 +50,9 @@
 .innercontainer {
   height: 100%;
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+}
+
+.insertypadding {
+  padding: 0 var(--klevu-drawer-ypadding, var(--klevu-spacing-normal));
 }

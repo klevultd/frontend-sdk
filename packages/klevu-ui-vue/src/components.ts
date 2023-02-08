@@ -41,6 +41,7 @@ export const KlevuDrawer = /*@__PURE__*/ defineContainer<JSX.KlevuDrawer>('klevu
   'startOpen',
   'background',
   'closeAtOutsideClick',
+  'insertYPadding',
   'anchor'
 ]);
 

@@ -44,7 +44,7 @@ export class KlevuLayoutResults {
         ></klevu-util-viewport>
         <div class="container">
           {isMobile ? (
-            <klevu-drawer ref={(el) => (this.drawerElement = el as HTMLKlevuDrawerElement)}>
+            <klevu-drawer ref={(el) => (this.drawerElement = el as HTMLKlevuDrawerElement)} insertYPadding>
               <slot slot="content" name="sidebar"></slot>
             </klevu-drawer>
           ) : (
