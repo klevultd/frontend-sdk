@@ -18,6 +18,7 @@ const Template: Story<HTMLKlevuDrawerElement> = (args) =>
     .background=${args.background}
     .closeAtOutsideClick=${args.closeAtOutsideClick}
     .startOpen=${args.startOpen}
+    .insertYPadding=${args.insertYPadding}
   >
     <klevu-button slot="origin">Open drawer</klevu-button>
     <div slot="content">Hello world drawer</div>
