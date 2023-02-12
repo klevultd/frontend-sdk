@@ -9,7 +9,7 @@
     "build": "shopify hydrogen build"
   },
   "devDependencies": {
-    "@shopify/cli": "3.0.27",
+    "@shopify/cli": "3.43.0",
     "@shopify/cli-hydrogen": "3.0.27",
     "typescript": "^4.6.4",
     "vite": "^2.9.0"
