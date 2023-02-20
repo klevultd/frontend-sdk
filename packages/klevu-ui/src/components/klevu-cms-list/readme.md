@@ -38,12 +38,12 @@ Component to display list of CMS page results
 
 ### Depends on
 
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-cms-list --> klevu-heading
+  klevu-cms-list --> klevu-typography
   klevu-quicksearch --> klevu-cms-list
   style klevu-cms-list fill:#f9f,stroke:#333,stroke-width:4px
 ```

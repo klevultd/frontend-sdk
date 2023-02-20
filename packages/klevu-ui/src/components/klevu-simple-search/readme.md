@@ -28,6 +28,7 @@ graph TD;
   klevu-simple-search --> klevu-search-field
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
+  klevu-button --> klevu-typography
   style klevu-simple-search fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

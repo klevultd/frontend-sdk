@@ -36,7 +36,7 @@ Full app to create search bar that popups trending products and search results.
 - [klevu-suggestions-list](../klevu-suggestions-list)
 - [klevu-latest-searches](../klevu-latest-searches)
 - [klevu-cms-list](../klevu-cms-list)
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 
@@ -48,14 +48,15 @@ graph TD;
   klevu-quicksearch --> klevu-suggestions-list
   klevu-quicksearch --> klevu-latest-searches
   klevu-quicksearch --> klevu-cms-list
-  klevu-quicksearch --> klevu-heading
+  klevu-quicksearch --> klevu-typography
   klevu-quicksearch --> klevu-product-grid
   klevu-quicksearch --> klevu-product
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
-  klevu-suggestions-list --> klevu-heading
-  klevu-latest-searches --> klevu-heading
-  klevu-cms-list --> klevu-heading
+  klevu-button --> klevu-typography
+  klevu-suggestions-list --> klevu-typography
+  klevu-latest-searches --> klevu-typography
+  klevu-cms-list --> klevu-typography
   style klevu-quicksearch fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

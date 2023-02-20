@@ -16,7 +16,7 @@ export default autofillMeta("klevu-accordion", {
 const Template: Story<HTMLKlevuAccordionElement> = (args) => html`<klevu-accordion
   startOpen=${ifDefined(args.startOpen)}
 >
-  <klevu-heading slot="header" variant="h2">Heading</klevu-heading>
+  <klevu-typography slot="header" variant="h2">Heading</klevu-typography>
   <div slot="content">Hello world accordion</div>
 </klevu-accordion>`
 

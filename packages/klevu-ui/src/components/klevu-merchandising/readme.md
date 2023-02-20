@@ -28,7 +28,7 @@ Full merchandising app to power up your product grid pages
 - [klevu-util-viewport](../klevu-util-viewport)
 - [klevu-layout-results](../klevu-layout-results)
 - [klevu-facet-list](../klevu-facet-list)
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
 - [klevu-sort](../klevu-sort)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
@@ -41,7 +41,7 @@ graph TD;
   klevu-merchandising --> klevu-util-viewport
   klevu-merchandising --> klevu-layout-results
   klevu-merchandising --> klevu-facet-list
-  klevu-merchandising --> klevu-heading
+  klevu-merchandising --> klevu-typography
   klevu-merchandising --> klevu-sort
   klevu-merchandising --> klevu-product-grid
   klevu-merchandising --> klevu-product
@@ -50,10 +50,11 @@ graph TD;
   klevu-layout-results --> klevu-util-viewport
   klevu-layout-results --> klevu-drawer
   klevu-layout-results --> klevu-button
+  klevu-button --> klevu-typography
   klevu-facet-list --> klevu-facet
   klevu-facet-list --> klevu-button
   klevu-facet --> klevu-accordion
-  klevu-facet --> klevu-heading
+  klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
   klevu-sort --> klevu-dropdown

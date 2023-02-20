@@ -31,7 +31,7 @@ export class KlevuCmsList {
   render() {
     return (
       <Host>
-        <klevu-heading variant="h2">{this.caption}</klevu-heading>
+        <klevu-typography variant="h2">{this.caption}</klevu-typography>
         <ul part="klevu-list">
           {this.pages?.map((page) => {
             if (this.link) {

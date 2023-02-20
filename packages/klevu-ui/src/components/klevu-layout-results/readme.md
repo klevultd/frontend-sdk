@@ -51,6 +51,7 @@ graph TD;
   klevu-layout-results --> klevu-util-viewport
   klevu-layout-results --> klevu-drawer
   klevu-layout-results --> klevu-button
+  klevu-button --> klevu-typography
   klevu-merchandising --> klevu-layout-results
   klevu-search-landing-page --> klevu-layout-results
   style klevu-layout-results fill:#f9f,stroke:#333,stroke-width:4px

@@ -23,7 +23,7 @@ export class KlevuLatestSearches {
   render() {
     return (
       <Host>
-        <klevu-heading variant="h3">{this.caption}</klevu-heading>
+        <klevu-typography variant="h3">{this.caption}</klevu-typography>
         <ul part="klevu-list">
           {this.lastSearches.map((ls) => (
             <li>{ls}</li>

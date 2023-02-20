@@ -30,6 +30,7 @@ Horizontal slides component
 ```mermaid
 graph TD;
   klevu-slides --> klevu-button
+  klevu-button --> klevu-typography
   klevu-recommendations --> klevu-slides
   style klevu-slides fill:#f9f,stroke:#333,stroke-width:4px
 ```

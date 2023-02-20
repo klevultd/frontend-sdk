@@ -28,7 +28,7 @@ export class KlevuPopularSearches {
   render() {
     return (
       <Host>
-        <klevu-heading variant="h2">{this.caption}</klevu-heading>
+        <klevu-typography variant="h2">{this.caption}</klevu-typography>
         <ul part="klevu-list">{this.popularSearches ? this.popularSearches.map((s) => <li>{s}</li>) : null}</ul>
       </Host>
     )

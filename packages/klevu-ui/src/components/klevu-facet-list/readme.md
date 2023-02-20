@@ -45,9 +45,10 @@ graph TD;
   klevu-facet-list --> klevu-facet
   klevu-facet-list --> klevu-button
   klevu-facet --> klevu-accordion
-  klevu-facet --> klevu-heading
+  klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
+  klevu-button --> klevu-typography
   klevu-merchandising --> klevu-facet-list
   klevu-search-landing-page --> klevu-facet-list
   style klevu-facet-list fill:#f9f,stroke:#333,stroke-width:4px

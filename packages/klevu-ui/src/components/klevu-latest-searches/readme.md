@@ -29,12 +29,12 @@ Lists latest searches user has made on the site
 
 ### Depends on
 
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-latest-searches --> klevu-heading
+  klevu-latest-searches --> klevu-typography
   klevu-quicksearch --> klevu-latest-searches
   style klevu-latest-searches fill:#f9f,stroke:#333,stroke-width:4px
 ```

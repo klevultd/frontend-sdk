@@ -27,9 +27,14 @@ Basic button component
  - [klevu-search-landing-page](../klevu-search-landing-page)
  - [klevu-slides](../klevu-slides)
 
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-button --> klevu-typography
   klevu-facet-list --> klevu-button
   klevu-layout-results --> klevu-button
   klevu-merchandising --> klevu-button

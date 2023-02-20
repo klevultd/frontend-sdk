@@ -26,6 +26,6 @@
   border-radius: var(--klevu-rounded-corners);
 }
 
-klevu-heading {
+klevu-typography {
   margin: var(--klevu-spacing-large) 0 var(--klevu-spacing-normal);
 }

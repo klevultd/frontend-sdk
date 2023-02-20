@@ -216,9 +216,9 @@ export class KlevuSearchLandingPage {
             onKlevuApplyFilters={this.#applyFilters.bind(this)}
           ></klevu-facet-list>
           <div slot="header" class="header">
-            <klevu-heading slot="header" variant="h1">
+            <klevu-typography slot="header" variant="h1">
               Searching term "{this.term}"
-            </klevu-heading>
+            </klevu-typography>
             <klevu-sort onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>
           <klevu-product-grid slot="content">

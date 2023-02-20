@@ -8,24 +8,24 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
-import { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
-export { KlevuHeadingVariant } from "./components/klevu-heading/klevu-heading";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+export { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export namespace Components {
     /**
@@ -213,27 +213,6 @@ export namespace Components {
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
         "useApplyButton"?: boolean;
-    }
-    /**
-     * Heading element
-     * @cssprop --klevu-h1-size - H1 size
-     * @cssprop --klevu-h1-line-height - H1 line-height
-     * @cssprop --klevu-h1-weight - H1 weight
-     * @cssprop --klevu-h2-size - H2 size
-     * @cssprop --klevu-h2-line-height - H2 line-height
-     * @cssprop --klevu-h2-weight - H2 weight
-     * @cssprop --klevu-h3-size - H3 size
-     * @cssprop --klevu-h3-line-height - H3 line-height
-     * @cssprop --klevu-h3-weight - H3 weight
-     * @cssprop --klevu-h4-size - H4 size
-     * @cssprop --klevu-h4-line-height - H4 line-height
-     * @cssprop --klevu-h4-weight - H4 weight
-     */
-    interface KlevuHeading {
-        /**
-          * Variant of heading
-         */
-        "variant": KlevuHeadingVariant;
     }
     /**
      * Initializes components to fetch data from correct Klevu backend
@@ -755,6 +734,27 @@ export namespace Components {
          */
         "value": string;
     }
+    /**
+     * Heading element
+     * @cssprop --klevu-h1-size - H1 size
+     * @cssprop --klevu-h1-line-height - H1 line-height
+     * @cssprop --klevu-h1-weight - H1 weight
+     * @cssprop --klevu-h2-size - H2 size
+     * @cssprop --klevu-h2-line-height - H2 line-height
+     * @cssprop --klevu-h2-weight - H2 weight
+     * @cssprop --klevu-h3-size - H3 size
+     * @cssprop --klevu-h3-line-height - H3 line-height
+     * @cssprop --klevu-h3-weight - H3 weight
+     * @cssprop --klevu-h4-size - H4 size
+     * @cssprop --klevu-h4-line-height - H4 line-height
+     * @cssprop --klevu-h4-weight - H4 weight
+     */
+    interface KlevuTypography {
+        /**
+          * Variant of heading
+         */
+        "variant": KlevuTypographyVariant;
+    }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
         "sizes": ViewportSize[];
@@ -898,27 +898,6 @@ declare global {
     var HTMLKlevuFacetListElement: {
         prototype: HTMLKlevuFacetListElement;
         new (): HTMLKlevuFacetListElement;
-    };
-    /**
-     * Heading element
-     * @cssprop --klevu-h1-size - H1 size
-     * @cssprop --klevu-h1-line-height - H1 line-height
-     * @cssprop --klevu-h1-weight - H1 weight
-     * @cssprop --klevu-h2-size - H2 size
-     * @cssprop --klevu-h2-line-height - H2 line-height
-     * @cssprop --klevu-h2-weight - H2 weight
-     * @cssprop --klevu-h3-size - H3 size
-     * @cssprop --klevu-h3-line-height - H3 line-height
-     * @cssprop --klevu-h3-weight - H3 weight
-     * @cssprop --klevu-h4-size - H4 size
-     * @cssprop --klevu-h4-line-height - H4 line-height
-     * @cssprop --klevu-h4-weight - H4 weight
-     */
-    interface HTMLKlevuHeadingElement extends Components.KlevuHeading, HTMLStencilElement {
-    }
-    var HTMLKlevuHeadingElement: {
-        prototype: HTMLKlevuHeadingElement;
-        new (): HTMLKlevuHeadingElement;
     };
     /**
      * Initializes components to fetch data from correct Klevu backend
@@ -1147,6 +1126,27 @@ declare global {
         prototype: HTMLKlevuTextfieldElement;
         new (): HTMLKlevuTextfieldElement;
     };
+    /**
+     * Heading element
+     * @cssprop --klevu-h1-size - H1 size
+     * @cssprop --klevu-h1-line-height - H1 line-height
+     * @cssprop --klevu-h1-weight - H1 weight
+     * @cssprop --klevu-h2-size - H2 size
+     * @cssprop --klevu-h2-line-height - H2 line-height
+     * @cssprop --klevu-h2-weight - H2 weight
+     * @cssprop --klevu-h3-size - H3 size
+     * @cssprop --klevu-h3-line-height - H3 line-height
+     * @cssprop --klevu-h3-weight - H3 weight
+     * @cssprop --klevu-h4-size - H4 size
+     * @cssprop --klevu-h4-line-height - H4 line-height
+     * @cssprop --klevu-h4-weight - H4 weight
+     */
+    interface HTMLKlevuTypographyElement extends Components.KlevuTypography, HTMLStencilElement {
+    }
+    var HTMLKlevuTypographyElement: {
+        prototype: HTMLKlevuTypographyElement;
+        new (): HTMLKlevuTypographyElement;
+    };
     interface HTMLKlevuUtilViewportElement extends Components.KlevuUtilViewport, HTMLStencilElement {
     }
     var HTMLKlevuUtilViewportElement: {
@@ -1162,7 +1162,6 @@ declare global {
         "klevu-dropdown": HTMLKlevuDropdownElement;
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
-        "klevu-heading": HTMLKlevuHeadingElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
@@ -1183,6 +1182,7 @@ declare global {
         "klevu-sort": HTMLKlevuSortElement;
         "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
+        "klevu-typography": HTMLKlevuTypographyElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
 }
@@ -1380,27 +1380,6 @@ declare namespace LocalJSX {
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
         "useApplyButton"?: boolean;
-    }
-    /**
-     * Heading element
-     * @cssprop --klevu-h1-size - H1 size
-     * @cssprop --klevu-h1-line-height - H1 line-height
-     * @cssprop --klevu-h1-weight - H1 weight
-     * @cssprop --klevu-h2-size - H2 size
-     * @cssprop --klevu-h2-line-height - H2 line-height
-     * @cssprop --klevu-h2-weight - H2 weight
-     * @cssprop --klevu-h3-size - H3 size
-     * @cssprop --klevu-h3-line-height - H3 line-height
-     * @cssprop --klevu-h3-weight - H3 weight
-     * @cssprop --klevu-h4-size - H4 size
-     * @cssprop --klevu-h4-line-height - H4 line-height
-     * @cssprop --klevu-h4-weight - H4 weight
-     */
-    interface KlevuHeading {
-        /**
-          * Variant of heading
-         */
-        "variant"?: KlevuHeadingVariant;
     }
     /**
      * Initializes components to fetch data from correct Klevu backend
@@ -1953,6 +1932,27 @@ declare namespace LocalJSX {
          */
         "value": string;
     }
+    /**
+     * Heading element
+     * @cssprop --klevu-h1-size - H1 size
+     * @cssprop --klevu-h1-line-height - H1 line-height
+     * @cssprop --klevu-h1-weight - H1 weight
+     * @cssprop --klevu-h2-size - H2 size
+     * @cssprop --klevu-h2-line-height - H2 line-height
+     * @cssprop --klevu-h2-weight - H2 weight
+     * @cssprop --klevu-h3-size - H3 size
+     * @cssprop --klevu-h3-line-height - H3 line-height
+     * @cssprop --klevu-h3-weight - H3 weight
+     * @cssprop --klevu-h4-size - H4 size
+     * @cssprop --klevu-h4-line-height - H4 line-height
+     * @cssprop --klevu-h4-weight - H4 weight
+     */
+    interface KlevuTypography {
+        /**
+          * Variant of heading
+         */
+        "variant": KlevuTypographyVariant;
+    }
     interface KlevuUtilViewport {
         "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
         "sizes"?: ViewportSize[];
@@ -1966,7 +1966,6 @@ declare namespace LocalJSX {
         "klevu-dropdown": KlevuDropdown;
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
-        "klevu-heading": KlevuHeading;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
@@ -1987,6 +1986,7 @@ declare namespace LocalJSX {
         "klevu-sort": KlevuSort;
         "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-textfield": KlevuTextfield;
+        "klevu-typography": KlevuTypography;
         "klevu-util-viewport": KlevuUtilViewport;
     }
 }
@@ -2040,22 +2040,6 @@ declare module "@stencil/core" {
              * @cssprop --klevu-face-list-width 200px Width of the facet listing
              */
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
-            /**
-             * Heading element
-             * @cssprop --klevu-h1-size - H1 size
-             * @cssprop --klevu-h1-line-height - H1 line-height
-             * @cssprop --klevu-h1-weight - H1 weight
-             * @cssprop --klevu-h2-size - H2 size
-             * @cssprop --klevu-h2-line-height - H2 line-height
-             * @cssprop --klevu-h2-weight - H2 weight
-             * @cssprop --klevu-h3-size - H3 size
-             * @cssprop --klevu-h3-line-height - H3 line-height
-             * @cssprop --klevu-h3-weight - H3 weight
-             * @cssprop --klevu-h4-size - H4 size
-             * @cssprop --klevu-h4-line-height - H4 line-height
-             * @cssprop --klevu-h4-weight - H4 weight
-             */
-            "klevu-heading": LocalJSX.KlevuHeading & JSXBase.HTMLAttributes<HTMLKlevuHeadingElement>;
             /**
              * Initializes components to fetch data from correct Klevu backend
              * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
@@ -2183,6 +2167,22 @@ declare module "@stencil/core" {
              * Branded text field component
              */
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
+            /**
+             * Heading element
+             * @cssprop --klevu-h1-size - H1 size
+             * @cssprop --klevu-h1-line-height - H1 line-height
+             * @cssprop --klevu-h1-weight - H1 weight
+             * @cssprop --klevu-h2-size - H2 size
+             * @cssprop --klevu-h2-line-height - H2 line-height
+             * @cssprop --klevu-h2-weight - H2 weight
+             * @cssprop --klevu-h3-size - H3 size
+             * @cssprop --klevu-h3-line-height - H3 line-height
+             * @cssprop --klevu-h3-weight - H3 weight
+             * @cssprop --klevu-h4-size - H4 size
+             * @cssprop --klevu-h4-line-height - H4 line-height
+             * @cssprop --klevu-h4-weight - H4 weight
+             */
+            "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }
     }

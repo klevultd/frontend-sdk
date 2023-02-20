@@ -1,6 +1,18 @@
 import { Component, h, Prop } from "@stencil/core"
 
-export type KlevuHeadingVariant = "h1" | "h2" | "h3" | "h4"
+export type KlevuTypographyVariant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "body-l"
+  | "body-m"
+  | "body-s"
+  | "body-xs"
+  | "body-l-bold"
+  | "body-m-bold"
+  | "body-s-bold"
+  | "body-xs-bold"
 
 /**
  * Heading element
@@ -19,19 +31,19 @@ export type KlevuHeadingVariant = "h1" | "h2" | "h3" | "h4"
  * @cssprop --klevu-h4-weight - H4 weight
  */
 @Component({
-  tag: "klevu-heading",
-  styleUrl: "klevu-heading.css",
+  tag: "klevu-typography",
+  styleUrl: "klevu-typography.css",
   shadow: true,
 })
-export class KlevuHeading {
+export class KlevuTypography {
   /**
    * Variant of heading
    */
-  @Prop() variant: KlevuHeadingVariant = "h1"
+  @Prop() variant!: KlevuTypographyVariant
 
   render() {
     return (
-      <span class={`heading-${this.variant}`}>
+      <span class={`variant-${this.variant}`}>
         <slot></slot>
       </span>
     )

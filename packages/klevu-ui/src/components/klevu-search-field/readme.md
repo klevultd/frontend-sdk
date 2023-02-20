@@ -48,6 +48,7 @@ Plain textfield that does the searching
 graph TD;
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
+  klevu-button --> klevu-typography
   klevu-quicksearch --> klevu-search-field
   klevu-simple-search --> klevu-search-field
   style klevu-search-field fill:#f9f,stroke:#333,stroke-width:4px

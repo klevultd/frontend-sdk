@@ -29,6 +29,7 @@
   --klevu-product-image-fill: cover; /* cover, contain */
 
   /** new tokens **/
+  /** colors */
   --klevu-color-primary: #2b4af7;
   --klevu-color-primary-darker: #0d2ee8;
 
@@ -41,6 +42,7 @@
   --klevu-color-neutral-07: #757575;
   --klevu-color-neutral-08: #191919;
 
+  /** spacing */
   --klevu-spacing-01: 1px;
   --klevu-spacing-02: 4px;
   --klevu-spacing-03: 8px;
@@ -52,14 +54,17 @@
   --klevu-spacing-09: 48px;
   --klevu-spacing-10: 64px;
 
+  /** sizes */
   --klevu-size-s: 16px;
   --klevu-size-m: 20px;
   --klevu-size-l: 24px;
   --klevu-size-xl: 36px;
 
+  /** opacity */
   --klevu-opacity-disabled: 0.35;
   --klevu-opacity-subtle: 0.25;
 
+  /** headings */
   --klevu-h1-size: 24px;
   --klevu-h1-line-height: 28px;
   --klevu-h1-weight: 700;
@@ -76,6 +81,7 @@
   --klevu-h4-line-height: 18px;
   --klevu-h4-weight: 700;
 
+  /** body text */
   --klevu-body-l-size: 20;
   --klevu-body-l-line-height: 28px;
 
@@ -87,6 +93,14 @@
 
   --klevu-body-xs-size: 12px;
   --klevu-body-xs-line-height: 16px;
+
+  /** border radiuses */
+  --klevu-border-radius-xs: 2px;
+  --klevu-border-radius-s: 4px;
+  --klevu-border-radius-m: 8px;
+  --klevu-border-radius-l: 12px;
+  --klevu-border-radius-xl: 16px;
+  --klevu-border-radius-xxl: 24px;
 
   /* animation css variables */
   --klevu-animation-duration-slow: 0.3s;

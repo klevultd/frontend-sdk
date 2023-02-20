@@ -78,11 +78,6 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
 ]);
 
 
-export const KlevuHeading = /*@__PURE__*/ defineContainer<JSX.KlevuHeading>('klevu-heading', undefined, [
-  'variant'
-]);
-
-
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url',
@@ -260,6 +255,11 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
   'placeholder',
   'klevuTextChanged',
   'klevuTextFocused'
+]);
+
+
+export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography>('klevu-typography', undefined, [
+  'variant'
 ]);
 
 

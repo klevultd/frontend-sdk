@@ -21,7 +21,7 @@ export class KlevuSuggestionsList {
   render() {
     return (
       <Host>
-        <klevu-heading variant="h3">{this.caption}</klevu-heading>
+        <klevu-typography variant="h3">{this.caption}</klevu-typography>
         <ul part="klevu-list">
           {this.suggestions?.map((s) => (
             <li innerHTML={s}></li>

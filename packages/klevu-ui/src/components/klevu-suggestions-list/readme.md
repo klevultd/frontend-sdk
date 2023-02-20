@@ -30,12 +30,12 @@ Simple component to list suggestions
 
 ### Depends on
 
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-suggestions-list --> klevu-heading
+  klevu-suggestions-list --> klevu-typography
   klevu-quicksearch --> klevu-suggestions-list
   style klevu-suggestions-list fill:#f9f,stroke:#333,stroke-width:4px
 ```

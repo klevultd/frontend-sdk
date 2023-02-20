@@ -1,11 +1,11 @@
 import { newE2EPage } from "@stencil/core/testing"
 
-describe("klevu-heading", () => {
+describe("klevu-typography", () => {
   it("renders", async () => {
     const page = await newE2EPage()
-    await page.setContent("<klevu-heading></klevu-heading>")
+    await page.setContent("<klevu-typography></klevu-typography>")
 
-    const element = await page.find("klevu-heading")
+    const element = await page.find("klevu-typography")
     expect(element).toHaveClass("hydrated")
   })
 })

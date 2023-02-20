@@ -161,7 +161,7 @@ export class KlevuQuicksearch {
             </aside>
             {(this.products ?? []).length > 0 ? (
               <section>
-                <klevu-heading variant="h3">Search results</klevu-heading>
+                <klevu-typography variant="h3">Search results</klevu-typography>
                 <klevu-product-grid class="desktop" itemsPerRow={3}>
                   {this.products?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="small">
@@ -185,7 +185,7 @@ export class KlevuQuicksearch {
               </section>
             ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (
               <section>
-                <klevu-heading variant="h3">Trending products</klevu-heading>
+                <klevu-typography variant="h3">Trending products</klevu-typography>
                 <klevu-product-grid class="desktop" itemsPerRow={3}>
                   {this.trendingProducts?.map((p) => (
                     <klevu-product product={p} fixedWidth variant="small">

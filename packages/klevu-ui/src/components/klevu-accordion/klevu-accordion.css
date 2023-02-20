@@ -1,5 +1,6 @@
 :host {
   display: block;
+  padding: var(--klevu-spacing-04) 0;
 }
 
 input {
@@ -32,5 +33,5 @@ label span {
 }
 
 input:checked + label span {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }

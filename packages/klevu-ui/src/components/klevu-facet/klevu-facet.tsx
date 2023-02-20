@@ -87,9 +87,9 @@ export class KlevuFacet {
     }
     return (
       <Fragment>
-        <klevu-heading slot="header" variant="h3">
+        <klevu-typography slot="header" variant="h3">
           {this.slider.label}
-        </klevu-heading>
+        </klevu-typography>
         <klevu-slider
           slot="content"
           showTooltips
@@ -128,9 +128,9 @@ export class KlevuFacet {
 
     return (
       <Fragment>
-        <klevu-heading slot="header" variant="h3">
+        <klevu-typography slot="header" variant="h3">
           {this.option.label}
-        </klevu-heading>
+        </klevu-typography>
         <ul slot="content" part="klevu-list">
           {opts.map((o) => (
             <li>

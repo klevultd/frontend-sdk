@@ -33,7 +33,9 @@ export class KlevuButton {
           fullwidth: Boolean(this.fullWidth),
         }}
       >
-        <slot />
+        <klevu-typography variant="body-s-bold">
+          <slot />
+        </klevu-typography>
       </button>
     )
   }
