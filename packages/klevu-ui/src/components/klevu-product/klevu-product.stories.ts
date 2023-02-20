@@ -1,4 +1,5 @@
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta, fullMockRequest } from "../../storybookUtils"
 import notes from "./readme.md"
 import { Story } from "@storybook/web-components"
@@ -19,14 +20,14 @@ const Template: Story<HTMLKlevuProductElement> = (args) =>
   html`
     <klevu-product
       .product=${args.product}
-      .variant=${args.variant}
-      .fixedWidth=${args.fixedWidth}
-      .hideBrand=${args.hideBrand}
-      .hideDescription=${args.hideDescription}
-      .hideImage=${args.hideImage}
-      .hideName=${args.hideName}
-      .hidePrice=${args.hideName}
-      .hideSwatches=${args.hideSwatches}
+      variant=${ifDefined(args.variant)}
+      fixed-width=${ifDefined(args.fixedWidth)}
+      hide-brand=${ifDefined(args.hideBrand)}
+      hide-description=${ifDefined(args.hideDescription)}
+      hide-image=${ifDefined(args.hideImage)}
+      hide-name=${ifDefined(args.hideName)}
+      hide-price=${ifDefined(args.hideName)}
+      hide-swatches=${ifDefined(args.hideSwatches)}
     ></klevu-product>
   `
 

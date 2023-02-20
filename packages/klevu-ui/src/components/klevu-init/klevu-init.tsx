@@ -21,6 +21,28 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
  * @cssprop --klevu-spacing-normal - Normal spacing
  * @cssprop --klevu-spacing-large - Large spacing
  * @cssprop --klevu-rounded-corners - Rounded corners
+ *
+ * @cssprop --klevu-color-primary #2b4af7 The primary color
+ * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+ * @cssprop --klevu-color-neutral-01 #ffffff Background color
+ * @cssprop --klevu-color-neutral-02 #f6f6f6
+ * @cssprop --klevu-color-neutral-03 #ededed
+ * @cssprop --klevu-color-neutral-04 #e3e3e3
+ * @cssprop --klevu-color-neutral-05 #d6d6d6
+ * @cssprop --klevu-color-neutral-06 #919191
+ * @cssprop --klevu-color-neutral-07 #757575
+ * @cssprop --klevu-color-neutral-08 #191919 Text color
+ *
+ * @cssprop --klevu-spacing-01 1px Spacing 01
+ * @cssprop --klevu-spacing-02 4px Spacing 02
+ * @cssprop --klevu-spacing-03 8px Spacing 03
+ * @cssprop --klevu-spacing-04 12px Spacing 04
+ * @cssprop --klevu-spacing-05 16px Spacing 05
+ * @cssprop --klevu-spacing-06 24px Spacing 06
+ * @cssprop --klevu-spacing-07 32px Spacing 07
+ * @cssprop --klevu-spacing-08 40px Spacing 08
+ * @cssprop --klevu-spacing-09 48px Spacing 09
+ * @cssprop --klevu-spacing-10 64px Spacing 10
  */
 @Component({
   tag: "klevu-init",
@@ -49,6 +71,33 @@ export class KlevuInit {
     if (this.settings) {
       // @ts-expect-error
       window["klevu_ui_settings"] = this.settings
+    }
+
+    // Inject material fonts to project
+    const fontCssUrl =
+      "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    let element = document.querySelector(`link[href="${fontCssUrl}"]`)
+
+    // Only inject the element if it's not yet present
+    if (!element) {
+      element = document.createElement("link")
+      element.setAttribute("rel", "stylesheet")
+      element.setAttribute("href", fontCssUrl)
+      document.head.appendChild(element)
+    }
+
+    if (!Boolean(document.querySelector("#klevu-icons"))) {
+      const style = document.createElement("style")
+      style.id = "klevu-icons"
+      style.appendChild(
+        document.createTextNode(
+          `
+          ::part(material-icon) { font-family: "Material Symbols Rounded"; font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 20; }
+          ::part(material-icon-light) { font-family: "Material Symbols Rounded"; font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20; }
+          `
+        )
+      )
+      document.head.appendChild(style)
     }
   }
 

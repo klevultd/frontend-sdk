@@ -26,11 +26,11 @@ input:checked ~ .content {
   max-height: var(--klevu-accordion-content-height, 600px);
 }
 
-svg {
-  fill: var(--klevu-accordion-icon-color, var(--klevu-h3-color));
-  transition: transform 0.3s;
+label span {
+  color: var(--klevu-color-neutral-08);
+  transition: transform var(--klevu-animation-duration-fast) var(--klevu-animation-timing-function);
 }
 
-input:checked + label svg {
-  transform: rotate(90deg);
+input:checked + label span {
+  transform: rotate(-90deg);
 }

@@ -6,6 +6,7 @@ import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 
 export default autofillMeta("klevu-facet", {
   title: "Components/Facet",
@@ -17,11 +18,11 @@ manager.initFromListFilters(fullMockRequest.queryResults?.[0].filters as any)
 
 const Template: Story<HTMLKlevuFacetElement> = (args) =>
   html`<klevu-facet
-    .accordion=${args.accordion}
-    .accordionStartOpen=${args.accordionStartOpen}
+    accordion=${ifDefined(args.accordion)}
+    accordion-start-open=${ifDefined(args.accordionStartOpen)}
     .customOrder=${args.customOrder}
     .manager=${args.manager}
-    .mode=${args.mode}
+    mode=${ifDefined(args.mode)}
     .option=${args.option}
     .slider=${args.slider}
   ></klevu-facet>`

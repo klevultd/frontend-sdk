@@ -5,6 +5,7 @@ import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 
 export default autofillMeta("klevu-dropdown", {
   title: "Atoms/Dropdown",
@@ -16,9 +17,9 @@ export default autofillMeta("klevu-dropdown", {
 const Template: Story<HTMLKlevuDropdownElement> = (args) =>
   html`<klevu-dropdown
     .options=${args.options as any}
-    .disabled=${args.disabled}
-    .name=${args.name}
-    .selected=${args.selected}
+    disabled=${ifDefined(args.disabled)}
+    name=${ifDefined(args.name)}
+    selected=${ifDefined(args.selected)}
   ></klevu-dropdown>`
 
 export const Default = Template.bind({})

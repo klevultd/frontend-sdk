@@ -1,5 +1,6 @@
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
@@ -12,11 +13,11 @@ export default autofillMeta("klevu-slider", {
 
 const Template: Story<HTMLKlevuSliderElement> = (args) =>
   html`<klevu-slider
-    .end=${args.end}
-    .max=${args.max}
-    .min=${args.min}
-    .showTooltips=${args.showTooltips}
-    .start=${args.start}
+    end=${ifDefined(args.end)}
+    max=${ifDefined(args.max)}
+    min=${ifDefined(args.min)}
+    show-tooltips=${ifDefined(args.showTooltips)}
+    start=${ifDefined(args.start)}
   ></klevu-slider>`
 
 export const Default = Template.bind({})

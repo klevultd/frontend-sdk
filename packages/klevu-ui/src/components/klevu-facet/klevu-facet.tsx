@@ -1,5 +1,6 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate } from "@stencil/core"
+import { globalExportedParts } from "../../utils/utils"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
@@ -58,7 +59,9 @@ export class KlevuFacet {
         {this.option ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.#renderOptions()}</klevu-accordion>
+              <klevu-accordion exportparts={globalExportedParts} startOpen={this.accordionStartOpen}>
+                {this.#renderOptions()}
+              </klevu-accordion>
             ) : (
               this.#renderOptions()
             )}
@@ -66,7 +69,9 @@ export class KlevuFacet {
         ) : this.slider ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.#renderSlider()}</klevu-accordion>
+              <klevu-accordion exportparts={globalExportedParts} startOpen={this.accordionStartOpen}>
+                {this.#renderSlider()}
+              </klevu-accordion>
             ) : (
               this.#renderSlider()
             )}

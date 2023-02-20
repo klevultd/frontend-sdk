@@ -3,6 +3,7 @@ import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta } from "../../storybookUtils"
 
 export default autofillMeta("klevu-drawer", {
@@ -14,11 +15,11 @@ export default autofillMeta("klevu-drawer", {
 
 const Template: Story<HTMLKlevuDrawerElement> = (args) =>
   html`<klevu-drawer
-    .anchor=${args.anchor}
-    .background=${args.background}
-    .closeAtOutsideClick=${args.closeAtOutsideClick}
-    .startOpen=${args.startOpen}
-    .insertYPadding=${args.insertYPadding}
+    anchor=${ifDefined(args.anchor)}
+    background=${ifDefined(args.background)}
+    close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+    start-open=${ifDefined(args.startOpen)}
+    insert-y-padding=${ifDefined(args.insertYPadding)}
   >
     <klevu-button slot="origin">Open drawer</klevu-button>
     <div slot="content">Hello world drawer</div>

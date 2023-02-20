@@ -1,5 +1,5 @@
 import { html } from "lit-html"
-//
+import { ifDefined } from "lit-html/directives/if-defined"
 import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"
@@ -13,11 +13,11 @@ export default autofillMeta("klevu-quicksearch", {
 const Template: Story<HTMLKlevuQuicksearchElement> = (args) =>
   html` <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"
     ><klevu-quicksearch
-      .fallbackTerm=${args.fallbackTerm}
-      .popupAnchor=${args.popupAnchor}
-      .searchCategories=${args.searchCategories}
-      .searchCmsPages=${args.searchCmsPages}
-      .placeholder=${args.placeholder}
+      fallback-term=${ifDefined(args.fallbackTerm)}
+      popup-anchor=${ifDefined(args.popupAnchor)}
+      search-categories=${ifDefined(args.searchCategories)}
+      search-cms-cages=${ifDefined(args.searchCmsPages)}
+      placeholder=${ifDefined(args.placeholder)}
     ></klevu-quicksearch
   ></klevu-init>`
 

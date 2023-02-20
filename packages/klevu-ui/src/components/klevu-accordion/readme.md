@@ -24,6 +24,13 @@ Component that wrap two slots to create accordion element
 | `"icon"`    | Icon element                                |
 
 
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
+
+
 ## Dependencies
 
 ### Used by

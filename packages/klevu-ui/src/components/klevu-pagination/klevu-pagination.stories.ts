@@ -1,5 +1,6 @@
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta, fullMockRequest } from "../../storybookUtils"
 import notes from "./readme.md"
 
@@ -12,11 +13,11 @@ export default autofillMeta("klevu-pagination", {
 
 const Template: Story<HTMLKlevuPaginationElement> = (args) =>
   html`<klevu-pagination
-    .current=${args.current}
-    .max=${args.max}
-    .min=${args.min}
-    .nextNext=${args.nextNext}
-    .prevText=${args.prevText}
+    current=${ifDefined(args.current)}
+    max=${ifDefined(args.max)}
+    min=${ifDefined(args.min)}
+    next-text=${ifDefined(args.nextText)}
+    prev-text=${ifDefined(args.prevText)}
     .queryResult=${args.queryResult}
   ></klevu-pagination>`
 

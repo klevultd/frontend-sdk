@@ -1,5 +1,6 @@
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
@@ -11,7 +12,11 @@ export default autofillMeta("klevu-cms-list", {
 })
 
 const Template: Story<HTMLKlevuCmsListElement> = (args) =>
-  html`<klevu-cms-list .link=${args.link} .pages=${args.pages} .caption=${args.caption}></klevu-cms-list>`
+  html`<klevu-cms-list
+    link=${ifDefined(args.link)}
+    .pages=${args.pages}
+    caption=${ifDefined(args.caption)}
+  ></klevu-cms-list>`
 
 export const Links = Template.bind({})
 Links.args = {

@@ -27,6 +27,72 @@
   --klevu-product-width: 300px;
   --klevu-product-small-width: 200px;
   --klevu-product-image-fill: cover; /* cover, contain */
+
+  /** new tokens **/
+  --klevu-color-primary: #2b4af7;
+  --klevu-color-primary-darker: #0d2ee8;
+
+  --klevu-color-neutral-01: #ffffff;
+  --klevu-color-neutral-02: #f6f6f6;
+  --klevu-color-neutral-03: #ededed;
+  --klevu-color-neutral-04: #e3e3e3;
+  --klevu-color-neutral-05: #d6d6d6;
+  --klevu-color-neutral-06: #919191;
+  --klevu-color-neutral-07: #757575;
+  --klevu-color-neutral-08: #191919;
+
+  --klevu-spacing-01: 1px;
+  --klevu-spacing-02: 4px;
+  --klevu-spacing-03: 8px;
+  --klevu-spacing-04: 12px;
+  --klevu-spacing-05: 16px;
+  --klevu-spacing-06: 24px;
+  --klevu-spacing-07: 32px;
+  --klevu-spacing-08: 40px;
+  --klevu-spacing-09: 48px;
+  --klevu-spacing-10: 64px;
+
+  --klevu-size-s: 16px;
+  --klevu-size-m: 20px;
+  --klevu-size-l: 24px;
+  --klevu-size-xl: 36px;
+
+  --klevu-opacity-disabled: 0.35;
+  --klevu-opacity-subtle: 0.25;
+
+  --klevu-h1-size: 24px;
+  --klevu-h1-line-height: 28px;
+  --klevu-h1-weight: 700;
+
+  --klevu-h2-size: 20px;
+  --klevu-h2-line-height: 24px;
+  --klevu-h2-weight: 700;
+
+  --klevu-h3-size: 16px;
+  --klevu-h3-line-height: 20px;
+  --klevu-h3-weight: 700;
+
+  --klevu-h4-size: 14px;
+  --klevu-h4-line-height: 18px;
+  --klevu-h4-weight: 700;
+
+  --klevu-body-l-size: 20;
+  --klevu-body-l-line-height: 28px;
+
+  --klevu-body-m-size: 16px;
+  --klevu-body-m-line-height: 24px;
+
+  --klevu-body-s-size: 14px;
+  --klevu-body-s-line-height: 20px;
+
+  --klevu-body-xs-size: 12px;
+  --klevu-body-xs-line-height: 16px;
+
+  /* animation css variables */
+  --klevu-animation-duration-slow: 0.3s;
+  --klevu-animation-duration-normal: 0.2s;
+  --klevu-animation-duration-fast: 0.1s;
+  --klevu-animation-timing-function: ease-in-out;
 }
 
 @media (max-width: 600) {

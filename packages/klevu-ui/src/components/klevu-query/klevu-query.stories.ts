@@ -1,5 +1,6 @@
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta } from "../../storybookUtils"
 import notes from "./readme.md"
 
@@ -10,18 +11,18 @@ export default autofillMeta("klevu-query", {
 
 const Template: Story<HTMLKlevuQueryElement> = (args) =>
   html`<klevu-query
-      .category=${args.category}
-      .categoryTitle=${args.categoryTitle}
-      .filterCount=${args.filterCount}
-      .limit=${args.limit}
+      category=${ifDefined(args.category)}
+      category-title=${ifDefined(args.categoryTitle)}
+      filter-count=${ifDefined(args.filterCount)}
+      limit=${ifDefined(args.limit)}
       .manager=${args.manager}
-      .offset=${args.offset}
+      offset=${ifDefined(args.offset)}
       .options=${args.options}
-      .recommendationId=${args.recommendationId}
-      .searchTerm=${args.searchTerm}
-      .sort=${args.sort}
-      .type=${args.type}
-      .updateOnFilterChange=${args.updateOnFilterChange}
+      recommendation-id=${ifDefined(args.recommendationId)}
+      search-term=${ifDefined(args.searchTerm)}
+      sort=${ifDefined(args.sort)}
+      type=${ifDefined(args.type)}
+      update-on-filter-change=${ifDefined(args.updateOnFilterChange)}
     ></klevu-query>
     <p>
       <h3>Klevu Query</h3>

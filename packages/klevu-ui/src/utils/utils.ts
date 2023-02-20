@@ -41,7 +41,7 @@ export function debounce<T extends unknown[], U>(callback: (...args: T) => Promi
  * Essentially this is list of css selectors that are exposed to the developers.
  * See global.css for the list of selectors.
  */
-export const globalExportedParts = ["klevu-list"].join(" ")
+export const globalExportedParts = ["klevu-list", "material-icon"].join(", ")
 
 /**
  * Global settings that modify the way Klevu UI library works.

@@ -3,6 +3,7 @@ import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 import { autofillMeta } from "../../storybookUtils"
 
 export default autofillMeta("klevu-popup", {
@@ -13,11 +14,11 @@ export default autofillMeta("klevu-popup", {
 })
 
 const Template: Story<HTMLKlevuPopupElement> = (args) => html`<klevu-popup
-  .anchor=${args.anchor}
-  .closeAtOutsideClick=${args.closeAtOutsideClick}
-  .fullwidthContent=${args.fullwidthContent}
-  .openAtFocus=${args.openAtFocus}
-  .startOpen=${args.startOpen}
+  anchor=${ifDefined(args.anchor)}
+  close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+  fullwidth-content=${ifDefined(args.fullwidthContent)}
+  open-at-focus=${ifDefined(args.openAtFocus)}
+  start-open=${ifDefined(args.startOpen)}
 >
   <klevu-search-field slot="origin"></klevu-search-field>
   <div slot="content">Hello world popup</div>

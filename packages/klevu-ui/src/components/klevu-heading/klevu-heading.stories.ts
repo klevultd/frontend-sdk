@@ -8,11 +8,26 @@ export default autofillMeta("klevu-heading", {
   parameters: { notes },
 })
 
-const Template: Story<HTMLKlevuHeadingElement> = (args) =>
-  html`<klevu-heading .variant=${args.variant}>The quick brown fox jumps over the lazy dog</klevu-heading>`
-export const H1 = Template.bind({})
-H1.args = { variant: "h1" }
-export const H2 = Template.bind({})
-H2.args = { variant: "h2" }
-export const H3 = Template.bind({})
-H3.args = { variant: "h3" }
+const Template: Story<HTMLKlevuHeadingElement & { text: string }> = (args) =>
+  html`
+    <style>
+      li {
+        padding: 16px 0;
+        list-style-type: none;
+      }
+    </style>
+    <ul>
+      <li>
+        <klevu-heading variant=${args.variant}>Configured: ${args.text}</klevu-heading>
+      </li>
+      <li><klevu-heading variant="h1">H1: ${args.text}</klevu-heading></li>
+      <li><klevu-heading variant="h2">H2: ${args.text}</klevu-heading></li>
+      <li><klevu-heading variant="h3">H3: ${args.text}</klevu-heading></li>
+      <li><klevu-heading variant="h4">H4: ${args.text}</klevu-heading></li>
+    </ul>
+  `
+
+export const Headings = Template.bind({})
+Headings.args = {
+  text: "The quick brown fox jumps over the lazy dog",
+}

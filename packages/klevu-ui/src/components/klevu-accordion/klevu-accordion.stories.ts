@@ -1,4 +1,5 @@
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined"
 
 //
 import { Story } from "@storybook/web-components"
@@ -12,7 +13,9 @@ export default autofillMeta("klevu-accordion", {
   },
 })
 
-const Template: Story<HTMLKlevuAccordionElement> = (args) => html` <klevu-accordion .startOpen=${args.startOpen}>
+const Template: Story<HTMLKlevuAccordionElement> = (args) => html`<klevu-accordion
+  startOpen=${ifDefined(args.startOpen)}
+>
   <klevu-heading slot="header" variant="h2">Heading</klevu-heading>
   <div slot="content">Hello world accordion</div>
 </klevu-accordion>`

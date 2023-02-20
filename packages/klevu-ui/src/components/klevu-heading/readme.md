@@ -9,9 +9,9 @@ Heading element
 
 ## Properties
 
-| Property  | Attribute | Description       | Type                   | Default |
-| --------- | --------- | ----------------- | ---------------------- | ------- |
-| `variant` | `variant` | Varint of heading | `"h1" \| "h2" \| "h3"` | `"h1"`  |
+| Property  | Attribute | Description        | Type                           | Default |
+| --------- | --------- | ------------------ | ------------------------------ | ------- |
+| `variant` | `variant` | Variant of heading | `"h1" \| "h2" \| "h3" \| "h4"` | `"h1"`  |
 
 
 ## Dependencies
