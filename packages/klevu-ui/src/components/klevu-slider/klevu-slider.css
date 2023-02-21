@@ -29,6 +29,11 @@
 .noUi-target {
   position: relative;
 }
+
+.noUi-base {
+  top: -2px;
+}
+
 .noUi-base,
 .noUi-connects {
   width: 100%;
@@ -93,11 +98,11 @@
 /* Slider size and handle placement;
   */
 .noUi-horizontal {
-  height: 18px;
+  height: 8px;
 }
 .noUi-horizontal .noUi-handle {
-  width: 34px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   right: -17px;
   top: -6px;
 }
@@ -118,12 +123,12 @@
   * Giving the connect element a border radius causes issues with using transform: scale
   */
 .noUi-target {
-  background: #fafafa;
-  border-radius: var(--klevu-rounded-corners);
-  border: 1px solid var(--klevu-color-border);
+  background: var(--klevu-color-neutral-04);
+  border-radius: var(--klevu-border-radius-m);
   /*box-shadow: inset 0 1px 1px #f0f0f0, 0 3px 6px -5px #bbb;*/
 }
 .noUi-connects {
+  top: 2px;
   border-radius: var(--klevu-rounded-corners);
 }
 .noUi-connect {
@@ -138,9 +143,8 @@
   cursor: ns-resize;
 }
 .noUi-handle {
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
-  background: #fff;
+  border-radius: 1000px;
+  background: var(--klevu-color-primary);
   cursor: default;
   /*box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;*/
 }
@@ -149,6 +153,7 @@
 }
 /* Handle stripes;
   */
+/*
 .noUi-handle:before,
 .noUi-handle:after {
   content: "";
@@ -173,10 +178,11 @@
 .noUi-vertical .noUi-handle:after {
   top: 17px;
 }
+*/
 /* Disabled state;
   */
 [disabled] .noUi-connect {
-  background: var(--klevu-color-dim-background);
+  opacity: var(--klevu-opacity-disabled);
 }
 [disabled].noUi-target,
 [disabled].noUi-handle,
@@ -281,13 +287,12 @@
 .noUi-tooltip {
   display: block;
   position: absolute;
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
-  background: #fff;
-  color: #000;
+  background: transparent;
+  color: var(--klevu-color-neutral-08);
   padding: 5px;
   text-align: center;
   white-space: nowrap;
+  font-size: var(--klevu-body-s-size);
 }
 .noUi-horizontal .noUi-tooltip {
   -webkit-transform: translate(-50%, 0);

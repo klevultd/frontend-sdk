@@ -18,6 +18,7 @@ const Template: Story<HTMLKlevuSliderElement> = (args) =>
     min=${ifDefined(args.min)}
     show-tooltips=${ifDefined(args.showTooltips)}
     start=${ifDefined(args.start)}
+    .formatTooltip=${args.formatTooltip}
   ></klevu-slider>`
 
 export const Default = Template.bind({})
@@ -26,4 +27,14 @@ Default.args = {
   max: 100,
   start: 10,
   end: 90,
+}
+
+export const WithCurrencyTooltip = Template.bind({})
+WithCurrencyTooltip.args = {
+  min: 10,
+  max: 500,
+  start: 50,
+  end: 400,
+  showTooltips: true,
+  formatTooltip: (value: number) => `$${value.toFixed(0)}`,
 }

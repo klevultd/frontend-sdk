@@ -28,6 +28,12 @@ export class KlevuSlider {
   @Prop() end?: number
 
   /**
+   * Format tooltip value with function
+   */
+  @Prop()
+  formatTooltip?: (value: number) => string
+
+  /**
    * Show tooltips on top of slider
    */
   @Prop() showTooltips?: boolean
@@ -56,7 +62,13 @@ export class KlevuSlider {
 
     this.sliderInstance = noUiSlider.create(el, {
       connect: true,
-      tooltips: this.showTooltips,
+      tooltips: this.showTooltips
+        ? this.formatTooltip
+          ? {
+              to: this.formatTooltip,
+            }
+          : true
+        : false,
       step: 1,
       range: {
         max: this.max,

@@ -62,6 +62,7 @@ export namespace Components {
     /**
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
+     * @cssprop --klevu-checkbox-size 20px Size of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -665,6 +666,10 @@ export namespace Components {
          */
         "end"?: number;
         /**
+          * Format tooltip value with function
+         */
+        "formatTooltip"?: (value: number) => string;
+        /**
           * Max value of the range
          */
         "max": number;
@@ -844,6 +849,7 @@ declare global {
     /**
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
+     * @cssprop --klevu-checkbox-size 20px Size of the checkbox
      */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
@@ -1223,6 +1229,7 @@ declare namespace LocalJSX {
     /**
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
+     * @cssprop --klevu-checkbox-size 20px Size of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -1849,6 +1856,10 @@ declare namespace LocalJSX {
          */
         "end"?: number;
         /**
+          * Format tooltip value with function
+         */
+        "formatTooltip"?: (value: number) => string;
+        /**
           * Max value of the range
          */
         "max": number;
@@ -2017,6 +2028,7 @@ declare module "@stencil/core" {
             /**
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
+             * @cssprop --klevu-checkbox-size 20px Size of the checkbox
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             /**

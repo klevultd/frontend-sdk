@@ -226,6 +226,7 @@ export const KlevuSlider = /*@__PURE__*/ defineContainer<JSX.KlevuSlider>('klevu
   'max',
   'start',
   'end',
+  'formatTooltip',
   'showTooltips',
   'klevuSliderChange'
 ]);
