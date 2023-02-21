@@ -1,10 +1,11 @@
 :host {
+  --button-padding: calc(var(--klevu-button-padding, var(--klevu-spacing-03)) + 2px);
+
   display: inline-block;
 }
 
 button {
   position: relative;
-  --button-padding: var(--klevu-button-padding, var(--klevu-spacing-03));
   background: var(--klevu-button-background-color, var(--klevu-color-primary));
   padding: var(--button-padding) calc(var(--button-padding) * 2);
   border-radius: var(--klevu-border-radius-m);
@@ -24,12 +25,12 @@ button:hover {
 button:focus:after {
   content: "";
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
   border: 2px solid var(--klevu-color-primary);
-  border-radius: calc(var(--klevu-border-radius-m) + 4px);
+  border-radius: calc(var(--klevu-border-radius-m) + 2px);
 }
 
 button:disabled {

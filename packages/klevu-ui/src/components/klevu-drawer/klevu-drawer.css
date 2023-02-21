@@ -15,13 +15,13 @@
 .drawer.left {
   left: -100%;
   border-right: 1px solid var(--klevu-color-border);
-  padding-right: var(--klevu-spacing-normal);
+  padding-right: var(--klevu-spacing-04);
 }
 
 .drawer.right {
   right: -100%;
   border-left: 1px solid var(--klevu-color-border);
-  padding-left: var(--klevu-spacing-normal);
+  padding-left: var(--klevu-spacing-04);
 }
 
 .drawer.left.show {
@@ -54,5 +54,5 @@
 }
 
 .insertypadding {
-  padding: 0 var(--klevu-drawer-ypadding, var(--klevu-spacing-normal));
+  padding: 0 var(--klevu-drawer-ypadding, var(--klevu-spacing-04));
 }

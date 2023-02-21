@@ -1,13 +1,13 @@
 :host {
   display: flex;
-  gap: var(--klevu-spacing-normal);
+  gap: var(--klevu-spacing-04);
   justify-content: center;
   flex-wrap: wrap;
 }
 
 span {
   display: block;
-  padding: var(--klevu-spacing-normal);
+  padding: var(--klevu-spacing-04);
   background: var(--klevu-pagination-background-color, var(--klevu-color-dim-background));
   color: var(--klevu-pagination-text-color);
   border-radius: var(--klevu-rounded-corners);

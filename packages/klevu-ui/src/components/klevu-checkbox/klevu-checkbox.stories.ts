@@ -18,6 +18,8 @@ const Template: Story<HTMLKlevuCheckboxElement> = (args) =>
     >
       Content related to checkbox
     </klevu-checkbox>
+    <br />
+    <h6>Just checkbox</h6>
     <klevu-checkbox
       checked=${ifDefined(args.checked)}
       disabled=${ifDefined(args.disabled)}

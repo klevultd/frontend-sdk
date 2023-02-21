@@ -34,6 +34,12 @@ export class KlevuTextfield {
   placeholder?: string
 
   /**
+   * Is field in error state
+   */
+  @Prop()
+  error?: boolean
+
+  /**
    * When text changes in field
    */
   @Event({
@@ -57,6 +63,9 @@ export class KlevuTextfield {
         value={this.value}
         disabled={this.disabled}
         placeholder={this.placeholder}
+        class={{
+          error: Boolean(this.error),
+        }}
         onFocus={() => this.klevuTextFocused.emit()}
         onInput={(e) => {
           const el = e.target as HTMLInputElement

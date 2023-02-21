@@ -6,7 +6,7 @@
 .applybar {
   display: flex;
   justify-content: space-between;
-  margin: var(--klevu-spacing-normal) 0;
+  margin: var(--klevu-spacing-04) 0;
   gap: var(--klevu-spacing-large);
 }
 

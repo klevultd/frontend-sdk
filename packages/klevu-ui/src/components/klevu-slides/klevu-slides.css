@@ -21,7 +21,7 @@
 
 klevu-button {
   --klevu-rounded-corners: 50%;
-  --klevu-button-padding: var(--klevu-spacing-normal) var(--klevu-spacing-large);
+  --klevu-button-padding: var(--klevu-spacing-04) var(--klevu-spacing-large);
 }
 
 .prev {

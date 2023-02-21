@@ -16,6 +16,7 @@ const Template: Story<HTMLKlevuTextfieldElement> = (args) =>
     disabled=${ifDefined(args.disabled)}
     placeholder=${ifDefined(args.placeholder)}
     value=${ifDefined(args.value)}
+    error=${ifDefined(args.error)}
   ></klevu-textfield>`
 
 export const Default = Template.bind({})

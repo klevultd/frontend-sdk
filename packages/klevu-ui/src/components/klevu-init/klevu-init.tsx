@@ -18,7 +18,7 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
  * @cssprop --klevu-color-dim-text - Secondary dimmed texts
  * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
  * @cssprop --klevu-spacing-small - Small spacing
- * @cssprop --klevu-spacing-normal - Normal spacing
+ * @cssprop --klevu-spacing-04 - Normal spacing
  * @cssprop --klevu-spacing-large - Large spacing
  * @cssprop --klevu-rounded-corners - Rounded corners
  *

@@ -13,7 +13,7 @@
 
 .container {
   display: block;
-  padding: var(--klevu-spacing-normal);
+  padding: var(--klevu-spacing-04);
   border: 1px solid var(--klevu-color-border);
   border-radius: var(--klevu-rounded-corners);
   box-sizing: border-box;
@@ -73,7 +73,7 @@
 .line .info {
   display: flex;
   flex-direction: column;
-  margin-left: var(--klevu-spacing-normal);
+  margin-left: var(--klevu-spacing-04);
 }
 
 .line .info p {

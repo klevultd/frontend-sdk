@@ -1,12 +1,14 @@
 :host {
   --klevu-checkbox-color: var(--klevu-color-primary);
+  --klevu-checkbox-size: 20px;
+
   display: flex;
 }
 
 .check {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: var(--klevu-checkbox-size);
+  height: var(--klevu-checkbox-size);
   position: relative;
 }
 
@@ -15,8 +17,7 @@
   user-select: none;
   display: block;
   width: 100%;
-  height: 24px;
-  margin-top: 2px;
+  height: var(--klevu-checkbox-size);
 }
 
 input[type="checkbox"] {
@@ -25,8 +26,8 @@ input[type="checkbox"] {
   margin: 0;
   font: inherit;
   color: currentColor;
-  width: 24px;
-  height: 24px;
+  width: var(--klevu-checkbox-size);
+  height: var(--klevu-checkbox-size);
   border: 1px solid var(--klevu-color-neutral-05);
   border-radius: var(--klevu-border-radius-s);
   display: inline-block;

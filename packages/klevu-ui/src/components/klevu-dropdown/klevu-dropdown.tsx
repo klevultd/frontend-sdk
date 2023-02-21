@@ -58,7 +58,9 @@ export class KlevuDropdown {
               </option>
             ))}
           </select>
-          <div class="triangle"></div>
+          <span part="material-icon" class="triangle">
+            expand_more
+          </span>
         </div>
       </Host>
     )

@@ -9,11 +9,12 @@ Branded text field component
 
 ## Properties
 
-| Property             | Attribute     | Description                    | Type                  | Default     |
-| -------------------- | ------------- | ------------------------------ | --------------------- | ----------- |
-| `disabled`           | `disabled`    | Is field disabled              | `boolean`             | `false`     |
-| `placeholder`        | `placeholder` | Placeholder value of the field | `string \| undefined` | `undefined` |
-| `value` _(required)_ | `value`       | Current value of the field     | `string`              | `undefined` |
+| Property             | Attribute     | Description                    | Type                   | Default     |
+| -------------------- | ------------- | ------------------------------ | ---------------------- | ----------- |
+| `disabled`           | `disabled`    | Is field disabled              | `boolean`              | `false`     |
+| `error`              | `error`       | Is field in error state        | `boolean \| undefined` | `undefined` |
+| `placeholder`        | `placeholder` | Placeholder value of the field | `string \| undefined`  | `undefined` |
+| `value` _(required)_ | `value`       | Current value of the field     | `string`               | `undefined` |
 
 
 ## Events

@@ -9,13 +9,13 @@
 
 .content aside {
   width: 200px;
-  padding-right: var(--klevu-spacing-normal);
+  padding-right: var(--klevu-spacing-04);
   border-right: 1px solid var(--klevu-color-border);
-  margin-right: var(--klevu-spacing-normal);
+  margin-right: var(--klevu-spacing-04);
 }
 
 klevu-suggestions-list {
-  margin-bottom: var(--klevu-spacing-normal);
+  margin-bottom: var(--klevu-spacing-04);
 }
 
 klevu-product-grid.desktop {

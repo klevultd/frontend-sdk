@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: var(--klevu-spacing-normal);
+  gap: var(--klevu-spacing-04);
 }
 
 .sidebar {
@@ -18,11 +18,11 @@ main {
 }
 
 .header {
-  margin-bottom: var(--klevu-spacing-normal);
+  margin-bottom: var(--klevu-spacing-04);
 }
 
 .footer {
-  margin-top: var(--klevu-spacing-normal);
+  margin-top: var(--klevu-spacing-04);
   width: 100%;
 }
 

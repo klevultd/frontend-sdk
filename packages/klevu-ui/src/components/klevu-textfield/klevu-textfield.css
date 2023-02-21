@@ -7,16 +7,30 @@ input[type="text"] {
   width: 100%;
   box-sizing: border-box;
   appearance: none;
-  padding: var(--klevu-spacing-normal);
-  border: 1px solid var(--klevu-color-border);
+  padding: var(--klevu-spacing-04);
+  border: 1px solid var(--klevu-color-neutral-05);
+  margin: 1px;
   border-radius: var(--klevu-rounded-corners);
 }
 
 input[type="text"]:focus {
-  outline: 1px solid var(--klevu-color-primary-border);
+  outline: 0;
+  border-color: var(--klevu-color-primary);
+  margin: 0;
+  border-width: 2px;
+}
+
+input[type="text"].error {
+  border-color: var(--klevu-color-primary);
+  margin: 0;
+  border-width: 2px;
+}
+
+input[type="text"]:focus {
+  outline: 0;
 }
 
 input[type="text"]:disabled {
-  background-color: var(--klevu-color-dim-background);
+  opacity: var(--klevu-opacity-disabled);
   cursor: not-allowed;
 }

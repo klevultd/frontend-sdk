@@ -14,7 +14,7 @@
   visibility: hidden;
   box-sizing: border-box;
   box-shadow: 0px 1px 5px var(--klevu-color-shadow, rgba(0, 0, 0, 0.2));
-  padding: var(--klevu-spacing-normal);
+  padding: var(--klevu-spacing-04);
   border-radius: var(--klevu-rounded-corners);
   transition: opacity 0.4s, visibility 0.4s;
   opacity: 0;

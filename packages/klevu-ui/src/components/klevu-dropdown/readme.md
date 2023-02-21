@@ -24,6 +24,13 @@ Simple native dropdown component for dropdown
 | `klevuDropdownChanged` | When dropdown item has been changed | `CustomEvent<string>` |
 
 
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
+
+
 ## Dependencies
 
 ### Used by

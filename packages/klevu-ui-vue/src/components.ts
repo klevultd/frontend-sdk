@@ -253,6 +253,7 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
   'value',
   'disabled',
   'placeholder',
+  'error',
   'klevuTextChanged',
   'klevuTextFocused'
 ]);

@@ -4,22 +4,26 @@
 
 select {
   appearance: none;
-  padding: var(--klevu-spacing-normal);
+  padding: var(--klevu-spacing-04) var(--klevu-spacing-06);
   width: 100%;
   min-width: 80px;
   border: none;
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-m);
 }
 
 .select {
   position: relative;
   display: flex;
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
+  border: 1px solid var(--klevu-color-neutral-04);
+  border-radius: var(--klevu-border-radius-m);
 }
 
-.select:has(select:active) {
-  border: 1px solid var(--klevu-color-primary-border);
+select:focus {
+  outline: 0;
+}
+
+.select:has(select:active, select:focus) {
+  border: 1px solid var(--klevu-color-primary);
 }
 
 .triangle {
@@ -28,10 +32,9 @@ select {
   top: 50%;
   transform: translateY(-50%);
   display: block;
-  width: 1rem;
-  height: 0.6rem;
-  background-color: var(--klevu-dropdown-icon-color, var(--klevu-color-primary));
-  clip-path: var(--klevu-dropdown-icon-clip-path, polygon(100% 0%, 0 0%, 50% 100%));
+  font-size: 20px;
+  height: 24px;
+  width: 24px;
 }
 
 .select.disabled {
