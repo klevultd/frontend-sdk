@@ -43,7 +43,9 @@ export class KlevuAccordion {
       <Host>
         <input type="checkbox" id={this.#id} checked={this.open} onChange={() => (this.open = !this.open)} />
         <label htmlFor={this.#id}>
-          <slot name="header"></slot>
+          <klevu-typography variant="body-s-bold">
+            <slot name="header"></slot>
+          </klevu-typography>
           <span part="material-icon">expand_more</span>
         </label>
         <div class="content">

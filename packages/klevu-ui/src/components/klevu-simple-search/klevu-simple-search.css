@@ -11,7 +11,7 @@ ul {
 li {
   display: block;
   cursor: pointer;
-  padding: var(--klevu-spacing-small) 0;
+  padding: var(--klevu-spacing-02) 0;
 }
 
 li:hover {

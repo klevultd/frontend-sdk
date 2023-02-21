@@ -5,27 +5,29 @@
 :host li {
   display: flex;
   align-items: center;
-  margin-bottom: var(--klevu-spacing-small);
+  margin-bottom: var(--klevu-spacing-02);
 }
 
-:host .name {
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.name {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size: 0.95em;
-  margin: 0 var(--klevu-spacing-small);
 }
 
-:host .count {
+.count {
   display: inline-block;
   margin-left: auto;
-  font-size: var(--font-size-small);
-  padding: var(--klevu-spacing-small);
-  background: var(--klevu-color-dim-background);
-  font-size: 0.8em;
-  border-radius: var(--klevu-rounded-corners);
+  color: var(--klevu-color-neutral-06);
+  font-size: var(--klevu-body-xs-size);
 }
 
-klevu-typography {
-  margin: var(--klevu-spacing-large) 0 var(--klevu-spacing-normal);
+klevu-checkbox {
+  width: 100%;
 }

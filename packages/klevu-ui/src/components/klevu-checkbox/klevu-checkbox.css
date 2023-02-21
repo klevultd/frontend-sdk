@@ -1,7 +1,22 @@
 :host {
+  --klevu-checkbox-color: var(--klevu-color-primary);
+  display: flex;
+}
+
+.check {
   display: block;
   width: 24px;
   height: 24px;
+  position: relative;
+}
+
+.content {
+  margin-left: var(--klevu-spacing-03);
+  user-select: none;
+  display: block;
+  width: 100%;
+  height: 24px;
+  margin-top: 2px;
 }
 
 input[type="checkbox"] {
@@ -12,37 +27,52 @@ input[type="checkbox"] {
   color: currentColor;
   width: 24px;
   height: 24px;
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
+  border: 1px solid var(--klevu-color-neutral-05);
+  border-radius: var(--klevu-border-radius-s);
   display: inline-block;
   box-sizing: border-box;
-}
-
-input[type="checkbox"]::before {
-  content: "";
-  height: 100%;
-  width: 100%;
-  display: block;
-  transition: 120ms transform ease-in-out;
-  background-color: var(--klevu-checkbox-color, var(--klevu-color-primary));
-  transform-origin: center center;
-  clip-path: var(--klevu-checkbox-shape, polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%));
-  transform: scale(0);
-}
-
-input[type="checkbox"]:checked::before {
-  transform: scale(0.8);
+  transition: background-color var(--klevu-animation-duration-fast) var(--klevu-animation-timing-function);
 }
 
 input[type="checkbox"]:focus {
-  outline: 1px var(--klevu-checkbox-color, var(--klevu-color-primary));
+  outline: 0;
+}
+
+input[type="checkbox"]:focus::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 2px solid var(--klevu-checkbox-color);
+  border-radius: calc(var(--klevu-border-radius-s) + 2px);
+}
+
+input[type="checkbox"]:hover {
+  border-color: var(--klevu-checkbox-color);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--klevu-checkbox-color);
+  border-color: var(--klevu-checkbox-color);
+}
+
+span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 120ms transform ease-in-out;
+  color: var(--klevu-color-neutral-01);
+  pointer-events: none;
 }
 
 input[type="checkbox"]:disabled {
   cursor: not-allowed;
-}
-
-input[type="checkbox"]:disabled::before {
-  background-color: var(--klevu-color-border);
-  cursor: not-allowed;
+  opacity: var(--klevu-opacity-disabled);
 }

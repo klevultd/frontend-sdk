@@ -61,8 +61,7 @@ export namespace Components {
     }
     /**
      * Checkbox component
-     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
-     * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      */
     interface KlevuCheckbox {
         /**
@@ -840,8 +839,7 @@ declare global {
     };
     /**
      * Checkbox component
-     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
-     * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
@@ -1220,8 +1218,7 @@ declare namespace LocalJSX {
     }
     /**
      * Checkbox component
-     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
-     * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      */
     interface KlevuCheckbox {
         /**
@@ -2011,8 +2008,7 @@ declare module "@stencil/core" {
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
              * Checkbox component
-             * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox mark
-             * @cssprop --klevu-checkbox-shape polygon CSS clip-path shape to create the checkbox look.
+             * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             /**

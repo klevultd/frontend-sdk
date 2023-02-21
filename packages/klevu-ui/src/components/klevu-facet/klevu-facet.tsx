@@ -87,9 +87,7 @@ export class KlevuFacet {
     }
     return (
       <Fragment>
-        <klevu-typography slot="header" variant="h3">
-          {this.slider.label}
-        </klevu-typography>
+        <span slot="header">{this.slider.label}</span>
         <klevu-slider
           slot="content"
           showTooltips
@@ -128,37 +126,43 @@ export class KlevuFacet {
 
     return (
       <Fragment>
-        <klevu-typography slot="header" variant="h3">
-          {this.option.label}
-        </klevu-typography>
+        <span slot="header">{this.option.label}</span>
         <ul slot="content" part="klevu-list">
           {opts.map((o) => (
             <li>
               {this.mode === "checkbox" ? (
                 <klevu-checkbox
+                  exportparts={globalExportedParts}
                   checked={o.selected}
                   name={this.option!.key}
                   onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
                     this.manager.toggleOption(this.option!.key, o.name)
                   }}
-                ></klevu-checkbox>
+                >
+                  <div class="container">
+                    <span class="name">{o.name}</span>
+                    <span class="count">({o.count})</span>
+                  </div>
+                </klevu-checkbox>
               ) : (
-                <input
-                  type="radio"
-                  id={this.option!.key}
-                  name={this.option!.key}
-                  value={o.value}
-                  checked={o.selected}
-                  onClick={() => {
-                    this.manager.clearOptionSelections(this.option!.key)
-                    this.manager.toggleOption(this.option!.key, o.name)
-                  }}
-                />
+                <Fragment>
+                  <input
+                    type="radio"
+                    id={this.option!.key}
+                    name={this.option!.key}
+                    value={o.value}
+                    checked={o.selected}
+                    onClick={() => {
+                      this.manager.clearOptionSelections(this.option!.key)
+                      this.manager.toggleOption(this.option!.key, o.name)
+                    }}
+                  />
+                  <label htmlFor={this.option!.key} class="name">
+                    {o.name}
+                  </label>
+                  <span class="count">({o.count})</span>
+                </Fragment>
               )}
-              <label htmlFor={this.option!.key} class="name">
-                {o.name}
-              </label>
-              <span class="count">{o.count}</span>
             </li>
           ))}
         </ul>

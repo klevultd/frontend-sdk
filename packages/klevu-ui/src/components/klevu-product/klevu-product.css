@@ -184,7 +184,7 @@
 
 .swatches {
   display: none;
-  margin: var(--klevu-spacing-small) 0;
+  margin: var(--klevu-spacing-02) 0;
 }
 
 .swatches > div {
@@ -195,7 +195,7 @@
 
 .container.default .swatches {
   display: flex;
-  gap: var(--klevu-spacing-small);
+  gap: var(--klevu-spacing-02);
 }
 
 @keyframes loadinggradient {

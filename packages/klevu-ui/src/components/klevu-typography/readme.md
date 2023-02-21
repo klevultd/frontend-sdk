@@ -18,9 +18,10 @@ Heading element
 
 ### Used by
 
+ - [klevu-accordion](../klevu-accordion)
  - [klevu-button](../klevu-button)
+ - [klevu-checkbox](../klevu-checkbox)
  - [klevu-cms-list](../klevu-cms-list)
- - [klevu-facet](../klevu-facet)
  - [klevu-latest-searches](../klevu-latest-searches)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-popular-searches](../klevu-popular-searches)
@@ -31,9 +32,10 @@ Heading element
 ### Graph
 ```mermaid
 graph TD;
+  klevu-accordion --> klevu-typography
   klevu-button --> klevu-typography
+  klevu-checkbox --> klevu-typography
   klevu-cms-list --> klevu-typography
-  klevu-facet --> klevu-typography
   klevu-latest-searches --> klevu-typography
   klevu-merchandising --> klevu-typography
   klevu-popular-searches --> klevu-typography

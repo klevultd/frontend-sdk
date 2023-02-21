@@ -10,11 +10,21 @@ export default autofillMeta("klevu-checkbox", {
 })
 
 const Template: Story<HTMLKlevuCheckboxElement> = (args) =>
-  html`<klevu-checkbox
-    checked=${ifDefined(args.checked)}
-    disabled=${ifDefined(args.disabled)}
-    name=${ifDefined(args.name)}
-  ></klevu-checkbox>`
+  html`
+    <klevu-checkbox
+      checked=${ifDefined(args.checked)}
+      disabled=${ifDefined(args.disabled)}
+      name=${ifDefined(args.name)}
+    >
+      Content related to checkbox
+    </klevu-checkbox>
+    <klevu-checkbox
+      checked=${ifDefined(args.checked)}
+      disabled=${ifDefined(args.disabled)}
+      name=${ifDefined(args.name)}
+    >
+    </klevu-checkbox>
+  `
 export const Default = Template.bind({})
 Default.args = {
   checked: true,
