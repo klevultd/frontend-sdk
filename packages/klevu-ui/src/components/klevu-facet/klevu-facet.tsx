@@ -1,6 +1,6 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
+import { getGlobalSettings, globalExportedParts } from "../../utils/utils"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
@@ -104,6 +104,9 @@ export class KlevuFacet {
           max={parseFloat(this.slider.max)}
           start={this.slider.start ? parseFloat(this.slider.start) : undefined}
           end={this.slider.end ? parseFloat(this.slider.end) : undefined}
+          formatTooltip={(value) =>
+            (getGlobalSettings()?.renderPrice?.(value.toFixed(2), "EUR") ?? value.toFixed(2)).toString()
+          }
           onKlevuSliderChange={(event) => {
             this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
           }}

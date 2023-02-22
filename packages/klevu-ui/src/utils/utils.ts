@@ -69,8 +69,11 @@ export type KlevuUIGlobalSettings = {
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {
   if (window) {
-    // @ts-expect-error
-    return window["klevu_ui_settings"]
+    return {
+      renderPrice,
+      // @ts-expect-error
+      ...window["klevu_ui_settings"],
+    }
   }
   return undefined
 }

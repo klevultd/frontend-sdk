@@ -3,8 +3,8 @@
 }
 
 .hasTooltips {
-  margin-top: calc(var(--klevu-spacing-large) * 4);
-  margin-bottom: var(--klevu-spacing-large);
+  margin-top: var(--klevu-spacing-09);
+  margin-bottom: var(--klevu-spacing-05);
   margin-left: 2px;
   margin-right: 2px;
 }
