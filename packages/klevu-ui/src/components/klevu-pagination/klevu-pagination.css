@@ -1,27 +1,37 @@
 :host {
+  --klevu-pagination-selected-color: var(--klevu-color-primary);
+
   display: flex;
-  gap: var(--klevu-spacing-04);
+  gap: var(--klevu-spacing-03);
   justify-content: center;
   flex-wrap: wrap;
 }
 
 span {
-  display: block;
-  padding: var(--klevu-spacing-04);
-  background: var(--klevu-pagination-background-color, var(--klevu-color-dim-background));
-  color: var(--klevu-pagination-text-color);
-  border-radius: var(--klevu-rounded-corners);
+  display: flex;
+  height: 32px;
+  width: 32px;
+  color: var(--klevu-color-neutral-08);
+  border-radius: var(--klevu-border-radius-m);
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--klevu-body-s-size);
+  box-sizing: border-box;
 }
 
 span.current {
   font-weight: bold;
   cursor: inherit;
-  background: var(--klevu-pagination-selected-background-color, var(--klevu-color-primary));
-  color: var(--klevu-pagination-selected-text-color, var(--klevu-color-primary-text));
+  border: 1px solid var(--klevu-pagination-selected-color);
+  color: var(--klevu-pagination-selected-color);
+}
+
+span:not(.disabled):hover {
+  border: 1px solid var(--klevu-pagination-selected-color);
 }
 
 span.disabled {
-  color: var(--klevu-color-dim-text);
+  opacity: var(--klevu-opacity-disabled);
   cursor: inherit;
 }

@@ -31,14 +31,6 @@ export class KlevuPagination {
    * Query results used to build min, max and current
    */
   @Prop() queryResult?: KlevuQueryResult
-  /**
-   * Button text for previous button
-   */
-  @Prop() prevText = "Previous"
-  /**
-   * Button text for next button
-   */
-  @Prop() nextText = "Next"
 
   /**
    * Page that was changed into
@@ -104,8 +96,9 @@ export class KlevuPagination {
             disabled: current === min,
           }}
           onClick={() => current !== min && this.klevuPaginationChange.emit(current - 1)}
+          part="material-icon"
         >
-          {this.prevText}
+          navigate_before
         </span>
         {pages.map((i) => {
           if (i == -1) {
@@ -128,8 +121,9 @@ export class KlevuPagination {
             disabled: current === max,
           }}
           onClick={() => current !== max && this.klevuPaginationChange.emit(current + 1)}
+          part="material-icon"
         >
-          {this.nextText}
+          navigate_next
         </span>
       </Host>
     )

@@ -18,11 +18,13 @@ const Template: Story<HTMLKlevuQuicksearchElement> = (args) =>
       search-categories=${ifDefined(args.searchCategories)}
       search-cms-cages=${ifDefined(args.searchCmsPages)}
       placeholder=${ifDefined(args.placeholder)}
+      search-field-variant=${ifDefined(args.searchFieldVariant)}
     ></klevu-quicksearch
   ></klevu-init>`
 
 export const Default = Template.bind({})
 
 Default.args = {
+  popupAnchor: "bottom-start",
   fallbackTerm: "shoes",
 }

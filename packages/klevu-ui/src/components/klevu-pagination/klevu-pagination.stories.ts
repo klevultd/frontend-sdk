@@ -16,8 +16,6 @@ const Template: Story<HTMLKlevuPaginationElement> = (args) =>
     current=${ifDefined(args.current)}
     max=${ifDefined(args.max)}
     min=${ifDefined(args.min)}
-    next-text=${ifDefined(args.nextText)}
-    prev-text=${ifDefined(args.prevText)}
     .queryResult=${args.queryResult}
   ></klevu-pagination>`
 

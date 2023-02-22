@@ -6,7 +6,11 @@ import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
-import { SearchResultsEventData, SuggestionsEventData } from "../klevu-search-field/klevu-search-field"
+import {
+  SearchFieldVariant,
+  SearchResultsEventData,
+  SuggestionsEventData,
+} from "../klevu-search-field/klevu-search-field"
 
 /**
  * Full app to create search bar that popups trending products and search results.
@@ -43,6 +47,11 @@ export class KlevuQuicksearch {
    * Text of search button
    */
   @Prop() searchText?: string
+
+  /**
+   * Change variant of the search field
+   */
+  @Prop() searchFieldVariant: SearchFieldVariant = "default"
 
   /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
@@ -148,6 +157,8 @@ export class KlevuQuicksearch {
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
             onFocus={() => this.popup?.openModal()}
+            exportparts={globalExportedParts}
+            variant={this.searchFieldVariant}
           ></klevu-search-field>
           <div class="content" slot="content">
             <aside>

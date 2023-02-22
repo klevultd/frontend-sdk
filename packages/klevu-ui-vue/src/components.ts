@@ -111,8 +111,6 @@ export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination
   'min',
   'max',
   'queryResult',
-  'prevText',
-  'nextText',
   'klevuPaginationChange'
 ]);
 
@@ -175,6 +173,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'searchCmsPages',
   'placeholder',
   'searchText',
+  'searchFieldVariant',
   'renderProductSlot'
 ]);
 

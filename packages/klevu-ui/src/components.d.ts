@@ -14,7 +14,8 @@ import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
-import { SearchFieldVariant, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
+import { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
@@ -28,7 +29,8 @@ export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
-export { SearchFieldVariant, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
+export { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 export { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
@@ -350,14 +352,6 @@ export namespace Components {
          */
         "min"?: number;
         /**
-          * Button text for next button
-         */
-        "nextText": string;
-        /**
-          * Button text for previous button
-         */
-        "prevText": string;
-        /**
           * Query results used to build min, max and current
          */
         "queryResult"?: KlevuQueryResult;
@@ -552,6 +546,10 @@ export namespace Components {
          */
         "searchCmsPages"?: boolean;
         /**
+          * Change variant of the search field
+         */
+        "searchFieldVariant": SearchFieldVariant;
+        /**
           * Text of search button
          */
         "searchText"?: string;
@@ -632,7 +630,7 @@ export namespace Components {
         /**
           * Variant of the search field
          */
-        "variant": SearchFieldVariant;
+        "variant": SearchFieldVariant1;
     }
     /**
      * Full app component for search landing page
@@ -1553,17 +1551,9 @@ declare namespace LocalJSX {
          */
         "min"?: number;
         /**
-          * Button text for next button
-         */
-        "nextText"?: string;
-        /**
           * Page that was changed into
          */
         "onKlevuPaginationChange"?: (event: KlevuPaginationCustomEvent<number>) => void;
-        /**
-          * Button text for previous button
-         */
-        "prevText"?: string;
         /**
           * Query results used to build min, max and current
          */
@@ -1755,6 +1745,10 @@ declare namespace LocalJSX {
          */
         "searchCmsPages"?: boolean;
         /**
+          * Change variant of the search field
+         */
+        "searchFieldVariant"?: SearchFieldVariant;
+        /**
           * Text of search button
          */
         "searchText"?: string;
@@ -1847,7 +1841,7 @@ declare namespace LocalJSX {
         /**
           * Variant of the search field
          */
-        "variant"?: SearchFieldVariant;
+        "variant"?: SearchFieldVariant1;
     }
     /**
      * Full app component for search landing page

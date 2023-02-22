@@ -254,6 +254,7 @@ export class KlevuMerchandising {
           <div slot="footer" class="footer">
             {this.usePagination && this.#resultObject ? (
               <klevu-pagination
+                exportparts={globalExportedParts}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
               ></klevu-pagination>
