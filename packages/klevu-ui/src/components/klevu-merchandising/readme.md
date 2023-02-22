@@ -48,12 +48,13 @@ graph TD;
   klevu-merchandising --> klevu-pagination
   klevu-merchandising --> klevu-button
   klevu-layout-results --> klevu-util-viewport
-  klevu-layout-results --> klevu-drawer
   klevu-layout-results --> klevu-button
+  klevu-layout-results --> klevu-drawer
   klevu-button --> klevu-typography
   klevu-facet-list --> klevu-facet
   klevu-facet-list --> klevu-button
   klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
   klevu-accordion --> klevu-typography

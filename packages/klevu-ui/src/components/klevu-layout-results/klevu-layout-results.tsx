@@ -42,9 +42,23 @@ export class KlevuLayoutResults {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
+        <header class="header">
+          <slot name="header"></slot>
+          {isMobile ? (
+            <klevu-button
+              onClick={async (event) => {
+                await this.drawerElement.openModal()
+                event.stopPropagation()
+                return false
+              }}
+            >
+              <span part="material-icon">menu</span>
+            </klevu-button>
+          ) : null}
+        </header>
         <div class="container">
           {isMobile ? (
-            <klevu-drawer ref={(el) => (this.drawerElement = el as HTMLKlevuDrawerElement)} insertYPadding>
+            <klevu-drawer ref={(el) => (this.drawerElement = el as HTMLKlevuDrawerElement)} insertYPadding background>
               <slot slot="content" name="sidebar"></slot>
             </klevu-drawer>
           ) : (
@@ -52,22 +66,7 @@ export class KlevuLayoutResults {
               <slot name="sidebar"></slot>
             </aside>
           )}
-
           <main>
-            <header class="header">
-              <slot name="header"></slot>
-              {isMobile ? (
-                <klevu-button
-                  onClick={async (event) => {
-                    await this.drawerElement.openModal()
-                    event.stopPropagation()
-                    return false
-                  }}
-                >
-                  Open&nbsp;menu
-                </klevu-button>
-              ) : null}
-            </header>
             <section class="content">
               <slot name="content"></slot>
             </section>

@@ -17,6 +17,9 @@ const Template: Story<HTMLKlevuTextfieldElement> = (args) =>
     placeholder=${ifDefined(args.placeholder)}
     value=${ifDefined(args.value)}
     error=${ifDefined(args.error)}
+    variant=${ifDefined(args.variant)}
+    icon=${ifDefined(args.icon)}
+    clear-button=${ifDefined(args.clearButton)}
   ></klevu-textfield>`
 
 export const Default = Template.bind({})

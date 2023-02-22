@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuUIGlobalSettings } from "./utils/utils";
@@ -13,10 +14,13 @@ import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
-import { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+import { SearchFieldVariant, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
+import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuUIGlobalSettings } from "./utils/utils";
@@ -24,7 +28,9 @@ export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
-export { SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+export { SearchFieldVariant, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
+export { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
+export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 export { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export namespace Components {
@@ -146,9 +152,14 @@ export namespace Components {
           * Which element value is selected
          */
         "selected": string;
+        /**
+          * Variant of dropdown
+         */
+        "variant": KlevuDropdownVariant;
     }
     /**
      * Rendering items of single facet
+     * @csspart heading - Heading of the facet
      */
     interface KlevuFacet {
         /**
@@ -618,6 +629,10 @@ export namespace Components {
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
+        /**
+          * Variant of the search field
+         */
+        "variant": SearchFieldVariant;
     }
     /**
      * Full app component for search landing page
@@ -707,6 +722,10 @@ export namespace Components {
      * Sort dropdown. User can select what kind of sorting they want
      */
     interface KlevuSort {
+        /**
+          * Dropdown variant
+         */
+        "variant": KlevuDropdownVariant1;
     }
     /**
      * Simple component to list suggestions
@@ -726,6 +745,10 @@ export namespace Components {
      */
     interface KlevuTextfield {
         /**
+          * Display a button to clear field value on the right side of the field
+         */
+        "clearButton"?: boolean;
+        /**
           * Is field disabled
          */
         "disabled": boolean;
@@ -734,6 +757,10 @@ export namespace Components {
          */
         "error"?: boolean;
         /**
+          * Icon to display in textfield start of the field. Please use tokens of material icons
+         */
+        "icon"?: string;
+        /**
           * Placeholder value of the field
          */
         "placeholder"?: string;
@@ -741,6 +768,10 @@ export namespace Components {
           * Current value of the field
          */
         "value": string;
+        /**
+          * Variant of textfield
+         */
+        "variant": KlevuTextfieldVariant;
     }
     /**
      * Heading element
@@ -765,6 +796,9 @@ export namespace Components {
     }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
+        /**
+          * List of sizes to listen for
+         */
         "sizes": ViewportSize[];
     }
 }
@@ -890,6 +924,7 @@ declare global {
     };
     /**
      * Rendering items of single facet
+     * @csspart heading - Heading of the facet
      */
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
@@ -1317,9 +1352,14 @@ declare namespace LocalJSX {
           * Which element value is selected
          */
         "selected": string;
+        /**
+          * Variant of dropdown
+         */
+        "variant"?: KlevuDropdownVariant;
     }
     /**
      * Rendering items of single facet
+     * @csspart heading - Heading of the facet
      */
     interface KlevuFacet {
         /**
@@ -1804,6 +1844,10 @@ declare namespace LocalJSX {
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
+        /**
+          * Variant of the search field
+         */
+        "variant"?: SearchFieldVariant;
     }
     /**
      * Full app component for search landing page
@@ -1905,6 +1949,10 @@ declare namespace LocalJSX {
           * When the sorting changes
          */
         "onKlevuSortChanged"?: (event: KlevuSortCustomEvent<KlevuSearchSorting>) => void;
+        /**
+          * Dropdown variant
+         */
+        "variant"?: KlevuDropdownVariant1;
     }
     /**
      * Simple component to list suggestions
@@ -1924,6 +1972,10 @@ declare namespace LocalJSX {
      */
     interface KlevuTextfield {
         /**
+          * Display a button to clear field value on the right side of the field
+         */
+        "clearButton"?: boolean;
+        /**
           * Is field disabled
          */
         "disabled"?: boolean;
@@ -1931,6 +1983,10 @@ declare namespace LocalJSX {
           * Is field in error state
          */
         "error"?: boolean;
+        /**
+          * Icon to display in textfield start of the field. Please use tokens of material icons
+         */
+        "icon"?: string;
         /**
           * When text changes in field
          */
@@ -1947,6 +2003,10 @@ declare namespace LocalJSX {
           * Current value of the field
          */
         "value": string;
+        /**
+          * Variant of textfield
+         */
+        "variant"?: KlevuTextfieldVariant;
     }
     /**
      * Heading element
@@ -1971,6 +2031,9 @@ declare namespace LocalJSX {
     }
     interface KlevuUtilViewport {
         "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
+        /**
+          * List of sizes to listen for
+         */
         "sizes"?: ViewportSize[];
     }
     interface IntrinsicElements {
@@ -2049,6 +2112,7 @@ declare module "@stencil/core" {
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             /**
              * Rendering items of single facet
+             * @csspart heading - Heading of the facet
              */
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             /**

@@ -13,3 +13,7 @@
 .applybar .apply {
   width: 100%;
 }
+
+klevu-facet:first-of-type::part(heading) {
+  margin-top: 0;
+}

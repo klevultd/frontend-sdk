@@ -9,6 +9,9 @@ export type ViewportSize = { name: ViewportSizeName; minWidth: number; maxWidth:
 export class KlevuUtilViewport {
   @Event() sizeChanged!: EventEmitter<ViewportSize>
 
+  /**
+   * List of sizes to listen for
+   */
   @Prop() sizes: ViewportSize[] = [
     { name: "xs", minWidth: 0, maxWidth: 319 },
     { name: "sm", minWidth: 320, maxWidth: 511 },

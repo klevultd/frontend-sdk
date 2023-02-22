@@ -3,8 +3,6 @@
 }
 
 :host li {
-  display: flex;
-  align-items: center;
   margin-bottom: var(--klevu-spacing-02);
 }
 
@@ -12,22 +10,45 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  min-width: 0;
 }
 
 .name {
+  display: block;
+  flex-grow: 1;
+  min-width: 0;
+  font-size: var(--klevu-body-s-size);
+}
+
+.name span {
+  display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-size: 0.95em;
 }
 
 .count {
+  flex-basis: 30px;
   display: inline-block;
   margin-left: auto;
+  text-align: right;
   color: var(--klevu-color-neutral-06);
   font-size: var(--klevu-body-xs-size);
 }
 
 klevu-checkbox {
   width: 100%;
+  min-width: 0;
+}
+
+klevu-typography {
+  margin: var(--klevu-spacing-05) 0 var(--klevu-spacing-03);
+}
+
+klevu-typography.accordion {
+  margin: inherit;
+}
+
+input[type="radio"] {
+  margin-right: var(--klevu-spacing-04);
 }

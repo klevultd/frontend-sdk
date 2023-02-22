@@ -20,6 +20,7 @@ Plain textfield that does the searching
 | `searchSuggestions` | `search-suggestions` | Should search suggestions                            | `boolean \| undefined` | `undefined`             |
 | `searchText`        | `search-text`        | Button text                                          | `string`               | `"Search"`              |
 | `sendAnalytics`     | `send-analytics`     | Sends analytics when making query                    | `boolean \| undefined` | `undefined`             |
+| `variant`           | `variant`            | Variant of the search field                          | `"default" \| "pill"`  | `"default"`             |
 
 
 ## Events

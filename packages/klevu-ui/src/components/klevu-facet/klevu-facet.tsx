@@ -6,6 +6,8 @@ export type KlevuFacetMode = "checkbox" | "radio"
 
 /**
  * Rendering items of single facet
+ *
+ * @csspart heading - Heading of the facet
  */
 @Component({
   tag: "klevu-facet",
@@ -87,7 +89,14 @@ export class KlevuFacet {
     }
     return (
       <Fragment>
-        <span slot="header">{this.slider.label}</span>
+        <klevu-typography
+          part="heading"
+          class={{ accordion: Boolean(this.accordion) }}
+          variant="body-s-bold"
+          slot="header"
+        >
+          {this.slider.label}
+        </klevu-typography>
         <klevu-slider
           slot="content"
           showTooltips
@@ -126,7 +135,14 @@ export class KlevuFacet {
 
     return (
       <Fragment>
-        <span slot="header">{this.option.label}</span>
+        <klevu-typography
+          part="heading"
+          class={{ accordion: Boolean(this.accordion) }}
+          variant="body-s-bold"
+          slot="header"
+        >
+          {this.option.label}
+        </klevu-typography>
         <ul slot="content" part="klevu-list">
           {opts.map((o) => (
             <li>
@@ -140,27 +156,31 @@ export class KlevuFacet {
                   }}
                 >
                   <div class="container">
-                    <span class="name">{o.name}</span>
+                    <span class="name">
+                      <span>{o.name}</span>
+                    </span>
                     <span class="count">({o.count})</span>
                   </div>
                 </klevu-checkbox>
               ) : (
                 <Fragment>
-                  <input
-                    type="radio"
-                    id={this.option!.key}
-                    name={this.option!.key}
-                    value={o.value}
-                    checked={o.selected}
-                    onClick={() => {
-                      this.manager.clearOptionSelections(this.option!.key)
-                      this.manager.toggleOption(this.option!.key, o.name)
-                    }}
-                  />
-                  <label htmlFor={this.option!.key} class="name">
-                    {o.name}
-                  </label>
-                  <span class="count">({o.count})</span>
+                  <div class="container">
+                    <input
+                      type="radio"
+                      id={this.option!.key}
+                      name={this.option!.key}
+                      value={o.value}
+                      checked={o.selected}
+                      onClick={() => {
+                        this.manager.clearOptionSelections(this.option!.key)
+                        this.manager.toggleOption(this.option!.key, o.name)
+                      }}
+                    />
+                    <label htmlFor={this.option!.key} class="name">
+                      <span>{o.name}</span>
+                    </label>
+                    <span class="count">({o.count})</span>
+                  </div>
                 </Fragment>
               )}
             </li>

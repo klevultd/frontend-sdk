@@ -15,6 +15,7 @@ Simple native dropdown component for dropdown
 | `name` _(required)_     | `name`     | Form name                       | `string`                             | `undefined` |
 | `options` _(required)_  | --         | Options to display in dropdown  | `{ value: string; text: String; }[]` | `undefined` |
 | `selected` _(required)_ | `selected` | Which element value is selected | `string`                             | `undefined` |
+| `variant`               | `variant`  | Variant of dropdown             | `"default" \| "inline"`              | `"default"` |
 
 
 ## Events

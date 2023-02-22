@@ -32,6 +32,13 @@ Type: `Promise<void>`
 | `"sidebar"` | Sidebar                       |
 
 
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
+
+
 ## Dependencies
 
 ### Used by
@@ -42,15 +49,15 @@ Type: `Promise<void>`
 ### Depends on
 
 - [klevu-util-viewport](../klevu-util-viewport)
-- [klevu-drawer](../klevu-drawer)
 - [klevu-button](../klevu-button)
+- [klevu-drawer](../klevu-drawer)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-layout-results --> klevu-util-viewport
-  klevu-layout-results --> klevu-drawer
   klevu-layout-results --> klevu-button
+  klevu-layout-results --> klevu-drawer
   klevu-button --> klevu-typography
   klevu-merchandising --> klevu-layout-results
   klevu-search-landing-page --> klevu-layout-results

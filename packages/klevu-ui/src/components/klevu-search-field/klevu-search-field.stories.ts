@@ -23,6 +23,7 @@ const Template: Story<HTMLKlevuSearchFieldElement> = (args) =>
     search-suggestions=${ifDefined(args.searchSuggestions)}
     search-text=${ifDefined(args.searchText)}
     send-analytics=${ifDefined(args.sendAnalytics)}
+    variant=${ifDefined(args.variant)}
   ></klevu-search-field>`
 
 export const Default = Template.bind({})

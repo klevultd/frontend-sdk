@@ -27,11 +27,11 @@ const Template: Story<HTMLKlevuPopupElement> = (args) => html`<klevu-popup
 export const StartOpen = Template.bind({})
 StartOpen.args = {
   startOpen: true,
-  anchor: "left",
+  anchor: "bottom-start",
 }
 
 export const StartClosed = Template.bind({})
 StartClosed.args = {
   startOpen: false,
-  anchor: "left",
+  anchor: "bottom-start",
 }

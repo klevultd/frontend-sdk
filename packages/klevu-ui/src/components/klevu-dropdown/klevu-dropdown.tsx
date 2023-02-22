@@ -1,5 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
+export type KlevuDropdownVariant = "default" | "inline"
+
 /**
  * Simple native dropdown component for dropdown
  *
@@ -31,6 +33,11 @@ export class KlevuDropdown {
   @Prop() selected!: string
 
   /**
+   * Variant of dropdown
+   */
+  @Prop() variant: KlevuDropdownVariant = "default"
+
+  /**
    * When dropdown item has been changed
    */
   @Event({
@@ -47,8 +54,10 @@ export class KlevuDropdown {
       <Host>
         <div
           class={{
-            select: true,
+            selectcontainer: true,
             disabled: Boolean(this.disabled),
+            inline: this.variant === "inline",
+            default: this.variant === "default",
           }}
         >
           <select name={this.name} disabled={this.disabled} onChange={this.#onChange.bind(this)}>

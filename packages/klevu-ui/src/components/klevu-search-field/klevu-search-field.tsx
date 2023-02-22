@@ -21,6 +21,7 @@ export type SearchResultsEventData = {
 }
 
 export type SuggestionsEventData = string[]
+export type SearchFieldVariant = "default" | "pill"
 
 /**
  * Plain textfield that does the searching
@@ -77,6 +78,11 @@ export class KlevuSearchField {
    * Sends analytics when making query
    */
   @Prop() sendAnalytics?: boolean
+
+  /**
+   * Variant of the search field
+   */
+  @Prop() variant: SearchFieldVariant = "default"
 
   /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
@@ -187,7 +193,9 @@ export class KlevuSearchField {
           onKlevuTextChanged={this.#handleChange.bind(this)}
           aria-role="search"
         ></klevu-textfield>
-        <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
+        {this.variant !== "pill" && (
+          <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
+        )}
       </Host>
     )
   }

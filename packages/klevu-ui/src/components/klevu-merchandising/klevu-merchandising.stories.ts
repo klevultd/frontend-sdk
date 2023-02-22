@@ -12,7 +12,7 @@ export default autofillMeta("klevu-merchandising", {
 const Template: Story<HTMLKlevuMerchandisingElement> = (args) =>
   html`<klevu-merchandising
     category=${ifDefined(args.category)}
-    categoryTitle=${ifDefined(args.categoryTitle)}
+    category-title=${ifDefined(args.categoryTitle)}
     filter-count=${ifDefined(args.filterCount)}
     .filterCustomOrder=${args.filterCustomOrder}
     limit=${args.limit}
@@ -25,6 +25,7 @@ export const Default = Template.bind({})
 Default.args = {
   category: "Apparel",
   categoryTitle: "Apparels",
+  limit: 24,
 }
 
 export const Pagination = Template.bind({})

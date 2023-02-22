@@ -2,35 +2,80 @@
   display: block;
 }
 
-input[type="text"] {
+div {
+  position: relative;
+}
+
+input {
   display: block;
   width: 100%;
   box-sizing: border-box;
   appearance: none;
   padding: var(--klevu-spacing-04);
+  border: 0;
+}
+
+input:focus {
+  outline: 0;
+}
+
+input:disabled {
+  opacity: var(--klevu-opacity-disabled);
+  cursor: not-allowed;
+}
+
+/** Default bordered input */
+
+input.default {
   border: 1px solid var(--klevu-color-neutral-05);
   margin: 1px;
   border-radius: var(--klevu-rounded-corners);
 }
 
-input[type="text"]:focus {
-  outline: 0;
+input.default:focus {
   border-color: var(--klevu-color-primary);
   margin: 0;
   border-width: 2px;
 }
 
-input[type="text"].error {
+input.default.error {
   border-color: var(--klevu-color-primary);
   margin: 0;
   border-width: 2px;
 }
 
-input[type="text"]:focus {
-  outline: 0;
+/** Pill input */
+
+input.pill {
+  border: 1px solid var(--klevu-color-neutral-02);
+  margin: 1px;
+  background-color: var(--klevu-color-neutral-02);
+  border-radius: 1000px;
 }
 
-input[type="text"]:disabled {
-  opacity: var(--klevu-opacity-disabled);
-  cursor: not-allowed;
+/** icon */
+
+input.hasicon {
+  padding-left: var(--klevu-spacing-07);
+}
+
+span.icon {
+  position: absolute;
+  top: 50%;
+  left: var(--klevu-spacing-04);
+  transform: translateY(-50%);
+}
+
+/** clear button */
+
+input.hasclear {
+  padding-right: var(--klevu-spacing-07);
+}
+
+span.clear {
+  position: absolute;
+  top: 50%;
+  right: var(--klevu-spacing-04);
+  transform: translateY(-50%);
+  cursor: pointer;
 }

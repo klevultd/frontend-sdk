@@ -1,7 +1,6 @@
 :host {
   --klevu-checkbox-color: var(--klevu-color-primary);
   --klevu-checkbox-size: 20px;
-
   display: flex;
 }
 
@@ -18,6 +17,7 @@
   display: block;
   width: 100%;
   height: var(--klevu-checkbox-size);
+  min-width: 0;
 }
 
 input[type="checkbox"] {

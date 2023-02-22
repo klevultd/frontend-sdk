@@ -10,6 +10,6 @@ export default autofillMeta("klevu-sort", {
   },
 })
 
-const Template: Story<HTMLKlevuSortElement> = (args) => html`<klevu-sort></klevu-sort>`
+const Template: Story<HTMLKlevuSortElement> = (args) => html`<klevu-sort variant=${args.variant}></klevu-sort>`
 
 export const Default = Template.bind({})

@@ -218,7 +218,10 @@ export class KlevuMerchandising {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}>
+        <klevu-layout-results
+          exportparts={globalExportedParts}
+          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+        >
           <klevu-facet-list
             slot="sidebar"
             accordion
@@ -232,7 +235,11 @@ export class KlevuMerchandising {
             <klevu-typography slot="header" variant="h1">
               {this.categoryTitle}
             </klevu-typography>
-            <klevu-sort onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+            <klevu-sort
+              variant="inline"
+              exportparts={globalExportedParts}
+              onKlevuSortChanged={this.#sortChanged.bind(this)}
+            ></klevu-sort>
           </div>
           <klevu-product-grid slot="content">
             {this.results.map((p) => (

@@ -206,7 +206,7 @@ export class KlevuSearchLandingPage {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results>
+        <klevu-layout-results exportparts={globalExportedParts}>
           <klevu-facet-list
             slot="sidebar"
             customOrder={this.filterCustomOrder}
@@ -219,7 +219,11 @@ export class KlevuSearchLandingPage {
             <klevu-typography slot="header" variant="h1">
               Searching term "{this.term}"
             </klevu-typography>
-            <klevu-sort onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+            <klevu-sort
+              variant="inline"
+              exportparts={globalExportedParts}
+              onKlevuSortChanged={this.#sortChanged.bind(this)}
+            ></klevu-sort>
           </div>
           <klevu-product-grid slot="content">
             {this.results?.map((p) => (

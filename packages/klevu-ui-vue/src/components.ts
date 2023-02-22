@@ -51,6 +51,7 @@ export const KlevuDropdown = /*@__PURE__*/ defineContainer<JSX.KlevuDropdown>('k
   'options',
   'disabled',
   'selected',
+  'variant',
   'klevuDropdownChanged'
 ]);
 
@@ -199,6 +200,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'searchCategories',
   'searchCmsPages',
   'sendAnalytics',
+  'variant',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'
@@ -240,6 +242,7 @@ export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu
 
 
 export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sort', undefined, [
+  'variant',
   'klevuSortChanged'
 ]);
 
@@ -255,6 +258,9 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
   'disabled',
   'placeholder',
   'error',
+  'variant',
+  'icon',
+  'clearButton',
   'klevuTextChanged',
   'klevuTextFocused'
 ]);

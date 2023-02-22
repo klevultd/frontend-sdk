@@ -20,6 +20,7 @@ const Template: Story<HTMLKlevuDropdownElement> = (args) =>
     disabled=${ifDefined(args.disabled)}
     name=${ifDefined(args.name)}
     selected=${ifDefined(args.selected)}
+    variant=${ifDefined(args.variant)}
   ></klevu-dropdown>`
 
 export const Default = Template.bind({})

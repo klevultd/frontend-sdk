@@ -7,6 +7,13 @@
 
 Sort dropdown. User can select what kind of sorting they want
 
+## Properties
+
+| Property  | Attribute | Description      | Type                    | Default     |
+| --------- | --------- | ---------------- | ----------------------- | ----------- |
+| `variant` | `variant` | Dropdown variant | `"default" \| "inline"` | `"default"` |
+
+
 ## Events
 
 | Event              | Description              | Type                                                                                                                                                                                                                                                                                                                                                    |
