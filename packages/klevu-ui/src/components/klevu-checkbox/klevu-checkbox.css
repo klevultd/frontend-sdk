@@ -44,8 +44,8 @@ input[type="checkbox"]:focus::after {
   position: absolute;
   top: -3px;
   left: -3px;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
+  width: calc(100% + 3px);
+  height: calc(100% + 3px);
   border: 2px solid var(--klevu-checkbox-color);
   border-radius: calc(var(--klevu-border-radius-s) + 2px);
 }

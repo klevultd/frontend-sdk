@@ -103,7 +103,7 @@ export class KlevuTextfield {
             {this.icon}
           </span>
         )}
-        {this.clearButton && this.value.length > 0 && (
+        {this.clearButton && this.value?.length > 0 && (
           <span
             class="clear"
             part="material-icon"
