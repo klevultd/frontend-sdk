@@ -98,13 +98,13 @@
 /* Slider size and handle placement;
   */
 .noUi-horizontal {
-  height: 8px;
+  height: 4px;
 }
 .noUi-horizontal .noUi-handle {
-  width: 24px;
-  height: 24px;
-  right: -17px;
-  top: -6px;
+  width: 16px;
+  height: 16px;
+  right: -8px;
+  top: -4px;
 }
 .noUi-vertical {
   width: 18px;
@@ -148,7 +148,16 @@
   cursor: default;
   /*box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;*/
 }
-.noUi-active {
+.noUi-active::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 100%;
+  height: 100%;
+  border: 5px solid var(--klevu-color-primary);
+  opacity: var(--klevu-opacity-subtle);
+  border-radius: 1000px;
   /*box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;*/
 }
 /* Handle stripes;

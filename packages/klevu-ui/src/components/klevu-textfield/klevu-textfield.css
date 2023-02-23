@@ -7,12 +7,16 @@ div {
 }
 
 input {
+  --padding: calc((var(--klevu-size-m) * 2 - var(--klevu-body-s-size)) / 2);
+
   display: block;
   width: 100%;
   box-sizing: border-box;
   appearance: none;
-  padding: var(--klevu-spacing-04);
   border: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  font-size: var(--klevu-body-m-size);
+  padding: var(--padding);
 }
 
 input:focus {

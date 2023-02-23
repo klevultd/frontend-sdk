@@ -3,12 +3,17 @@
 }
 
 select {
+  --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
+
+  font-size: var(--klevu-body-s-size);
+  font-weight: var(--klevu-body-s-weight);
   appearance: none;
-  padding: var(--klevu-spacing-04) var(--klevu-spacing-06);
   width: 100%;
   min-width: 80px;
   border: none;
   border-radius: var(--klevu-border-radius-m);
+  height: calc(var(--klevu-size-m) * 2);
+  padding: 0 var(--padding);
 }
 
 .selectcontainer {

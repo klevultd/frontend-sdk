@@ -1,17 +1,21 @@
 :host {
-  --button-padding: calc(var(--klevu-button-padding, var(--klevu-spacing-03)) + 2px);
-
+  --klevu-button-background-hover: var(--klevu-color-primary-darker);
   display: inline-block;
 }
 
 button {
+  --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
+
   position: relative;
   background: var(--klevu-button-background-color, var(--klevu-color-primary));
-  padding: var(--button-padding) calc(var(--button-padding) * 2);
   border-radius: var(--klevu-border-radius-m);
   box-sizing: border-box;
   transition: transform 100ms;
   border: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  font-size: var(--klevu-body-s-size);
+  font-weight: var(--klevu-body-s-weight);
+  padding: 0 calc(var(--padding) * 2);
 }
 
 button klevu-typography {
@@ -19,7 +23,11 @@ button klevu-typography {
 }
 
 button:hover {
-  background-color: var(--klevu-button-background-hover, var(--klevu-color-primary-darker));
+  background-color: var(--klevu-button-background-hover);
+}
+
+button:focus {
+  outline: 0;
 }
 
 button:focus:after {
