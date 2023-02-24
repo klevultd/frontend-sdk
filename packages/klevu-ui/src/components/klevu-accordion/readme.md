@@ -31,24 +31,6 @@ Component that wrap two slots to create accordion element
 | `"material-icon"` |             |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-facet](../klevu-facet)
-
-### Depends on
-
-- [klevu-typography](../klevu-typography)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-accordion --> klevu-typography
-  klevu-facet --> klevu-accordion
-  style klevu-accordion fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

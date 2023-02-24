@@ -26,7 +26,11 @@ import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 export type AllQueryOptions = KlevuMerchandisingOptions | KlevuKMCRecommendationOptions | KlevuSearchOptions
 
 /**
- * Abstract helper component that queries
+ * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
+ * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
+ * based on that. This components gives you ability to create any kind of UI with Klevu components or by using your own
+ * components! Just use __klevu-query__ to fetch the data and __klevu-product__ to render the product
+ * cards. Whole content of __klevu-product__ can be replaced with your content.
  */
 @Component({
   tag: "klevu-query",

@@ -1,5 +1,5 @@
 import { html } from "lit-html"
-import { ifDefined } from "lit-html/directives/if-defined"
+import { ifDefined } from "lit-html/directives/if-defined.js"
 import notes from "./readme.md"
 
 import { Story } from "@storybook/web-components"

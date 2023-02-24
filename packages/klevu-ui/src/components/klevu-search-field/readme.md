@@ -32,29 +32,6 @@ Plain textfield that does the searching
 | `klevuSearchSuggestions` | When searchfield gives some suggestions                                                                 | `CustomEvent<string[]>`                                                                                                                                                                                 |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-quicksearch](../klevu-quicksearch)
- - [klevu-simple-search](../klevu-simple-search)
-
-### Depends on
-
-- [klevu-textfield](../klevu-textfield)
-- [klevu-button](../klevu-button)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-search-field --> klevu-textfield
-  klevu-search-field --> klevu-button
-  klevu-button --> klevu-typography
-  klevu-quicksearch --> klevu-search-field
-  klevu-simple-search --> klevu-search-field
-  style klevu-search-field fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

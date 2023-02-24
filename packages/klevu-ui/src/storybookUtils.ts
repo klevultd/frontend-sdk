@@ -39,10 +39,10 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     const isOptions = Boolean(noUndefinedValues[0].value) && noUndefinedValues[0].type === "string"
 
     argTypes[a.name] = {
-      name: a.name,
+      name: Boolean(a.attr) ? a.attr : a.name,
       description: a.docs,
       table: {
-        category: "Attributes",
+        category: Boolean(a.attr) ? "Attributes" : "Properties",
         type: {
           summary: a.type,
         },
@@ -129,6 +129,23 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     }
   }
 
+  const sortKeys = ["Attributes", "Properties", "Events", "Slots", "Methods", "CSS Properties", "CSS Parts"]
+
+  const sortedArgTypeKeys = Object.keys(argTypes).sort((a, b) => {
+    // sort keys by sortKeys variable
+    const aIndex = sortKeys.indexOf(argTypes[a].table.category)
+    const bIndex = sortKeys.indexOf(argTypes[b].table.category)
+    if (aIndex === bIndex) {
+      return a.localeCompare(b)
+    }
+    return aIndex - bIndex
+  })
+
+  const sortedArgTypes = sortedArgTypeKeys.reduce((acc, key) => {
+    acc[key] = argTypes[key]
+    return acc
+  }, {} as ArgTypes)
+
   return merge(meta, {
     component: tag,
     parameters: {
@@ -136,8 +153,21 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
         handles,
       },
     },
-    argTypes,
+    argTypes: sortedArgTypes,
   })
+}
+
+export function MDXAutoFillMeta(tag: string, meta: Meta) {
+  const { argTypes, parameters } = autofillMeta(tag, meta)
+
+  const data: JsonDocs = jsdocs as any
+  const comp = data.components.find((c) => c.tag == tag)
+
+  return {
+    argTypes,
+    parameters,
+    description: comp?.docs,
+  }
 }
 
 /**

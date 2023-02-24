@@ -5,3 +5,4 @@ dist-transpiled
 coverage
 .DS_Store
 .npmrc
+:Zone.Identifier

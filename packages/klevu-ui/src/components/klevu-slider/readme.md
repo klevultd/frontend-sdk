@@ -26,19 +26,6 @@ Horizontal slider component. Used for price range
 | `klevuSliderChange` | When values change | `CustomEvent<[number, number]>` |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-facet](../klevu-facet)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-facet --> klevu-slider
-  style klevu-slider fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

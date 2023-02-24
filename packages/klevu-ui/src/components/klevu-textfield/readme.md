@@ -35,19 +35,6 @@ Branded text field component
 | `"material-icon"` |             |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-search-field](../klevu-search-field)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-search-field --> klevu-textfield
-  style klevu-textfield fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

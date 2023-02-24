@@ -60,7 +60,14 @@ for (const prop of documentedCssProps) {
 export const parameters = {
   options: {
     storySort: {
-      order: ["Start", ["Welcome", "Installation", "Styles"], "Atoms", "Components", "Layout", "Apps"],
+      order: [
+        "Start",
+        ["Welcome", "Installation", "Styles", "Using Storybook"],
+        "Atoms",
+        "Components",
+        "Layout",
+        "Apps",
+      ],
     },
     showPanel: true,
     panelPosition: "bottom",
@@ -76,4 +83,5 @@ export const parameters = {
     expanded: true,
   },
   cssprops,
+  viewMode: "docs",
 }

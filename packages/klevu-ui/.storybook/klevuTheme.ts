@@ -10,12 +10,12 @@ export default create({
   fontBase: "'Poppins', sans-serif !important",
   fontCode: "'Source Code Pro', monospace",
 
-  /*
   // UI
-  appBg: "white",
-  appContentBg: "silver",
-  appBorderColor: "grey",
-  appBorderRadius: 4,
+  appBg: "#EBF4F7",
+  appContentBg: "white",
+  appBorderColor: "#dbdbdb",
+  appBorderRadius: 2,
+  /*
 
   // Text colors
   textColor: "black",
@@ -23,9 +23,9 @@ export default create({
   */
 
   // Toolbar default and active colors
-  barTextColor: "#eee",
-  barSelectedColor: "#e5e5e5",
-  barBg: "#0A4563",
+  barTextColor: "#191919",
+  barSelectedColor: "#000",
+  barBg: "#fff",
 
   /*
   // Form colors

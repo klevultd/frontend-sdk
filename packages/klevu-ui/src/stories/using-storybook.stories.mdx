@@ -1,0 +1,82 @@
+import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
+
+<Meta title="Start/Using Storybook" />
+
+# Using Klevu Components and structure of this documentation
+
+Klevu components are built with properties and attributes. Properties and attributes are the data that determine how a
+component looks or behaves. Attributes are simple string or numerical data that can be passed with HTML attribute to the
+component. Properties are far more intricate and involve items such as arrays, objects, and functions. The way they're
+assigned to the component differs depending on the framework employed; if you were using plain vanilla JS for example,
+you'd first have to retrieve a reference of the HTML element before assigning its property. When it comes to frameworks
+like React, Vue Angular or Lit though—it's an entirely different story! Both attributes and properties can be
+effortlessly included in your template with ease!
+
+## VanilljaJS example
+
+Here is a example how to create `klevu-init` component in HTML, settings some attributes to it and then in Javascript
+settings properties to it.
+
+```html
+<klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"></klevu-init>
+```
+
+And in your Javascript file:
+
+```js
+const myComponent = document.querySelector("klevu-init")
+myComponent.settings = {
+  onProductClick: function onProductClick(product, event) {
+    alert("Product clicked!")
+  },
+  generateProductUrl: function generateProductUrl(product) {
+    return "myurl.com/" + product.id
+  },
+  renderPrice: function renderPrice(amount, currency) {
+    return amount + " " + currency
+  },
+}
+```
+
+## React example
+
+We provide a ready made library `@klevu/ui-react` for React that changes Klevu Web Components to React Components.
+It allows much easier interface to for use the component.
+
+```jsx
+import { KlevuInit } from "@klevu/ui-react"
+
+const App = () => {
+  return (
+    <KlevuInit
+      apiKey="klevu-165829460115715456"
+      url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+      settings={{
+        onProductClick: function onProductClick(product, event) {
+          alert("Product clicked!")
+        },
+        generateProductUrl: function generateProductUrl(product) {
+          return "myurl.com/" + product.id
+        },
+        renderPrice: function renderPrice(amount, currency) {
+          return amount + " " + currency
+        },
+      }}
+    />
+  )
+}
+```
+
+# Events, Slots, Parts and CSS Properties
+
+When using Klevu components you can also attach to events and modify functionality and theme with slots, parts and CSS
+properties. Events refer to how a user interacts with a component - when they click on something or hover over it. Slots
+represent elements of a component that will be filled with content. Parts are the different elements of a component,
+such as a header or footer that can be modified with specific CSS. Lastly, CSS properties allow developers to change the
+styling of components without having to rewrite HTML code.
+
+Here is a example how these settings are displayed in the documentation:
+
+<figure>
+  <img src="/checkbox_args_example.jpg" alt="" />
+</figure>

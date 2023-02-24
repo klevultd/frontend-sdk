@@ -30,24 +30,6 @@ Component to display list of CMS page results
 | `"klevu-list"` |             |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-quicksearch](../klevu-quicksearch)
-
-### Depends on
-
-- [klevu-typography](../klevu-typography)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-cms-list --> klevu-typography
-  klevu-quicksearch --> klevu-cms-list
-  style klevu-cms-list fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

@@ -32,23 +32,6 @@ Type: `Promise<ViewportSize | undefined>`
 
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-layout-results](../klevu-layout-results)
- - [klevu-merchandising](../klevu-merchandising)
- - [klevu-search-landing-page](../klevu-search-landing-page)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-layout-results --> klevu-util-viewport
-  klevu-merchandising --> klevu-util-viewport
-  klevu-search-landing-page --> klevu-util-viewport
-  style klevu-util-viewport fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

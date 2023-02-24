@@ -31,21 +31,6 @@ Pagination component. Either provide numbers or query result to display the comp
 | `"material-icon"` |             |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-merchandising](../klevu-merchandising)
- - [klevu-search-landing-page](../klevu-search-landing-page)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-merchandising --> klevu-pagination
-  klevu-search-landing-page --> klevu-pagination
-  style klevu-pagination fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

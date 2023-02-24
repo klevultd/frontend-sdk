@@ -48,25 +48,6 @@ All parts of the component can be replaced with slots.
 | `"image"`     |             |
 
 
-## Dependencies
-
-### Used by
-
- - [klevu-merchandising](../klevu-merchandising)
- - [klevu-quicksearch](../klevu-quicksearch)
- - [klevu-recommendations](../klevu-recommendations)
- - [klevu-search-landing-page](../klevu-search-landing-page)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-merchandising --> klevu-product
-  klevu-quicksearch --> klevu-product
-  klevu-recommendations --> klevu-product
-  klevu-search-landing-page --> klevu-product
-  style klevu-product fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

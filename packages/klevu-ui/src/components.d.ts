@@ -228,22 +228,20 @@ export namespace Components {
         "useApplyButton"?: boolean;
     }
     /**
+     * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
+     * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
+     * configuration for all components on the page and provide few global settings for all components:
+     * - **onItemClick:** what happens when product is clicked. Typically this places default action of
+     *   _klevu-product_ click. For example you can make your own frontend router to act in this function. Is
+     *   provided with product and click event as attributes. Remember to preventDefault and return false to prevent anchor
+     *   link following.
+     * - **generateProductUrl:** what kind of URL's should be generated for products. If _onItemClick_
+     *   is not used this can be used for it. Has product as attribute.
+     * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
+     *   rendering then this is the place. Has two attribute amount and currency of item.
      * Initializes components to fetch data from correct Klevu backend
-     * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
-     * @cssprop --klevu-color-primary - Main color of components
-     * @cssprop --klevu-color-primary-text - Text color on top primary color
-     * @cssprop --klevu-color-primary-border - Border color related to primary color
-     * @cssprop --klevu-color-secondary - Main color of components
-     * @cssprop --klevu-color-secondary-text - Text color on top primary color
-     * @cssprop --klevu-color-secondary-border - Border color related to primary color
-     * @cssprop --klevu-color-border - Standard border color used to separate items
-     * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
-     * @cssprop --klevu-color-dim-text - Secondary dimmed texts
-     * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
-     * @cssprop --klevu-spacing-small - Small spacing
-     * @cssprop --klevu-spacing-04 - Normal spacing
-     * @cssprop --klevu-spacing-large - Large spacing
-     * @cssprop --klevu-rounded-corners - Rounded corners
+     * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
+     * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
      * @cssprop --klevu-color-neutral-01 #ffffff Background color
@@ -457,7 +455,11 @@ export namespace Components {
         "itemsPerRow"?: number;
     }
     /**
-     * Abstract helper component that queries
+     * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
+     * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
+     * based on that. This components gives you ability to create any kind of UI with Klevu components or by using your own
+     * components! Just use __klevu-query__ to fetch the data and __klevu-product__ to render the product
+     * cards. Whole content of __klevu-product__ can be replaced with your content.
      */
     interface KlevuQuery {
         /**
@@ -941,22 +943,20 @@ declare global {
         new (): HTMLKlevuFacetListElement;
     };
     /**
+     * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
+     * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
+     * configuration for all components on the page and provide few global settings for all components:
+     * - **onItemClick:** what happens when product is clicked. Typically this places default action of
+     *   _klevu-product_ click. For example you can make your own frontend router to act in this function. Is
+     *   provided with product and click event as attributes. Remember to preventDefault and return false to prevent anchor
+     *   link following.
+     * - **generateProductUrl:** what kind of URL's should be generated for products. If _onItemClick_
+     *   is not used this can be used for it. Has product as attribute.
+     * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
+     *   rendering then this is the place. Has two attribute amount and currency of item.
      * Initializes components to fetch data from correct Klevu backend
-     * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
-     * @cssprop --klevu-color-primary - Main color of components
-     * @cssprop --klevu-color-primary-text - Text color on top primary color
-     * @cssprop --klevu-color-primary-border - Border color related to primary color
-     * @cssprop --klevu-color-secondary - Main color of components
-     * @cssprop --klevu-color-secondary-text - Text color on top primary color
-     * @cssprop --klevu-color-secondary-border - Border color related to primary color
-     * @cssprop --klevu-color-border - Standard border color used to separate items
-     * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
-     * @cssprop --klevu-color-dim-text - Secondary dimmed texts
-     * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
-     * @cssprop --klevu-spacing-small - Small spacing
-     * @cssprop --klevu-spacing-04 - Normal spacing
-     * @cssprop --klevu-spacing-large - Large spacing
-     * @cssprop --klevu-rounded-corners - Rounded corners
+     * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
+     * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
      * @cssprop --klevu-color-neutral-01 #ffffff Background color
@@ -1069,7 +1069,11 @@ declare global {
         new (): HTMLKlevuProductGridElement;
     };
     /**
-     * Abstract helper component that queries
+     * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
+     * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
+     * based on that. This components gives you ability to create any kind of UI with Klevu components or by using your own
+     * components! Just use __klevu-query__ to fetch the data and __klevu-product__ to render the product
+     * cards. Whole content of __klevu-product__ can be replaced with your content.
      */
     interface HTMLKlevuQueryElement extends Components.KlevuQuery, HTMLStencilElement {
     }
@@ -1428,22 +1432,20 @@ declare namespace LocalJSX {
         "useApplyButton"?: boolean;
     }
     /**
+     * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
+     * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
+     * configuration for all components on the page and provide few global settings for all components:
+     * - **onItemClick:** what happens when product is clicked. Typically this places default action of
+     *   _klevu-product_ click. For example you can make your own frontend router to act in this function. Is
+     *   provided with product and click event as attributes. Remember to preventDefault and return false to prevent anchor
+     *   link following.
+     * - **generateProductUrl:** what kind of URL's should be generated for products. If _onItemClick_
+     *   is not used this can be used for it. Has product as attribute.
+     * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
+     *   rendering then this is the place. Has two attribute amount and currency of item.
      * Initializes components to fetch data from correct Klevu backend
-     * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
-     * @cssprop --klevu-color-primary - Main color of components
-     * @cssprop --klevu-color-primary-text - Text color on top primary color
-     * @cssprop --klevu-color-primary-border - Border color related to primary color
-     * @cssprop --klevu-color-secondary - Main color of components
-     * @cssprop --klevu-color-secondary-text - Text color on top primary color
-     * @cssprop --klevu-color-secondary-border - Border color related to primary color
-     * @cssprop --klevu-color-border - Standard border color used to separate items
-     * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
-     * @cssprop --klevu-color-dim-text - Secondary dimmed texts
-     * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
-     * @cssprop --klevu-spacing-small - Small spacing
-     * @cssprop --klevu-spacing-04 - Normal spacing
-     * @cssprop --klevu-spacing-large - Large spacing
-     * @cssprop --klevu-rounded-corners - Rounded corners
+     * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
+     * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
      * @cssprop --klevu-color-neutral-01 #ffffff Background color
@@ -1656,7 +1658,11 @@ declare namespace LocalJSX {
         "itemsPerRow"?: number;
     }
     /**
-     * Abstract helper component that queries
+     * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
+     * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
+     * based on that. This components gives you ability to create any kind of UI with Klevu components or by using your own
+     * components! Just use __klevu-query__ to fetch the data and __klevu-product__ to render the product
+     * cards. Whole content of __klevu-product__ can be replaced with your content.
      */
     interface KlevuQuery {
         /**
@@ -2115,22 +2121,20 @@ declare module "@stencil/core" {
              */
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
             /**
+             * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
+             * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
+             * configuration for all components on the page and provide few global settings for all components:
+             * - **onItemClick:** what happens when product is clicked. Typically this places default action of
+             *   _klevu-product_ click. For example you can make your own frontend router to act in this function. Is
+             *   provided with product and click event as attributes. Remember to preventDefault and return false to prevent anchor
+             *   link following.
+             * - **generateProductUrl:** what kind of URL's should be generated for products. If _onItemClick_
+             *   is not used this can be used for it. Has product as attribute.
+             * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
+             *   rendering then this is the place. Has two attribute amount and currency of item.
              * Initializes components to fetch data from correct Klevu backend
-             * Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.
-             * @cssprop --klevu-color-primary - Main color of components
-             * @cssprop --klevu-color-primary-text - Text color on top primary color
-             * @cssprop --klevu-color-primary-border - Border color related to primary color
-             * @cssprop --klevu-color-secondary - Main color of components
-             * @cssprop --klevu-color-secondary-text - Text color on top primary color
-             * @cssprop --klevu-color-secondary-border - Border color related to primary color
-             * @cssprop --klevu-color-border - Standard border color used to separate items
-             * @cssprop --klevu-color-dim-background - Dimmed background color for default cases
-             * @cssprop --klevu-color-dim-text - Secondary dimmed texts
-             * @cssprop --klevu-color-shadow - When shadows are used (popups, etc) what color it should be
-             * @cssprop --klevu-spacing-small - Small spacing
-             * @cssprop --klevu-spacing-04 - Normal spacing
-             * @cssprop --klevu-spacing-large - Large spacing
-             * @cssprop --klevu-rounded-corners - Rounded corners
+             * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
+             * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
              * @cssprop --klevu-color-primary #2b4af7 The primary color
              * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
              * @cssprop --klevu-color-neutral-01 #ffffff Background color
@@ -2198,7 +2202,11 @@ declare module "@stencil/core" {
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
             /**
-             * Abstract helper component that queries
+             * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
+             * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
+             * based on that. This components gives you ability to create any kind of UI with Klevu components or by using your own
+             * components! Just use __klevu-query__ to fetch the data and __klevu-product__ to render the product
+             * cards. Whole content of __klevu-product__ can be replaced with your content.
              */
             "klevu-query": LocalJSX.KlevuQuery & JSXBase.HTMLAttributes<HTMLKlevuQueryElement>;
             /**

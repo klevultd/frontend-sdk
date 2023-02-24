@@ -21,19 +21,6 @@ Fetches and displays most popular searches from Klevu Merchant center
 | `"klevu-list"` |             |
 
 
-## Dependencies
-
-### Depends on
-
-- [klevu-typography](../klevu-typography)
-
-### Graph
-```mermaid
-graph TD;
-  klevu-popular-searches --> klevu-typography
-  style klevu-popular-searches fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+
