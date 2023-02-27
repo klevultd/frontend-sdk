@@ -24,14 +24,14 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
  *
  * @cssprop --klevu-color-primary #2b4af7 The primary color
  * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
- * @cssprop --klevu-color-neutral-01 #ffffff Background color
- * @cssprop --klevu-color-neutral-02 #f6f6f6
- * @cssprop --klevu-color-neutral-03 #ededed
- * @cssprop --klevu-color-neutral-04 #e3e3e3
- * @cssprop --klevu-color-neutral-05 #d6d6d6
- * @cssprop --klevu-color-neutral-06 #919191
- * @cssprop --klevu-color-neutral-07 #757575
- * @cssprop --klevu-color-neutral-08 #191919 Text color
+ * @cssprop --klevu-color-neutral-1 #ffffff Background color
+ * @cssprop --klevu-color-neutral-2 #f6f6f6
+ * @cssprop --klevu-color-neutral-3 #ededed
+ * @cssprop --klevu-color-neutral-4 #e3e3e3
+ * @cssprop --klevu-color-neutral-5 #d6d6d6
+ * @cssprop --klevu-color-neutral-6 #919191
+ * @cssprop --klevu-color-neutral-7 #757575
+ * @cssprop --klevu-color-neutral-8 #191919 Text color
  *
  * @cssprop --klevu-spacing-01 1px Spacing 01
  * @cssprop --klevu-spacing-02 4px Spacing 02

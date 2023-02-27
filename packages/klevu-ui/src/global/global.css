@@ -1,27 +1,23 @@
 :root {
   font-family: Arial, Helvetica, sans-serif;
 
-  --klevu-color-shadow: rgba(0, 160, 233, 0.35);
-  --klevu-rounded-corners: 4px;
-
-  --klevu-product-image-aspect-ratio: 1.3 / 1;
-  --klevu-product-width: 300px;
-  --klevu-product-small-width: 200px;
-  --klevu-product-image-fill: cover; /* cover, contain */
-
-  /** new tokens **/
   /** colors */
   --klevu-color-primary: #2b4af7;
   --klevu-color-primary-darker: #0d2ee8;
 
-  --klevu-color-neutral-01: #ffffff;
-  --klevu-color-neutral-02: #f6f6f6;
-  --klevu-color-neutral-03: #ededed;
-  --klevu-color-neutral-04: #e3e3e3;
-  --klevu-color-neutral-05: #d6d6d6;
-  --klevu-color-neutral-06: #919191;
-  --klevu-color-neutral-07: #757575;
-  --klevu-color-neutral-08: #191919;
+  --klevu-color-neutral-1: #ffffff;
+  --klevu-color-neutral-2: #f6f6f6;
+  --klevu-color-neutral-3: #ededed;
+  --klevu-color-neutral-4: #e3e3e3;
+  --klevu-color-neutral-5: #d6d6d6;
+  --klevu-color-neutral-6: #919191;
+  --klevu-color-neutral-7: #757575;
+  --klevu-color-neutral-8: #191919;
+
+  --klevu-color-accent-1: #8eedd3;
+  --klevu-color-accent-2: #ffcb9f;
+  --klevu-color-accent-3: #ffb8d6;
+  --klevu-color-accent-4: #c3d7ff;
 
   /** spacing */
   --klevu-spacing-01: 1px;
@@ -83,11 +79,20 @@
   --klevu-border-radius-xl: 16px;
   --klevu-border-radius-xxl: 24px;
 
+  /** Elevations, set as box shadow */
+  --klevu-elevation-1: 0 0.5px 2px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.08);
+
   /* animation css variables */
   --klevu-animation-duration-slow: 0.3s;
   --klevu-animation-duration-normal: 0.2s;
   --klevu-animation-duration-fast: 0.1s;
   --klevu-animation-timing-function: ease-in-out;
+
+  /** component specific variables */
+  --klevu-product-image-aspect-ratio: 1.3 / 1;
+  --klevu-product-width: 300px;
+  --klevu-product-small-width: 200px;
+  --klevu-product-image-fill: cover; /* cover, contain */
 }
 
 /**

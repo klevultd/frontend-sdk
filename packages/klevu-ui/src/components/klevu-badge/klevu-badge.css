@@ -1,0 +1,6 @@
+:host {
+  display: inline-block;
+  padding: var(--klevu-spacing-01) var(--klevu-spacing-05);
+  background: var(--klevu-badge-background);
+  border-radius: var(--klevu-border-radius-xxl);
+}

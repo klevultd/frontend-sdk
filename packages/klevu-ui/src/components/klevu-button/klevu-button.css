@@ -50,12 +50,12 @@ button:active:not(:disabled) {
 }
 
 button.secondary {
-  background: var(--klevu-color-neutral-02);
-  color: var(--klevu-color-neutral-08);
+  background: var(--klevu-color-neutral-2);
+  color: var(--klevu-color-neutral-8);
 }
 
 button.secondary:hover {
-  background: var(--klevu-color-neutral-03);
+  background: var(--klevu-color-neutral-3);
 }
 
 button.fullwidth {

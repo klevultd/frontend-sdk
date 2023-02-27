@@ -28,7 +28,7 @@ input[type="checkbox"] {
   color: currentColor;
   width: var(--klevu-checkbox-size);
   height: var(--klevu-checkbox-size);
-  border: 1px solid var(--klevu-color-neutral-05);
+  border: 1px solid var(--klevu-color-neutral-5);
   border-radius: var(--klevu-border-radius-s);
   display: inline-block;
   box-sizing: border-box;
@@ -69,7 +69,7 @@ span {
   align-items: center;
   justify-content: center;
   transition: 120ms transform ease-in-out;
-  color: var(--klevu-color-neutral-01);
+  color: var(--klevu-color-neutral-1);
   pointer-events: none;
 }
 

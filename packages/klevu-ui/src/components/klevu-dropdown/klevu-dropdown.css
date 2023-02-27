@@ -30,7 +30,7 @@ select {
 }
 
 .selectcontainer.default {
-  border: 1px solid var(--klevu-color-neutral-04);
+  border: 1px solid var(--klevu-color-neutral-4);
   border-radius: var(--klevu-border-radius-m);
 }
 

@@ -32,7 +32,7 @@
   display: inline-block;
   margin-left: auto;
   text-align: right;
-  color: var(--klevu-color-neutral-06);
+  color: var(--klevu-color-neutral-6);
   font-size: var(--klevu-body-xs-size);
 }
 

@@ -31,9 +31,9 @@ input:disabled {
 /** Default bordered input */
 
 input.default {
-  border: 1px solid var(--klevu-color-neutral-05);
+  border: 1px solid var(--klevu-color-neutral-5);
   margin: 1px;
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-s);
 }
 
 input.default:focus {
@@ -51,9 +51,9 @@ input.default.error {
 /** Pill input */
 
 input.pill {
-  border: 1px solid var(--klevu-color-neutral-02);
+  border: 1px solid var(--klevu-color-neutral-2);
   margin: 1px;
-  background-color: var(--klevu-color-neutral-02);
+  background-color: var(--klevu-color-neutral-2);
   border-radius: 1000px;
 }
 

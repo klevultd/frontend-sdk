@@ -3,7 +3,7 @@
 
   display: block;
   padding: var(--klevu-spacing-04) 0;
-  border-top: 1px solid var(--klevu-color-neutral-04);
+  border-top: 1px solid var(--klevu-color-neutral-4);
 }
 
 input {
@@ -38,7 +38,7 @@ input:checked ~ .content {
 }
 
 label span {
-  color: var(--klevu-color-neutral-08);
+  color: var(--klevu-color-neutral-8);
   transition: transform var(--klevu-animation-duration-fast) var(--klevu-animation-timing-function);
   user-select: none;
 }

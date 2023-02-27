@@ -11,7 +11,7 @@ span {
   display: flex;
   height: 32px;
   width: 32px;
-  color: var(--klevu-color-neutral-08);
+  color: var(--klevu-color-neutral-8);
   border-radius: var(--klevu-border-radius-m);
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@ span.current {
 
 span:not(.disabled):not(.current):hover {
   color: var(--klevu-pagination-selected-color);
-  background-color: var(--klevu-color-neutral-02);
+  background-color: var(--klevu-color-neutral-2);
   cursor: pointer;
 }
 

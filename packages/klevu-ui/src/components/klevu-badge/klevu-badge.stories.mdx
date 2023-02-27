@@ -1,0 +1,98 @@
+import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { MDXAutoFillMeta } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-badge")
+
+<Meta title="Atoms/Badge" component="klevu-badge" argTypes={meta.argTypes} parameters={meta.parameters} />
+
+# Klevu-badge
+
+<Description>{meta.description}</Description>
+
+## Badge in accent colors
+
+Badge can be in accent colors. Colors are set in css properties and can be changed by overriding them.
+
+<Canvas>
+  <Story
+    name="Badge"
+    args={{
+      accent: 1,
+    }}
+  >
+    {(args) => html`<klevu-badge accent=${args.accent}>Badge 1</klevu-badge>`}
+  </Story>
+  <Story
+    name="Badge-2"
+    args={{
+      accent: 2,
+    }}
+  >
+    {(args) => html`<klevu-badge accent=${args.accent}>Badge 2</klevu-badge>`}
+  </Story>
+  <Story
+    name="Badge-3"
+    args={{
+      accent: 3,
+    }}
+  >
+    {(args) => html`<klevu-badge accent=${args.accent}>Badge 3</klevu-badge>`}
+  </Story>
+  <Story
+    name="Badge-4"
+    args={{
+      accent: 4,
+    }}
+  >
+    {(args) => html`<klevu-badge accent=${args.accent}>Badge 4</klevu-badge>`}
+  </Story>
+</Canvas>
+
+## Neutral colors
+
+Badges can be in neutral colors. Colors are set in css properties and can be changed by overriding them.
+
+<Canvas>
+  <Story
+    name="Neutral-1"
+    args={{
+      neutral: 1,
+    }}
+  >
+    {(args) => html`<klevu-badge neutral=${args.neutral}>Badge 1</klevu-badge>`}
+  </Story>
+  <Story
+    name="Neutral-2"
+    args={{
+      neutral: 2,
+    }}
+  >
+    {(args) => html`<klevu-badge neutral=${args.neutral}>Badge 2</klevu-badge>`}
+  </Story>
+  <Story
+    name="Neutral-3"
+    args={{
+      neutral: 3,
+    }}
+  >
+    {(args) => html`<klevu-badge neutral=${args.neutral}>Badge 3</klevu-badge>`}
+  </Story>
+  <Story
+    name="Neutral-4"
+    args={{
+      neutral: 4,
+    }}
+  >
+    {(args) => html`<klevu-badge neutral=${args.neutral}>Badge 4</klevu-badge>`}
+  </Story>
+</Canvas>
+
+## Badge with custom color
+
+Any color can be set to badget with css property.
+
+<Canvas>
+  <Story name="custom-color">
+    {(args) => html`<klevu-badge style="--klevu-badge-background: salmon;">Badge 1</klevu-badge>`}
+  </Story>
+</Canvas>

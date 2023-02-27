@@ -15,7 +15,7 @@
   display: block;
   padding: var(--klevu-spacing-04);
   border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-s);
   box-sizing: border-box;
   height: 100%;
 }

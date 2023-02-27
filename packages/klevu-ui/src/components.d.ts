@@ -53,6 +53,20 @@ export namespace Components {
         "startOpen"?: boolean;
     }
     /**
+     * Basic badge component. Can be used to display small information on top of other elements.
+     * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+     */
+    interface KlevuBadge {
+        /**
+          * Setting a acceent color to badge
+         */
+        "accent"?: number;
+        /**
+          * Setting a neutral color to badge
+         */
+        "neutral"?: number;
+    }
+    /**
      * Basic button component
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
@@ -244,14 +258,14 @@ export namespace Components {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
-     * @cssprop --klevu-color-neutral-01 #ffffff Background color
-     * @cssprop --klevu-color-neutral-02 #f6f6f6
-     * @cssprop --klevu-color-neutral-03 #ededed
-     * @cssprop --klevu-color-neutral-04 #e3e3e3
-     * @cssprop --klevu-color-neutral-05 #d6d6d6
-     * @cssprop --klevu-color-neutral-06 #919191
-     * @cssprop --klevu-color-neutral-07 #757575
-     * @cssprop --klevu-color-neutral-08 #191919 Text color
+     * @cssprop --klevu-color-neutral-1 #ffffff Background color
+     * @cssprop --klevu-color-neutral-2 #f6f6f6
+     * @cssprop --klevu-color-neutral-3 #ededed
+     * @cssprop --klevu-color-neutral-4 #e3e3e3
+     * @cssprop --klevu-color-neutral-5 #d6d6d6
+     * @cssprop --klevu-color-neutral-6 #919191
+     * @cssprop --klevu-color-neutral-7 #757575
+     * @cssprop --klevu-color-neutral-8 #191919 Text color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -868,6 +882,16 @@ declare global {
         new (): HTMLKlevuAccordionElement;
     };
     /**
+     * Basic badge component. Can be used to display small information on top of other elements.
+     * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+     */
+    interface HTMLKlevuBadgeElement extends Components.KlevuBadge, HTMLStencilElement {
+    }
+    var HTMLKlevuBadgeElement: {
+        prototype: HTMLKlevuBadgeElement;
+        new (): HTMLKlevuBadgeElement;
+    };
+    /**
      * Basic button component
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
@@ -959,14 +983,14 @@ declare global {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
-     * @cssprop --klevu-color-neutral-01 #ffffff Background color
-     * @cssprop --klevu-color-neutral-02 #f6f6f6
-     * @cssprop --klevu-color-neutral-03 #ededed
-     * @cssprop --klevu-color-neutral-04 #e3e3e3
-     * @cssprop --klevu-color-neutral-05 #d6d6d6
-     * @cssprop --klevu-color-neutral-06 #919191
-     * @cssprop --klevu-color-neutral-07 #757575
-     * @cssprop --klevu-color-neutral-08 #191919 Text color
+     * @cssprop --klevu-color-neutral-1 #ffffff Background color
+     * @cssprop --klevu-color-neutral-2 #f6f6f6
+     * @cssprop --klevu-color-neutral-3 #ededed
+     * @cssprop --klevu-color-neutral-4 #e3e3e3
+     * @cssprop --klevu-color-neutral-5 #d6d6d6
+     * @cssprop --klevu-color-neutral-6 #919191
+     * @cssprop --klevu-color-neutral-7 #757575
+     * @cssprop --klevu-color-neutral-8 #191919 Text color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -1200,6 +1224,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "klevu-accordion": HTMLKlevuAccordionElement;
+        "klevu-badge": HTMLKlevuBadgeElement;
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -1247,6 +1272,20 @@ declare namespace LocalJSX {
           * Should it initially be open
          */
         "startOpen"?: boolean;
+    }
+    /**
+     * Basic badge component. Can be used to display small information on top of other elements.
+     * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+     */
+    interface KlevuBadge {
+        /**
+          * Setting a acceent color to badge
+         */
+        "accent"?: number;
+        /**
+          * Setting a neutral color to badge
+         */
+        "neutral"?: number;
     }
     /**
      * Basic button component
@@ -1448,14 +1487,14 @@ declare namespace LocalJSX {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
-     * @cssprop --klevu-color-neutral-01 #ffffff Background color
-     * @cssprop --klevu-color-neutral-02 #f6f6f6
-     * @cssprop --klevu-color-neutral-03 #ededed
-     * @cssprop --klevu-color-neutral-04 #e3e3e3
-     * @cssprop --klevu-color-neutral-05 #d6d6d6
-     * @cssprop --klevu-color-neutral-06 #919191
-     * @cssprop --klevu-color-neutral-07 #757575
-     * @cssprop --klevu-color-neutral-08 #191919 Text color
+     * @cssprop --klevu-color-neutral-1 #ffffff Background color
+     * @cssprop --klevu-color-neutral-2 #f6f6f6
+     * @cssprop --klevu-color-neutral-3 #ededed
+     * @cssprop --klevu-color-neutral-4 #e3e3e3
+     * @cssprop --klevu-color-neutral-5 #d6d6d6
+     * @cssprop --klevu-color-neutral-6 #919191
+     * @cssprop --klevu-color-neutral-7 #757575
+     * @cssprop --klevu-color-neutral-8 #191919 Text color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -2038,6 +2077,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "klevu-accordion": KlevuAccordion;
+        "klevu-badge": KlevuBadge;
         "klevu-button": KlevuButton;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-cms-list": KlevuCmsList;
@@ -2080,6 +2120,11 @@ declare module "@stencil/core" {
              * @cssprop --klevu-accordion-content-height 600px Maxium height for content
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
+            /**
+             * Basic badge component. Can be used to display small information on top of other elements.
+             * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+             */
+            "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
              * Basic button component
              * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
@@ -2137,14 +2182,14 @@ declare module "@stencil/core" {
              * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
              * @cssprop --klevu-color-primary #2b4af7 The primary color
              * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
-             * @cssprop --klevu-color-neutral-01 #ffffff Background color
-             * @cssprop --klevu-color-neutral-02 #f6f6f6
-             * @cssprop --klevu-color-neutral-03 #ededed
-             * @cssprop --klevu-color-neutral-04 #e3e3e3
-             * @cssprop --klevu-color-neutral-05 #d6d6d6
-             * @cssprop --klevu-color-neutral-06 #919191
-             * @cssprop --klevu-color-neutral-07 #757575
-             * @cssprop --klevu-color-neutral-08 #191919 Text color
+             * @cssprop --klevu-color-neutral-1 #ffffff Background color
+             * @cssprop --klevu-color-neutral-2 #f6f6f6
+             * @cssprop --klevu-color-neutral-3 #ededed
+             * @cssprop --klevu-color-neutral-4 #e3e3e3
+             * @cssprop --klevu-color-neutral-5 #d6d6d6
+             * @cssprop --klevu-color-neutral-6 #919191
+             * @cssprop --klevu-color-neutral-7 #757575
+             * @cssprop --klevu-color-neutral-8 #191919 Text color
              * @cssprop --klevu-spacing-01 1px Spacing 01
              * @cssprop --klevu-spacing-02 4px Spacing 02
              * @cssprop --klevu-spacing-03 8px Spacing 03

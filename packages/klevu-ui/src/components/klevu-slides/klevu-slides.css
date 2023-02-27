@@ -1,7 +1,7 @@
 :host {
   display: block;
   margin: var(--klevu-spacing-large);
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-s);
   position: relative;
 }
 
@@ -13,14 +13,14 @@
   transform: translateY(-50%);
   z-index: 1;
   color: var(--klevu-color-primary-text);
-  box-shadow: 1px 1px 5px var(--klevu-color-shadow);
+
   border-radius: 50%;
   cursor: pointer;
   user-select: none;
 }
 
 klevu-button {
-  --klevu-rounded-corners: 50%;
+  --klevu-border-radius-s: 50%;
   --klevu-button-padding: var(--klevu-spacing-04) var(--klevu-spacing-large);
 }
 

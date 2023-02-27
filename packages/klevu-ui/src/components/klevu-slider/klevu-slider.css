@@ -123,13 +123,13 @@
   * Giving the connect element a border radius causes issues with using transform: scale
   */
 .noUi-target {
-  background: var(--klevu-color-neutral-04);
+  background: var(--klevu-color-neutral-4);
   border-radius: var(--klevu-border-radius-m);
   /*box-shadow: inset 0 1px 1px #f0f0f0, 0 3px 6px -5px #bbb;*/
 }
 .noUi-connects {
   top: 2px;
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-s);
 }
 .noUi-connect {
   background: var(--klevu-color-primary);
@@ -297,7 +297,7 @@
   display: block;
   position: absolute;
   background: transparent;
-  color: var(--klevu-color-neutral-08);
+  color: var(--klevu-color-neutral-8);
   padding: 5px;
   text-align: center;
   white-space: nowrap;
