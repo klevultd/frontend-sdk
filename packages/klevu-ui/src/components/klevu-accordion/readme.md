@@ -5,7 +5,7 @@
 
 ## Overview
 
-Component that wrap two slots to create accordion element
+Component that wrap two slots to create accordion element.
 
 ## Properties
 

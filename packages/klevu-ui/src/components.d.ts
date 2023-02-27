@@ -37,7 +37,7 @@ export { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typo
 export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export namespace Components {
     /**
-     * Component that wrap two slots to create accordion element
+     * Component that wrap two slots to create accordion element.
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
@@ -78,7 +78,13 @@ export namespace Components {
           * Is button disabled
          */
         "disabled"?: boolean;
+        /**
+          * Make button display block
+         */
         "fullWidth"?: boolean;
+        /**
+          * Toned down secondary button
+         */
         "isSecondary"?: boolean;
     }
     /**
@@ -870,7 +876,7 @@ export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     /**
-     * Component that wrap two slots to create accordion element
+     * Component that wrap two slots to create accordion element.
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
@@ -1258,7 +1264,7 @@ declare global {
 }
 declare namespace LocalJSX {
     /**
-     * Component that wrap two slots to create accordion element
+     * Component that wrap two slots to create accordion element.
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
@@ -1299,7 +1305,13 @@ declare namespace LocalJSX {
           * Is button disabled
          */
         "disabled"?: boolean;
+        /**
+          * Make button display block
+         */
         "fullWidth"?: boolean;
+        /**
+          * Toned down secondary button
+         */
         "isSecondary"?: boolean;
     }
     /**
@@ -2114,7 +2126,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             /**
-             * Component that wrap two slots to create accordion element
+             * Component that wrap two slots to create accordion element.
              * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
              * @cssprop --klevu-accordion-background transparent Header background
              * @cssprop --klevu-accordion-content-height 600px Maxium height for content

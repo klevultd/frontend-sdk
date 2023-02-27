@@ -1,11 +1,11 @@
 :host {
   --klevu-button-background-hover: var(--klevu-color-primary-darker);
-  display: inline-block;
 }
 
 button {
   --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
 
+  display: inline-block;
   position: relative;
   background: var(--klevu-button-background-color, var(--klevu-color-primary));
   border-radius: var(--klevu-border-radius-m);

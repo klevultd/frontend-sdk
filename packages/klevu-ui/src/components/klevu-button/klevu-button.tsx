@@ -18,9 +18,11 @@ export class KlevuButton {
   @Prop({ reflect: true })
   disabled?: boolean
 
+  /** Toned down secondary button */
   @Prop()
   isSecondary?: boolean
 
+  /** Make button display block */
   @Prop()
   fullWidth?: boolean
 
