@@ -313,6 +313,19 @@ export namespace Components {
         "closeDrawer": () => Promise<void>;
     }
     /**
+     * Single list item for listing things. Can include icons, or images and
+     */
+    interface KlevuList {
+        /**
+          * Icon to be displayed in the list item. Cannot be used with image.
+         */
+        "icon"?: string;
+        /**
+          * Image to be displayed in the list item. Cannot be used with icon.
+         */
+        "image"?: string;
+    }
+    /**
      * Full merchandising app to power up your product grid pages
      */
     interface KlevuMerchandising {
@@ -1041,6 +1054,15 @@ declare global {
         new (): HTMLKlevuLayoutResultsElement;
     };
     /**
+     * Single list item for listing things. Can include icons, or images and
+     */
+    interface HTMLKlevuListElement extends Components.KlevuList, HTMLStencilElement {
+    }
+    var HTMLKlevuListElement: {
+        prototype: HTMLKlevuListElement;
+        new (): HTMLKlevuListElement;
+    };
+    /**
      * Full merchandising app to power up your product grid pages
      */
     interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
@@ -1257,6 +1279,7 @@ declare global {
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
+        "klevu-list": HTMLKlevuListElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
         "klevu-pagination": HTMLKlevuPaginationElement;
         "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
@@ -1561,6 +1584,19 @@ declare namespace LocalJSX {
      * Generic layout used in merchansiding and search landing page
      */
     interface KlevuLayoutResults {
+    }
+    /**
+     * Single list item for listing things. Can include icons, or images and
+     */
+    interface KlevuList {
+        /**
+          * Icon to be displayed in the list item. Cannot be used with image.
+         */
+        "icon"?: string;
+        /**
+          * Image to be displayed in the list item. Cannot be used with icon.
+         */
+        "image"?: string;
     }
     /**
      * Full merchandising app to power up your product grid pages
@@ -2124,6 +2160,7 @@ declare namespace LocalJSX {
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
+        "klevu-list": KlevuList;
         "klevu-merchandising": KlevuMerchandising;
         "klevu-pagination": KlevuPagination;
         "klevu-popular-searches": KlevuPopularSearches;
@@ -2246,6 +2283,10 @@ declare module "@stencil/core" {
              * Generic layout used in merchansiding and search landing page
              */
             "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
+            /**
+             * Single list item for listing things. Can include icons, or images and
+             */
+            "klevu-list": LocalJSX.KlevuList & JSXBase.HTMLAttributes<HTMLKlevuListElement>;
             /**
              * Full merchandising app to power up your product grid pages
              */

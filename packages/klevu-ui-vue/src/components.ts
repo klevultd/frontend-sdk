@@ -100,6 +100,12 @@ export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatest
 export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutResults>('klevu-layout-results', undefined);
 
 
+export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-list', undefined, [
+  'icon',
+  'image'
+]);
+
+
 export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchandising>('klevu-merchandising', undefined, [
   'usePagination',
   'limit',
