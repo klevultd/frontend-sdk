@@ -5,7 +5,7 @@
 
 ## Overview
 
-Heading element
+Klevu typography component. This component is used in most places to set correct font in component pieces.
 
 ## Properties
 
