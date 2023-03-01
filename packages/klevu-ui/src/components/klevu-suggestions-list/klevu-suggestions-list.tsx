@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop } from "@stencil/core"
 
 /**
- * Simple component to list suggestions
+ * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
  */
 @Component({
   tag: "klevu-suggestions-list",
@@ -16,17 +16,19 @@ export class KlevuSuggestionsList {
   /**
    * Suggestions to render in list
    */
-  @Prop() suggestions!: string[]
+  @Prop() suggestions: string[] = []
 
   render() {
     return (
       <Host>
-        <klevu-typography variant="h3">{this.caption}</klevu-typography>
-        <ul part="klevu-list">
-          {this.suggestions?.map((s) => (
-            <li innerHTML={s}></li>
-          ))}
-        </ul>
+        <klevu-typography class="caption" variant="h4">
+          {this.caption}
+        </klevu-typography>
+        {this.suggestions?.map((s) => (
+          <klevu-list condensed noXPadding>
+            <span slot="primary" innerHTML={s}></span>
+          </klevu-list>
+        ))}
       </Host>
     )
   }

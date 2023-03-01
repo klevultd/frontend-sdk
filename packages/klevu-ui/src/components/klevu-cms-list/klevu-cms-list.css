@@ -2,6 +2,6 @@
   display: block;
 }
 
-ul {
-  margin-top: var(--klevu-spacing-04);
+klevu-typography.caption {
+  margin-bottom: var(--klevu-spacing-04);
 }

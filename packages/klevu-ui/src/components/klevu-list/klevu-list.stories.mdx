@@ -13,23 +13,31 @@ const meta = MDXAutoFillMeta("klevu-list")
 ## List items with only primary text
 
 <Canvas>
-  <Story name="List">
+  <Story
+    name="List"
+    args={{
+      condensed: false,
+      noXPadding: false,
+    }}
+  >
     {(args) => html`
-      <klevu-list>
+      <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
         <span slot="primary">List items with only primary text</span>
       </klevu-list>
-      <klevu-list>
+      <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
         <span slot="primary">List items with only primary text</span>
       </klevu-list>
-      <klevu-list>
+      <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
         <span slot="primary">List items with only primary text</span>
       </klevu-list>
-      <klevu-list>
+      <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
         <span slot="primary">List items with only primary text</span>
       </klevu-list>
     `}
   </Story>
 </Canvas>
+
+<ArgsTable story="List" />
 
 ## List items with secondary text
 
@@ -37,19 +45,19 @@ const meta = MDXAutoFillMeta("klevu-list")
   <Story name="List with secondary text">
     {(args) => html`
       <klevu-list>
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list>
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list>
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list>
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
     `}
@@ -62,11 +70,11 @@ const meta = MDXAutoFillMeta("klevu-list")
   <Story name="List with icons">
     {(args) => html`
       <klevu-list icon="check">
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list icon="search">
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list icon="palette">
@@ -85,11 +93,11 @@ const meta = MDXAutoFillMeta("klevu-list")
   <Story name="List with images">
     {(args) => html`
       <klevu-list image="https://picsum.photos/200">
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list image="https://picsum.photos/300">
-        <span slot="primary">List items with only primary text</span>
+        <span slot="primary">List items with primary text</span>
         <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
       <klevu-list image="https://picsum.photos/220">
@@ -97,6 +105,23 @@ const meta = MDXAutoFillMeta("klevu-list")
       </klevu-list>
       <klevu-list image="https://picsum.photos/400">
         <span slot="primary">List items with only primary text</span>
+      </klevu-list>
+    `}
+  </Story>
+</Canvas>
+
+## List item with url
+
+<Canvas>
+  <Story name="List with url">
+    {(args) => html`
+      <klevu-list image="https://picsum.photos/200" url="https://www.klevu.com">
+        <span slot="primary">List items with primary text</span>
+        <span slot="secondary">Seconday text on the list item</span>
+      </klevu-list>
+      <klevu-list image="https://picsum.photos/200" url="https://www.google.com">
+        <span slot="primary">List items with primary text</span>
+        <span slot="secondary">Seconday text on the list item</span>
       </klevu-list>
     `}
   </Story>

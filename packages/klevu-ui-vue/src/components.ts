@@ -102,7 +102,10 @@ export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutR
 
 export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-list', undefined, [
   'icon',
-  'image'
+  'image',
+  'url',
+  'condensed',
+  'noXPadding'
 ]);
 
 

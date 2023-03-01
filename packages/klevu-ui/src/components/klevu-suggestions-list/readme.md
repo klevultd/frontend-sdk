@@ -5,21 +5,14 @@
 
 ## Overview
 
-Simple component to list suggestions
+Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
 
 ## Properties
 
-| Property                   | Attribute | Description                   | Type       | Default                |
-| -------------------------- | --------- | ----------------------------- | ---------- | ---------------------- |
-| `caption`                  | `caption` | Caption on the list           | `string`   | `"Search suggestions"` |
-| `suggestions` _(required)_ | --        | Suggestions to render in list | `string[]` | `undefined`            |
-
-
-## Shadow Parts
-
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
+| Property      | Attribute | Description                   | Type       | Default                |
+| ------------- | --------- | ----------------------------- | ---------- | ---------------------- |
+| `caption`     | `caption` | Caption on the list           | `string`   | `"Search suggestions"` |
+| `suggestions` | --        | Suggestions to render in list | `string[]` | `[]`                   |
 
 
 ----------------------------------------------

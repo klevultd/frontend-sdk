@@ -14,13 +14,6 @@ Fetches and displays most popular searches from Klevu Merchant center
 | `caption` | `caption` | Caption of the list | `string` | `"Popular searches"` |
 
 
-## Shadow Parts
-
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
-
-
 ----------------------------------------------
 
 

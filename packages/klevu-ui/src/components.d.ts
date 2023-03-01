@@ -313,9 +313,13 @@ export namespace Components {
         "closeDrawer": () => Promise<void>;
     }
     /**
-     * Single list item for listing things. Can include icons, or images and
+     * Single list item for listing things.
      */
     interface KlevuList {
+        /**
+          * Condensed version of the list item.
+         */
+        "condensed": boolean;
         /**
           * Icon to be displayed in the list item. Cannot be used with image.
          */
@@ -324,6 +328,11 @@ export namespace Components {
           * Image to be displayed in the list item. Cannot be used with icon.
          */
         "image"?: string;
+        "noXPadding": boolean;
+        /**
+          * Make the whole thing clickable and navigate to this url.
+         */
+        "url"?: string;
     }
     /**
      * Full merchandising app to power up your product grid pages
@@ -761,7 +770,7 @@ export namespace Components {
         "variant": KlevuDropdownVariant1;
     }
     /**
-     * Simple component to list suggestions
+     * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
      */
     interface KlevuSuggestionsList {
         /**
@@ -1054,7 +1063,7 @@ declare global {
         new (): HTMLKlevuLayoutResultsElement;
     };
     /**
-     * Single list item for listing things. Can include icons, or images and
+     * Single list item for listing things.
      */
     interface HTMLKlevuListElement extends Components.KlevuList, HTMLStencilElement {
     }
@@ -1214,7 +1223,7 @@ declare global {
         new (): HTMLKlevuSortElement;
     };
     /**
-     * Simple component to list suggestions
+     * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
      */
     interface HTMLKlevuSuggestionsListElement extends Components.KlevuSuggestionsList, HTMLStencilElement {
     }
@@ -1586,9 +1595,13 @@ declare namespace LocalJSX {
     interface KlevuLayoutResults {
     }
     /**
-     * Single list item for listing things. Can include icons, or images and
+     * Single list item for listing things.
      */
     interface KlevuList {
+        /**
+          * Condensed version of the list item.
+         */
+        "condensed"?: boolean;
         /**
           * Icon to be displayed in the list item. Cannot be used with image.
          */
@@ -1597,6 +1610,11 @@ declare namespace LocalJSX {
           * Image to be displayed in the list item. Cannot be used with icon.
          */
         "image"?: string;
+        "noXPadding"?: boolean;
+        /**
+          * Make the whole thing clickable and navigate to this url.
+         */
+        "url"?: string;
     }
     /**
      * Full merchandising app to power up your product grid pages
@@ -2058,7 +2076,7 @@ declare namespace LocalJSX {
         "variant"?: KlevuDropdownVariant1;
     }
     /**
-     * Simple component to list suggestions
+     * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
      */
     interface KlevuSuggestionsList {
         /**
@@ -2068,7 +2086,7 @@ declare namespace LocalJSX {
         /**
           * Suggestions to render in list
          */
-        "suggestions": string[];
+        "suggestions"?: string[];
     }
     /**
      * Branded text field component
@@ -2284,7 +2302,7 @@ declare module "@stencil/core" {
              */
             "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
             /**
-             * Single list item for listing things. Can include icons, or images and
+             * Single list item for listing things.
              */
             "klevu-list": LocalJSX.KlevuList & JSXBase.HTMLAttributes<HTMLKlevuListElement>;
             /**
@@ -2364,7 +2382,7 @@ declare module "@stencil/core" {
              */
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
             /**
-             * Simple component to list suggestions
+             * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
              */
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
             /**

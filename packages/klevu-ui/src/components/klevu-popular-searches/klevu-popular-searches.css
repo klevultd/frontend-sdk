@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+klevu-typography.caption {
+  margin-bottom: var(--klevu-spacing-04);
+}

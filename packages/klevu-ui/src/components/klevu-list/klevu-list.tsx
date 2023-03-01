@@ -1,7 +1,8 @@
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, Host, h, Prop, Fragment } from "@stencil/core"
+import { html } from "lit-html"
 
 /**
- * Single list item for listing things. Can include icons, or images and
+ * Single list item for listing things.
  */
 @Component({
   tag: "klevu-list",
@@ -18,9 +19,21 @@ export class KlevuList {
    */
   @Prop() image?: string
 
-  render() {
+  /**
+   * Make the whole thing clickable and navigate to this url.
+   */
+  @Prop() url?: string
+
+  /**
+   * Condensed version of the list item.
+   */
+  @Prop() condensed = false
+
+  @Prop() noXPadding = false
+
+  #getContent() {
     return (
-      <Host>
+      <Fragment>
         {this.icon && (
           <span class="icon" part="material-icon">
             {this.icon}
@@ -41,6 +54,34 @@ export class KlevuList {
           </klevu-typography>
         </div>
         <slot name="button"></slot>
+      </Fragment>
+    )
+  }
+
+  render() {
+    return (
+      <Host>
+        {Boolean(this.url) ? (
+          <a
+            class={{
+              condensed: this.condensed,
+              noXPadding: this.noXPadding,
+            }}
+            href={this.url}
+          >
+            {this.#getContent()}
+          </a>
+        ) : (
+          <div
+            class={{
+              container: true,
+              condensed: this.condensed,
+              noXPadding: this.noXPadding,
+            }}
+          >
+            {this.#getContent()}
+          </div>
+        )}
       </Host>
     )
   }

@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, h, Host, Prop } from "@stencil/core"
 
 /**
  * Component to display list of CMS page results
@@ -31,19 +31,24 @@ export class KlevuCmsList {
   render() {
     return (
       <Host>
-        <klevu-typography variant="h2">{this.caption}</klevu-typography>
-        <ul part="klevu-list">
-          {this.pages?.map((page) => {
-            if (this.link) {
-              return (
-                <li>
-                  <a href={page.url}>{page.name}</a>
-                </li>
-              )
-            }
-            return <li onClick={() => this.klevuCmsPageClick.emit(page)}>{page.name}</li>
-          })}
-        </ul>
+        <klevu-typography class="caption" variant="h4">
+          {this.caption}
+        </klevu-typography>
+
+        {this.pages?.map((page) => {
+          if (this.link) {
+            return (
+              <klevu-list url={page.url} condensed noXPadding>
+                <span slot="primary">{page.name}</span>
+              </klevu-list>
+            )
+          }
+          return (
+            <klevu-list onClick={() => this.klevuCmsPageClick.emit(page)} condensed noXPadding>
+              <span slot="primary">{page.name}</span>
+            </klevu-list>
+          )
+        })}
       </Host>
     )
   }

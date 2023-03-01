@@ -28,8 +28,16 @@ export class KlevuPopularSearches {
   render() {
     return (
       <Host>
-        <klevu-typography variant="h2">{this.caption}</klevu-typography>
-        <ul part="klevu-list">{this.popularSearches ? this.popularSearches.map((s) => <li>{s}</li>) : null}</ul>
+        <klevu-typography class="caption" variant="h4">
+          {this.caption}
+        </klevu-typography>
+        {this.popularSearches
+          ? this.popularSearches.map((s) => (
+              <klevu-list condensed noXPadding>
+                <span slot="primary">{s}</span>
+              </klevu-list>
+            ))
+          : null}
       </Host>
     )
   }
