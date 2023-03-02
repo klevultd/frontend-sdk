@@ -2,7 +2,8 @@ import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil
 import noUiSlider, { API } from "nouislider"
 
 /**
- * Horizontal slider component. Used for price range
+ * Horizontal slider component. By default used for price range in this package. But can
+ * be used for other purposes as well.
  */
 @Component({
   tag: "klevu-slider",

@@ -487,7 +487,7 @@ export namespace Components {
         "variant": KlevuProductVariant;
     }
     /**
-     * Component to place products on grid
+     * Component to place products on grid. Very simple container for products.
      * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
      */
     interface KlevuProductGrid {
@@ -632,7 +632,8 @@ export namespace Components {
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
     }
     /**
-     * Plain textfield that does the searching
+     * Plain textfield that does the searching. It queries Klevu and returns the results
+     * in a custom event. Then you can decide what to do with the results.
      */
     interface KlevuSearchField {
         /**
@@ -715,7 +716,8 @@ export namespace Components {
     interface KlevuSimpleSearch {
     }
     /**
-     * Horizontal slider component. Used for price range
+     * Horizontal slider component. By default used for price range in this package. But can
+     * be used for other purposes as well.
      */
     interface KlevuSlider {
         /**
@@ -1128,7 +1130,7 @@ declare global {
         new (): HTMLKlevuProductElement;
     };
     /**
-     * Component to place products on grid
+     * Component to place products on grid. Very simple container for products.
      * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
      */
     interface HTMLKlevuProductGridElement extends Components.KlevuProductGrid, HTMLStencilElement {
@@ -1169,7 +1171,8 @@ declare global {
         new (): HTMLKlevuRecommendationsElement;
     };
     /**
-     * Plain textfield that does the searching
+     * Plain textfield that does the searching. It queries Klevu and returns the results
+     * in a custom event. Then you can decide what to do with the results.
      */
     interface HTMLKlevuSearchFieldElement extends Components.KlevuSearchField, HTMLStencilElement {
     }
@@ -1196,7 +1199,8 @@ declare global {
         new (): HTMLKlevuSimpleSearchElement;
     };
     /**
-     * Horizontal slider component. Used for price range
+     * Horizontal slider component. By default used for price range in this package. But can
+     * be used for other purposes as well.
      */
     interface HTMLKlevuSliderElement extends Components.KlevuSlider, HTMLStencilElement {
     }
@@ -1769,7 +1773,7 @@ declare namespace LocalJSX {
         "variant"?: KlevuProductVariant;
     }
     /**
-     * Component to place products on grid
+     * Component to place products on grid. Very simple container for products.
      * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
      */
     interface KlevuProductGrid {
@@ -1914,7 +1918,8 @@ declare namespace LocalJSX {
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
     }
     /**
-     * Plain textfield that does the searching
+     * Plain textfield that does the searching. It queries Klevu and returns the results
+     * in a custom event. Then you can decide what to do with the results.
      */
     interface KlevuSearchField {
         /**
@@ -2013,7 +2018,8 @@ declare namespace LocalJSX {
         "onKlevuSuggestionClick"?: (event: KlevuSimpleSearchCustomEvent<string>) => void;
     }
     /**
-     * Horizontal slider component. Used for price range
+     * Horizontal slider component. By default used for price range in this package. But can
+     * be used for other purposes as well.
      */
     interface KlevuSlider {
         /**
@@ -2337,7 +2343,7 @@ declare module "@stencil/core" {
              */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**
-             * Component to place products on grid
+             * Component to place products on grid. Very simple container for products.
              * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
@@ -2358,7 +2364,8 @@ declare module "@stencil/core" {
              */
             "klevu-recommendations": LocalJSX.KlevuRecommendations & JSXBase.HTMLAttributes<HTMLKlevuRecommendationsElement>;
             /**
-             * Plain textfield that does the searching
+             * Plain textfield that does the searching. It queries Klevu and returns the results
+             * in a custom event. Then you can decide what to do with the results.
              */
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
             /**
@@ -2370,7 +2377,8 @@ declare module "@stencil/core" {
              */
             "klevu-simple-search": LocalJSX.KlevuSimpleSearch & JSXBase.HTMLAttributes<HTMLKlevuSimpleSearchElement>;
             /**
-             * Horizontal slider component. Used for price range
+             * Horizontal slider component. By default used for price range in this package. But can
+             * be used for other purposes as well.
              */
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             /**

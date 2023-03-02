@@ -1,0 +1,77 @@
+import { ArgsTable, Canvas, Meta, Story, Description, Source } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
+import { MDXAutoFillMeta } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-slider")
+
+<Meta title="Components/Slider" component="klevu-slider" argTypes={meta.argTypes} parameters={meta.parameters} />
+
+# Klevu-slider
+
+<Description>{meta.description}</Description>
+
+<Canvas>
+  <Story
+    name="Slider"
+    args={{
+      min: 0,
+      max: 100,
+      start: 10,
+      end: 90,
+    }}
+  >
+    {(args) => html`<klevu-slider
+      end=${ifDefined(args.end)}
+      max=${ifDefined(args.max)}
+      min=${ifDefined(args.min)}
+      show-tooltips=${ifDefined(args.showTooltips)}
+      start=${ifDefined(args.start)}
+      .formatTooltip=${args.formatTooltip}
+    ></klevu-slider>`}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Slider" />
+
+## Slider with tooltips
+
+By setting the `formtTooltip` property, you can format the tooltip values.
+
+<Canvas>
+  <Story
+    name="Slider with tooltips"
+    args={{
+      min: 0,
+      max: 100,
+      start: 10,
+      end: 90,
+      showTooltips: true,
+    }}
+  >
+    {(args) => html`<klevu-slider
+      end=${ifDefined(args.end)}
+      max=${ifDefined(args.max)}
+      min=${ifDefined(args.min)}
+      show-tooltips=${ifDefined(args.showTooltips)}
+      start=${ifDefined(args.start)}
+      .formatTooltip=${(value) => `$${value.toFixed(0)}`}
+    ></klevu-slider>`}
+  </Story>
+</Canvas>
+
+Here is the code for the above example in React (@klevu/ui-react):
+
+<Source
+  language="jsx"
+  dark
+  format={true}
+  code={`
+  <KlevuSlider 
+    formatTooltip={(value) => \`$\${value.toFixed(0)}\`}
+    end={90}
+    max={100}
+    min={0}
+    start={10}
+    showTooltips
+  ></KlevuSlider>`}
+/>

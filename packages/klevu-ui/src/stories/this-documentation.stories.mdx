@@ -1,6 +1,6 @@
 import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
 
-<Meta title="Start/Using Storybook" />
+<Meta title="Start/This documentation" />
 
 # Using Klevu Components and structure of this documentation
 
@@ -12,10 +12,16 @@ you'd first have to retrieve a reference of the HTML element before assigning it
 like React, Vue Angular or Lit though—it's an entirely different story! Both attributes and properties can be
 effortlessly included in your template with ease!
 
+In this documenation most of the examples are in plain VanillaJS. This reason properties are not visible in them. In some
+of the examples we also provide React examples.
+
+Problem with properties in this documentation is that they won't be displayed in automatically generated code examples
+that you can click open under the stories.
+
 ## VanilljaJS example
 
-Here is a example how to create `klevu-init` component in HTML, settings some attributes to it and then in Javascript
-settings properties to it.
+Here is a example how to create `klevu-init` component in HTML. And then getting reference to to said element and setting
+some properites on it.
 
 ```html
 <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"></klevu-init>
@@ -42,6 +48,8 @@ myComponent.settings = {
 
 We provide a ready made library `@klevu/ui-react` for React that changes Klevu Web Components to React Components.
 It allows much easier interface to for use the component.
+
+Biggest change is that you need to import components from `@klevu/ui-react` and component names are in PascalCase.
 
 ```jsx
 import { KlevuInit } from "@klevu/ui-react"

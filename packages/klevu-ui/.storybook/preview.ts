@@ -2,6 +2,8 @@ import { defineCustomElements } from "../loader"
 import "../src/global/global.css"
 // @ts-inore
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
+import prettier from "prettier/standalone"
+import prettierBabel from "prettier/parser-babel"
 
 defineCustomElements()
 
@@ -62,7 +64,7 @@ export const parameters = {
     storySort: {
       order: [
         "Start",
-        ["Welcome", "Installation", "Styles", "Using Storybook"],
+        ["Welcome", "Installation", "Styles", "This documentation"],
         "Atoms",
         "Components",
         "Layout",
@@ -84,4 +86,11 @@ export const parameters = {
   },
   cssprops,
   viewMode: "docs",
+  docs: {
+    transformSource: (input) =>
+      prettier.format(input, {
+        parser: "babel",
+        plugins: [prettierBabel],
+      }),
+  },
 }

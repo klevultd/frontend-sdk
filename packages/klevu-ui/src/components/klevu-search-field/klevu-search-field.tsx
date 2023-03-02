@@ -24,7 +24,8 @@ export type SuggestionsEventData = string[]
 export type SearchFieldVariant = "default" | "pill"
 
 /**
- * Plain textfield that does the searching
+ * Plain textfield that does the searching. It queries Klevu and returns the results
+ * in a custom event. Then you can decide what to do with the results.
  */
 @Component({
   tag: "klevu-search-field",

@@ -5,7 +5,7 @@
 
 ## Overview
 
-Component to place products on grid
+Component to place products on grid. Very simple container for products.
 
 ## Properties
 

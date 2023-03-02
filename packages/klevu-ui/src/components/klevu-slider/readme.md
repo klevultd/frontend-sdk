@@ -5,7 +5,8 @@
 
 ## Overview
 
-Horizontal slider component. Used for price range
+Horizontal slider component. By default used for price range in this package. But can
+be used for other purposes as well.
 
 ## Properties
 
