@@ -14,13 +14,6 @@ Lists latest searches user has made on the site
 | `caption` | `caption` | Caption of the list | `string` | `"Last searches"` |
 
 
-## Shadow Parts
-
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
-
-
 ----------------------------------------------
 
 

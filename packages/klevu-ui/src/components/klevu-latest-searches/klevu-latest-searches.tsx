@@ -14,6 +14,7 @@ export class KlevuLatestSearches {
    * Caption of the list
    */
   @Prop() caption = "Last searches"
+
   @State() lastSearches: string[] = []
 
   async connectedCallback() {
@@ -23,12 +24,14 @@ export class KlevuLatestSearches {
   render() {
     return (
       <Host>
-        <klevu-typography variant="h3">{this.caption}</klevu-typography>
-        <ul part="klevu-list">
-          {this.lastSearches.map((ls) => (
-            <li>{ls}</li>
-          ))}
-        </ul>
+        <klevu-typography variant="h3" class="caption">
+          {this.caption}
+        </klevu-typography>
+        {this.lastSearches.map((ls) => (
+          <klevu-list condensed noXPadding>
+            <span slot="primary">{ls}</span>
+          </klevu-list>
+        ))}
       </Host>
     )
   }
