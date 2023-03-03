@@ -181,7 +181,8 @@ export namespace Components {
         "variant": KlevuDropdownVariant;
     }
     /**
-     * Rendering items of single facet
+     * Rendering items of single facet with all its options or a slider.
+     * Manager property must be set for this component to work.
      * @csspart heading - Heading of the facet
      */
     interface KlevuFacet {
@@ -198,7 +199,7 @@ export namespace Components {
          */
         "customOrder"?: string[];
         /**
-          * Originating filter manager which to modify
+          * Originating filter manager which to modify. This is the most important property of the component. It will be used to modify the filter state for queries.
          */
         "manager": FilterManager;
         /**
@@ -206,11 +207,11 @@ export namespace Components {
          */
         "mode": KlevuFacetMode;
         /**
-          * From which options to build facet
+          * From which options to build facet. Single option value from Klevu SDK FilterManager. Either this or slider must be set.
          */
         "option"?: KlevuFilterResultOptions;
         /**
-          * From which slider to build facet
+          * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
     }
@@ -311,6 +312,9 @@ export namespace Components {
      * Generic layout used in merchansiding and search landing page
      */
     interface KlevuLayoutResults {
+        /**
+          * Can be used to close the drawer programmatically
+         */
         "closeDrawer": () => Promise<void>;
     }
     /**
@@ -987,7 +991,8 @@ declare global {
         new (): HTMLKlevuDropdownElement;
     };
     /**
-     * Rendering items of single facet
+     * Rendering items of single facet with all its options or a slider.
+     * Manager property must be set for this component to work.
      * @csspart heading - Heading of the facet
      */
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
@@ -1466,7 +1471,8 @@ declare namespace LocalJSX {
         "variant"?: KlevuDropdownVariant;
     }
     /**
-     * Rendering items of single facet
+     * Rendering items of single facet with all its options or a slider.
+     * Manager property must be set for this component to work.
      * @csspart heading - Heading of the facet
      */
     interface KlevuFacet {
@@ -1483,7 +1489,7 @@ declare namespace LocalJSX {
          */
         "customOrder"?: string[];
         /**
-          * Originating filter manager which to modify
+          * Originating filter manager which to modify. This is the most important property of the component. It will be used to modify the filter state for queries.
          */
         "manager": FilterManager;
         /**
@@ -1491,11 +1497,11 @@ declare namespace LocalJSX {
          */
         "mode"?: KlevuFacetMode;
         /**
-          * From which options to build facet
+          * From which options to build facet. Single option value from Klevu SDK FilterManager. Either this or slider must be set.
          */
         "option"?: KlevuFilterResultOptions;
         /**
-          * From which slider to build facet
+          * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
     }
@@ -2257,7 +2263,8 @@ declare module "@stencil/core" {
              */
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             /**
-             * Rendering items of single facet
+             * Rendering items of single facet with all its options or a slider.
+             * Manager property must be set for this component to work.
              * @csspart heading - Heading of the facet
              */
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;

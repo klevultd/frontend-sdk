@@ -5,7 +5,9 @@ import { getGlobalSettings, globalExportedParts } from "../../utils/utils"
 export type KlevuFacetMode = "checkbox" | "radio"
 
 /**
- * Rendering items of single facet
+ * Rendering items of single facet with all its options or a slider.
+ *
+ * Manager property must be set for this component to work.
  *
  * @csspart heading - Heading of the facet
  */
@@ -19,15 +21,16 @@ export class KlevuFacet {
   el!: HTMLKlevuFacetElement
 
   /**
-   * From which options to build facet
+   * From which options to build facet. Single option value from Klevu SDK FilterManager. Either this or slider must be set.
    */
   @Prop() option?: KlevuFilterResultOptions
   /**
-   * From which slider to build facet
+   * From which slider to build facet.
    */
   @Prop() slider?: KlevuFilterResultSlider
   /**
-   * Originating filter manager which to modify
+   * Originating filter manager which to modify. This is the most important property of the component.
+   * It will be used to modify the filter state for queries.
    */
   @Prop() manager!: FilterManager
   /**

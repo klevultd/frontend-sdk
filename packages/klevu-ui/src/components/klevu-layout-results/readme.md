@@ -13,7 +13,7 @@ Generic layout used in merchansiding and search landing page
 
 ### `closeDrawer() => Promise<void>`
 
-
+Can be used to close the drawer programmatically
 
 #### Returns
 

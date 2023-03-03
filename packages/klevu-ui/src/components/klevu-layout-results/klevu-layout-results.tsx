@@ -28,6 +28,9 @@ export class KlevuLayoutResults {
     this.currentViewPortSize = await this.viewportUtil.getCurrentSize()
   }
 
+  /**
+   * Can be used to close the drawer programmatically
+   */
   @Method()
   async closeDrawer() {
     this.drawerElement.closeModal()
