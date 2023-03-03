@@ -55,6 +55,7 @@ export namespace Components {
     /**
      * Basic badge component. Can be used to display small information on top of other elements.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+     * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
     interface KlevuBadge {
         /**
@@ -922,6 +923,7 @@ declare global {
     /**
      * Basic badge component. Can be used to display small information on top of other elements.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+     * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
     interface HTMLKlevuBadgeElement extends Components.KlevuBadge, HTMLStencilElement {
     }
@@ -1334,6 +1336,7 @@ declare namespace LocalJSX {
     /**
      * Basic badge component. Can be used to display small information on top of other elements.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+     * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
     interface KlevuBadge {
         /**
@@ -2220,6 +2223,7 @@ declare module "@stencil/core" {
             /**
              * Basic badge component. Can be used to display small information on top of other elements.
              * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+             * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**

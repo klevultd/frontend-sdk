@@ -79,7 +79,7 @@ export const parameters = {
   },
   controls: {
     matchers: {
-      color: /(background|color)$/i,
+      color: /(color)$/i,
       date: /Date$/,
     },
     expanded: true,

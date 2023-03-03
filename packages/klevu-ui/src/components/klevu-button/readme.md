@@ -16,6 +16,13 @@ Basic button component
 | `isSecondary` | `is-secondary` | Toned down secondary button | `boolean \| undefined` | `undefined` |
 
 
+## Slots
+
+| Slot        | Description |
+| ----------- | ----------- |
+| `"default"` | Button text |
+
+
 ----------------------------------------------
 
 

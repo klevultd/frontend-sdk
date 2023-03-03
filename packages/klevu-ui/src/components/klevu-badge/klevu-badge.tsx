@@ -3,8 +3,9 @@ import { Component, Host, h, Prop } from "@stencil/core"
 /**
  * Basic badge component. Can be used to display small information on top of other elements.
  *
- * @slot - Default slot for badge content
+ * @slot default - Badge content
  * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
+ * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
  */
 @Component({
   tag: "klevu-badge",

@@ -6,19 +6,27 @@ const meta = MDXAutoFillMeta("klevu-button")
 
 <Meta title="Atoms/Button" component="klevu-button" argTypes={meta.argTypes} parameters={meta.parameters} />
 
-# Klevu-accordion
+# Klevu-button
 
 <Description>{meta.description}</Description>
 
 <Canvas>
   <Story
     name="Button"
+    argTypes={{
+      text: {
+        description: "Text to be displayed on the button",
+        control: {
+          type: "text",
+        },
+      },
+    }}
     args={{
-      text: "Hello World",
+      text: "Hello Button",
     }}
   >
     {(args) =>
-      html`<klevu-button
+      html` <klevu-button
         disabled=${ifDefined(args.disabled)}
         full-width=${ifDefined(args.fullWidth)}
         is-secondary=${ifDefined(args.isSecondary)}

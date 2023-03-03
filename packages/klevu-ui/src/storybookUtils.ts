@@ -66,6 +66,9 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
   }
   const handles: string[] = []
   for (const e of comp.events) {
+    if (!e.event) {
+      continue
+    }
     handles.push(e.event)
     argTypes[e.event] = {
       action: e.docs,
@@ -76,6 +79,9 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     }
   }
   for (const s of comp.slots) {
+    if (!s.name) {
+      continue
+    }
     argTypes[s.name] = {
       description: s.docs,
       table: {
@@ -84,6 +90,9 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
     }
   }
   for (const m of comp.methods) {
+    if (!m.name) {
+      continue
+    }
     argTypes[m.name] = {
       description: m.docs,
       table: {
@@ -101,6 +110,11 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
       continue
     }
     const [variable, defaultVal, ...desc] = prop.text.split(" ")
+
+    if (!variable) {
+      continue
+    }
+
     argTypes[variable] = {
       description: desc.join(" "),
       table: {

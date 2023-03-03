@@ -19,9 +19,9 @@ Basic badge component. Can be used to display small information on top of other 
 
 ## Slots
 
-| Slot | Description                    |
-| ---- | ------------------------------ |
-|      | Default slot for badge content |
+| Slot        | Description   |
+| ----------- | ------------- |
+| `"default"` | Badge content |
 
 
 ----------------------------------------------
