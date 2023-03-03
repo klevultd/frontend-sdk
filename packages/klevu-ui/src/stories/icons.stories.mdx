@@ -1,0 +1,31 @@
+import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
+
+<Meta title="Guides/Icons" />
+
+# Icons
+
+All icons used are from [Material Design Icons](https://fonts.google.com/icons). Some components take
+icon name as string input. Please use the icon name as it is in the Material Design Icons library.
+
+`klevu-init` component will automatically inject the required font into the page. You can also directly inject the font
+in your head tag to avoid waiting for JavaScript to load and download the font.
+
+```html
+<link
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  rel="stylesheet"
+/>
+<style id="klevu-icons">
+  ::part(material-icon) {
+    font-family: "Material Symbols Rounded";
+    font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 20;
+  }
+  ::part(material-icon-light) {
+    font-family: "Material Symbols Rounded";
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
+  }
+</style>
+```
+
+As you can see you have the ability to modify `FILL`, `wght`, `GRAD` and `opsz` to change the
+appearance of the icons.

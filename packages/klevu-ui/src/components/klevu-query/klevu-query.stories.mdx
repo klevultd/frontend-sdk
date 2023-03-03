@@ -4,7 +4,7 @@ import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-do
 import { MDXAutoFillMeta } from "../../storybookUtils"
 const meta = MDXAutoFillMeta("klevu-query")
 
-<Meta title="Start/Query" component="klevu-query" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta title="Non components/Query" component="klevu-query" argTypes={meta.argTypes} parameters={meta.parameters} />
 
 # Klevu-query
 
@@ -34,3 +34,5 @@ const meta = MDXAutoFillMeta("klevu-query")
     ></klevu-query>`}
   </Story>
 </Canvas>
+
+<ArgsTable story="Query" />

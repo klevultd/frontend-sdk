@@ -61,17 +61,13 @@ By setting the `formtTooltip` property, you can format the tooltip values.
 
 Here is the code for the above example in React (@klevu/ui-react):
 
-<Source
-  language="jsx"
-  dark
-  format={true}
-  code={`
-  <KlevuSlider 
-    formatTooltip={(value) => \`$\${value.toFixed(0)}\`}
-    end={90}
-    max={100}
-    min={0}
-    start={10}
-    showTooltips
-  />`}
-/>
+```jsx
+import React from "react"
+import { KlevuSlider } from "@klevu/ui-react"
+
+const MyComp = () => {
+  return (
+    <KlevuSlider formatTooltip={(value) => `$${value.toFixed(0)}`} end={90} max={100} min={0} start={10} showTooltips />
+  )
+}
+```

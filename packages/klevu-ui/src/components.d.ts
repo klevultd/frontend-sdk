@@ -530,7 +530,7 @@ export namespace Components {
          */
         "limit"?: number;
         /**
-          * Manager used for filters
+          * @klevu /core FilterManager used for filters. If none is set, new one is created
          */
         "manager": FilterManager;
         /**
@@ -1816,7 +1816,7 @@ declare namespace LocalJSX {
          */
         "limit"?: number;
         /**
-          * Manager used for filters
+          * @klevu /core FilterManager used for filters. If none is set, new one is created
          */
         "manager"?: FilterManager;
         /**

@@ -38,18 +38,19 @@ manager.initFromListFilters(fullMockRequest.queryResults?.[0].filters)
 
 As component includes only required properties it is easier to use component with @klevu/ui-react or other frameworks.
 
-<Source
-  language="jsx"
-  dark
-  format={true}
-  code={`
-  <KlevuFacet    
-    manager={manager}
-    option={manager.options[0]}
-    mode="checkbox"
-  />
-`}
-/>
+```jsx
+import React from "react"
+import { KlevuFacet } from "@klevu/ui-react"
+import { FilterManager } from "@klevu/core"
+
+const manager = new FilterManager()
+
+// Load the manager options with KlevuFetch or other method.
+
+const MyComp = () => {
+  return <KlevuFacet manager={manager} option={manager.options[0]} mode="checkbox" />
+}
+```
 
 <ArgsTable story="Facet" />
 
@@ -99,32 +100,24 @@ Here is how to do this with @klevu/ui-react. Green and petrol will be at the top
   </Story>
 </Canvas>
 
-<Source
-  language="jsx"
-  dark
-  format={true}
-  code={`
-  <KlevuFacet    
-    manager={manager}
-    option={manager.options[0]}
-    customOrder={["green", "petrol"]}
-  />
-  `}
-/>
+```jsx
+<KlevuFacet manager={manager} option={manager.options[0]} customOrder={["green", "petrol"]} />
+```
 
 # Slider
+
+Facet can also be used to display a slider. This is useful for price or other numeric filters.
 
 <Canvas withSource="none">
   <Story
     name="Slider"
     args={{
       manager: manager,
-      option: manager.options[0],
-      customOrder: ["green", "petrol"],
+      slider: manager.sliders[0],
     }}
   >
     {(args) =>
-      html`<klevu-facet .customOrder=${args.customOrder} .manager=${args.manager} .option=${args.option}></klevu-facet>`
+      html`<klevu-facet .customOrder=${args.customOrder} .manager=${args.manager} .slider=${args.slider}></klevu-facet>`
     }
   </Story>
 </Canvas>

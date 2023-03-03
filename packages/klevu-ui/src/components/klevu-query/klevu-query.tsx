@@ -94,7 +94,7 @@ export class KlevuQuery {
   @Prop() recommendationId?: string
 
   /**
-   * Manager used for filters
+   * @klevu/core FilterManager used for filters. If none is set, new one is created
    */
   @Prop() manager: FilterManager = new FilterManager()
 
