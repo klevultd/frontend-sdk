@@ -1,6 +1,9 @@
 :host {
   display: inline-block;
   --loading-animation-time: 5s;
+  --klevu-product-small-width: var(--klevu-product-small-width, 300px);
+  --klevu-product-image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
+  --klevu-product-image-fill: var(--klevu-product-image-fill, cover);
 }
 
 :host a {
@@ -40,18 +43,18 @@
 .container.small {
   display: flex;
   flex-direction: column;
-  max-width: var(--klevu-product-small-width, 300px);
+  max-width: var(--klevu-product-small-width);
 }
 
 .container.small.fixedWidth {
   max-width: auto;
-  width: var(--klevu-product-small-width, 300px);
+  width: var(--klevu-product-small-width);
 }
 
 .default .image {
   width: 100%;
-  aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  background-size: var(--klevu-product-image-fill, cover);
+  aspect-ratio: var(--klevu-product-image-aspect-ratio);
+  background-size: var(--klevu-product-image-fill);
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -59,7 +62,7 @@
 .small .image {
   width: 100%;
   aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  background-size: var(--klevu-product-image-fill, cover);
+  background-size: var(--klevu-product-image-fill);
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -90,7 +93,7 @@
   width: 100px;
   height: 100px;
   aspect-ratio: 1;
-  background-size: var(--klevu-product-image-fill, cover);
+  background-size: var(--klevu-product-image-fill);
   background-position: center center;
 }
 
