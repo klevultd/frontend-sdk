@@ -27,6 +27,12 @@ export class KlevuButton {
   @Prop()
   fullWidth?: boolean
 
+  /**
+   * Instead of content have an icon. So basically icon-button
+   */
+  @Prop()
+  icon?: string
+
   render() {
     return (
       <button
@@ -34,11 +40,16 @@ export class KlevuButton {
         class={{
           secondary: Boolean(this.isSecondary),
           fullwidth: Boolean(this.fullWidth),
+          icon: Boolean(this.icon),
         }}
       >
-        <klevu-typography variant="body-s-bold">
-          <slot />
-        </klevu-typography>
+        {this.icon ? (
+          <span part="material-icon">{this.icon}</span>
+        ) : (
+          <klevu-typography variant="body-s-bold">
+            <slot />
+          </klevu-typography>
+        )}
       </button>
     )
   }

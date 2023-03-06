@@ -1,6 +1,6 @@
 import { Placement } from "@floating-ui/dom"
 import { KlevuEvents, KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
-import { Component, h, Host, Listen, Prop, State } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
 import { KlevuSearchFieldCustomEvent } from "../../components"
 import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
@@ -104,7 +104,7 @@ export class KlevuQuicksearch {
     await KlevuInit.ready()
     const trendingProductsQuery = await KlevuFetch(
       trendingProducts({
-        limit: 6,
+        limit: 10,
       })
     )
     const resultObject = trendingProductsQuery.queriesById("trendingProducts")
@@ -161,63 +161,60 @@ export class KlevuQuicksearch {
             variant={this.searchFieldVariant}
           ></klevu-search-field>
           <div class="content" slot="content">
-            <aside>
-              <klevu-suggestions-list
-                exportparts={globalExportedParts}
-                suggestions={this.suggestions}
-              ></klevu-suggestions-list>
-              <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
-              {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
-              {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
-            </aside>
             {(this.products ?? []).length > 0 ? (
-              <section>
-                <klevu-typography variant="h3">Search results</klevu-typography>
-                <klevu-product-grid class="desktop" itemsPerRow={3}>
-                  {this.products?.map((p) => (
-                    <klevu-product product={p} fixedWidth variant="small">
-                      {this.#internalRenderProductSlot(p, "top")}
-                      {this.#internalRenderProductSlot(p, "image")}
-                      {this.#internalRenderProductSlot(p, "info")}
-                      {this.#internalRenderProductSlot(p, "bottom")}
-                    </klevu-product>
-                  ))}
-                </klevu-product-grid>
-                <klevu-product-grid class="mobile">
-                  {this.products?.map((p) => (
-                    <klevu-product product={p} fixedWidth variant="line">
-                      {this.#internalRenderProductSlot(p, "top")}
-                      {this.#internalRenderProductSlot(p, "image")}
-                      {this.#internalRenderProductSlot(p, "info")}
-                      {this.#internalRenderProductSlot(p, "bottom")}
-                    </klevu-product>
-                  ))}
-                </klevu-product-grid>
-              </section>
+              <Fragment>
+                <aside>
+                  <klevu-suggestions-list
+                    exportparts={globalExportedParts}
+                    suggestions={this.suggestions}
+                  ></klevu-suggestions-list>
+                  {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
+                  {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
+                </aside>
+                <section>
+                  <klevu-typography variant="h3">Search results</klevu-typography>
+                  <klevu-product-grid class="desktop" itemsPerRow={3}>
+                    {this.products?.map((p) => (
+                      <klevu-product product={p} fixedWidth variant="small">
+                        {this.#internalRenderProductSlot(p, "top")}
+                        {this.#internalRenderProductSlot(p, "image")}
+                        {this.#internalRenderProductSlot(p, "info")}
+                        {this.#internalRenderProductSlot(p, "bottom")}
+                      </klevu-product>
+                    ))}
+                  </klevu-product-grid>
+                  <klevu-product-grid class="mobile">
+                    {this.products?.map((p) => (
+                      <klevu-product product={p} fixedWidth variant="line">
+                        {this.#internalRenderProductSlot(p, "top")}
+                        {this.#internalRenderProductSlot(p, "image")}
+                        {this.#internalRenderProductSlot(p, "info")}
+                        {this.#internalRenderProductSlot(p, "bottom")}
+                      </klevu-product>
+                    ))}
+                  </klevu-product-grid>
+                </section>
+              </Fragment>
             ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (
-              <section>
-                <klevu-typography variant="h3">Trending products</klevu-typography>
-                <klevu-product-grid class="desktop" itemsPerRow={3}>
-                  {this.trendingProducts?.map((p) => (
-                    <klevu-product product={p} fixedWidth variant="small">
-                      {this.#internalRenderProductSlot(p, "top")}
-                      {this.#internalRenderProductSlot(p, "image")}
-                      {this.#internalRenderProductSlot(p, "info")}
-                      {this.#internalRenderProductSlot(p, "bottom")}
-                    </klevu-product>
-                  ))}
-                </klevu-product-grid>
-                <klevu-product-grid class="mobile">
-                  {this.trendingProducts?.map((p) => (
-                    <klevu-product product={p} fixedWidth variant="line">
-                      {this.#internalRenderProductSlot(p, "top")}
-                      {this.#internalRenderProductSlot(p, "image")}
-                      {this.#internalRenderProductSlot(p, "info")}
-                      {this.#internalRenderProductSlot(p, "bottom")}
-                    </klevu-product>
-                  ))}
-                </klevu-product-grid>
-              </section>
+              <Fragment>
+                <aside>
+                  <klevu-popular-searches></klevu-popular-searches>
+                  <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
+                </aside>
+                <section>
+                  <klevu-typography variant="h3">Trending products</klevu-typography>
+                  <klevu-slides class="trending-slides" exportparts={globalExportedParts}>
+                    {this.trendingProducts?.map((p) => (
+                      <klevu-product product={p} fixedWidth variant="small">
+                        {this.#internalRenderProductSlot(p, "top")}
+                        {this.#internalRenderProductSlot(p, "image")}
+                        {this.#internalRenderProductSlot(p, "info")}
+                        {this.#internalRenderProductSlot(p, "bottom")}
+                      </klevu-product>
+                    ))}
+                  </klevu-slides>
+                </section>
+              </Fragment>
             ) : null}
           </div>
         </klevu-popup>

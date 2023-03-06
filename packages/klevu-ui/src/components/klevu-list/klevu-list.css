@@ -14,7 +14,7 @@ a {
 }
 
 .condensed {
-  padding: var(--klevu-spacing-02) var(--klevu-spacing-04);
+  padding: 0 var(--klevu-spacing-04);
 }
 
 .noXPadding {

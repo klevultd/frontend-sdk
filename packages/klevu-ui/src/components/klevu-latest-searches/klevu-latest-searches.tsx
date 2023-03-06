@@ -22,6 +22,10 @@ export class KlevuLatestSearches {
   }
 
   render() {
+    if (this.lastSearches.length === 0) {
+      return null
+    }
+
     return (
       <Host>
         <klevu-typography variant="h3" class="caption">

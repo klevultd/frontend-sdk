@@ -232,9 +232,7 @@ export class KlevuMerchandising {
             onKlevuApplyFilters={this.#applyFilters.bind(this)}
           ></klevu-facet-list>
           <div slot="header" class="header">
-            <klevu-typography slot="header" variant="h1">
-              {this.categoryTitle}
-            </klevu-typography>
+            <klevu-typography variant="h1">{this.categoryTitle}</klevu-typography>
             <klevu-sort
               variant="inline"
               exportparts={globalExportedParts}

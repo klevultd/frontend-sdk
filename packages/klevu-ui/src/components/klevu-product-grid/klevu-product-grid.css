@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-large));
+  gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
   align-items: stretch;
   justify-content: space-between;
 }
 
 .gridcontainer {
   display: grid;
-  grid-gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-large));
+  grid-gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
 }

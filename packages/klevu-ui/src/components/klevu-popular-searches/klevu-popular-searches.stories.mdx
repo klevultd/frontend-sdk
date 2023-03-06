@@ -11,7 +11,7 @@ const meta = MDXAutoFillMeta("klevu-popular-searches")
   parameters={meta.parameters}
 />
 
-# Klevu-cms-list
+# Klevu-popular searches
 
 <Description>{meta.description}</Description>
 
@@ -20,3 +20,5 @@ const meta = MDXAutoFillMeta("klevu-popular-searches")
     {(args) => html`<klevu-popular-searches caption=${ifDefined(args.caption)}></klevu-popular-searches>`}
   </Story>
 </Canvas>
+
+<ArgsTable story="Popular searches" />

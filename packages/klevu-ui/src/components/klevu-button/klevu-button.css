@@ -18,8 +18,10 @@ button {
   padding: 0 calc(var(--padding) * 2);
 }
 
-button klevu-typography {
+button klevu-typography,
+button span[part="material-icon"] {
   --klevu-typography-color: var(--klevu-button-text-color, #ffffff);
+  color: var(--klevu-button-text-color, #ffffff);
 }
 
 button:hover {
@@ -61,4 +63,8 @@ button.secondary:hover {
 button.fullwidth {
   display: block;
   width: 100%;
+}
+
+button.icon {
+  padding: 0 calc(var(--padding));
 }

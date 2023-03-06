@@ -23,7 +23,8 @@ export const KlevuBadge = /*@__PURE__*/ defineContainer<JSX.KlevuBadge>('klevu-b
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
   'disabled',
   'isSecondary',
-  'fullWidth'
+  'fullWidth',
+  'icon'
 ]);
 
 

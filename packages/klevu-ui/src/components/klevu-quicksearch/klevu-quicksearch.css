@@ -14,8 +14,10 @@
   margin-right: var(--klevu-spacing-04);
 }
 
-klevu-suggestions-list {
-  margin-bottom: var(--klevu-spacing-04);
+klevu-suggestions-list,
+klevu-popular-searches,
+klevu-cms-list {
+  margin-bottom: var(--klevu-spacing-05);
 }
 
 klevu-product-grid.desktop {
@@ -32,6 +34,10 @@ klevu-product-grid.desktop {
 
 .mobile {
   display: none;
+}
+
+.trending-slides {
+  max-width: 500px;
 }
 
 @media (max-width: 600px) {

@@ -84,6 +84,10 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
+          * Instead of content have an icon. So basically icon-button
+         */
+        "icon"?: string;
+        /**
           * Toned down secondary button
          */
         "isSecondary"?: boolean;
@@ -493,7 +497,7 @@ export namespace Components {
     }
     /**
      * Component to place products on grid. Very simple container for products.
-     * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+     * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
      */
     interface KlevuProductGrid {
         /**
@@ -1138,7 +1142,7 @@ declare global {
     };
     /**
      * Component to place products on grid. Very simple container for products.
-     * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+     * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
      */
     interface HTMLKlevuProductGridElement extends Components.KlevuProductGrid, HTMLStencilElement {
     }
@@ -1369,6 +1373,10 @@ declare namespace LocalJSX {
           * Make button display block
          */
         "fullWidth"?: boolean;
+        /**
+          * Instead of content have an icon. So basically icon-button
+         */
+        "icon"?: string;
         /**
           * Toned down secondary button
          */
@@ -1783,7 +1791,7 @@ declare namespace LocalJSX {
     }
     /**
      * Component to place products on grid. Very simple container for products.
-     * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+     * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
      */
     interface KlevuProductGrid {
         /**
@@ -2355,7 +2363,7 @@ declare module "@stencil/core" {
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**
              * Component to place products on grid. Very simple container for products.
-             * @cssprop --klevu-product-grid-spacing --klevu-spacing-large spacing between grid items;
+             * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
             /**

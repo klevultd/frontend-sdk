@@ -37,3 +37,68 @@ const meta = MDXAutoFillMeta("klevu-button")
 </Canvas>
 
 <ArgsTable story="Button" />
+
+# Icon buttons
+
+<Canvas>
+  <Story
+    name="Icon button 1"
+    args={{
+      icon: "search",
+    }}
+  >
+    {(args) =>
+      html` <klevu-button
+        disabled=${ifDefined(args.disabled)}
+        full-width=${ifDefined(args.fullWidth)}
+        is-secondary=${ifDefined(args.isSecondary)}
+        icon=${ifDefined(args.icon)}
+      ></klevu-button>`
+    }
+  </Story>
+  <Story
+    name="Icon button 2"
+    args={{
+      icon: "chevron_left",
+    }}
+  >
+    {(args) =>
+      html` <klevu-button
+        disabled=${ifDefined(args.disabled)}
+        full-width=${ifDefined(args.fullWidth)}
+        is-secondary=${ifDefined(args.isSecondary)}
+        icon=${ifDefined(args.icon)}
+      ></klevu-button>`
+    }
+  </Story>
+  <Story
+    name="Icon button 3"
+    args={{
+      icon: "chevron_right",
+    }}
+  >
+    {(args) =>
+      html` <klevu-button
+        disabled=${ifDefined(args.disabled)}
+        full-width=${ifDefined(args.fullWidth)}
+        is-secondary=${ifDefined(args.isSecondary)}
+        icon=${ifDefined(args.icon)}
+      ></klevu-button>`
+    }
+  </Story>
+  <Story
+    name="Icon button 4"
+    args={{
+      icon: "settings",
+    }}
+  >
+    {(args) =>
+      html` <klevu-button
+        disabled=${ifDefined(args.disabled)}
+        full-width=${ifDefined(args.fullWidth)}
+        is-secondary=${ifDefined(args.isSecondary)}
+        icon=${ifDefined(args.icon)}
+      ></klevu-button>`
+    }
+  </Story>
+</Canvas>

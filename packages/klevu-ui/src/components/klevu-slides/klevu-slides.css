@@ -1,6 +1,6 @@
 :host {
   display: block;
-  margin: var(--klevu-spacing-large);
+  margin: var(--klevu-spacing-05);
   border-radius: var(--klevu-border-radius-s);
   position: relative;
 }
@@ -21,7 +21,7 @@
 
 klevu-button {
   --klevu-border-radius-s: 50%;
-  --klevu-button-padding: var(--klevu-spacing-04) var(--klevu-spacing-large);
+  --klevu-button-padding: var(--klevu-spacing-04) var(--klevu-spacing-05);
 }
 
 .prev {
@@ -34,8 +34,8 @@ klevu-button {
 
 .slides {
   display: flex;
-  margin: 0 calc(var(--klevu-spacing-large) * 2);
-  gap: var(--klevu-spacing-large);
+  margin: 0 calc(var(--klevu-spacing-05) * 2);
+  gap: var(--klevu-spacing-05);
   overflow-x: scroll;
   position: relative;
   scroll-behavior: smooth;

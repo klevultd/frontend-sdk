@@ -1,6 +1,6 @@
 :host {
   display: flex;
-  gap: var(--klevu-spacing-large);
+  gap: var(--klevu-spacing-05);
 }
 
 .header {

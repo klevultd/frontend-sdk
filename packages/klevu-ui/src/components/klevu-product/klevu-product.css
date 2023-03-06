@@ -1,9 +1,10 @@
 :host {
   display: inline-block;
   --loading-animation-time: 5s;
-  --klevu-product-small-width: var(--klevu-product-small-width, 300px);
-  --klevu-product-image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  --klevu-product-image-fill: var(--klevu-product-image-fill, cover);
+  --width: var(--klevu-product-width, 300px);
+  --small-width: var(--klevu-product-small-width, 150px);
+  --image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
+  --image-fill: var(--klevu-product-image-fill, cover);
 }
 
 :host a {
@@ -26,12 +27,12 @@
 .container.default {
   display: flex;
   flex-direction: column;
-  max-width: var(--klevu-product-width, 300px);
+  max-width: var(--width);
 }
 
 .container.default.fixedWidth {
   max-width: auto;
-  width: var(--klevu-product-width, 300px);
+  width: var(--width);
 }
 
 @media (max-width: 500px) {
@@ -43,26 +44,26 @@
 .container.small {
   display: flex;
   flex-direction: column;
-  max-width: var(--klevu-product-small-width);
+  max-width: var(--small-width);
 }
 
 .container.small.fixedWidth {
   max-width: auto;
-  width: var(--klevu-product-small-width);
+  width: var(--small-width);
 }
 
 .default .image {
   width: 100%;
-  aspect-ratio: var(--klevu-product-image-aspect-ratio);
-  background-size: var(--klevu-product-image-fill);
+  aspect-ratio: var(--image-aspect-ratio);
+  background-size: var(--image-fill);
   background-position: center center;
   background-repeat: no-repeat;
 }
 
 .small .image {
   width: 100%;
-  aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  background-size: var(--klevu-product-image-fill);
+  aspect-ratio: var(--image-aspect-ratio);
+  background-size: var(--image-fill);
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -93,7 +94,7 @@
   width: 100px;
   height: 100px;
   aspect-ratio: 1;
-  background-size: var(--klevu-product-image-fill);
+  background-size: var(--image-fill);
   background-position: center center;
 }
 
