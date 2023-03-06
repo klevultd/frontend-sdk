@@ -62,6 +62,7 @@ export namespace Components {
           * Setting a acceent color to badge
          */
         "accent"?: number;
+        "closable"?: boolean;
         /**
           * Setting a neutral color to badge
          */
@@ -863,6 +864,10 @@ export namespace Components {
         "sizes": ViewportSize[];
     }
 }
+export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuBadgeElement;
+}
 export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCheckboxElement;
@@ -1352,10 +1357,12 @@ declare namespace LocalJSX {
           * Setting a acceent color to badge
          */
         "accent"?: number;
+        "closable"?: boolean;
         /**
           * Setting a neutral color to badge
          */
         "neutral"?: number;
+        "onKlevuBadgeClose"?: (event: KlevuBadgeCustomEvent<void>) => void;
     }
     /**
      * Basic button component

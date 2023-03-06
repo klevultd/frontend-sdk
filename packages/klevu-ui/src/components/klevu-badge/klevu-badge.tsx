@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from "@stencil/core"
+import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
 
 /**
  * Basic badge component. Can be used to display small information on top of other elements.
@@ -19,6 +19,16 @@ export class KlevuBadge {
   /** Setting a neutral color to badge   */
   @Prop() neutral?: number
 
+  @Prop() closable?: boolean
+
+  @Event({ composed: true }) klevuBadgeClose!: EventEmitter<void>
+
+  #close = () => {
+    if (this.closable) {
+      this.klevuBadgeClose.emit()
+    }
+  }
+
   render() {
     let style = {}
 
@@ -31,7 +41,8 @@ export class KlevuBadge {
     }
 
     return (
-      <Host style={style}>
+      <Host style={style} class={{ closable: Boolean(this.closable) }} onClick={this.#close.bind(this)}>
+        {this.closable && <span part="material-icon">close</span>}
         <klevu-typography variant="body-xs">
           <slot></slot>
         </klevu-typography>

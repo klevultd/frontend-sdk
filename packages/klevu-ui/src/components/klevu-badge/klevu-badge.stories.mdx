@@ -44,7 +44,7 @@ Badge can be in accent colors. Colors are set in css properties and can be chang
       accent: 4,
     }}
   >
-    {(args) => html`<klevu-badge accent=${args.accent}>Badge 4</klevu-badge>`}
+    {(args) => html`<klevu-badge accent=${args.accent} closable>Badge 4</klevu-badge>`}
   </Story>
 </Canvas>
 
@@ -92,7 +92,22 @@ Badges can be in neutral colors. Colors are set in css properties and can be cha
 Any color can be set to badget with css property.
 
 <Canvas>
-  <Story name="custom-color">
+  <Story name="Custom color">
     {(args) => html`<klevu-badge style="--klevu-badge-background: salmon;">Badge 1</klevu-badge>`}
+  </Story>
+</Canvas>
+
+## Closable badges
+
+If closable attribute is defined then badge will have close button on the left side.
+
+<Canvas>
+  <Story name="closable">
+    {(args) =>
+      html` <div>
+        <klevu-badge accent="1" closable>hats</klevu-badge>
+        <klevu-badge accent="1" closable>shirts</klevu-badge>
+      </div>`
+    }
   </Story>
 </Canvas>
