@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -20,7 +20,7 @@ import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -651,6 +651,18 @@ export namespace Components {
          */
         "fallbackTerm"?: string;
         /**
+          * Fetch next page of results from previous query
+          * @param type what type of content to get page from
+          * @param pageIndex from what page. If empty next page is fetched
+         */
+        "getPage": (type: "search" | "category" | "cms", pageIndex?: number) => Promise<void>;
+        /**
+          * Fetches query result from last request
+          * @param type type of query result
+          * @returns
+         */
+        "getQueryResult": (type: "search" | "category" | "cms") => Promise<KlevuFetchQueryResult | undefined>;
+        /**
           * Maximum amount of results
          */
         "limit": number;
@@ -682,6 +694,10 @@ export namespace Components {
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
+        /**
+          * In case you want to sort the results
+         */
+        "sort"?: KlevuSearchSorting;
         /**
           * Variant of the search field
          */
@@ -1995,6 +2011,10 @@ declare namespace LocalJSX {
          */
         "sendAnalytics"?: boolean;
         /**
+          * In case you want to sort the results
+         */
+        "sort"?: KlevuSearchSorting;
+        /**
           * Variant of the search field
          */
         "variant"?: SearchFieldVariant1;
@@ -2142,6 +2162,10 @@ declare namespace LocalJSX {
           * When text changes in field
          */
         "onKlevuTextChanged"?: (event: KlevuTextfieldCustomEvent<string>) => void;
+        /**
+          * When enter is pressed in textfield
+         */
+        "onKlevuTextEnterPressed"?: (event: KlevuTextfieldCustomEvent<void>) => void;
         /**
           * When textfield is focused
          */

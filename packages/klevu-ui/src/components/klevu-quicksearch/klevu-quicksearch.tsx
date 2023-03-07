@@ -1,7 +1,14 @@
 import { Placement } from "@floating-ui/dom"
-import { KlevuEvents, KlevuFetch, KlevuRecord, trendingProducts } from "@klevu/core"
+import {
+  KlevuEvents,
+  KlevuFetch,
+  KlevuQueryResult,
+  KlevuRecord,
+  KlevuSearchSorting,
+  trendingProducts,
+} from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
-import { KlevuSearchFieldCustomEvent } from "../../components"
+import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent } from "../../components"
 import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -72,6 +79,10 @@ export class KlevuQuicksearch {
   @State() suggestions: string[] = []
   @State() cmsPages?: KlevuRecord[]
   @State() categories?: KlevuRecord[]
+  @State() queryResult?: KlevuQueryResult
+  @State() searchSort?: KlevuSearchSorting
+
+  #searchField?: HTMLKlevuSearchFieldElement
 
   clickEvent?: (productId: string, variantId?: string) => void
 
@@ -84,6 +95,15 @@ export class KlevuQuicksearch {
     this.cmsPages = event.detail.cms?.records
     this.categories = event.detail.category?.records
     this.popup?.openModal()
+    this.queryResult = await this.#searchField?.getQueryResult("search")
+  }
+
+  async #searchPageChange(event: KlevuPaginationCustomEvent<number>) {
+    if (!this.#searchField) {
+      return
+    }
+    this.#searchField.getPage("search", event.detail - 1)
+    this.queryResult = await this.#searchField?.getQueryResult("search")
   }
 
   @Listen("klevuSearchSuggestions")
@@ -147,7 +167,9 @@ export class KlevuQuicksearch {
       <Host>
         <klevu-popup anchor={this.popupAnchor} ref={(el) => (this.popup = el)} fullwidthContent openAtFocus>
           <klevu-search-field
+            ref={(el) => (this.#searchField = el)}
             limit={6}
+            sort={this.searchSort}
             slot="origin"
             searchProducts
             searchSuggestions
@@ -172,7 +194,14 @@ export class KlevuQuicksearch {
                   {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
                 </aside>
                 <section>
-                  <klevu-typography variant="h3">Search results</klevu-typography>
+                  <div class="resultheader">
+                    <klevu-typography variant="h3">Search results</klevu-typography>
+                    <klevu-sort
+                      variant="inline"
+                      exportparts={globalExportedParts}
+                      onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
+                    ></klevu-sort>
+                  </div>
                   <klevu-product-grid class="desktop" itemsPerRow={3}>
                     {this.products?.map((p) => (
                       <klevu-product product={p} fixedWidth variant="small">
@@ -193,6 +222,11 @@ export class KlevuQuicksearch {
                       </klevu-product>
                     ))}
                   </klevu-product-grid>
+                  <klevu-pagination
+                    exportparts={globalExportedParts}
+                    queryResult={this.queryResult}
+                    onKlevuPaginationChange={this.#searchPageChange.bind(this)}
+                  ></klevu-pagination>
                 </section>
               </Fragment>
             ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (

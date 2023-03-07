@@ -217,6 +217,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'searchCategories',
   'searchCmsPages',
   'sendAnalytics',
+  'sort',
   'variant',
   'klevuSearchResults',
   'klevuSearchSuggestions',
@@ -279,7 +280,8 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
   'icon',
   'clearButton',
   'klevuTextChanged',
-  'klevuTextFocused'
+  'klevuTextFocused',
+  'klevuTextEnterPressed'
 ]);
 
 

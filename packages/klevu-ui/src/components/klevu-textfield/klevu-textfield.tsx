@@ -75,6 +75,14 @@ export class KlevuTextfield {
   })
   klevuTextFocused!: EventEmitter<void>
 
+  /**
+   * When enter is pressed in textfield
+   */
+  @Event({
+    composed: true,
+  })
+  klevuTextEnterPressed!: EventEmitter<void>
+
   render() {
     return (
       <div>
@@ -92,6 +100,11 @@ export class KlevuTextfield {
             hasclear: Boolean(this.clearButton),
           }}
           onFocus={() => this.klevuTextFocused.emit()}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              this.klevuTextEnterPressed.emit()
+            }
+          }}
           onInput={(e) => {
             const el = e.target as HTMLInputElement
             this.value = el.value

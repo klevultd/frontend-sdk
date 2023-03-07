@@ -22,10 +22,11 @@ Branded text field component
 
 ## Events
 
-| Event              | Description                | Type                  |
-| ------------------ | -------------------------- | --------------------- |
-| `klevuTextChanged` | When text changes in field | `CustomEvent<string>` |
-| `klevuTextFocused` | When textfield is focused  | `CustomEvent<void>`   |
+| Event                   | Description                        | Type                  |
+| ----------------------- | ---------------------------------- | --------------------- |
+| `klevuTextChanged`      | When text changes in field         | `CustomEvent<string>` |
+| `klevuTextEnterPressed` | When enter is pressed in textfield | `CustomEvent<void>`   |
+| `klevuTextFocused`      | When textfield is focused          | `CustomEvent<void>`   |
 
 
 ## Shadow Parts

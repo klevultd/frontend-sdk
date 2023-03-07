@@ -40,6 +40,13 @@ klevu-product-grid.desktop {
   max-width: 500px;
 }
 
+.resultheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--klevu-spacing-05);
+}
+
 @media (max-width: 600px) {
   .desktop {
     display: none;
