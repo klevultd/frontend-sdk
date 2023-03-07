@@ -36,3 +36,13 @@ span.disabled {
   opacity: var(--klevu-opacity-disabled);
   cursor: inherit;
 }
+
+span.dots {
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  :host {
+    gap: var(--klevu-spacing-02);
+  }
+}

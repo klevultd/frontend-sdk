@@ -188,7 +188,7 @@ export namespace Components {
     /**
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
-     * @csspart heading - Heading of the facet
+     * @csspart facet-heading - Heading of the facet
      */
     interface KlevuFacet {
         /**
@@ -451,8 +451,8 @@ export namespace Components {
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
      * All parts of the component can be replaced with slots.
-     * @csspart image - The image element of component
-     * @csspart container - The container element of whole
+     * @csspart product-image - The image element of component
+     * @csspart product-container - The container element of whole
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -1018,7 +1018,7 @@ declare global {
     /**
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
-     * @csspart heading - Heading of the facet
+     * @csspart facet-heading - Heading of the facet
      */
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
@@ -1148,8 +1148,8 @@ declare global {
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
      * All parts of the component can be replaced with slots.
-     * @csspart image - The image element of component
-     * @csspart container - The container element of whole
+     * @csspart product-image - The image element of component
+     * @csspart product-container - The container element of whole
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -1504,7 +1504,7 @@ declare namespace LocalJSX {
     /**
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
-     * @csspart heading - Heading of the facet
+     * @csspart facet-heading - Heading of the facet
      */
     interface KlevuFacet {
         /**
@@ -1763,8 +1763,8 @@ declare namespace LocalJSX {
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
      * All parts of the component can be replaced with slots.
-     * @csspart image - The image element of component
-     * @csspart container - The container element of whole
+     * @csspart product-image - The image element of component
+     * @csspart product-container - The container element of whole
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -2304,7 +2304,7 @@ declare module "@stencil/core" {
             /**
              * Rendering items of single facet with all its options or a slider.
              * Manager property must be set for this component to work.
-             * @csspart heading - Heading of the facet
+             * @csspart facet-heading - Heading of the facet
              */
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             /**
@@ -2384,8 +2384,8 @@ declare module "@stencil/core" {
             /**
              * Generic product component that renders product based on KlevuRecord of @klevu/core
              * All parts of the component can be replaced with slots.
-             * @csspart image - The image element of component
-             * @csspart container - The container element of whole
+             * @csspart product-image - The image element of component
+             * @csspart product-container - The container element of whole
              * @cssprop --klevu-product-width - Width of the product
              * @cssprop --klevu-product-small-width - Width of the product when small variant is used
              * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be

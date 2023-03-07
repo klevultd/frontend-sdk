@@ -102,7 +102,7 @@ export class KlevuPagination {
         </span>
         {pages.map((i) => {
           if (i == -1) {
-            return <span class="disabled">...</span>
+            return <span class="disabled dots">...</span>
           }
 
           return (

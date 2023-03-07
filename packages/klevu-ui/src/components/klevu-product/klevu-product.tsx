@@ -15,8 +15,8 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @slot info - Swatches, titles, brands and prices slot
  * @slot bottom - Empty are after product content
  *
- * @csspart image - The image element of component
- * @csspart container - The container element of whole
+ * @csspart product-image - The image element of component
+ * @csspart product-container - The container element of whole
  *
  * @cssprop --klevu-product-width - Width of the product
  * @cssprop --klevu-product-small-width - Width of the product when small variant is used
@@ -163,15 +163,15 @@ export class KlevuProduct {
     }
 
     return (
-      <Host>
-        <div part="container" class={containerClasses}>
+      <Host class={{ line: this.variant === "line" }}>
+        <div part="product-container" class={containerClasses}>
           <slot name="top"></slot>
           <a href={settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
             {this.hideImage ? null : (
               <slot name="image">
                 <div
                   class="image"
-                  part="image"
+                  part="product-image"
                   style={{
                     backgroundImage: `url(${this.hoverImage || this.product.image})`,
                   }}
@@ -194,18 +194,31 @@ export class KlevuProduct {
               ) : null}
 
               <div class="info">
-                {this.hideBrand ? null : <p class="brandname">{this.product.brand}</p>}
-                {this.hideName ? null : <p class="productname">{this.product.name}</p>}
-                {this.hideDescription ? null : <p class="description">{this.product.shortDesc}</p>}
+                {this.hideBrand || !this.product.brand ? null : (
+                  <klevu-typography class="brandname" variant="body-s-bold">
+                    {this.product.brand}
+                  </klevu-typography>
+                )}
+                {this.hideName || !this.product.name ? null : (
+                  <klevu-typography class="productname" variant="body-s">
+                    {this.product.name}
+                  </klevu-typography>
+                )}
+                {this.hideDescription || !this.product.shortDesc ? null : (
+                  <klevu-typography class="description" variant="body-s">
+                    {this.product.shortDesc}
+                  </klevu-typography>
+                )}
                 {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
-                  <p
+                  <klevu-typography
+                    variant="body-l-bold"
                     class={{
                       isOnSale,
                       price: true,
                     }}
                   >
                     {renderPrice(this.product.salePrice, this.product.currency)}
-                  </p>
+                  </klevu-typography>
                 )}
               </div>
             </slot>

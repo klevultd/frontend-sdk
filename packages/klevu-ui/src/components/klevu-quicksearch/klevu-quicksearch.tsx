@@ -8,7 +8,7 @@ import {
   trendingProducts,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
-import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent } from "../../components"
+import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent, KlevuTextfieldCustomEvent } from "../../components"
 import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -87,6 +87,15 @@ export class KlevuQuicksearch {
   clickEvent?: (productId: string, variantId?: string) => void
 
   popup?: HTMLKlevuPopupElement
+
+  @Listen("klevuTextChange")
+  async onTextChange(event: KlevuTextfieldCustomEvent<string>) {
+    console.log(event.detail)
+    if (event.detail === "") {
+      this.suggestions = []
+      this.products = []
+    }
+  }
 
   @Listen("klevuSearchResults")
   async onResults(event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) {

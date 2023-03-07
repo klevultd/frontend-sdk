@@ -47,6 +47,10 @@ klevu-product-grid.desktop {
   margin-bottom: var(--klevu-spacing-05);
 }
 
+klevu-pagination {
+  margin-top: var(--klevu-spacing-05);
+}
+
 @media (max-width: 600px) {
   .desktop {
     display: none;
@@ -63,7 +67,7 @@ klevu-product-grid.desktop {
   .content {
     flex-direction: column;
     left: 0;
-    width: 100vw;
+    width: calc(100vw - 60px);
   }
 
   .content aside {

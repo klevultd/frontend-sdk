@@ -42,10 +42,10 @@ All parts of the component can be replaced with slots.
 
 ## Shadow Parts
 
-| Part          | Description |
-| ------------- | ----------- |
-| `"container"` |             |
-| `"image"`     |             |
+| Part                  | Description |
+| --------------------- | ----------- |
+| `"product-container"` |             |
+| `"product-image"`     |             |
 
 
 ----------------------------------------------

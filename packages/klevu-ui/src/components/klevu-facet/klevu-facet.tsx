@@ -9,7 +9,7 @@ export type KlevuFacetMode = "checkbox" | "radio"
  *
  * Manager property must be set for this component to work.
  *
- * @csspart heading - Heading of the facet
+ * @csspart facet-heading - Heading of the facet
  */
 @Component({
   tag: "klevu-facet",
@@ -93,7 +93,7 @@ export class KlevuFacet {
     return (
       <Fragment>
         <klevu-typography
-          part="heading"
+          part="facet-heading"
           class={{ accordion: Boolean(this.accordion) }}
           variant="body-s-bold"
           slot="header"
@@ -142,7 +142,7 @@ export class KlevuFacet {
     return (
       <Fragment>
         <klevu-typography
-          part="heading"
+          part="facet-heading"
           class={{ accordion: Boolean(this.accordion) }}
           variant="body-s-bold"
           slot="header"

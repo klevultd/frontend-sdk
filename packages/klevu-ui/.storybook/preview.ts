@@ -88,6 +88,7 @@ export const parameters = {
   },
   cssprops,
   viewMode: "docs",
+  /*
   docs: {
     transformSource: (input) =>
       prettier.format(input, {
@@ -95,4 +96,5 @@ export const parameters = {
         plugins: [prettierBabel],
       }),
   },
+  */
 }
