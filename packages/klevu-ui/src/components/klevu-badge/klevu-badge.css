@@ -1,6 +1,6 @@
 :host {
   display: inline-block;
-  padding: var(--klevu-spacing-01) var(--klevu-spacing-05);
+  padding: var(--klevu-spacing-02) var(--klevu-spacing-05);
   background: var(--klevu-badge-background);
   border-radius: var(--klevu-border-radius-xxl, var(--klevu-badge-border-radius));
   align-items: center;
@@ -18,4 +18,8 @@ span[part="material-icon"] {
   left: -4px;
   font-size: 0.7em;
   margin-right: var(--klevu-spacing-01);
+}
+
+klevu-typography {
+  line-height: 1;
 }

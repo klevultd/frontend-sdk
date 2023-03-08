@@ -9,4 +9,5 @@
 .gridcontainer {
   display: grid;
   grid-gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
+  /*grid-template-columns: repeat(auto-fill, minmax(var(--klevu-product-width, 300px), 1fr));*/
 }

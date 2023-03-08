@@ -38,6 +38,13 @@ export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('k
 ]);
 
 
+export const KlevuChip = /*@__PURE__*/ defineContainer<JSX.KlevuChip>('klevu-chip', undefined, [
+  'selected',
+  'removable',
+  'klevuChipRemove'
+]);
+
+
 export const KlevuCmsList = /*@__PURE__*/ defineContainer<JSX.KlevuCmsList>('klevu-cms-list', undefined, [
   'pages',
   'link',
@@ -143,7 +150,8 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'openAtFocus',
   'closeAtOutsideClick',
   'fullwidthContent',
-  'anchor'
+  'anchor',
+  'elevation'
 ]);
 
 

@@ -113,6 +113,24 @@ export namespace Components {
         "name"?: string;
     }
     /**
+     * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
+     * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+     * @cssprop --klevu-chip-radius - Border radius of the chip
+     * @cssprop --klevu-chip-border - Border color of the chip
+     * @cssprop --klevu-chip-selected-background - Selected background color of the chip
+     * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+     */
+    interface KlevuChip {
+        /**
+          * Removable state of the chip
+         */
+        "removable": boolean;
+        /**
+          * Selected state of the chip
+         */
+        "selected": boolean;
+    }
+    /**
      * Component to display list of CMS page results
      */
     interface KlevuCmsList {
@@ -431,6 +449,10 @@ export namespace Components {
           * Closes the popup
          */
         "closeModal": () => Promise<void>;
+        /**
+          * Elevation of the popup. 0-3.
+         */
+        "elevation": number;
         /**
           * At minimum popup content should be the widht of the origin
          */
@@ -888,6 +910,10 @@ export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCheckboxElement;
 }
+export interface KlevuChipCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChipElement;
+}
 export interface KlevuCmsListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCmsListElement;
@@ -983,6 +1009,20 @@ declare global {
     var HTMLKlevuCheckboxElement: {
         prototype: HTMLKlevuCheckboxElement;
         new (): HTMLKlevuCheckboxElement;
+    };
+    /**
+     * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
+     * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+     * @cssprop --klevu-chip-radius - Border radius of the chip
+     * @cssprop --klevu-chip-border - Border color of the chip
+     * @cssprop --klevu-chip-selected-background - Selected background color of the chip
+     * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+     */
+    interface HTMLKlevuChipElement extends Components.KlevuChip, HTMLStencilElement {
+    }
+    var HTMLKlevuChipElement: {
+        prototype: HTMLKlevuChipElement;
+        new (): HTMLKlevuChipElement;
     };
     /**
      * Component to display list of CMS page results
@@ -1316,6 +1356,7 @@ declare global {
         "klevu-badge": HTMLKlevuBadgeElement;
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
+        "klevu-chip": HTMLKlevuChipElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
         "klevu-drawer": HTMLKlevuDrawerElement;
         "klevu-dropdown": HTMLKlevuDropdownElement;
@@ -1424,6 +1465,28 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         "onKlevuCheckboxChange"?: (event: KlevuCheckboxCustomEvent<boolean>) => void;
+    }
+    /**
+     * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
+     * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+     * @cssprop --klevu-chip-radius - Border radius of the chip
+     * @cssprop --klevu-chip-border - Border color of the chip
+     * @cssprop --klevu-chip-selected-background - Selected background color of the chip
+     * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+     */
+    interface KlevuChip {
+        /**
+          * Event that is fired when chip is removed
+         */
+        "onKlevuChipRemove"?: (event: KlevuChipCustomEvent<void>) => void;
+        /**
+          * Removable state of the chip
+         */
+        "removable"?: boolean;
+        /**
+          * Selected state of the chip
+         */
+        "selected"?: boolean;
     }
     /**
      * Component to display list of CMS page results
@@ -1747,6 +1810,10 @@ declare namespace LocalJSX {
           * Close popup when clicking outside content area
          */
         "closeAtOutsideClick"?: boolean;
+        /**
+          * Elevation of the popup. 0-3.
+         */
+        "elevation"?: number;
         /**
           * At minimum popup content should be the widht of the origin
          */
@@ -2224,6 +2291,7 @@ declare namespace LocalJSX {
         "klevu-badge": KlevuBadge;
         "klevu-button": KlevuButton;
         "klevu-checkbox": KlevuCheckbox;
+        "klevu-chip": KlevuChip;
         "klevu-cms-list": KlevuCmsList;
         "klevu-drawer": KlevuDrawer;
         "klevu-dropdown": KlevuDropdown;
@@ -2285,6 +2353,15 @@ declare module "@stencil/core" {
              * @cssprop --klevu-checkbox-size 20px Size of the checkbox
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
+            /**
+             * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
+             * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+             * @cssprop --klevu-chip-radius - Border radius of the chip
+             * @cssprop --klevu-chip-border - Border color of the chip
+             * @cssprop --klevu-chip-selected-background - Selected background color of the chip
+             * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+             */
+            "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**
              * Component to display list of CMS page results
              */

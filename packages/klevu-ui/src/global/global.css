@@ -3,7 +3,10 @@
 
   /** colors */
   --klevu-color-primary: #2b4af7;
+  --klevu-color-primary-hsl: 231, 93, 57;
+  --klevu-color-primary-rgb: 43, 74, 247;
   --klevu-color-primary-darker: #0d2ee8;
+  --klevu-color-primary-darker-hsl: 231, 89, 48;
 
   --klevu-color-neutral-1: #ffffff;
   --klevu-color-neutral-2: #f6f6f6;
@@ -81,6 +84,8 @@
 
   /** Elevations, set as box shadow */
   --klevu-elevation-1: 0 0.5px 2px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.08);
+  --klevu-elevation-2: 0px 0.5px 3px rgba(0, 0, 0, 0.05), 2px 6px 12px rgba(0, 0, 0, 0.08);
+  --klevu-elevation-3: 0px 2px 3px rgba(0, 0, 0, 0.04), 6px 10px 24px rgba(0, 0, 0, 0.08);
 
   /* animation css variables */
   --klevu-animation-duration-slow: 0.3s;

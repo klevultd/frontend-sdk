@@ -1,5 +1,5 @@
 import { autoUpdate, computePosition, offset, Placement, shift, size } from "@floating-ui/dom"
-import { Component, Element, h, Host, Listen, Method, Prop, State } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
 
 /**
  * Popup component where clicking origin component popups the the content
@@ -34,6 +34,11 @@ export class KlevuPopup {
    * Anchor popup to left or right of page
    */
   @Prop() anchor: Placement = "left-end"
+
+  /**
+   * Elevation of the popup. 0-3.
+   */
+  @Prop() elevation = 1
 
   @State() open = false
 
@@ -144,18 +149,19 @@ export class KlevuPopup {
   }
 
   render() {
+    const popupClasses: any = {
+      popup: true,
+      show: this.open,
+    }
+
+    popupClasses[`elevation-${this.elevation}`] = true
+
     return (
       <Host>
         <div id="origin" class="originContainer">
           <slot name="origin" />
         </div>
-        <div
-          id="content"
-          class={{
-            popup: true,
-            show: this.open,
-          }}
-        >
+        <div id="content" class={popupClasses}>
           <slot name="content" />
         </div>
       </Host>

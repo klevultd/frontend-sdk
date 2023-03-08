@@ -77,3 +77,7 @@ input[type="checkbox"]:disabled {
   cursor: not-allowed;
   opacity: var(--klevu-opacity-disabled);
 }
+
+klevu-typography {
+  line-height: 1;
+}
