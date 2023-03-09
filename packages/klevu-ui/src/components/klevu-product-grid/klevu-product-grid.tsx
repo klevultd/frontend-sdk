@@ -12,28 +12,17 @@ import { Component, h, Host, Prop } from "@stencil/core"
 })
 export class KlevuProductGrid {
   /**
-   * Place products in grid with this many products
+   * Force to place products in grid with given number of columns.
    */
   @Prop() itemsPerRow?: number
   render() {
+    const style: any = {}
     if (this.itemsPerRow) {
-      return (
-        <Host>
-          <div
-            class="gridcontainer"
-            style={{
-              gridTemplateColumns: `repeat(${this.itemsPerRow}, 1fr)`,
-            }}
-          >
-            <slot />
-          </div>
-        </Host>
-      )
+      style.gridTemplateColumns = `repeat(${this.itemsPerRow}, 1fr)`
     }
-
     return (
       <Host>
-        <div class="container">
+        <div class="gridcontainer" style={style}>
           <slot />
         </div>
       </Host>

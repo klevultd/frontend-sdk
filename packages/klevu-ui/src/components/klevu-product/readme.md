@@ -8,6 +8,9 @@
 Generic product component that renders product based on KlevuRecord of @klevu/core
 All parts of the component can be replaced with slots.
 
+By default the products fill the whole space, but it can be limited
+with --kleu-product-width and --klevu-product-small-width css variables.
+
 ## Properties
 
 | Property          | Attribute          | Description                                           | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Default     |

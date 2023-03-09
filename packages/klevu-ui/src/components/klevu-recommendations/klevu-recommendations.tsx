@@ -1,5 +1,6 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, h, Host, Prop, State } from "@stencil/core"
+import { globalExportedParts } from "../../utils/utils"
 import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductSlots } from "../klevu-product/klevu-product"
@@ -132,7 +133,7 @@ export class KlevuRecommendations {
 
     return (
       <Host>
-        <klevu-slides>
+        <klevu-slides exportparts={globalExportedParts}>
           {this.products.map((product) => (
             <klevu-product fixedWidth onKlevuProductClick={this.#productClick.bind(this)} product={product}>
               {this.#internalRenderProductSlot(product, "top")}

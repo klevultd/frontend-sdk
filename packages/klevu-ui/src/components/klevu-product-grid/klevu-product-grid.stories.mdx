@@ -25,11 +25,12 @@ It is possible to set a custom number of columns with itemsPerRow parameter.
 In this example we also change the width of the product with CSS variable.
 
 <Canvas>
-  <Story name="Product grid with set amount">
-    {(args) =>
-      html`<klevu-product-grid items-per-row="6" style="--klevu-product-width: 100px;">
-        ${productElements()}
-      </klevu-product-grid>`
-    }
+  <Story
+    name="Product grid with set amount"
+    args={{
+      itemsPerRow: 6,
+    }}
+  >
+    {(args) => html`<klevu-product-grid items-per-row=${args.itemsPerRow}> ${productElements()} </klevu-product-grid>`}
   </Story>
 </Canvas>

@@ -473,6 +473,8 @@ export namespace Components {
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
      * All parts of the component can be replaced with slots.
+     * By default the products fill the whole space, but it can be limited
+     * with --kleu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image - The image element of component
      * @csspart product-container - The container element of whole
      * @cssprop --klevu-product-width - Width of the product
@@ -524,7 +526,7 @@ export namespace Components {
      */
     interface KlevuProductGrid {
         /**
-          * Place products in grid with this many products
+          * Force to place products in grid with given number of columns.
          */
         "itemsPerRow"?: number;
     }
@@ -1188,6 +1190,8 @@ declare global {
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
      * All parts of the component can be replaced with slots.
+     * By default the products fill the whole space, but it can be limited
+     * with --kleu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image - The image element of component
      * @csspart product-container - The container element of whole
      * @cssprop --klevu-product-width - Width of the product
@@ -1830,6 +1834,8 @@ declare namespace LocalJSX {
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
      * All parts of the component can be replaced with slots.
+     * By default the products fill the whole space, but it can be limited
+     * with --kleu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image - The image element of component
      * @csspart product-container - The container element of whole
      * @cssprop --klevu-product-width - Width of the product
@@ -1885,7 +1891,7 @@ declare namespace LocalJSX {
      */
     interface KlevuProductGrid {
         /**
-          * Place products in grid with this many products
+          * Force to place products in grid with given number of columns.
          */
         "itemsPerRow"?: number;
     }
@@ -2461,6 +2467,8 @@ declare module "@stencil/core" {
             /**
              * Generic product component that renders product based on KlevuRecord of @klevu/core
              * All parts of the component can be replaced with slots.
+             * By default the products fill the whole space, but it can be limited
+             * with --kleu-product-width and --klevu-product-small-width css variables.
              * @csspart product-image - The image element of component
              * @csspart product-container - The container element of whole
              * @cssprop --klevu-product-width - Width of the product

@@ -2,6 +2,7 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 
 export const singleProduct = (args: HTMLKlevuProductElement) => html` <klevu-product
+  style="--klevu-product-width: 300px"
   variant=${args.variant}
   .product=${args.product}
   fixed-width=${ifDefined(args.fixedWidth)}
@@ -16,7 +17,7 @@ export const singleProduct = (args: HTMLKlevuProductElement) => html` <klevu-pro
 export const productWithCustomizedProduct = (args: HTMLKlevuProductElement) => html`<div>
   ${singleProduct(args)}
   <klevu-product
-    style="--klevu-product-image-aspect-ratio: 1 / 1.3"
+    style="--klevu-product-width: 300px; --klevu-product-image-aspect-ratio: 1 / 1.3"
     variant=${args.variant}
     .product=${args.product}
     fixed-width=${ifDefined(args.fixedWidth)}
@@ -40,6 +41,9 @@ export const productWithCustomizedProduct = (args: HTMLKlevuProductElement) => h
     hide-swatches=${ifDefined(args.hideSwatches)}
   ></klevu-product>
   <style>
+    #modified {
+      --klevu-product-width: 300px;
+    }
     klevu-product#modified::part(product-container) {
       box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.35);
     }

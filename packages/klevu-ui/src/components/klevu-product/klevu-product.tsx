@@ -10,6 +10,9 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * Generic product component that renders product based on KlevuRecord of @klevu/core
  * All parts of the component can be replaced with slots.
  *
+ * By default the products fill the whole space, but it can be limited
+ * with --kleu-product-width and --klevu-product-small-width css variables.
+ *
  * @slot top - Empty are before any product content
  * @slot image - Image region of component
  * @slot info - Swatches, titles, brands and prices slot
