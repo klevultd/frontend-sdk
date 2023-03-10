@@ -279,6 +279,9 @@ export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSugge
 ]);
 
 
+export const KlevuTab = /*@__PURE__*/ defineContainer<JSX.KlevuTab>('klevu-tab', undefined);
+
+
 export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>('klevu-textfield', undefined, [
   'value',
   'disabled',

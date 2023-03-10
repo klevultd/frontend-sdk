@@ -1,6 +1,5 @@
 :host {
   display: block;
-  margin: var(--klevu-spacing-05) 0;
 }
 
 .slides {

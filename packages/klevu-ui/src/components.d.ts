@@ -836,6 +836,8 @@ export namespace Components {
          */
         "suggestions": string[];
     }
+    interface KlevuTab {
+    }
     /**
      * Branded text field component
      */
@@ -1322,6 +1324,12 @@ declare global {
         prototype: HTMLKlevuSuggestionsListElement;
         new (): HTMLKlevuSuggestionsListElement;
     };
+    interface HTMLKlevuTabElement extends Components.KlevuTab, HTMLStencilElement {
+    }
+    var HTMLKlevuTabElement: {
+        prototype: HTMLKlevuTabElement;
+        new (): HTMLKlevuTabElement;
+    };
     /**
      * Branded text field component
      */
@@ -1406,6 +1414,7 @@ declare global {
         "klevu-slides": HTMLKlevuSlidesElement;
         "klevu-sort": HTMLKlevuSortElement;
         "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
+        "klevu-tab": HTMLKlevuTabElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
@@ -2232,6 +2241,8 @@ declare namespace LocalJSX {
          */
         "suggestions"?: string[];
     }
+    interface KlevuTab {
+    }
     /**
      * Branded text field component
      */
@@ -2351,6 +2362,7 @@ declare namespace LocalJSX {
         "klevu-slides": KlevuSlides;
         "klevu-sort": KlevuSort;
         "klevu-suggestions-list": KlevuSuggestionsList;
+        "klevu-tab": KlevuTab;
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
@@ -2557,6 +2569,7 @@ declare module "@stencil/core" {
              * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
              */
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
+            "klevu-tab": LocalJSX.KlevuTab & JSXBase.HTMLAttributes<HTMLKlevuTabElement>;
             /**
              * Branded text field component
              */

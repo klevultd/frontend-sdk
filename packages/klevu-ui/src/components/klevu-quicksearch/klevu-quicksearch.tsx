@@ -245,8 +245,7 @@ export class KlevuQuicksearch {
                   <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
                 </aside>
                 <section>
-                  <klevu-typography variant="h3">Trending products</klevu-typography>
-                  <klevu-slides class="trending-slides" exportparts={globalExportedParts}>
+                  <klevu-slides class="trending-slides" heading="Trending products" exportparts={globalExportedParts}>
                     {this.trendingProducts?.map((p) => (
                       <klevu-product product={p} fixedWidth variant="small">
                         {this.#internalRenderProductSlot(p, "top")}

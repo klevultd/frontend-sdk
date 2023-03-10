@@ -133,9 +133,16 @@ export class KlevuRecommendations {
 
     return (
       <Host>
-        <klevu-slides exportparts={globalExportedParts}>
+        <klevu-slides exportparts={globalExportedParts} heading={this.recommendationTitle}>
           {this.products.map((product) => (
-            <klevu-product fixedWidth onKlevuProductClick={this.#productClick.bind(this)} product={product}>
+            <klevu-product
+              fixedWidth
+              onKlevuProductClick={this.#productClick.bind(this)}
+              product={product}
+              style={{
+                "--klevu-product-width": "300px",
+              }}
+            >
               {this.#internalRenderProductSlot(product, "top")}
               {this.#internalRenderProductSlot(product, "image")}
               {this.#internalRenderProductSlot(product, "info")}
