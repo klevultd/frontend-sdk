@@ -25,7 +25,7 @@ export function products(
     typeOfRequest: KlevuTypeOfRequest.Search,
     settings: {
       limit: productIds.length,
-      customeANDQuery: `id:(${productIds.join(" OR ")})`,
+      customANDQuery: `id:(${productIds.join(" OR ")})`,
       topIds: productIds.map((id) => ({ key: "id", value: id })),
       typeOfRecords: [KlevuTypeOfRecord.Product],
     },

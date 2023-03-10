@@ -198,7 +198,7 @@ export async function kmcRecommendation(
       if (!q.settings) {
         q.settings = {}
       }
-      q.settings.customeANDQuery = `id:(${last10.join(" OR ")})`
+      q.settings.customANDQuery = `id:(${last10.join(" OR ")})`
       q.settings.topIds = last10.map((id) => ({ key: "id", value: id }))
     }
   }
