@@ -22,6 +22,7 @@ button klevu-typography,
 button span[part="material-icon"] {
   --klevu-typography-color: var(--klevu-button-text-color, #ffffff);
   color: var(--klevu-button-text-color, #ffffff);
+  user-select: none;
 }
 
 button:hover {
@@ -53,6 +54,10 @@ button:active:not(:disabled) {
 
 button.secondary {
   background: var(--klevu-color-neutral-2);
+}
+
+button.secondary,
+button.secondary span[part="material-icon"] {
   color: var(--klevu-color-neutral-8);
 }
 
@@ -66,5 +71,11 @@ button.fullwidth {
 }
 
 button.icon {
-  padding: 0 calc(var(--padding));
+  padding: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  width: calc(var(--klevu-size-m) * 2);
+  border-radius: 10000000px;
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 1.8;
 }

@@ -261,8 +261,8 @@ export const KlevuSlider = /*@__PURE__*/ defineContainer<JSX.KlevuSlider>('klevu
 
 
 export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined, [
+  'heading',
   'slideFullWidth',
-  'height',
   'hideNextPrev'
 ]);
 
@@ -295,6 +295,12 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
 
 export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography>('klevu-typography', undefined, [
   'variant'
+]);
+
+
+export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilScrollbars>('klevu-util-scrollbars', undefined, [
+  'overflowX',
+  'overflowY'
 ]);
 
 

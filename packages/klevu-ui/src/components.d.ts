@@ -19,6 +19,7 @@ import { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, Sugg
 import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
+import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -34,6 +35,7 @@ export { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, Sugg
 export { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 export { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
+export { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export namespace Components {
     /**
@@ -796,13 +798,13 @@ export namespace Components {
         "start"?: number;
     }
     /**
-     * Horizontal slides component
+     * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
      */
     interface KlevuSlides {
         /**
-          * Height of the slider
+          * Heading for the slides component
          */
-        "height": number;
+        "heading"?: string;
         /**
           * Hides next and previous buttons
          */
@@ -895,6 +897,15 @@ export namespace Components {
           * Variant of heading
          */
         "variant": KlevuTypographyVariant;
+    }
+    /**
+     * Utility that replaces the default browser scrollbar with a custom one.
+     */
+    interface KlevuUtilScrollbars {
+        "getContainer": () => Promise<HTMLDivElement | undefined>;
+        "getInstance": () => Promise<OverlayScrollbars | undefined>;
+        "overflowX"?: OverflowBehavior;
+        "overflowY"?: OverflowBehavior;
     }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
@@ -1285,7 +1296,7 @@ declare global {
         new (): HTMLKlevuSliderElement;
     };
     /**
-     * Horizontal slides component
+     * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
      */
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
@@ -1349,6 +1360,15 @@ declare global {
         prototype: HTMLKlevuTypographyElement;
         new (): HTMLKlevuTypographyElement;
     };
+    /**
+     * Utility that replaces the default browser scrollbar with a custom one.
+     */
+    interface HTMLKlevuUtilScrollbarsElement extends Components.KlevuUtilScrollbars, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilScrollbarsElement: {
+        prototype: HTMLKlevuUtilScrollbarsElement;
+        new (): HTMLKlevuUtilScrollbarsElement;
+    };
     interface HTMLKlevuUtilViewportElement extends Components.KlevuUtilViewport, HTMLStencilElement {
     }
     var HTMLKlevuUtilViewportElement: {
@@ -1388,6 +1408,7 @@ declare global {
         "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
+        "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
 }
@@ -2169,13 +2190,13 @@ declare namespace LocalJSX {
         "start"?: number;
     }
     /**
-     * Horizontal slides component
+     * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
      */
     interface KlevuSlides {
         /**
-          * Height of the slider
+          * Heading for the slides component
          */
-        "height"?: number;
+        "heading"?: string;
         /**
           * Hides next and previous buttons
          */
@@ -2285,6 +2306,13 @@ declare namespace LocalJSX {
          */
         "variant": KlevuTypographyVariant;
     }
+    /**
+     * Utility that replaces the default browser scrollbar with a custom one.
+     */
+    interface KlevuUtilScrollbars {
+        "overflowX"?: OverflowBehavior;
+        "overflowY"?: OverflowBehavior;
+    }
     interface KlevuUtilViewport {
         "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
         /**
@@ -2325,6 +2353,7 @@ declare namespace LocalJSX {
         "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
+        "klevu-util-scrollbars": KlevuUtilScrollbars;
         "klevu-util-viewport": KlevuUtilViewport;
     }
 }
@@ -2517,7 +2546,7 @@ declare module "@stencil/core" {
              */
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             /**
-             * Horizontal slides component
+             * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
              */
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             /**
@@ -2556,6 +2585,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
              */
             "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
+            /**
+             * Utility that replaces the default browser scrollbar with a custom one.
+             */
+            "klevu-util-scrollbars": LocalJSX.KlevuUtilScrollbars & JSXBase.HTMLAttributes<HTMLKlevuUtilScrollbarsElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }
     }

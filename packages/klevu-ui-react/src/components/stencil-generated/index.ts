@@ -40,4 +40,5 @@ export const KlevuSort = /*@__PURE__*/createReactComponent<JSX.KlevuSort, HTMLKl
 export const KlevuSuggestionsList = /*@__PURE__*/createReactComponent<JSX.KlevuSuggestionsList, HTMLKlevuSuggestionsListElement>('klevu-suggestions-list');
 export const KlevuTextfield = /*@__PURE__*/createReactComponent<JSX.KlevuTextfield, HTMLKlevuTextfieldElement>('klevu-textfield');
 export const KlevuTypography = /*@__PURE__*/createReactComponent<JSX.KlevuTypography, HTMLKlevuTypographyElement>('klevu-typography');
+export const KlevuUtilScrollbars = /*@__PURE__*/createReactComponent<JSX.KlevuUtilScrollbars, HTMLKlevuUtilScrollbarsElement>('klevu-util-scrollbars');
 export const KlevuUtilViewport = /*@__PURE__*/createReactComponent<JSX.KlevuUtilViewport, HTMLKlevuUtilViewportElement>('klevu-util-viewport');

@@ -1,51 +1,19 @@
 :host {
   display: block;
-  margin: var(--klevu-spacing-05);
-  border-radius: var(--klevu-border-radius-s);
-  position: relative;
-}
-
-.prev,
-.next {
-  top: 50%;
-  position: absolute;
-  display: block;
-  transform: translateY(-50%);
-  z-index: 1;
-  color: var(--klevu-color-primary-text);
-
-  border-radius: 50%;
-  cursor: pointer;
-  user-select: none;
-}
-
-klevu-button {
-  --klevu-border-radius-s: 50%;
-  --klevu-button-padding: var(--klevu-spacing-04) var(--klevu-spacing-05);
-}
-
-.prev {
-  left: 0;
-}
-
-.next {
-  right: 0;
+  margin: var(--klevu-spacing-05) 0;
 }
 
 .slides {
   display: flex;
-  margin: 0 calc(var(--klevu-spacing-05) * 2);
   gap: var(--klevu-spacing-05);
-  overflow-x: scroll;
-  position: relative;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
 }
 
-.slides.hideNextPrev {
-  margin: 0;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.slides > * {
-  scroll-snap-align: center;
+header div klevu-button {
+  margin-left: var(--klevu-spacing-04);
 }

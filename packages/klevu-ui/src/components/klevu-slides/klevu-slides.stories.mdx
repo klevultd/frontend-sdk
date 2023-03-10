@@ -13,8 +13,14 @@ const productElements = () =>
 <Description>{meta.description}</Description>
 
 <Canvas>
-  <Story name="Slides">
+  <Story
+    name="Slides"
+    args={{
+      heading: "Hello World Slides!",
+    }}
+  >
     {(args) => html`<klevu-slides
+      heading=${ifDefined(args.heading)}
       slide-full-width=${ifDefined(args.slideFullWidth)}
       hide-next-prev=${ifDefined(args.hideNextPrev)}
       height=${ifDefined(args.height)}
