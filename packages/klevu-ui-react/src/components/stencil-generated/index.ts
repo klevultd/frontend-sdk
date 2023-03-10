@@ -38,6 +38,7 @@ export const KlevuSlider = /*@__PURE__*/createReactComponent<JSX.KlevuSlider, HT
 export const KlevuSlides = /*@__PURE__*/createReactComponent<JSX.KlevuSlides, HTMLKlevuSlidesElement>('klevu-slides');
 export const KlevuSort = /*@__PURE__*/createReactComponent<JSX.KlevuSort, HTMLKlevuSortElement>('klevu-sort');
 export const KlevuSuggestionsList = /*@__PURE__*/createReactComponent<JSX.KlevuSuggestionsList, HTMLKlevuSuggestionsListElement>('klevu-suggestions-list');
+export const KlevuTab = /*@__PURE__*/createReactComponent<JSX.KlevuTab, HTMLKlevuTabElement>('klevu-tab');
 export const KlevuTextfield = /*@__PURE__*/createReactComponent<JSX.KlevuTextfield, HTMLKlevuTextfieldElement>('klevu-textfield');
 export const KlevuTypography = /*@__PURE__*/createReactComponent<JSX.KlevuTypography, HTMLKlevuTypographyElement>('klevu-typography');
 export const KlevuUtilScrollbars = /*@__PURE__*/createReactComponent<JSX.KlevuUtilScrollbars, HTMLKlevuUtilScrollbarsElement>('klevu-util-scrollbars');

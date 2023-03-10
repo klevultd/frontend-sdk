@@ -836,7 +836,18 @@ export namespace Components {
          */
         "suggestions": string[];
     }
+    /**
+     * Very simple tab component
+     */
     interface KlevuTab {
+        /**
+          * Whether the tab is active
+         */
+        "active"?: boolean;
+        /**
+          * Title of the tab
+         */
+        "caption": string;
     }
     /**
      * Branded text field component
@@ -1324,6 +1335,9 @@ declare global {
         prototype: HTMLKlevuSuggestionsListElement;
         new (): HTMLKlevuSuggestionsListElement;
     };
+    /**
+     * Very simple tab component
+     */
     interface HTMLKlevuTabElement extends Components.KlevuTab, HTMLStencilElement {
     }
     var HTMLKlevuTabElement: {
@@ -2241,7 +2255,18 @@ declare namespace LocalJSX {
          */
         "suggestions"?: string[];
     }
+    /**
+     * Very simple tab component
+     */
     interface KlevuTab {
+        /**
+          * Whether the tab is active
+         */
+        "active"?: boolean;
+        /**
+          * Title of the tab
+         */
+        "caption": string;
     }
     /**
      * Branded text field component
@@ -2569,6 +2594,9 @@ declare module "@stencil/core" {
              * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
              */
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
+            /**
+             * Very simple tab component
+             */
             "klevu-tab": LocalJSX.KlevuTab & JSXBase.HTMLAttributes<HTMLKlevuTabElement>;
             /**
              * Branded text field component
