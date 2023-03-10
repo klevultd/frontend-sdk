@@ -41,7 +41,7 @@ export function recentlyViewed(
     settings: {
       limit: lastProducts.length,
       typeOfRecords: [KlevuTypeOfRecord.Product],
-      customeANDQuery: `id:(${lastProducts.join(" OR ")})`,
+      customANDQuery: `id:(${lastProducts.join(" OR ")})`,
       topIds: lastProducts.map((id) => ({ key: "id", value: id })),
     },
   }

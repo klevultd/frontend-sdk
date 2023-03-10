@@ -122,7 +122,7 @@ export type KlevuBaseQuerySettings = {
    * building these queries, so when you need support please reach out to us
    * via the Community Forum.
    */
-  customeANDQuery?: string
+  customANDQuery?: string
 
   /**
    * When a customer enters a physical shop, they may express their
