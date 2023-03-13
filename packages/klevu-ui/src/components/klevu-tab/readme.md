@@ -18,6 +18,24 @@ Very simple tab component
 | `disabled`             | `disabled` | Whether the tab is disabled | `boolean \| undefined` | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-quicksearch](../klevu-quicksearch)
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-tab --> klevu-typography
+  klevu-quicksearch --> klevu-tab
+  style klevu-tab fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

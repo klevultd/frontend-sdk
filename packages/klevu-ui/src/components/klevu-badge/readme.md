@@ -39,6 +39,19 @@ Basic badge component. Can be used to display small information on top of other 
 | `"material-icon"` |             |
 
 
+## Dependencies
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-badge --> klevu-typography
+  style klevu-badge fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

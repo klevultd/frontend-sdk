@@ -31,6 +31,56 @@ Full app to create search bar that popups trending products and search results.
 | `"content"` | Popup content |
 
 
+## Dependencies
+
+### Depends on
+
+- [klevu-popup](../klevu-popup)
+- [klevu-search-field](../klevu-search-field)
+- [klevu-suggestions-list](../klevu-suggestions-list)
+- [klevu-cms-list](../klevu-cms-list)
+- [klevu-typography](../klevu-typography)
+- [klevu-sort](../klevu-sort)
+- [klevu-product-grid](../klevu-product-grid)
+- [klevu-product](../klevu-product)
+- [klevu-pagination](../klevu-pagination)
+- [klevu-popular-searches](../klevu-popular-searches)
+- [klevu-latest-searches](../klevu-latest-searches)
+- [klevu-tab](../klevu-tab)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-quicksearch --> klevu-popup
+  klevu-quicksearch --> klevu-search-field
+  klevu-quicksearch --> klevu-suggestions-list
+  klevu-quicksearch --> klevu-cms-list
+  klevu-quicksearch --> klevu-typography
+  klevu-quicksearch --> klevu-sort
+  klevu-quicksearch --> klevu-product-grid
+  klevu-quicksearch --> klevu-product
+  klevu-quicksearch --> klevu-pagination
+  klevu-quicksearch --> klevu-popular-searches
+  klevu-quicksearch --> klevu-latest-searches
+  klevu-quicksearch --> klevu-tab
+  klevu-search-field --> klevu-textfield
+  klevu-search-field --> klevu-button
+  klevu-button --> klevu-typography
+  klevu-suggestions-list --> klevu-typography
+  klevu-suggestions-list --> klevu-list
+  klevu-list --> klevu-typography
+  klevu-cms-list --> klevu-typography
+  klevu-cms-list --> klevu-list
+  klevu-sort --> klevu-dropdown
+  klevu-product --> klevu-typography
+  klevu-popular-searches --> klevu-typography
+  klevu-popular-searches --> klevu-list
+  klevu-latest-searches --> klevu-typography
+  klevu-latest-searches --> klevu-list
+  klevu-tab --> klevu-typography
+  style klevu-quicksearch fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

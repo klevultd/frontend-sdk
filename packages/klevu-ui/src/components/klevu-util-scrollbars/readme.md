@@ -40,6 +40,19 @@ Type: `Promise<OverlayScrollbars | undefined>`
 
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-slides](../klevu-slides)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-slides --> klevu-util-scrollbars
+  style klevu-util-scrollbars fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

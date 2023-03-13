@@ -14,6 +14,27 @@ Fetches and displays most popular searches from Klevu Merchant center
 | `caption` | `caption` | Caption of the list | `string` | `"Popular searches"` |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-quicksearch](../klevu-quicksearch)
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+- [klevu-list](../klevu-list)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-popular-searches --> klevu-typography
+  klevu-popular-searches --> klevu-list
+  klevu-list --> klevu-typography
+  klevu-quicksearch --> klevu-popular-searches
+  style klevu-popular-searches fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

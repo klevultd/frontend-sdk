@@ -30,6 +30,24 @@ Checkbox component
 | `"material-icon"` |             |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-facet](../klevu-facet)
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-checkbox --> klevu-typography
+  klevu-facet --> klevu-checkbox
+  style klevu-checkbox fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

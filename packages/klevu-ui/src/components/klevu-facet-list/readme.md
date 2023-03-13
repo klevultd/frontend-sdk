@@ -27,6 +27,35 @@ Render all facets of filter manager
 | `klevuApplyFilters` | When filters are applied | `CustomEvent<void>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
+
+### Depends on
+
+- [klevu-facet](../klevu-facet)
+- [klevu-button](../klevu-button)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-facet-list --> klevu-facet
+  klevu-facet-list --> klevu-button
+  klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-typography
+  klevu-facet --> klevu-slider
+  klevu-facet --> klevu-checkbox
+  klevu-accordion --> klevu-typography
+  klevu-checkbox --> klevu-typography
+  klevu-button --> klevu-typography
+  klevu-merchandising --> klevu-facet-list
+  klevu-search-landing-page --> klevu-facet-list
+  style klevu-facet-list fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

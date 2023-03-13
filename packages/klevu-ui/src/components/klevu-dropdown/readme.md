@@ -32,6 +32,19 @@ Simple native dropdown component for dropdown
 | `"material-icon"` |             |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-sort](../klevu-sort)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-sort --> klevu-dropdown
+  style klevu-dropdown fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

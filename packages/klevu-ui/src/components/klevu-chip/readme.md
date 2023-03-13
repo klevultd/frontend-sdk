@@ -33,6 +33,19 @@ Has selected and removable attributes that can be used to display the chip in se
 | `"material-icon"` |             |
 
 
+## Dependencies
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-chip --> klevu-typography
+  style klevu-chip fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

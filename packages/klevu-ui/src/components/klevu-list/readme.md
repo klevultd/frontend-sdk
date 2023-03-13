@@ -20,6 +20,30 @@ Single list item for listing things.
 | `url`        | `url`          | Make the whole thing clickable and navigate to this url.          | `string \| undefined` | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-cms-list](../klevu-cms-list)
+ - [klevu-latest-searches](../klevu-latest-searches)
+ - [klevu-popular-searches](../klevu-popular-searches)
+ - [klevu-suggestions-list](../klevu-suggestions-list)
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-list --> klevu-typography
+  klevu-cms-list --> klevu-list
+  klevu-latest-searches --> klevu-list
+  klevu-popular-searches --> klevu-list
+  klevu-suggestions-list --> klevu-list
+  style klevu-list fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

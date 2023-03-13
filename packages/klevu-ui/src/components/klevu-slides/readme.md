@@ -16,6 +16,29 @@ Horizontal slides component. Can be used to display a list of items horizontally
 | `slideFullWidth` | `slide-full-width` | When clicking next/prev buttons should scroll full width of container | `boolean \| undefined` | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-recommendations](../klevu-recommendations)
+
+### Depends on
+
+- [klevu-typography](../klevu-typography)
+- [klevu-button](../klevu-button)
+- [klevu-util-scrollbars](../klevu-util-scrollbars)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-slides --> klevu-typography
+  klevu-slides --> klevu-button
+  klevu-slides --> klevu-util-scrollbars
+  klevu-button --> klevu-typography
+  klevu-recommendations --> klevu-slides
+  style klevu-slides fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

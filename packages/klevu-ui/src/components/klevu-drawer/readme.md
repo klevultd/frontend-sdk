@@ -49,6 +49,19 @@ Type: `Promise<void>`
 | `"origin"`  | When origin element is clicked then content is shown |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-layout-results](../klevu-layout-results)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-layout-results --> klevu-drawer
+  style klevu-drawer fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

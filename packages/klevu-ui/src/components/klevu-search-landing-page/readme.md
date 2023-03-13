@@ -20,6 +20,49 @@ Full app component for search landing page
 | `usePagination`     | `use-pagination` | Use pagination instead of loading more                                                                                                                                                                                                                                                            | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined` |
 
 
+## Dependencies
+
+### Depends on
+
+- [klevu-util-viewport](../klevu-util-viewport)
+- [klevu-layout-results](../klevu-layout-results)
+- [klevu-facet-list](../klevu-facet-list)
+- [klevu-typography](../klevu-typography)
+- [klevu-sort](../klevu-sort)
+- [klevu-product-grid](../klevu-product-grid)
+- [klevu-product](../klevu-product)
+- [klevu-pagination](../klevu-pagination)
+- [klevu-button](../klevu-button)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-search-landing-page --> klevu-util-viewport
+  klevu-search-landing-page --> klevu-layout-results
+  klevu-search-landing-page --> klevu-facet-list
+  klevu-search-landing-page --> klevu-typography
+  klevu-search-landing-page --> klevu-sort
+  klevu-search-landing-page --> klevu-product-grid
+  klevu-search-landing-page --> klevu-product
+  klevu-search-landing-page --> klevu-pagination
+  klevu-search-landing-page --> klevu-button
+  klevu-layout-results --> klevu-util-viewport
+  klevu-layout-results --> klevu-button
+  klevu-layout-results --> klevu-drawer
+  klevu-button --> klevu-typography
+  klevu-facet-list --> klevu-facet
+  klevu-facet-list --> klevu-button
+  klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-typography
+  klevu-facet --> klevu-slider
+  klevu-facet --> klevu-checkbox
+  klevu-accordion --> klevu-typography
+  klevu-checkbox --> klevu-typography
+  klevu-sort --> klevu-dropdown
+  klevu-product --> klevu-typography
+  style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 
