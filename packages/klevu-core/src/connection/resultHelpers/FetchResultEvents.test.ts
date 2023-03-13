@@ -63,7 +63,10 @@ test("Category merchandising click event", async () => {
   )
 })
 
-test("Recommendation click event", async () => {
+/**
+ * @todo: Find new way of testing this as recommendation can be deleted in backend and then it doesn't work anymore
+ */
+test.skip("Recommendation click event", async () => {
   // special case for recommendation
   KlevuConfig.init({
     url: "", // this should work without url
