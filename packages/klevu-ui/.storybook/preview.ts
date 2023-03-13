@@ -4,6 +4,7 @@ import "../src/global/global.css"
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import prettier from "prettier/standalone"
 import prettierBabel from "prettier/parser-babel"
+import prettierHtml from "prettier/parser-html"
 
 defineCustomElements()
 
@@ -88,13 +89,11 @@ export const parameters = {
   },
   cssprops,
   viewMode: "docs",
-  /*
   docs: {
     transformSource: (input) =>
       prettier.format(input, {
-        parser: "babel",
-        plugins: [prettierBabel],
+        parser: "html",
+        plugins: [prettierHtml],
       }),
   },
-  */
 }

@@ -20,8 +20,8 @@ button {
 
 button klevu-typography,
 button span[part="material-icon"] {
-  --klevu-typography-color: var(--klevu-button-text-color, #ffffff);
-  color: var(--klevu-button-text-color, #ffffff);
+  --klevu-typography-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
+  color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
   user-select: none;
 }
 
@@ -56,8 +56,9 @@ button.secondary {
   background: var(--klevu-color-neutral-2);
 }
 
-button.secondary,
+button.secondary klevu-typography,
 button.secondary span[part="material-icon"] {
+  --klevu-typography-color: var(--klevu-color-neutral-7);
   color: var(--klevu-color-neutral-8);
 }
 

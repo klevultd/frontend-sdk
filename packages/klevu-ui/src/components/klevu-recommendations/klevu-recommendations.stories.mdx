@@ -1,0 +1,99 @@
+import { ArgsTable, Canvas, Meta, Story, Description, Source } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
+import { MDXAutoFillMeta, fullMockRequest } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-recommendations")
+
+<Meta
+  title="Apps/Recommendations"
+  component="klevu-recommendations"
+  argTypes={meta.argTypes}
+  parameters={meta.parameters}
+/>
+
+# Klevu-recommendations
+
+<Description>{meta.description}</Description>
+
+In a default case we can fetch recommendation from Klevu Merchant Center with a ID of recommendation. There is no need to pass any other parameters in typical case.
+
+<Canvas>
+  <Story
+    name="Recommendations"
+    args={{
+      recommendationId: "k-7c7abfff-2adb-4699-b0ff-cf65752fff41",
+      recommendationTitle: "Trending products",
+    }}
+  >
+     
+    {(args) =>
+      html`<klevu-recommendations
+        .cartProductIds=${args.cartProductIds}
+        category-path=${ifDefined(args.categoryPath)}
+        current-product-id=${ifDefined(args.currentProductId)}
+        item-group-id=${ifDefined(args.itemGroupId)}
+        recommendation-id=${ifDefined(args.recommendationId)}
+        recommendation-title=${ifDefined(args.recommendationTitle)}
+        .renderProductSlot=${args.renderProductSlot}
+      ></klevu-recommendations>`
+    }
+  </Story>
+</Canvas>
+
+<ArgsTable story="Recommendations" />
+
+## Newest arrivals recommendation
+
+Newest arrivals doesn't need any references either.
+
+<Canvas>
+  <Story
+    name="Newest arrivals recommendation"
+    args={{
+      recommendationId: "k-02442189-e70c-45b7-a565-0918e600fc9a",
+      recommendationTitle: "Fresh off the boat",
+    }}
+  >
+     
+    {(args) =>
+      html`<klevu-recommendations
+        .cartProductIds=${args.cartProductIds}
+        category-path=${ifDefined(args.categoryPath)}
+        current-product-id=${ifDefined(args.currentProductId)}
+        item-group-id=${ifDefined(args.itemGroupId)}
+        recommendation-id=${ifDefined(args.recommendationId)}
+        recommendation-title=${ifDefined(args.recommendationTitle)}
+        .renderProductSlot=${args.renderProductSlot}
+      ></klevu-recommendations>`
+    }
+  </Story>
+</Canvas>
+
+## Also bought together recommendation
+
+When we want to show also bought together recommendation we need to pass current product ID and item group ID.
+
+<Canvas>
+  <Story
+    name="Others viewed"
+    args={{
+      recommendationId: "k-bcd9d473-9615-4d27-8f6c-2cda5097433e",
+      recommendationTitle: "Bought together",
+      currentProductId: "40414059986989",
+      itemGroupId: "6968005591085",
+    }}
+  >
+     
+    {(args) =>
+      html`<klevu-recommendations
+        .cartProductIds=${args.cartProductIds}
+        category-path=${ifDefined(args.categoryPath)}
+        current-product-id=${ifDefined(args.currentProductId)}
+        item-group-id=${ifDefined(args.itemGroupId)}
+        recommendation-id=${ifDefined(args.recommendationId)}
+        recommendation-title=${ifDefined(args.recommendationTitle)}
+        .renderProductSlot=${args.renderProductSlot}
+      ></klevu-recommendations>`
+    }
+  </Story>
+</Canvas>

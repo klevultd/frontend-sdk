@@ -227,7 +227,7 @@ export class KlevuSearchLandingPage {
           </div>
           <klevu-product-grid slot="content">
             {this.results?.map((p) => (
-              <klevu-product product={p} fixedWidth variant="small">
+              <klevu-product product={p} fixedWidth>
                 {this.#internalRenderProductSlot(p, "top")}
                 {this.#internalRenderProductSlot(p, "image")}
                 {this.#internalRenderProductSlot(p, "info")}
@@ -235,7 +235,7 @@ export class KlevuSearchLandingPage {
               </klevu-product>
             ))}
           </klevu-product-grid>
-          <div slot="footer">
+          <div slot="footer" class="footer">
             {this.usePagination && this.#resultObject ? (
               <klevu-pagination
                 queryResult={this.#resultObject}

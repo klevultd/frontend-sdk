@@ -39,12 +39,6 @@
   width: var(--width);
 }
 
-@media (max-width: 500px) {
-  .container.default.fixedWidth {
-    width: auto;
-  }
-}
-
 .container.small {
   display: flex;
   flex-direction: column;

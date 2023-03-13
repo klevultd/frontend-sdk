@@ -22,16 +22,14 @@ const meta = MDXAutoFillMeta("klevu-quicksearch")
     }}
   >
     {(args) =>
-      html` <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"
-        ><klevu-quicksearch
-          fallback-term=${ifDefined(args.fallbackTerm)}
-          popup-anchor=${ifDefined(args.popupAnchor)}
-          search-categories=${ifDefined(args.searchCategories)}
-          search-cms-cages=${ifDefined(args.searchCmsPages)}
-          placeholder=${ifDefined(args.placeholder)}
-          search-field-variant=${ifDefined(args.searchFieldVariant)}
-        ></klevu-quicksearch
-      ></klevu-init>`
+      html` <klevu-quicksearch
+        fallback-term=${ifDefined(args.fallbackTerm)}
+        popup-anchor=${ifDefined(args.popupAnchor)}
+        search-categories=${ifDefined(args.searchCategories)}
+        search-cms-cages=${ifDefined(args.searchCmsPages)}
+        placeholder=${ifDefined(args.placeholder)}
+        search-field-variant=${ifDefined(args.searchFieldVariant)}
+      ></klevu-quicksearch>`
     }
   </Story>
 </Canvas>
