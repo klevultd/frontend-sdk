@@ -10,7 +10,10 @@ beforeEach(() => {
   })
 })
 
-test("KMC recommendation", async () => {
+/**
+ * @todo: Find new way of testing this as recommendation can be deleted in backend and then it doesn't work anymore
+ */
+test.skip("KMC recommendation", async () => {
   const result = await KlevuFetch(
     kmcRecommendation("3a5580bf-c5b2-407e-acac-4a58ae730b64")
   )
