@@ -15,6 +15,13 @@ Simple component to list suggestions. Takes in a parameter suggestions that will
 | `suggestions` | --        | Suggestions to render in list | `string[]` | `[]`                   |
 
 
+## Events
+
+| Event                    | Description                                        | Type                  |
+| ------------------------ | -------------------------------------------------- | --------------------- |
+| `klevuSuggestionClicked` | Event that is emitted when a suggestion is clicked | `CustomEvent<string>` |
+
+
 ## Dependencies
 
 ### Used by

@@ -103,7 +103,8 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
 
 
 export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatestSearches>('klevu-latest-searches', undefined, [
-  'caption'
+  'caption',
+  'klevuLastSearchClicked'
 ]);
 
 
@@ -141,7 +142,8 @@ export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination
 
 
 export const KlevuPopularSearches = /*@__PURE__*/ defineContainer<JSX.KlevuPopularSearches>('klevu-popular-searches', undefined, [
-  'caption'
+  'caption',
+  'klevuPopularSearchClicked'
 ]);
 
 
@@ -279,7 +281,8 @@ export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sor
 
 export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSuggestionsList>('klevu-suggestions-list', undefined, [
   'caption',
-  'suggestions'
+  'suggestions',
+  'klevuSuggestionClicked'
 ]);
 
 

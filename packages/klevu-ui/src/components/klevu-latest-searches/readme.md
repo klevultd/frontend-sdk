@@ -14,6 +14,13 @@ Lists latest searches user has made on the site
 | `caption` | `caption` | Caption of the list | `string` | `"Last searches"` |
 
 
+## Events
+
+| Event                    | Description                                            | Type                  |
+| ------------------------ | ------------------------------------------------------ | --------------------- |
+| `klevuLastSearchClicked` | Event that is emitted when a popular search is clicked | `CustomEvent<string>` |
+
+
 ## Dependencies
 
 ### Used by

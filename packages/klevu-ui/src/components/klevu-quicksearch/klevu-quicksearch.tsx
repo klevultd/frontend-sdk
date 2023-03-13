@@ -9,7 +9,12 @@ import {
   trendingProducts,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
-import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent, KlevuTextfieldCustomEvent } from "../../components"
+import {
+  KlevuPaginationCustomEvent,
+  KlevuSearchFieldCustomEvent,
+  KlevuSuggestionsListCustomEvent,
+  KlevuTextfieldCustomEvent,
+} from "../../components"
 import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -119,7 +124,11 @@ export class KlevuQuicksearch {
   @Listen("klevuSearchResults")
   async onResults(event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) {
     this.clickEvent = event.detail.search?.getSearchClickSendEvent?.()
-    this.products = event.detail.search?.records
+    if (event.detail.search?.records.length === 0) {
+      this.products = event.detail.fallback?.records
+    } else {
+      this.products = event.detail.search?.records
+    }
     this.cmsPages = event.detail.cms?.records
     this.categories = event.detail.category?.records
     this.popup?.openModal()
@@ -194,6 +203,11 @@ export class KlevuQuicksearch {
     this.lastClickedProducts = KlevuLastClickedProducts.getProducts(3) as KlevuRecord[]
   }
 
+  #startSearch(term: string) {
+    this.products = [undefined, undefined, undefined] as any
+    this.#searchField?.makeSearch(term)
+  }
+
   render() {
     return (
       <Host>
@@ -240,9 +254,12 @@ export class KlevuQuicksearch {
           <klevu-suggestions-list
             exportparts={globalExportedParts}
             suggestions={this.suggestions}
+            onKlevuSuggestionClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-suggestions-list>
-          {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
-          {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
+          {this.cmsPages && this.cmsPages.length > 0 && <klevu-cms-list pages={this.cmsPages} link></klevu-cms-list>}
+          {this.categories && this.categories.length > 0 && (
+            <klevu-cms-list pages={this.categories} caption="Categories" link></klevu-cms-list>
+          )}
         </aside>
         <section>
           {this.resultVariant === "full" && (
@@ -308,8 +325,13 @@ export class KlevuQuicksearch {
     return (
       <Fragment>
         <aside>
-          <klevu-popular-searches></klevu-popular-searches>
-          <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
+          <klevu-popular-searches
+            onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
+          ></klevu-popular-searches>
+          <klevu-latest-searches
+            exportparts={globalExportedParts}
+            onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
+          ></klevu-latest-searches>
         </aside>
         <section>
           <div class="tabrow">

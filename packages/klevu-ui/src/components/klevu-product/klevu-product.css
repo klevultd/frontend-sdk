@@ -167,10 +167,21 @@
 .loading.content div {
   width: 100%;
   height: 32px;
-  margin-top: 6px;
+  margin-bottom: 6px;
   background: linear-gradient(-75deg, #a1a1a1 0%, #eaeaea 50%, #f8f8f8 100%);
   background-size: 400% 400%;
   animation: loadinggradient var(--loading-animation-time) linear infinite;
+}
+
+:host(.line.loading) .container {
+  display: flex;
+}
+
+:host(.line.loading) .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 var(--klevu-spacing-04);
 }
 
 .loading.content div:nth-child(1) {

@@ -113,17 +113,20 @@ export class KlevuProduct {
   }
 
   render() {
-    const containerClasses = {
-      container: true,
+    const typeClasses = {
       small: this.variant === "small",
       line: this.variant === "line",
       default: this.variant === "default",
+    }
+    const containerClasses: any = {
+      container: true,
       fixedWidth: Boolean(this.fixedWidth),
+      ...typeClasses,
     }
 
     if (!this.product) {
       return (
-        <Host>
+        <Host class={{ ...typeClasses, loading: true }}>
           <div class={containerClasses}>
             <div class="loading image"></div>
             <div class="loading content">

@@ -27,6 +27,7 @@ klevu-product-grid.desktop {
 
 .content section {
   max-width: 600px;
+  min-width: 300px;
 }
 
 .desktop {
@@ -35,10 +36,6 @@ klevu-product-grid.desktop {
 
 .mobile {
   display: none;
-}
-
-.trending-slides {
-  max-width: 500px;
 }
 
 .resultheader {

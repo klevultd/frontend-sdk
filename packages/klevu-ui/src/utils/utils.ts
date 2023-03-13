@@ -36,6 +36,22 @@ export function debounce<T extends unknown[], U>(callback: (...args: T) => Promi
 }
 
 /**
+ * Strip html tags from string.
+ *
+ * @param html
+ * @returns
+ */
+export function stripTags(html: string): string {
+  if (!document) {
+    return html
+  }
+
+  const tmp = document.createElement("DIV")
+  tmp.innerHTML = html
+  return tmp.textContent || tmp.innerText || ""
+}
+
+/**
  * List of css ::parts() that are exposed to the developers.
  *
  * Essentially this is list of css selectors that are exposed to the developers.

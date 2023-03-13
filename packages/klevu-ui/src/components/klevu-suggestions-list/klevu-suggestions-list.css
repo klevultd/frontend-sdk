@@ -5,3 +5,8 @@
 klevu-typography.caption {
   margin-bottom: var(--klevu-spacing-04);
 }
+
+klevu-list:hover {
+  cursor: pointer;
+  background: var(--klevu-color-neutral-2);
+}

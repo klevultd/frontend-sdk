@@ -707,6 +707,11 @@ export namespace Components {
          */
         "limit": number;
         /**
+          * Programmatically trigger search
+          * @param term What to search
+         */
+        "makeSearch": (term: string) => Promise<void>;
+        /**
           * The placeholder text to display in the search field.
          */
         "placeholder": string;
@@ -970,9 +975,17 @@ export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuFacetListElement;
 }
+export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuLatestSearchesElement;
+}
 export interface KlevuPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuPaginationElement;
+}
+export interface KlevuPopularSearchesCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuPopularSearchesElement;
 }
 export interface KlevuPopupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1001,6 +1014,10 @@ export interface KlevuSliderCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuSortCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSortElement;
+}
+export interface KlevuSuggestionsListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuSuggestionsListElement;
 }
 export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1765,6 +1782,10 @@ declare namespace LocalJSX {
           * Caption of the list
          */
         "caption"?: string;
+        /**
+          * Event that is emitted when a popular search is clicked
+         */
+        "onKlevuLastSearchClicked"?: (event: KlevuLatestSearchesCustomEvent<string>) => void;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -1867,6 +1888,10 @@ declare namespace LocalJSX {
           * Caption of the list
          */
         "caption"?: string;
+        /**
+          * Event that is emitted when a popular search is clicked
+         */
+        "onKlevuPopularSearchClicked"?: (event: KlevuPopularSearchesCustomEvent<string>) => void;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -2288,6 +2313,10 @@ declare namespace LocalJSX {
           * Caption on the list
          */
         "caption"?: string;
+        /**
+          * Event that is emitted when a suggestion is clicked
+         */
+        "onKlevuSuggestionClicked"?: (event: KlevuSuggestionsListCustomEvent<string>) => void;
         /**
           * Suggestions to render in list
          */

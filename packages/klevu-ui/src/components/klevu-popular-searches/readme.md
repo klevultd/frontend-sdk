@@ -14,6 +14,13 @@ Fetches and displays most popular searches from Klevu Merchant center
 | `caption` | `caption` | Caption of the list | `string` | `"Popular searches"` |
 
 
+## Events
+
+| Event                       | Description                                            | Type                  |
+| --------------------------- | ------------------------------------------------------ | --------------------- |
+| `klevuPopularSearchClicked` | Event that is emitted when a popular search is clicked | `CustomEvent<string>` |
+
+
 ## Dependencies
 
 ### Used by

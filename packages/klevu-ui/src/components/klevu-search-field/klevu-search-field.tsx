@@ -119,6 +119,17 @@ export class KlevuSearchField {
     await KlevuInit.ready()
   }
 
+  /**
+   * Programmatically trigger search
+   *
+   * @param term What to search
+   */
+  @Method()
+  async makeSearch(term: string) {
+    this.term = term
+    await this.#doSearch(term)
+  }
+
   #doSearch = debounce(async (term: string) => {
     if (term.length < 3) {
       return
@@ -152,20 +163,17 @@ export class KlevuSearchField {
     }
     if (this.searchCmsPages) {
       allSearchQueries.push(
-        search(
-          term,
-          { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms], sort: this.sort },
-          ...searchModifiers
-        )
+        search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms], sort: this.sort })
       )
     }
     if (this.searchCategories) {
       allSearchQueries.push(
-        search(
-          term,
-          { id: "categorySearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Category], sort: this.sort },
-          ...searchModifiers
-        )
+        search(term, {
+          id: "categorySearch",
+          limit: this.limit,
+          typeOfRecords: [KlevuTypeOfRecord.Category],
+          sort: this.sort,
+        })
       )
     }
     if (this.searchSuggestions) {

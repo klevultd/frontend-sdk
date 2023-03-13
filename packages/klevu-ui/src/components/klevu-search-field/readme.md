@@ -56,6 +56,16 @@ Type: `Promise<KlevuFetchQueryResult | undefined>`
 
 
 
+### `makeSearch(term: string) => Promise<void>`
+
+Programmatically trigger search
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 
 ## Dependencies
 
