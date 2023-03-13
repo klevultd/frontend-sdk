@@ -33,7 +33,6 @@ export const config: Config = {
     {
       type: "docs-readme",
       footer: "",
-      dependencies: false,
     },
     {
       type: "docs-json",

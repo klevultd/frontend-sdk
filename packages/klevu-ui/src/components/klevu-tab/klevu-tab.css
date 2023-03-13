@@ -39,3 +39,7 @@ button.active klevu-typography {
 button:hover klevu-typography {
   background: var(--klevu-color-neutral-2);
 }
+
+button:disabled klevu-typography {
+  color: var(--klevu-color-neutral-7);
+}

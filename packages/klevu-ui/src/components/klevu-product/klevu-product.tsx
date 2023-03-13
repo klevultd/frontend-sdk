@@ -208,7 +208,7 @@ export class KlevuProduct {
                   </klevu-typography>
                 )}
                 {this.hideDescription || !this.product.shortDesc ? null : (
-                  <klevu-typography class="description" variant="body-s">
+                  <klevu-typography class="description" variant="body-xs">
                     {this.product.shortDesc}
                   </klevu-typography>
                 )}

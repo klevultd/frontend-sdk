@@ -2,6 +2,7 @@ import { Placement } from "@floating-ui/dom"
 import {
   KlevuEvents,
   KlevuFetch,
+  KlevuLastClickedProducts,
   KlevuQueryResult,
   KlevuRecord,
   KlevuSearchSorting,
@@ -18,6 +19,8 @@ import {
   SearchResultsEventData,
   SuggestionsEventData,
 } from "../klevu-search-field/klevu-search-field"
+
+export type KlevuQuicksearchResultVarint = "simple" | "full"
 
 /**
  * Full app to create search bar that popups trending products and search results.
@@ -58,7 +61,22 @@ export class KlevuQuicksearch {
   /**
    * Change variant of the search field
    */
-  @Prop() searchFieldVariant: SearchFieldVariant = "default"
+  @Prop() searchFieldVariant: SearchFieldVariant = "pill"
+
+  /**
+   * Change variant of the search results
+   */
+  @Prop() resultVariant: KlevuQuicksearchResultVarint = "simple"
+
+  /**
+   * How many products to show in simple variant
+   */
+  @Prop() simpleResultCount: number = 3
+
+  /**
+   * How many products to show in full variant
+   */
+  @Prop() fullResultCount: number = 9
 
   /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
@@ -81,6 +99,8 @@ export class KlevuQuicksearch {
   @State() categories?: KlevuRecord[]
   @State() queryResult?: KlevuQueryResult
   @State() searchSort?: KlevuSearchSorting
+  @State() lastClickedProducts?: KlevuRecord[]
+  @State() activeTab: "trending" | "last" = "trending"
 
   #searchField?: HTMLKlevuSearchFieldElement
 
@@ -88,10 +108,9 @@ export class KlevuQuicksearch {
 
   popup?: HTMLKlevuPopupElement
 
-  @Listen("klevuTextChange")
+  @Listen("klevuTextChanged")
   async onTextChange(event: KlevuTextfieldCustomEvent<string>) {
-    console.log(event.detail)
-    if (event.detail === "") {
+    if (event.detail.length === 0) {
       this.suggestions = []
       this.products = []
     }
@@ -133,7 +152,7 @@ export class KlevuQuicksearch {
     await KlevuInit.ready()
     const trendingProductsQuery = await KlevuFetch(
       trendingProducts({
-        limit: 10,
+        limit: this.simpleResultCount,
       })
     )
     const resultObject = trendingProductsQuery.queriesById("trendingProducts")
@@ -171,13 +190,24 @@ export class KlevuQuicksearch {
     )
   }
 
+  #onPopupOpen() {
+    this.lastClickedProducts = KlevuLastClickedProducts.getProducts(3) as KlevuRecord[]
+  }
+
   render() {
     return (
       <Host>
-        <klevu-popup anchor={this.popupAnchor} ref={(el) => (this.popup = el)} fullwidthContent openAtFocus>
+        <klevu-popup
+          anchor={this.popupAnchor}
+          ref={(el) => (this.popup = el)}
+          fullwidthContent
+          openAtFocus
+          onKlevuPopupOpen={this.#onPopupOpen.bind(this)}
+          elevation={2}
+        >
           <klevu-search-field
             ref={(el) => (this.#searchField = el)}
-            limit={6}
+            limit={this.resultVariant === "simple" ? this.simpleResultCount : this.fullResultCount}
             sort={this.searchSort}
             slot="origin"
             searchProducts
@@ -192,75 +222,140 @@ export class KlevuQuicksearch {
             variant={this.searchFieldVariant}
           ></klevu-search-field>
           <div class="content" slot="content">
-            {(this.products ?? []).length > 0 ? (
-              <Fragment>
-                <aside>
-                  <klevu-suggestions-list
-                    exportparts={globalExportedParts}
-                    suggestions={this.suggestions}
-                  ></klevu-suggestions-list>
-                  {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
-                  {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
-                </aside>
-                <section>
-                  <div class="resultheader">
-                    <klevu-typography variant="h3">Search results</klevu-typography>
-                    <klevu-sort
-                      variant="inline"
-                      exportparts={globalExportedParts}
-                      onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
-                    ></klevu-sort>
-                  </div>
-                  <klevu-product-grid class="desktop" itemsPerRow={3}>
-                    {this.products?.map((p) => (
-                      <klevu-product product={p} fixedWidth variant="small">
-                        {this.#internalRenderProductSlot(p, "top")}
-                        {this.#internalRenderProductSlot(p, "image")}
-                        {this.#internalRenderProductSlot(p, "info")}
-                        {this.#internalRenderProductSlot(p, "bottom")}
-                      </klevu-product>
-                    ))}
-                  </klevu-product-grid>
-                  <klevu-product-grid class="mobile">
-                    {this.products?.map((p) => (
-                      <klevu-product product={p} fixedWidth variant="line">
-                        {this.#internalRenderProductSlot(p, "top")}
-                        {this.#internalRenderProductSlot(p, "image")}
-                        {this.#internalRenderProductSlot(p, "info")}
-                        {this.#internalRenderProductSlot(p, "bottom")}
-                      </klevu-product>
-                    ))}
-                  </klevu-product-grid>
-                  <klevu-pagination
-                    exportparts={globalExportedParts}
-                    queryResult={this.queryResult}
-                    onKlevuPaginationChange={this.#searchPageChange.bind(this)}
-                  ></klevu-pagination>
-                </section>
-              </Fragment>
-            ) : this.products?.length === 0 && this.trendingProducts.length > 0 ? (
-              <Fragment>
-                <aside>
-                  <klevu-popular-searches></klevu-popular-searches>
-                  <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
-                </aside>
-                <section>
-                  <klevu-slides class="trending-slides" heading="Trending products" exportparts={globalExportedParts}>
-                    {this.trendingProducts?.map((p) => (
-                      <klevu-product product={p} fixedWidth variant="small">
-                        {this.#internalRenderProductSlot(p, "top")}
-                        {this.#internalRenderProductSlot(p, "image")}
-                        {this.#internalRenderProductSlot(p, "info")}
-                        {this.#internalRenderProductSlot(p, "bottom")}
-                      </klevu-product>
-                    ))}
-                  </klevu-slides>
-                </section>
-              </Fragment>
-            ) : null}
+            {(this.products ?? []).length > 0
+              ? this.#renderResultPage()
+              : this.products?.length === 0 && this.trendingProducts.length > 0
+              ? this.#renderTrendingPage()
+              : null}
           </div>
         </klevu-popup>
       </Host>
+    )
+  }
+
+  #renderResultPage() {
+    return (
+      <Fragment>
+        <aside>
+          <klevu-suggestions-list
+            exportparts={globalExportedParts}
+            suggestions={this.suggestions}
+          ></klevu-suggestions-list>
+          {this.cmsPages && <klevu-cms-list pages={this.cmsPages}></klevu-cms-list>}
+          {this.categories && <klevu-cms-list pages={this.categories} caption="Categories"></klevu-cms-list>}
+        </aside>
+        <section>
+          {this.resultVariant === "full" && (
+            <Fragment>
+              <div class="resultheader">
+                <klevu-typography variant="h3">Search results</klevu-typography>
+                <klevu-sort
+                  variant="inline"
+                  exportparts={globalExportedParts}
+                  onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
+                ></klevu-sort>
+              </div>
+              <klevu-product-grid class="desktop" itemsPerRow={3}>
+                {this.products?.map((p) => (
+                  <klevu-product product={p} fixedWidth variant="small">
+                    {this.#internalRenderProductSlot(p, "top")}
+                    {this.#internalRenderProductSlot(p, "image")}
+                    {this.#internalRenderProductSlot(p, "info")}
+                    {this.#internalRenderProductSlot(p, "bottom")}
+                  </klevu-product>
+                ))}
+              </klevu-product-grid>
+              <klevu-product-grid class="mobile">
+                {this.products?.map((p) => (
+                  <klevu-product product={p} fixedWidth variant="line">
+                    {this.#internalRenderProductSlot(p, "top")}
+                    {this.#internalRenderProductSlot(p, "image")}
+                    {this.#internalRenderProductSlot(p, "info")}
+                    {this.#internalRenderProductSlot(p, "bottom")}
+                  </klevu-product>
+                ))}
+              </klevu-product-grid>
+              <klevu-pagination
+                exportparts={globalExportedParts}
+                queryResult={this.queryResult}
+                onKlevuPaginationChange={this.#searchPageChange.bind(this)}
+              ></klevu-pagination>
+            </Fragment>
+          )}
+          {this.resultVariant === "simple" && (
+            <Fragment>
+              <div class="resultheader">
+                <klevu-typography variant="h3">Search results</klevu-typography>
+              </div>
+              <div class="lineproducts">
+                {this.products?.map((p) => (
+                  <klevu-product product={p} variant="line">
+                    {this.#internalRenderProductSlot(p, "top")}
+                    {this.#internalRenderProductSlot(p, "image")}
+                    {this.#internalRenderProductSlot(p, "info")}
+                    {this.#internalRenderProductSlot(p, "bottom")}
+                  </klevu-product>
+                ))}
+              </div>
+            </Fragment>
+          )}
+        </section>
+      </Fragment>
+    )
+  }
+
+  #renderTrendingPage() {
+    return (
+      <Fragment>
+        <aside>
+          <klevu-popular-searches></klevu-popular-searches>
+          <klevu-latest-searches exportparts={globalExportedParts}></klevu-latest-searches>
+        </aside>
+        <section>
+          <div class="tabrow">
+            <klevu-tab
+              caption="Trending"
+              active={this.activeTab === "trending"}
+              onClick={() => (this.activeTab = "trending")}
+            ></klevu-tab>
+            <klevu-tab
+              caption={`Recently viewed (${this.lastClickedProducts?.length ?? 0})`}
+              active={this.activeTab === "last"}
+              onClick={() => {
+                if (this.lastClickedProducts?.length === 0) {
+                  return
+                }
+                this.activeTab = "last"
+              }}
+              disabled={this.lastClickedProducts?.length === 0}
+            ></klevu-tab>
+          </div>
+          {this.activeTab === "trending" && (
+            <Fragment>
+              {this.trendingProducts?.map((p) => (
+                <klevu-product product={p} variant="line">
+                  {this.#internalRenderProductSlot(p, "top")}
+                  {this.#internalRenderProductSlot(p, "image")}
+                  {this.#internalRenderProductSlot(p, "info")}
+                  {this.#internalRenderProductSlot(p, "bottom")}
+                </klevu-product>
+              ))}
+            </Fragment>
+          )}
+          {this.activeTab === "last" && (
+            <Fragment>
+              {this.lastClickedProducts?.map((p) => (
+                <klevu-product product={p} variant="line">
+                  {this.#internalRenderProductSlot(p, "top")}
+                  {this.#internalRenderProductSlot(p, "image")}
+                  {this.#internalRenderProductSlot(p, "info")}
+                  {this.#internalRenderProductSlot(p, "bottom")}
+                </klevu-product>
+              ))}
+            </Fragment>
+          )}
+        </section>
+      </Fragment>
     )
   }
 }

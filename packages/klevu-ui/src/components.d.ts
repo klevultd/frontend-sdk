@@ -15,6 +15,7 @@ import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
+import { KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
 import { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
@@ -31,6 +32,7 @@ export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
+export { KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
 export { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
@@ -606,6 +608,10 @@ export namespace Components {
          */
         "fallbackTerm"?: string;
         /**
+          * How many products to show in full variant
+         */
+        "fullResultCount": number;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -617,6 +623,10 @@ export namespace Components {
           * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
          */
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
+        /**
+          * Change variant of the search results
+         */
+        "resultVariant": KlevuQuicksearchResultVarint;
         /**
           * Should component search for categories too
          */
@@ -633,6 +643,10 @@ export namespace Components {
           * Text of search button
          */
         "searchText"?: string;
+        /**
+          * How many products to show in simple variant
+         */
+        "simpleResultCount": number;
     }
     /**
      * Full recommendation banner solution
@@ -848,6 +862,10 @@ export namespace Components {
           * Title of the tab
          */
         "caption": string;
+        /**
+          * Whether the tab is disabled
+         */
+        "disabled"?: boolean;
     }
     /**
      * Branded text field component
@@ -955,6 +973,10 @@ export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuPaginationElement;
+}
+export interface KlevuPopupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuPopupElement;
 }
 export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1867,6 +1889,10 @@ declare namespace LocalJSX {
          */
         "fullwidthContent"?: boolean;
         /**
+          * When popup is opened this event is emitted
+         */
+        "onKlevuPopupOpen"?: (event: KlevuPopupCustomEvent<void>) => void;
+        /**
           * Open content when origin component is focused
          */
         "openAtFocus"?: boolean;
@@ -2013,6 +2039,10 @@ declare namespace LocalJSX {
          */
         "fallbackTerm"?: string;
         /**
+          * How many products to show in full variant
+         */
+        "fullResultCount"?: number;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -2024,6 +2054,10 @@ declare namespace LocalJSX {
           * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
          */
         "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
+        /**
+          * Change variant of the search results
+         */
+        "resultVariant"?: KlevuQuicksearchResultVarint;
         /**
           * Should component search for categories too
          */
@@ -2040,6 +2074,10 @@ declare namespace LocalJSX {
           * Text of search button
          */
         "searchText"?: string;
+        /**
+          * How many products to show in simple variant
+         */
+        "simpleResultCount"?: number;
     }
     /**
      * Full recommendation banner solution
@@ -2267,6 +2305,10 @@ declare namespace LocalJSX {
           * Title of the tab
          */
         "caption": string;
+        /**
+          * Whether the tab is disabled
+         */
+        "disabled"?: boolean;
     }
     /**
      * Branded text field component

@@ -1,5 +1,5 @@
 import { autoUpdate, computePosition, offset, Placement, shift, size } from "@floating-ui/dom"
-import { Component, Element, h, Host, Listen, Method, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Method, Prop, State, Event, EventEmitter } from "@stencil/core"
 
 /**
  * Popup component where clicking origin component popups the the content
@@ -40,6 +40,17 @@ export class KlevuPopup {
    */
   @Prop() elevation = 1
 
+  /**
+   * When popup is opened this event is emitted
+   */
+  @Event({
+    composed: true,
+  })
+  klevuPopupOpen!: EventEmitter<void>
+
+  /**
+   * Is currently open
+   */
   @State() open = false
 
   #stopUpdatePos?: Function
@@ -59,6 +70,7 @@ export class KlevuPopup {
 
     this.open = true
     this.#updatePopupPosition()
+    this.klevuPopupOpen.emit()
   }
 
   async #updatePopupPosition() {

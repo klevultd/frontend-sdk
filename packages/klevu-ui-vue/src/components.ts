@@ -151,7 +151,8 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'closeAtOutsideClick',
   'fullwidthContent',
   'anchor',
-  'elevation'
+  'elevation',
+  'klevuPopupOpen'
 ]);
 
 
@@ -200,6 +201,9 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'placeholder',
   'searchText',
   'searchFieldVariant',
+  'resultVariant',
+  'simpleResultCount',
+  'fullResultCount',
   'renderProductSlot'
 ]);
 
@@ -281,7 +285,8 @@ export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSugge
 
 export const KlevuTab = /*@__PURE__*/ defineContainer<JSX.KlevuTab>('klevu-tab', undefined, [
   'caption',
-  'active'
+  'active',
+  'disabled'
 ]);
 
 

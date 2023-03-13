@@ -19,6 +19,13 @@ Popup component where clicking origin component popups the the content
 | `startOpen`           | `start-open`             | Initially show the popup                                   | `boolean \| undefined`                                                                                                                                               | `undefined`  |
 
 
+## Events
+
+| Event            | Description                                | Type                |
+| ---------------- | ------------------------------------------ | ------------------- |
+| `klevuPopupOpen` | When popup is opened this event is emitted | `CustomEvent<void>` |
+
+
 ## Methods
 
 ### `closeModal() => Promise<void>`

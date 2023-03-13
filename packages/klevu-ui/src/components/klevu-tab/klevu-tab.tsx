@@ -19,6 +19,11 @@ export class KlevuTab {
    */
   @Prop() active?: boolean
 
+  /**
+   * Whether the tab is disabled
+   */
+  @Prop() disabled?: boolean
+
   render() {
     return (
       <Host>
@@ -26,6 +31,7 @@ export class KlevuTab {
           class={{
             active: Boolean(this.active),
           }}
+          disabled={Boolean(this.disabled)}
         >
           <klevu-typography variant="body-s">{this.caption}</klevu-typography>
         </button>

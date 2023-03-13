@@ -176,6 +176,8 @@ export class KlevuSearchField {
       throw new Error("You need specify at least one thing to search")
     }
 
+    console.log(allSearchQueries)
+
     const result = await KlevuFetch(...allSearchQueries)
     this.#lastQueryResult = {
       fallback: result.queriesById("search-fallback"),
@@ -188,6 +190,7 @@ export class KlevuSearchField {
     const suggestionsResult = result.suggestionsById("suggestions")
 
     if (suggestionsResult) {
+      console.log(suggestionsResult.suggestions)
       this.klevuSearchSuggestions.emit(suggestionsResult.suggestions.map((s) => s.suggest))
     }
   }, 500)
