@@ -32,7 +32,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd utils
-          npm install
+          npm install --force
           node ./update-klevu-ui.js --type ${{ inputs.type }} --no-otp
 
       - name: Print
