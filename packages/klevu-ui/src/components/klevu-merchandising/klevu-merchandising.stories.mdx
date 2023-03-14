@@ -39,6 +39,8 @@ const meta = MDXAutoFillMeta("klevu-merchandising")
 
 # Same merchandising page but with pagination
 
+Also includes custom styling for product components.
+
 <Canvas>
   <Story
     name="With pagination"
@@ -51,15 +53,20 @@ const meta = MDXAutoFillMeta("klevu-merchandising")
   >
     {(args) =>
       html`<klevu-merchandising
-        category=${ifDefined(args.category)}
-        category-title=${ifDefined(args.categoryTitle)}
-        filter-count=${ifDefined(args.filterCount)}
-        .filterCustomOrder=${args.filterCustomOrder}
-        limit=${args.limit}
-        .renderProductSlot=${args.renderProductSlot}
-        sort=${ifDefined(args.sort)}
-        use-pagination=${ifDefined(args.usePagination)}
-      ></klevu-merchandising>`
+          category=${ifDefined(args.category)}
+          category-title=${ifDefined(args.categoryTitle)}
+          filter-count=${ifDefined(args.filterCount)}
+          .filterCustomOrder=${args.filterCustomOrder}
+          limit=${args.limit}
+          .renderProductSlot=${args.renderProductSlot}
+          sort=${ifDefined(args.sort)}
+          use-pagination=${ifDefined(args.usePagination)}
+        ></klevu-merchandising>
+        <style>
+          ::part(product-container) {
+            border: 1px solid black;
+          }
+        </style>`
     }
   </Story>
 </Canvas>

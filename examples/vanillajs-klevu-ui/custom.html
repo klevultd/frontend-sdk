@@ -33,8 +33,13 @@
           category-title="Jeans & Trousers"
           update-on-filter-change
         ></klevu-query>
-        <div id="results" style="display: flex; flex-direction: column"></div>
-        <klevu-facet-list id="facetlist"></klevu-facet-list>
+        <div style="display: flex; gap: 24px">
+          <klevu-facet-list id="facetlist"></klevu-facet-list>
+          <klevu-product-grid
+            style="width: 100%"
+            id="results"
+          ></klevu-product-grid>
+        </div>
       </section>
     </klevu-init>
     <script type="module">
@@ -52,15 +57,12 @@
         for (const product of event.detail.result.records) {
           const productEl = document.createElement("klevu-product")
           productEl.product = product
-          productEl.variant = "line"
-          productEl.fullWidth = true
+          productEl.variant = "default"
 
-          /*
-          const bottomSlot = document.createElement("div")
+          const bottomSlot = document.createElement("klevu-button")
           bottomSlot.slot = "bottom"
-          bottomSlot.innerHTML = "Hello world"
+          bottomSlot.innerHTML = "Add to cart"
           productEl.append(bottomSlot)
-          */
 
           resultsEl.append(productEl)
         }
