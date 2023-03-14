@@ -1,5 +1,5 @@
 import { KlevuLastSearches } from "@klevu/core"
-import { Component, h, Host, Prop, State } from "@stencil/core"
+import { Component, h, Host, Prop, State, Event, EventEmitter } from "@stencil/core"
 
 /**
  * Lists latest searches user has made on the site
@@ -14,21 +14,40 @@ export class KlevuLatestSearches {
    * Caption of the list
    */
   @Prop() caption = "Last searches"
+
   @State() lastSearches: string[] = []
+
+  /**
+   * Event that is emitted when a popular search is clicked
+   */
+  @Event({
+    composed: true,
+  })
+  klevuLastSearchClicked!: EventEmitter<string>
+
+  #lastSearchClick(suggestion: string) {
+    this.klevuLastSearchClicked.emit(suggestion)
+  }
 
   async connectedCallback() {
     this.lastSearches = KlevuLastSearches.get().map((s) => s.term)
   }
 
   render() {
+    if (this.lastSearches.length === 0) {
+      return null
+    }
+
     return (
       <Host>
-        <klevu-heading variant="h3">{this.caption}</klevu-heading>
-        <ul part="klevu-list">
-          {this.lastSearches.map((ls) => (
-            <li>{ls}</li>
-          ))}
-        </ul>
+        <klevu-typography variant="h3" class="caption">
+          {this.caption}
+        </klevu-typography>
+        {this.lastSearches.map((ls) => (
+          <klevu-list condensed noXPadding onClick={() => this.#lastSearchClick(ls)}>
+            <span slot="primary">{ls}</span>
+          </klevu-list>
+        ))}
       </Host>
     )
   }

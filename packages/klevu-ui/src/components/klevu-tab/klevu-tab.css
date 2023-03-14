@@ -1,0 +1,54 @@
+:host {
+  display: inline-block;
+  --klevu-tab-color: var(--klevu-color-primary);
+  --klevu-tab-padding: var(--klevu-spacing-04);
+}
+
+button {
+  display: inline-block;
+  position: relative;
+  transition: transform 100ms;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  background: transparent;
+  border-bottom: 1px solid var(--klevu-color-neutral-5);
+  padding-bottom: 1px;
+}
+
+button klevu-typography {
+  border-radius: var(--klevu-border-radius-m);
+  color: var(--klevu-color-neutral-7);
+  display: block;
+  padding: 0 calc(var(--klevu-tab-padding) * 2);
+  height: calc(100% - 4px);
+  display: flex;
+  align-items: center;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button.active {
+  border-bottom: 2px solid var(--klevu-tab-color);
+  padding-bottom: 0;
+}
+
+button.active klevu-typography {
+  color: var(--klevu-color-neutral-8);
+}
+
+button:hover klevu-typography {
+  background: var(--klevu-color-neutral-2);
+}
+
+button:disabled klevu-typography {
+  color: var(--klevu-color-neutral-7);
+}
+
+button:focus klevu-typography {
+  outline-offset: -2px;
+  outline: 2px solid var(--klevu-tab-color);
+}

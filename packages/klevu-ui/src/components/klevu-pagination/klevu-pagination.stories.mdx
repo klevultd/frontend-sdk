@@ -1,0 +1,55 @@
+import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
+import { MDXAutoFillMeta, fullMockRequest } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-pagination")
+
+<Meta
+  title="Components/Pagination"
+  component="klevu-pagination"
+  argTypes={meta.argTypes}
+  parameters={meta.parameters}
+/>
+
+# Klevu-pagination
+
+<Description>{meta.description}</Description>
+
+Pagination can be build simply with just providing the min, max and current values.
+
+<Canvas>
+  <Story
+    name="Pagination"
+    args={{
+      min: 1,
+      max: 6,
+      current: 3,
+    }}
+  >
+    {(args) =>
+      html`<klevu-pagination
+        current=${ifDefined(args.current)}
+        max=${ifDefined(args.max)}
+        min=${ifDefined(args.min)}
+        .queryResult=${args.queryResult}
+      ></klevu-pagination>`
+    }
+  </Story>
+</Canvas>
+
+<ArgsTable story="Pagination" />
+
+## Pagination from query results
+
+Pagination can be automatically build from the @klevu/core query results. Just provide the query results property to the component.
+
+<Canvas>
+  <Story
+    name="Pagination from results"
+    args={{
+      queryResult: fullMockRequest.queryResults?.[0],
+    }}
+  >
+    {(args) => html`<klevu-pagination .queryResult=${args.queryResult}></klevu-pagination>`}
+  </Story>
+</Canvas>

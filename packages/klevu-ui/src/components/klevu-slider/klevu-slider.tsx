@@ -1,8 +1,9 @@
 import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
-import noUiSlider from "nouislider"
+import noUiSlider, { API } from "nouislider"
 
 /**
- * Horizontal slider component. Used for price range
+ * Horizontal slider component. By default used for price range in this package. But can
+ * be used for other purposes as well.
  */
 @Component({
   tag: "klevu-slider",
@@ -28,11 +29,19 @@ export class KlevuSlider {
   @Prop() end?: number
 
   /**
+   * Format tooltip value with function
+   */
+  @Prop()
+  formatTooltip?: (value: number) => string
+
+  /**
    * Show tooltips on top of slider
    */
   @Prop() showTooltips?: boolean
 
   @Element() el?: HTMLKlevuSliderElement
+
+  sliderInstance?: API
 
   /**
    * When values change
@@ -42,13 +51,25 @@ export class KlevuSlider {
   })
   klevuSliderChange!: EventEmitter<[number, number]>
 
-  initNoUISlider(el: HTMLDivElement | undefined) {
+  #initNoUISlider(el: HTMLDivElement | undefined) {
     if (!el) {
       return
     }
-    noUiSlider.create(el, {
+
+    if (this.sliderInstance) {
+      this.sliderInstance.set([this.start || this.min, this.end || this.max])
+      return
+    }
+
+    this.sliderInstance = noUiSlider.create(el, {
       connect: true,
-      tooltips: this.showTooltips,
+      tooltips: this.showTooltips
+        ? this.formatTooltip
+          ? {
+              to: this.formatTooltip,
+            }
+          : true
+        : false,
       step: 1,
       range: {
         max: this.max,
@@ -71,7 +92,7 @@ export class KlevuSlider {
             hasTooltips: Boolean(this.showTooltips),
           }}
         >
-          <div class="container" ref={this.initNoUISlider.bind(this)}></div>
+          <div class="container" ref={this.#initNoUISlider.bind(this)}></div>
         </div>
       </Host>
     )

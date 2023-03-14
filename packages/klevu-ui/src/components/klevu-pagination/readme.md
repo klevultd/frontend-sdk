@@ -3,16 +3,18 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Pagination component. Either provide numbers or query result to display the component.
+
 ## Properties
 
-| Property      | Attribute   | Description                                      | Type                                                                                                                                                                                                                                                                                                                                                                                                          | Default      |
-| ------------- | ----------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| `current`     | `current`   | Current page                                     | `number \| undefined`                                                                                                                                                                                                                                                                                                                                                                                         | `undefined`  |
-| `max`         | `max`       | Max page                                         | `number \| undefined`                                                                                                                                                                                                                                                                                                                                                                                         | `undefined`  |
-| `min`         | `min`       | Min page                                         | `number \| undefined`                                                                                                                                                                                                                                                                                                                                                                                         | `undefined`  |
-| `nextText`    | `next-text` | Button text for next button                      | `string`                                                                                                                                                                                                                                                                                                                                                                                                      | `"Next"`     |
-| `prevText`    | `prev-text` | Button text for previous button                  | `string`                                                                                                                                                                                                                                                                                                                                                                                                      | `"Previous"` |
-| `queryResult` | --          | Query results used to build min, max and current | `undefined \| { id: string; filters?: (KlevuFilterResultOptions \| KlevuFilterResultSlider)[] \| undefined; meta: { apiKey: string; isPersonalised: boolean; qTime: number; noOfResults: number; totalResultsFound: number; offset: number; typeOfSearch: KlevuTypeOfSearch; debuggingInformation: unknown; notificationCode: number; searchedTerm: string; }; records: ({ id: string; } & KlevuRecord)[]; }` | `undefined`  |
+| Property      | Attribute | Description                                      | Type                                                                                                                                                                                                                                                                                                                                                                                                          | Default     |
+| ------------- | --------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `current`     | `current` | Current page                                     | `number \| undefined`                                                                                                                                                                                                                                                                                                                                                                                         | `undefined` |
+| `max`         | `max`     | Max page                                         | `number \| undefined`                                                                                                                                                                                                                                                                                                                                                                                         | `undefined` |
+| `min`         | `min`     | Min page                                         | `number \| undefined`                                                                                                                                                                                                                                                                                                                                                                                         | `undefined` |
+| `queryResult` | --        | Query results used to build min, max and current | `undefined \| { id: string; filters?: (KlevuFilterResultOptions \| KlevuFilterResultSlider)[] \| undefined; meta: { apiKey: string; isPersonalised: boolean; qTime: number; noOfResults: number; totalResultsFound: number; offset: number; typeOfSearch: KlevuTypeOfSearch; debuggingInformation: unknown; notificationCode: number; searchedTerm: string; }; records: ({ id: string; } & KlevuRecord)[]; }` | `undefined` |
 
 
 ## Events
@@ -22,6 +24,30 @@
 | `klevuPaginationChange` | Page that was changed into | `CustomEvent<number>` |
 
 
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
+
+
+## Dependencies
+
+### Used by
+
+ - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-quicksearch](../klevu-quicksearch)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-merchandising --> klevu-pagination
+  klevu-quicksearch --> klevu-pagination
+  klevu-search-landing-page --> klevu-pagination
+  style klevu-pagination fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

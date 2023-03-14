@@ -1,5 +1,5 @@
 import { KlevuKMCSettings } from "@klevu/core"
-import { Component, h, Host, Prop, State } from "@stencil/core"
+import { Component, h, Host, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 /**
@@ -15,7 +15,19 @@ export class KlevuPopularSearches {
    * Caption of the list
    */
   @Prop() caption = "Popular searches"
-  @State() popularSearches?: string[]
+  @State() popularSearches: string[] = []
+
+  /**
+   * Event that is emitted when a popular search is clicked
+   */
+  @Event({
+    composed: true,
+  })
+  klevuPopularSearchClicked!: EventEmitter<string>
+
+  #popularSearchClick(suggestion: string) {
+    this.klevuPopularSearchClicked.emit(suggestion)
+  }
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -26,10 +38,19 @@ export class KlevuPopularSearches {
   }
 
   render() {
+    if (this.popularSearches.length == 0) {
+      return null
+    }
     return (
       <Host>
-        <klevu-heading variant="h2">{this.caption}</klevu-heading>
-        <ul part="klevu-list">{this.popularSearches ? this.popularSearches.map((s) => <li>{s}</li>) : null}</ul>
+        <klevu-typography class="caption" variant="h3">
+          {this.caption}
+        </klevu-typography>
+        {this.popularSearches.map((s) => (
+          <klevu-list condensed noXPadding onClick={() => this.#popularSearchClick(s)}>
+            <span slot="primary">{s}</span>
+          </klevu-list>
+        ))}
       </Host>
     )
   }

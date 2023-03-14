@@ -2,3 +2,18 @@
   display: block;
   width: var(--klevu-facet-list-width, 200px);
 }
+
+.applybar {
+  display: flex;
+  justify-content: space-between;
+  margin: var(--klevu-spacing-04) 0;
+  gap: var(--klevu-spacing-05);
+}
+
+.applybar .apply {
+  width: 100%;
+}
+
+klevu-facet:first-of-type::part(heading) {
+  margin-top: 0;
+}

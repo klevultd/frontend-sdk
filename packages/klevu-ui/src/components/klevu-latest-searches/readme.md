@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Lists latest searches user has made on the site
+
 ## Properties
 
 | Property  | Attribute | Description         | Type     | Default           |
@@ -10,11 +14,11 @@
 | `caption` | `caption` | Caption of the list | `string` | `"Last searches"` |
 
 
-## Shadow Parts
+## Events
 
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
+| Event                    | Description                                            | Type                  |
+| ------------------------ | ------------------------------------------------------ | --------------------- |
+| `klevuLastSearchClicked` | Event that is emitted when a popular search is clicked | `CustomEvent<string>` |
 
 
 ## Dependencies
@@ -25,16 +29,19 @@
 
 ### Depends on
 
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
+- [klevu-list](../klevu-list)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-latest-searches --> klevu-heading
+  klevu-latest-searches --> klevu-typography
+  klevu-latest-searches --> klevu-list
+  klevu-list --> klevu-typography
   klevu-quicksearch --> klevu-latest-searches
   style klevu-latest-searches fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

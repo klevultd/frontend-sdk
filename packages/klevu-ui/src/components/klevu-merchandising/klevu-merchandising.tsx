@@ -10,9 +10,16 @@ import {
   sendMerchandisingViewEvent,
 } from "@klevu/core"
 import { Component, Element, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import {
+  KlevuPaginationCustomEvent,
+  KlevuProductCustomEvent,
+  KlevuSortCustomEvent,
+  KlevuUtilViewportCustomEvent,
+} from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
+import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 
 /**
  * Full merchandising app to power up your product grid pages
@@ -23,6 +30,11 @@ import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/
   shadow: true,
 })
 export class KlevuMerchandising {
+  /**
+   * Should display pagination instead of load next
+   */
+  @Prop() usePagination?: boolean
+
   /**
    * Count of products for page
    */
@@ -53,6 +65,11 @@ export class KlevuMerchandising {
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
 
+  @State() currentViewPortSize?: ViewportSize
+
+  #viewportUtil!: HTMLKlevuUtilViewportElement
+  #layoutElement!: HTMLKlevuLayoutResultsElement
+
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
     undefined,
@@ -68,23 +85,23 @@ export class KlevuMerchandising {
 
   @Element() el!: HTMLElement
 
-  private resultObject?: KlevuFetchQueryResult
-  private clickEvent?: (id: string, categoryTitle: string, variantId: string) => void
+  #resultObject?: KlevuFetchQueryResult
+  #clickEvent?: (id: string, categoryTitle: string, variantId: string) => void
 
   async connectedCallback() {
     await KlevuInit.ready()
-    await this.initialFetch()
+    await this.#initialFetch()
   }
 
   @Watch("category")
   async watchPropHandler(newValue: string, oldValue: string) {
     if (newValue !== oldValue) {
       this.manager.clear()
-      await this.initialFetch()
+      await this.#initialFetch()
     }
   }
 
-  async initialFetch() {
+  async #initialFetch() {
     const result = await KlevuFetch(
       categoryMerchandising(
         this.category,
@@ -103,35 +120,58 @@ export class KlevuMerchandising {
         applyFilterWithManager(this.manager)
       )
     )
-    this.resultObject = result.queriesById("categoryMerchandising")
+    this.#resultObject = result.queriesById("categoryMerchandising")
 
-    this.results = this.resultObject?.records ?? []
-    this.clickEvent = this.resultObject?.getCategoryMerchandisingClickSendEvent?.()
+    this.results = this.#resultObject?.records ?? []
+    this.#clickEvent = this.#resultObject?.getCategoryMerchandisingClickSendEvent?.()
   }
 
-  async loadMore() {
-    if (!this.resultObject?.next) {
+  async #loadMore() {
+    if (!this.#resultObject?.next) {
       return
     }
-    const nextResultObject = await this.resultObject.next()
-    this.resultObject = nextResultObject.queriesById("categoryMerchandising")
-    this.results = [...this.results, ...(this.resultObject?.records ?? [])]
-    this.clickEvent = this.resultObject?.getCategoryMerchandisingClickSendEvent?.()
+    const nextResultObject = await this.#resultObject.next()
+    this.#resultObject = nextResultObject.queriesById("categoryMerchandising")
+    this.results = [...this.results, ...(this.#resultObject?.records ?? [])]
+    this.#clickEvent = this.#resultObject?.getCategoryMerchandisingClickSendEvent?.()
+  }
+
+  async #paginationChange(event: KlevuPaginationCustomEvent<number>) {
+    if (!this.#resultObject?.getPage) {
+      return
+    }
+    const nextResultObject = await this.#resultObject.getPage({ pageIndex: event.detail - 1 })
+    this.#resultObject = nextResultObject.queriesById("categoryMerchandising")
+    this.results = this.#resultObject?.records ?? []
+    this.#clickEvent = this.#resultObject?.getCategoryMerchandisingClickSendEvent?.()
+  }
+
+  async #sortChanged(event: KlevuSortCustomEvent<KlevuSearchSorting>) {
+    this.sort = event.detail
+    await this.#initialFetch()
   }
 
   @Listen("productClick")
-  productClickHandler(event: CustomEvent<KlevuProductOnProductClick>) {
+  productClickHandler(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
     if (!event.detail.product.id || !event.detail.product.itemGroupId) {
       return
     }
-    if (this.clickEvent) {
-      this.clickEvent(event.detail.product?.id, this.categoryTitle, event.detail.product.itemGroupId)
+    if (this.#clickEvent) {
+      this.#clickEvent(event.detail.product?.id, this.categoryTitle, event.detail.product.itemGroupId)
     }
   }
 
-  @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate() {
-    this.initialFetch()
+  #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
+    this.currentViewPortSize = event.detail
+  }
+
+  async componentDidLoad() {
+    this.currentViewPortSize = await this.#viewportUtil.getCurrentSize()
+  }
+
+  #applyFilters() {
+    this.#initialFetch()
+    this.#layoutElement.closeDrawer()
   }
 
   /**
@@ -140,7 +180,7 @@ export class KlevuMerchandising {
    * slot requested. Return null for slots that you do not want to render.
    */
   @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
-  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null
     }
@@ -170,48 +210,57 @@ export class KlevuMerchandising {
   }
 
   render() {
+    const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+
     return (
       <Host>
-        <klevu-facet-list
-          accordion
-          class="desktop"
-          customOrder={this.filterCustomOrder}
+        <klevu-util-viewport
+          onSizeChanged={this.#sizeChange.bind(this)}
+          ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
+        ></klevu-util-viewport>
+        <klevu-layout-results
           exportparts={globalExportedParts}
-          manager={this.manager}
-        ></klevu-facet-list>
-        <div class="mobileheader">
-          <klevu-heading variant="h1">{this.categoryTitle}</klevu-heading>
-          <klevu-drawer anchor="right" background>
-            <klevu-button slot="origin">Filters</klevu-button>
-            <klevu-facet-list
-              slot="content"
-              accordion
-              customOrder={this.filterCustomOrder}
+          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+        >
+          <klevu-facet-list
+            slot="sidebar"
+            accordion
+            customOrder={this.filterCustomOrder}
+            exportparts={globalExportedParts}
+            manager={this.manager}
+            useApplyButton={isMobile}
+            onKlevuApplyFilters={this.#applyFilters.bind(this)}
+          ></klevu-facet-list>
+          <div slot="header" class="header">
+            <klevu-typography variant="h1">{this.categoryTitle}</klevu-typography>
+            <klevu-sort
+              variant="inline"
               exportparts={globalExportedParts}
-              manager={this.manager}
-            ></klevu-facet-list>
-          </klevu-drawer>
-        </div>
-        <section>
-          <klevu-heading class="desktop title" variant="h1">
-            {this.categoryTitle}
-          </klevu-heading>
-          <klevu-product-grid>
+              onKlevuSortChanged={this.#sortChanged.bind(this)}
+            ></klevu-sort>
+          </div>
+          <klevu-product-grid slot="content">
             {this.results.map((p) => (
               <klevu-product product={p} fixedWidth>
-                {this.internalRenderProductSlot(p, "top")}
-                {this.internalRenderProductSlot(p, "image")}
-                {this.internalRenderProductSlot(p, "info")}
-                {this.internalRenderProductSlot(p, "bottom")}
+                {this.#internalRenderProductSlot(p, "top")}
+                {this.#internalRenderProductSlot(p, "image")}
+                {this.#internalRenderProductSlot(p, "info")}
+                {this.#internalRenderProductSlot(p, "bottom")}
               </klevu-product>
             ))}
           </klevu-product-grid>
-          {this.resultObject?.next ? (
-            <div class="loadmorebuttoncontainer">
-              <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>
-            </div>
-          ) : null}
-        </section>
+          <div slot="footer" class="footer">
+            {this.usePagination && this.#resultObject ? (
+              <klevu-pagination
+                exportparts={globalExportedParts}
+                queryResult={this.#resultObject}
+                onKlevuPaginationChange={this.#paginationChange.bind(this)}
+              ></klevu-pagination>
+            ) : this.#resultObject?.next ? (
+              <klevu-button onClick={this.#loadMore.bind(this)}>Load more</klevu-button>
+            ) : null}
+          </div>
+        </klevu-layout-results>
       </Host>
     )
   }

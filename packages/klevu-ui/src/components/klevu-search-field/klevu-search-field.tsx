@@ -2,13 +2,16 @@ import {
   fallback,
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
+  KlevuFetchModifer,
   KlevuFetchQueryResult,
+  KlevuSearchSorting,
   KlevuTypeOfRecord,
   search,
+  sendSearchEvent,
   suggestions,
 } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
-import { debounce } from "../../utils/utils"
+import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
+import { debounce, globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type SearchResultsEventData = {
@@ -19,9 +22,11 @@ export type SearchResultsEventData = {
 }
 
 export type SuggestionsEventData = string[]
+export type SearchFieldVariant = "default" | "pill"
 
 /**
- * Plain textfield that does the searching
+ * Plain textfield that does the searching. It queries Klevu and returns the results
+ * in a custom event. Then you can decide what to do with the results.
  */
 @Component({
   tag: "klevu-search-field",
@@ -72,6 +77,21 @@ export class KlevuSearchField {
   @Prop() searchCmsPages?: boolean
 
   /**
+   * Sends analytics when making query
+   */
+  @Prop() sendAnalytics?: boolean
+
+  /**
+   * In case you want to sort the results
+   */
+  @Prop() sort?: KlevuSearchSorting
+
+  /**
+   * Variant of the search field
+   */
+  @Prop() variant: SearchFieldVariant = "default"
+
+  /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
   @Event({
@@ -93,16 +113,29 @@ export class KlevuSearchField {
   })
   klevuSearchClick!: EventEmitter<string>
 
+  #lastQueryResult?: SearchResultsEventData
+
   async connectedCallback() {
     await KlevuInit.ready()
   }
 
-  private doSearch = debounce(async (term: string) => {
+  /**
+   * Programmatically trigger search
+   *
+   * @param term What to search
+   */
+  @Method()
+  async makeSearch(term: string) {
+    this.term = term
+    await this.#doSearch(term)
+  }
+
+  #doSearch = debounce(async (term: string) => {
     if (term.length < 3) {
       return
     }
 
-    const searchModifiers = []
+    const searchModifiers: KlevuFetchModifer[] = []
     // if fallback term is defined use it to search
     if (this.fallbackTerm && this.searchProducts) {
       searchModifiers.push(
@@ -114,20 +147,33 @@ export class KlevuSearchField {
       )
     }
 
+    if (this.sendAnalytics) {
+      searchModifiers.push(sendSearchEvent())
+    }
+
     const allSearchQueries: KlevuFetchFunctionReturnValue[] = []
     if (this.searchProducts) {
       allSearchQueries.push(
-        search(term, { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product] }, ...searchModifiers)
+        search(
+          term,
+          { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product], sort: this.sort },
+          ...searchModifiers
+        )
       )
     }
     if (this.searchCmsPages) {
       allSearchQueries.push(
-        search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms] })
+        search(term, { id: "cmsSearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Cms], sort: this.sort })
       )
     }
     if (this.searchCategories) {
       allSearchQueries.push(
-        search(term, { id: "categorySearch", limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Category] })
+        search(term, {
+          id: "categorySearch",
+          limit: this.limit,
+          typeOfRecords: [KlevuTypeOfRecord.Category],
+          sort: this.sort,
+        })
       )
     }
     if (this.searchSuggestions) {
@@ -138,28 +184,97 @@ export class KlevuSearchField {
       throw new Error("You need specify at least one thing to search")
     }
 
-    const result = await KlevuFetch(...allSearchQueries)
+    console.log(allSearchQueries)
 
-    this.klevuSearchResults.emit({
+    const result = await KlevuFetch(...allSearchQueries)
+    this.#lastQueryResult = {
       fallback: result.queriesById("search-fallback"),
       search: result.queriesById("search"),
       category: result.queriesById("categorySearch"),
       cms: result.queriesById("cmsSearch"),
-    })
+    }
+    this.klevuSearchResults.emit(this.#lastQueryResult)
 
     const suggestionsResult = result.suggestionsById("suggestions")
 
     if (suggestionsResult) {
+      console.log(suggestionsResult.suggestions)
       this.klevuSearchSuggestions.emit(suggestionsResult.suggestions.map((s) => s.suggest))
     }
   }, 500)
 
-  handleChange = (event: CustomEvent<string>) => {
-    this.term = event.detail
-    this.doSearch(event.detail)
+  /**
+   * Fetch next page of results from previous query
+   *
+   * @param type what type of content to get page from
+   * @param pageIndex from what page. If empty next page is fetched
+   */
+  @Method()
+  async getPage(type: "search" | "category" | "cms", pageIndex?: number) {
+    if (!this.#lastQueryResult) {
+      throw new Error("No search results to get page from")
+    }
+
+    switch (type) {
+      case "search": {
+        const res = this.#lastQueryResult.search
+        if (res && res.getPage) {
+          const result = await res.getPage({ pageIndex })
+          this.#lastQueryResult.search = result.queriesById("search")
+          this.klevuSearchResults.emit({
+            search: result.queriesById("search"),
+          })
+        }
+      }
+      case "category": {
+        const res = this.#lastQueryResult.category
+        if (res && res.getPage) {
+          const result = await res.getPage({ pageIndex })
+          this.#lastQueryResult.category = result.queriesById("categorySearch")
+          this.klevuSearchResults.emit({
+            category: result.queriesById("categorySearch"),
+          })
+        }
+      }
+      case "cms": {
+        const res = this.#lastQueryResult.cms
+        if (res && res.getPage) {
+          const result = await res.getPage({ pageIndex })
+          this.#lastQueryResult.cms = result.queriesById("cmsSearch")
+          this.klevuSearchResults.emit({
+            cms: result.queriesById("cmsSearch"),
+          })
+        }
+      }
+    }
   }
 
-  handleSearchClick = () => {
+  /**
+   * Fetches query result from last request
+   *
+   * @param type type of query result
+   * @returns
+   */
+  @Method()
+  async getQueryResult(type: "search" | "category" | "cms") {
+    if (!this.#lastQueryResult) {
+      throw new Error("No search results to get query results")
+    }
+
+    return this.#lastQueryResult[type]
+  }
+
+  @Watch("sort")
+  async propsChanged() {
+    this.#doSearch(this.term)
+  }
+
+  #handleChange = (event: CustomEvent<string>) => {
+    this.term = event.detail
+    this.#doSearch(event.detail)
+  }
+
+  #handleSearchClick = () => {
     this.klevuSearchClick.emit(this.term)
   }
 
@@ -169,9 +284,16 @@ export class KlevuSearchField {
         <klevu-textfield
           value={this.term}
           placeholder={this.placeholder}
-          onKlevuTextChanged={this.handleChange.bind(this)}
+          onKlevuTextChanged={this.#handleChange.bind(this)}
+          onKlevuTextEnterPressed={this.#handleSearchClick.bind(this)}
+          aria-role="search"
+          variant={this.variant}
+          icon="search"
+          exportparts={globalExportedParts}
         ></klevu-textfield>
-        <klevu-button onClick={this.handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
+        {this.variant !== "pill" && (
+          <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
+        )}
       </Host>
     )
   }

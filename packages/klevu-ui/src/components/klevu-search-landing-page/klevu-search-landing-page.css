@@ -1,47 +1,21 @@
 :host {
   display: flex;
-  gap: var(--klevu-spacing-large);
+  gap: var(--klevu-spacing-05);
 }
 
-:host klevu-facet-list {
-  flex-shrink: 0;
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.loadmorebuttoncontainer {
+.footer {
   display: flex;
   justify-content: center;
-  margin: var(--klevu-spacing-large);
 }
 
-.mobileheader {
-  display: none;
-  justify-content: space-between;
-  margin: var(--klevu-spacing-normal) 0;
-}
-
-.mobileheader klevu-facet-list {
-  padding: var(--klevu-spacing-normal);
-}
-
-.desktop {
-  display: block;
-}
-
-.desktop.title {
-  margin: var(--klevu-spacing-large) 0;
-}
-
-@media (max-width: 600px) {
-  :host {
+@media (max-width: 511px) {
+  .header {
     display: block;
-    gap: 0;
-  }
-
-  .mobileheader {
-    display: flex;
-  }
-
-  .desktop {
-    display: none;
   }
 }

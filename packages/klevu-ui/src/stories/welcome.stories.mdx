@@ -1,8 +1,10 @@
 import { Canvas, Meta, Story, ArgTable } from "@storybook/addon-docs"
 
-<Meta title="Start/Welcome" />
+<Meta title="Welcome" />
 
-# Welcome to Klevu Web Components (Alpha!)
+<img src="/web-components.png" style={{ float: "right", width: "400px" }} />
+
+# Welcome to Klevu Web Components (Beta!)
 
 With Klevu Web Components, developers can create unique e-commerce experiences quickly and easily using Klevu services.
 Our suite of tools offers three NPM packages to simplify the process - making it effortless for innovators to take advantage of our advanced discovery capabilities!
@@ -19,21 +21,13 @@ libraries for both React and Vue – enabling easy integration into any framewor
 
 [![](https://img.shields.io/badge/Discord-Join%20the%20chat-5965f2.svg?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/Jrud6Zj5Hy)
 [![](https://data.jsdelivr.com/v1/package/npm/@klevu/ui/badge)](https://www.jsdelivr.com/package/npm/@klevu/ui)
-[![npm version][npm-src]][npm-href]
-[![Bundle size][bundlephobia-src]][bundlephobia-href]
-[![npm total downloads][npm-total-downloads]][npm-href]
-[![npm weekly downloads][npm-weekly-downloads]][npm-href]
-![github stars][github-stars-src]
-![github issues][github-issues-src]
-[npm-src]: https://badgen.net/npm/v/@klevu/ui
-[npm-href]: https://www.npmjs.com/package/@klevu/ui
-[bundlephobia-src]: https://badgen.net/bundlephobia/minzip/@klevu/ui
-[bundlephobia-href]: https://bundlephobia.com/package/@klevu/ui
-[npm-weekly-downloads]: https://badgen.net/npm/dw/@klevu/ui
-[npm-total-downloads]: https://badgen.net/npm/dt/@klevu/ui
-[github-stars-src]: https://badgen.net/github/stars/klevultd/frontend-sdk?color=purple
-[github-issues-src]: https://badgen.net/github/issues/klevultd/frontend-sdk?color=purple
-[github-href]: https://github.com/klevultd/frontend-sdk/tree/master/packages/klevu-ui
+[![](https://img.shields.io/badge/GitHub-Source-black?logo=github)](https://github.com/klevultd/frontend-sdk/tree/master/packages/klevu-ui)
+[![](https://badgen.net/npm/v/@klevu/ui)](https://www.npmjs.com/package/@klevu/ui)
+[![](https://badgen.net/bundlephobia/minzip/@klevu/ui)](https://bundlephobia.com/package/@klevu/ui)
+[![](https://badgen.net/npm/dt/@klevu/ui)](https://www.npmjs.com/package/@klevu/ui)
+[![](https://badgen.net/npm/dw/@klevu/ui)](https://www.npmjs.com/package/@klevu/ui)
+[![](https://badgen.net/github/stars/klevultd/frontend-sdk?color=purple)](https://github.com/klevultd/frontend-sdk/tree/master/packages/klevu-ui)
+[![](https://badgen.net/github/issues/klevultd/frontend-sdk?color=purple)](https://github.com/klevultd/frontend-sdk/tree/master/packages/klevu-ui)
 
 ## Before using the components
 
@@ -45,199 +39,8 @@ After this you can start using these components on your data.
 
 ## Example
 
-Here is a example of `klevu-quicksearch` component:
+Here is a example of `klevu-quicksearch` component (try searching for clothing items):
 
 <Canvas>
-  <Story height="700px" id="apps-quicksearch--default" />
+  <Story height="700px" id="apps-quicksearch--quicksearch" />
 </Canvas>
-
-# Installing with CDN url (VanillaJS)
-
-Simplest way to get started is to use jsdelivr.net CDN to get sources and import loader in the `head`
-of the document. It will automatically add polyfills and lazy load custom element code when they
-are found in the HTML source.
-
-```ts
-import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
-defineCustomElements()
-```
-
-And it's important to embed CSS styles too:
-
-```html
-<link href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css" rel="stylesheet" />
-```
-
-**Warning:** These links will always load latest version of the library. Breaking changes will brake your site.
-To lock the version one should use versioned URL's by adding version number by adding
-`@version` after `@klevu/ui`. For example `...npm/@klevu/ui@0.0.13/loader/...`
-
-Full example with HTML file:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Klevu UI CDN example</title>
-    <meta charset="UTF-8" />
-    <script type="module">
-      import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
-      defineCustomElements()
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css" rel="stylesheet" />
-  </head>
-
-  <body>
-    <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search">
-      <klevu-quicksearch></klevu-quicksearch>
-    </klevu-init>
-  </body>
-</html>
-```
-
-# Installing with NPM packages
-
-Currently components can be used either with vanilla JS (`@klevu/ui`), React (`@klevu/ui-react`) or Vue (`@klevu/ui-vue`).
-Each of them have slightly different initialization.
-
-## @klevu/ui
-
-Standard Web Components package that you can use with any framework. Just import JS and CSS file and start using these components.
-
-At development phase we currently support only module way of loading UI library through NPM.
-
-To use library in Vanilla JS project you need to first install package `@klevu/ui`
-
-```bash
-npm install @klevu/ui
-```
-
-Then in your html file (index.html) add following script tag to your `head` tag.
-
-```html
-<script type="module" src="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"></script>
-```
-
-And add CSS variables templates to your `head` tag too. These can be replace with your own values if you wish.
-
-```html
-<link rel="stylesheet" href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css" />
-```
-
-Now you are free to try it out. Just replace API key and URL to ones found from your Klevu Merchant Center settings page.
-
-```html
-<klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search">
-  <klevu-quicksearch></klevu-quicksearch>
-</klevu-init>
-```
-
-## @klevu/ui-react
-
-Web components automatically compiled into React components. These components can be used with React framework in native and easy
-way. Can be easily placed inside React components.
-
-In your React application add `@klevu/ui-react` package.
-
-```bash
-npm install @klevu/ui-react
-```
-
-And add CSS variables templates to your `head` tag. These can be replace with your own values if you wish.
-
-```html
-<link rel="stylesheet" href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css" />
-```
-
-Now you can use React components from package. First wrap everything with `KlevuInit` component and then use other components.
-
-```ts
-import React from "react"
-import { KlevuInit, KlevuQuickSearch } from "@klevu/ui-react"
-
-export function SimpleKlevuApp() {
-  return (
-    <KlevuInit apiKey="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search">
-      <KlevuQuickSearch />
-    </KlevuInit>
-  )
-}
-```
-
-As you can see syntax is almost same as in default web components version. Only kebab-case has been changed to CamelCase.
-
-## @klevu/ui-vue
-
-Web components automatically compiled into Vue components. Use Vue syntax to embed components into your code.
-
-In your Vue application add `@klevu/ui-vue` package.
-
-```bash
-npm install @klevu/ui-vue
-```
-
-And add CSS variables templates to your `head` tag. These can be replace with your own values if you wish.
-
-```html
-<link rel="stylesheet" href="./node_modules/@klevu/ui/dist/klevu-ui/klevu-ui.css" />
-```
-
-Add KlevuComponents with `use()` when mounting app.
-
-```ts
-import { createApp } from "vue"
-import App from "./App.vue"
-import { KlevuComponents } from "@klevu/ui-vue"
-
-createApp(App).use(KlevuComponents).mount("#app")
-```
-
-Then just use the components in your components:
-
-```html
-<template>
-  <klevu-init
-    url="https://eucs30v2.ksearchnet.com/cs/v2/search"
-    api-key="klevu-165829460115715456"
-    :settings.prop="{
-      onProductClick(product: any, event: any) {
-        console.log("clicked", product)
-        return false;
-      },
-    }"
-  >
-    <klevu-quicksearch></klevu-quicksearch>
-  </klevu-init>
-</template>
-```
-
-Optional: To get code autocomplete in VSCode you can import the Klevu components to your component.
-
-```html
-<script setup lang="ts">
-  import { KlevuInit, KlevuQuickSearch } from "@klevu/ui-vue"
-</script>
-
-<script lang="ts">
-  export default {
-    components: {
-      KlevuInit,
-      KlevuQuickSearch,
-    },
-  }
-</script>
-```
-
-# KlevuInit component
-
-KlevuInit is an essential component that can be used to set backend configuration for any Klevu Components within the DOM tree.
-Through a single instance of KlevuInit, global configurations for various components
-are defined - as demonstrated by its usage in VanillaJS. Currently only one KlevuInit is allowed in the document.
-
-Here is a simple example.
-
-```html
-<klevu-init api-key="mykey" url="https://eucsXXv2.ksearchnet.com/cs/v2/search">
-  <klevu-quicksearch></klevu-quicksearch>
-</klevu-init>
-```

@@ -2,21 +2,84 @@
   display: block;
 }
 
-input[type="text"] {
+div {
+  position: relative;
+}
+
+input {
+  --padding: calc((var(--klevu-size-m) * 2 - var(--klevu-body-s-size)) / 2);
+
   display: block;
   width: 100%;
   box-sizing: border-box;
   appearance: none;
-  padding: var(--klevu-spacing-normal);
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
+  border: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  font-size: var(--klevu-body-m-size);
+  padding: var(--padding);
 }
 
-input[type="text"]:focus {
-  outline: 1px solid var(--klevu-color-primary-border);
+input:focus {
+  outline: 0;
 }
 
-input[type="text"]:disabled {
-  background-color: var(--klevu-color-dim-background);
+input:disabled {
+  opacity: var(--klevu-opacity-disabled);
   cursor: not-allowed;
+}
+
+/** Default bordered input */
+
+input.default {
+  border: 1px solid var(--klevu-color-neutral-5);
+  margin: 0 1px;
+  border-radius: var(--klevu-border-radius-s);
+}
+
+input.default:focus {
+  border-color: var(--klevu-color-primary);
+  margin: 0;
+  border-width: 2px;
+}
+
+input.default.error {
+  border-color: var(--klevu-color-primary);
+  margin: 0;
+  border-width: 2px;
+}
+
+/** Pill input */
+
+input.pill {
+  border: 1px solid var(--klevu-color-neutral-2);
+  margin: 1px;
+  background-color: var(--klevu-color-neutral-2);
+  border-radius: 1000px;
+}
+
+/** icon */
+
+input.hasicon {
+  padding-left: var(--klevu-spacing-07);
+}
+
+span.icon {
+  position: absolute;
+  top: 50%;
+  left: var(--klevu-spacing-04);
+  transform: translateY(-50%);
+}
+
+/** clear button */
+
+input.hasclear {
+  padding-right: var(--klevu-spacing-07);
+}
+
+span.clear {
+  position: absolute;
+  top: 50%;
+  right: var(--klevu-spacing-04);
+  transform: translateY(-50%);
+  cursor: pointer;
 }

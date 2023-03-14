@@ -3,23 +3,43 @@
 }
 
 select {
+  --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
+
+  font-size: var(--klevu-body-s-size);
+  font-weight: var(--klevu-body-s-weight);
   appearance: none;
-  padding: var(--klevu-spacing-normal);
   width: 100%;
   min-width: 80px;
   border: none;
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-m);
+  height: calc(var(--klevu-size-m) * 2);
+  padding: 0 var(--padding);
 }
 
-.select {
+.selectcontainer {
   position: relative;
   display: flex;
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
 }
 
-.select:has(select:active) {
-  border: 1px solid var(--klevu-color-primary-border);
+.selectcontainer.inline {
+  display: inline-block;
+}
+
+.selectcontainer.inline select {
+  width: auto;
+}
+
+.selectcontainer.default {
+  border: 1px solid var(--klevu-color-neutral-4);
+  border-radius: var(--klevu-border-radius-m);
+}
+
+select:focus {
+  outline: 0;
+}
+
+.selectcontainer:has(select:active, select:focus) {
+  border: 1px solid var(--klevu-color-primary);
 }
 
 .triangle {
@@ -28,20 +48,20 @@ select {
   top: 50%;
   transform: translateY(-50%);
   display: block;
-  width: 1rem;
-  height: 0.6rem;
-  background-color: var(--klevu-dropdown-icon-color, var(--klevu-color-primary));
-  clip-path: var(--klevu-dropdown-icon-clip-path, polygon(100% 0%, 0 0%, 50% 100%));
+  font-size: 20px;
+  height: 24px;
+  width: 24px;
+  pointer-events: none;
 }
 
-.select.disabled {
+.selectcontainer.disabled {
   cursor: not-allowed;
 }
 
-.select.disabled select {
+.selectcontainer.disabled select {
   cursor: not-allowed;
 }
 
-.select.disabled .triangle {
+.selectcontainer.disabled .triangle {
   background-color: var(--klevu-color-border);
 }

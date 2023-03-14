@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+.container {
+  display: flex;
+  padding: var(--klevu-spacing-03) var(--klevu-spacing-05);
+}
+
+a {
+  display: flex;
+  text-decoration: none;
+  padding: var(--klevu-spacing-03) var(--klevu-spacing-05);
+}
+
+.condensed {
+  padding: 0 var(--klevu-spacing-04);
+}
+
+.noXPadding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  font-size: 20px;
+  margin-right: var(--klevu-spacing-03);
+}
+
+.image {
+  max-width: 48px;
+  margin-right: var(--klevu-spacing-03);
+  border-radius: var(--klevu-border-radius-xxl);
+}

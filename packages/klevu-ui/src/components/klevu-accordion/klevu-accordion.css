@@ -1,5 +1,9 @@
 :host {
+  --klevu-accordion-background: inherit;
+
   display: block;
+  padding: var(--klevu-spacing-04) 0;
+  border-top: 1px solid var(--klevu-color-neutral-4);
 }
 
 input {
@@ -11,7 +15,8 @@ input {
 .content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s;
+  transition: max-height var(--klevu-animation-duration-normal);
+  padding: 0 4px;
 }
 
 label {
@@ -20,17 +25,24 @@ label {
   justify-content: space-between;
   align-items: center;
   background: var(--klevu-accordion-background);
+  transition: margin var(--klevu-animation-duration-slow) var(--klevu-animation-timing-function);
+}
+
+input:checked + label {
+  margin-bottom: var(--klevu-spacing-04);
 }
 
 input:checked ~ .content {
   max-height: var(--klevu-accordion-content-height, 600px);
+  padding: 4px;
 }
 
-svg {
-  fill: var(--klevu-accordion-icon-color, var(--klevu-h3-color));
-  transition: transform 0.3s;
+label span {
+  color: var(--klevu-color-neutral-8);
+  transition: transform var(--klevu-animation-duration-fast) var(--klevu-animation-timing-function);
+  user-select: none;
 }
 
-input:checked + label svg {
-  transform: rotate(90deg);
+input:checked + label span {
+  transform: rotate(-180deg);
 }

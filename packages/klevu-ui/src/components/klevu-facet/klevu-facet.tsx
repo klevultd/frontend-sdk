@@ -1,10 +1,15 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Fragment, h, Host, Prop } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate, State } from "@stencil/core"
+import { getGlobalSettings, globalExportedParts } from "../../utils/utils"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
 /**
- * Rendering items of single facet
+ * Rendering items of single facet with all its options or a slider.
+ *
+ * Manager property must be set for this component to work.
+ *
+ * @csspart facet-heading - Heading of the facet
  */
 @Component({
   tag: "klevu-facet",
@@ -12,16 +17,20 @@ export type KlevuFacetMode = "checkbox" | "radio"
   shadow: true,
 })
 export class KlevuFacet {
+  @Element()
+  el!: HTMLKlevuFacetElement
+
   /**
-   * From which options to build facet
+   * From which options to build facet. Single option value from Klevu SDK FilterManager. Either this or slider must be set.
    */
   @Prop() option?: KlevuFilterResultOptions
   /**
-   * From which slider to build facet
+   * From which slider to build facet.
    */
   @Prop() slider?: KlevuFilterResultSlider
   /**
-   * Originating filter manager which to modify
+   * Originating filter manager which to modify. This is the most important property of the component.
+   * It will be used to modify the filter state for queries.
    */
   @Prop() manager!: FilterManager
   /**
@@ -44,23 +53,37 @@ export class KlevuFacet {
    */
   @Prop() accordionStartOpen?: boolean
 
+  /**
+   * Show all options
+   */
+  @State() showAll = false
+
+  @Listen("klevu-filter-selection-updates", { target: "document" })
+  filterSelectionUpdate(event: any) {
+    forceUpdate(this.el)
+  }
+
   render() {
     return (
       <Host>
         {this.option ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.renderOptions()}</klevu-accordion>
+              <klevu-accordion exportparts={globalExportedParts} startOpen={this.accordionStartOpen}>
+                {this.#renderOptions()}
+              </klevu-accordion>
             ) : (
-              this.renderOptions()
+              this.#renderOptions()
             )}
           </Fragment>
         ) : this.slider ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.renderSlider()}</klevu-accordion>
+              <klevu-accordion exportparts={globalExportedParts} startOpen={this.accordionStartOpen}>
+                {this.#renderSlider()}
+              </klevu-accordion>
             ) : (
-              this.renderSlider()
+              this.#renderSlider()
             )}
           </Fragment>
         ) : null}
@@ -68,15 +91,20 @@ export class KlevuFacet {
     )
   }
 
-  renderSlider() {
+  #renderSlider() {
     if (!this.slider) {
       return null
     }
     return (
       <Fragment>
-        <klevu-heading slot="header" variant="h3">
+        <klevu-typography
+          part="facet-heading"
+          class={{ accordion: Boolean(this.accordion) }}
+          variant="body-s-bold"
+          slot="header"
+        >
           {this.slider.label}
-        </klevu-heading>
+        </klevu-typography>
         <klevu-slider
           slot="content"
           showTooltips
@@ -84,6 +112,9 @@ export class KlevuFacet {
           max={parseFloat(this.slider.max)}
           start={this.slider.start ? parseFloat(this.slider.start) : undefined}
           end={this.slider.end ? parseFloat(this.slider.end) : undefined}
+          formatTooltip={(value) =>
+            (getGlobalSettings()?.renderPrice?.(value.toFixed(2), "EUR") ?? value.toFixed(2)).toString()
+          }
           onKlevuSliderChange={(event) => {
             this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
           }}
@@ -92,11 +123,11 @@ export class KlevuFacet {
     )
   }
 
-  renderOptions() {
+  #renderOptions() {
     if (!this.option) {
       return null
     }
-    const opts = [...this.option.options]
+    let opts = [...this.option.options]
     if (this.customOrder) {
       opts.sort((a, b) => {
         const aio = this.customOrder!.indexOf(a.value)
@@ -113,21 +144,44 @@ export class KlevuFacet {
       })
     }
 
+    let showAllButton = false
+    if (!this.showAll && opts.length > 5) {
+      console.log(opts.length)
+      opts = opts.slice(0, 5)
+      showAllButton = true
+    }
+
     return (
       <Fragment>
-        <klevu-heading slot="header" variant="h3">
+        <klevu-typography
+          part="facet-heading"
+          class={{ accordion: Boolean(this.accordion) }}
+          variant="body-s-bold"
+          slot="header"
+        >
           {this.option.label}
-        </klevu-heading>
-        <ul slot="content" part="klevu-list">
-          {opts.map((o) => (
-            <li>
-              {this.mode === "checkbox" ? (
-                <klevu-checkbox
-                  checked={o.selected}
-                  name={this.option!.key}
-                  onClick={() => this.manager.toggleOption(this.option!.key, o.name)}
-                ></klevu-checkbox>
-              ) : (
+        </klevu-typography>
+
+        {opts.map((o) => (
+          <div class="option">
+            {this.mode === "checkbox" ? (
+              <klevu-checkbox
+                exportparts={globalExportedParts}
+                checked={o.selected}
+                name={this.option!.key}
+                onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
+                  this.manager.toggleOption(this.option!.key, o.name)
+                }}
+              >
+                <div class="container">
+                  <span class="name">
+                    <span>{o.name}</span>
+                  </span>
+                  <span class="count">({o.count})</span>
+                </div>
+              </klevu-checkbox>
+            ) : (
+              <div class="container">
                 <input
                   type="radio"
                   id={this.option!.key}
@@ -139,14 +193,24 @@ export class KlevuFacet {
                     this.manager.toggleOption(this.option!.key, o.name)
                   }}
                 />
-              )}
-              <label htmlFor={this.option!.key} class="name">
-                {o.name}
-              </label>
-              <span class="count">{o.count}</span>
-            </li>
-          ))}
-        </ul>
+                <label htmlFor={this.option!.key} class="name">
+                  <span>{o.name}</span>
+                </label>
+                <span class="count">({o.count})</span>
+              </div>
+            )}
+          </div>
+        ))}
+        {showAllButton ? (
+          <klevu-button
+            style={{ "--klevu-button-text-align": "left" }}
+            isTertiary
+            fullWidth
+            onClick={() => (this.showAll = true)}
+          >
+            More
+          </klevu-button>
+        ) : null}
       </Fragment>
     )
   }

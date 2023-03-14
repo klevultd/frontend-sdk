@@ -3,8 +3,8 @@
 }
 
 .hasTooltips {
-  margin-top: calc(var(--klevu-spacing-large) * 4);
-  margin-bottom: var(--klevu-spacing-large);
+  margin-top: var(--klevu-spacing-09);
+  margin-bottom: var(--klevu-spacing-05);
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -29,6 +29,11 @@
 .noUi-target {
   position: relative;
 }
+
+.noUi-base {
+  top: -2px;
+}
+
 .noUi-base,
 .noUi-connects {
   width: 100%;
@@ -93,13 +98,13 @@
 /* Slider size and handle placement;
   */
 .noUi-horizontal {
-  height: 18px;
+  height: 4px;
 }
 .noUi-horizontal .noUi-handle {
-  width: 34px;
-  height: 28px;
-  right: -17px;
-  top: -6px;
+  width: 16px;
+  height: 16px;
+  right: -8px;
+  top: -4px;
 }
 .noUi-vertical {
   width: 18px;
@@ -118,13 +123,13 @@
   * Giving the connect element a border radius causes issues with using transform: scale
   */
 .noUi-target {
-  background: #fafafa;
-  border-radius: var(--klevu-rounded-corners);
-  border: 1px solid var(--klevu-color-border);
+  background: var(--klevu-color-neutral-4);
+  border-radius: var(--klevu-border-radius-m);
   /*box-shadow: inset 0 1px 1px #f0f0f0, 0 3px 6px -5px #bbb;*/
 }
 .noUi-connects {
-  border-radius: var(--klevu-rounded-corners);
+  top: 2px;
+  border-radius: var(--klevu-border-radius-s);
 }
 .noUi-connect {
   background: var(--klevu-color-primary);
@@ -138,17 +143,26 @@
   cursor: ns-resize;
 }
 .noUi-handle {
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
-  background: #fff;
+  border-radius: 1000px;
+  background: var(--klevu-color-primary);
   cursor: default;
   /*box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;*/
 }
-.noUi-active {
+.noUi-active::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 100%;
+  height: 100%;
+  border: 5px solid var(--klevu-color-primary);
+  opacity: var(--klevu-opacity-subtle);
+  border-radius: 1000px;
   /*box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;*/
 }
 /* Handle stripes;
   */
+/*
 .noUi-handle:before,
 .noUi-handle:after {
   content: "";
@@ -173,10 +187,11 @@
 .noUi-vertical .noUi-handle:after {
   top: 17px;
 }
+*/
 /* Disabled state;
   */
 [disabled] .noUi-connect {
-  background: var(--klevu-color-dim-background);
+  opacity: var(--klevu-opacity-disabled);
 }
 [disabled].noUi-target,
 [disabled].noUi-handle,
@@ -281,13 +296,12 @@
 .noUi-tooltip {
   display: block;
   position: absolute;
-  border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
-  background: #fff;
-  color: #000;
+  background: transparent;
+  color: var(--klevu-color-neutral-8);
   padding: 5px;
   text-align: center;
   white-space: nowrap;
+  font-size: var(--klevu-body-s-size);
 }
 .noUi-horizontal .noUi-tooltip {
   -webkit-transform: translate(-50%, 0);

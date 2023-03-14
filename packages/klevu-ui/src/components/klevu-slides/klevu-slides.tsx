@@ -1,7 +1,8 @@
-import { Component, Element, h, Host, Prop } from "@stencil/core"
+import { Component, h, Host, Prop } from "@stencil/core"
+import { globalExportedParts } from "../../utils/utils"
 
 /**
- * Horizontal slides component
+ * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
  */
 @Component({
   tag: "klevu-slides",
@@ -10,16 +11,15 @@ import { Component, Element, h, Host, Prop } from "@stencil/core"
 })
 export class KlevuSlides {
   /**
+   * Heading for the slides component
+   */
+  @Prop() heading?: string
+
+  /**
    * When clicking next/prev buttons should scroll full width of container
    */
   @Prop()
   slideFullWidth?: boolean
-
-  /**
-   * Height of the slider
-   */
-  @Prop()
-  height = 300
 
   /**
    * Hides next and previous buttons
@@ -27,62 +27,83 @@ export class KlevuSlides {
   @Prop()
   hideNextPrev?: boolean
 
-  private gap = 0
-  private containerDiv?: HTMLDivElement
-  private slotElement?: HTMLSlotElement
+  #gap = 0
+  #slotElement?: HTMLSlotElement
+  #scrollElement?: HTMLKlevuUtilScrollbarsElement
 
-  private prev = () => {
-    if (!this.containerDiv) {
-      return
+  #prev = async () => {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance) {
+      instance.elements().viewport.scrollTo({
+        left: instance.elements().viewport.scrollLeft - (await this.#calcAmountToSlide()),
+        behavior: "smooth",
+      })
     }
-
-    this.containerDiv.scrollLeft -= this.calcAmountToSlide()
   }
 
-  private next = () => {
-    if (!this.containerDiv) {
-      return
+  #next = async () => {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance) {
+      instance.elements().viewport.scrollTo({
+        left: instance.elements().viewport.scrollLeft + (await this.#calcAmountToSlide()),
+        behavior: "smooth",
+      })
     }
-    this.containerDiv.scrollLeft += this.calcAmountToSlide()
   }
 
-  private calcAmountToSlide(): number {
+  async #calcAmountToSlide(): Promise<number> {
     let w: number | undefined
     if (this.slideFullWidth) {
-      w = this.containerDiv?.clientWidth
+      const cont = await this.#scrollElement?.getContainer()
+      if (cont) {
+        w = cont.clientWidth
+      }
     } else {
-      w = (this.slotElement?.assignedElements().at(0)?.clientWidth ?? 300) + this.gap
+      w = (this.#slotElement?.assignedElements().at(0)?.clientWidth ?? 200) + this.#gap
     }
 
-    return w ?? 300
+    return w ?? 200
   }
 
   connectedCallback() {
-    this.gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--klevu-spacing-large"))
+    this.#gap = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--klevu-spacing-05"))
+    if (isNaN(this.#gap)) {
+      this.#gap = 0
+    }
   }
 
   render() {
     return (
-      <Host style={{ height: `${this.height}px` }}>
-        {this.hideNextPrev ? null : (
-          <klevu-button class="prev" onClick={this.prev.bind(this)}>
-            &lt;
-          </klevu-button>
-        )}
-        <div
-          class={{
-            slides: true,
-            hideNextPrev: Boolean(this.hideNextPrev),
-          }}
-          ref={(el) => (this.containerDiv = el)}
-        >
-          <slot ref={(el) => (this.slotElement = el as HTMLSlotElement)}></slot>
-        </div>
-        {this.hideNextPrev ? null : (
-          <klevu-button class="next" onClick={this.next.bind(this)}>
-            &gt;
-          </klevu-button>
-        )}
+      <Host>
+        {this.heading === undefined || !this.hideNextPrev ? (
+          <header>
+            <klevu-typography variant="h2">{this.heading}</klevu-typography>
+            {this.hideNextPrev ? null : (
+              <div>
+                <klevu-button
+                  exportparts={globalExportedParts}
+                  class="prev"
+                  icon="chevron_left"
+                  onClick={this.#prev.bind(this)}
+                  isSecondary
+                ></klevu-button>
+                <klevu-button
+                  exportparts={globalExportedParts}
+                  class="next"
+                  icon="chevron_right"
+                  onClick={this.#next.bind(this)}
+                  isSecondary
+                ></klevu-button>
+              </div>
+            )}
+          </header>
+        ) : null}
+
+        <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+          <div class={{ slides: true }}>
+            <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
+          </div>
+        </klevu-util-scrollbars>
       </Host>
     )
   }

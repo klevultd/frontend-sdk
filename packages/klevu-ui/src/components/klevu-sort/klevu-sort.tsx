@@ -1,5 +1,7 @@
 import { KlevuSearchSorting } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { globalExportedParts } from "../../utils/utils"
+import { KlevuDropdownCustomEvent, KlevuDropdownVariant } from "../../components"
 
 /**
  * Sort dropdown. User can select what kind of sorting they want
@@ -18,7 +20,13 @@ export class KlevuSort {
   })
   klevuSortChanged!: EventEmitter<KlevuSearchSorting>
 
-  private options: Array<{ value: KlevuSearchSorting; text: string }> = [
+  /**
+   * Dropdown variant
+   */
+  @Prop()
+  variant: KlevuDropdownVariant = "default"
+
+  #options: Array<{ value: KlevuSearchSorting; text: string }> = [
     { value: KlevuSearchSorting.Relevance, text: "Relevance" },
     { value: KlevuSearchSorting.NameAsc, text: "Name ▲" },
     { value: KlevuSearchSorting.NameDesc, text: "Name ▼" },
@@ -30,11 +38,11 @@ export class KlevuSort {
     { value: KlevuSearchSorting.RatingDesc, text: "Rating ▼" },
   ]
 
-  private selected = KlevuSearchSorting.Relevance
+  #selected = KlevuSearchSorting.Relevance
 
-  private onChange(event: CustomEvent<string>) {
+  #onChange(event: KlevuDropdownCustomEvent<string>) {
     const newSort = event.detail as KlevuSearchSorting
-    this.selected = newSort
+    this.#selected = newSort
     this.klevuSortChanged.emit(newSort)
   }
 
@@ -42,10 +50,12 @@ export class KlevuSort {
     return (
       <Host>
         <klevu-dropdown
+          exportparts={globalExportedParts}
           name="sort"
-          options={this.options}
-          selected={this.selected}
-          onKlevuDropdownChanged={this.onChange.bind(this)}
+          options={this.#options}
+          selected={this.#selected}
+          variant={this.variant}
+          onKlevuDropdownChanged={this.#onChange.bind(this)}
         ></klevu-dropdown>
       </Host>
     )

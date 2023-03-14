@@ -3,17 +3,25 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Full app to create search bar that popups trending products and search results.
+
 ## Properties
 
-| Property            | Attribute           | Description                                                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                              | Default        |
-| ------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `fallbackTerm`      | `fallback-term`     | What term should be used if there isn't enough results                                                                                                                                                                                                                                                         | `string \| undefined`                                                                                                                                                             | `undefined`    |
-| `placeholder`       | `placeholder`       | Placeholder for input text                                                                                                                                                                                                                                                                                     | `string \| undefined`                                                                                                                                                             | `undefined`    |
-| `popupAnchor`       | `popup-anchor`      | Anchor popup to witch side                                                                                                                                                                                                                                                                                     | `"bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start" \| undefined` | `"bottom-end"` |
-| `renderProductSlot` | --                  | Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render. | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement \| null) \| undefined`                                                                          | `undefined`    |
-| `searchCategories`  | `search-categories` | Should component search for categories too                                                                                                                                                                                                                                                                     | `boolean \| undefined`                                                                                                                                                            | `undefined`    |
-| `searchCmsPages`    | `search-cms-pages`  | Should component search for CMS pages too                                                                                                                                                                                                                                                                      | `boolean \| undefined`                                                                                                                                                            | `undefined`    |
-| `searchText`        | `search-text`       | Text of search button                                                                                                                                                                                                                                                                                          | `string \| undefined`                                                                                                                                                             | `undefined`    |
+| Property             | Attribute              | Description                                                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                              | Default        |
+| -------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `fallbackTerm`       | `fallback-term`        | What term should be used if there isn't enough results                                                                                                                                                                                                                                                         | `string \| undefined`                                                                                                                                                             | `undefined`    |
+| `fullResultCount`    | `full-result-count`    | How many products to show in full variant                                                                                                                                                                                                                                                                      | `number`                                                                                                                                                                          | `9`            |
+| `placeholder`        | `placeholder`          | Placeholder for input text                                                                                                                                                                                                                                                                                     | `string \| undefined`                                                                                                                                                             | `undefined`    |
+| `popupAnchor`        | `popup-anchor`         | Anchor popup to witch side                                                                                                                                                                                                                                                                                     | `"bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start" \| undefined` | `"bottom-end"` |
+| `renderProductSlot`  | --                     | Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render. | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement \| null) \| undefined`                                                                          | `undefined`    |
+| `resultVariant`      | `result-variant`       | Change variant of the search results                                                                                                                                                                                                                                                                           | `"full" \| "simple"`                                                                                                                                                              | `"simple"`     |
+| `searchCategories`   | `search-categories`    | Should component search for categories too                                                                                                                                                                                                                                                                     | `boolean \| undefined`                                                                                                                                                            | `undefined`    |
+| `searchCmsPages`     | `search-cms-pages`     | Should component search for CMS pages too                                                                                                                                                                                                                                                                      | `boolean \| undefined`                                                                                                                                                            | `undefined`    |
+| `searchFieldVariant` | `search-field-variant` | Change variant of the search field                                                                                                                                                                                                                                                                             | `"default" \| "pill"`                                                                                                                                                             | `"pill"`       |
+| `searchText`         | `search-text`          | Text of search button                                                                                                                                                                                                                                                                                          | `string \| undefined`                                                                                                                                                             | `undefined`    |
+| `simpleResultCount`  | `simple-result-count`  | How many products to show in simple variant                                                                                                                                                                                                                                                                    | `number`                                                                                                                                                                          | `3`            |
 
 
 ## Slots
@@ -30,11 +38,15 @@
 - [klevu-popup](../klevu-popup)
 - [klevu-search-field](../klevu-search-field)
 - [klevu-suggestions-list](../klevu-suggestions-list)
-- [klevu-latest-searches](../klevu-latest-searches)
 - [klevu-cms-list](../klevu-cms-list)
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
+- [klevu-sort](../klevu-sort)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
+- [klevu-pagination](../klevu-pagination)
+- [klevu-popular-searches](../klevu-popular-searches)
+- [klevu-latest-searches](../klevu-latest-searches)
+- [klevu-tab](../klevu-tab)
 
 ### Graph
 ```mermaid
@@ -42,19 +54,33 @@ graph TD;
   klevu-quicksearch --> klevu-popup
   klevu-quicksearch --> klevu-search-field
   klevu-quicksearch --> klevu-suggestions-list
-  klevu-quicksearch --> klevu-latest-searches
   klevu-quicksearch --> klevu-cms-list
-  klevu-quicksearch --> klevu-heading
+  klevu-quicksearch --> klevu-typography
+  klevu-quicksearch --> klevu-sort
   klevu-quicksearch --> klevu-product-grid
   klevu-quicksearch --> klevu-product
+  klevu-quicksearch --> klevu-pagination
+  klevu-quicksearch --> klevu-popular-searches
+  klevu-quicksearch --> klevu-latest-searches
+  klevu-quicksearch --> klevu-tab
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
-  klevu-suggestions-list --> klevu-heading
-  klevu-latest-searches --> klevu-heading
-  klevu-cms-list --> klevu-heading
+  klevu-button --> klevu-typography
+  klevu-suggestions-list --> klevu-typography
+  klevu-suggestions-list --> klevu-list
+  klevu-list --> klevu-typography
+  klevu-cms-list --> klevu-typography
+  klevu-cms-list --> klevu-list
+  klevu-sort --> klevu-dropdown
+  klevu-product --> klevu-typography
+  klevu-popular-searches --> klevu-typography
+  klevu-popular-searches --> klevu-list
+  klevu-latest-searches --> klevu-typography
+  klevu-latest-searches --> klevu-list
+  klevu-tab --> klevu-typography
   style klevu-quicksearch fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

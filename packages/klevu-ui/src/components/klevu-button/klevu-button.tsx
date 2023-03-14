@@ -3,10 +3,12 @@ import { Component, h, Prop } from "@stencil/core"
 /**
  * Basic button component
  *
+ * @slot default - Button text
  * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
  * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
  * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
- * @cssprop --klebu-button-padding --klevu-spacing-normal Padding on button
+ * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
+ * @cssprop --klevu-button-text-align center Align text on button
  */
 @Component({
   tag: "klevu-button",
@@ -18,10 +20,42 @@ export class KlevuButton {
   @Prop({ reflect: true })
   disabled?: boolean
 
+  /** Toned down secondary button */
+  @Prop()
+  isSecondary?: boolean
+
+  /** Toned down tertiary button */
+  @Prop()
+  isTertiary?: boolean
+
+  /** Make button display block */
+  @Prop()
+  fullWidth?: boolean
+
+  /**
+   * Instead of content have an icon. So basically icon-button
+   */
+  @Prop()
+  icon?: string
+
   render() {
     return (
-      <button disabled={this.disabled}>
-        <slot />
+      <button
+        disabled={this.disabled}
+        class={{
+          secondary: Boolean(this.isSecondary),
+          tertiary: Boolean(this.isTertiary),
+          fullwidth: Boolean(this.fullWidth),
+          icon: Boolean(this.icon),
+        }}
+      >
+        {this.icon ? (
+          <span part="material-icon">{this.icon}</span>
+        ) : (
+          <klevu-typography variant={this.isTertiary ? "body-s" : "body-s-bold"}>
+            <slot />
+          </klevu-typography>
+        )}
       </button>
     )
   }

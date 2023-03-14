@@ -1,27 +1,102 @@
 :host {
-  display: inline-block;
+  --klevu-button-background-hover: var(--klevu-color-primary-darker);
+  --klevu-button-text-align: var(--klevu-button-text-align);
 }
 
 button {
+  --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
+
+  display: inline-block;
+  position: relative;
   background: var(--klevu-button-background-color, var(--klevu-color-primary));
-  padding: var(--klevu-button-padding, var(--klevu-spacing-normal));
-  border: 1px solid var(--klevu-button-border, var(--klevu-color-primary-border));
-  border-radius: var(--klevu-rounded-corners);
-  color: var(--klevu-button-text-color, var(--klevu-color-primary-text));
+  border-radius: var(--klevu-border-radius-m);
+  box-sizing: border-box;
   transition: transform 100ms;
+  border: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  font-size: var(--klevu-body-s-size);
+  font-weight: var(--klevu-body-s-weight);
+  padding: 0 calc(var(--padding) * 2);
+  text-align: var(--klevu-button-text-align, center);
+}
+
+button klevu-typography,
+button span[part="material-icon"] {
+  --klevu-typography-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
+  color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
+  user-select: none;
+}
+
+button:hover {
+  background-color: var(--klevu-button-background-hover);
 }
 
 button:focus {
-  outline: 1px solid var(--klevu-color-primary-border);
+  outline: 0;
+}
+
+button:focus:after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 2px solid var(--klevu-color-primary);
+  border-radius: calc(var(--klevu-border-radius-m) + 2px);
 }
 
 button:disabled {
-  background-color: var(--klevu-color-dim-background);
-  color: var(--klevu-color-border);
-  border: 1px solid var(--klevu-color-border);
-  cursor: not-allowed;
+  opacity: var(--klevu-opacity-disabled);
 }
 
 button:active:not(:disabled) {
   transform: translateY(1px);
+}
+
+button.secondary {
+  background: var(--klevu-color-neutral-2);
+}
+
+button.secondary klevu-typography,
+button.secondary span[part="material-icon"] {
+  --klevu-typography-color: var(--klevu-color-neutral-7);
+  color: var(--klevu-color-neutral-8);
+}
+
+button.secondary:hover {
+  background: var(--klevu-color-neutral-3);
+}
+
+button.fullwidth {
+  display: block;
+  width: 100%;
+}
+
+button.icon {
+  padding: 0;
+  height: calc(var(--klevu-size-m) * 2);
+  width: calc(var(--klevu-size-m) * 2);
+  border-radius: 10000000px;
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 1.8;
+}
+
+button.icon:focus:after {
+  border-radius: 100%;
+}
+
+button.tertiary {
+  background: transparent;
+  border: 0;
+  color: var(--klevu-color-primary);
+  padding: 0;
+  height: calc(var(--klevu-size-s) * 2);
+}
+
+button.tertiary klevu-typography,
+button.tertiary span[part="material-icon"] {
+  --klevu-typography-color: var(--klevu-color-primary);
+  color: var(--klevu-color-primary);
 }

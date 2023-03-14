@@ -13,13 +13,24 @@
   width: max-content;
   visibility: hidden;
   box-sizing: border-box;
-  box-shadow: 0px 1px 5px var(--klevu-color-shadow, rgba(0, 0, 0, 0.2));
-  padding: var(--klevu-spacing-normal);
-  border-radius: var(--klevu-rounded-corners);
+  padding: var(--klevu-spacing-04);
+  border-radius: var(--klevu-border-radius-s);
   transition: opacity 0.4s, visibility 0.4s;
   opacity: 0;
   z-index: 1000;
   background: white;
+}
+
+.elevation-1 {
+  box-shadow: var(--klevu-elevation-1);
+}
+
+.elevation-2 {
+  box-shadow: var(--klevu-elevation-2);
+}
+
+.elevation-3 {
+  box-shadow: var(--klevu-elevation-3);
 }
 
 .popup.left {

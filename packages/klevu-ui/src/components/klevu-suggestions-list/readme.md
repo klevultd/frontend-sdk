@@ -3,19 +3,23 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
+
 ## Properties
 
-| Property                   | Attribute | Description                   | Type       | Default                |
-| -------------------------- | --------- | ----------------------------- | ---------- | ---------------------- |
-| `caption`                  | `caption` | Caption on the list           | `string`   | `"Search suggestions"` |
-| `suggestions` _(required)_ | --        | Suggestions to render in list | `string[]` | `undefined`            |
+| Property      | Attribute | Description                   | Type       | Default                |
+| ------------- | --------- | ----------------------------- | ---------- | ---------------------- |
+| `caption`     | `caption` | Caption on the list           | `string`   | `"Search suggestions"` |
+| `suggestions` | --        | Suggestions to render in list | `string[]` | `[]`                   |
 
 
-## Shadow Parts
+## Events
 
-| Part           | Description |
-| -------------- | ----------- |
-| `"klevu-list"` |             |
+| Event                    | Description                                        | Type                  |
+| ------------------------ | -------------------------------------------------- | --------------------- |
+| `klevuSuggestionClicked` | Event that is emitted when a suggestion is clicked | `CustomEvent<string>` |
 
 
 ## Dependencies
@@ -26,16 +30,19 @@
 
 ### Depends on
 
-- [klevu-heading](../klevu-heading)
+- [klevu-typography](../klevu-typography)
+- [klevu-list](../klevu-list)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-suggestions-list --> klevu-heading
+  klevu-suggestions-list --> klevu-typography
+  klevu-suggestions-list --> klevu-list
+  klevu-list --> klevu-typography
   klevu-quicksearch --> klevu-suggestions-list
   style klevu-suggestions-list fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

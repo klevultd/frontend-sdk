@@ -1,6 +1,14 @@
 :host {
   display: inline-block;
   --loading-animation-time: 5s;
+  --width: var(--klevu-product-width, auto);
+  --small-width: var(--klevu-product-small-width, 150px);
+  --image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
+  --image-fill: var(--klevu-product-image-fill, cover);
+}
+
+:host(.line) {
+  display: block;
 }
 
 :host a {
@@ -13,9 +21,9 @@
 
 .container {
   display: block;
-  padding: var(--klevu-spacing-normal);
+  padding: var(--klevu-spacing-04);
   border: 1px solid var(--klevu-color-border);
-  border-radius: var(--klevu-rounded-corners);
+  border-radius: var(--klevu-border-radius-s);
   box-sizing: border-box;
   height: 100%;
 }
@@ -23,43 +31,37 @@
 .container.default {
   display: flex;
   flex-direction: column;
-  max-width: var(--klevu-product-width, 300px);
+  max-width: var(--width);
 }
 
 .container.default.fixedWidth {
   max-width: auto;
-  width: var(--klevu-product-width, 300px);
-}
-
-@media (max-width: 500px) {
-  .container.default.fixedWidth {
-    width: auto;
-  }
+  width: var(--width);
 }
 
 .container.small {
   display: flex;
   flex-direction: column;
-  max-width: var(--klevu-product-small-width, 300px);
+  max-width: var(--small-width);
 }
 
 .container.small.fixedWidth {
   max-width: auto;
-  width: var(--klevu-product-small-width, 300px);
+  width: var(--small-width);
 }
 
 .default .image {
   width: 100%;
-  aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  background-size: var(--klevu-product-image-fill, cover);
+  aspect-ratio: var(--image-aspect-ratio);
+  background-size: var(--image-fill);
   background-position: center center;
   background-repeat: no-repeat;
 }
 
 .small .image {
   width: 100%;
-  aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
-  background-size: var(--klevu-product-image-fill, cover);
+  aspect-ratio: var(--image-aspect-ratio);
+  background-size: var(--image-fill);
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -67,13 +69,12 @@
 .container.line a {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .line .info {
   display: flex;
   flex-direction: column;
-  margin-left: var(--klevu-spacing-normal);
+  margin-left: var(--klevu-spacing-04);
 }
 
 .line .info p {
@@ -88,16 +89,16 @@
 
 .container.line .image {
   width: 100px;
-  height: 100px;
+  height: 100%;
   aspect-ratio: 1;
-  background-size: var(--klevu-product-image-fill, cover);
+  background-size: var(--image-fill);
   background-position: center center;
+  flex-shrink: 0;
 }
 
 @media (max-width: 400px) {
   .container.line .image {
     width: 80px;
-    height: 80px;
   }
 }
 
@@ -111,13 +112,9 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  line-height: 1.2;
   overflow: hidden;
-  height: calc(var(--klevu-h3-size) * 1.2 * 2);
+  height: calc(var(--klevu-body-s-height) * var(--klevu-body-s-line-height) * 2);
   text-align: left;
-  font-size: var(--klevu-h3-size);
-  font-weight: var(--klevu-h3-weight);
-  color: var(--klevu-h3-color);
 }
 
 .brandname + .productname {
@@ -131,7 +128,7 @@
 .description {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-height: 1.2em;
+  max-height: 3.5em;
 }
 
 .container.small .description {
@@ -164,10 +161,21 @@
 .loading.content div {
   width: 100%;
   height: 32px;
-  margin-top: 6px;
+  margin-bottom: 6px;
   background: linear-gradient(-75deg, #a1a1a1 0%, #eaeaea 50%, #f8f8f8 100%);
   background-size: 400% 400%;
   animation: loadinggradient var(--loading-animation-time) linear infinite;
+}
+
+:host(.line.loading) .container {
+  display: flex;
+}
+
+:host(.line.loading) .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 var(--klevu-spacing-04);
 }
 
 .loading.content div:nth-child(1) {
@@ -184,7 +192,7 @@
 
 .swatches {
   display: none;
-  margin: var(--klevu-spacing-small) 0;
+  margin: var(--klevu-spacing-02) 0;
 }
 
 .swatches > div {
@@ -195,7 +203,7 @@
 
 .container.default .swatches {
   display: flex;
-  gap: var(--klevu-spacing-small);
+  gap: var(--klevu-spacing-02);
 }
 
 @keyframes loadinggradient {

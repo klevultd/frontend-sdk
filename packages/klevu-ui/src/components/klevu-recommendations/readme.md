@@ -3,6 +3,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Full recommendation banner solution
+
 ## Properties
 
 | Property                           | Attribute              | Description                                                                                                                                                                                                                                                                                       | Type                                                                                                     | Default     |
@@ -28,10 +32,14 @@
 graph TD;
   klevu-recommendations --> klevu-slides
   klevu-recommendations --> klevu-product
+  klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
+  klevu-slides --> klevu-util-scrollbars
+  klevu-button --> klevu-typography
+  klevu-product --> klevu-typography
   style klevu-recommendations fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

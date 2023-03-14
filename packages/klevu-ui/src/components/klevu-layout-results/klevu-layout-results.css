@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: var(--klevu-spacing-04);
+}
+
+.sidebar {
+  width: 300px;
+}
+
+main {
+  width: 100%;
+}
+
+.header {
+  margin: var(--klevu-spacing-04) 0;
+  display: flex;
+}
+
+.header slot {
+  width: 100%;
+}
+
+.header klevu-button {
+  margin-left: auto;
+}
+
+.footer {
+  margin-top: var(--klevu-spacing-04);
+  width: 100%;
+}
+
+@media (max-width: 511px) {
+  .container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}

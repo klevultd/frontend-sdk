@@ -1,0 +1,31 @@
+:host {
+  display: inline-block;
+  padding: var(--klevu-spacing-02) var(--klevu-spacing-05);
+  border-radius: var(--klevu-chip-radius, var(--klevu-border-radius-xxl));
+  align-items: center;
+  border: 1px solid var(--klevu-chip-border, var(--klevu-color-neutral-5));
+}
+
+:host(.removable) {
+  display: inline-flex;
+}
+
+:host(.selected) {
+  background-color: var(--klevu-chip-selected-background, rgba(var(--klevu-color-primary-rgb), 0.2));
+  border-color: var(--klevu-chip-selected-border, var(--klevu-color-primary));
+}
+
+span[part="material-icon"] {
+  position: relative;
+  top: 1px;
+  left: -4px;
+  font-size: 0.7em;
+  padding: 2px;
+  margin-right: var(--klevu-spacing-01);
+  cursor: pointer;
+  user-select: none;
+}
+
+klevu-typography {
+  line-height: 1;
+}

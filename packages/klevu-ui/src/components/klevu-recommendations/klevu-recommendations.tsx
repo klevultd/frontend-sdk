@@ -1,5 +1,7 @@
 import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
 import { Component, h, Host, Prop, State } from "@stencil/core"
+import { globalExportedParts } from "../../utils/utils"
+import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductSlots } from "../klevu-product/klevu-product"
 
@@ -44,7 +46,7 @@ export class KlevuRecommendations {
   /**
    * The products to display
    */
-  @State() products: Array<KlevuRecord> = []
+  @State() products: Array<KlevuRecord> = [undefined, undefined, undefined, undefined, undefined, undefined] as any
 
   @State() clickEvent?: (productId: string, variantId?: string) => void
 
@@ -54,7 +56,7 @@ export class KlevuRecommendations {
    * slot requested. Return null for slots that you do not want to render.
    */
   @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
-  private internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
+  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
     if (!this.renderProductSlot || !product) {
       return null
     }
@@ -113,8 +115,8 @@ export class KlevuRecommendations {
     }
   }
 
-  productClick(
-    event: CustomEvent<{
+  #productClick(
+    event: KlevuProductCustomEvent<{
       product: Partial<KlevuRecord>
       originalEvent: MouseEvent
     }>
@@ -131,13 +133,20 @@ export class KlevuRecommendations {
 
     return (
       <Host>
-        <klevu-slides>
+        <klevu-slides exportparts={globalExportedParts} heading={this.recommendationTitle}>
           {this.products.map((product) => (
-            <klevu-product fixedWidth onKlevuProductClick={this.productClick.bind(this)} product={product}>
-              {this.internalRenderProductSlot(product, "top")}
-              {this.internalRenderProductSlot(product, "image")}
-              {this.internalRenderProductSlot(product, "info")}
-              {this.internalRenderProductSlot(product, "bottom")}
+            <klevu-product
+              fixedWidth
+              onKlevuProductClick={this.#productClick.bind(this)}
+              product={product}
+              style={{
+                "--klevu-product-width": "300px",
+              }}
+            >
+              {this.#internalRenderProductSlot(product, "top")}
+              {this.#internalRenderProductSlot(product, "image")}
+              {this.#internalRenderProductSlot(product, "info")}
+              {this.#internalRenderProductSlot(product, "bottom")}
             </klevu-product>
           ))}
         </klevu-slides>

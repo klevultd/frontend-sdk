@@ -10,13 +10,17 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * Generic product component that renders product based on KlevuRecord of @klevu/core
  * All parts of the component can be replaced with slots.
  *
+ * By default the products fill the whole space, but it can be limited
+ * with --kleu-product-width and --klevu-product-small-width css variables.
+ *
  * @slot top - Empty are before any product content
  * @slot image - Image region of component
  * @slot info - Swatches, titles, brands and prices slot
  * @slot bottom - Empty are after product content
  *
- * @csspart image - The image element of component
- * @csspart container - The container element of whole
+ * @csspart product-image - The image element of component
+ * @csspart product-container - The container element of whole
+ * @csspart product-swatch - Single swatch element under the image
  *
  * @cssprop --klevu-product-width - Width of the product
  * @cssprop --klevu-product-small-width - Width of the product when small variant is used
@@ -66,6 +70,21 @@ export class KlevuProduct {
    */
   @Prop() fixedWidth?: boolean
 
+  /**
+   * What key to use for brand value
+   */
+  @Prop() keyBrand = "brand"
+
+  /**
+   * What key to use for name value
+   */
+  @Prop() keyName = "name"
+
+  /**
+   * What key to use for description value
+   */
+  @Prop() keyDescription = "shortDesc"
+
   @State() hoverImage?: string
 
   /**
@@ -77,7 +96,7 @@ export class KlevuProduct {
   })
   klevuProductClick!: EventEmitter<KlevuProductOnProductClick>
 
-  click(ev: MouseEvent) {
+  #click(ev: MouseEvent) {
     const settings = getGlobalSettings()
 
     if (!this.product) {
@@ -110,17 +129,20 @@ export class KlevuProduct {
   }
 
   render() {
-    const containerClasses = {
-      container: true,
+    const typeClasses = {
       small: this.variant === "small",
       line: this.variant === "line",
       default: this.variant === "default",
+    }
+    const containerClasses: any = {
+      container: true,
       fixedWidth: Boolean(this.fixedWidth),
+      ...typeClasses,
     }
 
     if (!this.product) {
       return (
-        <Host>
+        <Host class={{ ...typeClasses, loading: true }}>
           <div class={containerClasses}>
             <div class="loading image"></div>
             <div class="loading content">
@@ -135,6 +157,65 @@ export class KlevuProduct {
 
     const settings = getGlobalSettings()
     const isOnSale = this.product.price != this.product.salePrice
+
+    return (
+      <Host class={{ line: this.variant === "line" }}>
+        <div part="product-container" class={containerClasses}>
+          <slot name="top"></slot>
+          <a href={settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
+            {this.hideImage ? null : (
+              <slot name="image">
+                <div
+                  class="image"
+                  part="product-image"
+                  style={{
+                    backgroundImage: `url(${this.hoverImage || this.product.image})`,
+                  }}
+                ></div>
+              </slot>
+            )}
+            <slot name="info">
+              {this.#renderSwatch()}
+              <div class="info">
+                {this.hideBrand || !this.product[this.keyBrand] ? null : (
+                  <klevu-typography class="brandname" variant="body-s-bold">
+                    {this.product[this.keyBrand]}
+                  </klevu-typography>
+                )}
+                {this.hideName || !this.product[this.keyName] ? null : (
+                  <klevu-typography class="productname" variant="body-s">
+                    {this.product[this.keyName]}
+                  </klevu-typography>
+                )}
+                {this.hideDescription || !this.product[this.keyDescription] ? null : (
+                  <klevu-typography class="description" variant="body-xs">
+                    {this.product[this.keyDescription]}
+                  </klevu-typography>
+                )}
+                {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
+                  <klevu-typography
+                    variant="body-l-bold"
+                    class={{
+                      isOnSale,
+                      price: true,
+                    }}
+                  >
+                    {renderPrice(this.product.salePrice, this.product.currency)}
+                  </klevu-typography>
+                )}
+              </div>
+            </slot>
+          </a>
+          <slot name="bottom"></slot>
+        </div>
+      </Host>
+    )
+  }
+
+  #renderSwatch() {
+    if (this.hideSwatches) {
+      return null
+    }
 
     const swatches: Array<{
       Id?: string
@@ -162,57 +243,28 @@ export class KlevuProduct {
       }
     }
 
-    return (
-      <Host>
-        <div part="container" class={containerClasses}>
-          <slot name="top"></slot>
-          <a href={settings?.generateProductUrl?.(this.product)} onClick={this.click.bind(this)}>
-            {this.hideImage ? null : (
-              <slot name="image">
-                <div
-                  class="image"
-                  part="image"
-                  style={{
-                    backgroundImage: `url(${this.hoverImage || this.product.image})`,
-                  }}
-                ></div>
-              </slot>
-            )}
-            <slot name="info">
-              {!this.hideSwatches && swatches.length > 1 ? (
-                <div class="swatches" onMouseLeave={() => (this.hoverImage = undefined)}>
-                  {swatches.map((swatch) => (
-                    <div
-                      style={{
-                        backgroundColor: swatch.Color,
-                        backgroundImage: `url(${swatch.SwatchImage || swatch.Image})`,
-                      }}
-                      onMouseEnter={() => (this.hoverImage = swatch.Image)}
-                    ></div>
-                  ))}
-                </div>
-              ) : null}
+    if (swatches.length === 0) {
+      return null
+    }
 
-              <div class="info">
-                {this.hideBrand ? null : <p class="brandname">{this.product.brand}</p>}
-                {this.hideName ? null : <p class="productname">{this.product.name}</p>}
-                {this.hideDescription ? null : <p class="description">{this.product.shortDesc}</p>}
-                {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
-                  <p
-                    class={{
-                      isOnSale,
-                      price: true,
-                    }}
-                  >
-                    {renderPrice(this.product.salePrice, this.product.currency)}
-                  </p>
-                )}
-              </div>
-            </slot>
-          </a>
-          <slot name="bottom"></slot>
-        </div>
-      </Host>
+    return (
+      <div class="swatches" onMouseLeave={() => (this.hoverImage = undefined)}>
+        {swatches.map((swatch) => (
+          <div
+            part="product-swatch"
+            style={{
+              backgroundColor: swatch.Color
+                ? CSS.supports("color", swatch.Color)
+                  ? swatch.Color
+                  : "lightgray"
+                : "lightgray",
+              backgroundImage:
+                swatch.SwatchImage || swatch.Image ? `url(${swatch.SwatchImage || swatch.Image})` : undefined,
+            }}
+            onMouseEnter={() => (this.hoverImage = swatch.Image)}
+          ></div>
+        ))}
+      </div>
     )
   }
 }

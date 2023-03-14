@@ -1,5 +1,5 @@
 import { autoUpdate, computePosition, offset, Placement, shift, size } from "@floating-ui/dom"
-import { Component, Element, h, Host, Listen, Method, Prop, State } from "@stencil/core"
+import { Component, Element, h, Host, Listen, Method, Prop, State, Event, EventEmitter } from "@stencil/core"
 
 /**
  * Popup component where clicking origin component popups the the content
@@ -35,33 +35,50 @@ export class KlevuPopup {
    */
   @Prop() anchor: Placement = "left-end"
 
+  /**
+   * Elevation of the popup. 0-3.
+   */
+  @Prop() elevation = 1
+
+  /**
+   * When popup is opened this event is emitted
+   */
+  @Event({
+    composed: true,
+  })
+  klevuPopupOpen!: EventEmitter<void>
+
+  /**
+   * Is currently open
+   */
   @State() open = false
 
-  private stopUpdatePos?: Function
-  private originElement?: HTMLElement | null
-  private contentElement?: HTMLElement | null
+  #stopUpdatePos?: Function
+  #originElement?: HTMLElement | null
+  #contentElement?: HTMLElement | null
 
-  private closeEvent(event: any) {
+  #closeEvent(event: any) {
     if (!event.composedPath().some((el: HTMLElement) => el === this.el)) {
       this.open = false
     }
   }
 
-  private async internalOpen() {
+  async #internalOpen() {
     if (this.open) {
       return
     }
 
     this.open = true
-    this.updatePopupPosition()
+    this.#updatePopupPosition()
+    this.klevuPopupOpen.emit()
   }
 
-  private async updatePopupPosition() {
-    if (!this.originElement || !this.contentElement || !this.open) {
+  async #updatePopupPosition() {
+    if (!this.#originElement || !this.#contentElement || !this.open) {
       return
     }
 
-    const { x, y } = await computePosition(this.originElement, this.contentElement, {
+    const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
       placement: this.anchor,
       middleware: [
         offset(16),
@@ -76,7 +93,7 @@ export class KlevuPopup {
         }),
       ],
     })
-    Object.assign(this.contentElement.style, {
+    Object.assign(this.#contentElement.style, {
       left: `${x}px`,
       top: `${y}px`,
     })
@@ -87,7 +104,7 @@ export class KlevuPopup {
    */
   @Method()
   async openModal() {
-    this.internalOpen()
+    this.#internalOpen()
   }
 
   /**
@@ -103,7 +120,7 @@ export class KlevuPopup {
   })
   childItemClicked(event: PointerEvent) {
     if (event.composedPath().some((e: any) => e.localName === "slot" && e.name === "origin")) {
-      this.internalOpen()
+      this.#internalOpen()
     }
   }
 
@@ -115,47 +132,48 @@ export class KlevuPopup {
       return
     }
     if (event.composedPath().some((e: any) => e.localName === "slot" && e.name === "origin")) {
-      this.internalOpen()
+      this.#internalOpen()
     }
   }
 
   connectedCallback() {
     if (this.closeAtOutsideClick) {
-      document.addEventListener("click", this.closeEvent.bind(this))
+      document.addEventListener("click", this.#closeEvent.bind(this))
     }
   }
 
   componentDidLoad() {
-    this.originElement = this.el?.shadowRoot?.querySelector("#origin")
-    this.contentElement = this.el?.shadowRoot?.querySelector("#content")
+    this.#originElement = this.el?.shadowRoot?.querySelector("#origin")
+    this.#contentElement = this.el?.shadowRoot?.querySelector("#content")
 
     if (this.startOpen) {
       this.openModal()
     }
 
-    if (this.originElement && this.contentElement) {
-      this.stopUpdatePos = autoUpdate(this.originElement, this.contentElement, this.updatePopupPosition.bind(this))
+    if (this.#originElement && this.#contentElement) {
+      this.#stopUpdatePos = autoUpdate(this.#originElement, this.#contentElement, this.#updatePopupPosition.bind(this))
     }
   }
 
   detachedCallback() {
-    document.removeEventListener("click", this.closeEvent)
-    this.stopUpdatePos?.()
+    document.removeEventListener("click", this.#closeEvent)
+    this.#stopUpdatePos?.()
   }
 
   render() {
+    const popupClasses: any = {
+      popup: true,
+      show: this.open,
+    }
+
+    popupClasses[`elevation-${this.elevation}`] = true
+
     return (
       <Host>
         <div id="origin" class="originContainer">
           <slot name="origin" />
         </div>
-        <div
-          id="content"
-          class={{
-            popup: true,
-            show: this.open,
-          }}
-        >
+        <div id="content" class={popupClasses}>
           <slot name="content" />
         </div>
       </Host>

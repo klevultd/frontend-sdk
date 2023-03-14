@@ -2,6 +2,9 @@ import { defineCustomElements } from "../loader"
 import "../src/global/global.css"
 // @ts-inore
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
+import prettier from "prettier/standalone"
+import prettierBabel from "prettier/parser-babel"
+import prettierHtml from "prettier/parser-html"
 
 defineCustomElements()
 
@@ -60,7 +63,16 @@ for (const prop of documentedCssProps) {
 export const parameters = {
   options: {
     storySort: {
-      order: ["Start", ["Welcome", "Styles"], "Atoms", "Components", "Apps"],
+      order: [
+        "Welcome",
+        "Guides",
+        ["Installation", "Styles", "This documentation"],
+        "Non components",
+        "Atoms",
+        "Components",
+        "Layout",
+        "Apps",
+      ],
     },
     showPanel: true,
     panelPosition: "bottom",
@@ -70,10 +82,18 @@ export const parameters = {
   },
   controls: {
     matchers: {
-      color: /(background|color)$/i,
+      color: /(color)$/i,
       date: /Date$/,
     },
     expanded: true,
   },
   cssprops,
+  viewMode: "docs",
+  docs: {
+    transformSource: (input) =>
+      prettier.format(input, {
+        parser: "html",
+        plugins: [prettierHtml],
+      }),
+  },
 }

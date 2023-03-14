@@ -3,6 +3,17 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Sort dropdown. User can select what kind of sorting they want
+
+## Properties
+
+| Property  | Attribute | Description      | Type                    | Default     |
+| --------- | --------- | ---------------- | ----------------------- | ----------- |
+| `variant` | `variant` | Dropdown variant | `"default" \| "inline"` | `"default"` |
+
+
 ## Events
 
 | Event              | Description              | Type                                                                                                                                                                                                                                                                                                                                                    |
@@ -12,6 +23,12 @@
 
 ## Dependencies
 
+### Used by
+
+ - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-quicksearch](../klevu-quicksearch)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
+
 ### Depends on
 
 - [klevu-dropdown](../klevu-dropdown)
@@ -20,9 +37,12 @@
 ```mermaid
 graph TD;
   klevu-sort --> klevu-dropdown
+  klevu-merchandising --> klevu-sort
+  klevu-quicksearch --> klevu-sort
+  klevu-search-landing-page --> klevu-sort
   style klevu-sort fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
 
-*Built with [StencilJS](https://stenciljs.com/)*
+

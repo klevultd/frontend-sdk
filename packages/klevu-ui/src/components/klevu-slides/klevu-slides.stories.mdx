@@ -1,0 +1,33 @@
+import { ArgsTable, Canvas, Meta, Story, Description, Source } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
+import { MDXAutoFillMeta, mockProducts, KlevuProductElement } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-slides")
+const productElements = () =>
+  mockProducts.slice(0, 16).map((p) => KlevuProductElement(p, { variant: "small", fixedWidth: true }))
+
+<Meta title="Components/Slides" component="klevu-slides" argTypes={meta.argTypes} parameters={meta.parameters} />
+
+# Klevu-slides
+
+<Description>{meta.description}</Description>
+
+<Canvas>
+  <Story
+    name="Slides"
+    args={{
+      heading: "Hello World Slides!",
+    }}
+  >
+    {(args) => html`<klevu-slides
+      heading=${ifDefined(args.heading)}
+      slide-full-width=${ifDefined(args.slideFullWidth)}
+      hide-next-prev=${ifDefined(args.hideNextPrev)}
+      height=${ifDefined(args.height)}
+    >
+      ${productElements()}</klevu-slides
+    >`}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Slides" />

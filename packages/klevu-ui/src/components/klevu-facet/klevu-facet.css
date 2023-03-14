@@ -2,30 +2,54 @@
   display: block;
 }
 
-:host li {
+.container {
   display: flex;
-  align-items: center;
-  margin-bottom: var(--klevu-spacing-small);
+  justify-content: space-between;
+  width: 100%;
+  min-width: 0;
 }
 
-:host .name {
+.option {
+  margin-bottom: var(--klevu-spacing-02);
+}
+
+.name {
+  display: block;
+  flex-grow: 1;
+  min-width: 0;
+  font-size: var(--klevu-body-s-size);
+}
+
+.name span {
+  display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-size: 0.95em;
-  margin: 0 var(--klevu-spacing-small);
 }
 
-:host .count {
+.count {
+  flex-basis: 30px;
   display: inline-block;
   margin-left: auto;
-  font-size: var(--font-size-small);
-  padding: var(--klevu-spacing-small);
-  background: var(--klevu-color-dim-background);
-  font-size: 0.8em;
-  border-radius: var(--klevu-rounded-corners);
+  text-align: right;
+  color: var(--klevu-color-neutral-6);
+  font-size: var(--klevu-body-xs-size);
 }
 
-klevu-heading {
-  margin: var(--klevu-spacing-large) 0 var(--klevu-spacing-normal);
+klevu-checkbox {
+  width: 100%;
+  min-width: 0;
+}
+
+klevu-typography {
+  margin: var(--klevu-spacing-05) 0 var(--klevu-spacing-03);
+}
+
+klevu-typography.accordion {
+  margin: inherit;
+}
+
+input[type="radio"] {
+  margin: 0;
+  margin-right: var(--klevu-spacing-04);
 }

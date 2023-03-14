@@ -1,0 +1,65 @@
+import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
+import { MDXAutoFillMeta } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-popup")
+
+<Meta title="Atoms/Popup" component="klevu-popup" argTypes={meta.argTypes} parameters={meta.parameters} />
+
+# Klevu-popup
+
+<Description>{meta.description}</Description>
+
+## Popup starting from search field
+
+<Canvas>
+  <Story
+    name="Popup"
+    args={{
+      startOpen: false,
+      anchor: "bottom-start",
+    }}
+    height="200px"
+  >
+    {(args) => html` <klevu-popup
+      anchor=${ifDefined(args.anchor)}
+      close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+      fullwidth-content=${ifDefined(args.fullwidthContent)}
+      open-at-focus=${ifDefined(args.openAtFocus)}
+      start-open=${ifDefined(args.startOpen)}
+      elevation=${ifDefined(args.elevation)}
+    >
+      <klevu-search-field slot="origin"></klevu-search-field>
+      <div slot="content">Hello world popup</div>
+    </klevu-popup>`}
+  </Story>
+</Canvas>
+
+## Popup starting from button
+
+<Canvas>
+  <Story
+    name="Button source"
+    args={{
+      startOpen: false,
+      anchor: "bottom-start",
+      openAtFocus: false,
+      elevation: 3,
+    }}
+    height="200px"
+  >
+    {(args) => html` <klevu-popup
+      anchor=${ifDefined(args.anchor)}
+      close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+      fullwidth-content=${ifDefined(args.fullwidthContent)}
+      open-at-focus=${ifDefined(args.openAtFocus)}
+      start-open=${ifDefined(args.startOpen)}
+      elevation=${ifDefined(args.elevation)}
+    >
+      <klevu-button slot="origin">Open popup</klevu-button>
+      <div slot="content">Hello world popup</div>
+    </klevu-popup>`}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Popup" />

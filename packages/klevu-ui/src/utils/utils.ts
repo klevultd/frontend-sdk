@@ -36,12 +36,28 @@ export function debounce<T extends unknown[], U>(callback: (...args: T) => Promi
 }
 
 /**
+ * Strip html tags from string.
+ *
+ * @param html
+ * @returns
+ */
+export function stripTags(html: string): string {
+  if (!document) {
+    return html
+  }
+
+  const tmp = document.createElement("DIV")
+  tmp.innerHTML = html
+  return tmp.textContent || tmp.innerText || ""
+}
+
+/**
  * List of css ::parts() that are exposed to the developers.
  *
  * Essentially this is list of css selectors that are exposed to the developers.
  * See global.css for the list of selectors.
  */
-export const globalExportedParts = ["klevu-list"].join(" ")
+export const globalExportedParts = ["klevu-list", "material-icon"].join(", ")
 
 /**
  * Global settings that modify the way Klevu UI library works.
@@ -69,8 +85,11 @@ export type KlevuUIGlobalSettings = {
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {
   if (window) {
-    // @ts-expect-error
-    return window["klevu_ui_settings"]
+    return {
+      renderPrice,
+      // @ts-expect-error
+      ...window["klevu_ui_settings"],
+    }
   }
   return undefined
 }

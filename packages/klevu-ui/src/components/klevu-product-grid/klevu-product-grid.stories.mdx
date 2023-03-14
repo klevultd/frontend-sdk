@@ -1,0 +1,36 @@
+import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { html } from "lit-html"
+import { MDXAutoFillMeta, KlevuProductElement, mockProducts } from "../../storybookUtils"
+const productElements = () => mockProducts.slice(0, 8).map((p) => KlevuProductElement(p, { fixedWidth: true }))
+const meta = MDXAutoFillMeta("klevu-product-grid")
+
+<Meta
+  title="Components/Product grid"
+  component="klevu-product-grid"
+  argTypes={meta.argTypes}
+  parameters={meta.parameters}
+/>
+
+# Klevu-product-grid
+
+<Description>{meta.description}</Description>
+
+<Canvas>
+  <Story name="Product grid">{(args) => html`<klevu-product-grid>${productElements()}</klevu-product-grid>`}</Story>
+</Canvas>
+
+## Set amount of items per row
+
+It is possible to set a custom number of columns with itemsPerRow parameter.
+In this example we also change the width of the product with CSS variable.
+
+<Canvas>
+  <Story
+    name="Product grid with set amount"
+    args={{
+      itemsPerRow: 6,
+    }}
+  >
+    {(args) => html`<klevu-product-grid items-per-row=${args.itemsPerRow}> ${productElements()} </klevu-product-grid>`}
+  </Story>
+</Canvas>

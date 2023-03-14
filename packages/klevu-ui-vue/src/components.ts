@@ -14,15 +14,35 @@ export const KlevuAccordion = /*@__PURE__*/ defineContainer<JSX.KlevuAccordion>(
 ]);
 
 
+export const KlevuBadge = /*@__PURE__*/ defineContainer<JSX.KlevuBadge>('klevu-badge', undefined, [
+  'accent',
+  'neutral',
+  'closable',
+  'klevuBadgeClose'
+]);
+
+
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
-  'disabled'
+  'disabled',
+  'isSecondary',
+  'isTertiary',
+  'fullWidth',
+  'icon'
 ]);
 
 
 export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('klevu-checkbox', undefined, [
   'checked',
   'disabled',
-  'name'
+  'name',
+  'klevuCheckboxChange'
+]);
+
+
+export const KlevuChip = /*@__PURE__*/ defineContainer<JSX.KlevuChip>('klevu-chip', undefined, [
+  'selected',
+  'removable',
+  'klevuChipRemove'
 ]);
 
 
@@ -38,6 +58,7 @@ export const KlevuDrawer = /*@__PURE__*/ defineContainer<JSX.KlevuDrawer>('klevu
   'startOpen',
   'background',
   'closeAtOutsideClick',
+  'insertYPadding',
   'anchor'
 ]);
 
@@ -47,6 +68,7 @@ export const KlevuDropdown = /*@__PURE__*/ defineContainer<JSX.KlevuDropdown>('k
   'options',
   'disabled',
   'selected',
+  'variant',
   'klevuDropdownChanged'
 ]);
 
@@ -66,12 +88,11 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
   'manager',
   'mode',
   'customOrder',
-  'accordion'
-]);
-
-
-export const KlevuHeading = /*@__PURE__*/ defineContainer<JSX.KlevuHeading>('klevu-heading', undefined, [
-  'variant'
+  'accordion',
+  'useApplyButton',
+  'applyButtonText',
+  'clearButtonText',
+  'klevuApplyFilters'
 ]);
 
 
@@ -83,11 +104,25 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
 
 
 export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatestSearches>('klevu-latest-searches', undefined, [
-  'caption'
+  'caption',
+  'klevuLastSearchClicked'
+]);
+
+
+export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutResults>('klevu-layout-results', undefined);
+
+
+export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-list', undefined, [
+  'icon',
+  'image',
+  'url',
+  'condensed',
+  'noXPadding'
 ]);
 
 
 export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchandising>('klevu-merchandising', undefined, [
+  'usePagination',
   'limit',
   'category',
   'categoryTitle',
@@ -103,14 +138,13 @@ export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination
   'min',
   'max',
   'queryResult',
-  'prevText',
-  'nextText',
   'klevuPaginationChange'
 ]);
 
 
 export const KlevuPopularSearches = /*@__PURE__*/ defineContainer<JSX.KlevuPopularSearches>('klevu-popular-searches', undefined, [
-  'caption'
+  'caption',
+  'klevuPopularSearchClicked'
 ]);
 
 
@@ -119,7 +153,9 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'openAtFocus',
   'closeAtOutsideClick',
   'fullwidthContent',
-  'anchor'
+  'anchor',
+  'elevation',
+  'klevuPopupOpen'
 ]);
 
 
@@ -133,6 +169,9 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
   'hideImage',
   'hideBrand',
   'fixedWidth',
+  'keyBrand',
+  'keyName',
+  'keyDescription',
   'klevuProductClick'
 ]);
 
@@ -167,6 +206,10 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'searchCmsPages',
   'placeholder',
   'searchText',
+  'searchFieldVariant',
+  'resultVariant',
+  'simpleResultCount',
+  'fullResultCount',
   'renderProductSlot'
 ]);
 
@@ -191,6 +234,9 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'searchSuggestions',
   'searchCategories',
   'searchCmsPages',
+  'sendAnalytics',
+  'sort',
+  'variant',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'
@@ -203,12 +249,8 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'sort',
   'filterCount',
   'filterCustomOrder',
+  'usePagination',
   'renderProductSlot'
-]);
-
-
-export const KlevuSimpleSearch = /*@__PURE__*/ defineContainer<JSX.KlevuSimpleSearch>('klevu-simple-search', undefined, [
-  'klevuSuggestionClick'
 ]);
 
 
@@ -217,26 +259,36 @@ export const KlevuSlider = /*@__PURE__*/ defineContainer<JSX.KlevuSlider>('klevu
   'max',
   'start',
   'end',
+  'formatTooltip',
   'showTooltips',
   'klevuSliderChange'
 ]);
 
 
 export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined, [
+  'heading',
   'slideFullWidth',
-  'height',
   'hideNextPrev'
 ]);
 
 
 export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sort', undefined, [
+  'variant',
   'klevuSortChanged'
 ]);
 
 
 export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSuggestionsList>('klevu-suggestions-list', undefined, [
   'caption',
-  'suggestions'
+  'suggestions',
+  'klevuSuggestionClicked'
+]);
+
+
+export const KlevuTab = /*@__PURE__*/ defineContainer<JSX.KlevuTab>('klevu-tab', undefined, [
+  'caption',
+  'active',
+  'disabled'
 ]);
 
 
@@ -244,7 +296,29 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
   'value',
   'disabled',
   'placeholder',
+  'error',
+  'variant',
+  'icon',
+  'clearButton',
   'klevuTextChanged',
-  'klevuTextFocused'
+  'klevuTextFocused',
+  'klevuTextEnterPressed'
+]);
+
+
+export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography>('klevu-typography', undefined, [
+  'variant'
+]);
+
+
+export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilScrollbars>('klevu-util-scrollbars', undefined, [
+  'overflowX',
+  'overflowY'
+]);
+
+
+export const KlevuUtilViewport = /*@__PURE__*/ defineContainer<JSX.KlevuUtilViewport>('klevu-util-viewport', undefined, [
+  'sizes',
+  'sizeChanged'
 ]);
 
