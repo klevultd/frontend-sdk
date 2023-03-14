@@ -25,6 +25,7 @@ export const KlevuBadge = /*@__PURE__*/ defineContainer<JSX.KlevuBadge>('klevu-b
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
   'disabled',
   'isSecondary',
+  'isTertiary',
   'fullWidth',
   'icon'
 ]);
@@ -247,11 +248,6 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'filterCustomOrder',
   'usePagination',
   'renderProductSlot'
-]);
-
-
-export const KlevuSimpleSearch = /*@__PURE__*/ defineContainer<JSX.KlevuSimpleSearch>('klevu-simple-search', undefined, [
-  'klevuSuggestionClick'
 ]);
 
 

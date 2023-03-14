@@ -78,6 +78,7 @@ export namespace Components {
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
+     * @cssprop --klevu-button-text-align center Align text on button
      */
     interface KlevuButton {
         /**
@@ -96,6 +97,10 @@ export namespace Components {
           * Toned down secondary button
          */
         "isSecondary"?: boolean;
+        /**
+          * Toned down tertiary button
+         */
+        "isTertiary"?: boolean;
     }
     /**
      * Checkbox component
@@ -782,11 +787,6 @@ export namespace Components {
         "usePagination"?: boolean;
     }
     /**
-     * Simplified application that shows search box where typing text displays suggestions.
-     */
-    interface KlevuSimpleSearch {
-    }
-    /**
      * Horizontal slider component. By default used for price range in this package. But can
      * be used for other purposes as well.
      */
@@ -856,7 +856,8 @@ export namespace Components {
         "suggestions": string[];
     }
     /**
-     * Very simple tab component
+     * Very simple tab component. Use like a button, but with a caption.
+     * Use standard onClick event to handle click.
      */
     interface KlevuTab {
         /**
@@ -1003,10 +1004,6 @@ export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSearchFieldElement;
 }
-export interface KlevuSimpleSearchCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLKlevuSimpleSearchElement;
-}
 export interface KlevuSliderCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSliderElement;
@@ -1057,6 +1054,7 @@ declare global {
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
+     * @cssprop --klevu-button-text-align center Align text on button
      */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
@@ -1329,15 +1327,6 @@ declare global {
         new (): HTMLKlevuSearchLandingPageElement;
     };
     /**
-     * Simplified application that shows search box where typing text displays suggestions.
-     */
-    interface HTMLKlevuSimpleSearchElement extends Components.KlevuSimpleSearch, HTMLStencilElement {
-    }
-    var HTMLKlevuSimpleSearchElement: {
-        prototype: HTMLKlevuSimpleSearchElement;
-        new (): HTMLKlevuSimpleSearchElement;
-    };
-    /**
      * Horizontal slider component. By default used for price range in this package. But can
      * be used for other purposes as well.
      */
@@ -1375,7 +1364,8 @@ declare global {
         new (): HTMLKlevuSuggestionsListElement;
     };
     /**
-     * Very simple tab component
+     * Very simple tab component. Use like a button, but with a caption.
+     * Use standard onClick event to handle click.
      */
     interface HTMLKlevuTabElement extends Components.KlevuTab, HTMLStencilElement {
     }
@@ -1462,7 +1452,6 @@ declare global {
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
         "klevu-search-landing-page": HTMLKlevuSearchLandingPageElement;
-        "klevu-simple-search": HTMLKlevuSimpleSearchElement;
         "klevu-slider": HTMLKlevuSliderElement;
         "klevu-slides": HTMLKlevuSlidesElement;
         "klevu-sort": HTMLKlevuSortElement;
@@ -1514,6 +1503,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
+     * @cssprop --klevu-button-text-align center Align text on button
      */
     interface KlevuButton {
         /**
@@ -1532,6 +1522,10 @@ declare namespace LocalJSX {
           * Toned down secondary button
          */
         "isSecondary"?: boolean;
+        /**
+          * Toned down tertiary button
+         */
+        "isTertiary"?: boolean;
     }
     /**
      * Checkbox component
@@ -2233,15 +2227,6 @@ declare namespace LocalJSX {
         "usePagination"?: boolean;
     }
     /**
-     * Simplified application that shows search box where typing text displays suggestions.
-     */
-    interface KlevuSimpleSearch {
-        /**
-          * When any of suggestions has been clicked
-         */
-        "onKlevuSuggestionClick"?: (event: KlevuSimpleSearchCustomEvent<string>) => void;
-    }
-    /**
      * Horizontal slider component. By default used for price range in this package. But can
      * be used for other purposes as well.
      */
@@ -2323,7 +2308,8 @@ declare namespace LocalJSX {
         "suggestions"?: string[];
     }
     /**
-     * Very simple tab component
+     * Very simple tab component. Use like a button, but with a caption.
+     * Use standard onClick event to handle click.
      */
     interface KlevuTab {
         /**
@@ -2453,7 +2439,6 @@ declare namespace LocalJSX {
         "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
         "klevu-search-landing-page": KlevuSearchLandingPage;
-        "klevu-simple-search": KlevuSimpleSearch;
         "klevu-slider": KlevuSlider;
         "klevu-slides": KlevuSlides;
         "klevu-sort": KlevuSort;
@@ -2488,6 +2473,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
              * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
              * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
+             * @cssprop --klevu-button-text-align center Align text on button
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
@@ -2645,10 +2631,6 @@ declare module "@stencil/core" {
              */
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
             /**
-             * Simplified application that shows search box where typing text displays suggestions.
-             */
-            "klevu-simple-search": LocalJSX.KlevuSimpleSearch & JSXBase.HTMLAttributes<HTMLKlevuSimpleSearchElement>;
-            /**
              * Horizontal slider component. By default used for price range in this package. But can
              * be used for other purposes as well.
              */
@@ -2666,7 +2648,8 @@ declare module "@stencil/core" {
              */
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
             /**
-             * Very simple tab component
+             * Very simple tab component. Use like a button, but with a caption.
+             * Use standard onClick event to handle click.
              */
             "klevu-tab": LocalJSX.KlevuTab & JSXBase.HTMLAttributes<HTMLKlevuTabElement>;
             /**

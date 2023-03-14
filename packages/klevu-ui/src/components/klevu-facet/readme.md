@@ -34,6 +34,7 @@ Manager property must be set for this component to work.
 - [klevu-typography](../klevu-typography)
 - [klevu-slider](../klevu-slider)
 - [klevu-checkbox](../klevu-checkbox)
+- [klevu-button](../klevu-button)
 
 ### Graph
 ```mermaid
@@ -42,8 +43,10 @@ graph TD;
   klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-button
   klevu-accordion --> klevu-typography
   klevu-checkbox --> klevu-typography
+  klevu-button --> klevu-typography
   klevu-facet-list --> klevu-facet
   style klevu-facet fill:#f9f,stroke:#333,stroke-width:4px
 ```

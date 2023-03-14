@@ -33,7 +33,6 @@ export const KlevuQuicksearch = /*@__PURE__*/createReactComponent<JSX.KlevuQuick
 export const KlevuRecommendations = /*@__PURE__*/createReactComponent<JSX.KlevuRecommendations, HTMLKlevuRecommendationsElement>('klevu-recommendations');
 export const KlevuSearchField = /*@__PURE__*/createReactComponent<JSX.KlevuSearchField, HTMLKlevuSearchFieldElement>('klevu-search-field');
 export const KlevuSearchLandingPage = /*@__PURE__*/createReactComponent<JSX.KlevuSearchLandingPage, HTMLKlevuSearchLandingPageElement>('klevu-search-landing-page');
-export const KlevuSimpleSearch = /*@__PURE__*/createReactComponent<JSX.KlevuSimpleSearch, HTMLKlevuSimpleSearchElement>('klevu-simple-search');
 export const KlevuSlider = /*@__PURE__*/createReactComponent<JSX.KlevuSlider, HTMLKlevuSliderElement>('klevu-slider');
 export const KlevuSlides = /*@__PURE__*/createReactComponent<JSX.KlevuSlides, HTMLKlevuSlidesElement>('klevu-slides');
 export const KlevuSort = /*@__PURE__*/createReactComponent<JSX.KlevuSort, HTMLKlevuSortElement>('klevu-sort');

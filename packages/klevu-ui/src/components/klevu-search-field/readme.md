@@ -72,7 +72,6 @@ Type: `Promise<void>`
 ### Used by
 
  - [klevu-quicksearch](../klevu-quicksearch)
- - [klevu-simple-search](../klevu-simple-search)
 
 ### Depends on
 
@@ -86,7 +85,6 @@ graph TD;
   klevu-search-field --> klevu-button
   klevu-button --> klevu-typography
   klevu-quicksearch --> klevu-search-field
-  klevu-simple-search --> klevu-search-field
   style klevu-search-field fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

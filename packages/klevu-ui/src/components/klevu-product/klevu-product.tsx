@@ -142,32 +142,6 @@ export class KlevuProduct {
     const settings = getGlobalSettings()
     const isOnSale = this.product.price != this.product.salePrice
 
-    const swatches: Array<{
-      Id?: string
-      Color?: string
-      Image?: string
-      SwatchImage?: string
-    }> = []
-    if (!this.hideSwatches) {
-      const swatchesParts = this.product?.swatchesInfo?.split(" ;;;; ")
-
-      for (const sPart of swatchesParts ?? []) {
-        const splitPos = sPart.indexOf(":")
-        const key = sPart.substring(0, splitPos)
-        const value = sPart.substring(splitPos + 1)
-        for (const keyStart of ["variantId", "variantColor", "variantImage", "variantSwatchImage"]) {
-          if (key.startsWith(keyStart)) {
-            const index = parseInt(key.substring(keyStart.length)) - 1
-            if (!swatches[index]) {
-              swatches[index] = {}
-            }
-            // @ts-expect-error
-            swatches[index][keyStart.substring("variant".length)] = value
-          }
-        }
-      }
-    }
-
     return (
       <Host class={{ line: this.variant === "line" }}>
         <div part="product-container" class={containerClasses}>
@@ -185,20 +159,7 @@ export class KlevuProduct {
               </slot>
             )}
             <slot name="info">
-              {!this.hideSwatches && swatches.length > 1 ? (
-                <div class="swatches" onMouseLeave={() => (this.hoverImage = undefined)}>
-                  {swatches.map((swatch) => (
-                    <div
-                      style={{
-                        backgroundColor: swatch.Color,
-                        backgroundImage: `url(${swatch.SwatchImage || swatch.Image})`,
-                      }}
-                      onMouseEnter={() => (this.hoverImage = swatch.Image)}
-                    ></div>
-                  ))}
-                </div>
-              ) : null}
-
+              {this.#renderSwatch()}
               <div class="info">
                 {this.hideBrand || !this.product.brand ? null : (
                   <klevu-typography class="brandname" variant="body-s-bold">
@@ -232,6 +193,61 @@ export class KlevuProduct {
           <slot name="bottom"></slot>
         </div>
       </Host>
+    )
+  }
+
+  #renderSwatch() {
+    if (this.hideSwatches) {
+      return null
+    }
+
+    const swatches: Array<{
+      Id?: string
+      Color?: string
+      Image?: string
+      SwatchImage?: string
+    }> = []
+    if (!this.hideSwatches) {
+      const swatchesParts = this.product?.swatchesInfo?.split(" ;;;; ")
+
+      for (const sPart of swatchesParts ?? []) {
+        const splitPos = sPart.indexOf(":")
+        const key = sPart.substring(0, splitPos)
+        const value = sPart.substring(splitPos + 1)
+        for (const keyStart of ["variantId", "variantColor", "variantImage", "variantSwatchImage"]) {
+          if (key.startsWith(keyStart)) {
+            const index = parseInt(key.substring(keyStart.length)) - 1
+            if (!swatches[index]) {
+              swatches[index] = {}
+            }
+            // @ts-expect-error
+            swatches[index][keyStart.substring("variant".length)] = value
+          }
+        }
+      }
+    }
+
+    if (swatches.length === 0) {
+      return null
+    }
+
+    return (
+      <div class="swatches" onMouseLeave={() => (this.hoverImage = undefined)}>
+        {swatches.map((swatch) => (
+          <div
+            style={{
+              backgroundColor: swatch.Color
+                ? CSS.supports("color", swatch.Color)
+                  ? swatch.Color
+                  : "lightgray"
+                : "lightgray",
+              backgroundImage:
+                swatch.SwatchImage || swatch.Image ? `url(${swatch.SwatchImage || swatch.Image})` : undefined,
+            }}
+            onMouseEnter={() => (this.hoverImage = swatch.Image)}
+          ></div>
+        ))}
+      </div>
     )
   }
 }

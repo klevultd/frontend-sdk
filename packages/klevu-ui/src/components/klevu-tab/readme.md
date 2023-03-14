@@ -7,7 +7,8 @@
 
 ## Overview
 
-Very simple tab component
+Very simple tab component. Use like a button, but with a caption.
+Use standard onClick event to handle click.
 
 ## Properties
 

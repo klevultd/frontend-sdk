@@ -1,5 +1,6 @@
 :host {
   --klevu-button-background-hover: var(--klevu-color-primary-darker);
+  --klevu-button-text-align: var(--klevu-button-text-align);
 }
 
 button {
@@ -16,6 +17,7 @@ button {
   font-size: var(--klevu-body-s-size);
   font-weight: var(--klevu-body-s-weight);
   padding: 0 calc(var(--padding) * 2);
+  text-align: var(--klevu-button-text-align, center);
 }
 
 button klevu-typography,
@@ -79,4 +81,22 @@ button.icon {
   font-size: 1.5em;
   font-weight: normal;
   line-height: 1.8;
+}
+
+button.icon:focus:after {
+  border-radius: 100%;
+}
+
+button.tertiary {
+  background: transparent;
+  border: 0;
+  color: var(--klevu-color-primary);
+  padding: 0;
+  height: calc(var(--klevu-size-s) * 2);
+}
+
+button.tertiary klevu-typography,
+button.tertiary span[part="material-icon"] {
+  --klevu-typography-color: var(--klevu-color-primary);
+  color: var(--klevu-color-primary);
 }

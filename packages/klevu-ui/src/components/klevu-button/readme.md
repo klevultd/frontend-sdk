@@ -15,6 +15,7 @@ Basic button component
 | `fullWidth`   | `full-width`   | Make button display block                                 | `boolean \| undefined` | `undefined` |
 | `icon`        | `icon`         | Instead of content have an icon. So basically icon-button | `string \| undefined`  | `undefined` |
 | `isSecondary` | `is-secondary` | Toned down secondary button                               | `boolean \| undefined` | `undefined` |
+| `isTertiary`  | `is-tertiary`  | Toned down tertiary button                                | `boolean \| undefined` | `undefined` |
 
 
 ## Slots
@@ -35,6 +36,7 @@ Basic button component
 
 ### Used by
 
+ - [klevu-facet](../klevu-facet)
  - [klevu-facet-list](../klevu-facet-list)
  - [klevu-layout-results](../klevu-layout-results)
  - [klevu-merchandising](../klevu-merchandising)
@@ -50,6 +52,7 @@ Basic button component
 ```mermaid
 graph TD;
   klevu-button --> klevu-typography
+  klevu-facet --> klevu-button
   klevu-facet-list --> klevu-button
   klevu-layout-results --> klevu-button
   klevu-merchandising --> klevu-button

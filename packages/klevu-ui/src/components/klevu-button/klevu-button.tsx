@@ -8,6 +8,7 @@ import { Component, h, Prop } from "@stencil/core"
  * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
  * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
  * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
+ * @cssprop --klevu-button-text-align center Align text on button
  */
 @Component({
   tag: "klevu-button",
@@ -22,6 +23,10 @@ export class KlevuButton {
   /** Toned down secondary button */
   @Prop()
   isSecondary?: boolean
+
+  /** Toned down tertiary button */
+  @Prop()
+  isTertiary?: boolean
 
   /** Make button display block */
   @Prop()
@@ -39,6 +44,7 @@ export class KlevuButton {
         disabled={this.disabled}
         class={{
           secondary: Boolean(this.isSecondary),
+          tertiary: Boolean(this.isTertiary),
           fullwidth: Boolean(this.fullWidth),
           icon: Boolean(this.icon),
         }}
@@ -46,7 +52,7 @@ export class KlevuButton {
         {this.icon ? (
           <span part="material-icon">{this.icon}</span>
         ) : (
-          <klevu-typography variant="body-s-bold">
+          <klevu-typography variant={this.isTertiary ? "body-s" : "body-s-bold"}>
             <slot />
           </klevu-typography>
         )}

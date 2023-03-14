@@ -48,6 +48,7 @@ graph TD;
   klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
+  klevu-facet --> klevu-button
   klevu-accordion --> klevu-typography
   klevu-checkbox --> klevu-typography
   klevu-button --> klevu-typography

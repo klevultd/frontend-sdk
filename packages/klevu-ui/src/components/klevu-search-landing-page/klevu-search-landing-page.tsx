@@ -83,8 +83,7 @@ export class KlevuSearchLandingPage {
 
   @Watch("term")
   termChanged(oldValue: string, newValue: string) {
-    console.log(oldValue, newValue)
-    //this.#initialFetch()
+    this.#initialFetch()
   }
 
   async #initialFetch() {
@@ -206,7 +205,10 @@ export class KlevuSearchLandingPage {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results exportparts={globalExportedParts}>
+        <klevu-layout-results
+          exportparts={globalExportedParts}
+          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+        >
           <klevu-facet-list
             slot="sidebar"
             customOrder={this.filterCustomOrder}

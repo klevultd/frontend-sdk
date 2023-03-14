@@ -17,7 +17,7 @@ import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 })
 export class KlevuLayoutResults {
   @State() currentViewPortSize?: ViewportSize
-  drawerElement!: HTMLKlevuDrawerElement
+  drawerElement?: HTMLKlevuDrawerElement
   viewportUtil!: HTMLKlevuUtilViewportElement
 
   #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
@@ -33,7 +33,7 @@ export class KlevuLayoutResults {
    */
   @Method()
   async closeDrawer() {
-    this.drawerElement.closeModal()
+    this.drawerElement?.closeModal()
   }
 
   render() {
@@ -50,7 +50,7 @@ export class KlevuLayoutResults {
           {isMobile ? (
             <klevu-button
               onClick={async (event) => {
-                await this.drawerElement.openModal()
+                await this.drawerElement?.openModal()
                 event.stopPropagation()
                 return false
               }}

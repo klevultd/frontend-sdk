@@ -1,5 +1,5 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate, State } from "@stencil/core"
 import { getGlobalSettings, globalExportedParts } from "../../utils/utils"
 
 export type KlevuFacetMode = "checkbox" | "radio"
@@ -52,6 +52,11 @@ export class KlevuFacet {
    * Start accordion open
    */
   @Prop() accordionStartOpen?: boolean
+
+  /**
+   * Show all options
+   */
+  @State() showAll = false
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate(event: any) {
@@ -122,7 +127,7 @@ export class KlevuFacet {
     if (!this.option) {
       return null
     }
-    const opts = [...this.option.options]
+    let opts = [...this.option.options]
     if (this.customOrder) {
       opts.sort((a, b) => {
         const aio = this.customOrder!.indexOf(a.value)
@@ -137,6 +142,13 @@ export class KlevuFacet {
 
         return aio - bio
       })
+    }
+
+    let showAllButton = false
+    if (!this.showAll && opts.length > 5) {
+      console.log(opts.length)
+      opts = opts.slice(0, 5)
+      showAllButton = true
     }
 
     return (
@@ -192,6 +204,16 @@ export class KlevuFacet {
             </li>
           ))}
         </ul>
+        {showAllButton ? (
+          <klevu-button
+            style={{ "--klevu-button-text-align": "left" }}
+            isTertiary
+            fullWidth
+            onClick={() => (this.showAll = true)}
+          >
+            More
+          </klevu-button>
+        ) : null}
       </Fragment>
     )
   }

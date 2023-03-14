@@ -62,13 +62,11 @@ Type: `Promise<void>`
 ### Used by
 
  - [klevu-quicksearch](../klevu-quicksearch)
- - [klevu-simple-search](../klevu-simple-search)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-quicksearch --> klevu-popup
-  klevu-simple-search --> klevu-popup
   style klevu-popup fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
