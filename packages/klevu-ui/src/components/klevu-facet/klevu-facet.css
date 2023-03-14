@@ -2,15 +2,15 @@
   display: block;
 }
 
-:host li {
-  margin-bottom: var(--klevu-spacing-02);
-}
-
 .container {
   display: flex;
   justify-content: space-between;
   width: 100%;
   min-width: 0;
+}
+
+.option {
+  margin-bottom: var(--klevu-spacing-02);
 }
 
 .name {
@@ -50,5 +50,6 @@ klevu-typography.accordion {
 }
 
 input[type="radio"] {
+  margin: 0;
   margin-right: var(--klevu-spacing-04);
 }

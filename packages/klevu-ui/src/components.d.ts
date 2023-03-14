@@ -486,6 +486,7 @@ export namespace Components {
      * with --kleu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image - The image element of component
      * @csspart product-container - The container element of whole
+     * @csspart product-swatch - Single swatch element under the image
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -520,6 +521,18 @@ export namespace Components {
           * Do not show swatches in products
          */
         "hideSwatches"?: boolean;
+        /**
+          * What key to use for brand value
+         */
+        "keyBrand": string;
+        /**
+          * What key to use for description value
+         */
+        "keyDescription": string;
+        /**
+          * What key to use for name value
+         */
+        "keyName": string;
         /**
           * Product data
          */
@@ -1255,6 +1268,7 @@ declare global {
      * with --kleu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image - The image element of component
      * @csspart product-container - The container element of whole
+     * @csspart product-swatch - Single swatch element under the image
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -1927,6 +1941,7 @@ declare namespace LocalJSX {
      * with --kleu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image - The image element of component
      * @csspart product-container - The container element of whole
+     * @csspart product-swatch - Single swatch element under the image
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -1961,6 +1976,18 @@ declare namespace LocalJSX {
           * Do not show swatches in products
          */
         "hideSwatches"?: boolean;
+        /**
+          * What key to use for brand value
+         */
+        "keyBrand"?: string;
+        /**
+          * What key to use for description value
+         */
+        "keyDescription"?: string;
+        /**
+          * What key to use for name value
+         */
+        "keyName"?: string;
         /**
           * When products has been clicked
          */
@@ -2594,6 +2621,7 @@ declare module "@stencil/core" {
              * with --kleu-product-width and --klevu-product-small-width css variables.
              * @csspart product-image - The image element of component
              * @csspart product-container - The container element of whole
+             * @csspart product-swatch - Single swatch element under the image
              * @cssprop --klevu-product-width - Width of the product
              * @cssprop --klevu-product-small-width - Width of the product when small variant is used
              * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be

@@ -20,6 +20,7 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  *
  * @csspart product-image - The image element of component
  * @csspart product-container - The container element of whole
+ * @csspart product-swatch - Single swatch element under the image
  *
  * @cssprop --klevu-product-width - Width of the product
  * @cssprop --klevu-product-small-width - Width of the product when small variant is used
@@ -68,6 +69,21 @@ export class KlevuProduct {
    * Force certain width for product. Do not use max-width
    */
   @Prop() fixedWidth?: boolean
+
+  /**
+   * What key to use for brand value
+   */
+  @Prop() keyBrand = "brand"
+
+  /**
+   * What key to use for name value
+   */
+  @Prop() keyName = "name"
+
+  /**
+   * What key to use for description value
+   */
+  @Prop() keyDescription = "shortDesc"
 
   @State() hoverImage?: string
 
@@ -161,19 +177,19 @@ export class KlevuProduct {
             <slot name="info">
               {this.#renderSwatch()}
               <div class="info">
-                {this.hideBrand || !this.product.brand ? null : (
+                {this.hideBrand || !this.product[this.keyBrand] ? null : (
                   <klevu-typography class="brandname" variant="body-s-bold">
-                    {this.product.brand}
+                    {this.product[this.keyBrand]}
                   </klevu-typography>
                 )}
-                {this.hideName || !this.product.name ? null : (
+                {this.hideName || !this.product[this.keyName] ? null : (
                   <klevu-typography class="productname" variant="body-s">
-                    {this.product.name}
+                    {this.product[this.keyName]}
                   </klevu-typography>
                 )}
-                {this.hideDescription || !this.product.shortDesc ? null : (
+                {this.hideDescription || !this.product[this.keyDescription] ? null : (
                   <klevu-typography class="description" variant="body-xs">
-                    {this.product.shortDesc}
+                    {this.product[this.keyDescription]}
                   </klevu-typography>
                 )}
                 {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
@@ -235,6 +251,7 @@ export class KlevuProduct {
       <div class="swatches" onMouseLeave={() => (this.hoverImage = undefined)}>
         {swatches.map((swatch) => (
           <div
+            part="product-swatch"
             style={{
               backgroundColor: swatch.Color
                 ? CSS.supports("color", swatch.Color)

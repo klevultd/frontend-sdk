@@ -12,6 +12,9 @@ export const singleProduct = (args: HTMLKlevuProductElement) => html` <klevu-pro
   hide-price=${ifDefined(args.hidePrice)}
   hide-name=${ifDefined(args.hideName)}
   hide-swatches=${ifDefined(args.hideSwatches)}
+  key-brand=${ifDefined(args.keyBrand)}
+  key-name=${ifDefined(args.keyName)}
+  key-description=${ifDefined(args.keyDescription)}
 ></klevu-product>`
 
 export const productWithCustomizedProduct = (args: HTMLKlevuProductElement) => html`<div>
@@ -27,6 +30,9 @@ export const productWithCustomizedProduct = (args: HTMLKlevuProductElement) => h
     hide-price=${ifDefined(args.hidePrice)}
     hide-name=${ifDefined(args.hideName)}
     hide-swatches=${ifDefined(args.hideSwatches)}
+    key-brand=${ifDefined(args.keyBrand)}
+    key-name=${ifDefined(args.keyName)}
+    key-description=${ifDefined(args.keyDescription)}
   ></klevu-product>
   <klevu-product
     id="modified"
@@ -39,6 +45,9 @@ export const productWithCustomizedProduct = (args: HTMLKlevuProductElement) => h
     hide-price=${ifDefined(args.hidePrice)}
     hide-name=${ifDefined(args.hideName)}
     hide-swatches=${ifDefined(args.hideSwatches)}
+    key-brand=${ifDefined(args.keyBrand)}
+    key-name=${ifDefined(args.keyName)}
+    key-description=${ifDefined(args.keyDescription)}
   ></klevu-product>
   <style>
     #modified {
