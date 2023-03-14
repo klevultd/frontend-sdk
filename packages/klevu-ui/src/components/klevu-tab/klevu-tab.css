@@ -1,7 +1,7 @@
 :host {
   display: inline-block;
   --klevu-tab-color: var(--klevu-color-primary);
-  --klevu-tab-padding: var(--klevu-spacing-05);
+  --klevu-tab-padding: var(--klevu-spacing-04);
 }
 
 button {
@@ -27,6 +27,10 @@ button klevu-typography {
   align-items: center;
 }
 
+button:focus {
+  outline: 0;
+}
+
 button.active {
   border-bottom: 2px solid var(--klevu-tab-color);
   padding-bottom: 0;
@@ -42,4 +46,9 @@ button:hover klevu-typography {
 
 button:disabled klevu-typography {
   color: var(--klevu-color-neutral-7);
+}
+
+button:focus klevu-typography {
+  outline-offset: -2px;
+  outline: 2px solid var(--klevu-tab-color);
 }

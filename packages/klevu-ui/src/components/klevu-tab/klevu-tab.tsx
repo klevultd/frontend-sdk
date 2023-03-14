@@ -1,7 +1,8 @@
 import { Component, Host, Prop, h } from "@stencil/core"
 
 /**
- * Very simple tab component
+ * Very simple tab component. Use like a button, but with a caption.
+ * Use standard onClick event to handle click.
  */
 @Component({
   tag: "klevu-tab",
