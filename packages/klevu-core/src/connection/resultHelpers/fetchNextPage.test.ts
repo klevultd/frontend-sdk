@@ -1,6 +1,12 @@
-import { KlevuConfig, KlevuFetch, search } from "../../index.js"
-import { debug, listFilters } from "../../modifiers/index.js"
+import {
+  categoryMerchandising,
+  KlevuConfig,
+  KlevuFetch,
+  search,
+} from "../../index.js"
+import { listFilters } from "../../modifiers/index.js"
 import axios from "axios"
+import { jest } from "@jest/globals"
 
 beforeEach(() => {
   KlevuConfig.init({
@@ -91,4 +97,55 @@ test("Jump to pages test", async () => {
   const page1AgainSearchResult2 = page1AgainResult2?.queriesById("search")
   expect(page1AgainSearchResult2?.meta.offset).toBe(0)
   expect(searchResult?.records).toEqual(page1AgainSearchResult2?.records)
+})
+
+test("Next page analytics test", async () => {
+  const result = await KlevuFetch(categoryMerchandising("Women"))
+
+  const query = result.queriesById("categoryMerchandising")
+
+  expect(query).toBeDefined()
+  expect(query?.getCategoryMerchandisingClickSendEvent).toBeDefined()
+  const product = query!.records[0]
+
+  const getSpySuccess = jest
+    .spyOn(KlevuConfig.default!.axios!, "get")
+    .mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        return resolve({
+          data: {},
+        })
+      })
+    })
+
+  query?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+  )
+
+  // when doing it again, it should call the api again even though we have loaded results
+  const resultPage2 = await query!.getPage?.()
+  const query2 = resultPage2?.queriesById("categoryMerchandising")
+  query2?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+  )
 })
