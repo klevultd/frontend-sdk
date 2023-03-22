@@ -4,6 +4,7 @@ import { globalExportedParts } from "../../utils/utils"
 import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductSlots } from "../klevu-product/klevu-product"
+import { parts } from "../../utils/parts"
 
 /**
  * Full recommendation banner solution
@@ -136,6 +137,7 @@ export class KlevuRecommendations {
         <klevu-slides exportparts={globalExportedParts} heading={this.recommendationTitle}>
           {this.products.map((product) => (
             <klevu-product
+              exportparts={parts["klevu-product"]}
               fixedWidth
               onKlevuProductClick={this.#productClick.bind(this)}
               product={product}

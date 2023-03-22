@@ -10,6 +10,7 @@ import {
   sendSearchEvent,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { parts } from "../../utils/parts"
 import {
   KlevuPaginationCustomEvent,
   KlevuProductCustomEvent,
@@ -229,7 +230,7 @@ export class KlevuSearchLandingPage {
           </div>
           <klevu-product-grid slot="content">
             {this.results?.map((p) => (
-              <klevu-product product={p} fixedWidth>
+              <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}>
                 {this.#internalRenderProductSlot(p, "top")}
                 {this.#internalRenderProductSlot(p, "image")}
                 {this.#internalRenderProductSlot(p, "info")}
