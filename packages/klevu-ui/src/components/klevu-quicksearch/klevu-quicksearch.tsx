@@ -1,6 +1,5 @@
 import { Placement } from "@floating-ui/dom"
 import {
-  KlevuEvents,
   KlevuFetch,
   KlevuLastClickedProducts,
   KlevuQueryResult,
@@ -9,12 +8,8 @@ import {
   trendingProducts,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
-import {
-  KlevuPaginationCustomEvent,
-  KlevuSearchFieldCustomEvent,
-  KlevuSuggestionsListCustomEvent,
-  KlevuTextfieldCustomEvent,
-} from "../../components"
+import { parts } from "../../utils/parts"
+import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent, KlevuTextfieldCustomEvent } from "../../components"
 import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -274,7 +269,7 @@ export class KlevuQuicksearch {
               </div>
               <klevu-product-grid class="desktop" itemsPerRow={3}>
                 {this.products?.map((p) => (
-                  <klevu-product product={p} fixedWidth variant="small">
+                  <klevu-product product={p} fixedWidth variant="small" exportparts={parts["klevu-product"]}>
                     {this.#internalRenderProductSlot(p, "top")}
                     {this.#internalRenderProductSlot(p, "image")}
                     {this.#internalRenderProductSlot(p, "info")}
@@ -284,7 +279,7 @@ export class KlevuQuicksearch {
               </klevu-product-grid>
               <klevu-product-grid class="mobile">
                 {this.products?.map((p) => (
-                  <klevu-product product={p} fixedWidth variant="line">
+                  <klevu-product product={p} fixedWidth variant="line" exportparts={parts["klevu-product"]}>
                     {this.#internalRenderProductSlot(p, "top")}
                     {this.#internalRenderProductSlot(p, "image")}
                     {this.#internalRenderProductSlot(p, "info")}
@@ -306,7 +301,7 @@ export class KlevuQuicksearch {
               </div>
               <div class="lineproducts">
                 {this.products?.map((p) => (
-                  <klevu-product product={p} variant="line">
+                  <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}>
                     {this.#internalRenderProductSlot(p, "top")}
                     {this.#internalRenderProductSlot(p, "image")}
                     {this.#internalRenderProductSlot(p, "info")}
@@ -355,7 +350,7 @@ export class KlevuQuicksearch {
           {this.activeTab === "trending" && (
             <Fragment>
               {this.trendingProducts?.map((p) => (
-                <klevu-product product={p} variant="line">
+                <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}>
                   {this.#internalRenderProductSlot(p, "top")}
                   {this.#internalRenderProductSlot(p, "image")}
                   {this.#internalRenderProductSlot(p, "info")}
@@ -367,7 +362,7 @@ export class KlevuQuicksearch {
           {this.activeTab === "last" && (
             <Fragment>
               {this.lastClickedProducts?.map((p) => (
-                <klevu-product product={p} variant="line">
+                <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}>
                   {this.#internalRenderProductSlot(p, "top")}
                   {this.#internalRenderProductSlot(p, "image")}
                   {this.#internalRenderProductSlot(p, "info")}
