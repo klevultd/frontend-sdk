@@ -43,8 +43,12 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const nocripttag = document.createElement("noscript")
-    nocripttag.innerHTML =
-      '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMRCNX" height="0" width="0" style="display:none;visibility:hidden"></iframe>'
+    const iframe = document.createElement("iframe")
+    iframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-TMRCNX"
+    iframe.height = "0"
+    iframe.width = "0"
+    iframe.style = "display:none;visibility:hidden"
+    nocripttag.appendChild(iframe)
     document.body.prepend(nocripttag)
   })
 </script>
