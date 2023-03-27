@@ -1,11 +1,7 @@
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
 import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery.js"
 import { KlevuFetchModifer } from "../modifiers/index.js"
-import {
-  KlevuConfig,
-  KlevuKMCRecommendations,
-  KlevuFetchQueryResult,
-} from "../index.js"
+import { KlevuConfig, KlevuKMCRecommendations, KlevuRecord } from "../index.js"
 
 /**
  * Internal. List of known KlevuFetchIds
@@ -81,9 +77,9 @@ export type KlevuFetchFunctionReturnValue = {
   configOverride?: KlevuConfig
 
   /**
-   * Stored previous query results for analytical functions to do recursive data checking
+   * Local memory cache products from previous results. Used by analytics when making page changes
    */
-  previousFetchQueryResults?: KlevuFetchQueryResult
+  previousResultRecords?: KlevuRecord[]
 }
 
 export * from "./categoryMerchandising/categoryMerchandising.js"

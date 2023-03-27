@@ -134,7 +134,9 @@ test("Next page analytics test", async () => {
   )
 
   // when doing it again, it should call the api again even though we have loaded results
-  const resultPage2 = await query!.getPage?.()
+  const resultPage2 = await query!.getPage?.({
+    pageIndex: 1,
+  })
   const query2 = resultPage2?.queriesById("categoryMerchandising")
   query2?.getCategoryMerchandisingClickSendEvent?.()(
     product.id,
@@ -149,4 +151,45 @@ test("Next page analytics test", async () => {
   expect(getSpySuccess).toHaveBeenCalledWith(
     expect.stringContaining("klevu_shopperIP=192.168.0.1")
   )
+
+  // What if we do it third time?
+  const resultPage3 = await query2!.getPage?.({
+    pageIndex: 2,
+  })
+  const query3 = resultPage3?.queriesById("categoryMerchandising")
+  query3?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(3)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+  )
+
+  // Redo second analytics
+  query2?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  // Redo first analytics send
+  query?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(5)
 })

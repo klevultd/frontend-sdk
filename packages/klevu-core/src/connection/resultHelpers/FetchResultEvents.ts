@@ -32,18 +32,11 @@ export function FetchResultEvents(
               viewSent = true
             }
 
-            const record = result.records.find((r) => r.id === productId)
-            if (
-              !record &&
-              func.previousFetchQueryResults?.getSearchClickSendEvent
-            ) {
-              func.previousFetchQueryResults?.getSearchClickSendEvent()(
-                productId,
-                variantId,
-                override
-              )
-              return
-            } else if (!record) {
+            const record = [
+              ...result.records,
+              ...(func.previousResultRecords ?? []),
+            ].find((r) => r.id === productId)
+            if (!record) {
               throw new Error(
                 `KlevuEvents: Given "${productId}" doesn't exists in results`
               )
@@ -63,20 +56,12 @@ export function FetchResultEvents(
       return {
         getCategoryMerchandisingClickSendEvent: () => {
           return (productId, categoryTitle, variantId?, override?) => {
-            const record = result.records.find((r) => r.id === productId)
-            if (
-              !record &&
-              func.previousFetchQueryResults
-                ?.getCategoryMerchandisingClickSendEvent
-            ) {
-              func.previousFetchQueryResults?.getCategoryMerchandisingClickSendEvent()(
-                productId,
-                categoryTitle,
-                variantId,
-                override
-              )
-              return
-            } else if (!record) {
+            const record = [
+              ...result.records,
+              ...(func.previousResultRecords ?? []),
+            ].find((r) => r.id === productId)
+
+            if (!record) {
               throw new Error(
                 `KlevuEvents: Given "${productId}" doesn't exists in results`
               )
@@ -120,18 +105,11 @@ export function FetchResultEvents(
       return {
         getRecommendationClickSendEvent: () => {
           return (productId, variantId?, override?) => {
-            const record = result.records.find((r) => r.id === productId)
-            if (
-              !record &&
-              func.previousFetchQueryResults?.getRecommendationClickSendEvent
-            ) {
-              func.previousFetchQueryResults?.getRecommendationClickSendEvent()(
-                productId,
-                variantId,
-                override
-              )
-              return
-            } else if (!record) {
+            const record = [
+              ...result.records,
+              ...(func.previousResultRecords ?? []),
+            ].find((r) => r.id === productId)
+            if (!record) {
               throw new Error(
                 `KlevuEvents: Given "${productId}" doesn't exists in results`
               )
