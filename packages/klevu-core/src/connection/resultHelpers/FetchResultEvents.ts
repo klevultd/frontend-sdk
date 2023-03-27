@@ -33,7 +33,17 @@ export function FetchResultEvents(
             }
 
             const record = result.records.find((r) => r.id === productId)
-            if (!record) {
+            if (
+              !record &&
+              func.previousFetchQueryResults?.getSearchClickSendEvent
+            ) {
+              func.previousFetchQueryResults?.getSearchClickSendEvent()(
+                productId,
+                variantId,
+                override
+              )
+              return
+            } else if (!record) {
               throw new Error(
                 `KlevuEvents: Given "${productId}" doesn't exists in results`
               )
@@ -54,7 +64,19 @@ export function FetchResultEvents(
         getCategoryMerchandisingClickSendEvent: () => {
           return (productId, categoryTitle, variantId?, override?) => {
             const record = result.records.find((r) => r.id === productId)
-            if (!record) {
+            if (
+              !record &&
+              func.previousFetchQueryResults
+                ?.getCategoryMerchandisingClickSendEvent
+            ) {
+              func.previousFetchQueryResults?.getCategoryMerchandisingClickSendEvent()(
+                productId,
+                categoryTitle,
+                variantId,
+                override
+              )
+              return
+            } else if (!record) {
               throw new Error(
                 `KlevuEvents: Given "${productId}" doesn't exists in results`
               )
@@ -99,7 +121,17 @@ export function FetchResultEvents(
         getRecommendationClickSendEvent: () => {
           return (productId, variantId?, override?) => {
             const record = result.records.find((r) => r.id === productId)
-            if (!record) {
+            if (
+              !record &&
+              func.previousFetchQueryResults?.getRecommendationClickSendEvent
+            ) {
+              func.previousFetchQueryResults?.getRecommendationClickSendEvent()(
+                productId,
+                variantId,
+                override
+              )
+              return
+            } else if (!record) {
               throw new Error(
                 `KlevuEvents: Given "${productId}" doesn't exists in results`
               )

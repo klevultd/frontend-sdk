@@ -6,14 +6,21 @@ import {
   KlevuApiRawResponse,
   KlevuBaseQuery,
   KlevuNextFunc,
+  KlevuFetchQueryResult,
 } from "../../models/index.js"
 import { KlevuFetch, removeListFilters } from "../klevuFetch.js"
 
-export function fetchNextPage(
-  response: KlevuApiRawResponse,
-  func: KlevuFetchFunctionReturnValue,
-  ignoreLastPageUndefined = false
-) {
+export function fetchNextPage({
+  response,
+  func,
+  ignoreLastPageUndefined = false,
+  lastResponse,
+}: {
+  response: KlevuApiRawResponse
+  func: KlevuFetchFunctionReturnValue
+  ignoreLastPageUndefined?: boolean
+  lastResponse: KlevuFetchQueryResult
+}) {
   if (!func.queries) {
     return undefined
   }
@@ -68,6 +75,7 @@ export function fetchNextPage(
       }
       func.modifiers.push(applyFilterWithManager(override.filterManager))
     }
+    func.previousFetchQueryResults = lastResponse
 
     return await KlevuFetch(removeListFilters(func, prevQueryResponse))
   }

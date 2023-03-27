@@ -1,7 +1,11 @@
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
 import { KlevuSuggestionQuery } from "../models/KlevuSuggestionQuery.js"
 import { KlevuFetchModifer } from "../modifiers/index.js"
-import { KlevuConfig, KlevuKMCRecommendations } from "../index.js"
+import {
+  KlevuConfig,
+  KlevuKMCRecommendations,
+  KlevuFetchQueryResult,
+} from "../index.js"
 
 /**
  * Internal. List of known KlevuFetchIds
@@ -15,7 +19,7 @@ export type KlevuFetchTypeId =
   | "kmcRecommendation"
   | "raw"
 
-export type KlevuFecthFunctionParams = {
+export type KlevuFetchFunctionParams = {
   /**
    * Current id of function
    */
@@ -57,7 +61,7 @@ export type KlevuFetchFunctionReturnValue = {
   /**
    * Some of the functions pass metadata that can be used in other places
    */
-  params?: KlevuFecthFunctionParams
+  params?: KlevuFetchFunctionParams
 
   /**
    * What queries should KlevuFetch do to backend
@@ -75,6 +79,11 @@ export type KlevuFetchFunctionReturnValue = {
    * Pass down the if config has been overridden.
    */
   configOverride?: KlevuConfig
+
+  /**
+   * Stored previous query results for analytical functions to do recursive data checking
+   */
+  previousFetchQueryResults?: KlevuFetchQueryResult
 }
 
 export * from "./categoryMerchandising/categoryMerchandising.js"
