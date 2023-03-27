@@ -125,23 +125,20 @@ function KlevuQueriesById(
         getAnnotationsForProduct(res, productId, languageCode),
     }
   }
+
   const result: KlevuFetchQueryResult = {
     ...res,
     ...FetchResultEvents(res, func),
     functionParams: func.params,
     annotationsById: (productId: string, languageCode: string) =>
       getAnnotationsForProduct(res, productId, languageCode),
+    next: fetchNextPage({ response, func }),
+    getPage: fetchNextPage({
+      response,
+      func,
+      ignoreLastPageUndefined: true,
+    }),
   }
-
-  // Create circular reference for next page function to get results from previous queries
-  result.next = fetchNextPage({ response, func, lastResponse: result })
-  result.getPage = fetchNextPage({
-    response,
-    func,
-    ignoreLastPageUndefined: true,
-    lastResponse: result,
-  })
-
   return result
 }
 

@@ -6,7 +6,6 @@ import {
   KlevuApiRawResponse,
   KlevuBaseQuery,
   KlevuNextFunc,
-  KlevuFetchQueryResult,
 } from "../../models/index.js"
 import { KlevuFetch, removeListFilters } from "../klevuFetch.js"
 
@@ -14,24 +13,26 @@ export function fetchNextPage({
   response,
   func,
   ignoreLastPageUndefined = false,
-  lastResponse,
 }: {
   response: KlevuApiRawResponse
   func: KlevuFetchFunctionReturnValue
   ignoreLastPageUndefined?: boolean
-  lastResponse: KlevuFetchQueryResult
 }) {
-  if (!func.queries) {
+  const newFunc: KlevuFetchFunctionReturnValue = func
+
+  if (!newFunc.queries) {
     return undefined
   }
 
-  const queryIndex = func.queries.findIndex((q) => !q.isFallbackQuery)
+  const queryIndex = newFunc.queries.findIndex((q) => !q.isFallbackQuery)
 
   if (queryIndex === -1) {
     return undefined
   }
 
-  const prevQuery: KlevuBaseQuery = func.queries[queryIndex] as KlevuBaseQuery
+  const prevQuery: KlevuBaseQuery = newFunc.queries[
+    queryIndex
+  ] as KlevuBaseQuery
 
   const prevQueryResponse = response.queryResults?.find(
     (q) => q.id === prevQuery.id
@@ -66,18 +67,22 @@ export function fetchNextPage({
 
     // existance of prevQuery has checked in function before
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    func.queries![queryIndex] = prevQuery
+    newFunc.queries![queryIndex] = prevQuery
 
     // add previous filters with manager
     if (override?.filterManager) {
-      if (!func.modifiers) {
-        func.modifiers = []
+      if (!newFunc.modifiers) {
+        newFunc.modifiers = []
       }
-      func.modifiers.push(applyFilterWithManager(override.filterManager))
+      newFunc.modifiers.push(applyFilterWithManager(override.filterManager))
     }
-    func.previousFetchQueryResults = lastResponse
 
-    return await KlevuFetch(removeListFilters(func, prevQueryResponse))
+    newFunc.previousResultRecords = [
+      ...(func.previousResultRecords ?? []),
+      ...prevQueryResponse.records,
+    ]
+
+    return await KlevuFetch(removeListFilters(newFunc, prevQueryResponse))
   }
 
   return nextFunc

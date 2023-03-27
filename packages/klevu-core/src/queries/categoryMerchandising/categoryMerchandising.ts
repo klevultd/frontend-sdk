@@ -15,6 +15,7 @@ export type KlevuMerchandisingOptions = {
 const defaults: KlevuMerchandisingOptions = {
   id: "categoryMerchandising",
   searchTerm: "*",
+  limit: 24,
 }
 
 /**
