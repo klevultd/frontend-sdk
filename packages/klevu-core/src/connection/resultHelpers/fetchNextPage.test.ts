@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   categoryMerchandising,
   KlevuConfig,
@@ -144,7 +145,7 @@ test("Next page analytics test", async () => {
     }
   )
 
-  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSpySuccess).toHaveBeenCalledTimes(2)
   expect(getSpySuccess).toHaveBeenCalledWith(
     expect.stringContaining("klevu_shopperIP=192.168.0.1")
   )

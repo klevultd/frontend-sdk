@@ -2,7 +2,7 @@ import { FilterManager } from "../store/filterManager.js"
 import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse.js"
 import { KlevuResultEvent } from "./KlevuResultEvent.js"
-import { KlevuFecthFunctionParams } from "../queries/index.js"
+import { KlevuFetchFunctionParams } from "../queries/index.js"
 
 /**
  * Next function is available if there are more results in the given query.
@@ -44,7 +44,7 @@ export type KlevuFetchQueryResult = KlevuQueryResult &
     /**
      * All parameters defined in that query function
      */
-    functionParams?: KlevuFecthFunctionParams
+    functionParams?: KlevuFetchFunctionParams
     /**
      * Get annotations result by query id, product id and language code
      */
