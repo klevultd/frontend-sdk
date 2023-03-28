@@ -1,0 +1,53 @@
+name: Release @klevu/core
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        description: Which update to do
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  deploy:
+    name: Release
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Make Release
+        id: release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd utils
+          npm install
+          node ./release-klevu-core.js --type ${{ inputs.type }} --no-otp
+
+      - name: Print
+        run: echo ${{steps.release.outputs.version}}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "Automatic @klevu/core release"
+          branch: release/core-${{steps.release.outputs.version}}
+          title: "@klevu/core release ${{steps.release.outputs.version}}"
+          body: |
+            This is automatic update of package version and a todo list. 
+            NPM release has been already made and this is just update to repository.
+
+            - [ ] Create proper release notes
+            - [ ] Update documentations to reflect changes
+            - [ ] After merging this PR please create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=core-${{steps.release.outputs.version}}
