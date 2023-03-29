@@ -128,6 +128,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'categoryTitle',
   'sort',
   'filterCount',
+  'options',
   'filterCustomOrder',
   'renderProductSlot'
 ]);

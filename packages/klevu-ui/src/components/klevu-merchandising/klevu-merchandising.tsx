@@ -4,6 +4,7 @@ import {
   FilterManager,
   KlevuFetch,
   KlevuFetchQueryResult,
+  KlevuMerchandisingOptions,
   KlevuRecord,
   KlevuSearchSorting,
   listFilters,
@@ -62,6 +63,11 @@ export class KlevuMerchandising {
   @Prop() filterCount?: number
 
   /**
+   * Object to override and settings on search options
+   */
+  @Prop() options?: KlevuMerchandisingOptions
+
+  /**
    * Order filters in given order
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
@@ -106,7 +112,7 @@ export class KlevuMerchandising {
     const result = await KlevuFetch(
       categoryMerchandising(
         this.category,
-        { limit: this.limit, sort: this.sort },
+        { limit: this.limit, sort: this.sort, ...this.options },
         sendMerchandisingViewEvent(this.categoryTitle),
         listFilters({
           filterManager: this.manager,
