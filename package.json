@@ -6,6 +6,11 @@
   "author": "Klevu",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klevultd/frontend-sdk",
+    "directory": "packages/klevu-core"
+  },
   "devDependencies": {
     "@types/jest": "^29.2.3"
   }
