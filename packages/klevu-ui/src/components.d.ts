@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -22,7 +22,7 @@ import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfi
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -395,6 +395,10 @@ export namespace Components {
           * Count of products for page
          */
         "limit": number;
+        /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuMerchandisingOptions;
         /**
           * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
          */
@@ -1846,6 +1850,10 @@ declare namespace LocalJSX {
           * Count of products for page
          */
         "limit"?: number;
+        /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuMerchandisingOptions;
         /**
           * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
          */
