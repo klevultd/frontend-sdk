@@ -233,6 +233,7 @@ export class KlevuEvents {
    * @param pageStartsFrom Offset of the first product being shown on this page. For example, if you are displaying 30 products per page and if a customer is on the 2nd page, the value here should be 30. If on the 3rd page, it will be 60.
    * @param abTestId The AB test id currently running
    * @param abTestVariantId Id of AB test variant
+   * @param activeFilters The string version of active filters applied to the query that got the products.
    * @param override Ability to override any analytical keys in low level
    */
   static categoryMerchandisingView(
@@ -242,6 +243,7 @@ export class KlevuEvents {
     pageStartsFrom?: number,
     abTestId?: string,
     abTestVariantId?: string,
+    activeFilters?:string,
     override: Partial<KlevuV1CategoryProductsView> = {}
   ) {
     let data: KlevuV1CategoryProductsView = {
@@ -258,6 +260,12 @@ export class KlevuEvents {
         klevu_abTestVariantId: abTestVariantId,
       }
     }
+    if (activeFilters) {
+      data = {
+        ...data,
+        klevu_activeFilters: activeFilters
+      }
+    }
     KlevuEventV1CategoryView({
       ...data,
       ...override,
@@ -271,6 +279,7 @@ export class KlevuEvents {
    * @param klevuCategory This is the complete hierarchy of the category being visited. For example, Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the separator between a parent and a child category.
    * @param variantId This is the child/variant ID of the clicked product. eg. 12345. For compound products with a parent and multiple child/variant products, this is the ID of the specific variant.
    * @param productPosition Position of the product on the category page when it was clicked. For example, the value would be 0 if it is the first product on the first page. The value will be 30, if it is the first product on the 2nd page with 30 products being displayed per page.
+   * @param activeFilters The string version of active filters applied to the query that got the products.
    * @param override Ability to override any analytical keys in low level
    */
   static categoryMerchandisingProductClick(
@@ -281,6 +290,7 @@ export class KlevuEvents {
     productPosition?: number,
     abTestId?: string,
     abTestVariantId?: string,
+    activeFilters?:string,
     override: Partial<KlevuV1CategoryProductsClick> = {}
   ) {
     if (!product.id) {
@@ -307,6 +317,12 @@ export class KlevuEvents {
         ...data,
         klevu_abTestId: abTestId,
         klevu_abTestVariantId: abTestVariantId,
+      }
+    }
+    if (activeFilters) {
+      data = {
+        ...data,
+        klevu_activeFilters: activeFilters
       }
     }
 

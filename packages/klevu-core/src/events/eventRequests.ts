@@ -210,6 +210,8 @@ export type KlevuV1CategoryProductsView = {
   klevu_abTestId?: string
   /** The unique identifier of the A/B Test Variant. */
   klevu_abTestVariantId?: string
+  /** The active filters */
+  klevu_activeFilters?: string
 }
 
 export async function KlevuEventV1CategoryView(
@@ -280,6 +282,8 @@ export type KlevuV1CategoryProductsClick = {
   klevu_abTestId?: string
   /** The unique identifier of the A/B Test Variant. */
   klevu_abTestVariantId?: string
+  /** The active filters */
+  klevu_activeFilters?: string
 }
 
 export async function KlevuEventV1CategoryProductClick(

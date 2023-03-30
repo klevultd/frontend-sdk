@@ -2,7 +2,7 @@ import { KlevuQueryResult } from "../../models/index.js"
 import { KlevuResultEvent } from "../../models/KlevuResultEvent.js"
 import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
 import { KlevuEvents } from "../../events/KlevuEvents.js"
-
+import { extractActiveFilters } from "../../utils/extractActiveFilters.js"
 /**
  * Automatically injects events helpers to klevuFetch result object.
  *
@@ -83,6 +83,10 @@ export function FetchResultEvents(
               abTestId = func.params.abtest.abTestId
               abTestVariantId = func.params.abtest.abTestVariantId
             }
+            let activeFilters;
+            if(extractActiveFilters(result) !== undefined){
+              activeFilters = extractActiveFilters(result)
+            }
 
             KlevuEvents.categoryMerchandisingProductClick(
               record,
@@ -92,6 +96,7 @@ export function FetchResultEvents(
               index + 1,
               abTestId,
               abTestVariantId,
+              activeFilters,
               override
             )
           }
