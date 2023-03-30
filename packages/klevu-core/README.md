@@ -9,7 +9,7 @@
 ![github issues][github-issues-src]
 [![](https://data.jsdelivr.com/v1/package/npm/@klevu/core/badge)](https://www.jsdelivr.com/package/npm/@klevu/core)
 
-Come and chat with us: [![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/upkNw2b3)
+Come and chat with us: [![](https://dcbadge.vercel.app/api/server/upkNw2b3)](https://discord.gg/Jrud6Zj5Hy)
 
 # `@klevu/core`
 

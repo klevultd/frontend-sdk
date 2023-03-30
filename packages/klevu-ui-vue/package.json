@@ -14,7 +14,8 @@
   "description": "Klevu UI components for Vue",
   "repository": {
     "type": "git",
-    "url": "https://https://github.com/klevultd/frontend-sdk.git"
+    "url": "https://github.com/klevultd/frontend-sdk.git",
+    "directory": "packages/klevu-ui-vue"
   },
   "scripts": {
     "test": "echo 'No tests'",
