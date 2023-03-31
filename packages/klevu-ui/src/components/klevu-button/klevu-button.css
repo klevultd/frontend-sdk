@@ -83,6 +83,11 @@ button.icon {
   line-height: 1.8;
 }
 
+button.icon span[part="material-icon"] {
+  position: relative;
+  top: -1px;
+}
+
 button.icon:focus:after {
   border-radius: 100%;
 }
