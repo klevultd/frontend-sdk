@@ -36,6 +36,7 @@ Basic button component
 
 ### Used by
 
+ - [klevu-chat-layout](../klevu-chat-layout)
  - [klevu-facet](../klevu-facet)
  - [klevu-facet-list](../klevu-facet-list)
  - [klevu-layout-results](../klevu-layout-results)
@@ -52,6 +53,7 @@ Basic button component
 ```mermaid
 graph TD;
   klevu-button --> klevu-typography
+  klevu-chat-layout --> klevu-button
   klevu-facet --> klevu-button
   klevu-facet-list --> klevu-button
   klevu-layout-results --> klevu-button

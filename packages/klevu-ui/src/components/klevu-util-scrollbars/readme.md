@@ -44,11 +44,13 @@ Type: `Promise<OverlayScrollbars | undefined>`
 
 ### Used by
 
+ - [klevu-chat-layout](../klevu-chat-layout)
  - [klevu-slides](../klevu-slides)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-chat-layout --> klevu-util-scrollbars
   klevu-slides --> klevu-util-scrollbars
   style klevu-util-scrollbars fill:#f9f,stroke:#333,stroke-width:4px
 ```

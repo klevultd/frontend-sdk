@@ -1,0 +1,25 @@
+:host {
+  --max-height: var(--klevu-chat-layout-max-height, calc(100vh - 100px));
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main slot {
+  display: flex;
+  gap: var(--klevu-spacing-04);
+  flex-direction: column;
+  max-height: var(--max-height);
+  padding-bottom: var(--klevu-spacing-04);
+}
+
+footer {
+  padding-top: var(--klevu-spacing-04);
+  border-top: 1px solid var(--klevu-color-neutral-3);
+  display: flex;
+  gap: var(--klevu-spacing-04);
+}
+
+footer klevu-textfield {
+  width: 100%;
+}

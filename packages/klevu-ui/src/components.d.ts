@@ -103,6 +103,18 @@ export namespace Components {
         "isTertiary"?: boolean;
     }
     /**
+     * Container for chat items. Very simple component, just a wrapper.
+     */
+    interface KlevuChatBubble {
+        "remote"?: boolean;
+    }
+    /**
+     * Component that wraps chat elements into a layout.
+     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+     */
+    interface KlevuChatLayout {
+    }
+    /**
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
@@ -415,6 +427,11 @@ export namespace Components {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+    }
+    /**
+     * Klevu MOI Application
+     */
+    interface KlevuMoi {
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -981,6 +998,10 @@ export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBadgeElement;
 }
+export interface KlevuChatLayoutCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChatLayoutElement;
+}
 export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCheckboxElement;
@@ -1086,6 +1107,25 @@ declare global {
     var HTMLKlevuButtonElement: {
         prototype: HTMLKlevuButtonElement;
         new (): HTMLKlevuButtonElement;
+    };
+    /**
+     * Container for chat items. Very simple component, just a wrapper.
+     */
+    interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
+    }
+    var HTMLKlevuChatBubbleElement: {
+        prototype: HTMLKlevuChatBubbleElement;
+        new (): HTMLKlevuChatBubbleElement;
+    };
+    /**
+     * Component that wraps chat elements into a layout.
+     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+     */
+    interface HTMLKlevuChatLayoutElement extends Components.KlevuChatLayout, HTMLStencilElement {
+    }
+    var HTMLKlevuChatLayoutElement: {
+        prototype: HTMLKlevuChatLayoutElement;
+        new (): HTMLKlevuChatLayoutElement;
     };
     /**
      * Checkbox component
@@ -1241,6 +1281,15 @@ declare global {
     var HTMLKlevuMerchandisingElement: {
         prototype: HTMLKlevuMerchandisingElement;
         new (): HTMLKlevuMerchandisingElement;
+    };
+    /**
+     * Klevu MOI Application
+     */
+    interface HTMLKlevuMoiElement extends Components.KlevuMoi, HTMLStencilElement {
+    }
+    var HTMLKlevuMoiElement: {
+        prototype: HTMLKlevuMoiElement;
+        new (): HTMLKlevuMoiElement;
     };
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -1456,6 +1505,8 @@ declare global {
         "klevu-accordion": HTMLKlevuAccordionElement;
         "klevu-badge": HTMLKlevuBadgeElement;
         "klevu-button": HTMLKlevuButtonElement;
+        "klevu-chat-bubble": HTMLKlevuChatBubbleElement;
+        "klevu-chat-layout": HTMLKlevuChatLayoutElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-chip": HTMLKlevuChipElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -1468,6 +1519,7 @@ declare global {
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
         "klevu-list": HTMLKlevuListElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
+        "klevu-moi": HTMLKlevuMoiElement;
         "klevu-pagination": HTMLKlevuPaginationElement;
         "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
         "klevu-popup": HTMLKlevuPopupElement;
@@ -1552,6 +1604,22 @@ declare namespace LocalJSX {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+    }
+    /**
+     * Container for chat items. Very simple component, just a wrapper.
+     */
+    interface KlevuChatBubble {
+        "remote"?: boolean;
+    }
+    /**
+     * Component that wraps chat elements into a layout.
+     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+     */
+    interface KlevuChatLayout {
+        /**
+          * Event emitted when user sends a message
+         */
+        "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
     }
     /**
      * Checkbox component
@@ -1878,6 +1946,11 @@ declare namespace LocalJSX {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+    }
+    /**
+     * Klevu MOI Application
+     */
+    interface KlevuMoi {
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -2468,6 +2541,8 @@ declare namespace LocalJSX {
         "klevu-accordion": KlevuAccordion;
         "klevu-badge": KlevuBadge;
         "klevu-button": KlevuButton;
+        "klevu-chat-bubble": KlevuChatBubble;
+        "klevu-chat-layout": KlevuChatLayout;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-chip": KlevuChip;
         "klevu-cms-list": KlevuCmsList;
@@ -2480,6 +2555,7 @@ declare namespace LocalJSX {
         "klevu-layout-results": KlevuLayoutResults;
         "klevu-list": KlevuList;
         "klevu-merchandising": KlevuMerchandising;
+        "klevu-moi": KlevuMoi;
         "klevu-pagination": KlevuPagination;
         "klevu-popular-searches": KlevuPopularSearches;
         "klevu-popup": KlevuPopup;
@@ -2527,6 +2603,15 @@ declare module "@stencil/core" {
              * @cssprop --klevu-button-text-align center Align text on button
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
+            /**
+             * Container for chat items. Very simple component, just a wrapper.
+             */
+            "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
+            /**
+             * Component that wraps chat elements into a layout.
+             * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+             */
+            "klevu-chat-layout": LocalJSX.KlevuChatLayout & JSXBase.HTMLAttributes<HTMLKlevuChatLayoutElement>;
             /**
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
@@ -2622,6 +2707,10 @@ declare module "@stencil/core" {
              * Full merchandising app to power up your product grid pages
              */
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
+            /**
+             * Klevu MOI Application
+             */
+            "klevu-moi": LocalJSX.KlevuMoi & JSXBase.HTMLAttributes<HTMLKlevuMoiElement>;
             /**
              * Pagination component. Either provide numbers or query result to display the component.
              * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item

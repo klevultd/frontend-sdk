@@ -31,6 +31,16 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
 ]);
 
 
+export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble>('klevu-chat-bubble', undefined, [
+  'remote'
+]);
+
+
+export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
+  'klevuChatLayoutMessageSent'
+]);
+
+
 export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('klevu-checkbox', undefined, [
   'checked',
   'disabled',
@@ -133,6 +143,9 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'sortOptions',
   'renderProductSlot'
 ]);
+
+
+export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined);
 
 
 export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination>('klevu-pagination', undefined, [
