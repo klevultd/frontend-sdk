@@ -27,6 +27,11 @@ type KlevuConfiguration = {
   eventsApiV2Url?: string
 
   /**
+   * MOI API url
+   */
+  moiApiUrl?: string
+
+  /**
    *
    */
   axios?: AxiosStatic
@@ -41,10 +46,14 @@ export class KlevuConfig {
   eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
   axios?: AxiosInstance
+  moiApiUrl = "https://moi-ai.ksearchnet.com/"
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
     this.url = config.url
+    if (config.moiApiUrl) {
+      this.moiApiUrl = config.moiApiUrl
+    }
     if (config.cacheMaxTTL) {
       this.cacheMaxTTL = config.cacheMaxTTL
     }

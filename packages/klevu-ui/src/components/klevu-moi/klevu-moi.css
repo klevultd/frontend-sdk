@@ -1,3 +1,26 @@
 :host {
   display: block;
 }
+
+klevu-chat-layout {
+  height: 100%;
+}
+
+.filteractions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--klevu-spacing-03);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klevu-spacing-03);
+}
+
+.productactions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klevu-spacing-02);
+}

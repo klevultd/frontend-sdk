@@ -5,6 +5,14 @@
   flex-direction: column;
 }
 
+klevu-utils-scrollbar {
+  flex-grow: 1;
+}
+
+main {
+  height: 100%;
+}
+
 main slot {
   display: flex;
   gap: var(--klevu-spacing-04);
@@ -14,6 +22,7 @@ main slot {
 }
 
 footer {
+  margin-top: auto;
   padding-top: var(--klevu-spacing-04);
   border-top: 1px solid var(--klevu-color-neutral-3);
   display: flex;

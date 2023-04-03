@@ -20,6 +20,7 @@ Horizontal slides component. Can be used to display a list of items horizontally
 
 ### Used by
 
+ - [klevu-moi](../klevu-moi)
  - [klevu-recommendations](../klevu-recommendations)
 
 ### Depends on
@@ -35,6 +36,7 @@ graph TD;
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
   klevu-button --> klevu-typography
+  klevu-moi --> klevu-slides
   klevu-recommendations --> klevu-slides
   style klevu-slides fill:#f9f,stroke:#333,stroke-width:4px
 ```

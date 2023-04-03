@@ -16,6 +16,19 @@ Container for chat items. Very simple component, just a wrapper.
 | `remote` | `remote`  |             | `boolean \| undefined` | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-moi](../klevu-moi)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-moi --> klevu-chat-bubble
+  style klevu-chat-bubble fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

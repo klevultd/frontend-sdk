@@ -113,6 +113,7 @@ export namespace Components {
      * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface KlevuChatLayout {
+        "scrollMainToBottom": () => Promise<void>;
     }
     /**
      * Checkbox component
