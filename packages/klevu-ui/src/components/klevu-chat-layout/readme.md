@@ -9,6 +9,13 @@
 
 Component that wraps chat elements into a layout.
 
+## Properties
+
+| Property      | Attribute      | Description            | Type      | Default |
+| ------------- | -------------- | ---------------------- | --------- | ------- |
+| `showLoading` | `show-loading` | Show loading indicator | `boolean` | `false` |
+
+
 ## Events
 
 | Event                        | Description                             | Type                  |
@@ -18,9 +25,19 @@ Component that wraps chat elements into a layout.
 
 ## Methods
 
+### `closePopup() => Promise<void>`
+
+Close the popup menu
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
 ### `scrollMainToBottom() => Promise<void>`
 
-
+Scroll current chat to bottom of page
 
 #### Returns
 

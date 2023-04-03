@@ -1,10 +1,17 @@
 :host {
   display: block;
+  --item-width: var(--klevu-slides-item-width, inherit);
 }
 
 .slides {
   display: flex;
   gap: var(--klevu-spacing-05);
+  flex-shrink: 0;
+}
+
+.slides slot::slotted(*) {
+  flex-shrink: 0;
+  width: var(--item-width);
 }
 
 header {

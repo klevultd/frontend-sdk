@@ -32,6 +32,7 @@ graph TD;
   klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-textfield
   klevu-button --> klevu-typography
+  klevu-chat-bubble --> klevu-typography
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars

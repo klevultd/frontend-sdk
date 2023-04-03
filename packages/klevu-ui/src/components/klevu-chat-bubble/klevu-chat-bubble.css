@@ -7,7 +7,7 @@
   justify-content: flex-start;
 }
 
-div {
+klevu-typography {
   display: inline-block;
   padding: var(--klevu-spacing-04);
   background-color: var(--klevu-color-neutral-2);
@@ -15,9 +15,10 @@ div {
   border-bottom-right-radius: 0;
 }
 
-:host(.remote) div {
+:host(.remote) klevu-typography {
   background-color: var(--klevu-color-primary);
   color: var(--klevu-color-neutral-1);
   border-radius: var(--klevu-border-radius-m);
   border-bottom-left-radius: 0;
+  --klevu-typography-color: var(--klevu-color-neutral-1);
 }

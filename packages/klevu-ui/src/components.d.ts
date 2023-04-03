@@ -79,6 +79,7 @@ export namespace Components {
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
+     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
      */
     interface KlevuButton {
         /**
@@ -101,6 +102,7 @@ export namespace Components {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+        "size": "small" | "normal" | "large";
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
@@ -113,7 +115,18 @@ export namespace Components {
      * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface KlevuChatLayout {
+        /**
+          * Close the popup menu
+         */
+        "closePopup": () => Promise<void>;
+        /**
+          * Scroll current chat to bottom of page
+         */
         "scrollMainToBottom": () => Promise<void>;
+        /**
+          * Show loading indicator
+         */
+        "showLoading": boolean;
     }
     /**
      * Checkbox component
@@ -857,6 +870,7 @@ export namespace Components {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface KlevuSlides {
         /**
@@ -1102,6 +1116,7 @@ declare global {
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
+     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
      */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
@@ -1414,6 +1429,7 @@ declare global {
     };
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
@@ -1583,6 +1599,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
+     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
      */
     interface KlevuButton {
         /**
@@ -1605,6 +1622,7 @@ declare namespace LocalJSX {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+        "size"?: "small" | "normal" | "large";
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
@@ -1621,6 +1639,10 @@ declare namespace LocalJSX {
           * Event emitted when user sends a message
          */
         "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
+        /**
+          * Show loading indicator
+         */
+        "showLoading"?: boolean;
     }
     /**
      * Checkbox component
@@ -2383,6 +2405,7 @@ declare namespace LocalJSX {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface KlevuSlides {
         /**
@@ -2602,6 +2625,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
              * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
              * @cssprop --klevu-button-text-align center Align text on button
+             * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
@@ -2779,6 +2803,7 @@ declare module "@stencil/core" {
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             /**
              * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+             * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
              */
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             /**

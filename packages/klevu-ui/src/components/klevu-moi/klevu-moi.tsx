@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Fragment } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
-import { startMoi, MoiSession } from "@klevu/core"
+import { startMoi, MoiSession, MoiRequest } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 /**
@@ -20,17 +20,23 @@ export class KlevuMoi {
 
   async connectedCallback() {
     await KlevuInit.ready()
-    this.session = await startMoi(this.onMessage.bind(this))
-    this.messages = this.session.messages
+    const init = async () => {
+      this.session = await startMoi(this.onMessage.bind(this))
+      this.messages = this.session.messages
+    }
+    init()
   }
 
-  async #sendMessage(msg: string) {
+  async #sendMessage(msg: string, product?: MoiRequest["product"]) {
     if (!this.session) {
       return
     }
     await this.session.query({
       message: msg,
+      product,
     })
+
+    this.layoutRef.scrollMainToBottom()
   }
 
   onMessage() {
@@ -50,6 +56,7 @@ export class KlevuMoi {
         value: filterValue,
       },
     })
+    this.layoutRef.scrollMainToBottom()
   }
 
   render() {
@@ -63,8 +70,25 @@ export class KlevuMoi {
           }}
         >
           {this.renderChatContent()}
+          <div slot="actions" class="genericactions">
+            {this.session?.genericOptions.options.map((item) => (
+              <klevu-button
+                size="small"
+                isSecondary
+                onClick={() => {
+                  if (item.type === "message") {
+                    this.#sendMessage(item.chat)
+                  } else if (item.type === "clearChat") {
+                    this.session?.clear()
+                  }
+                }}
+              >
+                {item.name}
+              </klevu-button>
+            ))}
+          </div>
           <div slot="menu" class="menu">
-            {this.session?.menu.menuOptions.options.map((item) => (
+            {this.session?.menu.options.map((item) => (
               <klevu-button
                 onClick={() => {
                   if (item.type === "message") {
@@ -72,6 +96,7 @@ export class KlevuMoi {
                   } else {
                     console.error("Not implemented yet")
                   }
+                  this.layoutRef.closePopup()
                 }}
               >
                 {item.name}
@@ -108,16 +133,28 @@ export class KlevuMoi {
           if ("productData" in message) {
             return (
               <div>
-                <klevu-slides exportparts={globalExportedParts}>
+                <klevu-slides
+                  exportparts={globalExportedParts}
+                  style={{
+                    "--klevu-slides-item-width": "200px;",
+                  }}
+                >
                   {message.productData.products.map((product) => (
                     <klevu-product product={product}>
                       <div slot="bottom" class="productactions">
                         {product.options.map((option) => (
                           <klevu-button
+                            fullWidth
                             isSecondary
                             onClick={() => {
                               if (option.intent === "show-similar-products") {
-                                this.#sendMessage(option.chat)
+                                this.#sendMessage(option.chat, {
+                                  context: {
+                                    url: product.url,
+                                  },
+                                  id: product.id,
+                                  intent: option.intent,
+                                })
                               }
                             }}
                           >
@@ -132,7 +169,6 @@ export class KlevuMoi {
             )
           }
           if ("local" in message) {
-            console.log(message)
             return <klevu-chat-bubble exportparts={globalExportedParts}>{message.local?.message}</klevu-chat-bubble>
           }
         })}

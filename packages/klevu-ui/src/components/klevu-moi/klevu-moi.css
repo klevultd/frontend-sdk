@@ -1,5 +1,6 @@
 :host {
   display: block;
+  --klevu-slides-item-width: 200px;
 }
 
 klevu-chat-layout {
@@ -23,4 +24,17 @@ klevu-chat-layout {
   display: flex;
   flex-direction: column;
   gap: var(--klevu-spacing-02);
+}
+
+.genericactions {
+  margin: var(--klevu-spacing-03) 0;
+  display: flex;
+  flex-direction: row;
+  gap: var(--klevu-spacing-03);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.genericactions klevu-button {
+  --klevu-button-padding: 5px;
 }

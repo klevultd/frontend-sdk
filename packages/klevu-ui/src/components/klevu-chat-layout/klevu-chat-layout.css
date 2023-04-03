@@ -25,6 +25,9 @@ footer {
   margin-top: auto;
   padding-top: var(--klevu-spacing-04);
   border-top: 1px solid var(--klevu-color-neutral-3);
+}
+
+footer .inputs {
   display: flex;
   gap: var(--klevu-spacing-04);
 }
