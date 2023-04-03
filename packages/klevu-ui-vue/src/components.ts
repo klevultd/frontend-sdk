@@ -27,6 +27,7 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
   'isSecondary',
   'isTertiary',
   'fullWidth',
+  'size',
   'icon'
 ]);
 
@@ -37,6 +38,7 @@ export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble
 
 
 export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
+  'showLoading',
   'klevuChatLayoutMessageSent'
 ]);
 

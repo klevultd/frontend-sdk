@@ -12,9 +12,14 @@ const productItem = mockProducts[0]
 <Description>{meta.description}</Description>
 
 <Canvas>
-  <Story name="Chat">
+  <Story
+    name="Chat"
+    args={{
+      showLoading: false,
+    }}
+  >
     {(args) => html`
-      <klevu-chat-layout>
+      <klevu-chat-layout show-loading=${ifDefined(args.showLoading)}>
         <klevu-chat-bubble remote=${ifDefined(args.remote)}
           >Hello world! This is a content for chat bubble!</klevu-chat-bubble
         >
@@ -24,27 +29,77 @@ const productItem = mockProducts[0]
           paragraphes to fill the space fully.</klevu-chat-bubble
         >
         <klevu-chat-bubble remote>And this is where remote answers!</klevu-chat-bubble>
-        <klevu-slides>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
-          <klevu-product variant="small" .product=${productItem}></klevu-product>
+        <klevu-slides style="--klevu-slides-item-width: 200px;">
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
+          <klevu-product hide-swatches hide-brand .product=${productItem}>
+            <div slot="bottom">
+              <klevu-button full-width>Quick view</klevu-button>
+              <klevu-button full-width>Show more like this</klevu-button>
+            </div>
+          </klevu-product>
         </klevu-slides>
         <klevu-chat-bubble>Oh nice! I didn't know that we have responses in examples.</klevu-chat-bubble>
         <klevu-chat-bubble remote
           >You can also make selections in this UI. Here are several options to select from:</klevu-chat-bubble
         >
         <div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 8px 16px;">
-          <klevu-button is-secondary>Option 1</klevu-button>
-          <klevu-button is-secondary>Option 2</klevu-button>
-          <klevu-button is-secondary>Option 3</klevu-button>
-          <klevu-button is-secondary>Option 4</klevu-button>
+          <klevu-button is-secondary size="small">Option 1</klevu-button>
+          <klevu-button is-secondary size="small">Option 2</klevu-button>
+          <klevu-button is-secondary size="small">Option 3</klevu-button>
+          <klevu-button is-secondary size="small">Option 4</klevu-button>
         </div>
         <div slot="menu">Hello menu!</div>
       </klevu-chat-layout>

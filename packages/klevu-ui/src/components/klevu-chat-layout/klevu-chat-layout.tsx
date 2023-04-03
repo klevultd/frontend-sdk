@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, State, h, Method } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 
 /**
@@ -13,7 +13,15 @@ import { globalExportedParts } from "../../utils/utils"
 })
 export class KlevuChatLayout {
   @Element() el!: HTMLElement
+
   #scrollElement?: HTMLKlevuUtilScrollbarsElement
+  #popupElement?: HTMLKlevuPopupElement
+
+  /**
+   * Show loading indicator
+   */
+  @Prop()
+  showLoading = false
 
   /**
    * Current value of the text field
@@ -34,15 +42,28 @@ export class KlevuChatLayout {
     }, 20)
   }
 
+  /**
+   * Scroll current chat to bottom of page
+   */
   @Method()
   async scrollMainToBottom() {
     const instance = await this.#scrollElement?.getInstance()
     if (instance) {
-      instance.elements().viewport.scrollTo({
-        top: instance.elements().viewport.scrollHeight,
-        behavior: "smooth",
-      })
+      setTimeout(() => {
+        instance.elements().viewport.scrollTo({
+          top: instance.elements().viewport.scrollHeight,
+          behavior: "smooth",
+        })
+      }, 20)
     }
+  }
+
+  /**
+   * Close the popup menu
+   */
+  @Method()
+  async closePopup() {
+    this.#popupElement?.closeModal()
   }
 
   /**
@@ -64,27 +85,30 @@ export class KlevuChatLayout {
           </main>
         </klevu-util-scrollbars>
         <footer>
-          <klevu-popup anchor="top-start">
-            <div slot="content">
-              <slot name="menu"></slot>
-            </div>
-            <klevu-button slot="origin" exportparts={globalExportedParts} icon="menu" isSecondary></klevu-button>
-          </klevu-popup>
-          <klevu-textfield
-            variant="pill"
-            value={this.text}
-            onKlevuTextChanged={(e) => {
-              this.text = e.detail
-              e.preventDefault()
-              return false
-            }}
-            onKlevuTextEnterPressed={() => this.#sendMessage()}
-          ></klevu-textfield>
-          <klevu-button
-            exportparts={globalExportedParts}
-            icon="send"
-            onClick={() => this.#sendMessage()}
-          ></klevu-button>
+          <slot name="actions"></slot>
+          <div class="inputs">
+            <klevu-popup anchor="top-start" ref={(el) => (this.#popupElement = el)}>
+              <div slot="content">
+                <slot name="menu"></slot>
+              </div>
+              <klevu-button slot="origin" exportparts={globalExportedParts} icon="menu" isSecondary></klevu-button>
+            </klevu-popup>
+            <klevu-textfield
+              variant="pill"
+              value={this.text}
+              onKlevuTextChanged={(e) => {
+                this.text = e.detail
+                e.preventDefault()
+                return false
+              }}
+              onKlevuTextEnterPressed={() => this.#sendMessage()}
+            ></klevu-textfield>
+            <klevu-button
+              exportparts={globalExportedParts}
+              icon="send"
+              onClick={() => this.#sendMessage()}
+            ></klevu-button>
+          </div>
         </footer>
       </Host>
     )

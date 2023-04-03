@@ -10,6 +10,13 @@ export type MoiRequest = {
   filter?: {
     value: string
   }
+  product?: {
+    context: {
+      url: string
+    }
+    id: string
+    intent: string
+  }
 }
 
 export type MoiResponse = {
@@ -118,8 +125,9 @@ export type MoiSession = {
   messages: Array<
     MoiResponseText | MoiResponseFilter | MoiProducts | MoiLocalMessage
   >
-  menu: MoiMenuOptions
-  genericOptions: MoiResponseGenericOptions
+  clear: () => void
+  menu: MoiMenuOptions["menuOptions"]
+  genericOptions: MoiResponseGenericOptions["genericOptions"]
 }
 
 export async function startMoi(onMessage?: () => void): Promise<MoiSession> {
@@ -171,6 +179,10 @@ export async function startMoi(onMessage?: () => void): Promise<MoiSession> {
 
       return res
     },
+    clear() {
+      this.messages = []
+      onMessage?.()
+    },
     messages,
     genericOptions,
     menu,
@@ -187,18 +199,19 @@ async function queryMoi(request: MoiRequest) {
 
 function parseResponse(response: MoiResponse) {
   const messages: Array<MoiResponseText | MoiResponseFilter | MoiProducts> = []
-  let genericOptions: MoiResponseGenericOptions | undefined = undefined
-  let menu: MoiMenuOptions | undefined = undefined
+  let genericOptions: MoiResponseGenericOptions["genericOptions"] | undefined =
+    undefined
+  let menu: MoiMenuOptions["menuOptions"] | undefined = undefined
   for (const d of response.data) {
     "message" in d && messages.push(d)
     "filter" in d && messages.push(d)
     "productData" in d && messages.push(d)
 
     if ("genericOptions" in d) {
-      genericOptions = d
+      genericOptions = d.genericOptions
     }
     if ("menuOptions" in d) {
-      menu = d
+      menu = d.menuOptions
     }
   }
 
