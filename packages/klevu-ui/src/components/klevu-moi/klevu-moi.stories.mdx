@@ -11,5 +11,11 @@ const meta = MDXAutoFillMeta("klevu-moi")
 <Description>{meta.description}</Description>
 
 <Canvas>
-  <Story name="Moi">{(args) => html`<klevu-moi></klevu-moi>`}</Story>
+  <Story name="Moi">
+    {(args) => html`
+      <klevu-init api-key="klevu-156934068344410779" url="eucs15lb.ksearchnet.com">
+        <klevu-moi style="height: 600px"></klevu-moi>
+      </klevu-init>
+    `}
+  </Story>
 </Canvas>

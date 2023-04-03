@@ -1,3 +1,8 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 /*! 
  * OverlayScrollbars
  * Version: 2.1.0

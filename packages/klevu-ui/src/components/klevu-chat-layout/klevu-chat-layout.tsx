@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, State, h } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Host, State, h, Method } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 
 /**
@@ -24,17 +24,18 @@ export class KlevuChatLayout {
     // listen to updates to DOM in slot and scroll to bottom
     const main = this.el.shadowRoot?.querySelector("slot")
     const observer = new MutationObserver(() => {
-      this.#scrollMainToBottom()
+      this.scrollMainToBottom()
     })
     if (main) {
       observer.observe(main, { childList: true })
     }
     setTimeout(() => {
-      this.#scrollMainToBottom()
+      this.scrollMainToBottom()
     }, 20)
   }
 
-  async #scrollMainToBottom() {
+  @Method()
+  async scrollMainToBottom() {
     const instance = await this.#scrollElement?.getInstance()
     if (instance) {
       instance.elements().viewport.scrollTo({
