@@ -13,14 +13,16 @@ Component that wraps chat elements into a layout.
 
 | Property      | Attribute      | Description            | Type      | Default |
 | ------------- | -------------- | ---------------------- | --------- | ------- |
+| `showClose`   | `show-close`   |                        | `boolean` | `false` |
 | `showLoading` | `show-loading` | Show loading indicator | `boolean` | `false` |
 
 
 ## Events
 
-| Event                        | Description                             | Type                  |
-| ---------------------------- | --------------------------------------- | --------------------- |
-| `klevuChatLayoutMessageSent` | Event emitted when user sends a message | `CustomEvent<string>` |
+| Event                        | Description                                    | Type                  |
+| ---------------------------- | ---------------------------------------------- | --------------------- |
+| `klevuChatLayoutClose`       | Event emitted when user closes the chat layout | `CustomEvent<void>`   |
+| `klevuChatLayoutMessageSent` | Event emitted when user sends a message        | `CustomEvent<string>` |
 
 
 ## Methods
@@ -54,17 +56,19 @@ Type: `Promise<void>`
 
 ### Depends on
 
+- [klevu-typography](../klevu-typography)
+- [klevu-button](../klevu-button)
 - [klevu-util-scrollbars](../klevu-util-scrollbars)
 - [klevu-popup](../klevu-popup)
-- [klevu-button](../klevu-button)
 - [klevu-textfield](../klevu-textfield)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-chat-layout --> klevu-typography
+  klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-util-scrollbars
   klevu-chat-layout --> klevu-popup
-  klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-textfield
   klevu-button --> klevu-typography
   klevu-moi --> klevu-chat-layout

@@ -25,6 +25,7 @@ export const KlevuLatestSearches = /*@__PURE__*/createReactComponent<JSX.KlevuLa
 export const KlevuLayoutResults = /*@__PURE__*/createReactComponent<JSX.KlevuLayoutResults, HTMLKlevuLayoutResultsElement>('klevu-layout-results');
 export const KlevuList = /*@__PURE__*/createReactComponent<JSX.KlevuList, HTMLKlevuListElement>('klevu-list');
 export const KlevuMerchandising = /*@__PURE__*/createReactComponent<JSX.KlevuMerchandising, HTMLKlevuMerchandisingElement>('klevu-merchandising');
+export const KlevuModal = /*@__PURE__*/createReactComponent<JSX.KlevuModal, HTMLKlevuModalElement>('klevu-modal');
 export const KlevuMoi = /*@__PURE__*/createReactComponent<JSX.KlevuMoi, HTMLKlevuMoiElement>('klevu-moi');
 export const KlevuPagination = /*@__PURE__*/createReactComponent<JSX.KlevuPagination, HTMLKlevuPaginationElement>('klevu-pagination');
 export const KlevuPopularSearches = /*@__PURE__*/createReactComponent<JSX.KlevuPopularSearches, HTMLKlevuPopularSearchesElement>('klevu-popular-searches');

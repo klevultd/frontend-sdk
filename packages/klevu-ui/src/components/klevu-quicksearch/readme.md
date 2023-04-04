@@ -37,6 +37,7 @@ Full app to create search bar that popups trending products and search results.
 
 - [klevu-popup](../klevu-popup)
 - [klevu-search-field](../klevu-search-field)
+- [klevu-moi](../klevu-moi)
 - [klevu-suggestions-list](../klevu-suggestions-list)
 - [klevu-cms-list](../klevu-cms-list)
 - [klevu-typography](../klevu-typography)
@@ -44,6 +45,7 @@ Full app to create search bar that popups trending products and search results.
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-pagination](../klevu-pagination)
+- [klevu-button](../klevu-button)
 - [klevu-popular-searches](../klevu-popular-searches)
 - [klevu-latest-searches](../klevu-latest-searches)
 - [klevu-tab](../klevu-tab)
@@ -53,6 +55,7 @@ Full app to create search bar that popups trending products and search results.
 graph TD;
   klevu-quicksearch --> klevu-popup
   klevu-quicksearch --> klevu-search-field
+  klevu-quicksearch --> klevu-moi
   klevu-quicksearch --> klevu-suggestions-list
   klevu-quicksearch --> klevu-cms-list
   klevu-quicksearch --> klevu-typography
@@ -60,19 +63,35 @@ graph TD;
   klevu-quicksearch --> klevu-product-grid
   klevu-quicksearch --> klevu-product
   klevu-quicksearch --> klevu-pagination
+  klevu-quicksearch --> klevu-button
   klevu-quicksearch --> klevu-popular-searches
   klevu-quicksearch --> klevu-latest-searches
   klevu-quicksearch --> klevu-tab
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
   klevu-button --> klevu-typography
+  klevu-moi --> klevu-chat-layout
+  klevu-moi --> klevu-button
+  klevu-moi --> klevu-modal
+  klevu-moi --> klevu-product
+  klevu-moi --> klevu-chat-bubble
+  klevu-moi --> klevu-slides
+  klevu-chat-layout --> klevu-typography
+  klevu-chat-layout --> klevu-button
+  klevu-chat-layout --> klevu-util-scrollbars
+  klevu-chat-layout --> klevu-popup
+  klevu-chat-layout --> klevu-textfield
+  klevu-product --> klevu-typography
+  klevu-chat-bubble --> klevu-typography
+  klevu-slides --> klevu-typography
+  klevu-slides --> klevu-button
+  klevu-slides --> klevu-util-scrollbars
   klevu-suggestions-list --> klevu-typography
   klevu-suggestions-list --> klevu-list
   klevu-list --> klevu-typography
   klevu-cms-list --> klevu-typography
   klevu-cms-list --> klevu-list
   klevu-sort --> klevu-dropdown
-  klevu-product --> klevu-typography
   klevu-popular-searches --> klevu-typography
   klevu-popular-searches --> klevu-list
   klevu-latest-searches --> klevu-typography

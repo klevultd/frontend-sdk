@@ -23,6 +23,9 @@ export class KlevuChatLayout {
   @Prop()
   showLoading = false
 
+  @Prop()
+  showClose = false
+
   /**
    * Current value of the text field
    */
@@ -71,6 +74,11 @@ export class KlevuChatLayout {
    */
   @Event() klevuChatLayoutMessageSent!: EventEmitter<string>
 
+  /**
+   * Event emitted when user closes the chat layout
+   */
+  @Event() klevuChatLayoutClose!: EventEmitter<void>
+
   #sendMessage() {
     this.klevuChatLayoutMessageSent.emit(this.text)
     this.text = ""
@@ -79,11 +87,23 @@ export class KlevuChatLayout {
   render() {
     return (
       <Host>
-        <klevu-util-scrollbars overflowX="hidden" overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
-          <main>
+        <header>
+          <klevu-typography variant="body-m-bold">MOI</klevu-typography>
+          {this.showClose && (
+            <klevu-button
+              onClick={() => this.klevuChatLayoutClose.emit()}
+              size="small"
+              exportparts={globalExportedParts}
+              icon="close"
+              isSecondary
+            ></klevu-button>
+          )}
+        </header>
+        <main>
+          <klevu-util-scrollbars overflowX="hidden" overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
             <slot></slot>
-          </main>
-        </klevu-util-scrollbars>
+          </klevu-util-scrollbars>
+        </main>
         <footer>
           <slot name="actions"></slot>
           <div class="inputs">

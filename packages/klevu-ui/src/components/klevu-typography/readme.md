@@ -22,6 +22,7 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-badge](../klevu-badge)
  - [klevu-button](../klevu-button)
  - [klevu-chat-bubble](../klevu-chat-bubble)
+ - [klevu-chat-layout](../klevu-chat-layout)
  - [klevu-checkbox](../klevu-checkbox)
  - [klevu-chip](../klevu-chip)
  - [klevu-cms-list](../klevu-cms-list)
@@ -44,6 +45,7 @@ graph TD;
   klevu-badge --> klevu-typography
   klevu-button --> klevu-typography
   klevu-chat-bubble --> klevu-typography
+  klevu-chat-layout --> klevu-typography
   klevu-checkbox --> klevu-typography
   klevu-chip --> klevu-typography
   klevu-cms-list --> klevu-typography
