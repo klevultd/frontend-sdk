@@ -125,20 +125,44 @@ export class KlevuMoi {
         {this.messages.map((message) => {
           if ("message" in message) {
             return (
-              <klevu-chat-bubble remote exportparts={globalExportedParts}>
-                {message.message.value}
-              </klevu-chat-bubble>
+              <Fragment>
+                <klevu-chat-bubble remote exportparts={globalExportedParts}>
+                  {message.message.value}
+                </klevu-chat-bubble>
+                {message.message.note && (
+                  <klevu-typography
+                    style={{
+                      "--klevu-typography-color": "var(--klevu-color-neutral-6)",
+                    }}
+                    variant="body-xs"
+                  >
+                    {message.message.note}
+                  </klevu-typography>
+                )}
+              </Fragment>
             )
           }
           if ("filter" in message) {
             return (
-              <div class="filteractions">
-                {message.filter.options.map((o) => (
-                  <klevu-button isSecondary onClick={() => this.#sendFilter(o.value)}>
-                    {o.name}
-                  </klevu-button>
-                ))}
-              </div>
+              <Fragment>
+                <div class="filteractions">
+                  {message.filter.options.map((o) => (
+                    <klevu-button isSecondary onClick={() => this.#sendFilter(o.value)}>
+                      {o.name}
+                    </klevu-button>
+                  ))}
+                </div>
+                {message.filter.note && (
+                  <klevu-typography
+                    style={{
+                      "--klevu-typography-color": "var(--klevu-color-neutral-6)",
+                    }}
+                    variant="body-xs"
+                  >
+                    {message.filter.note}
+                  </klevu-typography>
+                )}
+              </Fragment>
             )
           }
           if ("productData" in message) {
@@ -179,6 +203,16 @@ export class KlevuMoi {
                     </klevu-product>
                   ))}
                 </klevu-slides>
+                {message.productData.note && (
+                  <klevu-typography
+                    style={{
+                      "--klevu-typography-color": "var(--klevu-color-neutral-6)",
+                    }}
+                    variant="body-xs"
+                  >
+                    {message.productData.note}
+                  </klevu-typography>
+                )}
               </div>
             )
           }

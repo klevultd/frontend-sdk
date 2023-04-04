@@ -1,6 +1,8 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../../index.js"
 import { post } from "../fetch.js"
 
+const STORAGE_KEY = "klevu-moi-session"
+
 export type MoiRequest = {
   context: {
     klevuApiKey: string
@@ -107,6 +109,17 @@ type MoiProducts = {
   }
 }
 
+type MoiActionsMessage = {
+  actions: {
+    actions: Array<{
+      type: "purgeHistory"
+      context: {
+        value: string
+      }
+    }>
+  }
+}
+
 type MoiLocalMessage = {
   local: {
     message: string
@@ -119,6 +132,7 @@ export type MoiResponseObjects =
   | MoiResponseGenericOptions
   | MoiMenuOptions
   | MoiProducts
+  | MoiActionsMessage
 
 export type MoiSession = {
   query: (request: Omit<MoiRequest, "context">) => Promise<MoiResponse>
@@ -130,12 +144,22 @@ export type MoiSession = {
   genericOptions: MoiResponseGenericOptions["genericOptions"]
 }
 
+type MoiSavedSession = {
+  sessionId: string
+  messages: MoiSession["messages"]
+}
+
 export async function startMoi(onMessage?: () => void): Promise<MoiSession> {
+  // FIXME: This should work, but it doesn't
   // const klevuApiKey = KlevuConfig.getDefault().apiKey
   const klevuApiKey = "klevu-156934068344410779"
+
+  const storedSession = await getStoredSession()
+
   const result = await queryMoi({
     context: {
       klevuApiKey,
+      sessionId: storedSession?.sessionId,
     },
   })
 
@@ -147,7 +171,14 @@ export async function startMoi(onMessage?: () => void): Promise<MoiSession> {
 
   const sessionId = ctx.context.sessionId
 
+  let startingMessages: MoiSession["messages"] = []
+  if (storedSession) {
+    startingMessages = storedSession.messages
+  }
+
   const { messages, genericOptions, menu } = parseResponse(result)
+
+  startingMessages = [...startingMessages, ...messages]
 
   const session: MoiSession = {
     async query(request) {
@@ -171,23 +202,57 @@ export async function startMoi(onMessage?: () => void): Promise<MoiSession> {
         throw new Error("No response from MOI")
       }
 
+      // run actions first
+      for (const obj of res.data) {
+        if ("actions" in obj) {
+          for (const action of obj.actions.actions) {
+            if (action.type === "purgeHistory") {
+              this.clear()
+            }
+          }
+        }
+      }
+
       const { messages, genericOptions, menu } = parseResponse(res)
       this.messages = [...this.messages, ...messages]
       onMessage?.()
       this.genericOptions = genericOptions
       this.menu = menu
 
+      saveSession({
+        sessionId,
+        messages: this.messages,
+      })
+
       return res
     },
     clear() {
       this.messages = []
+      saveSession({
+        sessionId,
+        messages: this.messages,
+      })
       onMessage?.()
     },
-    messages,
+    messages: startingMessages,
     genericOptions,
     menu,
   }
   return session
+}
+
+function getStoredSession(): MoiSavedSession | undefined {
+  const storedSession = localStorage.getItem(STORAGE_KEY)
+  if (!storedSession) {
+    return undefined
+  }
+
+  const session = JSON.parse(storedSession) as MoiSavedSession
+  return session
+}
+
+function saveSession(session: MoiSavedSession) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
 }
 
 async function queryMoi(request: MoiRequest) {
