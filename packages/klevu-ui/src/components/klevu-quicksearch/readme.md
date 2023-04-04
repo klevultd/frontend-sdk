@@ -75,6 +75,7 @@ graph TD;
   klevu-moi --> klevu-modal
   klevu-moi --> klevu-product
   klevu-moi --> klevu-chat-bubble
+  klevu-moi --> klevu-typography
   klevu-moi --> klevu-slides
   klevu-chat-layout --> klevu-typography
   klevu-chat-layout --> klevu-button

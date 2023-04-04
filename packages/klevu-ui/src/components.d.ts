@@ -975,6 +975,7 @@ export namespace Components {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
+     * @cssprop --klevu-typography-color - Color of the text
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -1495,6 +1496,7 @@ declare global {
     };
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
+     * @cssprop --klevu-typography-color - Color of the text
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -2552,6 +2554,7 @@ declare namespace LocalJSX {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
+     * @cssprop --klevu-typography-color - Color of the text
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -2862,6 +2865,7 @@ declare module "@stencil/core" {
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             /**
              * Klevu typography component. This component is used in most places to set correct font in component pieces.
+             * @cssprop --klevu-typography-color - Color of the text
              * @cssprop --klevu-h1-size 24px H1 size
              * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
              * @cssprop --klevu-h1-weight 700 H1 weight

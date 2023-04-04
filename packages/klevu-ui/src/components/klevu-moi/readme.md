@@ -29,6 +29,7 @@ Klevu MOI Application
 - [klevu-modal](../klevu-modal)
 - [klevu-product](../klevu-product)
 - [klevu-chat-bubble](../klevu-chat-bubble)
+- [klevu-typography](../klevu-typography)
 - [klevu-slides](../klevu-slides)
 
 ### Graph
@@ -39,6 +40,7 @@ graph TD;
   klevu-moi --> klevu-modal
   klevu-moi --> klevu-product
   klevu-moi --> klevu-chat-bubble
+  klevu-moi --> klevu-typography
   klevu-moi --> klevu-slides
   klevu-chat-layout --> klevu-typography
   klevu-chat-layout --> klevu-button
