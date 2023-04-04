@@ -101,6 +101,7 @@ export class KlevuQuicksearch {
   @State() searchSort?: KlevuSearchSorting
   @State() lastClickedProducts?: KlevuRecord[]
   @State() activeTab: "trending" | "last" = "trending"
+  @State() chat = false
 
   #searchField?: HTMLKlevuSearchFieldElement
 
@@ -150,6 +151,11 @@ export class KlevuQuicksearch {
     if (product.id) {
       this.clickEvent?.(product.id, product.itemGroupId || product.id)
     }
+  }
+
+  @Listen("klevuChatLayoutClose")
+  onChatLayoutClose() {
+    this.chat = false
   }
 
   async connectedCallback() {
@@ -238,6 +244,7 @@ export class KlevuQuicksearch {
               : null}
           </div>
         </klevu-popup>
+        {this.chat && <klevu-moi showClose exportparts={globalExportedParts}></klevu-moi>}
       </Host>
     )
   }
@@ -320,6 +327,9 @@ export class KlevuQuicksearch {
     return (
       <Fragment>
         <aside>
+          <klevu-button size="small" onClick={() => (this.chat = true)}>
+            Start chat
+          </klevu-button>
           <klevu-popular-searches
             onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-popular-searches>

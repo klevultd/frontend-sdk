@@ -39,7 +39,9 @@ export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble
 
 export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
   'showLoading',
-  'klevuChatLayoutMessageSent'
+  'showClose',
+  'klevuChatLayoutMessageSent',
+  'klevuChatLayoutClose'
 ]);
 
 
@@ -147,7 +149,14 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
 ]);
 
 
-export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined);
+export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-modal', undefined, [
+  'startOpen'
+]);
+
+
+export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined, [
+  'showClose'
+]);
 
 
 export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination>('klevu-pagination', undefined, [

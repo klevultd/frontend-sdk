@@ -9,34 +9,49 @@
 
 Klevu MOI Application
 
+## Properties
+
+| Property    | Attribute    | Description | Type      | Default |
+| ----------- | ------------ | ----------- | --------- | ------- |
+| `showClose` | `show-close` |             | `boolean` | `false` |
+
+
 ## Dependencies
+
+### Used by
+
+ - [klevu-quicksearch](../klevu-quicksearch)
 
 ### Depends on
 
 - [klevu-chat-layout](../klevu-chat-layout)
 - [klevu-button](../klevu-button)
+- [klevu-modal](../klevu-modal)
+- [klevu-product](../klevu-product)
 - [klevu-chat-bubble](../klevu-chat-bubble)
 - [klevu-slides](../klevu-slides)
-- [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-moi --> klevu-chat-layout
   klevu-moi --> klevu-button
+  klevu-moi --> klevu-modal
+  klevu-moi --> klevu-product
   klevu-moi --> klevu-chat-bubble
   klevu-moi --> klevu-slides
-  klevu-moi --> klevu-product
+  klevu-chat-layout --> klevu-typography
+  klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-util-scrollbars
   klevu-chat-layout --> klevu-popup
-  klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-textfield
   klevu-button --> klevu-typography
+  klevu-product --> klevu-typography
   klevu-chat-bubble --> klevu-typography
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
-  klevu-product --> klevu-typography
+  klevu-quicksearch --> klevu-moi
   style klevu-moi fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

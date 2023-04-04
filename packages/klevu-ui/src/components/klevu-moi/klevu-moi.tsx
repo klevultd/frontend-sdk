@@ -1,6 +1,6 @@
-import { Component, Host, h, State, Fragment } from "@stencil/core"
+import { Component, Host, h, State, Fragment, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
-import { startMoi, MoiSession, MoiRequest } from "@klevu/core"
+import { startMoi, MoiSession, MoiRequest, KlevuRecord } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 /**
@@ -13,10 +13,17 @@ import { KlevuInit } from "../klevu-init/klevu-init"
 })
 export class KlevuMoi {
   session?: MoiSession
-  layoutRef!: HTMLKlevuChatLayoutElement
+  #layoutRef?: HTMLKlevuChatLayoutElement
+  #modalRef?: HTMLKlevuModalElement
+
+  @State()
+  currentProduct?: Partial<KlevuRecord>
 
   @State()
   messages: MoiSession["messages"] = []
+
+  @Prop()
+  showClose = false
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -36,7 +43,7 @@ export class KlevuMoi {
       product,
     })
 
-    this.layoutRef.scrollMainToBottom()
+    this.#layoutRef?.scrollMainToBottom()
   }
 
   onMessage() {
@@ -44,7 +51,7 @@ export class KlevuMoi {
       return
     }
     this.messages = this.session.messages
-    this.layoutRef.scrollMainToBottom()
+    this.#layoutRef?.scrollMainToBottom()
   }
 
   async #sendFilter(filterValue: string) {
@@ -56,7 +63,7 @@ export class KlevuMoi {
         value: filterValue,
       },
     })
-    this.layoutRef.scrollMainToBottom()
+    this.#layoutRef?.scrollMainToBottom()
   }
 
   render() {
@@ -66,8 +73,9 @@ export class KlevuMoi {
           exportparts={globalExportedParts}
           onKlevuChatLayoutMessageSent={(e) => this.#sendMessage(e.detail)}
           ref={(el) => {
-            this.layoutRef = el as HTMLKlevuChatLayoutElement
+            this.#layoutRef = el
           }}
+          showClose={this.showClose}
         >
           {this.renderChatContent()}
           <div slot="actions" class="genericactions">
@@ -96,7 +104,7 @@ export class KlevuMoi {
                   } else {
                     console.error("Not implemented yet")
                   }
-                  this.layoutRef.closePopup()
+                  this.#layoutRef?.closePopup()
                 }}
               >
                 {item.name}
@@ -104,6 +112,9 @@ export class KlevuMoi {
             ))}
           </div>
         </klevu-chat-layout>
+        <klevu-modal exportparts={globalExportedParts} ref={(el) => (this.#modalRef = el)}>
+          <klevu-product product={this.currentProduct}></klevu-product>
+        </klevu-modal>
       </Host>
     )
   }
@@ -140,7 +151,7 @@ export class KlevuMoi {
                   }}
                 >
                   {message.productData.products.map((product) => (
-                    <klevu-product product={product}>
+                    <klevu-product product={product} hideSwatches>
                       <div slot="bottom" class="productactions">
                         {product.options.map((option) => (
                           <klevu-button
@@ -155,6 +166,9 @@ export class KlevuMoi {
                                   id: product.id,
                                   intent: option.intent,
                                 })
+                              } else if (option.intent === "quick-view") {
+                                this.currentProduct = product
+                                this.#modalRef?.openModal()
                               }
                             }}
                           >

@@ -123,6 +123,7 @@ export namespace Components {
           * Scroll current chat to bottom of page
          */
         "scrollMainToBottom": () => Promise<void>;
+        "showClose": boolean;
         /**
           * Show loading indicator
          */
@@ -443,9 +444,18 @@ export namespace Components {
         "usePagination"?: boolean;
     }
     /**
+     * Stylized modal dialog.
+     */
+    interface KlevuModal {
+        "closeModal": () => Promise<void>;
+        "openModal": () => Promise<void>;
+        "startOpen": boolean;
+    }
+    /**
      * Klevu MOI Application
      */
     interface KlevuMoi {
+        "showClose": boolean;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -1299,6 +1309,15 @@ declare global {
         new (): HTMLKlevuMerchandisingElement;
     };
     /**
+     * Stylized modal dialog.
+     */
+    interface HTMLKlevuModalElement extends Components.KlevuModal, HTMLStencilElement {
+    }
+    var HTMLKlevuModalElement: {
+        prototype: HTMLKlevuModalElement;
+        new (): HTMLKlevuModalElement;
+    };
+    /**
      * Klevu MOI Application
      */
     interface HTMLKlevuMoiElement extends Components.KlevuMoi, HTMLStencilElement {
@@ -1536,6 +1555,7 @@ declare global {
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
         "klevu-list": HTMLKlevuListElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
+        "klevu-modal": HTMLKlevuModalElement;
         "klevu-moi": HTMLKlevuMoiElement;
         "klevu-pagination": HTMLKlevuPaginationElement;
         "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
@@ -1636,9 +1656,14 @@ declare namespace LocalJSX {
      */
     interface KlevuChatLayout {
         /**
+          * Event emitted when user closes the chat layout
+         */
+        "onKlevuChatLayoutClose"?: (event: KlevuChatLayoutCustomEvent<void>) => void;
+        /**
           * Event emitted when user sends a message
          */
         "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
+        "showClose"?: boolean;
         /**
           * Show loading indicator
          */
@@ -1971,9 +1996,16 @@ declare namespace LocalJSX {
         "usePagination"?: boolean;
     }
     /**
+     * Stylized modal dialog.
+     */
+    interface KlevuModal {
+        "startOpen"?: boolean;
+    }
+    /**
      * Klevu MOI Application
      */
     interface KlevuMoi {
+        "showClose"?: boolean;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -2579,6 +2611,7 @@ declare namespace LocalJSX {
         "klevu-layout-results": KlevuLayoutResults;
         "klevu-list": KlevuList;
         "klevu-merchandising": KlevuMerchandising;
+        "klevu-modal": KlevuModal;
         "klevu-moi": KlevuMoi;
         "klevu-pagination": KlevuPagination;
         "klevu-popular-searches": KlevuPopularSearches;
@@ -2732,6 +2765,10 @@ declare module "@stencil/core" {
              * Full merchandising app to power up your product grid pages
              */
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
+            /**
+             * Stylized modal dialog.
+             */
+            "klevu-modal": LocalJSX.KlevuModal & JSXBase.HTMLAttributes<HTMLKlevuModalElement>;
             /**
              * Klevu MOI Application
              */
