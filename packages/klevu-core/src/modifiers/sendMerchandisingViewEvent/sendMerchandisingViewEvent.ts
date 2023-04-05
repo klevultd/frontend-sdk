@@ -36,11 +36,6 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
         return res
       }
 
-      let activeFilters;
-      if(extractActiveFilters(queryResult) !== undefined){
-        activeFilters = extractActiveFilters(queryResult)
-      }
-
       KlevuEvents.categoryMerchandisingView(
         title,
         category,
@@ -48,7 +43,7 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
         queryResult.meta.offset,
         abtest?.abTestId,
         abtest?.abTestVariantId,
-        activeFilters
+        extractActiveFilters(queryResult)
       )
 
       return res
