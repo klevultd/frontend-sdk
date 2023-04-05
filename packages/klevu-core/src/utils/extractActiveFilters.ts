@@ -1,17 +1,19 @@
-import { KlevuQueryResult } from "../models/index.js"
+import { KlevuFilterType, KlevuQueryResult } from "../models/index.js"
 /**
- * build a string|undefined from active filters
+ * build a string|undefined from active filters in format that is required by Klevu API
  *
  * @param result the api result object
  */
-export function extractActiveFilters(result: KlevuQueryResult): string|undefined {
-  let selectedFiltersStr = "";
-  let isAnyFilterSelected = false;
-  if(!result.filters || result.filters.length === 0 ) {
-    return undefined;
+export function extractActiveFilters(
+  result: KlevuQueryResult
+): string | undefined {
+  let selectedFiltersStr = ""
+  let isAnyFilterSelected = false
+  if (!result.filters || result.filters.length === 0) {
+    return undefined
   }
-  result.filters?.forEach( function (filter) {
-    if (filter.type == "SLIDER") {
+  result.filters?.forEach(function (filter) {
+    if (filter.type === KlevuFilterType.Slider) {
       if (
         filter.start !== null &&
         typeof filter.start !== "undefined" &&
@@ -20,25 +22,25 @@ export function extractActiveFilters(result: KlevuQueryResult): string|undefined
       ) {
         if (filter.start != filter.min || filter.end != filter.max) {
           if (isAnyFilterSelected) {
-            selectedFiltersStr += ";;";
+            selectedFiltersStr += ";;"
           }
-          isAnyFilterSelected = true;
-          selectedFiltersStr += filter.key + ":" + filter.start + " - " + filter.end;
+          isAnyFilterSelected = true
+          selectedFiltersStr +=
+            filter.key + ":" + filter.start + " - " + filter.end
         }
       }
     } else {
-      filter.options.forEach( function (option ) {
+      filter.options.forEach(function (option) {
         if (option.selected) {
           if (isAnyFilterSelected) {
-            selectedFiltersStr += ";;";
+            selectedFiltersStr += ";;"
           }
-          isAnyFilterSelected = true;
-          selectedFiltersStr += filter.key + ":" + option.name;
+          isAnyFilterSelected = true
+          selectedFiltersStr += filter.key + ":" + option.name
         }
-      });
+      })
     }
-  });
+  })
 
-
-  return isAnyFilterSelected?selectedFiltersStr:undefined;
+  return isAnyFilterSelected ? selectedFiltersStr : undefined
 }

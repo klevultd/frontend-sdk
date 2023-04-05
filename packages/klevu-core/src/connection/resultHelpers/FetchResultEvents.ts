@@ -83,10 +83,6 @@ export function FetchResultEvents(
               abTestId = func.params.abtest.abTestId
               abTestVariantId = func.params.abtest.abTestVariantId
             }
-            let activeFilters;
-            if(extractActiveFilters(result) !== undefined){
-              activeFilters = extractActiveFilters(result)
-            }
 
             KlevuEvents.categoryMerchandisingProductClick(
               record,
@@ -96,7 +92,7 @@ export function FetchResultEvents(
               index + 1,
               abTestId,
               abTestVariantId,
-              activeFilters,
+              extractActiveFilters(result),
               override
             )
           }

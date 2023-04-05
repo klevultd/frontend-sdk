@@ -243,7 +243,7 @@ export class KlevuEvents {
     pageStartsFrom?: number,
     abTestId?: string,
     abTestVariantId?: string,
-    activeFilters?:string,
+    activeFilters?: string,
     override: Partial<KlevuV1CategoryProductsView> = {}
   ) {
     let data: KlevuV1CategoryProductsView = {
@@ -260,14 +260,9 @@ export class KlevuEvents {
         klevu_abTestVariantId: abTestVariantId,
       }
     }
-    if (activeFilters) {
-      data = {
-        ...data,
-        klevu_activeFilters: activeFilters
-      }
-    }
     KlevuEventV1CategoryView({
       ...data,
+      klevu_activeFilters: activeFilters,
       ...override,
     })
   }
@@ -290,7 +285,7 @@ export class KlevuEvents {
     productPosition?: number,
     abTestId?: string,
     abTestVariantId?: string,
-    activeFilters?:string,
+    activeFilters?: string,
     override: Partial<KlevuV1CategoryProductsClick> = {}
   ) {
     if (!product.id) {
@@ -319,15 +314,10 @@ export class KlevuEvents {
         klevu_abTestVariantId: abTestVariantId,
       }
     }
-    if (activeFilters) {
-      data = {
-        ...data,
-        klevu_activeFilters: activeFilters
-      }
-    }
 
     KlevuEventV1CategoryProductClick({
       ...data,
+      klevu_activeFilters: activeFilters,
       ...override,
     })
   }
