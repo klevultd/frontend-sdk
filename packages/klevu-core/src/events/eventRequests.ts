@@ -30,6 +30,9 @@ export type V1SearchEvent = {
    * FUZZY_AND). You need to pass this value to this parameter.
    */
   klevu_typeOfQuery: KlevuTypeOfSearch
+
+  /** Currently active filters in the last request */
+  klevu_activeFilters?: string
 }
 
 export async function KlevuEventV1Search(event: V1SearchEvent) {
@@ -98,6 +101,9 @@ export type V1ProductTrackingEvent = {
    * The unique identifier of the A/B Test Variant.
    */
   klevu_abTestVariantId?: string
+
+  /** Currently active filters in the last request */
+  klevu_activeFilters?: string
 }
 
 export async function KlevuEventV1ProductTracking(

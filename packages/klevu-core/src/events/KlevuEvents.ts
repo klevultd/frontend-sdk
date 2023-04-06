@@ -40,14 +40,16 @@ export class KlevuEvents {
    * @property override optional override any settings of sent data
    *
    */
-  static buy(
+  static buy({
+    items,
+  }: {
     items: Array<{
       amount: number
       product: Partial<KlevuRecord>
       variantId?: string
       override: Partial<V1CheckedOutProductsEvent>
     }>
-  ) {
+  }) {
     for (const item of items) {
       const p = item.product
 
@@ -80,11 +82,15 @@ export class KlevuEvents {
    * @param products List of all products that are shown
    * @param override Ability to override any analytical keys in low level
    */
-  static recommendationView(
-    recommendationMetadata: RecommendationViewEventMetaData,
-    products: Array<Partial<KlevuRecord>>,
-    override: Partial<KlevuEventV2Data> = {}
-  ) {
+  static recommendationView({
+    recommendationMetadata,
+    products,
+    override = {},
+  }: {
+    recommendationMetadata: RecommendationViewEventMetaData
+    products: Array<Partial<KlevuRecord>>
+    override?: Partial<KlevuEventV2Data>
+  }) {
     const data: KlevuEventV2Data = {
       event: "view_recs_list",
       event_apikey: KlevuConfig.getDefault().apiKey,
@@ -125,13 +131,19 @@ export class KlevuEvents {
    * @param productIndexInList What is the index of the product in the list. Starting from 1
    * @param override Ability to override any analytical keys in low level
    */
-  static recommendationClick(
-    recommendationMetadata: RecommendationViewEventMetaData,
-    product: Partial<KlevuRecord>,
-    productIndexInList: number,
-    variantId?: string,
-    override: Partial<KlevuEventV2Data> = {}
-  ) {
+  static recommendationClick({
+    recommendationMetadata,
+    product,
+    productIndexInList,
+    variantId,
+    override = {},
+  }: {
+    recommendationMetadata: RecommendationViewEventMetaData
+    product: Partial<KlevuRecord>
+    productIndexInList: number
+    variantId?: string
+    override?: Partial<KlevuEventV2Data>
+  }) {
     if (!product.id) {
       throw new Error("Cannot send event without product id")
     }
@@ -149,7 +161,7 @@ export class KlevuEvents {
           item_id: product.id,
           item_group_id: product.itemGroupId || product.id,
           item_name: product.name ?? "unknown",
-          item_variant_id: product.itemGroupId || product.id,
+          item_variant_id: variantId || product.id,
           price: product.price ?? "0",
           currency: product.currency,
           item_brand: product.brand,
@@ -171,12 +183,19 @@ export class KlevuEvents {
    * @param searchTerm
    * @param product
    */
-  static searchProductClick(
-    product: Partial<KlevuRecord>,
-    searchTerm?: string,
-    variantId?: string,
-    override: Partial<V1ProductTrackingEvent> = {}
-  ) {
+  static searchProductClick({
+    product,
+    searchTerm,
+    variantId,
+    activeFilters,
+    override = {},
+  }: {
+    product: Partial<KlevuRecord>
+    searchTerm?: string
+    variantId?: string
+    activeFilters?: string
+    override?: Partial<V1ProductTrackingEvent>
+  }) {
     if (!product.id) {
       throw new Error("Cannot send event without product id")
     }
@@ -190,6 +209,7 @@ export class KlevuEvents {
       klevu_productName: product.name ?? "unknown",
       klevu_productUrl: product.url ?? "",
       klevu_productVariantId: variantId || product.id,
+      klevu_activeFilters: activeFilters,
     }
     KlevuEventV1ProductTracking({
       ...data,
@@ -206,19 +226,28 @@ export class KlevuEvents {
    * @param typeOfSearch Type of search used (can be found in result meta)
    * @param override Ability to override any analytical keys in low level
    */
-  static search(
-    term: string,
-    totalResults: number,
-    typeOfSearch: KlevuTypeOfSearch,
-    override: Partial<V1SearchEvent> = {}
-  ) {
+  static search({
+    term,
+    totalResults,
+    typeOfSearch,
+    activeFilters,
+    override = {},
+  }: {
+    term: string
+    totalResults: number
+    typeOfSearch: KlevuTypeOfSearch
+    activeFilters?: string
+    override?: Partial<V1SearchEvent>
+  }) {
     KlevuLastSearches.save(term)
     const data: V1SearchEvent = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_term: term,
       klevu_totalResults: totalResults,
       klevu_typeOfQuery: typeOfSearch,
+      klevu_activeFilters: activeFilters,
     }
+
     KlevuEventV1Search({
       ...data,
       ...override,
@@ -236,33 +265,37 @@ export class KlevuEvents {
    * @param activeFilters The string version of active filters applied to the query that got the products.
    * @param override Ability to override any analytical keys in low level
    */
-  static categoryMerchandisingView(
-    categoryTitle: string,
-    klevuCategory: string,
-    products: Array<Pick<KlevuRecord, "id">>,
-    pageStartsFrom?: number,
-    abTestId?: string,
-    abTestVariantId?: string,
-    activeFilters?: string,
-    override: Partial<KlevuV1CategoryProductsView> = {}
-  ) {
-    let data: KlevuV1CategoryProductsView = {
+  static categoryMerchandisingView({
+    categoryTitle,
+    klevuCategory,
+    products,
+    pageStartsFrom,
+    abTestId,
+    abTestVariantId,
+    activeFilters,
+    override = {},
+  }: {
+    categoryTitle: string
+    klevuCategory: string
+    products: Array<Pick<KlevuRecord, "id">>
+    pageStartsFrom?: number
+    abTestId?: string
+    abTestVariantId?: string
+    activeFilters?: string
+    override?: Partial<KlevuV1CategoryProductsView>
+  }) {
+    const data: KlevuV1CategoryProductsView = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
       klevu_categoryPath: klevuCategory,
       klevu_productIds: products.map((p) => p.id).join(","),
       klevu_pageStartsFrom: pageStartsFrom,
-    }
-    if (abTestId && abTestVariantId) {
-      data = {
-        ...data,
-        klevu_abTestId: abTestId,
-        klevu_abTestVariantId: abTestVariantId,
-      }
+      klevu_activeFilters: activeFilters,
+      klevu_abTestId: abTestId,
+      klevu_abTestVariantId: abTestVariantId,
     }
     KlevuEventV1CategoryView({
       ...data,
-      klevu_activeFilters: activeFilters,
       ...override,
     })
   }
@@ -293,7 +326,7 @@ export class KlevuEvents {
     }
 
     KlevuLastClickedProducts.click(product.id, product)
-    let data: KlevuV1CategoryProductsClick = {
+    const data: KlevuV1CategoryProductsClick = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
       klevu_productGroupId: product.itemGroupId || product.id,
@@ -305,25 +338,14 @@ export class KlevuEvents {
       klevu_salePrice: product.salePrice,
       klevu_productSku: product.sku,
       klevu_productPosition: productPosition,
+      klevu_abTestId: abTestId,
+      klevu_abTestVariantId: abTestVariantId,
+      klevu_activeFilters: activeFilters,
     }
 
-    if (abTestId && abTestVariantId) {
-      data = {
-        ...data,
-        klevu_abTestId: abTestId,
-        klevu_abTestVariantId: abTestVariantId,
-      }
-    }
-
-    const toSend = {
+    KlevuEventV1CategoryProductClick({
       ...data,
       ...override,
-    }
-
-    if (activeFilters) {
-      toSend.klevu_activeFilters = activeFilters
-    }
-
-    KlevuEventV1CategoryProductClick(toSend)
+    })
   }
 }

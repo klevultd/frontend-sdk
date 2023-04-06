@@ -27,7 +27,11 @@ export function sendSearchEvent(): KlevuFetchModifer {
         return res
       }
 
-      KlevuEvents.search(term, meta.totalResultsFound, meta.typeOfSearch)
+      KlevuEvents.search({
+        term,
+        totalResults: meta.totalResultsFound,
+        typeOfSearch: meta.typeOfSearch,
+      })
 
       return res
     },

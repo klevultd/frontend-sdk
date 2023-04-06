@@ -23,12 +23,13 @@ export function FetchResultEvents(
           let viewSent = false
           return (productId, variantId?, override?) => {
             if (!viewSent) {
-              KlevuEvents.search(
-                result.meta.searchedTerm,
-                result.meta.noOfResults,
-                result.meta.typeOfSearch,
-                override
-              )
+              KlevuEvents.search({
+                term: result.meta.searchedTerm,
+                totalResults: result.meta.noOfResults,
+                typeOfSearch: result.meta.typeOfSearch,
+                activeFilters: extractActiveFilters(result),
+                override,
+              })
               viewSent = true
             }
 
@@ -42,11 +43,11 @@ export function FetchResultEvents(
               )
             }
 
-            KlevuEvents.searchProductClick(
-              record,
-              result.meta.searchedTerm,
-              variantId
-            )
+            KlevuEvents.searchProductClick({
+              product: record,
+              searchTerm: result.meta.searchedTerm,
+              variantId,
+            })
           }
         },
       }
@@ -123,13 +124,13 @@ export function FetchResultEvents(
             }
 
             const index = result.records.findIndex((r) => r.id === productId)
-            KlevuEvents.recommendationClick(
-              config.metadata,
-              record,
-              index + 1,
+            KlevuEvents.recommendationClick({
+              recommendationMetadata: config.metadata,
+              product: record,
+              productIndexInList: index + 1,
               variantId,
-              override
-            )
+              override,
+            })
           }
         },
       }
