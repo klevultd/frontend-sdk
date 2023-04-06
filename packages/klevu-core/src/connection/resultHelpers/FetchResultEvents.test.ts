@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+  applyFilters,
   categoryMerchandising,
   KlevuConfig,
   KlevuFetch,
   KlevuLastClickedProducts,
   kmcRecommendation,
+  listFilters,
   search,
 } from "../../index.js"
 import axios from "axios"
@@ -135,5 +137,83 @@ test("Override user IP for request", async () => {
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
+  )
+})
+
+test("Merchandising call has correct filters set", async () => {
+  const result = await KlevuFetch(
+    categoryMerchandising(
+      "Women",
+      {},
+      listFilters(),
+      applyFilters([
+        {
+          key: "color",
+          values: ["Agate", "Amber"],
+        },
+      ])
+    )
+  )
+
+  const query = result.queriesById("categoryMerchandising")
+  expect(query?.getCategoryMerchandisingClickSendEvent).toBeDefined()
+
+  const getSpySuccess = jest
+    .spyOn(KlevuConfig.default!.axios!, "get")
+    .mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        return resolve({
+          data: {},
+        })
+      })
+    })
+
+  const product = query!.records[0]
+  query?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining(
+      `klevu_activeFilters=${encodeURIComponent("color:Agate;;color:Amber")}`
+    )
+  )
+})
+
+test("Filters should not be set if there are no filters", async () => {
+  const result = await KlevuFetch(categoryMerchandising("Women"))
+
+  const query = result.queriesById("categoryMerchandising")
+  expect(query?.getCategoryMerchandisingClickSendEvent).toBeDefined()
+
+  const getSpySuccess = jest
+    .spyOn(KlevuConfig.default!.axios!, "get")
+    .mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        return resolve({
+          data: {},
+        })
+      })
+    })
+
+  const product = query!.records[0]
+  query?.getCategoryMerchandisingClickSendEvent?.()(
+    product.id,
+    "Women",
+    product.itemGroupId,
+    {
+      klevu_shopperIP: "192.168.0.1",
+    }
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.not.stringContaining("klevu_activeFilters")
   )
 })

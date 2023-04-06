@@ -315,10 +315,15 @@ export class KlevuEvents {
       }
     }
 
-    KlevuEventV1CategoryProductClick({
+    const toSend = {
       ...data,
-      klevu_activeFilters: activeFilters,
       ...override,
-    })
+    }
+
+    if (activeFilters) {
+      toSend.klevu_activeFilters = activeFilters
+    }
+
+    KlevuEventV1CategoryProductClick(toSend)
   }
 }
