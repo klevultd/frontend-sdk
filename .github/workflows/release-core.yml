@@ -48,6 +48,8 @@ jobs:
             This is automatic update of package version and a todo list. 
             NPM release has been already made and this is just update to repository.
 
+            TODO before merging this PR:
+
             - [ ] Create proper release notes
             - [ ] Update documentations to reflect changes
-            - [ ] After merging this PR please create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=core-${{steps.release.outputs.version}}
+            - [ ] Create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=core-${{steps.release.outputs.version}}

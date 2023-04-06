@@ -47,3 +47,8 @@ jobs:
           body: |
             This is automatic update of package versions. 
             NPM release has been already made and this is just update to repository.
+
+            TODO before merging this PR:
+
+            - [ ] Create proper release notes
+            - [ ] Create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=ui-${{steps.release.outputs.version}}
