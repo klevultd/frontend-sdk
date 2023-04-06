@@ -51,13 +51,13 @@ export function sendRecommendationViewEvent(
           return res
         }
 
-        KlevuEvents.recommendationView(
-          {
+        KlevuEvents.recommendationView({
+          recommendationMetadata: {
             ...kmcData.metadata,
             title,
           },
-          products
-        )
+          products,
+        })
         return res
       }
 
@@ -84,13 +84,13 @@ export function sendRecommendationViewEvent(
         return res
       }
 
-      KlevuEvents.recommendationView(
-        {
+      KlevuEvents.recommendationView({
+        recommendationMetadata: {
           ...eventData,
           title,
         },
-        products
-      )
+        products,
+      })
 
       return res
     },

@@ -36,15 +36,15 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
         return res
       }
 
-      KlevuEvents.categoryMerchandisingView(
-        title,
-        category,
-        queryResult.records,
-        queryResult.meta.offset,
-        abtest?.abTestId,
-        abtest?.abTestVariantId,
-        extractActiveFilters(queryResult)
-      )
+      KlevuEvents.categoryMerchandisingView({
+        categoryTitle: title,
+        klevuCategory: category,
+        products: queryResult.records,
+        pageStartsFrom: queryResult.meta.offset,
+        abTestId: abtest?.abTestId,
+        abTestVariantId: abtest?.abTestVariantId,
+        activeFilters: extractActiveFilters(queryResult),
+      })
 
       return res
     },
