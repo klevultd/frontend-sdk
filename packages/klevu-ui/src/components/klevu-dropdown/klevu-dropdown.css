@@ -7,13 +7,16 @@ select {
 
   font-size: var(--klevu-body-s-size);
   font-weight: var(--klevu-body-s-weight);
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   width: 100%;
   min-width: 80px;
   border: none;
   border-radius: var(--klevu-border-radius-m);
   height: calc(var(--klevu-size-m) * 2);
   padding: 0 var(--padding);
+  padding-right: 30px;
 }
 
 .selectcontainer {
