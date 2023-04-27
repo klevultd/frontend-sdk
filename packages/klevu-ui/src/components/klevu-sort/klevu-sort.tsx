@@ -26,7 +26,11 @@ export class KlevuSort {
   @Prop()
   variant: KlevuDropdownVariant = "default"
 
-  #options: Array<{ value: KlevuSearchSorting; text: string }> = [
+  /**
+   * Pass custom options for the sort dropdown
+   */
+  @Prop()
+  options: Array<{ value: KlevuSearchSorting; text: string }> = [
     { value: KlevuSearchSorting.Relevance, text: "Relevance" },
     { value: KlevuSearchSorting.NameAsc, text: "Name ▲" },
     { value: KlevuSearchSorting.NameDesc, text: "Name ▼" },
@@ -52,7 +56,7 @@ export class KlevuSort {
         <klevu-dropdown
           exportparts={globalExportedParts}
           name="sort"
-          options={this.#options}
+          options={this.options}
           selected={this.#selected}
           variant={this.variant}
           onKlevuDropdownChanged={this.#onChange.bind(this)}

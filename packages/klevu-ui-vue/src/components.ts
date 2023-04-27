@@ -130,6 +130,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'filterCount',
   'options',
   'filterCustomOrder',
+  'sortOptions',
   'renderProductSlot'
 ]);
 
@@ -275,6 +276,7 @@ export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu
 
 export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sort', undefined, [
   'variant',
+  'options',
   'klevuSortChanged'
 ]);
 
