@@ -408,6 +408,10 @@ export namespace Components {
          */
         "sort"?: KlevuSearchSorting;
         /**
+          * Pass custom options for the sort dropdown
+         */
+        "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -854,6 +858,10 @@ export namespace Components {
      * Sort dropdown. User can select what kind of sorting they want
      */
     interface KlevuSort {
+        /**
+          * Pass custom options for the sort dropdown
+         */
+        "options": Array<{ value: KlevuSearchSorting; text: string }>;
         /**
           * Dropdown variant
          */
@@ -1863,6 +1871,10 @@ declare namespace LocalJSX {
          */
         "sort"?: KlevuSearchSorting;
         /**
+          * Pass custom options for the sort dropdown
+         */
+        "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -2320,6 +2332,10 @@ declare namespace LocalJSX {
           * When the sorting changes
          */
         "onKlevuSortChanged"?: (event: KlevuSortCustomEvent<KlevuSearchSorting>) => void;
+        /**
+          * Pass custom options for the sort dropdown
+         */
+        "options"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
           * Dropdown variant
          */

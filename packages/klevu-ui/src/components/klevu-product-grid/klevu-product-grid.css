@@ -11,5 +11,5 @@
 .gridcontainer {
   display: grid;
   grid-gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
-  grid-template-columns: repeat(auto-fit, minmax(var(--klevu-grid-product-width, 250px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(var(--klevu-grid-product-width, 250px), 1fr));
 }

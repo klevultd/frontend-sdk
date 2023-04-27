@@ -72,6 +72,12 @@ export class KlevuMerchandising {
    */
   @Prop() filterCustomOrder?: { [key: string]: string[] }
 
+  /**
+   * Pass custom options for the sort dropdown
+   */
+  @Prop()
+  sortOptions?: Array<{ value: KlevuSearchSorting; text: string }>
+
   @State() currentViewPortSize?: ViewportSize
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
@@ -244,6 +250,7 @@ export class KlevuMerchandising {
               variant="inline"
               exportparts={globalExportedParts}
               onKlevuSortChanged={this.#sortChanged.bind(this)}
+              options={this.sortOptions}
             ></klevu-sort>
           </div>
           <klevu-product-grid slot="content">
