@@ -349,6 +349,7 @@ export namespace Components {
           * Read only API key to Klevu
          */
         "apiKey": string;
+        "getApiKey": () => Promise<string>;
         /**
           * Global settings
          */
@@ -455,6 +456,13 @@ export namespace Components {
      * Klevu MOI Application
      */
     interface KlevuMoi {
+        /**
+          * Override default API key
+         */
+        "apiKey"?: string;
+        /**
+          * Show close button
+         */
         "showClose": boolean;
     }
     /**
@@ -670,6 +678,10 @@ export namespace Components {
      * Full app to create search bar that popups trending products and search results.
      */
     interface KlevuQuicksearch {
+        /**
+          * Enable Klevu MOI chat
+         */
+        "enableChat"?: boolean;
         /**
           * What term should be used if there isn't enough results
          */
@@ -2007,6 +2019,13 @@ declare namespace LocalJSX {
      * Klevu MOI Application
      */
     interface KlevuMoi {
+        /**
+          * Override default API key
+         */
+        "apiKey"?: string;
+        /**
+          * Show close button
+         */
         "showClose"?: boolean;
     }
     /**
@@ -2230,6 +2249,10 @@ declare namespace LocalJSX {
      * Full app to create search bar that popups trending products and search results.
      */
     interface KlevuQuicksearch {
+        /**
+          * Enable Klevu MOI chat
+         */
+        "enableChat"?: boolean;
         /**
           * What term should be used if there isn't enough results
          */

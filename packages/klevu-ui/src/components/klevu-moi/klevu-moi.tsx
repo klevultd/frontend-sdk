@@ -22,13 +22,26 @@ export class KlevuMoi {
   @State()
   messages: MoiSession["messages"] = []
 
+  /**
+   * Show close button
+   */
   @Prop()
   showClose = false
+
+  /**
+   * Override default API key
+   */
+  @Prop()
+  apiKey?: string
 
   async connectedCallback() {
     await KlevuInit.ready()
     const init = async () => {
-      this.session = await startMoi(this.onMessage.bind(this))
+      this.session = await startMoi({
+        onMessage: this.onMessage.bind(this),
+        // @ts-expect-error
+        apiKey: this.apiKey || window["klevu_ui_settings"].apiKey,
+      })
       this.messages = this.session.messages
     }
     init()

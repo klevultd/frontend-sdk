@@ -155,7 +155,8 @@ export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-m
 
 
 export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined, [
-  'showClose'
+  'showClose',
+  'apiKey'
 ]);
 
 
@@ -236,6 +237,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'resultVariant',
   'simpleResultCount',
   'fullResultCount',
+  'enableChat',
   'renderProductSlot'
 ]);
 

@@ -149,10 +149,11 @@ type MoiSavedSession = {
   messages: MoiSession["messages"]
 }
 
-export async function startMoi(onMessage?: () => void): Promise<MoiSession> {
-  // FIXME: This should work, but it doesn't
-  // const klevuApiKey = KlevuConfig.getDefault().apiKey
-  const klevuApiKey = "klevu-156934068344410779"
+export async function startMoi({
+  onMessage,
+  apiKey,
+}: { onMessage?: () => void; apiKey?: string } = {}): Promise<MoiSession> {
+  const klevuApiKey = apiKey || KlevuConfig.getDefault().apiKey
 
   const storedSession = await getStoredSession()
 
