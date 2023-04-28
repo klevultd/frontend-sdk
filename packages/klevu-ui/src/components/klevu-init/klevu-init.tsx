@@ -1,5 +1,5 @@
 import { KlevuConfig } from "@klevu/core"
-import { Component, h, Host, Prop } from "@stencil/core"
+import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 
 /**
@@ -68,9 +68,11 @@ export class KlevuInit {
       url: this.url,
     })
 
-    if (this.settings) {
-      // @ts-expect-error
-      window["klevu_ui_settings"] = this.settings
+    // @ts-expect-error
+    window["klevu_ui_settings"] = {
+      ...this.settings,
+      apiKey: this.apiKey,
+      url: this.url,
     }
 
     // Inject material fonts to project
@@ -99,6 +101,11 @@ export class KlevuInit {
       )
       document.head.appendChild(style)
     }
+  }
+
+  @Method()
+  async getApiKey() {
+    return this.apiKey
   }
 
   /**

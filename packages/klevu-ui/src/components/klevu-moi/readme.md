@@ -11,9 +11,10 @@ Klevu MOI Application
 
 ## Properties
 
-| Property    | Attribute    | Description | Type      | Default |
-| ----------- | ------------ | ----------- | --------- | ------- |
-| `showClose` | `show-close` |             | `boolean` | `false` |
+| Property    | Attribute    | Description              | Type                  | Default     |
+| ----------- | ------------ | ------------------------ | --------------------- | ----------- |
+| `apiKey`    | `api-key`    | Override default API key | `string \| undefined` | `undefined` |
+| `showClose` | `show-close` | Show close button        | `boolean`             | `false`     |
 
 
 ## Dependencies
