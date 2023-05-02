@@ -1,0 +1,41 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--klevu-spacing-02) var(--klevu-spacing-02);
+}
+
+main {
+  flex: 1;
+  overflow: hidden;
+}
+
+main slot {
+  display: flex;
+  gap: var(--klevu-spacing-04);
+  flex-direction: column;
+  height: 100%;
+  padding: var(--klevu-spacing-02);
+}
+
+footer {
+  margin-top: auto;
+  padding-top: var(--klevu-spacing-04);
+  border-top: 1px solid var(--klevu-color-neutral-3);
+}
+
+footer .inputs {
+  display: flex;
+  gap: var(--klevu-spacing-04);
+}
+
+footer klevu-textfield {
+  width: 100%;
+}

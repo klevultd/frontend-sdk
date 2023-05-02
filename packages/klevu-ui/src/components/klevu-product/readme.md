@@ -59,6 +59,7 @@ with --kleu-product-width and --klevu-product-small-width css variables.
 ### Used by
 
  - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-moi](../klevu-moi)
  - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-recommendations](../klevu-recommendations)
  - [klevu-search-landing-page](../klevu-search-landing-page)
@@ -72,6 +73,7 @@ with --kleu-product-width and --klevu-product-small-width css variables.
 graph TD;
   klevu-product --> klevu-typography
   klevu-merchandising --> klevu-product
+  klevu-moi --> klevu-product
   klevu-quicksearch --> klevu-product
   klevu-recommendations --> klevu-product
   klevu-search-landing-page --> klevu-product

@@ -32,6 +32,19 @@ Klevu init also initializes Google Material Icon font. It automatically injects 
 | `url` _(required)_    | `url`     | Klevu Server URL           | `string`                                                                                                                                                                                                                                                                          | `undefined` |
 
 
+## Methods
+
+### `getApiKey() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
+
 ----------------------------------------------
 
 

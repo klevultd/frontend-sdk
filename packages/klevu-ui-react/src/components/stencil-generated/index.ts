@@ -11,6 +11,8 @@ defineCustomElements();
 export const KlevuAccordion = /*@__PURE__*/createReactComponent<JSX.KlevuAccordion, HTMLKlevuAccordionElement>('klevu-accordion');
 export const KlevuBadge = /*@__PURE__*/createReactComponent<JSX.KlevuBadge, HTMLKlevuBadgeElement>('klevu-badge');
 export const KlevuButton = /*@__PURE__*/createReactComponent<JSX.KlevuButton, HTMLKlevuButtonElement>('klevu-button');
+export const KlevuChatBubble = /*@__PURE__*/createReactComponent<JSX.KlevuChatBubble, HTMLKlevuChatBubbleElement>('klevu-chat-bubble');
+export const KlevuChatLayout = /*@__PURE__*/createReactComponent<JSX.KlevuChatLayout, HTMLKlevuChatLayoutElement>('klevu-chat-layout');
 export const KlevuCheckbox = /*@__PURE__*/createReactComponent<JSX.KlevuCheckbox, HTMLKlevuCheckboxElement>('klevu-checkbox');
 export const KlevuChip = /*@__PURE__*/createReactComponent<JSX.KlevuChip, HTMLKlevuChipElement>('klevu-chip');
 export const KlevuCmsList = /*@__PURE__*/createReactComponent<JSX.KlevuCmsList, HTMLKlevuCmsListElement>('klevu-cms-list');
@@ -23,6 +25,8 @@ export const KlevuLatestSearches = /*@__PURE__*/createReactComponent<JSX.KlevuLa
 export const KlevuLayoutResults = /*@__PURE__*/createReactComponent<JSX.KlevuLayoutResults, HTMLKlevuLayoutResultsElement>('klevu-layout-results');
 export const KlevuList = /*@__PURE__*/createReactComponent<JSX.KlevuList, HTMLKlevuListElement>('klevu-list');
 export const KlevuMerchandising = /*@__PURE__*/createReactComponent<JSX.KlevuMerchandising, HTMLKlevuMerchandisingElement>('klevu-merchandising');
+export const KlevuModal = /*@__PURE__*/createReactComponent<JSX.KlevuModal, HTMLKlevuModalElement>('klevu-modal');
+export const KlevuMoi = /*@__PURE__*/createReactComponent<JSX.KlevuMoi, HTMLKlevuMoiElement>('klevu-moi');
 export const KlevuPagination = /*@__PURE__*/createReactComponent<JSX.KlevuPagination, HTMLKlevuPaginationElement>('klevu-pagination');
 export const KlevuPopularSearches = /*@__PURE__*/createReactComponent<JSX.KlevuPopularSearches, HTMLKlevuPopularSearchesElement>('klevu-popular-searches');
 export const KlevuPopup = /*@__PURE__*/createReactComponent<JSX.KlevuPopup, HTMLKlevuPopupElement>('klevu-popup');

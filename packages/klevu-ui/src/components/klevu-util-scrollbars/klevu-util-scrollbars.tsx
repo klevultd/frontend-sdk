@@ -51,6 +51,7 @@ export class KlevuUtilScrollbars {
       <Host>
         <div
           style={{
+            height: "100%",
             "--os-size": "4px !important",
             "--os-handle-bg": "red !important",
             "--os-handle-bg-hover": "var(--klevu-color-neutral-6) !important",

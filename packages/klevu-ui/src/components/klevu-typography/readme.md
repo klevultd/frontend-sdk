@@ -21,6 +21,8 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-accordion](../klevu-accordion)
  - [klevu-badge](../klevu-badge)
  - [klevu-button](../klevu-button)
+ - [klevu-chat-bubble](../klevu-chat-bubble)
+ - [klevu-chat-layout](../klevu-chat-layout)
  - [klevu-checkbox](../klevu-checkbox)
  - [klevu-chip](../klevu-chip)
  - [klevu-cms-list](../klevu-cms-list)
@@ -28,6 +30,7 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-latest-searches](../klevu-latest-searches)
  - [klevu-list](../klevu-list)
  - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-moi](../klevu-moi)
  - [klevu-popular-searches](../klevu-popular-searches)
  - [klevu-product](../klevu-product)
  - [klevu-quicksearch](../klevu-quicksearch)
@@ -42,6 +45,8 @@ graph TD;
   klevu-accordion --> klevu-typography
   klevu-badge --> klevu-typography
   klevu-button --> klevu-typography
+  klevu-chat-bubble --> klevu-typography
+  klevu-chat-layout --> klevu-typography
   klevu-checkbox --> klevu-typography
   klevu-chip --> klevu-typography
   klevu-cms-list --> klevu-typography
@@ -49,6 +54,7 @@ graph TD;
   klevu-latest-searches --> klevu-typography
   klevu-list --> klevu-typography
   klevu-merchandising --> klevu-typography
+  klevu-moi --> klevu-typography
   klevu-popular-searches --> klevu-typography
   klevu-product --> klevu-typography
   klevu-quicksearch --> klevu-typography

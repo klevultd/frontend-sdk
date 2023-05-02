@@ -61,11 +61,13 @@ Type: `Promise<void>`
 
 ### Used by
 
+ - [klevu-chat-layout](../klevu-chat-layout)
  - [klevu-quicksearch](../klevu-quicksearch)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-chat-layout --> klevu-popup
   klevu-quicksearch --> klevu-popup
   style klevu-popup fill:#f9f,stroke:#333,stroke-width:4px
 ```

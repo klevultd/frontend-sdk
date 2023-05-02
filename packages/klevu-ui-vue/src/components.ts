@@ -27,7 +27,21 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
   'isSecondary',
   'isTertiary',
   'fullWidth',
+  'size',
   'icon'
+]);
+
+
+export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble>('klevu-chat-bubble', undefined, [
+  'remote'
+]);
+
+
+export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
+  'showLoading',
+  'showClose',
+  'klevuChatLayoutMessageSent',
+  'klevuChatLayoutClose'
 ]);
 
 
@@ -135,6 +149,17 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
 ]);
 
 
+export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-modal', undefined, [
+  'startOpen'
+]);
+
+
+export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined, [
+  'showClose',
+  'apiKey'
+]);
+
+
 export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination>('klevu-pagination', undefined, [
   'current',
   'min',
@@ -212,6 +237,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'resultVariant',
   'simpleResultCount',
   'fullResultCount',
+  'enableChat',
   'renderProductSlot'
 ]);
 

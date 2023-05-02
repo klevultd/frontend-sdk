@@ -160,7 +160,6 @@ export class KlevuFacet {
         >
           {this.option.label}
         </klevu-typography>
-
         <div class="options" slot="content">
           {opts.map((o) => (
             <div class="option">
@@ -201,17 +200,17 @@ export class KlevuFacet {
               )}
             </div>
           ))}
+          {showAllButton ? (
+            <klevu-button
+              style={{ "--klevu-button-text-align": "left" }}
+              isTertiary
+              fullWidth
+              onClick={() => (this.showAll = true)}
+            >
+              More
+            </klevu-button>
+          ) : null}
         </div>
-        {showAllButton ? (
-          <klevu-button
-            style={{ "--klevu-button-text-align": "left" }}
-            isTertiary
-            fullWidth
-            onClick={() => (this.showAll = true)}
-          >
-            More
-          </klevu-button>
-        ) : null}
       </Fragment>
     )
   }

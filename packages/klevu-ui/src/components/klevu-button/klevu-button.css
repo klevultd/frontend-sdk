@@ -1,10 +1,11 @@
 :host {
   --klevu-button-background-hover: var(--klevu-color-primary-darker);
   --klevu-button-text-align: var(--klevu-button-text-align);
+  --klevu-button-padding: var(--klevu-button-padding);
 }
 
 button {
-  --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
+  --padding: var(--klevu-button-padding, calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)));
 
   display: inline-block;
   position: relative;
@@ -18,6 +19,16 @@ button {
   font-weight: var(--klevu-body-s-weight);
   padding: 0 calc(var(--padding) * 2);
   text-align: var(--klevu-button-text-align, center);
+}
+
+button.sizeSmall {
+  --padding: var(--klevu-button-padding, calc(var(--klevu-size-s) - (var(--klevu-body-s-size) / 2)));
+  height: calc(var(--klevu-size-s) * 2);
+}
+
+button.sizeLarge {
+  --padding: var(--klevu-button-padding, calc(var(--klevu-size-l) - (var(--klevu-body-s-size) / 2)));
+  height: calc(var(--klevu-size-l) * 2);
 }
 
 button klevu-typography,
@@ -81,6 +92,11 @@ button.icon {
   font-size: 1.5em;
   font-weight: normal;
   line-height: 1.8;
+}
+
+button.icon span[part="material-icon"] {
+  position: relative;
+  top: -1px;
 }
 
 button.icon:focus:after {

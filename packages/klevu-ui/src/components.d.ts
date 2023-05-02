@@ -79,6 +79,7 @@ export namespace Components {
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
+     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
      */
     interface KlevuButton {
         /**
@@ -101,6 +102,32 @@ export namespace Components {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+        "size": "small" | "normal" | "large";
+    }
+    /**
+     * Container for chat items. Very simple component, just a wrapper.
+     */
+    interface KlevuChatBubble {
+        "remote"?: boolean;
+    }
+    /**
+     * Component that wraps chat elements into a layout.
+     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+     */
+    interface KlevuChatLayout {
+        /**
+          * Close the popup menu
+         */
+        "closePopup": () => Promise<void>;
+        /**
+          * Scroll current chat to bottom of page
+         */
+        "scrollMainToBottom": () => Promise<void>;
+        "showClose": boolean;
+        /**
+          * Show loading indicator
+         */
+        "showLoading": boolean;
     }
     /**
      * Checkbox component
@@ -322,6 +349,7 @@ export namespace Components {
           * Read only API key to Klevu
          */
         "apiKey": string;
+        "getApiKey": () => Promise<string>;
         /**
           * Global settings
          */
@@ -415,6 +443,27 @@ export namespace Components {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+    }
+    /**
+     * Stylized modal dialog.
+     */
+    interface KlevuModal {
+        "closeModal": () => Promise<void>;
+        "openModal": () => Promise<void>;
+        "startOpen": boolean;
+    }
+    /**
+     * Klevu MOI Application
+     */
+    interface KlevuMoi {
+        /**
+          * Override default API key
+         */
+        "apiKey"?: string;
+        /**
+          * Show close button
+         */
+        "showClose": boolean;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -630,6 +679,10 @@ export namespace Components {
      */
     interface KlevuQuicksearch {
         /**
+          * Enable Klevu MOI chat
+         */
+        "enableChat"?: boolean;
+        /**
           * What term should be used if there isn't enough results
          */
         "fallbackTerm"?: string;
@@ -839,6 +892,7 @@ export namespace Components {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface KlevuSlides {
         /**
@@ -933,6 +987,7 @@ export namespace Components {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
+     * @cssprop --klevu-typography-color - Color of the text
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -980,6 +1035,10 @@ export namespace Components {
 export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBadgeElement;
+}
+export interface KlevuChatLayoutCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChatLayoutElement;
 }
 export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1080,12 +1139,32 @@ declare global {
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
+     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
      */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
     var HTMLKlevuButtonElement: {
         prototype: HTMLKlevuButtonElement;
         new (): HTMLKlevuButtonElement;
+    };
+    /**
+     * Container for chat items. Very simple component, just a wrapper.
+     */
+    interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
+    }
+    var HTMLKlevuChatBubbleElement: {
+        prototype: HTMLKlevuChatBubbleElement;
+        new (): HTMLKlevuChatBubbleElement;
+    };
+    /**
+     * Component that wraps chat elements into a layout.
+     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+     */
+    interface HTMLKlevuChatLayoutElement extends Components.KlevuChatLayout, HTMLStencilElement {
+    }
+    var HTMLKlevuChatLayoutElement: {
+        prototype: HTMLKlevuChatLayoutElement;
+        new (): HTMLKlevuChatLayoutElement;
     };
     /**
      * Checkbox component
@@ -1243,6 +1322,24 @@ declare global {
         new (): HTMLKlevuMerchandisingElement;
     };
     /**
+     * Stylized modal dialog.
+     */
+    interface HTMLKlevuModalElement extends Components.KlevuModal, HTMLStencilElement {
+    }
+    var HTMLKlevuModalElement: {
+        prototype: HTMLKlevuModalElement;
+        new (): HTMLKlevuModalElement;
+    };
+    /**
+     * Klevu MOI Application
+     */
+    interface HTMLKlevuMoiElement extends Components.KlevuMoi, HTMLStencilElement {
+    }
+    var HTMLKlevuMoiElement: {
+        prototype: HTMLKlevuMoiElement;
+        new (): HTMLKlevuMoiElement;
+    };
+    /**
      * Pagination component. Either provide numbers or query result to display the component.
      * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
      * @cssprop --klevu-pagination-text-color - text color of item
@@ -1364,6 +1461,7 @@ declare global {
     };
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
@@ -1410,6 +1508,7 @@ declare global {
     };
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
+     * @cssprop --klevu-typography-color - Color of the text
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -1456,6 +1555,8 @@ declare global {
         "klevu-accordion": HTMLKlevuAccordionElement;
         "klevu-badge": HTMLKlevuBadgeElement;
         "klevu-button": HTMLKlevuButtonElement;
+        "klevu-chat-bubble": HTMLKlevuChatBubbleElement;
+        "klevu-chat-layout": HTMLKlevuChatLayoutElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-chip": HTMLKlevuChipElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -1468,6 +1569,8 @@ declare global {
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
         "klevu-list": HTMLKlevuListElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
+        "klevu-modal": HTMLKlevuModalElement;
+        "klevu-moi": HTMLKlevuMoiElement;
         "klevu-pagination": HTMLKlevuPaginationElement;
         "klevu-popular-searches": HTMLKlevuPopularSearchesElement;
         "klevu-popup": HTMLKlevuPopupElement;
@@ -1530,6 +1633,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
+     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
      */
     interface KlevuButton {
         /**
@@ -1552,6 +1656,32 @@ declare namespace LocalJSX {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+        "size"?: "small" | "normal" | "large";
+    }
+    /**
+     * Container for chat items. Very simple component, just a wrapper.
+     */
+    interface KlevuChatBubble {
+        "remote"?: boolean;
+    }
+    /**
+     * Component that wraps chat elements into a layout.
+     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+     */
+    interface KlevuChatLayout {
+        /**
+          * Event emitted when user closes the chat layout
+         */
+        "onKlevuChatLayoutClose"?: (event: KlevuChatLayoutCustomEvent<void>) => void;
+        /**
+          * Event emitted when user sends a message
+         */
+        "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
+        "showClose"?: boolean;
+        /**
+          * Show loading indicator
+         */
+        "showLoading"?: boolean;
     }
     /**
      * Checkbox component
@@ -1880,6 +2010,25 @@ declare namespace LocalJSX {
         "usePagination"?: boolean;
     }
     /**
+     * Stylized modal dialog.
+     */
+    interface KlevuModal {
+        "startOpen"?: boolean;
+    }
+    /**
+     * Klevu MOI Application
+     */
+    interface KlevuMoi {
+        /**
+          * Override default API key
+         */
+        "apiKey"?: string;
+        /**
+          * Show close button
+         */
+        "showClose"?: boolean;
+    }
+    /**
      * Pagination component. Either provide numbers or query result to display the component.
      * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
      * @cssprop --klevu-pagination-text-color - text color of item
@@ -2101,6 +2250,10 @@ declare namespace LocalJSX {
      */
     interface KlevuQuicksearch {
         /**
+          * Enable Klevu MOI chat
+         */
+        "enableChat"?: boolean;
+        /**
           * What term should be used if there isn't enough results
          */
         "fallbackTerm"?: string;
@@ -2309,6 +2462,7 @@ declare namespace LocalJSX {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface KlevuSlides {
         /**
@@ -2423,6 +2577,7 @@ declare namespace LocalJSX {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
+     * @cssprop --klevu-typography-color - Color of the text
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -2468,6 +2623,8 @@ declare namespace LocalJSX {
         "klevu-accordion": KlevuAccordion;
         "klevu-badge": KlevuBadge;
         "klevu-button": KlevuButton;
+        "klevu-chat-bubble": KlevuChatBubble;
+        "klevu-chat-layout": KlevuChatLayout;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-chip": KlevuChip;
         "klevu-cms-list": KlevuCmsList;
@@ -2480,6 +2637,8 @@ declare namespace LocalJSX {
         "klevu-layout-results": KlevuLayoutResults;
         "klevu-list": KlevuList;
         "klevu-merchandising": KlevuMerchandising;
+        "klevu-modal": KlevuModal;
+        "klevu-moi": KlevuMoi;
         "klevu-pagination": KlevuPagination;
         "klevu-popular-searches": KlevuPopularSearches;
         "klevu-popup": KlevuPopup;
@@ -2525,8 +2684,18 @@ declare module "@stencil/core" {
              * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
              * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
              * @cssprop --klevu-button-text-align center Align text on button
+             * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
+            /**
+             * Container for chat items. Very simple component, just a wrapper.
+             */
+            "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
+            /**
+             * Component that wraps chat elements into a layout.
+             * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
+             */
+            "klevu-chat-layout": LocalJSX.KlevuChatLayout & JSXBase.HTMLAttributes<HTMLKlevuChatLayoutElement>;
             /**
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
@@ -2623,6 +2792,14 @@ declare module "@stencil/core" {
              */
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
             /**
+             * Stylized modal dialog.
+             */
+            "klevu-modal": LocalJSX.KlevuModal & JSXBase.HTMLAttributes<HTMLKlevuModalElement>;
+            /**
+             * Klevu MOI Application
+             */
+            "klevu-moi": LocalJSX.KlevuMoi & JSXBase.HTMLAttributes<HTMLKlevuMoiElement>;
+            /**
              * Pagination component. Either provide numbers or query result to display the component.
              * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
              * @cssprop --klevu-pagination-text-color - text color of item
@@ -2689,6 +2866,7 @@ declare module "@stencil/core" {
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             /**
              * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+             * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
              */
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             /**
@@ -2710,6 +2888,7 @@ declare module "@stencil/core" {
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             /**
              * Klevu typography component. This component is used in most places to set correct font in component pieces.
+             * @cssprop --klevu-typography-color - Color of the text
              * @cssprop --klevu-h1-size 24px H1 size
              * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
              * @cssprop --klevu-h1-weight 700 H1 weight

@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+dialog {
+  border: none !important;
+  border-radius: var(--klevu-border-radius-m);
+  padding: var(--klevu-spacing-04);
+  box-shadow: var(--klevu-elevation-1);
+}
+
+main {
+  padding: var(--klevu-spacing-04);
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  appearance: none;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+}

@@ -58,6 +58,22 @@ klevu-pagination {
   bottom: -1px;
 }
 
+klevu-moi {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: var(--klevu-spacing-03);
+  z-index: 10000;
+}
+
+.content aside klevu-button {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .desktop {
     display: none;
@@ -80,5 +96,10 @@ klevu-pagination {
   .content aside {
     width: 100%;
     border: none;
+  }
+
+  .content aside klevu-button {
+    display: block;
+    float: right;
   }
 }

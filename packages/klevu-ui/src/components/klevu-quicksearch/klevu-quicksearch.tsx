@@ -10,7 +10,6 @@ import {
 import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent, KlevuTextfieldCustomEvent } from "../../components"
-import { KlevuQueryCustomEvent } from "../../components"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
@@ -79,6 +78,11 @@ export class KlevuQuicksearch {
   @Prop() fullResultCount: number = 9
 
   /**
+   * Enable Klevu MOI chat
+   */
+  @Prop() enableChat?: boolean
+
+  /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
    * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
    * slot requested. Return null for slots that you do not want to render.
@@ -101,6 +105,7 @@ export class KlevuQuicksearch {
   @State() searchSort?: KlevuSearchSorting
   @State() lastClickedProducts?: KlevuRecord[]
   @State() activeTab: "trending" | "last" = "trending"
+  @State() chat = false
 
   #searchField?: HTMLKlevuSearchFieldElement
 
@@ -150,6 +155,11 @@ export class KlevuQuicksearch {
     if (product.id) {
       this.clickEvent?.(product.id, product.itemGroupId || product.id)
     }
+  }
+
+  @Listen("klevuChatLayoutClose")
+  onChatLayoutClose() {
+    this.chat = false
   }
 
   async connectedCallback() {
@@ -238,6 +248,7 @@ export class KlevuQuicksearch {
               : null}
           </div>
         </klevu-popup>
+        {this.chat && <klevu-moi showClose exportparts={globalExportedParts}></klevu-moi>}
       </Host>
     )
   }
@@ -320,6 +331,11 @@ export class KlevuQuicksearch {
     return (
       <Fragment>
         <aside>
+          {this.enableChat && (
+            <klevu-button size="small" onClick={() => (this.chat = true)}>
+              Start chat
+            </klevu-button>
+          )}
           <klevu-popular-searches
             onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-popular-searches>

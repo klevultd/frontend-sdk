@@ -9,6 +9,7 @@ import { Component, h, Prop } from "@stencil/core"
  * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
  * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
  * @cssprop --klevu-button-text-align center Align text on button
+ * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
  */
 @Component({
   tag: "klevu-button",
@@ -32,6 +33,9 @@ export class KlevuButton {
   @Prop()
   fullWidth?: boolean
 
+  @Prop()
+  size: "small" | "normal" | "large" = "normal"
+
   /**
    * Instead of content have an icon. So basically icon-button
    */
@@ -47,6 +51,8 @@ export class KlevuButton {
           tertiary: Boolean(this.isTertiary),
           fullwidth: Boolean(this.fullWidth),
           icon: Boolean(this.icon),
+          sizeSmall: this.size === "small",
+          sizeLarge: this.size === "large",
         }}
       >
         {this.icon ? (

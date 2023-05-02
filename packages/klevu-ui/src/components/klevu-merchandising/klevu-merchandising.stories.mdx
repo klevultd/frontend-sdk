@@ -53,20 +53,15 @@ Also includes custom styling for product components.
   >
     {(args) =>
       html`<klevu-merchandising
-          category=${ifDefined(args.category)}
-          category-title=${ifDefined(args.categoryTitle)}
-          filter-count=${ifDefined(args.filterCount)}
-          .filterCustomOrder=${args.filterCustomOrder}
-          limit=${args.limit}
-          .renderProductSlot=${args.renderProductSlot}
-          sort=${ifDefined(args.sort)}
-          use-pagination=${ifDefined(args.usePagination)}
-        ></klevu-merchandising>
-        <style>
-          ::part(product-container) {
-            border: 1px solid black;
-          }
-        </style>`
+        category=${ifDefined(args.category)}
+        category-title=${ifDefined(args.categoryTitle)}
+        filter-count=${ifDefined(args.filterCount)}
+        .filterCustomOrder=${args.filterCustomOrder}
+        limit=${args.limit}
+        .renderProductSlot=${args.renderProductSlot}
+        sort=${ifDefined(args.sort)}
+        use-pagination=${ifDefined(args.usePagination)}
+      ></klevu-merchandising>`
     }
   </Story>
 </Canvas>
