@@ -7,9 +7,7 @@ select {
 
   font-size: var(--klevu-body-s-size);
   font-weight: var(--klevu-body-s-weight);
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   width: 100%;
   min-width: 80px;
   border: none;
