@@ -42,26 +42,26 @@ const mockFilterData = (): Array<
 test("Filter manager initializes", () => {
   const manager = new FilterManager()
 
-  expect(manager.options.length).toBe(0)
-  expect(manager.sliders.length).toBe(0)
+  expect(manager.filters.length).toBe(0)
 })
 
 test("Init from data", () => {
   const manager = new FilterManager()
   manager.initFromListFilters(mockFilterData())
 
-  expect(manager.options.length).toBe(1)
-  expect(manager.sliders.length).toBe(1)
-  expect(manager.options[0].options.length).toBe(2)
+  expect(manager.filters.length).toBe(2)
+  expect((manager.filters[0] as KlevuFilterResultOptions).options.length).toBe(
+    2
+  )
 })
 
 test("Toggling works", () => {
   const manager = new FilterManager()
   manager.initFromListFilters(mockFilterData())
   manager.toggleOption("test", "Red")
-  const changedOption = manager.options
-    .find((o) => o.key === "test")
-    ?.options.find((o) => o.name === "Red")
+  const changedOption = (
+    manager.filters.find((o) => o.key === "test") as KlevuFilterResultOptions
+  ).options.find((o) => o.name === "Red")
   expect(changedOption?.selected).toBe(true)
 })
 
@@ -70,16 +70,16 @@ test("Clearing selection works", () => {
   manager.initFromListFilters(mockFilterData())
   manager.toggleOption("test", "Red")
   manager.clearOptionSelections()
-  const changedOption = manager.options
-    .find((o) => o.key === "test")
-    ?.options.find((o) => o.name === "Red")
+  const changedOption = (
+    manager.filters.find((o) => o.key === "test") as KlevuFilterResultOptions
+  ).options.find((o) => o.name === "Red")
   expect(changedOption?.selected).toBe(false)
 
   manager.toggleOption("test", "Red")
   manager.clearOptionSelections("foobar")
-  const changedOption2 = manager.options
-    .find((o) => o.key === "test")
-    ?.options.find((o) => o.name === "Red")
+  const changedOption2 = (
+    manager.filters.find((o) => o.key === "test") as KlevuFilterResultOptions
+  ).options.find((o) => o.name === "Red")
   expect(changedOption2?.selected).toBe(true)
 })
 
@@ -87,8 +87,7 @@ test("Clearing works", () => {
   const manager = new FilterManager()
   manager.initFromListFilters(mockFilterData())
   manager.clear()
-  expect(manager.options.length).toBe(0)
-  expect(manager.sliders.length).toBe(0)
+  expect(manager.filters.length).toBe(0)
 })
 
 test("Test slider settings", () => {
@@ -96,7 +95,12 @@ test("Test slider settings", () => {
   manager.initFromListFilters(mockFilterData())
 
   manager.updateSlide("price", 7, 8)
-  expect(manager.sliders[0]).toMatchObject({
+
+  const slider = manager.filters.find(
+    (f) => f.type === KlevuFilterType.Slider
+  ) as KlevuFilterResultSlider
+
+  expect(slider).toMatchObject({
     start: "7",
     end: "8",
   })
@@ -129,15 +133,39 @@ test("Save and restore state", () => {
   const state = manager.getCurrentState()
 
   const anotherManager = new FilterManager(state)
-  expect(manager.options).toEqual(anotherManager.options)
-  expect(manager.sliders).toEqual(anotherManager.sliders)
+  expect(manager.filters).toEqual(anotherManager.filters)
 
   manager.clear()
 
-  expect(manager.options).not.toEqual(anotherManager.options)
-  expect(manager.sliders).not.toEqual(anotherManager.sliders)
+  expect(manager.filters).not.toEqual(anotherManager.filters)
 
   manager.setState(state)
-  expect(manager.options).toEqual(anotherManager.options)
-  expect(manager.sliders).toEqual(anotherManager.sliders)
+  expect(manager.filters).toEqual(anotherManager.filters)
+})
+
+test("Test URL param settings", () => {
+  const manager = new FilterManager()
+  manager.initFromListFilters(mockFilterData())
+  manager.selectOption("test", "Red")
+
+  expect(manager.toURLParams()).toBe("test=red&price=3-7")
+
+  manager.readFromURLParams(new URLSearchParams("test=red&price=6-9"))
+
+  const slider = manager.filters.find(
+    (f) => f.type === KlevuFilterType.Slider
+  ) as KlevuFilterResultSlider
+
+  expect(slider).toMatchObject({
+    start: "6",
+    end: "9",
+  })
+
+  const option = manager.filters.find(
+    (f) => f.type === KlevuFilterType.Options
+  ) as KlevuFilterResultOptions
+
+  expect(option.options[0].selected).toBe(true)
+
+  expect(manager.toURLParams()).toBe("test=red&price=6-9")
 })

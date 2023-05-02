@@ -46,5 +46,5 @@ test("Filter manager - populates results", async () => {
     )
   )
 
-  expect(filterManager.options.length).toBeGreaterThan(0)
+  expect(filterManager.filters.length).toBeGreaterThan(0)
 })

@@ -9,57 +9,45 @@ import {
 import { isBrowser } from "../utils/isBrowser.js"
 
 type FilterManagerState = {
-  options: KlevuFilterResultOptions[]
-  sliders: KlevuFilterResultSlider[]
+  filters: FilterManagerFilters[]
 }
+
+type FilterManagerFilters = KlevuFilterResultOptions | KlevuFilterResultSlider
 
 /**
  * Filter manager is used to store and handle filters (facets) in the results easily.
  * It can be easily used with applyFilterWithFilterManager() and listFilters() modifiers
  */
 export class FilterManager {
-  options: KlevuFilterResultOptions[] = []
-  sliders: KlevuFilterResultSlider[] = []
+  filters: FilterManagerFilters[] = []
 
   /**
    * Manager can be initialized with existing options and sliders
    *
    * @param initialValues initialize manager with values
    */
-  constructor(initialValues?: Partial<FilterManagerState>) {
-    this.options = initialValues?.options ?? []
-    this.sliders = initialValues?.sliders ?? []
+  constructor(initialValues?: {
+    /** Given set of filters */
+    filters?: FilterManagerFilters[]
+    /** set of   */
+    enabledOptions?: Array<[string, string]>
+  }) {
+    this.filters = initialValues?.filters ?? []
   }
 
   initFromListFilters(
     filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider>
   ) {
-    this.options = []
-    this.sliders = []
-    for (const f of filters) {
-      if (isKlevuFilterResultOptions(f)) {
-        this.options.push(f)
-      } else if (isKlevuFilterResultSlider(f)) {
-        this.sliders.push(f)
-      }
-    }
-    this.sort()
+    this.filters = filters
 
     if (isBrowser()) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FiltersApplied, {
           detail: {
-            options: this.options,
-            sliders: this.sliders,
+            filters: this.filters,
           },
         })
       )
-    }
-  }
-
-  private sort() {
-    for (const o of this.options) {
-      o.options.sort((a, b) => b.count - a.count)
     }
   }
 
@@ -67,8 +55,7 @@ export class FilterManager {
    * clear current options and sliders
    */
   clear() {
-    this.options = []
-    this.sliders = []
+    this.filters = []
   }
 
   /**
@@ -78,14 +65,12 @@ export class FilterManager {
    */
   getCurrentState(): FilterManagerState {
     return {
-      options: this.options,
-      sliders: this.sliders,
+      filters: this.filters,
     }
   }
 
   setState(state: FilterManagerState): void {
-    this.options = state.options
-    this.sliders = state.sliders
+    this.filters = state.filters
   }
 
   /**
@@ -97,26 +82,22 @@ export class FilterManager {
    * @param name Name of value
    */
   toggleOption(key: string, name: string) {
-    const optionIndex = this.options.findIndex((o) => o.key === key)
+    const option = this.getOptionByKey(key)
 
-    if (optionIndex === -1) {
-      console.warn(`No filter found with ${key}.`)
+    if (!option) {
       return
     }
 
-    const subOptionIndex = this.options[optionIndex].options.findIndex(
-      (o) => o.name === name
-    )
+    const subOptionIndex = option.options.findIndex((o) => o.name === name)
 
     if (subOptionIndex === -1) {
       console.warn(`No filter ${key} option found with ${name}.`)
       return
     }
 
-    const prevSeleted =
-      this.options[optionIndex].options[subOptionIndex].selected
+    const prevSeleted = option.options[subOptionIndex].selected
 
-    this.options[optionIndex].options[subOptionIndex].selected = !prevSeleted
+    option.options[subOptionIndex].selected = !prevSeleted
 
     if (isBrowser()) {
       document.dispatchEvent(
@@ -132,6 +113,76 @@ export class FilterManager {
   }
 
   /**
+   * Select given option
+   *
+   * @param key key of filter to select
+   * @param name name of option to select
+   * @returns
+   */
+  selectOption(key: string, name: string) {
+    const option = this.getOptionByKey(key)
+    if (!option) {
+      return
+    }
+
+    const subOptionIndex = option.options.findIndex((o) => o.name === name)
+
+    if (subOptionIndex === -1) {
+      console.warn(`No filter ${key} option found with ${name}.`)
+      return
+    }
+
+    option.options[subOptionIndex].selected = true
+
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
+          detail: {
+            key,
+            name,
+            selected: true,
+          },
+        })
+      )
+    }
+  }
+
+  /**
+   * Deselect given option
+   *
+   * @param key name of filter to deselect
+   * @param name name of option to deselect
+   * @returns
+   */
+  deselectOption(key: string, name: string) {
+    const option = this.getOptionByKey(key)
+    if (!option) {
+      return
+    }
+
+    const subOptionIndex = option.options.findIndex((o) => o.name === name)
+
+    if (subOptionIndex === -1) {
+      console.warn(`No filter ${key} option found with ${name}.`)
+      return
+    }
+
+    option.options[subOptionIndex].selected = false
+
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
+          detail: {
+            key,
+            name,
+            selected: false,
+          },
+        })
+      )
+    }
+  }
+
+  /**
    * Sets `selected` key of all options to false
    *
    * @param key Optional key to lmit clearing to one option
@@ -139,15 +190,18 @@ export class FilterManager {
    */
   clearOptionSelections(key?: string) {
     if (key) {
-      this.options
-        .find((o) => o.key === key)
-        ?.options.forEach((o) => (o.selected = false))
+      const option = this.filters.find((o) => o.key === key)
+      if (option && this.isKlevuFilterResultOptions(option)) {
+        option.options.forEach((o) => (o.selected = false))
+      }
       return
     }
 
-    this.options.forEach((o) =>
-      o.options.forEach((o2) => (o2.selected = false))
-    )
+    this.filters.forEach((option) => {
+      if (option && this.isKlevuFilterResultOptions(option)) {
+        option.options.forEach((o2) => (o2.selected = false))
+      }
+    })
 
     if (isBrowser()) {
       document.dispatchEvent(
@@ -166,21 +220,29 @@ export class FilterManager {
    * @param max Max value of slide
    */
   updateSlide(key: string, min: number, max: number) {
-    const slideIndex = this.sliders.findIndex((s) => s.key === key)
+    const slideIndex = this.filters.findIndex((s) => s.key === key)
 
     if (slideIndex === -1) {
       console.warn(`No slider found with ${key}.`)
       return
     }
-    this.sliders[slideIndex].start = min.toString()
-    this.sliders[slideIndex].end = max.toString()
+
+    if (!this.isKlevuFilterResultSlider(this.filters[slideIndex])) {
+      console.warn(`Filter ${key} is not a slider filter.`)
+      return
+    }
+
+    const slider = this.filters[slideIndex] as KlevuFilterResultSlider
+
+    slider.start = min.toString()
+    slider.end = max.toString()
 
     if (isBrowser()) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
           detail: {
             key: key,
-            name: this.sliders[slideIndex].label,
+            name: slider.label,
             start: min.toString(),
             end: max.toString(),
           },
@@ -195,32 +257,33 @@ export class FilterManager {
    */
   toApplyFilters(): ApplyFilter[] {
     const filters: ApplyFilter[] = []
-    for (const o of this.options) {
-      const selected = o.options.filter(
-        (subOption) => subOption.selected === true
-      )
-      if (selected.length === 0) {
-        continue
+    for (const filter of this.filters) {
+      if (this.isKlevuFilterResultOptions(filter)) {
+        const selected = filter.options.filter(
+          (subOption) => subOption.selected === true
+        )
+        if (selected.length === 0) {
+          continue
+        }
+        filters.push({
+          key: filter.key,
+          values: selected.map((s) => s.value),
+          settings: {
+            singleSelect: false,
+          },
+        })
+      } else if (this.isKlevuFilterResultSlider(filter)) {
+        if (!filter.start || !filter.end) {
+          continue
+        }
+        filters.push({
+          key: filter.key,
+          values: [filter.start, filter.end],
+          settings: {
+            singleSelect: false,
+          },
+        })
       }
-      filters.push({
-        key: o.key,
-        values: selected.map((s) => s.value),
-        settings: {
-          singleSelect: false,
-        },
-      })
-    }
-    for (const s of this.sliders) {
-      if (!s.start || !s.end) {
-        continue
-      }
-      filters.push({
-        key: s.key,
-        values: [s.start, s.end],
-        settings: {
-          singleSelect: false,
-        },
-      })
     }
 
     return filters
@@ -233,31 +296,101 @@ export class FilterManager {
    * @returns
    */
   currentSelection(key: string): string[] | undefined {
-    const opt = this.options.find((o) => o.key === key)
-    if (opt) {
+    const opt = this.filters.find((o) => o.key === key)
+    if (opt && this.isKlevuFilterResultOptions(opt)) {
       const selectedOptions = opt.options.filter(
         (subOpt) => subOpt.selected === true
       )
       return selectedOptions.map((s) => s.value)
     }
 
-    const slider = this.sliders.find((s) => s.key === key)
-    if (slider && slider.start && slider.end) {
-      return [slider.start, slider.end]
+    if (opt && this.isKlevuFilterResultSlider(opt) && opt.start && opt.end) {
+      return [opt.start, opt.end]
     }
 
     return undefined
   }
-}
 
-function isKlevuFilterResultSlider(
-  filter: KlevuFilterResultOptions | KlevuFilterResultSlider
-): filter is KlevuFilterResultSlider {
-  return filter.type === KlevuFilterType.Slider
-}
+  /**
+   * Changes current selection of filters to a URL param string
+   *
+   * @returns string of URL params
+   */
+  toURLParams(): string {
+    const params = new URLSearchParams()
+    for (const filter of this.filters) {
+      if (this.isKlevuFilterResultOptions(filter)) {
+        const selected = filter.options.filter(
+          (subOption) => subOption.selected === true
+        )
+        if (selected.length === 0) {
+          continue
+        }
+        params.append(filter.key, selected.map((s) => s.value).join(","))
+      } else if (this.isKlevuFilterResultSlider(filter)) {
+        if (!filter.start || !filter.end) {
+          continue
+        }
+        params.append(filter.key, `${filter.start}-${filter.end}`)
+      }
+    }
 
-function isKlevuFilterResultOptions(
-  filter: KlevuFilterResultOptions | KlevuFilterResultSlider
-): filter is KlevuFilterResultOptions {
-  return filter.type === KlevuFilterType.Options
+    return params.toString()
+  }
+
+  /**
+   * Set current selection of filters from a URL param string
+   *
+   * @param params URLSearchParams to read from
+   */
+  readFromURLParams(params: URLSearchParams) {
+    this.clearOptionSelections()
+    for (const filter of this.filters) {
+      if (this.isKlevuFilterResultOptions(filter)) {
+        const selected = params.getAll(filter.key)
+        if (selected.length === 0) {
+          continue
+        }
+        filter.options.forEach((o) => {
+          o.selected = selected.includes(o.value)
+        })
+      } else if (this.isKlevuFilterResultSlider(filter)) {
+        const selected = params.get(filter.key)
+        if (!selected) {
+          continue
+        }
+        const [start, end] = selected.split("-")
+        filter.start = start
+        filter.end = end
+      }
+    }
+  }
+
+  private getOptionByKey(key: string): KlevuFilterResultOptions | undefined {
+    const optionIndex = this.filters.findIndex((o) => o.key === key)
+
+    if (optionIndex === -1) {
+      console.warn(`No filter found with ${key}.`)
+      return
+    }
+
+    if (!this.isKlevuFilterResultOptions(this.filters[optionIndex])) {
+      console.warn(`Filter ${key} is not an option filter.`)
+      return
+    }
+
+    return this.filters[optionIndex] as KlevuFilterResultOptions
+  }
+
+  private isKlevuFilterResultSlider(
+    filter: KlevuFilterResultOptions | KlevuFilterResultSlider
+  ): filter is KlevuFilterResultSlider {
+    return filter.type === KlevuFilterType.Slider
+  }
+
+  private isKlevuFilterResultOptions(
+    filter: KlevuFilterResultOptions | KlevuFilterResultSlider
+  ): filter is KlevuFilterResultOptions {
+    return filter.type === KlevuFilterType.Options
+  }
 }
