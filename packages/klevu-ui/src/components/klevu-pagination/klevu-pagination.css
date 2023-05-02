@@ -5,7 +5,6 @@
   gap: var(--klevu-spacing-03);
   justify-content: center;
   flex-wrap: wrap;
-  padding: var(--klevu-spacing-03) 0;
 }
 
 span {

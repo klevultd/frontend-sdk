@@ -10,4 +10,5 @@
 .footer {
   display: flex;
   justify-content: center;
+  padding: var(--klevu-spacing-03) 0;
 }
