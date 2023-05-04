@@ -1,4 +1,3 @@
-import {} from "../models/index.js"
 import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
 import { ApplyFilter } from "../modifiers/applyFilter/applyFilter.js"
 import {
@@ -22,6 +21,26 @@ export class FilterManager {
   filters: FilterManagerFilters[] = []
 
   /**
+   * @deprecated use filters instead. This doesn't take into account order of options and sliders
+   */
+  get options(): KlevuFilterResultOptions[] {
+    return this.filters.filter(
+      (filter): filter is KlevuFilterResultOptions =>
+        filter.type === KlevuFilterType.Options
+    )
+  }
+
+  /**
+   * @deprecated use filters instead. This doesn't take into account order of options and sliders
+   */
+  get sliders(): KlevuFilterResultSlider[] {
+    return this.filters.filter(
+      (filter): filter is KlevuFilterResultSlider =>
+        filter.type === KlevuFilterType.Slider
+    )
+  }
+
+  /**
    * Manager can be initialized with existing options and sliders
    *
    * @param initialValues initialize manager with values
@@ -29,8 +48,6 @@ export class FilterManager {
   constructor(initialValues?: {
     /** Given set of filters */
     filters?: FilterManagerFilters[]
-    /** set of   */
-    enabledOptions?: Array<[string, string]>
   }) {
     this.filters = initialValues?.filters ?? []
   }
@@ -79,32 +96,19 @@ export class FilterManager {
    * Sends a Dom event on change
    *
    * @param key Key of option
-   * @param name Name of value
+   * @param value value of option to toggle
    */
-  toggleOption(key: string, name: string) {
-    const option = this.getOptionByKey(key)
-
-    if (!option) {
-      return
-    }
-
-    const subOptionIndex = option.options.findIndex((o) => o.name === name)
-
-    if (subOptionIndex === -1) {
-      console.warn(`No filter ${key} option found with ${name}.`)
-      return
-    }
-
-    const prevSeleted = option.options[subOptionIndex].selected
-
-    option.options[subOptionIndex].selected = !prevSeleted
+  toggleOption(key: string, value: string) {
+    const suboption = this.getOptionByKeyCreateIfNotExists(key, value)
+    const prevSeleted = suboption.selected
+    suboption.selected = !suboption.selected
 
     if (isBrowser()) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
           detail: {
             key,
-            name,
+            name: value,
             selected: !prevSeleted,
           },
         })
@@ -116,30 +120,19 @@ export class FilterManager {
    * Select given option
    *
    * @param key key of filter to select
-   * @param name name of option to select
+   * @param value value of option to select
    * @returns
    */
-  selectOption(key: string, name: string) {
-    const option = this.getOptionByKey(key)
-    if (!option) {
-      return
-    }
-
-    const subOptionIndex = option.options.findIndex((o) => o.name === name)
-
-    if (subOptionIndex === -1) {
-      console.warn(`No filter ${key} option found with ${name}.`)
-      return
-    }
-
-    option.options[subOptionIndex].selected = true
+  selectOption(key: string, value: string) {
+    const suboption = this.getOptionByKeyCreateIfNotExists(key, value)
+    suboption.selected = true
 
     if (isBrowser()) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
           detail: {
             key,
-            name,
+            name: value,
             selected: true,
           },
         })
@@ -150,31 +143,20 @@ export class FilterManager {
   /**
    * Deselect given option
    *
-   * @param key name of filter to deselect
-   * @param name name of option to deselect
+   * @param key key of filter to deselect
+   * @param value value of option to deselect
    * @returns
    */
-  deselectOption(key: string, name: string) {
-    const option = this.getOptionByKey(key)
-    if (!option) {
-      return
-    }
-
-    const subOptionIndex = option.options.findIndex((o) => o.name === name)
-
-    if (subOptionIndex === -1) {
-      console.warn(`No filter ${key} option found with ${name}.`)
-      return
-    }
-
-    option.options[subOptionIndex].selected = false
+  deselectOption(key: string, value: string) {
+    const suboption = this.getOptionByKeyCreateIfNotExists(key, value)
+    suboption.selected = false
 
     if (isBrowser()) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
           detail: {
             key,
-            name,
+            name: value,
             selected: false,
           },
         })
@@ -221,21 +203,26 @@ export class FilterManager {
    */
   updateSlide(key: string, min: number, max: number) {
     const slideIndex = this.filters.findIndex((s) => s.key === key)
+    let slider: KlevuFilterResultSlider
 
     if (slideIndex === -1) {
-      console.warn(`No slider found with ${key}.`)
-      return
+      slider = {
+        key,
+        end: max.toString(),
+        start: min.toString(),
+        min: min.toString(),
+        max: max.toString(),
+        label: key,
+        type: KlevuFilterType.Slider,
+      }
+      this.filters.push(slider)
+    } else if (!this.isKlevuFilterResultSlider(this.filters[slideIndex])) {
+      throw new Error(`Filter ${key} is not a slider filter.`)
+    } else {
+      slider = this.filters[slideIndex] as KlevuFilterResultSlider
+      slider.start = min.toString()
+      slider.end = max.toString()
     }
-
-    if (!this.isKlevuFilterResultSlider(this.filters[slideIndex])) {
-      console.warn(`Filter ${key} is not a slider filter.`)
-      return
-    }
-
-    const slider = this.filters[slideIndex] as KlevuFilterResultSlider
-
-    slider.start = min.toString()
-    slider.end = max.toString()
 
     if (isBrowser()) {
       document.dispatchEvent(
@@ -326,12 +313,12 @@ export class FilterManager {
         if (selected.length === 0) {
           continue
         }
-        params.append(filter.key, selected.map((s) => s.value).join(","))
+        params.append(`o_${filter.key}`, selected.map((s) => s.value).join(","))
       } else if (this.isKlevuFilterResultSlider(filter)) {
         if (!filter.start || !filter.end) {
           continue
         }
-        params.append(filter.key, `${filter.start}-${filter.end}`)
+        params.append(`s_${filter.key}`, `${filter.start}-${filter.end}`)
       }
     }
 
@@ -345,41 +332,60 @@ export class FilterManager {
    */
   readFromURLParams(params: URLSearchParams) {
     this.clearOptionSelections()
-    for (const filter of this.filters) {
-      if (this.isKlevuFilterResultOptions(filter)) {
-        const selected = params.getAll(filter.key)
-        if (selected.length === 0) {
-          continue
-        }
-        filter.options.forEach((o) => {
-          o.selected = selected.includes(o.value)
-        })
-      } else if (this.isKlevuFilterResultSlider(filter)) {
-        const selected = params.get(filter.key)
-        if (!selected) {
-          continue
-        }
-        const [start, end] = selected.split("-")
-        filter.start = start
-        filter.end = end
+    for (const [key, value] of params.entries()) {
+      if (key.startsWith("o")) {
+        const optionKey = key.substring(2)
+        this.selectOption(optionKey, value)
+      } else if (key.startsWith("s")) {
+        const sliderKey = key.substring(2)
+        this.updateSlide(
+          sliderKey,
+          parseFloat(value.split("-")[0]),
+          parseFloat(value.split("-")[1])
+        )
       }
     }
   }
 
-  private getOptionByKey(key: string): KlevuFilterResultOptions | undefined {
+  /**
+   * Get option by key and sub option name. If doesn't exist, create it.
+   *
+   * @param key
+   * @returns
+   */
+  private getOptionByKeyCreateIfNotExists(
+    key: string,
+    value: string
+  ): KlevuFilterResultOptions["options"][0] {
     const optionIndex = this.filters.findIndex((o) => o.key === key)
-
+    let option: KlevuFilterResultOptions
     if (optionIndex === -1) {
-      console.warn(`No filter found with ${key}.`)
-      return
+      option = {
+        key,
+        label: key,
+        options: [],
+        type: KlevuFilterType.Options,
+      }
+      this.filters.push(option)
+    } else if (!this.isKlevuFilterResultOptions(this.filters[optionIndex])) {
+      throw new Error(`Filter ${key} is not an option filter.`)
+    } else {
+      option = this.filters[optionIndex] as KlevuFilterResultOptions
+    }
+    const subOptionIndex = option.options.findIndex((o) => o.value === value)
+
+    if (subOptionIndex === -1) {
+      option.options.push({
+        count: 1,
+        name: value,
+        selected: false,
+        value: value,
+      })
+
+      return option.options[option.options.length - 1]
     }
 
-    if (!this.isKlevuFilterResultOptions(this.filters[optionIndex])) {
-      console.warn(`Filter ${key} is not an option filter.`)
-      return
-    }
-
-    return this.filters[optionIndex] as KlevuFilterResultOptions
+    return option.options[subOptionIndex]
   }
 
   private isKlevuFilterResultSlider(
