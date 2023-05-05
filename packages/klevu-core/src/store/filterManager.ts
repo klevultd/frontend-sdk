@@ -173,14 +173,14 @@ export class FilterManager {
   clearOptionSelections(key?: string) {
     if (key) {
       const option = this.filters.find((o) => o.key === key)
-      if (option && this.isKlevuFilterResultOptions(option)) {
+      if (option && FilterManager.isKlevuFilterResultOptions(option)) {
         option.options.forEach((o) => (o.selected = false))
       }
       return
     }
 
     this.filters.forEach((option) => {
-      if (option && this.isKlevuFilterResultOptions(option)) {
+      if (option && FilterManager.isKlevuFilterResultOptions(option)) {
         option.options.forEach((o2) => (o2.selected = false))
       }
     })
@@ -216,7 +216,9 @@ export class FilterManager {
         type: KlevuFilterType.Slider,
       }
       this.filters.push(slider)
-    } else if (!this.isKlevuFilterResultSlider(this.filters[slideIndex])) {
+    } else if (
+      !FilterManager.isKlevuFilterResultSlider(this.filters[slideIndex])
+    ) {
       throw new Error(`Filter ${key} is not a slider filter.`)
     } else {
       slider = this.filters[slideIndex] as KlevuFilterResultSlider
@@ -245,7 +247,7 @@ export class FilterManager {
   toApplyFilters(): ApplyFilter[] {
     const filters: ApplyFilter[] = []
     for (const filter of this.filters) {
-      if (this.isKlevuFilterResultOptions(filter)) {
+      if (FilterManager.isKlevuFilterResultOptions(filter)) {
         const selected = filter.options.filter(
           (subOption) => subOption.selected === true
         )
@@ -259,7 +261,7 @@ export class FilterManager {
             singleSelect: false,
           },
         })
-      } else if (this.isKlevuFilterResultSlider(filter)) {
+      } else if (FilterManager.isKlevuFilterResultSlider(filter)) {
         if (!filter.start || !filter.end) {
           continue
         }
@@ -284,14 +286,19 @@ export class FilterManager {
    */
   currentSelection(key: string): string[] | undefined {
     const opt = this.filters.find((o) => o.key === key)
-    if (opt && this.isKlevuFilterResultOptions(opt)) {
+    if (opt && FilterManager.isKlevuFilterResultOptions(opt)) {
       const selectedOptions = opt.options.filter(
         (subOpt) => subOpt.selected === true
       )
       return selectedOptions.map((s) => s.value)
     }
 
-    if (opt && this.isKlevuFilterResultSlider(opt) && opt.start && opt.end) {
+    if (
+      opt &&
+      FilterManager.isKlevuFilterResultSlider(opt) &&
+      opt.start &&
+      opt.end
+    ) {
       return [opt.start, opt.end]
     }
 
@@ -306,7 +313,7 @@ export class FilterManager {
   toURLParams(): string {
     const params = new URLSearchParams()
     for (const filter of this.filters) {
-      if (this.isKlevuFilterResultOptions(filter)) {
+      if (FilterManager.isKlevuFilterResultOptions(filter)) {
         const selected = filter.options.filter(
           (subOption) => subOption.selected === true
         )
@@ -314,7 +321,7 @@ export class FilterManager {
           continue
         }
         params.append(`o_${filter.key}`, selected.map((s) => s.value).join(","))
-      } else if (this.isKlevuFilterResultSlider(filter)) {
+      } else if (FilterManager.isKlevuFilterResultSlider(filter)) {
         if (!filter.start || !filter.end) {
           continue
         }
@@ -367,7 +374,9 @@ export class FilterManager {
         type: KlevuFilterType.Options,
       }
       this.filters.push(option)
-    } else if (!this.isKlevuFilterResultOptions(this.filters[optionIndex])) {
+    } else if (
+      !FilterManager.isKlevuFilterResultOptions(this.filters[optionIndex])
+    ) {
       throw new Error(`Filter ${key} is not an option filter.`)
     } else {
       option = this.filters[optionIndex] as KlevuFilterResultOptions
@@ -388,13 +397,23 @@ export class FilterManager {
     return option.options[subOptionIndex]
   }
 
-  private isKlevuFilterResultSlider(
+  /**
+   * Is given variable a slider filter
+   * @param filter
+   * @returns
+   */
+  static isKlevuFilterResultSlider(
     filter: KlevuFilterResultOptions | KlevuFilterResultSlider
   ): filter is KlevuFilterResultSlider {
     return filter.type === KlevuFilterType.Slider
   }
 
-  private isKlevuFilterResultOptions(
+  /**
+   * Is given variable an option filter
+   * @param filter
+   * @returns
+   */
+  static isKlevuFilterResultOptions(
     filter: KlevuFilterResultOptions | KlevuFilterResultSlider
   ): filter is KlevuFilterResultOptions {
     return filter.type === KlevuFilterType.Options
