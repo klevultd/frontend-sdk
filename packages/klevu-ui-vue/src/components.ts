@@ -135,6 +135,9 @@ export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-lis
 ]);
 
 
+export const KlevuLoadingIndicator = /*@__PURE__*/ defineContainer<JSX.KlevuLoadingIndicator>('klevu-loading-indicator', undefined);
+
+
 export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchandising>('klevu-merchandising', undefined, [
   'usePagination',
   'limit',

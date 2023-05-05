@@ -26,6 +26,7 @@ Klevu MOI Application
 ### Depends on
 
 - [klevu-chat-layout](../klevu-chat-layout)
+- [klevu-loading-indicator](../klevu-loading-indicator)
 - [klevu-button](../klevu-button)
 - [klevu-modal](../klevu-modal)
 - [klevu-product](../klevu-product)
@@ -37,6 +38,7 @@ Klevu MOI Application
 ```mermaid
 graph TD;
   klevu-moi --> klevu-chat-layout
+  klevu-moi --> klevu-loading-indicator
   klevu-moi --> klevu-button
   klevu-moi --> klevu-modal
   klevu-moi --> klevu-product

@@ -400,6 +400,12 @@ export namespace Components {
         "url"?: string;
     }
     /**
+     * Simple loading indicator
+     * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+     */
+    interface KlevuLoadingIndicator {
+    }
+    /**
      * Full merchandising app to power up your product grid pages
      */
     interface KlevuMerchandising {
@@ -1313,6 +1319,16 @@ declare global {
         new (): HTMLKlevuListElement;
     };
     /**
+     * Simple loading indicator
+     * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+     */
+    interface HTMLKlevuLoadingIndicatorElement extends Components.KlevuLoadingIndicator, HTMLStencilElement {
+    }
+    var HTMLKlevuLoadingIndicatorElement: {
+        prototype: HTMLKlevuLoadingIndicatorElement;
+        new (): HTMLKlevuLoadingIndicatorElement;
+    };
+    /**
      * Full merchandising app to power up your product grid pages
      */
     interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
@@ -1568,6 +1584,7 @@ declare global {
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
         "klevu-list": HTMLKlevuListElement;
+        "klevu-loading-indicator": HTMLKlevuLoadingIndicatorElement;
         "klevu-merchandising": HTMLKlevuMerchandisingElement;
         "klevu-modal": HTMLKlevuModalElement;
         "klevu-moi": HTMLKlevuMoiElement;
@@ -1963,6 +1980,12 @@ declare namespace LocalJSX {
           * Make the whole thing clickable and navigate to this url.
          */
         "url"?: string;
+    }
+    /**
+     * Simple loading indicator
+     * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+     */
+    interface KlevuLoadingIndicator {
     }
     /**
      * Full merchandising app to power up your product grid pages
@@ -2636,6 +2659,7 @@ declare namespace LocalJSX {
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
         "klevu-list": KlevuList;
+        "klevu-loading-indicator": KlevuLoadingIndicator;
         "klevu-merchandising": KlevuMerchandising;
         "klevu-modal": KlevuModal;
         "klevu-moi": KlevuMoi;
@@ -2787,6 +2811,11 @@ declare module "@stencil/core" {
              * Single list item for listing things.
              */
             "klevu-list": LocalJSX.KlevuList & JSXBase.HTMLAttributes<HTMLKlevuListElement>;
+            /**
+             * Simple loading indicator
+             * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+             */
+            "klevu-loading-indicator": LocalJSX.KlevuLoadingIndicator & JSXBase.HTMLAttributes<HTMLKlevuLoadingIndicatorElement>;
             /**
              * Full merchandising app to power up your product grid pages
              */
