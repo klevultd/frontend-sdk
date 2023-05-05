@@ -24,6 +24,7 @@ export const KlevuInit = /*@__PURE__*/createReactComponent<JSX.KlevuInit, HTMLKl
 export const KlevuLatestSearches = /*@__PURE__*/createReactComponent<JSX.KlevuLatestSearches, HTMLKlevuLatestSearchesElement>('klevu-latest-searches');
 export const KlevuLayoutResults = /*@__PURE__*/createReactComponent<JSX.KlevuLayoutResults, HTMLKlevuLayoutResultsElement>('klevu-layout-results');
 export const KlevuList = /*@__PURE__*/createReactComponent<JSX.KlevuList, HTMLKlevuListElement>('klevu-list');
+export const KlevuLoadingIndicator = /*@__PURE__*/createReactComponent<JSX.KlevuLoadingIndicator, HTMLKlevuLoadingIndicatorElement>('klevu-loading-indicator');
 export const KlevuMerchandising = /*@__PURE__*/createReactComponent<JSX.KlevuMerchandising, HTMLKlevuMerchandisingElement>('klevu-merchandising');
 export const KlevuModal = /*@__PURE__*/createReactComponent<JSX.KlevuModal, HTMLKlevuModalElement>('klevu-modal');
 export const KlevuMoi = /*@__PURE__*/createReactComponent<JSX.KlevuMoi, HTMLKlevuMoiElement>('klevu-moi');

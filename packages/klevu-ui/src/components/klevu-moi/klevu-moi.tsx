@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Fragment, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
-import { startMoi, MoiSession, MoiRequest, KlevuRecord } from "@klevu/core"
+import { startMoi, MoiSession, MoiRequest, KlevuRecord, MoiResponseObjects } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 /**
@@ -21,6 +21,9 @@ export class KlevuMoi {
 
   @State()
   messages: MoiSession["messages"] = []
+
+  @State()
+  loading = false
 
   /**
    * Show close button
@@ -51,10 +54,12 @@ export class KlevuMoi {
     if (!this.session) {
       return
     }
+    this.loading = true
     await this.session.query({
       message: msg,
       product,
     })
+    this.loading = false
 
     this.#layoutRef?.scrollMainToBottom()
   }
@@ -67,16 +72,36 @@ export class KlevuMoi {
     this.#layoutRef?.scrollMainToBottom()
   }
 
-  async #sendFilter(filterValue: string) {
+  async #sendFilter(filterValue: string, message?: string) {
     if (!this.session) {
       return
     }
+
     await this.session.query({
+      message,
       filter: {
         value: filterValue,
       },
     })
     this.#layoutRef?.scrollMainToBottom()
+  }
+
+  #buildChatFormat(
+    target: any,
+    settings: {
+      chatFormat: string
+      chatFormatEmpty: string
+      key: string | null
+      label: string | null
+    }
+  ) {
+    if (settings.key && target?.value === `${settings.key}:klevu_any`) {
+      return settings.chatFormatEmpty
+    }
+    if (target && target.name && settings.chatFormat) {
+      return settings.chatFormat.replace(`$VALUE$`, target.name)
+    }
+    return undefined
   }
 
   render() {
@@ -91,6 +116,7 @@ export class KlevuMoi {
           showClose={this.showClose}
         >
           {this.renderChatContent()}
+          {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
           <div slot="actions" class="genericactions">
             {this.session?.genericOptions.options.map((item) => (
               <klevu-button
@@ -109,20 +135,22 @@ export class KlevuMoi {
             ))}
           </div>
           <div slot="menu" class="menu">
-            {this.session?.menu.options.map((item) => (
-              <klevu-button
-                onClick={() => {
-                  if (item.type === "message") {
-                    this.#sendMessage(item.chat)
-                  } else {
-                    console.error("Not implemented yet")
-                  }
-                  this.#layoutRef?.closePopup()
-                }}
-              >
-                {item.name}
-              </klevu-button>
-            ))}
+            {this.session?.menu.options
+              .filter((i) => i.type === "message")
+              .map((item) => (
+                <klevu-button
+                  onClick={() => {
+                    if (item.type === "message") {
+                      this.#sendMessage(item.chat)
+                    } else {
+                      console.error("Not implemented yet")
+                    }
+                    this.#layoutRef?.closePopup()
+                  }}
+                >
+                  {item.name}
+                </klevu-button>
+              ))}
           </div>
         </klevu-chat-layout>
         <klevu-modal exportparts={globalExportedParts} ref={(el) => (this.#modalRef = el)}>
@@ -158,9 +186,17 @@ export class KlevuMoi {
           if ("filter" in message) {
             return (
               <Fragment>
+                {message.filter.settings.label && (
+                  <klevu-chat-bubble remote exportparts={globalExportedParts}>
+                    {message.filter.settings.label}
+                  </klevu-chat-bubble>
+                )}
                 <div class="filteractions">
                   {message.filter.options.map((o) => (
-                    <klevu-button isSecondary onClick={() => this.#sendFilter(o.value)}>
+                    <klevu-button
+                      isSecondary
+                      onClick={() => this.#sendFilter(o.value, this.#buildChatFormat(o, message.filter.settings))}
+                    >
                       {o.name}
                     </klevu-button>
                   ))}

@@ -1,0 +1,20 @@
+import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { html, Fragment } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
+import { MDXAutoFillMeta } from "../../storybookUtils"
+const meta = MDXAutoFillMeta("klevu-loading-indicator")
+
+<Meta
+  title="Atoms/Loading Indicator"
+  component="klevu-loading-indicator"
+  argTypes={meta.argTypes}
+  parameters={meta.parameters}
+/>
+
+# Klevu-loading-indicator
+
+<Description>{meta.description}</Description>
+
+<Canvas>
+  <Story name="Loading Indicator">{(args) => html`<klevu-loading-indicator></klevu-loading-indicator>`}</Story>
+</Canvas>

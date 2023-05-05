@@ -72,6 +72,7 @@ graph TD;
   klevu-search-field --> klevu-button
   klevu-button --> klevu-typography
   klevu-moi --> klevu-chat-layout
+  klevu-moi --> klevu-loading-indicator
   klevu-moi --> klevu-button
   klevu-moi --> klevu-modal
   klevu-moi --> klevu-product
