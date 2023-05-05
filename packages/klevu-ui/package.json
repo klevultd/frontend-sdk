@@ -70,7 +70,7 @@
     "@storybook/mdx2-csf": "^0.0.4",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.16",
-    "@storybook/web-components": "^6.5.16",
+    "@storybook/web-components": "^7.0.8",
     "@types/jest": "^27.0.3",
     "@types/lodash.merge": "^4.6.7",
     "@types/mdx": "^2.0.3",
