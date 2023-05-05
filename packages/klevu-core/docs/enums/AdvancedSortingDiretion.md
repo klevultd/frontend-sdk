@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[models/KlevuBaseQuerySettings.ts:246](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L246)
+[models/KlevuBaseQuerySettings.ts:246](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L246)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[models/KlevuBaseQuerySettings.ts:247](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L247)
+[models/KlevuBaseQuerySettings.ts:247](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L247)

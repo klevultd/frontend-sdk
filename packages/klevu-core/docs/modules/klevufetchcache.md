@@ -1,5 +1,15 @@
-# klevufetch
+# klevufetchcache
       
+• `Const` **klevuFetchCache**: `KlevuFetchCache`<[`KlevuPayload`](klevupayload.md), [`KlevuApiRawResponse`](klevuapirawresponse.md)\>
+
+#### Defined in
+
+[connection/klevuFetch.ts:19](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/klevuFetch.ts#L19)
+
+## KlevuFetch Functions
+
+### KlevuFetch
+
 ▸ **KlevuFetch**(...`functionPromises`): `Promise`<[`KlevuFetchResponse`](klevufetchresponse.md)\>
 
 Function that makes query to KlevuBackend. It can take amount of queries.

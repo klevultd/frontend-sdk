@@ -17,5 +17,5 @@ Does not apply if sort is something else than AdvancedSort or undefined.
 
 #### Defined in
 
-[modifiers/advancedSorting/advancedSorting.ts:15](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/advancedSorting/advancedSorting.ts#L15)
+[modifiers/advancedSorting/advancedSorting.ts:15](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/advancedSorting/advancedSorting.ts#L15)
 

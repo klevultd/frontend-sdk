@@ -14,5 +14,5 @@
 
 #### Defined in
 
-[modifiers/applyFilter/applyFilter.ts:21](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L21)
+[modifiers/applyFilter/applyFilter.ts:21](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/applyFilter/applyFilter.ts#L21)
 

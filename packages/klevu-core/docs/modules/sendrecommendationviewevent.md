@@ -18,5 +18,5 @@ correct event data to klevu backend on recommendation view
 
 #### Defined in
 
-[modifiers/sendRecommendationViewEvent/sendRecommendationViewEvent.ts:23](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/sendRecommendationViewEvent/sendRecommendationViewEvent.ts#L23)
+[modifiers/sendRecommendationViewEvent/sendRecommendationViewEvent.ts:23](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/sendRecommendationViewEvent/sendRecommendationViewEvent.ts#L23)
 

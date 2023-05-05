@@ -17,5 +17,5 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
+[queries/searchCategory/searchCategory.ts:13](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/searchCategory/searchCategory.ts#L13)
 

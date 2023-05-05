@@ -16,5 +16,5 @@ Fetches KMC settings from server. Caches data for a day.
 
 #### Defined in
 
-[connection/kmc.ts:20](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/connection/kmc.ts#L20)
+[connection/kmc.ts:20](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/kmc.ts#L20)
 

@@ -1,6 +1,6 @@
 # fallback
       
-▸ **fallback**(`func`): `KlevuFetchModifer`
+▸ **fallback**(`func`, `options?`): `KlevuFetchModifer`
 
 If original query doesn't return enough results then fallback query is run added to results
 
@@ -9,6 +9,7 @@ If original query doesn't return enough results then fallback query is run added
 | Name | Type |
 | :------ | :------ |
 | `func` | [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md) |
+| `options?` | [`KlevuFallbackQueryOptions`](klevufallbackqueryoptions.md) |
 
 #### Returns
 
@@ -16,5 +17,5 @@ If original query doesn't return enough results then fallback query is run added
 
 #### Defined in
 
-[modifiers/fallback/fallback.ts:12](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/fallback/fallback.ts#L12)
+[modifiers/fallback/fallback.ts:16](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/fallback/fallback.ts#L16)
 

@@ -30,5 +30,5 @@ See KlevuFetchFunction
 
 #### Defined in
 
-[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
+[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
 

@@ -16,5 +16,5 @@ Tool to override any query settings. Be careful with this, as it can override an
 
 #### Defined in
 
-[modifiers/overrideSettings/overrideSettings.ts:11](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/overrideSettings/overrideSettings.ts#L11)
+[modifiers/overrideSettings/overrideSettings.ts:11](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/overrideSettings/overrideSettings.ts#L11)
 

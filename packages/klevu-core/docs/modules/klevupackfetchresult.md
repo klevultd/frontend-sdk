@@ -18,5 +18,5 @@ JSON only raw response
 
 #### Defined in
 
-[connection/hydration.ts:14](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/connection/hydration.ts#L14)
+[connection/hydration.ts:14](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/hydration.ts#L14)
 

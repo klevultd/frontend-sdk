@@ -17,5 +17,5 @@ Search helper function that sets correct settings
 
 #### Defined in
 
-[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
+[queries/searchCms/searchCms.ts:13](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/searchCms/searchCms.ts#L13)
 

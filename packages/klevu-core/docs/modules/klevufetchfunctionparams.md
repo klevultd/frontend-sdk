@@ -1,6 +1,6 @@
-# klevufecthfunctionparams
+# klevufetchfunctionparams
       
-Ƭ **KlevuFecthFunctionParams**: `Object`
+Ƭ **KlevuFetchFunctionParams**: `Object`
 
 #### Type declaration
 
@@ -16,5 +16,5 @@
 
 #### Defined in
 
-[queries/index.ts:18](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/index.ts#L18)
+[queries/index.ts:18](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/index.ts#L18)
 

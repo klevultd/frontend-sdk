@@ -17,5 +17,5 @@ automatically correct event data to Klevu
 
 #### Defined in
 
-[modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts:12](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts#L12)
+[modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts:13](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts#L13)
 

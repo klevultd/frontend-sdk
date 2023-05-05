@@ -34,5 +34,5 @@
 
 #### Defined in
 
-[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
+[models/KlevuBaseQuerySettings.ts:6](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuBaseQuerySettings.ts#L6)
 

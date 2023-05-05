@@ -49,7 +49,8 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuBaseQuery](modules/klevubasequery.md)
 - [KlevuBaseQuerySettings](modules/klevubasequerysettings.md)
 - [KlevuBaseQuerySettingsQuery](modules/klevubasequerysettingsquery.md)
-- [KlevuFecthFunctionParams](modules/klevufecthfunctionparams.md)
+- [KlevuFallbackQueryOptions](modules/klevufallbackqueryoptions.md)
+- [KlevuFetchFunctionParams](modules/klevufetchfunctionparams.md)
 - [KlevuFetchFunctionReturnValue](modules/klevufetchfunctionreturnvalue.md)
 - [KlevuFetchQueries](modules/klevufetchqueries.md)
 - [KlevuFetchQueryResult](modules/klevufetchqueryresult.md)
@@ -74,12 +75,17 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuSuggestionQuery](modules/klevusuggestionquery.md)
 - [KlevuSuggestionResult](modules/klevusuggestionresult.md)
 - [KlevuTrendingProductsQuery](modules/klevutrendingproductsquery.md)
+- [MoiRequest](modules/moirequest.md)
+- [MoiResponse](modules/moiresponse.md)
+- [MoiResponseObjects](modules/moiresponseobjects.md)
+- [MoiSession](modules/moisession.md)
 - [RecommendationViewEventMetaData](modules/recommendationvieweventmetadata.md)
 
 ### Variables
 
 - [KlevuLastClickedProducts](modules/klevulastclickedproducts.md)
 - [KlevuLastSearches](modules/klevulastsearches.md)
+- [klevuFetchCache](modules/klevufetchcache.md)
 
 ### KlevuFetch Functions
 
@@ -131,6 +137,7 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuHydratePackedFetchResult](modules/klevuhydratepackedfetchresult.md)
 - [KlevuPackFetchResult](modules/klevupackfetchresult.md)
 - [removeListFilters](modules/removelistfilters.md)
+- [startMoi](modules/startmoi.md)
 
 ### Query Functions
 

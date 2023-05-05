@@ -13,6 +13,10 @@ It can be easily used with applyFilterWithFilterManager() and listFilters() modi
 
 ### Properties
 
+- [filters](FilterManager.md#filters)
+
+### Accessors
+
 - [options](FilterManager.md#options)
 - [sliders](FilterManager.md#sliders)
 
@@ -21,37 +25,84 @@ It can be easily used with applyFilterWithFilterManager() and listFilters() modi
 - [clear](FilterManager.md#clear)
 - [clearOptionSelections](FilterManager.md#clearoptionselections)
 - [currentSelection](FilterManager.md#currentselection)
+- [deselectOption](FilterManager.md#deselectoption)
+- [getCurrentState](FilterManager.md#getcurrentstate)
+- [getOptionByKeyCreateIfNotExists](FilterManager.md#getoptionbykeycreateifnotexists)
 - [initFromListFilters](FilterManager.md#initfromlistfilters)
-- [sort](FilterManager.md#sort)
+- [readFromURLParams](FilterManager.md#readfromurlparams)
+- [selectOption](FilterManager.md#selectoption)
+- [setState](FilterManager.md#setstate)
 - [toApplyFilters](FilterManager.md#toapplyfilters)
+- [toURLParams](FilterManager.md#tourlparams)
 - [toggleOption](FilterManager.md#toggleoption)
 - [updateSlide](FilterManager.md#updateslide)
+- [isKlevuFilterResultOptions](FilterManager.md#isklevufilterresultoptions)
+- [isKlevuFilterResultSlider](FilterManager.md#isklevufilterresultslider)
 
 ## Constructors
 
 ### constructor
 
-• **new FilterManager**()
+• **new FilterManager**(`initialValues?`)
 
-## Properties
+Manager can be initialized with existing options and sliders
 
-### options
+#### Parameters
 
-• **options**: [`KlevuFilterResultOptions`](../modules.md#klevufilterresultoptions)[] = `[]`
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `initialValues?` | `Object` | initialize manager with values |
+| `initialValues.filters?` | `FilterManagerFilters`[] | Given set of filters |
 
 #### Defined in
 
-[store/filterManager.ts:16](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L16)
+[store/filterManager.ts:48](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L48)
+
+## Properties
+
+### filters
+
+• **filters**: `FilterManagerFilters`[] = `[]`
+
+#### Defined in
+
+[store/filterManager.ts:21](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L21)
+
+## Accessors
+
+### options
+
+• `get` **options**(): [`KlevuFilterResultOptions`](../modules.md#klevufilterresultoptions)[]
+
+**`Deprecated`**
+
+use filters instead. This doesn't take into account order of options and sliders
+
+#### Returns
+
+[`KlevuFilterResultOptions`](../modules.md#klevufilterresultoptions)[]
+
+#### Defined in
+
+[store/filterManager.ts:26](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L26)
 
 ___
 
 ### sliders
 
-• **sliders**: [`KlevuFilterResultSlider`](../modules.md#klevufilterresultslider)[] = `[]`
+• `get` **sliders**(): [`KlevuFilterResultSlider`](../modules.md#klevufilterresultslider)[]
+
+**`Deprecated`**
+
+use filters instead. This doesn't take into account order of options and sliders
+
+#### Returns
+
+[`KlevuFilterResultSlider`](../modules.md#klevufilterresultslider)[]
 
 #### Defined in
 
-[store/filterManager.ts:17](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L17)
+[store/filterManager.ts:36](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L36)
 
 ## Methods
 
@@ -67,7 +118,7 @@ clear current options and sliders
 
 #### Defined in
 
-[store/filterManager.ts:54](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L54)
+[store/filterManager.ts:74](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L74)
 
 ___
 
@@ -89,7 +140,7 @@ Sets `selected` key of all options to false
 
 #### Defined in
 
-[store/filterManager.ts:108](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L108)
+[store/filterManager.ts:173](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L173)
 
 ___
 
@@ -111,7 +162,78 @@ Get current selection by key
 
 #### Defined in
 
-[store/filterManager.ts:203](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L203)
+[store/filterManager.ts:287](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L287)
+
+___
+
+### deselectOption
+
+▸ **deselectOption**(`key`, `value`): `void`
+
+Deselect given option
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `string` | key of filter to deselect |
+| `value` | `string` | value of option to deselect |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[store/filterManager.ts:150](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L150)
+
+___
+
+### getCurrentState
+
+▸ **getCurrentState**(): `FilterManagerState`
+
+Gets current state of filters
+
+#### Returns
+
+`FilterManagerState`
+
+current state
+
+#### Defined in
+
+[store/filterManager.ts:83](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L83)
+
+___
+
+### getOptionByKeyCreateIfNotExists
+
+▸ `Private` **getOptionByKeyCreateIfNotExists**(`key`, `value`): `Object`
+
+Get option by key and sub option name. If doesn't exist, create it.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+| `value` | `string` |
+
+#### Returns
+
+`Object`
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `count` | `number` |  |
+| `name` | `string` | Name / label of filter |
+| `selected` | `boolean` | Was this filter selected on the query |
+| `value` | `string` | Value of filter. That will be sent to backend |
+
+#### Defined in
+
+[store/filterManager.ts:363](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L363)
 
 ___
 
@@ -131,13 +253,21 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:19](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L19)
+[store/filterManager.ts:55](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L55)
 
 ___
 
-### sort
+### readFromURLParams
 
-▸ `Private` **sort**(): `void`
+▸ **readFromURLParams**(`params`): `void`
+
+Set current selection of filters from a URL param string
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | `URLSearchParams` | URLSearchParams to read from |
 
 #### Returns
 
@@ -145,7 +275,50 @@ ___
 
 #### Defined in
 
-[store/filterManager.ts:45](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L45)
+[store/filterManager.ts:340](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L340)
+
+___
+
+### selectOption
+
+▸ **selectOption**(`key`, `value`): `void`
+
+Select given option
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `string` | key of filter to select |
+| `value` | `string` | value of option to select |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[store/filterManager.ts:126](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L126)
+
+___
+
+### setState
+
+▸ **setState**(`state`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `state` | `FilterManagerState` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[store/filterManager.ts:89](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L89)
 
 ___
 
@@ -161,13 +334,31 @@ Populate filter manager with filters from Klevu API
 
 #### Defined in
 
-[store/filterManager.ts:164](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L164)
+[store/filterManager.ts:247](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L247)
+
+___
+
+### toURLParams
+
+▸ **toURLParams**(): `string`
+
+Changes current selection of filters to a URL param string
+
+#### Returns
+
+`string`
+
+string of URL params
+
+#### Defined in
+
+[store/filterManager.ts:313](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L313)
 
 ___
 
 ### toggleOption
 
-▸ **toggleOption**(`key`, `name`): `void`
+▸ **toggleOption**(`key`, `value`): `void`
 
 Function to select filters in filter manager
 
@@ -178,7 +369,7 @@ Sends a Dom event on change
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `key` | `string` | Key of option |
-| `name` | `string` | Name of value |
+| `value` | `string` | value of option to toggle |
 
 #### Returns
 
@@ -186,7 +377,7 @@ Sends a Dom event on change
 
 #### Defined in
 
-[store/filterManager.ts:67](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L67)
+[store/filterManager.ts:101](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L101)
 
 ___
 
@@ -212,4 +403,48 @@ Sends a Dom event on change
 
 #### Defined in
 
-[store/filterManager.ts:136](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/store/filterManager.ts#L136)
+[store/filterManager.ts:204](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L204)
+
+___
+
+### isKlevuFilterResultOptions
+
+▸ `Static` **isKlevuFilterResultOptions**(`filter`): filter is KlevuFilterResultOptions
+
+Is given variable an option filter
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `filter` | [`KlevuFilterResultOptions`](../modules.md#klevufilterresultoptions) \| [`KlevuFilterResultSlider`](../modules.md#klevufilterresultslider) |
+
+#### Returns
+
+filter is KlevuFilterResultOptions
+
+#### Defined in
+
+[store/filterManager.ts:416](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L416)
+
+___
+
+### isKlevuFilterResultSlider
+
+▸ `Static` **isKlevuFilterResultSlider**(`filter`): filter is KlevuFilterResultSlider
+
+Is given variable a slider filter
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `filter` | [`KlevuFilterResultOptions`](../modules.md#klevufilterresultoptions) \| [`KlevuFilterResultSlider`](../modules.md#klevufilterresultslider) |
+
+#### Returns
+
+filter is KlevuFilterResultSlider
+
+#### Defined in
+
+[store/filterManager.ts:405](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/filterManager.ts#L405)

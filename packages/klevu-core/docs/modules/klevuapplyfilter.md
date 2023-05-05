@@ -13,5 +13,5 @@ Apply Filter type for Klevu base query
 
 #### Defined in
 
-[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
+[models/KlevuApplyFilter.ts:4](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuApplyFilter.ts#L4)
 

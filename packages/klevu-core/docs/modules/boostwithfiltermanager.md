@@ -19,5 +19,5 @@ KlevuModifier that be used to modify query
 
 #### Defined in
 
-[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
+[modifiers/boostWithFilterManager/boostWithFilterManager.ts:13](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/boostWithFilterManager/boostWithFilterManager.ts#L13)
 

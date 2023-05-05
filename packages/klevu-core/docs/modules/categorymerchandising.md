@@ -19,5 +19,5 @@ Default result id is "categoryMerchandising".
 
 #### Defined in
 
-[queries/categoryMerchandising/categoryMerchandising.ts:29](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L29)
+[queries/categoryMerchandising/categoryMerchandising.ts:30](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L30)
 

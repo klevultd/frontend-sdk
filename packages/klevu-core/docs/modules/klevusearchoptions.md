@@ -6,5 +6,5 @@ Search options to modify the search query.
 
 #### Defined in
 
-[queries/search/search.ts:15](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/queries/search/search.ts#L15)
+[queries/search/search.ts:15](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/search/search.ts#L15)
 

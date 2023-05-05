@@ -11,5 +11,5 @@
 
 #### Defined in
 
-[models/KlevuBaseQuerySettingsQuery.ts:1](https://github.com/klevultd/frontend-sdk/blob/1b37b18/packages/klevu-core/src/models/KlevuBaseQuerySettingsQuery.ts#L1)
+[models/KlevuBaseQuerySettingsQuery.ts:1](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuBaseQuerySettingsQuery.ts#L1)
 
