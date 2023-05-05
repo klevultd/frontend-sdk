@@ -57,8 +57,7 @@ export class KlevuFacetList {
   @Event({ composed: true })
   klevuApplyFilters!: EventEmitter<void>
 
-  @State() options: KlevuFilterResultOptions[] = []
-  @State() sliders: KlevuFilterResultSlider[] = []
+  @State() filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider> = []
 
   #applyManager = new FilterManager()
 
@@ -70,11 +69,9 @@ export class KlevuFacetList {
     this.#applyManager = new FilterManager()
     this.#applyManager.setState(this.manager.getCurrentState())
     if (this.useApplyButton) {
-      this.options = this.#applyManager.options
-      this.sliders = this.#applyManager.sliders
+      this.filters = this.#applyManager.filters
     } else {
-      this.options = this.manager.options
-      this.sliders = this.manager.sliders
+      this.filters = this.manager.filters
     }
   }
 
@@ -82,16 +79,14 @@ export class KlevuFacetList {
   filtersApplied() {
     this.#applyManager.setState(this.manager.getCurrentState())
     if (!this.useApplyButton) {
-      this.options = this.manager.options
-      this.sliders = this.manager.sliders
+      this.filters = this.manager.filters
     }
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate() {
     if (!this.useApplyButton) {
-      this.options = this.manager.options
-      this.sliders = this.manager.sliders
+      this.filters = this.manager.filters
       this.klevuApplyFilters.emit()
     }
   }
@@ -103,41 +98,43 @@ export class KlevuFacetList {
 
   #clear() {
     this.#applyManager.clearOptionSelections()
-    this.options = this.#applyManager.options
-    this.sliders = this.#applyManager.sliders
+    this.filters = this.#applyManager.filters
   }
 
   render() {
     return (
       <Host>
-        {this.options.map((o, index) => {
-          let mode
-          if (this.mode && typeof this.mode === "string") {
-            mode = this.mode
-          } else if (this.mode && typeof this.mode === "object") {
-            mode = this.mode[o.key]
-          }
+        {this.filters.map((f, index) => {
+          if (FilterManager.isKlevuFilterResultOptions(f)) {
+            let mode
+            if (this.mode && typeof this.mode === "string") {
+              mode = this.mode
+            } else if (this.mode && typeof this.mode === "object") {
+              mode = this.mode[f.key]
+            }
 
-          return (
-            <klevu-facet
-              accordion={this.accordion}
-              accordionStartOpen={index === 0}
-              customOrder={this.customOrder?.[o.key]}
-              exportparts={globalExportedParts}
-              manager={this.useApplyButton ? this.#applyManager : this.manager}
-              option={o}
-              mode={mode}
-            ></klevu-facet>
-          )
+            return (
+              <klevu-facet
+                accordion={this.accordion}
+                accordionStartOpen={index === 0}
+                customOrder={this.customOrder?.[f.key]}
+                exportparts={globalExportedParts}
+                manager={this.useApplyButton ? this.#applyManager : this.manager}
+                option={f}
+                mode={mode}
+              ></klevu-facet>
+            )
+          } else if (FilterManager.isKlevuFilterResultSlider(f)) {
+            return (
+              <klevu-facet
+                accordion={this.accordion}
+                exportparts={globalExportedParts}
+                manager={this.useApplyButton ? this.#applyManager : this.manager}
+                slider={f}
+              ></klevu-facet>
+            )
+          }
         })}
-        {this.sliders.map((s) => (
-          <klevu-facet
-            accordion={this.accordion}
-            exportparts={globalExportedParts}
-            manager={this.useApplyButton ? this.#applyManager : this.manager}
-            slider={s}
-          ></klevu-facet>
-        ))}
         {this.useApplyButton ? (
           <div class="applybar">
             <klevu-button isSecondary onClick={() => this.#clear()}>
