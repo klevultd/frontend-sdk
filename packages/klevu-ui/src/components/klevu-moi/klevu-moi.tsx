@@ -117,6 +117,7 @@ export class KlevuMoi {
         >
           {this.renderChatContent()}
           {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
+          <br />
           <div slot="actions" class="genericactions">
             {this.session?.genericOptions.options.map((item) => (
               <klevu-button
@@ -163,7 +164,7 @@ export class KlevuMoi {
   renderChatContent() {
     return (
       <Fragment>
-        {this.messages.map((message) => {
+        {this.messages.map((message, index) => {
           if ("message" in message) {
             return (
               <Fragment>
@@ -195,6 +196,7 @@ export class KlevuMoi {
                   {message.filter.options.map((o) => (
                     <klevu-button
                       isSecondary
+                      disabled={this.messages.length - 1 !== index}
                       onClick={() => this.#sendFilter(o.value, this.#buildChatFormat(o, message.filter.settings))}
                     >
                       {o.name}
