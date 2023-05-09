@@ -14,9 +14,7 @@
     "jsx": "react",
     "jsxFactory": "h",
     "baseUrl": ".",
-    "paths": {
-      "*": ["./node_modules/*"]
-    },
+    "paths": {},
     "resolveJsonModule": true
   },
   "include": ["src"]
