@@ -1,44 +1,12 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-search-field.stories"
 
-<Meta
-  title="Components/Search field"
-  component="klevu-search-field"
-  argTypes={meta.argTypes}
-  parameters={meta.parameters}
-/>
+<Meta of={Stories} />
 
 # Klevu-search-field
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    height="120px"
-    name="Search field"
-    args={{
-      placeholder: "Custom placeholder",
-      fallbackTerm: "jeans",
-      searchProducts: true,
-      searchSuggestions: true,
-      searchCategories: false,
-      searchCmsPages: false,
-    }}
-  >
-    {(args) => html`<klevu-search-field
-      fallback-term=${ifDefined(args.fallbackTerm)}
-      limit=${ifDefined(args.limit)}
-      placeholder=${args.placeholder}
-      search-categories=${ifDefined(args.searchCategories)}
-      search-cms-pages=${ifDefined(args.searchCmsPages)}
-      search-products=${ifDefined(args.searchProducts)}
-      search-suggestions=${ifDefined(args.searchSuggestions)}
-      search-text=${ifDefined(args.searchText)}
-      send-analytics=${ifDefined(args.sendAnalytics)}
-      variant=${ifDefined(args.variant)}
-    >
-    </klevu-search-field>`}
-  </Story>
-</Canvas>
+<Canvas of={Stories.SearchField}></Canvas>
 
-<ArgsTable story="Search field" />
+<Controls />

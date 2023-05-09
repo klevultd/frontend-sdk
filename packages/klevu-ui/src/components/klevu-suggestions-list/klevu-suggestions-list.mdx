@@ -1,27 +1,10 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-suggestions-list.stories"
 
-<Meta
-  title="Components/Suggestions List"
-  component="klevu-suggesions-list"
-  argTypes={meta.argTypes}
-  parameters={meta.parameters}
-/>
+<Meta of={Stories} />
 
 # Klevu-suggestions-list
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Suggestions List"
-    args={{
-      suggestions: ["<strong>shoe</strong>s", "leather <strong>shoe</strong>s"],
-    }}
-  >
-    {(args) =>
-      html`<klevu-suggestions-list caption=${ifDefined(args.caption)} .suggestions=${args.suggestions}>
-      </klevu-suggestions-list>`
-    }
-  </Story>
-</Canvas>
+<Canvas of={Stories.SuggestionsList}></Canvas>

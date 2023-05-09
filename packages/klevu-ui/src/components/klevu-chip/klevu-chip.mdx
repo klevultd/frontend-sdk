@@ -11,22 +11,6 @@ import * as Stories from "./klevu-chip.stories"
 
 Badge can be in accent colors. Colors are set in css properties and can be changed by overriding them.
 
-<Canvas>
-  <Story name="Chip" of={Stories.chip} args={{}}></Story>
-  <Story
-    of={Stories.chip}
-    name="Selected chip"
-    args={{
-      selected: true,
-    }}
-  ></Story>
-  <Story
-    of={Stories.chip}
-    name="Removable chip"
-    args={{
-      removable: true,
-    }}
-  ></Story>
-</Canvas>
+<Canvas of={Stories.chip}></Canvas>
 
 <Controls />

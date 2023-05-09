@@ -1,4 +1,4 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-popup.stories"
 
 <Meta of={Stories} />
@@ -9,14 +9,15 @@ import * as Stories from "./klevu-popup.stories"
 
 ## Popup starting from search field
 
-<Canvas>
-  <Story of={Stories.Popup} name="Popup" height="200px"></Story>
-</Canvas>
+<Canvas of={Stories.Popup} story={{ height: "200px" }}></Canvas>
 
 ## Popup starting from button
 
-<Canvas>
-  <Story name="Button source" of={Stories.ButtonSource} height="200px"></Story>
-</Canvas>
+<Canvas
+  of={Stories.ButtonSource}
+  story={{
+    height: "200px",
+  }}
+></Canvas>
 
-<ArgsTable story="Popup" />
+<Controls />
