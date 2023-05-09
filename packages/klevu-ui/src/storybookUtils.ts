@@ -21,7 +21,7 @@ export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   return element
 }
 
-export function autofillMeta(tag: string, meta: Meta): Meta {
+export function autofillMeta(tag: string, meta: Meta = {}): Meta {
   const data: JsonDocs = jsdocs as any
   const comp = data.components.find((c) => c.tag == tag)
   if (!comp) {
@@ -171,7 +171,7 @@ export function autofillMeta(tag: string, meta: Meta): Meta {
   })
 }
 
-export function MDXAutoFillMeta(tag: string, meta: Meta) {
+export function MDXAutoFillMeta(tag: string, meta: Meta = {}) {
   const { argTypes, parameters } = autofillMeta(tag, meta)
 
   const data: JsonDocs = jsdocs as any

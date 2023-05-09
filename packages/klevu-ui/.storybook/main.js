@@ -1,10 +1,12 @@
 module.exports = {
-  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../src/stories/*.mdx", "../src/components/**/*.mdx", "../src/components/**/*.stories.ts"],
   addons: ["@storybook/addon-essentials", "@ljcl/storybook-addon-cssprops"],
-  framework: "@storybook/web-components",
+  framework: {
+    name: "@storybook/web-components-vite",
+    options: {},
+  },
   staticDirs: ["../storybookAssets"],
-  core: { builder: "webpack5" },
-  features: {
-    previewMdx2: false,
+  docs: {
+    autodocs: true,
   },
 }
