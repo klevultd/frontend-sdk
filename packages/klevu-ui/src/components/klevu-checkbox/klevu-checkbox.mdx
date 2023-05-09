@@ -1,38 +1,12 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-checkbox.stories"
 
-<Meta title="Atoms/Checkbox" component="klevu-checkbox" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-Checkbox
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Checkbox with text"
-    args={{
-      checked: true,
-    }}
-  >
-    {(args) =>
-      html`<klevu-checkbox
-        checked=${ifDefined(args.checked)}
-        disabled=${ifDefined(args.disabled)}
-        name=${ifDefined(args.name)}
-        >Content related to checkbox</klevu-checkbox
-      >`
-    }
-  </Story>
-</Canvas>
+<Canvas of={Stories.Checkbox}></Canvas>
 
-<Canvas>
-  <Story name="Just checkbox">
-    {(args) => html`<klevu-checkbox
-      checked=${ifDefined(args.checked)}
-      disabled=${ifDefined(args.disabled)}
-      name=${ifDefined(args.name)}
-    ></klevu-checkbox>`}
-  </Story>
-</Canvas>
-
-<ArgsTable story="Checkbox with text" />
+<Controls />

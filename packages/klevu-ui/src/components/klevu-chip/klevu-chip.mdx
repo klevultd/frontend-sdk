@@ -1,42 +1,32 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-chip.stories"
 
-<Meta title="Atoms/Chip" component="klevu-chip" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-chip
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
 ## Badge in accent colors
 
 Badge can be in accent colors. Colors are set in css properties and can be changed by overriding them.
 
 <Canvas>
-  <Story name="Chip" args={{}}>
-    {(args) =>
-      html`<klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>`
-    }
-  </Story>
+  <Story name="Chip" of={Stories.chip} args={{}}></Story>
   <Story
+    of={Stories.chip}
     name="Selected chip"
     args={{
       selected: true,
     }}
-  >
-    {(args) =>
-      html`<klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>`
-    }
-  </Story>
+  ></Story>
   <Story
+    of={Stories.chip}
     name="Removable chip"
     args={{
       removable: true,
     }}
-  >
-    {(args) =>
-      html`<klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>`
-    }
-  </Story>
+  ></Story>
 </Canvas>
 
-<ArgsTable story="Chip" />
+<Controls />
