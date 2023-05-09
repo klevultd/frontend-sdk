@@ -1,138 +1,30 @@
-import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
-import { html, Fragment } from "lit-html"
-import { ifDefined } from "lit-html/directives/if-defined.js"
-import { MDXAutoFillMeta } from "../../storybookUtils"
+import { ArgsTable, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-list.stories"
 
-<Meta title="Atoms/List" component="klevu-list" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-list
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
 ## List items with only primary text
 
-<Canvas>
-  <Story
-    name="List"
-    args={{
-      condensed: false,
-      noXPadding: false,
-    }}
-  >
-    {(args) => html`
-      <Fragment>
-        <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-        <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-        <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-        <klevu-list condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-      </Fragment>
-    `}
-  </Story>
-</Canvas>
+<Canvas of={Stories.List}></Canvas>
 
 <ArgsTable story="List" />
 
 ## List items with secondary text
 
-<Canvas>
-  <Story name="List with secondary text">
-    {(args) => html`
-      <Fragment>
-        <klevu-list>
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list>
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list>
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list>
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-      </Fragment>
-    `}
-  </Story>
-</Canvas>
+<Canvas of={Stories.ListWithSecondaryText}></Canvas>
 
 ## List items with icons
 
-<Canvas>
-  <Story name="List with icons">
-    {(args) => html`
-      <Fragment>
-        <klevu-list icon="check">
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list icon="search">
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list icon="palette">
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-        <klevu-list icon="nature">
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-      </Fragment>
-    `}
-  </Story>
-</Canvas>
+<Canvas of={Stories.ListWithIcons}></Canvas>
 
 ## List items with images
 
-<Canvas>
-  <Story name="List with images">
-    {(args) => html`
-      <Fragment>
-        <klevu-list image="https://picsum.photos/200">
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list image="https://picsum.photos/300">
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list image="https://picsum.photos/220">
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-        <klevu-list image="https://picsum.photos/400">
-          <span slot="primary">List items with only primary text</span>
-        </klevu-list>
-      </Fragment>
-    `}
-  </Story>
-</Canvas>
+<Canvas of={Stories.ListWithImages}></Canvas>
 
 ## List item with url
 
-<Canvas>
-  <Story name="List with url">
-    {(args) => html`
-      <Fragment>
-        <klevu-list image="https://picsum.photos/200" url="https://www.klevu.com">
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-        <klevu-list image="https://picsum.photos/200" url="https://www.google.com">
-          <span slot="primary">List items with primary text</span>
-          <span slot="secondary">Seconday text on the list item</span>
-        </klevu-list>
-      </Fragment>
-    `}
-  </Story>
-</Canvas>
+<Canvas of={Stories.ListWithUrl}></Canvas>

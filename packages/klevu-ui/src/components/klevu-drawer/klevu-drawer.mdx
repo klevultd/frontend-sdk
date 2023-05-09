@@ -1,32 +1,12 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-drawer.stories"
 
-<Meta title="Atoms/Drawer" component="klevu-drawer" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-drawer
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Drawer"
-    args={{
-      anchor: "left",
-    }}
-  >
-    {(args) =>
-      html`<klevu-drawer
-        anchor=${ifDefined(args.anchor)}
-        background=${ifDefined(args.background)}
-        close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-        start-open=${ifDefined(args.startOpen)}
-        insert-y-padding=${ifDefined(args.insertYPadding)}
-      >
-        <klevu-button slot="origin">Open drawer</klevu-button>
-        <div slot="content">Hello world drawer</div>
-      </klevu-drawer>`
-    }
-  </Story>
-</Canvas>
+<Canvas of={Stories.Drawer}></Canvas>
 
-<ArgsTable story="Drawer" />
+<Controls />

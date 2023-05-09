@@ -1,41 +1,12 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-dropdown.stories"
 
-<Meta title="Atoms/Dropdown" component="klevu-dropdown" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-dropdown
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Dropdown"
-    args={{
-      options: [
-        {
-          value: "1",
-          text: "One",
-        },
-        {
-          value: "2",
-          text: "Two",
-        },
-        {
-          value: "3",
-          text: "Three",
-        },
-      ],
-    }}
-  >
-    {(args) => html`<klevu-dropdown
-      .options=${args.options}
-      disabled=${ifDefined(args.disabled)}
-      name=${ifDefined(args.name)}
-      selected=${ifDefined(args.selected)}
-      variant=${ifDefined(args.variant)}
-    >
-    </klevu-dropdown>`}
-  </Story>
-</Canvas>
+<Canvas of={Stories.Dropdown}></Canvas>
 
-<ArgsTable story="Dropdown" />
+<Controls />

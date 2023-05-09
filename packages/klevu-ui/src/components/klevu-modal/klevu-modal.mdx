@@ -1,15 +1,10 @@
-import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { MDXAutoFillMeta } from "../../storybookUtils"
-import { ModalStory } from "./story/modal.ts"
+import { Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-modal.stories"
 
-<Meta title="Atoms/Modal" component="klevu-modal" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-modal
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story name="Modal">{ModalStory.bind({})}</Story>
-</Canvas>
+<Canvas of={Stories.Modal}></Canvas>

@@ -1,30 +1,13 @@
-import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { MDXAutoFillMeta } from "../../storybookUtils"
+import { Meta, Story, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-init.stories"
 
-<Meta title="Non components/Init" component="klevu-init" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-init
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Story
-  name="Init"
-  args={{
-    apiKey: "klevu-165829460115715456",
-    url: "https://eucs30v2.ksearchnet.com/cs/v2/search",
-    settings: {
-      onProductClick: (product, event) => {},
-      generateProductUrl: (product) => {
-        return `myurl.com/${product.id}`
-      },
-      renderPrice: (amount, currency) => `${amount} ${currency}`,
-    },
-  }}
->
-  {(args) => html`<klevu-init api-key=${args.apiKey} url=${args.url} .settings=${args.settings}></klevu-init>`}
-</Story>
+<Story of={Stories.Init}></Story>
 
 ## VanillaJS initialization
 

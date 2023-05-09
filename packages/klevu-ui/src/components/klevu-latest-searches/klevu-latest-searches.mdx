@@ -1,20 +1,10 @@
-import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { ifDefined } from "lit-html/directives/if-defined.js"
-import { MDXAutoFillMeta, fullMockRequest } from "../../storybookUtils"
+import { Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-latest-searches.stories"
 
-<Meta
-  title="Components/Latest searches"
-  component="klevu-latest-searches"
-  argTypes={meta.argTypes}
-  parameters={meta.parameters}
-/>
+<Meta of={Stories} />
 
 # Klevu-latest-searches
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story name="Latest searches">{(args) => html`<klevu-latest-searches></klevu-latest-searches>`}</Story>
-</Canvas>
+<Canvas of={Stories.LatestSearches}></Canvas>

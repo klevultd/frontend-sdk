@@ -1,30 +1,11 @@
-import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { MDXAutoFillMeta } from "../../storybookUtils"
+import { Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-layout-results.stories"
 
-<Meta title="Layout/Results" component="klevu-layout-results" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-layout-results
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Results"
-    args={{
-      hello: "world",
-    }}
-  >
-    {(args) =>
-      html`<klevu-layout-results>
-        <div slot="sidebar" style="background: lightblue; height: 500px;">Sidebar</div>
-        <div slot="header" style="background: yellow; height: 100px; width: 100%;">Header</div>
-        <div slot="content" style="background: green; height: 500px;">Content</div>
-        <div slot="footer" style="background: red; height: 100px;">Footer</div>
-      </klevu-layout-results>`
-    }
-  </Story>
-</Canvas>
-
-<ArgsTable story="Results" />
+<Canvas of={Stories.Results}></Canvas>
+<Controls />
