@@ -2,6 +2,7 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
+import { KlevuAccordion } from "./klevu-accordion"
 export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-accordion")
 
 const meta: Meta = {
@@ -13,7 +14,7 @@ const meta: Meta = {
 
 export default meta
 
-export const Accordion: StoryObj<HTMLKlevuAccordionElement> = {
+export const Accordion: StoryObj<KlevuAccordion> = {
   args: {
     startOpen: true,
   },

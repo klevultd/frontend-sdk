@@ -1,18 +1,11 @@
-import { ArgsTable, Canvas, Meta, Story, Description, Source } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { ifDefined } from "lit-html/directives/if-defined.js"
-import { MDXAutoFillMeta, fullMockRequest, mockProducts } from "../../storybookUtils"
-import { productWithCustomizedProduct, singleProduct } from "./story/product"
-const meta = MDXAutoFillMeta("klevu-product")
-const productItem = mockProducts[0]
-const productItem2 = fullMockRequest.queryResults?.[0].records[1]
-const productItem3 = fullMockRequest.queryResults?.[0].records[2]
+import { Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import * as Stories from "./klevu-product.stories"
 
-<Meta title="Components/Product" component="klevu-product" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-product
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
 ## Default product
 
@@ -25,33 +18,13 @@ Here are four products.
 3. Style modifications in `style` tag with CSS parts and CSS properties.
 4. Undefined loading product.
 
-<Canvas>
-  <Story
-    name="Product"
-    args={{
-      product: productItem,
-      variant: "default",
-    }}
-  >
-    {productWithCustomizedProduct.bind({})}
-  </Story>
-</Canvas>
+<Canvas of={Stories.Product}></Canvas>
 
 ## Smaller products
 
 Smaller products are usually used in popups and in places where not all information can fit.
 
-<Canvas>
-  <Story
-    name="Small product"
-    args={{
-      product: productItem,
-      variant: "small",
-    }}
-  >
-    {singleProduct.bind({})}
-  </Story>
-</Canvas>
+<Canvas of={Stories.SmallProduct}></Canvas>
 
 ## Line products
 
@@ -59,54 +32,27 @@ Line products are typically used in mobile listings.
 
 <Canvas>
   <Story
+    of={Stories.Product}
     name="Line product"
     args={{
-      product: productItem,
+      product: Stories.ProductItems.productItem,
       variant: "line",
     }}
-  >
-    {singleProduct.bind({})}
-  </Story>
+  ></Story>
   <Story
+    of={Stories.Product}
     name="Line product 2"
     args={{
-      product: productItem2,
+      product: Stories.ProductItems.productItem2,
       variant: "line",
     }}
-  >
-    {singleProduct.bind({})}
-  </Story>
+  ></Story>
   <Story
+    of={Stories.Product}
     name="Line product 3"
     args={{
-      product: productItem3,
+      product: Stories.ProductItems.productItem3,
       variant: "line",
     }}
-  >
-    {singleProduct.bind({})}
-  </Story>
-</Canvas>
-
-## Loading products
-
-<Canvas>
-  <Story name="Product loading" args={{ variant: "default" }}>
-    {singleProduct.bind({})}
-  </Story>
-  <Story
-    name="Small product loading"
-    args={{
-      variant: "small",
-    }}
-  >
-    {singleProduct.bind({})}
-  </Story>
-  <Story
-    name="Line product loading"
-    args={{
-      variant: "line",
-    }}
-  >
-    {singleProduct.bind({})}
-  </Story>
+  ></Story>
 </Canvas>
