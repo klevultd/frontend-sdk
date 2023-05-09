@@ -1,4 +1,4 @@
-import { Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-product.stories"
 
 <Meta of={Stories} />
@@ -30,29 +30,4 @@ Smaller products are usually used in popups and in places where not all informat
 
 Line products are typically used in mobile listings.
 
-<Canvas>
-  <Story
-    of={Stories.Product}
-    name="Line product"
-    args={{
-      product: Stories.ProductItems.productItem,
-      variant: "line",
-    }}
-  ></Story>
-  <Story
-    of={Stories.Product}
-    name="Line product 2"
-    args={{
-      product: Stories.ProductItems.productItem2,
-      variant: "line",
-    }}
-  ></Story>
-  <Story
-    of={Stories.Product}
-    name="Line product 3"
-    args={{
-      product: Stories.ProductItems.productItem3,
-      variant: "line",
-    }}
-  ></Story>
-</Canvas>
+<Canvas of={Stories.LineItems}></Canvas>

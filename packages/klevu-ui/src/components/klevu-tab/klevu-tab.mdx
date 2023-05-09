@@ -1,26 +1,12 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-tab.stories"
 
-<Meta title="Atoms/Tab" component="klevu-tab" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-tab
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Tab"
-    args={{
-      caption: "Tab",
-    }}
-  >
-    {(args) =>
-      html`<klevu-tab caption=${ifDefined(args.caption)}></klevu-tab
-        ><klevu-tab caption=${ifDefined(args.caption)} active></klevu-tab
-        ><klevu-tab caption=${ifDefined(args.caption)}></klevu-tab
-        ><klevu-tab caption=${ifDefined(args.caption)}></klevu-tab>`
-    }
-  </Story>
-</Canvas>
+<Canvas of={Stories.Tab}></Canvas>
 
-<ArgsTable story="Tab" />
+<Controls />

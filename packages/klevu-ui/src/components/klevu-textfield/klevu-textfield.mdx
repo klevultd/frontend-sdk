@@ -1,65 +1,16 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-textfield.stories"
 
-<Meta title="Atoms/Textfield" component="klevu-textfield" argTypes={meta.argTypes} parameters={meta.parameters} />
+<Meta of={Stories} />
 
 # Klevu-textfield
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story name="Textfield">
-    {(args) =>
-      html`<klevu-textfield
-        disabled=${ifDefined(args.disabled)}
-        placeholder=${ifDefined(args.placeholder)}
-        value=${ifDefined(args.value)}
-        error=${ifDefined(args.error)}
-        variant=${ifDefined(args.variant)}
-        icon=${ifDefined(args.icon)}
-        clear-button=${ifDefined(args.clearButton)}
-      ></klevu-textfield>`
-    }
-  </Story>
-</Canvas>
+<Canvas of={Stories.Textfield}></Canvas>
 
-<ArgsTable story="Textfield" />
+<Controls />
 
 ## Textfield with other elements
 
-<Canvas>
-  <Story
-    name="Form elements"
-    args={{
-      disabled: false,
-    }}
-  >
-    {(args) => html`<div
-      style="display: flex;
-align-items: center;
-justify-content: center;
-gap: 16px;"
-    >
-      <klevu-textfield disabled=${args.disabled}></klevu-textfield>
-      <klevu-checkbox disabled=${args.disabled}></klevu-checkbox>
-      <klevu-button disabled=${args.disabled}>A Button</klevu-button>
-      <klevu-dropdown
-        disabled=${args.disabled}
-        .options=${[
-          {
-            value: "1",
-            text: "One",
-          },
-          {
-            value: "2",
-            text: "Two",
-          },
-          {
-            value: "3",
-            text: "Three",
-          },
-        ]}
-      ></klevu-dropdown>
-    </div>`}
-  </Story>
-</Canvas>
+<Canvas of={Stories.FormFields}></Canvas>

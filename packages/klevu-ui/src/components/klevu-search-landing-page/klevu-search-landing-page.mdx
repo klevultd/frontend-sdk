@@ -1,39 +1,12 @@
-import { ArgsTable, Canvas, Meta, Story, Description, Source } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { ifDefined } from "lit-html/directives/if-defined.js"
-import { MDXAutoFillMeta, fullMockRequest } from "../../storybookUtils"
+import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
 import * as Stories from "./klevu-search-landing-page.stories"
 
-<Meta
-  title="Apps/Search landing page"
-  component="klevu-search-landing-page"
-  argTypes={meta.argTypes}
-  parameters={meta.parameters}
-/>
+<Meta of={Stories} />
 
 # Klevu-search-landing-page
 
-<Description>{meta.description}</Description>
+<Description>{Stories.description}</Description>
 
-<Canvas>
-  <Story
-    name="Search landing page"
-    args={{
-      term: "red shoes",
-    }}
-  >
-    {(args) =>
-      html`<klevu-search-landing-page
-        filter-count=${ifDefined(args.filterCount)}
-        .filterCustomOrder=${args.filterCustomOrder}
-        limit=${ifDefined(args.limit)}
-        .renderProductSlot=${args.renderProductSlot}
-        sort=${ifDefined(args.sort)}
-        term=${ifDefined(args.term)}
-        use-pagination=${ifDefined(args.usePagination)}
-      ></klevu-search-landing-page>`
-    }
-  </Story>
-</Canvas>
+<Canvas of={Stories.SearchLandingPage}></Canvas>
 
-<ArgsTable story="Search landing page" />
+<Controls />
