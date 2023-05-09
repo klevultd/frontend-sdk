@@ -1,6 +1,7 @@
 import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
+import { KlevuBadge } from "./klevu-badge"
 export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-badge")
 
 const meta: Meta = {
@@ -12,7 +13,7 @@ const meta: Meta = {
 
 export default meta
 
-export const Badges: StoryObj<HTMLKlevuBadgeElement> = {
+export const Badges: StoryObj<KlevuBadge> = {
   args: {
     accent: 1,
   },
@@ -24,7 +25,7 @@ export const Badges: StoryObj<HTMLKlevuBadgeElement> = {
   `,
 }
 
-export const NeutralBadges: StoryObj<HTMLKlevuBadgeElement> = {
+export const NeutralBadges: StoryObj<KlevuBadge> = {
   render: (args) => html`
     <klevu-badge neutral="1">Badge 1</klevu-badge>
     <klevu-badge neutral="2">Badge 2</klevu-badge>
@@ -33,10 +34,10 @@ export const NeutralBadges: StoryObj<HTMLKlevuBadgeElement> = {
   `,
 }
 
-export const CustomColor: StoryObj<HTMLKlevuBadgeElement> = {
+export const CustomColor: StoryObj<KlevuBadge> = {
   render: (args) => html`<klevu-badge style="--klevu-badge-background: salmon;">Badge 1</klevu-badge>`,
 }
 
-export const Closable: StoryObj<HTMLKlevuBadgeElement> = {
+export const Closable: StoryObj<KlevuBadge> = {
   render: (args) => html`<klevu-badge closable>hats</klevu-badge><klevu-badge closable accent="3">shirts</klevu-badge>`,
 }

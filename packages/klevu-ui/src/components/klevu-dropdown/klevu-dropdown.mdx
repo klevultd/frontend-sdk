@@ -1,8 +1,5 @@
-import { ArgsTable, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
-import { html } from "lit-html"
-import { ifDefined } from "lit-html/directives/if-defined.js"
-import { MDXAutoFillMeta } from "../../storybookUtils"
-const meta = MDXAutoFillMeta("klevu-dropdown")
+import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import * as Stories from "./klevu-dropdown.stories"
 
 <Meta title="Atoms/Dropdown" component="klevu-dropdown" argTypes={meta.argTypes} parameters={meta.parameters} />
 

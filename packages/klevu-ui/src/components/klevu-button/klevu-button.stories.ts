@@ -2,6 +2,7 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
+import { KlevuButton } from "./klevu-button"
 export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-button")
 
 const meta: Meta = {
@@ -13,7 +14,7 @@ const meta: Meta = {
 
 export default meta
 
-export const Button: StoryObj<HTMLKlevuButtonElement & { text?: string }> = {
+export const Button: StoryObj<KlevuButton & { text?: string }> = {
   args: {
     text: "Hello Button",
   },
@@ -35,21 +36,21 @@ export const Button: StoryObj<HTMLKlevuButtonElement & { text?: string }> = {
   >`,
 }
 
-export const IconButton1: StoryObj<HTMLKlevuButtonElement & { text?: string }> = {
+export const IconButton1: StoryObj<KlevuButton & { text?: string }> = {
   ...Button,
   args: {
     icon: "chevron_left",
   },
 }
 
-export const IconButton2: StoryObj<HTMLKlevuButtonElement & { text?: string }> = {
+export const IconButton2: StoryObj<KlevuButton & { text?: string }> = {
   ...Button,
   args: {
     icon: "search",
   },
 }
 
-export const IconButton3: StoryObj<HTMLKlevuButtonElement & { text?: string }> = {
+export const IconButton3: StoryObj<KlevuButton & { text?: string }> = {
   ...Button,
   args: {
     icon: "settings",
