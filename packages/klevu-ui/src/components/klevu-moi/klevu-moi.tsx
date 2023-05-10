@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Fragment, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
-import { startMoi, MoiSession, MoiRequest, KlevuRecord, MoiResponseObjects } from "@klevu/core"
+import { startMoi, MoiSession, MoiRequest, KlevuRecord, MoiProducts } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 /**
@@ -17,7 +17,7 @@ export class KlevuMoi {
   #modalRef?: HTMLKlevuModalElement
 
   @State()
-  currentProduct?: Partial<KlevuRecord>
+  currentProduct?: MoiProducts["productData"]["products"][0]
 
   @State()
   messages: MoiSession["messages"] = []
@@ -37,6 +37,19 @@ export class KlevuMoi {
   @Prop()
   apiKey?: string
 
+  /**
+   * When a product is clicked. By default does a full page redirect to product url.
+   * @param product
+   */
+  @Prop()
+  onProductClick = (product: Partial<KlevuRecord>) => {
+    if (!product.url) {
+      console.warn("No product url found. Cannot redirect")
+      return
+    }
+    window.location.href = product.url
+  }
+
   async connectedCallback() {
     await KlevuInit.ready()
     const init = async () => {
@@ -44,6 +57,8 @@ export class KlevuMoi {
         onMessage: this.onMessage.bind(this),
         // @ts-expect-error
         apiKey: this.apiKey || window["klevu_ui_settings"].apiKey,
+        // Do nothing on redirect as we have our own system
+        onRedirect: (url) => {},
       })
       this.messages = this.session.messages
     }
@@ -102,6 +117,24 @@ export class KlevuMoi {
       return settings.chatFormat.replace(`$VALUE$`, target.name)
     }
     return undefined
+  }
+
+  async #productClick(product: MoiProducts["productData"]["products"][0]) {
+    if (!this.session || !product.id || !product.url) {
+      return
+    }
+    this.loading = true
+    await this.session.query({
+      product: {
+        id: product.id,
+        context: {
+          url: product.url,
+        },
+        intent: "redirect",
+      },
+    })
+    this.loading = false
+    this.onProductClick(product)
   }
 
   render() {
@@ -197,7 +230,11 @@ export class KlevuMoi {
                     <klevu-button
                       isSecondary
                       disabled={this.messages.length - 1 !== index}
-                      onClick={() => this.#sendFilter(o.value, this.#buildChatFormat(o, message.filter.settings))}
+                      onClick={() => {
+                        if (this.messages.length - 1 === index) {
+                          this.#sendFilter(o.value, this.#buildChatFormat(o, message.filter.settings))
+                        }
+                      }}
                     >
                       {o.name}
                     </klevu-button>
@@ -226,7 +263,16 @@ export class KlevuMoi {
                   }}
                 >
                   {message.productData.products.map((product) => (
-                    <klevu-product product={product} hideSwatches>
+                    <klevu-product
+                      product={product}
+                      hideSwatches
+                      onKlevuProductClick={(event) => {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        this.#productClick(product)
+                        return false
+                      }}
+                    >
                       <div slot="bottom" class="productactions">
                         {product.options.map((option) => (
                           <klevu-button

@@ -159,7 +159,8 @@ export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-m
 
 export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined, [
   'showClose',
-  'apiKey'
+  'apiKey',
+  'onProductClick'
 ]);
 
 

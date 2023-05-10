@@ -25,14 +25,14 @@ export type MoiResponse = {
   data: [MoiResponseContext, ...MoiResponseObjects[]]
 }
 
-type MoiResponseContext = {
+export type MoiResponseContext = {
   context: {
     klevuApiKey: string
     sessionId: string
   }
 }
 
-type MoiResponseText = {
+export type MoiResponseText = {
   message: {
     note: string | null
     type: "text"
@@ -40,7 +40,7 @@ type MoiResponseText = {
   }
 }
 
-type MoiResponseFilter = {
+export type MoiResponseFilter = {
   filter: {
     note: string | null
     options: Array<{
@@ -58,7 +58,7 @@ type MoiResponseFilter = {
   }
 }
 
-type MoiResponseGenericOptions = {
+export type MoiResponseGenericOptions = {
   genericOptions: {
     options: Array<{
       chat: string
@@ -68,7 +68,7 @@ type MoiResponseGenericOptions = {
   }
 }
 
-type MoiMenuOptions = {
+export type MoiMenuOptions = {
   menuOptions: {
     options: Array<{
       name: string
@@ -83,7 +83,7 @@ type MoiMenuOptions = {
   }
 }
 
-type MoiProducts = {
+export type MoiProducts = {
   productData: {
     note: string | null
     totalResultsFound: string
@@ -109,18 +109,19 @@ type MoiProducts = {
   }
 }
 
-type MoiActionsMessage = {
+export type MoiActionsMessage = {
   actions: {
     actions: Array<{
-      type: "purgeHistory"
+      type: "purgeHistory" | "redirectToUrl"
       context: {
-        value: string
+        value?: string
+        link?: string
       }
     }>
   }
 }
 
-type MoiLocalMessage = {
+export type MoiLocalMessage = {
   local: {
     message: string
   }
@@ -152,7 +153,12 @@ type MoiSavedSession = {
 export async function startMoi({
   onMessage,
   apiKey,
-}: { onMessage?: () => void; apiKey?: string } = {}): Promise<MoiSession> {
+  onRedirect,
+}: {
+  onMessage?: () => void
+  apiKey?: string
+  onRedirect?: (url: string) => void
+} = {}): Promise<MoiSession> {
   const klevuApiKey = apiKey || KlevuConfig.getDefault().apiKey
 
   const storedSession = await getStoredSession()
@@ -209,6 +215,12 @@ export async function startMoi({
           for (const action of obj.actions.actions) {
             if (action.type === "purgeHistory") {
               this.clear()
+            } else if (action.type === "redirectToUrl" && action.context.link) {
+              if (onRedirect) {
+                onRedirect(action.context.link)
+              } else {
+                window.location.href = action.context.link
+              }
             }
           }
         }
