@@ -11,10 +11,11 @@ Klevu MOI Application
 
 ## Properties
 
-| Property    | Attribute    | Description              | Type                  | Default     |
-| ----------- | ------------ | ------------------------ | --------------------- | ----------- |
-| `apiKey`    | `api-key`    | Override default API key | `string \| undefined` | `undefined` |
-| `showClose` | `show-close` | Show close button        | `boolean`             | `false`     |
+| Property         | Attribute    | Description                                                                     | Type                                      | Default                                                                                                                                                                                  |
+| ---------------- | ------------ | ------------------------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`         | `api-key`    | Override default API key                                                        | `string \| undefined`                     | `undefined`                                                                                                                                                                              |
+| `onProductClick` | --           | When a product is clicked. By default does a full page redirect to product url. | `(product: Partial<KlevuRecord>) => void` | `(product: Partial<KlevuRecord>) => {     if (!product.url) {       console.warn("No product url found. Cannot redirect")       return     }     window.location.href = product.url   }` |
+| `showClose`      | `show-close` | Show close button                                                               | `boolean`                                 | `false`                                                                                                                                                                                  |
 
 
 ## Dependencies

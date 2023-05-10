@@ -467,6 +467,11 @@ export namespace Components {
          */
         "apiKey"?: string;
         /**
+          * When a product is clicked. By default does a full page redirect to product url.
+          * @param product
+         */
+        "onProductClick": (product: Partial<KlevuRecord>) => void;
+        /**
           * Show close button
          */
         "showClose": boolean;
@@ -2046,6 +2051,11 @@ declare namespace LocalJSX {
           * Override default API key
          */
         "apiKey"?: string;
+        /**
+          * When a product is clicked. By default does a full page redirect to product url.
+          * @param product
+         */
+        "onProductClick"?: (product: Partial<KlevuRecord>) => void;
         /**
           * Show close button
          */
