@@ -2,13 +2,14 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuBadge } from "./klevu-badge"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-badge")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-badge")
 
 const meta: Meta = {
   title: "Atoms/Badge",
   component: "klevu-badge",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

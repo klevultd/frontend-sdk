@@ -2,13 +2,14 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuMoi } from "./klevu-moi"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-moi")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-moi")
 
 const meta: Meta = {
   title: "Apps/Moi",
   component: "klevu-moi",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

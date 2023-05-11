@@ -2,13 +2,14 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuModal } from "./klevu-modal"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-modal")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-modal")
 
 const meta: Meta = {
   title: "Atoms/Modal",
   component: "klevu-modal",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

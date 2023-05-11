@@ -1,13 +1,14 @@
 import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-lastest-searches")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-lastest-searches")
 
 const meta: Meta = {
   title: "Components/Latest searches",
   component: "klevu-latest-searches",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

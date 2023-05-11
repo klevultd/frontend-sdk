@@ -3,13 +3,14 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuDrawer } from "./klevu-drawer"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-drawer")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-drawer")
 
 const meta: Meta = {
   title: "Atoms/Drawer",
   component: "klevu-drawer",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

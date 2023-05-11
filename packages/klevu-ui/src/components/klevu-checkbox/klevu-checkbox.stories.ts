@@ -3,13 +3,14 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuCheckbox } from "./klevu-checkbox"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-checkbox")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-checkbox")
 
 const meta: Meta = {
   title: "Atoms/Checkbox",
   component: "klevu-checkbox",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

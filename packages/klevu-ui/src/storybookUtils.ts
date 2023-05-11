@@ -8,6 +8,7 @@ import { ArgTypes, Meta } from "@storybook/web-components"
 // @ts-inore
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import merge from "lodash.merge"
+import { withActions } from "@storybook/addon-actions/decorator"
 
 export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
@@ -181,6 +182,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}) {
     argTypes,
     parameters,
     description: comp?.docs,
+    decorators: [withActions as any],
   }
 }
 

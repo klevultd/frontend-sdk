@@ -3,7 +3,7 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuChatLayout } from "./klevu-chat-layout"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-chat-bubble")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-chat-bubble")
 const productItem = mockProducts[0]
 
 const meta: Meta = {
@@ -11,6 +11,7 @@ const meta: Meta = {
   component: "klevu-chat-layout",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

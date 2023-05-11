@@ -3,13 +3,14 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuPopularSearches } from "./klevu-popular-searches"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-popular-searches")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-popular-searches")
 
 const meta: Meta = {
   title: "Atoms/Popular Searches",
   component: "klevu-popular-searches",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

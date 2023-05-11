@@ -2,13 +2,14 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuLayoutResults } from "./klevu-layout-results"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-layout-results")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-layout-results")
 
 const meta: Meta = {
   title: "Layout/Results",
   component: "klevu-layout-results",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta
