@@ -3,13 +3,17 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuButton } from "./klevu-button"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-button")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-button")
 
 const meta: Meta = {
   title: "Atoms/Button",
   component: "klevu-button",
   argTypes,
-  parameters,
+  parameters: {
+    actions: {
+      handles: ["click klevu-button"],
+    },
+  },
 }
 
 export default meta
@@ -32,6 +36,7 @@ export const Button: StoryObj<KlevuButton & { text?: string }> = {
     is-secondary=${ifDefined(args.isSecondary)}
     is-tertiary=${ifDefined(args.isTertiary)}
     icon=${ifDefined(args.icon)}
+    @click=${() => console.log("clicked")}
     >${args.text}</klevu-button
   >`,
 }

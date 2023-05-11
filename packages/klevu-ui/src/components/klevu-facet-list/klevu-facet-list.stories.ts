@@ -4,7 +4,7 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuFacetList } from "./klevu-facet-list"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-facet-list")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-facet-list")
 const manager = new FilterManager()
 manager.initFromListFilters(fullMockRequest.queryResults?.[0].filters as any)
 const manager2 = new FilterManager()
@@ -43,6 +43,7 @@ const meta: Meta = {
   component: "klevu-facet-list",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

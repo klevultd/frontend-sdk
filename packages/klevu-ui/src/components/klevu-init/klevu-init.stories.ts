@@ -2,13 +2,14 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuInit } from "./klevu-init"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-init")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-init")
 
 const meta: Meta = {
   title: "Non components/Init",
   component: "klevu-facet-list",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

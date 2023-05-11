@@ -3,13 +3,15 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuSearchField } from "./klevu-search-field"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-search-field")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-search-field")
+import { withActions } from "@storybook/addon-actions/decorator"
 
 const meta: Meta = {
   title: "Components/SearchField",
   component: "klevu-search-field",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

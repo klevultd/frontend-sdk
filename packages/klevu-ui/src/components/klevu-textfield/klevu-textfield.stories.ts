@@ -3,13 +3,14 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuTextfield } from "./klevu-textfield"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-textfield")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-textfield")
 
 const meta: Meta = {
   title: "Atoms/Textfield",
   component: "klevu-textfield",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta

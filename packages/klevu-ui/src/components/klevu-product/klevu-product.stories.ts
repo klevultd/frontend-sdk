@@ -3,7 +3,7 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuProduct } from "./klevu-product"
-export const { argTypes, parameters, description } = MDXAutoFillMeta("klevu-product")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-product")
 
 const productItem = mockProducts[0]
 const productItem2 = fullMockRequest.queryResults?.[0].records[1]
@@ -32,6 +32,7 @@ const meta: Meta = {
   component: "klevu-product",
   argTypes,
   parameters,
+  decorators,
 }
 
 export default meta
