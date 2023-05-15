@@ -1,3 +1,5 @@
+import { mergeConfig } from "vite"
+
 module.exports = {
   stories: ["../src/stories/*.mdx", "../src/components/**/*.mdx", "../src/components/**/*.stories.ts"],
   addons: ["@storybook/addon-essentials", "@ljcl/storybook-addon-cssprops"],
@@ -9,4 +11,13 @@ module.exports = {
   docs: {
     autodocs: true,
   },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      build: {
+        rollupOptions: {
+          external: ["@klevu/core"]
+        }
+      }
+    })
+  }
 }
