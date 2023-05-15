@@ -92,7 +92,7 @@ async function main(args) {
   console.log("🟢 Version checks OK. Can continue with automated process")
 
   console.log("🟡 Build the core")
-  shelljs.cd("../klevu-core")
+  shelljs.cd("../packages/klevu-core")
   if (
     shelljs.exec("npm install", {
       fatal: true,
@@ -107,7 +107,7 @@ async function main(args) {
   ) {
     abortWithMessage("Building failed in @klevu/core.")
   }
-  shelljs.cd("../klevu-ui")
+  shelljs.cd("../../utils")
   console.log("🟢 Built the core")
 
   console.log(`🟡 Updating to version ${version}`)
