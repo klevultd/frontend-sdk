@@ -91,6 +91,25 @@ async function main(args) {
   }
   console.log("🟢 Version checks OK. Can continue with automated process")
 
+  console.log("🟡 Build the core")
+  shelljs.cd("../klevu-core")
+  if (
+    shelljs.exec("npm install", {
+      fatal: true,
+    }).code !== 0
+  ) {
+    abortWithMessage("Installing failed in @klevu/core.")
+  }
+  if (
+    shelljs.exec("npm run build", {
+      fatal: true,
+    }).code !== 0
+  ) {
+    abortWithMessage("Building failed in @klevu/core.")
+  }
+  shelljs.cd("../klevu-ui")
+  console.log("🟢 Built the core")
+
   console.log(`🟡 Updating to version ${version}`)
   console.log(`::set-output name=version::${version}`)
 
