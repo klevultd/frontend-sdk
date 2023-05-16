@@ -1,4 +1,4 @@
-import { FilterManager, KlevuFilterType } from "@klevu/core"
+import { FilterManager } from "@klevu/core"
 import { MDXAutoFillMeta, fullMockRequest } from "../../storybookUtils"
 import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
@@ -33,6 +33,7 @@ export const Facet: StoryObj<KlevuFacet> = {
       mode=${ifDefined(args.mode)}
       .option=${args.option}
       .slider=${args.slider}
+      labelOverride=${ifDefined(args.labelOverride)}
     ></klevu-facet>`,
 }
 

@@ -59,6 +59,7 @@ export const FacetList: StoryObj<KlevuFacetList> = {
       .manager=${args.manager}
       .mode=${args.mode}
       use-apply-button="${ifDefined(args.useApplyButton)}}"
+      defaultPriceLabel=${ifDefined(args.defaultPriceLabel)}
     ></klevu-facet-list>`,
 }
 

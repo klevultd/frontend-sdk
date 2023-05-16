@@ -94,7 +94,8 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'mode',
   'customOrder',
   'accordion',
-  'accordionStartOpen'
+  'accordionStartOpen',
+  'labelOverride'
 ]);
 
 
@@ -106,6 +107,7 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
   'useApplyButton',
   'applyButtonText',
   'clearButtonText',
+  'defaultPriceLabel',
   'klevuApplyFilters'
 ]);
 

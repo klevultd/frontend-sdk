@@ -258,6 +258,10 @@ export namespace Components {
          */
         "customOrder"?: string[];
         /**
+          * Override label text with custom value
+         */
+        "labelOverride"?: string;
+        /**
           * Originating filter manager which to modify. This is the most important property of the component. It will be used to modify the filter state for queries.
          */
         "manager": FilterManager;
@@ -295,6 +299,10 @@ export namespace Components {
           * Custom order keys for every facet
          */
         "customOrder"?: { [key: string]: string[] };
+        /**
+          * Default price label for sliders
+         */
+        "defaultPriceLabel": string;
         /**
           * Filter managet from which the list is built from
          */
@@ -1842,6 +1850,10 @@ declare namespace LocalJSX {
          */
         "customOrder"?: string[];
         /**
+          * Override label text with custom value
+         */
+        "labelOverride"?: string;
+        /**
           * Originating filter manager which to modify. This is the most important property of the component. It will be used to modify the filter state for queries.
          */
         "manager": FilterManager;
@@ -1879,6 +1891,10 @@ declare namespace LocalJSX {
           * Custom order keys for every facet
          */
         "customOrder"?: { [key: string]: string[] };
+        /**
+          * Default price label for sliders
+         */
+        "defaultPriceLabel"?: string;
         /**
           * Filter managet from which the list is built from
          */

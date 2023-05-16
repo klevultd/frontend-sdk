@@ -54,6 +54,11 @@ export class KlevuFacet {
   @Prop() accordionStartOpen?: boolean
 
   /**
+   * Override label text with custom value
+   */
+  @Prop() labelOverride?: string
+
+  /**
    * Show all options
    */
   @State() showAll = false
@@ -103,7 +108,7 @@ export class KlevuFacet {
           variant="body-s-bold"
           slot="header"
         >
-          {this.slider.label}
+          {this.labelOverride || this.slider.label}
         </klevu-typography>
         <klevu-slider
           slot="content"
@@ -158,7 +163,7 @@ export class KlevuFacet {
           variant="body-s-bold"
           slot="header"
         >
-          {this.option.label}
+          {this.labelOverride || this.option.label}
         </klevu-typography>
         <div class="options" slot="content">
           {opts.map((o) => (

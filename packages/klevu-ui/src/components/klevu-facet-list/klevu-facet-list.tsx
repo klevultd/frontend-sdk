@@ -52,6 +52,11 @@ export class KlevuFacetList {
   @Prop() clearButtonText = "Clear"
 
   /**
+   * Default price label for sliders
+   */
+  @Prop() defaultPriceLabel = "Price"
+
+  /**
    * When filters are applied
    */
   @Event({ composed: true })
@@ -131,6 +136,7 @@ export class KlevuFacetList {
                 exportparts={globalExportedParts}
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 slider={f}
+                labelOverride={ f.label === "klevu_price" ? this.defaultPriceLabel : undefined}
               ></klevu-facet>
             )
           }
