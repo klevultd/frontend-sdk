@@ -1,5 +1,10 @@
 import { KlevuConfig } from "@klevu/core"
-import { KlevuButton, KlevuInit, KlevuQuicksearch } from "@klevu/ui-react"
+import {
+  KlevuButton,
+  KlevuCheckbox,
+  KlevuInit,
+  KlevuQuicksearch,
+} from "@klevu/ui-react"
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { Link, Outlet, useNavigate } from "react-router-dom"

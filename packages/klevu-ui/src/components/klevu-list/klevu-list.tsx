@@ -1,5 +1,4 @@
 import { Component, Host, h, Prop, Fragment } from "@stencil/core"
-import { html } from "lit-html"
 
 /**
  * Single list item for listing things.

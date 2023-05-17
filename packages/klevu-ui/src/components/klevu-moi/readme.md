@@ -11,11 +11,17 @@ Klevu MOI Application
 
 ## Properties
 
-| Property         | Attribute    | Description                                                                     | Type                                      | Default                                                                                                                                                                                  |
-| ---------------- | ------------ | ------------------------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apiKey`         | `api-key`    | Override default API key                                                        | `string \| undefined`                     | `undefined`                                                                                                                                                                              |
-| `onProductClick` | --           | When a product is clicked. By default does a full page redirect to product url. | `(product: Partial<KlevuRecord>) => void` | `(product: Partial<KlevuRecord>) => {     if (!product.url) {       console.warn("No product url found. Cannot redirect")       return     }     window.location.href = product.url   }` |
-| `showClose`      | `show-close` | Show close button                                                               | `boolean`                                 | `false`                                                                                                                                                                                  |
+| Property    | Attribute    | Description              | Type                  | Default     |
+| ----------- | ------------ | ------------------------ | --------------------- | ----------- |
+| `apiKey`    | `api-key`    | Override default API key | `string \| undefined` | `undefined` |
+| `showClose` | `show-close` | Show close button        | `boolean`             | `false`     |
+
+
+## Events
+
+| Event                  | Description                                                                                                                                                     | Type                                                                                                                                                                                                                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `klevuMoiProductClick` | When a product is clicked. By default does a full page redirect to product url if event is not cancelled.  Use `event.preventDefault()` to cancel the redirect. | `CustomEvent<{ id: string; currency: string; image: string; itemGroupId: string; name: string; noOfVariants: number; options: { chat: string; intent: string; name: string; }[]; originalContent: string \| null; price: string; salePrice: string; shortDesc: string; url: string; }>` |
 
 
 ## Dependencies

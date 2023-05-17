@@ -11,6 +11,7 @@ import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
+import { MoiProduct } from "./components/klevu-moi/klevu-moi";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
@@ -28,6 +29,7 @@ export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
+export { MoiProduct } from "./components/klevu-moi/klevu-moi";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
@@ -474,11 +476,6 @@ export namespace Components {
           * Override default API key
          */
         "apiKey"?: string;
-        /**
-          * When a product is clicked. By default does a full page redirect to product url.
-          * @param product
-         */
-        "onProductClick": (product: Partial<KlevuRecord>) => void;
         /**
           * Show close button
          */
@@ -1082,6 +1079,10 @@ export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuLatestSearchesElement;
+}
+export interface KlevuMoiCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuMoiElement;
 }
 export interface KlevuPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2068,10 +2069,10 @@ declare namespace LocalJSX {
          */
         "apiKey"?: string;
         /**
-          * When a product is clicked. By default does a full page redirect to product url.
+          * When a product is clicked. By default does a full page redirect to product url if event is not cancelled.  Use `event.preventDefault()` to cancel the redirect.
           * @param product
          */
-        "onProductClick"?: (product: Partial<KlevuRecord>) => void;
+        "onKlevuMoiProductClick"?: (event: KlevuMoiCustomEvent<MoiProduct>) => void;
         /**
           * Show close button
          */

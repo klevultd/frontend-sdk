@@ -1,7 +1,9 @@
-import { Component, Host, h, State, Fragment, Prop } from "@stencil/core"
+import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { startMoi, MoiSession, MoiRequest, KlevuRecord, MoiProducts } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
+
+export type MoiProduct = MoiProducts["productData"]["products"][0]
 
 /**
  * Klevu MOI Application
@@ -17,7 +19,7 @@ export class KlevuMoi {
   #modalRef?: HTMLKlevuModalElement
 
   @State()
-  currentProduct?: MoiProducts["productData"]["products"][0]
+  currentProduct?: MoiProduct
 
   @State()
   messages: MoiSession["messages"] = []
@@ -38,16 +40,22 @@ export class KlevuMoi {
   apiKey?: string
 
   /**
-   * When a product is clicked. By default does a full page redirect to product url.
+   * When a product is clicked. By default does a full page redirect to product url if event is not cancelled.
+   *
+   * Use `event.preventDefault()` to cancel the redirect.
    * @param product
    */
-  @Prop()
-  onProductClick = (product: Partial<KlevuRecord>) => {
-    if (!product.url) {
-      console.warn("No product url found. Cannot redirect")
-      return
-    }
-    window.location.href = product.url
+  @Event({ composed: true, cancelable: true })
+  klevuMoiProductClick!: EventEmitter<MoiProduct>
+
+  /** By default redirect the page if product click is not cancelled */
+  @Listen("klevuMoiProductClick")
+  onKlevuMoiProductClick(event: CustomEvent<MoiProduct>) {
+    setTimeout(() => {
+      if (!event.defaultPrevented) {
+        window.location.href = event.detail.url
+      }
+    }, 1)
   }
 
   async connectedCallback() {
@@ -119,7 +127,7 @@ export class KlevuMoi {
     return undefined
   }
 
-  async #productClick(product: MoiProducts["productData"]["products"][0]) {
+  async #productClick(product: MoiProduct) {
     if (!this.session || !product.id || !product.url) {
       return
     }
@@ -134,7 +142,7 @@ export class KlevuMoi {
       },
     })
     this.loading = false
-    this.onProductClick(product)
+    this.klevuMoiProductClick.emit(product)
   }
 
   render() {
