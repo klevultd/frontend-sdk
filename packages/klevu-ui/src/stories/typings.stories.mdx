@@ -1,0 +1,22 @@
+import { Meta } from "@storybook/addon-docs"
+
+<Meta title="Guides/Typings" />
+
+# Typings
+
+By default importing the package Klevu packages will give you all the typings you need.
+For React and Vue projects it will be just question of adding the `@klevu/ui-react` or `@klevu/ui-vue` packages to your project.
+
+When using plain JavaScript there are JSON configuration that adds vscode intellisense for the Klevu UI components.
+For this there are file located in `node_modules/@klevu/ui/dist/docs/vscode-data.json`.
+
+To use these typings add following in your `.vscode/settings.json` file:
+
+```json
+{
+  ... other settings
+  "html.customData": [
+    "./node_modules/@klevu/ui/dist/docs/vscode-data.json"
+  ]
+}
+```

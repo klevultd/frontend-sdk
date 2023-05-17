@@ -15,5 +15,13 @@ const meta: Meta = {
 export default meta
 
 export const Moi: StoryObj<KlevuMoi> = {
-  render: (args) => html`<klevu-moi api-key="klevu-156934068344410779" style="height: 600px"></klevu-moi>`,
+  render: (args) =>
+    html`<klevu-moi
+      api-key="klevu-156934068344410779"
+      style="height: 600px"
+      @klevuMoiProductClick="${(e: CustomEvent) => {
+        console.log("moi product click", e.detail)
+        e.preventDefault()
+      }}"
+    ></klevu-moi>`,
 }

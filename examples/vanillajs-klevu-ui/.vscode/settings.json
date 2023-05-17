@@ -1,0 +1,5 @@
+{
+  "html.customData": [
+    "./node_modules/@klevu/ui/dist/docs/vscode-data.json"
+  ]
+}
