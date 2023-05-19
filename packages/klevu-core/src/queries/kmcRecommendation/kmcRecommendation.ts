@@ -52,6 +52,8 @@ export enum KMCRecommendationLogic {
   OtherAlsoViewed = "OTHER_ALSO_VIEWED",
   Similar = "SIMILAR",
   BoughtTogether = "BOUGHT_TOGETHER",
+  BoughtTogetherPDP = "BOUGHT_TOGETHER_PDP",
+  VisuallySimilar = "VISUALLY_SIMILAR",
 }
 
 type KlevuKMCRecommendationBase = {
@@ -109,6 +111,8 @@ type KlevuKMCProductPageRecommendation = KlevuKMCRecommendationBase & {
       | KMCRecommendationLogic.OtherAlsoViewed
       | KMCRecommendationLogic.Similar
       | KMCRecommendationLogic.HandPicked
+      | KMCRecommendationLogic.BoughtTogetherPDP
+      | KMCRecommendationLogic.VisuallySimilar
   }
 }
 
@@ -273,6 +277,50 @@ export async function kmcRecommendation(
   }
 
   if (
+    kmcConfig.metadata.pageType === KMCRecommendationPagetype.Product &&
+    [
+      KMCRecommendationLogic.BoughtTogetherPDP,
+      KMCRecommendationLogic.VisuallySimilar,
+    ].includes(kmcConfig.metadata.logic)
+  ) {
+    if (!options || !options.currentProductId || !options.itemGroupId) {
+      throw new Error(
+        "'currentProductId' and 'itemGroupdId' is required for Product recommendation"
+      )
+    }
+
+    for (const q of queries) {
+      if (!q.settings) {
+        q.settings = {}
+      }
+      if (!q.settings.context) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        q.settings.context = {} as any
+      }
+      q.settings.excludeIds = [
+        {
+          key: "itemGroupId",
+          value: options.itemGroupId,
+        },
+      ]
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      q.settings.context!.sourceObjects = [
+        {
+          typeOfRecord: KlevuTypeOfRecord.Product,
+          records: [
+            {
+              id: options.currentProductId,
+            },
+            {
+              itemGroupId: options.itemGroupId,
+            },
+          ],
+        },
+      ]
+    }
+  }
+
+  if (
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Checkout &&
     kmcConfig.metadata.logic === KMCRecommendationLogic.BoughtTogether
   ) {
@@ -315,6 +363,8 @@ export async function kmcRecommendation(
       },
     })
   }
+
+  console.log(JSON.stringify(queries, undefined, 2))
 
   return {
     klevuFunctionId: "kmcRecommendation",
