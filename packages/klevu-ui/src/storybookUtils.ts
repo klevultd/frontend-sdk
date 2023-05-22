@@ -2311,6 +2311,19 @@ export const fullMockRequest: KlevuApiRawResponse = {
           ],
         },
         {
+          key: "rating",
+          label: "Rating",
+          type: "RATING",
+          options: [
+            {
+              "count": 5,
+              "name": "5",
+              "value": "4.51 - 5.5",
+              "selected": false
+            }
+          ]
+        },
+        {
           key: "klevu_price",
           label: "klevu_price",
           type: "SLIDER",
