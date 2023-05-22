@@ -54,6 +54,7 @@ export enum KMCRecommendationLogic {
   BoughtTogether = "BOUGHT_TOGETHER",
   BoughtTogetherPDP = "BOUGHT_TOGETHER_PDP",
   VisuallySimilar = "VISUALLY_SIMILAR",
+  Custom = "CUSTOM_LOGIC",
 }
 
 type KlevuKMCRecommendationBase = {
@@ -90,6 +91,7 @@ type KlevuKMCHomeRecommendation = KlevuKMCRecommendationBase & {
       | KMCRecommendationLogic.NewestArrivals
       | KMCRecommendationLogic.RecentlyViewed
       | KMCRecommendationLogic.HandPicked
+      | KMCRecommendationLogic.Custom
   }
 }
 
@@ -101,6 +103,7 @@ type KlevuKMCCategoryRecommendation = KlevuKMCRecommendationBase & {
       | KMCRecommendationLogic.TrendingPersonalized
       | KMCRecommendationLogic.NewestArrivals
       | KMCRecommendationLogic.HandPicked
+      | KMCRecommendationLogic.Custom
   }
 }
 
@@ -113,6 +116,7 @@ type KlevuKMCProductPageRecommendation = KlevuKMCRecommendationBase & {
       | KMCRecommendationLogic.HandPicked
       | KMCRecommendationLogic.BoughtTogetherPDP
       | KMCRecommendationLogic.VisuallySimilar
+      | KMCRecommendationLogic.Custom
   }
 }
 
@@ -122,6 +126,7 @@ type KlevuKMCCheckoutRecommendation = KlevuKMCRecommendationBase & {
     logic:
       | KMCRecommendationLogic.BoughtTogether
       | KMCRecommendationLogic.HandPicked
+      | KMCRecommendationLogic.Custom
   }
 }
 
@@ -212,6 +217,7 @@ export async function kmcRecommendation(
       KMCRecommendationLogic.Trending,
       KMCRecommendationLogic.TrendingPersonalized,
       KMCRecommendationLogic.NewestArrivals,
+      KMCRecommendationLogic.Custom,
     ].includes(kmcConfig.metadata.logic)
   ) {
     if (!options || !options.categoryPath) {
@@ -281,6 +287,7 @@ export async function kmcRecommendation(
     [
       KMCRecommendationLogic.BoughtTogetherPDP,
       KMCRecommendationLogic.VisuallySimilar,
+      KMCRecommendationLogic.Custom,
     ].includes(kmcConfig.metadata.logic)
   ) {
     if (!options || !options.currentProductId || !options.itemGroupId) {
@@ -322,7 +329,10 @@ export async function kmcRecommendation(
 
   if (
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Checkout &&
-    kmcConfig.metadata.logic === KMCRecommendationLogic.BoughtTogether
+    [
+      KMCRecommendationLogic.BoughtTogether,
+      KMCRecommendationLogic.Custom,
+    ].includes(kmcConfig.metadata.logic)
   ) {
     if (!options || !options.cartProductIds) {
       throw new Error(
