@@ -174,7 +174,7 @@ export class KlevuFacet {
                   checked={o.selected}
                   name={this.option!.key}
                   onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
-                    this.manager.toggleOption(this.option!.key, o.name)
+                    this.manager.toggleOption(this.option!.key, o.value)
                   }}
                 >
                   <div class="container">
@@ -194,7 +194,7 @@ export class KlevuFacet {
                     checked={o.selected}
                     onClick={() => {
                       this.manager.clearOptionSelections(this.option!.key)
-                      this.manager.toggleOption(this.option!.key, o.name)
+                      this.manager.toggleOption(this.option!.key, o.value)
                     }}
                   />
                   <label htmlFor={this.option!.key} class="name">
