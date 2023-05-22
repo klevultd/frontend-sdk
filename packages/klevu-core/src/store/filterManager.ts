@@ -4,6 +4,7 @@ import {
   KlevuFilterType,
   KlevuFilterResultSlider,
   KlevuFilterResultOptions,
+  KlevuFilterResultRating
 } from "../models/KlevuApiRawResponse.js"
 import { isBrowser } from "../utils/isBrowser.js"
 
@@ -11,7 +12,7 @@ type FilterManagerState = {
   filters: FilterManagerFilters[]
 }
 
-type FilterManagerFilters = KlevuFilterResultOptions | KlevuFilterResultSlider
+type FilterManagerFilters = KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
 
 /**
  * Filter manager is used to store and handle filters (facets) in the results easily.
@@ -53,7 +54,7 @@ export class FilterManager {
   }
 
   initFromListFilters(
-    filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider>
+    filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating>
   ) {
     this.filters = filters
 
@@ -403,7 +404,7 @@ export class FilterManager {
    * @returns
    */
   static isKlevuFilterResultSlider(
-    filter: KlevuFilterResultOptions | KlevuFilterResultSlider
+    filter: KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
   ): filter is KlevuFilterResultSlider {
     return filter.type === KlevuFilterType.Slider
   }
@@ -414,8 +415,19 @@ export class FilterManager {
    * @returns
    */
   static isKlevuFilterResultOptions(
-    filter: KlevuFilterResultOptions | KlevuFilterResultSlider
+    filter: KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
   ): filter is KlevuFilterResultOptions {
     return filter.type === KlevuFilterType.Options
+  }
+
+   /**
+   * Is given variable an rating filter
+   * @param filter
+   * @returns
+   */
+   static isKlevuFilterResultRating(
+    filter: KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
+  ): filter is KlevuFilterResultRating {
+    return filter.type === KlevuFilterType.Rating
   }
 }

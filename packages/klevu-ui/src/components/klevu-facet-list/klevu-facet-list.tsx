@@ -1,4 +1,4 @@
-import { FilterManager, KlevuDomEvents, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
+import { FilterManager, KlevuDomEvents, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuFilterResultRating } from "@klevu/core"
 import { Component, EventEmitter, h, Host, Listen, Prop, State, Event, forceUpdate, Element } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
@@ -62,7 +62,7 @@ export class KlevuFacetList {
   @Event({ composed: true })
   klevuApplyFilters!: EventEmitter<void>
 
-  @State() filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider> = []
+  @State() filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating> = []
 
   #applyManager = new FilterManager()
 
@@ -110,7 +110,7 @@ export class KlevuFacetList {
     return (
       <Host>
         {this.filters.map((f, index) => {
-          if (FilterManager.isKlevuFilterResultOptions(f)) {
+          if (FilterManager.isKlevuFilterResultOptions(f) || FilterManager.isKlevuFilterResultRating(f)) {
             let mode
             if (this.mode && typeof this.mode === "string") {
               mode = this.mode

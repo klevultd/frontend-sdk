@@ -7,6 +7,7 @@ import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 export enum KlevuFilterType {
   Options = "OPTIONS",
   Slider = "SLIDER",
+  Rating = "RATING"
 }
 
 /**
@@ -28,7 +29,7 @@ type KlevuFilterResult = {
 }
 
 export type KlevuFilterResultOptions = KlevuFilterResult & {
-  type: KlevuFilterType.Options
+  type: KlevuFilterType.Options | KlevuFilterType.Rating
   /**
    * Options of filter
    */
@@ -76,6 +77,34 @@ export type KlevuFilterResultSlider = KlevuFilterResult & {
 }
 
 /**
+ * Klevu rating filters option
+ */
+export type KlevuFilterResultRating = KlevuFilterResult & {
+  type: KlevuFilterType.Rating
+  /**
+   * Options of filter
+   */
+  options: Array<{
+    /**
+     * Name / label of filter
+     */
+    name: string
+    /**
+     * Value of filter. That will be sent to backend
+     */
+    value: string
+    /**
+     *
+     */
+    count: number
+    /**
+     * Was this filter selected on the query
+     */
+    selected: boolean
+  }>
+}
+
+/**
  * Raw query object from api
  */
 export type KlevuQueryResult = {
@@ -86,7 +115,7 @@ export type KlevuQueryResult = {
   /**
    * Currently available filters
    */
-  filters?: Array<KlevuFilterResultOptions | KlevuFilterResultSlider>
+  filters?: Array<KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating>
   meta: {
     /**
      * Klevu API key
