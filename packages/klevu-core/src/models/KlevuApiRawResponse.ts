@@ -7,7 +7,7 @@ import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 export enum KlevuFilterType {
   Options = "OPTIONS",
   Slider = "SLIDER",
-  Rating = "RATING"
+  Rating = "RATING",
 }
 
 /**
@@ -115,7 +115,9 @@ export type KlevuQueryResult = {
   /**
    * Currently available filters
    */
-  filters?: Array<KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating>
+  filters?: Array<
+    KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
+  >
   meta: {
     /**
      * Klevu API key
