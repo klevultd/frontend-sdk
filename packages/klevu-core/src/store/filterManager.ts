@@ -4,7 +4,7 @@ import {
   KlevuFilterType,
   KlevuFilterResultSlider,
   KlevuFilterResultOptions,
-  KlevuFilterResultRating
+  KlevuFilterResultRating,
 } from "../models/KlevuApiRawResponse.js"
 import { isBrowser } from "../utils/isBrowser.js"
 
@@ -12,7 +12,10 @@ type FilterManagerState = {
   filters: FilterManagerFilters[]
 }
 
-type FilterManagerFilters = KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
+type FilterManagerFilters =
+  | KlevuFilterResultOptions
+  | KlevuFilterResultSlider
+  | KlevuFilterResultRating
 
 /**
  * Filter manager is used to store and handle filters (facets) in the results easily.
@@ -54,7 +57,11 @@ export class FilterManager {
   }
 
   initFromListFilters(
-    filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating>
+    filters: Array<
+      | KlevuFilterResultOptions
+      | KlevuFilterResultSlider
+      | KlevuFilterResultRating
+    >
   ) {
     this.filters = filters
 
@@ -248,7 +255,10 @@ export class FilterManager {
   toApplyFilters(): ApplyFilter[] {
     const filters: ApplyFilter[] = []
     for (const filter of this.filters) {
-      if (FilterManager.isKlevuFilterResultOptions(filter)) {
+      if (
+        FilterManager.isKlevuFilterResultOptions(filter) ||
+        FilterManager.isKlevuFilterResultRating(filter)
+      ) {
         const selected = filter.options.filter(
           (subOption) => subOption.selected === true
         )
@@ -287,7 +297,11 @@ export class FilterManager {
    */
   currentSelection(key: string): string[] | undefined {
     const opt = this.filters.find((o) => o.key === key)
-    if (opt && FilterManager.isKlevuFilterResultOptions(opt)) {
+    if (
+      opt &&
+      (FilterManager.isKlevuFilterResultOptions(opt) ||
+        FilterManager.isKlevuFilterResultRating(opt))
+    ) {
       const selectedOptions = opt.options.filter(
         (subOpt) => subOpt.selected === true
       )
@@ -314,7 +328,10 @@ export class FilterManager {
   toURLParams(): string {
     const params = new URLSearchParams()
     for (const filter of this.filters) {
-      if (FilterManager.isKlevuFilterResultOptions(filter)) {
+      if (
+        FilterManager.isKlevuFilterResultOptions(filter) ||
+        FilterManager.isKlevuFilterResultRating(filter)
+      ) {
         const selected = filter.options.filter(
           (subOption) => subOption.selected === true
         )
@@ -376,7 +393,8 @@ export class FilterManager {
       }
       this.filters.push(option)
     } else if (
-      !FilterManager.isKlevuFilterResultOptions(this.filters[optionIndex])
+      !FilterManager.isKlevuFilterResultOptions(this.filters[optionIndex]) &&
+      !FilterManager.isKlevuFilterResultRating(this.filters[optionIndex])
     ) {
       throw new Error(`Filter ${key} is not an option filter.`)
     } else {
@@ -404,7 +422,10 @@ export class FilterManager {
    * @returns
    */
   static isKlevuFilterResultSlider(
-    filter: KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
+    filter:
+      | KlevuFilterResultOptions
+      | KlevuFilterResultSlider
+      | KlevuFilterResultRating
   ): filter is KlevuFilterResultSlider {
     return filter.type === KlevuFilterType.Slider
   }
@@ -415,18 +436,24 @@ export class FilterManager {
    * @returns
    */
   static isKlevuFilterResultOptions(
-    filter: KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
+    filter:
+      | KlevuFilterResultOptions
+      | KlevuFilterResultSlider
+      | KlevuFilterResultRating
   ): filter is KlevuFilterResultOptions {
     return filter.type === KlevuFilterType.Options
   }
 
-   /**
+  /**
    * Is given variable an rating filter
    * @param filter
    * @returns
    */
-   static isKlevuFilterResultRating(
-    filter: KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating
+  static isKlevuFilterResultRating(
+    filter:
+      | KlevuFilterResultOptions
+      | KlevuFilterResultSlider
+      | KlevuFilterResultRating
   ): filter is KlevuFilterResultRating {
     return filter.type === KlevuFilterType.Rating
   }
