@@ -1,6 +1,7 @@
 import { KlevuFetchModifer } from "../index.js"
 import { KlevuEvents } from "../../events/index.js"
 import { extractActiveFilters } from "../../utils/extractActiveFilters.js"
+import { KlevuV1CategoryProductsView } from "../../events/eventRequests.js"
 
 /**
  * This modifier should be used with merchandising query. It sends
@@ -10,7 +11,10 @@ import { extractActiveFilters } from "../../utils/extractActiveFilters.js"
  * @param title Title of the category page viewed
  * @returns
  */
-export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
+export function sendMerchandisingViewEvent(
+  title: string,
+  override?: Partial<KlevuV1CategoryProductsView>
+): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
     onResult: (res, f) => {
@@ -44,6 +48,7 @@ export function sendMerchandisingViewEvent(title: string): KlevuFetchModifer {
         abTestId: abtest?.abTestId,
         abTestVariantId: abtest?.abTestVariantId,
         activeFilters: extractActiveFilters(queryResult),
+        override,
       })
 
       return res
