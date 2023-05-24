@@ -4,6 +4,7 @@ import {
   RecommendationViewEventMetaData,
 } from "../../events/index.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
+import { KlevuEventV2Data } from "../../events/eventRequests.js"
 
 const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
   KlevuTypeOfRequest.AlsoBought,
@@ -22,7 +23,8 @@ const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
  */
 export function sendRecommendationViewEvent(
   title: string,
-  eventData?: RecommendationViewEventMetaData
+  eventData?: RecommendationViewEventMetaData,
+  override?: Partial<KlevuEventV2Data>
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
@@ -57,6 +59,7 @@ export function sendRecommendationViewEvent(
             title,
           },
           products,
+          override,
         })
         return res
       }

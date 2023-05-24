@@ -1,5 +1,6 @@
 import { KlevuFetchModifer } from "../index.js"
 import { KlevuEvents } from "../../events/index.js"
+import { V1SearchEvent } from "../../events/eventRequests.js"
 
 /**
  * This modifier should be used in the case when user hits enter (or presses button) to see
@@ -8,7 +9,9 @@ import { KlevuEvents } from "../../events/index.js"
  * @category Modifier
  * @returns
  */
-export function sendSearchEvent(): KlevuFetchModifer {
+export function sendSearchEvent(
+  override?: Partial<V1SearchEvent>
+): KlevuFetchModifer {
   return {
     klevuModifierId: "sendSearchEvent",
     onResult: (res, f) => {
@@ -31,6 +34,7 @@ export function sendSearchEvent(): KlevuFetchModifer {
         term,
         totalResults: meta.totalResultsFound,
         typeOfSearch: meta.typeOfSearch,
+        override,
       })
 
       return res
