@@ -51,4 +51,4 @@ jobs:
             TODO before merging this PR:
 
             - [ ] Create proper release notes
-            - [ ] Create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=ui-${{steps.release.outputs.version}}
+            - [ ] Create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=@klevu/ui-${{steps.release.outputs.version}}

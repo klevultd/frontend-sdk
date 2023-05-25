@@ -52,4 +52,4 @@ jobs:
 
             - [ ] Create proper release notes
             - [ ] Update documentations to reflect changes
-            - [ ] Create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=core-${{steps.release.outputs.version}}
+            - [ ] Create a release to GitHub with following link: https://github.com/klevultd/frontend-sdk/releases/new?tag=@klevu/core-${{steps.release.outputs.version}}
