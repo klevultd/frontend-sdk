@@ -166,7 +166,9 @@ test("Test URL param settings", () => {
 
   expect(manager.toURLParams()).toBe("o_test=red&s_price=3-7")
 
-  manager.readFromURLParams(new URLSearchParams("o_test=red&s_price=6-9"))
+  manager.readFromURLParams(
+    new URLSearchParams("o_test=red%2Cblue&s_price=6-9")
+  )
 
   const slider = manager.filters.find(
     (f) => f.type === KlevuFilterType.Slider
@@ -182,8 +184,9 @@ test("Test URL param settings", () => {
   ) as KlevuFilterResultOptions
 
   expect(option.options[0].selected).toBe(true)
+  expect(option.options[1].selected).toBe(true)
 
-  expect(manager.toURLParams()).toBe("o_test=red&s_price=6-9")
+  expect(manager.toURLParams()).toBe("o_test=red%2Cblue&s_price=6-9")
 })
 
 test("Test URL param reading when there is not initialized", () => {
