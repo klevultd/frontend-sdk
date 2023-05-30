@@ -360,7 +360,7 @@ export class FilterManager {
     for (const [key, value] of params.entries()) {
       if (key.startsWith("o")) {
         const optionKey = key.substring(2)
-        this.selectOption(optionKey, value)
+        value.split(",").forEach((v) => this.selectOption(optionKey, v))
       } else if (key.startsWith("s")) {
         const sliderKey = key.substring(2)
         this.updateSlide(
