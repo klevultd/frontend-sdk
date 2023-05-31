@@ -7,9 +7,7 @@ import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings.js"
  * Does not apply if sort is something else than AdvancedSort or undefined.
  *
  * @category Modifier
- * @param term Search term from input
- * @param id id of request. Response is under this is. Has to be unique across single query. Default is 'search'
- * @param options
+ * @param sorts Array of sorts to apply to the query.
  * @returns
  */
 export function advancedSorting(

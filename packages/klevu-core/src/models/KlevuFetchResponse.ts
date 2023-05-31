@@ -1,8 +1,11 @@
-import { FilterManager } from "../store/filterManager.js"
-import { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
-import { KlevuApiRawResponse, KlevuQueryResult } from "./KlevuApiRawResponse.js"
-import { KlevuResultEvent } from "./KlevuResultEvent.js"
-import { KlevuFetchFunctionParams } from "../queries/index.js"
+import type { FilterManager } from "../store/filterManager.js"
+import type { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
+import type {
+  KlevuApiRawResponse,
+  KlevuQueryResult,
+} from "./KlevuApiRawResponse.js"
+import type { KlevuResultEvent } from "./KlevuResultEvent.js"
+import type { KlevuFetchFunctionParams } from "../queries/index.js"
 
 /**
  * Next function is available if there are more results in the given query.
