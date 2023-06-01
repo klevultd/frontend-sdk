@@ -248,9 +248,9 @@ export async function kmcRecommendation(
       KMCRecommendationLogic.Similar,
     ].includes(kmcConfig.metadata.logic)
   ) {
-    if (!options || !options.currentProductId || !options.itemGroupId) {
+    if (!options || !options.currentProductId) {
       throw new Error(
-        "'currentProductId' and 'itemGroupdId' is required for Product recommendation"
+        "'currentProductId' is required for Product recommendation"
       )
     }
 
@@ -262,12 +262,14 @@ export async function kmcRecommendation(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         q.settings.context = {} as any
       }
-      q.settings.excludeIds = [
-        {
-          key: "itemGroupId",
-          value: options.itemGroupId,
-        },
-      ]
+      if (options.itemGroupId) {
+        q.settings.excludeIds = [
+          {
+            key: "itemGroupId",
+            value: options.itemGroupId,
+          },
+        ]
+      }
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       q.settings.context!.recentObjects = [
         {
@@ -290,9 +292,9 @@ export async function kmcRecommendation(
       KMCRecommendationLogic.Custom,
     ].includes(kmcConfig.metadata.logic)
   ) {
-    if (!options || !options.currentProductId || !options.itemGroupId) {
+    if (!options || !options.currentProductId) {
       throw new Error(
-        "'currentProductId' and 'itemGroupdId' is required for Product recommendation"
+        "'currentProductId' is required for Product recommendation"
       )
     }
 
@@ -304,12 +306,14 @@ export async function kmcRecommendation(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         q.settings.context = {} as any
       }
-      q.settings.excludeIds = [
-        {
-          key: "itemGroupId",
-          value: options.itemGroupId,
-        },
-      ]
+      if (options.itemGroupId) {
+        q.settings.excludeIds = [
+          {
+            key: "itemGroupId",
+            value: options.itemGroupId,
+          },
+        ]
+      }
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       q.settings.context!.sourceObjects = [
         {
@@ -318,12 +322,16 @@ export async function kmcRecommendation(
             {
               id: options.currentProductId,
             },
-            {
-              itemGroupId: options.itemGroupId,
-            },
           ],
         },
       ]
+
+      if (options.itemGroupId) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        q.settings.context!.sourceObjects[0].records.push({
+          itemGroupId: options.itemGroupId,
+        })
+      }
     }
   }
 
