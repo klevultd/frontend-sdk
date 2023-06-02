@@ -3,14 +3,16 @@
   <head>
     <title>Klevu UI CDN example</title>
     <meta charset="UTF-8" />
-    <script type="module">
-      import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
-      defineCustomElements()
-    </script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"
+    ></script>
     <link
       href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css"
       rel="stylesheet"
     />
+    <!-- uncomment to create customization with one file -->
+    <!--<script type="module" src="/custom.js"></script>-->
   </head>
 
   <body>
