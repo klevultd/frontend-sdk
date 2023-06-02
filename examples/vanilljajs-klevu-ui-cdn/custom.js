@@ -1,7 +1,7 @@
 // Try removing the quicksearch
 try {
   document.getElementsByTagName("klevu-quicksearch")[0].remove()
-} catch (e) { }
+} catch (e) {}
 
 // find the init component
 const init = document.getElementsByTagName("klevu-init")[0]
@@ -43,6 +43,13 @@ searchField.addEventListener("klevuSearchResults", (event) => {
     const product = document.createElement("klevu-product")
     product.variant = "line"
     product.product = p
+
+    // create add to cart button for each product
+    const addToCart = document.createElement("klevu-button")
+    addToCart.innerHTML = "Add to cart"
+    addToCart.slot = "bottom"
+    product.appendChild(addToCart)
+
     productList.appendChild(product)
 
     // listen for clicks on the product
