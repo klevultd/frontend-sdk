@@ -69,11 +69,11 @@ export type KlevuFilterResultSlider = KlevuFilterResult & {
   /**
    * Current start value slider
    */
-  start: string
+  start: string | null
   /**
    * Current end value of slider
    */
-  end: string
+  end: string | null
 }
 
 /**
