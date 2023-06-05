@@ -288,7 +288,6 @@ export async function kmcRecommendation(
     kmcConfig.metadata.pageType === KMCRecommendationPagetype.Product &&
     [
       KMCRecommendationLogic.BoughtTogetherPDP,
-      KMCRecommendationLogic.VisuallySimilar,
       KMCRecommendationLogic.Custom,
     ].includes(kmcConfig.metadata.logic)
   ) {
@@ -314,13 +313,59 @@ export async function kmcRecommendation(
           },
         ]
       }
+
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      q.settings.context!.recentObjects = [
+        {
+          typeOfRecord: KlevuTypeOfRecord.Product,
+          records: [
+            {
+              id: options.currentProductId, 
+            },
+          ],
+        },
+      ]
+
+    }
+  }
+
+  // only VisuallySimilar uses sourceObjects
+  if (
+    kmcConfig.metadata.pageType === KMCRecommendationPagetype.Product &&
+    kmcConfig.metadata.logic === KMCRecommendationLogic.VisuallySimilar
+  ) {
+    if (!options || !options.currentProductId) {
+      throw new Error(
+        "'currentProductId' is required for Product recommendation"
+      )
+    }
+
+    for (const q of queries) {
+      if (!q.settings) {
+        q.settings = {}
+      }
+      if (!q.settings.context) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        q.settings.context = {} as any
+      }
+      if (options.itemGroupId) {
+        q.settings.excludeIds = [
+          {
+            key: "itemGroupId",
+            value: options.itemGroupId,
+          },
+        ]
+      }
+
+
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       q.settings.context!.sourceObjects = [
         {
           typeOfRecord: KlevuTypeOfRecord.Product,
           records: [
             {
-              id: options.currentProductId,
+              id: options.currentProductId, 
             },
           ],
         },
