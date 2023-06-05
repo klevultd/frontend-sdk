@@ -1,4 +1,4 @@
-import {
+import type {
   KlevuEventV2Data,
   KlevuV1CategoryProductsView,
   V1SearchEvent,

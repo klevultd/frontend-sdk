@@ -1,7 +1,12 @@
-import { KlevuAnyTypeOfRecord, KlevuRecordFields, KlevuTypeOfSearch } from "."
-import { KlevuSearchSorting } from "./KlevuSearchSorting.js"
-import { KlevuSearchPreference } from "./KlevuSearchPreference.js"
-import { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery.js"
+import type {
+  KlevuAnyTypeOfRecord,
+  KlevuRecordFields,
+  KlevuTypeOfSearch,
+} from "."
+import type { KlevuSearchSorting } from "./KlevuSearchSorting.js"
+import type { KlevuSearchPreference } from "./KlevuSearchPreference.js"
+import type { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery.js"
+import type { KlevuGroupConditions } from "./KlevuGroupConditions.js"
 
 export type KlevuBaseQuerySettings = {
   query?: KlevuBaseQuerySettingsQuery
@@ -240,6 +245,41 @@ export type KlevuBaseQuerySettings = {
    * localStorage, session, DB, etc.
    */
   campaignForCatNav?: string
+
+  /**
+   * The groupCondition object can be used for applying the advance filtering conditions so your customers can fine-tune
+   * their results based on relevant attributes.
+   *
+   * @example
+   * Here is an example of how to use the groupCondition object.
+   * ```
+   *  "groupCondition": {
+   *    "groupOperator": "ANY_OF",
+   *    "conditions": [
+   *      {
+   *        "key": "klevu_price",
+   *        "valueOperator": "INCLUDE",
+   *        "singleSelect": true,
+   *        "excludeValuesInResult": true,
+   *        "values": ["20 - 25"]
+   *      },
+   *      {
+   *        "key": "itemGroupId",
+   *        "valueOperator": "EXCLUDE",
+   *        "singleSelect": false,
+   *        "values": ["4384028262462"]
+   *      },
+   *      {
+   *        "key": "size",
+   *        "valueOperator": "EXCLUDE",
+   *        "singleSelect": false,
+   *        "values": ["Small", "Large"]
+   *      }
+   *    ]
+   *  }
+   * ```
+   */
+  groupCondition?: KlevuGroupConditions
 }
 
 export enum AdvancedSortingDiretion {

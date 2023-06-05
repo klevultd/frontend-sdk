@@ -1,5 +1,5 @@
-import { LiteralUnion } from "../utils/literalUnion.js"
-import { ValueOf } from "../utils/valuOf.js"
+import type { LiteralUnion } from "../utils/literalUnion.js"
+import type { ValueOf } from "../utils/valuOf.js"
 
 export enum KlevuTypeOfRecord {
   Product = "KLEVU_PRODUCT",

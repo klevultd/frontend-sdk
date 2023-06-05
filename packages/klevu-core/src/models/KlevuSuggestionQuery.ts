@@ -1,5 +1,5 @@
-import { KlevuTypeOfRequest } from "."
-import { KlevuBaseQuery } from "./KlevuBaseQuery.js"
+import type { KlevuTypeOfRequest } from "."
+import type { KlevuBaseQuery } from "./KlevuBaseQuery.js"
 
 export type KlevuSuggestionQuery = KlevuBaseQuery & {
   typeOfRequest: KlevuTypeOfRequest.Suggestion

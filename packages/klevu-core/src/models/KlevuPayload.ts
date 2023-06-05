@@ -1,5 +1,5 @@
-import { KlevuSuggestionQuery } from "./KlevuSuggestionQuery.js"
-import { KlevuAllRecordQueries } from "./KlevuAllRecordQueries.js"
+import type { KlevuSuggestionQuery } from "./KlevuSuggestionQuery.js"
+import type { KlevuAllRecordQueries } from "./KlevuAllRecordQueries.js"
 
 export type KlevuPayload = {
   context: {
