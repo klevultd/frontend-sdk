@@ -1,12 +1,12 @@
 import type {
+  KlevuSearchSorting,
+  KlevuSearchPreference,
+  KlevuBaseQuerySettingsQuery,
+  KlevuGroupConditions,
   KlevuAnyTypeOfRecord,
   KlevuRecordFields,
   KlevuTypeOfSearch,
-} from "."
-import type { KlevuSearchSorting } from "./KlevuSearchSorting.js"
-import type { KlevuSearchPreference } from "./KlevuSearchPreference.js"
-import type { KlevuBaseQuerySettingsQuery } from "./KlevuBaseQuerySettingsQuery.js"
-import type { KlevuGroupConditions } from "./KlevuGroupConditions.js"
+} from "./index.js"
 
 export type KlevuBaseQuerySettings = {
   query?: KlevuBaseQuerySettingsQuery

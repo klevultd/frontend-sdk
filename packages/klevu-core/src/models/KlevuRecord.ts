@@ -1,4 +1,4 @@
-import type { KlevuAnyTypeOfRecord } from "./KlevuTypeOfRecord.js"
+import { KlevuAnyTypeOfRecord } from "./KlevuTypeOfRecord.js"
 
 export type KlevuRecord = {
   /**

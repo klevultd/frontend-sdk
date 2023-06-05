@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 
 /**
  * Boost or deboost query based on a record ids.

@@ -2,7 +2,7 @@ import { KlevuConfig } from "../../config.js"
 import { post } from "../../connection/fetch.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
 import { isBrowser } from "../../utils/isBrowser.js"
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 
 const STORAGE_TS_KEY = "abtest-data-ts"
 const STORAGE_KEY = "abtest-data"

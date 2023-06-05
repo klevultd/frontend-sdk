@@ -1,9 +1,7 @@
 import { search, KlevuSearchOptions } from "../search/search.js"
-import {
-  KlevuFetchFunctionReturnValue,
-  KlevuFetchModifer,
-  KlevuTypeOfRecord,
-} from "../../index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
+import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 
 /**
  * Create a trending products search query. Id for this query is `trendingProducts`

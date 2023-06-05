@@ -1,5 +1,5 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
-import { KlevuTypeOfRecord } from "../../index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
+import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { search, KlevuSearchOptions } from "../search/search.js"
 
 /**

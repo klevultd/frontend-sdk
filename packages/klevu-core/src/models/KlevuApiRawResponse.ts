@@ -1,5 +1,8 @@
-import type { KlevuRecord, KlevuTypeOfSearch } from "."
-import type { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
+import type {
+  KlevuRecord,
+  KlevuSuggestionResult,
+  KlevuTypeOfSearch,
+} from "./index.js"
 
 /**
  * Filter types Klevu support

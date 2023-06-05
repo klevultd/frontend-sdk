@@ -1,20 +1,19 @@
-import { KlevuConfig, KlevuFetchFunctionReturnValue } from "../index.js"
 import {
   KlevuAllRecordQueries,
   KlevuPayload,
   KlevuApiRawResponse,
   KlevuFetchResponse,
   KlevuSuggestionQuery,
-  KlevuQueryResult,
   KlevuFetchQueryResult,
 } from "../models/index.js"
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
-import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
 import { post } from "./fetch.js"
 import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
 import { fetchNextPage } from "./resultHelpers/fetchNextPage.js"
 import { FetchResultEvents } from "./resultHelpers/FetchResultEvents.js"
+import { KlevuConfig } from "../config.js"
+import { KlevuFetchFunctionReturnValue } from "../models/KlevuFetchFunctionReturnValue.js"
 
 export const klevuFetchCache = new KlevuFetchCache<
   KlevuPayload,
@@ -177,33 +176,4 @@ async function cleanAndProcessFunctions(
     recordQueries,
     suggestionQueries,
   }
-}
-
-/**
- * Removes list filters from query
- *
- * @param f
- * @param prevQueryResult
- * @returns
- */
-export function removeListFilters(
-  f: KlevuFetchFunctionReturnValue,
-  prevQueryResult: KlevuQueryResult
-): KlevuFetchFunctionReturnValue {
-  f.queries = f.queries?.map((q) => {
-    if (q.filters?.filtersToReturn) {
-      delete q.filters?.filtersToReturn
-    }
-    return q
-  })
-  if (f.modifiers) {
-    const index = f.modifiers.findIndex(
-      (m) => m.klevuModifierId == "listfilters"
-    )
-    if (index > -1) {
-      f.modifiers.splice(index, 1)
-    }
-    f.modifiers.push(injectFilterResult(prevQueryResult))
-  }
-  return f
 }

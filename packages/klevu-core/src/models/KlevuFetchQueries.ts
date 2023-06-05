@@ -1,4 +1,4 @@
-import type { KlevuFetchFunctionReturnValue } from "../queries/index.js"
+import type { KlevuFetchFunctionReturnValue } from "./KlevuFetchFunctionReturnValue.js"
 
 export type KlevuFetchQueries = Array<
   Promise<KlevuFetchFunctionReturnValue> | KlevuFetchFunctionReturnValue

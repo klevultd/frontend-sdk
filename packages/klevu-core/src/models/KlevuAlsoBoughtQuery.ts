@@ -1,6 +1,8 @@
-import type { KlevuTypeOfRequest } from "."
-import type { KlevuBaseQuery } from "./KlevuBaseQuery.js"
-import type { KlevuAlsoViewedQuery } from "./KlevuAlsoViewedQuery.js"
+import type {
+  KlevuTypeOfRequest,
+  KlevuBaseQuery,
+  KlevuAlsoViewedQuery,
+} from "./index.js"
 
 /**
  * Backend API parameters relevat for Also Bought Recommendation query

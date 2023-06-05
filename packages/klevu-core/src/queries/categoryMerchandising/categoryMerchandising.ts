@@ -1,11 +1,11 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
-import { KlevuFetchModifer } from "../../index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery.js"
 import {
   KlevuBaseQuerySettings,
   KlevuTypeOfRequest,
 } from "../../models/index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 
 export type KlevuMerchandisingOptions = {
   id: string

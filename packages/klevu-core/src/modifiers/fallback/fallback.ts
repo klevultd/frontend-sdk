@@ -1,6 +1,6 @@
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
-import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 
 export type KlevuFallbackQueryOptions = {
   runWhenLessThanResults: number

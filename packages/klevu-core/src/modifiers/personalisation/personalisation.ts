@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 import { KlevuTypeOfRecord, KlevuRecordFields } from "../../models/index.js"
 import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 

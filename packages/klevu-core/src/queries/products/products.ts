@@ -3,8 +3,8 @@ import {
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../../models/index.js"
-import { KlevuFetchModifer } from "../../modifiers/index.js"
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 
 /**
  * Fetches list of products. All fields are fetched.

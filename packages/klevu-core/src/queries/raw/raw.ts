@@ -1,6 +1,6 @@
 import { KlevuBaseQuery } from "../../models/index.js"
-import { KlevuFetchModifer } from "../../modifiers/index.js"
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 
 /**
  * Take control and write any kind of query you wish to Klevu API. For experts only.

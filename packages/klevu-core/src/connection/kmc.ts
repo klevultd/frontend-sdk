@@ -1,4 +1,4 @@
-import { KlevuConfig } from "../index.js"
+import { KlevuConfig } from "../config.js"
 import { isBrowser } from "../utils/isBrowser.js"
 import { KMCBannerRootObject } from "./kmcmodels/KMCBanner.js"
 import { KMCMapsRootObject } from "./kmcmodels/KMCMaps.js"

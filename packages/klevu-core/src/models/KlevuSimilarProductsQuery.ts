@@ -1,5 +1,8 @@
-import type { KlevuAnyTypeOfRecord, KlevuTypeOfRequest } from "."
-import type { KlevuBaseQuery } from "./KlevuBaseQuery.js"
+import type {
+  KlevuBaseQuery,
+  KlevuAnyTypeOfRecord,
+  KlevuTypeOfRequest,
+} from "./index.js"
 
 export type KlevuSimilarProductsQuery = KlevuBaseQuery & {
   typeOfRequest: KlevuTypeOfRequest.SimilarProducts

@@ -1,35 +1,3 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
-import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
-import { KlevuFetchResponse } from "../models/KlevuFetchResponse.js"
-import { LiteralUnion } from "../utils/literalUnion.js"
-
-/**
- * @ignore
- */
-export type KlevuModifierId =
-  | "listfilters"
-  | "applyFilters"
-  | "fallback"
-  | "boostWithKeywords"
-  | "boostWithFilterManager"
-  | "boostWithFilters"
-  | "personalisation"
-
-/**
- * @ignore
- */
-export type KlevuFetchModifer = {
-  klevuModifierId: LiteralUnion<KlevuModifierId, string>
-  modifyAfter?: (
-    queries: Readonly<KlevuAllRecordQueries[]>,
-    func: KlevuFetchFunctionReturnValue
-  ) => Promise<KlevuAllRecordQueries[]>
-  onResult?: (
-    response: Readonly<KlevuFetchResponse>,
-    query: KlevuFetchFunctionReturnValue
-  ) => KlevuFetchResponse
-}
-
 export * from "./applyFilter/applyFilter.js"
 export * from "./applyFilterWithManager/applyFilterWithManager.js"
 export * from "./fallback/fallback.js"

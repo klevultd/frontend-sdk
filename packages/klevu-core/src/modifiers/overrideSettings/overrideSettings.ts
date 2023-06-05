@@ -1,5 +1,5 @@
 import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings.js"
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 
 /**
  * Tool to override any query settings. Be careful with this, as it can override any query settings and can cause unexpected results.

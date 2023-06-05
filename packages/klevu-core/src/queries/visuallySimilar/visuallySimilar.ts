@@ -2,8 +2,8 @@ import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuSearchPreference } from "../../models/KlevuSearchPreference.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
-import { KlevuFetchModifer } from "../../modifiers/index.js"
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 
 type Options = {
   limit?: number

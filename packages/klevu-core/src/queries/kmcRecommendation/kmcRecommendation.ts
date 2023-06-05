@@ -1,6 +1,6 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 import { KlevuConfig } from "../../config.js"
-import { KlevuFetchModifer } from "../../modifiers/index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 import { KlevuAllRecordQueries } from "../../models/KlevuAllRecordQueries.js"
 import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 import { personalisation } from "../../modifiers/personalisation/personalisation.js"

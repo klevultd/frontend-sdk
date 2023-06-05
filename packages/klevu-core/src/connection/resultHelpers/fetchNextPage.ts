@@ -1,13 +1,13 @@
 import {
-  applyFilterWithManager,
-  KlevuFetchFunctionReturnValue,
-} from "../../index.js"
-import {
   KlevuApiRawResponse,
   KlevuBaseQuery,
   KlevuNextFunc,
+  KlevuQueryResult,
 } from "../../models/index.js"
-import { KlevuFetch, removeListFilters } from "../klevuFetch.js"
+import { applyFilterWithManager } from "../../modifiers/applyFilterWithManager/applyFilterWithManager.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
+import { KlevuFetch } from "../klevuFetch.js"
+import { injectFilterResult } from "../../modifiers/injectFilterResult/injectFilterResult.js"
 
 export function fetchNextPage({
   response,
@@ -86,4 +86,33 @@ export function fetchNextPage({
   }
 
   return nextFunc
+}
+
+/**
+ * Removes list filters from query
+ *
+ * @param f
+ * @param prevQueryResult
+ * @returns
+ */
+function removeListFilters(
+  f: KlevuFetchFunctionReturnValue,
+  prevQueryResult: KlevuQueryResult
+): KlevuFetchFunctionReturnValue {
+  f.queries = f.queries?.map((q) => {
+    if (q.filters?.filtersToReturn) {
+      delete q.filters?.filtersToReturn
+    }
+    return q
+  })
+  if (f.modifiers) {
+    const index = f.modifiers.findIndex(
+      (m) => m.klevuModifierId == "listfilters"
+    )
+    if (index > -1) {
+      f.modifiers.splice(index, 1)
+    }
+    f.modifiers.push(injectFilterResult(prevQueryResult))
+  }
+  return f
 }

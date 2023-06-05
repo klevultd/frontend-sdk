@@ -1,9 +1,7 @@
-import {
-  KlevuConfig,
-  KlevuKMCRecommendations,
-  KlevuRecord,
-  KlevuTypeOfSearch,
-} from "../index.js"
+import { KlevuConfig } from "../config.js"
+import { KlevuRecord } from "../models/KlevuRecord.js"
+import { KlevuTypeOfSearch } from "../models/KlevuTypeOfSearch.js"
+import { KlevuKMCRecommendations } from "../queries/kmcRecommendation/kmcRecommendation.js"
 import { KlevuLastClickedProducts } from "../store/lastClickedProducts.js"
 import { KlevuLastSearches } from "../store/lastSearches.js"
 import {

@@ -1,4 +1,5 @@
-import { KlevuConfig, KlevuTypeOfSearch } from "../../index.js"
+import { KlevuConfig } from "../../config.js"
+import { KlevuTypeOfSearch } from "../../models/KlevuTypeOfSearch.js"
 import { post } from "../fetch.js"
 
 const STORAGE_KEY = "klevu-moi-session"

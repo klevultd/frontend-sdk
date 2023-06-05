@@ -1,4 +1,4 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuBaseQuerySettings } from "../../models/KlevuBaseQuerySettings.js"
 import {
@@ -6,7 +6,7 @@ import {
   KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../../models/index.js"
-import { KlevuFetchModifer } from "../../modifiers/index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 import { cleanSearchQuery } from "../../utils/index.js"
 
 /**

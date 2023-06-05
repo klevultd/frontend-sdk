@@ -1,7 +1,8 @@
-import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import { get, post } from "../connection/fetch.js"
 import { isBrowser } from "../utils/isBrowser.js"
 import { objectToQueryParameters } from "../utils/index.js"
+import { KlevuTypeOfSearch } from "../models/KlevuTypeOfSearch.js"
+import { KlevuConfig } from "../config.js"
 
 const KEY_PENDING_REQUESTS = "klevu-pending-analytics"
 

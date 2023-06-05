@@ -1,9 +1,7 @@
-import type {
-  KlevuTypeOfRequest,
-  KlevuBaseQuerySettings,
-  KlevuApplyFilter,
-  KlevuListFilter,
-} from "."
+import { KlevuApplyFilter } from "./KlevuApplyFilter.js"
+import { KlevuBaseQuerySettings } from "./KlevuBaseQuerySettings.js"
+import { KlevuListFilter } from "./KlevuListFilter.js"
+import { KlevuTypeOfRequest } from "./KlevuTypeOfRequest.js"
 
 /**
  * Generic

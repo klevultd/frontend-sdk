@@ -1,7 +1,7 @@
-import { KlevuAnnotations, KlevuConfig } from "../../index.js"
-import { KlevuQueryResult } from "../../models/index.js"
+import { KlevuAnnotations, KlevuQueryResult } from "../../models/index.js"
 import { get } from "../fetch.js"
 import { objectToQueryParameters } from "../../utils/index.js"
+import { KlevuConfig } from "../../config.js"
 
 /**
  *

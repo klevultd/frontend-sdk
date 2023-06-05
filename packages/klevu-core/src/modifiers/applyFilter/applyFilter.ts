@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 import { KlevuApplyFilter } from "../../models/KlevuApplyFilter.js"
 import { KlevuListFilter } from "../../models/KlevuListFilter.js"
 

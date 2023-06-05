@@ -1,6 +1,6 @@
 import { KlevuQueryResult } from "../../models/index.js"
 import { KlevuResultEvent } from "../../models/KlevuResultEvent.js"
-import { KlevuFetchFunctionReturnValue } from "../../queries/index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 import { KlevuEvents } from "../../events/KlevuEvents.js"
 import { extractActiveFilters } from "../../utils/extractActiveFilters.js"
 /**

@@ -1,4 +1,4 @@
-import { KlevuFetchModifer } from "../index.js"
+import { KlevuFetchModifer } from "../../models/KlevuFetchModifer.js"
 import { KlevuEvents } from "../../events/index.js"
 import { extractActiveFilters } from "../../utils/extractActiveFilters.js"
 import { KlevuV1CategoryProductsView } from "../../events/eventRequests.js"

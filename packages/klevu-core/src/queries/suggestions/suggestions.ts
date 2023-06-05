@@ -1,4 +1,4 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchFunctionReturnValue } from "../../models/KlevuFetchFunctionReturnValue.js"
 import { KlevuSuggestionQuery } from "../../models/KlevuSuggestionQuery.js"
 import { KlevuTypeOfRequest } from "../../models/index.js"
 import { cleanSearchQuery } from "../../utils/index.js"

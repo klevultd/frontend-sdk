@@ -1,11 +1,11 @@
 import type { FilterManager } from "../store/filterManager.js"
-import type { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
 import type {
+  KlevuSuggestionResult,
   KlevuApiRawResponse,
   KlevuQueryResult,
-} from "./KlevuApiRawResponse.js"
-import type { KlevuResultEvent } from "./KlevuResultEvent.js"
-import type { KlevuFetchFunctionParams } from "../queries/index.js"
+  KlevuResultEvent,
+  KlevuFetchFunctionParams,
+} from "./index.js"
 
 /**
  * Next function is available if there are more results in the given query.
