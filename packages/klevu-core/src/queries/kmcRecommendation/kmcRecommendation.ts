@@ -314,19 +314,17 @@ export async function kmcRecommendation(
         ]
       }
 
-
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       q.settings.context!.recentObjects = [
         {
           typeOfRecord: KlevuTypeOfRecord.Product,
           records: [
             {
-              id: options.currentProductId, 
+              id: options.currentProductId,
             },
           ],
         },
       ]
-
     }
   }
 
@@ -358,14 +356,13 @@ export async function kmcRecommendation(
         ]
       }
 
-
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       q.settings.context!.sourceObjects = [
         {
           typeOfRecord: KlevuTypeOfRecord.Product,
           records: [
             {
-              id: options.currentProductId, 
+              id: options.currentProductId,
             },
           ],
         },
@@ -426,8 +423,6 @@ export async function kmcRecommendation(
       },
     })
   }
-
-  console.log(JSON.stringify(queries, undefined, 2))
 
   return {
     klevuFunctionId: "kmcRecommendation",
