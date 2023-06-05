@@ -373,6 +373,53 @@ export class FilterManager {
   }
 
   /**
+   * Quickly get all selected options and sliders
+   *
+   * @returns Array of selected filters, with key, label, type and value
+   */
+  selectedFilters() {
+    const selectedFilters: Array<{
+      key: string
+      label: string
+      type: KlevuFilterType
+      value: string
+    }> = []
+    for (const filter of this.filters) {
+      if (
+        FilterManager.isKlevuFilterResultOptions(filter) ||
+        FilterManager.isKlevuFilterResultRating(filter)
+      ) {
+        const selected = filter.options.filter(
+          (subOption) => subOption.selected === true
+        )
+        if (selected.length === 0) {
+          continue
+        }
+        for (const option of selected) {
+          selectedFilters.push({
+            key: filter.key,
+            label: filter.label,
+            type: filter.type,
+            value: option.value,
+          })
+        }
+      } else if (FilterManager.isKlevuFilterResultSlider(filter)) {
+        if (!filter.start || !filter.end) {
+          continue
+        }
+        selectedFilters.push({
+          key: filter.key,
+          label: filter.label,
+          type: filter.type,
+          value: `${filter.start}-${filter.end}`,
+        })
+      }
+    }
+
+    return selectedFilters
+  }
+
+  /**
    * Get option by key and sub option name. If doesn't exist, create it.
    *
    * @param key

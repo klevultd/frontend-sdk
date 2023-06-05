@@ -42,8 +42,8 @@ const mockFilterData = (): Array<
     label: "Test price slider",
     min: "0",
     max: "10",
-    start: "3",
-    end: "7",
+    start: null,
+    end: null,
   },
 ]
 
@@ -135,6 +135,7 @@ test("Apply filters", () => {
   manager.initFromListFilters(mockFilterData())
 
   manager.toggleOption("test", "red")
+  manager.updateSlide("price", 3, 7)
   const filters = manager.toApplyFilters()
 
   expect(filters[0].values).toEqual(["red"])
@@ -163,6 +164,7 @@ test("Test URL param settings", () => {
   const manager = new FilterManager()
   manager.initFromListFilters(mockFilterData())
   manager.selectOption("test", "red")
+  manager.updateSlide("price", 3, 7)
 
   expect(manager.toURLParams()).toBe("o_test=red&s_price=3-7")
 
@@ -246,4 +248,32 @@ test("Deprecated properties still work", () => {
   expect(manager.options[0].options.length).toBe(2)
 
   expect(manager.sliders.length).toBe(1)
+})
+
+test("Selected filters are correctly applied", () => {
+  const manager = new FilterManager()
+  manager.initFromListFilters(mockFilterData())
+
+  const result = manager.selectedFilters()
+
+  expect(result.length).toBe(0)
+
+  manager.toggleOption("test", "red")
+  manager.updateSlide("price", 3, 7)
+
+  const result2 = manager.selectedFilters()
+
+  expect(result2.length).toBe(2)
+  expect(result2[0]).toMatchObject({
+    key: "test",
+    value: "red",
+    label: "Test",
+    type: KlevuFilterType.Options,
+  })
+  expect(result2[1]).toMatchObject({
+    key: "price",
+    value: "3-7",
+    label: "Test price slider",
+    type: KlevuFilterType.Slider,
+  })
 })
