@@ -23,10 +23,12 @@ test("Sending merchandising event", async () => {
     )
   )
 
-  const click = result
+  result
     .queriesById("test")
-    ?.getCategoryMerchandisingClickSendEvent?.()
-  click?.(result.queriesById("test")?.records[0].id ?? "", "Hoodies")
+    ?.getCategoryMerchandisingClickSendEvent?.(
+      result.queriesById("test")?.records[0].id ?? "",
+      "Hoodies"
+    )
 
   expect(result.queriesById("test")).toBeDefined()
 })

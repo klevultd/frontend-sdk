@@ -36,10 +36,53 @@ test("Search click event should be defined", async () => {
 
   const product = query!.records[0]
 
-  query?.getSearchClickSendEvent?.()(product.id, product.itemGroupId)
+  query?.getSearchClickSendEvent?.(product.id, product.itemGroupId)
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
+  )
+})
+
+test("Search click should send a search event on first time, but not on second time", async () => {
+  const result = await KlevuFetch(
+    search("hoodies", {
+      id: "test",
+    })
+  )
+
+  const query = result.queriesById("test")
+
+  const getSpySuccess = jest
+    .spyOn(KlevuConfig.default!.axios!, "get")
+    .mockImplementation((params) => {
+      return new Promise((resolve) => {
+        return resolve({
+          data: {},
+        })
+      })
+    })
+
+  query?.getSearchClickSendEvent?.(
+    query.records[0].id,
+    query.records[0].itemGroupId
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("analytics/n-search")
+  )
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("productTracking")
+  )
+  expect(getSpySuccess).toHaveBeenCalledTimes(2)
+
+  query?.getSearchClickSendEvent?.(
+    query.records[0].id,
+    query.records[0].itemGroupId
+  )
+
+  expect(getSpySuccess).toHaveBeenCalledTimes(3)
+  expect(getSpySuccess).toHaveBeenCalledWith(
+    expect.stringContaining("productTracking")
   )
 })
 
@@ -55,7 +98,7 @@ test("Category merchandising click event", async () => {
 
   const product = query!.records[0]
 
-  query?.getCategoryMerchandisingClickSendEvent?.()(
+  query?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId
@@ -92,7 +135,7 @@ test.skip("Recommendation click event", async () => {
 
   const product = query!.records[0]
 
-  query?.getRecommendationClickSendEvent?.()(product.id, product.itemGroupId)
+  query?.getRecommendationClickSendEvent?.(product.id, product.itemGroupId)
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
@@ -114,14 +157,14 @@ test("Override user IP for request", async () => {
   const getSpySuccess = jest
     .spyOn(KlevuConfig.default!.axios!, "get")
     .mockImplementation(() => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         return resolve({
           data: {},
         })
       })
     })
 
-  query?.getCategoryMerchandisingClickSendEvent?.()(
+  query?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -161,7 +204,7 @@ test("Merchandising call has correct filters set", async () => {
   const getSpySuccess = jest
     .spyOn(KlevuConfig.default!.axios!, "get")
     .mockImplementation(() => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         return resolve({
           data: {},
         })
@@ -169,7 +212,7 @@ test("Merchandising call has correct filters set", async () => {
     })
 
   const product = query!.records[0]
-  query?.getCategoryMerchandisingClickSendEvent?.()(
+  query?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -195,7 +238,7 @@ test("Filters should not be set if there are no filters", async () => {
   const getSpySuccess = jest
     .spyOn(KlevuConfig.default!.axios!, "get")
     .mockImplementation(() => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         return resolve({
           data: {},
         })
@@ -203,7 +246,7 @@ test("Filters should not be set if there are no filters", async () => {
     })
 
   const product = query!.records[0]
-  query?.getCategoryMerchandisingClickSendEvent?.()(
+  query?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -216,4 +259,28 @@ test("Filters should not be set if there are no filters", async () => {
   expect(getSpySuccess).toHaveBeenCalledWith(
     expect.not.stringContaining("klevu_activeFilters")
   )
+})
+
+test("Hooks should be called", (done) => {
+  KlevuFetch(
+    search("hoodies", {
+      id: "test",
+    })
+  ).then((result) => {
+    const query = result.queriesById("test")
+
+    query?.hooks.push(async (params) => {
+      try {
+        expect(params.type).toBe("search")
+        done()
+      } catch (e) {
+        done(e)
+      }
+    })
+
+    query?.getSearchClickSendEvent?.(
+      query.records[0].id,
+      query.records[0].itemGroupId
+    )
+  })
 })

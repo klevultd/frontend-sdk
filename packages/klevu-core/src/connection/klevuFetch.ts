@@ -15,6 +15,7 @@ import { post } from "./fetch.js"
 import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
 import { fetchNextPage } from "./resultHelpers/fetchNextPage.js"
 import { FetchResultEvents } from "./resultHelpers/FetchResultEvents.js"
+import { KlevuResponseObject } from "./responseObject.js"
 
 export const klevuFetchCache = new KlevuFetchCache<
   KlevuPayload,
@@ -30,7 +31,7 @@ export const klevuFetchCache = new KlevuFetchCache<
  */
 export async function KlevuFetch(
   ...functionPromises: KlevuFetchQueries
-): Promise<KlevuFetchResponse> {
+): Promise<KlevuResponseObject> {
   if (functionPromises.length < 1) {
     throw new Error("At least one fetch function should be provided to fetch.")
   }
@@ -73,73 +74,7 @@ export async function KlevuFetch(
     }
   }
 
-  return KlevuCreateResponseObject(response, functions)
-}
-
-export function KlevuCreateResponseObject(
-  response: KlevuApiRawResponse,
-  queries: KlevuFetchFunctionReturnValue[]
-): KlevuFetchResponse {
-  let responseObject: KlevuFetchResponse = {
-    apiResponse: response,
-    suggestionsById: (id: string) =>
-      response.suggestionResults?.find((q) => q.id === id),
-    queriesById: (id: string) => KlevuQueriesById(id, response, queries),
-  }
-
-  // Send event to functions on result
-  for (const f of queries) {
-    if (f.modifiers) {
-      for (const modifier of f.modifiers) {
-        if (modifier.onResult) {
-          responseObject = modifier.onResult(responseObject, f)
-        }
-      }
-    }
-  }
-
-  return responseObject
-}
-
-/**
- *
- * @param id Id if response to find
- * @param response Raw API response from server
- * @param queries Queries used to create API response
- * @returns
- */
-function KlevuQueriesById(
-  id: string,
-  response: KlevuApiRawResponse,
-  queries: KlevuFetchFunctionReturnValue[]
-): KlevuFetchQueryResult | undefined {
-  const res = response.queryResults?.find((s) => s.id === id)
-  if (!res) {
-    return undefined
-  }
-  const func = queries.find((f) => f.queries?.some((q) => q.id == res.id))
-  if (!func) {
-    return {
-      ...res,
-      annotationsById: (productId: string, languageCode: string) =>
-        getAnnotationsForProduct(res, productId, languageCode),
-    }
-  }
-
-  const result: KlevuFetchQueryResult = {
-    ...res,
-    ...FetchResultEvents(res, func),
-    functionParams: func.params,
-    annotationsById: (productId: string, languageCode: string) =>
-      getAnnotationsForProduct(res, productId, languageCode),
-    next: fetchNextPage({ response, func }),
-    getPage: fetchNextPage({
-      response,
-      func,
-      ignoreLastPageUndefined: true,
-    }),
-  }
-  return result
+  return new KlevuResponseObject(response, functions)
 }
 
 async function cleanAndProcessFunctions(

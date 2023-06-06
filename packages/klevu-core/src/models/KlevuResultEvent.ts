@@ -8,7 +8,7 @@ export type KlevuResultEvent = {
   /**
    * Returns function to be called when search result is clicked
    */
-  getSearchClickSendEvent?: () => (
+  getSearchClickSendEvent?: (
     productId: string,
     variantId?: string,
     override?: Partial<V1SearchEvent>
@@ -16,7 +16,7 @@ export type KlevuResultEvent = {
   /**
    * Returns function to be called when category item is clicked
    */
-  getCategoryMerchandisingClickSendEvent?: () => (
+  getCategoryMerchandisingClickSendEvent?: (
     productId: string,
     categoryTitle: string,
     variantId?: string,
@@ -25,9 +25,17 @@ export type KlevuResultEvent = {
   /**
    * Returns function to be called when recommendation item is clicked.
    */
-  getRecommendationClickSendEvent?: () => (
+  getRecommendationClickSendEvent?: (
     productId: string,
     variantId?: string,
     override?: Partial<KlevuEventV2Data>
   ) => void
+
+  hooks: KlevuResultEventOnResult[]
 }
+
+export type KlevuResultEventOnResult = (params: {
+  type: "search" | "categoryMerchandising" | "recommendation"
+  productId: string
+  variantId?: string
+}) => Promise<void>
