@@ -3,7 +3,7 @@ import type {
   KlevuFetchQueries,
   KlevuFetchResponse,
 } from "../models/index.js"
-import { KlevuCreateResponseObject } from "./klevuFetch.js"
+import { KlevuResponseObject } from "./responseObject.js"
 
 /**
  * Returns only JSON from KlevuFetch that can be sent to client in SSR process to hydrate
@@ -31,5 +31,5 @@ export async function KlevuHydratePackedFetchResult(
   packed: KlevuApiRawResponse,
   functions: KlevuFetchQueries
 ) {
-  return KlevuCreateResponseObject(packed, await Promise.all(functions))
+  return new KlevuResponseObject(packed, await Promise.all(functions))
 }

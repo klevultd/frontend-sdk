@@ -119,7 +119,7 @@ test("Next page analytics test", async () => {
       })
     })
 
-  query?.getCategoryMerchandisingClickSendEvent?.()(
+  query?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -138,7 +138,7 @@ test("Next page analytics test", async () => {
     pageIndex: 1,
   })
   const query2 = resultPage2?.queriesById("categoryMerchandising")
-  query2?.getCategoryMerchandisingClickSendEvent?.()(
+  query2?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -157,7 +157,7 @@ test("Next page analytics test", async () => {
     pageIndex: 2,
   })
   const query3 = resultPage3?.queriesById("categoryMerchandising")
-  query3?.getCategoryMerchandisingClickSendEvent?.()(
+  query3?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -172,7 +172,7 @@ test("Next page analytics test", async () => {
   )
 
   // Redo second analytics
-  query2?.getCategoryMerchandisingClickSendEvent?.()(
+  query2?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,
@@ -182,7 +182,7 @@ test("Next page analytics test", async () => {
   )
 
   // Redo first analytics send
-  query?.getCategoryMerchandisingClickSendEvent?.()(
+  query?.getCategoryMerchandisingClickSendEvent?.(
     product.id,
     "Women",
     product.itemGroupId,

@@ -38,5 +38,5 @@ test("No type errors", async () => {
     })
   )
 
-  expect(result.queriesById("test")).toBe(undefined)
+  expect(result.queryExists("test")).toBeFalsy()
 })

@@ -6,6 +6,7 @@ import type {
 } from "./KlevuApiRawResponse.js"
 import type { KlevuResultEvent } from "./KlevuResultEvent.js"
 import type { KlevuFetchFunctionParams } from "../queries/index.js"
+import { KlevuResponseObject } from "../connection/responseObject.js"
 
 /**
  * Next function is available if there are more results in the given query.
@@ -26,7 +27,7 @@ export type KlevuNextFunc = (override?: {
    * Use page index to load certain page instead of next available. 0 is first page
    */
   pageIndex?: number
-}) => Promise<KlevuFetchResponse>
+}) => Promise<KlevuResponseObject>
 
 /**
  * Fetch query results
