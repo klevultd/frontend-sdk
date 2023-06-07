@@ -628,6 +628,8 @@ export namespace Components {
          */
         "itemsPerRow"?: number;
     }
+    interface KlevuProductQuery {
+    }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
      * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
@@ -1432,6 +1434,12 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    interface HTMLKlevuProductQueryElement extends Components.KlevuProductQuery, HTMLStencilElement {
+    }
+    var HTMLKlevuProductQueryElement: {
+        prototype: HTMLKlevuProductQueryElement;
+        new (): HTMLKlevuProductQueryElement;
+    };
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
      * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
@@ -1610,6 +1618,7 @@ declare global {
         "klevu-popup": HTMLKlevuPopupElement;
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
+        "klevu-product-query": HTMLKlevuProductQueryElement;
         "klevu-query": HTMLKlevuQueryElement;
         "klevu-quicksearch": HTMLKlevuQuicksearchElement;
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
@@ -2233,6 +2242,8 @@ declare namespace LocalJSX {
          */
         "itemsPerRow"?: number;
     }
+    interface KlevuProductQuery {
+    }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
      * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
@@ -2698,6 +2709,7 @@ declare namespace LocalJSX {
         "klevu-popup": KlevuPopup;
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
+        "klevu-product-query": KlevuProductQuery;
         "klevu-query": KlevuQuery;
         "klevu-quicksearch": KlevuQuicksearch;
         "klevu-recommendations": KlevuRecommendations;
@@ -2893,6 +2905,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
              * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu

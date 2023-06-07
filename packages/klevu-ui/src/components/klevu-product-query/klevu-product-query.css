@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+#container {
+  width: 400px;
+}
+
+.remote {
+  display: flex;
+}
+
+.remote .thumbs {
+  padding: var(--klevu-spacing-04);
+  font-size: 21px;
+}
+
+.remote .thumbs span:nth-child(1) {
+  color: var(--klevu-color-accent-1);
+  padding-right: var(--klevu-spacing-04);
+}
+
+.remote .thumbs span:nth-child(2) {
+  color: var(--klevu-color-accent-3);
+}

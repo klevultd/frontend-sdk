@@ -53,6 +53,7 @@ Type: `Promise<void>`
 ### Used by
 
  - [klevu-moi](../klevu-moi)
+ - [klevu-product-query](../klevu-product-query)
 
 ### Depends on
 
@@ -72,6 +73,7 @@ graph TD;
   klevu-chat-layout --> klevu-textfield
   klevu-button --> klevu-typography
   klevu-moi --> klevu-chat-layout
+  klevu-product-query --> klevu-chat-layout
   style klevu-chat-layout fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

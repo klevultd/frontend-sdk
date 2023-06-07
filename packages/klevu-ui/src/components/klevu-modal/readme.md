@@ -51,11 +51,13 @@ Type: `Promise<void>`
 ### Used by
 
  - [klevu-moi](../klevu-moi)
+ - [klevu-product-query](../klevu-product-query)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-moi --> klevu-modal
+  klevu-product-query --> klevu-modal
   style klevu-modal fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

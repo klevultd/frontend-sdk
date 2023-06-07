@@ -87,7 +87,7 @@ export class KlevuChatLayout {
   render() {
     return (
       <Host>
-        <header>
+        <header slot="header">
           <klevu-typography variant="body-m-bold">MOI</klevu-typography>
           {this.showClose && (
             <klevu-button
