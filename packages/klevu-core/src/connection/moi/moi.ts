@@ -59,7 +59,7 @@ export type MoiResponseFilter = {
 }
 
 export type MoiResponseGenericOptions = {
-  genericOptions: {
+  genericOptions?: {
     options: Array<{
       chat: string
       name: string
@@ -69,7 +69,7 @@ export type MoiResponseGenericOptions = {
 }
 
 export type MoiMenuOptions = {
-  menuOptions: {
+  menuOptions?: {
     options: Array<{
       name: string
       chat: string
@@ -152,23 +152,26 @@ type MoiSavedSession = {
 
 export async function startMoi({
   onMessage,
-  apiKey,
   onRedirect,
+  configOverride,
 }: {
   onMessage?: () => void
-  apiKey?: string
   onRedirect?: (url: string) => void
+  configOverride?: KlevuConfig
 } = {}): Promise<MoiSession> {
-  const klevuApiKey = apiKey || KlevuConfig.getDefault().apiKey
+  const config = configOverride || KlevuConfig.getDefault()
 
   const storedSession = await getStoredSession()
 
-  const result = await queryMoi({
-    context: {
-      klevuApiKey,
-      sessionId: storedSession?.sessionId,
+  const result = await queryMoi(
+    {
+      context: {
+        klevuApiKey: config.apiKey,
+        sessionId: storedSession?.sessionId,
+      },
     },
-  })
+    config
+  )
 
   const ctx = result?.data[0]
 
@@ -197,13 +200,16 @@ export async function startMoi({
         onMessage?.()
       }
 
-      const res = await queryMoi({
-        ...request,
-        context: {
-          klevuApiKey,
-          sessionId,
+      const res = await queryMoi(
+        {
+          ...request,
+          context: {
+            klevuApiKey: config.apiKey,
+            sessionId,
+          },
         },
-      })
+        config
+      )
 
       if (!res) {
         throw new Error("No response from MOI")
@@ -268,11 +274,8 @@ function saveSession(session: MoiSavedSession) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
 }
 
-async function queryMoi(request: MoiRequest) {
-  return await post<MoiResponse>(
-    `${KlevuConfig.getDefault().moiApiUrl}chat/send`,
-    request
-  )
+async function queryMoi(request: MoiRequest, config: KlevuConfig) {
+  return await post<MoiResponse>(`${config.moiApiUrl}chat/send`, request)
 }
 
 function parseResponse(response: MoiResponse) {
@@ -291,10 +294,6 @@ function parseResponse(response: MoiResponse) {
     if ("menuOptions" in d) {
       menu = d.menuOptions
     }
-  }
-
-  if (!menu || !genericOptions) {
-    throw new Error("No menu or generic options found")
   }
 
   return {

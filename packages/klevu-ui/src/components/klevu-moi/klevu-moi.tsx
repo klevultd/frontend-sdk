@@ -1,6 +1,6 @@
-import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen } from "@stencil/core"
+import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen, Element } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
-import { startMoi, MoiSession, MoiRequest, KlevuRecord, MoiProducts } from "@klevu/core"
+import { startMoi, MoiSession, MoiRequest, MoiProducts, KlevuConfig } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type MoiProduct = MoiProducts["productData"]["products"][0]
@@ -26,6 +26,9 @@ export class KlevuMoi {
 
   @State()
   loading = false
+
+  @Element()
+  el!: HTMLKlevuMoiElement
 
   /**
    * Show close button
@@ -60,13 +63,15 @@ export class KlevuMoi {
 
   async connectedCallback() {
     await KlevuInit.ready()
+
+    const config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
+
     const init = async () => {
       this.session = await startMoi({
         onMessage: this.onMessage.bind(this),
-        // @ts-expect-error
-        apiKey: this.apiKey || window["klevu_ui_settings"].apiKey,
         // Do nothing on redirect as we have our own system
         onRedirect: (url) => {},
+        configOverride: config,
       })
       this.messages = this.session.messages
     }
@@ -160,7 +165,7 @@ export class KlevuMoi {
           {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
           <br />
           <div slot="actions" class="genericactions">
-            {this.session?.genericOptions.options.map((item) => (
+            {this.session?.genericOptions?.options.map((item) => (
               <klevu-button
                 size="small"
                 isSecondary
@@ -177,7 +182,7 @@ export class KlevuMoi {
             ))}
           </div>
           <div slot="menu" class="menu">
-            {this.session?.menu.options
+            {this.session?.menu?.options
               .filter((i) => i.type === "message")
               .map((item) => (
                 <klevu-button
