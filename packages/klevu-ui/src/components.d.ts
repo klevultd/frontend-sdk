@@ -82,6 +82,7 @@ export namespace Components {
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
      * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface KlevuButton {
         /**
@@ -1165,6 +1166,7 @@ declare global {
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
      * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
@@ -1677,6 +1679,7 @@ declare namespace LocalJSX {
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
      * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface KlevuButton {
         /**
@@ -2751,6 +2754,7 @@ declare module "@stencil/core" {
              * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
              * @cssprop --klevu-button-text-align center Align text on button
              * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+             * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**

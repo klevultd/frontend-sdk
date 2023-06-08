@@ -5,22 +5,33 @@
 <!-- Auto Generated Below -->
 
 
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
+
+
 ## Dependencies
 
 ### Depends on
 
 - [klevu-button](../klevu-button)
 - [klevu-modal](../klevu-modal)
+- [klevu-typography](../klevu-typography)
 - [klevu-chat-layout](../klevu-chat-layout)
 - [klevu-chat-bubble](../klevu-chat-bubble)
+- [klevu-textfield](../klevu-textfield)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-product-query --> klevu-button
   klevu-product-query --> klevu-modal
+  klevu-product-query --> klevu-typography
   klevu-product-query --> klevu-chat-layout
   klevu-product-query --> klevu-chat-bubble
+  klevu-product-query --> klevu-textfield
   klevu-button --> klevu-typography
   klevu-chat-layout --> klevu-typography
   klevu-chat-layout --> klevu-button

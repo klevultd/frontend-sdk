@@ -10,12 +10,13 @@ dialog {
 }
 
 main {
-  padding: var(--klevu-spacing-04);
+  padding: var(--klevu-spacing-04) 0;
 }
 
 header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 
 button {

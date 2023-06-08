@@ -34,6 +34,7 @@ export class KlevuModal {
       <Host>
         <dialog ref={(el) => (this.#dialogRef = el)}>
           <header>
+            <slot name="header"></slot>
             <form method="dialog">
               <button>
                 <span part="material-icon">close</span>
