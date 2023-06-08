@@ -359,7 +359,10 @@ export namespace Components {
           * Read only API key to Klevu
          */
         "apiKey": string;
-        "getApiKey": () => Promise<string>;
+        /**
+          * @returns KlevuConfig, but due to typescript problems it is any
+         */
+        "getConfig": () => Promise<any>;
         /**
           * Global settings
          */

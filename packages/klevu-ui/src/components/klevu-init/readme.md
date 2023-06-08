@@ -34,15 +34,15 @@ Klevu init also initializes Google Material Icon font. It automatically injects 
 
 ## Methods
 
-### `getApiKey() => Promise<string>`
+### `getConfig() => Promise<any>`
 
 
 
 #### Returns
 
-Type: `Promise<string>`
+Type: `Promise<any>`
 
-
+KlevuConfig, but due to typescript problems it is any
 
 
 ----------------------------------------------

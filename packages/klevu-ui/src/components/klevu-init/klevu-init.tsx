@@ -102,9 +102,13 @@ export class KlevuInit {
     }
   }
 
+  /**
+   *
+   * @returns KlevuConfig, but due to typescript problems it is any
+   */
   @Method()
-  async getApiKey() {
-    return this.apiKey
+  async getConfig(): Promise<any> {
+    return KlevuConfig.getDefault()
   }
 
   /**
