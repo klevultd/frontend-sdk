@@ -11,16 +11,23 @@ Stylized modal dialog.
 
 ## Properties
 
-| Property    | Attribute    | Description | Type      | Default |
-| ----------- | ------------ | ----------- | --------- | ------- |
-| `startOpen` | `start-open` |             | `boolean` | `false` |
+| Property    | Attribute    | Description                    | Type      | Default |
+| ----------- | ------------ | ------------------------------ | --------- | ------- |
+| `startOpen` | `start-open` | Should show the modal on load. | `boolean` | `false` |
+
+
+## Events
+
+| Event             | Description                       | Type                |
+| ----------------- | --------------------------------- | ------------------- |
+| `klevuCloseModal` | Emitted when the modal is closed. | `CustomEvent<void>` |
 
 
 ## Methods
 
 ### `closeModal() => Promise<void>`
 
-
+Closes the modal.
 
 #### Returns
 
@@ -30,7 +37,7 @@ Type: `Promise<void>`
 
 ### `openModal() => Promise<void>`
 
-
+Opens the modal.
 
 #### Returns
 

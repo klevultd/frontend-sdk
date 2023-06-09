@@ -14,6 +14,7 @@ export class KlevuProductQuery {
   @State() name = ""
   @State() email = ""
   @State() registered = false
+  @State() showFeedback = false
 
   @State() messages: Array<{
     message: string
@@ -64,122 +65,162 @@ export class KlevuProductQuery {
     this.messages = [...this.messages]
   }
 
+  #pqafeedback(dir: "up" | "down") {
+    this.#modal?.closeModal()
+  }
+
+  #closeModal(e: CustomEvent<void>) {
+    if (!this.showFeedback) {
+      this.showFeedback = true
+      e.preventDefault()
+      return
+    }
+  }
+
+  #start() {
+    this.showFeedback = false
+    this.#modal?.openModal()
+  }
+
   render() {
     return (
       <Host>
-        <klevu-button onClick={() => this.#modal?.openModal()}>Ask a Question</klevu-button>
-        <klevu-modal ref={(el) => (this.#modal = el)} exportparts={globalExportedParts}>
+        <klevu-button onClick={this.#start.bind(this)}>Ask a Question</klevu-button>
+        <klevu-modal
+          ref={(el) => (this.#modal = el)}
+          exportparts={globalExportedParts}
+          onKlevuCloseModal={this.#closeModal.bind(this)}
+        >
           <div slot="header">
             <klevu-typography variant="body-m-bold">Ask a Question</klevu-typography>
           </div>
-          <div id="container">
-            <klevu-chat-layout
-              ref={(el) => (this.#chatLayout = el)}
-              exportparts={globalExportedParts}
-              onKlevuChatLayoutMessageSent={(event) => this.messages.push({ isRemote: false, message: event.detail })}
-            >
-              <div slot="header"></div>
-              {this.messages.map((message, index) => {
-                if (message.isRemote) {
-                  return (
-                    <Fragment>
-                      <div class="remote">
-                        <klevu-chat-bubble remote>
-                          {message.thumb && message.thumb === "up" && (
-                            <span class="feedback_up" part="material-icon">
-                              thumb_up
-                            </span>
-                          )}
-                          {message.thumb && message.thumb === "down" && (
-                            <span class="feedback_down" part="material-icon">
-                              thumb_down
-                            </span>
-                          )}
-                          {message.message}
-                        </klevu-chat-bubble>
-                        {message.feedbackable && !message.thumb && (
-                          <div class="thumbs">
-                            <span part="material-icon" onClick={() => this.#thumb(index, "up")}>
-                              thumb_up
-                            </span>
-                            <span part="material-icon" onClick={() => this.#thumb(index, "down")}>
-                              thumb_down
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      {message.thumb && message.thumb === "down" && (
-                        <div class="feedback_buttons">
-                          <klevu-typography variant="body-xs">Rating reason:</klevu-typography>
-                          <klevu-button size="small" isSecondary>
-                            Irrelevant
-                          </klevu-button>
-                          <klevu-button size="small" isSecondary>
-                            Incorrect
-                          </klevu-button>
-                          <klevu-button size="small" isSecondary>
-                            Offensive
-                          </klevu-button>
-                          <klevu-button size="small" isSecondary>
-                            Other
-                          </klevu-button>
-                        </div>
-                      )}
-                    </Fragment>
-                  )
-                }
-                return <klevu-chat-bubble>{message.message}</klevu-chat-bubble>
-              })}
-
-              <div slot="footer">
-                {!this.registered ? (
-                  <Fragment>
-                    <div class="inputs">
-                      <klevu-textfield
-                        value={this.name}
-                        variant="pill"
-                        placeholder="Name"
-                        onKlevuTextEnterPressed={() => this.#register()}
-                        onKlevuTextChanged={(e) => (this.name = e.detail)}
-                      ></klevu-textfield>
-                      <klevu-textfield
-                        value={this.email}
-                        variant="pill"
-                        placeholder="Email"
-                        onKlevuTextEnterPressed={() => this.#register()}
-                        onKlevuTextChanged={(e) => {
-                          this.email = e.detail
-                        }}
-                      ></klevu-textfield>
-                      <klevu-button
-                        exportparts={globalExportedParts}
-                        icon="send"
-                        onClick={() => this.#register()}
-                      ></klevu-button>
-                    </div>
-                    <klevu-typography variant="body-xs">
-                      We are compliant with data protection regulations. Visit our privacy policy to learn how we
-                      collect, keep, and process your private information in accordance with these laws.
-                    </klevu-typography>
-                  </Fragment>
-                ) : (
-                  <div class="sendmessage">
-                    <klevu-textfield
-                      value={this.text}
-                      variant="pill"
-                      onKlevuTextEnterPressed={() => this.#sendMessage()}
-                      onKlevuTextChanged={(e) => (this.text = e.detail)}
-                    ></klevu-textfield>
-                    <klevu-button
-                      exportparts={globalExportedParts}
-                      icon="send"
-                      onClick={() => this.#sendMessage()}
-                    ></klevu-button>
-                  </div>
-                )}
+          {this.showFeedback ? (
+            <div class="pqa_feedback">
+              <klevu-typography variant="body-l-bold">Rate your experience</klevu-typography>
+              <klevu-typography variant="body-m">How was your experience using this Q&A tool?</klevu-typography>
+              <div>
+                <span part="material-icon" onClick={() => this.#pqafeedback("up")}>
+                  thumb_up
+                </span>
+                <span part="material-icon" onClick={() => this.#pqafeedback("down")}>
+                  thumb_down
+                </span>
               </div>
-            </klevu-chat-layout>
-          </div>
+            </div>
+          ) : (
+            <Fragment>
+              <div id="container">
+                <klevu-chat-layout
+                  ref={(el) => (this.#chatLayout = el)}
+                  exportparts={globalExportedParts}
+                  onKlevuChatLayoutMessageSent={(event) =>
+                    this.messages.push({ isRemote: false, message: event.detail })
+                  }
+                >
+                  <div slot="header"></div>
+                  {this.messages.map((message, index) => {
+                    if (message.isRemote) {
+                      return (
+                        <Fragment>
+                          <div class="remote">
+                            <klevu-chat-bubble remote>
+                              {message.thumb && message.thumb === "up" && (
+                                <span class="feedback_up" part="material-icon">
+                                  thumb_up
+                                </span>
+                              )}
+                              {message.thumb && message.thumb === "down" && (
+                                <span class="feedback_down" part="material-icon">
+                                  thumb_down
+                                </span>
+                              )}
+                              {message.message}
+                            </klevu-chat-bubble>
+                            {message.feedbackable && !message.thumb && (
+                              <div class="thumbs">
+                                <span part="material-icon" onClick={() => this.#thumb(index, "up")}>
+                                  thumb_up
+                                </span>
+                                <span part="material-icon" onClick={() => this.#thumb(index, "down")}>
+                                  thumb_down
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          {message.thumb && message.thumb === "down" && (
+                            <div class="feedback_buttons">
+                              <klevu-typography variant="body-xs">Rating reason:</klevu-typography>
+                              <klevu-button size="small" isSecondary>
+                                Irrelevant
+                              </klevu-button>
+                              <klevu-button size="small" isSecondary>
+                                Incorrect
+                              </klevu-button>
+                              <klevu-button size="small" isSecondary>
+                                Offensive
+                              </klevu-button>
+                              <klevu-button size="small" isSecondary>
+                                Other
+                              </klevu-button>
+                            </div>
+                          )}
+                        </Fragment>
+                      )
+                    }
+                    return <klevu-chat-bubble>{message.message}</klevu-chat-bubble>
+                  })}
+
+                  <div slot="footer">
+                    {!this.registered ? (
+                      <Fragment>
+                        <div class="inputs">
+                          <klevu-textfield
+                            value={this.name}
+                            variant="pill"
+                            placeholder="Name"
+                            onKlevuTextEnterPressed={() => this.#register()}
+                            onKlevuTextChanged={(e) => (this.name = e.detail)}
+                          ></klevu-textfield>
+                          <klevu-textfield
+                            value={this.email}
+                            variant="pill"
+                            placeholder="Email"
+                            onKlevuTextEnterPressed={() => this.#register()}
+                            onKlevuTextChanged={(e) => {
+                              this.email = e.detail
+                            }}
+                          ></klevu-textfield>
+                          <klevu-button
+                            exportparts={globalExportedParts}
+                            icon="send"
+                            onClick={() => this.#register()}
+                          ></klevu-button>
+                        </div>
+                        <klevu-typography variant="body-xs">
+                          We are compliant with data protection regulations. Visit our privacy policy to learn how we
+                          collect, keep, and process your private information in accordance with these laws.
+                        </klevu-typography>
+                      </Fragment>
+                    ) : (
+                      <div class="sendmessage">
+                        <klevu-textfield
+                          value={this.text}
+                          variant="pill"
+                          onKlevuTextEnterPressed={() => this.#sendMessage()}
+                          onKlevuTextChanged={(e) => (this.text = e.detail)}
+                        ></klevu-textfield>
+                        <klevu-button
+                          exportparts={globalExportedParts}
+                          icon="send"
+                          onClick={() => this.#sendMessage()}
+                        ></klevu-button>
+                      </div>
+                    )}
+                  </div>
+                </klevu-chat-layout>
+              </div>
+            </Fragment>
+          )}
         </klevu-modal>
       </Host>
     )

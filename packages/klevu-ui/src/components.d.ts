@@ -109,6 +109,8 @@ export namespace Components {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      */
     interface KlevuChatBubble {
         "remote"?: boolean;
@@ -468,8 +470,17 @@ export namespace Components {
      * Stylized modal dialog.
      */
     interface KlevuModal {
+        /**
+          * Closes the modal.
+         */
         "closeModal": () => Promise<void>;
+        /**
+          * Opens the modal.
+         */
         "openModal": () => Promise<void>;
+        /**
+          * Should show the modal on load.
+         */
         "startOpen": boolean;
     }
     /**
@@ -1086,6 +1097,10 @@ export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuLatestSearchesElement;
 }
+export interface KlevuModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuModalElement;
+}
 export interface KlevuMoiCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuMoiElement;
@@ -1176,6 +1191,8 @@ declare global {
     };
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1706,6 +1723,8 @@ declare namespace LocalJSX {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      */
     interface KlevuChatBubble {
         "remote"?: boolean;
@@ -2073,6 +2092,13 @@ declare namespace LocalJSX {
      * Stylized modal dialog.
      */
     interface KlevuModal {
+        /**
+          * Emitted when the modal is closed.
+         */
+        "onKlevuCloseModal"?: (event: KlevuModalCustomEvent<void>) => void;
+        /**
+          * Should show the modal on load.
+         */
         "startOpen"?: boolean;
     }
     /**
@@ -2759,6 +2785,8 @@ declare module "@stencil/core" {
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
              * Container for chat items. Very simple component, just a wrapper.
+             * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+             * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**

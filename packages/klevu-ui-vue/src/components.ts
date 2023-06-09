@@ -155,7 +155,8 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
 
 
 export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-modal', undefined, [
-  'startOpen'
+  'startOpen',
+  'klevuCloseModal'
 ]);
 
 
