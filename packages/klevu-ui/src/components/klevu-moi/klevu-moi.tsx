@@ -1,9 +1,7 @@
 import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen, Element } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
-import { startMoi, MoiSession, MoiRequest, MoiProducts, KlevuConfig } from "@klevu/core"
+import { startMoi, MoiSession, MoiRequest, MoiProducts, MoiProduct, MoiMessages, KlevuConfig } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
-
-export type MoiProduct = MoiProducts["productData"]["products"][0]
 
 /**
  * Klevu MOI Application
@@ -22,7 +20,7 @@ export class KlevuMoi {
   currentProduct?: MoiProduct
 
   @State()
-  messages: MoiSession["messages"] = []
+  messages: MoiMessages = []
 
   @State()
   loading = false

@@ -97,6 +97,11 @@ div[slot="footer"] .sendmessage klevu-textfield {
   font-size: 24px;
   padding: var(--klevu-spacing-04);
   cursor: pointer;
+  border-radius: 50%;
+}
+
+.pqa_feedback span[part="material-icon"]:hover {
+  background-color: var(--klevu-color-neutral-2);
 }
 
 .pqa_feedback span[part="material-icon"]:nth-child(1) {

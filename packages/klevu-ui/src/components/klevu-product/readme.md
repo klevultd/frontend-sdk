@@ -58,6 +58,7 @@ with --kleu-product-width and --klevu-product-small-width css variables.
 
 ### Used by
 
+ - [klevu-chat-messages](../klevu-chat-messages)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-moi](../klevu-moi)
  - [klevu-quicksearch](../klevu-quicksearch)
@@ -72,6 +73,7 @@ with --kleu-product-width and --klevu-product-small-width css variables.
 ```mermaid
 graph TD;
   klevu-product --> klevu-typography
+  klevu-chat-messages --> klevu-product
   klevu-merchandising --> klevu-product
   klevu-moi --> klevu-product
   klevu-quicksearch --> klevu-product

@@ -13,6 +13,7 @@ export const KlevuBadge = /*@__PURE__*/createReactComponent<JSX.KlevuBadge, HTML
 export const KlevuButton = /*@__PURE__*/createReactComponent<JSX.KlevuButton, HTMLKlevuButtonElement>('klevu-button');
 export const KlevuChatBubble = /*@__PURE__*/createReactComponent<JSX.KlevuChatBubble, HTMLKlevuChatBubbleElement>('klevu-chat-bubble');
 export const KlevuChatLayout = /*@__PURE__*/createReactComponent<JSX.KlevuChatLayout, HTMLKlevuChatLayoutElement>('klevu-chat-layout');
+export const KlevuChatMessages = /*@__PURE__*/createReactComponent<JSX.KlevuChatMessages, HTMLKlevuChatMessagesElement>('klevu-chat-messages');
 export const KlevuCheckbox = /*@__PURE__*/createReactComponent<JSX.KlevuCheckbox, HTMLKlevuCheckboxElement>('klevu-checkbox');
 export const KlevuChip = /*@__PURE__*/createReactComponent<JSX.KlevuChip, HTMLKlevuChipElement>('klevu-chip');
 export const KlevuCmsList = /*@__PURE__*/createReactComponent<JSX.KlevuCmsList, HTMLKlevuCmsListElement>('klevu-cms-list');

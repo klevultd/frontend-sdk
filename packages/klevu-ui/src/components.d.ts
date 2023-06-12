@@ -5,13 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
-import { MoiProduct } from "./components/klevu-moi/klevu-moi";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
@@ -23,13 +22,12 @@ import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfi
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
-export { MoiProduct } from "./components/klevu-moi/klevu-moi";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
@@ -133,6 +131,12 @@ export namespace Components {
           * Show loading indicator
          */
         "showLoading": boolean;
+    }
+    interface KlevuChatMessages {
+        /**
+          * Messages received from Moi backend
+         */
+        "messages": MoiMessages;
     }
     /**
      * Checkbox component
@@ -641,6 +645,7 @@ export namespace Components {
         "itemsPerRow"?: number;
     }
     interface KlevuProductQuery {
+        "url": string;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -1073,6 +1078,10 @@ export interface KlevuChatLayoutCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuChatLayoutElement;
 }
+export interface KlevuChatMessagesCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChatMessagesElement;
+}
 export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCheckboxElement;
@@ -1209,6 +1218,12 @@ declare global {
     var HTMLKlevuChatLayoutElement: {
         prototype: HTMLKlevuChatLayoutElement;
         new (): HTMLKlevuChatLayoutElement;
+    };
+    interface HTMLKlevuChatMessagesElement extends Components.KlevuChatMessages, HTMLStencilElement {
+    }
+    var HTMLKlevuChatMessagesElement: {
+        prototype: HTMLKlevuChatMessagesElement;
+        new (): HTMLKlevuChatMessagesElement;
     };
     /**
      * Checkbox component
@@ -1617,6 +1632,7 @@ declare global {
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-chat-bubble": HTMLKlevuChatBubbleElement;
         "klevu-chat-layout": HTMLKlevuChatLayoutElement;
+        "klevu-chat-messages": HTMLKlevuChatMessagesElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-chip": HTMLKlevuChipElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -1747,6 +1763,24 @@ declare namespace LocalJSX {
           * Show loading indicator
          */
         "showLoading"?: boolean;
+    }
+    interface KlevuChatMessages {
+        /**
+          * Messages received from Moi backend
+         */
+        "messages"?: MoiMessages;
+        /**
+          * When product is clicked
+         */
+        "onKlevuChatProductClick"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct }>) => void;
+        /**
+          * When product filter is clicked
+         */
+        "onKlevuSelectFilter"?: (event: KlevuChatMessagesCustomEvent<{ filter: MoiResponseFilter["filter"]["options"][0] }>) => void;
+        /**
+          * When product option is clicked
+         */
+        "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
     }
     /**
      * Checkbox component
@@ -2272,6 +2306,7 @@ declare namespace LocalJSX {
         "itemsPerRow"?: number;
     }
     interface KlevuProductQuery {
+        "url"?: string;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -2718,6 +2753,7 @@ declare namespace LocalJSX {
         "klevu-button": KlevuButton;
         "klevu-chat-bubble": KlevuChatBubble;
         "klevu-chat-layout": KlevuChatLayout;
+        "klevu-chat-messages": KlevuChatMessages;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-chip": KlevuChip;
         "klevu-cms-list": KlevuCmsList;
@@ -2794,6 +2830,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
              */
             "klevu-chat-layout": LocalJSX.KlevuChatLayout & JSXBase.HTMLAttributes<HTMLKlevuChatLayoutElement>;
+            "klevu-chat-messages": LocalJSX.KlevuChatMessages & JSXBase.HTMLAttributes<HTMLKlevuChatMessagesElement>;
             /**
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border

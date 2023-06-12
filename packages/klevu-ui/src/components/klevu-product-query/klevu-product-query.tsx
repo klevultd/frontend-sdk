@@ -1,5 +1,7 @@
-import { Component, Fragment, Host, State, h } from "@stencil/core"
+import { Component, Fragment, Host, State, h, Element, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
+import { KlevuInit } from "../klevu-init/klevu-init"
+import { KlevuConfig, MoiMessages, MoiSession, startMoi } from "@klevu/core"
 
 @Component({
   tag: "klevu-product-query",
@@ -7,8 +9,11 @@ import { globalExportedParts } from "../../utils/utils"
   shadow: true,
 })
 export class KlevuProductQuery {
+  session?: MoiSession
   #modal?: HTMLKlevuModalElement
   #chatLayout?: HTMLKlevuChatLayoutElement
+
+  @Prop() url: string = ""
 
   @State() text = ""
   @State() name = ""
@@ -16,31 +21,29 @@ export class KlevuProductQuery {
   @State() registered = false
   @State() showFeedback = false
 
-  @State() messages: Array<{
-    message: string
-    isRemote: boolean
-    feedbackable?: boolean
-    thumb?: "up" | "down"
-  }> = [
-    {
-      isRemote: true,
-      message:
-        "Howdy! I can answer specific questions about this product, if the information is available on the product page.",
-    },
-    {
-      isRemote: true,
-      message: "But before that, please enter your name and email.",
-    },
-    {
-      isRemote: true,
-      message: "This is a test message with loger text to see how it looks like. And it has a feedback buttons with it",
-      feedbackable: true,
-    },
-  ]
+  @Element()
+  el!: HTMLKlevuProductElement
+
+  @State() messages: MoiMessages = []
+
+  async connectedCallback() {
+    await KlevuInit.ready()
+
+    if (this.url == "") {
+      throw new Error("Klevu Product Query: url is required")
+    }
+  }
+
+  onMessage() {
+    if (!this.session) {
+      return
+    }
+    this.messages = this.session.messages
+    this.#chatLayout?.scrollMainToBottom()
+  }
 
   #sendMessage() {
-    this.messages.push({
-      isRemote: false,
+    this.session?.query({
       message: this.text,
     })
     this.text = ""
@@ -48,21 +51,19 @@ export class KlevuProductQuery {
   }
 
   #register() {
-    this.messages.push({
-      isRemote: false,
-      message: `${this.name}, (${this.email})`,
-    })
-    this.messages.push({
-      isRemote: true,
-      message: "Thanks! What would you like to know about this product?",
+    this.session?.messages.push({
+      message: {
+        type: "text",
+        value: `${this.name}, (${this.email})`,
+        note: null,
+      },
     })
     this.registered = true
     this.#chatLayout?.scrollMainToBottom()
   }
 
   #thumb(index: number, dir: "up" | "down") {
-    this.messages[index].thumb = dir
-    this.messages = [...this.messages]
+    // Todo
   }
 
   #pqafeedback(dir: "up" | "down") {
@@ -80,6 +81,21 @@ export class KlevuProductQuery {
   #start() {
     this.showFeedback = false
     this.#modal?.openModal()
+    this.el
+      .closest("klevu-init")
+      ?.getConfig()
+      .then(async (config) => {
+        this.session = await startMoi({
+          onMessage: this.onMessage.bind(this),
+          // Do nothing on redirect as we have our own system
+          onRedirect: () => {},
+          configOverride: config,
+          url: this.url,
+          mode: "PQA",
+        })
+        this.messages = this.session.messages
+        this.registered = this.messages.length > 1
+      })
   }
 
   render() {
@@ -113,62 +129,10 @@ export class KlevuProductQuery {
                 <klevu-chat-layout
                   ref={(el) => (this.#chatLayout = el)}
                   exportparts={globalExportedParts}
-                  onKlevuChatLayoutMessageSent={(event) =>
-                    this.messages.push({ isRemote: false, message: event.detail })
-                  }
+                  onKlevuChatLayoutMessageSent={(event) => this.#sendMessage()}
                 >
                   <div slot="header"></div>
-                  {this.messages.map((message, index) => {
-                    if (message.isRemote) {
-                      return (
-                        <Fragment>
-                          <div class="remote">
-                            <klevu-chat-bubble remote>
-                              {message.thumb && message.thumb === "up" && (
-                                <span class="feedback_up" part="material-icon">
-                                  thumb_up
-                                </span>
-                              )}
-                              {message.thumb && message.thumb === "down" && (
-                                <span class="feedback_down" part="material-icon">
-                                  thumb_down
-                                </span>
-                              )}
-                              {message.message}
-                            </klevu-chat-bubble>
-                            {message.feedbackable && !message.thumb && (
-                              <div class="thumbs">
-                                <span part="material-icon" onClick={() => this.#thumb(index, "up")}>
-                                  thumb_up
-                                </span>
-                                <span part="material-icon" onClick={() => this.#thumb(index, "down")}>
-                                  thumb_down
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                          {message.thumb && message.thumb === "down" && (
-                            <div class="feedback_buttons">
-                              <klevu-typography variant="body-xs">Rating reason:</klevu-typography>
-                              <klevu-button size="small" isSecondary>
-                                Irrelevant
-                              </klevu-button>
-                              <klevu-button size="small" isSecondary>
-                                Incorrect
-                              </klevu-button>
-                              <klevu-button size="small" isSecondary>
-                                Offensive
-                              </klevu-button>
-                              <klevu-button size="small" isSecondary>
-                                Other
-                              </klevu-button>
-                            </div>
-                          )}
-                        </Fragment>
-                      )
-                    }
-                    return <klevu-chat-bubble>{message.message}</klevu-chat-bubble>
-                  })}
+                  <klevu-chat-messages messages={this.messages}></klevu-chat-messages>
 
                   <div slot="footer">
                     {!this.registered ? (

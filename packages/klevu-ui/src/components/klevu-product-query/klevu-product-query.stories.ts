@@ -17,5 +17,9 @@ export default meta
 
 export const Query: StoryObj<KlevuProductQuery> = {
   args: {},
-  render: (args) => html`<klevu-product-query></klevu-product-query>`,
+  render: (args) => html`
+    <klevu-init api-key="klevu-156934068344410779">
+      <klevu-product-query url="https://roolee.com/products/this-is-me-scoop-neck-dress"></klevu-product-query>
+    </klevu-init>
+  `,
 }
