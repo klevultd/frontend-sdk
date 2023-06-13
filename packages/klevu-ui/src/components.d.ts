@@ -5,13 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
-import { MoiProduct } from "./components/klevu-moi/klevu-moi";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
@@ -23,13 +22,12 @@ import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfi
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting } from "@klevu/core";
+export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
-export { MoiProduct } from "./components/klevu-moi/klevu-moi";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
@@ -82,6 +80,7 @@ export namespace Components {
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
      * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface KlevuButton {
         /**
@@ -108,6 +107,8 @@ export namespace Components {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      */
     interface KlevuChatBubble {
         "remote"?: boolean;
@@ -130,6 +131,12 @@ export namespace Components {
           * Show loading indicator
          */
         "showLoading": boolean;
+    }
+    interface KlevuChatMessages {
+        /**
+          * Messages received from Moi backend
+         */
+        "messages": MoiMessages;
     }
     /**
      * Checkbox component
@@ -467,8 +474,17 @@ export namespace Components {
      * Stylized modal dialog.
      */
     interface KlevuModal {
+        /**
+          * Closes the modal.
+         */
         "closeModal": () => Promise<void>;
+        /**
+          * Opens the modal.
+         */
         "openModal": () => Promise<void>;
+        /**
+          * Should show the modal on load.
+         */
         "startOpen": boolean;
     }
     /**
@@ -627,6 +643,9 @@ export namespace Components {
           * Force to place products in grid with given number of columns.
          */
         "itemsPerRow"?: number;
+    }
+    interface KlevuProductQuery {
+        "url": string;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -1059,6 +1078,10 @@ export interface KlevuChatLayoutCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuChatLayoutElement;
 }
+export interface KlevuChatMessagesCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChatMessagesElement;
+}
 export interface KlevuCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCheckboxElement;
@@ -1082,6 +1105,10 @@ export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuLatestSearchesElement;
+}
+export interface KlevuModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuModalElement;
 }
 export interface KlevuMoiCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1163,6 +1190,7 @@ declare global {
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
      * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
@@ -1172,6 +1200,8 @@ declare global {
     };
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1188,6 +1218,12 @@ declare global {
     var HTMLKlevuChatLayoutElement: {
         prototype: HTMLKlevuChatLayoutElement;
         new (): HTMLKlevuChatLayoutElement;
+    };
+    interface HTMLKlevuChatMessagesElement extends Components.KlevuChatMessages, HTMLStencilElement {
+    }
+    var HTMLKlevuChatMessagesElement: {
+        prototype: HTMLKlevuChatMessagesElement;
+        new (): HTMLKlevuChatMessagesElement;
     };
     /**
      * Checkbox component
@@ -1432,6 +1468,12 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    interface HTMLKlevuProductQueryElement extends Components.KlevuProductQuery, HTMLStencilElement {
+    }
+    var HTMLKlevuProductQueryElement: {
+        prototype: HTMLKlevuProductQueryElement;
+        new (): HTMLKlevuProductQueryElement;
+    };
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
      * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
@@ -1590,6 +1632,7 @@ declare global {
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-chat-bubble": HTMLKlevuChatBubbleElement;
         "klevu-chat-layout": HTMLKlevuChatLayoutElement;
+        "klevu-chat-messages": HTMLKlevuChatMessagesElement;
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-chip": HTMLKlevuChipElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
@@ -1610,6 +1653,7 @@ declare global {
         "klevu-popup": HTMLKlevuPopupElement;
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
+        "klevu-product-query": HTMLKlevuProductQueryElement;
         "klevu-query": HTMLKlevuQueryElement;
         "klevu-quicksearch": HTMLKlevuQuicksearchElement;
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
@@ -1668,6 +1712,7 @@ declare namespace LocalJSX {
      * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
      * @cssprop --klevu-button-text-align center Align text on button
      * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface KlevuButton {
         /**
@@ -1694,6 +1739,8 @@ declare namespace LocalJSX {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      */
     interface KlevuChatBubble {
         "remote"?: boolean;
@@ -1716,6 +1763,24 @@ declare namespace LocalJSX {
           * Show loading indicator
          */
         "showLoading"?: boolean;
+    }
+    interface KlevuChatMessages {
+        /**
+          * Messages received from Moi backend
+         */
+        "messages"?: MoiMessages;
+        /**
+          * When product is clicked
+         */
+        "onKlevuChatProductClick"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct }>) => void;
+        /**
+          * When product filter is clicked
+         */
+        "onKlevuSelectFilter"?: (event: KlevuChatMessagesCustomEvent<{ filter: MoiResponseFilter["filter"]["options"][0] }>) => void;
+        /**
+          * When product option is clicked
+         */
+        "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
     }
     /**
      * Checkbox component
@@ -2061,6 +2126,13 @@ declare namespace LocalJSX {
      * Stylized modal dialog.
      */
     interface KlevuModal {
+        /**
+          * Emitted when the modal is closed.
+         */
+        "onKlevuCloseModal"?: (event: KlevuModalCustomEvent<void>) => void;
+        /**
+          * Should show the modal on load.
+         */
         "startOpen"?: boolean;
     }
     /**
@@ -2232,6 +2304,9 @@ declare namespace LocalJSX {
           * Force to place products in grid with given number of columns.
          */
         "itemsPerRow"?: number;
+    }
+    interface KlevuProductQuery {
+        "url"?: string;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -2678,6 +2753,7 @@ declare namespace LocalJSX {
         "klevu-button": KlevuButton;
         "klevu-chat-bubble": KlevuChatBubble;
         "klevu-chat-layout": KlevuChatLayout;
+        "klevu-chat-messages": KlevuChatMessages;
         "klevu-checkbox": KlevuCheckbox;
         "klevu-chip": KlevuChip;
         "klevu-cms-list": KlevuCmsList;
@@ -2698,6 +2774,7 @@ declare namespace LocalJSX {
         "klevu-popup": KlevuPopup;
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
+        "klevu-product-query": KlevuProductQuery;
         "klevu-query": KlevuQuery;
         "klevu-quicksearch": KlevuQuicksearch;
         "klevu-recommendations": KlevuRecommendations;
@@ -2739,10 +2816,13 @@ declare module "@stencil/core" {
              * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
              * @cssprop --klevu-button-text-align center Align text on button
              * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
+             * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
              * Container for chat items. Very simple component, just a wrapper.
+             * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
+             * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**
@@ -2750,6 +2830,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
              */
             "klevu-chat-layout": LocalJSX.KlevuChatLayout & JSXBase.HTMLAttributes<HTMLKlevuChatLayoutElement>;
+            "klevu-chat-messages": LocalJSX.KlevuChatMessages & JSXBase.HTMLAttributes<HTMLKlevuChatMessagesElement>;
             /**
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
@@ -2893,6 +2974,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
              * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu

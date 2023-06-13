@@ -45,6 +45,14 @@ export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout
 ]);
 
 
+export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMessages>('klevu-chat-messages', undefined, [
+  'messages',
+  'klevuChatProductClick',
+  'klevuSelectFilter',
+  'klevuSelectProductOption'
+]);
+
+
 export const KlevuCheckbox = /*@__PURE__*/ defineContainer<JSX.KlevuCheckbox>('klevu-checkbox', undefined, [
   'checked',
   'disabled',
@@ -155,7 +163,8 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
 
 
 export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-modal', undefined, [
-  'startOpen'
+  'startOpen',
+  'klevuCloseModal'
 ]);
 
 
@@ -211,6 +220,11 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
 
 export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGrid>('klevu-product-grid', undefined, [
   'itemsPerRow'
+]);
+
+
+export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQuery>('klevu-product-query', undefined, [
+  'url'
 ]);
 
 

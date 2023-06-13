@@ -41,12 +41,14 @@ Branded text field component
 ### Used by
 
  - [klevu-chat-layout](../klevu-chat-layout)
+ - [klevu-product-query](../klevu-product-query)
  - [klevu-search-field](../klevu-search-field)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-chat-layout --> klevu-textfield
+  klevu-product-query --> klevu-textfield
   klevu-search-field --> klevu-textfield
   style klevu-textfield fill:#f9f,stroke:#333,stroke-width:4px
 ```

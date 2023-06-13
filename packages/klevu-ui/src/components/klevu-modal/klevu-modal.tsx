@@ -1,5 +1,4 @@
-import { Component, Host, h, Method, Prop } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
+import { Component, Host, h, Method, Prop, Event, EventEmitter } from "@stencil/core"
 
 /**
  * Stylized modal dialog.
@@ -12,6 +11,9 @@ import { globalExportedParts } from "../../utils/utils"
 export class KlevuModal {
   #dialogRef?: HTMLDialogElement
 
+  /**
+   * Should show the modal on load.
+   */
   @Prop()
   startOpen = false
 
@@ -21,20 +23,43 @@ export class KlevuModal {
     }
   }
 
+  /**
+   * Opens the modal.
+   */
   @Method() async openModal() {
     this.#dialogRef?.showModal()
   }
 
+  /**
+   * Closes the modal.
+   */
   @Method() async closeModal() {
     this.#dialogRef?.close()
+  }
+
+  /**
+   * Emitted when the modal is closed.
+   */
+  @Event({
+    bubbles: true,
+    cancelable: true,
+  })
+  klevuCloseModal!: EventEmitter<void>
+
+  #close(e: Event) {
+    const event = this.klevuCloseModal.emit()
+    if (event.defaultPrevented) {
+      e.preventDefault()
+    }
   }
 
   render() {
     return (
       <Host>
-        <dialog ref={(el) => (this.#dialogRef = el)}>
+        <dialog ref={(el) => (this.#dialogRef = el)} onCancel={this.#close.bind(this)}>
           <header>
-            <form method="dialog">
+            <slot name="header"></slot>
+            <form method="dialog" onSubmit={this.#close.bind(this)}>
               <button>
                 <span part="material-icon">close</span>
               </button>

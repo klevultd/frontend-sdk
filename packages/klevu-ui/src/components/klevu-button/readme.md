@@ -38,11 +38,13 @@ Basic button component
 ### Used by
 
  - [klevu-chat-layout](../klevu-chat-layout)
+ - [klevu-chat-messages](../klevu-chat-messages)
  - [klevu-facet](../klevu-facet)
  - [klevu-facet-list](../klevu-facet-list)
  - [klevu-layout-results](../klevu-layout-results)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-moi](../klevu-moi)
+ - [klevu-product-query](../klevu-product-query)
  - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-search-field](../klevu-search-field)
  - [klevu-search-landing-page](../klevu-search-landing-page)
@@ -57,11 +59,13 @@ Basic button component
 graph TD;
   klevu-button --> klevu-typography
   klevu-chat-layout --> klevu-button
+  klevu-chat-messages --> klevu-button
   klevu-facet --> klevu-button
   klevu-facet-list --> klevu-button
   klevu-layout-results --> klevu-button
   klevu-merchandising --> klevu-button
   klevu-moi --> klevu-button
+  klevu-product-query --> klevu-button
   klevu-quicksearch --> klevu-button
   klevu-search-field --> klevu-button
   klevu-search-landing-page --> klevu-button

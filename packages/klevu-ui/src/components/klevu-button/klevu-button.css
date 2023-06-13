@@ -2,6 +2,7 @@
   --klevu-button-background-hover: var(--klevu-color-primary-darker);
   --klevu-button-text-align: var(--klevu-button-text-align);
   --klevu-button-padding: var(--klevu-button-padding);
+  --klevu-button-font-size: var(--klkevu-body-s-size);
 }
 
 button {
@@ -15,10 +16,14 @@ button {
   transition: transform 100ms;
   border: 0;
   height: calc(var(--klevu-size-m) * 2);
-  font-size: var(--klevu-body-s-size);
+  font-size: var(--klevu-button-font-size);
   font-weight: var(--klevu-body-s-weight);
   padding: 0 calc(var(--padding) * 2);
   text-align: var(--klevu-button-text-align, center);
+}
+
+button klevu-typography {
+  --klevu-typography-font-size: var(--klevu-button-font-size);
 }
 
 button.sizeSmall {

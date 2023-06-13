@@ -23,6 +23,7 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-button](../klevu-button)
  - [klevu-chat-bubble](../klevu-chat-bubble)
  - [klevu-chat-layout](../klevu-chat-layout)
+ - [klevu-chat-messages](../klevu-chat-messages)
  - [klevu-checkbox](../klevu-checkbox)
  - [klevu-chip](../klevu-chip)
  - [klevu-cms-list](../klevu-cms-list)
@@ -33,6 +34,7 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-moi](../klevu-moi)
  - [klevu-popular-searches](../klevu-popular-searches)
  - [klevu-product](../klevu-product)
+ - [klevu-product-query](../klevu-product-query)
  - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-search-landing-page](../klevu-search-landing-page)
  - [klevu-slides](../klevu-slides)
@@ -47,6 +49,7 @@ graph TD;
   klevu-button --> klevu-typography
   klevu-chat-bubble --> klevu-typography
   klevu-chat-layout --> klevu-typography
+  klevu-chat-messages --> klevu-typography
   klevu-checkbox --> klevu-typography
   klevu-chip --> klevu-typography
   klevu-cms-list --> klevu-typography
@@ -57,6 +60,7 @@ graph TD;
   klevu-moi --> klevu-typography
   klevu-popular-searches --> klevu-typography
   klevu-product --> klevu-typography
+  klevu-product-query --> klevu-typography
   klevu-quicksearch --> klevu-typography
   klevu-search-landing-page --> klevu-typography
   klevu-slides --> klevu-typography
