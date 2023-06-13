@@ -16,10 +16,12 @@ const meta: Meta = {
 export default meta
 
 export const Query: StoryObj<KlevuProductQuery> = {
-  args: {},
+  args: {
+    url: "https://roolee.com/products/this-is-me-scoop-neck-dress",
+  },
   render: (args) => html`
     <klevu-init api-key="klevu-156934068344410779">
-      <klevu-product-query url="https://roolee.com/products/this-is-me-scoop-neck-dress"></klevu-product-query>
+      <klevu-product-query url=${ifDefined(args.url)}></klevu-product-query>
     </klevu-init>
   `,
 }
