@@ -24,6 +24,11 @@ export type MoiRequest = {
     id: string
     intent: string
   }
+  feedback?: {
+    messageId: string
+    thumbs?: "up" | "down"
+    reason?: string
+  }
 }
 
 export type MoiResponse = {
@@ -191,9 +196,6 @@ export async function startMoi({
     url,
   }
   const storedSession = await getStoredSession(ctx)
-
-  console.log(storedSession)
-
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
   if (storedSession?.context) {
@@ -202,7 +204,6 @@ export async function startMoi({
     menu = storedSession.menu
     genericOptions = storedSession.genericOptions
   } else {
-    console.log("query moi", mode, url)
     const result = await queryMoi(
       {
         context: {
@@ -273,6 +274,7 @@ export async function startMoi({
       this.menu = menu
 
       saveSession({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         context: ctx!,
         menu: this.menu,
         genericOptions: this.genericOptions,
@@ -284,6 +286,7 @@ export async function startMoi({
     clear() {
       this.messages = []
       saveSession({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         context: ctx!,
         menu: this.menu,
         genericOptions: this.genericOptions,
