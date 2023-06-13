@@ -30,7 +30,7 @@ export class KlevuProductQuery {
     await KlevuInit.ready()
 
     if (this.url == "") {
-      throw new Error("Klevu Product Query: url is required")
+      this.url = window.location.href
     }
   }
 
@@ -71,15 +71,20 @@ export class KlevuProductQuery {
   }
 
   #closeModal(e: CustomEvent<void>) {
+    // add back when full feedback is implemented
+    /*
     if (!this.showFeedback) {
       this.showFeedback = true
       e.preventDefault()
       return
     }
+    */
   }
 
   #start() {
     this.showFeedback = false
+    // todo - remove this when using registering
+    this.registered = true
     this.#modal?.openModal()
     this.el
       .closest("klevu-init")
@@ -94,7 +99,8 @@ export class KlevuProductQuery {
           mode: "PQA",
         })
         this.messages = this.session.messages
-        this.registered = this.messages.length > 1
+        // add this when registering works
+        //this.registered = this.messages.length > 1
       })
   }
 
