@@ -3,18 +3,13 @@ import {
   KlevuAllRecordQueries,
   KlevuPayload,
   KlevuApiRawResponse,
-  KlevuFetchResponse,
   KlevuSuggestionQuery,
   KlevuQueryResult,
-  KlevuFetchQueryResult,
 } from "../models/index.js"
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
 import { post } from "./fetch.js"
-import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
-import { fetchNextPage } from "./resultHelpers/fetchNextPage.js"
-import { FetchResultEvents } from "./resultHelpers/FetchResultEvents.js"
 import { KlevuResponseObject } from "./responseObject.js"
 
 export const klevuFetchCache = new KlevuFetchCache<
