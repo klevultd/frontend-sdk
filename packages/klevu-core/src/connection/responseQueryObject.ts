@@ -17,7 +17,7 @@ export class KlevuResponseQueryObject {
   responseObject: KlevuResponseObject
   query: KlevuQueryResult
   func: KlevuFetchFunctionReturnValue
-  hooks: Array<KlevuResultEventOnResult> = []
+  hooks: KlevuResultEventOnResult[] = []
   getSearchClickSendEvent?: KlevuFetchQueryResult["getSearchClickSendEvent"]
   getCategoryMerchandisingClickSendEvent?: KlevuFetchQueryResult["getCategoryMerchandisingClickSendEvent"]
   getRecommendationClickSendEvent?: KlevuFetchQueryResult["getRecommendationClickSendEvent"]
