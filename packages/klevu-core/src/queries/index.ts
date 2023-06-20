@@ -43,6 +43,11 @@ export type KlevuFetchFunctionParams = {
    * Which category merchandising was called
    */
   category?: string
+
+  /**
+   * If true modifier has sent a search event already
+   */
+  searchSendEventSent?: boolean
 }
 
 /**

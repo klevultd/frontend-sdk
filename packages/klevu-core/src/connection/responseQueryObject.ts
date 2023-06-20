@@ -11,18 +11,43 @@ import { KlevuResponseObject } from "./responseObject.js"
 import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
 
 /**
- * Result object for each query. Can be used to fetch more data, send events etc.
+ * Result object for each query. A storage for results. Can be used to fetch more data, send events etc.
  */
 export class KlevuResponseQueryObject {
+  /**
+   * Original request response that includes all queries
+   */
   responseObject: KlevuResponseObject
-  query: KlevuQueryResult
-  func: KlevuFetchFunctionReturnValue
-  hooks: KlevuResultEventOnResult[] = []
-  getSearchClickSendEvent?: KlevuFetchQueryResult["getSearchClickSendEvent"]
-  getCategoryMerchandisingClickSendEvent?: KlevuFetchQueryResult["getCategoryMerchandisingClickSendEvent"]
-  getRecommendationClickSendEvent?: KlevuFetchQueryResult["getRecommendationClickSendEvent"]
 
-  #searchViewSent = false
+  /**
+   * This query
+   */
+  query: KlevuQueryResult
+
+  /**
+   * Function used to create this query
+   */
+  func: KlevuFetchFunctionReturnValue
+
+  /**
+   * Hooks that can be used to listen for events
+   */
+  hooks: KlevuResultEventOnResult[] = []
+
+  /**
+   * When query is search this is available. It is used to send search click events
+   */
+  getSearchClickSendEvent?: KlevuFetchQueryResult["getSearchClickSendEvent"]
+
+  /**
+   * When query is categoryMerchandising this is available. It is used to send categoryMerchandising click events
+   */
+  getCategoryMerchandisingClickSendEvent?: KlevuFetchQueryResult["getCategoryMerchandisingClickSendEvent"]
+
+  /**
+   * When query is recommendation this is available. It is used to send recommendation click events
+   */
+  getRecommendationClickSendEvent?: KlevuFetchQueryResult["getRecommendationClickSendEvent"]
 
   constructor(
     responseObject: KlevuResponseObject,
@@ -35,26 +60,47 @@ export class KlevuResponseQueryObject {
     this.initResultFunctions()
   }
 
+  /**
+   * All filters related to this query
+   */
   get filters() {
     return this.query.filters
   }
 
+  /**
+   * Id if the query
+   */
   get id() {
     return this.query.id
   }
 
+  /**
+   * Meta data of the query
+   */
   get meta() {
     return this.query.meta
   }
 
+  /**
+   * Records of the query
+   */
   get records() {
     return this.query.records
   }
 
+  /**
+   * Special parameters that are saved to query
+   */
   get functionParams() {
     return this.func.params
   }
 
+  /**
+   * Fetches page of results. If pageIndex is not defined it will fetch next page.
+   *
+   * @param params
+   * @returns
+   */
   async getPage(params?: {
     /**
      * Limit number of results for next query. By default this is automatically calculated from previous result
@@ -77,22 +123,24 @@ export class KlevuResponseQueryObject {
       return undefined
     }
 
-    const prevQuery = newFunc.queries[0]
+    for (let i = 0; i < newFunc.queries.length; i++) {
+      const prevQuery = newFunc.queries[i]
 
-    if (!prevQuery.settings) {
-      prevQuery.settings = {}
+      if (!prevQuery.settings) {
+        prevQuery.settings = {}
+      }
+
+      if (params?.pageIndex !== undefined) {
+        prevQuery.settings.offset =
+          prevQueryResponse.meta.noOfResults * params.pageIndex
+      } else {
+        prevQuery.settings.offset =
+          prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
+      }
+      prevQuery.settings.limit = params?.limit ?? prevQuery.settings?.limit ?? 5
+
+      newFunc.queries[i] = prevQuery
     }
-
-    if (params?.pageIndex !== undefined) {
-      prevQuery.settings.offset =
-        prevQueryResponse.meta.noOfResults * params.pageIndex
-    } else {
-      prevQuery.settings.offset =
-        prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
-    }
-    prevQuery.settings.limit = params?.limit ?? prevQuery.settings?.limit ?? 5
-
-    newFunc.queries[0] = prevQuery
 
     // add previous filters with manager
     if (params?.filterManager) {
@@ -110,6 +158,10 @@ export class KlevuResponseQueryObject {
     return await KlevuFetch(removeListFilters(newFunc, prevQueryResponse))
   }
 
+  /**
+   *
+   * @returns true if there are more pages to fetch
+   */
   hasNextPage() {
     return (
       this.query.meta.totalResultsFound <=
@@ -117,23 +169,28 @@ export class KlevuResponseQueryObject {
     )
   }
 
+  /**
+   *
+   * @returns total number of pages
+   */
   getTotalPages() {
     return Math.ceil(this.query.meta.totalResultsFound / this.query.meta.offset)
   }
 
-  initResultFunctions() {
+  private initResultFunctions() {
     switch (this.func?.klevuFunctionId) {
       case "search": {
-        this.getSearchClickSendEvent = function (
+        this.getSearchClickSendEvent = function ({
           productId,
-          variantId?,
-          override?
-        ) {
+          variantId,
+          autoSendViewEvent = true,
+          override,
+        }) {
           if (!this.func) {
             return
           }
 
-          if (!this.#searchViewSent) {
+          if (autoSendViewEvent && !this.func.params?.searchSendEventSent) {
             KlevuEvents.search({
               term: this.query.meta.searchedTerm,
               totalResults: this.query.meta.noOfResults,
@@ -141,7 +198,10 @@ export class KlevuResponseQueryObject {
               activeFilters: extractActiveFilters(this.query),
               override,
             })
-            this.#searchViewSent = true
+            if (!this.func.params) {
+              this.func.params = {}
+            }
+            this.func.params.searchSendEventSent = true
           }
 
           const record = [
@@ -168,12 +228,12 @@ export class KlevuResponseQueryObject {
       }
 
       case "categoryMerchandising": {
-        this.getCategoryMerchandisingClickSendEvent = function (
+        this.getCategoryMerchandisingClickSendEvent = function ({
           productId,
           categoryTitle,
-          variantId?,
-          override?
-        ) {
+          variantId,
+          override,
+        }) {
           if (!this.func) {
             return
           }
@@ -227,11 +287,11 @@ export class KlevuResponseQueryObject {
       }
 
       case "kmcRecommendation": {
-        this.getRecommendationClickSendEvent = function (
+        this.getRecommendationClickSendEvent = function ({
           productId,
-          variantId?,
-          override?
-        ) {
+          variantId,
+          override,
+        }) {
           if (!this.func) {
             return
           }
