@@ -23,7 +23,9 @@ test("Kleviyo modifier should work", async () => {
   const query = result.queriesById("test")
   expect(query).toBeDefined()
   expect(query.getSearchClickSendEvent).toBeDefined()
-  query?.getSearchClickSendEvent?.(query.records[0].id)
+  query?.getSearchClickSendEvent?.({
+    productId: query.records[0].id,
+  })
 
   // wait for a second for annotations to be fetched
   await new Promise((resolve) => setTimeout(resolve, 1000))

@@ -37,6 +37,11 @@ export function sendSearchEvent(
         override,
       })
 
+      if (!f.params) {
+        f.params = {}
+      }
+      f.params.searchSendEventSent = true
+
       return res
     },
   }

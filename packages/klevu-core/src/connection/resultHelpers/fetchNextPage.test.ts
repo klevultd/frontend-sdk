@@ -119,14 +119,14 @@ test("Next page analytics test", async () => {
       })
     })
 
-  query?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -138,14 +138,14 @@ test("Next page analytics test", async () => {
     pageIndex: 1,
   })
   const query2 = resultPage2?.queriesById("categoryMerchandising")
-  query2?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query2?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(2)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -157,14 +157,14 @@ test("Next page analytics test", async () => {
     pageIndex: 2,
   })
   const query3 = resultPage3?.queriesById("categoryMerchandising")
-  query3?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query3?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(3)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -172,24 +172,24 @@ test("Next page analytics test", async () => {
   )
 
   // Redo second analytics
-  query2?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query2?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   // Redo first analytics send
-  query?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(5)
 })

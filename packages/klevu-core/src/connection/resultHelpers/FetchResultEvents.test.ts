@@ -36,7 +36,10 @@ test("Search click event should be defined", async () => {
 
   const product = query!.records[0]
 
-  query?.getSearchClickSendEvent?.(product.id, product.itemGroupId)
+  query?.getSearchClickSendEvent?.({
+    productId: product.id,
+    variantId: product.itemGroupId,
+  })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
@@ -62,10 +65,10 @@ test("Search click should send a search event on first time, but not on second t
       })
     })
 
-  query?.getSearchClickSendEvent?.(
-    query.records[0].id,
-    query.records[0].itemGroupId
-  )
+  query?.getSearchClickSendEvent?.({
+    productId: query.records[0].id,
+    variantId: query.records[0].itemGroupId,
+  })
 
   expect(getSpySuccess).toHaveBeenCalledWith(
     expect.stringContaining("analytics/n-search")
@@ -75,10 +78,10 @@ test("Search click should send a search event on first time, but not on second t
   )
   expect(getSpySuccess).toHaveBeenCalledTimes(2)
 
-  query?.getSearchClickSendEvent?.(
-    query.records[0].id,
-    query.records[0].itemGroupId
-  )
+  query?.getSearchClickSendEvent?.({
+    productId: query.records[0].id,
+    variantId: query.records[0].itemGroupId,
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(3)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -98,11 +101,11 @@ test("Category merchandising click event", async () => {
 
   const product = query!.records[0]
 
-  query?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId
-  )
+  query?.getCategoryMerchandisingClickSendEvent?.({
+    categoryTitle: "Women",
+    productId: product.id,
+    variantId: product.itemGroupId,
+  })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
@@ -135,7 +138,10 @@ test.skip("Recommendation click event", async () => {
 
   const product = query!.records[0]
 
-  query?.getRecommendationClickSendEvent?.(product.id, product.itemGroupId)
+  query?.getRecommendationClickSendEvent?.({
+    productId: product.id,
+    variantId: product.itemGroupId,
+  })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
@@ -164,14 +170,14 @@ test("Override user IP for request", async () => {
       })
     })
 
-  query?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -212,14 +218,14 @@ test("Merchandising call has correct filters set", async () => {
     })
 
   const product = query!.records[0]
-  query?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -246,14 +252,14 @@ test("Filters should not be set if there are no filters", async () => {
     })
 
   const product = query!.records[0]
-  query?.getCategoryMerchandisingClickSendEvent?.(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.getCategoryMerchandisingClickSendEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -278,9 +284,9 @@ test("Hooks should be called", (done) => {
       }
     })
 
-    query?.getSearchClickSendEvent?.(
-      query.records[0].id,
-      query.records[0].itemGroupId
-    )
+    query?.getSearchClickSendEvent?.({
+      productId: query.records[0].id,
+      variantId: query.records[0].itemGroupId,
+    })
   })
 })

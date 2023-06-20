@@ -23,12 +23,10 @@ test("Sending merchandising event", async () => {
     )
   )
 
-  result
-    .queriesById("test")
-    ?.getCategoryMerchandisingClickSendEvent?.(
-      result.queriesById("test")?.records[0].id ?? "",
-      "Hoodies"
-    )
+  result.queriesById("test")?.getCategoryMerchandisingClickSendEvent?.({
+    productId: result.queriesById("test")?.records[0].id ?? "",
+    categoryTitle: "Hoodies",
+  })
 
   expect(result.queriesById("test")).toBeDefined()
 })
