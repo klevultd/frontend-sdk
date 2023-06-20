@@ -1,32 +1,28 @@
 import { KlevuEvents } from "../events/KlevuEvents.js"
 import { KlevuQueryResult } from "../models/KlevuApiRawResponse.js"
-import {
-  KlevuFetchQueryResult,
-  KlevuNextFunc,
-} from "../models/KlevuFetchResponse.js"
+import { KlevuFetchQueryResult } from "../models/KlevuFetchResponse.js"
 import { KlevuResultEventOnResult } from "../models/KlevuResultEvent.js"
+import { applyFilterWithManager } from "../modifiers/index.js"
 import { KlevuFetchFunctionReturnValue } from "../queries/index.js"
+import { FilterManager } from "../store/filterManager.js"
 import { extractActiveFilters } from "../utils/extractActiveFilters.js"
+import { KlevuFetch, removeListFilters } from "./klevuFetch.js"
 import { KlevuResponseObject } from "./responseObject.js"
-import { fetchNextPage } from "./resultHelpers/fetchNextPage.js"
 import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
 
+/**
+ * Result object for each query. Can be used to fetch more data, send events etc.
+ */
 export class KlevuResponseQueryObject {
   responseObject: KlevuResponseObject
   query: KlevuQueryResult
-  filters: KlevuQueryResult["filters"]
-  meta: KlevuQueryResult["meta"]
-  records: KlevuQueryResult["records"]
-  id: string
   func: KlevuFetchFunctionReturnValue
-  functionParams?: KlevuFetchFunctionReturnValue["params"]
   hooks: Array<KlevuResultEventOnResult> = []
-  next?: KlevuNextFunc
-  getPage?: KlevuNextFunc
   getSearchClickSendEvent?: KlevuFetchQueryResult["getSearchClickSendEvent"]
   getCategoryMerchandisingClickSendEvent?: KlevuFetchQueryResult["getCategoryMerchandisingClickSendEvent"]
   getRecommendationClickSendEvent?: KlevuFetchQueryResult["getRecommendationClickSendEvent"]
-  searchViewSent = false
+
+  #searchViewSent = false
 
   constructor(
     responseObject: KlevuResponseObject,
@@ -35,26 +31,97 @@ export class KlevuResponseQueryObject {
   ) {
     this.responseObject = responseObject
     this.query = query
-    this.functionParams = func?.params
     this.func = func
-    this.filters = query.filters
-    this.meta = query.meta
-    this.records = query.records
-    this.id = query.id
     this.initResultFunctions()
   }
 
-  initResultFunctions() {
-    this.next = fetchNextPage({
-      response: this.responseObject.apiResponse,
-      func: this.func,
-    })
-    this.getPage = fetchNextPage({
-      response: this.responseObject.apiResponse,
-      func: this.func,
-      ignoreLastPageUndefined: true,
-    })
+  get filters() {
+    return this.query.filters
+  }
 
+  get id() {
+    return this.query.id
+  }
+
+  get meta() {
+    return this.query.meta
+  }
+
+  get records() {
+    return this.query.records
+  }
+
+  get functionParams() {
+    return this.func.params
+  }
+
+  async getPage(params?: {
+    /**
+     * Limit number of results for next query. By default this is automatically calculated from previous result
+     */
+    limit?: number
+    /**
+     * Filter manager to apply for next function
+     */
+    filterManager?: FilterManager
+
+    /**
+     * Use page index to load certain page instead of next available. 0 is first page
+     */
+    pageIndex?: number
+  }): Promise<KlevuResponseObject | undefined> {
+    const newFunc = { ...this.func }
+    const prevQueryResponse = this.query
+
+    if (!newFunc.queries) {
+      return undefined
+    }
+
+    const prevQuery = newFunc.queries[0]
+
+    if (!prevQuery.settings) {
+      prevQuery.settings = {}
+    }
+
+    if (params?.pageIndex !== undefined) {
+      prevQuery.settings.offset =
+        prevQueryResponse.meta.noOfResults * params.pageIndex
+    } else {
+      prevQuery.settings.offset =
+        prevQueryResponse.meta.noOfResults + prevQueryResponse.meta.offset
+    }
+    prevQuery.settings.limit = params?.limit ?? prevQuery.settings?.limit ?? 5
+
+    newFunc.queries[0] = prevQuery
+
+    // add previous filters with manager
+    if (params?.filterManager) {
+      if (!newFunc.modifiers) {
+        newFunc.modifiers = []
+      }
+      newFunc.modifiers.push(applyFilterWithManager(params.filterManager))
+    }
+
+    newFunc.previousResultRecords = [
+      ...(this.func.previousResultRecords ?? []),
+      ...prevQueryResponse.records,
+    ]
+
+    return await KlevuFetch(removeListFilters(newFunc, prevQueryResponse))
+  }
+
+  hasNextPage() {
+    return (
+      this.query.meta.totalResultsFound <=
+      this.query.meta.offset + this.query.meta.noOfResults
+    )
+  }
+
+  getTotalPages() {
+    return Math.ceil(this.query.meta.totalResultsFound / this.query.meta.offset)
+  }
+
+  initResultFunctions() {
     switch (this.func?.klevuFunctionId) {
       case "search": {
         this.getSearchClickSendEvent = function (
@@ -66,7 +133,7 @@ export class KlevuResponseQueryObject {
             return
           }
 
-          if (!this.searchViewSent) {
+          if (!this.#searchViewSent) {
             KlevuEvents.search({
               term: this.query.meta.searchedTerm,
               totalResults: this.query.meta.noOfResults,
@@ -74,7 +141,7 @@ export class KlevuResponseQueryObject {
               activeFilters: extractActiveFilters(this.query),
               override,
             })
-            this.searchViewSent = true
+            this.#searchViewSent = true
           }
 
           const record = [

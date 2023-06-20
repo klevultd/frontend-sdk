@@ -33,25 +33,25 @@ test("Next page pagination test", async () => {
   const searchResult = result.queriesById("search")
 
   expect(searchResult?.records.length).toBe(2)
-  expect(searchResult?.next).toBeDefined()
+  expect(searchResult?.getPage).toBeDefined()
   expect(searchResult?.filters?.length).toBeGreaterThan(0)
   expect(searchResult?.meta.offset).toBe(0 * limit)
   expect(searchResult?.meta.noOfResults).toBe(limit)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const nextResult = await searchResult?.next!()
+  const nextResult = await searchResult?.getPage()
   const nextSearchResult = nextResult?.queriesById("search")
 
   const prevFirstId = searchResult?.records[0].id
   const nextFirstId = nextSearchResult?.records[0].id
   expect(nextFirstId).not.toBe(prevFirstId)
-  expect(nextSearchResult?.next).toBeDefined()
+  expect(nextSearchResult?.getPage).toBeDefined()
   expect(nextSearchResult?.filters?.length).toBeGreaterThan(0)
   expect(nextSearchResult?.meta.offset).toBe(1 * limit)
   expect(nextSearchResult?.meta.noOfResults).toBe(limit)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const nextNextResult = await nextSearchResult?.next!()
+  const nextNextResult = await nextSearchResult?.getPage()
   const nextNextSearchResult = nextNextResult?.queriesById("search")
   const nextNextFirstId = nextNextSearchResult?.records[0].id
   expect(nextNextFirstId).not.toBe(prevFirstId)
