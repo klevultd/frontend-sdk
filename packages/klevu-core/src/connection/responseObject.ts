@@ -32,7 +32,7 @@ export class KlevuResponseObject {
   #buildQueryObjects() {
     for (const q of this.apiResponse.queryResults ?? []) {
       const func = this.#functions.find((f) =>
-        f.queries?.some((qu) => q.id == qu.id)
+        f.queries?.some((qu) => q.id == qu.id || q.id == `${qu.id}-fallback`)
       )
       if (func) {
         this.#queryObjects[q.id] = new KlevuResponseQueryObject(this, q, func)
