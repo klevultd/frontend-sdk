@@ -27,11 +27,11 @@ test("Fetch recently visited", async () => {
   const query = result.queriesById("test")
 
   expect(query).toBeDefined()
-  expect(query?.getSearchClickSendEvent).toBeDefined()
+  expect(query?.searchClickEvent).toBeDefined()
 
   const product = query!.records[0]
 
-  query?.getSearchClickSendEvent?.({
+  query?.searchClickEvent?.({
     productId: product.id,
     variantId: product.itemGroupId,
   })

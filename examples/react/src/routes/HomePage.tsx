@@ -1,8 +1,8 @@
 import {
   KlevuFetch,
   KlevuRecord,
+  KlevuResponseQueryObject,
   kmcRecommendation,
-  personalisation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Container, Typography } from "@mui/material"
@@ -10,13 +10,15 @@ import { Fragment, useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { config } from "../config"
 
-let eventClick
-let eventClickNoPersonalisation
-
 export function HomePage() {
   const [trendingRecs, setTrendingRecs] = useState<KlevuRecord[]>([])
   const [trendingRecsNoPersonlisation, setTrendingRecsNoPersonlisation] =
     useState<KlevuRecord[]>([])
+  const [trendingResult, setTrendingResult] = useState<
+    KlevuResponseQueryObject | undefined
+  >()
+  const [trendingResultNoPersonalisation, setTrendingResultNoPersonalisation] =
+    useState<KlevuResponseQueryObject | undefined>()
 
   const fetchData = async () => {
     const result = await KlevuFetch(
@@ -40,13 +42,10 @@ export function HomePage() {
       )
     )
 
-    eventClick = result
-      .queriesById("trendingrecs")
-      ?.getRecommendationClickSendEvent?.()
-
-    eventClickNoPersonalisation = result
-      .queriesById("trendingrecs-nopersonalisation")
-      ?.getRecommendationClickSendEvent?.()
+    setTrendingResult(result.queriesById("trendingrecs"))
+    setTrendingResultNoPersonalisation(
+      result.queriesById("trendingrecs-nopersonalisation")
+    )
 
     setTrendingRecs(result.queriesById("trendingrecs")?.records)
     setTrendingRecsNoPersonlisation(
@@ -79,13 +78,23 @@ export function HomePage() {
         <RecommendationBanner
           products={trendingRecs}
           title="Trending recommendations using KMC builder personalised"
-          productClick={eventClick}
+          productClick={(productId, variantId) => {
+            trendingResult.recommendationClickEvent?.({
+              productId,
+              variantId,
+            })
+          }}
         />
 
         <RecommendationBanner
           products={trendingRecsNoPersonlisation}
           title="Trending recommendations using KMC builder"
-          productClick={eventClickNoPersonalisation}
+          productClick={(productId, variantId) => {
+            trendingResultNoPersonalisation.recommendationClickEvent?.({
+              productId,
+              variantId,
+            })
+          }}
         />
       </Container>
     </Fragment>

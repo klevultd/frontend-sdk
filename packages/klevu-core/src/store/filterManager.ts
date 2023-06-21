@@ -12,7 +12,7 @@ type FilterManagerState = {
   filters: FilterManagerFilters[]
 }
 
-type FilterManagerFilters =
+export type FilterManagerFilters =
   | KlevuFilterResultOptions
   | KlevuFilterResultSlider
   | KlevuFilterResultRating

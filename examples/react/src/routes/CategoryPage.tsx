@@ -1,15 +1,12 @@
 import type {
-  KlevuFilterResultOptions,
-  KlevuFilterResultSlider,
-  KlevuNextFunc,
   KlevuRecord,
-  KlevuResultEvent,
+  KlevuResponseQueryObject,
+  FilterManagerFilters,
 } from "@klevu/core"
 import {
   abTest,
   applyFilterWithManager,
   categoryMerchandising,
-  debug,
   FilterManager,
   KlevuDomEvents,
   KlevuFetch,
@@ -19,7 +16,6 @@ import {
   listFilters,
   sendMerchandisingViewEvent,
   sendRecommendationViewEvent,
-  overrideSettings,
 } from "@klevu/core"
 import { FilterAlt } from "@mui/icons-material"
 import {
@@ -44,13 +40,6 @@ import { RecommendationBanner } from "../components/recommendationBanner"
 import { config } from "../config"
 
 const manager = new FilterManager()
-let nextFunc: KlevuNextFunc
-let productClickManager: ReturnType<
-  KlevuResultEvent["getCategoryMerchandisingClickSendEvent"]
->
-let recommendationClickManager: ReturnType<
-  KlevuResultEvent["getRecommendationClickSendEvent"]
->
 
 // A custom hook that builds on useLocation to parse
 // the query string for you.
@@ -66,12 +55,7 @@ export function CategoryPage() {
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
-  const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
-    manager.options
-  )
-  const [sliders, setSliders] = useState<KlevuFilterResultSlider[]>(
-    manager.sliders
-  )
+  const [filters, setFilters] = useState<FilterManagerFilters[]>([])
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [recommendationProducts, setRecommendationProducts] = useState<
     KlevuRecord[]
@@ -79,6 +63,12 @@ export function CategoryPage() {
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
   const [itemsOnPage, setItemsOnPage] = useState(36)
+  const [searchResponse, setSearchResponse] = useState<
+    KlevuResponseQueryObject | undefined
+  >(undefined)
+  const [recommendationResponse, setRecommendationResponse] = useState<
+    KlevuResponseQueryObject | undefined
+  >(undefined)
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -92,7 +82,7 @@ export function CategoryPage() {
           id: "search",
           limit: itemsOnPage,
           sort: sorting,
-          campaignForCatNav: query.get("campaignId")
+          campaignForCatNav: query.get("campaignId"),
         },
         listFilters({
           include: ["color", "", "size", "designer"],
@@ -106,8 +96,7 @@ export function CategoryPage() {
         }),
         applyFilterWithManager(manager),
         sendMerchandisingViewEvent(params.id),
-        abTest(),
-        debug()
+        abTest()
       ),
       kmcRecommendation(
         config.categoryPageRecommendationId,
@@ -125,38 +114,30 @@ export function CategoryPage() {
       return
     }
 
-    productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
+    setSearchResponse(searchResult)
+    setRecommendationResponse(recommendationResult)
 
-    setShowMore(Boolean(searchResult.next))
-    nextFunc = searchResult.next
-    setOptions(manager.options)
-    setSliders(manager.sliders)
+    setShowMore(searchResult.hasNextPage())
+    setFilters(manager.filters)
     setProducts(searchResult.records ?? [])
-
-    if (recommendationResult) {
-      recommendationClickManager =
-        recommendationResult.getRecommendationClickSendEvent()
-
-      setRecommendationProducts(recommendationResult.records ?? [])
-    }
+    setRecommendationProducts(recommendationResult?.records ?? [])
   }, [sorting, params.id, itemsOnPage])
 
   const fetchMore = async () => {
-    const nextRes = await nextFunc({
+    const nextResponse = await searchResponse.getPage({
       filterManager: manager,
     })
 
-    const nextSearchResult = nextRes.queriesById("search")
+    const nextSearchResult = nextResponse.queriesById("search")
 
     setProducts([...products, ...(nextSearchResult?.records ?? [])])
+    setSearchResponse(nextSearchResult)
 
-    setShowMore(Boolean(nextSearchResult?.next))
-    nextFunc = nextSearchResult?.next
+    setShowMore(nextSearchResult.hasNextPage())
   }
 
   const handleFilterUpdate = () => {
-    setOptions(manager.options)
-    setSliders(manager.sliders)
+    setFilters(manager.filters)
     initialFetch()
   }
 
@@ -188,14 +169,18 @@ export function CategoryPage() {
         open={open}
         onClose={() => setOpen(false)}
         manager={manager}
-        options={options}
-        sliders={sliders}
+        filters={filters}
       />
 
       <RecommendationBanner
         products={recommendationProducts}
         title="Category product recommendations"
-        productClick={recommendationClickManager}
+        productClick={(productId, variantId, product, index) => {
+          recommendationResponse.recommendationClickEvent?.({
+            productId,
+            variantId,
+          })
+        }}
       />
 
       <div id="main">
@@ -270,8 +255,13 @@ export function CategoryPage() {
                 }}
                 product={p}
                 onClick={(event) => {
+                  console.log(searchResponse.categoryMerchandisingClickEvent)
+                  searchResponse.categoryMerchandisingClickEvent?.({
+                    productId: p.id,
+                    variantId: p.itemGroupId,
+                    categoryTitle: title,
+                  })
                   navigate(`/products/${p.itemGroupId}/${p.id}`)
-                  productClickManager(p.id, params.id)
                   event.preventDefault()
                   return false
                 }}

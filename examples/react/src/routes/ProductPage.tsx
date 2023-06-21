@@ -8,6 +8,7 @@ import {
   kmcRecommendation,
   sendRecommendationViewEvent,
   exclude,
+  KlevuResponseQueryObject,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCallback, useEffect, useState, Fragment } from "react"
@@ -19,12 +20,13 @@ import { LoadingIndicator } from "../components/loadingIndicator"
 import { config } from "../config"
 import { InspireMe } from "../components/inspireMe"
 
-let alsoviewedClick
-
 export function ProductPage() {
   const [product, setProduct] = useState<KlevuRecord>()
   const [similar, setSimilar] = useState<KlevuRecord[]>([])
   const [alsoviewed, setAlsoBoought] = useState<KlevuRecord[]>([])
+  const [alsoResult, setAlsoResult] = useState<
+    KlevuResponseQueryObject | undefined
+  >()
   const params = useParams()
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
@@ -50,8 +52,7 @@ export function ProductPage() {
     setProduct(product)
     setSimilar(sim?.records)
     setAlsoBoought(also?.records)
-
-    alsoviewedClick = also.getRecommendationClickSendEvent?.()
+    setAlsoResult(also)
   }, [params.id])
 
   useEffect(() => {
@@ -146,22 +147,28 @@ export function ProductPage() {
           title="Similar products"
           productClick={(productId, variantId, product, index) => {
             // Example how to create custom recommendation event
-            KlevuEvents.recommendationClick(
-              {
+            KlevuEvents.recommendationClick({
+              product,
+              productIndexInList: index,
+              recommendationMetadata: {
                 recsKey: "product-similar",
                 logic: KMCRecommendationLogic.Similar,
                 title: "Similar products",
               },
-              product,
-              index
-            )
+              variantId,
+            })
           }}
         />
 
         <RecommendationBanner
           products={alsoviewed}
           title="Also viewed KMC recommendation"
-          productClick={alsoviewedClick}
+          productClick={(productId, variantId, product, index) => {
+            alsoResult.recommendationClickEvent?.({
+              productId,
+              variantId,
+            })
+          }}
         />
       </div>
     </Container>

@@ -47,7 +47,7 @@ export class KlevuEvents {
       amount: number
       product: Partial<KlevuRecord>
       variantId?: string
-      override: Partial<V1CheckedOutProductsEvent>
+      override?: Partial<V1CheckedOutProductsEvent>
     }>
   }) {
     for (const item of items) {
@@ -70,7 +70,7 @@ export class KlevuEvents {
 
       KlevuEventV1CheckedOutProducts({
         ...data,
-        ...item.override,
+        ...(item.override ?? {}),
       })
     }
   }

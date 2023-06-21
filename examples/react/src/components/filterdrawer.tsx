@@ -14,18 +14,13 @@ import {
 } from "@mui/material"
 import React from "react"
 import debounce from "lodash.debounce"
-import {
-  FilterManager,
-  KlevuFilterResultOptions,
-  KlevuFilterResultSlider,
-} from "@klevu/core"
+import { FilterManager, FilterManagerFilters } from "@klevu/core"
 
 const drawerWidth = 240
 
 export function FilterDrawer(props: {
   open: boolean
-  options: KlevuFilterResultOptions[]
-  sliders: KlevuFilterResultSlider[]
+  filters: FilterManagerFilters[]
   manager: FilterManager
   onClose: () => void
 }) {
@@ -61,69 +56,74 @@ export function FilterDrawer(props: {
         Clear selections
       </Button>
       <Divider />
-      {props.options.map((o, i) => (
-        <React.Fragment key={i}>
-          <Typography
-            variant="h6"
-            style={{
-              margin: "0 12px",
-            }}
-          >
-            {o.label}
-          </Typography>
-          <List key={i}>
-            {o.options.map((o2, i2) => (
-              <ListItemButton
-                key={i2}
-                role={undefined}
-                onClick={() => {
-                  props.manager.toggleOption(o.key, o2.name)
+      {props.filters.map((filter, i) => {
+        if (FilterManager.isKlevuFilterResultOptions(filter)) {
+          return (
+            <React.Fragment key={i}>
+              <Typography
+                variant="h6"
+                style={{
+                  margin: "0 12px",
                 }}
-                dense
               >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={o2.selected == true}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemText primary={`${o2.name} (${o2.count})`} />
-                {o.key === "color" ? (
-                  <div
-                    style={{
-                      height: "16px",
-                      width: "16px",
-                      border: "1px solid gray",
-                      backgroundColor: o2.name,
-                      marginLeft: "8px",
+                {filter.label}
+              </Typography>
+              <List key={i}>
+                {filter.options.map((o2, i2) => (
+                  <ListItemButton
+                    key={i2}
+                    role={undefined}
+                    onClick={() => {
+                      props.manager.toggleOption(filter.key, o2.name)
                     }}
-                  ></div>
-                ) : null}
-              </ListItemButton>
-            ))}
-          </List>
-        </React.Fragment>
-      ))}
-      {props.sliders.map((s, i) => (
-        <React.Fragment key={i}>
-          <Typography variant="h6" style={{ margin: "0 12px" }}>
-            {s.label}
-          </Typography>
-          <div style={{ margin: "24px" }}>
-            <Slider
-              defaultValue={[
-                parseInt(s.start || s.min),
-                parseInt(s.end || s.max),
-              ]}
-              max={parseInt(s.max)}
-              min={parseInt(s.min)}
-              onChange={debouncedSlider(s.key)}
-              valueLabelDisplay="on"
-            />
-          </div>
-        </React.Fragment>
-      ))}
+                    dense
+                  >
+                    <ListItemIcon>
+                      <Checkbox
+                        edge="start"
+                        checked={o2.selected == true}
+                        disableRipple
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={`${o2.name} (${o2.count})`} />
+                    {filter.key === "color" ? (
+                      <div
+                        style={{
+                          height: "16px",
+                          width: "16px",
+                          border: "1px solid gray",
+                          backgroundColor: o2.name,
+                          marginLeft: "8px",
+                        }}
+                      ></div>
+                    ) : null}
+                  </ListItemButton>
+                ))}
+              </List>
+            </React.Fragment>
+          )
+        } else if (FilterManager.isKlevuFilterResultSlider(filter)) {
+          return (
+            <React.Fragment key={i}>
+              <Typography variant="h6" style={{ margin: "0 12px" }}>
+                {filter.label}
+              </Typography>
+              <div style={{ margin: "24px" }}>
+                <Slider
+                  defaultValue={[
+                    parseInt(filter.start || filter.min),
+                    parseInt(filter.end || filter.max),
+                  ]}
+                  max={parseInt(filter.max)}
+                  min={parseInt(filter.min)}
+                  onChange={debouncedSlider(filter.key)}
+                  valueLabelDisplay="on"
+                />
+              </div>
+            </React.Fragment>
+          )
+        }
+      })}
     </Drawer>
   )
 }

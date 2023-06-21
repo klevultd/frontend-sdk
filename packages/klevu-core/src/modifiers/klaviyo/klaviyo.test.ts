@@ -22,8 +22,8 @@ test("Kleviyo modifier should work", async () => {
 
   const query = result.queriesById("test")
   expect(query).toBeDefined()
-  expect(query.getSearchClickSendEvent).toBeDefined()
-  query?.getSearchClickSendEvent?.({
+  expect(query.searchClickEvent).toBeDefined()
+  query?.searchClickEvent?.({
     productId: query.records[0].id,
   })
 

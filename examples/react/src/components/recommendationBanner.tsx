@@ -53,7 +53,7 @@ export function RecommendationBanner(props: {
       >
         {props.products.map((p, index) => (
           <SwiperSlide
-            key={p.id}
+            key={index}
             style={{
               display: "flex",
               justifyContent: "center",
