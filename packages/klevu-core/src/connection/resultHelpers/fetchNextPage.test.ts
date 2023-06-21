@@ -106,7 +106,7 @@ test("Next page analytics test", async () => {
   const query = result.queriesById("categoryMerchandising")
 
   expect(query).toBeDefined()
-  expect(query?.getCategoryMerchandisingClickSendEvent).toBeDefined()
+  expect(query?.categoryMerchandisingClickEvent).toBeDefined()
   const product = query!.records[0]
 
   const getSpySuccess = jest
@@ -119,7 +119,7 @@ test("Next page analytics test", async () => {
       })
     })
 
-  query?.getCategoryMerchandisingClickSendEvent?.({
+  query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
     variantId: product.itemGroupId,
@@ -138,7 +138,7 @@ test("Next page analytics test", async () => {
     pageIndex: 1,
   })
   const query2 = resultPage2?.queriesById("categoryMerchandising")
-  query2?.getCategoryMerchandisingClickSendEvent?.({
+  query2?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
     variantId: product.itemGroupId,
@@ -157,7 +157,7 @@ test("Next page analytics test", async () => {
     pageIndex: 2,
   })
   const query3 = resultPage3?.queriesById("categoryMerchandising")
-  query3?.getCategoryMerchandisingClickSendEvent?.({
+  query3?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
     variantId: product.itemGroupId,
@@ -172,7 +172,7 @@ test("Next page analytics test", async () => {
   )
 
   // Redo second analytics
-  query2?.getCategoryMerchandisingClickSendEvent?.({
+  query2?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
     variantId: product.itemGroupId,
@@ -182,7 +182,7 @@ test("Next page analytics test", async () => {
   })
 
   // Redo first analytics send
-  query?.getCategoryMerchandisingClickSendEvent?.({
+  query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
     variantId: product.itemGroupId,

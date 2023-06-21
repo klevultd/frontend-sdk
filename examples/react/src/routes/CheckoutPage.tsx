@@ -2,8 +2,8 @@ import {
   KlevuEvents,
   KlevuFetch,
   KlevuRecord,
+  KlevuResponseQueryObject,
   kmcRecommendation,
-  personalisation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
@@ -14,16 +14,19 @@ import { useSnackbar } from "notistack"
 import { useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { config } from "../config"
-
-let eventClick
+import { useNavigate } from "react-router-dom"
 
 export function CheckoutPage() {
   const [alsoBoughtProducts, setAlsoBoughtProducts] = useState<KlevuRecord[]>(
     []
   )
+  const [alsoBoughtResult, setAlsoBoughtResult] = useState<
+    KlevuResponseQueryObject | undefined
+  >()
 
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
+  const navigate = useNavigate()
 
   const fetchData = async () => {
     const result = await KlevuFetch(
@@ -37,9 +40,7 @@ export function CheckoutPage() {
       )
     )
 
-    eventClick = result
-      .queriesById("alsobought")
-      .getRecommendationClickSendEvent()
+    setAlsoBoughtResult(result.queriesById("alsobought"))
     setAlsoBoughtProducts(result.queriesById("alsobought").records)
   }
 
@@ -56,7 +57,7 @@ export function CheckoutPage() {
         product: data[0],
       }
     })
-    KlevuEvents.buy(toBuy)
+    KlevuEvents.buy({ items: toBuy })
 
     enqueueSnackbar("Items bought!", {
       variant: "info",
@@ -115,7 +116,12 @@ export function CheckoutPage() {
       <RecommendationBanner
         products={alsoBoughtProducts}
         title="Also bought together KMC recommendation"
-        productClick={eventClick}
+        productClick={(productId, variantId) => {
+          alsoBoughtResult.recommendationClickEvent?.({
+            productId,
+            variantId,
+          })
+        }}
       />
     </Container>
   )

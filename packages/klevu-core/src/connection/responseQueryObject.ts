@@ -37,17 +37,17 @@ export class KlevuResponseQueryObject {
   /**
    * When query is search this is available. It is used to send search click events
    */
-  getSearchClickSendEvent?: KlevuFetchQueryResult["getSearchClickSendEvent"]
+  searchClickEvent?: KlevuFetchQueryResult["searchClickEvent"]
 
   /**
    * When query is categoryMerchandising this is available. It is used to send categoryMerchandising click events
    */
-  getCategoryMerchandisingClickSendEvent?: KlevuFetchQueryResult["getCategoryMerchandisingClickSendEvent"]
+  categoryMerchandisingClickEvent?: KlevuFetchQueryResult["categoryMerchandisingClickEvent"]
 
   /**
    * When query is recommendation this is available. It is used to send recommendation click events
    */
-  getRecommendationClickSendEvent?: KlevuFetchQueryResult["getRecommendationClickSendEvent"]
+  recommendationClickEvent?: KlevuFetchQueryResult["recommendationClickEvent"]
 
   constructor(
     responseObject: KlevuResponseObject,
@@ -57,7 +57,7 @@ export class KlevuResponseQueryObject {
     this.responseObject = responseObject
     this.query = query
     this.func = func
-    this.initResultFunctions()
+    this.initEventFunctions()
   }
 
   /**
@@ -164,7 +164,7 @@ export class KlevuResponseQueryObject {
    */
   hasNextPage() {
     return (
-      this.query.meta.totalResultsFound <=
+      this.query.meta.totalResultsFound >
       this.query.meta.offset + this.query.meta.noOfResults
     )
   }
@@ -177,10 +177,10 @@ export class KlevuResponseQueryObject {
     return Math.ceil(this.query.meta.totalResultsFound / this.query.meta.offset)
   }
 
-  private initResultFunctions() {
+  private initEventFunctions() {
     switch (this.func?.klevuFunctionId) {
       case "search": {
-        this.getSearchClickSendEvent = function ({
+        this.searchClickEvent = function ({
           productId,
           variantId,
           autoSendViewEvent = true,
@@ -228,7 +228,7 @@ export class KlevuResponseQueryObject {
       }
 
       case "categoryMerchandising": {
-        this.getCategoryMerchandisingClickSendEvent = function ({
+        this.categoryMerchandisingClickEvent = function ({
           productId,
           categoryTitle,
           variantId,
@@ -287,7 +287,7 @@ export class KlevuResponseQueryObject {
       }
 
       case "kmcRecommendation": {
-        this.getRecommendationClickSendEvent = function ({
+        this.recommendationClickEvent = function ({
           productId,
           variantId,
           override,

@@ -7,15 +7,13 @@ import {
   KlevuListenDomEvent,
   FilterManager,
   search,
-  KlevuResultEvent,
   sendSearchEvent,
   personalisation,
-  KlevuNextFunc,
 } from "@klevu/core"
 import type {
   KlevuRecord,
-  KlevuFilterResultOptions,
-  KlevuFilterResultSlider,
+  KlevuResponseQueryObject,
+  FilterManagerFilters,
 } from "@klevu/core"
 import {
   IconButton,
@@ -35,8 +33,6 @@ import { FilterDrawer } from "../components/filterdrawer"
 import { useSnackbar } from "notistack"
 
 const manager = new FilterManager()
-let nextFunc: KlevuNextFunc
-let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
 
 function useQuery() {
   const { search } = useLocation()
@@ -55,12 +51,10 @@ export function SearchResultPage(props: Props) {
   const location = useLocation()
 
   const [open, setOpen] = useState(false)
-  const [options, setOptions] = useState<KlevuFilterResultOptions[]>(
-    manager.options
-  )
-  const [sliders, setSliders] = useState<KlevuFilterResultSlider[]>(
-    manager.sliders
-  )
+  const [searchResponse, setSearchResponse] = useState<
+    KlevuResponseQueryObject | undefined
+  >(undefined)
+  const [filters, setFilters] = useState<FilterManagerFilters[]>([])
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
@@ -107,31 +101,27 @@ export function SearchResultPage(props: Props) {
       return
     }
 
-    nextFunc = searchResult.next
-
-    clickManager = searchResult.getSearchClickSendEvent()
-
-    setShowMore(Boolean(searchResult.next))
-    setOptions(manager.options)
-    setSliders(manager.sliders)
+    setSearchResponse(searchResult)
+    setShowMore(searchResult.hasNextPage())
+    setFilters(manager.filters)
     setProducts(searchResult.records ?? [])
   }, [sorting, query])
 
   const fetchMore = async () => {
-    const nextRes = await nextFunc({
+    const nextResponse = await searchResponse.getPage({
       filterManager: manager,
     })
 
-    const searchResult = nextRes.queriesById("search")
+    const nextSearchResult = nextResponse.queriesById("search")
 
-    setProducts([...products, ...(searchResult?.records ?? [])])
-    nextFunc = searchResult.next
-    setShowMore(Boolean(searchResult.next))
+    setProducts([...products, ...(nextSearchResult?.records ?? [])])
+    setSearchResponse(nextSearchResult)
+
+    setShowMore(nextSearchResult.hasNextPage())
   }
 
   const handleFilterUpdate = () => {
-    setOptions(manager.options)
-    setSliders(manager.sliders)
+    setFilters(manager.filters)
     initialFetch()
   }
 
@@ -157,8 +147,7 @@ export function SearchResultPage(props: Props) {
         open={open}
         onClose={() => setOpen(false)}
         manager={manager}
-        options={options}
-        sliders={sliders}
+        filters={filters}
       />
       <div id="main">
         <Box
@@ -209,7 +198,10 @@ export function SearchResultPage(props: Props) {
                 product={p}
                 onClick={(event) => {
                   navigate(`/products/${p.itemGroupId}/${p.id}`)
-                  clickManager(p.id, p.itemGroupId)
+                  searchResponse.searchClickEvent?.({
+                    productId: p.id,
+                    variantId: p.itemGroupId,
+                  })
                   event.preventDefault()
                   return false
                 }}

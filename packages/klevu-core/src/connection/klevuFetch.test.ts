@@ -23,10 +23,10 @@ test("Two searches should work", async () => {
   const query2 = result.queriesById("test2")
 
   expect(query).toBeDefined()
-  expect(query?.getSearchClickSendEvent).toBeDefined()
+  expect(query?.searchClickEvent).toBeDefined()
 
   expect(query2).toBeDefined()
-  expect(query2?.getSearchClickSendEvent).toBeDefined()
+  expect(query2?.searchClickEvent).toBeDefined()
 })
 
 test("Should fail when trying two searches with same id", async () => {

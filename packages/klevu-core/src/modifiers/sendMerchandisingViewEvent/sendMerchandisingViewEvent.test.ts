@@ -23,7 +23,7 @@ test("Sending merchandising event", async () => {
     )
   )
 
-  result.queriesById("test")?.getCategoryMerchandisingClickSendEvent?.({
+  result.queriesById("test")?.categoryMerchandisingClickEvent?.({
     productId: result.queriesById("test")?.records[0].id ?? "",
     categoryTitle: "Hoodies",
   })
