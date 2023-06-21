@@ -4,13 +4,14 @@ ENV NODE_ENV "development"
 
 WORKDIR /app
 
-COPY entrypoint.sh /entrypoint.sh
+COPY examples/react/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ADD . .
+ADD examples/react examples/react
+ADD packages/klevu-core packages/klevu-core
 
-RUN rm -f package-lock.json
-RUN npm install --force
+WORKDIR /app/examples/react
+RUN npm install
 RUN npm run build
 
 ENTRYPOINT ["/entrypoint.sh"]
