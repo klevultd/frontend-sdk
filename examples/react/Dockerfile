@@ -10,6 +10,10 @@ RUN chmod +x /entrypoint.sh
 ADD examples/react examples/react
 ADD packages/klevu-core packages/klevu-core
 
+WORKDIR /app/packages/klevu-core
+RUN npm install
+RUN npm run build
+
 WORKDIR /app/examples/react
 RUN npm install
 RUN npm run build
