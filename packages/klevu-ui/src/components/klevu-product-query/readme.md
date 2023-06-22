@@ -28,6 +28,7 @@
 - [klevu-typography](../klevu-typography)
 - [klevu-chat-layout](../klevu-chat-layout)
 - [klevu-chat-messages](../klevu-chat-messages)
+- [klevu-loading-indicator](../klevu-loading-indicator)
 - [klevu-textfield](../klevu-textfield)
 
 ### Graph
@@ -38,6 +39,7 @@ graph TD;
   klevu-product-query --> klevu-typography
   klevu-product-query --> klevu-chat-layout
   klevu-product-query --> klevu-chat-messages
+  klevu-product-query --> klevu-loading-indicator
   klevu-product-query --> klevu-textfield
   klevu-button --> klevu-typography
   klevu-chat-layout --> klevu-typography

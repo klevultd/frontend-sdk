@@ -30,6 +30,7 @@ Basic button component
 
 | Part              | Description |
 | ----------------- | ----------- |
+| `"klevu-button"`  |             |
 | `"material-icon"` |             |
 
 

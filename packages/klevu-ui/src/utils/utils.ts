@@ -57,7 +57,7 @@ export function stripTags(html: string): string {
  * Essentially this is list of css selectors that are exposed to the developers.
  * See global.css for the list of selectors.
  */
-export const globalExportedParts = ["klevu-list", "material-icon"].join(", ")
+export const globalExportedParts = ["klevu-list", "klevu-button", "material-icon"].join(", ")
 
 /**
  * Global settings that modify the way Klevu UI library works.

@@ -3,7 +3,7 @@
 }
 
 #container {
-  width: 400px;
+  max-width: 400px;
 }
 
 klevu-chat-layout {

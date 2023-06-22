@@ -74,6 +74,7 @@ export namespace Components {
     }
     /**
      * Basic button component
+     * @csspart klevu-button - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -109,6 +110,8 @@ export namespace Components {
      * Container for chat items. Very simple component, just a wrapper.
      * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
+     * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
+     * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
         "remote"?: boolean;
@@ -1184,6 +1187,7 @@ declare global {
     };
     /**
      * Basic button component
+     * @csspart klevu-button - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -1202,6 +1206,8 @@ declare global {
      * Container for chat items. Very simple component, just a wrapper.
      * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
+     * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
+     * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1706,6 +1712,7 @@ declare namespace LocalJSX {
     }
     /**
      * Basic button component
+     * @csspart klevu-button - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -1741,6 +1748,8 @@ declare namespace LocalJSX {
      * Container for chat items. Very simple component, just a wrapper.
      * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
+     * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
+     * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
         "remote"?: boolean;
@@ -2810,6 +2819,7 @@ declare module "@stencil/core" {
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
              * Basic button component
+             * @csspart klevu-button - The button element
              * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
              * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
              * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -2823,6 +2833,8 @@ declare module "@stencil/core" {
              * Container for chat items. Very simple component, just a wrapper.
              * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
              * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
+             * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
+             * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**

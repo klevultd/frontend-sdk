@@ -20,6 +20,7 @@ export class KlevuProductQuery {
   @State() email = ""
   @State() registered = false
   @State() showFeedback = false
+  @State() showLoading = false
 
   @Element()
   el!: HTMLKlevuProductElement
@@ -42,12 +43,15 @@ export class KlevuProductQuery {
     this.#chatLayout?.scrollMainToBottom()
   }
 
-  #sendMessage() {
-    this.session?.query({
-      message: this.text,
-    })
+  async #sendMessage() {
+    const message = this.text
     this.text = ""
     this.#chatLayout?.scrollMainToBottom()
+    this.showLoading = true
+    await this.session?.query({
+      message: message,
+    })
+    this.showLoading = false
   }
 
   #register() {
@@ -107,7 +111,9 @@ export class KlevuProductQuery {
   render() {
     return (
       <Host>
-        <klevu-button onClick={this.#start.bind(this)}>Ask a Question</klevu-button>
+        <klevu-button exportparts={globalExportedParts} onClick={this.#start.bind(this)}>
+          Ask a Question
+        </klevu-button>
         <klevu-modal
           ref={(el) => (this.#modal = el)}
           exportparts={globalExportedParts}
@@ -139,6 +145,7 @@ export class KlevuProductQuery {
                 >
                   <div slot="header"></div>
                   <klevu-chat-messages messages={this.messages}></klevu-chat-messages>
+                  {this.showLoading ? <klevu-loading-indicator /> : null}
 
                   <div slot="footer">
                     {!this.registered ? (
