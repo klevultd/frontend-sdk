@@ -3,6 +3,8 @@
   justify-content: flex-end;
   --background: var(--klevu-chat-bubble-background, var(--klevu-color-neutral-2));
   --background-remote: var(--klevu-chat-bubble-background-remote, var(--klevu-color-primary));
+  --text-color: var(--klevu-chat-bubble-text-color, inherit);
+  --text-color-remote: var(--klevu-chat-bubble-text-color-remote, var(--klevu-color-neutral-1));
 }
 
 :host(.remote) {
@@ -15,11 +17,12 @@ klevu-typography {
   background-color: var(--background);
   border-radius: var(--klevu-border-radius-m);
   border-bottom-right-radius: 0;
+  color: var(--text-color);
 }
 
 :host(.remote) klevu-typography {
   background-color: var(--background-remote);
-  color: var(--klevu-color-neutral-1);
+  color: var(--text-color-remote);
   border-radius: var(--klevu-border-radius-m);
   border-bottom-left-radius: 0;
   --klevu-typography-color: var(--klevu-color-neutral-1);
