@@ -13,12 +13,13 @@ import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
 import { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
-import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
+import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/klevu-textfield/klevu-textfield";
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
@@ -30,12 +31,13 @@ export { KlevuUIGlobalSettings } from "./utils/utils";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
 export { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
-export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
+export { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/klevu-textfield/klevu-textfield";
 export { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 export { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
@@ -648,6 +650,9 @@ export namespace Components {
         "itemsPerRow"?: number;
     }
     interface KlevuProductQuery {
+        "productId"?: string;
+        "textFieldPlaceholder": string;
+        "textFieldVariant": KlevuTextfieldVariant;
         "url": string;
     }
     /**
@@ -1024,7 +1029,7 @@ export namespace Components {
         /**
           * Variant of textfield
          */
-        "variant": KlevuTextfieldVariant;
+        "variant": KlevuTextfieldVariant1;
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
@@ -2315,6 +2320,9 @@ declare namespace LocalJSX {
         "itemsPerRow"?: number;
     }
     interface KlevuProductQuery {
+        "productId"?: string;
+        "textFieldPlaceholder"?: string;
+        "textFieldVariant"?: KlevuTextfieldVariant;
         "url"?: string;
     }
     /**
@@ -2710,7 +2718,7 @@ declare namespace LocalJSX {
         /**
           * Variant of textfield
          */
-        "variant"?: KlevuTextfieldVariant;
+        "variant"?: KlevuTextfieldVariant1;
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.

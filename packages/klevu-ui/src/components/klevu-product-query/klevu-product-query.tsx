@@ -1,7 +1,8 @@
 import { Component, Fragment, Host, State, h, Element, Prop } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuConfig, MoiMessages, MoiSession, startMoi } from "@klevu/core"
+import { MoiMessages, MoiSession, startMoi } from "@klevu/core"
+import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 
 @Component({
   tag: "klevu-product-query",
@@ -14,6 +15,9 @@ export class KlevuProductQuery {
   #chatLayout?: HTMLKlevuChatLayoutElement
 
   @Prop() url: string = ""
+  @Prop() productId?: string
+  @Prop() textFieldVariant: KlevuTextfieldVariant = "pill"
+  @Prop() textFieldPlaceholder: string = "Ask a question"
 
   @State() text = ""
   @State() name = ""
@@ -30,7 +34,7 @@ export class KlevuProductQuery {
   async connectedCallback() {
     await KlevuInit.ready()
 
-    if (this.url == "") {
+    if (!this.productId && this.url == "") {
       this.url = window.location.href
     }
   }
@@ -44,7 +48,12 @@ export class KlevuProductQuery {
   }
 
   async #sendMessage() {
-    const message = this.text
+    const message = this.text.trim()
+
+    if (message == "") {
+      return
+    }
+
     this.text = ""
     this.#chatLayout?.scrollMainToBottom()
     this.showLoading = true
@@ -86,6 +95,7 @@ export class KlevuProductQuery {
   }
 
   #start() {
+    console.log(this.productId)
     this.showFeedback = false
     // todo - remove this when using registering
     this.registered = true
@@ -99,7 +109,8 @@ export class KlevuProductQuery {
           // Do nothing on redirect as we have our own system
           onRedirect: () => {},
           configOverride: config,
-          url: this.url,
+          url: this.url === "" ? undefined : this.url,
+          productId: this.productId,
           mode: "PQA",
         })
         this.messages = this.session.messages
@@ -182,7 +193,8 @@ export class KlevuProductQuery {
                       <div class="sendmessage">
                         <klevu-textfield
                           value={this.text}
-                          variant="pill"
+                          variant={this.textFieldVariant}
+                          placeholder={this.textFieldPlaceholder}
                           onKlevuTextEnterPressed={() => this.#sendMessage()}
                           onKlevuTextChanged={(e) => (this.text = e.detail)}
                         ></klevu-textfield>
