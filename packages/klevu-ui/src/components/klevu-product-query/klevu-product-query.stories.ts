@@ -21,7 +21,19 @@ export const Query: StoryObj<KlevuProductQuery> = {
   },
   render: (args) => html`
     <klevu-init api-key="klevu-156934068344410779">
-      <klevu-product-query url=${ifDefined(args.url)}></klevu-product-query>
+      <klevu-product-query
+        url=${ifDefined(args.url)}
+        product-id=${ifDefined(args.productId)}
+        text-field-variant=${ifDefined(args.textFieldVariant)}
+        text-field-placeholder=${ifDefined(args.textFieldPlaceholder)}
+      ></klevu-product-query>
     </klevu-init>
   `,
+}
+
+export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
+  args: {
+    productId: "40912128737373",
+  },
+  render: Query.render,
 }

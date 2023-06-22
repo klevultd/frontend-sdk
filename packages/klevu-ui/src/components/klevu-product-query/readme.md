@@ -7,9 +7,12 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default |
-| -------- | --------- | ----------- | -------- | ------- |
-| `url`    | `url`     |             | `string` | `""`    |
+| Property               | Attribute                | Description | Type                  | Default            |
+| ---------------------- | ------------------------ | ----------- | --------------------- | ------------------ |
+| `productId`            | `product-id`             |             | `string \| undefined` | `undefined`        |
+| `textFieldPlaceholder` | `text-field-placeholder` |             | `string`              | `"Ask a question"` |
+| `textFieldVariant`     | `text-field-variant`     |             | `"default" \| "pill"` | `"pill"`           |
+| `url`                  | `url`                    |             | `string`              | `""`               |
 
 
 ## Shadow Parts

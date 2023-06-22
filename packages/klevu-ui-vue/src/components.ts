@@ -224,7 +224,10 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 
 
 export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQuery>('klevu-product-query', undefined, [
-  'url'
+  'url',
+  'productId',
+  'textFieldVariant',
+  'textFieldPlaceholder'
 ]);
 
 

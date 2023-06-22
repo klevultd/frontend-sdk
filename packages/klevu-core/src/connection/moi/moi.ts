@@ -9,10 +9,11 @@ export type MoiContext = {
   sessionId: string
   mode: MoiChatModes
   url: string
+  productId: string
 }
 
 export type MoiRequest = {
-  context: PartialK<MoiContext, "sessionId" | "mode" | "url">
+  context: PartialK<MoiContext, "sessionId" | "mode" | "url" | "productId">
   message?: string
   filter?: {
     value: string
@@ -36,7 +37,7 @@ export type MoiResponse = {
 }
 
 export type MoiResponseContext = {
-  context: PartialK<MoiContext, "mode" | "url">
+  context: PartialK<MoiContext, "mode" | "url" | "productId">
 }
 
 export type MoiResponseText = {
@@ -159,7 +160,7 @@ export type MoiSession = {
 export type MoiChatModes = "PQA"
 
 type MoiSavedSession = {
-  context: PartialK<MoiContext, "url" | "mode">
+  context: PartialK<MoiContext, "url" | "mode" | "productId">
   genericOptions: MoiResponseGenericOptions["genericOptions"]
   menu: MoiMenuOptions["menuOptions"]
   messages: MoiSession["messages"]
@@ -179,21 +180,24 @@ export async function startMoi({
   configOverride,
   mode,
   url,
+  productId,
 }: {
   onMessage?: () => void
   onRedirect?: (url: string) => void
   configOverride?: KlevuConfig
   mode?: MoiChatModes
   url?: string
+  productId?: string
 } = {}): Promise<MoiSession> {
   const config = configOverride || KlevuConfig.getDefault()
   let startingMessages: MoiMessages = []
 
-  let ctx: PartialK<MoiContext, "mode" | "url"> = {
+  let ctx: PartialK<MoiContext, "mode" | "url" | "productId"> = {
     klevuApiKey: config.apiKey,
     sessionId: "",
     mode,
     url,
+    productId,
   }
   const storedSession = await getStoredSession(ctx)
   let menu: MoiMenuOptions["menuOptions"]
@@ -211,6 +215,7 @@ export async function startMoi({
           sessionId: storedSession?.context.sessionId,
           mode,
           url,
+          productId,
         },
       },
       config
@@ -302,7 +307,7 @@ export async function startMoi({
 }
 
 function getStoredSession(
-  ctx: PartialK<MoiContext, "url" | "mode" | "sessionId">
+  ctx: PartialK<MoiContext, "url" | "mode" | "sessionId" | "productId">
 ): MoiSavedSession | undefined {
   const storedSession = localStorage.getItem(STORAGE_KEY)
   if (!storedSession) {
@@ -330,10 +335,14 @@ function getStoredSession(
 
   switch (ctx.mode) {
     case "PQA":
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      if (session.modes["PQA"] && session.modes["PQA"][ctx.url!]) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return session.modes["PQA"][ctx.url!]
+      if (session.modes["PQA"] && ctx.url && session.modes["PQA"][ctx.url]) {
+        return session.modes["PQA"][ctx.url]
+      } else if (
+        session.modes["PQA"] &&
+        ctx.productId &&
+        session.modes["PQA"][ctx.productId]
+      ) {
+        return session.modes["PQA"][ctx.productId]
       }
       break
   }
@@ -347,6 +356,8 @@ function saveSession(session: MoiSavedSession) {
   if (saved) {
     parsed = JSON.parse(saved) as MoiSavedLocalStorage
   }
+
+  const key = session.context.url || session.context.productId
 
   switch (session.context.mode) {
     case undefined:
@@ -364,8 +375,10 @@ function saveSession(session: MoiSavedSession) {
       if (!parsed.modes.PQA) {
         parsed.modes.PQA = {}
       }
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      parsed.modes.PQA[session.context.url!] = session
+      if (!key) {
+        throw new Error("No url or productId")
+      }
+      parsed.modes.PQA[key] = session
       break
   }
 
