@@ -26,6 +26,11 @@ export const Query: StoryObj<KlevuProductQuery> = {
         product-id=${ifDefined(args.productId)}
         text-field-variant=${ifDefined(args.textFieldVariant)}
         text-field-placeholder=${ifDefined(args.textFieldPlaceholder)}
+        title=${ifDefined(args.title)}
+        button-text=${ifDefined(args.buttonText)}
+        ask-button-text=${ifDefined(args.askButtonText)}
+        use-background=${ifDefined(args.useBackground)}
+        fine-print=${ifDefined(args.finePrint)}
       ></klevu-product-query>
     </klevu-init>
   `,

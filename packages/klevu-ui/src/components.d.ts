@@ -572,9 +572,17 @@ export namespace Components {
          */
         "openModal": () => Promise<void>;
         /**
+          * Set width of the popup content
+         */
+        "popupWidth"?: number;
+        /**
           * Initially show the popup
          */
         "startOpen"?: boolean;
+        /**
+          * Darken background when popup is open
+         */
+        "useBackground": boolean;
     }
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
@@ -650,10 +658,42 @@ export namespace Components {
         "itemsPerRow"?: number;
     }
     interface KlevuProductQuery {
+        /**
+          * Text of the button for asking a question
+         */
+        "askButtonText"?: string;
+        /**
+          * Text of the button to open the popup
+         */
+        "buttonText": string;
+        /**
+          * Fine print of the popup under the title
+         */
+        "finePrint": string;
+        /**
+          * Alternative to url, productId can be used to start a session
+         */
         "productId"?: string;
+        /**
+          * Placeholder of the textfield
+         */
         "textFieldPlaceholder": string;
+        /**
+          * Variant of the textfield how does it look like
+         */
         "textFieldVariant": KlevuTextfieldVariant;
+        /**
+          * Title of the popup
+         */
+        "title": string;
+        /**
+          * Url of the page where the product is
+         */
         "url": string;
+        /**
+          * Use dark background with the popup
+         */
+        "useBackground"?: boolean;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -2229,6 +2269,7 @@ declare namespace LocalJSX {
           * At minimum popup content should be the widht of the origin
          */
         "fullwidthContent"?: boolean;
+        "onKlevuPopupClose"?: (event: KlevuPopupCustomEvent<void>) => void;
         /**
           * When popup is opened this event is emitted
          */
@@ -2238,9 +2279,17 @@ declare namespace LocalJSX {
          */
         "openAtFocus"?: boolean;
         /**
+          * Set width of the popup content
+         */
+        "popupWidth"?: number;
+        /**
           * Initially show the popup
          */
         "startOpen"?: boolean;
+        /**
+          * Darken background when popup is open
+         */
+        "useBackground"?: boolean;
     }
     /**
      * Generic product component that renders product based on KlevuRecord of @klevu/core
@@ -2320,10 +2369,42 @@ declare namespace LocalJSX {
         "itemsPerRow"?: number;
     }
     interface KlevuProductQuery {
+        /**
+          * Text of the button for asking a question
+         */
+        "askButtonText"?: string;
+        /**
+          * Text of the button to open the popup
+         */
+        "buttonText"?: string;
+        /**
+          * Fine print of the popup under the title
+         */
+        "finePrint"?: string;
+        /**
+          * Alternative to url, productId can be used to start a session
+         */
         "productId"?: string;
+        /**
+          * Placeholder of the textfield
+         */
         "textFieldPlaceholder"?: string;
+        /**
+          * Variant of the textfield how does it look like
+         */
         "textFieldVariant"?: KlevuTextfieldVariant;
+        /**
+          * Title of the popup
+         */
+        "title"?: string;
+        /**
+          * Url of the page where the product is
+         */
         "url"?: string;
+        /**
+          * Use dark background with the popup
+         */
+        "useBackground"?: boolean;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the

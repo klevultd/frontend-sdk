@@ -7,12 +7,17 @@
 
 ## Properties
 
-| Property               | Attribute                | Description | Type                  | Default            |
-| ---------------------- | ------------------------ | ----------- | --------------------- | ------------------ |
-| `productId`            | `product-id`             |             | `string \| undefined` | `undefined`        |
-| `textFieldPlaceholder` | `text-field-placeholder` |             | `string`              | `"Ask a question"` |
-| `textFieldVariant`     | `text-field-variant`     |             | `"default" \| "pill"` | `"pill"`           |
-| `url`                  | `url`                    |             | `string`              | `""`               |
+| Property               | Attribute                | Description                                                  | Type                   | Default                                                                                  |
+| ---------------------- | ------------------------ | ------------------------------------------------------------ | ---------------------- | ---------------------------------------------------------------------------------------- |
+| `askButtonText`        | `ask-button-text`        | Text of the button for asking a question                     | `string \| undefined`  | `undefined`                                                                              |
+| `buttonText`           | `button-text`            | Text of the button to open the popup                         | `string`               | `"Ask a Question"`                                                                       |
+| `finePrint`            | `fine-print`             | Fine print of the popup under the title                      | `string`               | `"I'm an AI model. Sometimes, I may make mistakes. Please verify answers on this page."` |
+| `productId`            | `product-id`             | Alternative to url, productId can be used to start a session | `string \| undefined`  | `undefined`                                                                              |
+| `textFieldPlaceholder` | `text-field-placeholder` | Placeholder of the textfield                                 | `string`               | `"Ask a question"`                                                                       |
+| `textFieldVariant`     | `text-field-variant`     | Variant of the textfield how does it look like               | `"default" \| "pill"`  | `"pill"`                                                                                 |
+| `title`                | `title`                  | Title of the popup                                           | `string`               | `"Ask a Question"`                                                                       |
+| `url`                  | `url`                    | Url of the page where the product is                         | `string`               | `""`                                                                                     |
+| `useBackground`        | `use-background`         | Use dark background with the popup                           | `boolean \| undefined` | `undefined`                                                                              |
 
 
 ## Shadow Parts
@@ -26,8 +31,8 @@
 
 ### Depends on
 
+- [klevu-popup](../klevu-popup)
 - [klevu-button](../klevu-button)
-- [klevu-modal](../klevu-modal)
 - [klevu-typography](../klevu-typography)
 - [klevu-chat-layout](../klevu-chat-layout)
 - [klevu-chat-messages](../klevu-chat-messages)
@@ -37,8 +42,8 @@
 ### Graph
 ```mermaid
 graph TD;
+  klevu-product-query --> klevu-popup
   klevu-product-query --> klevu-button
-  klevu-product-query --> klevu-modal
   klevu-product-query --> klevu-typography
   klevu-product-query --> klevu-chat-layout
   klevu-product-query --> klevu-chat-messages

@@ -2,8 +2,10 @@
   display: block;
 }
 
-#container {
-  max-width: 400px;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 klevu-chat-layout {
@@ -110,4 +112,9 @@ div[slot="footer"] .sendmessage klevu-textfield {
 
 .pqa_feedback span[part="material-icon"]:nth-child(2) {
   color: var(--klevu-color-accent-3);
+}
+
+klevu-typography.fineprint {
+  --klevu-body-xs-size: 10px;
+  --klevu-body-xs-line-height: 1em;
 }

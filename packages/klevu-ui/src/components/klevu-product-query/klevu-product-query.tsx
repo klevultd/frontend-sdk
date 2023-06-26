@@ -11,18 +11,57 @@ import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 })
 export class KlevuProductQuery {
   session?: MoiSession
-  #modal?: HTMLKlevuModalElement
+  #popup?: HTMLKlevuPopupElement
   #chatLayout?: HTMLKlevuChatLayoutElement
 
+  /**
+   * Url of the page where the product is
+   */
   @Prop() url: string = ""
+  /**
+   * Alternative to url, productId can be used to start a session
+   */
   @Prop() productId?: string
+
+  /**
+   * Variant of the textfield how does it look like
+   */
   @Prop() textFieldVariant: KlevuTextfieldVariant = "pill"
+
+  /**
+   * Placeholder of the textfield
+   */
   @Prop() textFieldPlaceholder: string = "Ask a question"
+
+  /**
+   * Title of the popup
+   */
+  @Prop() title = "Ask a Question"
+
+  /**
+   * Text of the button to open the popup
+   */
+  @Prop() buttonText = "Ask a Question"
+
+  /**
+   * Fine print of the popup under the title
+   */
+  @Prop() finePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on this page."
+
+  /**
+   * Text of the button for asking a question
+   */
+  @Prop() askButtonText?: string
+
+  /**
+   * Use dark background with the popup
+   */
+  @Prop() useBackground?: boolean
 
   @State() text = ""
   @State() name = ""
   @State() email = ""
-  @State() registered = false
+  @State() registered = true // change to false when registering works
   @State() showFeedback = false
   @State() showLoading = false
 
@@ -80,11 +119,10 @@ export class KlevuProductQuery {
   }
 
   #pqafeedback(dir: "up" | "down") {
-    this.#modal?.closeModal()
+    this.#popup?.closeModal()
   }
 
   #closeModal(e: CustomEvent<void>) {
-    // add back when full feedback is implemented
     /*
     if (!this.showFeedback) {
       this.showFeedback = true
@@ -95,11 +133,8 @@ export class KlevuProductQuery {
   }
 
   #start() {
-    console.log(this.productId)
     this.showFeedback = false
-    // todo - remove this when using registering
-    this.registered = true
-    this.#modal?.openModal()
+    this.#popup?.openModal()
     this.el
       .closest("klevu-init")
       ?.getConfig()
@@ -122,95 +157,109 @@ export class KlevuProductQuery {
   render() {
     return (
       <Host>
-        <klevu-button exportparts={globalExportedParts} onClick={this.#start.bind(this)}>
-          Ask a Question
-        </klevu-button>
-        <klevu-modal
-          ref={(el) => (this.#modal = el)}
+        <klevu-popup
+          ref={(el) => (this.#popup = el)}
           exportparts={globalExportedParts}
-          onKlevuCloseModal={this.#closeModal.bind(this)}
+          onKlevuPopupClose={this.#closeModal.bind(this)}
+          anchor="bottom-start"
+          useBackground={this.useBackground}
+          popupWidth={400}
         >
-          <div slot="header">
-            <klevu-typography variant="body-m-bold">Ask a Question</klevu-typography>
+          <div slot="origin">
+            <klevu-button exportparts={globalExportedParts} onClick={this.#start.bind(this)}>
+              {this.buttonText}
+            </klevu-button>
           </div>
-          {this.showFeedback ? (
-            <div class="pqa_feedback">
-              <klevu-typography variant="body-l-bold">Rate your experience</klevu-typography>
-              <klevu-typography variant="body-m">How was your experience using this Q&A tool?</klevu-typography>
-              <div>
-                <span part="material-icon" onClick={() => this.#pqafeedback("up")}>
-                  thumb_up
-                </span>
-                <span part="material-icon" onClick={() => this.#pqafeedback("down")}>
-                  thumb_down
-                </span>
-              </div>
+          <div slot="content">
+            <div class="header">
+              <klevu-typography variant="body-m-bold">{this.title}</klevu-typography>
+              <span part="material-icon" onClick={() => this.#popup?.closeModal()}>
+                close
+              </span>
             </div>
-          ) : (
-            <Fragment>
-              <div id="container">
-                <klevu-chat-layout
-                  ref={(el) => (this.#chatLayout = el)}
-                  exportparts={globalExportedParts}
-                  onKlevuChatLayoutMessageSent={(event) => this.#sendMessage()}
-                >
-                  <div slot="header"></div>
-                  <klevu-chat-messages messages={this.messages}></klevu-chat-messages>
-                  {this.showLoading ? <klevu-loading-indicator /> : null}
+            <klevu-typography variant="body-xs" class="fineprint">
+              {this.finePrint}
+            </klevu-typography>
 
-                  <div slot="footer">
-                    {!this.registered ? (
-                      <Fragment>
-                        <div class="inputs">
-                          <klevu-textfield
-                            value={this.name}
-                            variant="pill"
-                            placeholder="Name"
-                            onKlevuTextEnterPressed={() => this.#register()}
-                            onKlevuTextChanged={(e) => (this.name = e.detail)}
-                          ></klevu-textfield>
-                          <klevu-textfield
-                            value={this.email}
-                            variant="pill"
-                            placeholder="Email"
-                            onKlevuTextEnterPressed={() => this.#register()}
-                            onKlevuTextChanged={(e) => {
-                              this.email = e.detail
-                            }}
-                          ></klevu-textfield>
-                          <klevu-button
-                            exportparts={globalExportedParts}
-                            icon="send"
-                            onClick={() => this.#register()}
-                          ></klevu-button>
-                        </div>
-                        <klevu-typography variant="body-xs">
-                          We are compliant with data protection regulations. Visit our privacy policy to learn how we
-                          collect, keep, and process your private information in accordance with these laws.
-                        </klevu-typography>
-                      </Fragment>
-                    ) : (
-                      <div class="sendmessage">
+            {this.showFeedback ? (
+              <div class="pqa_feedback">
+                <klevu-typography variant="body-l-bold">Rate your experience</klevu-typography>
+                <klevu-typography variant="body-m">How was your experience using this Q&A tool?</klevu-typography>
+                <div>
+                  <span part="material-icon" onClick={() => this.#pqafeedback("up")}>
+                    thumb_up
+                  </span>
+                  <span part="material-icon" onClick={() => this.#pqafeedback("down")}>
+                    thumb_down
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <klevu-chat-layout
+                ref={(el) => (this.#chatLayout = el)}
+                exportparts={globalExportedParts}
+                onKlevuChatLayoutMessageSent={(event) => this.#sendMessage()}
+              >
+                <div slot="header"></div>
+                <klevu-chat-messages messages={this.messages}></klevu-chat-messages>
+                {this.showLoading ? <klevu-loading-indicator /> : null}
+
+                <div slot="footer">
+                  {!this.registered ? (
+                    <Fragment>
+                      <div class="inputs">
                         <klevu-textfield
-                          value={this.text}
-                          variant={this.textFieldVariant}
-                          placeholder={this.textFieldPlaceholder}
-                          onKlevuTextEnterPressed={() => this.#sendMessage()}
-                          onKlevuTextChanged={(e) => (this.text = e.detail)}
+                          value={this.name}
+                          variant="pill"
+                          placeholder="Name"
+                          onKlevuTextEnterPressed={() => this.#register()}
+                          onKlevuTextChanged={(e) => (this.name = e.detail)}
                         ></klevu-textfield>
+                        <klevu-textfield
+                          value={this.email}
+                          variant="pill"
+                          placeholder="Email"
+                          onKlevuTextEnterPressed={() => this.#register()}
+                          onKlevuTextChanged={(e) => {
+                            this.email = e.detail
+                          }}
+                        ></klevu-textfield>
+                        <klevu-button
+                          exportparts={globalExportedParts}
+                          icon="send"
+                          onClick={() => this.#register()}
+                        ></klevu-button>
+                      </div>
+                      <klevu-typography variant="body-xs">
+                        We are compliant with data protection regulations. Visit our privacy policy to learn how we
+                        collect, keep, and process your private information in accordance with these laws.
+                      </klevu-typography>
+                    </Fragment>
+                  ) : (
+                    <div class="sendmessage">
+                      <klevu-textfield
+                        value={this.text}
+                        variant={this.textFieldVariant}
+                        placeholder={this.textFieldPlaceholder}
+                        onKlevuTextEnterPressed={() => this.#sendMessage()}
+                        onKlevuTextChanged={(e) => (this.text = e.detail)}
+                      ></klevu-textfield>
+                      {this.askButtonText ? (
+                        <klevu-button onClick={() => this.#sendMessage()}>{this.askButtonText}</klevu-button>
+                      ) : (
                         <klevu-button
                           exportparts={globalExportedParts}
                           icon="send"
                           onClick={() => this.#sendMessage()}
                         ></klevu-button>
-                      </div>
-                    )}
-                  </div>
-                </klevu-chat-layout>
-              </div>
-            </Fragment>
-          )}
-        </klevu-modal>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </klevu-chat-layout>
+            )}
+          </div>
+        </klevu-popup>
       </Host>
     )
   }

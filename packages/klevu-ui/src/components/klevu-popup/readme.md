@@ -16,14 +16,17 @@ Popup component where clicking origin component popups the the content
 | `elevation`           | `elevation`              | Elevation of the popup. 0-3.                               | `number`                                                                                                                                                             | `1`          |
 | `fullwidthContent`    | `fullwidth-content`      | At minimum popup content should be the widht of the origin | `boolean`                                                                                                                                                            | `false`      |
 | `openAtFocus`         | `open-at-focus`          | Open content when origin component is focused              | `boolean`                                                                                                                                                            | `true`       |
+| `popupWidth`          | `popup-width`            | Set width of the popup content                             | `number \| undefined`                                                                                                                                                | `undefined`  |
 | `startOpen`           | `start-open`             | Initially show the popup                                   | `boolean \| undefined`                                                                                                                                               | `undefined`  |
+| `useBackground`       | `use-background`         | Darken background when popup is open                       | `boolean`                                                                                                                                                            | `false`      |
 
 
 ## Events
 
-| Event            | Description                                | Type                |
-| ---------------- | ------------------------------------------ | ------------------- |
-| `klevuPopupOpen` | When popup is opened this event is emitted | `CustomEvent<void>` |
+| Event             | Description                                | Type                |
+| ----------------- | ------------------------------------------ | ------------------- |
+| `klevuPopupClose` |                                            | `CustomEvent<void>` |
+| `klevuPopupOpen`  | When popup is opened this event is emitted | `CustomEvent<void>` |
 
 
 ## Methods
@@ -62,12 +65,14 @@ Type: `Promise<void>`
 ### Used by
 
  - [klevu-chat-layout](../klevu-chat-layout)
+ - [klevu-product-query](../klevu-product-query)
  - [klevu-quicksearch](../klevu-quicksearch)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-chat-layout --> klevu-popup
+  klevu-product-query --> klevu-popup
   klevu-quicksearch --> klevu-popup
   style klevu-popup fill:#f9f,stroke:#333,stroke-width:4px
 ```
