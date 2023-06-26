@@ -667,6 +667,10 @@ export namespace Components {
          */
         "buttonText": string;
         /**
+          * Fine print of the popup under the title
+         */
+        "finePrint": string;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -2373,6 +2377,10 @@ declare namespace LocalJSX {
           * Text of the button to open the popup
          */
         "buttonText"?: string;
+        /**
+          * Fine print of the popup under the title
+         */
+        "finePrint"?: string;
         /**
           * Alternative to url, productId can be used to start a session
          */

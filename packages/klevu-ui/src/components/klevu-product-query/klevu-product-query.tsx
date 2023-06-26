@@ -44,6 +44,11 @@ export class KlevuProductQuery {
   @Prop() buttonText = "Ask a Question"
 
   /**
+   * Fine print of the popup under the title
+   */
+  @Prop() finePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on this page."
+
+  /**
    * Text of the button for asking a question
    */
   @Prop() askButtonText?: string
@@ -172,6 +177,9 @@ export class KlevuProductQuery {
                 close
               </span>
             </div>
+            <klevu-typography variant="body-xs" class="fineprint">
+              {this.finePrint}
+            </klevu-typography>
 
             {this.showFeedback ? (
               <div class="pqa_feedback">

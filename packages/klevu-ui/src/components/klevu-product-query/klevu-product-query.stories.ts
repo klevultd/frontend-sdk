@@ -30,6 +30,7 @@ export const Query: StoryObj<KlevuProductQuery> = {
         button-text=${ifDefined(args.buttonText)}
         ask-button-text=${ifDefined(args.askButtonText)}
         use-background=${ifDefined(args.useBackground)}
+        fine-print=${ifDefined(args.finePrint)}
       ></klevu-product-query>
     </klevu-init>
   `,

@@ -233,6 +233,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'textFieldPlaceholder',
   'title',
   'buttonText',
+  'finePrint',
   'askButtonText',
   'useBackground'
 ]);
