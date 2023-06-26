@@ -31,6 +31,10 @@ export class KlevuPopup {
    */
   @Prop() fullwidthContent = false
   /**
+   * Set width of the popup content
+   */
+  @Prop() popupWidth?: number
+  /**
    * Anchor popup to left or right of page
    */
   @Prop() anchor: Placement = "left-end"
@@ -41,12 +45,22 @@ export class KlevuPopup {
   @Prop() elevation = 1
 
   /**
+   * Darken background when popup is open
+   */
+  @Prop() useBackground = false
+
+  /**
    * When popup is opened this event is emitted
    */
   @Event({
     composed: true,
   })
   klevuPopupOpen!: EventEmitter<void>
+
+  @Event({
+    composed: true,
+  })
+  klevuPopupClose!: EventEmitter<void>
 
   /**
    * Is currently open
@@ -57,9 +71,14 @@ export class KlevuPopup {
   #originElement?: HTMLElement | null
   #contentElement?: HTMLElement | null
 
+  /**
+   * When clicking outside popup close it
+   * @param event
+   */
   #closeEvent(event: any) {
-    if (!event.composedPath().some((el: HTMLElement) => el === this.el)) {
-      this.open = false
+    if (!event.composedPath().some((el: HTMLElement) => el.tagName === "klevu-popup".toLocaleUpperCase())) {
+      console.log("closeEvent", event.composedPath())
+      this.closeModal()
     }
   }
 
@@ -112,7 +131,10 @@ export class KlevuPopup {
    */
   @Method()
   async closeModal() {
-    this.open = false
+    const event = this.klevuPopupClose.emit()
+    if (!event.defaultPrevented) {
+      this.open = false
+    }
   }
 
   @Listen("click", {
@@ -168,14 +190,20 @@ export class KlevuPopup {
 
     popupClasses[`elevation-${this.elevation}`] = true
 
+    const styles: any = {}
+    if (this.popupWidth) {
+      styles.width = `${this.popupWidth}px`
+    }
+
     return (
       <Host>
         <div id="origin" class="originContainer">
           <slot name="origin" />
         </div>
-        <div id="content" class={popupClasses}>
+        <div id="content" class={popupClasses} style={styles}>
           <slot name="content" />
         </div>
+        {this.open && this.useBackground && <div class="background" onClick={this.closeModal.bind(this)} />}
       </Host>
     )
   }

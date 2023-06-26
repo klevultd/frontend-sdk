@@ -49,3 +49,9 @@
 .popup.fullwidth {
   min-width: 100%;
 }
+
+.background {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.06);
+  inset: 0;
+}

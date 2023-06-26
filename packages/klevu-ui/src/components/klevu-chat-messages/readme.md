@@ -9,7 +9,7 @@
 
 | Property   | Attribute | Description                        | Type                                                                         | Default |
 | ---------- | --------- | ---------------------------------- | ---------------------------------------------------------------------------- | ------- |
-| `messages` | --        | Messages received from Moi backend | `(MoiResponseText \| MoiResponseFilter \| MoiProducts \| MoiLocalMessage)[]` | `[]`    |
+| `messages` | --        | Messages received from Moi backend | `(MoiResponseFilter \| MoiResponseText \| MoiProducts \| MoiLocalMessage)[]` | `[]`    |
 
 
 ## Events

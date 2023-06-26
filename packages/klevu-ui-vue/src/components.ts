@@ -195,9 +195,12 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'openAtFocus',
   'closeAtOutsideClick',
   'fullwidthContent',
+  'popupWidth',
   'anchor',
   'elevation',
-  'klevuPopupOpen'
+  'useBackground',
+  'klevuPopupOpen',
+  'klevuPopupClose'
 ]);
 
 
@@ -227,7 +230,11 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'url',
   'productId',
   'textFieldVariant',
-  'textFieldPlaceholder'
+  'textFieldPlaceholder',
+  'title',
+  'buttonText',
+  'askButtonText',
+  'useBackground'
 ]);
 
 
