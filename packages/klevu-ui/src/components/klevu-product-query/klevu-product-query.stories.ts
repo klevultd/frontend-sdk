@@ -26,11 +26,13 @@ export const Query: StoryObj<KlevuProductQuery> = {
         product-id=${ifDefined(args.productId)}
         text-field-variant=${ifDefined(args.textFieldVariant)}
         text-field-placeholder=${ifDefined(args.textFieldPlaceholder)}
-        title=${ifDefined(args.title)}
+        popup-title=${ifDefined(args.popupTitle)}
         button-text=${ifDefined(args.buttonText)}
         ask-button-text=${ifDefined(args.askButtonText)}
         use-background=${ifDefined(args.useBackground)}
         fine-print=${ifDefined(args.finePrint)}
+        popup-anchor=${ifDefined(args.popupAnchor)}
+        popup-offset=${ifDefined(args.popupOffset)}
       ></klevu-product-query>
     </klevu-init>
   `,

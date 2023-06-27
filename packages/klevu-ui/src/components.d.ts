@@ -564,6 +564,10 @@ export namespace Components {
          */
         "fullwidthContent": boolean;
         /**
+          * How many pixels to offset the popup from origin
+         */
+        "offset": number;
+        /**
           * Open content when origin component is focused
          */
         "openAtFocus": boolean;
@@ -671,6 +675,18 @@ export namespace Components {
          */
         "finePrint": string;
         /**
+          * Anchor popup to which side of the origin
+         */
+        "popupAnchor": Placement;
+        /**
+          * How many pixels to offset the popup from origin
+         */
+        "popupOffset"?: number;
+        /**
+          * Title of the popup
+         */
+        "popupTitle": string;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -682,10 +698,6 @@ export namespace Components {
           * Variant of the textfield how does it look like
          */
         "textFieldVariant": KlevuTextfieldVariant;
-        /**
-          * Title of the popup
-         */
-        "title": string;
         /**
           * Url of the page where the product is
          */
@@ -2269,6 +2281,10 @@ declare namespace LocalJSX {
           * At minimum popup content should be the widht of the origin
          */
         "fullwidthContent"?: boolean;
+        /**
+          * How many pixels to offset the popup from origin
+         */
+        "offset"?: number;
         "onKlevuPopupClose"?: (event: KlevuPopupCustomEvent<void>) => void;
         /**
           * When popup is opened this event is emitted
@@ -2382,6 +2398,18 @@ declare namespace LocalJSX {
          */
         "finePrint"?: string;
         /**
+          * Anchor popup to which side of the origin
+         */
+        "popupAnchor"?: Placement;
+        /**
+          * How many pixels to offset the popup from origin
+         */
+        "popupOffset"?: number;
+        /**
+          * Title of the popup
+         */
+        "popupTitle"?: string;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -2393,10 +2421,6 @@ declare namespace LocalJSX {
           * Variant of the textfield how does it look like
          */
         "textFieldVariant"?: KlevuTextfieldVariant;
-        /**
-          * Title of the popup
-         */
-        "title"?: string;
         /**
           * Url of the page where the product is
          */

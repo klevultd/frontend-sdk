@@ -3,6 +3,7 @@ import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { MoiMessages, MoiSession, startMoi } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
+import { Placement } from "@floating-ui/dom"
 
 @Component({
   tag: "klevu-product-query",
@@ -36,7 +37,7 @@ export class KlevuProductQuery {
   /**
    * Title of the popup
    */
-  @Prop() title = "Ask a Question"
+  @Prop() popupTitle = "Ask a Question"
 
   /**
    * Text of the button to open the popup
@@ -57,6 +58,16 @@ export class KlevuProductQuery {
    * Use dark background with the popup
    */
   @Prop() useBackground?: boolean
+
+  /**
+   * Anchor popup to which side of the origin
+   */
+  @Prop() popupAnchor: Placement = "bottom-start"
+
+  /**
+   * How many pixels to offset the popup from origin
+   */
+  @Prop() popupOffset?: number
 
   @State() text = ""
   @State() name = ""
@@ -161,7 +172,8 @@ export class KlevuProductQuery {
           ref={(el) => (this.#popup = el)}
           exportparts={globalExportedParts}
           onKlevuPopupClose={this.#closeModal.bind(this)}
-          anchor="bottom-start"
+          anchor={this.popupAnchor}
+          offset={this.popupOffset}
           useBackground={this.useBackground}
           popupWidth={400}
         >
@@ -172,7 +184,7 @@ export class KlevuProductQuery {
           </div>
           <div slot="content">
             <div class="header">
-              <klevu-typography variant="body-m-bold">{this.title}</klevu-typography>
+              <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
               <span part="material-icon" onClick={() => this.#popup?.closeModal()}>
                 close
               </span>

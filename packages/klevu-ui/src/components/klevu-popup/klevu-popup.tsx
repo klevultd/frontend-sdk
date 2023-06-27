@@ -45,6 +45,11 @@ export class KlevuPopup {
   @Prop() elevation = 1
 
   /**
+   * How many pixels to offset the popup from origin
+   */
+  @Prop() offset = 16
+
+  /**
    * Darken background when popup is open
    */
   @Prop() useBackground = false
@@ -100,7 +105,7 @@ export class KlevuPopup {
     const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
       placement: this.anchor,
       middleware: [
-        offset(16),
+        offset(this.offset),
         shift(),
         size({
           apply({ availableWidth, availableHeight, elements }) {
