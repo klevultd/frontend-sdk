@@ -27,6 +27,7 @@ export const Popup: StoryObj<KlevuPopup> = {
     open-at-focus=${ifDefined(args.openAtFocus)}
     start-open=${ifDefined(args.startOpen)}
     elevation=${ifDefined(args.elevation)}
+    offset=${ifDefined(args.offset)}
   >
     <klevu-search-field slot="origin"></klevu-search-field>
     <div slot="content">Hello world popup</div>
@@ -47,6 +48,7 @@ export const ButtonSource: StoryObj<KlevuPopup> = {
     open-at-focus=${ifDefined(args.openAtFocus)}
     start-open=${ifDefined(args.startOpen)}
     elevation=${ifDefined(args.elevation)}
+    offset=${ifDefined(args.offset)}
   >
     <klevu-button slot="origin">Open popup</klevu-button>
     <div slot="content">Hello world popup</div>
