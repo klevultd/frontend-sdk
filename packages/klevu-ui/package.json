@@ -49,8 +49,7 @@
     "axios": "^1.4.0",
     "lit-html": "^2.7.4",
     "nouislider": "15.7.0",
-    "overlayscrollbars": "^2.1.1",
-    "react-popper-tooltip": "^4.4.2"
+    "overlayscrollbars": "^2.1.1"
   },
   "contributors": [
     {
