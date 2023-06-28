@@ -1,6 +1,6 @@
 module.exports = {
   stories: ["../src/stories/*.mdx", "../src/components/**/*.mdx", "../src/components/**/*.stories.ts"],
-  addons: ["@storybook/addon-essentials", "@ljcl/storybook-addon-cssprops"],
+  addons: ["@storybook/addon-essentials", "@ljcl/storybook-addon-cssprops", "../storybookAddons/register.ts"],
   framework: {
     name: "@storybook/web-components-vite",
     options: {},
@@ -8,5 +8,5 @@ module.exports = {
   staticDirs: ["../storybookAssets"],
   docs: {
     autodocs: true,
-  }
+  },
 }

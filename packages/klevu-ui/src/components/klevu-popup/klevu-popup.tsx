@@ -82,7 +82,6 @@ export class KlevuPopup {
    */
   #closeEvent(event: any) {
     if (!event.composedPath().some((el: HTMLElement) => el.tagName === "klevu-popup".toLocaleUpperCase())) {
-      console.log("closeEvent", event.composedPath())
       this.closeModal()
     }
   }

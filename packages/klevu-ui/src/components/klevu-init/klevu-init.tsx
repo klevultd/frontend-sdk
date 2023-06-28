@@ -68,12 +68,7 @@ export class KlevuInit {
       url: this.url,
     })
 
-    // @ts-expect-error
-    window["klevu_ui_settings"] = {
-      ...this.settings,
-      apiKey: this.apiKey,
-      url: this.url,
-    }
+    window["klevu_ui_settings"] = this.settings
 
     // Inject material fonts to project
     const fontCssUrl =
@@ -133,5 +128,12 @@ export class KlevuInit {
         <slot></slot>
       </Host>
     )
+  }
+}
+
+// extends window type with klevu_ui_settings
+declare global {
+  interface Window {
+    klevu_ui_settings?: KlevuUIGlobalSettings
   }
 }

@@ -9,6 +9,7 @@ import { ArgTypes, Meta } from "@storybook/web-components"
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import merge from "lodash.merge"
 import { withActions } from "@storybook/addon-actions/decorator"
+import { html } from "lit"
 
 export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
@@ -182,7 +183,23 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}) {
     argTypes,
     parameters,
     description: comp?.docs,
-    decorators: [withActions as any],
+    decorators: [
+      withActions as any,
+      (story: any) => {
+        const key = localStorage.getItem("klevu-api-key")
+        const url = localStorage.getItem("klevu-url")
+
+        if (key && url) {
+          return html` <klevu-init api-key=${key} url=${url}> ${story()} </klevu-init> `
+        }
+
+        return html`
+          <klevu-init api-key="klevu-164651914788114877" url="https://eucs29v2.ksearchnet.com/cs/v2/search">
+            ${story()}
+          </klevu-init>
+        `
+      },
+    ],
   }
 }
 

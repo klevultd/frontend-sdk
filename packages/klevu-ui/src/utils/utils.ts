@@ -87,7 +87,6 @@ export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {
   if (window) {
     return {
       renderPrice,
-      // @ts-expect-error
       ...window["klevu_ui_settings"],
     }
   }
