@@ -17,10 +17,10 @@ export default meta
 
 export const Query: StoryObj<KlevuProductQuery> = {
   args: {
-    url: "https://roolee.com/products/this-is-me-scoop-neck-dress",
+    url: "https://www.conns.com/lg-65-c2-evo-oled-tv-oled65c2pua.html",
   },
   render: (args) => html`
-    <klevu-init api-key="klevu-156934068344410779">
+    <klevu-init api-key="klevu-164677714116414855">
       <klevu-product-query
         url=${ifDefined(args.url)}
         product-id=${ifDefined(args.productId)}

@@ -5,7 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
+import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -23,7 +24,8 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
+export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -116,6 +118,13 @@ export namespace Components {
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
+        /**
+          * Has user given feedback to this message
+         */
+        "feedback"?: "up" | "down";
+        /**
+          * Is the message from the user or from the bot
+         */
         "remote"?: boolean;
     }
     /**
@@ -138,6 +147,11 @@ export namespace Components {
         "showLoading": boolean;
     }
     interface KlevuChatMessages {
+        /**
+          * Should display a feedback button after each message
+         */
+        "enableMessageFeedback"?: boolean;
+        "feedbacks"?: MoiSavedFeedback[];
         /**
           * Messages received from Moi backend
          */
@@ -347,6 +361,8 @@ export namespace Components {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+     * @cssprop --klevu-color-positive #2e9c40 Positive color
+     * @cssprop --klevu-color-negative #ad2d2d Negative color
      * @cssprop --klevu-color-neutral-1 #ffffff Background color
      * @cssprop --klevu-color-neutral-2 #f6f6f6
      * @cssprop --klevu-color-neutral-3 #ededed
@@ -355,6 +371,10 @@ export namespace Components {
      * @cssprop --klevu-color-neutral-6 #919191
      * @cssprop --klevu-color-neutral-7 #757575
      * @cssprop --klevu-color-neutral-8 #191919 Text color
+     * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+     * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+     * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+     * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -1382,6 +1402,8 @@ declare global {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+     * @cssprop --klevu-color-positive #2e9c40 Positive color
+     * @cssprop --klevu-color-negative #ad2d2d Negative color
      * @cssprop --klevu-color-neutral-1 #ffffff Background color
      * @cssprop --klevu-color-neutral-2 #f6f6f6
      * @cssprop --klevu-color-neutral-3 #ededed
@@ -1390,6 +1412,10 @@ declare global {
      * @cssprop --klevu-color-neutral-6 #919191
      * @cssprop --klevu-color-neutral-7 #757575
      * @cssprop --klevu-color-neutral-8 #191919 Text color
+     * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+     * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+     * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+     * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -1809,6 +1835,13 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
+        /**
+          * Has user given feedback to this message
+         */
+        "feedback"?: "up" | "down";
+        /**
+          * Is the message from the user or from the bot
+         */
         "remote"?: boolean;
     }
     /**
@@ -1832,6 +1865,11 @@ declare namespace LocalJSX {
     }
     interface KlevuChatMessages {
         /**
+          * Should display a feedback button after each message
+         */
+        "enableMessageFeedback"?: boolean;
+        "feedbacks"?: MoiSavedFeedback[];
+        /**
           * Messages received from Moi backend
          */
         "messages"?: MoiMessages;
@@ -1839,6 +1877,10 @@ declare namespace LocalJSX {
           * When product is clicked
          */
         "onKlevuChatProductClick"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct }>) => void;
+        /**
+          * When feedback is given
+         */
+        "onKlevuMessageFeedback"?: (event: KlevuChatMessagesCustomEvent<onKlevuMessageFeedbackDetails>) => void;
         /**
           * When product filter is clicked
          */
@@ -2064,6 +2106,8 @@ declare namespace LocalJSX {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+     * @cssprop --klevu-color-positive #2e9c40 Positive color
+     * @cssprop --klevu-color-negative #ad2d2d Negative color
      * @cssprop --klevu-color-neutral-1 #ffffff Background color
      * @cssprop --klevu-color-neutral-2 #f6f6f6
      * @cssprop --klevu-color-neutral-3 #ededed
@@ -2072,6 +2116,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-color-neutral-6 #919191
      * @cssprop --klevu-color-neutral-7 #757575
      * @cssprop --klevu-color-neutral-8 #191919 Text color
+     * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+     * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+     * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+     * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -3015,6 +3063,8 @@ declare module "@stencil/core" {
              * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
              * @cssprop --klevu-color-primary #2b4af7 The primary color
              * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+             * @cssprop --klevu-color-positive #2e9c40 Positive color
+             * @cssprop --klevu-color-negative #ad2d2d Negative color
              * @cssprop --klevu-color-neutral-1 #ffffff Background color
              * @cssprop --klevu-color-neutral-2 #f6f6f6
              * @cssprop --klevu-color-neutral-3 #ededed
@@ -3023,6 +3073,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-color-neutral-6 #919191
              * @cssprop --klevu-color-neutral-7 #757575
              * @cssprop --klevu-color-neutral-8 #191919 Text color
+             * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+             * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+             * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+             * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
              * @cssprop --klevu-spacing-01 1px Spacing 01
              * @cssprop --klevu-spacing-02 4px Spacing 02
              * @cssprop --klevu-spacing-03 8px Spacing 03

@@ -4,3 +4,28 @@
   gap: var(--klevu-spacing-04);
   padding-bottom: var(--klevu-spacing-05);
 }
+
+.message-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.feedback {
+  width: 48px;
+  margin-right: 6px;
+}
+
+.feedback span {
+  font-size: 22px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.feedback span:first-child {
+  color: var(--klevu-color-positive);
+}
+
+.feedback span:last-child {
+  color: var(--klevu-color-negative);
+}

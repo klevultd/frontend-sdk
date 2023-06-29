@@ -7,18 +7,28 @@
 
 ## Properties
 
-| Property   | Attribute | Description                        | Type                                                                         | Default |
-| ---------- | --------- | ---------------------------------- | ---------------------------------------------------------------------------- | ------- |
-| `messages` | --        | Messages received from Moi backend | `(MoiResponseText \| MoiResponseFilter \| MoiProducts \| MoiLocalMessage)[]` | `[]`    |
+| Property                | Attribute                 | Description                                         | Type                                                                         | Default     |
+| ----------------------- | ------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
+| `enableMessageFeedback` | `enable-message-feedback` | Should display a feedback button after each message | `boolean \| undefined`                                                       | `undefined` |
+| `feedbacks`             | --                        |                                                     | `MoiSavedFeedback[] \| undefined`                                            | `undefined` |
+| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseFilter \| MoiResponseText \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
 
 
 ## Events
 
-| Event                      | Description                    | Type                                                                                                   |
-| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `klevuChatProductClick`    | When product is clicked        | `CustomEvent<{ product: MoiProduct; }>`                                                                |
-| `klevuSelectFilter`        | When product filter is clicked | `CustomEvent<{ filter: { count: string; name: string; selected: boolean \| null; value: string; }; }>` |
-| `klevuSelectProductOption` | When product option is clicked | `CustomEvent<{ product: MoiProduct; option: { chat: string; intent: string; name: string; }; }>`       |
+| Event                      | Description                    | Type                                                                                                                      |
+| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `klevuChatProductClick`    | When product is clicked        | `CustomEvent<{ product: MoiProduct; }>`                                                                                   |
+| `klevuMessageFeedback`     | When feedback is given         | `CustomEvent<{ message: { id: string; note: string \| null; type: "text"; value: string; }; feedback: "up" \| "down"; }>` |
+| `klevuSelectFilter`        | When product filter is clicked | `CustomEvent<{ filter: { count: string; name: string; selected: boolean \| null; value: string; }; }>`                    |
+| `klevuSelectProductOption` | When product option is clicked | `CustomEvent<{ product: MoiProduct; option: { chat: string; intent: string; name: string; }; }>`                          |
+
+
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
 
 
 ## Dependencies

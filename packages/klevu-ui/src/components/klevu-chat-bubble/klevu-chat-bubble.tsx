@@ -14,7 +14,15 @@ import { Component, Host, Prop, h } from "@stencil/core"
   shadow: true,
 })
 export class KlevuChatBubble {
+  /**
+   * Is the message from the user or from the bot
+   */
   @Prop() remote?: boolean
+
+  /**
+   * Has user given feedback to this message
+   */
+  @Prop() feedback?: "up" | "down"
 
   render() {
     return (
@@ -26,6 +34,16 @@ export class KlevuChatBubble {
         <klevu-typography variant="body-s">
           <slot></slot>
         </klevu-typography>
+        {this.feedback && this.feedback === "up" && (
+          <span part="material-icon" class="positive_feedback">
+            thumb_up
+          </span>
+        )}
+        {this.feedback && this.feedback === "down" && (
+          <span part="material-icon" class="negative_feedback">
+            thumb_down
+          </span>
+        )}
       </Host>
     )
   }

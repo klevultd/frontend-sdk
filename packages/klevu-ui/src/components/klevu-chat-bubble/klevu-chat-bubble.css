@@ -1,4 +1,5 @@
 :host {
+  position: relative;
   display: flex;
   justify-content: flex-end;
   --background: var(--klevu-chat-bubble-background, var(--klevu-color-neutral-2));
@@ -26,4 +27,26 @@ klevu-typography {
   border-radius: var(--klevu-border-radius-m);
   border-bottom-left-radius: 0;
   --klevu-typography-color: var(--klevu-color-neutral-1);
+}
+
+.positive_feedback,
+.negative_feedback {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  height: 24px;
+  width: 24px;
+  color: white;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.negative_feedback {
+  background-color: var(--klevu-color-negative);
+}
+
+.positive_feedback {
+  background-color: var(--klevu-color-positive);
 }

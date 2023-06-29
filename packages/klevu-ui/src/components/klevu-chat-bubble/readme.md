@@ -11,9 +11,17 @@ Container for chat items. Very simple component, just a wrapper.
 
 ## Properties
 
-| Property | Attribute | Description | Type                   | Default     |
-| -------- | --------- | ----------- | ---------------------- | ----------- |
-| `remote` | `remote`  |             | `boolean \| undefined` | `undefined` |
+| Property   | Attribute  | Description                                  | Type                          | Default     |
+| ---------- | ---------- | -------------------------------------------- | ----------------------------- | ----------- |
+| `feedback` | `feedback` | Has user given feedback to this message      | `"down" \| "up" \| undefined` | `undefined` |
+| `remote`   | `remote`   | Is the message from the user or from the bot | `boolean \| undefined`        | `undefined` |
+
+
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
 
 
 ## Dependencies

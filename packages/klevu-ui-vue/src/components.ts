@@ -33,7 +33,8 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
 
 
 export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble>('klevu-chat-bubble', undefined, [
-  'remote'
+  'remote',
+  'feedback'
 ]);
 
 
@@ -47,9 +48,12 @@ export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout
 
 export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMessages>('klevu-chat-messages', undefined, [
   'messages',
+  'feedbacks',
+  'enableMessageFeedback',
   'klevuChatProductClick',
   'klevuSelectFilter',
-  'klevuSelectProductOption'
+  'klevuSelectProductOption',
+  'klevuMessageFeedback'
 ]);
 
 
