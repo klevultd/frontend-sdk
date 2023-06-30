@@ -60,7 +60,7 @@ export class KlevuChatBubble {
             thumb_down
           </span>
         )}
-        {this.feedback?.thumbs === "down" && !Boolean(this.feedback.reason) && this.feedbackReasons && (
+        {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
           <div class="feedback_reasons">
             <span>Rating reason:</span>
             {this.feedbackReasons.map((reason) => (

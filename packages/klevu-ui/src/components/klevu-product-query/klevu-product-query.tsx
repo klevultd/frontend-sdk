@@ -91,6 +91,7 @@ export class KlevuProductQuery {
   @State() showFeedback = false
   @State() showLoading = false
   @State() feedbacks: MoiSavedFeedback[] = []
+  @State() showMessageFeedbackFor?: string
 
   @Element()
   el!: HTMLKlevuProductElement
@@ -190,6 +191,8 @@ export class KlevuProductQuery {
     if (action.type !== "askFeedbackReason") {
       return
     }
+
+    this.showMessageFeedbackFor = action.context.messageId
   }
 
   async #onFeedback(e: CustomEvent<onKlevuMessageFeedbackDetails>) {
@@ -201,6 +204,7 @@ export class KlevuProductQuery {
   async onMessageFeedback(e: CustomEvent<KlevuMessageFeedbackReasonDetails>) {
     await this.session?.addFeedback(e.detail.feedback.id, e.detail.feedback.thumbs, e.detail.reason)
     this.feedbacks = this.session?.feedbacks || []
+    this.messages = this.session?.messages || []
   }
 
   render() {
@@ -261,6 +265,7 @@ export class KlevuProductQuery {
                   enableMessageFeedback
                   exportparts={globalExportedParts}
                   onKlevuMessageFeedback={this.#onFeedback.bind(this)}
+                  showFeedbackFor={this.showMessageFeedbackFor}
                 ></klevu-chat-messages>
                 {this.showLoading ? <klevu-loading-indicator /> : null}
 

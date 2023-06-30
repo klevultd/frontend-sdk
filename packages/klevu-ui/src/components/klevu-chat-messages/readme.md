@@ -11,17 +11,18 @@
 | ----------------------- | ------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
 | `enableMessageFeedback` | `enable-message-feedback` | Should display a feedback button after each message | `boolean \| undefined`                                                       | `undefined` |
 | `feedbacks`             | --                        | Feedbacks given by user                             | `MoiSavedFeedback[] \| undefined`                                            | `undefined` |
-| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseFilter \| MoiResponseText \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
+| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseText \| MoiResponseFilter \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
+| `showFeedbackFor`       | `show-feedback-for`       | What message should we                              | `string \| undefined`                                                        | `undefined` |
 
 
 ## Events
 
-| Event                      | Description                    | Type                                                                                                                      |
-| -------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `klevuChatProductClick`    | When product is clicked        | `CustomEvent<{ product: MoiProduct; }>`                                                                                   |
-| `klevuMessageFeedback`     | When feedback is given         | `CustomEvent<{ message: { id: string; note: string \| null; type: "text"; value: string; }; feedback: "up" \| "down"; }>` |
-| `klevuSelectFilter`        | When product filter is clicked | `CustomEvent<{ filter: { count: string; name: string; selected: boolean \| null; value: string; }; }>`                    |
-| `klevuSelectProductOption` | When product option is clicked | `CustomEvent<{ product: MoiProduct; option: { chat: string; intent: string; name: string; }; }>`                          |
+| Event                      | Description                    | Type                                                                                                                                                              |
+| -------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `klevuChatProductClick`    | When product is clicked        | `CustomEvent<{ product: MoiProduct; }>`                                                                                                                           |
+| `klevuMessageFeedback`     | When feedback is given         | `CustomEvent<{ message: { id: string; note: string \| null; type: "text"; value: string; collectFeedback?: boolean \| undefined; }; feedback: "up" \| "down"; }>` |
+| `klevuSelectFilter`        | When product filter is clicked | `CustomEvent<{ filter: { count: string; name: string; selected: boolean \| null; value: string; }; }>`                                                            |
+| `klevuSelectProductOption` | When product option is clicked | `CustomEvent<{ product: MoiProduct; option: { chat: string; intent: string; name: string; }; }>`                                                                  |
 
 
 ## Shadow Parts

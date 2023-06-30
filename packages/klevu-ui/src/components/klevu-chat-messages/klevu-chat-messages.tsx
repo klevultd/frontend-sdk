@@ -29,6 +29,11 @@ export class KlevuChatMessages {
   @Prop() enableMessageFeedback?: boolean
 
   /**
+   * What message should we
+   */
+  @Prop() showFeedbackFor?: string
+
+  /**
    * When product is clicked
    */
   @Event({
@@ -69,18 +74,19 @@ export class KlevuChatMessages {
           if ("message" in message) {
             const givenFeedback = this.feedbacks?.find((f) => f.id === message.message.id)
             const isLastMessage = this.messages.length - 1 === index
+            const showFeedback = this.showFeedbackFor === message.message.id && !Boolean(givenFeedback?.reason)
             return (
               <Fragment>
                 <div class="message-container">
                   <klevu-chat-bubble
                     feedback={givenFeedback}
-                    feedbackReasons={this.feedbackReasons}
+                    feedbackReasons={showFeedback ? this.feedbackReasons : undefined}
                     remote
                     exportparts={globalExportedParts}
                   >
                     {message.message.value}
                   </klevu-chat-bubble>
-                  {this.enableMessageFeedback && !givenFeedback && isLastMessage && (
+                  {this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
                     <div class="feedback">
                       <span
                         part="material-icon"

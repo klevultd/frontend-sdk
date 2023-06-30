@@ -46,6 +46,7 @@ export type MoiResponseText = {
     note: string | null
     type: "text"
     value: string
+    collectFeedback?: boolean
   }
 }
 

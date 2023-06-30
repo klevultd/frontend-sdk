@@ -165,6 +165,10 @@ export namespace Components {
           * Messages received from Moi backend
          */
         "messages": MoiMessages;
+        /**
+          * What message should we
+         */
+        "showFeedbackFor"?: string;
     }
     /**
      * Checkbox component
@@ -1933,6 +1937,10 @@ declare namespace LocalJSX {
           * When product option is clicked
          */
         "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
+        /**
+          * What message should we
+         */
+        "showFeedbackFor"?: string;
     }
     /**
      * Checkbox component
