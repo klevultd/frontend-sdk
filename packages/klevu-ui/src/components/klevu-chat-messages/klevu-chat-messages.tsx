@@ -79,7 +79,7 @@ export class KlevuChatMessages {
               <Fragment>
                 <div class="message-container">
                   <klevu-chat-bubble
-                    feedback={givenFeedback}
+                    feedback={message.message.collectFeedback ? givenFeedback : undefined}
                     feedbackReasons={showFeedback ? this.feedbackReasons : undefined}
                     remote
                     exportparts={globalExportedParts}
