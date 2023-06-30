@@ -19,7 +19,10 @@ export const ChatBubble: StoryObj<KlevuChatBubble> = {
   args: {},
   render: (args) => html`
     <klevu-chat-layout>
-      <klevu-chat-bubble remote=${ifDefined(args.remote)}
+      <klevu-chat-bubble
+        remote=${ifDefined(args.remote)}
+        .feedback=${args.feedback}
+        .feedbackReasons=${args.feedbackReasons}
         >Hello world! This is a content for chat bubble!</klevu-chat-bubble
       >
       <klevu-chat-bubble remote>And this is where remote answers!</klevu-chat-bubble>

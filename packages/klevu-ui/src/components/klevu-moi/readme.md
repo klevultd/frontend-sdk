@@ -60,6 +60,7 @@ graph TD;
   klevu-button --> klevu-typography
   klevu-product --> klevu-typography
   klevu-chat-bubble --> klevu-typography
+  klevu-chat-bubble --> klevu-button
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars

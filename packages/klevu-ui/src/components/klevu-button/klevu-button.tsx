@@ -36,7 +36,7 @@ export class KlevuButton {
   fullWidth?: boolean
 
   @Prop()
-  size: "small" | "normal" | "large" = "normal"
+  size: "tiny" | "small" | "normal" | "large" = "normal"
 
   /**
    * Instead of content have an icon. So basically icon-button
@@ -56,12 +56,13 @@ export class KlevuButton {
           icon: Boolean(this.icon),
           sizeSmall: this.size === "small",
           sizeLarge: this.size === "large",
+          sizeTiny: this.size === "tiny",
         }}
       >
         {this.icon ? (
           <span part="material-icon">{this.icon}</span>
         ) : (
-          <klevu-typography variant={this.isTertiary ? "body-s" : "body-s-bold"}>
+          <klevu-typography variant={this.isTertiary || this.size === "tiny" ? "body-s" : "body-s-bold"}>
             <slot />
           </klevu-typography>
         )}

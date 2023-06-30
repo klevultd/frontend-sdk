@@ -37,6 +37,7 @@ export const Button: StoryObj<KlevuButton & { text?: string }> = {
     is-tertiary=${ifDefined(args.isTertiary)}
     icon=${ifDefined(args.icon)}
     @click=${() => console.log("clicked")}
+    size=${ifDefined(args.size)}
     >${args.text}</klevu-button
   >`,
 }

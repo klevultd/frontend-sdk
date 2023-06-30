@@ -6,6 +6,9 @@ import { Component, Element, h, Host, Listen, Method, Prop, State, Event, EventE
  *
  * @slot origin - Popoup origin that opens content of popup
  * @slot content - Content of the popup
+ *
+ * @csspart popup-origin - Origin component
+ * @csspart popup-content - Content component
  */
 @Component({
   tag: "klevu-popup",
@@ -201,10 +204,10 @@ export class KlevuPopup {
 
     return (
       <Host>
-        <div id="origin" class="originContainer">
+        <div id="origin" class="originContainer" part="popup-origin">
           <slot name="origin" />
         </div>
-        <div id="content" class={popupClasses} style={styles}>
+        <div id="content" class={popupClasses} style={styles} part="popup-content">
           <slot name="content" />
         </div>
         {this.open && this.useBackground && <div class="background" onClick={this.closeModal.bind(this)} />}

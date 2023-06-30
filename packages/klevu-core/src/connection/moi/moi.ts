@@ -1,19 +1,19 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../../index.js"
-import type { PartialK } from "../../utils/partialK.js"
 import { post } from "../fetch.js"
 
 const STORAGE_KEY = "klevu-moi-session"
 
 export type MoiContext = {
   klevuApiKey: string
-  sessionId: string
-  mode: MoiChatModes
-  url: string
-  productId: string
+  sessionId?: string
+  mode?: MoiChatModes
+  url?: string
+  productId?: string
+  pqaWidgetId?: string
 }
 
 export type MoiRequest = {
-  context: PartialK<MoiContext, "sessionId" | "mode" | "url" | "productId">
+  context: MoiContext
   message?: string
   filter?: {
     value: string
@@ -27,7 +27,7 @@ export type MoiRequest = {
   }
   feedback?: {
     messageId: string
-    thumbs?: "up" | "down"
+    thumbs?: "UP" | "DOWN"
     reason?: string
   }
 }
@@ -37,14 +37,16 @@ export type MoiResponse = {
 }
 
 export type MoiResponseContext = {
-  context: PartialK<MoiContext, "mode" | "url" | "productId">
+  context: MoiContext
 }
 
 export type MoiResponseText = {
   message: {
+    id: string
     note: string | null
     type: "text"
     value: string
+    collectFeedback?: boolean
   }
 }
 
@@ -122,8 +124,9 @@ export type MoiProduct = {
 export type MoiActionsMessage = {
   actions: {
     actions: Array<{
-      type: "purgeHistory" | "redirectToUrl"
+      type: "purgeHistory" | "redirectToUrl" | "askFeedbackReason"
       context: {
+        messageId?: string
         value?: string
         link?: string
       }
@@ -149,21 +152,20 @@ export type MoiMessages = Array<
   MoiResponseText | MoiResponseFilter | MoiProducts | MoiLocalMessage
 >
 
-export type MoiSession = {
-  query: (request: Omit<MoiRequest, "context">) => Promise<MoiResponse>
-  messages: MoiMessages
-  clear: () => void
-  menu: MoiMenuOptions["menuOptions"]
-  genericOptions: MoiResponseGenericOptions["genericOptions"]
-}
-
 export type MoiChatModes = "PQA"
 
+export type MoiSavedFeedback = {
+  id: string
+  thumbs: "up" | "down"
+  reason?: string
+}
+
 type MoiSavedSession = {
-  context: PartialK<MoiContext, "url" | "mode" | "productId">
+  context: MoiContext
   genericOptions: MoiResponseGenericOptions["genericOptions"]
   menu: MoiMenuOptions["menuOptions"]
   messages: MoiSession["messages"]
+  feedbacks: MoiSavedFeedback[]
 }
 
 type MoiSavedLocalStorage = Partial<MoiSavedSession> & {
@@ -174,48 +176,82 @@ type MoiSavedLocalStorage = Partial<MoiSavedSession> & {
   }
 }
 
-export async function startMoi({
-  onMessage,
-  onRedirect,
-  configOverride,
-  mode,
-  url,
-  productId,
-}: {
+export type MoiStartOptions = {
+  /**
+   * Called when a message is received from Moi
+   *
+   * @returns
+   */
   onMessage?: () => void
+  /**
+   * Custom redirect handler
+   * @param url
+   * @returns
+   */
   onRedirect?: (url: string) => void
+  /**
+   * Action listener for actions
+   * @param action
+   * @returns if false will prevent the default action
+   */
+  onAction?: (
+    action: MoiActionsMessage["actions"]["actions"][number]
+  ) => boolean | void
+  /**
+   * Override the config
+   */
   configOverride?: KlevuConfig
+  /**
+   * The mode to use. If undefined will use the default Moi mode
+   */
   mode?: MoiChatModes
+  /**
+   * URL for the PQA application
+   */
   url?: string
+  /**
+   * productId for the PQA application
+   */
   productId?: string
-} = {}): Promise<MoiSession> {
-  const config = configOverride || KlevuConfig.getDefault()
+  /**
+   * PQA widgetId for the PQA application
+   */
+  pqaWidgetId?: string
+}
+
+export async function startMoi(
+  options: MoiStartOptions = {}
+): Promise<MoiSession> {
+  const config = options.configOverride || KlevuConfig.getDefault()
   let startingMessages: MoiMessages = []
 
-  let ctx: PartialK<MoiContext, "mode" | "url" | "productId"> = {
+  let ctx: MoiContext = {
     klevuApiKey: config.apiKey,
     sessionId: "",
-    mode,
-    url,
-    productId,
+    mode: options.mode,
+    url: options.url,
+    productId: options.url,
+    pqaWidgetId: options.pqaWidgetId,
   }
   const storedSession = await getStoredSession(ctx)
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
+  let feedbacks: MoiSavedFeedback[] = []
   if (storedSession?.context) {
     ctx = storedSession.context
     startingMessages = storedSession.messages
     menu = storedSession.menu
     genericOptions = storedSession.genericOptions
+    feedbacks = storedSession.feedbacks
   } else {
     const result = await queryMoi(
       {
         context: {
           klevuApiKey: config.apiKey,
           sessionId: storedSession?.context.sessionId,
-          mode,
-          url,
-          productId,
+          mode: options.mode,
+          url: options.url,
+          productId: options.productId,
         },
       },
       config
@@ -233,82 +269,146 @@ export async function startMoi({
     genericOptions = parsed.genericOptions
   }
 
-  const session: MoiSession = {
-    async query(request) {
-      if (request.message) {
-        this.messages = [
-          ...this.messages,
-          { local: { message: request.message } },
-        ]
-        onMessage?.()
-      }
+  return new MoiSession(
+    {
+      feedbacks,
+      messages: startingMessages,
+      menu,
+      genericOptions,
+    },
+    options,
+    ctx,
+    config
+  )
+}
 
-      const res = await queryMoi(
-        {
-          context: ctx,
-          ...request,
-        },
-        config
-      )
+export class MoiSession {
+  constructor(
+    state: {
+      messages: MoiMessages
+      menu: MoiMenuOptions["menuOptions"]
+      genericOptions: MoiResponseGenericOptions["genericOptions"]
+      feedbacks: MoiSavedFeedback[]
+    },
+    options: MoiStartOptions,
+    context: MoiContext,
+    config: KlevuConfig
+  ) {
+    this.messages = state.messages
+    this.menu = state.menu
+    this.genericOptions = state.genericOptions
+    this.feedbacks = state.feedbacks ?? []
+    this.options = options
+    this.context = context
+    this.config = config
+  }
 
-      if (!res) {
-        throw new Error("No response from MOI")
-      }
+  messages: MoiMessages
+  menu: MoiMenuOptions["menuOptions"]
+  genericOptions?: MoiResponseGenericOptions["genericOptions"]
+  feedbacks: MoiSavedFeedback[]
+  options: MoiStartOptions
+  context: MoiContext
+  config: KlevuConfig
 
-      // run actions first
-      for (const obj of res.data) {
-        if ("actions" in obj) {
-          for (const action of obj.actions.actions) {
-            if (action.type === "purgeHistory") {
-              this.clear()
-            } else if (action.type === "redirectToUrl" && action.context.link) {
-              if (onRedirect) {
-                onRedirect(action.context.link)
-              } else {
-                window.location.href = action.context.link
-              }
+  async query(
+    request: Omit<MoiRequest, "context">,
+    target?: MoiAPITarget
+  ): Promise<MoiResponse> {
+    if (request.message) {
+      this.messages = [
+        ...(this.messages ?? []),
+        { local: { message: request.message } },
+      ]
+      this.options.onMessage?.()
+    }
+
+    const res = await queryMoi(
+      {
+        context: this.context,
+        ...request,
+      },
+      this.config,
+      target
+    )
+
+    if (!res) {
+      throw new Error("No response from MOI")
+    }
+
+    // run actions first
+    for (const obj of res.data) {
+      if ("actions" in obj) {
+        for (const action of obj.actions.actions) {
+          //notify listeners if they want to do something
+          const response = this.options.onAction?.(action)
+
+          // allow listeners to cancel the default actions
+          if (response === false) {
+            continue
+          }
+
+          if (action.type === "purgeHistory") {
+            this.clear()
+          } else if (action.type === "redirectToUrl" && action.context.link) {
+            if (this.options.onRedirect) {
+              this.options.onRedirect(action.context.link)
+            } else {
+              window.location.href = action.context.link
             }
           }
         }
       }
+    }
 
-      const { messages, genericOptions, menu } = parseResponse(res)
-      this.messages = [...this.messages, ...messages]
-      onMessage?.()
-      this.genericOptions = genericOptions
-      this.menu = menu
+    const { messages, genericOptions, menu } = parseResponse(res)
+    this.messages = [...this.messages, ...messages]
+    this.options.onMessage?.()
+    this.genericOptions = genericOptions
+    this.menu = menu
 
-      saveSession({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        context: ctx!,
-        menu: this.menu,
-        genericOptions: this.genericOptions,
-        messages: this.messages,
-      })
+    this.save()
 
-      return res
-    },
-    clear() {
-      this.messages = []
-      saveSession({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        context: ctx!,
-        menu: this.menu,
-        genericOptions: this.genericOptions,
-        messages: this.messages,
-      })
-      onMessage?.()
-    },
-    messages: startingMessages,
-    genericOptions,
-    menu,
+    return res
   }
-  return session
+  clear() {
+    this.messages = []
+    this.feedbacks = []
+    this.save()
+    this.options.onMessage?.()
+  }
+  save() {
+    saveSession({
+      context: this.context,
+      menu: this.menu,
+      genericOptions: this.genericOptions,
+      messages: this.messages,
+      feedbacks: this.feedbacks,
+    })
+  }
+  async addFeedback(messageId: string, thumbs: "up" | "down", reason?: string) {
+    const oldFeedback = this.feedbacks.find((f) => f.id === messageId)
+    if (oldFeedback) {
+      oldFeedback.thumbs = thumbs
+      oldFeedback.reason = reason
+    } else {
+      this.feedbacks.push({ id: messageId, thumbs, reason })
+    }
+
+    return this.query(
+      {
+        feedback: {
+          messageId,
+          thumbs: thumbs.toUpperCase() as "UP" | "DOWN",
+          reason,
+        },
+      },
+      "feedback"
+    )
+  }
 }
 
-function getStoredSession(
-  ctx: PartialK<MoiContext, "url" | "mode" | "sessionId" | "productId">
-): MoiSavedSession | undefined {
+function getStoredSession(ctx: MoiContext): MoiSavedSession | undefined {
   const storedSession = localStorage.getItem(STORAGE_KEY)
   if (!storedSession) {
     return undefined
@@ -323,6 +423,7 @@ function getStoredSession(
         genericOptions: session.genericOptions,
         menu: session.menu,
         messages: session.messages ?? [],
+        feedbacks: session.feedbacks ?? [],
       }
     }
     return undefined
@@ -365,6 +466,7 @@ function saveSession(session: MoiSavedSession) {
       parsed.messages = session.messages
       parsed.menu = session.menu
       parsed.genericOptions = session.genericOptions
+      parsed.feedbacks = session.feedbacks
       break
     case "PQA":
       if (!parsed.modes) {
@@ -385,8 +487,14 @@ function saveSession(session: MoiSavedSession) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed))
 }
 
-async function queryMoi(request: MoiRequest, config: KlevuConfig) {
-  return await post<MoiResponse>(`${config.moiApiUrl}chat/send`, request)
+type MoiAPITarget = "send" | "feedback"
+
+async function queryMoi(
+  request: MoiRequest,
+  config: KlevuConfig,
+  target: MoiAPITarget = "send"
+) {
+  return await post<MoiResponse>(`${config.moiApiUrl}chat/${target}`, request)
 }
 
 function parseResponse(response: MoiResponse) {

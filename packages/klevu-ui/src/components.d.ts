@@ -5,7 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
+import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
+import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -23,7 +25,9 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core";
+export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
+export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
@@ -106,7 +110,7 @@ export namespace Components {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
-        "size": "small" | "normal" | "large";
+        "size": "tiny" | "small" | "normal" | "large";
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
@@ -116,6 +120,17 @@ export namespace Components {
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
+        /**
+          * Has user given feedback to this message
+         */
+        "feedback"?: MoiSavedFeedback;
+        /**
+          * List of feedback reasons to show after the message
+         */
+        "feedbackReasons"?: string[];
+        /**
+          * Is the message from the user or from the bot
+         */
         "remote"?: boolean;
     }
     /**
@@ -139,9 +154,21 @@ export namespace Components {
     }
     interface KlevuChatMessages {
         /**
+          * Should display a feedback button after each message
+         */
+        "enableMessageFeedback"?: boolean;
+        /**
+          * Feedbacks given by user
+         */
+        "feedbacks"?: MoiSavedFeedback[];
+        /**
           * Messages received from Moi backend
          */
         "messages": MoiMessages;
+        /**
+          * What message should we
+         */
+        "showFeedbackFor"?: string;
     }
     /**
      * Checkbox component
@@ -347,6 +374,8 @@ export namespace Components {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+     * @cssprop --klevu-color-positive #2e9c40 Positive color
+     * @cssprop --klevu-color-negative #ad2d2d Negative color
      * @cssprop --klevu-color-neutral-1 #ffffff Background color
      * @cssprop --klevu-color-neutral-2 #f6f6f6
      * @cssprop --klevu-color-neutral-3 #ededed
@@ -355,6 +384,10 @@ export namespace Components {
      * @cssprop --klevu-color-neutral-6 #919191
      * @cssprop --klevu-color-neutral-7 #757575
      * @cssprop --klevu-color-neutral-8 #191919 Text color
+     * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+     * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+     * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+     * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -541,6 +574,8 @@ export namespace Components {
     }
     /**
      * Popup component where clicking origin component popups the the content
+     * @csspart popup-origin - Origin component
+     * @csspart popup-content - Content component
      */
     interface KlevuPopup {
         /**
@@ -661,6 +696,15 @@ export namespace Components {
          */
         "itemsPerRow"?: number;
     }
+    /**
+     * Klevu Product Query application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
+     */
     interface KlevuProductQuery {
         /**
           * Text of the button for asking a question
@@ -686,6 +730,10 @@ export namespace Components {
           * Title of the popup
          */
         "popupTitle": string;
+        /**
+          * Instead of Klevu API-key use a widget id to start a session
+         */
+        "pqaWidgetId"?: string;
         /**
           * Alternative to url, productId can be used to start a session
          */
@@ -1134,6 +1182,10 @@ export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBadgeElement;
 }
+export interface KlevuChatBubbleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChatBubbleElement;
+}
 export interface KlevuChatLayoutCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuChatLayoutElement;
@@ -1382,6 +1434,8 @@ declare global {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+     * @cssprop --klevu-color-positive #2e9c40 Positive color
+     * @cssprop --klevu-color-negative #ad2d2d Negative color
      * @cssprop --klevu-color-neutral-1 #ffffff Background color
      * @cssprop --klevu-color-neutral-2 #f6f6f6
      * @cssprop --klevu-color-neutral-3 #ededed
@@ -1390,6 +1444,10 @@ declare global {
      * @cssprop --klevu-color-neutral-6 #919191
      * @cssprop --klevu-color-neutral-7 #757575
      * @cssprop --klevu-color-neutral-8 #191919 Text color
+     * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+     * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+     * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+     * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -1495,6 +1553,8 @@ declare global {
     };
     /**
      * Popup component where clicking origin component popups the the content
+     * @csspart popup-origin - Origin component
+     * @csspart popup-content - Content component
      */
     interface HTMLKlevuPopupElement extends Components.KlevuPopup, HTMLStencilElement {
     }
@@ -1531,6 +1591,15 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    /**
+     * Klevu Product Query application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
+     */
     interface HTMLKlevuProductQueryElement extends Components.KlevuProductQuery, HTMLStencilElement {
     }
     var HTMLKlevuProductQueryElement: {
@@ -1799,7 +1868,7 @@ declare namespace LocalJSX {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
-        "size"?: "small" | "normal" | "large";
+        "size"?: "tiny" | "small" | "normal" | "large";
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
@@ -1809,6 +1878,18 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
+        /**
+          * Has user given feedback to this message
+         */
+        "feedback"?: MoiSavedFeedback;
+        /**
+          * List of feedback reasons to show after the message
+         */
+        "feedbackReasons"?: string[];
+        "onKlevuMessageFeedbackReason"?: (event: KlevuChatBubbleCustomEvent<KlevuMessageFeedbackReasonDetails>) => void;
+        /**
+          * Is the message from the user or from the bot
+         */
         "remote"?: boolean;
     }
     /**
@@ -1832,6 +1913,14 @@ declare namespace LocalJSX {
     }
     interface KlevuChatMessages {
         /**
+          * Should display a feedback button after each message
+         */
+        "enableMessageFeedback"?: boolean;
+        /**
+          * Feedbacks given by user
+         */
+        "feedbacks"?: MoiSavedFeedback[];
+        /**
           * Messages received from Moi backend
          */
         "messages"?: MoiMessages;
@@ -1840,6 +1929,10 @@ declare namespace LocalJSX {
          */
         "onKlevuChatProductClick"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct }>) => void;
         /**
+          * When feedback is given
+         */
+        "onKlevuMessageFeedback"?: (event: KlevuChatMessagesCustomEvent<onKlevuMessageFeedbackDetails>) => void;
+        /**
           * When product filter is clicked
          */
         "onKlevuSelectFilter"?: (event: KlevuChatMessagesCustomEvent<{ filter: MoiResponseFilter["filter"]["options"][0] }>) => void;
@@ -1847,6 +1940,10 @@ declare namespace LocalJSX {
           * When product option is clicked
          */
         "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
+        /**
+          * What message should we
+         */
+        "showFeedbackFor"?: string;
     }
     /**
      * Checkbox component
@@ -2064,6 +2161,8 @@ declare namespace LocalJSX {
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      * @cssprop --klevu-color-primary #2b4af7 The primary color
      * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+     * @cssprop --klevu-color-positive #2e9c40 Positive color
+     * @cssprop --klevu-color-negative #ad2d2d Negative color
      * @cssprop --klevu-color-neutral-1 #ffffff Background color
      * @cssprop --klevu-color-neutral-2 #f6f6f6
      * @cssprop --klevu-color-neutral-3 #ededed
@@ -2072,6 +2171,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-color-neutral-6 #919191
      * @cssprop --klevu-color-neutral-7 #757575
      * @cssprop --klevu-color-neutral-8 #191919 Text color
+     * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+     * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+     * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+     * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
      * @cssprop --klevu-spacing-01 1px Spacing 01
      * @cssprop --klevu-spacing-02 4px Spacing 02
      * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -2263,6 +2366,8 @@ declare namespace LocalJSX {
     }
     /**
      * Popup component where clicking origin component popups the the content
+     * @csspart popup-origin - Origin component
+     * @csspart popup-content - Content component
      */
     interface KlevuPopup {
         /**
@@ -2384,6 +2489,15 @@ declare namespace LocalJSX {
          */
         "itemsPerRow"?: number;
     }
+    /**
+     * Klevu Product Query application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
+     */
     interface KlevuProductQuery {
         /**
           * Text of the button for asking a question
@@ -2409,6 +2523,10 @@ declare namespace LocalJSX {
           * Title of the popup
          */
         "popupTitle"?: string;
+        /**
+          * Instead of Klevu API-key use a widget id to start a session
+         */
+        "pqaWidgetId"?: string;
         /**
           * Alternative to url, productId can be used to start a session
          */
@@ -3015,6 +3133,8 @@ declare module "@stencil/core" {
              * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
              * @cssprop --klevu-color-primary #2b4af7 The primary color
              * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
+             * @cssprop --klevu-color-positive #2e9c40 Positive color
+             * @cssprop --klevu-color-negative #ad2d2d Negative color
              * @cssprop --klevu-color-neutral-1 #ffffff Background color
              * @cssprop --klevu-color-neutral-2 #f6f6f6
              * @cssprop --klevu-color-neutral-3 #ededed
@@ -3023,6 +3143,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-color-neutral-6 #919191
              * @cssprop --klevu-color-neutral-7 #757575
              * @cssprop --klevu-color-neutral-8 #191919 Text color
+             * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
+             * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
+             * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
+             * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
              * @cssprop --klevu-spacing-01 1px Spacing 01
              * @cssprop --klevu-spacing-02 4px Spacing 02
              * @cssprop --klevu-spacing-03 8px Spacing 03
@@ -3078,6 +3202,8 @@ declare module "@stencil/core" {
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             /**
              * Popup component where clicking origin component popups the the content
+             * @csspart popup-origin - Origin component
+             * @csspart popup-content - Content component
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             /**
@@ -3099,6 +3225,15 @@ declare module "@stencil/core" {
              * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            /**
+             * Klevu Product Query application that shows a popup for asking questions about a product
+             * @csspart product-query-header - Header of the popup
+             * @csspart product-query-footer - Footer of the popup where input is
+             * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+             * @csspart product-query-open-button - Button that opens the popup
+             * @csspart popup-origin - Popup origin element
+             * @csspart popup-content - Popup content element
+             */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the

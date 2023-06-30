@@ -11,9 +11,25 @@ Container for chat items. Very simple component, just a wrapper.
 
 ## Properties
 
-| Property | Attribute | Description | Type                   | Default     |
-| -------- | --------- | ----------- | ---------------------- | ----------- |
-| `remote` | `remote`  |             | `boolean \| undefined` | `undefined` |
+| Property          | Attribute | Description                                        | Type                                                                                 | Default     |
+| ----------------- | --------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- |
+| `feedback`        | --        | Has user given feedback to this message            | `undefined \| { id: string; thumbs: "up" \| "down"; reason?: string \| undefined; }` | `undefined` |
+| `feedbackReasons` | --        | List of feedback reasons to show after the message | `string[] \| undefined`                                                              | `undefined` |
+| `remote`          | `remote`  | Is the message from the user or from the bot       | `boolean \| undefined`                                                               | `undefined` |
+
+
+## Events
+
+| Event                        | Description | Type                                                           |
+| ---------------------------- | ----------- | -------------------------------------------------------------- |
+| `klevuMessageFeedbackReason` |             | `CustomEvent<{ reason: string; feedback: MoiSavedFeedback; }>` |
+
+
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"material-icon"` |             |
 
 
 ## Dependencies
@@ -26,11 +42,14 @@ Container for chat items. Very simple component, just a wrapper.
 ### Depends on
 
 - [klevu-typography](../klevu-typography)
+- [klevu-button](../klevu-button)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-chat-bubble --> klevu-typography
+  klevu-chat-bubble --> klevu-button
+  klevu-button --> klevu-typography
   klevu-chat-messages --> klevu-chat-bubble
   klevu-moi --> klevu-chat-bubble
   style klevu-chat-bubble fill:#f9f,stroke:#333,stroke-width:4px

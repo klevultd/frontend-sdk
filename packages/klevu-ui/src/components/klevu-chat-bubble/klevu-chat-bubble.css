@@ -1,18 +1,18 @@
 :host {
-  display: flex;
-  justify-content: flex-end;
+  position: relative;
   --background: var(--klevu-chat-bubble-background, var(--klevu-color-neutral-2));
   --background-remote: var(--klevu-chat-bubble-background-remote, var(--klevu-color-primary));
   --text-color: var(--klevu-chat-bubble-text-color, inherit);
   --text-color-remote: var(--klevu-chat-bubble-text-color-remote, var(--klevu-color-neutral-1));
 }
 
-:host(.remote) {
-  justify-content: flex-start;
+:host(::after) {
+  content: "";
+  clear: both;
 }
 
 klevu-typography {
-  display: inline-block;
+  float: right;
   padding: var(--klevu-spacing-04);
   background-color: var(--background);
   border-radius: var(--klevu-border-radius-m);
@@ -21,9 +21,41 @@ klevu-typography {
 }
 
 :host(.remote) klevu-typography {
+  float: left;
   background-color: var(--background-remote);
   color: var(--text-color-remote);
   border-radius: var(--klevu-border-radius-m);
   border-bottom-left-radius: 0;
   --klevu-typography-color: var(--klevu-color-neutral-1);
+}
+
+.positive_feedback,
+.negative_feedback {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  height: 24px;
+  width: 24px;
+  color: white;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.negative_feedback {
+  background-color: var(--klevu-color-negative);
+}
+
+.positive_feedback {
+  background-color: var(--klevu-color-positive);
+}
+
+.feedback_reasons {
+  font-size: 12px;
+  clear: both;
+  display: flex;
+  gap: var(--klevu-spacing-03);
+  flex-wrap: wrap;
+  padding: var(--klevu-spacing-04);
 }

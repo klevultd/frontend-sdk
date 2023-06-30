@@ -1,6 +1,11 @@
-import { MoiMessages, MoiProduct, MoiResponseFilter } from "@klevu/core"
+import { MoiMessages, MoiProduct, MoiResponseFilter, MoiResponseText, MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
+
+export type onKlevuMessageFeedbackDetails = {
+  message: MoiResponseText["message"]
+  feedback: "up" | "down"
+}
 
 @Component({
   tag: "klevu-chat-messages",
@@ -12,6 +17,21 @@ export class KlevuChatMessages {
    * Messages received from Moi backend
    */
   @Prop() messages: MoiMessages = []
+
+  /**
+   * Feedbacks given by user
+   */
+  @Prop() feedbacks?: MoiSavedFeedback[]
+
+  /**
+   * Should display a feedback button after each message
+   */
+  @Prop() enableMessageFeedback?: boolean
+
+  /**
+   * What message should we
+   */
+  @Prop() showFeedbackFor?: string
 
   /**
    * When product is clicked
@@ -37,16 +57,52 @@ export class KlevuChatMessages {
   })
   klevuSelectProductOption!: EventEmitter<{ product: MoiProduct; option: MoiProduct["options"][0] }>
 
+  /**
+   * When feedback is given
+   */
+  @Event({
+    composed: true,
+  })
+  klevuMessageFeedback!: EventEmitter<onKlevuMessageFeedbackDetails>
+
+  feedbackReasons = ["Irrelevant", "Incorrect", "Offensive", "Other"]
+
   render() {
     return (
       <Host>
         {this.messages.map((message, index) => {
           if ("message" in message) {
+            const givenFeedback = this.feedbacks?.find((f) => f.id === message.message.id)
+            const isLastMessage = this.messages.length - 1 === index
+            const showFeedback = this.showFeedbackFor === message.message.id && !Boolean(givenFeedback?.reason)
             return (
               <Fragment>
-                <klevu-chat-bubble remote exportparts={globalExportedParts}>
-                  {message.message.value}
-                </klevu-chat-bubble>
+                <div class="message-container">
+                  <klevu-chat-bubble
+                    feedback={givenFeedback}
+                    feedbackReasons={showFeedback ? this.feedbackReasons : undefined}
+                    remote
+                    exportparts={globalExportedParts}
+                  >
+                    {message.message.value}
+                  </klevu-chat-bubble>
+                  {this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
+                    <div class="feedback">
+                      <span
+                        part="material-icon"
+                        onClick={() => this.klevuMessageFeedback.emit({ feedback: "up", message: message.message })}
+                      >
+                        thumb_up
+                      </span>
+                      <span
+                        part="material-icon"
+                        onClick={() => this.klevuMessageFeedback.emit({ feedback: "down", message: message.message })}
+                      >
+                        thumb_down
+                      </span>
+                    </div>
+                  )}
+                </div>
                 {message.message.note && (
                   <klevu-typography
                     style={{

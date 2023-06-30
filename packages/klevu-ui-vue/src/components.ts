@@ -33,7 +33,10 @@ export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu
 
 
 export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble>('klevu-chat-bubble', undefined, [
-  'remote'
+  'remote',
+  'feedback',
+  'feedbackReasons',
+  'klevuMessageFeedbackReason'
 ]);
 
 
@@ -47,9 +50,13 @@ export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout
 
 export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMessages>('klevu-chat-messages', undefined, [
   'messages',
+  'feedbacks',
+  'enableMessageFeedback',
+  'showFeedbackFor',
   'klevuChatProductClick',
   'klevuSelectFilter',
-  'klevuSelectProductOption'
+  'klevuSelectProductOption',
+  'klevuMessageFeedback'
 ]);
 
 
@@ -230,6 +237,7 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQuery>('klevu-product-query', undefined, [
   'url',
   'productId',
+  'pqaWidgetId',
   'textFieldVariant',
   'textFieldPlaceholder',
   'popupTitle',

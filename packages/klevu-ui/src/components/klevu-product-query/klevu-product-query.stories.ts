@@ -5,37 +5,42 @@ import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuProductQuery } from "./klevu-product-query"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-product-query")
 
+const decoratorsWithoutInit = decorators?.filter((d) => d.name !== "klevuInitInject")
+
 const meta: Meta = {
   title: "Apps/Product Query",
   component: "klevu-product-query",
   argTypes,
   parameters,
-  decorators,
+  decorators: decoratorsWithoutInit,
 }
 
 export default meta
 
+const productRender = (args: KlevuProductQuery) => {
+  return html`
+    <klevu-product-query
+      pqa-widget-id=${ifDefined(args.pqaWidgetId)}
+      url=${ifDefined(args.url)}
+      product-id=${ifDefined(args.productId)}
+      text-field-variant=${ifDefined(args.textFieldVariant)}
+      text-field-placeholder=${ifDefined(args.textFieldPlaceholder)}
+      popup-title=${ifDefined(args.popupTitle)}
+      button-text=${ifDefined(args.buttonText)}
+      ask-button-text=${ifDefined(args.askButtonText)}
+      use-background=${ifDefined(args.useBackground)}
+      fine-print=${ifDefined(args.finePrint)}
+      popup-anchor=${ifDefined(args.popupAnchor)}
+      popup-offset=${ifDefined(args.popupOffset)}
+    ></klevu-product-query>
+  `
+}
+
 export const Query: StoryObj<KlevuProductQuery> = {
   args: {
-    url: "https://roolee.com/products/this-is-me-scoop-neck-dress",
+    url: "https://www.conns.com/lg-65-c2-evo-oled-tv-oled65c2pua.html",
   },
-  render: (args) => html`
-    <klevu-init api-key="klevu-156934068344410779">
-      <klevu-product-query
-        url=${ifDefined(args.url)}
-        product-id=${ifDefined(args.productId)}
-        text-field-variant=${ifDefined(args.textFieldVariant)}
-        text-field-placeholder=${ifDefined(args.textFieldPlaceholder)}
-        popup-title=${ifDefined(args.popupTitle)}
-        button-text=${ifDefined(args.buttonText)}
-        ask-button-text=${ifDefined(args.askButtonText)}
-        use-background=${ifDefined(args.useBackground)}
-        fine-print=${ifDefined(args.finePrint)}
-        popup-anchor=${ifDefined(args.popupAnchor)}
-        popup-offset=${ifDefined(args.popupOffset)}
-      ></klevu-product-query>
-    </klevu-init>
-  `,
+  render: (args) => html` <klevu-init api-key="klevu-164677714116414855">${productRender(args)}</klevu-init> `,
 }
 
 export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
@@ -43,4 +48,11 @@ export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
     productId: "40912128737373",
   },
   render: Query.render,
+}
+
+export const QueryWithWidgetId: StoryObj<KlevuProductQuery> = {
+  args: {
+    pqaWidgetId: "my-pqa-widget",
+  },
+  render: (args) => html` ${productRender(args)} `,
 }
