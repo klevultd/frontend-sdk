@@ -37,6 +37,9 @@ export class KlevuProductQuery {
    */
   @Prop() productId?: string
 
+  /**
+   * Instead of Klevu API-key use a widget id to start a session
+   */
   @Prop() pqaWidgetId?: string
 
   /**

@@ -730,6 +730,9 @@ export namespace Components {
           * Title of the popup
          */
         "popupTitle": string;
+        /**
+          * Instead of Klevu API-key use a widget id to start a session
+         */
         "pqaWidgetId"?: string;
         /**
           * Alternative to url, productId can be used to start a session
@@ -2520,6 +2523,9 @@ declare namespace LocalJSX {
           * Title of the popup
          */
         "popupTitle"?: string;
+        /**
+          * Instead of Klevu API-key use a widget id to start a session
+         */
         "pqaWidgetId"?: string;
         /**
           * Alternative to url, productId can be used to start a session

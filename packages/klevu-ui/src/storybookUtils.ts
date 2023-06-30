@@ -179,27 +179,26 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}) {
   const data: JsonDocs = jsdocs as any
   const comp = data.components.find((c) => c.tag == tag)
 
+  const klevuInitInject = (story: any) => {
+    const key = localStorage.getItem("klevu-api-key")
+    const url = localStorage.getItem("klevu-url")
+
+    if (key && url) {
+      return html` <klevu-init api-key=${key} url=${url}> ${story()} </klevu-init> `
+    }
+
+    return html`
+      <klevu-init api-key="klevu-164651914788114877" url="https://eucs29v2.ksearchnet.com/cs/v2/search">
+        ${story()}
+      </klevu-init>
+    `
+  }
+
   return {
     argTypes,
     parameters,
     description: comp?.docs,
-    decorators: [
-      withActions as any,
-      (story: any) => {
-        const key = localStorage.getItem("klevu-api-key")
-        const url = localStorage.getItem("klevu-url")
-
-        if (key && url) {
-          return html` <klevu-init api-key=${key} url=${url}> ${story()} </klevu-init> `
-        }
-
-        return html`
-          <klevu-init api-key="klevu-164651914788114877" url="https://eucs29v2.ksearchnet.com/cs/v2/search">
-            ${story()}
-          </klevu-init>
-        `
-      },
-    ],
+    decorators: [withActions as any, klevuInitInject],
   }
 }
 
