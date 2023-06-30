@@ -18,6 +18,9 @@ export class KlevuChatMessages {
    */
   @Prop() messages: MoiMessages = []
 
+  /**
+   * Feedbacks given by user
+   */
   @Prop() feedbacks?: MoiSavedFeedback[]
 
   /**
@@ -57,20 +60,27 @@ export class KlevuChatMessages {
   })
   klevuMessageFeedback!: EventEmitter<onKlevuMessageFeedbackDetails>
 
+  feedbackReasons = ["Irrelevant", "Incorrect", "Offensive", "Other"]
+
   render() {
     return (
       <Host>
         {this.messages.map((message, index) => {
           if ("message" in message) {
             const givenFeedback = this.feedbacks?.find((f) => f.id === message.message.id)
-            const feedback = this.enableMessageFeedback ? givenFeedback?.thumbs : undefined
+            const isLastMessage = this.messages.length - 1 === index
             return (
               <Fragment>
                 <div class="message-container">
-                  <klevu-chat-bubble feedback={feedback} remote exportparts={globalExportedParts}>
+                  <klevu-chat-bubble
+                    feedback={givenFeedback}
+                    feedbackReasons={this.feedbackReasons}
+                    remote
+                    exportparts={globalExportedParts}
+                  >
                     {message.message.value}
                   </klevu-chat-bubble>
-                  {this.enableMessageFeedback && !feedback && this.messages.length - 1 === index && (
+                  {this.enableMessageFeedback && !givenFeedback && isLastMessage && (
                     <div class="feedback">
                       <span
                         part="material-icon"

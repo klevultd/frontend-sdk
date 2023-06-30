@@ -61,6 +61,14 @@ Type: `Promise<void>`
 | `"origin"`  | Popoup origin that opens content of popup |
 
 
+## Shadow Parts
+
+| Part              | Description |
+| ----------------- | ----------- |
+| `"popup-content"` |             |
+| `"popup-origin"`  |             |
+
+
 ## Dependencies
 
 ### Used by

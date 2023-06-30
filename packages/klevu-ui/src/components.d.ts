@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
@@ -25,6 +26,7 @@ import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typo
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
 export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
@@ -108,7 +110,7 @@ export namespace Components {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
-        "size": "small" | "normal" | "large";
+        "size": "tiny" | "small" | "normal" | "large";
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
@@ -121,7 +123,11 @@ export namespace Components {
         /**
           * Has user given feedback to this message
          */
-        "feedback"?: "up" | "down";
+        "feedback"?: MoiSavedFeedback;
+        /**
+          * List of feedback reasons to show after the message
+         */
+        "feedbackReasons"?: string[];
         /**
           * Is the message from the user or from the bot
          */
@@ -151,6 +157,9 @@ export namespace Components {
           * Should display a feedback button after each message
          */
         "enableMessageFeedback"?: boolean;
+        /**
+          * Feedbacks given by user
+         */
         "feedbacks"?: MoiSavedFeedback[];
         /**
           * Messages received from Moi backend
@@ -561,6 +570,8 @@ export namespace Components {
     }
     /**
      * Popup component where clicking origin component popups the the content
+     * @csspart popup-origin - Origin component
+     * @csspart popup-content - Content component
      */
     interface KlevuPopup {
         /**
@@ -681,6 +692,15 @@ export namespace Components {
          */
         "itemsPerRow"?: number;
     }
+    /**
+     * Klevu Product Query application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
+     */
     interface KlevuProductQuery {
         /**
           * Text of the button for asking a question
@@ -706,6 +726,7 @@ export namespace Components {
           * Title of the popup
          */
         "popupTitle": string;
+        "pqaWidgetId"?: string;
         /**
           * Alternative to url, productId can be used to start a session
          */
@@ -1154,6 +1175,10 @@ export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBadgeElement;
 }
+export interface KlevuChatBubbleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuChatBubbleElement;
+}
 export interface KlevuChatLayoutCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuChatLayoutElement;
@@ -1521,6 +1546,8 @@ declare global {
     };
     /**
      * Popup component where clicking origin component popups the the content
+     * @csspart popup-origin - Origin component
+     * @csspart popup-content - Content component
      */
     interface HTMLKlevuPopupElement extends Components.KlevuPopup, HTMLStencilElement {
     }
@@ -1557,6 +1584,15 @@ declare global {
         prototype: HTMLKlevuProductGridElement;
         new (): HTMLKlevuProductGridElement;
     };
+    /**
+     * Klevu Product Query application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
+     */
     interface HTMLKlevuProductQueryElement extends Components.KlevuProductQuery, HTMLStencilElement {
     }
     var HTMLKlevuProductQueryElement: {
@@ -1825,7 +1861,7 @@ declare namespace LocalJSX {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
-        "size"?: "small" | "normal" | "large";
+        "size"?: "tiny" | "small" | "normal" | "large";
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
@@ -1838,7 +1874,12 @@ declare namespace LocalJSX {
         /**
           * Has user given feedback to this message
          */
-        "feedback"?: "up" | "down";
+        "feedback"?: MoiSavedFeedback;
+        /**
+          * List of feedback reasons to show after the message
+         */
+        "feedbackReasons"?: string[];
+        "onKlevuMessageFeedbackReason"?: (event: KlevuChatBubbleCustomEvent<KlevuMessageFeedbackReasonDetails>) => void;
         /**
           * Is the message from the user or from the bot
          */
@@ -1868,6 +1909,9 @@ declare namespace LocalJSX {
           * Should display a feedback button after each message
          */
         "enableMessageFeedback"?: boolean;
+        /**
+          * Feedbacks given by user
+         */
         "feedbacks"?: MoiSavedFeedback[];
         /**
           * Messages received from Moi backend
@@ -2311,6 +2355,8 @@ declare namespace LocalJSX {
     }
     /**
      * Popup component where clicking origin component popups the the content
+     * @csspart popup-origin - Origin component
+     * @csspart popup-content - Content component
      */
     interface KlevuPopup {
         /**
@@ -2432,6 +2478,15 @@ declare namespace LocalJSX {
          */
         "itemsPerRow"?: number;
     }
+    /**
+     * Klevu Product Query application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
+     */
     interface KlevuProductQuery {
         /**
           * Text of the button for asking a question
@@ -2457,6 +2512,7 @@ declare namespace LocalJSX {
           * Title of the popup
          */
         "popupTitle"?: string;
+        "pqaWidgetId"?: string;
         /**
           * Alternative to url, productId can be used to start a session
          */
@@ -3132,6 +3188,8 @@ declare module "@stencil/core" {
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             /**
              * Popup component where clicking origin component popups the the content
+             * @csspart popup-origin - Origin component
+             * @csspart popup-content - Content component
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             /**
@@ -3153,6 +3211,15 @@ declare module "@stencil/core" {
              * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
+            /**
+             * Klevu Product Query application that shows a popup for asking questions about a product
+             * @csspart product-query-header - Header of the popup
+             * @csspart product-query-footer - Footer of the popup where input is
+             * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+             * @csspart product-query-open-button - Button that opens the popup
+             * @csspart popup-origin - Popup origin element
+             * @csspart popup-content - Popup content element
+             */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the

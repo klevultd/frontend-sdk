@@ -5,6 +5,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Klevu Product Query application that shows a popup for asking questions about a product
+
 ## Properties
 
 | Property               | Attribute                | Description                                                  | Type                                                                                                                                                                 | Default                                                                                  |
@@ -15,6 +19,7 @@
 | `popupAnchor`          | `popup-anchor`           | Anchor popup to which side of the origin                     | `"bottom" \| "bottom-end" \| "bottom-start" \| "left" \| "left-end" \| "left-start" \| "right" \| "right-end" \| "right-start" \| "top" \| "top-end" \| "top-start"` | `"bottom-start"`                                                                         |
 | `popupOffset`          | `popup-offset`           | How many pixels to offset the popup from origin              | `number \| undefined`                                                                                                                                                | `undefined`                                                                              |
 | `popupTitle`           | `popup-title`            | Title of the popup                                           | `string`                                                                                                                                                             | `"Ask a Question"`                                                                       |
+| `pqaWidgetId`          | `pqa-widget-id`          |                                                              | `string \| undefined`                                                                                                                                                | `undefined`                                                                              |
 | `productId`            | `product-id`             | Alternative to url, productId can be used to start a session | `string \| undefined`                                                                                                                                                | `undefined`                                                                              |
 | `textFieldPlaceholder` | `text-field-placeholder` | Placeholder of the textfield                                 | `string`                                                                                                                                                             | `"Ask a question"`                                                                       |
 | `textFieldVariant`     | `text-field-variant`     | Variant of the textfield how does it look like               | `"default" \| "pill"`                                                                                                                                                | `"pill"`                                                                                 |
@@ -24,9 +29,13 @@
 
 ## Shadow Parts
 
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
+| Part                        | Description |
+| --------------------------- | ----------- |
+| `"klevu-query-open-button"` |             |
+| `"material-icon"`           |             |
+| `"product-query-feedback"`  |             |
+| `"product-query-footer"`    |             |
+| `"product-query-header"`    |             |
 
 
 ## Dependencies
@@ -63,6 +72,7 @@ graph TD;
   klevu-chat-messages --> klevu-slides
   klevu-chat-messages --> klevu-product
   klevu-chat-bubble --> klevu-typography
+  klevu-chat-bubble --> klevu-button
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars

@@ -36,6 +36,13 @@ button.sizeLarge {
   height: calc(var(--klevu-size-l) * 2);
 }
 
+button.sizeTiny {
+  --padding: var(--klevu-button-padding, var(--klevu-spacing-02));
+  height: calc(var(--klevu-size-xs) * 2);
+  --klevu-button-font-size: var(--klevu-body-xs-size);
+  border-radius: var(--klevu-border-radius-s);
+}
+
 button klevu-typography,
 button span[part="material-icon"] {
   --klevu-typography-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));

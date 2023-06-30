@@ -1,11 +1,22 @@
-import { Component, Fragment, Host, State, h, Element, Prop } from "@stencil/core"
+import { Component, Fragment, Host, State, h, Element, Prop, Listen } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
+import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-chat-bubble"
 
+/**
+ * Klevu Product Query application that shows a popup for asking questions about a product
+ *
+ * @csspart product-query-header - Header of the popup
+ * @csspart product-query-footer - Footer of the popup where input is
+ * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+ * @csspart product-query-open-button - Button that opens the popup
+ * @csspart popup-origin - Popup origin element
+ * @csspart popup-content - Popup content element
+ */
 @Component({
   tag: "klevu-product-query",
   styleUrl: "klevu-product-query.css",
@@ -20,10 +31,13 @@ export class KlevuProductQuery {
    * Url of the page where the product is
    */
   @Prop() url: string = ""
+
   /**
    * Alternative to url, productId can be used to start a session
    */
   @Prop() productId?: string
+
+  @Prop() pqaWidgetId?: string
 
   /**
    * Variant of the textfield how does it look like
@@ -163,6 +177,7 @@ export class KlevuProductQuery {
           productId: this.productId,
           mode: "PQA",
           onAction: this.#onAction.bind(this),
+          pqaWidgetId: this.pqaWidgetId,
         })
         this.messages = this.session.messages
         this.feedbacks = this.session.feedbacks
@@ -182,25 +197,35 @@ export class KlevuProductQuery {
     this.feedbacks = this.session?.feedbacks || []
   }
 
+  @Listen("klevuMessageFeedbackReason")
+  async onMessageFeedback(e: CustomEvent<KlevuMessageFeedbackReasonDetails>) {
+    await this.session?.addFeedback(e.detail.feedback.id, e.detail.feedback.thumbs, e.detail.reason)
+    this.feedbacks = this.session?.feedbacks || []
+  }
+
   render() {
     return (
       <Host>
         <klevu-popup
           ref={(el) => (this.#popup = el)}
-          exportparts={globalExportedParts}
+          exportparts={[globalExportedParts, "popup-content", "popup-origin"].join(", ")}
           onKlevuPopupClose={this.#closeModal.bind(this)}
           anchor={this.popupAnchor}
           offset={this.popupOffset}
           useBackground={this.useBackground}
-          popupWidth={400}
+          popupWidth={480}
         >
           <div slot="origin">
-            <klevu-button exportparts={globalExportedParts} onClick={this.#start.bind(this)}>
+            <klevu-button
+              exportparts={globalExportedParts}
+              onClick={this.#start.bind(this)}
+              part="klevu-query-open-button"
+            >
               {this.buttonText}
             </klevu-button>
           </div>
           <div slot="content">
-            <div class="header">
+            <div class="header" part="product-query-header">
               <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
               <span part="material-icon" onClick={() => this.#popup?.closeModal()}>
                 close
@@ -211,7 +236,7 @@ export class KlevuProductQuery {
             </klevu-typography>
 
             {this.showFeedback ? (
-              <div class="pqa_feedback">
+              <div class="pqa_feedback" part="product-query-feedback">
                 <klevu-typography variant="body-l-bold">Rate your experience</klevu-typography>
                 <klevu-typography variant="body-m">How was your experience using this Q&A tool?</klevu-typography>
                 <div>
@@ -239,7 +264,7 @@ export class KlevuProductQuery {
                 ></klevu-chat-messages>
                 {this.showLoading ? <klevu-loading-indicator /> : null}
 
-                <div slot="footer">
+                <div slot="footer" part="product-query-footer">
                   {!this.registered ? (
                     <Fragment>
                       <div class="inputs">

@@ -9,14 +9,14 @@ Basic button component
 
 ## Properties
 
-| Property      | Attribute      | Description                                               | Type                             | Default     |
-| ------------- | -------------- | --------------------------------------------------------- | -------------------------------- | ----------- |
-| `disabled`    | `disabled`     | Is button disabled                                        | `boolean \| undefined`           | `undefined` |
-| `fullWidth`   | `full-width`   | Make button display block                                 | `boolean \| undefined`           | `undefined` |
-| `icon`        | `icon`         | Instead of content have an icon. So basically icon-button | `string \| undefined`            | `undefined` |
-| `isSecondary` | `is-secondary` | Toned down secondary button                               | `boolean \| undefined`           | `undefined` |
-| `isTertiary`  | `is-tertiary`  | Toned down tertiary button                                | `boolean \| undefined`           | `undefined` |
-| `size`        | `size`         |                                                           | `"large" \| "normal" \| "small"` | `"normal"`  |
+| Property      | Attribute      | Description                                               | Type                                       | Default     |
+| ------------- | -------------- | --------------------------------------------------------- | ------------------------------------------ | ----------- |
+| `disabled`    | `disabled`     | Is button disabled                                        | `boolean \| undefined`                     | `undefined` |
+| `fullWidth`   | `full-width`   | Make button display block                                 | `boolean \| undefined`                     | `undefined` |
+| `icon`        | `icon`         | Instead of content have an icon. So basically icon-button | `string \| undefined`                      | `undefined` |
+| `isSecondary` | `is-secondary` | Toned down secondary button                               | `boolean \| undefined`                     | `undefined` |
+| `isTertiary`  | `is-tertiary`  | Toned down tertiary button                                | `boolean \| undefined`                     | `undefined` |
+| `size`        | `size`         |                                                           | `"large" \| "normal" \| "small" \| "tiny"` | `"normal"`  |
 
 
 ## Slots
@@ -38,6 +38,7 @@ Basic button component
 
 ### Used by
 
+ - [klevu-chat-bubble](../klevu-chat-bubble)
  - [klevu-chat-layout](../klevu-chat-layout)
  - [klevu-chat-messages](../klevu-chat-messages)
  - [klevu-facet](../klevu-facet)
@@ -59,6 +60,7 @@ Basic button component
 ```mermaid
 graph TD;
   klevu-button --> klevu-typography
+  klevu-chat-bubble --> klevu-button
   klevu-chat-layout --> klevu-button
   klevu-chat-messages --> klevu-button
   klevu-facet --> klevu-button

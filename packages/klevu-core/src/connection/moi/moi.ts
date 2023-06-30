@@ -156,6 +156,7 @@ export type MoiChatModes = "PQA"
 export type MoiSavedFeedback = {
   id: string
   thumbs: "up" | "down"
+  reason?: string
 }
 
 type MoiSavedSession = {
@@ -384,13 +385,21 @@ export class MoiSession {
       feedbacks: this.feedbacks,
     })
   }
-  async addFeedback(messageId: string, thumbs: "up" | "down") {
-    this.feedbacks.push({ id: messageId, thumbs })
+  async addFeedback(messageId: string, thumbs: "up" | "down", reason?: string) {
+    const oldFeedback = this.feedbacks.find((f) => f.id === messageId)
+    if (oldFeedback) {
+      oldFeedback.thumbs = thumbs
+      oldFeedback.reason = reason
+    } else {
+      this.feedbacks.push({ id: messageId, thumbs, reason })
+    }
+
     return this.query(
       {
         feedback: {
           messageId,
           thumbs: thumbs.toUpperCase() as "UP" | "DOWN",
+          reason,
         },
       },
       "feedback"
