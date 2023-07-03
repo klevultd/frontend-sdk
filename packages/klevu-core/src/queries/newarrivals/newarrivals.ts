@@ -1,4 +1,4 @@
-import { KlevuTypeOfRequest } from "../../models/index.js"
+import { KlevuTypeOfRecord, KlevuTypeOfRequest } from "../../models/index.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
@@ -28,16 +28,20 @@ export function newArrivals(
     ...options,
   }
 
+  const settings: KlevuBaseQuery["settings"] = {
+    typeOfRecords: [KlevuTypeOfRecord.Product],
+  }
+
+  if (category) {
+    settings.query = {
+      categoryPath: category,
+    }
+  }
+
   const query: KlevuBaseQuery = {
     id: params.id,
     typeOfRequest: KlevuTypeOfRequest.NewArrivals,
-    settings: category
-      ? {
-          query: {
-            categoryPath: category,
-          },
-        }
-      : undefined,
+    settings,
   }
 
   return {
