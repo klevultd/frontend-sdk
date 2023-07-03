@@ -117,4 +117,7 @@ div[slot="footer"] .sendmessage klevu-textfield {
 klevu-typography.fineprint {
   --klevu-body-xs-size: 10px;
   --klevu-body-xs-line-height: 1em;
+  padding-bottom: var(--klevu-spacing-04);
+  margin-bottom: var(--klevu-spacing-04);
+  border-bottom: 1px solid var(--klevu-color-neutral-4);
 }

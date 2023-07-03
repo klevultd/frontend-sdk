@@ -1,10 +1,11 @@
 import { defineCustomElements } from "../loader"
 import "../src/global/global.css"
+import "../src/global/pqa.css"
 // @ts-inore
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import prettier from "prettier/standalone"
-import prettierBabel from "prettier/parser-babel"
 import prettierHtml from "prettier/parser-html"
+import { withThemeByClassName } from "@storybook/addon-styling"
 
 defineCustomElements()
 
@@ -97,3 +98,13 @@ export const parameters = {
       }),
   },
 }
+
+export const decorators = [
+  withThemeByClassName({
+    themes: {
+      default: "default",
+      pqa: "pqa",
+    },
+    defaultTheme: "default",
+  }),
+]

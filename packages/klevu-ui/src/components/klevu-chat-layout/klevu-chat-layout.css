@@ -22,7 +22,7 @@ main slot {
   gap: var(--klevu-spacing-04);
   flex-direction: column;
   height: 100%;
-  padding: var(--klevu-spacing-02) var(--klevu-spacing-04) var(--klevu-spacing-02);
+  padding: var(--klevu-spacing-02) var(--klevu-spacing-06) var(--klevu-spacing-02) 0;
 }
 
 footer {

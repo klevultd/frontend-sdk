@@ -26,7 +26,7 @@ klevu-typography {
   color: var(--text-color-remote);
   border-radius: var(--klevu-border-radius-m);
   border-bottom-left-radius: 0;
-  --klevu-typography-color: var(--klevu-color-neutral-1);
+  --klevu-typography-color: var(--text-color);
 }
 
 .positive_feedback,

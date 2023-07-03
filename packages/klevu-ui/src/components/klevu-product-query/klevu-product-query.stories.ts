@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuProductQuery } from "./klevu-product-query"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-product-query")
 
-const decoratorsWithoutInit = decorators?.filter((d) => d.name !== "klevuInitInject")
+const decoratorsWithoutInit = [decorators[0]]
 
 const meta: Meta = {
   title: "Apps/Product Query",
