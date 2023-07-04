@@ -1,11 +1,8 @@
-.pqa {
-  /*
-  --klevu-color-primary: #d8edfd;
-  --klevu-color-primary-rgb: 216, 237, 253;
-  --klevu-color-primary-darker: #b6ccdc;
-  */
+.klevu-style-pqa {
+  --klevu-chat-bubble-background: #d8edfd;
+  --klevu-chat-bubble-text-color: #000;
 
-  --klevu-chat-bubble-background-remote: #d8edfd;
+  --klevu-chat-bubble-background-remote: var(--klevu-color-neutral-2);
   --klevu-chat-bubble-text-color-remote: #000;
 
   --klevu-color-positive: #1db046;
@@ -14,14 +11,14 @@
   --klevu-elevation-1: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.pqa klevu-product-query::part(product-query-footer) {
+.klevu-style-pqa klevu-product-query::part(product-query-footer) {
   --klevu-color-primary: #d8edfd;
   --klevu-color-primary-rgb: 216, 237, 253;
   --klevu-color-primary-darker: #b6ccdc;
   --klevu-button-text-color: #000;
 }
 
-.pqa klevu-product-query::part(klevu-query-open-button) {
+.klevu-style-pqa klevu-product-query::part(klevu-query-open-button) {
   --klevu-color-primary: #428bca;
   --klevu-color-primary-darker: #407db3;
 }

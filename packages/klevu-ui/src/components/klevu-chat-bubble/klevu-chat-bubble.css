@@ -18,15 +18,16 @@ klevu-typography {
   border-radius: var(--klevu-border-radius-m);
   border-bottom-right-radius: 0;
   color: var(--text-color);
+  --klevu-typography-color: var(--text-color);
 }
 
 :host(.remote) klevu-typography {
   float: left;
   background-color: var(--background-remote);
-  color: var(--text-color-remote);
   border-radius: var(--klevu-border-radius-m);
   border-bottom-left-radius: 0;
-  --klevu-typography-color: var(--text-color);
+  color: var(--text-color-remote);
+  --klevu-typography-color: var(--text-color-remote);
 }
 
 .positive_feedback,

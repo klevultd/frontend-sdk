@@ -17,6 +17,7 @@ input {
   height: calc(var(--klevu-size-m) * 2);
   font-size: var(--klevu-body-m-size);
   padding: var(--padding);
+  font-family: inherit;
 }
 
 input:focus {

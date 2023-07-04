@@ -103,7 +103,7 @@ export const decorators = [
   withThemeByClassName({
     themes: {
       default: "default",
-      pqa: "pqa",
+      pqa: "klevu-style-pqa",
     },
     defaultTheme: "default",
   }),

@@ -26,6 +26,7 @@ export class KlevuProductQuery {
   session?: MoiSession
   #popup?: HTMLKlevuPopupElement
   #scrollElement?: HTMLKlevuUtilScrollbarsElement
+  #chatMessagesElement?: HTMLKlevuChatMessagesElement
 
   /**
    * Url of the page where the product is
@@ -197,6 +198,13 @@ export class KlevuProductQuery {
     this.messages = this.session.messages
     this.feedbacks = this.session.feedbacks
     await this.#scrollMainToBottom("instant")
+
+    if (this.#chatMessagesElement) {
+      // hack to fix scrollbars not showing
+      this.#chatMessagesElement.style.paddingTop = "1px"
+      this.#chatMessagesElement.style.paddingTop = "0px"
+    }
+
     // add this when registering works
     //this.registered = this.messages.length > 1
   }
@@ -276,6 +284,7 @@ export class KlevuProductQuery {
                     exportparts={globalExportedParts}
                     onKlevuMessageFeedback={this.#onFeedback.bind(this)}
                     showFeedbackFor={this.showMessageFeedbackFor}
+                    ref={(el) => (this.#chatMessagesElement = el)}
                   ></klevu-chat-messages>
                 </klevu-util-scrollbars>
 
