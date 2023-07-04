@@ -212,6 +212,7 @@ export class KlevuChatMessages {
             return <klevu-chat-bubble exportparts={globalExportedParts}>{message.local?.message}</klevu-chat-bubble>
           }
         })}
+        <div class="end-spacer">&nbsp;</div>
       </Host>
     )
   }

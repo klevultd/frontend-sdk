@@ -8,83 +8,30 @@
   justify-content: space-between;
 }
 
-klevu-chat-layout {
+klevu-chat-messages {
   height: 500px;
+  padding-right: 16px;
+  max-height: 50vh;
 }
 
-.remote {
-  position: relative;
-  display: flex;
-}
-
-.remote .thumbs {
-  padding: var(--klevu-spacing-04);
-  font-size: 21px;
+div.content {
   display: flex;
   flex-direction: column;
 }
 
-.remote .thumbs span {
-  cursor: pointer;
-  padding: var(--klevu-spacing-02);
-}
-
-.remote .thumbs span:nth-child(1) {
-  color: var(--klevu-color-accent-1);
-  padding-right: var(--klevu-spacing-04);
-}
-
-.remote .thumbs span:nth-child(2) {
-  color: var(--klevu-color-accent-3);
-}
-
-div[slot="footer"] .inputs {
+div[part="product-query-footer"] .inputs {
   display: flex;
   gap: var(--klevu-spacing-04);
 }
 
-div[slot="footer"] .sendmessage {
+div[part="product-query-footer"] .sendmessage {
   display: flex;
   gap: var(--klevu-spacing-04);
+  padding-top: var(--klevu-spacing-04);
 }
 
-div[slot="footer"] .sendmessage klevu-textfield {
+div[part="product-query-footer"] .sendmessage klevu-textfield {
   width: 100%;
-}
-
-.feedback_up,
-.feedback_down {
-  position: absolute;
-  height: 24px;
-  width: 24px;
-  top: -12px;
-  right: 12px;
-  border-radius: 100%;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.feedback_up {
-  background-color: var(--klevu-color-accent-1);
-}
-
-.feedback_down {
-  background-color: var(--klevu-color-accent-3);
-}
-
-.feedback_buttons {
-  display: flex;
-  gap: var(--klevu-spacing-02);
-}
-
-.feedback_buttons klevu-typography {
-  --klevu-typography-font-size: 10px;
-}
-
-.feedback_buttons klevu-button {
-  --klevu-button-font-size: 10px;
 }
 
 .pqa_feedback {

@@ -45,9 +45,8 @@ Klevu Product Query application that shows a popup for asking questions about a 
 - [klevu-popup](../klevu-popup)
 - [klevu-button](../klevu-button)
 - [klevu-typography](../klevu-typography)
-- [klevu-chat-layout](../klevu-chat-layout)
+- [klevu-util-scrollbars](../klevu-util-scrollbars)
 - [klevu-chat-messages](../klevu-chat-messages)
-- [klevu-loading-indicator](../klevu-loading-indicator)
 - [klevu-textfield](../klevu-textfield)
 
 ### Graph
@@ -56,16 +55,10 @@ graph TD;
   klevu-product-query --> klevu-popup
   klevu-product-query --> klevu-button
   klevu-product-query --> klevu-typography
-  klevu-product-query --> klevu-chat-layout
+  klevu-product-query --> klevu-util-scrollbars
   klevu-product-query --> klevu-chat-messages
-  klevu-product-query --> klevu-loading-indicator
   klevu-product-query --> klevu-textfield
   klevu-button --> klevu-typography
-  klevu-chat-layout --> klevu-typography
-  klevu-chat-layout --> klevu-button
-  klevu-chat-layout --> klevu-util-scrollbars
-  klevu-chat-layout --> klevu-popup
-  klevu-chat-layout --> klevu-textfield
   klevu-chat-messages --> klevu-chat-bubble
   klevu-chat-messages --> klevu-typography
   klevu-chat-messages --> klevu-button
