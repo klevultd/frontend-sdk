@@ -252,6 +252,7 @@ export async function startMoi(
           mode: options.mode,
           url: options.url,
           productId: options.productId,
+          pqaWidgetId: options.pqaWidgetId,
         },
       },
       config

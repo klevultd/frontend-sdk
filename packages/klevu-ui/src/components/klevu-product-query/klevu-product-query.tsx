@@ -1,7 +1,7 @@
 import { Component, Fragment, Host, State, h, Element, Prop, Listen } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage } from "@klevu/core"
+import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage, KlevuConfig } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
@@ -168,7 +168,6 @@ export class KlevuProductQuery {
 
   async #scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
     const instance = await this.#scrollElement?.getInstance()
-    console.log("instance", instance)
     if (instance) {
       setTimeout(() => {
         instance.elements().viewport.scrollTo({
@@ -182,13 +181,15 @@ export class KlevuProductQuery {
   async #start() {
     this.showFeedback = false
     this.#popup?.openModal()
-    let config = await this.el.closest("klevu-init")?.getConfig()
+    let config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
+
+    const useConfig = config.apiKey && config.apiKey !== ""
 
     this.session = await startMoi({
       onMessage: this.onMessage.bind(this),
       // Do nothing on redirect as we have our own system
       onRedirect: () => {},
-      configOverride: config,
+      configOverride: useConfig ? config : undefined,
       url: this.url === "" ? undefined : this.url,
       productId: this.productId,
       mode: "PQA",
