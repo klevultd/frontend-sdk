@@ -1,7 +1,7 @@
 import { Component, Fragment, Host, State, h, Element, Prop, Listen } from "@stencil/core"
 import { globalExportedParts } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage } from "@klevu/core"
+import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage, KlevuConfig } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
@@ -25,7 +25,8 @@ import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-ch
 export class KlevuProductQuery {
   session?: MoiSession
   #popup?: HTMLKlevuPopupElement
-  #chatLayout?: HTMLKlevuChatLayoutElement
+  #scrollElement?: HTMLKlevuUtilScrollbarsElement
+  #chatMessagesElement?: HTMLKlevuChatMessagesElement
 
   /**
    * Url of the page where the product is
@@ -115,7 +116,7 @@ export class KlevuProductQuery {
     }
     this.messages = this.session.messages
     this.feedbacks = this.session.feedbacks
-    this.#chatLayout?.scrollMainToBottom()
+    this.#scrollMainToBottom()
   }
 
   async #sendMessage() {
@@ -126,7 +127,7 @@ export class KlevuProductQuery {
     }
 
     this.text = ""
-    this.#chatLayout?.scrollMainToBottom()
+    this.#scrollMainToBottom()
     this.showLoading = true
     await this.session?.query({
       message: message,
@@ -144,7 +145,7 @@ export class KlevuProductQuery {
       },
     })
     this.registered = true
-    this.#chatLayout?.scrollMainToBottom()
+    this.#scrollMainToBottom()
   }
 
   #thumb(index: number, dir: "up" | "down") {
@@ -165,29 +166,48 @@ export class KlevuProductQuery {
     */
   }
 
-  #start() {
+  async #scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance) {
+      setTimeout(() => {
+        instance.elements().viewport.scrollTo({
+          top: instance.elements().viewport.scrollHeight,
+          behavior: behavior as any, // for some reason doesn't compile without any
+        })
+      }, 100)
+    }
+  }
+
+  async #start() {
     this.showFeedback = false
     this.#popup?.openModal()
-    this.el
-      .closest("klevu-init")
-      ?.getConfig()
-      .then(async (config) => {
-        this.session = await startMoi({
-          onMessage: this.onMessage.bind(this),
-          // Do nothing on redirect as we have our own system
-          onRedirect: () => {},
-          configOverride: config,
-          url: this.url === "" ? undefined : this.url,
-          productId: this.productId,
-          mode: "PQA",
-          onAction: this.#onAction.bind(this),
-          pqaWidgetId: this.pqaWidgetId,
-        })
-        this.messages = this.session.messages
-        this.feedbacks = this.session.feedbacks
-        // add this when registering works
-        //this.registered = this.messages.length > 1
-      })
+    let config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
+
+    const useConfig = config.apiKey && config.apiKey !== ""
+
+    this.session = await startMoi({
+      onMessage: this.onMessage.bind(this),
+      // Do nothing on redirect as we have our own system
+      onRedirect: () => {},
+      configOverride: useConfig ? config : undefined,
+      url: this.url === "" ? undefined : this.url,
+      productId: this.productId,
+      mode: "PQA",
+      onAction: this.#onAction.bind(this),
+      pqaWidgetId: this.pqaWidgetId,
+    })
+    this.messages = this.session.messages
+    this.feedbacks = this.session.feedbacks
+    await this.#scrollMainToBottom("instant")
+
+    if (this.#chatMessagesElement) {
+      // hack to fix scrollbars not showing
+      this.#chatMessagesElement.style.paddingTop = "1px"
+      this.#chatMessagesElement.style.paddingTop = "0px"
+    }
+
+    // add this when registering works
+    //this.registered = this.messages.length > 1
   }
 
   #onAction(action: MoiActionsMessage["actions"]["actions"][number]) {
@@ -231,7 +251,7 @@ export class KlevuProductQuery {
               {this.buttonText}
             </klevu-button>
           </div>
-          <div slot="content">
+          <div class="content" slot="content">
             <div class="header" part="product-query-header">
               <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
               <span part="material-icon" onClick={() => this.#popup?.closeModal()}>
@@ -256,23 +276,20 @@ export class KlevuProductQuery {
                 </div>
               </div>
             ) : (
-              <klevu-chat-layout
-                ref={(el) => (this.#chatLayout = el)}
-                exportparts={globalExportedParts}
-                onKlevuChatLayoutMessageSent={(event) => this.#sendMessage()}
-              >
-                <div slot="header"></div>
-                <klevu-chat-messages
-                  messages={this.messages}
-                  feedbacks={this.feedbacks}
-                  enableMessageFeedback
-                  exportparts={globalExportedParts}
-                  onKlevuMessageFeedback={this.#onFeedback.bind(this)}
-                  showFeedbackFor={this.showMessageFeedbackFor}
-                ></klevu-chat-messages>
-                {this.showLoading ? <klevu-loading-indicator /> : null}
+              <Fragment>
+                <klevu-util-scrollbars overflowX="hidden" overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+                  <klevu-chat-messages
+                    messages={this.messages}
+                    feedbacks={this.feedbacks}
+                    enableMessageFeedback
+                    exportparts={globalExportedParts}
+                    onKlevuMessageFeedback={this.#onFeedback.bind(this)}
+                    showFeedbackFor={this.showMessageFeedbackFor}
+                    ref={(el) => (this.#chatMessagesElement = el)}
+                  ></klevu-chat-messages>
+                </klevu-util-scrollbars>
 
-                <div slot="footer" part="product-query-footer">
+                <div part="product-query-footer">
                   {!this.registered ? (
                     <Fragment>
                       <div class="inputs">
@@ -324,7 +341,7 @@ export class KlevuProductQuery {
                     </div>
                   )}
                 </div>
-              </klevu-chat-layout>
+              </Fragment>
             )}
           </div>
         </klevu-popup>

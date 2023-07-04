@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.2.8",
-    "@klevu/core": "2.0.11",
+    "@klevu/core": "2.0.13",
     "@stencil/core": "^3.2.2",
     "axios": "^1.4.0",
     "lit-html": "^2.7.4",
@@ -70,6 +70,7 @@
     "@storybook/addon-essentials": "^7.0.12",
     "@storybook/addon-links": "^7.0.12",
     "@storybook/addon-mdx-gfm": "^7.0.12",
+    "@storybook/addon-styling": "^1.3.2",
     "@storybook/builder-vite": "^7.0.12",
     "@storybook/mdx2-csf": "^1.1.0",
     "@storybook/testing-library": "^0.1.0",

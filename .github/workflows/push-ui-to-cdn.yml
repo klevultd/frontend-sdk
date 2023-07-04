@@ -1,0 +1,34 @@
+name: Push latest version of @klevu/ui to Klevu CDN
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: NPM install
+        run: npm install @klevu/ui
+      - name: Get the version of package
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
+        with:
+          path: node_modules/@klevu/ui
+      - name: Upload to latest folder Klevu CDN
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
+          source_dir: "node_modules/@klevu/ui/dist"
+          destination_dir: "latest"
+      - name: Upload to version folder Klevu CDN
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
+          source_dir: "node_modules/@klevu/ui/dist"
+          destination_dir: ${{ steps.package-version.outputs.current-version }}

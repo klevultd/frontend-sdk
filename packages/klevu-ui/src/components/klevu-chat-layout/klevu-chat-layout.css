@@ -21,8 +21,11 @@ main slot {
   display: flex;
   gap: var(--klevu-spacing-04);
   flex-direction: column;
+  padding: var(--klevu-spacing-02) var(--klevu-spacing-06) var(--klevu-spacing-02) 0;
+}
+
+main klevu-util-scrollbars {
   height: 100%;
-  padding: var(--klevu-spacing-02) var(--klevu-spacing-04) var(--klevu-spacing-02);
 }
 
 footer {

@@ -43,7 +43,7 @@ export type KlevuTypographyVariant =
 @Component({
   tag: "klevu-typography",
   styleUrl: "klevu-typography.css",
-  shadow: true,
+  shadow: false,
 })
 export class KlevuTypography {
   /**

@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuProductQuery } from "./klevu-product-query"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-product-query")
 
-const decoratorsWithoutInit = decorators?.filter((d) => d.name !== "klevuInitInject")
+const decoratorsWithoutInit = [decorators[0]]
 
 const meta: Meta = {
   title: "Apps/Product Query",
@@ -52,7 +52,8 @@ export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
 
 export const QueryWithWidgetId: StoryObj<KlevuProductQuery> = {
   args: {
-    pqaWidgetId: "my-pqa-widget",
+    pqaWidgetId: "pqa-f53fb4ac-9b8b-48c6-be1f-e3131e841114",
+    url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
-  render: (args) => html` ${productRender(args)} `,
+  render: (args) => html`<klevu-init>${productRender(args)}</klevu-init>`,
 }
