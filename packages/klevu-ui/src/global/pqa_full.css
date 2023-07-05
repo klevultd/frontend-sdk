@@ -1,9 +1,4 @@
 :root {
-  /** colors */
-  --klevu-color-primary: #2b4af7;
-  --klevu-color-primary-rgb: 43, 74, 247;
-  --klevu-color-primary-darker: #0d2ee8;
-
   --klevu-color-neutral-1: #ffffff;
   --klevu-color-neutral-2: #f6f6f6;
   --klevu-color-neutral-3: #ededed;
@@ -95,6 +90,10 @@
   --klevu-product-small-width: 200px;
   */
   --klevu-product-image-fill: cover; /* cover, contain */
+
+  --klevu-color-primary: #d8edfd;
+  --klevu-color-primary-rgb: 216, 237, 253;
+  --klevu-color-primary-darker: #b6ccdc;
 
   --klevu-chat-bubble-background: #d8edfd;
   --klevu-chat-bubble-text-color: #000;

@@ -1,4 +1,8 @@
 .klevu-style-pqa {
+  --klevu-color-primary: #d8edfd;
+  --klevu-color-primary-rgb: 216, 237, 253;
+  --klevu-color-primary-darker: #b6ccdc;
+
   --klevu-chat-bubble-background: #d8edfd;
   --klevu-chat-bubble-text-color: #000;
 
