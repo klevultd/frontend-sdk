@@ -23,7 +23,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
           aws-bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
           aws-region: "eu-west-1"
-          file-path: "./node_modules/@klevu/ui/dist/*"
+          file-path: "./node_modules/@klevu/ui/dist/"
           destination-dir: "latest"
       - name: Upload to version folder Klevu CDN
         uses: hkusu/s3-upload-action@v2
@@ -32,5 +32,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
           aws-bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
           aws-region: "eu-west-1"
-          file-path: "./node_modules/@klevu/ui/dist/*"
+          file-path: "./node_modules/@klevu/ui/dist/"
           destination-dir: ${{ steps.package-version.outputs.current-version }}
