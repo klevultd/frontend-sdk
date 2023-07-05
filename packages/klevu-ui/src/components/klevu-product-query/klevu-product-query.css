@@ -68,3 +68,8 @@ klevu-typography.fineprint {
   margin-bottom: var(--klevu-spacing-04);
   border-bottom: 1px solid var(--klevu-color-neutral-4);
 }
+
+.loading-sorry {
+  display: block;
+  --klevu-body-xs-size: 10px;
+}

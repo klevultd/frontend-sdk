@@ -7,6 +7,9 @@ export type onKlevuMessageFeedbackDetails = {
   feedback: "up" | "down"
 }
 
+/**
+ * @slot after-messages - Things to place in the after all messages
+ */
 @Component({
   tag: "klevu-chat-messages",
   styleUrl: "klevu-chat-messages.css",
@@ -212,6 +215,7 @@ export class KlevuChatMessages {
             return <klevu-chat-bubble exportparts={globalExportedParts}>{message.local?.message}</klevu-chat-bubble>
           }
         })}
+        <slot name="after-messages"></slot>
         <div class="end-spacer">&nbsp;</div>
       </Host>
     )

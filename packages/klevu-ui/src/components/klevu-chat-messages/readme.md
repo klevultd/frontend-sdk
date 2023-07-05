@@ -25,6 +25,13 @@
 | `klevuSelectProductOption` | When product option is clicked | `CustomEvent<{ product: MoiProduct; option: { chat: string; intent: string; name: string; }; }>`                                                                  |
 
 
+## Slots
+
+| Slot               | Description                               |
+| ------------------ | ----------------------------------------- |
+| `"after-messages"` | Things to place in the after all messages |
+
+
 ## Shadow Parts
 
 | Part              | Description |
