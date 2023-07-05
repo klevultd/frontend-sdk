@@ -17,18 +17,20 @@ jobs:
         with:
           path: node_modules/@klevu/ui
       - name: Upload to latest folder Klevu CDN
-        uses: shallwefootball/s3-upload-action@master
+        uses: hkusu/s3-upload-action@v2
         with:
-          aws_key_id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
-          source_dir: "node_modules/@klevu/ui/dist"
-          destination_dir: "latest"
+          aws-access-key-id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
+          aws-bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
+          aws-region: "eu-west-1"
+          file-path: "./node_modules/@klevu/ui/dist/*"
+          destination-dir: "latest"
       - name: Upload to version folder Klevu CDN
-        uses: shallwefootball/s3-upload-action@master
+        uses: hkusu/s3-upload-action@v2
         with:
-          aws_key_id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
-          source_dir: "node_modules/@klevu/ui/dist"
-          destination_dir: ${{ steps.package-version.outputs.current-version }}
+          aws-access-key-id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
+          aws-bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
+          aws-region: "eu-west-1"
+          file-path: "./node_modules/@klevu/ui/dist/*"
+          destination-dir: ${{ steps.package-version.outputs.current-version }}
