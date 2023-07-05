@@ -51,7 +51,7 @@ export class KlevuProductQuery {
   /**
    * Placeholder of the textfield
    */
-  @Prop() textFieldPlaceholder: string = "Ask a question"
+  @Prop() textFieldPlaceholder: string = "Ask a questions"
 
   /**
    * Title of the popup
@@ -66,7 +66,7 @@ export class KlevuProductQuery {
   /**
    * Fine print of the popup under the title
    */
-  @Prop() finePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on this page."
+  @Prop() finePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page."
 
   /**
    * Text of the button for asking a question
@@ -94,6 +94,7 @@ export class KlevuProductQuery {
   @State() registered = true // change to false when registering works
   @State() showFeedback = false
   @State() showLoading = false
+  @State() showLoadingSorry = false
   @State() feedbacks: MoiSavedFeedback[] = []
   @State() showMessageFeedbackFor?: string
 
@@ -129,9 +130,14 @@ export class KlevuProductQuery {
     this.text = ""
     this.#scrollMainToBottom()
     this.showLoading = true
+    const timeout = setTimeout(() => {
+      this.showLoadingSorry = true
+    }, 4000)
     await this.session?.query({
       message: message,
     })
+    clearTimeout(timeout)
+    this.showLoadingSorry = false
     this.showLoading = false
   }
 
@@ -167,6 +173,11 @@ export class KlevuProductQuery {
   }
 
   async #scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
+    if (this.#chatMessagesElement) {
+      // hack to fix scrollbars not showing
+      this.#chatMessagesElement.style.paddingTop = "1px"
+      this.#chatMessagesElement.style.paddingTop = "0px"
+    }
     const instance = await this.#scrollElement?.getInstance()
     if (instance) {
       setTimeout(() => {
@@ -199,12 +210,6 @@ export class KlevuProductQuery {
     this.messages = this.session.messages
     this.feedbacks = this.session.feedbacks
     await this.#scrollMainToBottom("instant")
-
-    if (this.#chatMessagesElement) {
-      // hack to fix scrollbars not showing
-      this.#chatMessagesElement.style.paddingTop = "1px"
-      this.#chatMessagesElement.style.paddingTop = "0px"
-    }
 
     // add this when registering works
     //this.registered = this.messages.length > 1
@@ -240,7 +245,7 @@ export class KlevuProductQuery {
           anchor={this.popupAnchor}
           offset={this.popupOffset}
           useBackground={this.useBackground}
-          popupWidth={480}
+          popupWidth={520}
         >
           <div slot="origin">
             <klevu-button
@@ -286,7 +291,17 @@ export class KlevuProductQuery {
                     onKlevuMessageFeedback={this.#onFeedback.bind(this)}
                     showFeedbackFor={this.showMessageFeedbackFor}
                     ref={(el) => (this.#chatMessagesElement = el)}
-                  ></klevu-chat-messages>
+                  >
+                    <div slot="after-messages">
+                      {this.showLoading ? <klevu-loading-indicator /> : null}
+                      {this.showLoadingSorry ? (
+                        <klevu-typography class="loading-sorry" variant="body-xs">
+                          I take a few extra seconds when answering the first question sometimes if I need to scan whole
+                          page.
+                        </klevu-typography>
+                      ) : null}
+                    </div>
+                  </klevu-chat-messages>
                 </klevu-util-scrollbars>
 
                 <div part="product-query-footer">
