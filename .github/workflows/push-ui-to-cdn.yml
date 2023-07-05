@@ -8,6 +8,10 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.RESOURCES_AWS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY }}
+      RESOURCES_AWS_BUCKET: ${{ secrets.RESOURCES_AWS_BUCKET }}
     steps:
       - name: NPM install
         run: npm install @klevu/ui
@@ -17,20 +21,6 @@ jobs:
         with:
           path: node_modules/@klevu/ui
       - name: Upload to latest folder Klevu CDN
-        uses: hkusu/s3-upload-action@v2
-        with:
-          aws-access-key-id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
-          aws-bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
-          aws-region: "eu-west-1"
-          file-path: "./node_modules/@klevu/ui/dist/"
-          destination-dir: "latest"
+        run: aws s3 sync ./node_modules/@klevu/ui/dist/ s3://$RESOURCES_AWS_BUCKET/latest/ --region eu-west-1
       - name: Upload to version folder Klevu CDN
-        uses: hkusu/s3-upload-action@v2
-        with:
-          aws-access-key-id: ${{ secrets.RESOURCES_AWS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.RESOURCES_AWS_SECRET_ACCESS_KEY}}
-          aws-bucket: ${{ secrets.RESOURCES_AWS_BUCKET }}
-          aws-region: "eu-west-1"
-          file-path: "./node_modules/@klevu/ui/dist/"
-          destination-dir: ${{ steps.package-version.outputs.current-version }}
+        run: aws s3 sync ./node_modules/@klevu/ui/dist/ s3://$RESOURCES_AWS_BUCKET/${{ steps.package-version.outputs.current-version }}/ --region eu-west-1
