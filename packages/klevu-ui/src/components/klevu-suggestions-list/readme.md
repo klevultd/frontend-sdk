@@ -38,6 +38,7 @@ Simple component to list suggestions. Takes in a parameter suggestions that will
 graph TD;
   klevu-suggestions-list --> klevu-typography
   klevu-suggestions-list --> klevu-list
+  klevu-list --> klevu-icon
   klevu-list --> klevu-typography
   klevu-quicksearch --> klevu-suggestions-list
   style klevu-suggestions-list fill:#f9f,stroke:#333,stroke-width:4px

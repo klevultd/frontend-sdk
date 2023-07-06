@@ -57,7 +57,7 @@ export class KlevuCheckbox {
             id={this.name}
             onChange={this.#onChange.bind(this)}
           />
-          <span part="material-icon">check</span>
+          <klevu-icon name="check" />
         </div>
         {this.renderContent && (
           <label class="content" htmlFor={this.name}>

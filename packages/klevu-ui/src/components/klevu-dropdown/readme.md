@@ -25,22 +25,20 @@ Simple native dropdown component for dropdown
 | `klevuDropdownChanged` | When dropdown item has been changed | `CustomEvent<string>` |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
 
  - [klevu-sort](../klevu-sort)
 
+### Depends on
+
+- [klevu-icon](../klevu-icon)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-dropdown --> klevu-icon
   klevu-sort --> klevu-dropdown
   style klevu-dropdown fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -70,7 +70,9 @@ graph TD;
   klevu-chat-layout --> klevu-util-scrollbars
   klevu-chat-layout --> klevu-popup
   klevu-chat-layout --> klevu-textfield
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
+  klevu-textfield --> klevu-icon
   klevu-moi --> klevu-chat-layout
   style klevu-chat-layout fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -1,5 +1,5 @@
 import { Component, Fragment, Host, State, h, Element, Prop, Listen } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
+
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage, KlevuConfig } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
@@ -240,7 +240,7 @@ export class KlevuProductQuery {
       <Host>
         <klevu-popup
           ref={(el) => (this.#popup = el)}
-          exportparts={[globalExportedParts, "popup-content", "popup-origin"].join(", ")}
+          exportparts="popup-content, popup-origin"
           onKlevuPopupClose={this.#closeModal.bind(this)}
           anchor={this.popupAnchor}
           offset={this.popupOffset}
@@ -248,20 +248,14 @@ export class KlevuProductQuery {
           popupWidth={520}
         >
           <div slot="origin">
-            <klevu-button
-              exportparts={globalExportedParts}
-              onClick={this.#start.bind(this)}
-              part="klevu-query-open-button"
-            >
+            <klevu-button onClick={this.#start.bind(this)} part="klevu-query-open-button">
               {this.buttonText}
             </klevu-button>
           </div>
           <div class="content" slot="content">
             <div class="header" part="product-query-header">
               <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
-              <span part="material-icon" onClick={() => this.#popup?.closeModal()}>
-                close
-              </span>
+              <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
             </div>
             <klevu-typography variant="body-xs" class="fineprint">
               {this.finePrint}
@@ -272,12 +266,8 @@ export class KlevuProductQuery {
                 <klevu-typography variant="body-l-bold">Rate your experience</klevu-typography>
                 <klevu-typography variant="body-m">How was your experience using this Q&A tool?</klevu-typography>
                 <div>
-                  <span part="material-icon" onClick={() => this.#pqafeedback("up")}>
-                    thumb_up
-                  </span>
-                  <span part="material-icon" onClick={() => this.#pqafeedback("down")}>
-                    thumb_down
-                  </span>
+                  <klevu-icon onClick={() => this.#pqafeedback("up")} name="thumb_up" />
+                  <klevu-icon onClick={() => this.#pqafeedback("down")} name="thumb_down" />
                 </div>
               </div>
             ) : (
@@ -287,7 +277,6 @@ export class KlevuProductQuery {
                     messages={this.messages}
                     feedbacks={this.feedbacks}
                     enableMessageFeedback
-                    exportparts={globalExportedParts}
                     onKlevuMessageFeedback={this.#onFeedback.bind(this)}
                     showFeedbackFor={this.showMessageFeedbackFor}
                     ref={(el) => (this.#chatMessagesElement = el)}
@@ -324,11 +313,7 @@ export class KlevuProductQuery {
                             this.email = e.detail
                           }}
                         ></klevu-textfield>
-                        <klevu-button
-                          exportparts={globalExportedParts}
-                          icon="send"
-                          onClick={() => this.#register()}
-                        ></klevu-button>
+                        <klevu-button icon="send" onClick={() => this.#register()}></klevu-button>
                       </div>
                       <klevu-typography variant="body-xs">
                         We are compliant with data protection regulations. Visit our privacy policy to learn how we
@@ -347,11 +332,7 @@ export class KlevuProductQuery {
                       {this.askButtonText ? (
                         <klevu-button onClick={() => this.#sendMessage()}>{this.askButtonText}</klevu-button>
                       ) : (
-                        <klevu-button
-                          exportparts={globalExportedParts}
-                          icon="send"
-                          onClick={() => this.#sendMessage()}
-                        ></klevu-button>
+                        <klevu-button icon="send" onClick={() => this.#sendMessage()}></klevu-button>
                       )}
                     </div>
                   )}

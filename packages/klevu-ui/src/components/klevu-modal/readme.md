@@ -46,22 +46,20 @@ Type: `Promise<void>`
 
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
 
  - [klevu-moi](../klevu-moi)
 
+### Depends on
+
+- [klevu-icon](../klevu-icon)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-modal --> klevu-icon
   klevu-moi --> klevu-modal
   style klevu-modal fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -26,22 +26,17 @@ Has selected and removable attributes that can be used to display the chip in se
 | `klevuChipRemove` | Event that is fired when chip is removed | `CustomEvent<void>` |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Depends on
 
+- [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-chip --> klevu-icon
   klevu-chip --> klevu-typography
   style klevu-chip fill:#f9f,stroke:#333,stroke-width:4px
 ```

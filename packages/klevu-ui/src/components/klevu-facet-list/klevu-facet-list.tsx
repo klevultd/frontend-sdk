@@ -6,7 +6,6 @@ import {
   KlevuFilterResultRating,
 } from "@klevu/core"
 import { Component, EventEmitter, h, Host, Listen, Prop, State, Event, forceUpdate, Element } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
 /**
@@ -129,7 +128,6 @@ export class KlevuFacetList {
                 accordion={this.accordion}
                 accordionStartOpen={index === 0}
                 customOrder={this.customOrder?.[f.key]}
-                exportparts={globalExportedParts}
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 option={f}
                 mode={mode}
@@ -139,7 +137,6 @@ export class KlevuFacetList {
             return (
               <klevu-facet
                 accordion={this.accordion}
-                exportparts={globalExportedParts}
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 slider={f}
                 labelOverride={f.label === "klevu_price" ? this.defaultPriceLabel : undefined}

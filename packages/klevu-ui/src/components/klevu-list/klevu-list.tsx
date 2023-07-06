@@ -33,11 +33,7 @@ export class KlevuList {
   #getContent() {
     return (
       <Fragment>
-        {this.icon && (
-          <span class="icon" part="material-icon">
-            {this.icon}
-          </span>
-        )}
+        {this.icon && <klevu-icon class="icon" name={this.icon} />}
         {this.image && <img class="image" src={this.image} />}
         <div class="text">
           <klevu-typography variant="body-s">

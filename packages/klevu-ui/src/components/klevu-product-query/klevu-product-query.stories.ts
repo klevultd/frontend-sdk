@@ -40,7 +40,19 @@ export const Query: StoryObj<KlevuProductQuery> = {
   args: {
     url: "https://www.conns.com/lg-65-c2-evo-oled-tv-oled65c2pua.html",
   },
-  render: (args) => html` <klevu-init api-key="klevu-164677714116414855">${productRender(args)}</klevu-init> `,
+  render: (args) =>
+    html`
+      <klevu-init
+        .settings=${{
+          icons: {
+            thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
+            thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
+          },
+        }}
+        api-key="klevu-164677714116414855"
+        >${productRender(args)}</klevu-init
+      >
+    `,
 }
 
 export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
@@ -55,5 +67,14 @@ export const QueryWithWidgetId: StoryObj<KlevuProductQuery> = {
     pqaWidgetId: "pqa-f53fb4ac-9b8b-48c6-be1f-e3131e841114",
     url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
-  render: (args) => html`<klevu-init>${productRender(args)}</klevu-init>`,
+  render: (args) =>
+    html`<klevu-init
+      .settings=${{
+        icons: {
+          thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
+          thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
+        },
+      }}
+      >${productRender(args)}</klevu-init
+    >`,
 }

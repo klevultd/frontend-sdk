@@ -24,13 +24,6 @@ Pagination component. Either provide numbers or query result to display the comp
 | `klevuPaginationChange` | Page that was changed into | `CustomEvent<number>` |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
@@ -39,9 +32,14 @@ Pagination component. Either provide numbers or query result to display the comp
  - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-search-landing-page](../klevu-search-landing-page)
 
+### Depends on
+
+- [klevu-icon](../klevu-icon)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-pagination --> klevu-icon
   klevu-merchandising --> klevu-pagination
   klevu-quicksearch --> klevu-pagination
   klevu-search-landing-page --> klevu-pagination

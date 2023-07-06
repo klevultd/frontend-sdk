@@ -1,6 +1,6 @@
 import { defineCustomElements } from "../loader"
 import "../src/global/global.css"
-import "../src/global/pqa.css"
+import "../src/global/pqa/pqa.css"
 // @ts-inore
 import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import prettier from "prettier/standalone"

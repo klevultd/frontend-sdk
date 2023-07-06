@@ -46,7 +46,7 @@ export class KlevuAccordion {
           <klevu-typography variant="body-s-bold">
             <slot name="header"></slot>
           </klevu-typography>
-          <span part="material-icon">expand_more</span>
+          <klevu-icon name="expand_more"></klevu-icon>
         </label>
         <div class="content">
           <slot name="content"></slot>

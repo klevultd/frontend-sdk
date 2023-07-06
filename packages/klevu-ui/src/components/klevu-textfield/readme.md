@@ -29,13 +29,6 @@ Branded text field component
 | `klevuTextFocused`      | When textfield is focused          | `CustomEvent<void>`   |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
@@ -44,9 +37,14 @@ Branded text field component
  - [klevu-product-query](../klevu-product-query)
  - [klevu-search-field](../klevu-search-field)
 
+### Depends on
+
+- [klevu-icon](../klevu-icon)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-textfield --> klevu-icon
   klevu-chat-layout --> klevu-textfield
   klevu-product-query --> klevu-textfield
   klevu-search-field --> klevu-textfield

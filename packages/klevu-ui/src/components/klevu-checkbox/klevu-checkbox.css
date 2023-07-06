@@ -59,7 +59,7 @@ input[type="checkbox"]:checked {
   border-color: var(--klevu-checkbox-color);
 }
 
-span {
+klevu-icon {
   position: absolute;
   top: 0;
   left: 0;

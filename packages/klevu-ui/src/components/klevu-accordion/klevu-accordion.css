@@ -37,12 +37,12 @@ input:checked ~ .content {
   padding: 4px;
 }
 
-label span {
+label klevu-icon {
   color: var(--klevu-color-neutral-8);
   transition: transform var(--klevu-animation-duration-fast) var(--klevu-animation-timing-function);
   user-select: none;
 }
 
-input:checked + label span {
+input:checked + label klevu-icon {
   transform: rotate(-180deg);
 }

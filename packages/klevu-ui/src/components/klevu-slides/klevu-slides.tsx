@@ -1,5 +1,4 @@
 import { Component, h, Host, Prop } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
 
 /**
  * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
@@ -83,14 +82,12 @@ export class KlevuSlides {
             {this.hideNextPrev ? null : (
               <div>
                 <klevu-button
-                  exportparts={globalExportedParts}
                   class="prev"
                   icon="chevron_left"
                   onClick={this.#prev.bind(this)}
                   isSecondary
                 ></klevu-button>
                 <klevu-button
-                  exportparts={globalExportedParts}
                   class="next"
                   icon="chevron_right"
                   onClick={this.#next.bind(this)}

@@ -91,15 +91,13 @@ export class KlevuPagination {
 
     return (
       <Host>
-        <span
+        <klevu-icon
           class={{
             disabled: current === min,
           }}
           onClick={() => current !== min && this.klevuPaginationChange.emit(current - 1)}
-          part="material-icon"
-        >
-          navigate_before
-        </span>
+          name="navigate_before"
+        />
         {pages.map((i) => {
           if (i == -1) {
             return <span class="disabled dots">...</span>
@@ -116,15 +114,13 @@ export class KlevuPagination {
             </span>
           )
         })}
-        <span
+        <klevu-icon
           class={{
             disabled: current === max,
           }}
           onClick={() => current !== max && this.klevuPaginationChange.emit(current + 1)}
-          part="material-icon"
-        >
-          navigate_next
-        </span>
+          name="navigate_next"
+        />
       </Host>
     )
   }

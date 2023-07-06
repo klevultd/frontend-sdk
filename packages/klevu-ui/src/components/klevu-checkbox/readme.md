@@ -23,13 +23,6 @@ Checkbox component
 | `klevuCheckboxChange` |             | `CustomEvent<boolean>` |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
@@ -38,11 +31,13 @@ Checkbox component
 
 ### Depends on
 
+- [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-checkbox --> klevu-icon
   klevu-checkbox --> klevu-typography
   klevu-facet --> klevu-checkbox
   style klevu-checkbox fill:#f9f,stroke:#333,stroke-width:4px

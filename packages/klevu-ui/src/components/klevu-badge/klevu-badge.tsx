@@ -42,7 +42,7 @@ export class KlevuBadge {
 
     return (
       <Host style={style} class={{ closable: Boolean(this.closable) }} onClick={this.#close.bind(this)}>
-        {this.closable && <span part="material-icon">close</span>}
+        {this.closable && <klevu-icon name="close"></klevu-icon>}
         <klevu-typography variant="body-xs">
           <slot></slot>
         </klevu-typography>

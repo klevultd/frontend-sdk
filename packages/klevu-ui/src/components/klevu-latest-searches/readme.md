@@ -37,6 +37,7 @@ Lists latest searches user has made on the site
 graph TD;
   klevu-latest-searches --> klevu-typography
   klevu-latest-searches --> klevu-list
+  klevu-list --> klevu-icon
   klevu-list --> klevu-typography
   klevu-quicksearch --> klevu-latest-searches
   style klevu-latest-searches fill:#f9f,stroke:#333,stroke-width:4px

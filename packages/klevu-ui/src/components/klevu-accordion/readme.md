@@ -24,13 +24,6 @@ Component that wrap two slots to create accordion element.
 | `"icon"`    | Icon element                                |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
@@ -40,11 +33,13 @@ Component that wrap two slots to create accordion element.
 ### Depends on
 
 - [klevu-typography](../klevu-typography)
+- [klevu-icon](../klevu-icon)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-accordion --> klevu-typography
+  klevu-accordion --> klevu-icon
   klevu-facet --> klevu-accordion
   style klevu-accordion fill:#f9f,stroke:#333,stroke-width:4px
 ```

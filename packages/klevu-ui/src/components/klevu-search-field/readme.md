@@ -83,6 +83,8 @@ Type: `Promise<void>`
 graph TD;
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
+  klevu-textfield --> klevu-icon
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-quicksearch --> klevu-search-field
   style klevu-search-field fill:#f9f,stroke:#333,stroke-width:4px

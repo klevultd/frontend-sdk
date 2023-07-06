@@ -38,6 +38,7 @@ Sort dropdown. User can select what kind of sorting they want
 ```mermaid
 graph TD;
   klevu-sort --> klevu-dropdown
+  klevu-dropdown --> klevu-icon
   klevu-merchandising --> klevu-sort
   klevu-quicksearch --> klevu-sort
   klevu-search-landing-page --> klevu-sort

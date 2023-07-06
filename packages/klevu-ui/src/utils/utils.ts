@@ -50,14 +50,6 @@ export function stripTags(html: string): string {
 }
 
 /**
- * List of css ::parts() that are exposed to the developers.
- *
- * Essentially this is list of css selectors that are exposed to the developers.
- * See global.css for the list of selectors.
- */
-export const globalExportedParts = ["klevu-list", "klevu-button", "material-icon"].join(", ")
-
-/**
  * Global settings that modify the way Klevu UI library works.
  */
 export type KlevuUIGlobalSettings = {
@@ -79,6 +71,13 @@ export type KlevuUIGlobalSettings = {
    * Generic way to render prices. By default browser currency renderer is used
    */
   renderPrice?: typeof renderPrice
+
+  /**
+   * Replace icons with custom image based ones
+   */
+  icons?: {
+    [key: string]: string
+  }
 }
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {

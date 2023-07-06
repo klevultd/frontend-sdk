@@ -36,6 +36,7 @@ graph TD;
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-chat-messages --> klevu-slides
   klevu-moi --> klevu-slides

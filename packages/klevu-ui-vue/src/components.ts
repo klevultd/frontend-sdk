@@ -127,6 +127,11 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
 ]);
 
 
+export const KlevuIcon = /*@__PURE__*/ defineContainer<JSX.KlevuIcon>('klevu-icon', undefined, [
+  'name'
+]);
+
+
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url',

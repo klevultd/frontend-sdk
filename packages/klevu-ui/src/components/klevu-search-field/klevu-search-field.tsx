@@ -11,7 +11,7 @@ import {
   suggestions,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
-import { debounce, globalExportedParts } from "../../utils/utils"
+import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type SearchResultsEventData = {
@@ -286,7 +286,6 @@ export class KlevuSearchField {
           aria-role="search"
           variant={this.variant}
           icon="search"
-          exportparts={globalExportedParts}
         ></klevu-textfield>
         {this.variant !== "pill" && (
           <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>

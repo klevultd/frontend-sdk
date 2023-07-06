@@ -35,6 +35,7 @@ graph TD;
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-product --> klevu-typography
   style klevu-recommendations fill:#f9f,stroke:#333,stroke-width:4px

@@ -31,11 +31,13 @@ Single list item for listing things.
 
 ### Depends on
 
+- [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-list --> klevu-icon
   klevu-list --> klevu-typography
   klevu-cms-list --> klevu-list
   klevu-latest-searches --> klevu-list

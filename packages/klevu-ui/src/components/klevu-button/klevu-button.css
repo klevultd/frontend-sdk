@@ -44,7 +44,7 @@ button.sizeTiny {
 }
 
 button klevu-typography,
-button span[part="material-icon"] {
+button klevu-icon {
   --klevu-typography-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
   color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
   user-select: none;
@@ -82,7 +82,7 @@ button.secondary {
 }
 
 button.secondary klevu-typography,
-button.secondary span[part="material-icon"] {
+button.secondary klevu-icon {
   --klevu-typography-color: var(--klevu-color-neutral-7);
   color: var(--klevu-color-neutral-8);
 }
@@ -106,7 +106,7 @@ button.icon {
   line-height: 1.8;
 }
 
-button.icon span[part="material-icon"] {
+button.icon klevu-icon {
   position: relative;
   top: -1px;
 }
@@ -124,7 +124,7 @@ button.tertiary {
 }
 
 button.tertiary klevu-typography,
-button.tertiary span[part="material-icon"] {
+button.tertiary klevu-icon {
   --klevu-typography-color: var(--klevu-color-primary);
   color: var(--klevu-color-primary);
 }
