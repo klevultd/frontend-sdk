@@ -25,13 +25,6 @@ Container for chat items. Very simple component, just a wrapper.
 | `klevuMessageFeedbackReason` |             | `CustomEvent<{ reason: string; feedback: MoiSavedFeedback; }>` |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Used by
@@ -42,13 +35,16 @@ Container for chat items. Very simple component, just a wrapper.
 ### Depends on
 
 - [klevu-typography](../klevu-typography)
+- [klevu-icon](../klevu-icon)
 - [klevu-button](../klevu-button)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-chat-bubble --> klevu-typography
+  klevu-chat-bubble --> klevu-icon
   klevu-chat-bubble --> klevu-button
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-chat-messages --> klevu-chat-bubble
   klevu-moi --> klevu-chat-bubble

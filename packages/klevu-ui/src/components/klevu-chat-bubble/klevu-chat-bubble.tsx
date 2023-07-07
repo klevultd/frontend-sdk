@@ -50,16 +50,8 @@ export class KlevuChatBubble {
         <klevu-typography variant="body-s">
           <slot></slot>
         </klevu-typography>
-        {this.feedback?.thumbs === "up" && (
-          <span part="material-icon" class="positive_feedback">
-            thumb_up
-          </span>
-        )}
-        {this.feedback?.thumbs === "down" && (
-          <span part="material-icon" class="negative_feedback">
-            thumb_down
-          </span>
-        )}
+        {this.feedback?.thumbs === "up" && <klevu-icon class="positive_feedback" name="thumb_up" />}
+        {this.feedback?.thumbs === "down" && <klevu-icon class="negative_feedback" name="thumb_down" />}
         {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
           <div class="feedback_reasons">
             <span>Rating reason:</span>

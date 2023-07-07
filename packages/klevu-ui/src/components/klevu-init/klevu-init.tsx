@@ -78,32 +78,6 @@ export class KlevuInit {
     })
 
     window["klevu_ui_settings"] = this.settings
-
-    // Inject material fonts to project
-    const fontCssUrl =
-      "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,600,0,0"
-    let element = document.querySelector(`link[href="${fontCssUrl}"]`)
-
-    // Only inject the element if it's not yet present
-    if (!element) {
-      element = document.createElement("link")
-      element.setAttribute("rel", "stylesheet")
-      element.setAttribute("href", fontCssUrl)
-      document.head.appendChild(element)
-    }
-
-    if (!Boolean(document.querySelector("#klevu-icons"))) {
-      const style = document.createElement("style")
-      style.id = "klevu-icons"
-      style.appendChild(
-        document.createTextNode(
-          `
-          ::part(material-icon) { font-family: "Material Symbols Rounded"; font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 20; }
-          `
-        )
-      )
-      document.head.appendChild(style)
-    }
   }
 
   /**
@@ -113,6 +87,16 @@ export class KlevuInit {
   @Method()
   async getConfig(): Promise<any> {
     return KlevuConfig.getDefault()
+  }
+
+  /**
+   * Get settings defined in klevu-init
+   *
+   * @returns
+   */
+  @Method()
+  async getSettings(): Promise<KlevuUIGlobalSettings | undefined> {
+    return this.settings
   }
 
   /**

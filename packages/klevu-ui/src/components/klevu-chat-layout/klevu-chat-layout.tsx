@@ -1,5 +1,4 @@
 import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
 
 /**
  * Component that wraps chat elements into a layout.
@@ -94,7 +93,6 @@ export class KlevuChatLayout {
               <klevu-button
                 onClick={() => this.klevuChatLayoutClose.emit()}
                 size="small"
-                exportparts={globalExportedParts}
                 icon="close"
                 isSecondary
               ></klevu-button>
@@ -114,7 +112,7 @@ export class KlevuChatLayout {
                 <div slot="content">
                   <slot name="menu"></slot>
                 </div>
-                <klevu-button slot="origin" exportparts={globalExportedParts} icon="menu" isSecondary></klevu-button>
+                <klevu-button slot="origin" icon="menu" isSecondary></klevu-button>
               </klevu-popup>
               <klevu-textfield
                 variant="pill"
@@ -126,11 +124,7 @@ export class KlevuChatLayout {
                 }}
                 onKlevuTextEnterPressed={() => this.#sendMessage()}
               ></klevu-textfield>
-              <klevu-button
-                exportparts={globalExportedParts}
-                icon="send"
-                onClick={() => this.#sendMessage()}
-              ></klevu-button>
+              <klevu-button icon="send" onClick={() => this.#sendMessage()}></klevu-button>
             </div>
           </slot>
         </footer>

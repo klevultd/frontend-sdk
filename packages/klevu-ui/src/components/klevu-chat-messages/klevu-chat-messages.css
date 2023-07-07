@@ -10,17 +10,22 @@
   align-items: center;
 }
 
-.feedback span {
+.feedback {
+  display: flex;
+}
+
+.feedback klevu-icon {
   font-size: 22px;
   padding: 6px;
   cursor: pointer;
+  position: relative;
 }
 
-.feedback span:first-child {
+.feedback klevu-icon:first-child {
   color: var(--klevu-color-positive);
 }
 
-.feedback span:last-child {
+.feedback klevu-icon:last-child {
   color: var(--klevu-color-negative);
 }
 

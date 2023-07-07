@@ -51,7 +51,9 @@ graph TD;
   klevu-merchandising --> klevu-button
   klevu-layout-results --> klevu-util-viewport
   klevu-layout-results --> klevu-button
+  klevu-layout-results --> klevu-icon
   klevu-layout-results --> klevu-drawer
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-facet-list --> klevu-facet
   klevu-facet-list --> klevu-button
@@ -61,9 +63,13 @@ graph TD;
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-button
   klevu-accordion --> klevu-typography
+  klevu-accordion --> klevu-icon
+  klevu-checkbox --> klevu-icon
   klevu-checkbox --> klevu-typography
   klevu-sort --> klevu-dropdown
+  klevu-dropdown --> klevu-icon
   klevu-product --> klevu-typography
+  klevu-pagination --> klevu-icon
   style klevu-merchandising fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

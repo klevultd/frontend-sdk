@@ -70,6 +70,8 @@ graph TD;
   klevu-quicksearch --> klevu-tab
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
+  klevu-textfield --> klevu-icon
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-moi --> klevu-chat-layout
   klevu-moi --> klevu-loading-indicator
@@ -84,18 +86,23 @@ graph TD;
   klevu-chat-layout --> klevu-util-scrollbars
   klevu-chat-layout --> klevu-popup
   klevu-chat-layout --> klevu-textfield
+  klevu-modal --> klevu-icon
   klevu-product --> klevu-typography
   klevu-chat-bubble --> klevu-typography
+  klevu-chat-bubble --> klevu-icon
   klevu-chat-bubble --> klevu-button
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
   klevu-suggestions-list --> klevu-typography
   klevu-suggestions-list --> klevu-list
+  klevu-list --> klevu-icon
   klevu-list --> klevu-typography
   klevu-cms-list --> klevu-typography
   klevu-cms-list --> klevu-list
   klevu-sort --> klevu-dropdown
+  klevu-dropdown --> klevu-icon
+  klevu-pagination --> klevu-icon
   klevu-popular-searches --> klevu-typography
   klevu-popular-searches --> klevu-list
   klevu-latest-searches --> klevu-typography

@@ -1,6 +1,5 @@
 import { MoiMessages, MoiProduct, MoiResponseFilter, MoiResponseText, MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
 
 export type onKlevuMessageFeedbackDetails = {
   message: MoiResponseText["message"]
@@ -85,24 +84,19 @@ export class KlevuChatMessages {
                     feedback={message.message.collectFeedback ? givenFeedback : undefined}
                     feedbackReasons={showFeedback ? this.feedbackReasons : undefined}
                     remote
-                    exportparts={globalExportedParts}
                   >
                     {message.message.value}
                   </klevu-chat-bubble>
                   {this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
                     <div class="feedback">
-                      <span
-                        part="material-icon"
+                      <klevu-icon
+                        name="thumb_up"
                         onClick={() => this.klevuMessageFeedback.emit({ feedback: "up", message: message.message })}
-                      >
-                        thumb_up
-                      </span>
-                      <span
-                        part="material-icon"
+                      />
+                      <klevu-icon
+                        name="thumb_down"
                         onClick={() => this.klevuMessageFeedback.emit({ feedback: "down", message: message.message })}
-                      >
-                        thumb_down
-                      </span>
+                      />
                     </div>
                   )}
                 </div>
@@ -123,9 +117,7 @@ export class KlevuChatMessages {
             return (
               <Fragment>
                 {message.filter.settings.label && (
-                  <klevu-chat-bubble remote exportparts={globalExportedParts}>
-                    {message.filter.settings.label}
-                  </klevu-chat-bubble>
+                  <klevu-chat-bubble remote>{message.filter.settings.label}</klevu-chat-bubble>
                 )}
                 <div class="filteractions">
                   {message.filter.options.map((o) => (
@@ -161,7 +153,6 @@ export class KlevuChatMessages {
             return (
               <div>
                 <klevu-slides
-                  exportparts={globalExportedParts}
                   style={{
                     "--klevu-slides-item-width": "200px;",
                   }}
@@ -212,7 +203,7 @@ export class KlevuChatMessages {
             )
           }
           if ("local" in message) {
-            return <klevu-chat-bubble exportparts={globalExportedParts}>{message.local?.message}</klevu-chat-bubble>
+            return <klevu-chat-bubble>{message.local?.message}</klevu-chat-bubble>
           }
         })}
         <slot name="after-messages"></slot>

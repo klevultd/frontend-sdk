@@ -10,6 +10,7 @@ import jsdocs from "../dist/docs/klevu-ui-docs.json"
 import merge from "lodash.merge"
 import { withActions } from "@storybook/addon-actions/decorator"
 import { html } from "lit"
+import { KlevuUIGlobalSettings } from "./utils/utils"
 
 export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
@@ -173,7 +174,7 @@ export function autofillMeta(tag: string, meta: Meta = {}): Meta {
   })
 }
 
-export function MDXAutoFillMeta(tag: string, meta: Meta = {}) {
+export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUIGlobalSettings) {
   const { argTypes, parameters } = autofillMeta(tag, meta)
 
   const data: JsonDocs = jsdocs as any
@@ -188,7 +189,11 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}) {
     }
 
     return html`
-      <klevu-init api-key="klevu-164651914788114877" url="https://eucs29v2.ksearchnet.com/cs/v2/search">
+      <klevu-init
+        .settings=${settings}
+        api-key="klevu-164651914788114877"
+        url="https://eucs29v2.ksearchnet.com/cs/v2/search"
+      >
         ${story()}
       </klevu-init>
     `

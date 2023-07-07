@@ -39,6 +39,7 @@ Component to display list of CMS page results
 graph TD;
   klevu-cms-list --> klevu-typography
   klevu-cms-list --> klevu-list
+  klevu-list --> klevu-icon
   klevu-list --> klevu-typography
   klevu-quicksearch --> klevu-cms-list
   style klevu-cms-list fill:#f9f,stroke:#333,stroke-width:4px

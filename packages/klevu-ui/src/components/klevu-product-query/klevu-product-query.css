@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.header klevu-icon {
+  cursor: pointer;
+}
+
 klevu-chat-messages {
   height: 500px;
   padding-right: 16px;
@@ -42,22 +46,22 @@ div[part="product-query-footer"] .sendmessage klevu-textfield {
   padding-bottom: var(--klevu-spacing-04);
 }
 
-.pqa_feedback span[part="material-icon"] {
+.pqa_feedback klevu-icon {
   font-size: 24px;
   padding: var(--klevu-spacing-04);
   cursor: pointer;
   border-radius: 50%;
 }
 
-.pqa_feedback span[part="material-icon"]:hover {
+.pqa_feedback klevu-icon:hover {
   background-color: var(--klevu-color-neutral-2);
 }
 
-.pqa_feedback span[part="material-icon"]:nth-child(1) {
+.pqa_feedback klevu-icon:nth-child(1) {
   color: var(--klevu-color-accent-1);
 }
 
-.pqa_feedback span[part="material-icon"]:nth-child(2) {
+.pqa_feedback klevu-icon:nth-child(2) {
   color: var(--klevu-color-accent-3);
 }
 

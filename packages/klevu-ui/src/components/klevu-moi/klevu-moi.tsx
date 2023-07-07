@@ -1,5 +1,5 @@
 import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen, Element } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
+
 import { startMoi, MoiSession, MoiRequest, MoiProducts, MoiProduct, MoiMessages, KlevuConfig } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
@@ -152,7 +152,6 @@ export class KlevuMoi {
     return (
       <Host>
         <klevu-chat-layout
-          exportparts={globalExportedParts}
           onKlevuChatLayoutMessageSent={(e) => this.#sendMessage(e.detail)}
           ref={(el) => {
             this.#layoutRef = el
@@ -198,7 +197,7 @@ export class KlevuMoi {
               ))}
           </div>
         </klevu-chat-layout>
-        <klevu-modal exportparts={globalExportedParts} ref={(el) => (this.#modalRef = el)}>
+        <klevu-modal ref={(el) => (this.#modalRef = el)}>
           <klevu-product product={this.currentProduct}></klevu-product>
         </klevu-modal>
       </Host>
@@ -212,9 +211,7 @@ export class KlevuMoi {
           if ("message" in message) {
             return (
               <Fragment>
-                <klevu-chat-bubble remote exportparts={globalExportedParts}>
-                  {message.message.value}
-                </klevu-chat-bubble>
+                <klevu-chat-bubble remote>{message.message.value}</klevu-chat-bubble>
                 {message.message.note && (
                   <klevu-typography
                     style={{
@@ -232,9 +229,7 @@ export class KlevuMoi {
             return (
               <Fragment>
                 {message.filter.settings.label && (
-                  <klevu-chat-bubble remote exportparts={globalExportedParts}>
-                    {message.filter.settings.label}
-                  </klevu-chat-bubble>
+                  <klevu-chat-bubble remote>{message.filter.settings.label}</klevu-chat-bubble>
                 )}
                 <div class="filteractions">
                   {message.filter.options.map((o) => (
@@ -268,7 +263,6 @@ export class KlevuMoi {
             return (
               <div>
                 <klevu-slides
-                  exportparts={globalExportedParts}
                   style={{
                     "--klevu-slides-item-width": "200px;",
                   }}
@@ -325,7 +319,7 @@ export class KlevuMoi {
             )
           }
           if ("local" in message) {
-            return <klevu-chat-bubble exportparts={globalExportedParts}>{message.local?.message}</klevu-chat-bubble>
+            return <klevu-chat-bubble>{message.local?.message}</klevu-chat-bubble>
           }
         })}
       </Fragment>

@@ -358,6 +358,15 @@ export namespace Components {
         "useApplyButton"?: boolean;
     }
     /**
+     * Klevu icon component. Uses Google Material Icons.
+     */
+    interface KlevuIcon {
+        /**
+          * Name of the icon. Please use tokens of material icons
+         */
+        "name": string;
+    }
+    /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
      * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
      * configuration for all components on the page and provide few global settings for all components:
@@ -408,6 +417,11 @@ export namespace Components {
           * @returns KlevuConfig, but due to typescript problems it is any
          */
         "getConfig": () => Promise<any>;
+        /**
+          * Get settings defined in klevu-init
+          * @returns
+         */
+        "getSettings": () => Promise<KlevuUIGlobalSettings | undefined>;
         /**
           * Global settings
          */
@@ -1418,6 +1432,15 @@ declare global {
         new (): HTMLKlevuFacetListElement;
     };
     /**
+     * Klevu icon component. Uses Google Material Icons.
+     */
+    interface HTMLKlevuIconElement extends Components.KlevuIcon, HTMLStencilElement {
+    }
+    var HTMLKlevuIconElement: {
+        prototype: HTMLKlevuIconElement;
+        new (): HTMLKlevuIconElement;
+    };
+    /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
      * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
      * configuration for all components on the page and provide few global settings for all components:
@@ -1772,6 +1795,7 @@ declare global {
         "klevu-dropdown": HTMLKlevuDropdownElement;
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
+        "klevu-icon": HTMLKlevuIconElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
@@ -2143,6 +2167,15 @@ declare namespace LocalJSX {
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
         "useApplyButton"?: boolean;
+    }
+    /**
+     * Klevu icon component. Uses Google Material Icons.
+     */
+    interface KlevuIcon {
+        /**
+          * Name of the icon. Please use tokens of material icons
+         */
+        "name": string;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -3001,6 +3034,7 @@ declare namespace LocalJSX {
         "klevu-dropdown": KlevuDropdown;
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
+        "klevu-icon": KlevuIcon;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
@@ -3116,6 +3150,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-face-list-width 200px Width of the facet listing
              */
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
+            /**
+             * Klevu icon component. Uses Google Material Icons.
+             */
+            "klevu-icon": LocalJSX.KlevuIcon & JSXBase.HTMLAttributes<HTMLKlevuIconElement>;
             /**
              * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
              * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define

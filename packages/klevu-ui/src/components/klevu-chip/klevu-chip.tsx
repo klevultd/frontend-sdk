@@ -40,11 +40,7 @@ export class KlevuChip {
   render() {
     return (
       <Host class={{ removable: Boolean(this.removable), selected: Boolean(this.selected) }}>
-        {this.removable && (
-          <span onClick={this.#close.bind(this)} part="material-icon">
-            close
-          </span>
-        )}
+        {this.removable && <klevu-icon name="close" onClick={this.#close.bind(this)} />}
         <klevu-typography variant="body-xs">
           <slot></slot>
         </klevu-typography>

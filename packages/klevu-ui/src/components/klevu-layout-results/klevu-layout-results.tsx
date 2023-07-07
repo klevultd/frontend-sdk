@@ -55,7 +55,7 @@ export class KlevuLayoutResults {
                 return false
               }}
             >
-              <span part="material-icon">menu</span>
+              <klevu-icon name="menu" />
             </klevu-button>
           ) : null}
         </header>

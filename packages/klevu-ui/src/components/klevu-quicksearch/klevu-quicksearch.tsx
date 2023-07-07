@@ -10,7 +10,7 @@ import {
 import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent, KlevuTextfieldCustomEvent } from "../../components"
-import { globalExportedParts } from "../../utils/utils"
+
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import {
@@ -237,7 +237,6 @@ export class KlevuQuicksearch {
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
             onFocus={() => this.popup?.openModal()}
-            exportparts={globalExportedParts}
             variant={this.searchFieldVariant}
           ></klevu-search-field>
           <div class="content" slot="content">
@@ -248,7 +247,7 @@ export class KlevuQuicksearch {
               : null}
           </div>
         </klevu-popup>
-        {this.chat && <klevu-moi showClose exportparts={globalExportedParts}></klevu-moi>}
+        {this.chat && <klevu-moi showClose></klevu-moi>}
       </Host>
     )
   }
@@ -258,7 +257,6 @@ export class KlevuQuicksearch {
       <Fragment>
         <aside>
           <klevu-suggestions-list
-            exportparts={globalExportedParts}
             suggestions={this.suggestions}
             onKlevuSuggestionClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-suggestions-list>
@@ -274,7 +272,6 @@ export class KlevuQuicksearch {
                 <klevu-typography variant="h3">Search results</klevu-typography>
                 <klevu-sort
                   variant="inline"
-                  exportparts={globalExportedParts}
                   onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
                 ></klevu-sort>
               </div>
@@ -299,7 +296,6 @@ export class KlevuQuicksearch {
                 ))}
               </klevu-product-grid>
               <klevu-pagination
-                exportparts={globalExportedParts}
                 queryResult={this.queryResult}
                 onKlevuPaginationChange={this.#searchPageChange.bind(this)}
               ></klevu-pagination>
@@ -340,7 +336,6 @@ export class KlevuQuicksearch {
             onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-popular-searches>
           <klevu-latest-searches
-            exportparts={globalExportedParts}
             onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-latest-searches>
         </aside>

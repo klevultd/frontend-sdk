@@ -18,7 +18,7 @@ import {
   KlevuUtilViewportCustomEvent,
   ViewportSize,
 } from "../../components"
-import { globalExportedParts } from "../../utils/utils"
+
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 
@@ -206,14 +206,10 @@ export class KlevuSearchLandingPage {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results
-          exportparts={globalExportedParts}
-          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
-        >
+        <klevu-layout-results ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}>
           <klevu-facet-list
             slot="sidebar"
             customOrder={this.filterCustomOrder}
-            exportparts={globalExportedParts}
             manager={this.manager}
             useApplyButton={isMobile}
             onKlevuApplyFilters={this.#applyFilters.bind(this)}
@@ -222,11 +218,7 @@ export class KlevuSearchLandingPage {
             <klevu-typography slot="header" variant="h1">
               Searching term "{this.term}"
             </klevu-typography>
-            <klevu-sort
-              variant="inline"
-              exportparts={globalExportedParts}
-              onKlevuSortChanged={this.#sortChanged.bind(this)}
-            ></klevu-sort>
+            <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>
           <klevu-product-grid slot="content">
             {this.results?.map((p) => (

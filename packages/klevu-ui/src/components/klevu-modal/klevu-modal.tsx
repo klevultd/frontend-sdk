@@ -61,7 +61,7 @@ export class KlevuModal {
             <slot name="header"></slot>
             <form method="dialog" onSubmit={this.#close.bind(this)}>
               <button>
-                <span part="material-icon">close</span>
+                <klevu-icon name="close" />
               </button>
             </form>
           </header>

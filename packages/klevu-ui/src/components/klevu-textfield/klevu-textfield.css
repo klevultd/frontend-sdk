@@ -64,7 +64,7 @@ input.hasicon {
   padding-left: var(--klevu-spacing-07);
 }
 
-span.icon {
+klevu-icon.icon {
   position: absolute;
   top: 50%;
   left: var(--klevu-spacing-04);
@@ -77,7 +77,7 @@ input.hasclear {
   padding-right: var(--klevu-spacing-07);
 }
 
-span.clear {
+klevu-icon.clear {
   position: absolute;
   top: 50%;
   right: var(--klevu-spacing-04);

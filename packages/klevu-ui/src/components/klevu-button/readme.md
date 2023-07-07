@@ -28,10 +28,9 @@ Basic button component
 
 ## Shadow Parts
 
-| Part              | Description |
-| ----------------- | ----------- |
-| `"klevu-button"`  |             |
-| `"material-icon"` |             |
+| Part             | Description |
+| ---------------- | ----------- |
+| `"klevu-button"` |             |
 
 
 ## Dependencies
@@ -54,11 +53,13 @@ Basic button component
 
 ### Depends on
 
+- [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-chat-bubble --> klevu-button
   klevu-chat-layout --> klevu-button

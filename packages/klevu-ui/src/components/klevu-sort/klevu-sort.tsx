@@ -1,6 +1,6 @@
 import { KlevuSearchSorting } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
-import { globalExportedParts } from "../../utils/utils"
+
 import { KlevuDropdownCustomEvent, KlevuDropdownVariant } from "../../components"
 
 /**
@@ -54,7 +54,6 @@ export class KlevuSort {
     return (
       <Host>
         <klevu-dropdown
-          exportparts={globalExportedParts}
           name="sort"
           options={this.options}
           selected={this.#selected}

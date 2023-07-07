@@ -111,22 +111,16 @@ export class KlevuTextfield {
             this.klevuTextChanged.emit(el.value)
           }}
         />
-        {this.icon && (
-          <span class="icon" part="material-icon">
-            {this.icon}
-          </span>
-        )}
+        {this.icon && <klevu-icon class="icon" name={this.icon} />}
         {this.clearButton && this.value?.length > 0 && (
-          <span
+          <klevu-icon
+            name="clear"
             class="clear"
-            part="material-icon"
             onClick={() => {
               this.value = ""
               this.klevuTextChanged.emit("")
             }}
-          >
-            clear
-          </span>
+          />
         )}
       </div>
     )

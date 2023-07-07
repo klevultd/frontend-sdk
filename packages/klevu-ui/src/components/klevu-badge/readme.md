@@ -32,22 +32,17 @@ Basic badge component. Can be used to display small information on top of other 
 | `"default"` | Badge content |
 
 
-## Shadow Parts
-
-| Part              | Description |
-| ----------------- | ----------- |
-| `"material-icon"` |             |
-
-
 ## Dependencies
 
 ### Depends on
 
+- [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-badge --> klevu-icon
   klevu-badge --> klevu-typography
   style klevu-badge fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -7,7 +7,8 @@
   flex-wrap: wrap;
 }
 
-span {
+span,
+klevu-icon {
   display: flex;
   height: 32px;
   width: 32px;
@@ -26,13 +27,15 @@ span.current {
   color: var(--klevu-pagination-selected-color);
 }
 
-span:not(.disabled):not(.current):hover {
+span:not(.disabled):not(.current):hover,
+klevu-icon:not(.disabled):not(.current):hover {
   color: var(--klevu-pagination-selected-color);
   background-color: var(--klevu-color-neutral-2);
   cursor: pointer;
 }
 
-span.disabled {
+span.disabled,
+klevu-icon.disabled {
   opacity: var(--klevu-opacity-disabled);
   cursor: inherit;
 }

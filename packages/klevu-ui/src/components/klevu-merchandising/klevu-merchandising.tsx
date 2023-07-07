@@ -18,7 +18,7 @@ import {
   KlevuSortCustomEvent,
   KlevuUtilViewportCustomEvent,
 } from "../../components"
-import { globalExportedParts } from "../../utils/utils"
+
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
@@ -231,15 +231,11 @@ export class KlevuMerchandising {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results
-          exportparts={globalExportedParts}
-          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
-        >
+        <klevu-layout-results ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}>
           <klevu-facet-list
             slot="sidebar"
             accordion
             customOrder={this.filterCustomOrder}
-            exportparts={globalExportedParts}
             manager={this.manager}
             useApplyButton={isMobile}
             onKlevuApplyFilters={this.#applyFilters.bind(this)}
@@ -248,7 +244,6 @@ export class KlevuMerchandising {
             <klevu-typography variant="h1">{this.categoryTitle}</klevu-typography>
             <klevu-sort
               variant="inline"
-              exportparts={globalExportedParts}
               onKlevuSortChanged={this.#sortChanged.bind(this)}
               options={this.sortOptions}
             ></klevu-sort>
@@ -266,7 +261,6 @@ export class KlevuMerchandising {
           <div slot="footer" class="footer">
             {this.usePagination && this.#resultObject ? (
               <klevu-pagination
-                exportparts={globalExportedParts}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
               ></klevu-pagination>

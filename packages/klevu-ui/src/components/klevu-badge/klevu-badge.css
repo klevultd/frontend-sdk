@@ -12,7 +12,7 @@
   user-select: none;
 }
 
-span[part="material-icon"] {
+klevu-icon {
   position: relative;
   top: 1px;
   left: -4px;

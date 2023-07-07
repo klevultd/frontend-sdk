@@ -60,7 +60,7 @@ export class KlevuButton {
         }}
       >
         {this.icon ? (
-          <span part="material-icon">{this.icon}</span>
+          <klevu-icon name={this.icon}></klevu-icon>
         ) : (
           <klevu-typography variant={this.isTertiary || this.size === "tiny" ? "body-s" : "body-s-bold"}>
             <slot />
