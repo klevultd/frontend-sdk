@@ -19,21 +19,27 @@ export class KlevuIcon {
 
   @State() iconURL?: string
   @State() iconURLSvg?: string
-  @State() svgColor?: string
+  @State() svgStyle?: {
+    [key: string]: string
+  }
 
   async connectedCallback() {
     const url = window["klevu_ui_settings"]?.icons?.[this.name]
     if (url?.endsWith(".svg")) {
-      /*
-      const data = await window.fetch(url)
-      console.log(data)
-      */
-      this.iconURLSvg = url
-      this.svgColor = getComputedStyle(this.el).color
+      try {
+        const data = await window.fetch(url)
+        this.iconURLSvg = await data.text()
+        const fontSize = getComputedStyle(this.el).fontSize
+        this.svgStyle = {
+          fill: getComputedStyle(this.el).color,
+          height: fontSize,
+          width: fontSize,
+        }
+      } catch (e) {}
     } else if (url) {
       this.iconURL = url
     }
-    if (!url) {
+    if (!this.iconURL && !this.iconURLSvg) {
       // Inject material fonts to project
       const fontCssUrl =
         "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,600,0,0"
@@ -53,9 +59,7 @@ export class KlevuIcon {
     return (
       <Host>
         {this.iconURLSvg ? (
-          <svg viewBox="0 0 14 16" width="50">
-            <use href={this.iconURLSvg} fill={this.svgColor} />
-          </svg>
+          <div style={this.svgStyle} innerHTML={this.iconURLSvg}></div>
         ) : this.iconURL ? (
           <img src={this.iconURL} />
         ) : (

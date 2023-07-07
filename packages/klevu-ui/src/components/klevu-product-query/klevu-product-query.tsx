@@ -332,7 +332,7 @@ export class KlevuProductQuery {
                       {this.askButtonText ? (
                         <klevu-button onClick={() => this.#sendMessage()}>{this.askButtonText}</klevu-button>
                       ) : (
-                        <klevu-button icon="send" onClick={() => this.#sendMessage()}></klevu-button>
+                        <klevu-button icon="chevron_right" onClick={() => this.#sendMessage()}></klevu-button>
                       )}
                     </div>
                   )}

@@ -10,10 +10,15 @@
   align-items: center;
 }
 
+.feedback {
+  display: flex;
+}
+
 .feedback klevu-icon {
   font-size: 22px;
   padding: 6px;
   cursor: pointer;
+  position: relative;
 }
 
 .feedback klevu-icon:first-child {
