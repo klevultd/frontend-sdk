@@ -104,6 +104,8 @@ export class KlevuPopup {
       return
     }
 
+    let smallScreen = (this.popupWidth ?? 390) > window.innerWidth
+
     const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
       placement: this.anchor,
       middleware: [
@@ -119,10 +121,17 @@ export class KlevuPopup {
         }),
       ],
     })
-    Object.assign(this.#contentElement.style, {
-      left: `${x}px`,
-      top: `${y}px`,
-    })
+    if (smallScreen) {
+      Object.assign(this.#contentElement.style, {
+        left: `0px`,
+        top: `0px`,
+      })
+    } else {
+      Object.assign(this.#contentElement.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      })
+    }
   }
 
   /**
