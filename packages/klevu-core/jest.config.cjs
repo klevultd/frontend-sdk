@@ -2,14 +2,17 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  transform: {},
-  extensionsToTreatAsEsm: [".ts"],
-  globals: {
-    "ts-jest": {
-      useESM: true,
-      tsconfig: "tsconfig-tests.json",
-    },
+  transform: {
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        //the content you'd placed at "global"
+        useESM: true,
+        tsconfig: "tsconfig-tests.json",
+      },
+    ],
   },
+  extensionsToTreatAsEsm: [".ts"],
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
