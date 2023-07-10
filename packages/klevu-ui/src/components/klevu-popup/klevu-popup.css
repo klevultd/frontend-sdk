@@ -1,5 +1,6 @@
 :host {
   display: block;
+  --spacing: var(--klevu-popup-spacing, 0);
 }
 
 .originContainer {
@@ -13,7 +14,7 @@
   width: max-content;
   visibility: hidden;
   box-sizing: border-box;
-  padding: var(--klevu-spacing-04);
+  padding: var(--spacing);
   border-radius: var(--klevu-border-radius-s);
   transition: opacity 0.4s, visibility 0.4s;
   opacity: 0;

@@ -5,6 +5,7 @@
 
 .content {
   display: flex;
+  padding: var(--klevu-spacing-04);
 }
 
 .content aside {

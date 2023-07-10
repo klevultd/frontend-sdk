@@ -42,3 +42,7 @@ footer .inputs {
 footer klevu-textfield {
   width: 100%;
 }
+
+klevu-popup div[slot="content"] {
+  padding: var(--klevu-spacing-04);
+}

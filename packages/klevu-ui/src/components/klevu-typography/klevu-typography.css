@@ -3,6 +3,10 @@
   display: block;
 }
 
+span {
+  display: inline-block;
+}
+
 .variant-h1 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h1-size));
   font-weight: var(--klevu-h1-weight);

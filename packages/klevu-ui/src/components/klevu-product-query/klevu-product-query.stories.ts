@@ -42,6 +42,28 @@ export const Query: StoryObj<KlevuProductQuery> = {
   },
   render: (args) =>
     html`
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
+        maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
+        Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
+        cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
+        Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
+        efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
+        venenatis.
+      </p>
+
+      <p>
+        Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
+        Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec massa
+        maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis odio
+        at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
+        ligula nec orci. Nam sed porttitor dolor. Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat
+        libero, sit amet suscipit augue tortor at justo. In consectetur, mi ac posuere dictum, erat ligula lacinia
+        augue, sit amet sollicitudin felis sem eu metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris
+        quis ex interdum pretium. Praesent ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida,
+        ultrices magna vel, efficitur lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
+      </p>
+
       <klevu-init
         .settings=${{
           icons: {
@@ -50,8 +72,30 @@ export const Query: StoryObj<KlevuProductQuery> = {
           },
         }}
         api-key="klevu-164677714116414855"
-        >${productRender(args)}</klevu-init
       >
+        ${productRender(args)}
+      </klevu-init>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
+        maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
+        Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
+        cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
+        Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
+        efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
+        venenatis.
+      </p>
+
+      <p>
+        Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
+        Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec massa
+        maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis odio
+        at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
+        ligula nec orci. Nam sed porttitor dolor. Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat
+        libero, sit amet suscipit augue tortor at justo. In consectetur, mi ac posuere dictum, erat ligula lacinia
+        augue, sit amet sollicitudin felis sem eu metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris
+        quis ex interdum pretium. Praesent ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida,
+        ultrices magna vel, efficitur lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
+      </p>
     `,
 }
 
