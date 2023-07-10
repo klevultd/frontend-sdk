@@ -104,27 +104,30 @@ export class KlevuPopup {
       return
     }
 
-    let smallScreen = (this.popupWidth ?? 390) > window.innerWidth
-
     const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
       placement: this.anchor,
       middleware: [
         offset(this.offset),
         shift(),
         size({
-          apply({ availableWidth, availableHeight, elements }) {
+          apply: ({ availableWidth, elements }) => {
             Object.assign(elements.floating.style, {
               maxWidth: `${availableWidth}px`,
-              maxHeight: `${availableHeight}px`,
             })
           },
         }),
       ],
     })
+    const smallScreen = (this.popupWidth ?? 390) > window.innerWidth
     if (smallScreen) {
       Object.assign(this.#contentElement.style, {
-        left: `0px`,
-        top: `0px`,
+        left: "0px",
+        top: "0px",
+        position: "fixed",
+        maxHeight: "auto",
+        maxWidth: "auto",
+        width: "100vw",
+        height: "100vh",
       })
     } else {
       Object.assign(this.#contentElement.style, {

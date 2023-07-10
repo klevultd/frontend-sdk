@@ -185,7 +185,7 @@ export class KlevuProductQuery {
           top: instance.elements().viewport.scrollHeight,
           behavior: behavior as any, // for some reason doesn't compile without any
         })
-      }, 100)
+      }, 300)
     }
   }
 
@@ -242,24 +242,27 @@ export class KlevuProductQuery {
           ref={(el) => (this.#popup = el)}
           exportparts="popup-content, popup-origin"
           onKlevuPopupClose={this.#closeModal.bind(this)}
+          onKlevuPopupOpen={() => {
+            this.#start()
+          }}
           anchor={this.popupAnchor}
           offset={this.popupOffset}
           useBackground={this.useBackground}
           popupWidth={520}
         >
           <div slot="origin">
-            <klevu-button onClick={this.#start.bind(this)} part="klevu-query-open-button">
-              {this.buttonText}
-            </klevu-button>
+            <klevu-button part="klevu-query-open-button">{this.buttonText}</klevu-button>
           </div>
           <div class="content" slot="content">
-            <div class="header" part="product-query-header">
-              <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
-              <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
+            <div part="product-query-header">
+              <div class="header">
+                <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
+                <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
+              </div>
+              <klevu-typography variant="body-xs" class="fineprint">
+                {this.finePrint}
+              </klevu-typography>
             </div>
-            <klevu-typography variant="body-xs" class="fineprint">
-              {this.finePrint}
-            </klevu-typography>
 
             {this.showFeedback ? (
               <div class="pqa_feedback" part="product-query-feedback">
@@ -279,7 +282,9 @@ export class KlevuProductQuery {
                     enableMessageFeedback
                     onKlevuMessageFeedback={this.#onFeedback.bind(this)}
                     showFeedbackFor={this.showMessageFeedbackFor}
-                    ref={(el) => (this.#chatMessagesElement = el)}
+                    ref={(el) => {
+                      this.#chatMessagesElement = el
+                    }}
                   >
                     <div slot="after-messages">
                       {this.showLoading ? <klevu-loading-indicator /> : null}
