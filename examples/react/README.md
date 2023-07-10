@@ -99,13 +99,9 @@ const doSearch = async (term: string) => {
   )
 
   const searchResult = result.queriesById("search")
-  clickManager = searchResult.getSearchClickManager()
 
   setProducts(searchResult?.records ?? [])
-  setSuggestions(
-    result.suggestionsById("suggestions")?.suggestions.map((i) => i.suggest) ??
-      []
-  )
+  setSuggestions(result.suggestionsById("suggestions")?.suggestions.map((i) => i.suggest) ?? [])
 }
 ```
 
@@ -118,7 +114,7 @@ The first search we make by calling the _search_ function with two parameters. T
 The second search we make by calling the _suggestions_ function with a single parameter, the search term to return search suggestions based on that term.
 
 **IMPORTANT NOTE**
-Although the SDK also contains functions to send analytics data back to Klevu in order to update the AI, we recommend that you do not use these for doing a Quick Search. 
+Although the SDK also contains functions to send analytics data back to Klevu in order to update the AI, we recommend that you do not use these for doing a Quick Search.
 
 ## Search Landing (results) page
 
@@ -212,13 +208,28 @@ The filter is basically just a checkbox input. We can call the manager.toggleOpt
 We then need to add an event handler to listen for the _KlevuDomEvents.FilterSelectionUpdate_ event and handle triggering a new search:
 
 ```js
-const stopListening = KlevuListenDomEvent(
-  KlevuDomEvents.FilterSelectionUpdate,
-  handleFilterUpdate
-)
+const stopListening = KlevuListenDomEvent(KlevuDomEvents.FilterSelectionUpdate, handleFilterUpdate)
 ```
 
 See how filterManager makes it easy to manage filters 😉
+
+### Product Click Event
+
+In addition, the results of this search include a new function that we can use to log click events for products returned by this search and we can use this function to send click events that also show in KMC.
+
+```react
+<Product
+  product={p}
+  onClick={() => {
+    searchResponse.searchClickEvent?.({
+      productId: p.id,
+      variantId: p.itemGroupId,
+    })
+  }}
+/>
+```
+
+In the example above, we pass in the ID of the product to the _searchClickEvent_ function which we have called within a onClick handler.
 
 ### Load More
 
@@ -307,26 +318,24 @@ const res = await KlevuFetch(
 
 This example also shows a search modifier specifically created to log analytics data for category pages, _sendMerchandisingViewEvent_ which accepts the name/title of the category to display in KMC.
 
-Second new feature shown in this example is _abTest()_ modifier that automatically checks if there are A/B created for the category in KMC and enables them. In the following `getCategoryMerchandisingClickSendEvent()` example SDK will now automatically send correct event data to Klevu. If you know that you are planning on using A/B testing feature then it is recommended to add `abTest()` modifier to each `categoryMerchandising` query.
+Second new feature shown in this example is _abTest()_ modifier that automatically checks if there are A/B created for the category in KMC and enables them.
 
-In addition, the results of this search include a new function that we can use to log click events for products returned by this search.
-
-```js
-productClickManager = searchResult.getCategoryMerchandisingClickSendEvent()
-```
-
-Now we can use _productClickManager_ (can be called anything) to send click events that also show in KMC.
+Just like on the search results landing page example above, the results of this category search include a new function that we can use to log click events for products returned by this search and we can use this function to send click events that also show in KMC.
 
 ```react
 <Product
   product={p}
   onClick={() => {
-    productClickManager(p.id, params.id)
+    searchResponse.categoryMerchandisingClickEvent?.({
+      productId: p.id,
+      variantId: p.itemGroupId,
+      categoryTitle: title,
+    })
   }}
 />
 ```
 
-In the example above, we pass in the ID of the product along with the category name/title to the _productClickManager_ function which we have called within a onClick handler.
+In the example above, we pass in the ID of the product along with the category name/title to the _categoryMerchandisingClickEvent_ function which we have called within a onClick handler.
 
 ### Category recommendation
 
@@ -334,7 +343,7 @@ In [Category page](./src/routes/CategoryPage.tsx) klevuFetch function there is a
 
 ### Category CampaignID
 
-In [Category page](./src/routes/CategoryPage.tsx) we are looking for a parameter called `campaignId`; which is sent into the `categoryMerchandising` call. We are not storing it in this demo as it is just implemented for demonstration purposes, but in production this ID can be stores in localStorage, a cookie, or a server-side session variable. 
+In [Category page](./src/routes/CategoryPage.tsx) we are looking for a parameter called `campaignId`; which is sent into the `categoryMerchandising` call. We are not storing it in this demo as it is just implemented for demonstration purposes, but in production this ID can be stores in localStorage, a cookie, or a server-side session variable.
 
 ## Product fetch
 
@@ -372,15 +381,11 @@ const result = await KlevuFetch(
     sendRecommendationViewEvent("Trending recommendations using KMC builder")
   )
 )
-
-eventClick = result
-  .queriesById("trendingrecs")
-  .getRecommendationClickSendEvent()
 ```
 
 This type of search first needs to be created within the KMC. Then you are able to call _kmcRecommendation_ and pass in the id. The next parameter is the query id (name) of the search, in our example, we called it _trendingrects_. The last parameter is the _sendRecommendationViewEvent_ modifier which logs the view of this recommendation by a user.
 
-The result of this search also returns a function we can use to log click events of the recommendation products by calling _getRecommendationClicckSendEvent_ as seen above. In our example, we store this function as _eventClick_.
+The result of this search also returns a function we can use to log click events of the recommendation products by calling _recommendationClickEvent_ as we have previously seen.
 
 We can then use this function to handle the click event for our recommendation products:
 
@@ -388,7 +393,12 @@ We can then use this function to handle the click event for our recommendation p
 <RecommendationBanner
   products={trendingRecs}
   title="Trending recommendations using KMC builder"
-  productClick={eventClick}
+  productClick={(productId, variantId, product, index) => {
+    alsoResult.recommendationClickEvent?.({
+      productId,
+      variantId,
+    })
+  }}
 />
 ```
 
@@ -435,19 +445,22 @@ const result = await KlevuFetch(
     cartProductIds: cart.items.map((p) => p.id),
   })
 )
-
-eventClick = result.queriesById("alsobought").getRecommendationClickSendEvent()
 ```
 
 Here the main difference to the first recommendations example is that instead of only passing in an id for the search we also include a reference to all the products ids in the cart.
 
-Similar to the first example, we see the _getRecommendationClickSendEvent_ function called on the resutls to retrieve the click event handler we are storing in _eventClick_ which we will also attach to the click event handler for each product recommendation:
+Similar to the first example, we will also attach to the click event handler for each product recommendation:
 
 ```jsx
 <RecommendationBanner
   products={alsoBoughtProducts}
   title="Also bought together KMC recommendation"
-  productClick={eventClick}
+  productClick={(productId, variantId) => {
+    alsoBoughtResult.recommendationClickEvent?.({
+      productId,
+      variantId,
+    })
+  }}
 />
 ```
 
