@@ -1,6 +1,6 @@
+import { KlevuResponseObject } from "../connection/responseObject.js"
 import { KlevuFetchFunctionReturnValue } from "../index.js"
 import { KlevuAllRecordQueries } from "../models/KlevuAllRecordQueries.js"
-import { KlevuFetchResponse } from "../models/KlevuFetchResponse.js"
 import { LiteralUnion } from "../utils/literalUnion.js"
 
 /**
@@ -25,9 +25,9 @@ export type KlevuFetchModifer = {
     func: KlevuFetchFunctionReturnValue
   ) => Promise<KlevuAllRecordQueries[]>
   onResult?: (
-    response: Readonly<KlevuFetchResponse>,
+    response: KlevuResponseObject,
     query: KlevuFetchFunctionReturnValue
-  ) => KlevuFetchResponse
+  ) => void
 }
 
 export * from "./applyFilter/applyFilter.js"
@@ -51,3 +51,4 @@ export * from "./abTest/abTest.js"
 export * from "./overrideSettings/overrideSettings.js"
 export * from "./advancedSorting/advancedSorting.js"
 export * from "./advancedFiltering/advancedFiltering.js"
+export * from "./klaviyo/klaviyo.js"

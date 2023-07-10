@@ -49,5 +49,5 @@ test("No fallback when enough results", async () => {
   )
 
   expect(result.queriesById("no-fallback")?.records.length).toBeGreaterThan(0)
-  expect(result.queriesById("no-fallback-fallback")).not.toBeDefined()
+  expect(result.queryExists("no-fallback-fallback")).toBeFalsy()
 })

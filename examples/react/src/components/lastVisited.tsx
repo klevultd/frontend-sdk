@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import { RecommendationBanner } from "./recommendationBanner"
 
 export function LastVisited() {
-  const [products, setProducts] = useState<KlevuRecord[]>(
+  const [products, setProducts] = useState<Partial<KlevuRecord>[]>(
     KlevuLastClickedProducts.getProducts(5)
   )
 
@@ -32,9 +32,9 @@ export function LastVisited() {
   return (
     <RecommendationBanner
       title="Last visited products"
-      products={products}
+      products={products as KlevuRecord[]}
       productClick={(productId, variantId, product) => {
-        KlevuEvents.searchProductClick(product, undefined, variantId)
+        KlevuEvents.searchProductClick({ product, variantId })
       }}
     />
   )

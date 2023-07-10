@@ -33,25 +33,25 @@ test("Next page pagination test", async () => {
   const searchResult = result.queriesById("search")
 
   expect(searchResult?.records.length).toBe(2)
-  expect(searchResult?.next).toBeDefined()
+  expect(searchResult?.getPage).toBeDefined()
   expect(searchResult?.filters?.length).toBeGreaterThan(0)
   expect(searchResult?.meta.offset).toBe(0 * limit)
   expect(searchResult?.meta.noOfResults).toBe(limit)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const nextResult = await searchResult?.next!()
+  const nextResult = await searchResult?.getPage()
   const nextSearchResult = nextResult?.queriesById("search")
 
   const prevFirstId = searchResult?.records[0].id
   const nextFirstId = nextSearchResult?.records[0].id
   expect(nextFirstId).not.toBe(prevFirstId)
-  expect(nextSearchResult?.next).toBeDefined()
+  expect(nextSearchResult?.getPage).toBeDefined()
   expect(nextSearchResult?.filters?.length).toBeGreaterThan(0)
   expect(nextSearchResult?.meta.offset).toBe(1 * limit)
   expect(nextSearchResult?.meta.noOfResults).toBe(limit)
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const nextNextResult = await nextSearchResult?.next!()
+  const nextNextResult = await nextSearchResult?.getPage()
   const nextNextSearchResult = nextNextResult?.queriesById("search")
   const nextNextFirstId = nextNextSearchResult?.records[0].id
   expect(nextNextFirstId).not.toBe(prevFirstId)
@@ -106,7 +106,7 @@ test("Next page analytics test", async () => {
   const query = result.queriesById("categoryMerchandising")
 
   expect(query).toBeDefined()
-  expect(query?.getCategoryMerchandisingClickSendEvent).toBeDefined()
+  expect(query?.categoryMerchandisingClickEvent).toBeDefined()
   const product = query!.records[0]
 
   const getSpySuccess = jest
@@ -119,14 +119,14 @@ test("Next page analytics test", async () => {
       })
     })
 
-  query?.getCategoryMerchandisingClickSendEvent?.()(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.categoryMerchandisingClickEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -138,14 +138,14 @@ test("Next page analytics test", async () => {
     pageIndex: 1,
   })
   const query2 = resultPage2?.queriesById("categoryMerchandising")
-  query2?.getCategoryMerchandisingClickSendEvent?.()(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query2?.categoryMerchandisingClickEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(2)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -157,14 +157,14 @@ test("Next page analytics test", async () => {
     pageIndex: 2,
   })
   const query3 = resultPage3?.queriesById("categoryMerchandising")
-  query3?.getCategoryMerchandisingClickSendEvent?.()(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query3?.categoryMerchandisingClickEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(3)
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -172,24 +172,24 @@ test("Next page analytics test", async () => {
   )
 
   // Redo second analytics
-  query2?.getCategoryMerchandisingClickSendEvent?.()(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query2?.categoryMerchandisingClickEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   // Redo first analytics send
-  query?.getCategoryMerchandisingClickSendEvent?.()(
-    product.id,
-    "Women",
-    product.itemGroupId,
-    {
+  query?.categoryMerchandisingClickEvent?.({
+    productId: product.id,
+    categoryTitle: "Women",
+    variantId: product.itemGroupId,
+    override: {
       klevu_shopperIP: "192.168.0.1",
-    }
-  )
+    },
+  })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(5)
 })
