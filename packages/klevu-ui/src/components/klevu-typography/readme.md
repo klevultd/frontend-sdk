@@ -31,7 +31,6 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-latest-searches](../klevu-latest-searches)
  - [klevu-list](../klevu-list)
  - [klevu-merchandising](../klevu-merchandising)
- - [klevu-moi](../klevu-moi)
  - [klevu-popular-searches](../klevu-popular-searches)
  - [klevu-product](../klevu-product)
  - [klevu-product-query](../klevu-product-query)
@@ -57,7 +56,6 @@ graph TD;
   klevu-latest-searches --> klevu-typography
   klevu-list --> klevu-typography
   klevu-merchandising --> klevu-typography
-  klevu-moi --> klevu-typography
   klevu-popular-searches --> klevu-typography
   klevu-product --> klevu-typography
   klevu-product-query --> klevu-typography

@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop, Listen } from "@stencil/core"
 
 /**
  * Component that wraps chat elements into a layout.
@@ -32,29 +32,47 @@ export class KlevuChatLayout {
 
   componentDidLoad() {
     // listen to updates to DOM in slot and scroll to bottom
-    const main = this.el.shadowRoot?.querySelector("slot")
+    const mainSlot: HTMLSlotElement = this.el.shadowRoot?.querySelector("main slot") as HTMLSlotElement
+    this.#calcElemSize()
     const observer = new MutationObserver(() => {
       this.scrollMainToBottom()
     })
-    if (main) {
-      observer.observe(main, { childList: true })
+    if (mainSlot) {
+      observer.observe(mainSlot, { childList: true })
     }
     setTimeout(() => {
       this.scrollMainToBottom()
     }, 20)
   }
 
+  #calcElemSize() {
+    const mainSlot: HTMLSlotElement = this.el.shadowRoot?.querySelector("main slot") as HTMLSlotElement
+    const main = this.el.shadowRoot?.querySelector("main")
+
+    const firstChild: HTMLElement | undefined = mainSlot.assignedElements()?.[0] as HTMLElement | undefined
+    if (firstChild && main) {
+      firstChild.style.height = main.clientHeight - 32 + "px"
+    }
+  }
+
+  /*
+  @Listen("window:resize")
+  handleResize() {
+    this.#calcElemSize()
+  }
+  */
+
   /**
    * Scroll current chat to bottom of page
    */
   @Method()
-  async scrollMainToBottom() {
+  async scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
     const instance = await this.#scrollElement?.getInstance()
     if (instance) {
       setTimeout(() => {
         instance.elements().viewport.scrollTo({
           top: instance.elements().viewport.scrollHeight,
-          behavior: "smooth",
+          behavior: behavior as any,
         })
       }, 20)
     }

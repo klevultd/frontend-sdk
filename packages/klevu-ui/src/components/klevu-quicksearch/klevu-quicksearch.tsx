@@ -4,6 +4,7 @@ import {
   KlevuLastClickedProducts,
   KlevuQueryResult,
   KlevuRecord,
+  KlevuResponseQueryObject,
   KlevuSearchSorting,
   trendingProducts,
 } from "@klevu/core"
@@ -109,7 +110,7 @@ export class KlevuQuicksearch {
 
   #searchField?: HTMLKlevuSearchFieldElement
 
-  clickEvent?: (productId: string, variantId?: string) => void
+  #resultObject?: KlevuResponseQueryObject
 
   popup?: HTMLKlevuPopupElement
 
@@ -123,10 +124,11 @@ export class KlevuQuicksearch {
 
   @Listen("klevuSearchResults")
   async onResults(event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) {
-    this.clickEvent = event.detail.search?.getSearchClickSendEvent?.()
     if (event.detail.search?.records.length === 0) {
+      this.#resultObject = event.detail.fallback
       this.products = event.detail.fallback?.records
     } else {
+      this.#resultObject = event.detail.search
       this.products = event.detail.search?.records
     }
     this.cmsPages = event.detail.cms?.records
@@ -153,7 +155,10 @@ export class KlevuQuicksearch {
     const { product } = event.detail
     this.popup?.closeModal()
     if (product.id) {
-      this.clickEvent?.(product.id, product.itemGroupId || product.id)
+      this.#resultObject?.searchClickEvent?.({
+        productId: product.id,
+        variantId: product.itemGroupId || product.id,
+      })
     }
   }
 
@@ -247,7 +252,7 @@ export class KlevuQuicksearch {
               : null}
           </div>
         </klevu-popup>
-        {this.chat && <klevu-moi showClose></klevu-moi>}
+        {this.chat && <klevu-moi></klevu-moi>}
       </Host>
     )
   }

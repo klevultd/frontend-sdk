@@ -33,3 +33,15 @@
   height: var(--klevu-spacing-04);
   width: 100%;
 }
+
+.filteractions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--klevu-spacing-02);
+}
+
+.productactions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klevu-spacing-02);
+}

@@ -30,7 +30,6 @@ Container for chat items. Very simple component, just a wrapper.
 ### Used by
 
  - [klevu-chat-messages](../klevu-chat-messages)
- - [klevu-moi](../klevu-moi)
 
 ### Depends on
 
@@ -47,7 +46,6 @@ graph TD;
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-chat-messages --> klevu-chat-bubble
-  klevu-moi --> klevu-chat-bubble
   style klevu-chat-bubble fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

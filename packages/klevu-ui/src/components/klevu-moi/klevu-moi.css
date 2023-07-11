@@ -1,29 +1,48 @@
 :host {
   display: block;
   --klevu-slides-item-width: 200px;
+  --container-height: var(--klevu-moi-height, 550px);
+  --container-width: var(--klevu-moi-width, 640px);
 }
 
-klevu-chat-layout {
-  height: 100%;
+.popup {
+  display: none;
+  position: fixed;
+  bottom: -450px;
+  right: 20px;
+  height: var(--container-height);
+  width: var(--container-width);
+  max-height: 80vh;
+  max-width: 80vw;
+  background: var(--klevu-color-neutral-1);
+  border-radius: var(--klevu-border-radius-m);
+  box-shadow: var(--klevu-elevation-3);
+  padding: var(--klevu-spacing-04);
+  z-index: 100;
+  transition: all 0.3s ease-in;
+  opacity: 0;
 }
 
-.filteractions {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: var(--klevu-spacing-03);
+.popup.show {
+  display: block;
+}
+
+.popup.open {
+  bottom: 20px;
+  right: 20px;
+  height: var(--container-height);
+  width: var(--container-width);
+  opacity: 1;
+}
+
+klevu-chat-messages {
+  height: calc(var(--container-height) - 250px);
 }
 
 .menu {
   display: flex;
   flex-direction: column;
   gap: var(--klevu-spacing-03);
-}
-
-.productactions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--klevu-spacing-02);
 }
 
 .genericactions {
@@ -33,8 +52,4 @@ klevu-chat-layout {
   gap: var(--klevu-spacing-03);
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.genericactions klevu-button {
-  --klevu-button-padding: 5px;
 }

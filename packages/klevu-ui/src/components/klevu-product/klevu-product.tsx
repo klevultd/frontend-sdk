@@ -189,7 +189,7 @@ export class KlevuProduct {
                 )}
                 {this.hideDescription || !this.product[this.keyDescription] ? null : (
                   <klevu-typography class="description" variant="body-xs">
-                    {this.product[this.keyDescription]}
+                    {this.product[this.keyDescription].substring(0, 100)}
                   </klevu-typography>
                 )}
                 {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (

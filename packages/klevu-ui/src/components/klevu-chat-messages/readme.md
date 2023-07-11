@@ -11,7 +11,7 @@
 | ----------------------- | ------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
 | `enableMessageFeedback` | `enable-message-feedback` | Should display a feedback button after each message | `boolean \| undefined`                                                       | `undefined` |
 | `feedbacks`             | --                        | Feedbacks given by user                             | `MoiSavedFeedback[] \| undefined`                                            | `undefined` |
-| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseText \| MoiResponseFilter \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
+| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseFilter \| MoiResponseText \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
 | `showFeedbackFor`       | `show-feedback-for`       | What message should we                              | `string \| undefined`                                                        | `undefined` |
 
 
@@ -21,7 +21,7 @@
 | -------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `klevuChatProductClick`    | When product is clicked        | `CustomEvent<{ product: MoiProduct; }>`                                                                                                                           |
 | `klevuMessageFeedback`     | When feedback is given         | `CustomEvent<{ message: { id: string; note: string \| null; type: "text"; value: string; collectFeedback?: boolean \| undefined; }; feedback: "up" \| "down"; }>` |
-| `klevuSelectFilter`        | When product filter is clicked | `CustomEvent<{ filter: { count: string; name: string; selected: boolean \| null; value: string; }; }>`                                                            |
+| `klevuSelectFilter`        | When product filter is clicked | `CustomEvent<{ message: MoiResponseFilter; filter: { count: string; name: string; selected: boolean \| null; value: string; }; }>`                                |
 | `klevuSelectProductOption` | When product option is clicked | `CustomEvent<{ product: MoiProduct; option: { chat: string; intent: string; name: string; }; }>`                                                                  |
 
 
@@ -36,6 +36,7 @@
 
 ### Used by
 
+ - [klevu-moi](../klevu-moi)
  - [klevu-product-query](../klevu-product-query)
 
 ### Depends on
@@ -65,6 +66,7 @@ graph TD;
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
   klevu-product --> klevu-typography
+  klevu-moi --> klevu-chat-messages
   klevu-product-query --> klevu-chat-messages
   style klevu-chat-messages fill:#f9f,stroke:#333,stroke-width:4px
 ```

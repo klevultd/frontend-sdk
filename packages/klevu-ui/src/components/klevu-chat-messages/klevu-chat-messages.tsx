@@ -49,7 +49,7 @@ export class KlevuChatMessages {
   @Event({
     composed: true,
   })
-  klevuSelectFilter!: EventEmitter<{ filter: MoiResponseFilter["filter"]["options"][0] }>
+  klevuSelectFilter!: EventEmitter<{ message: MoiResponseFilter; filter: MoiResponseFilter["filter"]["options"][0] }>
 
   /**
    * When product option is clicked
@@ -127,6 +127,7 @@ export class KlevuChatMessages {
                       onClick={() => {
                         if (this.messages.length - 1 === index) {
                           this.klevuSelectFilter.emit({
+                            message: message,
                             filter: o,
                           })
                         }

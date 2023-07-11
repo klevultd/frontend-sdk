@@ -1,4 +1,10 @@
-import { KlevuFetch, KlevuRecord, kmcRecommendation, sendRecommendationViewEvent } from "@klevu/core"
+import {
+  KlevuFetch,
+  KlevuRecord,
+  KlevuResponseQueryObject,
+  kmcRecommendation,
+  sendRecommendationViewEvent,
+} from "@klevu/core"
 import { Component, h, Host, Prop, State } from "@stencil/core"
 
 import { KlevuProductCustomEvent } from "../../components"
@@ -49,7 +55,7 @@ export class KlevuRecommendations {
    */
   @State() products: Array<KlevuRecord> = [undefined, undefined, undefined, undefined, undefined, undefined] as any
 
-  @State() clickEvent?: (productId: string, variantId?: string) => void
+  #responseObject?: KlevuResponseQueryObject
 
   /**
    * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered.
@@ -107,12 +113,9 @@ export class KlevuRecommendations {
       )
     )
 
-    const resultObject = res.queriesById("recommendation")
-    if (resultObject) {
-      this.products = resultObject.records
-      if (resultObject.getRecommendationClickSendEvent) {
-        this.clickEvent = resultObject.getRecommendationClickSendEvent()
-      }
+    this.#responseObject = res.queriesById("recommendation")
+    if (this.#responseObject) {
+      this.products = this.#responseObject.records
     }
   }
 
@@ -122,8 +125,11 @@ export class KlevuRecommendations {
       originalEvent: MouseEvent
     }>
   ) {
-    if (this.clickEvent && event.detail.product.id) {
-      this.clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
+    if (this.#responseObject?.recommendationClickEvent && event.detail.product.id) {
+      this.#responseObject?.recommendationClickEvent({
+        productId: event.detail.product.id,
+        variantId: event.detail.product.itemGroupId || event.detail.product.id,
+      })
     }
   }
 

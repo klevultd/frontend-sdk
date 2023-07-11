@@ -186,11 +186,12 @@ export class KlevuSearchField {
     }
 
     const result = await KlevuFetch(...allSearchQueries)
+
     this.#lastQueryResult = {
-      fallback: result.queriesById("search-fallback"),
-      search: result.queriesById("search"),
-      category: result.queriesById("categorySearch"),
-      cms: result.queriesById("cmsSearch"),
+      fallback: result.queryExists("search-fallback") ? result.queriesById("search-fallback") : undefined,
+      search: result.queryExists("search") ? result.queriesById("search") : undefined,
+      category: result.queryExists("categorySearch") ? result.queriesById("categorySearch") : undefined,
+      cms: result.queryExists("cmsSearch") ? result.queriesById("cmsSearch") : undefined,
     }
     this.klevuSearchResults.emit(this.#lastQueryResult)
 

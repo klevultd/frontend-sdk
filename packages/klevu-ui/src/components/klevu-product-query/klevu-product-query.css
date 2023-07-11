@@ -26,6 +26,7 @@ klevu-chat-messages {
 
 klevu-util-scrollbars {
   flex-grow: 1;
+  min-height: 200px;
 }
 
 div[part="product-query-footer"] .inputs {

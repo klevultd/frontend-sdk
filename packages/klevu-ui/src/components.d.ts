@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -25,7 +25,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -145,7 +145,7 @@ export namespace Components {
         /**
           * Scroll current chat to bottom of page
          */
-        "scrollMainToBottom": () => Promise<void>;
+        "scrollMainToBottom": (behavior?: "smooth" | "instant") => Promise<void>;
         "showClose": boolean;
         /**
           * Show loading indicator
@@ -547,10 +547,8 @@ export namespace Components {
           * Override default API key
          */
         "apiKey"?: string;
-        /**
-          * Show close button
-         */
-        "showClose": boolean;
+        "close": () => Promise<void>;
+        "open": () => Promise<void>;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -1959,7 +1957,7 @@ declare namespace LocalJSX {
         /**
           * When product filter is clicked
          */
-        "onKlevuSelectFilter"?: (event: KlevuChatMessagesCustomEvent<{ filter: MoiResponseFilter["filter"]["options"][0] }>) => void;
+        "onKlevuSelectFilter"?: (event: KlevuChatMessagesCustomEvent<{ message: MoiResponseFilter; filter: MoiResponseFilter["filter"]["options"][0] }>) => void;
         /**
           * When product option is clicked
          */
@@ -2350,10 +2348,6 @@ declare namespace LocalJSX {
           * @param product
          */
         "onKlevuMoiProductClick"?: (event: KlevuMoiCustomEvent<MoiProduct>) => void;
-        /**
-          * Show close button
-         */
-        "showClose"?: boolean;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
