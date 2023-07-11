@@ -10,6 +10,7 @@ import {
   KlevuListenDomEvent,
   KlevuMerchandisingOptions,
   KlevuQueryResult,
+  KlevuResponseQueryObject,
   KlevuSearchOptions,
   KlevuSearchSorting,
   kmcRecommendation,
@@ -166,18 +167,18 @@ export class KlevuQuery {
     switch (this.type) {
       case "merchandising":
         if (this.categoryTitle) {
-          this.#lastResult.getCategoryMerchandisingClickSendEvent?.()(
-            product.id,
-            this.categoryTitle,
-            product.itemGroupId
-          )
+          this.#lastResult.categoryMerchandisingClickEvent?.({
+            productId: product.id,
+            categoryTitle: this.categoryTitle,
+            variantId: product.itemGroupId,
+          })
         }
         break
       case "recommendation":
-        this.#lastResult.getRecommendationClickSendEvent?.()(product.id, product.itemGroupId)
+        this.#lastResult.recommendationClickEvent?.({ productId: product.id, variantId: product.itemGroupId })
         break
       case "search":
-        this.#lastResult.getSearchClickSendEvent?.()(product.id, product.itemGroupId)
+        this.#lastResult.searchClickEvent?.({ productId: product.id, variantId: product.itemGroupId })
         break
       default:
         const e: never = this.type
@@ -185,7 +186,7 @@ export class KlevuQuery {
     }
   }
 
-  #lastResult?: KlevuFetchQueryResult
+  #lastResult?: KlevuResponseQueryObject
 
   async #fetch() {
     const options: AllQueryOptions = {

@@ -4,6 +4,7 @@ import {
   KlevuFetchFunctionReturnValue,
   KlevuFetchModifer,
   KlevuFetchQueryResult,
+  KlevuResponseQueryObject,
   KlevuSearchSorting,
   KlevuTypeOfRecord,
   search,
@@ -15,10 +16,10 @@ import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type SearchResultsEventData = {
-  fallback?: KlevuFetchQueryResult
-  search?: KlevuFetchQueryResult
-  category?: KlevuFetchQueryResult
-  cms?: KlevuFetchQueryResult
+  fallback?: KlevuResponseQueryObject
+  search?: KlevuResponseQueryObject
+  category?: KlevuResponseQueryObject
+  cms?: KlevuResponseQueryObject
 }
 
 export type SuggestionsEventData = string[]
@@ -217,9 +218,9 @@ export class KlevuSearchField {
         const res = this.#lastQueryResult.search
         if (res && res.getPage) {
           const result = await res.getPage({ pageIndex })
-          this.#lastQueryResult.search = result.queriesById("search")
+          this.#lastQueryResult.search = result?.queriesById("search")
           this.klevuSearchResults.emit({
-            search: result.queriesById("search"),
+            search: result?.queriesById("search"),
           })
         }
       }
@@ -227,9 +228,9 @@ export class KlevuSearchField {
         const res = this.#lastQueryResult.category
         if (res && res.getPage) {
           const result = await res.getPage({ pageIndex })
-          this.#lastQueryResult.category = result.queriesById("categorySearch")
+          this.#lastQueryResult.category = result?.queriesById("categorySearch")
           this.klevuSearchResults.emit({
-            category: result.queriesById("categorySearch"),
+            category: result?.queriesById("categorySearch"),
           })
         }
       }
@@ -237,9 +238,9 @@ export class KlevuSearchField {
         const res = this.#lastQueryResult.cms
         if (res && res.getPage) {
           const result = await res.getPage({ pageIndex })
-          this.#lastQueryResult.cms = result.queriesById("cmsSearch")
+          this.#lastQueryResult.cms = result?.queriesById("cmsSearch")
           this.klevuSearchResults.emit({
-            cms: result.queriesById("cmsSearch"),
+            cms: result?.queriesById("cmsSearch"),
           })
         }
       }

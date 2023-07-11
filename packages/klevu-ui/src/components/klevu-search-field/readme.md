@@ -27,11 +27,11 @@ in a custom event. Then you can decide what to do with the results.
 
 ## Events
 
-| Event                    | Description                                                                                             | Type                                                                                                                                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `klevuSearchClick`       | When user clicks search button. Returns the search term.                                                | `CustomEvent<string>`                                                                                                                                                                                   |
-| `klevuSearchResults`     | When results come from after typing in the search field. This is debounced to avoid excessive requests. | `CustomEvent<{ fallback?: KlevuFetchQueryResult \| undefined; search?: KlevuFetchQueryResult \| undefined; category?: KlevuFetchQueryResult \| undefined; cms?: KlevuFetchQueryResult \| undefined; }>` |
-| `klevuSearchSuggestions` | When searchfield gives some suggestions                                                                 | `CustomEvent<string[]>`                                                                                                                                                                                 |
+| Event                    | Description                                                                                             | Type                                                                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `klevuSearchClick`       | When user clicks search button. Returns the search term.                                                | `CustomEvent<string>`                                                                                                                                                                                               |
+| `klevuSearchResults`     | When results come from after typing in the search field. This is debounced to avoid excessive requests. | `CustomEvent<{ fallback?: KlevuResponseQueryObject \| undefined; search?: KlevuResponseQueryObject \| undefined; category?: KlevuResponseQueryObject \| undefined; cms?: KlevuResponseQueryObject \| undefined; }>` |
+| `klevuSearchSuggestions` | When searchfield gives some suggestions                                                                 | `CustomEvent<string[]>`                                                                                                                                                                                             |
 
 
 ## Methods
@@ -46,13 +46,13 @@ Type: `Promise<void>`
 
 
 
-### `getQueryResult(type: "search" | "category" | "cms") => Promise<KlevuFetchQueryResult | undefined>`
+### `getQueryResult(type: "search" | "category" | "cms") => Promise<KlevuResponseQueryObject | undefined>`
 
 Fetches query result from last request
 
 #### Returns
 
-Type: `Promise<KlevuFetchQueryResult | undefined>`
+Type: `Promise<KlevuResponseQueryObject | undefined>`
 
 
 

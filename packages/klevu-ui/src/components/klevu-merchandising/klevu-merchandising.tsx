@@ -6,6 +6,7 @@ import {
   KlevuFetchQueryResult,
   KlevuMerchandisingOptions,
   KlevuRecord,
+  KlevuResponseQueryObject,
   KlevuSearchSorting,
   listFilters,
   sendMerchandisingViewEvent,
@@ -98,8 +99,7 @@ export class KlevuMerchandising {
 
   @Element() el!: HTMLElement
 
-  #resultObject?: KlevuFetchQueryResult
-  #clickEvent?: (id: string, categoryTitle: string, variantId: string) => void
+  #resultObject?: KlevuResponseQueryObject
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -136,17 +136,15 @@ export class KlevuMerchandising {
     this.#resultObject = result.queriesById("categoryMerchandising")
 
     this.results = this.#resultObject?.records ?? []
-    this.#clickEvent = this.#resultObject?.getCategoryMerchandisingClickSendEvent?.()
   }
 
   async #loadMore() {
-    if (!this.#resultObject?.next) {
+    if (!this.#resultObject?.getPage) {
       return
     }
-    const nextResultObject = await this.#resultObject.next()
-    this.#resultObject = nextResultObject.queriesById("categoryMerchandising")
+    const nextResultObject = await this.#resultObject.getPage()
+    this.#resultObject = nextResultObject?.queriesById("categoryMerchandising")
     this.results = [...this.results, ...(this.#resultObject?.records ?? [])]
-    this.#clickEvent = this.#resultObject?.getCategoryMerchandisingClickSendEvent?.()
   }
 
   async #paginationChange(event: KlevuPaginationCustomEvent<number>) {
@@ -154,9 +152,8 @@ export class KlevuMerchandising {
       return
     }
     const nextResultObject = await this.#resultObject.getPage({ pageIndex: event.detail - 1 })
-    this.#resultObject = nextResultObject.queriesById("categoryMerchandising")
+    this.#resultObject = nextResultObject?.queriesById("categoryMerchandising")
     this.results = this.#resultObject?.records ?? []
-    this.#clickEvent = this.#resultObject?.getCategoryMerchandisingClickSendEvent?.()
   }
 
   async #sortChanged(event: KlevuSortCustomEvent<KlevuSearchSorting>) {
@@ -169,8 +166,12 @@ export class KlevuMerchandising {
     if (!event.detail.product.id || !event.detail.product.itemGroupId) {
       return
     }
-    if (this.#clickEvent) {
-      this.#clickEvent(event.detail.product?.id, this.categoryTitle, event.detail.product.itemGroupId)
+    if (this.#resultObject?.categoryMerchandisingClickEvent) {
+      this.#resultObject?.categoryMerchandisingClickEvent({
+        productId: event.detail.product.id,
+        variantId: event.detail.product.itemGroupId,
+        categoryTitle: this.categoryTitle,
+      })
     }
   }
 
@@ -264,7 +265,7 @@ export class KlevuMerchandising {
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
               ></klevu-pagination>
-            ) : this.#resultObject?.next ? (
+            ) : this.#resultObject?.getPage ? (
               <klevu-button onClick={this.#loadMore.bind(this)}>Load more</klevu-button>
             ) : null}
           </div>
