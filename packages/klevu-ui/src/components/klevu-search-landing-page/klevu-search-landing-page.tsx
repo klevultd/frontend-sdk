@@ -4,6 +4,7 @@ import {
   KlevuFetch,
   KlevuFetchQueryResult,
   KlevuRecord,
+  KlevuResponseQueryObject,
   KlevuSearchSorting,
   listFilters,
   search,
@@ -71,8 +72,7 @@ export class KlevuSearchLandingPage {
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
 
-  #resultObject?: KlevuFetchQueryResult
-  #clickEvent?: (id: string, variantId: string) => void
+  #resultObject?: KlevuResponseQueryObject
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
   #layoutElement!: HTMLKlevuLayoutResultsElement
@@ -109,17 +109,15 @@ export class KlevuSearchLandingPage {
     this.#resultObject = result.queriesById("search")
 
     this.results = this.#resultObject?.records ?? []
-    this.#clickEvent = this.#resultObject?.getSearchClickSendEvent?.()
   }
 
   async loadMore() {
-    if (!this.#resultObject?.next) {
+    if (!this.#resultObject?.getPage) {
       return
     }
-    const nextResultObject = await this.#resultObject.next()
-    this.#resultObject = nextResultObject.queriesById("search")
+    const nextResultObject = await this.#resultObject.getPage()
+    this.#resultObject = nextResultObject?.queriesById("search")
     this.results = [...this.results, ...(this.#resultObject?.records ?? [])]
-    this.#clickEvent = this.#resultObject!.getSearchClickSendEvent?.()
   }
 
   async paginationChange(event: KlevuPaginationCustomEvent<number>) {
@@ -127,15 +125,17 @@ export class KlevuSearchLandingPage {
       return
     }
     const nextResultObject = await this.#resultObject.getPage({ pageIndex: event.detail - 1 })
-    this.#resultObject = nextResultObject.queriesById("search")
+    this.#resultObject = nextResultObject?.queriesById("search")
     this.results = this.#resultObject?.records ?? []
-    this.#clickEvent = this.#resultObject?.getSearchClickSendEvent?.()
   }
 
   @Listen("productClick")
   productClickHandler(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
-    if (this.#clickEvent && event.detail.product.id) {
-      this.#clickEvent(event.detail.product.id, event.detail.product.itemGroupId || event.detail.product.id)
+    if (this.#resultObject?.searchClickEvent && event.detail.product.id) {
+      this.#resultObject.searchClickEvent({
+        productId: event.detail.product.id,
+        variantId: event.detail.product.itemGroupId || event.detail.product.id,
+      })
     }
   }
 
@@ -236,7 +236,7 @@ export class KlevuSearchLandingPage {
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>
-            ) : this.#resultObject?.next ? (
+            ) : this.#resultObject?.getPage ? (
               <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>
             ) : null}
           </div>

@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -25,7 +25,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuFetchQueryResult, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -940,7 +940,7 @@ export namespace Components {
           * @param type type of query result
           * @returns
          */
-        "getQueryResult": (type: "search" | "category" | "cms") => Promise<KlevuFetchQueryResult | undefined>;
+        "getQueryResult": (type: "search" | "category" | "cms") => Promise<KlevuResponseQueryObject | undefined>;
         /**
           * Maximum amount of results
          */
