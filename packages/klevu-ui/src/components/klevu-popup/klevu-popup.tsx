@@ -119,7 +119,6 @@ export class KlevuPopup {
       ],
     })
     const smallScreen = (this.popupWidth ?? 390) > window.innerWidth
-    this.#contentElement.style.maxHeight = `${window.innerHeight - 32}px`
     if (smallScreen) {
       Object.assign(this.#contentElement.style, {
         left: "0px",
@@ -135,9 +134,6 @@ export class KlevuPopup {
         left: `${x}px`,
         top: `${y}px`,
         position: null,
-        maxHeight: null,
-        maxWidth: null,
-        width: null,
         height: null,
       })
     }
