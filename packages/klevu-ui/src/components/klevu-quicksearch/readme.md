@@ -74,26 +74,30 @@ graph TD;
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-moi --> klevu-chat-layout
+  klevu-moi --> klevu-chat-messages
   klevu-moi --> klevu-loading-indicator
   klevu-moi --> klevu-button
   klevu-moi --> klevu-modal
   klevu-moi --> klevu-product
-  klevu-moi --> klevu-chat-bubble
-  klevu-moi --> klevu-typography
-  klevu-moi --> klevu-slides
   klevu-chat-layout --> klevu-typography
   klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-util-scrollbars
   klevu-chat-layout --> klevu-popup
   klevu-chat-layout --> klevu-textfield
-  klevu-modal --> klevu-icon
-  klevu-product --> klevu-typography
+  klevu-chat-messages --> klevu-chat-bubble
+  klevu-chat-messages --> klevu-icon
+  klevu-chat-messages --> klevu-typography
+  klevu-chat-messages --> klevu-button
+  klevu-chat-messages --> klevu-slides
+  klevu-chat-messages --> klevu-product
   klevu-chat-bubble --> klevu-typography
   klevu-chat-bubble --> klevu-icon
   klevu-chat-bubble --> klevu-button
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-product --> klevu-typography
+  klevu-modal --> klevu-icon
   klevu-suggestions-list --> klevu-typography
   klevu-suggestions-list --> klevu-list
   klevu-list --> klevu-icon

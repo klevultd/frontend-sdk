@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen, Element } from "@stencil/core"
+import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen, Element, Method } from "@stencil/core"
 
 import { startMoi, MoiSession, MoiRequest, MoiProducts, MoiProduct, MoiMessages, KlevuConfig } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -25,14 +25,14 @@ export class KlevuMoi {
   @State()
   loading = false
 
+  @State()
+  isShow = false
+
+  @State()
+  isOpen = false
+
   @Element()
   el!: HTMLKlevuMoiElement
-
-  /**
-   * Show close button
-   */
-  @Prop()
-  showClose = false
 
   /**
    * Override default API key
@@ -61,19 +61,34 @@ export class KlevuMoi {
 
   async connectedCallback() {
     await KlevuInit.ready()
+  }
 
-    const config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
-
-    const init = async () => {
+  @Method()
+  async open() {
+    if (!this.session) {
+      const config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
       this.session = await startMoi({
         onMessage: this.onMessage.bind(this),
         // Do nothing on redirect as we have our own system
         onRedirect: (url) => {},
         configOverride: config,
       })
-      this.messages = this.session.messages
     }
-    init()
+
+    this.messages = this.session.messages
+    this.isShow = true
+    setTimeout(() => {
+      this.isOpen = true
+      this.#layoutRef?.scrollMainToBottom("instant")
+    }, 50)
+  }
+
+  @Method()
+  async close() {
+    this.isOpen = false
+    setTimeout(() => {
+      this.isShow = false
+    }, 300)
   }
 
   async #sendMessage(msg: string, product?: MoiRequest["product"]) {
@@ -149,180 +164,101 @@ export class KlevuMoi {
   }
 
   render() {
+    const popupClasses = {
+      popup: true,
+      show: this.isShow,
+      open: this.isOpen,
+    }
+
     return (
       <Host>
-        <klevu-chat-layout
-          onKlevuChatLayoutMessageSent={(e) => this.#sendMessage(e.detail)}
-          ref={(el) => {
-            this.#layoutRef = el
-          }}
-          showClose={this.showClose}
-        >
-          {this.renderChatContent()}
-          {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
-          <br />
-          <div slot="actions" class="genericactions">
-            {this.session?.genericOptions?.options.map((item) => (
-              <klevu-button
-                size="small"
-                isSecondary
-                onClick={() => {
-                  if (item.type === "message") {
-                    this.#sendMessage(item.chat)
-                  } else if (item.type === "clearChat") {
-                    this.session?.clear()
+        <div class={popupClasses}>
+          {this.session && (
+            <klevu-chat-layout
+              slot="content"
+              onKlevuChatLayoutMessageSent={(e) => this.#sendMessage(e.detail)}
+              onKlevuChatLayoutClose={() => this.close()}
+              ref={(el) => {
+                this.#layoutRef = el
+              }}
+              showClose
+            >
+              <klevu-chat-messages
+                onKlevuSelectFilter={(event) => {
+                  this.#sendFilter(
+                    event.detail.filter.value,
+                    this.#buildChatFormat(event.detail.filter, event.detail.message.filter.settings)
+                  )
+                }}
+                onKlevuSelectProductOption={(event) => {
+                  const option = event.detail.option
+                  const product = event.detail.product
+                  if (option.intent === "show-similar-products") {
+                    this.#sendMessage(option.chat, {
+                      context: {
+                        url: product.url,
+                      },
+                      id: product.id,
+                      intent: option.intent,
+                    })
+                  } else if (option.intent === "quick-view") {
+                    this.currentProduct = product
+                    this.#modalRef?.openModal()
                   }
                 }}
-              >
-                {item.name}
-              </klevu-button>
-            ))}
-          </div>
-          <div slot="menu" class="menu">
-            {this.session?.menu?.options
-              .filter((i) => i.type === "message")
-              .map((item) => (
-                <klevu-button
-                  onClick={() => {
-                    if (item.type === "message") {
-                      this.#sendMessage(item.chat)
-                    } else {
-                      console.error("Not implemented yet")
-                    }
-                    this.#layoutRef?.closePopup()
-                  }}
-                >
-                  {item.name}
-                </klevu-button>
-              ))}
-          </div>
-        </klevu-chat-layout>
+                onKlevuChatProductClick={(event) => {
+                  event.preventDefault()
+                  event.stopPropagation()
+                  this.#productClick(event.detail.product)
+                  return false
+                }}
+                messages={this.messages}
+              ></klevu-chat-messages>
+              {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
+              <br />
+              <div slot="actions" class="genericactions">
+                {this.session?.genericOptions?.options.map((item) => (
+                  <klevu-button
+                    size="small"
+                    isSecondary
+                    onClick={() => {
+                      if (item.type === "message") {
+                        this.#sendMessage(item.chat)
+                      } else if (item.type === "clearChat") {
+                        this.session?.clear()
+                      }
+                    }}
+                  >
+                    {item.name}
+                  </klevu-button>
+                ))}
+              </div>
+              <div slot="menu" class="menu">
+                {this.session?.menu?.options
+                  .filter((i) => i.type === "message")
+                  .map((item) => (
+                    <klevu-button
+                      onClick={() => {
+                        if (item.type === "message") {
+                          this.#sendMessage(item.chat)
+                        } else {
+                          console.error("Not implemented yet")
+                        }
+                        this.#layoutRef?.closePopup()
+                      }}
+                    >
+                      {item.name}
+                    </klevu-button>
+                  ))}
+              </div>
+            </klevu-chat-layout>
+          )}
+        </div>
+
         <klevu-modal ref={(el) => (this.#modalRef = el)}>
           <klevu-product product={this.currentProduct}></klevu-product>
         </klevu-modal>
       </Host>
-    )
-  }
-
-  renderChatContent() {
-    return (
-      <Fragment>
-        {this.messages.map((message, index) => {
-          if ("message" in message) {
-            return (
-              <Fragment>
-                <klevu-chat-bubble remote>{message.message.value}</klevu-chat-bubble>
-                {message.message.note && (
-                  <klevu-typography
-                    style={{
-                      "--klevu-typography-color": "var(--klevu-color-neutral-6)",
-                    }}
-                    variant="body-xs"
-                  >
-                    {message.message.note}
-                  </klevu-typography>
-                )}
-              </Fragment>
-            )
-          }
-          if ("filter" in message) {
-            return (
-              <Fragment>
-                {message.filter.settings.label && (
-                  <klevu-chat-bubble remote>{message.filter.settings.label}</klevu-chat-bubble>
-                )}
-                <div class="filteractions">
-                  {message.filter.options.map((o) => (
-                    <klevu-button
-                      isSecondary
-                      disabled={this.messages.length - 1 !== index}
-                      onClick={() => {
-                        if (this.messages.length - 1 === index) {
-                          this.#sendFilter(o.value, this.#buildChatFormat(o, message.filter.settings))
-                        }
-                      }}
-                    >
-                      {o.name}
-                    </klevu-button>
-                  ))}
-                </div>
-                {message.filter.note && (
-                  <klevu-typography
-                    style={{
-                      "--klevu-typography-color": "var(--klevu-color-neutral-6)",
-                    }}
-                    variant="body-xs"
-                  >
-                    {message.filter.note}
-                  </klevu-typography>
-                )}
-              </Fragment>
-            )
-          }
-          if ("productData" in message) {
-            return (
-              <div>
-                <klevu-slides
-                  style={{
-                    "--klevu-slides-item-width": "200px;",
-                  }}
-                >
-                  {message.productData.products.map((product) => (
-                    <klevu-product
-                      product={product}
-                      hideSwatches
-                      onKlevuProductClick={(event) => {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        this.#productClick(product)
-                        return false
-                      }}
-                    >
-                      <div slot="bottom" class="productactions">
-                        {product.options.map((option) => (
-                          <klevu-button
-                            fullWidth
-                            isSecondary
-                            onClick={() => {
-                              if (option.intent === "show-similar-products") {
-                                this.#sendMessage(option.chat, {
-                                  context: {
-                                    url: product.url,
-                                  },
-                                  id: product.id,
-                                  intent: option.intent,
-                                })
-                              } else if (option.intent === "quick-view") {
-                                this.currentProduct = product
-                                this.#modalRef?.openModal()
-                              }
-                            }}
-                          >
-                            {option.name}
-                          </klevu-button>
-                        ))}
-                      </div>
-                    </klevu-product>
-                  ))}
-                </klevu-slides>
-                {message.productData.note && (
-                  <klevu-typography
-                    style={{
-                      "--klevu-typography-color": "var(--klevu-color-neutral-6)",
-                    }}
-                    variant="body-xs"
-                  >
-                    {message.productData.note}
-                  </klevu-typography>
-                )}
-              </div>
-            )
-          }
-          if ("local" in message) {
-            return <klevu-chat-bubble>{message.local?.message}</klevu-chat-bubble>
-          }
-        })}
-      </Fragment>
     )
   }
 }

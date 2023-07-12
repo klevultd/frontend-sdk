@@ -11,10 +11,9 @@ Klevu MOI Application
 
 ## Properties
 
-| Property    | Attribute    | Description              | Type                  | Default     |
-| ----------- | ------------ | ------------------------ | --------------------- | ----------- |
-| `apiKey`    | `api-key`    | Override default API key | `string \| undefined` | `undefined` |
-| `showClose` | `show-close` | Show close button        | `boolean`             | `false`     |
+| Property | Attribute | Description              | Type                  | Default     |
+| -------- | --------- | ------------------------ | --------------------- | ----------- |
+| `apiKey` | `api-key` | Override default API key | `string \| undefined` | `undefined` |
 
 
 ## Events
@@ -22,6 +21,29 @@ Klevu MOI Application
 | Event                  | Description                                                                                                                                                     | Type                                                                                                                                                                                                                                                                                    |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `klevuMoiProductClick` | When a product is clicked. By default does a full page redirect to product url if event is not cancelled.  Use `event.preventDefault()` to cancel the redirect. | `CustomEvent<{ id: string; currency: string; image: string; itemGroupId: string; name: string; noOfVariants: number; options: { chat: string; intent: string; name: string; }[]; originalContent: string \| null; price: string; salePrice: string; shortDesc: string; url: string; }>` |
+
+
+## Methods
+
+### `close() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `open() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ## Dependencies
@@ -33,25 +55,21 @@ Klevu MOI Application
 ### Depends on
 
 - [klevu-chat-layout](../klevu-chat-layout)
+- [klevu-chat-messages](../klevu-chat-messages)
 - [klevu-loading-indicator](../klevu-loading-indicator)
 - [klevu-button](../klevu-button)
 - [klevu-modal](../klevu-modal)
 - [klevu-product](../klevu-product)
-- [klevu-chat-bubble](../klevu-chat-bubble)
-- [klevu-typography](../klevu-typography)
-- [klevu-slides](../klevu-slides)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-moi --> klevu-chat-layout
+  klevu-moi --> klevu-chat-messages
   klevu-moi --> klevu-loading-indicator
   klevu-moi --> klevu-button
   klevu-moi --> klevu-modal
   klevu-moi --> klevu-product
-  klevu-moi --> klevu-chat-bubble
-  klevu-moi --> klevu-typography
-  klevu-moi --> klevu-slides
   klevu-chat-layout --> klevu-typography
   klevu-chat-layout --> klevu-button
   klevu-chat-layout --> klevu-util-scrollbars
@@ -60,14 +78,20 @@ graph TD;
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-textfield --> klevu-icon
-  klevu-modal --> klevu-icon
-  klevu-product --> klevu-typography
+  klevu-chat-messages --> klevu-chat-bubble
+  klevu-chat-messages --> klevu-icon
+  klevu-chat-messages --> klevu-typography
+  klevu-chat-messages --> klevu-button
+  klevu-chat-messages --> klevu-slides
+  klevu-chat-messages --> klevu-product
   klevu-chat-bubble --> klevu-typography
   klevu-chat-bubble --> klevu-icon
   klevu-chat-bubble --> klevu-button
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-product --> klevu-typography
+  klevu-modal --> klevu-icon
   klevu-quicksearch --> klevu-moi
   style klevu-moi fill:#f9f,stroke:#333,stroke-width:4px
 ```

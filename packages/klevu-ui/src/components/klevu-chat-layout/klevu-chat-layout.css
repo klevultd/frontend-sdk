@@ -10,25 +10,15 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 var(--klevu-spacing-02) var(--klevu-spacing-02);
+  flex-shrink: 0;
 }
 
 main {
-  flex: 1;
-  overflow: hidden;
-}
-
-main slot {
-  display: flex;
-  gap: var(--klevu-spacing-04);
-  flex-direction: column;
-  padding: var(--klevu-spacing-02) var(--klevu-spacing-06) var(--klevu-spacing-02) 0;
-}
-
-main klevu-util-scrollbars {
-  height: 100%;
+  flex-grow: 1;
 }
 
 footer {
+  flex-shrink: 0;
   margin-top: auto;
   padding-top: var(--klevu-spacing-04);
   border-top: 1px solid var(--klevu-color-neutral-3);

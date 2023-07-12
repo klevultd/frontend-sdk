@@ -1,10 +1,9 @@
 :host {
   display: block;
 }
-
 /*! 
  * OverlayScrollbars
- * Version: 2.1.0
+ * Version: 2.2.1
  * 
  * Copyright (c) Rene Haas | KingSora.
  * https://github.com/KingSora
@@ -194,14 +193,14 @@
   * hide native scrollbars
   */
 .os-environment,
-.os-viewport {
+[data-overlayscrollbars-viewport] {
   -ms-overflow-style: scrollbar !important;
 }
 
 [data-overlayscrollbars-initialize],
 [data-overlayscrollbars~="scrollbarHidden"],
-.os-viewport-scrollbar-hidden.os-environment,
-.os-viewport-scrollbar-hidden.os-viewport {
+[data-overlayscrollbars-viewport~="scrollbarHidden"],
+.os-scrollbar-hidden.os-environment {
   scrollbar-width: none !important;
 }
 
@@ -209,10 +208,10 @@
 [data-overlayscrollbars-initialize]::-webkit-scrollbar-corner,
 [data-overlayscrollbars~="scrollbarHidden"]::-webkit-scrollbar,
 [data-overlayscrollbars~="scrollbarHidden"]::-webkit-scrollbar-corner,
-.os-viewport-scrollbar-hidden.os-environment::-webkit-scrollbar,
-.os-viewport-scrollbar-hidden.os-environment::-webkit-scrollbar-corner,
-.os-viewport-scrollbar-hidden.os-viewport::-webkit-scrollbar,
-.os-viewport-scrollbar-hidden.os-viewport::-webkit-scrollbar-corner {
+[data-overlayscrollbars-viewport~="scrollbarHidden"]::-webkit-scrollbar,
+[data-overlayscrollbars-viewport~="scrollbarHidden"]::-webkit-scrollbar-corner,
+.os-scrollbar-hidden.os-environment::-webkit-scrollbar,
+.os-scrollbar-hidden.os-environment::-webkit-scrollbar-corner {
   -webkit-appearance: none !important;
   appearance: none !important;
   display: none !important;
@@ -231,8 +230,8 @@
   * applied to body 
   */
 html[data-overlayscrollbars],
-html.os-viewport-scrollbar-hidden,
-html.os-viewport-scrollbar-hidden > body {
+html.os-scrollbar-hidden,
+html.os-scrollbar-hidden > body {
   box-sizing: border-box;
   margin: 0;
   width: 100%;
@@ -251,30 +250,31 @@ html[data-overlayscrollbars] > body {
 }
 
 [data-overlayscrollbars~="host"],
-.os-padding {
+[data-overlayscrollbars-padding] {
   display: flex;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
 }
 
-.os-padding,
-.os-viewport {
+[data-overlayscrollbars-padding],
+[data-overlayscrollbars-viewport] {
   box-sizing: inherit;
   position: relative;
   flex: auto !important;
   height: auto;
   width: 100%;
+  min-width: 0;
   padding: 0;
   margin: 0;
   border: none;
   z-index: 0;
 }
 
-.os-viewport {
+[data-overlayscrollbars-viewport] {
   --os-vaw: 0;
   --os-vah: 0;
 }
-.os-viewport.os-viewport-arrange::before {
+[data-overlayscrollbars-viewport][data-overlayscrollbars-viewport~="arrange"]::before {
   content: "";
   position: absolute;
   pointer-events: none;
@@ -285,12 +285,19 @@ html[data-overlayscrollbars] > body {
   height: var(--os-vah);
 }
 
+[data-overlayscrollbars-padding],
+[data-overlayscrollbars-viewport] {
+  overflow: hidden;
+}
+
 [data-overlayscrollbars~="host"],
 [data-overlayscrollbars~="viewport"] {
   overflow: hidden;
 }
 
-[data-overlayscrollbars~="overflowVisible"] {
+[data-overlayscrollbars~="overflowVisible"],
+[data-overlayscrollbars-padding~="overflowVisible"],
+[data-overlayscrollbars-viewport~="overflowVisible"] {
   overflow: visible;
 }
 
@@ -310,16 +317,12 @@ html[data-overlayscrollbars] > body {
   overflow-y: scroll;
 }
 
-.os-padding,
-.os-viewport {
-  overflow: hidden;
+[data-overlayscrollbars~="scrollbarPressed"],
+[data-overlayscrollbars~="scrollbarPressed"] [data-overlayscrollbars-viewport] {
+  scroll-behavior: auto !important;
 }
 
-.os-overflow-visible {
-  overflow: visible;
-}
-
-.os-content {
+[data-overlayscrollbars-content] {
   box-sizing: inherit;
 }
 
@@ -327,14 +330,14 @@ html[data-overlayscrollbars] > body {
   * optional & experimental grid mode
   */
 [data-overlayscrollbars-grid],
-[data-overlayscrollbars-grid] .os-padding {
+[data-overlayscrollbars-grid] [data-overlayscrollbars-padding] {
   display: grid;
   grid-template: 1fr/1fr;
 }
 
-[data-overlayscrollbars-grid] > .os-padding,
-[data-overlayscrollbars-grid] > .os-viewport,
-[data-overlayscrollbars-grid] > .os-padding > .os-viewport {
+[data-overlayscrollbars-grid] > [data-overlayscrollbars-padding],
+[data-overlayscrollbars-grid] > [data-overlayscrollbars-viewport],
+[data-overlayscrollbars-grid] > [data-overlayscrollbars-padding] > [data-overlayscrollbars-viewport] {
   height: auto !important;
   width: auto !important;
 }
@@ -572,6 +575,7 @@ body > .os-scrollbar {
 /* DARK & LIGHT THEME: */
 .os-theme-dark,
 .os-theme-light {
+  box-sizing: border-box;
   --os-size: 10px;
   --os-padding-perpendicular: 2px;
   --os-padding-axis: 2px;
@@ -663,26 +667,4 @@ body > .os-scrollbar {
 }
 .os-no-css-vars.os-theme-light:active .os-scrollbar-handle {
   background: rgba(255, 255, 255, 0.66);
-}
-
-/** Klevu theme */
-.os-theme-klevu {
-  --os-size: 4px;
-  --os-padding-perpendicular: 2px;
-  --os-padding-axis: 2px;
-  --os-track-border-radius: 10px;
-  --os-handle-interactive-area-offset: 4px;
-  --os-handle-border-radius: 10px;
-  --os-handle-bg: var(--klevu-color-neutral-5, rgba(0, 0, 0, 0.44));
-  --os-handle-bg-hover: var(--klevu-color-neutral-6, rgba(0, 0, 0, 0.55));
-  --os-handle-bg-active: var(--klevu-color-neutral-7, rgba(0, 0, 0, 0.66));
-}
-/** improve usability by increasing clickable area */
-.os-theme-klevu .os-scrollbar-handle::after {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
 }

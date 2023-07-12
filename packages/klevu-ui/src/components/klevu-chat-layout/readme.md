@@ -37,7 +37,7 @@ Type: `Promise<void>`
 
 
 
-### `scrollMainToBottom() => Promise<void>`
+### `scrollMainToBottom(behavior?: "smooth" | "instant") => Promise<void>`
 
 Scroll current chat to bottom of page
 

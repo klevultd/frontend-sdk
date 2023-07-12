@@ -247,6 +247,7 @@ export class KlevuProductQuery {
           }}
           anchor={this.popupAnchor}
           offset={this.popupOffset}
+          elevation={3}
           useBackground={this.useBackground}
           popupWidth={520}
         >
