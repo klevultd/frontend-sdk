@@ -22,5 +22,7 @@ jobs:
           path: node_modules/@klevu/ui
       - name: Upload to latest folder Klevu CDN
         run: aws s3 sync ./node_modules/@klevu/ui/dist/ s3://$RESOURCES_AWS_BUCKET/latest/ --region eu-west-1
+      - name: Upload package.json to Klevu CDN
+        run: aws s3 cp ./node_modules/@klevu/ui/package.json s3://$RESOURCES_AWS_BUCKET/latest/package.json --region eu-west-1
       - name: Upload to version folder Klevu CDN
         run: aws s3 sync ./node_modules/@klevu/ui/dist/ s3://$RESOURCES_AWS_BUCKET/${{ steps.package-version.outputs.current-version }}/ --region eu-west-1
