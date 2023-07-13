@@ -135,6 +135,7 @@ export class KlevuPopup {
         top: `${y}px`,
         position: null,
         height: null,
+        width: null,
       })
     }
   }
@@ -211,9 +212,11 @@ export class KlevuPopup {
 
     popupClasses[`elevation-${this.elevation}`] = true
 
-    const styles: any = {}
+    const styles: any = {
+      height: "100%",
+    }
     if (this.popupWidth) {
-      styles.width = `${this.popupWidth}px`
+      styles.maxWidth = `${this.popupWidth}px`
     }
 
     return (
@@ -221,8 +224,10 @@ export class KlevuPopup {
         <div id="origin" class="originContainer" part="popup-origin">
           <slot name="origin" />
         </div>
-        <div id="content" class={popupClasses} style={styles} part="popup-content">
-          <slot name="content" />
+        <div id="content" class={popupClasses} part="popup-content">
+          <div style={styles}>
+            <slot name="content" />
+          </div>
         </div>
         {this.open && this.useBackground && <div class="background" onClick={this.closeModal.bind(this)} />}
       </Host>

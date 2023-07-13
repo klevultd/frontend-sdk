@@ -16,18 +16,33 @@ export class KlevuMoi {
   #layoutRef?: HTMLKlevuChatLayoutElement
   #modalRef?: HTMLKlevuModalElement
 
+  /**
+   * Currently clicked product
+   */
   @State()
   currentProduct?: MoiProduct
 
+  /**
+   * All messages
+   */
   @State()
   messages: MoiMessages = []
 
+  /**
+   * Are we loading any messages
+   */
   @State()
   loading = false
 
+  /**
+   * Display state
+   */
   @State()
   isShow = false
 
+  /**
+   * Is currently open
+   */
   @State()
   isOpen = false
 
@@ -41,6 +56,12 @@ export class KlevuMoi {
   apiKey?: string
 
   /**
+   * Start the MOI window open
+   */
+  @Prop()
+  startOpen?: boolean
+
+  /**
    * When a product is clicked. By default does a full page redirect to product url if event is not cancelled.
    *
    * Use `event.preventDefault()` to cancel the redirect.
@@ -48,6 +69,12 @@ export class KlevuMoi {
    */
   @Event({ composed: true, cancelable: true })
   klevuMoiProductClick!: EventEmitter<MoiProduct>
+
+  /**
+   * When the visibility of Moi window changes
+   */
+  @Event({ composed: true })
+  klevuMoiVisibilityChange!: EventEmitter<"open" | "close">
 
   /** By default redirect the page if product click is not cancelled */
   @Listen("klevuMoiProductClick")
@@ -61,8 +88,15 @@ export class KlevuMoi {
 
   async connectedCallback() {
     await KlevuInit.ready()
+
+    if (this.startOpen) {
+      this.open()
+    }
   }
 
+  /**
+   * Initialize the MOI session and open window
+   */
   @Method()
   async open() {
     if (!this.session) {
@@ -77,15 +111,21 @@ export class KlevuMoi {
 
     this.messages = this.session.messages
     this.isShow = true
-    setTimeout(() => {
+    this.klevuMoiVisibilityChange.emit("open")
+    setTimeout(async () => {
       this.isOpen = true
-      this.#layoutRef?.scrollMainToBottom("instant")
+      await this.#layoutRef?.calcContentSize()
+      await this.#layoutRef?.scrollMainToBottom("instant")
     }, 50)
   }
 
   @Method()
   async close() {
+    if (!this.isOpen) {
+      return
+    }
     this.isOpen = false
+    this.klevuMoiVisibilityChange.emit("close")
     setTimeout(() => {
       this.isShow = false
     }, 300)
@@ -170,6 +210,10 @@ export class KlevuMoi {
       open: this.isOpen,
     }
 
+    if (!this.isShow) {
+      return null
+    }
+
     return (
       <Host>
         <div class={popupClasses}>
@@ -177,12 +221,14 @@ export class KlevuMoi {
             <klevu-chat-layout
               slot="content"
               onKlevuChatLayoutMessageSent={(e) => this.#sendMessage(e.detail)}
-              onKlevuChatLayoutClose={() => this.close()}
               ref={(el) => {
                 this.#layoutRef = el
               }}
-              showClose
             >
+              <div slot="header">
+                <klevu-typography variant="body-m-bold">MOI</klevu-typography>
+                <klevu-button onClick={() => this.close()} size="small" icon="close" isSecondary></klevu-button>
+              </div>
               <klevu-chat-messages
                 onKlevuSelectFilter={(event) => {
                   this.#sendFilter(
@@ -215,7 +261,6 @@ export class KlevuMoi {
                 messages={this.messages}
               ></klevu-chat-messages>
               {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
-              <br />
               <div slot="actions" class="genericactions">
                 {this.session?.genericOptions?.options.map((item) => (
                   <klevu-button

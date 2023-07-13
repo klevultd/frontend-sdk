@@ -139,14 +139,18 @@ export namespace Components {
      */
     interface KlevuChatLayout {
         /**
+          * Recalculates and fills the content to the max height of the chat layout. It can be used to force layout size calculation
+         */
+        "calcContentSize": () => Promise<void>;
+        /**
           * Close the popup menu
          */
         "closePopup": () => Promise<void>;
+        "elementForHeightCalculation"?: HTMLElement;
         /**
           * Scroll current chat to bottom of page
          */
         "scrollMainToBottom": (behavior?: "smooth" | "instant") => Promise<void>;
-        "showClose": boolean;
         /**
           * Show loading indicator
          */
@@ -548,7 +552,14 @@ export namespace Components {
          */
         "apiKey"?: string;
         "close": () => Promise<void>;
+        /**
+          * Initialize the MOI session and open window
+         */
         "open": () => Promise<void>;
+        /**
+          * Start the MOI window open
+         */
+        "startOpen"?: boolean;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
@@ -1919,15 +1930,11 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface KlevuChatLayout {
-        /**
-          * Event emitted when user closes the chat layout
-         */
-        "onKlevuChatLayoutClose"?: (event: KlevuChatLayoutCustomEvent<void>) => void;
+        "elementForHeightCalculation"?: HTMLElement;
         /**
           * Event emitted when user sends a message
          */
         "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
-        "showClose"?: boolean;
         /**
           * Show loading indicator
          */
@@ -2348,6 +2355,14 @@ declare namespace LocalJSX {
           * @param product
          */
         "onKlevuMoiProductClick"?: (event: KlevuMoiCustomEvent<MoiProduct>) => void;
+        /**
+          * When the visibility of Moi window changes
+         */
+        "onKlevuMoiVisibilityChange"?: (event: KlevuMoiCustomEvent<"open" | "close">) => void;
+        /**
+          * Start the MOI window open
+         */
+        "startOpen"?: boolean;
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.

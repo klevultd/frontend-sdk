@@ -42,9 +42,8 @@ export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble
 
 export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
   'showLoading',
-  'showClose',
-  'klevuChatLayoutMessageSent',
-  'klevuChatLayoutClose'
+  'elementForHeightCalculation',
+  'klevuChatLayoutMessageSent'
 ]);
 
 
@@ -182,7 +181,9 @@ export const KlevuModal = /*@__PURE__*/ defineContainer<JSX.KlevuModal>('klevu-m
 
 export const KlevuMoi = /*@__PURE__*/ defineContainer<JSX.KlevuMoi>('klevu-moi', undefined, [
   'apiKey',
-  'klevuMoiProductClick'
+  'startOpen',
+  'klevuMoiProductClick',
+  'klevuMoiVisibilityChange'
 ]);
 
 
