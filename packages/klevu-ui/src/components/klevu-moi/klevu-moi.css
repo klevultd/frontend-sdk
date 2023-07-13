@@ -8,19 +8,22 @@
 .popup {
   display: none;
   position: fixed;
-  bottom: -450px;
+  bottom: -100vh;
   right: 20px;
   height: var(--container-height);
   width: var(--container-width);
-  max-height: 80vh;
-  max-width: 80vw;
+  max-height: 100vh;
+  max-width: calc(100vw - 20px);
   background: var(--klevu-color-neutral-1);
   border-radius: var(--klevu-border-radius-m);
   box-shadow: var(--klevu-elevation-3);
   padding: var(--klevu-spacing-04);
   z-index: 100;
-  transition: all 0.3s ease-in;
+  transition-property: bottom, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
   opacity: 0;
+  box-sizing: border-box;
 }
 
 .popup.show {
@@ -33,6 +36,22 @@
   height: var(--container-height);
   width: var(--container-width);
   opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .popup {
+    right: 0;
+    bottom: -100vh;
+    max-width: 100vw;
+    height: 100vh;
+  }
+
+  .popup.open {
+    right: 0;
+    bottom: 0;
+    max-width: 100vw;
+    height: 100vh;
+  }
 }
 
 klevu-chat-messages {
@@ -52,4 +71,14 @@ klevu-chat-messages {
   gap: var(--klevu-spacing-03);
   flex-wrap: wrap;
   justify-content: center;
+}
+
+div[slot="header"] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--klevu-spacing-02) var(--klevu-spacing-02);
+  flex-shrink: 0;
+  margin-bottom: var(--klevu-spacing-04);
+  border-bottom: 1px solid var(--klevu-color-neutral-4);
 }

@@ -3,6 +3,11 @@ import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop, 
 /**
  * Component that wraps chat elements into a layout.
  *
+ * @slot header - Header of the chat layout
+ * @slot footer - Footer of the chat layout
+ * @slot default - Main content of the chat layout. Only one element should be used for this slot to make layout calculatios right.
+ * @slot actions - Actions to be placed in the footer
+ *
  * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
  */
 @Component({
@@ -23,17 +28,21 @@ export class KlevuChatLayout {
   showLoading = false
 
   @Prop()
-  showClose = false
+  elementForHeightCalculation?: HTMLElement
 
   /**
    * Current value of the text field
    */
-  @State() text = ""
+  @State()
+  text = ""
+
+  @State()
+  menuSlotCount = 0
 
   componentDidLoad() {
     // listen to updates to DOM in slot and scroll to bottom
     const mainSlot: HTMLSlotElement = this.el.shadowRoot?.querySelector("main slot") as HTMLSlotElement
-    this.#calcElemSize()
+    this.calcContentSize()
     const observer = new MutationObserver(() => {
       this.scrollMainToBottom()
     })
@@ -43,24 +52,49 @@ export class KlevuChatLayout {
     setTimeout(() => {
       this.scrollMainToBottom()
     }, 20)
+
+    const menu = this.el.shadowRoot?.querySelector("slot[name=menu]") as HTMLSlotElement | undefined
+    this.menuSlotCount = menu?.assignedElements().length ?? 0
+    menu?.addEventListener("slotchange", () => {
+      this.menuSlotCount = menu?.assignedElements().length ?? 0
+    })
+
+    window.addEventListener("resize", this.handleResize.bind(this))
   }
 
-  #calcElemSize() {
+  @Listen("slotchange")
+  handleSlotChange() {
+    this.calcContentSize()
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("resize", this.handleResize.bind(this))
+  }
+
+  /**
+   * Recalculates and fills the content to the max height of the chat layout.
+   * It can be used to force layout size calculation
+   */
+  @Method()
+  async calcContentSize() {
     const mainSlot: HTMLSlotElement = this.el.shadowRoot?.querySelector("main slot") as HTMLSlotElement
-    const main = this.el.shadowRoot?.querySelector("main")
+    const header = this.el.shadowRoot?.querySelector("header")
+    const footer = this.el.shadowRoot?.querySelector("footer")
+    const element = this.elementForHeightCalculation ? this.elementForHeightCalculation : this.el
+    const elementPadding =
+      parseInt(getComputedStyle(element).paddingTop) + parseInt(getComputedStyle(element).paddingBottom)
+
+    const totalHeight = element.clientHeight - elementPadding
 
     const firstChild: HTMLElement | undefined = mainSlot.assignedElements()?.[0] as HTMLElement | undefined
-    if (firstChild && main) {
-      firstChild.style.height = main.clientHeight - 32 + "px"
+    if (firstChild && header && footer) {
+      firstChild.style.height = totalHeight - header.clientHeight - footer.clientHeight + "px"
     }
   }
 
-  /*
-  @Listen("window:resize")
   handleResize() {
-    this.#calcElemSize()
+    this.calcContentSize()
   }
-  */
 
   /**
    * Scroll current chat to bottom of page
@@ -91,11 +125,6 @@ export class KlevuChatLayout {
    */
   @Event() klevuChatLayoutMessageSent!: EventEmitter<string>
 
-  /**
-   * Event emitted when user closes the chat layout
-   */
-  @Event() klevuChatLayoutClose!: EventEmitter<void>
-
   #sendMessage() {
     this.klevuChatLayoutMessageSent.emit(this.text)
     this.text = ""
@@ -105,17 +134,7 @@ export class KlevuChatLayout {
     return (
       <Host>
         <header>
-          <slot name="header">
-            <klevu-typography variant="body-m-bold">MOI</klevu-typography>
-            {this.showClose && (
-              <klevu-button
-                onClick={() => this.klevuChatLayoutClose.emit()}
-                size="small"
-                icon="close"
-                isSecondary
-              ></klevu-button>
-            )}
-          </slot>
+          <slot name="header"></slot>
         </header>
         <main>
           <klevu-util-scrollbars overflowX="hidden" overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
@@ -126,12 +145,14 @@ export class KlevuChatLayout {
           <slot name="footer">
             <slot name="actions"></slot>
             <div class="inputs">
-              <klevu-popup anchor="top-start" ref={(el) => (this.#popupElement = el)}>
-                <div slot="content">
-                  <slot name="menu"></slot>
-                </div>
-                <klevu-button slot="origin" icon="menu" isSecondary></klevu-button>
-              </klevu-popup>
+              {this.menuSlotCount > 0 ? (
+                <klevu-popup anchor="top-start" ref={(el) => (this.#popupElement = el)}>
+                  <div slot="content">
+                    <slot name="menu"></slot>
+                  </div>
+                  <klevu-button slot="origin" icon="menu" isSecondary></klevu-button>
+                </klevu-popup>
+              ) : null}
               <klevu-textfield
                 variant="pill"
                 value={this.text}

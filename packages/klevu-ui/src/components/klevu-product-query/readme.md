@@ -32,9 +32,6 @@ Klevu Product Query application that shows a popup for asking questions about a 
 | Part                        | Description |
 | --------------------------- | ----------- |
 | `"klevu-query-open-button"` |             |
-| `"product-query-feedback"`  |             |
-| `"product-query-footer"`    |             |
-| `"product-query-header"`    |             |
 
 
 ## Dependencies
@@ -43,9 +40,9 @@ Klevu Product Query application that shows a popup for asking questions about a 
 
 - [klevu-popup](../klevu-popup)
 - [klevu-button](../klevu-button)
+- [klevu-chat-layout](../klevu-chat-layout)
 - [klevu-typography](../klevu-typography)
 - [klevu-icon](../klevu-icon)
-- [klevu-util-scrollbars](../klevu-util-scrollbars)
 - [klevu-chat-messages](../klevu-chat-messages)
 - [klevu-loading-indicator](../klevu-loading-indicator)
 - [klevu-textfield](../klevu-textfield)
@@ -55,14 +52,19 @@ Klevu Product Query application that shows a popup for asking questions about a 
 graph TD;
   klevu-product-query --> klevu-popup
   klevu-product-query --> klevu-button
+  klevu-product-query --> klevu-chat-layout
   klevu-product-query --> klevu-typography
   klevu-product-query --> klevu-icon
-  klevu-product-query --> klevu-util-scrollbars
   klevu-product-query --> klevu-chat-messages
   klevu-product-query --> klevu-loading-indicator
   klevu-product-query --> klevu-textfield
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
+  klevu-chat-layout --> klevu-util-scrollbars
+  klevu-chat-layout --> klevu-popup
+  klevu-chat-layout --> klevu-button
+  klevu-chat-layout --> klevu-textfield
+  klevu-textfield --> klevu-icon
   klevu-chat-messages --> klevu-chat-bubble
   klevu-chat-messages --> klevu-icon
   klevu-chat-messages --> klevu-typography
@@ -76,7 +78,6 @@ graph TD;
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
   klevu-product --> klevu-typography
-  klevu-textfield --> klevu-icon
   style klevu-product-query fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -10,6 +10,16 @@
   height: 100%;
 }
 
+klevu-chat-layout {
+  height: 500px;
+}
+
+@media (max-width: 520px) {
+  klevu-chat-layout {
+    height: 100%;
+  }
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -20,14 +30,8 @@
   cursor: pointer;
 }
 
-klevu-chat-messages {
-  max-height: 350px;
-  min-height: 350px;
-}
-
-klevu-util-scrollbars {
-  flex-grow: 1;
-  min-height: 200px;
+div[part="product-query-header"] {
+  width: 100%;
 }
 
 div[part="product-query-footer"] .inputs {
