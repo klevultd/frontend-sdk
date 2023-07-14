@@ -230,7 +230,7 @@ export async function startMoi(
     sessionId: "",
     mode: options.mode,
     url: options.url,
-    productId: options.url,
+    productId: options.productId,
     pqaWidgetId: options.pqaWidgetId,
   }
   const storedSession = await getStoredSession(ctx)
@@ -302,6 +302,10 @@ export class MoiSession {
     this.options = options
     this.context = context
     this.config = config
+
+    if (this.context.url && this.context.productId) {
+      throw new Error("Cannot set both url and productId for PQA")
+    }
   }
 
   messages: MoiMessages
