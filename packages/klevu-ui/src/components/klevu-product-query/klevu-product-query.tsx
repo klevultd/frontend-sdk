@@ -206,10 +206,6 @@ export class KlevuProductQuery {
 
     await this.#layoutElement?.scrollMainToBottom("instant")
 
-    setTimeout(() => {
-      this.#layoutElement?.calcContentSize()
-    }, 10)
-
     // add this when registering works
     //this.registered = this.messages.length > 1
   }
@@ -235,6 +231,10 @@ export class KlevuProductQuery {
   }
 
   render() {
+    if (!this.isEnabled) {
+      return null
+    }
+
     return (
       <Host>
         <klevu-popup
@@ -250,11 +250,9 @@ export class KlevuProductQuery {
           useBackground={this.useBackground}
           popupWidth={520}
         >
-          {this.isEnabled ? (
-            <div slot="origin">
-              <klevu-button part="klevu-query-open-button">{this.buttonText}</klevu-button>
-            </div>
-          ) : null}
+          <div slot="origin">
+            <klevu-button part="klevu-query-open-button">{this.buttonText}</klevu-button>
+          </div>
           <div class="content" slot="content" ref={(el) => (this.#contentDiv = el)}>
             {this.showFeedback ? this.#renderFeedback() : this.#renderChat()}
           </div>

@@ -139,10 +139,6 @@ export namespace Components {
      */
     interface KlevuChatLayout {
         /**
-          * Recalculates and fills the content to the max height of the chat layout. It can be used to force layout size calculation
-         */
-        "calcContentSize": () => Promise<void>;
-        /**
           * Close the popup menu
          */
         "closePopup": () => Promise<void>;

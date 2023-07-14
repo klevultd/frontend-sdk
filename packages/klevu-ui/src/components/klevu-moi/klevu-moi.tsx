@@ -114,7 +114,6 @@ export class KlevuMoi {
     this.klevuMoiVisibilityChange.emit("open")
     setTimeout(async () => {
       this.isOpen = true
-      await this.#layoutRef?.calcContentSize()
       await this.#layoutRef?.scrollMainToBottom("instant")
     }, 50)
   }
