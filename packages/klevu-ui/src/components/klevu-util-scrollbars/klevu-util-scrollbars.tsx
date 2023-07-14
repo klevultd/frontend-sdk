@@ -1,8 +1,12 @@
-import { Component, Element, Host, h, Prop, Method } from "@stencil/core"
+import { Component, Element, Host, h, Prop, Method, Watch } from "@stencil/core"
 import { OverflowBehavior, OverlayScrollbars, PartialOptions } from "overlayscrollbars"
 
 /**
  * Utility that replaces the default browser scrollbar with a custom one.
+ *
+ * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
+ * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
+ * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
  */
 @Component({
   tag: "klevu-util-scrollbars",
@@ -18,6 +22,17 @@ export class KlevuUtilScrollbars {
   @Prop() overflowY?: OverflowBehavior
 
   componentDidLoad() {
+    this.#initCustomScrollbars()
+  }
+
+  @Watch("overflowX")
+  @Watch("overflowY")
+  scrollbarOptionsChanged() {
+    this.instance?.destroy()
+    this.#initCustomScrollbars()
+  }
+
+  #initCustomScrollbars() {
     if (!this.container) {
       return
     }
@@ -51,10 +66,7 @@ export class KlevuUtilScrollbars {
       <Host>
         <div
           style={{
-            "--os-size": "4px !important",
-            "--os-handle-bg": "red !important",
-            "--os-handle-bg-hover": "var(--klevu-color-neutral-6) !important",
-            "--os-handle-bg-active": "var(--klevu-color-neutral-7) !important",
+            height: "100%",
           }}
           ref={(el) => (this.container = el)}
         >

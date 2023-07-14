@@ -1186,6 +1186,9 @@ export namespace Components {
     }
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
+     * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
+     * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
+     * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface KlevuUtilScrollbars {
         "getContainer": () => Promise<HTMLDivElement | undefined>;
@@ -1777,6 +1780,9 @@ declare global {
     };
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
+     * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
+     * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
+     * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface HTMLKlevuUtilScrollbarsElement extends Components.KlevuUtilScrollbars, HTMLStencilElement {
     }
@@ -3017,6 +3023,9 @@ declare namespace LocalJSX {
     }
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
+     * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
+     * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
+     * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface KlevuUtilScrollbars {
         "overflowX"?: OverflowBehavior;
@@ -3361,6 +3370,9 @@ declare module "@stencil/core" {
             "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
             /**
              * Utility that replaces the default browser scrollbar with a custom one.
+             * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
+             * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
+             * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
              */
             "klevu-util-scrollbars": LocalJSX.KlevuUtilScrollbars & JSXBase.HTMLAttributes<HTMLKlevuUtilScrollbarsElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
