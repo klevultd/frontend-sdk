@@ -20,6 +20,11 @@ klevu-chat-layout {
   }
 }
 
+klevu-chat-messages {
+  padding-right: var(--klevu-spacing-04);
+  height: 100%;
+}
+
 .header {
   display: flex;
   align-items: center;

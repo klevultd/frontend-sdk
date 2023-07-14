@@ -42,7 +42,6 @@ export class KlevuChatLayout {
   componentDidLoad() {
     // listen to updates to DOM in slot and scroll to bottom
     const mainSlot: HTMLSlotElement = this.el.shadowRoot?.querySelector("main slot") as HTMLSlotElement
-    this.calcContentSize()
     const observer = new MutationObserver(() => {
       this.scrollMainToBottom()
     })
@@ -58,42 +57,6 @@ export class KlevuChatLayout {
     menu?.addEventListener("slotchange", () => {
       this.menuSlotCount = menu?.assignedElements().length ?? 0
     })
-
-    window.addEventListener("resize", this.handleResize.bind(this))
-  }
-
-  @Listen("slotchange")
-  handleSlotChange() {
-    this.calcContentSize()
-  }
-
-  disconnectedCallback() {
-    window.removeEventListener("resize", this.handleResize.bind(this))
-  }
-
-  /**
-   * Recalculates and fills the content to the max height of the chat layout.
-   * It can be used to force layout size calculation
-   */
-  @Method()
-  async calcContentSize() {
-    const mainSlot: HTMLSlotElement = this.el.shadowRoot?.querySelector("main slot") as HTMLSlotElement
-    const header = this.el.shadowRoot?.querySelector("header")
-    const footer = this.el.shadowRoot?.querySelector("footer")
-    const element = this.elementForHeightCalculation ? this.elementForHeightCalculation : this.el
-    const elementPadding =
-      parseInt(getComputedStyle(element).paddingTop) + parseInt(getComputedStyle(element).paddingBottom)
-
-    const totalHeight = element.clientHeight - elementPadding
-
-    const firstChild: HTMLElement | undefined = mainSlot.assignedElements()?.[0] as HTMLElement | undefined
-    if (firstChild && header && footer) {
-      firstChild.style.height = totalHeight - header.clientHeight - footer.clientHeight + "px"
-    }
-  }
-
-  handleResize() {
-    this.calcContentSize()
   }
 
   /**
@@ -103,6 +66,7 @@ export class KlevuChatLayout {
   async scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
     const instance = await this.#scrollElement?.getInstance()
     if (instance) {
+      instance.update(true)
       setTimeout(() => {
         instance.elements().viewport.scrollTo({
           top: instance.elements().viewport.scrollHeight,

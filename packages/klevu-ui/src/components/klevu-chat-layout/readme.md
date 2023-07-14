@@ -26,17 +26,6 @@ Component that wraps chat elements into a layout.
 
 ## Methods
 
-### `calcContentSize() => Promise<void>`
-
-Recalculates and fills the content to the max height of the chat layout.
-It can be used to force layout size calculation
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
 ### `closePopup() => Promise<void>`
 
 Close the popup menu

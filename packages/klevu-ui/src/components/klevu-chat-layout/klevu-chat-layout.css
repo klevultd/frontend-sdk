@@ -6,6 +6,7 @@
 }
 
 main {
+  height: 200px;
   flex-grow: 1;
 }
 
