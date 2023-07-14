@@ -1,7 +1,10 @@
-import { Component, Host, h, Prop, Fragment } from "@stencil/core"
+import { Component, Host, h, Prop, Fragment, Element, State, Listen } from "@stencil/core"
 
 /**
  * Single list item for listing things.
+ *
+ * @slot primary - Primary text
+ * @slot secondary - Secondary text
  */
 @Component({
   tag: "klevu-list",
@@ -9,6 +12,8 @@ import { Component, Host, h, Prop, Fragment } from "@stencil/core"
   shadow: true,
 })
 export class KlevuList {
+  @Element() el!: HTMLKlevuListElement
+
   /**
    * Icon to be displayed in the list item. Cannot be used with image.
    */
@@ -30,6 +35,22 @@ export class KlevuList {
 
   @Prop() noXPadding = false
 
+  @State() secondarySlotChildCount = 0
+
+  componentDidLoad() {
+    this.#checkSecondarySlotChildCount()
+  }
+
+  #checkSecondarySlotChildCount() {
+    const slot = this.el.shadowRoot?.querySelector("slot[name='secondary']") as HTMLSlotElement
+    this.secondarySlotChildCount = slot.assignedElements().length
+  }
+
+  @Listen("slotchange")
+  handleSlotChange() {
+    this.#checkSecondarySlotChildCount()
+  }
+
   #getContent() {
     return (
       <Fragment>
@@ -39,14 +60,16 @@ export class KlevuList {
           <klevu-typography variant="body-s">
             <slot name="primary"></slot>
           </klevu-typography>
-          <klevu-typography
-            variant="body-s"
-            style={{
-              "--klevu-typography-color": "var(--klevu-color-neutral-7)",
-            }}
-          >
-            <slot name="secondary"></slot>
-          </klevu-typography>
+          {this.secondarySlotChildCount > 0 && (
+            <klevu-typography
+              variant="body-s"
+              style={{
+                "--klevu-typography-color": "var(--klevu-color-neutral-7)",
+              }}
+            >
+              <slot name="secondary"></slot>
+            </klevu-typography>
+          )}
         </div>
         <slot name="button"></slot>
       </Fragment>
