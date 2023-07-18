@@ -109,7 +109,8 @@ export class KlevuProductQuery {
     await KlevuInit.ready()
 
     if (!this.productId && this.url == "") {
-      this.url = window.location.href
+      const canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null
+      this.url = canonical?.href ?? window.location.href
     }
 
     await this.#checkIsPQAEnabled()
