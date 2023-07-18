@@ -20,6 +20,14 @@ Single list item for listing things.
 | `url`        | `url`          | Make the whole thing clickable and navigate to this url.          | `string \| undefined` | `undefined` |
 
 
+## Slots
+
+| Slot          | Description    |
+| ------------- | -------------- |
+| `"primary"`   | Primary text   |
+| `"secondary"` | Secondary text |
+
+
 ## Dependencies
 
 ### Used by
