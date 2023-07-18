@@ -251,7 +251,8 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'askButtonText',
   'useBackground',
   'popupAnchor',
-  'popupOffset'
+  'popupOffset',
+  'settings'
 ]);
 
 
