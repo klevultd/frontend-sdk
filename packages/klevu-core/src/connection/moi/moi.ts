@@ -1,4 +1,8 @@
-import { KlevuConfig, KlevuTypeOfSearch } from "../../index.js"
+import {
+  KlevuBaseQuerySettings,
+  KlevuConfig,
+  KlevuTypeOfSearch,
+} from "../../index.js"
 import { post } from "../fetch.js"
 
 const STORAGE_KEY = "klevu-moi-session"
@@ -30,6 +34,7 @@ export type MoiRequest = {
     thumbs?: "UP" | "DOWN"
     reason?: string
   }
+  klevuSettings?: Omit<KlevuBaseQuerySettings, "query">
 }
 
 export type MoiResponse = {
