@@ -32,6 +32,7 @@ const productRender = (args: KlevuProductQuery) => {
       fine-print=${ifDefined(args.finePrint)}
       popup-anchor=${ifDefined(args.popupAnchor)}
       popup-offset=${ifDefined(args.popupOffset)}
+      settings=${ifDefined(JSON.stringify(args.settings))}
     ></klevu-product-query>
   `
 }

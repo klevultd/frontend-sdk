@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -25,7 +25,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
@@ -757,6 +757,10 @@ export namespace Components {
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
+        /**
+          * Settings for requests to Klevu. Deeper modification on how the product query works.
+         */
+        "settings"?: MoiRequest["klevuSettings"];
         /**
           * Placeholder of the textfield
          */
@@ -2575,6 +2579,10 @@ declare namespace LocalJSX {
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
+        /**
+          * Settings for requests to Klevu. Deeper modification on how the product query works.
+         */
+        "settings"?: MoiRequest["klevuSettings"];
         /**
           * Placeholder of the textfield
          */

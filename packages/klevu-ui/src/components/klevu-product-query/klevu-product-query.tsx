@@ -1,7 +1,15 @@
 import { Component, Fragment, Host, State, h, Element, Prop, Listen } from "@stencil/core"
 
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { MoiMessages, MoiSession, startMoi, MoiSavedFeedback, MoiActionsMessage, KlevuConfig } from "@klevu/core"
+import {
+  MoiMessages,
+  MoiSession,
+  startMoi,
+  MoiSavedFeedback,
+  MoiActionsMessage,
+  KlevuConfig,
+  MoiRequest,
+} from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
@@ -88,6 +96,11 @@ export class KlevuProductQuery {
    */
   @Prop() popupOffset?: number
 
+  /**
+   * Settings for requests to Klevu. Deeper modification on how the product query works.
+   */
+  @Prop() settings?: MoiRequest["klevuSettings"]
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -154,6 +167,7 @@ export class KlevuProductQuery {
     }, 4000)
     await this.session?.query({
       message: message,
+      klevuSettings: this.settings,
     })
     clearTimeout(timeout)
     this.showLoadingSorry = false
