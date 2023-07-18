@@ -6,7 +6,6 @@ import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
 import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-chat-bubble"
-import { KlevuChatLayout } from "../klevu-chat-layout/klevu-chat-layout"
 
 /**
  * Klevu Product Query application that shows a popup for asking questions about a product
@@ -107,6 +106,10 @@ export class KlevuProductQuery {
 
   async connectedCallback() {
     await KlevuInit.ready()
+
+    if (window.klevu_page_meta?.itemId) {
+      this.productId = window.klevu_page_meta.itemId
+    }
 
     if (!this.productId && this.url == "") {
       const canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null

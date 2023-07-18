@@ -124,9 +124,18 @@ export class KlevuInit {
   }
 }
 
-// extends window type with klevu_ui_settings
+// extends window type with klevu_ui_settings and other known Klevu variables
 declare global {
   interface Window {
     klevu_ui_settings?: KlevuUIGlobalSettings
+    klevu_page_meta?: {
+      pageType?: string
+      itemName?: string
+      itemUrl?: string
+      itemId?: string
+      itemGroupId?: string
+      itemSalePrice?: string
+      itemCurrency?: string
+    }
   }
 }
