@@ -24,7 +24,9 @@ export function Product(props: {
         src={props.product.image}
         alt={props.product.name}
       />
-      <h2>{props.product.name}</h2>
+      <h2>
+        {props.product.name} - ${props.product.price}
+      </h2>
     </a>
   )
 }
