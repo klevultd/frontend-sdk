@@ -201,10 +201,7 @@ export type MoiStartOptions = {
   onAction?: (
     action: MoiActionsMessage["actions"]["actions"][number]
   ) => boolean | void
-  /**
-   * Override the config
-   */
-  configOverride?: KlevuConfig
+
   /**
    * The mode to use. If undefined will use the default Moi mode
    */
@@ -221,12 +218,24 @@ export type MoiStartOptions = {
    * PQA widgetId for the PQA application
    */
   pqaWidgetId?: string
+
+  settings?: {
+    /**
+     * Override the config
+     */
+    configOverride?: KlevuConfig
+
+    /**
+     * Always sends the initial message to Moi even if there are no messages stored for that case
+     */
+    alwaysStartConversation?: boolean
+  }
 }
 
 export async function startMoi(
   options: MoiStartOptions = {}
 ): Promise<MoiSession> {
-  const config = options.configOverride || KlevuConfig.getDefault()
+  const config = options.settings?.configOverride || KlevuConfig.getDefault()
   let startingMessages: MoiMessages = []
 
   let ctx: MoiContext = {
@@ -254,7 +263,10 @@ export async function startMoi(
           menu = storedSession.MOI.menu
           genericOptions = storedSession.MOI.genericOptions
           feedbacks = storedSession.MOI.feedbacks
-          shouldSendMessage = storedSession.MOI.messages.length === 0
+
+          if (options.settings?.alwaysStartConversation) {
+            shouldSendMessage = storedSession.MOI.messages.length === 0
+          }
         }
         break
       case "PQA":
@@ -264,7 +276,10 @@ export async function startMoi(
           menu = storedSession.PQA[PQAKey].menu
           genericOptions = storedSession.PQA[PQAKey].genericOptions
           feedbacks = storedSession.PQA[PQAKey].feedbacks
-          shouldSendMessage = storedSession.PQA[PQAKey].messages.length === 0
+
+          if (options.settings?.alwaysStartConversation) {
+            shouldSendMessage = storedSession.PQA[PQAKey].messages.length === 0
+          }
         }
     }
   }
