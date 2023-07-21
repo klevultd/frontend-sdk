@@ -341,6 +341,8 @@ export class MoiSession {
     if (this.context.url && this.context.productId) {
       throw new Error("Cannot set both url and productId for PQA")
     }
+
+    this.save()
   }
 
   messages: MoiMessages
