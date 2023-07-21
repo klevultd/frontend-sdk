@@ -247,7 +247,6 @@ export async function startMoi(
     pqaWidgetId: options.pqaWidgetId,
   }
   const storedSession = await getStoredSession()
-  console.log(storedSession)
 
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
@@ -258,7 +257,7 @@ export async function startMoi(
   if (storedSession && storedSession.context) {
     switch (options.mode) {
       case undefined:
-        ctx = storedSession.context
+        ctx.sessionId = storedSession.context.sessionId
         if (storedSession.MOI) {
           startingMessages = storedSession.MOI.messages
           menu = storedSession.MOI.menu
@@ -271,7 +270,7 @@ export async function startMoi(
         }
         break
       case "PQA":
-        ctx = storedSession.context
+        ctx.sessionId = storedSession.context.sessionId
         if (PQAKey && storedSession.PQA && storedSession.PQA[PQAKey]) {
           startingMessages = storedSession.PQA[PQAKey].messages
           menu = storedSession.PQA[PQAKey].menu
