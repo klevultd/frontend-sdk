@@ -289,14 +289,7 @@ export async function startMoi(
   if (shouldSendMessage) {
     const result = await queryMoi(
       {
-        context: {
-          klevuApiKey: config.apiKey,
-          sessionId: storedSession?.context.sessionId,
-          mode: options.mode,
-          url: options.url,
-          productId: options.productId,
-          pqaWidgetId: options.pqaWidgetId,
-        },
+        context: ctx,
       },
       config
     )
