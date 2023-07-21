@@ -105,7 +105,9 @@ export class KlevuMoi {
         onMessage: this.onMessage.bind(this),
         // Do nothing on redirect as we have our own system
         onRedirect: (url) => {},
-        configOverride: config,
+        settings: {
+          configOverride: config,
+        },
       })
     }
 

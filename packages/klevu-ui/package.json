@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.4.4",
-    "@klevu/core": "3.0.2",
+    "@klevu/core": "3.0.3",
     "@stencil/core": "^4.0.1",
     "axios": "^1.4.0",
     "lit-html": "^2.7.5",

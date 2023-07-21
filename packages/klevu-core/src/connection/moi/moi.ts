@@ -247,11 +247,12 @@ export async function startMoi(
     pqaWidgetId: options.pqaWidgetId,
   }
   const storedSession = await getStoredSession()
+  console.log(storedSession)
+
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
   let feedbacks: MoiSavedFeedback[] = []
-
-  let shouldSendMessage = true
+  let shouldSendMessage = false
   const PQAKey = options.productId || options.url
 
   if (storedSession && storedSession.context) {
@@ -282,6 +283,8 @@ export async function startMoi(
           }
         }
     }
+  } else {
+    shouldSendMessage = true
   }
 
   if (shouldSendMessage) {
