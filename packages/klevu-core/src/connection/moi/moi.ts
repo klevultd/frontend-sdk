@@ -489,7 +489,7 @@ function saveSession(session: MoiSavedSession) {
     parsed = JSON.parse(saved) as MoiSavedSession
   }
 
-  const key = session.context.url || session.context.productId
+  const key = session.context.productId || session.context.url
 
   switch (session.context.mode) {
     case undefined:
