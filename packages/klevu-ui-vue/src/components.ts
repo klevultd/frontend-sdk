@@ -212,6 +212,7 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'elevation',
   'offset',
   'useBackground',
+  'originElement',
   'klevuPopupOpen',
   'klevuPopupClose'
 ]);

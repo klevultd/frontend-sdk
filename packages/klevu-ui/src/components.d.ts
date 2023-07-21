@@ -630,6 +630,10 @@ export namespace Components {
          */
         "openModal": () => Promise<void>;
         /**
+          * Element to anchor popup to. If not set popup is anchored to origin slot
+         */
+        "originElement"?: HTMLElement;
+        /**
           * Set width of the popup content
          */
         "popupWidth"?: number;
@@ -2447,6 +2451,10 @@ declare namespace LocalJSX {
           * Open content when origin component is focused
          */
         "openAtFocus"?: boolean;
+        /**
+          * Element to anchor popup to. If not set popup is anchored to origin slot
+         */
+        "originElement"?: HTMLElement;
         /**
           * Set width of the popup content
          */

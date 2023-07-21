@@ -11,6 +11,8 @@ import * as Stories from "./klevu-popup.stories"
 
 <Canvas of={Stories.Popup} story={{ height: "200px" }}></Canvas>
 
+<Controls />
+
 ## Popup starting from button
 
 <Canvas
@@ -20,4 +22,11 @@ import * as Stories from "./klevu-popup.stories"
   }}
 ></Canvas>
 
-<Controls />
+## Popup starting from external HTML element
+
+<Canvas
+  of={Stories.ExternalSource}
+  story={{
+    height: "200px",
+  }}
+></Canvas>

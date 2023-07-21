@@ -58,6 +58,11 @@ export class KlevuPopup {
   @Prop() useBackground = false
 
   /**
+   * Element to anchor popup to. If not set popup is anchored to origin slot
+   */
+  @Prop() originElement?: HTMLElement
+
+  /**
    * When popup is opened this event is emitted
    */
   @Event({
@@ -83,8 +88,14 @@ export class KlevuPopup {
    * When clicking outside popup close it
    * @param event
    */
-  #closeEvent(event: any) {
-    if (!event.composedPath().some((el: HTMLElement) => el.tagName === "klevu-popup".toLocaleUpperCase())) {
+  #closeEvent(event: MouseEvent) {
+    if (
+      !event.composedPath().some((el) => {
+        const elem = el as HTMLElement
+        return elem.tagName === "klevu-popup".toLocaleUpperCase()
+      }) &&
+      event.target !== this.#originElement
+    ) {
       this.closeModal()
     }
   }
@@ -187,7 +198,13 @@ export class KlevuPopup {
   }
 
   componentDidLoad() {
-    this.#originElement = this.el?.shadowRoot?.querySelector("#origin")
+    if (this.originElement) {
+      this.originElement.addEventListener("click", () => {
+        this.openModal()
+      })
+    }
+
+    this.#originElement = this.originElement || this.el?.shadowRoot?.querySelector("#origin")
     this.#contentElement = this.el?.shadowRoot?.querySelector("#content")
 
     if (this.startOpen) {
