@@ -165,19 +165,18 @@ export type MoiSavedFeedback = {
   reason?: string
 }
 
-type MoiSavedSession = {
-  context: MoiContext
+type MoiSavedSessionState = {
   genericOptions: MoiResponseGenericOptions["genericOptions"]
   menu: MoiMenuOptions["menuOptions"]
   messages: MoiSession["messages"]
   feedbacks: MoiSavedFeedback[]
 }
 
-type MoiSavedLocalStorage = Partial<MoiSavedSession> & {
-  modes?: {
-    PQA?: {
-      [url: string]: MoiSavedSession
-    }
+type MoiSavedSession = {
+  context: MoiContext
+  MOI?: MoiSavedSessionState
+  PQA?: {
+    [urlOrProductId: string]: MoiSavedSessionState
   }
 }
 
@@ -202,10 +201,7 @@ export type MoiStartOptions = {
   onAction?: (
     action: MoiActionsMessage["actions"]["actions"][number]
   ) => boolean | void
-  /**
-   * Override the config
-   */
-  configOverride?: KlevuConfig
+
   /**
    * The mode to use. If undefined will use the default Moi mode
    */
@@ -222,12 +218,24 @@ export type MoiStartOptions = {
    * PQA widgetId for the PQA application
    */
   pqaWidgetId?: string
+
+  settings?: {
+    /**
+     * Override the config
+     */
+    configOverride?: KlevuConfig
+
+    /**
+     * Always sends the initial message to Moi even if there are no messages stored for that case
+     */
+    alwaysStartConversation?: boolean
+  }
 }
 
 export async function startMoi(
   options: MoiStartOptions = {}
 ): Promise<MoiSession> {
-  const config = options.configOverride || KlevuConfig.getDefault()
+  const config = options.settings?.configOverride || KlevuConfig.getDefault()
   let startingMessages: MoiMessages = []
 
   let ctx: MoiContext = {
@@ -238,27 +246,50 @@ export async function startMoi(
     productId: options.productId,
     pqaWidgetId: options.pqaWidgetId,
   }
-  const storedSession = await getStoredSession(ctx)
+  const storedSession = await getStoredSession()
+
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
   let feedbacks: MoiSavedFeedback[] = []
-  if (storedSession?.context) {
-    ctx = storedSession.context
-    startingMessages = storedSession.messages
-    menu = storedSession.menu
-    genericOptions = storedSession.genericOptions
-    feedbacks = storedSession.feedbacks
+  let shouldSendMessage = false
+  const PQAKey = options.productId || options.url
+
+  if (storedSession && storedSession.context) {
+    switch (options.mode) {
+      case undefined:
+        ctx.sessionId = storedSession.context.sessionId
+        if (storedSession.MOI) {
+          startingMessages = storedSession.MOI.messages
+          menu = storedSession.MOI.menu
+          genericOptions = storedSession.MOI.genericOptions
+          feedbacks = storedSession.MOI.feedbacks
+
+          if (options.settings?.alwaysStartConversation) {
+            shouldSendMessage = storedSession.MOI.messages.length === 0
+          }
+        }
+        break
+      case "PQA":
+        ctx.sessionId = storedSession.context.sessionId
+        if (PQAKey && storedSession.PQA && storedSession.PQA[PQAKey]) {
+          startingMessages = storedSession.PQA[PQAKey].messages
+          menu = storedSession.PQA[PQAKey].menu
+          genericOptions = storedSession.PQA[PQAKey].genericOptions
+          feedbacks = storedSession.PQA[PQAKey].feedbacks
+
+          if (options.settings?.alwaysStartConversation) {
+            shouldSendMessage = storedSession.PQA[PQAKey].messages.length === 0
+          }
+        }
+    }
   } else {
+    shouldSendMessage = true
+  }
+
+  if (shouldSendMessage) {
     const result = await queryMoi(
       {
-        context: {
-          klevuApiKey: config.apiKey,
-          sessionId: storedSession?.context.sessionId,
-          mode: options.mode,
-          url: options.url,
-          productId: options.productId,
-          pqaWidgetId: options.pqaWidgetId,
-        },
+        context: ctx,
       },
       config
     )
@@ -267,9 +298,8 @@ export async function startMoi(
       throw new Error("No context found")
     }
 
-    ctx = result.data[0].context
-
     const parsed = parseResponse(result)
+    ctx = parsed.context
     startingMessages = parsed.messages
     menu = parsed.menu
     genericOptions = parsed.genericOptions
@@ -371,11 +401,12 @@ export class MoiSession {
       }
     }
 
-    const { messages, genericOptions, menu } = parseResponse(res)
+    const { messages, genericOptions, menu, context } = parseResponse(res)
     this.messages = [...this.messages, ...messages]
     this.options.onMessage?.()
     this.genericOptions = genericOptions
     this.menu = menu
+    this.context = context
 
     this.save()
 
@@ -388,13 +419,37 @@ export class MoiSession {
     this.options.onMessage?.()
   }
   save() {
-    saveSession({
-      context: this.context,
-      menu: this.menu,
-      genericOptions: this.genericOptions,
-      messages: this.messages,
-      feedbacks: this.feedbacks,
-    })
+    const PQAkey = this.context.productId || this.context.url
+
+    switch (this.context.mode) {
+      case undefined:
+        saveSession({
+          context: this.context,
+          MOI: {
+            menu: this.menu,
+            genericOptions: this.genericOptions,
+            messages: this.messages,
+            feedbacks: this.feedbacks,
+          },
+        })
+        break
+      case "PQA":
+        if (!PQAkey) {
+          throw new Error("Cannot save PQA session without url or productId")
+        }
+
+        saveSession({
+          context: this.context,
+          PQA: {
+            [PQAkey]: {
+              menu: this.menu,
+              genericOptions: this.genericOptions,
+              messages: this.messages,
+              feedbacks: this.feedbacks,
+            },
+          },
+        })
+    }
   }
   async addFeedback(messageId: string, thumbs: "up" | "down", reason?: string) {
     const oldFeedback = this.feedbacks.find((f) => f.id === messageId)
@@ -418,79 +473,40 @@ export class MoiSession {
   }
 }
 
-function getStoredSession(ctx: MoiContext): MoiSavedSession | undefined {
+function getStoredSession(): MoiSavedSession | undefined {
   const storedSession = localStorage.getItem(STORAGE_KEY)
   if (!storedSession) {
     return undefined
   }
 
-  const session = JSON.parse(storedSession) as MoiSavedLocalStorage
-
-  if (!ctx.mode && session.context) {
-    if (session.context) {
-      return {
-        context: session.context,
-        genericOptions: session.genericOptions,
-        menu: session.menu,
-        messages: session.messages ?? [],
-        feedbacks: session.feedbacks ?? [],
-      }
-    }
-    return undefined
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  if (!session.modes || !session.modes[ctx.mode!]) {
-    return undefined
-  }
-
-  switch (ctx.mode) {
-    case "PQA":
-      if (session.modes["PQA"] && ctx.url && session.modes["PQA"][ctx.url]) {
-        return session.modes["PQA"][ctx.url]
-      } else if (
-        session.modes["PQA"] &&
-        ctx.productId &&
-        session.modes["PQA"][ctx.productId]
-      ) {
-        return session.modes["PQA"][ctx.productId]
-      }
-      break
-  }
-
-  return undefined
+  return JSON.parse(storedSession) as MoiSavedSession
 }
 
 function saveSession(session: MoiSavedSession) {
   const saved = localStorage.getItem(STORAGE_KEY)
-  let parsed: MoiSavedLocalStorage = {}
+  let parsed: Partial<MoiSavedSession> = {}
   if (saved) {
-    parsed = JSON.parse(saved) as MoiSavedLocalStorage
+    parsed = JSON.parse(saved) as MoiSavedSession
   }
 
-  const key = session.context.url || session.context.productId
+  const key = session.context.productId || session.context.url
 
   switch (session.context.mode) {
     case undefined:
       parsed.context = session.context
-      parsed.messages = session.messages
-      parsed.menu = session.menu
-      parsed.genericOptions = session.genericOptions
-      parsed.feedbacks = session.feedbacks
+      parsed.MOI = session.MOI
       break
     case "PQA":
-      if (!parsed.modes) {
-        parsed.modes = {
-          PQA: {},
-        }
+      parsed.context = session.context
+
+      if (!parsed.PQA) {
+        parsed.PQA = {}
       }
-      if (!parsed.modes.PQA) {
-        parsed.modes.PQA = {}
+
+      if (!key || !session.PQA) {
+        throw new Error("No url, productId or PQA session")
       }
-      if (!key) {
-        throw new Error("No url or productId")
-      }
-      parsed.modes.PQA[key] = session
+      parsed.PQA[key] = session.PQA[key]
       break
   }
 
@@ -512,6 +528,8 @@ function parseResponse(response: MoiResponse) {
   let genericOptions: MoiResponseGenericOptions["genericOptions"] | undefined =
     undefined
   let menu: MoiMenuOptions["menuOptions"] | undefined = undefined
+  const context: MoiContext = response.data[0].context
+
   for (const d of response.data) {
     "message" in d && messages.push(d)
     "filter" in d && messages.push(d)
@@ -526,6 +544,7 @@ function parseResponse(response: MoiResponse) {
   }
 
   return {
+    context,
     messages,
     menu,
     genericOptions,

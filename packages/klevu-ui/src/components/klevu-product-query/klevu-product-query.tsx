@@ -212,12 +212,14 @@ export class KlevuProductQuery {
       onMessage: this.onMessage.bind(this),
       // Do nothing on redirect as we have our own system
       onRedirect: () => {},
-      configOverride: useConfig ? config : undefined,
       url: this.url === "" ? undefined : this.url,
       productId: this.productId,
       mode: "PQA",
       onAction: this.#onAction.bind(this),
       pqaWidgetId: this.pqaWidgetId,
+      settings: {
+        configOverride: useConfig ? config : undefined,
+      },
     })
     this.messages = this.session.messages
     this.feedbacks = this.session.feedbacks
