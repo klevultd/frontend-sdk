@@ -46,6 +46,7 @@ Basic button component
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-moi](../klevu-moi)
  - [klevu-product-query](../klevu-product-query)
+ - [klevu-product-query-button](../klevu-product-query-button)
  - [klevu-quicksearch](../klevu-quicksearch)
  - [klevu-search-field](../klevu-search-field)
  - [klevu-search-landing-page](../klevu-search-landing-page)
@@ -70,6 +71,7 @@ graph TD;
   klevu-merchandising --> klevu-button
   klevu-moi --> klevu-button
   klevu-product-query --> klevu-button
+  klevu-product-query-button --> klevu-button
   klevu-quicksearch --> klevu-button
   klevu-search-field --> klevu-button
   klevu-search-landing-page --> klevu-button

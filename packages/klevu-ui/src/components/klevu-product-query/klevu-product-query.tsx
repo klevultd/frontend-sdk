@@ -101,6 +101,16 @@ export class KlevuProductQuery {
    */
   @Prop() settings?: MoiRequest["klevuSettings"]
 
+  /**
+   * Element to anchor the product query popup to
+   */
+  @Prop() originElement?: HTMLElement
+
+  /**
+   * Config for Klevu
+   */
+  @Prop() config?: KlevuConfig
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -110,7 +120,6 @@ export class KlevuProductQuery {
   @State() showLoadingSorry = false
   @State() feedbacks: MoiSavedFeedback[] = []
   @State() showMessageFeedbackFor?: string
-  @State() isEnabled = false
 
   @Element()
   el!: HTMLKlevuProductElement
@@ -128,19 +137,6 @@ export class KlevuProductQuery {
       const canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null
       this.url = canonical?.href ?? window.location.href
     }
-
-    await this.#checkIsPQAEnabled()
-  }
-
-  async #checkIsPQAEnabled() {
-    const config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
-    if (!this.pqaWidgetId) {
-      this.isEnabled = true
-      return
-    }
-    const res = await window.fetch(`${config.moiApiUrl}chat/status?pqaWidgetId=${this.pqaWidgetId}`)
-    const statusJSON = await res.json()
-    this.isEnabled = statusJSON.status === "UNKNOWN" || statusJSON.status === "ENABLED"
   }
 
   onMessage() {
@@ -204,9 +200,8 @@ export class KlevuProductQuery {
   async #start() {
     this.showFeedback = false
     this.#popup?.openModal()
-    let config: KlevuConfig = await this.el.closest("klevu-init")?.getConfig()
 
-    const useConfig = config.apiKey && config.apiKey !== ""
+    const useConfig = this.config?.apiKey && this.config?.apiKey !== ""
 
     this.session = await startMoi({
       onMessage: this.onMessage.bind(this),
@@ -218,7 +213,7 @@ export class KlevuProductQuery {
       onAction: this.#onAction.bind(this),
       pqaWidgetId: this.pqaWidgetId,
       settings: {
-        configOverride: useConfig ? config : undefined,
+        configOverride: useConfig ? this.config : undefined,
       },
     })
     this.messages = this.session.messages
@@ -251,10 +246,6 @@ export class KlevuProductQuery {
   }
 
   render() {
-    if (!this.isEnabled) {
-      return null
-    }
-
     return (
       <Host>
         <klevu-popup
@@ -269,10 +260,8 @@ export class KlevuProductQuery {
           elevation={3}
           useBackground={this.useBackground}
           popupWidth={520}
+          originElement={this.originElement}
         >
-          <div slot="origin">
-            <klevu-button part="klevu-query-open-button">{this.buttonText}</klevu-button>
-          </div>
           <div class="content" slot="content" ref={(el) => (this.#contentDiv = el)}>
             {this.showFeedback ? this.#renderFeedback() : this.#renderChat()}
           </div>

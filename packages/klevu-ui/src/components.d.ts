@@ -738,6 +738,68 @@ export namespace Components {
          */
         "buttonText": string;
         /**
+          * Config for Klevu
+         */
+        "config"?: KlevuConfig;
+        /**
+          * Fine print of the popup under the title
+         */
+        "finePrint": string;
+        /**
+          * Element to anchor the product query popup to
+         */
+        "originElement"?: HTMLElement;
+        /**
+          * Anchor popup to which side of the origin
+         */
+        "popupAnchor": Placement;
+        /**
+          * How many pixels to offset the popup from origin
+         */
+        "popupOffset"?: number;
+        /**
+          * Title of the popup
+         */
+        "popupTitle": string;
+        /**
+          * Instead of Klevu API-key use a widget id to start a session
+         */
+        "pqaWidgetId"?: string;
+        /**
+          * Alternative to url, productId can be used to start a session
+         */
+        "productId"?: string;
+        /**
+          * Settings for requests to Klevu. Deeper modification on how the product query works.
+         */
+        "settings"?: MoiRequest["klevuSettings"];
+        /**
+          * Placeholder of the textfield
+         */
+        "textFieldPlaceholder": string;
+        /**
+          * Variant of the textfield how does it look like
+         */
+        "textFieldVariant": KlevuTextfieldVariant;
+        /**
+          * Url of the page where the product is
+         */
+        "url": string;
+        /**
+          * Use dark background with the popup
+         */
+        "useBackground"?: boolean;
+    }
+    interface KlevuProductQueryButton {
+        /**
+          * Text of the button for asking a question
+         */
+        "askButtonText"?: string;
+        /**
+          * Text of the button to open the popup
+         */
+        "buttonText": string;
+        /**
           * Fine print of the popup under the title
          */
         "finePrint": string;
@@ -1187,6 +1249,8 @@ export namespace Components {
           * Variant of heading
          */
         "variant": KlevuTypographyVariant;
+    }
+    interface KlevuUtilPortal {
     }
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
@@ -1645,6 +1709,12 @@ declare global {
         prototype: HTMLKlevuProductQueryElement;
         new (): HTMLKlevuProductQueryElement;
     };
+    interface HTMLKlevuProductQueryButtonElement extends Components.KlevuProductQueryButton, HTMLStencilElement {
+    }
+    var HTMLKlevuProductQueryButtonElement: {
+        prototype: HTMLKlevuProductQueryButtonElement;
+        new (): HTMLKlevuProductQueryButtonElement;
+    };
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
      * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
@@ -1782,6 +1852,12 @@ declare global {
         prototype: HTMLKlevuTypographyElement;
         new (): HTMLKlevuTypographyElement;
     };
+    interface HTMLKlevuUtilPortalElement extends Components.KlevuUtilPortal, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilPortalElement: {
+        prototype: HTMLKlevuUtilPortalElement;
+        new (): HTMLKlevuUtilPortalElement;
+    };
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
      * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
@@ -1829,6 +1905,7 @@ declare global {
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
         "klevu-product-query": HTMLKlevuProductQueryElement;
+        "klevu-product-query-button": HTMLKlevuProductQueryButtonElement;
         "klevu-query": HTMLKlevuQueryElement;
         "klevu-quicksearch": HTMLKlevuQuicksearchElement;
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
@@ -1841,6 +1918,7 @@ declare global {
         "klevu-tab": HTMLKlevuTabElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
+        "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
@@ -2564,6 +2642,68 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
+          * Config for Klevu
+         */
+        "config"?: KlevuConfig;
+        /**
+          * Fine print of the popup under the title
+         */
+        "finePrint"?: string;
+        /**
+          * Element to anchor the product query popup to
+         */
+        "originElement"?: HTMLElement;
+        /**
+          * Anchor popup to which side of the origin
+         */
+        "popupAnchor"?: Placement;
+        /**
+          * How many pixels to offset the popup from origin
+         */
+        "popupOffset"?: number;
+        /**
+          * Title of the popup
+         */
+        "popupTitle"?: string;
+        /**
+          * Instead of Klevu API-key use a widget id to start a session
+         */
+        "pqaWidgetId"?: string;
+        /**
+          * Alternative to url, productId can be used to start a session
+         */
+        "productId"?: string;
+        /**
+          * Settings for requests to Klevu. Deeper modification on how the product query works.
+         */
+        "settings"?: MoiRequest["klevuSettings"];
+        /**
+          * Placeholder of the textfield
+         */
+        "textFieldPlaceholder"?: string;
+        /**
+          * Variant of the textfield how does it look like
+         */
+        "textFieldVariant"?: KlevuTextfieldVariant;
+        /**
+          * Url of the page where the product is
+         */
+        "url"?: string;
+        /**
+          * Use dark background with the popup
+         */
+        "useBackground"?: boolean;
+    }
+    interface KlevuProductQueryButton {
+        /**
+          * Text of the button for asking a question
+         */
+        "askButtonText"?: string;
+        /**
+          * Text of the button to open the popup
+         */
+        "buttonText"?: string;
+        /**
           * Fine print of the popup under the title
          */
         "finePrint"?: string;
@@ -3033,6 +3173,8 @@ declare namespace LocalJSX {
          */
         "variant": KlevuTypographyVariant;
     }
+    interface KlevuUtilPortal {
+    }
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
      * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
@@ -3079,6 +3221,7 @@ declare namespace LocalJSX {
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
         "klevu-product-query": KlevuProductQuery;
+        "klevu-product-query-button": KlevuProductQueryButton;
         "klevu-query": KlevuQuery;
         "klevu-quicksearch": KlevuQuicksearch;
         "klevu-recommendations": KlevuRecommendations;
@@ -3091,6 +3234,7 @@ declare namespace LocalJSX {
         "klevu-tab": KlevuTab;
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
+        "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
         "klevu-util-viewport": KlevuUtilViewport;
     }
@@ -3303,6 +3447,7 @@ declare module "@stencil/core" {
              * @csspart popup-content - Popup content element
              */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
+            "klevu-product-query-button": LocalJSX.KlevuProductQueryButton & JSXBase.HTMLAttributes<HTMLKlevuProductQueryButtonElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
              * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
@@ -3380,6 +3525,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
              */
             "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
+            "klevu-util-portal": LocalJSX.KlevuUtilPortal & JSXBase.HTMLAttributes<HTMLKlevuUtilPortalElement>;
             /**
              * Utility that replaces the default browser scrollbar with a custom one.
              * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.

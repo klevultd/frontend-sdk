@@ -17,9 +17,9 @@ const meta: Meta = {
 
 export default meta
 
-const productRender = (args: KlevuProductQuery) => {
+const chatRender = (args: KlevuProductQuery) => {
   return html`
-    <klevu-product-query
+    <klevu-product-query-button
       pqa-widget-id=${ifDefined(args.pqaWidgetId)}
       url=${ifDefined(args.url)}
       product-id=${ifDefined(args.productId)}
@@ -33,7 +33,7 @@ const productRender = (args: KlevuProductQuery) => {
       popup-anchor=${ifDefined(args.popupAnchor)}
       popup-offset=${ifDefined(args.popupOffset)}
       settings=${ifDefined(JSON.stringify(args.settings))}
-    ></klevu-product-query>
+    ></klevu-product-query-button>
   `
 }
 
@@ -74,7 +74,7 @@ export const Query: StoryObj<KlevuProductQuery> = {
         }}
         api-key="klevu-164677714116414855"
       >
-        ${productRender(args)}
+        ${chatRender(args)}
       </klevu-init>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
@@ -120,6 +120,6 @@ export const QueryWithWidgetId: StoryObj<KlevuProductQuery> = {
           thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
         },
       }}
-      >${productRender(args)}</klevu-init
+      >${chatRender(args)}</klevu-init
     >`,
 }
