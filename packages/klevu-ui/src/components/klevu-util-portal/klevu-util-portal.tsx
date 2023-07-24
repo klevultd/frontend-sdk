@@ -9,7 +9,7 @@ export class KlevuUtilPortal {
   @Element() el!: HTMLKlevuUtilPortalElement
 
   connectedCallback() {
-    console.log("hello")
+    console.log("hello", this.el)
     // document.body.appendChild(this.el)
   }
 

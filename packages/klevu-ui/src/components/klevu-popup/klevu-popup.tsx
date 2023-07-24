@@ -199,8 +199,11 @@ export class KlevuPopup {
 
   componentDidLoad() {
     if (this.originElement) {
-      this.originElement.addEventListener("click", () => {
+      this.originElement.addEventListener("click", (event) => {
         this.openModal()
+        event.preventDefault()
+        event.stopPropagation()
+        return false
       })
     }
 

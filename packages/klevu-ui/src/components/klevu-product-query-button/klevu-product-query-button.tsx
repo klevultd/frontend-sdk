@@ -1,6 +1,6 @@
 import { Placement } from "@floating-ui/dom"
 import { KlevuConfig, MoiRequest } from "@klevu/core"
-import { Component, Element, Host, Prop, State, h } from "@stencil/core"
+import { Component, Element, Fragment, Host, Prop, State, h } from "@stencil/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { KlevuProductQuery } from "../klevu-product-query/klevu-product-query"
 
