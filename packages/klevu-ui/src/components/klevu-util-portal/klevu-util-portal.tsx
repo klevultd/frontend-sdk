@@ -1,5 +1,11 @@
 import { Component, Host, h, Element } from "@stencil/core"
 
+/**
+ * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
+ * to prevent problems with CSS stylings.
+ *
+ * Does not move styles, so create a child component that has styles defined in shadow DOM.
+ */
 @Component({
   tag: "klevu-util-portal",
   styleUrl: "klevu-util-portal.css",

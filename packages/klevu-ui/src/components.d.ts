@@ -1250,6 +1250,11 @@ export namespace Components {
          */
         "variant": KlevuTypographyVariant;
     }
+    /**
+     * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
+     * to prevent problems with CSS stylings.
+     * Does not move styles, so create a child component that has styles defined in shadow DOM.
+     */
     interface KlevuUtilPortal {
     }
     /**
@@ -1852,6 +1857,11 @@ declare global {
         prototype: HTMLKlevuTypographyElement;
         new (): HTMLKlevuTypographyElement;
     };
+    /**
+     * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
+     * to prevent problems with CSS stylings.
+     * Does not move styles, so create a child component that has styles defined in shadow DOM.
+     */
     interface HTMLKlevuUtilPortalElement extends Components.KlevuUtilPortal, HTMLStencilElement {
     }
     var HTMLKlevuUtilPortalElement: {
@@ -3173,6 +3183,11 @@ declare namespace LocalJSX {
          */
         "variant": KlevuTypographyVariant;
     }
+    /**
+     * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
+     * to prevent problems with CSS stylings.
+     * Does not move styles, so create a child component that has styles defined in shadow DOM.
+     */
     interface KlevuUtilPortal {
     }
     /**
@@ -3525,6 +3540,11 @@ declare module "@stencil/core" {
              * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
              */
             "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
+            /**
+             * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
+             * to prevent problems with CSS stylings.
+             * Does not move styles, so create a child component that has styles defined in shadow DOM.
+             */
             "klevu-util-portal": LocalJSX.KlevuUtilPortal & JSXBase.HTMLAttributes<HTMLKlevuUtilPortalElement>;
             /**
              * Utility that replaces the default browser scrollbar with a custom one.
