@@ -36,12 +36,14 @@
 ### Depends on
 
 - [klevu-button](../klevu-button)
+- [klevu-util-portal](../klevu-util-portal)
 - [klevu-product-query](../klevu-product-query)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-product-query-button --> klevu-button
+  klevu-product-query-button --> klevu-util-portal
   klevu-product-query-button --> klevu-product-query
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography

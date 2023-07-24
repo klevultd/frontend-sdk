@@ -107,21 +107,23 @@ export class KlevuProductQueryButton {
           {this.buttonText}
         </klevu-button>
         {this.origin && (
-          <klevu-product-query
-            url={this.url}
-            productId={this.productId}
-            finePrint={this.finePrint}
-            popupTitle={this.popupTitle}
-            askButtonText={this.askButtonText}
-            textFieldPlaceholder={this.textFieldPlaceholder}
-            settings={this.settings}
-            popupAnchor={this.popupAnchor}
-            popupOffset={this.popupOffset}
-            exportparts="popup-content, popup-origin"
-            useBackground={this.useBackground}
-            originElement={this.origin}
-            config={this.config}
-          ></klevu-product-query>
+          <klevu-util-portal>
+            <klevu-product-query
+              url={this.url}
+              productId={this.productId}
+              finePrint={this.finePrint}
+              popupTitle={this.popupTitle}
+              askButtonText={this.askButtonText}
+              textFieldPlaceholder={this.textFieldPlaceholder}
+              settings={this.settings}
+              popupAnchor={this.popupAnchor}
+              popupOffset={this.popupOffset}
+              exportparts="popup-content, popup-origin"
+              useBackground={this.useBackground}
+              originElement={this.origin}
+              config={this.config}
+            ></klevu-product-query>
+          </klevu-util-portal>
         )}
       </Host>
     )

@@ -7,10 +7,29 @@ import { Component, Host, h, Element } from "@stencil/core"
 })
 export class KlevuUtilPortal {
   @Element() el!: HTMLKlevuUtilPortalElement
+  root?: HTMLDivElement
 
   connectedCallback() {
-    console.log("hello", this.el)
-    // document.body.appendChild(this.el)
+    this.createRoot()
+  }
+
+  createRoot() {
+    if (this.root) {
+      return
+    }
+
+    this.root = document.createElement("div")
+    this.root.appendChild(this.el)
+    this.root.setAttribute("data-name", "klevu-portal")
+    document.body.appendChild(this.root)
+  }
+
+  disconnectedCallback() {
+    if (!this.root) {
+      return
+    }
+
+    this.root.remove()
   }
 
   render() {
