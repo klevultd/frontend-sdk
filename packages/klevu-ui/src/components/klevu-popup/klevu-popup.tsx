@@ -138,7 +138,7 @@ export class KlevuPopup {
         maxHeight: "auto",
         maxWidth: "auto",
         width: "100vw",
-        height: "100vh",
+        height: "100dvh",
       })
     } else {
       Object.assign(this.#contentElement.style, {
