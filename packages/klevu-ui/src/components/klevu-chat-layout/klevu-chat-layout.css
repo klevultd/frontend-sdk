@@ -1,12 +1,12 @@
 :host {
   height: 100%;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   max-height: 100vh;
 }
 
 main {
-  height: 300px;
+  height: 200px;
   flex-grow: 1;
 }
 
