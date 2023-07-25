@@ -4,6 +4,9 @@ import { Component, Element, Fragment, Host, Prop, State, h } from "@stencil/cor
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { KlevuProductQuery } from "../klevu-product-query/klevu-product-query"
 
+/**
+ * Button that is placed on the site to start a product query session
+ */
 @Component({
   tag: "klevu-product-query-button",
   styleUrl: "klevu-product-query-button.css",
@@ -111,6 +114,7 @@ export class KlevuProductQueryButton {
             <klevu-product-query
               url={this.url}
               productId={this.productId}
+              pqaWidgetId={this.pqaWidgetId}
               finePrint={this.finePrint}
               popupTitle={this.popupTitle}
               askButtonText={this.askButtonText}

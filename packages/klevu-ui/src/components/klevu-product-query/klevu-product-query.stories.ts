@@ -111,7 +111,7 @@ export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
 
 export const QueryWithWidgetId: StoryObj<KlevuProductQuery> = {
   args: {
-    pqaWidgetId: "pqa-f53fb4ac-9b8b-48c6-be1f-e3131e841114",
+    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
     url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
   render: (args) =>
