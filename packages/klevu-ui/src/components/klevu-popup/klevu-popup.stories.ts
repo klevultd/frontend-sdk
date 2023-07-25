@@ -54,3 +54,29 @@ export const ButtonSource: StoryObj<KlevuPopup> = {
     <div slot="content">Hello world popup</div>
   </klevu-popup>`,
 }
+
+export const ExternalSource: StoryObj<KlevuPopup> = {
+  args: {
+    anchor: "bottom-start",
+    elevation: 3,
+  },
+  render: (args) => html`<klevu-popup
+      id="external-popup"
+      anchor=${ifDefined(args.anchor)}
+      close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+      fullwidth-content=${ifDefined(args.fullwidthContent)}
+      open-at-focus=${ifDefined(args.openAtFocus)}
+      start-open=${ifDefined(args.startOpen)}
+      elevation=${ifDefined(args.elevation)}
+      offset=${ifDefined(args.offset)}
+    >
+      <div slot="content">This should position correctly to "My button"</div>
+    </klevu-popup>
+    <p>This is some text to separate popup from the origin</p>
+    <klevu-button id="thebutton" is-secondary>My button</klevu-button>
+    <script>
+      const origin = document.querySelector("#thebutton")
+      const popup = document.querySelector("#external-popup")
+      popup.originElement = origin
+    </script> `,
+}

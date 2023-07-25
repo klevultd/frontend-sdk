@@ -212,6 +212,7 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'elevation',
   'offset',
   'useBackground',
+  'originElement',
   'klevuPopupOpen',
   'klevuPopupClose'
 ]);
@@ -240,6 +241,25 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 
 
 export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQuery>('klevu-product-query', undefined, [
+  'url',
+  'productId',
+  'pqaWidgetId',
+  'textFieldVariant',
+  'textFieldPlaceholder',
+  'popupTitle',
+  'buttonText',
+  'finePrint',
+  'askButtonText',
+  'useBackground',
+  'popupAnchor',
+  'popupOffset',
+  'settings',
+  'originElement',
+  'config'
+]);
+
+
+export const KlevuProductQueryButton = /*@__PURE__*/ defineContainer<JSX.KlevuProductQueryButton>('klevu-product-query-button', undefined, [
   'url',
   'productId',
   'pqaWidgetId',
@@ -386,6 +406,9 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
 export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography>('klevu-typography', undefined, [
   'variant'
 ]);
+
+
+export const KlevuUtilPortal = /*@__PURE__*/ defineContainer<JSX.KlevuUtilPortal>('klevu-util-portal', undefined);
 
 
 export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilScrollbars>('klevu-util-scrollbars', undefined, [

@@ -47,7 +47,6 @@ div[part="product-query-footer"] .inputs {
 div[part="product-query-footer"] .sendmessage {
   display: flex;
   gap: var(--klevu-spacing-04);
-  padding-top: var(--klevu-spacing-04);
 }
 
 div[part="product-query-footer"] .sendmessage klevu-textfield {
