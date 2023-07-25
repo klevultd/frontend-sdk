@@ -790,6 +790,9 @@ export namespace Components {
          */
         "useBackground"?: boolean;
     }
+    /**
+     * Button that is placed on the site to start a product query session
+     */
     interface KlevuProductQueryButton {
         /**
           * Text of the button for asking a question
@@ -1714,6 +1717,9 @@ declare global {
         prototype: HTMLKlevuProductQueryElement;
         new (): HTMLKlevuProductQueryElement;
     };
+    /**
+     * Button that is placed on the site to start a product query session
+     */
     interface HTMLKlevuProductQueryButtonElement extends Components.KlevuProductQueryButton, HTMLStencilElement {
     }
     var HTMLKlevuProductQueryButtonElement: {
@@ -2704,6 +2710,9 @@ declare namespace LocalJSX {
          */
         "useBackground"?: boolean;
     }
+    /**
+     * Button that is placed on the site to start a product query session
+     */
     interface KlevuProductQueryButton {
         /**
           * Text of the button for asking a question
@@ -3462,6 +3471,9 @@ declare module "@stencil/core" {
              * @csspart popup-content - Popup content element
              */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
+            /**
+             * Button that is placed on the site to start a product query session
+             */
             "klevu-product-query-button": LocalJSX.KlevuProductQueryButton & JSXBase.HTMLAttributes<HTMLKlevuProductQueryButtonElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the

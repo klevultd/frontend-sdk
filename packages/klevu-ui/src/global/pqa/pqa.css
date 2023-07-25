@@ -22,7 +22,7 @@
   --klevu-button-text-color: #000;
 }
 
-.klevu-style-pqa klevu-product-query::part(klevu-query-open-button) {
+.klevu-style-pqa klevu-product-query-button {
   --klevu-color-primary: #428bca;
   --klevu-color-primary-darker: #407db3;
 }
