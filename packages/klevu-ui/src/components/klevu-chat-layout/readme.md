@@ -62,7 +62,7 @@ Type: `Promise<void>`
 ### Used by
 
  - [klevu-moi](../klevu-moi)
- - [klevu-product-query](../klevu-product-query)
+ - [klevu-product-query-popup](../klevu-product-query-popup)
 
 ### Depends on
 
@@ -82,7 +82,7 @@ graph TD;
   klevu-button --> klevu-typography
   klevu-textfield --> klevu-icon
   klevu-moi --> klevu-chat-layout
-  klevu-product-query --> klevu-chat-layout
+  klevu-product-query-popup --> klevu-chat-layout
   style klevu-chat-layout fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

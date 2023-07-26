@@ -34,7 +34,7 @@ Branded text field component
 ### Used by
 
  - [klevu-chat-layout](../klevu-chat-layout)
- - [klevu-product-query](../klevu-product-query)
+ - [klevu-product-query-popup](../klevu-product-query-popup)
  - [klevu-search-field](../klevu-search-field)
 
 ### Depends on
@@ -46,7 +46,7 @@ Branded text field component
 graph TD;
   klevu-textfield --> klevu-icon
   klevu-chat-layout --> klevu-textfield
-  klevu-product-query --> klevu-textfield
+  klevu-product-query-popup --> klevu-textfield
   klevu-search-field --> klevu-textfield
   style klevu-textfield fill:#f9f,stroke:#333,stroke-width:4px
 ```

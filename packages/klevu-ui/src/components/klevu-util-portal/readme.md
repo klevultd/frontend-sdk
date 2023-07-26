@@ -16,12 +16,12 @@ Does not move styles, so create a child component that has styles defined in sha
 
 ### Used by
 
- - [klevu-product-query-button](../klevu-product-query-button)
+ - [klevu-product-query](../klevu-product-query)
 
 ### Graph
 ```mermaid
 graph TD;
-  klevu-product-query-button --> klevu-util-portal
+  klevu-product-query --> klevu-util-portal
   style klevu-util-portal fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

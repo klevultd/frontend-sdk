@@ -19,7 +19,7 @@ export default meta
 
 const chatRender = (args: KlevuProductQuery) => {
   return html`
-    <klevu-product-query-button
+    <klevu-product-query
       pqa-widget-id=${ifDefined(args.pqaWidgetId)}
       url=${ifDefined(args.url)}
       product-id=${ifDefined(args.productId)}
@@ -33,7 +33,7 @@ const chatRender = (args: KlevuProductQuery) => {
       popup-anchor=${ifDefined(args.popupAnchor)}
       popup-offset=${ifDefined(args.popupOffset)}
       settings=${ifDefined(JSON.stringify(args.settings))}
-    ></klevu-product-query-button>
+    ></klevu-product-query>
   `
 }
 
