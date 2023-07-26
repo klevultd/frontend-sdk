@@ -32,7 +32,7 @@ Klevu icon component. Uses Google Material Icons.
  - [klevu-list](../klevu-list)
  - [klevu-modal](../klevu-modal)
  - [klevu-pagination](../klevu-pagination)
- - [klevu-product-query](../klevu-product-query)
+ - [klevu-product-query-popup](../klevu-product-query-popup)
  - [klevu-textfield](../klevu-textfield)
 
 ### Graph
@@ -50,7 +50,7 @@ graph TD;
   klevu-list --> klevu-icon
   klevu-modal --> klevu-icon
   klevu-pagination --> klevu-icon
-  klevu-product-query --> klevu-icon
+  klevu-product-query-popup --> klevu-icon
   klevu-textfield --> klevu-icon
   style klevu-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```

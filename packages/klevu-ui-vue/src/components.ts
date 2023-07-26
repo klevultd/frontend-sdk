@@ -253,13 +253,11 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'useBackground',
   'popupAnchor',
   'popupOffset',
-  'settings',
-  'originElement',
-  'config'
+  'settings'
 ]);
 
 
-export const KlevuProductQueryButton = /*@__PURE__*/ defineContainer<JSX.KlevuProductQueryButton>('klevu-product-query-button', undefined, [
+export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuProductQueryPopup>('klevu-product-query-popup', undefined, [
   'url',
   'productId',
   'pqaWidgetId',
@@ -272,7 +270,9 @@ export const KlevuProductQueryButton = /*@__PURE__*/ defineContainer<JSX.KlevuPr
   'useBackground',
   'popupAnchor',
   'popupOffset',
-  'settings'
+  'settings',
+  'originElement',
+  'config'
 ]);
 
 

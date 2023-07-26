@@ -720,7 +720,7 @@ export namespace Components {
         "itemsPerRow"?: number;
     }
     /**
-     * Klevu Product Query application that shows a popup for asking questions about a product
+     * Button that is placed on the site to start a product query session
      * @csspart product-query-header - Header of the popup
      * @csspart product-query-footer - Footer of the popup where input is
      * @csspart product-query-feedback - Feedback section of the popup when it is being closed
@@ -738,17 +738,9 @@ export namespace Components {
          */
         "buttonText": string;
         /**
-          * Config for Klevu
-         */
-        "config"?: KlevuConfig;
-        /**
           * Fine print of the popup under the title
          */
         "finePrint": string;
-        /**
-          * Element to anchor the product query popup to
-         */
-        "originElement"?: HTMLElement;
         /**
           * Anchor popup to which side of the origin
          */
@@ -791,9 +783,15 @@ export namespace Components {
         "useBackground"?: boolean;
     }
     /**
-     * Button that is placed on the site to start a product query session
+     * Klevu Product Query popup application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
      */
-    interface KlevuProductQueryButton {
+    interface KlevuProductQueryPopup {
         /**
           * Text of the button for asking a question
          */
@@ -803,9 +801,17 @@ export namespace Components {
          */
         "buttonText": string;
         /**
+          * Config for Klevu
+         */
+        "config"?: KlevuConfig;
+        /**
           * Fine print of the popup under the title
          */
         "finePrint": string;
+        /**
+          * Element to anchor the product query popup to
+         */
+        "originElement"?: HTMLElement;
         /**
           * Anchor popup to which side of the origin
          */
@@ -1703,7 +1709,7 @@ declare global {
         new (): HTMLKlevuProductGridElement;
     };
     /**
-     * Klevu Product Query application that shows a popup for asking questions about a product
+     * Button that is placed on the site to start a product query session
      * @csspart product-query-header - Header of the popup
      * @csspart product-query-footer - Footer of the popup where input is
      * @csspart product-query-feedback - Feedback section of the popup when it is being closed
@@ -1718,13 +1724,19 @@ declare global {
         new (): HTMLKlevuProductQueryElement;
     };
     /**
-     * Button that is placed on the site to start a product query session
+     * Klevu Product Query popup application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
      */
-    interface HTMLKlevuProductQueryButtonElement extends Components.KlevuProductQueryButton, HTMLStencilElement {
+    interface HTMLKlevuProductQueryPopupElement extends Components.KlevuProductQueryPopup, HTMLStencilElement {
     }
-    var HTMLKlevuProductQueryButtonElement: {
-        prototype: HTMLKlevuProductQueryButtonElement;
-        new (): HTMLKlevuProductQueryButtonElement;
+    var HTMLKlevuProductQueryPopupElement: {
+        prototype: HTMLKlevuProductQueryPopupElement;
+        new (): HTMLKlevuProductQueryPopupElement;
     };
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -1921,7 +1933,7 @@ declare global {
         "klevu-product": HTMLKlevuProductElement;
         "klevu-product-grid": HTMLKlevuProductGridElement;
         "klevu-product-query": HTMLKlevuProductQueryElement;
-        "klevu-product-query-button": HTMLKlevuProductQueryButtonElement;
+        "klevu-product-query-popup": HTMLKlevuProductQueryPopupElement;
         "klevu-query": HTMLKlevuQueryElement;
         "klevu-quicksearch": HTMLKlevuQuicksearchElement;
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
@@ -2640,7 +2652,7 @@ declare namespace LocalJSX {
         "itemsPerRow"?: number;
     }
     /**
-     * Klevu Product Query application that shows a popup for asking questions about a product
+     * Button that is placed on the site to start a product query session
      * @csspart product-query-header - Header of the popup
      * @csspart product-query-footer - Footer of the popup where input is
      * @csspart product-query-feedback - Feedback section of the popup when it is being closed
@@ -2658,17 +2670,9 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
-          * Config for Klevu
-         */
-        "config"?: KlevuConfig;
-        /**
           * Fine print of the popup under the title
          */
         "finePrint"?: string;
-        /**
-          * Element to anchor the product query popup to
-         */
-        "originElement"?: HTMLElement;
         /**
           * Anchor popup to which side of the origin
          */
@@ -2711,9 +2715,15 @@ declare namespace LocalJSX {
         "useBackground"?: boolean;
     }
     /**
-     * Button that is placed on the site to start a product query session
+     * Klevu Product Query popup application that shows a popup for asking questions about a product
+     * @csspart product-query-header - Header of the popup
+     * @csspart product-query-footer - Footer of the popup where input is
+     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button - Button that opens the popup
+     * @csspart popup-origin - Popup origin element
+     * @csspart popup-content - Popup content element
      */
-    interface KlevuProductQueryButton {
+    interface KlevuProductQueryPopup {
         /**
           * Text of the button for asking a question
          */
@@ -2723,9 +2733,17 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
+          * Config for Klevu
+         */
+        "config"?: KlevuConfig;
+        /**
           * Fine print of the popup under the title
          */
         "finePrint"?: string;
+        /**
+          * Element to anchor the product query popup to
+         */
+        "originElement"?: HTMLElement;
         /**
           * Anchor popup to which side of the origin
          */
@@ -3245,7 +3263,7 @@ declare namespace LocalJSX {
         "klevu-product": KlevuProduct;
         "klevu-product-grid": KlevuProductGrid;
         "klevu-product-query": KlevuProductQuery;
-        "klevu-product-query-button": KlevuProductQueryButton;
+        "klevu-product-query-popup": KlevuProductQueryPopup;
         "klevu-query": KlevuQuery;
         "klevu-quicksearch": KlevuQuicksearch;
         "klevu-recommendations": KlevuRecommendations;
@@ -3462,7 +3480,7 @@ declare module "@stencil/core" {
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
             /**
-             * Klevu Product Query application that shows a popup for asking questions about a product
+             * Button that is placed on the site to start a product query session
              * @csspart product-query-header - Header of the popup
              * @csspart product-query-footer - Footer of the popup where input is
              * @csspart product-query-feedback - Feedback section of the popup when it is being closed
@@ -3472,9 +3490,15 @@ declare module "@stencil/core" {
              */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
-             * Button that is placed on the site to start a product query session
+             * Klevu Product Query popup application that shows a popup for asking questions about a product
+             * @csspart product-query-header - Header of the popup
+             * @csspart product-query-footer - Footer of the popup where input is
+             * @csspart product-query-feedback - Feedback section of the popup when it is being closed
+             * @csspart product-query-open-button - Button that opens the popup
+             * @csspart popup-origin - Popup origin element
+             * @csspart popup-content - Popup content element
              */
-            "klevu-product-query-button": LocalJSX.KlevuProductQueryButton & JSXBase.HTMLAttributes<HTMLKlevuProductQueryButtonElement>;
+            "klevu-product-query-popup": LocalJSX.KlevuProductQueryPopup & JSXBase.HTMLAttributes<HTMLKlevuProductQueryPopupElement>;
             /**
              * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
              * __type__ parameter. It also listens to clicks to __klevu-product__ -component and sends analytical data to Klevu
