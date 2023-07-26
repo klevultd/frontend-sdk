@@ -1,11 +1,11 @@
-import { Meta, Story, Description } from "@storybook/addon-docs"
+import { Meta, Story, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-init.stories"
 
 <Meta of={Stories} />
 
 # Klevu-init
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
 <Story of={Stories.Init}></Story>
 

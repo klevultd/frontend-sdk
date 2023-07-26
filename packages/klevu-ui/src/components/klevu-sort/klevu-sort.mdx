@@ -1,4 +1,4 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 
 import * as Stories from "./klevu-sort.stories"
 
@@ -6,8 +6,8 @@ import * as Stories from "./klevu-sort.stories"
 
 # Klevu-sort
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.Sort}></Canvas>
+<Canvas of={Stories.Sort} />
 
 <Controls />

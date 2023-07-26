@@ -91,11 +91,13 @@ export const parameters = {
   cssprops,
   viewMode: "docs",
   docs: {
-    transformSource: (input) =>
-      prettier.format(input, {
-        parser: "html",
-        plugins: [prettierHtml],
-      }),
+    source: {
+      transform: (input) =>
+        prettier.format(input, {
+          parser: "html",
+          plugins: [prettierHtml],
+        }),
+    },
   },
 }
 

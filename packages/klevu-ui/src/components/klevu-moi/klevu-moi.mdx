@@ -1,10 +1,10 @@
-import { Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-moi.stories"
 
 <Meta of={Stories} />
 
 # Klevu-moi
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.Moi}></Canvas>
+<Canvas of={Stories.Moi} />

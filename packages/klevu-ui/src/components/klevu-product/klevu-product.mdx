@@ -1,11 +1,11 @@
-import { Controls, Canvas, Meta, Story, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Story, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-product.stories"
 
 <Meta of={Stories} />
 
 # Klevu-product
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
 ## Default product
 
@@ -18,16 +18,16 @@ Here are four products.
 3. Style modifications in `style` tag with CSS parts and CSS properties.
 4. Undefined loading product.
 
-<Canvas of={Stories.Product}></Canvas>
+<Canvas of={Stories.Product} />
 
 ## Smaller products
 
 Smaller products are usually used in popups and in places where not all information can fit.
 
-<Canvas of={Stories.SmallProduct}></Canvas>
+<Canvas of={Stories.SmallProduct} />
 
 ## Line products
 
 Line products are typically used in mobile listings.
 
-<Canvas of={Stories.LineItems}></Canvas>
+<Canvas of={Stories.LineItems} />

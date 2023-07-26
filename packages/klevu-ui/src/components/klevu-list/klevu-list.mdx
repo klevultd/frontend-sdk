@@ -1,30 +1,30 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-list.stories"
 
 <Meta of={Stories} />
 
 # Klevu-list
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
 ## List items with only primary text
 
-<Canvas of={Stories.List}></Canvas>
+<Canvas of={Stories.List} />
 
 <Controls />
 
 ## List items with secondary text
 
-<Canvas of={Stories.ListWithSecondaryText}></Canvas>
+<Canvas of={Stories.ListWithSecondaryText} />
 
 ## List items with icons
 
-<Canvas of={Stories.ListWithIcons}></Canvas>
+<Canvas of={Stories.ListWithIcons} />
 
 ## List items with images
 
-<Canvas of={Stories.ListWithImages}></Canvas>
+<Canvas of={Stories.ListWithImages} />
 
 ## List item with url
 
-<Canvas of={Stories.ListWithUrl}></Canvas>
+<Canvas of={Stories.ListWithUrl} />

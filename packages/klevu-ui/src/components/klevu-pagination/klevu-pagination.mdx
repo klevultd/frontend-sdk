@@ -1,15 +1,15 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-pagination.stories"
 
 <Meta of={Stories} />
 
 # Klevu-pagination
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
 Pagination can be build simply with just providing the min, max and current values.
 
-<Canvas of={Stories.Pagination}></Canvas>
+<Canvas of={Stories.Pagination} />
 
 <Controls />
 
@@ -17,4 +17,4 @@ Pagination can be build simply with just providing the min, max and current valu
 
 Pagination can be automatically build from the @klevu/core query results. Just provide the query results property to the component.
 
-<Canvas of={Stories.PaginationFromResults}></Canvas>
+<Canvas of={Stories.PaginationFromResults} />

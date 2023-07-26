@@ -1,17 +1,17 @@
-import { Canvas, Meta, Description, Controls } from "@storybook/addon-docs"
+import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
 import * as BadgeStories from "./klevu-badge.stories"
 
 <Meta of={BadgeStories} />
 
 # Klevu-badge
 
-<Description>{BadgeStories.description}</Description>
+<Markdown>{BadgeStories.description}</Markdown>
 
 ## Badge in accent colors
 
 Badge can be in accent colors. Colors are set in css properties and can be changed by overriding them.
 
-<Canvas of={BadgeStories.Badges}></Canvas>
+<Canvas of={BadgeStories.Badges} />
 
 <Controls />
 
@@ -19,16 +19,16 @@ Badge can be in accent colors. Colors are set in css properties and can be chang
 
 Badges can be in neutral colors. Colors are set in css properties and can be changed by overriding them.
 
-<Canvas of={BadgeStories.NeutralBadges}></Canvas>
+<Canvas of={BadgeStories.NeutralBadges} />
 
 ## Badge with custom color
 
 Any color can be set to badget with css property.
 
-<Canvas of={BadgeStories.CustomColor}></Canvas>
+<Canvas of={BadgeStories.CustomColor} />
 
 ## Closable badges
 
 If closable attribute is defined then badge will have close button on the left side.
 
-<Canvas of={BadgeStories.Closable}></Canvas>
+<Canvas of={BadgeStories.Closable} />

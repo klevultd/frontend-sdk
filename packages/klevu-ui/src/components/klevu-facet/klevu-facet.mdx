@@ -1,13 +1,13 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-facet.stories"
 
 <Meta of={Stories} />
 
 # Klevu-facet
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.Facet}></Canvas>
+<Canvas of={Stories.Facet} />
 
 As component includes only required properties it is easier to use component with @klevu/ui-react or other frameworks.
 
@@ -31,13 +31,13 @@ const MyComp = () => {
 
 It is possible to change all keys to be radio buttons instead of checkboxes by setting the mode to radio.
 
-<Canvas of={Stories.FacetWithRadio}></Canvas>
+<Canvas of={Stories.FacetWithRadio} />
 
 By default all options in facet are in order of most common to least common. This can be changed by setting the customOrder property to an array of option keys in the order you want them to appear.
 
 Here is how to do this with @klevu/ui-react. Green and petrol will be at the top. Rest are in order of most common to least common.
 
-<Canvas sourceState="none" of={Stories.CustomOrder}></Canvas>
+<Canvas sourceState="none" of={Stories.CustomOrder} />
 
 ```jsx
 <KlevuFacet manager={manager} option={manager.options[0]} customOrder={["green", "petrol"]} />
@@ -47,4 +47,4 @@ Here is how to do this with @klevu/ui-react. Green and petrol will be at the top
 
 Facet can also be used to display a slider. This is useful for price or other numeric filters.
 
-<Canvas sourceState="none" of={Stories.Slider}></Canvas>
+<Canvas sourceState="none" of={Stories.Slider} />

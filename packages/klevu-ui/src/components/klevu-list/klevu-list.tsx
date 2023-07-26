@@ -42,8 +42,8 @@ export class KlevuList {
   }
 
   #checkSecondarySlotChildCount() {
-    const slot = this.el.shadowRoot?.querySelector("slot[name='secondary']") as HTMLSlotElement
-    this.secondarySlotChildCount = slot.assignedElements().length
+    const slot = this.el.shadowRoot?.querySelector("slot[name='secondary']") as HTMLSlotElement | null
+    this.secondarySlotChildCount = slot?.assignedElements().length ?? 0
   }
 
   @Listen("slotchange")

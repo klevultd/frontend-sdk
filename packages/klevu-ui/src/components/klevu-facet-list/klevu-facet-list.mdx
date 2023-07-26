@@ -1,13 +1,13 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-facet-list.stories"
 
 <Meta of={Stories} />
 
 # Klevu-facet-list
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.FacetList}></Canvas>
+<Canvas of={Stories.FacetList} />
 
 Typically you will want to load the data through the `FilterManager` class. This class will handle the data and the state of the filters.
 
@@ -29,4 +29,4 @@ const MyComp = () => {
 
 ## Example with less data
 
-<Canvas of={Stories.SmallExample}></Canvas>
+<Canvas of={Stories.SmallExample} />
