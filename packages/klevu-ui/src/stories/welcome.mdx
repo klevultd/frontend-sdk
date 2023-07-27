@@ -1,4 +1,5 @@
 import { Canvas, Meta, Story } from "@storybook/addon-docs"
+import * as QuicksearchStories from "../components/klevu-quicksearch/klevu-quicksearch.stories"
 
 <Meta title="Welcome" />
 
@@ -41,6 +42,4 @@ After this you can start using these components on your data.
 
 Here is a example of `klevu-quicksearch` component (try searching for clothing items):
 
-<Canvas>
-  <Story height="700px" id="apps-quicksearch--quicksearch" />
-</Canvas>
+<Canvas of={QuicksearchStories.Quicksearch} story={{ height: "700px" }} />
