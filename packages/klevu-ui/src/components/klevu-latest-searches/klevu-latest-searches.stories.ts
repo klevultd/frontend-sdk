@@ -1,7 +1,8 @@
 import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
-export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-lastest-searches")
+import { KlevuLatestSearches } from "./klevu-latest-searches"
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-latest-searches")
 
 const meta: Meta = {
   title: "Components/Latest searches",
@@ -13,6 +14,6 @@ const meta: Meta = {
 
 export default meta
 
-export const LatestSearches: StoryObj = {
+export const LatestSearches: StoryObj<KlevuLatestSearches> = {
   render: (args) => html`<klevu-latest-searches></klevu-latest-searches>`,
 }
