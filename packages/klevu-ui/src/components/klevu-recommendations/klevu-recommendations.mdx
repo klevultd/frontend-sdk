@@ -1,14 +1,14 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-recommendations.stories"
 
 <Meta of={Stories} />
 
 # Klevu-recommendations
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
 In a default case we can fetch recommendation from Klevu Merchant Center with a ID of recommendation. There is no need to pass any other parameters in typical case.
 
-<Canvas of={Stories.Recommendations}></Canvas>
+<Canvas of={Stories.Recommendations} />
 
 <Controls />

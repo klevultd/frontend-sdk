@@ -1,4 +1,4 @@
-import { Canvas, Meta, Description, Controls } from "@storybook/addon-docs"
+import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
 
 import * as AccordionStories from "./klevu-accordion.stories"
 
@@ -6,8 +6,8 @@ import * as AccordionStories from "./klevu-accordion.stories"
 
 # Klevu-accordion
 
-<Description>{AccordionStories.description}</Description>
+<Markdown>{AccordionStories.description}</Markdown>
 
-<Canvas of={AccordionStories.Accordion}></Canvas>
+<Canvas of={AccordionStories.Accordion} />
 
 <Controls />

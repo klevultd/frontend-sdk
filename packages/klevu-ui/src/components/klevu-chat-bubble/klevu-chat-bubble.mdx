@@ -1,12 +1,12 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-chat-bubble.stories"
 
 <Meta of={Stories} />
 
 # Klevu-chat-bubble
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.ChatBubble}></Canvas>
+<Canvas of={Stories.ChatBubble} />
 
 <Controls />

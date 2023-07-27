@@ -1,13 +1,13 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-slider.stories"
 
 <Meta of={Stories} />
 
 # Klevu-slider
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.Slider}></Canvas>
+<Canvas of={Stories.Slider} />
 
 <Controls />
 
@@ -15,7 +15,7 @@ import * as Stories from "./klevu-slider.stories"
 
 By setting the `formatTooltip` property, you can format the tooltip values.
 
-<Canvas of={Stories.SliderWithTooltips}></Canvas>
+<Canvas of={Stories.SliderWithTooltips} />
 
 Here is the code for the above example in React (@klevu/ui-react):
 

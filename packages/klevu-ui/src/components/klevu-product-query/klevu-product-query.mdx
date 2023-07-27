@@ -1,13 +1,13 @@
-import { Controls, Canvas, Meta, Description } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-product-query.stories"
 
 <Meta of={Stories} />
 
 # Klevu-product-query
 
-<Description>{Stories.description}</Description>
+<Markdown>{Stories.description}</Markdown>
 
-<Canvas sourceState="open" of={Stories.Query} story={{ height: "700px" }}></Canvas>
+<Canvas sourceState="open" of={Stories.Query} story={{ height: "700px" }} />
 
 <Controls />
 
@@ -15,4 +15,4 @@ import * as Stories from "./klevu-product-query.stories"
 
 It is possible to run the component without Klevu account. In this case, the component will use the pqa widget id to fetch the data.
 
-<Canvas sourceState="open" of={Stories.QueryWithWidgetId} story={{ height: "700px" }}></Canvas>
+<Canvas sourceState="open" of={Stories.QueryWithWidgetId} story={{ height: "700px" }} />
