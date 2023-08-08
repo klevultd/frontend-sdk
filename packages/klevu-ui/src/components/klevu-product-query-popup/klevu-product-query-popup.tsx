@@ -107,6 +107,11 @@ export class KlevuProductQueryPopup {
   @Prop() originElement?: HTMLElement
 
   /**
+   * Disable closing the popup when clicking outside of it
+   */
+  @Prop() disableCloseOutsideClick?: boolean
+
+  /**
    * Config for Klevu
    */
   @Prop() config?: KlevuConfig
@@ -261,6 +266,7 @@ export class KlevuProductQueryPopup {
           useBackground={this.useBackground}
           popupWidth={520}
           originElement={this.originElement}
+          closeAtOutsideClick={!this.disableCloseOutsideClick}
         >
           <div class="content" slot="content" ref={(el) => (this.#contentDiv = el)}>
             {this.showFeedback ? this.#renderFeedback() : this.#renderChat()}

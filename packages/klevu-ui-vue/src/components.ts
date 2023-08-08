@@ -253,6 +253,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'useBackground',
   'popupAnchor',
   'popupOffset',
+  'disableCloseOutsideClick',
   'settings'
 ]);
 
@@ -272,6 +273,7 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'popupOffset',
   'settings',
   'originElement',
+  'disableCloseOutsideClick',
   'config'
 ]);
 

@@ -738,6 +738,10 @@ export namespace Components {
          */
         "buttonText": string;
         /**
+          * Disable closing the popup when clicking outside of it
+         */
+        "disableCloseOutsideClick"?: boolean;
+        /**
           * Fine print of the popup under the title
          */
         "finePrint": string;
@@ -804,6 +808,10 @@ export namespace Components {
           * Config for Klevu
          */
         "config"?: KlevuConfig;
+        /**
+          * Disable closing the popup when clicking outside of it
+         */
+        "disableCloseOutsideClick"?: boolean;
         /**
           * Fine print of the popup under the title
          */
@@ -2670,6 +2678,10 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
+          * Disable closing the popup when clicking outside of it
+         */
+        "disableCloseOutsideClick"?: boolean;
+        /**
           * Fine print of the popup under the title
          */
         "finePrint"?: string;
@@ -2736,6 +2748,10 @@ declare namespace LocalJSX {
           * Config for Klevu
          */
         "config"?: KlevuConfig;
+        /**
+          * Disable closing the popup when clicking outside of it
+         */
+        "disableCloseOutsideClick"?: boolean;
         /**
           * Fine print of the popup under the title
          */
