@@ -33,6 +33,7 @@ const chatRender = (args: KlevuProductQuery) => {
       popup-anchor=${ifDefined(args.popupAnchor)}
       popup-offset=${ifDefined(args.popupOffset)}
       settings=${ifDefined(JSON.stringify(args.settings))}
+      disable-close-outside-click=${ifDefined(args.disableCloseOutsideClick)}
     ></klevu-product-query>
   `
 }

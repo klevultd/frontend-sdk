@@ -220,7 +220,9 @@ export class KlevuPopup {
   }
 
   detachedCallback() {
-    document.removeEventListener("click", this.#closeEvent)
+    if (this.closeAtOutsideClick) {
+      document.removeEventListener("click", this.#closeEvent)
+    }
     this.#stopUpdatePos?.()
   }
 

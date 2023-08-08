@@ -86,6 +86,11 @@ export class KlevuProductQuery {
   @Prop() popupOffset?: number
 
   /**
+   * Disable closing the popup when clicking outside of it
+   */
+  @Prop() disableCloseOutsideClick?: boolean
+
+  /**
    * Settings for requests to Klevu. Deeper modification on how the product query works.
    */
   @Prop() settings?: MoiRequest["klevuSettings"]
@@ -131,6 +136,7 @@ export class KlevuProductQuery {
               exportparts="popup-content, popup-origin, product-query-header, product-query-footer, product-query-feedback, product-query-open-button, popup-origin, popup-content"
               useBackground={this.useBackground}
               originElement={this.origin}
+              disableCloseOutsideClick={this.disableCloseOutsideClick}
               config={this.config}
             ></klevu-product-query-popup>
           </klevu-util-portal>
