@@ -17,7 +17,8 @@ export type KlevuTypographyVariant =
 /**
  * Klevu typography component. This component is used in most places to set correct font in component pieces.
  *
- * @cssprop --klevu-typography-color - Color of the text
+ * @cssprop --klevu-typography-color - Color of the text that overrides the default
+ * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
  * @cssprop --klevu-h1-size 24px H1 size
  * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
  * @cssprop --klevu-h1-weight 700 H1 weight

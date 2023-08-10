@@ -4,7 +4,7 @@ import { Component, h, Prop } from "@stencil/core"
  * Basic button component
  *
  * @slot default - Button text
- * @csspart klevu-button - The button element
+ * @csspart button-base - The button element
  * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
  * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
  * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -47,7 +47,7 @@ export class KlevuButton {
   render() {
     return (
       <button
-        part="klevu-button"
+        part="button-base"
         disabled={this.disabled}
         class={{
           secondary: Boolean(this.isSecondary),

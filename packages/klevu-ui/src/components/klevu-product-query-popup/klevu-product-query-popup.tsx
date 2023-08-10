@@ -14,6 +14,7 @@ import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
 import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-chat-bubble"
+import { parts } from "../../utils/parts"
 
 /**
  * Klevu Product Query popup application that shows a popup for asking questions about a product
@@ -24,6 +25,8 @@ import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-ch
  * @csspart product-query-open-button - Button that opens the popup
  * @csspart popup-origin - Popup origin element
  * @csspart popup-content - Popup content element
+ *
+ * @slot fineprint - Fine print of the popup
  */
 @Component({
   tag: "klevu-product-query-popup",
@@ -255,7 +258,7 @@ export class KlevuProductQueryPopup {
       <Host>
         <klevu-popup
           ref={(el) => (this.#popup = el)}
-          exportparts="popup-content, popup-origin"
+          exportparts={parts["klevu-popup"]}
           onKlevuPopupClose={this.#closeModal.bind(this)}
           onKlevuPopupOpen={() => {
             this.#start()
@@ -285,8 +288,10 @@ export class KlevuProductQueryPopup {
               <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
               <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
             </div>
+
             <klevu-typography variant="body-xs" class="fineprint">
               {this.finePrint}
+              <slot name="after-fineprint"></slot>
             </klevu-typography>
           </div>
           <klevu-chat-messages
@@ -296,7 +301,7 @@ export class KlevuProductQueryPopup {
             onKlevuMessageFeedback={this.#onFeedback.bind(this)}
             showFeedbackFor={this.showMessageFeedbackFor}
           >
-            <div slot="after-messages">
+            <div slot="chat-messages-after">
               {this.showLoading ? <klevu-loading-indicator /> : null}
               {this.showLoadingSorry ? (
                 <klevu-typography class="loading-sorry" variant="body-xs">
