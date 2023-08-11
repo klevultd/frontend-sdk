@@ -16,6 +16,8 @@ import { parts } from "../../utils/parts"
  * @csspart popup-content - Popup content element
  * @csspart button-base - The button element
  *
+ * @slot before-button-text - Before origin button text
+ * @slot after-button-text - After origin button text
  * @slot after-fineprint - After fineprint in the popup
  */
 @Component({
