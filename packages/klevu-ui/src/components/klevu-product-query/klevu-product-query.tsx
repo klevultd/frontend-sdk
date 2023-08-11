@@ -16,7 +16,7 @@ import { parts } from "../../utils/parts"
  * @csspart popup-content - Popup content element
  * @csspart button-base - The button element
  *
- * @slot fineprint - Fineprint in the popup
+ * @slot after-fineprint - After fineprint in the popup
  */
 @Component({
   tag: "klevu-product-query",
@@ -132,27 +132,25 @@ export class KlevuProductQuery {
           <slot name="after-button-text"></slot>
         </klevu-button>
         {this.origin && (
-          <klevu-util-portal>
-            <klevu-product-query-popup
-              url={this.url}
-              productId={this.productId}
-              pqaWidgetId={this.pqaWidgetId}
-              finePrint={this.finePrint}
-              popupTitle={this.popupTitle}
-              askButtonText={this.askButtonText}
-              textFieldPlaceholder={this.textFieldPlaceholder}
-              settings={this.settings}
-              popupAnchor={this.popupAnchor}
-              popupOffset={this.popupOffset}
-              exportparts={parts["klevu-product-query-popup"]}
-              useBackground={this.useBackground}
-              originElement={this.origin}
-              disableCloseOutsideClick={this.disableCloseOutsideClick}
-              config={this.config}
-            >
-              <slot name="fineprint" slot="after-fineprint"></slot>
-            </klevu-product-query-popup>
-          </klevu-util-portal>
+          <klevu-product-query-popup
+            url={this.url}
+            productId={this.productId}
+            pqaWidgetId={this.pqaWidgetId}
+            finePrint={this.finePrint}
+            popupTitle={this.popupTitle}
+            askButtonText={this.askButtonText}
+            textFieldPlaceholder={this.textFieldPlaceholder}
+            settings={this.settings}
+            popupAnchor={this.popupAnchor}
+            popupOffset={this.popupOffset}
+            exportparts={parts["klevu-product-query-popup"]}
+            useBackground={this.useBackground}
+            originElement={this.origin}
+            disableCloseOutsideClick={this.disableCloseOutsideClick}
+            config={this.config}
+          >
+            <slot name="after-fineprint" slot="after-fineprint"></slot>
+          </klevu-product-query-popup>
         )}
       </Host>
     )

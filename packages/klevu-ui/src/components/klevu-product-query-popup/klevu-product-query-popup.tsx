@@ -207,8 +207,6 @@ export class KlevuProductQueryPopup {
 
   async #start() {
     this.showFeedback = false
-    this.#popup?.openModal()
-
     const useConfig = this.config?.apiKey && this.config?.apiKey !== ""
 
     this.session = await startMoi({

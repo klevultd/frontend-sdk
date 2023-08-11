@@ -614,10 +614,6 @@ export namespace Components {
          */
         "elevation": number;
         /**
-          * At minimum popup content should be the widht of the origin
-         */
-        "fullwidthContent": boolean;
-        /**
           * How many pixels to offset the popup from origin
          */
         "offset": number;
@@ -641,6 +637,10 @@ export namespace Components {
           * Initially show the popup
          */
         "startOpen"?: boolean;
+        /**
+          * Clicking origin again will close the popup
+         */
+        "toggle"?: boolean;
         /**
           * Darken background when popup is open
          */
@@ -2555,10 +2555,6 @@ declare namespace LocalJSX {
          */
         "elevation"?: number;
         /**
-          * At minimum popup content should be the widht of the origin
-         */
-        "fullwidthContent"?: boolean;
-        /**
           * How many pixels to offset the popup from origin
          */
         "offset"?: number;
@@ -2583,6 +2579,10 @@ declare namespace LocalJSX {
           * Initially show the popup
          */
         "startOpen"?: boolean;
+        /**
+          * Clicking origin again will close the popup
+         */
+        "toggle"?: boolean;
         /**
           * Darken background when popup is open
          */

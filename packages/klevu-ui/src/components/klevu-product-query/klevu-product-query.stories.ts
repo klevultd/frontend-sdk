@@ -50,22 +50,22 @@ export const Query: StoryObj<KlevuProductQuery> = {
         Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec massa
         maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis odio
         at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
-        ligula nec orci. Nam sed porttitor dolor. Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat
-        libero, sit amet suscipit augue tortor at justo. In consectetur, mi ac posuere dictum, erat ligula lacinia
-        augue, sit amet sollicitudin felis sem eu metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris
-        quis ex interdum pretium. Praesent ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida,
-        ultrices magna vel, efficitur lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
+        ligula nec orci. Nam sed porttitor dolor.
+        <klevu-init
+          .settings=${{
+            icons: {
+              thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
+              thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
+            },
+          }}
+          >${chatRender(args)}</klevu-init
+        >Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat libero, sit amet suscipit augue tortor at
+        justo. In consectetur, mi ac posuere dictum, erat ligula lacinia augue, sit amet sollicitudin felis sem eu
+        metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris quis ex interdum pretium. Praesent
+        ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida, ultrices magna vel, efficitur
+        lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
       </p>
 
-      <klevu-init
-        .settings=${{
-          icons: {
-            thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
-            thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
-          },
-        }}
-        >${chatRender(args)}</klevu-init
-      >
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
         maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
@@ -92,26 +92,41 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
     url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
   render: (args) => html`<klevu-init>
-    <klevu-product-query
-      class="modifed-version"
-      pqa-widget-id=${ifDefined(args.pqaWidgetId)}
-      url=${ifDefined(args.url)}
-      button-text="Ask a questions"
-      button-icon="forum"
-      popup-title="Ask a question about this product"
-      fine-print=" I’m an AI model so I do have
+      <klevu-product-query
+        class="modified-version"
+        pqa-widget-id=${ifDefined(args.pqaWidgetId)}
+        url=${ifDefined(args.url)}
+        button-text="Ask a questions"
+        popup-title="Ask a question about this product"
+        fine-print=" I’m an AI model so I do have
       limitations. Please verify answers on the product page."
-    >
-      <!-- This could be also a img with url -->
-      <klevu-icon
-        slot="before-button-text"
-        style="font-size: 1.5em; position: relative; top: 0.3em; margin-right: 0.5em"
-        name="forum"
-      ></klevu-icon>
-      <span slot="fineprint">Hello world</span>
-    </klevu-product-query>
+      >
+        <!-- This could be also a img with url -->
+        <klevu-icon
+          slot="before-button-text"
+          style="font-size: 1.5em; position: relative; top: 0.3em; margin-right: 0.5em"
+          name="forum"
+        ></klevu-icon>
+        <span slot="after-fineprint">
+          <klevu-popup popup-width="400" anchor="top-end" toggle>
+            <span slot="origin" id="fineprint-popup-origin">?</span>
+            <div slot="content" id="fineprint-popup">
+              By using our website and AI chatbot, you agree to the terms of our Privacy Policy and agree that you
+              understand the risks associated with using the AI chatbot. You acknowledge that you understand the risks,
+              limitations, and conditions of use and instructions for use. You may, at any time, stop communicating
+              through this service by closing the AI chat window.
+            </div>
+          </klevu-popup>
+        </span>
+      </klevu-product-query>
+    </klevu-init>
     <style>
-      klevu-product-query.modifed-version::part(button-base) {
+      klevu-product-query.modified-version {
+        --klevu-chat-bubble-background-remote: #000;
+        --klevu-color-primary: #000;
+      }
+
+      klevu-product-query.modified-version::part(button-base) {
         --klevu-border-radius-s: 0;
         --klevu-border-radius-m: 0;
         --klevu-border-radius-l: 0;
@@ -122,9 +137,33 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
         height: 42px;
         padding: 0 16px 4px 16px;
       }
-      klevu-product-query.modifed-version::part(button-base):focus:after {
+      klevu-product-query.modified-version::part(button-base):focus:after {
         border: 0;
       }
+
+      #fineprint-popup-origin {
+        display: inline-block;
+        padding: 2px;
+        background: #000;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 50%;
+        height: 12px;
+        width: 12px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      #fineprint-popup {
+        padding: 1em;
+        background: #000;
+        color: #fff;
+      }
     </style>
-  </klevu-init>`,
+    <script>
+      document.querySelector("#fineprint-popup").addEventListerner("click", (e) => {
+        console.log(e.target)
+        e.target.parent().close()
+      })
+    </script>`,
 }

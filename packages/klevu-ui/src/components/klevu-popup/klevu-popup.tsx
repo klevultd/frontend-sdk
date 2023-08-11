@@ -17,10 +17,18 @@ import { Component, Element, h, Host, Listen, Method, Prop, State, Event, EventE
 })
 export class KlevuPopup {
   @Element() el?: HTMLKlevuPopupElement
+  dialogRef?: HTMLDialogElement
+
   /**
    * Initially show the popup
    */
   @Prop() startOpen?: boolean
+
+  /**
+   * Clicking origin again will close the popup
+   */
+  @Prop() toggle?: boolean
+
   /**
    * Open content when origin component is focused
    */
@@ -29,10 +37,7 @@ export class KlevuPopup {
    * Close popup when clicking outside content area
    */
   @Prop() closeAtOutsideClick = true
-  /**
-   * At minimum popup content should be the widht of the origin
-   */
-  @Prop() fullwidthContent = false
+
   /**
    * Set width of the popup content
    */
@@ -75,11 +80,6 @@ export class KlevuPopup {
   })
   klevuPopupClose!: EventEmitter<void>
 
-  /**
-   * Is currently open
-   */
-  @State() open = false
-
   #stopUpdatePos?: Function
   #originElement?: HTMLElement | null
   #contentElement?: HTMLElement | null
@@ -101,17 +101,17 @@ export class KlevuPopup {
   }
 
   async #internalOpen() {
-    if (this.open) {
-      return
+    if (this.useBackground) {
+      this.dialogRef?.showModal()
+    } else {
+      this.dialogRef?.show()
     }
-
-    this.open = true
     this.#updatePopupPosition()
     this.klevuPopupOpen.emit()
   }
 
   async #updatePopupPosition() {
-    if (!this.#originElement || !this.#contentElement || !this.open) {
+    if (!this.#originElement || !this.#contentElement) {
       return
     }
 
@@ -122,8 +122,13 @@ export class KlevuPopup {
         shift(),
         size({
           apply: ({ availableWidth, elements }) => {
+            let maxWidth = availableWidth
+            if (this.popupWidth && this.popupWidth < availableWidth) {
+              maxWidth = this.popupWidth
+            }
+
             Object.assign(elements.floating.style, {
-              maxWidth: `${availableWidth}px`,
+              maxWidth: `${maxWidth}px`,
             })
           },
         }),
@@ -166,7 +171,7 @@ export class KlevuPopup {
   async closeModal() {
     const event = this.klevuPopupClose.emit()
     if (!event.defaultPrevented) {
-      this.open = false
+      this.dialogRef?.close()
     }
   }
 
@@ -175,7 +180,11 @@ export class KlevuPopup {
   })
   childItemClicked(event: PointerEvent) {
     if (event.composedPath().some((e: any) => e.localName === "slot" && e.name === "origin")) {
-      this.#internalOpen()
+      if (this.toggle && this.dialogRef?.open) {
+        this.closeModal()
+      } else {
+        this.#internalOpen()
+      }
     }
   }
 
@@ -229,14 +238,11 @@ export class KlevuPopup {
   render() {
     const popupClasses: any = {
       popup: true,
-      show: this.open,
     }
 
     popupClasses[`elevation-${this.elevation}`] = true
 
-    const styles: any = {
-      height: "100%",
-    }
+    const styles: any = {}
     if (this.popupWidth) {
       styles.maxWidth = `${this.popupWidth}px`
     }
@@ -246,12 +252,11 @@ export class KlevuPopup {
         <div id="origin" class="originContainer" part="popup-origin">
           <slot name="origin" />
         </div>
-        <div id="content" class={popupClasses} part="popup-content">
-          <div style={styles}>
+        <dialog style={styles} part="popup-content" open={this.startOpen} ref={(el) => (this.dialogRef = el)}>
+          <div id="content" class={popupClasses}>
             <slot name="content" />
           </div>
-        </div>
-        {this.open && this.useBackground && <div class="background" onClick={this.closeModal.bind(this)} />}
+        </dialog>
       </Host>
     )
   }
