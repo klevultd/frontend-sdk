@@ -138,7 +138,15 @@ Product example:
 
 ```css
 /* this allows to modify the container div of product */
-klevu-product::part(container) {
+klevu-product::part(product-container) {
   border: 3px dashed orange;
 }
 ```
+
+## Naming convetion for parts
+
+Parts can be exported from child components to parent components. To avoid name collisions
+all parts prefixed with component name, but dropping the `klevu-` from the name. For example
+`klevu-product` component has part `product-container`.
+
+Exported parts of components are tracked in the `utils/parts.ts` file.

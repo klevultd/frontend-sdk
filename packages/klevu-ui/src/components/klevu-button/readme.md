@@ -28,9 +28,9 @@ Basic button component
 
 ## Shadow Parts
 
-| Part             | Description |
-| ---------------- | ----------- |
-| `"klevu-button"` |             |
+| Part            | Description |
+| --------------- | ----------- |
+| `"button-base"` |             |
 
 
 ## Dependencies

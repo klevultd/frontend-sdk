@@ -67,12 +67,12 @@ span {
 .variant-body-m,
 .variant-body-s,
 .variant-body-xs {
-  font-weight: 400;
+  font-weight: var(--klevu-typography-font-weight, 400);
 }
 
 .variant-body-l-bold,
 .variant-body-m-bold,
 .variant-body-s-bold,
 .variant-body-xs-bold {
-  font-weight: 600;
+  font-weight: var(--klevu-typography-font-weight, 600);
 }

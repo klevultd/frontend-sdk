@@ -11,7 +11,7 @@
 | ----------------------- | ------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
 | `enableMessageFeedback` | `enable-message-feedback` | Should display a feedback button after each message | `boolean \| undefined`                                                       | `undefined` |
 | `feedbacks`             | --                        | Feedbacks given by user                             | `MoiSavedFeedback[] \| undefined`                                            | `undefined` |
-| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseText \| MoiResponseFilter \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
+| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseFilter \| MoiResponseText \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
 | `showFeedbackFor`       | `show-feedback-for`       | What message should we                              | `string \| undefined`                                                        | `undefined` |
 
 
@@ -27,9 +27,9 @@
 
 ## Slots
 
-| Slot               | Description                               |
-| ------------------ | ----------------------------------------- |
-| `"after-messages"` | Things to place in the after all messages |
+| Slot                    | Description                               |
+| ----------------------- | ----------------------------------------- |
+| `"chat-messages-after"` | Things to place in the after all messages |
 
 
 ## Dependencies

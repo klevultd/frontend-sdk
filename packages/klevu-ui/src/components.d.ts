@@ -80,7 +80,7 @@ export namespace Components {
     }
     /**
      * Basic button component
-     * @csspart klevu-button - The button element
+     * @csspart button-base - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -614,10 +614,6 @@ export namespace Components {
          */
         "elevation": number;
         /**
-          * At minimum popup content should be the widht of the origin
-         */
-        "fullwidthContent": boolean;
-        /**
           * How many pixels to offset the popup from origin
          */
         "offset": number;
@@ -641,6 +637,10 @@ export namespace Components {
           * Initially show the popup
          */
         "startOpen"?: boolean;
+        /**
+          * Clicking origin again will close the popup
+         */
+        "toggle"?: boolean;
         /**
           * Darken background when popup is open
          */
@@ -725,8 +725,10 @@ export namespace Components {
      * @csspart product-query-footer - Footer of the popup where input is
      * @csspart product-query-feedback - Feedback section of the popup when it is being closed
      * @csspart product-query-open-button - Button that opens the popup
+     * @csspart product-query-button-icon - Icon of the button that opens the popup
      * @csspart popup-origin - Popup origin element
      * @csspart popup-content - Popup content element
+     * @csspart button-base - The button element
      */
     interface KlevuProductQuery {
         /**
@@ -1239,7 +1241,8 @@ export namespace Components {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
-     * @cssprop --klevu-typography-color - Color of the text
+     * @cssprop --klevu-typography-color - Color of the text that overrides the default
+     * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -1412,7 +1415,7 @@ declare global {
     };
     /**
      * Basic button component
-     * @csspart klevu-button - The button element
+     * @csspart button-base - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -1722,8 +1725,10 @@ declare global {
      * @csspart product-query-footer - Footer of the popup where input is
      * @csspart product-query-feedback - Feedback section of the popup when it is being closed
      * @csspart product-query-open-button - Button that opens the popup
+     * @csspart product-query-button-icon - Icon of the button that opens the popup
      * @csspart popup-origin - Popup origin element
      * @csspart popup-content - Popup content element
+     * @csspart button-base - The button element
      */
     interface HTMLKlevuProductQueryElement extends Components.KlevuProductQuery, HTMLStencilElement {
     }
@@ -1855,7 +1860,8 @@ declare global {
     };
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
-     * @cssprop --klevu-typography-color - Color of the text
+     * @cssprop --klevu-typography-color - Color of the text that overrides the default
+     * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -1995,7 +2001,7 @@ declare namespace LocalJSX {
     }
     /**
      * Basic button component
-     * @csspart klevu-button - The button element
+     * @csspart button-base - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -2549,10 +2555,6 @@ declare namespace LocalJSX {
          */
         "elevation"?: number;
         /**
-          * At minimum popup content should be the widht of the origin
-         */
-        "fullwidthContent"?: boolean;
-        /**
           * How many pixels to offset the popup from origin
          */
         "offset"?: number;
@@ -2577,6 +2579,10 @@ declare namespace LocalJSX {
           * Initially show the popup
          */
         "startOpen"?: boolean;
+        /**
+          * Clicking origin again will close the popup
+         */
+        "toggle"?: boolean;
         /**
           * Darken background when popup is open
          */
@@ -2665,8 +2671,10 @@ declare namespace LocalJSX {
      * @csspart product-query-footer - Footer of the popup where input is
      * @csspart product-query-feedback - Feedback section of the popup when it is being closed
      * @csspart product-query-open-button - Button that opens the popup
+     * @csspart product-query-button-icon - Icon of the button that opens the popup
      * @csspart popup-origin - Popup origin element
      * @csspart popup-content - Popup content element
+     * @csspart button-base - The button element
      */
     interface KlevuProductQuery {
         /**
@@ -3198,7 +3206,8 @@ declare namespace LocalJSX {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
-     * @cssprop --klevu-typography-color - Color of the text
+     * @cssprop --klevu-typography-color - Color of the text that overrides the default
+     * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
      * @cssprop --klevu-h1-size 24px H1 size
      * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
      * @cssprop --klevu-h1-weight 700 H1 weight
@@ -3316,7 +3325,7 @@ declare module "@stencil/core" {
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
              * Basic button component
-             * @csspart klevu-button - The button element
+             * @csspart button-base - The button element
              * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
              * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
              * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -3501,8 +3510,10 @@ declare module "@stencil/core" {
              * @csspart product-query-footer - Footer of the popup where input is
              * @csspart product-query-feedback - Feedback section of the popup when it is being closed
              * @csspart product-query-open-button - Button that opens the popup
+             * @csspart product-query-button-icon - Icon of the button that opens the popup
              * @csspart popup-origin - Popup origin element
              * @csspart popup-content - Popup content element
+             * @csspart button-base - The button element
              */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
@@ -3569,7 +3580,8 @@ declare module "@stencil/core" {
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             /**
              * Klevu typography component. This component is used in most places to set correct font in component pieces.
-             * @cssprop --klevu-typography-color - Color of the text
+             * @cssprop --klevu-typography-color - Color of the text that overrides the default
+             * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
              * @cssprop --klevu-h1-size 24px H1 size
              * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
              * @cssprop --klevu-h1-weight 700 H1 weight
