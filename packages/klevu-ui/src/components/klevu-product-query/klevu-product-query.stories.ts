@@ -159,11 +159,5 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
         background: #000;
         color: #fff;
       }
-    </style>
-    <script>
-      document.querySelector("#fineprint-popup").addEventListerner("click", (e) => {
-        console.log(e.target)
-        e.target.parent().close()
-      })
-    </script>`,
+    </style>`,
 }
