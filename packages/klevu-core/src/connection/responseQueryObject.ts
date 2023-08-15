@@ -333,4 +333,13 @@ export class KlevuResponseQueryObject {
   annotationsById(productId: string, languageCode: string) {
     return getAnnotationsForProduct(this.query, productId, languageCode)
   }
+
+  /**
+   * @returns List of params used in the query and the metadata that was generated during
+   * the query. This is useful for example to fetching KMC metadata that was received
+   * for recommendations query.
+   */
+  getQueryParameters() {
+    return this.func.params
+  }
 }
