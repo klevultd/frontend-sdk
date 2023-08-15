@@ -406,7 +406,8 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
 
 
 export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography>('klevu-typography', undefined, [
-  'variant'
+  'variant',
+  'fullWidth'
 ]);
 
 

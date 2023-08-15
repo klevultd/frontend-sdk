@@ -61,7 +61,7 @@ export class KlevuCheckbox {
         </div>
         {this.renderContent && (
           <label class="content" htmlFor={this.name}>
-            <klevu-typography variant="body-s">
+            <klevu-typography variant="body-s" fullWidth>
               <slot />
             </klevu-typography>
           </label>

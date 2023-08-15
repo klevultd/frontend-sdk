@@ -35,7 +35,9 @@ export const Typography: StoryObj<KlevuTypography & { text?: string }> = {
     </style>
     <ul>
       <li>
-        <klevu-typography variant=${args.variant}>Configured: ${args.text}</klevu-typography>
+        <klevu-typography variant=${args.variant} full-width=${ifDefined(args.fullWidth)}
+          >Configured: ${args.text}</klevu-typography
+        >
       </li>
       <li><klevu-typography variant="h1">H1: ${args.text}</klevu-typography></li>
       <li><klevu-typography variant="h2">H2: ${args.text}</klevu-typography></li>
