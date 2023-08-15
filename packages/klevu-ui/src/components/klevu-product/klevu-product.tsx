@@ -165,13 +165,19 @@ export class KlevuProduct {
           <a href={settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
             {this.hideImage ? null : (
               <slot name="image">
-                <div
-                  class="image"
-                  part="product-image"
-                  style={{
-                    backgroundImage: `url(${this.hoverImage || this.product.image})`,
-                  }}
-                ></div>
+                {this.product?.image || this.hoverImage ? (
+                  <div
+                    class="image"
+                    part="product-image"
+                    style={{
+                      backgroundImage: `url(${this.hoverImage || this.product.image})`,
+                    }}
+                  ></div>
+                ) : (
+                  <div class="image no-image" part="product-image">
+                    <klevu-icon name="image_not_supported"></klevu-icon>
+                  </div>
+                )}
               </slot>
             )}
             <slot name="info">
