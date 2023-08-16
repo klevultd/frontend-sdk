@@ -206,6 +206,14 @@
   gap: var(--klevu-spacing-02);
 }
 
+.image.no-image {
+  color: var(--klevu-color-neutral-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4em;
+}
+
 @keyframes loadinggradient {
   0% {
     background-position: 0% 50%;

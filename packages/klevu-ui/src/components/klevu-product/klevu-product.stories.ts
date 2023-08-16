@@ -3,6 +3,7 @@ import { html } from "lit-html"
 import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuProduct } from "./klevu-product"
+import { KlevuRecord } from "@klevu/core"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-product")
 
 const productItem = mockProducts[0]
@@ -11,7 +12,8 @@ const productItem3 = fullMockRequest.queryResults?.[0].records[2]
 
 export const ProductItems = { productItem, productItem2, productItem3 }
 
-const productRender = (args: KlevuProduct) => html` <klevu-product
+const productRender = (args: KlevuProduct, className?: string) => html` <klevu-product
+  class=${ifDefined(className)}
   style="--klevu-product-width: 300px"
   variant=${args.variant}
   .product=${args.product}
@@ -54,6 +56,10 @@ export const SmallProduct: StoryObj<KlevuProduct> = {
 }
 
 export const CustomizedProducts: StoryObj<KlevuProduct> = {
+  args: {
+    product: productItem,
+    variant: "default",
+  },
   render: (args: KlevuProduct) => html`<div>
     <klevu-product
       style="--klevu-product-width: 300px; --klevu-product-image-aspect-ratio: 1 / 1.3"
@@ -101,5 +107,27 @@ export const LineItems: StoryObj<KlevuProduct> = {
     ${productRender({ product: productItem, variant: "line" } as any)}
     ${productRender({ product: productItem2, variant: "line" } as any)}
     ${productRender({ product: productItem3, variant: "line" } as any)}
+  `,
+}
+
+export const ProductWithoutImage: StoryObj<KlevuProduct> = {
+  render: (args: KlevuProduct) => html`
+    ${productRender(
+      {
+        variant: "default",
+        product: {
+          name: "Product without image",
+          shortDesc: "This is a product that has no image. There should be no image placeholder.",
+          price: "12345",
+          currency: "JPY",
+        } as Partial<KlevuRecord>,
+      } as any,
+      "without-image"
+    )}
+    <style>
+      klevu-product.without-image::part(product-container) {
+        border: 1px solid black;
+      }
+    </style>
   `,
 }
