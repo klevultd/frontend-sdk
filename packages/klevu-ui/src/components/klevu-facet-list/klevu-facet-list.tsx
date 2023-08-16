@@ -127,7 +127,7 @@ export class KlevuFacetList {
    * into to local state of that is displayed in the UI
    */
   @Method()
-  updateApplyFilterState() {
+  async updateApplyFilterState() {
     if (!this.useApplyButton) {
       return
     }
