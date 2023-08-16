@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Method } from "@stencil/core"
+import { Component, Host, h, State, Method, Event, EventEmitter } from "@stencil/core"
 import { KlevuUtilViewportCustomEvent } from "../../components"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 
@@ -36,6 +36,9 @@ export class KlevuLayoutResults {
     this.drawerElement?.closeModal()
   }
 
+  @Event({ composed: true })
+  drawerOpened!: EventEmitter<void>
+
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
 
@@ -51,6 +54,7 @@ export class KlevuLayoutResults {
             <klevu-button
               onClick={async (event) => {
                 await this.drawerElement?.openModal()
+                this.drawerOpened.emit()
                 event.stopPropagation()
                 return false
               }}

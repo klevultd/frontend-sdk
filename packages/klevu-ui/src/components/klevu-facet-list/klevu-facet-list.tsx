@@ -1,12 +1,22 @@
+import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuFilterResultRating } from "@klevu/core"
 import {
-  FilterManager,
-  KlevuDomEvents,
-  KlevuFilterResultOptions,
-  KlevuFilterResultSlider,
-  KlevuFilterResultRating,
-} from "@klevu/core"
-import { Component, EventEmitter, h, Host, Listen, Prop, State, Event, forceUpdate, Element } from "@stencil/core"
+  Component,
+  EventEmitter,
+  h,
+  Host,
+  Listen,
+  Prop,
+  State,
+  Event,
+  forceUpdate,
+  Element,
+  Method,
+} from "@stencil/core"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
+
+export type KlevuFiltersAppliedEventDetail = {
+  manager: FilterManager
+}
 
 /**
  * Render all facets of filter manager
@@ -65,7 +75,7 @@ export class KlevuFacetList {
    * When filters are applied
    */
   @Event({ composed: true })
-  klevuApplyFilters!: EventEmitter<void>
+  klevuApplyFilters!: EventEmitter<KlevuFiltersAppliedEventDetail>
 
   @State() filters: Array<KlevuFilterResultOptions | KlevuFilterResultSlider | KlevuFilterResultRating> = []
 
@@ -79,14 +89,14 @@ export class KlevuFacetList {
     this.#applyManager = new FilterManager()
     this.#applyManager.setState(this.manager.getCurrentState())
     if (this.useApplyButton) {
-      this.filters = this.#applyManager.filters
+      this.updateApplyFilterState()
     } else {
       this.filters = this.manager.filters
     }
   }
 
   @Listen("klevu-filters-applied", { target: "document" })
-  filtersApplied() {
+  filterManagerAppliedFilters() {
     this.#applyManager.setState(this.manager.getCurrentState())
     if (!this.useApplyButton) {
       this.filters = this.manager.filters
@@ -94,20 +104,33 @@ export class KlevuFacetList {
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate() {
+  filterSelectionUpdate(e: CustomEvent<{ key: string; name: string; selected: boolean }>) {
     if (!this.useApplyButton) {
       this.filters = this.manager.filters
-      this.klevuApplyFilters.emit()
     }
   }
 
   #applySettings() {
     this.manager.setState(this.#applyManager.getCurrentState())
-    this.klevuApplyFilters.emit()
+    this.klevuApplyFilters.emit({
+      manager: this.manager,
+    })
   }
 
   #clear() {
     this.#applyManager.clearOptionSelections()
+    this.filters = this.#applyManager.filters
+  }
+
+  /**
+   * When using `useApplyButton` then this method can be used to update current state filterManager
+   * into to local state of that is displayed in the UI
+   */
+  @Method()
+  updateApplyFilterState() {
+    if (!this.useApplyButton) {
+      return
+    }
     this.filters = this.#applyManager.filters
   }
 

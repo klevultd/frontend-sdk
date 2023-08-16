@@ -1,0 +1,16 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import * as Stories from "./klevu-util-dom-events.stories"
+
+<Meta of={Stories} />
+
+# Klevu-util-dom-events
+
+<Markdown>{Stories.description}</Markdown>
+
+Here is a example story where we have `klevu-facet-list` that will send a `filter-selection-update` events to DOM.
+This component intercepts it and makes another event with same name. This allows `React` developers to listen
+events much easier way.
+
+<Canvas of={Stories.DomEvents} />
+
+<Controls />

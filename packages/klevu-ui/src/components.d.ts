@@ -5,12 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
-import { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
+import { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/klevu-facet/klevu-facet";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
+import { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
@@ -25,12 +26,13 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
-export { KlevuFacetMode } from "./components/klevu-facet/klevu-facet";
+export { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/klevu-facet/klevu-facet";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
+export { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
@@ -352,6 +354,10 @@ export namespace Components {
           * Set mode for facets or if object is passed then define per key
          */
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+        /**
+          * When using `useApplyButton` then this method can be used to update current state filterManager into to local state of that is displayed in the UI
+         */
+        "updateApplyFilterState": () => Promise<void>;
         /**
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
@@ -1271,6 +1277,12 @@ export namespace Components {
         "variant": KlevuTypographyVariant;
     }
     /**
+     * Utility compoenent that simplifies listening Klevu SDK Dom events
+     * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
+     */
+    interface KlevuUtilDomEvents {
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -1329,6 +1341,10 @@ export interface KlevuDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuDropdownElement;
 }
+export interface KlevuFacetCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuFacetElement;
+}
 export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuFacetListElement;
@@ -1336,6 +1352,10 @@ export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuLatestSearchesElement;
+}
+export interface KlevuLayoutResultsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuLayoutResultsElement;
 }
 export interface KlevuModalCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1384,6 +1404,10 @@ export interface KlevuSuggestionsListCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuTextfieldElement;
+}
+export interface KlevuUtilDomEventsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuUtilDomEventsElement;
 }
 export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1890,6 +1914,16 @@ declare global {
         new (): HTMLKlevuTypographyElement;
     };
     /**
+     * Utility compoenent that simplifies listening Klevu SDK Dom events
+     * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
+     */
+    interface HTMLKlevuUtilDomEventsElement extends Components.KlevuUtilDomEvents, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilDomEventsElement: {
+        prototype: HTMLKlevuUtilDomEventsElement;
+        new (): HTMLKlevuUtilDomEventsElement;
+    };
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -1960,6 +1994,7 @@ declare global {
         "klevu-tab": HTMLKlevuTabElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
+        "klevu-util-dom-events": HTMLKlevuUtilDomEventsElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
@@ -2253,6 +2288,10 @@ declare namespace LocalJSX {
          */
         "mode"?: KlevuFacetMode;
         /**
+          * When filter selection is updated
+         */
+        "onKlevuFilterSelectionUpdate"?: (event: KlevuFacetCustomEvent<KlevuSelectionUpdatedEventDetail>) => void;
+        /**
           * From which options to build facet. Single option value from Klevu SDK FilterManager. Either this or slider must be set.
          */
         "option"?: KlevuFilterResultOptions;
@@ -2297,7 +2336,7 @@ declare namespace LocalJSX {
         /**
           * When filters are applied
          */
-        "onKlevuApplyFilters"?: (event: KlevuFacetListCustomEvent<void>) => void;
+        "onKlevuApplyFilters"?: (event: KlevuFacetListCustomEvent<KlevuFiltersAppliedEventDetail>) => void;
         /**
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
@@ -2385,6 +2424,7 @@ declare namespace LocalJSX {
      * Generic layout used in merchansiding and search landing page
      */
     interface KlevuLayoutResults {
+        "onDrawerOpened"?: (event: KlevuLayoutResultsCustomEvent<void>) => void;
     }
     /**
      * Single list item for listing things.
@@ -3236,6 +3276,25 @@ declare namespace LocalJSX {
         "variant": KlevuTypographyVariant;
     }
     /**
+     * Utility compoenent that simplifies listening Klevu SDK Dom events
+     * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
+     */
+    interface KlevuUtilDomEvents {
+        "onClickEventSent"?: (event: KlevuUtilDomEventsCustomEvent<{
+    productId: string
+    product?: Partial<KlevuRecord>
+  }>) => void;
+        "onFilterSelectionUpdate"?: (event: KlevuUtilDomEventsCustomEvent<{
+    key: string
+    name: string
+    selected: boolean
+  }>) => void;
+        "onFiltersApplied"?: (event: KlevuUtilDomEventsCustomEvent<{
+    filters: FilterManagerFilters[]
+  }>) => void;
+        "onLastSearchUpdate"?: (event: KlevuUtilDomEventsCustomEvent<void>) => void;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -3301,6 +3360,7 @@ declare namespace LocalJSX {
         "klevu-tab": KlevuTab;
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
+        "klevu-util-dom-events": KlevuUtilDomEvents;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
         "klevu-util-viewport": KlevuUtilViewport;
@@ -3604,6 +3664,11 @@ declare module "@stencil/core" {
              * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
              */
             "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
+            /**
+             * Utility compoenent that simplifies listening Klevu SDK Dom events
+             * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
+             */
+            "klevu-util-dom-events": LocalJSX.KlevuUtilDomEvents & JSXBase.HTMLAttributes<HTMLKlevuUtilDomEventsElement>;
             /**
              * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
              * to prevent problems with CSS stylings.

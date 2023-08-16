@@ -23,6 +23,13 @@ Manager property must be set for this component to work.
 | `slider`               | --                     | From which slider to build facet.                                                                                                                         | `KlevuFilterResult & { type: KlevuFilterType.Slider; min: string; max: string; start: string \| null; end: string \| null; } \| undefined`                                     | `undefined`  |
 
 
+## Events
+
+| Event                        | Description                      | Type                                                                                                                                                                                      |
+| ---------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `klevuFilterSelectionUpdate` | When filter selection is updated | `CustomEvent<{ manager: FilterManager; filter?: { key: string; name: string; selected?: boolean \| undefined; start?: string \| undefined; end?: string \| undefined; } \| undefined; }>` |
+
+
 ## Dependencies
 
 ### Used by

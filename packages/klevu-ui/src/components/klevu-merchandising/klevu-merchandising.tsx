@@ -83,6 +83,7 @@ export class KlevuMerchandising {
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
   #layoutElement!: HTMLKlevuLayoutResultsElement
+  #facetListElement!: HTMLKlevuFacetListElement
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
@@ -103,18 +104,18 @@ export class KlevuMerchandising {
 
   async connectedCallback() {
     await KlevuInit.ready()
-    await this.#initialFetch()
+    await this.#fetchData()
   }
 
   @Watch("category")
   async watchPropHandler(newValue: string, oldValue: string) {
     if (newValue !== oldValue) {
       this.manager.clear()
-      await this.#initialFetch()
+      await this.#fetchData()
     }
   }
 
-  async #initialFetch() {
+  async #fetchData() {
     const result = await KlevuFetch(
       categoryMerchandising(
         this.category,
@@ -158,7 +159,7 @@ export class KlevuMerchandising {
 
   async #sortChanged(event: KlevuSortCustomEvent<KlevuSearchSorting>) {
     this.sort = event.detail
-    await this.#initialFetch()
+    await this.#fetchData()
   }
 
   @Listen("productClick")
@@ -184,8 +185,16 @@ export class KlevuMerchandising {
   }
 
   #applyFilters() {
-    this.#initialFetch()
+    this.#fetchData()
     this.#layoutElement.closeDrawer()
+  }
+
+  @Listen("klevu-filter-selection-updates", { target: "document" })
+  filterManagerFiltersUpdated() {
+    if (this.#isMobile()) {
+      return
+    }
+    this.#fetchData()
   }
 
   /**
@@ -223,22 +232,32 @@ export class KlevuMerchandising {
     )
   }
 
-  render() {
-    const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+  #isMobile() {
+    return this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+  }
 
+  #mobileDrawerOpened() {
+    this.#facetListElement.updateApplyFilterState()
+  }
+
+  render() {
     return (
       <Host>
         <klevu-util-viewport
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}>
+        <klevu-layout-results
+          onDrawerOpened={this.#mobileDrawerOpened.bind(this)}
+          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+        >
           <klevu-facet-list
+            ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
             slot="sidebar"
             accordion
             customOrder={this.filterCustomOrder}
             manager={this.manager}
-            useApplyButton={isMobile}
+            useApplyButton={this.#isMobile()}
             onKlevuApplyFilters={this.#applyFilters.bind(this)}
           ></klevu-facet-list>
           <div slot="header" class="header">

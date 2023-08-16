@@ -76,18 +76,19 @@ export class KlevuSearchLandingPage {
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
   #layoutElement!: HTMLKlevuLayoutResultsElement
+  #facetListElement!: HTMLKlevuFacetListElement
 
   async connectedCallback() {
     await KlevuInit.ready()
-    await this.#initialFetch()
+    await this.#fetchData()
   }
 
   @Watch("term")
   termChanged(oldValue: string, newValue: string) {
-    this.#initialFetch()
+    this.#fetchData()
   }
 
-  async #initialFetch() {
+  async #fetchData() {
     const result = await KlevuFetch(
       search(
         this.term,
@@ -141,7 +142,16 @@ export class KlevuSearchLandingPage {
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate() {
-    this.#initialFetch()
+    this.#fetchData()
+    this.#layoutElement.closeDrawer()
+  }
+
+  @Listen("klevu-filter-selection-updates", { target: "document" })
+  filterManagerFiltersUpdated() {
+    if (this.#isMobile()) {
+      return
+    }
+    this.#fetchData()
   }
 
   /**
@@ -189,12 +199,20 @@ export class KlevuSearchLandingPage {
 
   async #sortChanged(event: KlevuSortCustomEvent<KlevuSearchSorting>) {
     this.sort = event.detail
-    await this.#initialFetch()
+    await this.#fetchData()
   }
 
   #applyFilters() {
-    this.#initialFetch()
+    this.#fetchData()
     this.#layoutElement.closeDrawer()
+  }
+
+  #isMobile() {
+    return this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+  }
+
+  #mobileDrawerOpened() {
+    this.#facetListElement.updateApplyFilterState()
   }
 
   render() {
@@ -206,8 +224,12 @@ export class KlevuSearchLandingPage {
           onSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
-        <klevu-layout-results ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}>
+        <klevu-layout-results
+          onDrawerOpened={this.#mobileDrawerOpened.bind(this)}
+          ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+        >
           <klevu-facet-list
+            ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
             slot="sidebar"
             customOrder={this.filterCustomOrder}
             manager={this.manager}

@@ -9,6 +9,13 @@
 
 Generic layout used in merchansiding and search landing page
 
+## Events
+
+| Event          | Description | Type                |
+| -------------- | ----------- | ------------------- |
+| `drawerOpened` |             | `CustomEvent<void>` |
+
+
 ## Methods
 
 ### `closeDrawer() => Promise<void>`

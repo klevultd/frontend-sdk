@@ -49,6 +49,7 @@ export const KlevuSuggestionsList = /*@__PURE__*/createReactComponent<JSX.KlevuS
 export const KlevuTab = /*@__PURE__*/createReactComponent<JSX.KlevuTab, HTMLKlevuTabElement>('klevu-tab');
 export const KlevuTextfield = /*@__PURE__*/createReactComponent<JSX.KlevuTextfield, HTMLKlevuTextfieldElement>('klevu-textfield');
 export const KlevuTypography = /*@__PURE__*/createReactComponent<JSX.KlevuTypography, HTMLKlevuTypographyElement>('klevu-typography');
+export const KlevuUtilDomEvents = /*@__PURE__*/createReactComponent<JSX.KlevuUtilDomEvents, HTMLKlevuUtilDomEventsElement>('klevu-util-dom-events');
 export const KlevuUtilPortal = /*@__PURE__*/createReactComponent<JSX.KlevuUtilPortal, HTMLKlevuUtilPortalElement>('klevu-util-portal');
 export const KlevuUtilScrollbars = /*@__PURE__*/createReactComponent<JSX.KlevuUtilScrollbars, HTMLKlevuUtilScrollbarsElement>('klevu-util-scrollbars');
 export const KlevuUtilViewport = /*@__PURE__*/createReactComponent<JSX.KlevuUtilViewport, HTMLKlevuUtilViewportElement>('klevu-util-viewport');
