@@ -1,5 +1,4 @@
 :host {
-  display: block;
   --spacing: var(--klevu-popup-spacing, 0);
 }
 
@@ -12,12 +11,10 @@
   top: 0;
   left: 0;
   width: max-content;
-  visibility: hidden;
   box-sizing: border-box;
   padding: var(--spacing);
   border-radius: var(--klevu-border-radius-s);
   transition: opacity 0.4s, visibility 0.4s;
-  opacity: 0;
   z-index: 1000;
   background: white;
 }
@@ -42,11 +39,6 @@
   right: 0;
 }
 
-.popup.show {
-  visibility: visible;
-  opacity: 1;
-}
-
 .popup.fullwidth {
   min-width: 100%;
 }
@@ -55,4 +47,9 @@
   position: fixed;
   background-color: rgba(0, 0, 0, 0.06);
   inset: 0;
+}
+
+dialog {
+  position: fixed;
+  border: 0;
 }

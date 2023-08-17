@@ -27,9 +27,9 @@
 
 ## Slots
 
-| Slot               | Description                               |
-| ------------------ | ----------------------------------------- |
-| `"after-messages"` | Things to place in the after all messages |
+| Slot                    | Description                               |
+| ----------------------- | ----------------------------------------- |
+| `"chat-messages-after"` | Things to place in the after all messages |
 
 
 ## Dependencies

@@ -31,6 +31,13 @@ Klevu Product Query popup application that shows a popup for asking questions ab
 | `useBackground`            | `use-background`              | Use dark background with the popup                                                  | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `undefined`                                                                                     |
 
 
+## Slots
+
+| Slot          | Description             |
+| ------------- | ----------------------- |
+| `"fineprint"` | Fine print of the popup |
+
+
 ## Dependencies
 
 ### Used by

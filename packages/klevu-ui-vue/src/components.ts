@@ -204,9 +204,9 @@ export const KlevuPopularSearches = /*@__PURE__*/ defineContainer<JSX.KlevuPopul
 
 export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-popup', undefined, [
   'startOpen',
+  'toggle',
   'openAtFocus',
   'closeAtOutsideClick',
-  'fullwidthContent',
   'popupWidth',
   'anchor',
   'elevation',

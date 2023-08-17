@@ -224,7 +224,6 @@ export class KlevuQuicksearch {
         <klevu-popup
           anchor={this.popupAnchor}
           ref={(el) => (this.popup = el)}
-          fullwidthContent
           openAtFocus
           onKlevuPopupOpen={this.#onPopupOpen.bind(this)}
           elevation={2}

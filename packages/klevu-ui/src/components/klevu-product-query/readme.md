@@ -29,6 +29,15 @@ Button that is placed on the site to start a product query session
 | `useBackground`            | `use-background`              | Use dark background with the popup                                                  | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `undefined`                                                                                     |
 
 
+## Slots
+
+| Slot                   | Description                  |
+| ---------------------- | ---------------------------- |
+| `"after-button-text"`  | After origin button text     |
+| `"after-fineprint"`    | After fineprint in the popup |
+| `"before-button-text"` | Before origin button text    |
+
+
 ## Shadow Parts
 
 | Part                        | Description |
@@ -41,14 +50,12 @@ Button that is placed on the site to start a product query session
 ### Depends on
 
 - [klevu-button](../klevu-button)
-- [klevu-util-portal](../klevu-util-portal)
 - [klevu-product-query-popup](../klevu-product-query-popup)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-product-query --> klevu-button
-  klevu-product-query --> klevu-util-portal
   klevu-product-query --> klevu-product-query-popup
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography

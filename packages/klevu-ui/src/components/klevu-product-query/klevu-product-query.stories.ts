@@ -40,33 +40,17 @@ const chatRender = (args: KlevuProductQuery) => {
 
 export const Query: StoryObj<KlevuProductQuery> = {
   args: {
-    url: "https://www.conns.com/lg-65-c2-evo-oled-tv-oled65c2pua.html",
+    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
+    url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
   render: (args) =>
-    html`
-      <div style="transform: translateY(-1px)">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
-          maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
-          Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
-          cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
-          Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
-          efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
-          venenatis.
-        </p>
-
-        <p>
-          Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
-          Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec
-          massa maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis
-          odio at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque
-          urna ligula nec orci. Nam sed porttitor dolor. Sed hendrerit, leo sit amet ultricies volutpat, felis erat
-          volutpat libero, sit amet suscipit augue tortor at justo. In consectetur, mi ac posuere dictum, erat ligula
-          lacinia augue, sit amet sollicitudin felis sem eu metus. Nunc pretium eros ut enim finibus congue. Phasellus
-          eu mauris quis ex interdum pretium. Praesent ultricies tempus sapien, ut efficitur metus luctus ut. Sed non
-          purus gravida, ultrices magna vel, efficitur lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
-        </p>
-
+    html` <div style="transform: translateY(-1px)">
+      <p>
+        Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
+        Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec massa
+        maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis odio
+        at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
+        ligula nec orci. Nam sed porttitor dolor.
         <klevu-init
           .settings=${{
             icons: {
@@ -74,55 +58,106 @@ export const Query: StoryObj<KlevuProductQuery> = {
               thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
             },
           }}
-          api-key="klevu-164677714116414855"
-        >
-          ${chatRender(args)}
-        </klevu-init>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
-          maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
-          Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
-          cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
-          Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
-          efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
-          venenatis.
-        </p>
+          >${chatRender(args)}</klevu-init
+        >Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat libero, sit amet suscipit augue tortor at
+        justo. In consectetur, mi ac posuere dictum, erat ligula lacinia augue, sit amet sollicitudin felis sem eu
+        metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris quis ex interdum pretium. Praesent
+        ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida, ultrices magna vel, efficitur
+        lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
+      </p>
 
-        <p>
-          Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
-          Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec
-          massa maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis
-          odio at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque
-          urna ligula nec orci. Nam sed porttitor dolor. Sed hendrerit, leo sit amet ultricies volutpat, felis erat
-          volutpat libero, sit amet suscipit augue tortor at justo. In consectetur, mi ac posuere dictum, erat ligula
-          lacinia augue, sit amet sollicitudin felis sem eu metus. Nunc pretium eros ut enim finibus congue. Phasellus
-          eu mauris quis ex interdum pretium. Praesent ultricies tempus sapien, ut efficitur metus luctus ut. Sed non
-          purus gravida, ultrices magna vel, efficitur lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
-        </p>
-      </div>
-    `,
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
+        maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
+        Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
+        cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
+        Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
+        efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
+        venenatis.
+      </p>
+    </div>`,
 }
 
 export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
   args: {
+    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
     productId: "40912128737373",
   },
   render: Query.render,
 }
 
-export const QueryWithWidgetId: StoryObj<KlevuProductQuery> = {
+export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
   args: {
     pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
     url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
-  render: (args) =>
-    html`<klevu-init
-      .settings=${{
-        icons: {
-          thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
-          thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
-        },
-      }}
-      >${chatRender(args)}</klevu-init
-    >`,
+  render: (args) => html`<klevu-init>
+      <klevu-product-query
+        class="modified-version"
+        pqa-widget-id=${ifDefined(args.pqaWidgetId)}
+        url=${ifDefined(args.url)}
+        button-text="Ask a questions"
+        popup-title="Ask a question about this product"
+        fine-print=" I’m an AI model so I do have
+      limitations. Please verify answers on the product page."
+      >
+        <!-- This could be also a img with url -->
+        <klevu-icon
+          slot="before-button-text"
+          style="font-size: 1.5em; position: relative; top: 0.3em; margin-right: 0.5em"
+          name="forum"
+        ></klevu-icon>
+        <span slot="after-fineprint">
+          <klevu-popup popup-width="400" anchor="top-end" toggle>
+            <span slot="origin" id="fineprint-popup-origin">?</span>
+            <div slot="content" id="fineprint-popup">
+              By using our website and AI chatbot, you agree to the terms of our Privacy Policy and agree that you
+              understand the risks associated with using the AI chatbot. You acknowledge that you understand the risks,
+              limitations, and conditions of use and instructions for use. You may, at any time, stop communicating
+              through this service by closing the AI chat window.
+            </div>
+          </klevu-popup>
+        </span>
+      </klevu-product-query>
+    </klevu-init>
+    <style>
+      klevu-product-query.modified-version {
+        --klevu-chat-bubble-background-remote: #000;
+        --klevu-color-primary: #000;
+      }
+
+      klevu-product-query.modified-version::part(button-base) {
+        --klevu-border-radius-s: 0;
+        --klevu-border-radius-m: 0;
+        --klevu-border-radius-l: 0;
+        --klevu-button-text-color: #000;
+        --klevu-typography-font-weight: normal;
+        background: #fff;
+        border: 1px solid black;
+        height: 42px;
+        padding: 0 16px 4px 16px;
+      }
+      klevu-product-query.modified-version::part(button-base):focus:after {
+        border: 0;
+      }
+
+      #fineprint-popup-origin {
+        display: inline-block;
+        padding: 2px;
+        background: #000;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 50%;
+        height: 12px;
+        width: 12px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      #fineprint-popup {
+        padding: 1em;
+        background: #000;
+        color: #fff;
+      }
+    </style>`,
 }
