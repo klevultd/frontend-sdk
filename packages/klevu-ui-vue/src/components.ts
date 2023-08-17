@@ -315,6 +315,11 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
 ]);
 
 
+export const KlevuRating = /*@__PURE__*/ defineContainer<JSX.KlevuRating>('klevu-rating', undefined, [
+  'rating'
+]);
+
+
 export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecommendations>('klevu-recommendations', undefined, [
   'recommendationTitle',
   'recommendationId',

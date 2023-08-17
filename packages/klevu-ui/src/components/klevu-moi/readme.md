@@ -93,6 +93,7 @@ graph TD;
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   klevu-modal --> klevu-icon
   klevu-quicksearch --> klevu-moi

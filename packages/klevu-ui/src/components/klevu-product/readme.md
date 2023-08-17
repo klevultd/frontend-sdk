@@ -67,11 +67,13 @@ with --kleu-product-width and --klevu-product-small-width css variables.
 
 ### Depends on
 
+- [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
 
 ### Graph
 ```mermaid
 graph TD;
+  klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   klevu-chat-messages --> klevu-product
   klevu-merchandising --> klevu-product

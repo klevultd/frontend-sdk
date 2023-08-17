@@ -39,6 +39,7 @@ Manager property must be set for this component to work.
 ### Depends on
 
 - [klevu-accordion](../klevu-accordion)
+- [klevu-rating](../klevu-rating)
 - [klevu-typography](../klevu-typography)
 - [klevu-slider](../klevu-slider)
 - [klevu-checkbox](../klevu-checkbox)
@@ -48,6 +49,7 @@ Manager property must be set for this component to work.
 ```mermaid
 graph TD;
   klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-rating
   klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox

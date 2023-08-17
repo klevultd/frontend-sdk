@@ -1,4 +1,4 @@
-import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
+import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuFilterType } from "@klevu/core"
 import {
   Component,
   Fragment,
@@ -15,6 +15,21 @@ import {
 import { getGlobalSettings } from "../../utils/utils"
 
 export type KlevuFacetMode = "checkbox" | "radio"
+export type OPTION_TYPE = {
+  name: string;
+  value: string;
+  count: number;
+  selected: boolean;
+};
+
+const resolveFacetLabel = (option: OPTION_TYPE, facet?: KlevuFilterResultOptions) => {
+  if (facet) {
+    if(facet.type === KlevuFilterType.Rating) {
+      return <klevu-rating rating={+option.name} />
+    }
+  }
+  return option.name
+}
 
 export type KlevuSelectionUpdatedEventDetail = {
   manager: FilterManager
@@ -165,7 +180,7 @@ export class KlevuFacet {
     if (!this.option) {
       return null
     }
-    let opts = [...this.option.options]
+    let opts: OPTION_TYPE[] = [...this.option.options]
     if (this.customOrder) {
       opts.sort((a, b) => {
         const aio = this.customOrder!.indexOf(a.value)
@@ -211,7 +226,7 @@ export class KlevuFacet {
                 >
                   <div class="container">
                     <span class="name">
-                      <span>{o.name}</span>
+                      <span>{resolveFacetLabel(o, this.option)}</span>
                     </span>
                     <span class="count">({o.count})</span>
                   </div>
@@ -230,7 +245,7 @@ export class KlevuFacet {
                     }}
                   />
                   <label htmlFor={this.option!.key} class="name">
-                    <span>{o.name}</span>
+                    <span>{resolveFacetLabel(o, this.option)}</span>
                   </label>
                   <span class="count">({o.count})</span>
                 </div>

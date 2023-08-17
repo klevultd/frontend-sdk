@@ -988,6 +988,16 @@ export namespace Components {
         "simpleResultCount": number;
     }
     /**
+     * Klevu ratings component
+     * @prop rating - The rating value as a number to show
+     */
+    interface KlevuRating {
+        /**
+          * Rating value
+         */
+        "rating": number;
+    }
+    /**
      * Full recommendation banner solution
      */
     interface KlevuRecommendations {
@@ -1802,6 +1812,16 @@ declare global {
         new (): HTMLKlevuQuicksearchElement;
     };
     /**
+     * Klevu ratings component
+     * @prop rating - The rating value as a number to show
+     */
+    interface HTMLKlevuRatingElement extends Components.KlevuRating, HTMLStencilElement {
+    }
+    var HTMLKlevuRatingElement: {
+        prototype: HTMLKlevuRatingElement;
+        new (): HTMLKlevuRatingElement;
+    };
+    /**
      * Full recommendation banner solution
      */
     interface HTMLKlevuRecommendationsElement extends Components.KlevuRecommendations, HTMLStencilElement {
@@ -1988,6 +2008,7 @@ declare global {
         "klevu-product-query-popup": HTMLKlevuProductQueryPopupElement;
         "klevu-query": HTMLKlevuQueryElement;
         "klevu-quicksearch": HTMLKlevuQuicksearchElement;
+        "klevu-rating": HTMLKlevuRatingElement;
         "klevu-recommendations": HTMLKlevuRecommendationsElement;
         "klevu-search-field": HTMLKlevuSearchFieldElement;
         "klevu-search-landing-page": HTMLKlevuSearchLandingPageElement;
@@ -2972,6 +2993,16 @@ declare namespace LocalJSX {
         "simpleResultCount"?: number;
     }
     /**
+     * Klevu ratings component
+     * @prop rating - The rating value as a number to show
+     */
+    interface KlevuRating {
+        /**
+          * Rating value
+         */
+        "rating"?: number;
+    }
+    /**
      * Full recommendation banner solution
      */
     interface KlevuRecommendations {
@@ -3358,6 +3389,7 @@ declare namespace LocalJSX {
         "klevu-product-query-popup": KlevuProductQueryPopup;
         "klevu-query": KlevuQuery;
         "klevu-quicksearch": KlevuQuicksearch;
+        "klevu-rating": KlevuRating;
         "klevu-recommendations": KlevuRecommendations;
         "klevu-search-field": KlevuSearchField;
         "klevu-search-landing-page": KlevuSearchLandingPage;
@@ -3606,6 +3638,11 @@ declare module "@stencil/core" {
              * Full app to create search bar that popups trending products and search results.
              */
             "klevu-quicksearch": LocalJSX.KlevuQuicksearch & JSXBase.HTMLAttributes<HTMLKlevuQuicksearchElement>;
+            /**
+             * Klevu ratings component
+             * @prop rating - The rating value as a number to show
+             */
+            "klevu-rating": LocalJSX.KlevuRating & JSXBase.HTMLAttributes<HTMLKlevuRatingElement>;
             /**
              * Full recommendation banner solution
              */

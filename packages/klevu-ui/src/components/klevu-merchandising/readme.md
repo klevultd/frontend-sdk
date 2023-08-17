@@ -58,6 +58,7 @@ graph TD;
   klevu-facet-list --> klevu-facet
   klevu-facet-list --> klevu-button
   klevu-facet --> klevu-accordion
+  klevu-facet --> klevu-rating
   klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
   klevu-facet --> klevu-checkbox
@@ -68,6 +69,7 @@ graph TD;
   klevu-checkbox --> klevu-typography
   klevu-sort --> klevu-dropdown
   klevu-dropdown --> klevu-icon
+  klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   klevu-pagination --> klevu-icon
   style klevu-merchandising fill:#f9f,stroke:#333,stroke-width:4px
