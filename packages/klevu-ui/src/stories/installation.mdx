@@ -13,30 +13,22 @@ import { Meta } from "@storybook/addon-docs"
 
 # Installing with CDN url (VanillaJS)
 
-Simplest way to get started is to use jsdelivr.net CDN to get sources and import loader in the `head`
-of the document. It will automatically add polyfills and lazy load custom element code when they
-are found in the HTML source.
-
-```ts
-import { defineCustomElements } from "https://cdn.jsdelivr.net/npm/@klevu/ui/loader/index.js"
-defineCustomElements()
-```
-
-Or if you are feeling very modern you can just import ESM version of the library directly:
+Simplest way to get started is to use our CDN to get sources and import in the `head`
+of the document.
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"></script>
+<script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
 ```
 
 And it's important to embed CSS styles too:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css" rel="stylesheet" />
+<link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
 ```
 
 **Warning:** These links will always load latest version of the library. Breaking changes will brake your site.
-To lock the version one should use versioned URL's by adding version number by adding
-`@version` after `@klevu/ui`. For example `...npm/@klevu/ui@0.0.13/...`
+To lock the version one should use versioned URL's by adding version number by replacing `latest` with version number.
+For example `...klevu.com/0.6.0/klevu-ui/...`
 
 Full example with HTML file:
 
@@ -46,8 +38,8 @@ Full example with HTML file:
   <head>
     <title>Klevu UI CDN example</title>
     <meta charset="UTF-8" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.esm.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@klevu/ui/dist/klevu-ui/klevu-ui.min.css" rel="stylesheet" />
+    <script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+    <link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
   </head>
 
   <body>
