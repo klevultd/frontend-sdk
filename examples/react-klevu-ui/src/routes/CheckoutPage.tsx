@@ -14,7 +14,7 @@ export function CheckoutPage() {
 
   const buy = () => {
     const groupedProducts = groupBy(cart.items, (i) => i.id)
-    const toBuy = Object.entries(groupedProducts).map((entry) => {
+    const items = Object.entries(groupedProducts).map((entry) => {
       const data: KlevuRecord[] = entry[1] as KlevuRecord[]
       return {
         amount: data.length,
@@ -22,7 +22,7 @@ export function CheckoutPage() {
         override: {},
       }
     })
-    KlevuEvents.buy(toBuy)
+    KlevuEvents.buy({items} )
 
     cart.clear()
   }

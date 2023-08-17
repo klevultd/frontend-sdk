@@ -1,0 +1,13 @@
+.eslintrc
+node_modules
+**/*/tests/*
+jest.config.*
+build*
+.husky
+.vscode
+.editorconfig
+.gitignore
+.prettierrc
+package*.json
+README.md
+dist
