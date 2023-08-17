@@ -1,0 +1,228 @@
+:root {
+  font-family: Poppins, sans-serif;
+  --klevu-h1-size: 1.5rem;
+  --klevu-h1-weight: normal;
+  --klevu-h1-color: rgb(43, 85, 110);
+  --klevu-h2-size: 1.2rem;
+  --klevu-h2-weight: normal;
+  --klevu-h2-color: rgb(43, 85, 110);
+  --klevu-h3-size: 1.1rem;
+  --klevu-h3-weight: light;
+  --klevu-h3-color: rgb(43, 85, 110);
+  --klevu-color-primary: rgb(151, 199, 62);
+  --klevu-color-primary-border: rgb(97, 136, 25);
+  --klevu-color-primary-text: #ffffff;
+  --klevu-color-border: #e0e0e0;
+  --klevu-color-dim-background: #fafafa;
+  --klevu-color-dim-text: #666666;
+  --klevu-color-shadow: rgba(168, 168, 168, 0.2);
+  --klevu-rounded-corners: 4px;
+  --klevu-spacing-small: 4px;
+  --klevu-spacing-normal: 8px;
+  --klevu-spacing-large: 12px;
+  --klevu-product-image-aspect-ratio: 1.3 / 1;
+  --klevu-product-width: 288px;
+  --klevu-product-small-width: 200px;
+  --klevu-product-image-fill: contain; /* cover, contain */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  height: 100px;
+  max-width: 100vw;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+nav ul {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-right: 10px;
+  overflow: hidden;
+  /* background-color: #333; */
+}
+
+nav li {
+  margin: 0 20px;
+  float: right;
+}
+
+nav .active {
+  background-color: #ccc;
+}
+.storeSettingsParent {
+  text-align: center;
+  margin: 10px;
+}
+.storeSettings {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px;
+  width: 100%;
+}
+
+.storeSettings label {
+  display: block;
+  font-weight: bold;
+  font-size: 12px;
+  color: blue;
+}
+
+.storeSettings input {
+  vertical-align: middle;
+  border-radius: 2px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.storeSettings button {
+  padding: 4px;
+  background: #0c4465;
+  padding: 5px 15px;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 5px;
+  height: 36px;
+}
+
+.topbar {
+  background: #0c4465 none repeat scroll 0 0;
+  padding: 12px 15px;
+  z-index: 10000;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background: linear-gradient(
+    269.86deg,
+    #97c73e -19.03%,
+    #0a4563 49.82%,
+    #97c73e 120.91%
+  );
+}
+.topbar .klevuLogo {
+  padding-top: 3px;
+  width: 150px;
+  display: inline-block;
+}
+
+.topbar .info {
+  color: #fff;
+  /* display: inline-block; */
+  font-size: 22px;
+  /* text-transform: uppercase; */
+  text-align: center;
+}
+
+.productGrid {
+  padding: 20px;
+}
+
+klevu-button::part(klevu-button) {
+  border: 3px dashed blue;
+  cursor: pointer;
+}
+
+klevu-product::part(product-container) klevu-button::part(klevu-button) {
+  border: 3px dashed red;
+}
+
+klevu-product::part(product-container) {
+  border: 3px dashed orange;
+}
+.recsProduct klevu-button::part(klevu-button) {
+  border: 3px dashed black;
+}
+
+#shoppingCart {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+#shoppingCartButton {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  background-color: rgb(151, 199, 62);
+  cursor: pointer;
+  gap: 10px;
+  border-radius: 5px;
+}
+#shoppingCartButton:hover {
+  opacity: 0.8;
+}
+
+.recsDiv {
+  margin: 0 auto;
+  max-width: 90vw;
+}
+.recsDiv klevu-product::part(klevu-product) {
+  --klevu-product-width: 100px;
+}
+.merchandisingContainer {
+  display: flex;
+  width: 100%;
+}
+
+.merchandisingContainer .productGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+
+.productInfo {
+  display: flex;
+  gap: 16px;
+}
+
+#checkoutProductGrid {
+  padding: 20px;
+}
+
+.facetSection {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  padding: 7px !important;
+}
+
+.loader {
+  inset: 0;
+  position: fixed;
+  z-index: 9999;
+  min-width: 100vw;
+  background-color: rgba(255, 255, 255, 0.65);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
