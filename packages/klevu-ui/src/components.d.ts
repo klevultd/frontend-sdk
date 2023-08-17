@@ -1272,6 +1272,10 @@ export namespace Components {
      */
     interface KlevuTypography {
         /**
+          * Display the text in full width. Usefull when typography needs to be used as a block element.
+         */
+        "fullWidth"?: boolean;
+        /**
           * Variant of heading
          */
         "variant": KlevuTypographyVariant;
@@ -3270,6 +3274,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
      */
     interface KlevuTypography {
+        /**
+          * Display the text in full width. Usefull when typography needs to be used as a block element.
+         */
+        "fullWidth"?: boolean;
         /**
           * Variant of heading
          */
