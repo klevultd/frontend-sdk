@@ -20,6 +20,13 @@ Full recommendation banner solution
 | `renderProductSlot`                | --                     | Rendering function created to put custom content to klevu-product slots. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render. | `((product: KlevuRecord, productSlot: KlevuProductSlots) => string \| HTMLElement \| null) \| undefined` | `undefined` |
 
 
+## Events
+
+| Event  | Description                           | Type                                    |
+| ------ | ------------------------------------- | --------------------------------------- |
+| `data` | When Recommndations data is available | `CustomEvent<KlevuResponseQueryObject>` |
+
+
 ## Dependencies
 
 ### Depends on

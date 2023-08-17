@@ -235,6 +235,47 @@ Both the URL and API Key are provided to you when you create an account with Kle
 </div>
 ```
 
+### Load Recommendations with your custom KlevuProduct card
+
+```react
+const [recsProducts, setRecsProducts] = useState([])
+
+<KlevuRecommendations
+          recommendationId={recsId}
+          recommendationTitle="Customized Recommendation"
+          onData={(e) => setRecsProducts(e.detail.records)}
+>
+   {recsProducts.map((product) => (
+      <KlevuProduct product={product}>
+         <div slot="info">{product.name}</div>
+         <div slot="bottom" className="buttonParent">
+            {cart.items.find((_p) => product.id === _p.id) ? (
+            <KlevuButton
+               onClick={() => {
+                  setRemoveProduct(product)
+               }}
+               fullWidth={true}
+               style={{ border: "3px dashed red" }}
+            >
+               Remove
+            </KlevuButton>
+            ) : (
+            <KlevuButton
+               onClick={() => {
+                  cart.add(product)
+               }}
+               fullWidth={true}
+               style={{ border: "3px dashed blue" }}
+            >
+               Add to cart
+            </KlevuButton>
+            )}
+         </div>
+      </KlevuProduct>
+   ))}
+</KlevuRecommendations>
+```
+
 ## Styling KlevuButton
 
 ```css

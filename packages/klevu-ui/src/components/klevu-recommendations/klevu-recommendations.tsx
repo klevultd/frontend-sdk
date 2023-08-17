@@ -5,11 +5,11 @@ import {
   kmcRecommendation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
-import { Component, h, Host, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Listen, Prop, State } from "@stencil/core"
 
 import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuProductSlots } from "../klevu-product/klevu-product"
+import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { parts } from "../../utils/parts"
 
 /**
@@ -21,6 +21,14 @@ import { parts } from "../../utils/parts"
   shadow: true,
 })
 export class KlevuRecommendations {
+  /**
+   * When Recommndations data is available
+   */
+  @Event({
+    composed: true,
+    cancelable: true,
+  })
+  data!: EventEmitter<KlevuResponseQueryObject>
   /**
    * Title of the recommendation
    */
@@ -116,10 +124,12 @@ export class KlevuRecommendations {
     this.#responseObject = res.queriesById("recommendation")
     if (this.#responseObject) {
       this.products = this.#responseObject.records
+      this.data.emit(this.#responseObject)
     }
   }
 
-  #productClick(
+  @Listen("klevuProductClick")
+  productClick(
     event: KlevuProductCustomEvent<{
       product: Partial<KlevuRecord>
       originalEvent: MouseEvent
@@ -141,22 +151,23 @@ export class KlevuRecommendations {
     return (
       <Host>
         <klevu-slides heading={this.recommendationTitle}>
-          {this.products.map((product) => (
-            <klevu-product
-              exportparts={parts["klevu-product"]}
-              fixedWidth
-              onKlevuProductClick={this.#productClick.bind(this)}
-              product={product}
-              style={{
-                "--klevu-product-width": "300px",
-              }}
-            >
-              {this.#internalRenderProductSlot(product, "top")}
-              {this.#internalRenderProductSlot(product, "image")}
-              {this.#internalRenderProductSlot(product, "info")}
-              {this.#internalRenderProductSlot(product, "bottom")}
-            </klevu-product>
-          ))}
+          <slot>
+            {this.products.map((product) => (
+              <klevu-product
+                exportparts={parts["klevu-product"]}
+                fixedWidth
+                product={product}
+                style={{
+                  "--klevu-product-width": "300px",
+                }}
+              >
+                {this.#internalRenderProductSlot(product, "top")}
+                {this.#internalRenderProductSlot(product, "image")}
+                {this.#internalRenderProductSlot(product, "info")}
+                {this.#internalRenderProductSlot(product, "bottom")}
+              </klevu-product>
+            ))}
+          </slot>
         </klevu-slides>
       </Host>
     )

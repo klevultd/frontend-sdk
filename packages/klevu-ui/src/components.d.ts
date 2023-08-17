@@ -1471,6 +1471,10 @@ export interface KlevuQueryCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuQueryElement;
 }
+export interface KlevuRecommendationsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuRecommendationsElement;
+}
 export interface KlevuSearchFieldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuSearchFieldElement;
@@ -3157,6 +3161,10 @@ declare namespace LocalJSX {
           * For similiar products recommendation you need to provide productId and itemGroupId
          */
         "itemGroupId"?: string;
+        /**
+          * When Recommndations data is available
+         */
+        "onData"?: (event: KlevuRecommendationsCustomEvent<KlevuResponseQueryObject>) => void;
         /**
           * The ID of the recommendation
          */

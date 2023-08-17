@@ -343,7 +343,8 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
   'categoryPath',
   'currentProductId',
   'itemGroupId',
-  'renderProductSlot'
+  'renderProductSlot',
+  'data'
 ]);
 
 
