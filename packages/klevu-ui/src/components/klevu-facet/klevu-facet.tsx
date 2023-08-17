@@ -1,8 +1,31 @@
 import { FilterManager, KlevuFilterResultOptions, KlevuFilterResultSlider } from "@klevu/core"
-import { Component, Fragment, h, Host, Listen, Prop, Element, forceUpdate, State } from "@stencil/core"
+import {
+  Component,
+  Fragment,
+  h,
+  Host,
+  Listen,
+  Prop,
+  Element,
+  forceUpdate,
+  State,
+  Event,
+  EventEmitter,
+} from "@stencil/core"
 import { getGlobalSettings } from "../../utils/utils"
 
 export type KlevuFacetMode = "checkbox" | "radio"
+
+export type KlevuSelectionUpdatedEventDetail = {
+  manager: FilterManager
+  filter?: {
+    key: string
+    name: string
+    selected?: boolean
+    start?: string
+    end?: string
+  }
+}
 
 /**
  * Rendering items of single facet with all its options or a slider.
@@ -24,15 +47,18 @@ export class KlevuFacet {
    * From which options to build facet. Single option value from Klevu SDK FilterManager. Either this or slider must be set.
    */
   @Prop() option?: KlevuFilterResultOptions
+
   /**
    * From which slider to build facet.
    */
   @Prop() slider?: KlevuFilterResultSlider
+
   /**
    * Originating filter manager which to modify. This is the most important property of the component.
    * It will be used to modify the filter state for queries.
    */
   @Prop() manager!: FilterManager
+
   /**
    * Which mode should facets be in
    */
@@ -63,9 +89,20 @@ export class KlevuFacet {
    */
   @State() showAll = false
 
+  /**
+   * When filter selection is updated
+   */
+  @Event({ composed: true })
+  klevuFilterSelectionUpdate!: EventEmitter<KlevuSelectionUpdatedEventDetail>
+
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate(event: any) {
     forceUpdate(this.el)
+
+    this.klevuFilterSelectionUpdate.emit({
+      manager: this.manager,
+      filter: event.detail,
+    })
   }
 
   render() {

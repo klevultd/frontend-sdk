@@ -23,9 +23,23 @@ Render all facets of filter manager
 
 ## Events
 
-| Event               | Description              | Type                |
-| ------------------- | ------------------------ | ------------------- |
-| `klevuApplyFilters` | When filters are applied | `CustomEvent<void>` |
+| Event               | Description              | Type                                       |
+| ------------------- | ------------------------ | ------------------------------------------ |
+| `klevuApplyFilters` | When filters are applied | `CustomEvent<{ manager: FilterManager; }>` |
+
+
+## Methods
+
+### `updateApplyFilterState() => Promise<void>`
+
+When using `useApplyButton` then this method can be used to update current state filterManager
+into to local state of that is displayed in the UI
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ## Dependencies

@@ -109,7 +109,8 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'customOrder',
   'accordion',
   'accordionStartOpen',
-  'labelOverride'
+  'labelOverride',
+  'klevuFilterSelectionUpdate'
 ]);
 
 
@@ -144,7 +145,9 @@ export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatest
 ]);
 
 
-export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutResults>('klevu-layout-results', undefined);
+export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutResults>('klevu-layout-results', undefined, [
+  'drawerOpened'
+]);
 
 
 export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-list', undefined, [
@@ -407,6 +410,14 @@ export const KlevuTextfield = /*@__PURE__*/ defineContainer<JSX.KlevuTextfield>(
 
 export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography>('klevu-typography', undefined, [
   'variant'
+]);
+
+
+export const KlevuUtilDomEvents = /*@__PURE__*/ defineContainer<JSX.KlevuUtilDomEvents>('klevu-util-dom-events', undefined, [
+  'lastSearchUpdate',
+  'filterSelectionUpdate',
+  'filtersApplied',
+  'clickEventSent'
 ]);
 
 
