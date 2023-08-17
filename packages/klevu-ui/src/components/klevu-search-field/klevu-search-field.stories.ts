@@ -18,7 +18,7 @@ export default meta
 
 export const SearchField: StoryObj<KlevuSearchField> = {
   args: {
-    placeholder: "Custom placeholder",
+    tPlaceholder: "Custom placeholder",
     fallbackTerm: "jeans",
     searchProducts: true,
     searchSuggestions: true,
@@ -28,12 +28,12 @@ export const SearchField: StoryObj<KlevuSearchField> = {
   render: (args) => html`<klevu-search-field
     fallback-term=${ifDefined(args.fallbackTerm)}
     limit=${ifDefined(args.limit)}
-    placeholder=${args.placeholder}
+    t-placeholder=${args.tPlaceholder}
+    t-search-text=${ifDefined(args.tSearchText)}
     search-categories=${ifDefined(args.searchCategories)}
     search-cms-pages=${ifDefined(args.searchCmsPages)}
     search-products=${ifDefined(args.searchProducts)}
     search-suggestions=${ifDefined(args.searchSuggestions)}
-    search-text=${ifDefined(args.searchText)}
     send-analytics=${ifDefined(args.sendAnalytics)}
     variant=${ifDefined(args.variant)}
   >

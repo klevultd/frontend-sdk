@@ -36,6 +36,7 @@ export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble
   'remote',
   'feedback',
   'feedbackReasons',
+  'tRatingReason',
   'klevuMessageFeedbackReason'
 ]);
 
@@ -77,7 +78,7 @@ export const KlevuChip = /*@__PURE__*/ defineContainer<JSX.KlevuChip>('klevu-chi
 export const KlevuCmsList = /*@__PURE__*/ defineContainer<JSX.KlevuCmsList>('klevu-cms-list', undefined, [
   'pages',
   'link',
-  'caption',
+  'tCaption',
   'klevuCmsPageClick'
 ]);
 
@@ -140,7 +141,7 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
 
 
 export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatestSearches>('klevu-latest-searches', undefined, [
-  'caption',
+  'tCaption',
   'klevuLastSearchClicked'
 ]);
 
@@ -167,6 +168,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'limit',
   'category',
   'categoryTitle',
+  'tLoadMore',
   'sort',
   'filterCount',
   'options',
@@ -200,7 +202,7 @@ export const KlevuPagination = /*@__PURE__*/ defineContainer<JSX.KlevuPagination
 
 
 export const KlevuPopularSearches = /*@__PURE__*/ defineContainer<JSX.KlevuPopularSearches>('klevu-popular-searches', undefined, [
-  'caption',
+  'tCaption',
   'klevuPopularSearchClicked'
 ]);
 
@@ -266,10 +268,14 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'productId',
   'pqaWidgetId',
   'textFieldVariant',
-  'textFieldPlaceholder',
-  'popupTitle',
-  'buttonText',
-  'finePrint',
+  'tTextFieldPlaceholder',
+  'tPopupTitle',
+  'tButtonText',
+  'tFinePrint',
+  'tLoadingSorry',
+  'tRateExperienceTitle',
+  'tRateExperienceText',
+  'tDataProtectionNotice',
   'askButtonText',
   'useBackground',
   'popupAnchor',
@@ -311,6 +317,9 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'simpleResultCount',
   'fullResultCount',
   'enableChat',
+  'tSearchResults',
+  'tStartChat',
+  'tCategoriesCaption',
   'renderProductSlot'
 ]);
 
@@ -327,8 +336,8 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
 
 
 export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchField>('klevu-search-field', undefined, [
-  'placeholder',
-  'searchText',
+  'tPlaceholder',
+  'tSearchText',
   'limit',
   'fallbackTerm',
   'searchProducts',
@@ -351,6 +360,8 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'filterCount',
   'filterCustomOrder',
   'usePagination',
+  'tSearchTitle',
+  'tLoadMore',
   'renderProductSlot'
 ]);
 
@@ -378,6 +389,9 @@ export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sor
   'options',
   'klevuSortChanged'
 ]);
+
+
+export const KlevuStringReplace = /*@__PURE__*/ defineContainer<JSX.KlevuStringReplace>('klevu-string-replace', undefined);
 
 
 export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSuggestionsList>('klevu-suggestions-list', undefined, [
@@ -428,6 +442,12 @@ export const KlevuUtilPortal = /*@__PURE__*/ defineContainer<JSX.KlevuUtilPortal
 export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilScrollbars>('klevu-util-scrollbars', undefined, [
   'overflowX',
   'overflowY'
+]);
+
+
+export const KlevuUtilStringReplace = /*@__PURE__*/ defineContainer<JSX.KlevuUtilStringReplace>('klevu-util-string-replace', undefined, [
+  'string',
+  'values'
 ]);
 
 

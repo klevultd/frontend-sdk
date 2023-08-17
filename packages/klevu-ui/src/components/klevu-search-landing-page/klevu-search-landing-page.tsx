@@ -58,6 +58,16 @@ export class KlevuSearchLandingPage {
    */
   @Prop() usePagination?: boolean
 
+  /**
+   * The title of the page
+   */
+  @Prop() tSearchTitle = 'Searching term "%s"'
+
+  /**
+   * Text of load more button
+   */
+  @Prop() tLoadMore = "Load more"
+
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
     undefined,
@@ -238,7 +248,7 @@ export class KlevuSearchLandingPage {
           ></klevu-facet-list>
           <div slot="header" class="header">
             <klevu-typography slot="header" variant="h1">
-              Searching term "{this.term}"
+              <klevu-util-string-replace string={this.tSearchTitle} values={[this.term]}></klevu-util-string-replace>
             </klevu-typography>
             <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>
@@ -259,7 +269,7 @@ export class KlevuSearchLandingPage {
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>
             ) : this.#resultObject?.getPage ? (
-              <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>
+              <klevu-button onClick={this.loadMore.bind(this)}>${this.tLoadMore}</klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

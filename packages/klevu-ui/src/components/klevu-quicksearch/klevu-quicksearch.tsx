@@ -84,6 +84,21 @@ export class KlevuQuicksearch {
   @Prop() enableChat?: boolean
 
   /**
+   * Title of search results
+   */
+  @Prop() tSearchResults = "Search results"
+
+  /**
+   * Title of button to start Moi session
+   */
+  @Prop() tStartChat = "Start chat"
+
+  /**
+   * Title of categories section
+   */
+  @Prop() tCategoriesCaption = "Categories"
+
+  /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
    * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
    * slot requested. Return null for slots that you do not want to render.
@@ -235,8 +250,8 @@ export class KlevuQuicksearch {
             slot="origin"
             searchProducts
             searchSuggestions
-            searchText={this.searchText}
-            placeholder={this.placeholder}
+            tSearchText={this.searchText}
+            tPlaceholder={this.placeholder}
             fallback-term={this.fallbackTerm}
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
@@ -266,7 +281,7 @@ export class KlevuQuicksearch {
           ></klevu-suggestions-list>
           {this.cmsPages && this.cmsPages.length > 0 && <klevu-cms-list pages={this.cmsPages} link></klevu-cms-list>}
           {this.categories && this.categories.length > 0 && (
-            <klevu-cms-list pages={this.categories} caption="Categories" link></klevu-cms-list>
+            <klevu-cms-list pages={this.categories} tCaption={this.tCategoriesCaption} link></klevu-cms-list>
           )}
         </aside>
         <section>
@@ -308,7 +323,7 @@ export class KlevuQuicksearch {
           {this.resultVariant === "simple" && (
             <Fragment>
               <div class="resultheader">
-                <klevu-typography variant="h3">Search results</klevu-typography>
+                <klevu-typography variant="h3">{this.tSearchResults}</klevu-typography>
               </div>
               <div class="lineproducts">
                 {this.products?.map((p) => (
@@ -333,7 +348,7 @@ export class KlevuQuicksearch {
         <aside>
           {this.enableChat && (
             <klevu-button size="small" onClick={() => (this.chat = true)}>
-              Start chat
+              {this.tStartChat}
             </klevu-button>
           )}
           <klevu-popular-searches

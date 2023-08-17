@@ -13,7 +13,7 @@ export class KlevuLatestSearches {
   /**
    * Caption of the list
    */
-  @Prop() caption = "Last searches"
+  @Prop() tCaption = "Last searches"
 
   @State() lastSearches: string[] = []
 
@@ -41,7 +41,7 @@ export class KlevuLatestSearches {
     return (
       <Host>
         <klevu-typography variant="h3" class="caption">
-          {this.caption}
+          {this.tCaption}
         </klevu-typography>
         {this.lastSearches.map((ls) => (
           <klevu-list condensed noXPadding onClick={() => this.#lastSearchClick(ls)}>

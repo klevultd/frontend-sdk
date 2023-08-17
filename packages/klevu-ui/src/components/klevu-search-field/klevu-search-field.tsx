@@ -40,12 +40,12 @@ export class KlevuSearchField {
   /**
    * The placeholder text to display in the search field.
    */
-  @Prop() placeholder = "Search for products"
+  @Prop() tPlaceholder = "Search for products"
 
   /**
    * Button text
    */
-  @Prop() searchText = "Search"
+  @Prop() tSearchText = "Search"
 
   /**
    * Maximum amount of results
@@ -282,7 +282,7 @@ export class KlevuSearchField {
       <Host>
         <klevu-textfield
           value={this.term}
-          placeholder={this.placeholder}
+          placeholder={this.tPlaceholder}
           onKlevuTextChanged={this.#handleChange.bind(this)}
           onKlevuTextEnterPressed={this.#handleSearchClick.bind(this)}
           aria-role="search"
@@ -290,7 +290,7 @@ export class KlevuSearchField {
           icon="search"
         ></klevu-textfield>
         {this.variant !== "pill" && (
-          <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.searchText}</klevu-button>
+          <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.tSearchText}</klevu-button>
         )}
       </Host>
     )

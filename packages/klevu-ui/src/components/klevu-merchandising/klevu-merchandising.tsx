@@ -54,6 +54,11 @@ export class KlevuMerchandising {
   @Prop() categoryTitle!: string
 
   /**
+   * Text for load more button
+   */
+  @Prop() tLoadMore = "Load more"
+
+  /**
    * Order of results
    */
   @Prop() sort?: KlevuSearchSorting
@@ -285,7 +290,7 @@ export class KlevuMerchandising {
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
               ></klevu-pagination>
             ) : this.#resultObject?.getPage ? (
-              <klevu-button onClick={this.#loadMore.bind(this)}>Load more</klevu-button>
+              <klevu-button onClick={this.#loadMore.bind(this)}>{this.tLoadMore}</klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

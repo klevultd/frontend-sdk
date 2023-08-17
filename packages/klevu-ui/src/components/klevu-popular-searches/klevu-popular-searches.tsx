@@ -14,7 +14,8 @@ export class KlevuPopularSearches {
   /**
    * Caption of the list
    */
-  @Prop() caption = "Popular searches"
+  @Prop() tCaption = "Popular searches"
+
   @State() popularSearches: string[] = []
 
   /**
@@ -44,7 +45,7 @@ export class KlevuPopularSearches {
     return (
       <Host>
         <klevu-typography class="caption" variant="h3">
-          {this.caption}
+          {this.tCaption}
         </klevu-typography>
         {this.popularSearches.map((s) => (
           <klevu-list condensed noXPadding onClick={() => this.#popularSearchClick(s)}>

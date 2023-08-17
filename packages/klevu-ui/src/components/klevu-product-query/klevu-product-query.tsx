@@ -138,10 +138,10 @@ export class KlevuProductQuery {
             url={this.url}
             productId={this.productId}
             pqaWidgetId={this.pqaWidgetId}
-            finePrint={this.finePrint}
-            popupTitle={this.popupTitle}
+            tFinePrint={this.finePrint}
+            tPopupTitle={this.popupTitle}
+            tTextFieldPlaceholder={this.textFieldPlaceholder}
             askButtonText={this.askButtonText}
-            textFieldPlaceholder={this.textFieldPlaceholder}
             settings={this.settings}
             popupAnchor={this.popupAnchor}
             popupOffset={this.popupOffset}

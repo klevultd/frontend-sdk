@@ -134,6 +134,10 @@ export namespace Components {
           * Is the message from the user or from the bot
          */
         "remote"?: boolean;
+        /**
+          * Text for rating reason title
+         */
+        "tRatingReason": string;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -214,10 +218,6 @@ export namespace Components {
      */
     interface KlevuCmsList {
         /**
-          * Caption of the listing
-         */
-        "caption": string;
-        /**
           * Should use url parameter from link to create anchor
          */
         "link"?: boolean;
@@ -225,6 +225,10 @@ export namespace Components {
           * List of Klevu results records with type of Page
          */
         "pages": Array<Partial<KlevuRecord>>;
+        /**
+          * Caption of the listing
+         */
+        "tCaption": string;
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -444,7 +448,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "caption": string;
+        "tCaption": string;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -524,6 +528,10 @@ export namespace Components {
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
+          * Text for load more button
+         */
+        "tLoadMore": string;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -595,7 +603,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "caption": string;
+        "tCaption": string;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -809,10 +817,6 @@ export namespace Components {
          */
         "askButtonText"?: string;
         /**
-          * Text of the button to open the popup
-         */
-        "buttonText": string;
-        /**
           * Config for Klevu
          */
         "config"?: KlevuConfig;
@@ -820,10 +824,6 @@ export namespace Components {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
-        /**
-          * Fine print of the popup under the title
-         */
-        "finePrint": string;
         /**
           * Element to anchor the product query popup to
          */
@@ -837,10 +837,6 @@ export namespace Components {
          */
         "popupOffset"?: number;
         /**
-          * Title of the popup
-         */
-        "popupTitle": string;
-        /**
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
@@ -853,9 +849,37 @@ export namespace Components {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * Text of the button to open the popup
+         */
+        "tButtonText": string;
+        /**
+          * Data protection notice when user registering is enabled
+         */
+        "tDataProtectionNotice": string;
+        /**
+          * Fine print of the popup under the title
+         */
+        "tFinePrint": string;
+        /**
+          * When loading takes a bit longer, show this text
+         */
+        "tLoadingSorry": string;
+        /**
+          * Title of the popup
+         */
+        "tPopupTitle": string;
+        /**
+          * Description of the feedback section when closing the popup
+         */
+        "tRateExperienceText": string;
+        /**
+          * Title of the feedback section when closing the popup
+         */
+        "tRateExperienceTitle": string;
+        /**
           * Placeholder of the textfield
          */
-        "textFieldPlaceholder": string;
+        "tTextFieldPlaceholder": string;
         /**
           * Variant of the textfield how does it look like
          */
@@ -986,6 +1010,18 @@ export namespace Components {
           * How many products to show in simple variant
          */
         "simpleResultCount": number;
+        /**
+          * Title of categories section
+         */
+        "tCategoriesCaption": string;
+        /**
+          * Title of search results
+         */
+        "tSearchResults": string;
+        /**
+          * Title of button to start Moi session
+         */
+        "tStartChat": string;
     }
     /**
      * Full recommendation banner solution
@@ -1051,10 +1087,6 @@ export namespace Components {
          */
         "makeSearch": (term: string) => Promise<void>;
         /**
-          * The placeholder text to display in the search field.
-         */
-        "placeholder": string;
-        /**
           * Should try to find categories as well
          */
         "searchCategories"?: boolean;
@@ -1071,10 +1103,6 @@ export namespace Components {
          */
         "searchSuggestions"?: boolean;
         /**
-          * Button text
-         */
-        "searchText": string;
-        /**
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
@@ -1082,6 +1110,14 @@ export namespace Components {
           * In case you want to sort the results
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * The placeholder text to display in the search field.
+         */
+        "tPlaceholder": string;
+        /**
+          * Button text
+         */
+        "tSearchText": string;
         /**
           * Variant of the search field
          */
@@ -1111,6 +1147,14 @@ export namespace Components {
           * In which order to set the products
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Text of load more button
+         */
+        "tLoadMore": string;
+        /**
+          * The title of the page
+         */
+        "tSearchTitle": string;
         /**
           * What term was used for search
          */
@@ -1180,6 +1224,8 @@ export namespace Components {
           * Dropdown variant
          */
         "variant": KlevuDropdownVariant1;
+    }
+    interface KlevuStringReplace {
     }
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
@@ -1304,6 +1350,21 @@ export namespace Components {
         "getInstance": () => Promise<OverlayScrollbars | undefined>;
         "overflowX"?: OverflowBehavior;
         "overflowY"?: OverflowBehavior;
+    }
+    /**
+     * Can be used to replace string of values into the string marked with %s token.
+     * string can contain multiple %s tokens. Each of them will be replace by the values array
+     * corresponding index.
+     */
+    interface KlevuUtilStringReplace {
+        /**
+          * Replacing string which contains %s
+         */
+        "string": string;
+        /**
+          * Values that will replace the %s.
+         */
+        "values": string[];
     }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
@@ -1858,6 +1919,12 @@ declare global {
         prototype: HTMLKlevuSortElement;
         new (): HTMLKlevuSortElement;
     };
+    interface HTMLKlevuStringReplaceElement extends Components.KlevuStringReplace, HTMLStencilElement {
+    }
+    var HTMLKlevuStringReplaceElement: {
+        prototype: HTMLKlevuStringReplaceElement;
+        new (): HTMLKlevuStringReplaceElement;
+    };
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
      */
@@ -1950,6 +2017,17 @@ declare global {
         prototype: HTMLKlevuUtilScrollbarsElement;
         new (): HTMLKlevuUtilScrollbarsElement;
     };
+    /**
+     * Can be used to replace string of values into the string marked with %s token.
+     * string can contain multiple %s tokens. Each of them will be replace by the values array
+     * corresponding index.
+     */
+    interface HTMLKlevuUtilStringReplaceElement extends Components.KlevuUtilStringReplace, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilStringReplaceElement: {
+        prototype: HTMLKlevuUtilStringReplaceElement;
+        new (): HTMLKlevuUtilStringReplaceElement;
+    };
     interface HTMLKlevuUtilViewportElement extends Components.KlevuUtilViewport, HTMLStencilElement {
     }
     var HTMLKlevuUtilViewportElement: {
@@ -1994,6 +2072,7 @@ declare global {
         "klevu-slider": HTMLKlevuSliderElement;
         "klevu-slides": HTMLKlevuSlidesElement;
         "klevu-sort": HTMLKlevuSortElement;
+        "klevu-string-replace": HTMLKlevuStringReplaceElement;
         "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-tab": HTMLKlevuTabElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
@@ -2001,6 +2080,7 @@ declare global {
         "klevu-util-dom-events": HTMLKlevuUtilDomEventsElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
+        "klevu-util-string-replace": HTMLKlevuUtilStringReplaceElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
 }
@@ -2093,6 +2173,10 @@ declare namespace LocalJSX {
           * Is the message from the user or from the bot
          */
         "remote"?: boolean;
+        /**
+          * Text for rating reason title
+         */
+        "tRatingReason"?: string;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -2190,10 +2274,6 @@ declare namespace LocalJSX {
      */
     interface KlevuCmsList {
         /**
-          * Caption of the listing
-         */
-        "caption"?: string;
-        /**
           * Should use url parameter from link to create anchor
          */
         "link"?: boolean;
@@ -2202,6 +2282,10 @@ declare namespace LocalJSX {
           * List of Klevu results records with type of Page
          */
         "pages": Array<Partial<KlevuRecord>>;
+        /**
+          * Caption of the listing
+         */
+        "tCaption"?: string;
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -2416,13 +2500,13 @@ declare namespace LocalJSX {
      */
     interface KlevuLatestSearches {
         /**
-          * Caption of the list
-         */
-        "caption"?: string;
-        /**
           * Event that is emitted when a popular search is clicked
          */
         "onKlevuLastSearchClicked"?: (event: KlevuLatestSearchesCustomEvent<string>) => void;
+        /**
+          * Caption of the list
+         */
+        "tCaption"?: string;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -2499,6 +2583,10 @@ declare namespace LocalJSX {
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
+          * Text for load more button
+         */
+        "tLoadMore"?: string;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -2572,13 +2660,13 @@ declare namespace LocalJSX {
      */
     interface KlevuPopularSearches {
         /**
-          * Caption of the list
-         */
-        "caption"?: string;
-        /**
           * Event that is emitted when a popular search is clicked
          */
         "onKlevuPopularSearchClicked"?: (event: KlevuPopularSearchesCustomEvent<string>) => void;
+        /**
+          * Caption of the list
+         */
+        "tCaption"?: string;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -2793,10 +2881,6 @@ declare namespace LocalJSX {
          */
         "askButtonText"?: string;
         /**
-          * Text of the button to open the popup
-         */
-        "buttonText"?: string;
-        /**
           * Config for Klevu
          */
         "config"?: KlevuConfig;
@@ -2804,10 +2888,6 @@ declare namespace LocalJSX {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
-        /**
-          * Fine print of the popup under the title
-         */
-        "finePrint"?: string;
         /**
           * Element to anchor the product query popup to
          */
@@ -2821,10 +2901,6 @@ declare namespace LocalJSX {
          */
         "popupOffset"?: number;
         /**
-          * Title of the popup
-         */
-        "popupTitle"?: string;
-        /**
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
@@ -2837,9 +2913,37 @@ declare namespace LocalJSX {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * Text of the button to open the popup
+         */
+        "tButtonText"?: string;
+        /**
+          * Data protection notice when user registering is enabled
+         */
+        "tDataProtectionNotice"?: string;
+        /**
+          * Fine print of the popup under the title
+         */
+        "tFinePrint"?: string;
+        /**
+          * When loading takes a bit longer, show this text
+         */
+        "tLoadingSorry"?: string;
+        /**
+          * Title of the popup
+         */
+        "tPopupTitle"?: string;
+        /**
+          * Description of the feedback section when closing the popup
+         */
+        "tRateExperienceText"?: string;
+        /**
+          * Title of the feedback section when closing the popup
+         */
+        "tRateExperienceTitle"?: string;
+        /**
           * Placeholder of the textfield
          */
-        "textFieldPlaceholder"?: string;
+        "tTextFieldPlaceholder"?: string;
         /**
           * Variant of the textfield how does it look like
          */
@@ -2970,6 +3074,18 @@ declare namespace LocalJSX {
           * How many products to show in simple variant
          */
         "simpleResultCount"?: number;
+        /**
+          * Title of categories section
+         */
+        "tCategoriesCaption"?: string;
+        /**
+          * Title of search results
+         */
+        "tSearchResults"?: string;
+        /**
+          * Title of button to start Moi session
+         */
+        "tStartChat"?: string;
     }
     /**
      * Full recommendation banner solution
@@ -3030,10 +3146,6 @@ declare namespace LocalJSX {
          */
         "onKlevuSearchSuggestions"?: (event: KlevuSearchFieldCustomEvent<SuggestionsEventData>) => void;
         /**
-          * The placeholder text to display in the search field.
-         */
-        "placeholder"?: string;
-        /**
           * Should try to find categories as well
          */
         "searchCategories"?: boolean;
@@ -3050,10 +3162,6 @@ declare namespace LocalJSX {
          */
         "searchSuggestions"?: boolean;
         /**
-          * Button text
-         */
-        "searchText"?: string;
-        /**
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
@@ -3061,6 +3169,14 @@ declare namespace LocalJSX {
           * In case you want to sort the results
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * The placeholder text to display in the search field.
+         */
+        "tPlaceholder"?: string;
+        /**
+          * Button text
+         */
+        "tSearchText"?: string;
         /**
           * Variant of the search field
          */
@@ -3090,6 +3206,14 @@ declare namespace LocalJSX {
           * In which order to set the products
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Text of load more button
+         */
+        "tLoadMore"?: string;
+        /**
+          * The title of the page
+         */
+        "tSearchTitle"?: string;
         /**
           * What term was used for search
          */
@@ -3167,6 +3291,8 @@ declare namespace LocalJSX {
           * Dropdown variant
          */
         "variant"?: KlevuDropdownVariant1;
+    }
+    interface KlevuStringReplace {
     }
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
@@ -3319,6 +3445,21 @@ declare namespace LocalJSX {
         "overflowX"?: OverflowBehavior;
         "overflowY"?: OverflowBehavior;
     }
+    /**
+     * Can be used to replace string of values into the string marked with %s token.
+     * string can contain multiple %s tokens. Each of them will be replace by the values array
+     * corresponding index.
+     */
+    interface KlevuUtilStringReplace {
+        /**
+          * Replacing string which contains %s
+         */
+        "string": string;
+        /**
+          * Values that will replace the %s.
+         */
+        "values": string[];
+    }
     interface KlevuUtilViewport {
         "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
         /**
@@ -3364,6 +3505,7 @@ declare namespace LocalJSX {
         "klevu-slider": KlevuSlider;
         "klevu-slides": KlevuSlides;
         "klevu-sort": KlevuSort;
+        "klevu-string-replace": KlevuStringReplace;
         "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-tab": KlevuTab;
         "klevu-textfield": KlevuTextfield;
@@ -3371,6 +3513,7 @@ declare namespace LocalJSX {
         "klevu-util-dom-events": KlevuUtilDomEvents;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
+        "klevu-util-string-replace": KlevuUtilStringReplace;
         "klevu-util-viewport": KlevuUtilViewport;
     }
 }
@@ -3633,6 +3776,7 @@ declare module "@stencil/core" {
              * Sort dropdown. User can select what kind of sorting they want
              */
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
+            "klevu-string-replace": LocalJSX.KlevuStringReplace & JSXBase.HTMLAttributes<HTMLKlevuStringReplaceElement>;
             /**
              * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
              */
@@ -3690,6 +3834,12 @@ declare module "@stencil/core" {
              * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
              */
             "klevu-util-scrollbars": LocalJSX.KlevuUtilScrollbars & JSXBase.HTMLAttributes<HTMLKlevuUtilScrollbarsElement>;
+            /**
+             * Can be used to replace string of values into the string marked with %s token.
+             * string can contain multiple %s tokens. Each of them will be replace by the values array
+             * corresponding index.
+             */
+            "klevu-util-string-replace": LocalJSX.KlevuUtilStringReplace & JSXBase.HTMLAttributes<HTMLKlevuUtilStringReplaceElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }
     }

@@ -11,11 +11,12 @@ Container for chat items. Very simple component, just a wrapper.
 
 ## Properties
 
-| Property          | Attribute | Description                                        | Type                                                                                 | Default     |
-| ----------------- | --------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------- |
-| `feedback`        | --        | Has user given feedback to this message            | `undefined \| { id: string; thumbs: "up" \| "down"; reason?: string \| undefined; }` | `undefined` |
-| `feedbackReasons` | --        | List of feedback reasons to show after the message | `string[] \| undefined`                                                              | `undefined` |
-| `remote`          | `remote`  | Is the message from the user or from the bot       | `boolean \| undefined`                                                               | `undefined` |
+| Property          | Attribute         | Description                                        | Type                                                                                 | Default            |
+| ----------------- | ----------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------ |
+| `feedback`        | --                | Has user given feedback to this message            | `undefined \| { id: string; thumbs: "up" \| "down"; reason?: string \| undefined; }` | `undefined`        |
+| `feedbackReasons` | --                | List of feedback reasons to show after the message | `string[] \| undefined`                                                              | `undefined`        |
+| `remote`          | `remote`          | Is the message from the user or from the bot       | `boolean \| undefined`                                                               | `undefined`        |
+| `tRatingReason`   | `t-rating-reason` | Text for rating reason title                       | `string`                                                                             | `"Rating reason:"` |
 
 
 ## Events

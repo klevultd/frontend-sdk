@@ -84,6 +84,7 @@ graph TD;
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   style klevu-product-query fill:#f9f,stroke:#333,stroke-width:4px
 ```
