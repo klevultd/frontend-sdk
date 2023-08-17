@@ -22,6 +22,7 @@ import {
 
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Full app component for search landing page
@@ -61,12 +62,12 @@ export class KlevuSearchLandingPage {
   /**
    * The title of the page
    */
-  @Prop() tSearchTitle = 'Searching term "%s"'
+  @Prop() tSearchTitle = getTranslation("searchLandingPage.tSearchTitle")
 
   /**
    * Text of load more button
    */
-  @Prop() tLoadMore = "Load more"
+  @Prop() tLoadMore = getTranslation("searchLandingPage.tLoadMore")
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,

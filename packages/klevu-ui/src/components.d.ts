@@ -13,6 +13,7 @@ import { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/k
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 import { KlevuUIGlobalSettings } from "./utils/utils";
+import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
@@ -34,6 +35,7 @@ export { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/k
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 export { KlevuUIGlobalSettings } from "./utils/utils";
+export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
@@ -137,7 +139,7 @@ export namespace Components {
         /**
           * Text for rating reason title
          */
-        "tRatingReason": string;
+        "tRatingReason": any;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -228,7 +230,7 @@ export namespace Components {
         /**
           * Caption of the listing
          */
-        "tCaption": string;
+        "tCaption": any;
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -433,9 +435,17 @@ export namespace Components {
          */
         "getSettings": () => Promise<KlevuUIGlobalSettings | undefined>;
         /**
+          * Which language to load
+         */
+        "language": Translations;
+        /**
           * Global settings
          */
         "settings"?: KlevuUIGlobalSettings;
+        /**
+          * Provide your own translations
+         */
+        "translation"?: Translation;
         /**
           * Klevu Server URL
          */
@@ -448,7 +458,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "tCaption": string;
+        "tCaption": any;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -530,7 +540,7 @@ export namespace Components {
         /**
           * Text for load more button
          */
-        "tLoadMore": string;
+        "tLoadMore": any;
         /**
           * Should display pagination instead of load next
          */
@@ -603,7 +613,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "tCaption": string;
+        "tCaption": any;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -851,35 +861,35 @@ export namespace Components {
         /**
           * Text of the button to open the popup
          */
-        "tButtonText": string;
+        "tButtonText": any;
         /**
           * Data protection notice when user registering is enabled
          */
-        "tDataProtectionNotice": string;
+        "tDataProtectionNotice": any;
         /**
           * Fine print of the popup under the title
          */
-        "tFinePrint": string;
+        "tFinePrint": any;
         /**
           * When loading takes a bit longer, show this text
          */
-        "tLoadingSorry": string;
+        "tLoadingSorry": any;
         /**
           * Title of the popup
          */
-        "tPopupTitle": string;
+        "tPopupTitle": any;
         /**
           * Description of the feedback section when closing the popup
          */
-        "tRateExperienceText": string;
+        "tRateExperienceText": any;
         /**
           * Title of the feedback section when closing the popup
          */
-        "tRateExperienceTitle": string;
+        "tRateExperienceTitle": any;
         /**
           * Placeholder of the textfield
          */
-        "tTextFieldPlaceholder": string;
+        "tTextFieldPlaceholder": any;
         /**
           * Variant of the textfield how does it look like
          */
@@ -1013,15 +1023,15 @@ export namespace Components {
         /**
           * Title of categories section
          */
-        "tCategoriesCaption": string;
+        "tCategoriesCaption": any;
         /**
           * Title of search results
          */
-        "tSearchResults": string;
+        "tSearchResults": any;
         /**
           * Title of button to start Moi session
          */
-        "tStartChat": string;
+        "tStartChat": any;
     }
     /**
      * Full recommendation banner solution
@@ -1113,11 +1123,11 @@ export namespace Components {
         /**
           * The placeholder text to display in the search field.
          */
-        "tPlaceholder": string;
+        "tPlaceholder": any;
         /**
           * Button text
          */
-        "tSearchText": string;
+        "tSearchText": any;
         /**
           * Variant of the search field
          */
@@ -1150,11 +1160,11 @@ export namespace Components {
         /**
           * Text of load more button
          */
-        "tLoadMore": string;
+        "tLoadMore": any;
         /**
           * The title of the page
          */
-        "tSearchTitle": string;
+        "tSearchTitle": any;
         /**
           * What term was used for search
          */
@@ -1224,8 +1234,6 @@ export namespace Components {
           * Dropdown variant
          */
         "variant": KlevuDropdownVariant1;
-    }
-    interface KlevuStringReplace {
     }
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
@@ -1919,12 +1927,6 @@ declare global {
         prototype: HTMLKlevuSortElement;
         new (): HTMLKlevuSortElement;
     };
-    interface HTMLKlevuStringReplaceElement extends Components.KlevuStringReplace, HTMLStencilElement {
-    }
-    var HTMLKlevuStringReplaceElement: {
-        prototype: HTMLKlevuStringReplaceElement;
-        new (): HTMLKlevuStringReplaceElement;
-    };
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
      */
@@ -2072,7 +2074,6 @@ declare global {
         "klevu-slider": HTMLKlevuSliderElement;
         "klevu-slides": HTMLKlevuSlidesElement;
         "klevu-sort": HTMLKlevuSortElement;
-        "klevu-string-replace": HTMLKlevuStringReplaceElement;
         "klevu-suggestions-list": HTMLKlevuSuggestionsListElement;
         "klevu-tab": HTMLKlevuTabElement;
         "klevu-textfield": HTMLKlevuTextfieldElement;
@@ -2176,7 +2177,7 @@ declare namespace LocalJSX {
         /**
           * Text for rating reason title
          */
-        "tRatingReason"?: string;
+        "tRatingReason"?: any;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -2285,7 +2286,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the listing
          */
-        "tCaption"?: string;
+        "tCaption"?: any;
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -2487,9 +2488,17 @@ declare namespace LocalJSX {
          */
         "apiKey": string;
         /**
+          * Which language to load
+         */
+        "language"?: Translations;
+        /**
           * Global settings
          */
         "settings"?: KlevuUIGlobalSettings;
+        /**
+          * Provide your own translations
+         */
+        "translation"?: Translation;
         /**
           * Klevu Server URL
          */
@@ -2506,7 +2515,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the list
          */
-        "tCaption"?: string;
+        "tCaption"?: any;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -2585,7 +2594,7 @@ declare namespace LocalJSX {
         /**
           * Text for load more button
          */
-        "tLoadMore"?: string;
+        "tLoadMore"?: any;
         /**
           * Should display pagination instead of load next
          */
@@ -2666,7 +2675,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the list
          */
-        "tCaption"?: string;
+        "tCaption"?: any;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -2915,35 +2924,35 @@ declare namespace LocalJSX {
         /**
           * Text of the button to open the popup
          */
-        "tButtonText"?: string;
+        "tButtonText"?: any;
         /**
           * Data protection notice when user registering is enabled
          */
-        "tDataProtectionNotice"?: string;
+        "tDataProtectionNotice"?: any;
         /**
           * Fine print of the popup under the title
          */
-        "tFinePrint"?: string;
+        "tFinePrint"?: any;
         /**
           * When loading takes a bit longer, show this text
          */
-        "tLoadingSorry"?: string;
+        "tLoadingSorry"?: any;
         /**
           * Title of the popup
          */
-        "tPopupTitle"?: string;
+        "tPopupTitle"?: any;
         /**
           * Description of the feedback section when closing the popup
          */
-        "tRateExperienceText"?: string;
+        "tRateExperienceText"?: any;
         /**
           * Title of the feedback section when closing the popup
          */
-        "tRateExperienceTitle"?: string;
+        "tRateExperienceTitle"?: any;
         /**
           * Placeholder of the textfield
          */
-        "tTextFieldPlaceholder"?: string;
+        "tTextFieldPlaceholder"?: any;
         /**
           * Variant of the textfield how does it look like
          */
@@ -3077,15 +3086,15 @@ declare namespace LocalJSX {
         /**
           * Title of categories section
          */
-        "tCategoriesCaption"?: string;
+        "tCategoriesCaption"?: any;
         /**
           * Title of search results
          */
-        "tSearchResults"?: string;
+        "tSearchResults"?: any;
         /**
           * Title of button to start Moi session
          */
-        "tStartChat"?: string;
+        "tStartChat"?: any;
     }
     /**
      * Full recommendation banner solution
@@ -3172,11 +3181,11 @@ declare namespace LocalJSX {
         /**
           * The placeholder text to display in the search field.
          */
-        "tPlaceholder"?: string;
+        "tPlaceholder"?: any;
         /**
           * Button text
          */
-        "tSearchText"?: string;
+        "tSearchText"?: any;
         /**
           * Variant of the search field
          */
@@ -3209,11 +3218,11 @@ declare namespace LocalJSX {
         /**
           * Text of load more button
          */
-        "tLoadMore"?: string;
+        "tLoadMore"?: any;
         /**
           * The title of the page
          */
-        "tSearchTitle"?: string;
+        "tSearchTitle"?: any;
         /**
           * What term was used for search
          */
@@ -3291,8 +3300,6 @@ declare namespace LocalJSX {
           * Dropdown variant
          */
         "variant"?: KlevuDropdownVariant1;
-    }
-    interface KlevuStringReplace {
     }
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
@@ -3505,7 +3512,6 @@ declare namespace LocalJSX {
         "klevu-slider": KlevuSlider;
         "klevu-slides": KlevuSlides;
         "klevu-sort": KlevuSort;
-        "klevu-string-replace": KlevuStringReplace;
         "klevu-suggestions-list": KlevuSuggestionsList;
         "klevu-tab": KlevuTab;
         "klevu-textfield": KlevuTextfield;
@@ -3776,7 +3782,6 @@ declare module "@stencil/core" {
              * Sort dropdown. User can select what kind of sorting they want
              */
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
-            "klevu-string-replace": LocalJSX.KlevuStringReplace & JSXBase.HTMLAttributes<HTMLKlevuStringReplaceElement>;
             /**
              * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
              */

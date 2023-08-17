@@ -45,7 +45,6 @@ export const KlevuSearchLandingPage = /*@__PURE__*/createReactComponent<JSX.Klev
 export const KlevuSlider = /*@__PURE__*/createReactComponent<JSX.KlevuSlider, HTMLKlevuSliderElement>('klevu-slider');
 export const KlevuSlides = /*@__PURE__*/createReactComponent<JSX.KlevuSlides, HTMLKlevuSlidesElement>('klevu-slides');
 export const KlevuSort = /*@__PURE__*/createReactComponent<JSX.KlevuSort, HTMLKlevuSortElement>('klevu-sort');
-export const KlevuStringReplace = /*@__PURE__*/createReactComponent<JSX.KlevuStringReplace, HTMLKlevuStringReplaceElement>('klevu-string-replace');
 export const KlevuSuggestionsList = /*@__PURE__*/createReactComponent<JSX.KlevuSuggestionsList, HTMLKlevuSuggestionsListElement>('klevu-suggestions-list');
 export const KlevuTab = /*@__PURE__*/createReactComponent<JSX.KlevuTab, HTMLKlevuTabElement>('klevu-tab');
 export const KlevuTextfield = /*@__PURE__*/createReactComponent<JSX.KlevuTextfield, HTMLKlevuTextfieldElement>('klevu-textfield');

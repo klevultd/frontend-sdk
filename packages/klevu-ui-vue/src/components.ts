@@ -136,7 +136,9 @@ export const KlevuIcon = /*@__PURE__*/ defineContainer<JSX.KlevuIcon>('klevu-ico
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url',
-  'settings'
+  'settings',
+  'language',
+  'translation'
 ]);
 
 
@@ -389,9 +391,6 @@ export const KlevuSort = /*@__PURE__*/ defineContainer<JSX.KlevuSort>('klevu-sor
   'options',
   'klevuSortChanged'
 ]);
-
-
-export const KlevuStringReplace = /*@__PURE__*/ defineContainer<JSX.KlevuStringReplace>('klevu-string-replace', undefined);
 
 
 export const KlevuSuggestionsList = /*@__PURE__*/ defineContainer<JSX.KlevuSuggestionsList>('klevu-suggestions-list', undefined, [

@@ -1,0 +1,40 @@
+{
+  "chatBubble": {
+    "tRatingReason": "Rating reason:"
+  },
+  "cmsList": {
+    "tCaption": "CMS pages"
+  },
+  "latestSearches": {
+    "tCaption": "Last searches"
+  },
+  "merchandising": {
+    "tLoadMore": "Load more"
+  },
+  "popularSearches": {
+    "tCaption": "Popular searches"
+  },
+  "productQueryPopup": {
+    "tTextFieldPlaceholder": "Ask a questions",
+    "tPopuptitle": "Ask a Question",
+    "tButtonText": "Ask a Question",
+    "tFinePrint": "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page.",
+    "tLoadingSorry": "I take a few extra seconds when answering the first question sometimes if I need to scan whole page.",
+    "tRateExperienceTitle": "Rate your experience",
+    "tRateExperienceText": "How was your experience using this Q&A tool?",
+    "tDataProtectionNotice": "We are compliant with data protection regulations. Visit our privacy policy to learn how we collect, keep, and process your private information in accordance with these laws."
+  },
+  "quicksearch": {
+    "tSearchResults": "Search results",
+    "tStartChat": "Start chat",
+    "tCategoriesCaption": "Categories"
+  },
+  "searchField": {
+    "tPlaceholder": "Search for products",
+    "tSearchText": "Search"
+  },
+  "searchLandingPage": {
+    "tSearchTitle": "Searching term \"%s\"",
+    "tLoadMore": "Load more"
+  }
+}

@@ -2,7 +2,7 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuLatestSearches } from "./klevu-latest-searches"
-import { ifDefined } from "lit-html/directives/if-defined"
+import { ifDefined } from "lit-html/directives/if-defined.js"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-latest-searches")
 
 const meta: Meta = {

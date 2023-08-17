@@ -23,6 +23,7 @@ import {
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Full merchandising app to power up your product grid pages
@@ -56,7 +57,7 @@ export class KlevuMerchandising {
   /**
    * Text for load more button
    */
-  @Prop() tLoadMore = "Load more"
+  @Prop() tLoadMore = getTranslation("merchandising.tLoadMore")
 
   /**
    * Order of results

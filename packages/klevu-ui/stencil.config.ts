@@ -29,6 +29,14 @@ export const config: Config = {
       customElementsExportBehavior: "auto-define-custom-elements",
       type: "dist-custom-elements",
       generateTypeDeclarations: true,
+      copy: [
+        {
+          src: "translations",
+          dest: "dist/",
+          keepDirStructure: true,
+          warn: true,
+        },
+      ],
     },
     {
       type: "docs-readme",

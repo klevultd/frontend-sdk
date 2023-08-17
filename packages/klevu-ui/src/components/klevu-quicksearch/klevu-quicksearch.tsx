@@ -19,6 +19,7 @@ import {
   SearchResultsEventData,
   SuggestionsEventData,
 } from "../klevu-search-field/klevu-search-field"
+import { getTranslation } from "../../utils/getTranslation"
 
 export type KlevuQuicksearchResultVarint = "simple" | "full"
 
@@ -86,17 +87,17 @@ export class KlevuQuicksearch {
   /**
    * Title of search results
    */
-  @Prop() tSearchResults = "Search results"
+  @Prop() tSearchResults = getTranslation("quicksearch.tSearchResults")
 
   /**
    * Title of button to start Moi session
    */
-  @Prop() tStartChat = "Start chat"
+  @Prop() tStartChat = getTranslation("quicksearch.tStartChat")
 
   /**
    * Title of categories section
    */
-  @Prop() tCategoriesCaption = "Categories"
+  @Prop() tCategoriesCaption = getTranslation("quicksearch.tCategoriesCaption")
 
   /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.

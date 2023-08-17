@@ -1,5 +1,6 @@
 import { KlevuLastSearches } from "@klevu/core"
 import { Component, h, Host, Prop, State, Event, EventEmitter } from "@stencil/core"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Lists latest searches user has made on the site
@@ -13,7 +14,7 @@ export class KlevuLatestSearches {
   /**
    * Caption of the list
    */
-  @Prop() tCaption = "Last searches"
+  @Prop() tCaption = getTranslation("latestSearches.tCaption")
 
   @State() lastSearches: string[] = []
 

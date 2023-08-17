@@ -14,6 +14,7 @@ import {
 import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } from "@stencil/core"
 import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { getTranslation } from "../../utils/getTranslation"
 
 export type SearchResultsEventData = {
   fallback?: KlevuResponseQueryObject
@@ -40,12 +41,12 @@ export class KlevuSearchField {
   /**
    * The placeholder text to display in the search field.
    */
-  @Prop() tPlaceholder = "Search for products"
+  @Prop() tPlaceholder = getTranslation("searchField.tPlaceholder")
 
   /**
    * Button text
    */
-  @Prop() tSearchText = "Search"
+  @Prop() tSearchText = getTranslation("searchField.tSearchText")
 
   /**
    * Maximum amount of results

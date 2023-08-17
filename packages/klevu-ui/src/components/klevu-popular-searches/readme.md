@@ -9,9 +9,9 @@ Fetches and displays most popular searches from Klevu Merchant center
 
 ## Properties
 
-| Property   | Attribute   | Description         | Type     | Default              |
-| ---------- | ----------- | ------------------- | -------- | -------------------- |
-| `tCaption` | `t-caption` | Caption of the list | `string` | `"Popular searches"` |
+| Property   | Attribute   | Description         | Type  | Default                                      |
+| ---------- | ----------- | ------------------- | ----- | -------------------------------------------- |
+| `tCaption` | `t-caption` | Caption of the list | `any` | `getTranslation("popularSearches.tCaption")` |
 
 
 ## Events

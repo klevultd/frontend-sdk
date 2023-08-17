@@ -1,5 +1,6 @@
 import { MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Host, Prop, h } from "@stencil/core"
+import { getTranslation } from "../../utils/getTranslation"
 
 export type KlevuMessageFeedbackReasonDetails = {
   reason: string
@@ -38,7 +39,7 @@ export class KlevuChatBubble {
   /**
    * Text for rating reason title
    */
-  @Prop() tRatingReason = "Rating reason:"
+  @Prop() tRatingReason = getTranslation("chatBubble.tRatingReason")
 
   @Event({
     composed: true,

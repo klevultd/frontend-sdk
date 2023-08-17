@@ -15,6 +15,7 @@ import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
 import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-chat-bubble"
 import { parts } from "../../utils/parts"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Klevu Product Query popup application that shows a popup for asking questions about a product
@@ -62,44 +63,42 @@ export class KlevuProductQueryPopup {
   /**
    * Placeholder of the textfield
    */
-  @Prop() tTextFieldPlaceholder: string = "Ask a questions"
+  @Prop() tTextFieldPlaceholder = getTranslation("productQueryPopup.tTextFieldPlaceholder")
 
   /**
    * Title of the popup
    */
-  @Prop() tPopupTitle = "Ask a Question"
+  @Prop() tPopupTitle = getTranslation("productQueryPopup.tPopuptitle")
 
   /**
    * Text of the button to open the popup
    */
-  @Prop() tButtonText = "Ask a Question"
+  @Prop() tButtonText = getTranslation("productQueryPopup.tButtonText")
 
   /**
    * Fine print of the popup under the title
    */
-  @Prop() tFinePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page."
+  @Prop() tFinePrint = getTranslation("productQueryPopup.tFinePrint")
 
   /**
    * When loading takes a bit longer, show this text
    */
-  @Prop() tLoadingSorry =
-    "I take a few extra seconds when answering the first question sometimes if I need to scan whole page."
+  @Prop() tLoadingSorry = getTranslation("productQueryPopup.tLoadingSorry")
 
   /**
    * Title of the feedback section when closing the popup
    */
-  @Prop() tRateExperienceTitle = "Rate your experience"
+  @Prop() tRateExperienceTitle = getTranslation("productQueryPopup.tRateExperienceTitle")
 
   /**
    * Description of the feedback section when closing the popup
    */
-  @Prop() tRateExperienceText = "How was your experience using this Q&A tool?"
+  @Prop() tRateExperienceText = getTranslation("productQueryPopup.tRateExperienceText")
 
   /**
    * Data protection notice when user registering is enabled
    */
-  @Prop() tDataProtectionNotice =
-    "We are compliant with data protection regulations. Visit our privacy policy to learn how we collect, keep, and process your private information in accordance with these laws."
+  @Prop() tDataProtectionNotice = getTranslation("productQueryPopup.tDataProtectionNotice")
 
   /**
    * Text of the button for asking a question

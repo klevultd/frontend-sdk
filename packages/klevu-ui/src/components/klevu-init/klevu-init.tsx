@@ -1,6 +1,10 @@
 import { KlevuConfig } from "@klevu/core"
 import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
+import en from "../../translations/en.json"
+
+export type Translations = "en" | "fi" | "es"
+export type Translation = typeof en
 
 /**
  *
@@ -71,6 +75,16 @@ export class KlevuInit {
    */
   @Prop() settings?: KlevuUIGlobalSettings
 
+  /**
+   * Which language to load
+   */
+  @Prop() language: Translations = "en"
+
+  /**
+   * Provide your own translations
+   */
+  @Prop() translation?: Translation
+
   async connectedCallback() {
     KlevuConfig.init({
       apiKey: this.apiKey,
@@ -78,6 +92,11 @@ export class KlevuInit {
     })
 
     window["klevu_ui_settings"] = this.settings
+    if (this.translation) {
+      window["klevu_ui_translations"] = this.translation
+    } else if (this.language != "en") {
+      window["klevu_ui_translations"] = await fetchTranslation(this.language)
+    }
   }
 
   /**
@@ -124,10 +143,24 @@ export class KlevuInit {
   }
 }
 
+async function fetchTranslation(lang: Translations): Promise<typeof en> {
+  console.log("fetching translation", lang)
+  return new Promise((resolve, reject): void => {
+    fetch(`/translations/${lang}.json`).then(
+      (result) => {
+        if (result.ok) resolve(result.json())
+        else reject()
+      },
+      () => reject()
+    )
+  })
+}
+
 // extends window type with klevu_ui_settings and other known Klevu variables
 declare global {
   interface Window {
     klevu_ui_settings?: KlevuUIGlobalSettings
+    klevu_ui_translations?: typeof en
     klevu_page_meta?: {
       pageType?: string
       itemName?: string

@@ -1,0 +1,40 @@
+{
+  "chatBubble": {
+    "tRatingReason": "Arvostelun syy:"
+  },
+  "cmsList": {
+    "tCaption": "CMS-sivut"
+  },
+  "latestSearches": {
+    "tCaption": "Viimeisimmät haut"
+  },
+  "merchandising": {
+    "tLoadMore": "Lataa lisää"
+  },
+  "popularSearches": {
+    "tCaption": "Suositut haut"
+  },
+  "productQueryPopup": {
+    "tTextFieldPlaceholder": "Kysy kysymys",
+    "tPopuptitle": "Kysy kysymys",
+    "tButtonText": "Kysy kysymys",
+    "tFinePrint": "Olen tekoälymalli. Saatan joskus tehdä virheitä. Varmista vastaukset tuotesivulta.",
+    "tLoadingSorry": "Saatan käyttää muutaman ylimääräisen sekunnin ensimmäisen kysymyksen kanssa, jos minun tarvitsee hakea koko verkkosivu.",
+    "tRateExperienceTitle": "Arvioi kokemuksesi",
+    "tRateExperienceText": "Miten koit tämän kysymys-vastaus-työkalun käytön?",
+    "tDataProtectionNotice": "Noudatamme tietosuoja-asetuksia. Tutustu tietosuojakäytäntöömme saadaksesi tietoa siitä, miten keräämme, säilytämme ja käsittelemme yksityistä tietoasi näiden lakien mukaisesti."
+  },
+  "quicksearch": {
+    "tSearchResults": "Hakutulokset",
+    "tStartChat": "Aloita keskustelu",
+    "tCategoriesCaption": "Kategoriat"
+  },
+  "searchField": {
+    "tPlaceholder": "Etsi tuotteita",
+    "tSearchText": "Etsi"
+  },
+  "searchLandingPage": {
+    "tSearchTitle": "Tulokset hakusanalla \"%s\"",
+    "tLoadMore": "Lataa lisää"
+  }
+}
