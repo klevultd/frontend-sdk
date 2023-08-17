@@ -21,7 +21,7 @@ import {
   KlevuRecommendations,
   KlevuSort,
 } from "@klevu/ui-react"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useRef, useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useCart } from "./cartContext"
 import { BANNER_ID } from "./constants"
@@ -31,7 +31,7 @@ import { createRoot } from "react-dom/client"
 const manager = new FilterManager()
 
 const HomePage = () => {
-  const { categoryId } = useOutletContext<{
+  const { categoryId, recsId } = useOutletContext<{
     apiKey: string
     storeUrlRef: string
     recsId: string
@@ -98,7 +98,7 @@ const HomePage = () => {
         <h3>Recommendation banner</h3>
         <hr />
         <KlevuRecommendations
-          recommendationId={BANNER_ID}
+          recommendationId={recsId}
           recommendationTitle="Some title"
           renderProductSlot={renderProductSlot}
         />

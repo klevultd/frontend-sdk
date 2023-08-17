@@ -107,110 +107,119 @@ function App() {
         </button>
       </div>
 
-      {
-        <KlevuInit
-          url={`https://${url}/cs/v2/search`}
-          apiKey="klevu-164651914788114877"
-          settings={{
-            onItemClick(product, event) {
-              navigate(`/products/${product.itemGroupId}/${product.id}`)
-              event.preventDefault()
-              return false
-            },
-            generateProductUrl(product) {
-              return `/products/${product.itemGroupId}/${product.id}`
-            },
-          }}
-        >
-          <nav className="topbar">
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault()
-                navigate("/")
-              }}
-              className="klevuLogo"
-            >
-              <img
-                src="https://klevu.com/klevu-logo/green-white.png"
-                alt="Klevu Web components Demo"
+      <KlevuInit
+        url={`https://${url}/cs/v2/search`}
+        apiKey={apiKey}
+        settings={{
+          onItemClick(product, event) {
+            navigate(`/products/${product.itemGroupId}/${product.id}`)
+            event.preventDefault()
+            return false
+          },
+          generateProductUrl(product) {
+            return `/products/${product.itemGroupId}/${product.id}`
+          },
+        }}
+      >
+        <nav className="topbar">
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault()
+              navigate("/")
+            }}
+            className="klevuLogo"
+          >
+            <img
+              src="https://klevu.com/klevu-logo/green-white.png"
+              alt="Klevu Web components Demo"
+            />
+          </a>
+          <p className="info">Klevu WebComponents Demo</p>
+          <ul>
+            <li>
+              <KlevuQuicksearch
+                searchFieldVariant="default"
+                placeholder="Search here"
+                renderProductSlot={(product, slot) => {
+                  if (slot === "bottom") {
+                    const div = document.createElement("div")
+                    createRoot(div).render(
+                      <KlevuButton
+                        onClick={() => {
+                          cart.add(product)
+                        }}
+                      >
+                        <KlevuIcon name="Add" /> Add to cart
+                      </KlevuButton>,
+                    )
+                    return div
+                  }
+                  return null
+                }}
               />
-            </a>
-            <p className="info">Klevu WebComponents Demo</p>
-            <ul>
-              <li>
-                <KlevuQuicksearch
-                  searchFieldVariant="default"
-                  placeholder="Search here"
-                  renderProductSlot={(product, slot) => {
-                    if (slot === "bottom") {
-                      const div = document.createElement("div")
-                      createRoot(div).render(
-                        <KlevuButton
-                          onClick={() => {
-                            cart.add(product)
-                          }}
-                        >
-                          <KlevuIcon name="Add" /> Add to cart
-                        </KlevuButton>,
+            </li>
+            <li>
+              <div>
+                <KlevuPopup
+                  ref={popupRef}
+                  anchor="bottom-start"
+                  start-open={false}
+                  onKlevuPopupClose={() => setSearchSuggestions([])}
+                >
+                  <KlevuSearchField
+                    slot="origin"
+                    limit={5}
+                    placeholder="Klevu search field"
+                    variant="pill"
+                    searchProducts
+                    onKlevuSearchResults={(param) => {
+                      // console.log(
+                      //   "onKlevuSearchResults",
+                      //   param.detail.search.responseObject.apiResponse
+                      //     .queryResults[0].records,
+                      // )
+                      setSearchSuggestions(
+                        param.detail.search.responseObject.apiResponse
+                          .queryResults[0].records,
                       )
-                      return div
-                    }
-                    return null
-                  }}
-                />
-              </li>
-              <li>
-                <div>
-                  <KlevuPopup
-                    ref={popupRef}
-                    anchor="bottom-start"
-                    start-open={false}
-                    onKlevuPopupClose={() => setSearchSuggestions([])}
-                  >
-                    <KlevuSearchField
-                      slot="origin"
-                      limit={5}
-                      placeholder="Klevu search field"
-                      variant="pill"
-                      searchProducts
-                      onKlevuSearchResults={(param) => {
-                        // console.log(
-                        //   "onKlevuSearchResults",
-                        //   param.detail.search.responseObject.apiResponse
-                        //     .queryResults[0].records,
-                        // )
-                        setSearchSuggestions(
-                          param.detail.search.responseObject.apiResponse
-                            .queryResults[0].records,
+                      popupRef.current.openModal()
+                    }}
+                  />
+                  <div slot="content">
+                    {searchSuggestions.map((product) => (
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "10px",
+                          padding: "10px",
+                        }}
+                      >
+                        <img src={product.image} width="30px" alt="" />
+                        <b>{product.name}</b> (
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: product.currency,
+                        }).format(product.price)}
                         )
-                        popupRef.current.openModal()
-                      }}
-                    />
-                    <div slot="content">
-                      {searchSuggestions.map((product) => (
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "10px",
-                            padding: "10px",
-                          }}
-                        >
-                          <img src={product.image} width="30px" alt="" />
-                          <b>{product.name}</b> (
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: product.currency,
-                          }).format(product.price)}
-                          )
-                        </div>
-                      ))}
-                    </div>
-                  </KlevuPopup>
-                </div>
-              </li>
-              <li style={{ float: "right" }}>
-                <KlevuDrawer anchor="right" ref={drawerRef}>
+                      </div>
+                    ))}
+                  </div>
+                </KlevuPopup>
+              </div>
+            </li>
+            <li style={{ float: "right" }}>
+              <KlevuButton slot="origin">
+                <span
+                  id="shoppingCartButton"
+                  style={{ whiteSpace: "nowrap" }}
+                  // onClick={() => navigate("/cart")}
+                >
+                  <KlevuIcon name="shopping_cart" id="shoppingCart" />
+                  <span>Cart ({cart.items?.length || 0})</span>
+                </span>
+              </KlevuButton>
+              {/* <KlevuDrawer anchor="right" ref={drawerRef}>
                   <KlevuButton slot="origin">
                     <span
                       id="shoppingCartButton"
@@ -264,16 +273,15 @@ function App() {
                       )}
                     </div>
                   </div>
-                </KlevuDrawer>
-              </li>
-            </ul>
-          </nav>
+                </KlevuDrawer> */}
+            </li>
+          </ul>
+        </nav>
 
-          <main>
-            <Outlet context={{ apiKey, storeUrlRef, recsId, categoryId }} />
-          </main>
-        </KlevuInit>
-      }
+        <main>
+          <Outlet context={{ apiKey, storeUrlRef, recsId, categoryId }} />
+        </main>
+      </KlevuInit>
     </>
   )
 }
