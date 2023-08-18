@@ -181,6 +181,12 @@ export class KlevuFacet {
       return null
     }
     let opts: OPTION_TYPE[] = [...this.option.options]
+    if (this.option.type === KlevuFilterType.Rating) {
+      opts.sort((a, b) => {
+        if (a.name < b.name) return 1;
+        return -1;
+      })
+    }
     if (this.customOrder) {
       opts.sort((a, b) => {
         const aio = this.customOrder!.indexOf(a.value)
