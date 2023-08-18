@@ -23,6 +23,7 @@ import {
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { getTranslation } from "../../utils/getTranslation"
+import { stringConcat } from "../../utils/stringConcat"
 
 /**
  * Full app component for search landing page
@@ -249,7 +250,7 @@ export class KlevuSearchLandingPage {
           ></klevu-facet-list>
           <div slot="header" class="header">
             <klevu-typography slot="header" variant="h1">
-              <klevu-util-string-replace string={this.tSearchTitle} values={[this.term]}></klevu-util-string-replace>
+              {stringConcat(this.tSearchTitle, [this.term])}
             </klevu-typography>
             <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>

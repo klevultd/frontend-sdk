@@ -20,7 +20,7 @@ import {
   SuggestionsEventData,
 } from "../klevu-search-field/klevu-search-field"
 import { getTranslation } from "../../utils/getTranslation"
-import { stringReplace } from "../../utils/stringReplace"
+import { stringConcat } from "../../utils/stringConcat"
 
 export type KlevuQuicksearchResultVarint = "simple" | "full"
 
@@ -378,7 +378,7 @@ export class KlevuQuicksearch {
               onClick={() => (this.activeTab = "trending")}
             ></klevu-tab>
             <klevu-tab
-              caption={stringReplace(this.tLastClickedProductsCaption, [`${this.lastClickedProducts?.length ?? 0}`])}
+              caption={stringConcat(this.tLastClickedProductsCaption, [`${this.lastClickedProducts?.length ?? 0}`])}
               active={this.activeTab === "last"}
               onClick={() => {
                 if (this.lastClickedProducts?.length === 0) {

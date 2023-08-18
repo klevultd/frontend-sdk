@@ -1372,21 +1372,6 @@ export namespace Components {
         "overflowX"?: OverflowBehavior;
         "overflowY"?: OverflowBehavior;
     }
-    /**
-     * Can be used to replace string of values into the string marked with %s token.
-     * string can contain multiple %s tokens. Each of them will be replace by the values array
-     * corresponding index.
-     */
-    interface KlevuUtilStringReplace {
-        /**
-          * Replacing string which contains %s
-         */
-        "string": string;
-        /**
-          * Values that will replace the %s.
-         */
-        "values": string[];
-    }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
         /**
@@ -2032,17 +2017,6 @@ declare global {
         prototype: HTMLKlevuUtilScrollbarsElement;
         new (): HTMLKlevuUtilScrollbarsElement;
     };
-    /**
-     * Can be used to replace string of values into the string marked with %s token.
-     * string can contain multiple %s tokens. Each of them will be replace by the values array
-     * corresponding index.
-     */
-    interface HTMLKlevuUtilStringReplaceElement extends Components.KlevuUtilStringReplace, HTMLStencilElement {
-    }
-    var HTMLKlevuUtilStringReplaceElement: {
-        prototype: HTMLKlevuUtilStringReplaceElement;
-        new (): HTMLKlevuUtilStringReplaceElement;
-    };
     interface HTMLKlevuUtilViewportElement extends Components.KlevuUtilViewport, HTMLStencilElement {
     }
     var HTMLKlevuUtilViewportElement: {
@@ -2094,7 +2068,6 @@ declare global {
         "klevu-util-dom-events": HTMLKlevuUtilDomEventsElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
-        "klevu-util-string-replace": HTMLKlevuUtilStringReplaceElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
 }
@@ -3478,21 +3451,6 @@ declare namespace LocalJSX {
         "overflowX"?: OverflowBehavior;
         "overflowY"?: OverflowBehavior;
     }
-    /**
-     * Can be used to replace string of values into the string marked with %s token.
-     * string can contain multiple %s tokens. Each of them will be replace by the values array
-     * corresponding index.
-     */
-    interface KlevuUtilStringReplace {
-        /**
-          * Replacing string which contains %s
-         */
-        "string": string;
-        /**
-          * Values that will replace the %s.
-         */
-        "values": string[];
-    }
     interface KlevuUtilViewport {
         "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
         /**
@@ -3545,7 +3503,6 @@ declare namespace LocalJSX {
         "klevu-util-dom-events": KlevuUtilDomEvents;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
-        "klevu-util-string-replace": KlevuUtilStringReplace;
         "klevu-util-viewport": KlevuUtilViewport;
     }
 }
@@ -3865,12 +3822,6 @@ declare module "@stencil/core" {
              * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
              */
             "klevu-util-scrollbars": LocalJSX.KlevuUtilScrollbars & JSXBase.HTMLAttributes<HTMLKlevuUtilScrollbarsElement>;
-            /**
-             * Can be used to replace string of values into the string marked with %s token.
-             * string can contain multiple %s tokens. Each of them will be replace by the values array
-             * corresponding index.
-             */
-            "klevu-util-string-replace": LocalJSX.KlevuUtilStringReplace & JSXBase.HTMLAttributes<HTMLKlevuUtilStringReplaceElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }
     }

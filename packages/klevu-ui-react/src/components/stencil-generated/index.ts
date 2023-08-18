@@ -52,5 +52,4 @@ export const KlevuTypography = /*@__PURE__*/createReactComponent<JSX.KlevuTypogr
 export const KlevuUtilDomEvents = /*@__PURE__*/createReactComponent<JSX.KlevuUtilDomEvents, HTMLKlevuUtilDomEventsElement>('klevu-util-dom-events');
 export const KlevuUtilPortal = /*@__PURE__*/createReactComponent<JSX.KlevuUtilPortal, HTMLKlevuUtilPortalElement>('klevu-util-portal');
 export const KlevuUtilScrollbars = /*@__PURE__*/createReactComponent<JSX.KlevuUtilScrollbars, HTMLKlevuUtilScrollbarsElement>('klevu-util-scrollbars');
-export const KlevuUtilStringReplace = /*@__PURE__*/createReactComponent<JSX.KlevuUtilStringReplace, HTMLKlevuUtilStringReplaceElement>('klevu-util-string-replace');
 export const KlevuUtilViewport = /*@__PURE__*/createReactComponent<JSX.KlevuUtilViewport, HTMLKlevuUtilViewportElement>('klevu-util-viewport');

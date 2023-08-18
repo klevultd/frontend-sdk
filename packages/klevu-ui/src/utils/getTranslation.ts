@@ -25,7 +25,8 @@ export function getTranslation(key: Paths<TranslationKeys, 10>) {
       // @ts-ignore
       value = value[key]
     } else {
-      throw new Error(`Translation "${key}" not found`)
+      console.error(`Translation "${key}" not found`)
+      return undefined
     }
   }
 

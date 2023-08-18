@@ -448,12 +448,6 @@ export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilSc
 ]);
 
 
-export const KlevuUtilStringReplace = /*@__PURE__*/ defineContainer<JSX.KlevuUtilStringReplace>('klevu-util-string-replace', undefined, [
-  'string',
-  'values'
-]);
-
-
 export const KlevuUtilViewport = /*@__PURE__*/ defineContainer<JSX.KlevuUtilViewport>('klevu-util-viewport', undefined, [
   'sizes',
   'sizeChanged'

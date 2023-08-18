@@ -30,7 +30,6 @@ Full app component for search landing page
 - [klevu-layout-results](../klevu-layout-results)
 - [klevu-facet-list](../klevu-facet-list)
 - [klevu-typography](../klevu-typography)
-- [klevu-util-string-replace](../klevu-util-string-replace)
 - [klevu-sort](../klevu-sort)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
@@ -44,7 +43,6 @@ graph TD;
   klevu-search-landing-page --> klevu-layout-results
   klevu-search-landing-page --> klevu-facet-list
   klevu-search-landing-page --> klevu-typography
-  klevu-search-landing-page --> klevu-util-string-replace
   klevu-search-landing-page --> klevu-sort
   klevu-search-landing-page --> klevu-product-grid
   klevu-search-landing-page --> klevu-product
