@@ -5,6 +5,9 @@
   "cmsList": {
     "tCaption": "CMS pages"
   },
+  "facet": {
+    "tMore": "More"
+  },
   "latestSearches": {
     "tCaption": "Last searches"
   },
@@ -27,7 +30,9 @@
   "quicksearch": {
     "tSearchResults": "Search results",
     "tStartChat": "Start chat",
-    "tCategoriesCaption": "Categories"
+    "tCategoriesCaption": "Categories",
+    "tTrendingCaption": "Trending",
+    "tLastClickedProductsCaption": "Recently viewed (%s)"
   },
   "searchField": {
     "tPlaceholder": "Search for products",
@@ -36,5 +41,16 @@
   "searchLandingPage": {
     "tSearchTitle": "Searching term \"%s\"",
     "tLoadMore": "Load more"
+  },
+  "sort": {
+    "tRelevance": "Relevance",
+    "tNameAsc": "Name ▲",
+    "tNameDesc": "Name ▼",
+    "tNewArrivalsAsc": "New arrivals ▲",
+    "tNewArrivalsDesc": "New arrivals ▼",
+    "tPriceAsc": "Price ▲",
+    "tPriceDesc": "Price ▼",
+    "tRatingAsc": "Rating ▲",
+    "tRatingDesc": "Rating ▼"
   }
 }

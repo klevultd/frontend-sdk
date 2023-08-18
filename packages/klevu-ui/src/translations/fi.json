@@ -5,6 +5,9 @@
   "cmsList": {
     "tCaption": "CMS-sivut"
   },
+  "facet": {
+    "tMore": "Lisää"
+  },
   "latestSearches": {
     "tCaption": "Viimeisimmät haut"
   },
@@ -12,7 +15,7 @@
     "tLoadMore": "Lataa lisää"
   },
   "popularSearches": {
-    "tCaption": "Suositut haut"
+    "tCaption": "Suosituimmat haut"
   },
   "productQueryPopup": {
     "tTextFieldPlaceholder": "Kysy kysymys",
@@ -27,7 +30,9 @@
   "quicksearch": {
     "tSearchResults": "Hakutulokset",
     "tStartChat": "Aloita keskustelu",
-    "tCategoriesCaption": "Kategoriat"
+    "tCategoriesCaption": "Kategoriat",
+    "tTrendingCaption": "Suosituimmat",
+    "tLastClickedProductsCaption": "Viimeksi katsotut (%s)"
   },
   "searchField": {
     "tPlaceholder": "Etsi tuotteita",
@@ -36,5 +41,16 @@
   "searchLandingPage": {
     "tSearchTitle": "Tulokset hakusanalla \"%s\"",
     "tLoadMore": "Lataa lisää"
+  },
+  "sort": {
+    "tRelevance": "Tärkeys",
+    "tNameAsc": "Nimi ▲",
+    "tNameDesc": "Nimi ▼",
+    "tNewArrivalsAsc": "Uusimmat ▲",
+    "tNewArrivalsDesc": "Uusimmat ▼",
+    "tPriceAsc": "Hinta ▲",
+    "tPriceDesc": "Hinta ▼",
+    "tRatingAsc": "Arvostelu ▲",
+    "tRatingDesc": "Arvostelu ▼"
   }
 }

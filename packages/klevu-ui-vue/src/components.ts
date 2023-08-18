@@ -111,6 +111,7 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'accordion',
   'accordionStartOpen',
   'labelOverride',
+  'tMore',
   'klevuFilterSelectionUpdate'
 ]);
 
@@ -138,7 +139,8 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
   'url',
   'settings',
   'language',
-  'translation'
+  'translation',
+  'translationUrlPrefix'
 ]);
 
 
@@ -322,6 +324,8 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'tSearchResults',
   'tStartChat',
   'tCategoriesCaption',
+  'tTrendingCaption',
+  'tLastClickedProductsCaption',
   'renderProductSlot'
 ]);
 

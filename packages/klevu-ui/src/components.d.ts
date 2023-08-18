@@ -326,6 +326,7 @@ export namespace Components {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
+        "tMore": any;
     }
     /**
      * Render all facets of filter manager
@@ -446,6 +447,10 @@ export namespace Components {
           * Provide your own translations
          */
         "translation"?: Translation;
+        /**
+          * Override the default translation URL prefix. Will use format of `${translationUrlPrefix}/translations/${lang}.json`
+         */
+        "translationUrlPrefix"?: string;
         /**
           * Klevu Server URL
          */
@@ -1025,6 +1030,10 @@ export namespace Components {
          */
         "tCategoriesCaption": any;
         /**
+          * Recentely clicked tab caption
+         */
+        "tLastClickedProductsCaption": any;
+        /**
           * Title of search results
          */
         "tSearchResults": any;
@@ -1032,6 +1041,10 @@ export namespace Components {
           * Title of button to start Moi session
          */
         "tStartChat": any;
+        /**
+          * Trending tab caption
+         */
+        "tTrendingCaption": any;
     }
     /**
      * Full recommendation banner solution
@@ -2388,6 +2401,7 @@ declare namespace LocalJSX {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
+        "tMore"?: any;
     }
     /**
      * Render all facets of filter manager
@@ -2499,6 +2513,10 @@ declare namespace LocalJSX {
           * Provide your own translations
          */
         "translation"?: Translation;
+        /**
+          * Override the default translation URL prefix. Will use format of `${translationUrlPrefix}/translations/${lang}.json`
+         */
+        "translationUrlPrefix"?: string;
         /**
           * Klevu Server URL
          */
@@ -3088,6 +3106,10 @@ declare namespace LocalJSX {
          */
         "tCategoriesCaption"?: any;
         /**
+          * Recentely clicked tab caption
+         */
+        "tLastClickedProductsCaption"?: any;
+        /**
           * Title of search results
          */
         "tSearchResults"?: any;
@@ -3095,6 +3117,10 @@ declare namespace LocalJSX {
           * Title of button to start Moi session
          */
         "tStartChat"?: any;
+        /**
+          * Trending tab caption
+         */
+        "tTrendingCaption"?: any;
     }
     /**
      * Full recommendation banner solution

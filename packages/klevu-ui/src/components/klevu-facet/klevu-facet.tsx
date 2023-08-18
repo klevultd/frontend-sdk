@@ -13,6 +13,7 @@ import {
   EventEmitter,
 } from "@stencil/core"
 import { getGlobalSettings } from "../../utils/utils"
+import { getTranslation } from "../../utils/getTranslation"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 
@@ -83,6 +84,8 @@ export class KlevuFacet {
    * Override label text with custom value
    */
   @Prop() labelOverride?: string
+
+  @Prop() tMore = getTranslation("facet.tMore")
 
   /**
    * Show all options
@@ -244,7 +247,7 @@ export class KlevuFacet {
               fullWidth
               onClick={() => (this.showAll = true)}
             >
-              More
+              {this.tMore}
             </klevu-button>
           ) : null}
         </div>

@@ -1,4 +1,5 @@
 import { Component, Host, Prop, Watch, h } from "@stencil/core"
+import { stringReplace } from "../../utils/stringReplace"
 
 /**
  * Can be used to replace string of values into the string marked with %s token.
@@ -22,10 +23,6 @@ export class KlevuUtilStringReplace {
   @Prop() values!: string[]
 
   render() {
-    let copy = this.string
-    for (const v of this.values) {
-      copy = copy.replace("%s", v)
-    }
-    return copy
+    return stringReplace(this.string, this.values)
   }
 }

@@ -3,7 +3,14 @@ import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
 
-export type Translations = "en" | "fi" | "es"
+/**
+ * List of available translations
+ */
+export type Translations = "en" | "fi"
+
+/**
+ * Translation typing to auto complete
+ */
 export type Translation = typeof en
 
 /**
@@ -85,6 +92,12 @@ export class KlevuInit {
    */
   @Prop() translation?: Translation
 
+  /**
+   * Override the default translation URL prefix. Will use format of
+   * `${translationUrlPrefix}/translations/${lang}.json`
+   */
+  @Prop() translationUrlPrefix?: string
+
   async connectedCallback() {
     KlevuConfig.init({
       apiKey: this.apiKey,
@@ -95,7 +108,7 @@ export class KlevuInit {
     if (this.translation) {
       window["klevu_ui_translations"] = this.translation
     } else if (this.language != "en") {
-      window["klevu_ui_translations"] = await fetchTranslation(this.language)
+      window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
     }
   }
 
@@ -143,10 +156,15 @@ export class KlevuInit {
   }
 }
 
-async function fetchTranslation(lang: Translations): Promise<typeof en> {
-  console.log("fetching translation", lang)
+async function fetchTranslation(lang: Translations, urlPrefix?: string): Promise<typeof en> {
+  // when not provided try loading translations from two folders up in the url
+  if (!urlPrefix) {
+    const parts = import.meta.url.split("/")
+    parts.splice(-2, 2)
+    urlPrefix = parts.join("/")
+  }
   return new Promise((resolve, reject): void => {
-    fetch(`/translations/${lang}.json`).then(
+    fetch(`${urlPrefix}/translations/${lang}.json`).then(
       (result) => {
         if (result.ok) resolve(result.json())
         else reject()

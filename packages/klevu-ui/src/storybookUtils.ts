@@ -194,8 +194,6 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
       `
     }
 
-    console.log({ language })
-
     return html`
       <klevu-init
         .settings=${settings}
