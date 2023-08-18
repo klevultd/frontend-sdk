@@ -46,6 +46,23 @@ To use the `translation` attribute for a specific string:
 
 List of keys can be found in `translations/en.json` in the `@klevu/ui` sources.
 
+## Using `t-` Prefix Attributes
+
+In individual components, you can find attributes starting with the `t-` prefix.
+These attributes allow you to replace specific texts within the components with
+translated strings. For example, the `klevu-quicksearch` component includes a
+`t-trending-caption` attribute that sets the title for trending products.
+
+To replace text using `t-` prefix attributes:
+
+```html
+<klevu-quicksearch t-trending-caption="Suositut tuotteet"></klevu-quicksearch>
+```
+
+In this case, the t-trending-caption attribute is set to "Suositut tuotteet,"
+which will be displayed as the title for trending products in the
+klevu-quicksearch component.
+
 ## Customizing Translation JSON
 
 When using the `language` attribute, Klevu's `klevu-init` component fetches a
