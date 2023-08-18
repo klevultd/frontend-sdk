@@ -2,7 +2,6 @@
 
 <!-- Auto Generated Below -->
 
-
 ## Overview
 
 Full app to create search bar that popups trending products and search results.
@@ -29,18 +28,20 @@ Full app to create search bar that popups trending products and search results.
 | `tStartChat`                  | `t-start-chat`                    | Title of button to start Moi session                                                                                                                                                                                                                                                                           | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tStartChat")`                  |
 | `tTrendingCaption`            | `t-trending-caption`              | Trending tab caption                                                                                                                                                                                                                                                                                           | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tTrendingCaption")`            |
 
-
 ## Slots
 
-| Slot        | Description   |
-| ----------- | ------------- |
-| `"content"` | Popup content |
-
+| Slot                      | Description                                |
+| ------------------------- | ------------------------------------------ |
+| `"content"`               | Popup content                              |
+| `"last-clicked-products"` | Slot to replace last clicked products      |
+| `"search-products"`       | Slot to replace search results listings    |
+| `"trending-products"`     | Slot to replace trending products listings |
 
 ## Dependencies
 
 ### Depends on
 
+- [klevu-util-viewport](../klevu-util-viewport)
 - [klevu-popup](../klevu-popup)
 - [klevu-search-field](../klevu-search-field)
 - [klevu-moi](../klevu-moi)
@@ -57,8 +58,10 @@ Full app to create search bar that popups trending products and search results.
 - [klevu-tab](../klevu-tab)
 
 ### Graph
+
 ```mermaid
 graph TD;
+  klevu-quicksearch --> klevu-util-viewport
   klevu-quicksearch --> klevu-popup
   klevu-quicksearch --> klevu-search-field
   klevu-quicksearch --> klevu-moi
@@ -121,6 +124,4 @@ graph TD;
   style klevu-quicksearch fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
-
-
+---

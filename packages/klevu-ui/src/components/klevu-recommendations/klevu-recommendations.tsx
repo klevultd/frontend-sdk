@@ -9,7 +9,6 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, State } from "@s
 
 import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { parts } from "../../utils/parts"
 
 /**
@@ -22,13 +21,14 @@ import { parts } from "../../utils/parts"
 })
 export class KlevuRecommendations {
   /**
-   * When Recommndations data is available
+   * When Recommndations data is available or updated
    */
   @Event({
     composed: true,
     cancelable: true,
   })
   data!: EventEmitter<KlevuResponseQueryObject>
+
   /**
    * Title of the recommendation
    */
@@ -64,41 +64,6 @@ export class KlevuRecommendations {
   @State() products: Array<KlevuRecord> = [undefined, undefined, undefined, undefined, undefined, undefined] as any
 
   #responseObject?: KlevuResponseQueryObject
-
-  /**
-   * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered.
-   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
-   * slot requested. Return null for slots that you do not want to render.
-   */
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
-  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
-    if (!this.renderProductSlot || !product) {
-      return null
-    }
-
-    const content = this.renderProductSlot(product, slot)
-
-    if (content === null) {
-      return null
-    }
-
-    if (typeof content === "string") {
-      return <div slot={slot} innerHTML={content}></div>
-    }
-
-    return (
-      <div
-        slot={slot}
-        ref={(el) => {
-          if (!el) {
-            return
-          }
-          el.innerHTML = ""
-          el.appendChild(content)
-        }}
-      ></div>
-    )
-  }
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -160,12 +125,7 @@ export class KlevuRecommendations {
                 style={{
                   "--klevu-product-width": "300px",
                 }}
-              >
-                {this.#internalRenderProductSlot(product, "top")}
-                {this.#internalRenderProductSlot(product, "image")}
-                {this.#internalRenderProductSlot(product, "info")}
-                {this.#internalRenderProductSlot(product, "bottom")}
-              </klevu-product>
+              ></klevu-product>
             ))}
           </slot>
         </klevu-slides>

@@ -7,6 +7,23 @@ import * as Stories from "./klevu-quicksearch.stories"
 
 <Markdown>{Stories.description}</Markdown>
 
-<Canvas of={Stories.Quicksearch} story={{ height: "700px" }} />
+<Canvas of={Stories.Quicksearch} story={{ height: "500px" }} />
 
-<Controls />
+## Customizing Klevu Quicksearch Component
+
+The provided code example showcases the customization of the `klevu-quicksearch` component using JavaScript and CSS. It demonstrates how to dynamically populate and style different sections of the component.
+
+1. **Component Setup:**
+   The HTML includes a `klevu-quicksearch` component with the class `customized`. Three slots are utilized: `search-products`, `trending-products`, and `last-clicked-products`.
+
+2. **JavaScript Customization:**
+   The JavaScript code listens for the `"data"` event on `klevu-quicksearch.customized`. Upon this event, it clears the content of the product slots and fills them with custom data.
+
+   - For each product, `klevu-product` elements are created and populated with custom HTML content like product name and designer. These elements are appended to the relevant slots.
+
+3. **Custom CSS Styling:**
+   Custom CSS styles are applied to the product display. Products are enclosed in `div.product` elements with borders, margins, and font sizes adjusted. The `klevu-product` element is set to display as a block.
+
+This example offers insights into dynamic population and styling of the `klevu-quicksearch` component, enhancing its customization capabilities.
+
+<Canvas of={Stories.CustomizedQuicksearch} story={{ height: "400px" }} />

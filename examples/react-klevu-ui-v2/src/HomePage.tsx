@@ -48,39 +48,7 @@ const HomePage = () => {
   const [recsProducts, setRecsProducts] = useState([])
   const [removeProduct, setRemoveProduct] = useState<KlevuRecord | null>(null)
   const [queryResult, setQueryResult] = useState<KlevuQueryResult>(null)
-  const renderProductSlot = useCallback(
-    (product: KlevuRecord, slot: string) => {
-      if (slot === "bottom") {
-        const div = document.createElement("div")
-        div.className = "recsProduct"
-        createRoot(div).render(
-          cart.items.find((p) => p.id === product.id) ? (
-            <KlevuButton
-              onClick={() => {
-                cart.remove(product.id)
-              }}
-              fullWidth={true}
-            >
-              Remove
-            </KlevuButton>
-          ) : (
-            <KlevuButton
-              onClick={() => {
-                cart.add(product)
-              }}
-              fullWidth={true}
-            >
-              Add to cart
-            </KlevuButton>
-          ),
-        )
-        return div
-      }
-
-      return null
-    },
-    [cart.items.length],
-  )
+  
   return (
     <div>
       {loading && (

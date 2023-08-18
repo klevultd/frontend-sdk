@@ -9,7 +9,7 @@
 }
 
 .content aside {
-  width: 240px;
+  width: 180px;
   flex-shrink: 0;
   padding-right: var(--klevu-spacing-04);
   border-right: 1px solid var(--klevu-color-border);
@@ -29,14 +29,6 @@ klevu-product-grid.desktop {
 .content section {
   max-width: 600px;
   min-width: 300px;
-}
-
-.desktop {
-  display: initial;
-}
-
-.mobile {
-  display: none;
 }
 
 .resultheader {
@@ -76,14 +68,6 @@ klevu-moi {
 }
 
 @media (max-width: 600px) {
-  .desktop {
-    display: none;
-  }
-
-  .mobile {
-    display: initial;
-  }
-
   klevu-product-grid.mobile {
     display: flex;
   }

@@ -20,7 +20,7 @@ import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/kl
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
-import { KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
+import { KlevuQuicksearchDataEvent, KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
 import { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/klevu-textfield/klevu-textfield";
@@ -42,7 +42,7 @@ export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/kl
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
-export { KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
+export { KlevuQuicksearchDataEvent, KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
 export { SearchFieldVariant as SearchFieldVariant1, SearchResultsEventData, SuggestionsEventData } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuDropdownVariant as KlevuDropdownVariant1 } from "./components";
 export { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/klevu-textfield/klevu-textfield";
@@ -718,6 +718,10 @@ export namespace Components {
          */
         "hideSwatches"?: boolean;
         /**
+          * Turns the component into a product wrapper that handles events automatically. It assumes that whole product is clickable.  Component has only one main slot that can contain any content.  To prevent product clicking use `event.stopPropagation()` in your events.  Component still requires the product parameter as it's data is used send correct data to Klevu analytics
+         */
+        "isWrapper"?: boolean;
+        /**
           * What key to use for brand value
          */
         "keyBrand": string;
@@ -998,10 +1002,6 @@ export namespace Components {
          */
         "popupAnchor"?: Placement;
         /**
-          * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
-         */
-        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
-        /**
           * Change variant of the search results
          */
         "resultVariant": KlevuQuicksearchResultVarint;
@@ -1089,10 +1089,6 @@ export namespace Components {
           * Title of the recommendation
          */
         "recommendationTitle": string;
-        /**
-          * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
-         */
-        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
     }
     /**
      * Plain textfield that does the searching. It queries Klevu and returns the results
@@ -1470,6 +1466,10 @@ export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuQueryCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuQueryElement;
+}
+export interface KlevuQuicksearchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuQuicksearchElement;
 }
 export interface KlevuRecommendationsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2794,6 +2794,10 @@ declare namespace LocalJSX {
          */
         "hideSwatches"?: boolean;
         /**
+          * Turns the component into a product wrapper that handles events automatically. It assumes that whole product is clickable.  Component has only one main slot that can contain any content.  To prevent product clicking use `event.stopPropagation()` in your events.  Component still requires the product parameter as it's data is used send correct data to Klevu analytics
+         */
+        "isWrapper"?: boolean;
+        /**
           * What key to use for brand value
          */
         "keyBrand"?: string;
@@ -3070,6 +3074,10 @@ declare namespace LocalJSX {
          */
         "fullResultCount"?: number;
         /**
+          * When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.
+         */
+        "onData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -3077,10 +3085,6 @@ declare namespace LocalJSX {
           * Anchor popup to witch side
          */
         "popupAnchor"?: Placement;
-        /**
-          * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
-         */
-        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
         /**
           * Change variant of the search results
          */
@@ -3162,7 +3166,7 @@ declare namespace LocalJSX {
          */
         "itemGroupId"?: string;
         /**
-          * When Recommndations data is available
+          * When Recommndations data is available or updated
          */
         "onData"?: (event: KlevuRecommendationsCustomEvent<KlevuResponseQueryObject>) => void;
         /**
@@ -3173,10 +3177,6 @@ declare namespace LocalJSX {
           * Title of the recommendation
          */
         "recommendationTitle": string;
-        /**
-          * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered. This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides slot requested. Return null for slots that you do not want to render.
-         */
-        "renderProductSlot"?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null;
     }
     /**
      * Plain textfield that does the searching. It queries Klevu and returns the results
