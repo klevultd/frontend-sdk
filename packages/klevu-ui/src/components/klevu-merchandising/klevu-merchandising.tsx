@@ -23,6 +23,7 @@ import {
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Full merchandising app to power up your product grid pages
@@ -52,6 +53,11 @@ export class KlevuMerchandising {
    * Category title
    */
   @Prop() categoryTitle!: string
+
+  /**
+   * Text for load more button
+   */
+  @Prop() tLoadMore = getTranslation("merchandising.tLoadMore")
 
   /**
    * Order of results
@@ -285,7 +291,7 @@ export class KlevuMerchandising {
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
               ></klevu-pagination>
             ) : this.#resultObject?.getPage ? (
-              <klevu-button onClick={this.#loadMore.bind(this)}>Load more</klevu-button>
+              <klevu-button onClick={this.#loadMore.bind(this)}>{this.tLoadMore}</klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

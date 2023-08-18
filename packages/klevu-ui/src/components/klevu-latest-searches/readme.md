@@ -9,9 +9,9 @@ Lists latest searches user has made on the site
 
 ## Properties
 
-| Property  | Attribute | Description         | Type     | Default           |
-| --------- | --------- | ------------------- | -------- | ----------------- |
-| `caption` | `caption` | Caption of the list | `string` | `"Last searches"` |
+| Property   | Attribute   | Description         | Type  | Default                                     |
+| ---------- | ----------- | ------------------- | ----- | ------------------------------------------- |
+| `tCaption` | `t-caption` | Caption of the list | `any` | `getTranslation("latestSearches.tCaption")` |
 
 
 ## Events

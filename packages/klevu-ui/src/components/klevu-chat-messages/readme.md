@@ -11,7 +11,7 @@
 | ----------------------- | ------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
 | `enableMessageFeedback` | `enable-message-feedback` | Should display a feedback button after each message | `boolean \| undefined`                                                       | `undefined` |
 | `feedbacks`             | --                        | Feedbacks given by user                             | `MoiSavedFeedback[] \| undefined`                                            | `undefined` |
-| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseFilter \| MoiResponseText \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
+| `messages`              | --                        | Messages received from Moi backend                  | `(MoiResponseText \| MoiResponseFilter \| MoiProducts \| MoiLocalMessage)[]` | `[]`        |
 | `showFeedbackFor`       | `show-feedback-for`       | What message should we                              | `string \| undefined`                                                        | `undefined` |
 
 
@@ -65,6 +65,7 @@ graph TD;
   klevu-slides --> klevu-typography
   klevu-slides --> klevu-button
   klevu-slides --> klevu-util-scrollbars
+  klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   klevu-moi --> klevu-chat-messages
   klevu-product-query-popup --> klevu-chat-messages

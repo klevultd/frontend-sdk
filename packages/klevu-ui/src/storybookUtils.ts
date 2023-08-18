@@ -11,6 +11,7 @@ import merge from "lodash.merge"
 import { withActions } from "@storybook/addon-actions/decorator"
 import { html } from "lit"
 import { KlevuUIGlobalSettings } from "./utils/utils"
+import { ifDefined } from "lit-html/directives/if-defined.js"
 
 export const KlevuProductElement = (product: KlevuRecord, args?: object) => {
   const element = document.createElement("klevu-product")
@@ -183,9 +184,14 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
   const klevuInitInject = (story: any) => {
     const key = localStorage.getItem("klevu-api-key")
     const url = localStorage.getItem("klevu-url")
+    const language = localStorage.getItem("klevu-language")
 
     if (key && url) {
-      return html` <klevu-init api-key=${key} url=${url}> ${story()} </klevu-init> `
+      return html`
+        <klevu-init api-key=${key} url=${url} language=${ifDefined(language === null ? undefined : language)}>
+          ${story()}
+        </klevu-init>
+      `
     }
 
     return html`
@@ -193,6 +199,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
         .settings=${settings}
         api-key="klevu-164651914788114877"
         url="https://eucs29v2.ksearchnet.com/cs/v2/search"
+        language=${ifDefined(language === null ? undefined : language)}
       >
         ${story()}
       </klevu-init>

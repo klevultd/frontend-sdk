@@ -15,6 +15,7 @@ import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
 import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-chat-bubble"
 import { parts } from "../../utils/parts"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Klevu Product Query popup application that shows a popup for asking questions about a product
@@ -62,22 +63,42 @@ export class KlevuProductQueryPopup {
   /**
    * Placeholder of the textfield
    */
-  @Prop() textFieldPlaceholder: string = "Ask a questions"
+  @Prop() tTextFieldPlaceholder = getTranslation("productQueryPopup.tTextFieldPlaceholder")
 
   /**
    * Title of the popup
    */
-  @Prop() popupTitle = "Ask a Question"
+  @Prop() tPopupTitle = getTranslation("productQueryPopup.tPopuptitle")
 
   /**
    * Text of the button to open the popup
    */
-  @Prop() buttonText = "Ask a Question"
+  @Prop() tButtonText = getTranslation("productQueryPopup.tButtonText")
 
   /**
    * Fine print of the popup under the title
    */
-  @Prop() finePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page."
+  @Prop() tFinePrint = getTranslation("productQueryPopup.tFinePrint")
+
+  /**
+   * When loading takes a bit longer, show this text
+   */
+  @Prop() tLoadingSorry = getTranslation("productQueryPopup.tLoadingSorry")
+
+  /**
+   * Title of the feedback section when closing the popup
+   */
+  @Prop() tRateExperienceTitle = getTranslation("productQueryPopup.tRateExperienceTitle")
+
+  /**
+   * Description of the feedback section when closing the popup
+   */
+  @Prop() tRateExperienceText = getTranslation("productQueryPopup.tRateExperienceText")
+
+  /**
+   * Data protection notice when user registering is enabled
+   */
+  @Prop() tDataProtectionNotice = getTranslation("productQueryPopup.tDataProtectionNotice")
 
   /**
    * Text of the button for asking a question
@@ -283,12 +304,12 @@ export class KlevuProductQueryPopup {
         <klevu-chat-layout ref={(el) => (this.#layoutElement = el)} elementForHeightCalculation={this.#contentDiv}>
           <div part="product-query-header" slot="header">
             <div class="header">
-              <klevu-typography variant="body-m-bold">{this.popupTitle}</klevu-typography>
+              <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
               <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">
-              {this.finePrint}
+              {this.tFinePrint}
               <slot name="after-fineprint"></slot>
             </klevu-typography>
           </div>
@@ -303,7 +324,7 @@ export class KlevuProductQueryPopup {
               {this.showLoading ? <klevu-loading-indicator /> : null}
               {this.showLoadingSorry ? (
                 <klevu-typography class="loading-sorry" variant="body-xs">
-                  I take a few extra seconds when answering the first question sometimes if I need to scan whole page.
+                  {this.tLoadingSorry}
                 </klevu-typography>
               ) : null}
             </div>
@@ -330,17 +351,14 @@ export class KlevuProductQueryPopup {
                   ></klevu-textfield>
                   <klevu-button icon="send" onClick={() => this.#register()}></klevu-button>
                 </div>
-                <klevu-typography variant="body-xs">
-                  We are compliant with data protection regulations. Visit our privacy policy to learn how we collect,
-                  keep, and process your private information in accordance with these laws.
-                </klevu-typography>
+                <klevu-typography variant="body-xs">{this.tDataProtectionNotice}</klevu-typography>
               </Fragment>
             ) : (
               <div class="sendmessage">
                 <klevu-textfield
                   value={this.text}
                   variant={this.textFieldVariant}
-                  placeholder={this.textFieldPlaceholder}
+                  placeholder={this.tTextFieldPlaceholder}
                   onKlevuTextEnterPressed={() => this.#sendMessage()}
                   onKlevuTextChanged={(e) => (this.text = e.detail)}
                 ></klevu-textfield>
@@ -360,8 +378,8 @@ export class KlevuProductQueryPopup {
   #renderFeedback() {
     return (
       <div class="pqa_feedback" part="product-query-feedback">
-        <klevu-typography variant="body-l-bold">Rate your experience</klevu-typography>
-        <klevu-typography variant="body-m">How was your experience using this Q&A tool?</klevu-typography>
+        <klevu-typography variant="body-l-bold">{this.tRateExperienceTitle}</klevu-typography>
+        <klevu-typography variant="body-m">{this.tRateExperienceText}</klevu-typography>
         <div>
           <klevu-icon onClick={() => this.#pqafeedback("up")} name="thumb_up" />
           <klevu-icon onClick={() => this.#pqafeedback("down")} name="thumb_down" />

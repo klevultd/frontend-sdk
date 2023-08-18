@@ -67,7 +67,7 @@ export const parameters = {
       order: [
         "Welcome",
         "Guides",
-        ["Installation", "Usage", "Styling components", "This documentation", "Icons", "Typings"],
+        ["Installation", "Usage", "Styling components", "This documentation", "Icons", "I18n", "Typings"],
         "Non components",
         "Atoms",
         "Components",

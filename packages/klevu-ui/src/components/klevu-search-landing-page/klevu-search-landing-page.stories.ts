@@ -27,5 +27,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     sort=${ifDefined(args.sort)}
     term=${ifDefined(args.term)}
     use-pagination=${ifDefined(args.usePagination)}
+    t-search-title=${ifDefined(args.tSearchTitle)}
+    t-load-more=${ifDefined(args.loadMore)}
   ></klevu-search-landing-page>`,
 }

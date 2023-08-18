@@ -32,6 +32,6 @@ export const CmsList: StoryObj<KlevuCmsList> = {
   render: (args) => html`<klevu-cms-list
     link=${ifDefined(args.link)}
     .pages=${args.pages}
-    caption=${ifDefined(args.caption)}
+    t-caption=${ifDefined(args.tCaption)}
   ></klevu-cms-list>`,
 }

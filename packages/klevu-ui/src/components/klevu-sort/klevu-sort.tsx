@@ -2,6 +2,7 @@ import { KlevuSearchSorting } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 import { KlevuDropdownCustomEvent, KlevuDropdownVariant } from "../../components"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Sort dropdown. User can select what kind of sorting they want
@@ -31,15 +32,15 @@ export class KlevuSort {
    */
   @Prop()
   options: Array<{ value: KlevuSearchSorting; text: string }> = [
-    { value: KlevuSearchSorting.Relevance, text: "Relevance" },
-    { value: KlevuSearchSorting.NameAsc, text: "Name ▲" },
-    { value: KlevuSearchSorting.NameDesc, text: "Name ▼" },
-    { value: KlevuSearchSorting.NewArrivalAsc, text: "New arrivals ▲" },
-    { value: KlevuSearchSorting.NewArrivalDesc, text: "New arrivals ▼" },
-    { value: KlevuSearchSorting.PriceAsc, text: "Price ▲" },
-    { value: KlevuSearchSorting.PriceDesc, text: "Price ▼" },
-    { value: KlevuSearchSorting.RatingAsc, text: "Rating ▲" },
-    { value: KlevuSearchSorting.RatingDesc, text: "Rating ▼" },
+    { value: KlevuSearchSorting.Relevance, text: getTranslation("sort.tRelevance") },
+    { value: KlevuSearchSorting.NameAsc, text: getTranslation("sort.tNameAsc") },
+    { value: KlevuSearchSorting.NameDesc, text: getTranslation("sort.tNameDesc") },
+    { value: KlevuSearchSorting.NewArrivalAsc, text: getTranslation("sort.tNewArrivalsAsc") },
+    { value: KlevuSearchSorting.NewArrivalDesc, text: getTranslation("sort.tNewArrivalsDesc") },
+    { value: KlevuSearchSorting.PriceAsc, text: getTranslation("sort.tPriceAsc") },
+    { value: KlevuSearchSorting.PriceDesc, text: getTranslation("sort.tPriceDesc") },
+    { value: KlevuSearchSorting.RatingAsc, text: getTranslation("sort.tRatingAsc") },
+    { value: KlevuSearchSorting.RatingDesc, text: getTranslation("sort.tRatingDesc") },
   ]
 
   #selected = KlevuSearchSorting.Relevance

@@ -1,5 +1,6 @@
 import { MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Host, Prop, h } from "@stencil/core"
+import { getTranslation } from "../../utils/getTranslation"
 
 export type KlevuMessageFeedbackReasonDetails = {
   reason: string
@@ -35,6 +36,11 @@ export class KlevuChatBubble {
    */
   @Prop() feedbackReasons?: string[]
 
+  /**
+   * Text for rating reason title
+   */
+  @Prop() tRatingReason = getTranslation("chatBubble.tRatingReason")
+
   @Event({
     composed: true,
   })
@@ -54,7 +60,7 @@ export class KlevuChatBubble {
         {this.feedback?.thumbs === "down" && <klevu-icon class="negative_feedback" name="thumb_down" />}
         {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
           <div class="feedback_reasons">
-            <span>Rating reason:</span>
+            <span>{this.tRatingReason}</span>
             {this.feedbackReasons.map((reason) => (
               <klevu-button
                 size="tiny"

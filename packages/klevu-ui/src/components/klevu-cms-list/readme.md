@@ -9,11 +9,11 @@ Component to display list of CMS page results
 
 ## Properties
 
-| Property             | Attribute | Description                                         | Type                     | Default       |
-| -------------------- | --------- | --------------------------------------------------- | ------------------------ | ------------- |
-| `caption`            | `caption` | Caption of the listing                              | `string`                 | `"CMS pages"` |
-| `link`               | `link`    | Should use url parameter from link to create anchor | `boolean \| undefined`   | `undefined`   |
-| `pages` _(required)_ | --        | List of Klevu results records with type of Page     | `Partial<KlevuRecord>[]` | `undefined`   |
+| Property             | Attribute   | Description                                         | Type                     | Default                              |
+| -------------------- | ----------- | --------------------------------------------------- | ------------------------ | ------------------------------------ |
+| `link`               | `link`      | Should use url parameter from link to create anchor | `boolean \| undefined`   | `undefined`                          |
+| `pages` _(required)_ | --          | List of Klevu results records with type of Page     | `Partial<KlevuRecord>[]` | `undefined`                          |
+| `tCaption`           | `t-caption` | Caption of the listing                              | `any`                    | `getTranslation("cmsList.tCaption")` |
 
 
 ## Events

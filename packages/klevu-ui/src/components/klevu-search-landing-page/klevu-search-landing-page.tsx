@@ -22,6 +22,8 @@ import {
 
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
+import { getTranslation } from "../../utils/getTranslation"
+import { stringConcat } from "../../utils/stringConcat"
 
 /**
  * Full app component for search landing page
@@ -57,6 +59,16 @@ export class KlevuSearchLandingPage {
    * Use pagination instead of loading more
    */
   @Prop() usePagination?: boolean
+
+  /**
+   * The title of the page
+   */
+  @Prop() tSearchTitle = getTranslation("searchLandingPage.tSearchTitle")
+
+  /**
+   * Text of load more button
+   */
+  @Prop() tLoadMore = getTranslation("searchLandingPage.tLoadMore")
 
   @State() results: Array<KlevuRecord | undefined> = [
     undefined,
@@ -238,7 +250,7 @@ export class KlevuSearchLandingPage {
           ></klevu-facet-list>
           <div slot="header" class="header">
             <klevu-typography slot="header" variant="h1">
-              Searching term "{this.term}"
+              {stringConcat(this.tSearchTitle, [this.term])}
             </klevu-typography>
             <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>
@@ -259,7 +271,7 @@ export class KlevuSearchLandingPage {
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>
             ) : this.#resultObject?.getPage ? (
-              <klevu-button onClick={this.loadMore.bind(this)}>Load more</klevu-button>
+              <klevu-button onClick={this.loadMore.bind(this)}>${this.tLoadMore}</klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

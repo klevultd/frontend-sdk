@@ -29,5 +29,8 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     search-cms-cages=${ifDefined(args.searchCmsPages)}
     placeholder=${ifDefined(args.placeholder)}
     search-field-variant=${ifDefined(args.searchFieldVariant)}
+    t-search-result=${ifDefined(args.tSearchResults)}
+    t-start-chat=${ifDefined(args.tStartChat)}
+    t-categories-caption=${ifDefined(args.tCategoriesCaption)}
   ></klevu-quicksearch>`,
 }
