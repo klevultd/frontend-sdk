@@ -26,7 +26,7 @@ export function getTranslation(key: Paths<TranslationKeys, 10>) {
       value = value[key]
     } else {
       console.error(`Translation "${key}" not found`)
-      return undefined
+      return key
     }
   }
 
