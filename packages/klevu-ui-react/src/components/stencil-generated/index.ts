@@ -39,6 +39,7 @@ export const KlevuProductQuery = /*@__PURE__*/createReactComponent<JSX.KlevuProd
 export const KlevuProductQueryPopup = /*@__PURE__*/createReactComponent<JSX.KlevuProductQueryPopup, HTMLKlevuProductQueryPopupElement>('klevu-product-query-popup');
 export const KlevuQuery = /*@__PURE__*/createReactComponent<JSX.KlevuQuery, HTMLKlevuQueryElement>('klevu-query');
 export const KlevuQuicksearch = /*@__PURE__*/createReactComponent<JSX.KlevuQuicksearch, HTMLKlevuQuicksearchElement>('klevu-quicksearch');
+export const KlevuRating = /*@__PURE__*/createReactComponent<JSX.KlevuRating, HTMLKlevuRatingElement>('klevu-rating');
 export const KlevuRecommendations = /*@__PURE__*/createReactComponent<JSX.KlevuRecommendations, HTMLKlevuRecommendationsElement>('klevu-recommendations');
 export const KlevuSearchField = /*@__PURE__*/createReactComponent<JSX.KlevuSearchField, HTMLKlevuSearchFieldElement>('klevu-search-field');
 export const KlevuSearchLandingPage = /*@__PURE__*/createReactComponent<JSX.KlevuSearchLandingPage, HTMLKlevuSearchLandingPageElement>('klevu-search-landing-page');

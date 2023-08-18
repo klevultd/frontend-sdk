@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+svg  {
+  color: #ccc;
+  margin: 0px 1px;
+}
+.filled {
+  color: #FFD707;
+}
