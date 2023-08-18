@@ -2,7 +2,6 @@ import {
   applyFilterWithManager,
   FilterManager,
   KlevuFetch,
-  KlevuFetchQueryResult,
   KlevuRecord,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
@@ -10,7 +9,7 @@ import {
   search,
   sendSearchEvent,
 } from "@klevu/core"
-import { Component, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import {
   KlevuPaginationCustomEvent,
@@ -27,6 +26,11 @@ import { stringConcat } from "../../utils/stringConcat"
 
 /**
  * Full app component for search landing page
+ *
+ * @slot header - Header container
+ * @slot footer - Footer container
+ * @slot content - Product grid items including the grid container
+ * @slot facets - Sidebar of facets content
  */
 @Component({
   tag: "klevu-search-landing-page",
@@ -70,17 +74,7 @@ export class KlevuSearchLandingPage {
    */
   @Prop() tLoadMore = getTranslation("searchLandingPage.tLoadMore")
 
-  @State() results: Array<KlevuRecord | undefined> = [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-  ]
+  @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
 
@@ -120,8 +114,8 @@ export class KlevuSearchLandingPage {
       )
     )
     this.#resultObject = result.queriesById("search")
-
     this.results = this.#resultObject?.records ?? []
+    this.#emitChanges()
   }
 
   async loadMore() {
@@ -131,6 +125,7 @@ export class KlevuSearchLandingPage {
     const nextResultObject = await this.#resultObject.getPage()
     this.#resultObject = nextResultObject?.queriesById("search")
     this.results = [...this.results, ...(this.#resultObject?.records ?? [])]
+    this.#emitChanges()
   }
 
   async paginationChange(event: KlevuPaginationCustomEvent<number>) {
@@ -140,6 +135,7 @@ export class KlevuSearchLandingPage {
     const nextResultObject = await this.#resultObject.getPage({ pageIndex: event.detail - 1 })
     this.#resultObject = nextResultObject?.queriesById("search")
     this.results = this.#resultObject?.records ?? []
+    this.#emitChanges()
   }
 
   @Listen("productClick")
@@ -166,43 +162,24 @@ export class KlevuSearchLandingPage {
     this.#fetchData()
   }
 
-  /**
-   * Rendering function created to put custom content to klevu-product slots. Provides a product being rendered.
-   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
-   * slot requested. Return null for slots that you do not want to render.
-   */
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
-  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
-    if (!this.renderProductSlot || !product) {
-      return null
-    }
-
-    const content = this.renderProductSlot(product, slot)
-
-    if (content === null) {
-      return null
-    }
-
-    if (typeof content === "string") {
-      return <div slot={slot} innerHTML={content}></div>
-    }
-
-    return (
-      <div
-        slot={slot}
-        ref={(el) => {
-          if (!el) {
-            return
-          }
-          el.innerHTML = ""
-          el.appendChild(content)
-        }}
-      ></div>
-    )
-  }
+  @Event({
+    composed: true,
+  })
+  data!: EventEmitter<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>
 
   #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
     this.currentViewPortSize = event.detail
+  }
+
+  #emitChanges() {
+    if (!this.#resultObject) {
+      return
+    }
+    this.data.emit({
+      resultObject: this.#resultObject,
+      records: this.results,
+      manager: this.manager,
+    })
   }
 
   async componentDidLoad() {
@@ -240,30 +217,28 @@ export class KlevuSearchLandingPage {
           onDrawerOpened={this.#mobileDrawerOpened.bind(this)}
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
-          <klevu-facet-list
-            ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
-            slot="sidebar"
-            customOrder={this.filterCustomOrder}
-            manager={this.manager}
-            useApplyButton={isMobile}
-            onKlevuApplyFilters={this.#applyFilters.bind(this)}
-          ></klevu-facet-list>
+          <slot name="facets" slot="sidebar">
+            <klevu-facet-list
+              ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
+              customOrder={this.filterCustomOrder}
+              manager={this.manager}
+              useApplyButton={isMobile}
+              onKlevuApplyFilters={this.#applyFilters.bind(this)}
+            ></klevu-facet-list>
+          </slot>
           <div slot="header" class="header">
             <klevu-typography slot="header" variant="h1">
               {stringConcat(this.tSearchTitle, [this.term])}
             </klevu-typography>
             <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>
-          <klevu-product-grid slot="content">
-            {this.results?.map((p) => (
-              <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}>
-                {this.#internalRenderProductSlot(p, "top")}
-                {this.#internalRenderProductSlot(p, "image")}
-                {this.#internalRenderProductSlot(p, "info")}
-                {this.#internalRenderProductSlot(p, "bottom")}
-              </klevu-product>
-            ))}
-          </klevu-product-grid>
+          <slot name="content" slot="content">
+            <klevu-product-grid slot="content">
+              {this.results?.map((p) => (
+                <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}></klevu-product>
+              ))}
+            </klevu-product-grid>
+          </slot>
           <div slot="footer" class="footer">
             {this.usePagination && this.#resultObject ? (
               <klevu-pagination
