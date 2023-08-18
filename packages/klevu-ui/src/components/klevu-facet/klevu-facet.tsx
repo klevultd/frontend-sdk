@@ -13,19 +13,20 @@ import {
   EventEmitter,
 } from "@stencil/core"
 import { getGlobalSettings } from "../../utils/utils"
+import { getTranslation } from "../../utils/getTranslation"
 
 export type KlevuFacetMode = "checkbox" | "radio"
-export type OPTION_TYPE = {
+export type OptionType = {
   name: string;
   value: string;
   count: number;
   selected: boolean;
 };
 
-const resolveFacetLabel = (option: OPTION_TYPE, facet?: KlevuFilterResultOptions) => {
+const resolveFacetLabel = (option: OptionType, facet?: KlevuFilterResultOptions) => {
   if (facet) {
     if(facet.type === KlevuFilterType.Rating) {
-      return <klevu-rating rating={+option.name} />
+      return <klevu-rating rating={parseFloat(option.name)} />
     }
   }
   return option.name
@@ -98,6 +99,8 @@ export class KlevuFacet {
    * Override label text with custom value
    */
   @Prop() labelOverride?: string
+
+  @Prop() tMore = getTranslation("facet.tMore")
 
   /**
    * Show all options
@@ -180,7 +183,7 @@ export class KlevuFacet {
     if (!this.option) {
       return null
     }
-    let opts: OPTION_TYPE[] = [...this.option.options]
+    let opts: OptionType[] = [...this.option.options]
     if (this.option.type === KlevuFilterType.Rating) {
       opts.sort((a, b) => {
         if (a.name < b.name) return 1;
@@ -265,7 +268,7 @@ export class KlevuFacet {
               fullWidth
               onClick={() => (this.showAll = true)}
             >
-              More
+              {this.tMore}
             </klevu-button>
           ) : null}
         </div>

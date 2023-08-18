@@ -13,6 +13,7 @@ import { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/k
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 import { KlevuUIGlobalSettings } from "./utils/utils";
+import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
@@ -34,6 +35,7 @@ export { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/k
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 export { KlevuUIGlobalSettings } from "./utils/utils";
+export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { KlevuProductSlots } from "./components/klevu-product/klevu-product";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
@@ -134,6 +136,10 @@ export namespace Components {
           * Is the message from the user or from the bot
          */
         "remote"?: boolean;
+        /**
+          * Text for rating reason title
+         */
+        "tRatingReason": any;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -214,10 +220,6 @@ export namespace Components {
      */
     interface KlevuCmsList {
         /**
-          * Caption of the listing
-         */
-        "caption": string;
-        /**
           * Should use url parameter from link to create anchor
          */
         "link"?: boolean;
@@ -225,6 +227,10 @@ export namespace Components {
           * List of Klevu results records with type of Page
          */
         "pages": Array<Partial<KlevuRecord>>;
+        /**
+          * Caption of the listing
+         */
+        "tCaption": any;
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -320,6 +326,7 @@ export namespace Components {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
+        "tMore": any;
     }
     /**
      * Render all facets of filter manager
@@ -429,9 +436,21 @@ export namespace Components {
          */
         "getSettings": () => Promise<KlevuUIGlobalSettings | undefined>;
         /**
+          * Which language to load
+         */
+        "language": Translations;
+        /**
           * Global settings
          */
         "settings"?: KlevuUIGlobalSettings;
+        /**
+          * Provide your own translations
+         */
+        "translation"?: Translation;
+        /**
+          * Override the default translation URL prefix. Will use format of `${translationUrlPrefix}/translations/${lang}.json`
+         */
+        "translationUrlPrefix"?: string;
         /**
           * Klevu Server URL
          */
@@ -444,7 +463,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "caption": string;
+        "tCaption": any;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -524,6 +543,10 @@ export namespace Components {
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
+          * Text for load more button
+         */
+        "tLoadMore": any;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -595,7 +618,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "caption": string;
+        "tCaption": any;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -809,10 +832,6 @@ export namespace Components {
          */
         "askButtonText"?: string;
         /**
-          * Text of the button to open the popup
-         */
-        "buttonText": string;
-        /**
           * Config for Klevu
          */
         "config"?: KlevuConfig;
@@ -820,10 +839,6 @@ export namespace Components {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
-        /**
-          * Fine print of the popup under the title
-         */
-        "finePrint": string;
         /**
           * Element to anchor the product query popup to
          */
@@ -837,10 +852,6 @@ export namespace Components {
          */
         "popupOffset"?: number;
         /**
-          * Title of the popup
-         */
-        "popupTitle": string;
-        /**
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
@@ -853,9 +864,37 @@ export namespace Components {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * Text of the button to open the popup
+         */
+        "tButtonText": any;
+        /**
+          * Data protection notice when user registering is enabled
+         */
+        "tDataProtectionNotice": any;
+        /**
+          * Fine print of the popup under the title
+         */
+        "tFinePrint": any;
+        /**
+          * When loading takes a bit longer, show this text
+         */
+        "tLoadingSorry": any;
+        /**
+          * Title of the popup
+         */
+        "tPopupTitle": any;
+        /**
+          * Description of the feedback section when closing the popup
+         */
+        "tRateExperienceText": any;
+        /**
+          * Title of the feedback section when closing the popup
+         */
+        "tRateExperienceTitle": any;
+        /**
           * Placeholder of the textfield
          */
-        "textFieldPlaceholder": string;
+        "tTextFieldPlaceholder": any;
         /**
           * Variant of the textfield how does it look like
          */
@@ -986,6 +1025,26 @@ export namespace Components {
           * How many products to show in simple variant
          */
         "simpleResultCount": number;
+        /**
+          * Title of categories section
+         */
+        "tCategoriesCaption": any;
+        /**
+          * Recentely clicked tab caption
+         */
+        "tLastClickedProductsCaption": any;
+        /**
+          * Title of search results
+         */
+        "tSearchResults": any;
+        /**
+          * Title of button to start Moi session
+         */
+        "tStartChat": any;
+        /**
+          * Trending tab caption
+         */
+        "tTrendingCaption": any;
     }
     /**
      * Klevu ratings component
@@ -1061,10 +1120,6 @@ export namespace Components {
          */
         "makeSearch": (term: string) => Promise<void>;
         /**
-          * The placeholder text to display in the search field.
-         */
-        "placeholder": string;
-        /**
           * Should try to find categories as well
          */
         "searchCategories"?: boolean;
@@ -1081,10 +1136,6 @@ export namespace Components {
          */
         "searchSuggestions"?: boolean;
         /**
-          * Button text
-         */
-        "searchText": string;
-        /**
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
@@ -1092,6 +1143,14 @@ export namespace Components {
           * In case you want to sort the results
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * The placeholder text to display in the search field.
+         */
+        "tPlaceholder": any;
+        /**
+          * Button text
+         */
+        "tSearchText": any;
         /**
           * Variant of the search field
          */
@@ -1121,6 +1180,14 @@ export namespace Components {
           * In which order to set the products
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Text of load more button
+         */
+        "tLoadMore": any;
+        /**
+          * The title of the page
+         */
+        "tSearchTitle": any;
         /**
           * What term was used for search
          */
@@ -2114,6 +2181,10 @@ declare namespace LocalJSX {
           * Is the message from the user or from the bot
          */
         "remote"?: boolean;
+        /**
+          * Text for rating reason title
+         */
+        "tRatingReason"?: any;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -2211,10 +2282,6 @@ declare namespace LocalJSX {
      */
     interface KlevuCmsList {
         /**
-          * Caption of the listing
-         */
-        "caption"?: string;
-        /**
           * Should use url parameter from link to create anchor
          */
         "link"?: boolean;
@@ -2223,6 +2290,10 @@ declare namespace LocalJSX {
           * List of Klevu results records with type of Page
          */
         "pages": Array<Partial<KlevuRecord>>;
+        /**
+          * Caption of the listing
+         */
+        "tCaption"?: any;
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -2324,6 +2395,7 @@ declare namespace LocalJSX {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
+        "tMore"?: any;
     }
     /**
      * Render all facets of filter manager
@@ -2424,9 +2496,21 @@ declare namespace LocalJSX {
          */
         "apiKey": string;
         /**
+          * Which language to load
+         */
+        "language"?: Translations;
+        /**
           * Global settings
          */
         "settings"?: KlevuUIGlobalSettings;
+        /**
+          * Provide your own translations
+         */
+        "translation"?: Translation;
+        /**
+          * Override the default translation URL prefix. Will use format of `${translationUrlPrefix}/translations/${lang}.json`
+         */
+        "translationUrlPrefix"?: string;
         /**
           * Klevu Server URL
          */
@@ -2437,13 +2521,13 @@ declare namespace LocalJSX {
      */
     interface KlevuLatestSearches {
         /**
-          * Caption of the list
-         */
-        "caption"?: string;
-        /**
           * Event that is emitted when a popular search is clicked
          */
         "onKlevuLastSearchClicked"?: (event: KlevuLatestSearchesCustomEvent<string>) => void;
+        /**
+          * Caption of the list
+         */
+        "tCaption"?: any;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -2520,6 +2604,10 @@ declare namespace LocalJSX {
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
+          * Text for load more button
+         */
+        "tLoadMore"?: any;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -2593,13 +2681,13 @@ declare namespace LocalJSX {
      */
     interface KlevuPopularSearches {
         /**
-          * Caption of the list
-         */
-        "caption"?: string;
-        /**
           * Event that is emitted when a popular search is clicked
          */
         "onKlevuPopularSearchClicked"?: (event: KlevuPopularSearchesCustomEvent<string>) => void;
+        /**
+          * Caption of the list
+         */
+        "tCaption"?: any;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -2814,10 +2902,6 @@ declare namespace LocalJSX {
          */
         "askButtonText"?: string;
         /**
-          * Text of the button to open the popup
-         */
-        "buttonText"?: string;
-        /**
           * Config for Klevu
          */
         "config"?: KlevuConfig;
@@ -2825,10 +2909,6 @@ declare namespace LocalJSX {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
-        /**
-          * Fine print of the popup under the title
-         */
-        "finePrint"?: string;
         /**
           * Element to anchor the product query popup to
          */
@@ -2842,10 +2922,6 @@ declare namespace LocalJSX {
          */
         "popupOffset"?: number;
         /**
-          * Title of the popup
-         */
-        "popupTitle"?: string;
-        /**
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
@@ -2858,9 +2934,37 @@ declare namespace LocalJSX {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * Text of the button to open the popup
+         */
+        "tButtonText"?: any;
+        /**
+          * Data protection notice when user registering is enabled
+         */
+        "tDataProtectionNotice"?: any;
+        /**
+          * Fine print of the popup under the title
+         */
+        "tFinePrint"?: any;
+        /**
+          * When loading takes a bit longer, show this text
+         */
+        "tLoadingSorry"?: any;
+        /**
+          * Title of the popup
+         */
+        "tPopupTitle"?: any;
+        /**
+          * Description of the feedback section when closing the popup
+         */
+        "tRateExperienceText"?: any;
+        /**
+          * Title of the feedback section when closing the popup
+         */
+        "tRateExperienceTitle"?: any;
+        /**
           * Placeholder of the textfield
          */
-        "textFieldPlaceholder"?: string;
+        "tTextFieldPlaceholder"?: any;
         /**
           * Variant of the textfield how does it look like
          */
@@ -2991,6 +3095,26 @@ declare namespace LocalJSX {
           * How many products to show in simple variant
          */
         "simpleResultCount"?: number;
+        /**
+          * Title of categories section
+         */
+        "tCategoriesCaption"?: any;
+        /**
+          * Recentely clicked tab caption
+         */
+        "tLastClickedProductsCaption"?: any;
+        /**
+          * Title of search results
+         */
+        "tSearchResults"?: any;
+        /**
+          * Title of button to start Moi session
+         */
+        "tStartChat"?: any;
+        /**
+          * Trending tab caption
+         */
+        "tTrendingCaption"?: any;
     }
     /**
      * Klevu ratings component
@@ -3061,10 +3185,6 @@ declare namespace LocalJSX {
          */
         "onKlevuSearchSuggestions"?: (event: KlevuSearchFieldCustomEvent<SuggestionsEventData>) => void;
         /**
-          * The placeholder text to display in the search field.
-         */
-        "placeholder"?: string;
-        /**
           * Should try to find categories as well
          */
         "searchCategories"?: boolean;
@@ -3081,10 +3201,6 @@ declare namespace LocalJSX {
          */
         "searchSuggestions"?: boolean;
         /**
-          * Button text
-         */
-        "searchText"?: string;
-        /**
           * Sends analytics when making query
          */
         "sendAnalytics"?: boolean;
@@ -3092,6 +3208,14 @@ declare namespace LocalJSX {
           * In case you want to sort the results
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * The placeholder text to display in the search field.
+         */
+        "tPlaceholder"?: any;
+        /**
+          * Button text
+         */
+        "tSearchText"?: any;
         /**
           * Variant of the search field
          */
@@ -3121,6 +3245,14 @@ declare namespace LocalJSX {
           * In which order to set the products
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Text of load more button
+         */
+        "tLoadMore"?: any;
+        /**
+          * The title of the page
+         */
+        "tSearchTitle"?: any;
         /**
           * What term was used for search
          */

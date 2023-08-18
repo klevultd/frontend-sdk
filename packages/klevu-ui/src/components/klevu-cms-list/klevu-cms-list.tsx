@@ -1,5 +1,6 @@
 import { KlevuRecord } from "@klevu/core"
 import { Component, Event, EventEmitter, Fragment, h, Host, Prop } from "@stencil/core"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Component to display list of CMS page results
@@ -21,7 +22,7 @@ export class KlevuCmsList {
   /**
    * Caption of the listing
    */
-  @Prop() caption = "CMS pages"
+  @Prop() tCaption = getTranslation("cmsList.tCaption")
 
   @Event({
     composed: true,
@@ -32,7 +33,7 @@ export class KlevuCmsList {
     return (
       <Host>
         <klevu-typography class="caption" variant="h3">
-          {this.caption}
+          {this.tCaption}
         </klevu-typography>
 
         {this.pages?.map((page) => {

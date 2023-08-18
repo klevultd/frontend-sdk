@@ -36,20 +36,23 @@ export const Tool = memo(function KlevuSettings() {
 
   const { getReferenceProps, getFloatingProps } = useInteractions([click, dismiss])
 
+  const [apiKey, setApiKey] = useState(localStorage.getItem("klevu-api-key") || "")
+  const [url, setUrl] = useState(localStorage.getItem("klevu-url") || "")
+  const [language, setLanguage] = useState(localStorage.getItem("klevu-language") || undefined)
+
   const onSave = (e) => {
     localStorage.setItem("klevu-api-key", apiKey)
     localStorage.setItem("klevu-url", url)
+    localStorage.setItem("klevu-language", language ?? "")
     window.location.reload()
   }
 
   const onClose = () => {
     setApiKey(localStorage.getItem("klevu-api-key") || "")
     setUrl(localStorage.getItem("klevu-url") || "")
+    setLanguage(localStorage.getItem("klevu-language") || undefined)
     setIsOpen(false)
   }
-
-  const [apiKey, setApiKey] = useState(localStorage.getItem("klevu-api-key") || "")
-  const [url, setUrl] = useState(localStorage.getItem("klevu-url") || "")
 
   return (
     <Fragment>
@@ -96,6 +99,17 @@ export const Tool = memo(function KlevuSettings() {
                   }}
                   value={url}
                 />
+                Language
+                <select
+                  onChange={(e) => {
+                    setLanguage(e.target.value)
+                  }}
+                  value={language}
+                >
+                  <option value="en">English</option>
+                  <option value="fi">Finnish</option>
+                  <option value="es">Spanish</option>
+                </select>
                 <div
                   style={{
                     display: "flex",

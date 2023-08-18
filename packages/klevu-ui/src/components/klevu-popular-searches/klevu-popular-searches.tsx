@@ -1,6 +1,7 @@
 import { KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { getTranslation } from "../../utils/getTranslation"
 
 /**
  * Fetches and displays most popular searches from Klevu Merchant center
@@ -14,7 +15,8 @@ export class KlevuPopularSearches {
   /**
    * Caption of the list
    */
-  @Prop() caption = "Popular searches"
+  @Prop() tCaption = getTranslation("popularSearches.tCaption")
+
   @State() popularSearches: string[] = []
 
   /**
@@ -44,7 +46,7 @@ export class KlevuPopularSearches {
     return (
       <Host>
         <klevu-typography class="caption" variant="h3">
-          {this.caption}
+          {this.tCaption}
         </klevu-typography>
         {this.popularSearches.map((s) => (
           <klevu-list condensed noXPadding onClick={() => this.#popularSearchClick(s)}>

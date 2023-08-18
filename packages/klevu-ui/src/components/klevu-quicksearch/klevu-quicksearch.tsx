@@ -19,6 +19,8 @@ import {
   SearchResultsEventData,
   SuggestionsEventData,
 } from "../klevu-search-field/klevu-search-field"
+import { getTranslation } from "../../utils/getTranslation"
+import { stringConcat } from "../../utils/stringConcat"
 
 export type KlevuQuicksearchResultVarint = "simple" | "full"
 
@@ -82,6 +84,31 @@ export class KlevuQuicksearch {
    * Enable Klevu MOI chat
    */
   @Prop() enableChat?: boolean
+
+  /**
+   * Title of search results
+   */
+  @Prop() tSearchResults = getTranslation("quicksearch.tSearchResults")
+
+  /**
+   * Title of button to start Moi session
+   */
+  @Prop() tStartChat = getTranslation("quicksearch.tStartChat")
+
+  /**
+   * Title of categories section
+   */
+  @Prop() tCategoriesCaption = getTranslation("quicksearch.tCategoriesCaption")
+
+  /**
+   * Trending tab caption
+   */
+  @Prop() tTrendingCaption = getTranslation("quicksearch.tTrendingCaption")
+
+  /**
+   * Recentely clicked tab caption
+   */
+  @Prop() tLastClickedProductsCaption = getTranslation("quicksearch.tLastClickedProductsCaption")
 
   /**
    * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
@@ -235,8 +262,8 @@ export class KlevuQuicksearch {
             slot="origin"
             searchProducts
             searchSuggestions
-            searchText={this.searchText}
-            placeholder={this.placeholder}
+            tSearchText={this.searchText}
+            tPlaceholder={this.placeholder}
             fallback-term={this.fallbackTerm}
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
@@ -266,7 +293,7 @@ export class KlevuQuicksearch {
           ></klevu-suggestions-list>
           {this.cmsPages && this.cmsPages.length > 0 && <klevu-cms-list pages={this.cmsPages} link></klevu-cms-list>}
           {this.categories && this.categories.length > 0 && (
-            <klevu-cms-list pages={this.categories} caption="Categories" link></klevu-cms-list>
+            <klevu-cms-list pages={this.categories} tCaption={this.tCategoriesCaption} link></klevu-cms-list>
           )}
         </aside>
         <section>
@@ -308,7 +335,7 @@ export class KlevuQuicksearch {
           {this.resultVariant === "simple" && (
             <Fragment>
               <div class="resultheader">
-                <klevu-typography variant="h3">Search results</klevu-typography>
+                <klevu-typography variant="h3">{this.tSearchResults}</klevu-typography>
               </div>
               <div class="lineproducts">
                 {this.products?.map((p) => (
@@ -333,7 +360,7 @@ export class KlevuQuicksearch {
         <aside>
           {this.enableChat && (
             <klevu-button size="small" onClick={() => (this.chat = true)}>
-              Start chat
+              {this.tStartChat}
             </klevu-button>
           )}
           <klevu-popular-searches
@@ -346,12 +373,12 @@ export class KlevuQuicksearch {
         <section>
           <div class="tabrow">
             <klevu-tab
-              caption="Trending"
+              caption={this.tTrendingCaption}
               active={this.activeTab === "trending"}
               onClick={() => (this.activeTab = "trending")}
             ></klevu-tab>
             <klevu-tab
-              caption={`Recently viewed (${this.lastClickedProducts?.length ?? 0})`}
+              caption={stringConcat(this.tLastClickedProductsCaption, [`${this.lastClickedProducts?.length ?? 0}`])}
               active={this.activeTab === "last"}
               onClick={() => {
                 if (this.lastClickedProducts?.length === 0) {

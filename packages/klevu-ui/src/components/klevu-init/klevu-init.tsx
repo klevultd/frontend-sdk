@@ -1,6 +1,17 @@
 import { KlevuConfig } from "@klevu/core"
 import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
+import en from "../../translations/en.json"
+
+/**
+ * List of available translations
+ */
+export type Translations = "en" | "fi"
+
+/**
+ * Translation typing to auto complete
+ */
+export type Translation = typeof en
 
 /**
  *
@@ -71,6 +82,22 @@ export class KlevuInit {
    */
   @Prop() settings?: KlevuUIGlobalSettings
 
+  /**
+   * Which language to load
+   */
+  @Prop() language: Translations = "en"
+
+  /**
+   * Provide your own translations
+   */
+  @Prop() translation?: Translation
+
+  /**
+   * Override the default translation URL prefix. Will use format of
+   * `${translationUrlPrefix}/translations/${lang}.json`
+   */
+  @Prop() translationUrlPrefix?: string
+
   async connectedCallback() {
     KlevuConfig.init({
       apiKey: this.apiKey,
@@ -78,6 +105,11 @@ export class KlevuInit {
     })
 
     window["klevu_ui_settings"] = this.settings
+    if (this.translation) {
+      window["klevu_ui_translations"] = this.translation
+    } else if (this.language != "en") {
+      window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
+    }
   }
 
   /**
@@ -124,10 +156,29 @@ export class KlevuInit {
   }
 }
 
+async function fetchTranslation(lang: Translations, urlPrefix?: string): Promise<typeof en> {
+  // when not provided try loading translations from two folders up in the url
+  if (!urlPrefix) {
+    const parts = import.meta.url.split("/")
+    parts.splice(-2, 2)
+    urlPrefix = parts.join("/")
+  }
+  return new Promise((resolve, reject): void => {
+    fetch(`${urlPrefix}/translations/${lang}.json`).then(
+      (result) => {
+        if (result.ok) resolve(result.json())
+        else reject()
+      },
+      () => reject()
+    )
+  })
+}
+
 // extends window type with klevu_ui_settings and other known Klevu variables
 declare global {
   interface Window {
     klevu_ui_settings?: KlevuUIGlobalSettings
+    klevu_ui_translations?: typeof en
     klevu_page_meta?: {
       pageType?: string
       itemName?: string

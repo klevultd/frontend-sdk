@@ -16,5 +16,5 @@ const meta: Meta = {
 export default meta
 
 export const PopularSearches: StoryObj<KlevuPopularSearches> = {
-  render: (args) => html`<klevu-popular-searches caption=${ifDefined(args.caption)}></klevu-popular-searches>`,
+  render: (args) => html`<klevu-popular-searches t-caption=${ifDefined(args.tCaption)}></klevu-popular-searches>`,
 }

@@ -1,0 +1,86 @@
+import { Meta, Story } from "@storybook/addon-docs"
+import { html } from "lit-html"
+
+<Meta title="Guides/I18n" />
+
+# Translating Components in Klevu
+
+Klevu provides a seamless way to translate strings used within its components.
+This feature enhances the user experience by allowing you to display content in
+the preferred language. There are two primary methods to achieve translation:
+using the language attribute or the translation attribute.
+
+Using the language Attribute The klevu-init component includes an attribute
+called language. This attribute serves as a powerful tool to modify the default
+language settings across all components. By adjusting the language attribute,
+you can ensure that the entire interface is presented in the desired language.
+
+To use the language attribute for translation:
+
+```html
+<klevu-init language="en"></klevu-init>
+```
+
+In this example, the language attribute is set to "en" to signify English as the
+default language. Klevu's components will then automatically display content in
+English. By default components are always rendered with English language.
+
+## Using the translation Attribute
+
+For more fine-grained control over translation, you can utilize the
+`translation` attribute.
+
+To use the `translation` attribute for a specific string:
+
+```html
+<klevu-init></klevu-init>
+<script>
+  const init = document.querySelector("klevu-init")
+  init.translation = {
+    chatBubble: {
+      tRatingReason: "Hello reason:",
+    },
+  }
+</script>
+```
+
+List of keys can be found in `translations/en.json` in the `@klevu/ui` sources.
+
+## Using `t-` Prefix Attributes
+
+In individual components, you can find attributes starting with the `t-` prefix.
+These attributes allow you to replace specific texts within the components with
+translated strings. For example, the `klevu-quicksearch` component includes a
+`t-trending-caption` attribute that sets the title for trending products.
+
+To replace text using `t-` prefix attributes:
+
+```html
+<klevu-quicksearch t-trending-caption="Suositut tuotteet"></klevu-quicksearch>
+```
+
+In this case, the t-trending-caption attribute is set to "Suositut tuotteet,"
+which will be displayed as the title for trending products in the
+klevu-quicksearch component.
+
+## Customizing Translation JSON
+
+When using the `language` attribute, Klevu's `klevu-init` component fetches a
+JSON file from the server to facilitate translation for all components. By
+default, the component attempts to retrieve this JSON from the same URL where
+the source was generated.
+
+However, there might be scenarios where this default behavior doesn't work as
+expected. In such cases, you can provide a custom URL prefix for the translation
+JSON using the `translation-url-prefix` attribute.
+
+To specify a custom URL prefix for translation:
+
+```html
+<klevu-init language="fr" translation-url-prefix="/assets"></klevu-init>
+```
+
+In this example, the `translation-url-prefix` attribute is set to `/assets`,
+allowing the `klevu-init` component to fetch the translation JSON from the
+specified path. Fetching will use format
+`${translation-url-prefix}/translations/${language}.json`
