@@ -16,7 +16,7 @@ import { getGlobalSettings } from "../../utils/utils"
 import { getTranslation } from "../../utils/getTranslation"
 
 export type KlevuFacetMode = "checkbox" | "radio"
-export type OptionType = {
+type OptionType = {
   name: string;
   value: string;
   count: number;
