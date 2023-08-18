@@ -11,9 +11,10 @@ Klevu ratings component
 
 ## Properties
 
-| Property | Attribute | Description  | Type     | Default |
-| -------- | --------- | ------------ | -------- | ------- |
-| `rating` | `rating`  | Rating value | `number` | `0`     |
+| Property      | Attribute      | Description             | Type     | Default |
+| ------------- | -------------- | ----------------------- | -------- | ------- |
+| `rating`      | `rating`       | Rating value            | `number` | `0`     |
+| `ratingRange` | `rating-range` | Number of stars to show | `number` | `5`     |
 
 
 ## Dependencies

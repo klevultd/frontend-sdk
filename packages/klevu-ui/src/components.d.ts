@@ -1049,12 +1049,17 @@ export namespace Components {
     /**
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
+     * @prop ratingRange - The number of stars to show
      */
     interface KlevuRating {
         /**
           * Rating value
          */
         "rating": number;
+        /**
+          * Number of stars to show
+         */
+        "ratingRange": number;
     }
     /**
      * Full recommendation banner solution
@@ -1881,6 +1886,7 @@ declare global {
     /**
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
+     * @prop ratingRange - The number of stars to show
      */
     interface HTMLKlevuRatingElement extends Components.KlevuRating, HTMLStencilElement {
     }
@@ -3119,12 +3125,17 @@ declare namespace LocalJSX {
     /**
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
+     * @prop ratingRange - The number of stars to show
      */
     interface KlevuRating {
         /**
           * Rating value
          */
         "rating"?: number;
+        /**
+          * Number of stars to show
+         */
+        "ratingRange"?: number;
     }
     /**
      * Full recommendation banner solution
@@ -3773,6 +3784,7 @@ declare module "@stencil/core" {
             /**
              * Klevu ratings component
              * @prop rating - The rating value as a number to show
+             * @prop ratingRange - The number of stars to show
              */
             "klevu-rating": LocalJSX.KlevuRating & JSXBase.HTMLAttributes<HTMLKlevuRatingElement>;
             /**

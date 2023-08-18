@@ -4,6 +4,7 @@ import { Component, Host, Prop, h } from "@stencil/core"
  * Klevu ratings component
  *
  * @prop rating - The rating value as a number to show
+ * @prop ratingRange - The number of stars to show
  */
 @Component({
   tag: "klevu-rating",
@@ -16,10 +17,15 @@ export class KlevuRating {
    */
   @Prop() rating: number = 0
 
+  /**
+   * Number of stars to show
+   */
+  @Prop() ratingRange: number = 5
+
   render() {
     return (
       <Host>
-        {...[...Array(5)].map((_, i) => (
+        {...[...Array(this.ratingRange)].map((_, i) => (
           <svg
             width="16"
             height="16"

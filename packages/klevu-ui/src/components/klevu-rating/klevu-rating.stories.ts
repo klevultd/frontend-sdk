@@ -1,5 +1,6 @@
 import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
+import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuRating } from "./klevu-rating"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-rating")
@@ -17,8 +18,9 @@ export default meta
 export const Rating: StoryObj<KlevuRating> = {
   args: {
     rating: 3,
+    ratingRange: 5
   },
   render: (args) => html`
-    <klevu-rating rating=${args.rating}></klevu-rating>
+    <klevu-rating rating=${ifDefined(args.rating)} rating-range=${ifDefined(args.ratingRange)}></klevu-rating>
   `,
 }

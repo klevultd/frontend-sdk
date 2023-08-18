@@ -331,7 +331,8 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
 
 
 export const KlevuRating = /*@__PURE__*/ defineContainer<JSX.KlevuRating>('klevu-rating', undefined, [
-  'rating'
+  'rating',
+  'ratingRange'
 ]);
 
 
