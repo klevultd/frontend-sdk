@@ -108,7 +108,7 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
           name="forum"
         ></klevu-icon>
         <span slot="after-fineprint">
-          <klevu-popup popup-width="400" anchor="top-end" toggle>
+          <klevu-popup popup-width="400" anchor="bottom-end" toggle>
             <span slot="origin" id="fineprint-popup-origin">?</span>
             <div slot="content" id="fineprint-popup">
               By using our website and AI chatbot, you agree to the terms of our Privacy Policy and agree that you

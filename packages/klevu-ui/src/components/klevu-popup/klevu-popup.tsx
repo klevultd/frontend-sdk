@@ -111,7 +111,7 @@ export class KlevuPopup {
   }
 
   async #updatePopupPosition() {
-    if (!this.#originElement || !this.#contentElement) {
+    if (!this.#originElement || !this.#contentElement || !this.dialogRef?.open) {
       return
     }
 
