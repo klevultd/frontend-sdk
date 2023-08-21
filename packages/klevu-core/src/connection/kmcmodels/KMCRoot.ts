@@ -27,6 +27,34 @@ export interface KMCRootObject {
    * Domain where JSv2 is hosted on
    */
   klevu_userJavascriptDomain: string
+
+  klevu_showBannerAds: boolean
+  klevu_multiSelectFilters: boolean
+  klevu_userAnalyticsDomain: string
+  klevu_showOutOfStock: boolean
+  klevu_logoFreeSearch: boolean
+  klevu_layoutView: string
+  klevu_showPopuralTerms: boolean
+  klevu_showProductCode: boolean
+  klevu_showPopularSearches: boolean
+  klevu_cmsApiKey: string
+  klevu_categorySearchEnabled: boolean
+  klevu_showPriceSlider: boolean
+  klevu_addToCartEnabled: boolean
+  klevu_productsToShowInSlimLayout: string
+  klevu_cmsEnabled: boolean
+  klevu_filtersOnLeft: boolean
+  klevu_showPrices: boolean
+  klevu_isSearchActive: boolean
+  klevu_filtersEnabled: boolean
+  klevu_fluidLayoutEnabled: boolean
+  klevu_cmsSearchDomain: string
+  klevu_lookForDataInSameFeed: boolean
+  klevuLayoutVersion: string
+  klevu_loadMapFile: boolean
+  klevu_layoutType: string
+  klevu_apiDomain: string
+  klevu_showRecentSerches: boolean
 }
 
 interface KlevuPopularProductsOfSite {
@@ -37,10 +65,34 @@ interface KlevuPopularProductsOfSite {
 }
 
 interface KlevuUcUserOptions {
+  addToCartButton: string
+  showRolloverImage: boolean
+  showProductSwatches: boolean
+  vatCaption: string
   enablePersonalisationInCatNav: boolean
-  enablePersonalisationInSearch: boolean
-  noImageUrl: string
+  outOfStockCaption: string
   noResultsOptions: NoResultsOptions
+  noImageUrl: string
+  showRatingsOnCategoryPage: boolean
+  showTrendingProductsCaption: string
+  enablePersonalisationInSearch: boolean
+  isFullImageUrlProvided: boolean
+  showSearchBoxOnLandingPage: boolean
+  showRecentlyViewedItemsCaption: string
+  priceInterval: string
+  priceFormatter: PriceFormatter
+  showRecentlyViewedItems: boolean
+  showTrendingProducts: boolean
+  showRatingsOnQuickSearches: boolean
+  showRatingsOnSearchResultsLandingPage: boolean
+  showFiltersInMobile: boolean
+}
+interface PriceFormatter {
+  thousandSeparator: string
+  decimalPlaces: string
+  decimalSeparator: string
+  appendCurrencyAtLast: boolean
+  currencySymbol: string
 }
 
 interface NoResultsOptions {
