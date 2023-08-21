@@ -27,6 +27,5 @@ export const Recommendations: StoryObj<KlevuRecommendations> = {
     item-group-id=${ifDefined(args.itemGroupId)}
     recommendation-id=${ifDefined(args.recommendationId)}
     recommendation-title=${ifDefined(args.recommendationTitle)}
-    .renderProductSlot=${args.renderProductSlot}
   ></klevu-recommendations>`,
 }

@@ -23,7 +23,6 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     filter-count=${ifDefined(args.filterCount)}
     .filterCustomOrder=${args.filterCustomOrder}
     limit=${ifDefined(args.limit)}
-    .renderProductSlot=${args.renderProductSlot}
     sort=${ifDefined(args.sort)}
     term=${ifDefined(args.term)}
     use-pagination=${ifDefined(args.usePagination)}
