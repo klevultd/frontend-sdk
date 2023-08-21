@@ -52,4 +52,5 @@
 dialog {
   position: fixed;
   border: 0;
+  z-index: 1000;
 }
