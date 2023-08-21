@@ -16,6 +16,46 @@ const meta: Meta = {
 export default meta
 
 export const chip: StoryObj<KlevuChip> = {
+  args: {
+    selected: true,
+  },
   render: (args) =>
-    html`<klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>`,
+    html`
+      <div class="chiplist">
+        <klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>
+        <klevu-chip removable>Color: Blue</klevu-chip>
+        <klevu-chip removable>Price: $0 - $100</klevu-chip>
+        <klevu-chip removable>Size: XXL</klevu-chip>
+      </div>
+      <script>
+        // should be const, but documentation breaks if set
+        chips = document.querySelectorAll(".chiplist klevu-chip")
+        for (const chip of chips) {
+          chip.addEventListener("click", (event) => {
+            for (const chip of chips) {
+              chip.setAttribute("selected", false)
+            }
+            event.target.setAttribute("selected", true)
+          })
+
+          chip.addEventListener("klevuChipRemove", (e) => {
+            e.target.remove()
+            // this prevents click events from being propagated in click event
+            e.preventDefault()
+            return false
+          })
+        }
+      </script>
+      <style>
+        .chiplist {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .chiplist klevu-chip {
+          cursor: pointer;
+        }
+      </style>
+    `,
 }

@@ -1,5 +1,5 @@
 :host {
-  display: inline-block;
+  display: inline-flex;
   padding: var(--klevu-spacing-02) var(--klevu-spacing-05);
   border-radius: var(--klevu-chip-radius, var(--klevu-border-radius-xxl));
   align-items: center;
@@ -17,7 +17,7 @@
 
 klevu-icon {
   position: relative;
-  top: 1px;
+  top: 2px;
   left: -4px;
   font-size: 0.7em;
   padding: 2px;

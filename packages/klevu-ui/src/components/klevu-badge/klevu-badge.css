@@ -6,12 +6,6 @@
   align-items: center;
 }
 
-:host(.closable) {
-  display: inline-flex;
-  cursor: pointer;
-  user-select: none;
-}
-
 klevu-icon {
   position: relative;
   top: 1px;

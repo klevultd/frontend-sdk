@@ -2,6 +2,7 @@ import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuBadge } from "./klevu-badge"
+import { ifDefined } from "lit-html/directives/if-defined.js"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-badge")
 
 const meta: Meta = {
@@ -19,7 +20,7 @@ export const Badges: StoryObj<KlevuBadge> = {
     accent: 1,
   },
   render: (args) => html`
-    <klevu-badge accent=${args.accent}>Badge 1</klevu-badge>
+    <klevu-badge accent=${ifDefined(args.accent)}>Badge 1</klevu-badge>
     <klevu-badge accent="2">Badge 2</klevu-badge>
     <klevu-badge accent="3">Badge 3</klevu-badge>
     <klevu-badge accent="4" closable>Badge 4</klevu-badge>
@@ -37,8 +38,4 @@ export const NeutralBadges: StoryObj<KlevuBadge> = {
 
 export const CustomColor: StoryObj<KlevuBadge> = {
   render: (args) => html`<klevu-badge style="--klevu-badge-background: salmon;">Badge 1</klevu-badge>`,
-}
-
-export const Closable: StoryObj<KlevuBadge> = {
-  render: (args) => html`<klevu-badge closable>hats</klevu-badge><klevu-badge closable accent="3">shirts</klevu-badge>`,
 }

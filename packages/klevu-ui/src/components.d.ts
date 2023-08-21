@@ -65,7 +65,8 @@ export namespace Components {
         "startOpen"?: boolean;
     }
     /**
-     * Basic badge component. Can be used to display small information on top of other elements.
+     * Basic badge component. Can be used to display small information on top of other elements. Typically
+     * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
@@ -74,7 +75,6 @@ export namespace Components {
           * Setting a acceent color to badge
          */
         "accent"?: number;
-        "closable"?: boolean;
         /**
           * Setting a neutral color to badge
          */
@@ -198,10 +198,10 @@ export namespace Components {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-     * @cssprop --klevu-chip-radius - Border radius of the chip
-     * @cssprop --klevu-chip-border - Border color of the chip
-     * @cssprop --klevu-chip-selected-background - Selected background color of the chip
-     * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+     * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
+     * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
+     * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
+     * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
      */
     interface KlevuChip {
         /**
@@ -1515,7 +1515,8 @@ declare global {
         new (): HTMLKlevuAccordionElement;
     };
     /**
-     * Basic badge component. Can be used to display small information on top of other elements.
+     * Basic badge component. Can be used to display small information on top of other elements. Typically
+     * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
@@ -1585,10 +1586,10 @@ declare global {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-     * @cssprop --klevu-chip-radius - Border radius of the chip
-     * @cssprop --klevu-chip-border - Border color of the chip
-     * @cssprop --klevu-chip-selected-background - Selected background color of the chip
-     * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+     * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
+     * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
+     * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
+     * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
      */
     interface HTMLKlevuChipElement extends Components.KlevuChip, HTMLStencilElement {
     }
@@ -2118,7 +2119,8 @@ declare namespace LocalJSX {
         "startOpen"?: boolean;
     }
     /**
-     * Basic badge component. Can be used to display small information on top of other elements.
+     * Basic badge component. Can be used to display small information on top of other elements. Typically
+     * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
@@ -2127,7 +2129,6 @@ declare namespace LocalJSX {
           * Setting a acceent color to badge
          */
         "accent"?: number;
-        "closable"?: boolean;
         /**
           * Setting a neutral color to badge
          */
@@ -2266,10 +2267,10 @@ declare namespace LocalJSX {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-     * @cssprop --klevu-chip-radius - Border radius of the chip
-     * @cssprop --klevu-chip-border - Border color of the chip
-     * @cssprop --klevu-chip-selected-background - Selected background color of the chip
-     * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+     * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
+     * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
+     * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
+     * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
      */
     interface KlevuChip {
         /**
@@ -3561,7 +3562,8 @@ declare module "@stencil/core" {
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             /**
-             * Basic badge component. Can be used to display small information on top of other elements.
+             * Basic badge component. Can be used to display small information on top of other elements. Typically
+             * used to display things on top of product.
              * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
              * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
              */
@@ -3601,10 +3603,10 @@ declare module "@stencil/core" {
             /**
              * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
              * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-             * @cssprop --klevu-chip-radius - Border radius of the chip
-             * @cssprop --klevu-chip-border - Border color of the chip
-             * @cssprop --klevu-chip-selected-background - Selected background color of the chip
-             * @cssprop --klevu-chip-selected-border - Selected border color of the chip
+             * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
+             * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
+             * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
+             * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
              */
             "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**
