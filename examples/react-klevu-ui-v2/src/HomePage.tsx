@@ -45,48 +45,10 @@ const HomePage = () => {
   const [offset, setOffset] = useState(0)
   const [sort, setSort] = useState(KlevuSearchSorting.NameAsc)
   const limit = 24
+  const [recsProducts, setRecsProducts] = useState([])
   const [removeProduct, setRemoveProduct] = useState<KlevuRecord | null>(null)
   const [queryResult, setQueryResult] = useState<KlevuQueryResult>(null)
-  const renderProductSlot = useCallback(
-    (product: KlevuRecord, slot: string) => {
-      if (slot === "bottom") {
-        const div = document.createElement("div")
-        console.log("cart.items", cart.items)
-        div.className = "recsProduct"
-        createRoot(div).render(
-          cart.items.find((p) => p.id === product.id) ? (
-            <KlevuButton
-              onClick={() => {
-                cart.remove(product.id)
-              }}
-              fullWidth={true}
-            >
-              Remove
-            </KlevuButton>
-          ) : (
-            <KlevuButton
-              onClick={() => {
-                cart.add(product)
-              }}
-              fullWidth={true}
-            >
-              Add to cart
-            </KlevuButton>
-          ),
-        )
-        return div
-      }
-
-      return null
-    },
-    [cart.items.length],
-  )
-
-  console.log({
-    queryResult,
-    r: queryResult?.records,
-    manager,
-  })
+  
   return (
     <div>
       {loading && (
@@ -100,8 +62,41 @@ const HomePage = () => {
         <KlevuRecommendations
           recommendationId={recsId}
           recommendationTitle="Some title"
-          renderProductSlot={renderProductSlot}
         />
+        <KlevuRecommendations
+          recommendationId={recsId}
+          recommendationTitle="Customized Recommendation"
+          onData={(e) => setRecsProducts(e.detail.records)}
+        >
+          {recsProducts.map((product) => (
+            <KlevuProduct product={product}>
+              <div slot="info">{product.name}</div>
+              <div slot="bottom" className="buttonParent">
+                {cart.items.find((_p) => product.id === _p.id) ? (
+                  <KlevuButton
+                    onClick={() => {
+                      setRemoveProduct(product)
+                    }}
+                    fullWidth={true}
+                    style={{ border: "3px dashed red" }}
+                  >
+                    Remove
+                  </KlevuButton>
+                ) : (
+                  <KlevuButton
+                    onClick={() => {
+                      cart.add(product)
+                    }}
+                    fullWidth={true}
+                    style={{ border: "3px dashed blue" }}
+                  >
+                    Add to cart
+                  </KlevuButton>
+                )}
+              </div>
+            </KlevuProduct>
+          ))}
+        </KlevuRecommendations>
         <br />
         <h3>Merchandising</h3>
         <hr />
@@ -115,7 +110,6 @@ const HomePage = () => {
           sort={sort}
           onKlevuQueryResult={(event) => {
             setQueryResult(event.detail.result)
-            console.log("onklevuQueryResult")
             setLoading(false)
           }}
           updateOnFilterChange
@@ -127,7 +121,6 @@ const HomePage = () => {
                 <KlevuFacetList
                   manager={manager}
                   onKlevuApplyFilters={(e) => {
-                    console.log(e.target)
                     setLoading(true)
                   }}
                 />

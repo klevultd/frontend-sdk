@@ -40,9 +40,6 @@ function App() {
     )
     window.location.reload()
   }
-  useEffect(() => {
-    console.log("App useEffect")
-  }, [])
   const settings = {
     onItemClick(product, event) {
       navigate(`/products/${product.itemGroupId}/${product.id}`)

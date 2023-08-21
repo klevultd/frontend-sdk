@@ -1,4 +1,8 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "html.customData": ["./packages/klevu-ui/dist/docs/vscode-data.json"]
+  "html.customData": ["./packages/klevu-ui/dist/docs/vscode-data.json"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

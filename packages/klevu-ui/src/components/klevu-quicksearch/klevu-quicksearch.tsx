@@ -8,9 +8,15 @@ import {
   KlevuSearchSorting,
   trendingProducts,
 } from "@klevu/core"
-import { Component, Fragment, h, Host, Listen, Prop, State } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
-import { KlevuPaginationCustomEvent, KlevuSearchFieldCustomEvent, KlevuTextfieldCustomEvent } from "../../components"
+import {
+  KlevuPaginationCustomEvent,
+  KlevuSearchFieldCustomEvent,
+  KlevuTextfieldCustomEvent,
+  KlevuUtilViewportCustomEvent,
+  ViewportSize,
+} from "../../components"
 
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
@@ -24,10 +30,19 @@ import { stringConcat } from "../../utils/stringConcat"
 
 export type KlevuQuicksearchResultVarint = "simple" | "full"
 
+export type KlevuQuicksearchDataEvent = {
+  trendingProducts?: KlevuRecord[]
+  lastClickedProducts?: KlevuRecord[]
+  searchResult?: KlevuQueryResult
+}
+
 /**
  * Full app to create search bar that popups trending products and search results.
  *
  * @slot content - Popup content
+ * @slot search-products - Slot to replace search results listings
+ * @slot trending-products - Slot to replace trending products listings
+ * @slot last-clicked-products - Slot to replace last clicked products
  */
 @Component({
   tag: "klevu-quicksearch",
@@ -110,22 +125,8 @@ export class KlevuQuicksearch {
    */
   @Prop() tLastClickedProductsCaption = getTranslation("quicksearch.tLastClickedProductsCaption")
 
-  /**
-   * Function to render custom products. Result has to be native HTML element or a string. Provides a product being rendered.
-   * This function is called for each slot (top, image, info and bottom) of the component. Second parameter provides
-   * slot requested. Return null for slots that you do not want to render.
-   */
-  @Prop() renderProductSlot?: (product: KlevuRecord, productSlot: KlevuProductSlots) => HTMLElement | string | null
-
   @State() products?: KlevuRecord[] = []
-  @State() trendingProducts: Array<KlevuRecord | undefined> = [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-  ]
+  @State() trendingProducts: KlevuRecord[] = []
   @State() suggestions: string[] = []
   @State() cmsPages?: KlevuRecord[]
   @State() categories?: KlevuRecord[]
@@ -140,6 +141,23 @@ export class KlevuQuicksearch {
   #resultObject?: KlevuResponseQueryObject
 
   popup?: HTMLKlevuPopupElement
+
+  /**
+   * When the data in the component changes. This event can be used to replace
+   * whole rendering of products when used with slots properly.
+   */
+  @Event({
+    composed: true,
+  })
+  data!: EventEmitter<KlevuQuicksearchDataEvent>
+
+  #emitChangedData() {
+    this.data.emit({
+      lastClickedProducts: this.lastClickedProducts,
+      trendingProducts: this.trendingProducts,
+      searchResult: this.queryResult,
+    })
+  }
 
   @Listen("klevuTextChanged")
   async onTextChange(event: KlevuTextfieldCustomEvent<string>) {
@@ -162,6 +180,7 @@ export class KlevuQuicksearch {
     this.categories = event.detail.category?.records
     this.popup?.openModal()
     this.queryResult = await this.#searchField?.getQueryResult("search")
+    this.#emitChangedData()
   }
 
   async #searchPageChange(event: KlevuPaginationCustomEvent<number>) {
@@ -170,6 +189,7 @@ export class KlevuQuicksearch {
     }
     this.#searchField.getPage("search", event.detail - 1)
     this.queryResult = await this.#searchField?.getQueryResult("search")
+    this.#emitChangedData()
   }
 
   @Listen("klevuSearchSuggestions")
@@ -204,40 +224,13 @@ export class KlevuQuicksearch {
     const resultObject = trendingProductsQuery.queriesById("trendingProducts")
     if (resultObject) {
       this.trendingProducts = resultObject.records
+      this.#emitChangedData()
     }
-  }
-
-  #internalRenderProductSlot(product: KlevuRecord | undefined, slot: KlevuProductSlots) {
-    if (!this.renderProductSlot || !product) {
-      return null
-    }
-
-    const content = this.renderProductSlot(product, slot)
-
-    if (content === null) {
-      return null
-    }
-
-    if (typeof content === "string") {
-      return <div slot={slot} innerHTML={content}></div>
-    }
-
-    return (
-      <div
-        slot={slot}
-        ref={(el) => {
-          if (!el) {
-            return
-          }
-          el.innerHTML = ""
-          el.appendChild(content)
-        }}
-      ></div>
-    )
   }
 
   #onPopupOpen() {
     this.lastClickedProducts = KlevuLastClickedProducts.getProducts(3) as KlevuRecord[]
+    this.#emitChangedData()
   }
 
   #startSearch(term: string) {
@@ -245,9 +238,20 @@ export class KlevuQuicksearch {
     this.#searchField?.makeSearch(term)
   }
 
+  @State() currentViewPortSize?: ViewportSize
+  viewportUtil!: HTMLKlevuUtilViewportElement
+
+  #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
+    this.currentViewPortSize = event.detail
+  }
+
   render() {
     return (
       <Host>
+        <klevu-util-viewport
+          onSizeChanged={this.#sizeChange.bind(this)}
+          ref={(el) => (this.viewportUtil = el as HTMLKlevuUtilViewportElement)}
+        ></klevu-util-viewport>
         <klevu-popup
           anchor={this.popupAnchor}
           ref={(el) => (this.popup = el)}
@@ -284,6 +288,8 @@ export class KlevuQuicksearch {
   }
 
   #renderResultPage() {
+    const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+
     return (
       <Fragment>
         <aside>
@@ -306,25 +312,17 @@ export class KlevuQuicksearch {
                   onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
                 ></klevu-sort>
               </div>
-              <klevu-product-grid class="desktop" itemsPerRow={3}>
-                {this.products?.map((p) => (
-                  <klevu-product product={p} fixedWidth variant="small" exportparts={parts["klevu-product"]}>
-                    {this.#internalRenderProductSlot(p, "top")}
-                    {this.#internalRenderProductSlot(p, "image")}
-                    {this.#internalRenderProductSlot(p, "info")}
-                    {this.#internalRenderProductSlot(p, "bottom")}
-                  </klevu-product>
-                ))}
-              </klevu-product-grid>
-              <klevu-product-grid class="mobile">
-                {this.products?.map((p) => (
-                  <klevu-product product={p} fixedWidth variant="line" exportparts={parts["klevu-product"]}>
-                    {this.#internalRenderProductSlot(p, "top")}
-                    {this.#internalRenderProductSlot(p, "image")}
-                    {this.#internalRenderProductSlot(p, "info")}
-                    {this.#internalRenderProductSlot(p, "bottom")}
-                  </klevu-product>
-                ))}
+              <klevu-product-grid itemsPerRow={isMobile ? undefined : 3}>
+                <slot name="search-products">
+                  {this.products?.map((p) => (
+                    <klevu-product
+                      product={p}
+                      fixedWidth
+                      variant={isMobile ? "line" : "small"}
+                      exportparts={parts["klevu-product"]}
+                    ></klevu-product>
+                  ))}
+                </slot>
               </klevu-product-grid>
               <klevu-pagination
                 queryResult={this.queryResult}
@@ -338,14 +336,11 @@ export class KlevuQuicksearch {
                 <klevu-typography variant="h3">{this.tSearchResults}</klevu-typography>
               </div>
               <div class="lineproducts">
-                {this.products?.map((p) => (
-                  <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}>
-                    {this.#internalRenderProductSlot(p, "top")}
-                    {this.#internalRenderProductSlot(p, "image")}
-                    {this.#internalRenderProductSlot(p, "info")}
-                    {this.#internalRenderProductSlot(p, "bottom")}
-                  </klevu-product>
-                ))}
+                <slot name="search-products">
+                  {this.products?.map((p) => (
+                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                  ))}
+                </slot>
               </div>
             </Fragment>
           )}
@@ -391,26 +386,20 @@ export class KlevuQuicksearch {
           </div>
           {this.activeTab === "trending" && (
             <Fragment>
-              {this.trendingProducts?.map((p) => (
-                <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}>
-                  {this.#internalRenderProductSlot(p, "top")}
-                  {this.#internalRenderProductSlot(p, "image")}
-                  {this.#internalRenderProductSlot(p, "info")}
-                  {this.#internalRenderProductSlot(p, "bottom")}
-                </klevu-product>
-              ))}
+              <slot name="trending-products">
+                {this.trendingProducts?.map((p) => (
+                  <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                ))}
+              </slot>
             </Fragment>
           )}
           {this.activeTab === "last" && (
             <Fragment>
-              {this.lastClickedProducts?.map((p) => (
-                <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}>
-                  {this.#internalRenderProductSlot(p, "top")}
-                  {this.#internalRenderProductSlot(p, "image")}
-                  {this.#internalRenderProductSlot(p, "info")}
-                  {this.#internalRenderProductSlot(p, "bottom")}
-                </klevu-product>
-              ))}
+              <slot name="last-clicked-products">
+                {this.lastClickedProducts?.map((p) => (
+                  <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                ))}
+              </slot>
             </Fragment>
           )}
         </section>

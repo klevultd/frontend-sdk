@@ -34,3 +34,88 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-categories-caption=${ifDefined(args.tCategoriesCaption)}
   ></klevu-quicksearch>`,
 }
+
+export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
+  render: (args) => html`
+    <klevu-quicksearch class="customized">
+      <div slot="search-products">This will be replaced by script below</div>
+      <div slot="trending-products">This will be replaced by script below</div>
+      <div slot="last-clicked-products">This will be replace by script below</div>
+    </klevu-quicksearch>
+    <script>
+      const qs = document.querySelector("klevu-quicksearch.customized")
+      const productsSlot = document.querySelector('div[slot="search-products"]')
+      const lastClickedSlot = document.querySelector('div[slot="last-clicked-products"]')
+      const trendingProductsSlot = document.querySelector('div[slot="trending-products"]')
+
+      // when ever the data changes inside the quicksearch component we will receive it
+      qs.addEventListener("data", (event) => {
+        // empty from previous content
+        productsSlot.innerHTML = ""
+        lastClickedSlot.innerHTML = ""
+        trendingProductsSlot.innerHTML = ""
+
+        if (event.detail.searchResult) {
+          for (const record of event.detail.searchResult.records) {
+            // we should put everything inside kleve-product to get analytics working
+            const p = document.createElement("klevu-product")
+            // set the product attribute to wrapper
+            p.isWrapper = true
+            // we need to provide what record we are rending
+            p.product = record
+
+            // this is the your cutom styling for the product
+            p.innerHTML =
+              "<div class='product'><strong>" + record.name + "</strong><p>" + record.designer + "</p></div>"
+
+            // and then the default slot of klevu-product has everything you exacly want to display
+            productsSlot.appendChild(p)
+          }
+        }
+        // lets do the same for last clicked products
+        if (event.detail.lastClickedProducts) {
+          for (const record of event.detail.lastClickedProducts) {
+            const p = document.createElement("klevu-product")
+            p.isWrapper = true
+            p.product = record
+
+            p.innerHTML =
+              "<div class='product'><strong>" + record.name + "</strong><p>" + record.designer + "</p></div>"
+            lastClickedSlot.appendChild(p)
+          }
+        }
+        // and trending products
+        if (event.detail.trendingProducts) {
+          for (const record of event.detail.trendingProducts) {
+            const p = document.createElement("klevu-product")
+            p.isWrapper = true
+            p.product = record
+
+            p.innerHTML =
+              "<div class='product'><strong>" + record.name + "</strong><p>" + record.designer + "</p></div>"
+            trendingProductsSlot.appendChild(p)
+          }
+        }
+      })
+    </script>
+    <!-- your custom code can be modified with fully custom css -->
+    <style>
+      div.product {
+        display: block;
+        border: 1px solid grey;
+        margin-bottom: 8px;
+      }
+
+      div.product strong {
+        font-size: 1.2em;
+      }
+      div.product p {
+        margin: 0;
+      }
+
+      klevu-product {
+        display: block;
+      }
+    </style>
+  `,
+}

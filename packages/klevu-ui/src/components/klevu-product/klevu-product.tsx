@@ -85,6 +85,20 @@ export class KlevuProduct {
    */
   @Prop() keyDescription = "shortDesc"
 
+  /**
+   * Turns the component into a product wrapper that handles events
+   * automatically. It assumes that whole product is clickable.
+   *
+   * Component has only one main slot that can contain any content.
+   *
+   * To prevent product clicking use `event.stopPropagation()` in your
+   * events.
+   *
+   * Component still requires the product parameter as it's data is used
+   * send correct data to Klevu analytics
+   */
+  @Prop() isWrapper?: boolean
+
   @State() hoverImage?: string
 
   /**
@@ -129,6 +143,16 @@ export class KlevuProduct {
   }
 
   render() {
+    if (this.isWrapper) {
+      return (
+        <Host>
+          <div onClick={this.#click.bind(this)}>
+            <slot></slot>
+          </div>
+        </Host>
+      )
+    }
+
     const typeClasses = {
       small: this.variant === "small",
       line: this.variant === "line",
