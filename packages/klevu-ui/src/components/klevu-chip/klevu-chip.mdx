@@ -7,9 +7,25 @@ import * as Stories from "./klevu-chip.stories"
 
 <Markdown>{Stories.description}</Markdown>
 
-## Badge in accent colors
+## Description of example code
 
-Badge can be in accent colors. Colors are set in css properties and can be changed by overriding them.
+### HTML Markup
+
+Begin by creating a container with the class `chiplist` and add `klevu-chip` elements inside it. These chips can have various attributes, including `selected` and `removable`, to control their behavior.
+
+### JavaScript Interaction
+
+The JavaScript code adds interactivity to the chips. It selects all `klevu-chip` elements within the `.chiplist` container and adds event listeners to handle clicks and chip removal.
+
+- **Click Event**: When a chip is clicked, it toggles the `selected` attribute for all chips to `false` and sets the `selected` attribute of the clicked chip to `true`. This allows you to visually highlight the selected chip.
+
+- **klevuChipRemove Event**: When the "remove" button on a chip is clicked, it removes the chip from the list. It also prevents click events from propagating further.
+
+### Custom CSS Styling
+
+To style the chip list, custom CSS styles are applied. The `.chiplist` container is set to display chips in a flex layout with proper spacing, and cursor styles are adjusted for interactivity.
+
+By following this example, you can create and customize interactive chip lists with specific behaviors using the Klevu `klevu-chip` component.
 
 <Canvas of={Stories.chip} />
 

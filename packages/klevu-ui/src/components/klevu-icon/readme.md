@@ -21,7 +21,6 @@ Klevu icon component. Uses Google Material Icons.
 ### Used by
 
  - [klevu-accordion](../klevu-accordion)
- - [klevu-badge](../klevu-badge)
  - [klevu-button](../klevu-button)
  - [klevu-chat-bubble](../klevu-chat-bubble)
  - [klevu-chat-messages](../klevu-chat-messages)
@@ -40,7 +39,6 @@ Klevu icon component. Uses Google Material Icons.
 ```mermaid
 graph TD;
   klevu-accordion --> klevu-icon
-  klevu-badge --> klevu-icon
   klevu-button --> klevu-icon
   klevu-chat-bubble --> klevu-icon
   klevu-chat-messages --> klevu-icon
