@@ -236,7 +236,7 @@ export class KlevuFacet {
         </klevu-typography>
         <div class="options" slot="content">
           {this.useColorSwatch ? (
-            <div style={{ display: "flex", "flex-wrap": "wrap" }}>
+            <div class="colorSwatchContainer">
               {opts.map((o) => {
                 let swatch: KlevuSwatch = {
                   name: o.name,
