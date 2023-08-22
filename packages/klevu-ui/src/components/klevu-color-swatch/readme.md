@@ -5,6 +5,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+Color Swatch component
+
 ## Properties
 
 | Property                | Attribute   | Description                                   | Type                  | Default     |

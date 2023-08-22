@@ -69,16 +69,14 @@ export const ColorSwatches: StoryObj<KlevuFacet> = {
     option: manager.options[0],
     mode: "checkbox",
     useColorSwatch: true,
-    colorSwatchOverrides: [
-      {
-        name: "oliv",
+    colorSwatchOverrides: {
+      oliv: {
         color: "red",
       },
-      {
-        name: "multicolored",
+      multicolored: {
         color: "purple",
       },
-    ],
+    },
   },
   render: (args) =>
     html`<klevu-facet

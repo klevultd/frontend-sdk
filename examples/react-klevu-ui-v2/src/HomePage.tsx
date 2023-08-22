@@ -121,20 +121,18 @@ const HomePage = () => {
                   }}
                   colorSwatches={["color"]}
                   colorSwatchOverrides={{
-                    color: [
-                      {
-                        name: "oliv",
+                    color: {
+                      oliv: {
                         color: "red",
                       },
-                      {
-                        name: "beige",
+                      beige: {
                         color: "#fff",
                       },
-                      {
-                        name: "gold",
+
+                      gold: {
                         imageUrl: "purple.jpg",
                       },
-                    ],
+                    },
                   }}
                 />
               </div>

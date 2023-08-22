@@ -75,16 +75,14 @@ export const FacetListColorSwatches: StoryObj<KlevuFacetList> = {
     manager: manager,
     colorSwatches: ["color"],
     colorSwatchOverrides: {
-      color: [
-        {
-          name: "oliv",
+      color: {
+        oliv: {
           color: "red",
         },
-        {
-          name: "multicolored",
+        multicolored: {
           color: "purple",
         },
-      ],
+      },
     },
     customOrder: {},
   },

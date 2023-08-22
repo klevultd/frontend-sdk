@@ -1,14 +1,23 @@
 :host {
   display: block;
+  --klevu-color-swatch-border: #8c8c8c;
+  --klevu-color-swatch-default-background: #000;
+  --klevu-color-swatch-size: 25px;
+  --klevu-color-swatch-selected-color: #2b4af7;
 }
 
 .circle {
   margin: 3px;
-  height: 25px;
-  width: 25px;
-  background-color: black;
-  border: 1px solid #8c8c8c;
+  height: var(--klevu-color-swatch-size);
+  width: var(--klevu-color-swatch-size);
+  background-color: var(--klevu-color-swatch-default-background);
+  border: 1px solid var(--klevu-color-swatch-border);
   border-radius: 50%;
   background-size: cover;
   display: inline-block;
+}
+
+.selected {
+  box-shadow: 0px 0px 0px 2px var(--klevu-color-swatch-selected-color);
+  border-color: #fff;
 }

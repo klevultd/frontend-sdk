@@ -15,10 +15,11 @@ import {
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
 export type KlevuColorSwatchOverride = {
-  name: string
-  color?: string
-  imageUrl?: string
-}[]
+  [key: string]: {
+    color?: string
+    imageUrl?: string
+  }
+}
 
 export type KlevuFiltersAppliedEventDetail = {
   manager: FilterManager
@@ -173,7 +174,7 @@ export class KlevuFacetList {
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 option={f}
                 useColorSwatch={this.colorSwatches && !!this.colorSwatches.includes(f.key)}
-                colorSwatchOverrides={(this.colorSwatchOverrides && this.colorSwatchOverrides[f.key]) || []}
+                colorSwatchOverrides={this.colorSwatchOverrides && this.colorSwatchOverrides[f.key]}
                 mode={mode}
               ></klevu-facet>
             )

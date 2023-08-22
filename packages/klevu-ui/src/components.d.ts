@@ -234,6 +234,13 @@ export namespace Components {
          */
         "tCaption": any;
     }
+    /**
+     * Color Swatch component
+     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+     * @cssprop --klevu-color-swatch-size 25px Size of swatch
+     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     */
     interface KlevuColorSwatch {
         /**
           * Color to apply
@@ -325,7 +332,7 @@ export namespace Components {
         /**
           * Specific overrides for individual color swatch. The overrides can be colors (hex or valid css colors) or a valid url to load. ImageUrl takes precedence over color when both are specified.
          */
-        "colorSwatchOverrides": KlevuColorSwatchOverride;
+        "colorSwatchOverrides"?: KlevuColorSwatchOverride;
         /**
           * Set predefined order for options. Unfound values are in original order in end
          */
@@ -354,7 +361,7 @@ export namespace Components {
         /**
           * Converts the color filters to swatches
          */
-        "useColorSwatch": boolean;
+        "useColorSwatch"?: boolean;
     }
     /**
      * Render all facets of filter manager
@@ -1650,6 +1657,13 @@ declare global {
         prototype: HTMLKlevuCmsListElement;
         new (): HTMLKlevuCmsListElement;
     };
+    /**
+     * Color Swatch component
+     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+     * @cssprop --klevu-color-swatch-size 25px Size of swatch
+     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     */
     interface HTMLKlevuColorSwatchElement extends Components.KlevuColorSwatch, HTMLStencilElement {
     }
     var HTMLKlevuColorSwatchElement: {
@@ -2355,6 +2369,13 @@ declare namespace LocalJSX {
          */
         "tCaption"?: any;
     }
+    /**
+     * Color Swatch component
+     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+     * @cssprop --klevu-color-swatch-size 25px Size of swatch
+     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     */
     interface KlevuColorSwatch {
         /**
           * Color to apply
@@ -3705,6 +3726,13 @@ declare module "@stencil/core" {
              * Component to display list of CMS page results
              */
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
+            /**
+             * Color Swatch component
+             * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+             * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+             * @cssprop --klevu-color-swatch-size 25px Size of swatch
+             * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+             */
             "klevu-color-swatch": LocalJSX.KlevuColorSwatch & JSXBase.HTMLAttributes<HTMLKlevuColorSwatchElement>;
             /**
              * Component to create offscreen drawer on left or right side of the screen

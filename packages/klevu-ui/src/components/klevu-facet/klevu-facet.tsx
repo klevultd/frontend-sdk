@@ -107,13 +107,13 @@ export class KlevuFacet {
   /**
    * Converts the color filters to swatches
    */
-  @Prop() useColorSwatch: boolean = false
+  @Prop() useColorSwatch?: boolean = false
   /**
    * Specific overrides for individual color swatch.
    * The overrides can be colors (hex or valid css colors) or a valid url to load.
    * ImageUrl takes precedence over color when both are specified.
    */
-  @Prop() colorSwatchOverrides: KlevuColorSwatchOverride = []
+  @Prop() colorSwatchOverrides?: KlevuColorSwatchOverride = {}
   /**
    * Show all options
    */
@@ -243,7 +243,7 @@ export class KlevuFacet {
                   color: o.value,
                   selected: o.selected,
                 }
-                const override = this.colorSwatchOverrides.find((override) => override.name === o.name)
+                const override = this.colorSwatchOverrides ? this.colorSwatchOverrides[o.name] : undefined
                 if (override) {
                   swatch.color = override.color
                   swatch.imageUrl = override.imageUrl
