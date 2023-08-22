@@ -76,6 +76,9 @@ export const FacetListColorSwatches: StoryObj<KlevuFacetList> = {
     colorSwatches: ["color"],
     colorSwatchOverrides: {
       color: {
+        beige: {
+          borderColor: "black",
+        },
         oliv: {
           color: "red",
         },

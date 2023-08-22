@@ -244,6 +244,10 @@ export namespace Components {
      */
     interface KlevuColorSwatch {
         /**
+          * Specify border color for the swatch
+         */
+        "borderColor"?: string;
+        /**
           * Color to apply
          */
         "color"?: string;
@@ -2380,6 +2384,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface KlevuColorSwatch {
+        /**
+          * Specify border color for the swatch
+         */
+        "borderColor"?: string;
         /**
           * Color to apply
          */

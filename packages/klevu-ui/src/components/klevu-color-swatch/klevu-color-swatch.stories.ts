@@ -21,6 +21,7 @@ export const ColorSwatch: StoryObj<KlevuColorSwatch> = {
     imageUrl: "",
     selected: false,
     name: "colorFacet",
+    borderColor: undefined,
   },
   render: (args) => html`
     <klevu-color-swatch
@@ -28,6 +29,7 @@ export const ColorSwatch: StoryObj<KlevuColorSwatch> = {
       color=${ifDefined(args.color) || ""}
       selected=${ifDefined(args.selected)}
       image-url=${ifDefined(args.imageUrl) || ""}
+      border-color=${ifDefined(args.borderColor) || ""}
     ></klevu-color-swatch>
   `,
 }

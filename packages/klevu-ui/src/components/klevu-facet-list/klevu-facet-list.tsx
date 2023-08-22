@@ -18,6 +18,7 @@ export type KlevuColorSwatchOverride = {
   [key: string]: {
     color?: string
     imageUrl?: string
+    borderColor?: string
   }
 }
 

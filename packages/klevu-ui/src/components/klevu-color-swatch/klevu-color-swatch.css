@@ -1,6 +1,5 @@
 :host {
   display: block;
-  --klevu-color-swatch-border: #8c8c8c;
   --klevu-color-swatch-default-background: #000;
   --klevu-color-swatch-size: 25px;
   --klevu-color-swatch-selected-color: #2b4af7;
@@ -11,7 +10,6 @@
   height: var(--klevu-color-swatch-size);
   width: var(--klevu-color-swatch-size);
   background-color: var(--klevu-color-swatch-default-background);
-  border: 1px solid var(--klevu-color-swatch-border);
   border-radius: var(--klevu-color-swatch-border-radius);
   background-size: cover;
   display: inline-block;

@@ -87,6 +87,7 @@ export const KlevuColorSwatch = /*@__PURE__*/ defineContainer<JSX.KlevuColorSwat
   'color',
   'selected',
   'imageUrl',
+  'borderColor',
   'klevuSwatchClick'
 ]);
 

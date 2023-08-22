@@ -245,8 +245,9 @@ export class KlevuFacet {
                 }
                 const override = this.colorSwatchOverrides ? this.colorSwatchOverrides[o.name] : undefined
                 if (override) {
-                  swatch.color = override.color
+                  swatch.color = override.color || swatch.color
                   swatch.imageUrl = override.imageUrl
+                  swatch.borderColor = override.borderColor
                 }
                 return (
                   <klevu-color-swatch
@@ -258,6 +259,7 @@ export class KlevuFacet {
                     color={swatch.color}
                     imageUrl={swatch.imageUrl}
                     selected={swatch.selected}
+                    borderColor={swatch.borderColor}
                   />
                 )
               })}

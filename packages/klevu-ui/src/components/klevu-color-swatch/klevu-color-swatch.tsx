@@ -9,6 +9,7 @@ export type KlevuSwatch = {
   selected: boolean
   imageUrl?: string
   color?: string
+  borderColor?: string
 }
 
 /**
@@ -52,6 +53,11 @@ export class KlevuColorSwatch {
    */
   @Prop() imageUrl?: string
 
+  /**
+   * Specify border color for the swatch
+   */
+  @Prop() borderColor?: string
+
   #swatchClick(name: string) {
     this.klevuSwatchClick.emit({ name })
   }
@@ -65,6 +71,7 @@ export class KlevuColorSwatch {
           class={`circle ${this.selected ? "selected" : ""}`}
           title={this.name}
           style={{
+            border: this.borderColor ? `1px solid ${this.borderColor}` : "none",
             "background-color": this.imageUrl ? "" : this.color,
             "background-image": this.imageUrl ? `url(${this.imageUrl})` : "",
           }}
