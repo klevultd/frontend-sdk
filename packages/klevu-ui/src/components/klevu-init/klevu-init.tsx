@@ -1,4 +1,4 @@
-import { KlevuConfig } from "@klevu/core"
+import { KMCRootObject, KlevuConfig, KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
@@ -98,6 +98,8 @@ export class KlevuInit {
    */
   @Prop() translationUrlPrefix?: string
 
+  @Prop() kmcLoadDefaults?: boolean
+
   async connectedCallback() {
     KlevuConfig.init({
       apiKey: this.apiKey,
@@ -109,6 +111,11 @@ export class KlevuInit {
       window["klevu_ui_translations"] = this.translation
     } else if (this.language != "en") {
       window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
+    }
+
+    if (this.kmcLoadDefaults) {
+      const data = await KlevuKMCSettings()
+      window["klevu_ui_kmc_settings"] = data.root
     }
   }
 
@@ -188,5 +195,6 @@ declare global {
       itemSalePrice?: string
       itemCurrency?: string
     }
+    klevu_ui_kmc_settings?: KMCRootObject
   }
 }

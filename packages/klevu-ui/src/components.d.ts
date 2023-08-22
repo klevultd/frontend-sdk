@@ -433,6 +433,7 @@ export namespace Components {
           * @returns
          */
         "getSettings": () => Promise<KlevuUIGlobalSettings | undefined>;
+        "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load
          */
@@ -2504,6 +2505,7 @@ declare namespace LocalJSX {
           * Read only API key to Klevu
          */
         "apiKey": string;
+        "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load
          */
