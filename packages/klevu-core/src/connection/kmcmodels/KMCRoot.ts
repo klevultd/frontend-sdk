@@ -164,14 +164,46 @@ interface KlevuPopularProductsOfSite {
 }
 
 interface KlevuUcUserOptions {
+  /**
+   * Add to cart button text
+   */
   addToCartButton: string
+  /**
+   * Enable personalisation in merchandising.
+   */
   enablePersonalisationInCatNav: boolean
+  /**
+   * Enable personalisation in search.
+   */
   enablePersonalisationInSearch: boolean
+
   isFullImageUrlProvided: boolean
+
+  /**
+   * Show filters on left or right
+   */
+  landingFilterPosition?: "left" | "right"
+
+  /**
+   * No image url. If relative url then use https://js.klevu.com as prefix.
+   */
   noImageUrl: string
+
+  /**
+   * When there are no results
+   */
   noResultsOptions: NoResultsOptions
+
+  /**
+   * Caption when product is out of stock
+   */
   outOfStockCaption: string
+
+  /**
+   * Default price formatting settings
+   */
   priceFormatter: PriceFormatter
+
   priceInterval: string
   showFiltersInMobile: boolean
   showProductSwatches: boolean
@@ -225,6 +257,8 @@ interface PriceFormatter {
  * Personalized Error Recommendations (KMC)
  */
 interface NoResultsOptions {
+  showPopularProducts?: boolean
+  showPopularKeywords?: boolean
   messages: Message[]
   banners: Banner[]
 }
