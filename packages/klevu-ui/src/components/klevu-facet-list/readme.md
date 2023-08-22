@@ -9,16 +9,18 @@ Render all facets of filter manager
 
 ## Properties
 
-| Property               | Attribute             | Description                                                                                      | Type                                                                       | Default     |
-| ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ----------- |
-| `accordion`            | `accordion`           | Should use accordions to for facets                                                              | `boolean \| undefined`                                                     | `undefined` |
-| `applyButtonText`      | `apply-button-text`   | Button text for Apply button when using `useApplyButton`                                         | `string`                                                                   | `"Apply"`   |
-| `clearButtonText`      | `clear-button-text`   | Button text for Clear button when using `useApplyButton`                                         | `string`                                                                   | `"Clear"`   |
-| `customOrder`          | --                    | Custom order keys for every facet                                                                | `undefined \| { [key: string]: string[]; }`                                | `undefined` |
-| `defaultPriceLabel`    | `default-price-label` | Default price label for sliders                                                                  | `string`                                                                   | `"Price"`   |
-| `manager` _(required)_ | --                    | Filter managet from which the list is built from                                                 | `FilterManager`                                                            | `undefined` |
-| `mode`                 | `mode`                | Set mode for facets or if object is passed then define per key                                   | `"checkbox" \| "radio" \| undefined \| { [key: string]: KlevuFacetMode; }` | `undefined` |
-| `useApplyButton`       | `use-apply-button`    | Display "apply filters" button in the end. And do not apply filters until this button is pressed | `boolean \| undefined`                                                     | `undefined` |
+| Property               | Attribute             | Description                                                                                                                                                                                 | Type                                                                       | Default     |
+| ---------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
+| `accordion`            | `accordion`           | Should use accordions to for facets                                                                                                                                                         | `boolean \| undefined`                                                     | `undefined` |
+| `applyButtonText`      | `apply-button-text`   | Button text for Apply button when using `useApplyButton`                                                                                                                                    | `string`                                                                   | `"Apply"`   |
+| `clearButtonText`      | `clear-button-text`   | Button text for Clear button when using `useApplyButton`                                                                                                                                    | `string`                                                                   | `"Clear"`   |
+| `colorSwatchOverrides` | --                    | Specific overrides for individual color swatch. The overrides can be colors (hex or valid css colors) or a valid url to load. ImageUrl takes precedence over color when both are specified. | `undefined \| { [key: string]: KlevuColorSwatchOverride; }`                | `undefined` |
+| `colorSwatches`        | --                    | Specify which facet keys should be rendered as color swatches                                                                                                                               | `string[] \| undefined`                                                    | `[]`        |
+| `customOrder`          | --                    | Custom order keys for every facet                                                                                                                                                           | `undefined \| { [key: string]: string[]; }`                                | `undefined` |
+| `defaultPriceLabel`    | `default-price-label` | Default price label for sliders                                                                                                                                                             | `string`                                                                   | `"Price"`   |
+| `manager` _(required)_ | --                    | Filter managet from which the list is built from                                                                                                                                            | `FilterManager`                                                            | `undefined` |
+| `mode`                 | `mode`                | Set mode for facets or if object is passed then define per key                                                                                                                              | `"checkbox" \| "radio" \| undefined \| { [key: string]: KlevuFacetMode; }` | `undefined` |
+| `useApplyButton`       | `use-apply-button`    | Display "apply filters" button in the end. And do not apply filters until this button is pressed                                                                                            | `boolean \| undefined`                                                     | `undefined` |
 
 
 ## Events
@@ -63,6 +65,7 @@ graph TD;
   klevu-facet --> klevu-rating
   klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
+  klevu-facet --> klevu-color-swatch
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-button
   klevu-accordion --> klevu-typography

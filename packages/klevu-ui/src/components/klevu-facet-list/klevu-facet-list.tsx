@@ -14,6 +14,12 @@ import {
 } from "@stencil/core"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
 
+export type KlevuColorSwatchOverride = {
+  name: string
+  color?: string
+  imageUrl?: string
+}[]
+
 export type KlevuFiltersAppliedEventDetail = {
   manager: FilterManager
 }
@@ -45,6 +51,19 @@ export class KlevuFacetList {
    * Custom order keys for every facet
    */
   @Prop() customOrder?: { [key: string]: string[] }
+
+  /**
+   * Specify which facet keys should be rendered as color swatches
+   */
+  @Prop() colorSwatches?: string[] = []
+  /**
+   * Specific overrides for individual color swatch.
+   * The overrides can be colors (hex or valid css colors) or a valid url to load.
+   * ImageUrl takes precedence over color when both are specified.
+   */
+  @Prop() colorSwatchOverrides?: {
+    [key: string]: KlevuColorSwatchOverride
+  }
 
   /**
    * Should use accordions to for facets
@@ -153,6 +172,8 @@ export class KlevuFacetList {
                 customOrder={this.customOrder?.[f.key]}
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 option={f}
+                useColorSwatch={this.colorSwatches && !!this.colorSwatches.includes(f.key)}
+                colorSwatchOverrides={(this.colorSwatchOverrides && this.colorSwatchOverrides[f.key]) || []}
                 mode={mode}
               ></klevu-facet>
             )

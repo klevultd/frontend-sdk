@@ -58,7 +58,7 @@ export const FacetList: StoryObj<KlevuFacetList> = {
       .customOrder=${args.customOrder}
       .manager=${args.manager}
       .mode=${args.mode}
-      use-apply-button="${ifDefined(args.useApplyButton)}}"
+      use-apply-button="${ifDefined(args.useApplyButton)}"
       defaultPriceLabel=${ifDefined(args.defaultPriceLabel)}
     ></klevu-facet-list>`,
 }
@@ -68,4 +68,36 @@ export const SmallExample: StoryObj<KlevuFacetList> = {
   args: {
     manager: manager2,
   },
+}
+
+export const FacetListColorSwatches: StoryObj<KlevuFacetList> = {
+  args: {
+    manager: manager,
+    colorSwatches: ["color"],
+    colorSwatchOverrides: {
+      color: [
+        {
+          name: "oliv",
+          color: "red",
+        },
+        {
+          name: "multicolored",
+          color: "purple",
+        },
+      ],
+    },
+    customOrder: {},
+  },
+  render: (args) =>
+    html`<klevu-facet-list
+      accordion=${ifDefined(args.accordion)}
+      .customOrder=${args.customOrder}
+      .manager=${args.manager}
+      .mode=${args.mode}
+      use-apply-button="${ifDefined(args.useApplyButton)}"
+      defaultPriceLabel=${ifDefined(args.defaultPriceLabel)}
+      custom-order="${ifDefined(args.customOrder)}"
+      .colorSwatchOverrides="${args.colorSwatchOverrides}"
+      .colorSwatches="${args.colorSwatches}"
+    ></klevu-facet-list>`,
 }

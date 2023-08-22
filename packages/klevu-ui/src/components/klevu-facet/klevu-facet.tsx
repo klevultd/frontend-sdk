@@ -14,18 +14,20 @@ import {
 } from "@stencil/core"
 import { getGlobalSettings } from "../../utils/utils"
 import { getTranslation } from "../../utils/getTranslation"
+import { KlevuOnSwatchClick, KlevuSwatch } from "../klevu-color-swatch/klevu-color-swatch"
+import { KlevuColorSwatchOverride } from "../klevu-facet-list/klevu-facet-list"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 type OptionType = {
-  name: string;
-  value: string;
-  count: number;
-  selected: boolean;
-};
+  name: string
+  value: string
+  count: number
+  selected: boolean
+}
 
 const resolveFacetLabel = (option: OptionType, facet?: KlevuFilterResultOptions) => {
   if (facet) {
-    if(facet.type === KlevuFilterType.Rating) {
+    if (facet.type === KlevuFilterType.Rating) {
       return <klevu-rating rating={parseFloat(option.name)} />
     }
   }
@@ -102,6 +104,16 @@ export class KlevuFacet {
 
   @Prop() tMore = getTranslation("facet.tMore")
 
+  /**
+   * Converts the color filters to swatches
+   */
+  @Prop() useColorSwatch: boolean = false
+  /**
+   * Specific overrides for individual color swatch.
+   * The overrides can be colors (hex or valid css colors) or a valid url to load.
+   * ImageUrl takes precedence over color when both are specified.
+   */
+  @Prop() colorSwatchOverrides: KlevuColorSwatchOverride = []
   /**
    * Show all options
    */
@@ -186,8 +198,8 @@ export class KlevuFacet {
     let opts: OptionType[] = [...this.option.options]
     if (this.option.type === KlevuFilterType.Rating) {
       opts.sort((a, b) => {
-        if (a.name < b.name) return 1;
-        return -1;
+        if (a.name < b.name) return 1
+        return -1
       })
     }
     if (this.customOrder) {
@@ -223,44 +235,73 @@ export class KlevuFacet {
           {this.labelOverride || this.option.label}
         </klevu-typography>
         <div class="options" slot="content">
-          {opts.map((o) => (
-            <div class="option">
-              {this.mode === "checkbox" ? (
-                <klevu-checkbox
-                  checked={o.selected}
-                  name={this.option!.key}
-                  onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
-                    this.manager.toggleOption(this.option!.key, o.value)
-                  }}
-                >
-                  <div class="container">
-                    <span class="name">
-                      <span>{resolveFacetLabel(o, this.option)}</span>
-                    </span>
-                    <span class="count">({o.count})</span>
-                  </div>
-                </klevu-checkbox>
-              ) : (
-                <div class="container">
-                  <input
-                    type="radio"
-                    id={this.option!.key}
-                    name={this.option!.key}
-                    value={o.value}
+          {this.useColorSwatch ? (
+            <div style={{ display: "flex", "flex-wrap": "wrap" }}>
+              {opts.map((o) => {
+                let swatch: KlevuSwatch = {
+                  name: o.name,
+                  color: o.value,
+                  selected: o.selected,
+                }
+                const override = this.colorSwatchOverrides.find((override) => override.name === o.name)
+                if (override) {
+                  swatch.color = override.color
+                  swatch.imageUrl = override.imageUrl
+                }
+                return (
+                  <klevu-color-swatch
+                    onKlevuSwatchClick={(event: CustomEvent<KlevuOnSwatchClick>) => {
+                      if (this.mode !== "checkbox") this.manager.clearOptionSelections(this.option!.key)
+                      this.manager.toggleOption(this.option!.key, event.detail.name)
+                    }}
+                    name={swatch.name}
+                    color={swatch.color}
+                    imageUrl={swatch.imageUrl}
+                    selected={swatch.selected}
+                  />
+                )
+              })}
+            </div>
+          ) : (
+            opts.map((o) => (
+              <div class="option">
+                {this.mode === "checkbox" ? (
+                  <klevu-checkbox
                     checked={o.selected}
-                    onClick={() => {
-                      this.manager.clearOptionSelections(this.option!.key)
+                    name={this.option!.key}
+                    onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
                       this.manager.toggleOption(this.option!.key, o.value)
                     }}
-                  />
-                  <label htmlFor={this.option!.key} class="name">
-                    <span>{resolveFacetLabel(o, this.option)}</span>
-                  </label>
-                  <span class="count">({o.count})</span>
-                </div>
-              )}
-            </div>
-          ))}
+                  >
+                    <div class="container">
+                      <span class="name">
+                        <span>{resolveFacetLabel(o, this.option)}</span>
+                      </span>
+                      <span class="count">({o.count})</span>
+                    </div>
+                  </klevu-checkbox>
+                ) : (
+                  <div class="container">
+                    <input
+                      type="radio"
+                      id={this.option!.key}
+                      name={this.option!.key}
+                      value={o.value}
+                      checked={o.selected}
+                      onClick={() => {
+                        this.manager.clearOptionSelections(this.option!.key)
+                        this.manager.toggleOption(this.option!.key, o.value)
+                      }}
+                    />
+                    <label htmlFor={this.option!.key} class="name">
+                      <span>{resolveFacetLabel(o, this.option)}</span>
+                    </label>
+                    <span class="count">({o.count})</span>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
           {showAllButton ? (
             <klevu-button
               style={{ "--klevu-button-text-align": "left" }}
