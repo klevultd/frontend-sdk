@@ -240,6 +240,7 @@ export namespace Components {
      * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
      * @cssprop --klevu-color-swatch-size 25px Size of swatch
      * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface KlevuColorSwatch {
         /**
@@ -1663,6 +1664,7 @@ declare global {
      * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
      * @cssprop --klevu-color-swatch-size 25px Size of swatch
      * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface HTMLKlevuColorSwatchElement extends Components.KlevuColorSwatch, HTMLStencilElement {
     }
@@ -2375,6 +2377,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
      * @cssprop --klevu-color-swatch-size 25px Size of swatch
      * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface KlevuColorSwatch {
         /**
@@ -3732,6 +3735,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
              * @cssprop --klevu-color-swatch-size 25px Size of swatch
              * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+             * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
              */
             "klevu-color-swatch": LocalJSX.KlevuColorSwatch & JSXBase.HTMLAttributes<HTMLKlevuColorSwatchElement>;
             /**

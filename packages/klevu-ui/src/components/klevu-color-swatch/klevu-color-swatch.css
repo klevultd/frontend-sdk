@@ -4,6 +4,7 @@
   --klevu-color-swatch-default-background: #000;
   --klevu-color-swatch-size: 25px;
   --klevu-color-swatch-selected-color: #2b4af7;
+  --klevu-color-swatch-border-radius: 50%;
 }
 
 .circle {
@@ -12,7 +13,7 @@
   width: var(--klevu-color-swatch-size);
   background-color: var(--klevu-color-swatch-default-background);
   border: 1px solid var(--klevu-color-swatch-border);
-  border-radius: 50%;
+  border-radius: var(--klevu-color-swatch-border-radius);
   background-size: cover;
   display: inline-block;
 }
