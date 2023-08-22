@@ -34,7 +34,9 @@ const chatRender = (args: KlevuProductQuery) => {
       popup-offset=${ifDefined(args.popupOffset)}
       settings=${ifDefined(JSON.stringify(args.settings))}
       disable-close-outside-click=${ifDefined(args.disableCloseOutsideClick)}
-    ></klevu-product-query>
+    >
+      <span slot="after-fineprint"> hello </span>
+    </klevu-product-query>
   `
 }
 
@@ -121,7 +123,7 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
       </klevu-product-query>
     </klevu-init>
     <style>
-      klevu-product-query.modified-version {
+      klevu-product-query-popup {
         --klevu-chat-bubble-background-remote: #000;
         --klevu-color-primary: #000;
       }

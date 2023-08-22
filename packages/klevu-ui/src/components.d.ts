@@ -690,6 +690,10 @@ export namespace Components {
          */
         "elevation": number;
         /**
+          * Expand popup to full size of the screen when popup is smaller that requested width
+         */
+        "fullscreenOnMobileSize"?: boolean;
+        /**
           * How many pixels to offset the popup from origin
          */
         "offset": number;
@@ -2838,6 +2842,10 @@ declare namespace LocalJSX {
           * Elevation of the popup. 0-3.
          */
         "elevation"?: number;
+        /**
+          * Expand popup to full size of the screen when popup is smaller that requested width
+         */
+        "fullscreenOnMobileSize"?: boolean;
         /**
           * How many pixels to offset the popup from origin
          */
