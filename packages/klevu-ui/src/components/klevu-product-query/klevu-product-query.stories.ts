@@ -121,7 +121,7 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
       </klevu-product-query>
     </klevu-init>
     <style>
-      klevu-product-query.modified-version {
+      klevu-product-query-popup {
         --klevu-chat-bubble-background-remote: #000;
         --klevu-color-primary: #000;
       }

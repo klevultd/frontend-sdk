@@ -289,6 +289,7 @@ export class KlevuProductQueryPopup {
           popupWidth={520}
           originElement={this.originElement}
           closeAtOutsideClick={!this.disableCloseOutsideClick}
+          fullscreenOnMobileSize
         >
           <div class="content" slot="content" ref={(el) => (this.#contentDiv = el)}>
             {this.showFeedback ? this.#renderFeedback() : this.#renderChat()}

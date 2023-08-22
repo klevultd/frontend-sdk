@@ -68,6 +68,11 @@ export class KlevuPopup {
   @Prop() originElement?: HTMLElement
 
   /**
+   * Expand popup to full size of the screen when popup is smaller that requested width
+   */
+  @Prop() fullscreenOnMobileSize?: boolean
+
+  /**
    * When popup is opened this event is emitted
    */
   @Event({
@@ -115,37 +120,37 @@ export class KlevuPopup {
       return
     }
 
-    const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
-      placement: this.anchor,
-      middleware: [
-        offset(this.offset),
-        shift(),
-        size({
-          apply: ({ availableWidth, elements }) => {
-            let maxWidth = availableWidth
-            if (this.popupWidth && this.popupWidth < availableWidth) {
-              maxWidth = this.popupWidth
-            }
-
-            Object.assign(elements.floating.style, {
-              maxWidth: `${maxWidth}px`,
-            })
-          },
-        }),
-      ],
-    })
-    const smallScreen = (this.popupWidth ?? 390) > window.innerWidth
-    if (smallScreen) {
+    const smallScreen = (this.popupWidth ?? 390) > document.body.clientWidth
+    if (smallScreen && this.fullscreenOnMobileSize) {
       Object.assign(this.#contentElement.style, {
         left: "0px",
         top: "0px",
         position: "fixed",
-        maxHeight: "auto",
-        maxWidth: "auto",
-        width: "100vw",
+        maxHeight: "100dvh",
+        maxWidth: "100%",
+        width: "100%",
         height: "100dvh",
       })
     } else {
+      const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
+        placement: this.anchor,
+        middleware: [
+          offset(this.offset),
+          shift(),
+          size({
+            apply: ({ availableWidth, elements }) => {
+              let maxWidth = availableWidth
+              if (this.popupWidth && this.popupWidth < availableWidth) {
+                maxWidth = this.popupWidth
+              }
+
+              Object.assign(elements.floating.style, {
+                maxWidth: `${maxWidth}px`,
+              })
+            },
+          }),
+        ],
+      })
       Object.assign(this.#contentElement.style, {
         left: `${x}px`,
         top: `${y}px`,

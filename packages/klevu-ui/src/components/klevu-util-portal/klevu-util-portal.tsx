@@ -25,7 +25,17 @@ export class KlevuUtilPortal {
     }
 
     this.root = document.createElement("div")
+    const assignedContent: Element[] = []
+
+    this.el.querySelectorAll("slot").forEach((slot) => {
+      assignedContent.push(...slot.assignedElements())
+    })
     this.root.appendChild(this.el)
+
+    for (const element of assignedContent) {
+      this.el.childNodes[0].appendChild(element)
+    }
+
     this.root.setAttribute("data-name", "klevu-portal")
     document.body.appendChild(this.root)
   }
