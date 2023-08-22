@@ -17,6 +17,7 @@ export const KlevuChatMessages = /*@__PURE__*/createReactComponent<JSX.KlevuChat
 export const KlevuCheckbox = /*@__PURE__*/createReactComponent<JSX.KlevuCheckbox, HTMLKlevuCheckboxElement>('klevu-checkbox');
 export const KlevuChip = /*@__PURE__*/createReactComponent<JSX.KlevuChip, HTMLKlevuChipElement>('klevu-chip');
 export const KlevuCmsList = /*@__PURE__*/createReactComponent<JSX.KlevuCmsList, HTMLKlevuCmsListElement>('klevu-cms-list');
+export const KlevuColorSwatch = /*@__PURE__*/createReactComponent<JSX.KlevuColorSwatch, HTMLKlevuColorSwatchElement>('klevu-color-swatch');
 export const KlevuDrawer = /*@__PURE__*/createReactComponent<JSX.KlevuDrawer, HTMLKlevuDrawerElement>('klevu-drawer');
 export const KlevuDropdown = /*@__PURE__*/createReactComponent<JSX.KlevuDropdown, HTMLKlevuDropdownElement>('klevu-dropdown');
 export const KlevuFacet = /*@__PURE__*/createReactComponent<JSX.KlevuFacet, HTMLKlevuFacetElement>('klevu-facet');

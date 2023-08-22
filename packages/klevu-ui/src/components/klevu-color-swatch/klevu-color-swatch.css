@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  --klevu-color-swatch-default-background: #000;
+  --klevu-color-swatch-size: 25px;
+  --klevu-color-swatch-selected-color: #2b4af7;
+  --klevu-color-swatch-border-radius: 50%;
+}
+
+.circle {
+  height: var(--klevu-color-swatch-size);
+  width: var(--klevu-color-swatch-size);
+  background-color: var(--klevu-color-swatch-default-background);
+  border-radius: var(--klevu-color-swatch-border-radius);
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+}
+
+.selected.circle:after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border: 2px solid var(--klevu-color-swatch-selected-color);
+  border-radius: var(--klevu-color-swatch-border-radius);
+}

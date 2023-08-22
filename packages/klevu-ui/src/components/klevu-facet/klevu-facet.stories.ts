@@ -62,3 +62,33 @@ export const Slider: StoryObj<KlevuFacet> = {
     slider: manager.sliders[0],
   },
 }
+
+export const ColorSwatches: StoryObj<KlevuFacet> = {
+  args: {
+    manager: manager,
+    option: manager.options[0],
+    mode: "checkbox",
+    useColorSwatch: true,
+    colorSwatchOverrides: {
+      oliv: {
+        color: "red",
+      },
+      multicolored: {
+        color: "purple",
+      },
+    },
+  },
+  render: (args) =>
+    html`<klevu-facet
+      accordion=${ifDefined(args.accordion)}
+      accordion-start-open=${ifDefined(args.accordionStartOpen)}
+      .customOrder=${args.customOrder}
+      .manager=${args.manager}
+      mode=${ifDefined(args.mode)}
+      .option=${args.option}
+      .slider=${args.slider}
+      labelOverride=${ifDefined(args.labelOverride)}
+      use-color-swatch=${ifDefined(args.useColorSwatch)}
+      .colorSwatchOverrides=${args.colorSwatchOverrides}
+    ></klevu-facet>`,
+}

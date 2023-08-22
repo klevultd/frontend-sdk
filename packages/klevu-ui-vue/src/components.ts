@@ -82,6 +82,16 @@ export const KlevuCmsList = /*@__PURE__*/ defineContainer<JSX.KlevuCmsList>('kle
 ]);
 
 
+export const KlevuColorSwatch = /*@__PURE__*/ defineContainer<JSX.KlevuColorSwatch>('klevu-color-swatch', undefined, [
+  'name',
+  'color',
+  'selected',
+  'imageUrl',
+  'borderColor',
+  'klevuSwatchClick'
+]);
+
+
 export const KlevuDrawer = /*@__PURE__*/ defineContainer<JSX.KlevuDrawer>('klevu-drawer', undefined, [
   'startOpen',
   'background',
@@ -111,6 +121,8 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'accordionStartOpen',
   'labelOverride',
   'tMore',
+  'useColorSwatch',
+  'colorSwatchOverrides',
   'klevuFilterSelectionUpdate'
 ]);
 
@@ -119,6 +131,8 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
   'manager',
   'mode',
   'customOrder',
+  'colorSwatches',
+  'colorSwatchOverrides',
   'accordion',
   'useApplyButton',
   'applyButtonText',

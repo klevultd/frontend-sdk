@@ -53,3 +53,9 @@ input[type="radio"] {
   margin: 0;
   margin-right: var(--klevu-spacing-04);
 }
+
+.colorSwatchContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--klevu-spacing-03);
+}

@@ -78,6 +78,7 @@ graph TD;
   klevu-facet --> klevu-rating
   klevu-facet --> klevu-typography
   klevu-facet --> klevu-slider
+  klevu-facet --> klevu-color-swatch
   klevu-facet --> klevu-checkbox
   klevu-facet --> klevu-button
   klevu-accordion --> klevu-typography

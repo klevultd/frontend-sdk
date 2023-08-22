@@ -11,20 +11,16 @@ import {
   KlevuButton,
   KlevuFacetList,
   KlevuIcon,
-  KlevuLayoutResults,
   KlevuLoadingIndicator,
   KlevuModal,
   KlevuPagination,
   KlevuProduct,
-  KlevuProductGrid,
   KlevuQuery,
   KlevuRecommendations,
-  KlevuSort,
 } from "@klevu/ui-react"
-import React, { useCallback, useRef, useState, useEffect } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useCart } from "./cartContext"
-import { BANNER_ID } from "./constants"
 import { useOutletContext } from "react-router-dom"
 import { createRoot } from "react-dom/client"
 
@@ -48,7 +44,7 @@ const HomePage = () => {
   const [recsProducts, setRecsProducts] = useState([])
   const [removeProduct, setRemoveProduct] = useState<KlevuRecord | null>(null)
   const [queryResult, setQueryResult] = useState<KlevuQueryResult>(null)
-  
+
   return (
     <div>
       {loading && (
@@ -122,6 +118,21 @@ const HomePage = () => {
                   manager={manager}
                   onKlevuApplyFilters={(e) => {
                     setLoading(true)
+                  }}
+                  colorSwatches={["color"]}
+                  colorSwatchOverrides={{
+                    color: {
+                      oliv: {
+                        color: "red",
+                      },
+                      beige: {
+                        color: "#fff",
+                      },
+
+                      gold: {
+                        imageUrl: "purple.jpg",
+                      },
+                    },
                   }}
                 />
               </div>

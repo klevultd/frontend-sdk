@@ -8,10 +8,12 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
+import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
 import { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 import { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/klevu-facet/klevu-facet";
+import { KlevuColorSwatchOverride } from "./components/klevu-facet-list/klevu-facet-list";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
-import { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
+import { KlevuColorSwatchOverride as KlevuColorSwatchOverride1, KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { Placement } from "@floating-ui/dom";
@@ -29,10 +31,12 @@ import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewpo
 export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
+export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
 export { KlevuDropdownVariant } from "./components/klevu-dropdown/klevu-dropdown";
 export { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/klevu-facet/klevu-facet";
+export { KlevuColorSwatchOverride } from "./components/klevu-facet-list/klevu-facet-list";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
-export { KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
+export { KlevuColorSwatchOverride as KlevuColorSwatchOverride1, KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { Placement } from "@floating-ui/dom";
@@ -231,6 +235,36 @@ export namespace Components {
         "tCaption": any;
     }
     /**
+     * Color Swatch component
+     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+     * @cssprop --klevu-color-swatch-size 25px Size of swatch
+     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
+     */
+    interface KlevuColorSwatch {
+        /**
+          * Specify border color for the swatch
+         */
+        "borderColor"?: string;
+        /**
+          * Color to apply
+         */
+        "color"?: string;
+        /**
+          * ImageUrl to load in swatch
+         */
+        "imageUrl"?: string;
+        /**
+          * This field will be sent in the click callback
+         */
+        "name": string;
+        /**
+          * If selected
+         */
+        "selected": boolean;
+    }
+    /**
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
@@ -301,6 +335,10 @@ export namespace Components {
          */
         "accordionStartOpen"?: boolean;
         /**
+          * Specific overrides for individual color swatch. The overrides can be colors (hex or valid css colors) or a valid url to load. ImageUrl takes precedence over color when both are specified.
+         */
+        "colorSwatchOverrides"?: KlevuColorSwatchOverride;
+        /**
           * Set predefined order for options. Unfound values are in original order in end
          */
         "customOrder"?: string[];
@@ -325,6 +363,10 @@ export namespace Components {
          */
         "slider"?: KlevuFilterResultSlider;
         "tMore": any;
+        /**
+          * Converts the color filters to swatches
+         */
+        "useColorSwatch"?: boolean;
     }
     /**
      * Render all facets of filter manager
@@ -343,6 +385,16 @@ export namespace Components {
           * Button text for Clear button when using `useApplyButton`
          */
         "clearButtonText": string;
+        /**
+          * Specific overrides for individual color swatch. The overrides can be colors (hex or valid css colors) or a valid url to load. ImageUrl takes precedence over color when both are specified.
+         */
+        "colorSwatchOverrides"?: {
+    [key: string]: KlevuColorSwatchOverride1
+  };
+        /**
+          * Specify which facet keys should be rendered as color swatches
+         */
+        "colorSwatches"?: string[];
         /**
           * Custom order keys for every facet
          */
@@ -1410,6 +1462,10 @@ export interface KlevuCmsListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuCmsListElement;
 }
+export interface KlevuColorSwatchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuColorSwatchElement;
+}
 export interface KlevuDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuDropdownElement;
@@ -1606,6 +1662,20 @@ declare global {
     var HTMLKlevuCmsListElement: {
         prototype: HTMLKlevuCmsListElement;
         new (): HTMLKlevuCmsListElement;
+    };
+    /**
+     * Color Swatch component
+     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+     * @cssprop --klevu-color-swatch-size 25px Size of swatch
+     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
+     */
+    interface HTMLKlevuColorSwatchElement extends Components.KlevuColorSwatch, HTMLStencilElement {
+    }
+    var HTMLKlevuColorSwatchElement: {
+        prototype: HTMLKlevuColorSwatchElement;
+        new (): HTMLKlevuColorSwatchElement;
     };
     /**
      * Component to create offscreen drawer on left or right side of the screen
@@ -2063,6 +2133,7 @@ declare global {
         "klevu-checkbox": HTMLKlevuCheckboxElement;
         "klevu-chip": HTMLKlevuChipElement;
         "klevu-cms-list": HTMLKlevuCmsListElement;
+        "klevu-color-swatch": HTMLKlevuColorSwatchElement;
         "klevu-drawer": HTMLKlevuDrawerElement;
         "klevu-dropdown": HTMLKlevuDropdownElement;
         "klevu-facet": HTMLKlevuFacetElement;
@@ -2306,6 +2377,40 @@ declare namespace LocalJSX {
         "tCaption"?: any;
     }
     /**
+     * Color Swatch component
+     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+     * @cssprop --klevu-color-swatch-size 25px Size of swatch
+     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
+     */
+    interface KlevuColorSwatch {
+        /**
+          * Specify border color for the swatch
+         */
+        "borderColor"?: string;
+        /**
+          * Color to apply
+         */
+        "color"?: string;
+        /**
+          * ImageUrl to load in swatch
+         */
+        "imageUrl"?: string;
+        /**
+          * This field will be sent in the click callback
+         */
+        "name": string;
+        /**
+          * When swatch has been clicked
+         */
+        "onKlevuSwatchClick"?: (event: KlevuColorSwatchCustomEvent<KlevuOnSwatchClick>) => void;
+        /**
+          * If selected
+         */
+        "selected": boolean;
+    }
+    /**
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
@@ -2378,6 +2483,10 @@ declare namespace LocalJSX {
          */
         "accordionStartOpen"?: boolean;
         /**
+          * Specific overrides for individual color swatch. The overrides can be colors (hex or valid css colors) or a valid url to load. ImageUrl takes precedence over color when both are specified.
+         */
+        "colorSwatchOverrides"?: KlevuColorSwatchOverride;
+        /**
           * Set predefined order for options. Unfound values are in original order in end
          */
         "customOrder"?: string[];
@@ -2406,6 +2515,10 @@ declare namespace LocalJSX {
          */
         "slider"?: KlevuFilterResultSlider;
         "tMore"?: any;
+        /**
+          * Converts the color filters to swatches
+         */
+        "useColorSwatch"?: boolean;
     }
     /**
      * Render all facets of filter manager
@@ -2424,6 +2537,16 @@ declare namespace LocalJSX {
           * Button text for Clear button when using `useApplyButton`
          */
         "clearButtonText"?: string;
+        /**
+          * Specific overrides for individual color swatch. The overrides can be colors (hex or valid css colors) or a valid url to load. ImageUrl takes precedence over color when both are specified.
+         */
+        "colorSwatchOverrides"?: {
+    [key: string]: KlevuColorSwatchOverride1
+  };
+        /**
+          * Specify which facet keys should be rendered as color swatches
+         */
+        "colorSwatches"?: string[];
         /**
           * Custom order keys for every facet
          */
@@ -3513,6 +3636,7 @@ declare namespace LocalJSX {
         "klevu-checkbox": KlevuCheckbox;
         "klevu-chip": KlevuChip;
         "klevu-cms-list": KlevuCmsList;
+        "klevu-color-swatch": KlevuColorSwatch;
         "klevu-drawer": KlevuDrawer;
         "klevu-dropdown": KlevuDropdown;
         "klevu-facet": KlevuFacet;
@@ -3615,6 +3739,15 @@ declare module "@stencil/core" {
              * Component to display list of CMS page results
              */
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
+            /**
+             * Color Swatch component
+             * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
+             * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
+             * @cssprop --klevu-color-swatch-size 25px Size of swatch
+             * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
+             * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
+             */
+            "klevu-color-swatch": LocalJSX.KlevuColorSwatch & JSXBase.HTMLAttributes<HTMLKlevuColorSwatchElement>;
             /**
              * Component to create offscreen drawer on left or right side of the screen
              * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
