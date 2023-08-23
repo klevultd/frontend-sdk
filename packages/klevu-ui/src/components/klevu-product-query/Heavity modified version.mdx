@@ -1,0 +1,77 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import * as Stories from "./klevu-product-query.stories"
+
+<Meta of={Stories} />
+
+# Customizing Klevu Product Query Component
+
+This code example demonstrates the customization of the `klevu-product-query`
+component within a `klevu-init` wrapper. The `klevu-product-query` component is
+designed for asking questions about a product, and this example customizes its
+appearance and behavior.
+
+## HTML Markup
+
+Inside the `klevu-init` element, a `klevu-product-query` component is defined.
+It has various attributes and slots for customization:
+
+- `button-text`: Sets the text for the query button.
+- `popup-title`: Specifies the title for the query popup.
+- `fine-print`: Provides additional information to be displayed.
+- `pqa-widget-id`: A unique identifier for the widget.
+- `url`: The URL of the product page.
+
+Within the component, there's a custom icon (`klevu-icon`) placed before the
+button text, and a popup (`klevu-popup`) that appears when a question mark icon
+is clicked.
+
+## Slotted content
+
+Within the klevu-product-query component, slotted content is used to allow
+developers to insert additional elements or content into specific slots of the
+component. In the provided code example, there are two notable uses of slotted
+content:
+
+### 1. Icon Slot (before-button-text):
+
+A custom icon is slotted before the button text inside the `klevu-product-query`
+component. This allows you to insert an icon of your choice, enhancing the
+visual appeal of the query button. The icon is styled with specific CSS
+properties, such as font size, positioning, and margin, to achieve the desired
+appearance.
+
+### 2. Popup Slot (after-fineprint):
+
+Another slotted component is used within the `klevu-product-query` component to
+create a popup that appears when a question mark icon is clicked.
+
+- This slotted content contains two sub-elements:
+  - #fineprint-popup-origin: A question mark icon displayed inline. When
+    clicked, it triggers the display of the popup.
+  - #fineprint-popup: The content of the popup, which provides additional
+    information and terms of use.
+- The slotted content is styled to ensure the question mark icon is visually
+  distinct and the popup has a specific appearance, with a black background and
+  white text.
+
+By utilizing slotted content, you have the flexibility to customize the
+klevu-product-query component's appearance and behavior to suit your
+application's design and user experience requirements. You can replace or modify
+these slotted elements to achieve the desired visual and functional effects.
+
+## CSS Styling
+
+Custom CSS styles are applied to customize the appearance of the components:
+
+- The `klevu-product-query` component has its button styled with specific
+  border, background, and text colors.
+- The `klevu-product-query` component's button loses its border when focused.
+- The question mark icon (`#fineprint-popup-origin`) is styled with a black
+  background, white text, and a circular shape.
+- The popup content (`#fineprint-popup`) is styled with a black background and
+  white text.
+
+This customization provides a distinct look and feel to the
+`klevu-product-query` component and its associated popup.
+
+<Canvas of={Stories.HeavilyModifedVersion} story={{ height: "600px" }} />

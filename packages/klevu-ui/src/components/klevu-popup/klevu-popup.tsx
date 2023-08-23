@@ -222,7 +222,7 @@ export class KlevuPopup {
     }
 
     this.#originElement = this.originElement || this.el?.shadowRoot?.querySelector("#origin")
-    this.#contentElement = this.el?.shadowRoot?.querySelector("#content")
+    this.#contentElement = this.el?.shadowRoot?.querySelector("dialog")
 
     if (this.startOpen) {
       this.openModal()
@@ -257,10 +257,14 @@ export class KlevuPopup {
         <div id="origin" class="originContainer" part="popup-origin">
           <slot name="origin" />
         </div>
-        <dialog style={styles} part="popup-content" open={this.startOpen} ref={(el) => (this.dialogRef = el)}>
-          <div id="content" class={popupClasses}>
-            <slot name="content" />
-          </div>
+        <dialog
+          style={styles}
+          part="popup-content"
+          open={this.startOpen}
+          ref={(el) => (this.dialogRef = el)}
+          class={popupClasses}
+        >
+          <slot name="content" />
         </dialog>
       </Host>
     )
