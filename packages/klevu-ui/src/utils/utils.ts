@@ -78,6 +78,16 @@ export type KlevuUIGlobalSettings = {
   icons?: {
     [key: string]: string
   }
+
+  /**
+   * Method called when adding product to cart.
+   *
+   * Remember to prevent default event behaviour if you want to handle it yourself.
+   *
+   * @param product Product that was added to cart
+   * @param event Event that triggered the add to cart
+   */
+  addToCart?: (product: Partial<KlevuRecord>, event: Event) => void
 }
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {

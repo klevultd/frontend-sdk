@@ -1,11 +1,17 @@
 <!-- modifications here require restarting storybook -->
 <script>
   window.klevu_ui_settings = {
-    onProductClick: (product, event) => {
-      alert(product.name + " is clicked")
+    onItemClick: (product, event) => {
+      alert(product.name + " is clicked. This should open the product page.")
+      return false
     },
     generateProductUrl: (product) => {
-      return undefined
+      return "products/" + product.id + ".html"
+    },
+    addToCart: (product, event) => {
+      alert("Adding product to cart: " + product.name)
+      event.stopPropagation()
+      event.preventDefault()
     },
   }
 </script>

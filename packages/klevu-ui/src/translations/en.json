@@ -17,6 +17,9 @@
   "popularSearches": {
     "tCaption": "Popular searches"
   },
+  "product": {
+    "tAddToCart": "Add to cart"
+  },
   "productQueryPopup": {
     "tTextFieldPlaceholder": "Ask a questions",
     "tPopuptitle": "Ask a Question",

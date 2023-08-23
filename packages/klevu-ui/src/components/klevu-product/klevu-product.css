@@ -214,6 +214,10 @@
   font-size: 4em;
 }
 
+klevu-button.addToCart {
+  margin-top: var(--klevu-spacing-04);
+}
+
 @keyframes loadinggradient {
   0% {
     background-position: 0% 50%;
