@@ -87,6 +87,7 @@ graph TD;
   klevu-dropdown --> klevu-icon
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
+  klevu-product --> klevu-button
   klevu-pagination --> klevu-icon
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```

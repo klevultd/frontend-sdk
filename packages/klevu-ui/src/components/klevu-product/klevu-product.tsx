@@ -1,6 +1,10 @@
 import { KlevuRecord } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
+import { getKMCSettings } from "../../utils/getKMCSettings"
+import { getTranslation } from "../../utils/getTranslation"
+import { parts } from "../../utils/parts"
+import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; originalEvent: MouseEvent }
 export type KlevuProductVariant = "line" | "small" | "default"
@@ -17,6 +21,7 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @slot image - Image region of component
  * @slot info - Swatches, titles, brands and prices slot
  * @slot bottom - Empty are after product content
+ * @slot addtocart - Add to cart button slot at the end of the component
  *
  * @csspart product-image - The image element of component
  * @csspart product-container - The container element of whole
@@ -41,6 +46,17 @@ export class KlevuProduct {
    * Product data
    */
   @Prop() product?: Partial<KlevuRecord>
+
+  /**
+   * Show add to cart button
+   */
+  @Prop() showAddToCart?: boolean
+
+  /**
+   * Text for add to cart button
+   */
+  @Prop() tAddToCart?: string
+
   /**
    * Do not show swatches in products
    */
@@ -110,6 +126,19 @@ export class KlevuProduct {
   })
   klevuProductClick!: EventEmitter<KlevuProductOnProductClick>
 
+  async connectedCallback() {
+    await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (settings) {
+      if (this.tAddToCart === undefined) {
+        this.tAddToCart = settings.klevu_uc_userOptions.addToCartButton ?? getTranslation("product.tAddToCart")
+      }
+      if (this.showAddToCart === undefined) {
+        this.showAddToCart = settings.klevu_addToCartEnabled
+      }
+    }
+  }
+
   #click(ev: MouseEvent) {
     const settings = getGlobalSettings()
 
@@ -140,6 +169,16 @@ export class KlevuProduct {
         return false
       }
     }
+  }
+
+  #addToCart(event: Event) {
+    event.stopPropagation()
+    const settings = getGlobalSettings()
+    if (!this.product || !settings?.addToCart) {
+      return
+    }
+
+    settings.addToCart(this.product, event)
   }
 
   render() {
@@ -234,6 +273,18 @@ export class KlevuProduct {
                   </klevu-typography>
                 )}
               </div>
+            </slot>
+            <slot name="addtocart">
+              {this.showAddToCart ? (
+                <klevu-button
+                  class="addToCart"
+                  onClick={this.#addToCart.bind(this)}
+                  fullWidth
+                  exportparts={parts["klevu-button"]}
+                >
+                  {this.tAddToCart}
+                </klevu-button>
+              ) : null}
             </slot>
           </a>
           <slot name="bottom"></slot>

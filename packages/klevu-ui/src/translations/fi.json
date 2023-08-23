@@ -17,6 +17,9 @@
   "popularSearches": {
     "tCaption": "Suosituimmat haut"
   },
+  "product": {
+    "tAddToCart": "Lisää koriin"
+  },
   "productQueryPopup": {
     "tTextFieldPlaceholder": "Kysy kysymys",
     "tPopuptitle": "Kysy kysymys",

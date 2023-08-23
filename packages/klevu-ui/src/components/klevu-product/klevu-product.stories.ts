@@ -27,6 +27,8 @@ const productRender = (args: KlevuProduct, className?: string) => html` <klevu-p
   key-brand=${ifDefined(args.keyBrand)}
   key-name=${ifDefined(args.keyName)}
   key-description=${ifDefined(args.keyDescription)}
+  show-add-to-cart=${ifDefined(args.showAddToCart)}
+  t-add-to-cart=${ifDefined(args.tAddToCart)}
 ></klevu-product>`
 
 const meta: Meta = {
@@ -44,7 +46,7 @@ export const Product: StoryObj<KlevuProduct> = {
     product: productItem,
     variant: "default",
   },
-  render: productRender,
+  render: (args) => html` ${productRender(args)} `,
 }
 
 export const SmallProduct: StoryObj<KlevuProduct> = {

@@ -106,7 +106,9 @@ export class KlevuInit {
       url: this.url,
     })
 
-    window["klevu_ui_settings"] = this.settings
+    if (this.settings) {
+      window["klevu_ui_settings"] = this.settings
+    }
     if (this.translation) {
       window["klevu_ui_translations"] = this.translation
     } else if (this.language != "en") {

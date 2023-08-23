@@ -9,5 +9,6 @@ let internalParts = {
 
 // inherited parts of the components
 internalParts["klevu-product-query-popup"] += "," + internalParts["klevu-popup"]
+internalParts["klevu-product"] += "," + internalParts["klevu-button"]
 
 export const parts = internalParts

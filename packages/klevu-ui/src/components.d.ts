@@ -789,6 +789,14 @@ export namespace Components {
          */
         "product"?: Partial<KlevuRecord>;
         /**
+          * Show add to cart button
+         */
+        "showAddToCart"?: boolean;
+        /**
+          * Text for add to cart button
+         */
+        "tAddToCart"?: string;
+        /**
           * What variant of product to render
          */
         "variant": KlevuProductVariant;
@@ -2946,6 +2954,14 @@ declare namespace LocalJSX {
           * Product data
          */
         "product"?: Partial<KlevuRecord>;
+        /**
+          * Show add to cart button
+         */
+        "showAddToCart"?: boolean;
+        /**
+          * Text for add to cart button
+         */
+        "tAddToCart"?: string;
         /**
           * What variant of product to render
          */

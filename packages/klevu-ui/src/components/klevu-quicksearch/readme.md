@@ -114,6 +114,7 @@ graph TD;
   klevu-slides --> klevu-util-scrollbars
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
+  klevu-product --> klevu-button
   klevu-modal --> klevu-icon
   klevu-suggestions-list --> klevu-typography
   klevu-suggestions-list --> klevu-list
