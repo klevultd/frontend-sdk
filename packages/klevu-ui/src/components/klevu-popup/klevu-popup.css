@@ -50,6 +50,7 @@
 }
 
 dialog {
+  margin: 0;
   position: fixed;
   border: 0;
   z-index: 1000;

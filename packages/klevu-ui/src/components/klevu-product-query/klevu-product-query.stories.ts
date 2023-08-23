@@ -100,6 +100,7 @@ export const HeavilyModifedVersion: StoryObj<KlevuProductQuery> = {
         popup-title="Ask a question about this product"
         fine-print=" I’m an AI model so I do have
       limitations. Please verify answers on the product page."
+        use-background
       >
         <!-- This could be also a img with url -->
         <klevu-icon
