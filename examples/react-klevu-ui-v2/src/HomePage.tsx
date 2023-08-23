@@ -164,7 +164,7 @@ const HomePage = () => {
                                 role="button"
                                 style={{ cursor: "pointer" }}
                                 onClick={() =>
-                                  manager.toggleOption(f.key, selected.name)
+                                  manager.toggleOption(f.key, selected.value)
                                 }
                               >
                                 <KlevuIcon
