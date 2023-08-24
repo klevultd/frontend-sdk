@@ -51,7 +51,7 @@ Full app component for search landing page
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-loading-indicator](../klevu-loading-indicator)
-- [klevu-infinite-scroll](../klevu-infinite-scroll)
+- [klevu-util-infinite-scroll](../klevu-util-infinite-scroll)
 - [klevu-pagination](../klevu-pagination)
 - [klevu-button](../klevu-button)
 
@@ -66,7 +66,7 @@ graph TD;
   klevu-search-landing-page --> klevu-product-grid
   klevu-search-landing-page --> klevu-product
   klevu-search-landing-page --> klevu-loading-indicator
-  klevu-search-landing-page --> klevu-infinite-scroll
+  klevu-search-landing-page --> klevu-util-infinite-scroll
   klevu-search-landing-page --> klevu-pagination
   klevu-search-landing-page --> klevu-button
   klevu-layout-results --> klevu-util-viewport

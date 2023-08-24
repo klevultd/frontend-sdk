@@ -264,10 +264,10 @@ export class KlevuSearchLandingPage {
           </slot>
           <div slot="footer" class="footer">
             {showInfiniteScroll ? (
-              <klevu-infinite-scroll
+              <klevu-util-infinite-scroll
                 infiniteScrollPauseThreshold={0}
                 enabled={!!this.#resultObject?.hasNextPage() && !this.loading}
-              ></klevu-infinite-scroll>
+              ></klevu-util-infinite-scroll>
             ) : this.usePagination && this.#resultObject ? (
               <klevu-pagination
                 queryResult={this.#resultObject}

@@ -430,18 +430,6 @@ export namespace Components {
         "name": string;
     }
     /**
-     * Component that triggers event when intercepted on scroll of page.
-     * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
-     *                                Listen to this event to allow further loading on user input.
-     * @prop enabled - Whether infinite scrolling is enabled
-     * @event loadMore - Event emitted when infinite scroll element is intercepted
-     * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
-     */
-    interface KlevuInfiniteScroll {
-        "enabled": boolean;
-        "infiniteScrollPauseThreshold": number;
-    }
-    /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
      * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
      * configuration for all components on the page and provide few global settings for all components:
@@ -1432,6 +1420,19 @@ export namespace Components {
     interface KlevuUtilDomEvents {
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface KlevuUtilInfiniteScroll {
+        /**
+          * Whether infinite scrolling is enabled
+         */
+        "enabled": boolean;
+        /**
+          * The number of pages after which triggers infiniteScrollingPaused event. Listen to this event to allow further loading on user input.
+         */
+        "infiniteScrollPauseThreshold": number;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -1501,10 +1502,6 @@ export interface KlevuFacetCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuFacetListElement;
-}
-export interface KlevuInfiniteScrollCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLKlevuInfiniteScrollElement;
 }
 export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1581,6 +1578,10 @@ export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuUtilDomEventsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuUtilDomEventsElement;
+}
+export interface KlevuUtilInfiniteScrollCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuUtilInfiniteScrollElement;
 }
 export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1756,20 +1757,6 @@ declare global {
     var HTMLKlevuIconElement: {
         prototype: HTMLKlevuIconElement;
         new (): HTMLKlevuIconElement;
-    };
-    /**
-     * Component that triggers event when intercepted on scroll of page.
-     * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
-     *                                Listen to this event to allow further loading on user input.
-     * @prop enabled - Whether infinite scrolling is enabled
-     * @event loadMore - Event emitted when infinite scroll element is intercepted
-     * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
-     */
-    interface HTMLKlevuInfiniteScrollElement extends Components.KlevuInfiniteScroll, HTMLStencilElement {
-    }
-    var HTMLKlevuInfiniteScrollElement: {
-        prototype: HTMLKlevuInfiniteScrollElement;
-        new (): HTMLKlevuInfiniteScrollElement;
     };
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -2137,6 +2124,15 @@ declare global {
         new (): HTMLKlevuUtilDomEventsElement;
     };
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface HTMLKlevuUtilInfiniteScrollElement extends Components.KlevuUtilInfiniteScroll, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilInfiniteScrollElement: {
+        prototype: HTMLKlevuUtilInfiniteScrollElement;
+        new (): HTMLKlevuUtilInfiniteScrollElement;
+    };
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -2181,7 +2177,6 @@ declare global {
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
         "klevu-icon": HTMLKlevuIconElement;
-        "klevu-infinite-scroll": HTMLKlevuInfiniteScrollElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
@@ -2211,6 +2206,7 @@ declare global {
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
         "klevu-util-dom-events": HTMLKlevuUtilDomEventsElement;
+        "klevu-util-infinite-scroll": HTMLKlevuUtilInfiniteScrollElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
@@ -2623,20 +2619,6 @@ declare namespace LocalJSX {
           * Name of the icon. Please use tokens of material icons
          */
         "name": string;
-    }
-    /**
-     * Component that triggers event when intercepted on scroll of page.
-     * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
-     *                                Listen to this event to allow further loading on user input.
-     * @prop enabled - Whether infinite scrolling is enabled
-     * @event loadMore - Event emitted when infinite scroll element is intercepted
-     * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
-     */
-    interface KlevuInfiniteScroll {
-        "enabled"?: boolean;
-        "infiniteScrollPauseThreshold"?: number;
-        "onInfiniteScrollingPaused"?: (event: KlevuInfiniteScrollCustomEvent<void>) => void;
-        "onLoadMore"?: (event: KlevuInfiniteScrollCustomEvent<void>) => void;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -3672,6 +3654,27 @@ declare namespace LocalJSX {
         "onLastSearchUpdate"?: (event: KlevuUtilDomEventsCustomEvent<void>) => void;
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface KlevuUtilInfiniteScroll {
+        /**
+          * Whether infinite scrolling is enabled
+         */
+        "enabled"?: boolean;
+        /**
+          * The number of pages after which triggers infiniteScrollingPaused event. Listen to this event to allow further loading on user input.
+         */
+        "infiniteScrollPauseThreshold"?: number;
+        /**
+          * Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+         */
+        "onInfiniteScrollingPaused"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+        /**
+          * Event emitted when infinite scroll element is intercepted
+         */
+        "onLoadMore"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -3711,7 +3714,6 @@ declare namespace LocalJSX {
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
         "klevu-icon": KlevuIcon;
-        "klevu-infinite-scroll": KlevuInfiniteScroll;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
@@ -3741,6 +3743,7 @@ declare namespace LocalJSX {
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
         "klevu-util-dom-events": KlevuUtilDomEvents;
+        "klevu-util-infinite-scroll": KlevuUtilInfiniteScroll;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
         "klevu-util-viewport": KlevuUtilViewport;
@@ -3845,15 +3848,6 @@ declare module "@stencil/core" {
              * Klevu icon component. Uses Google Material Icons.
              */
             "klevu-icon": LocalJSX.KlevuIcon & JSXBase.HTMLAttributes<HTMLKlevuIconElement>;
-            /**
-             * Component that triggers event when intercepted on scroll of page.
-             * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
-             *                                Listen to this event to allow further loading on user input.
-             * @prop enabled - Whether infinite scrolling is enabled
-             * @event loadMore - Event emitted when infinite scroll element is intercepted
-             * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
-             */
-            "klevu-infinite-scroll": LocalJSX.KlevuInfiniteScroll & JSXBase.HTMLAttributes<HTMLKlevuInfiniteScrollElement>;
             /**
              * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
              * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
@@ -4074,6 +4068,10 @@ declare module "@stencil/core" {
              * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
              */
             "klevu-util-dom-events": LocalJSX.KlevuUtilDomEvents & JSXBase.HTMLAttributes<HTMLKlevuUtilDomEventsElement>;
+            /**
+             * Component that triggers event when intercepted on scroll of page.
+             */
+            "klevu-util-infinite-scroll": LocalJSX.KlevuUtilInfiniteScroll & JSXBase.HTMLAttributes<HTMLKlevuUtilInfiniteScrollElement>;
             /**
              * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
              * to prevent problems with CSS stylings.

@@ -1,13 +1,13 @@
 import { MDXAutoFillMeta } from "../../storybookUtils"
 import { html } from "lit-html"
 import type { Meta, StoryObj } from "@storybook/web-components"
-import { KlevuInfiniteScroll } from "./klevu-infinite-scroll"
+import { KlevuUtilInfiniteScroll } from "./klevu-util-infinite-scroll"
 import { ifDefined } from "lit-html/directives/if-defined.js"
-export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-infinite-scroll")
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-util-infinite-scroll")
 
 const meta: Meta = {
-  title: "Atoms/Infinite Scroll",
-  component: "klevu-infinite-scroll",
+  title: "Utils/Infinite Scroll",
+  component: "klevu-util-infinite-scroll",
   argTypes,
   parameters,
   decorators,
@@ -15,7 +15,7 @@ const meta: Meta = {
 
 export default meta
 
-export const InfiniteScroll: StoryObj<KlevuInfiniteScroll> = {
+export const InfiniteScroll: StoryObj<KlevuUtilInfiniteScroll> = {
   args: {
     infiniteScrollPauseThreshold: 0,
     enabled: true,
@@ -55,10 +55,10 @@ export const InfiniteScroll: StoryObj<KlevuInfiniteScroll> = {
         <div class="item">10</div>
       </div>
       <!-- Infinite Scroll Component -->
-      <klevu-infinite-scroll
+      <klevu-util-infinite-scroll
         enabled="${ifDefined(args.enabled) && !document.querySelector("klevu-button")}"
         infiniteScrollPauseThreshold=${ifDefined(args.infiniteScrollPauseThreshold)}
-      ></klevu-infinite-scroll>
+      ></klevu-util-infinite-scroll>
     </div>
     <script>
       // JavaScript Code for Infinite Scroll and Load More Button
@@ -68,10 +68,10 @@ export const InfiniteScroll: StoryObj<KlevuInfiniteScroll> = {
       const container = document.querySelector(".container")
 
       // Select the Infinite Scroll component
-      const klevuInfiniteScroll = document.querySelector("klevu-infinite-scroll")
+      const klevuInfiniteScroll = document.querySelector("klevu-util-infinite-scroll")
 
       // Event listener for when infinite scrolling is paused
-      document.querySelector("klevu-infinite-scroll").addEventListener("infiniteScrollingPaused", () => {
+      document.querySelector("klevu-util-infinite-scroll").addEventListener("infiniteScrollingPaused", () => {
         // Disable the infinite scroll
         klevuInfiniteScroll.setAttribute("enabled", false)
 
@@ -91,7 +91,7 @@ export const InfiniteScroll: StoryObj<KlevuInfiniteScroll> = {
       })
 
       // Event listener for loading more items
-      document.querySelector("klevu-infinite-scroll").addEventListener("loadMore", () => {
+      document.querySelector("klevu-util-infinite-scroll").addEventListener("loadMore", () => {
         fetchMore() // Call the fetchMore function
       })
 

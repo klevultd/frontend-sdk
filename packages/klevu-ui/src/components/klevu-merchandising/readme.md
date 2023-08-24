@@ -53,7 +53,7 @@ Full merchandising app to power up your product grid pages
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-loading-indicator](../klevu-loading-indicator)
-- [klevu-infinite-scroll](../klevu-infinite-scroll)
+- [klevu-util-infinite-scroll](../klevu-util-infinite-scroll)
 - [klevu-pagination](../klevu-pagination)
 - [klevu-button](../klevu-button)
 
@@ -68,7 +68,7 @@ graph TD;
   klevu-merchandising --> klevu-product-grid
   klevu-merchandising --> klevu-product
   klevu-merchandising --> klevu-loading-indicator
-  klevu-merchandising --> klevu-infinite-scroll
+  klevu-merchandising --> klevu-util-infinite-scroll
   klevu-merchandising --> klevu-pagination
   klevu-merchandising --> klevu-button
   klevu-layout-results --> klevu-util-viewport

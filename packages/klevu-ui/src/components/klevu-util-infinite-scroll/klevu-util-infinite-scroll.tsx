@@ -2,30 +2,36 @@ import { Component, Element, Event, EventEmitter, Host, Prop, Watch, h } from "@
 
 /**
  * Component that triggers event when intercepted on scroll of page.
- *
- * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
- *                                      Listen to this event to allow further loading on user input.
- * @prop enabled - Whether infinite scrolling is enabled
- * @event loadMore - Event emitted when infinite scroll element is intercepted
- * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
  */
 @Component({
-  tag: "klevu-infinite-scroll",
+  tag: "klevu-util-infinite-scroll",
 })
-export class KlevuInfiniteScroll {
+export class KlevuUtilInfiniteScroll {
+  /**
+   * Event emitted when infinite scroll element is intercepted
+   */
   @Event({
     composed: true,
   })
   loadMore!: EventEmitter<void>
-
+  /**
+   * Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+   */
   @Event({
     composed: true,
   })
   infiniteScrollingPaused!: EventEmitter<void>
 
+  /**
+   * The number of pages after which triggers infiniteScrollingPaused event.
+   * Listen to this event to allow further loading on user input.
+   */
   @Prop()
   infiniteScrollPauseThreshold: number = 3
 
+  /**
+   * Whether infinite scrolling is enabled
+   */
   @Prop()
   enabled: boolean = false
 
@@ -88,6 +94,10 @@ export class KlevuInfiniteScroll {
   }
 
   render() {
-    return <Host>&nbsp;</Host>
+    return (
+      <Host>
+        <div />
+      </Host>
+    )
   }
 }

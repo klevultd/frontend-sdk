@@ -291,10 +291,10 @@ export class KlevuMerchandising {
           </slot>
           <div slot="footer" class="footer">
             {showInfiniteScroll ? (
-              <klevu-infinite-scroll
+              <klevu-util-infinite-scroll
                 infiniteScrollPauseThreshold={3}
                 enabled={!!this.#resultObject?.hasNextPage() && !this.loading}
-              ></klevu-infinite-scroll>
+              ></klevu-util-infinite-scroll>
             ) : this.usePagination && this.#resultObject ? (
               <klevu-pagination
                 queryResult={this.#resultObject}

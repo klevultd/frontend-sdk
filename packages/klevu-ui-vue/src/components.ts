@@ -147,14 +147,6 @@ export const KlevuIcon = /*@__PURE__*/ defineContainer<JSX.KlevuIcon>('klevu-ico
 ]);
 
 
-export const KlevuInfiniteScroll = /*@__PURE__*/ defineContainer<JSX.KlevuInfiniteScroll>('klevu-infinite-scroll', undefined, [
-  'infiniteScrollPauseThreshold',
-  'enabled',
-  'loadMore',
-  'infiniteScrollingPaused'
-]);
-
-
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url',
@@ -468,6 +460,14 @@ export const KlevuUtilDomEvents = /*@__PURE__*/ defineContainer<JSX.KlevuUtilDom
   'filterSelectionUpdate',
   'filtersApplied',
   'clickEventSent'
+]);
+
+
+export const KlevuUtilInfiniteScroll = /*@__PURE__*/ defineContainer<JSX.KlevuUtilInfiniteScroll>('klevu-util-infinite-scroll', undefined, [
+  'infiniteScrollPauseThreshold',
+  'enabled',
+  'loadMore',
+  'infiniteScrollingPaused'
 ]);
 
 
