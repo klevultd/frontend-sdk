@@ -7,9 +7,6 @@
 }
 
 .popup {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: max-content;
   box-sizing: border-box;
   padding: var(--spacing);
