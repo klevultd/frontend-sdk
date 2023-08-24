@@ -7,6 +7,8 @@ import HomePage from "./HomePage"
 import { ProductsPage } from "./ProductsPage"
 import ProductPage from "./ProductPage"
 import { CheckoutPage } from "./CheckoutPage"
+import { CategoryPage } from "./CategoryPage"
+import { SearchResultPage } from "./SearchResultPage"
 
 const container = document.getElementById("root")
 export const root = createRoot(container!)
@@ -19,7 +21,8 @@ root.render(
           <Route path="products" element={<ProductsPage />}>
             <Route path=":groupId/:id" element={<ProductPage />} />
           </Route>
-          {/* <Route path="search" element={<SearchResultPage />} /> */}
+          <Route path="search" element={<SearchResultPage />} />
+          <Route path="category" element={<CategoryPage />} />
           <Route path="cart" element={<CheckoutPage />} />
         </Route>
       </Routes>

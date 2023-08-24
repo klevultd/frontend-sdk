@@ -594,6 +594,10 @@ export namespace Components {
          */
         "tLoadMore": any;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -1249,6 +1253,10 @@ export namespace Components {
          */
         "term": string;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
@@ -1420,6 +1428,19 @@ export namespace Components {
     interface KlevuUtilDomEvents {
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface KlevuUtilInfiniteScroll {
+        /**
+          * Whether infinite scrolling is enabled
+         */
+        "enabled": boolean;
+        /**
+          * The number of pages after which triggers infiniteScrollingPaused event. Listen to this event to allow further loading on user input.
+         */
+        "infiniteScrollPauseThreshold": number;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -1565,6 +1586,10 @@ export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuUtilDomEventsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuUtilDomEventsElement;
+}
+export interface KlevuUtilInfiniteScrollCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuUtilInfiniteScrollElement;
 }
 export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2107,6 +2132,15 @@ declare global {
         new (): HTMLKlevuUtilDomEventsElement;
     };
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface HTMLKlevuUtilInfiniteScrollElement extends Components.KlevuUtilInfiniteScroll, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilInfiniteScrollElement: {
+        prototype: HTMLKlevuUtilInfiniteScrollElement;
+        new (): HTMLKlevuUtilInfiniteScrollElement;
+    };
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -2180,6 +2214,7 @@ declare global {
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
         "klevu-util-dom-events": HTMLKlevuUtilDomEventsElement;
+        "klevu-util-infinite-scroll": HTMLKlevuUtilInfiniteScrollElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
@@ -2750,6 +2785,10 @@ declare namespace LocalJSX {
           * Text for load more button
          */
         "tLoadMore"?: any;
+        /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
         /**
           * Should display pagination instead of load next
          */
@@ -3419,6 +3458,10 @@ declare namespace LocalJSX {
          */
         "term": string;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
@@ -3627,6 +3670,27 @@ declare namespace LocalJSX {
         "onLastSearchUpdate"?: (event: KlevuUtilDomEventsCustomEvent<void>) => void;
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface KlevuUtilInfiniteScroll {
+        /**
+          * Whether infinite scrolling is enabled
+         */
+        "enabled"?: boolean;
+        /**
+          * The number of pages after which triggers infiniteScrollingPaused event. Listen to this event to allow further loading on user input.
+         */
+        "infiniteScrollPauseThreshold"?: number;
+        /**
+          * Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+         */
+        "onInfiniteScrollingPaused"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+        /**
+          * Event emitted when infinite scroll element is intercepted
+         */
+        "onLoadMore"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -3695,6 +3759,7 @@ declare namespace LocalJSX {
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
         "klevu-util-dom-events": KlevuUtilDomEvents;
+        "klevu-util-infinite-scroll": KlevuUtilInfiniteScroll;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
         "klevu-util-viewport": KlevuUtilViewport;
@@ -4019,6 +4084,10 @@ declare module "@stencil/core" {
              * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
              */
             "klevu-util-dom-events": LocalJSX.KlevuUtilDomEvents & JSXBase.HTMLAttributes<HTMLKlevuUtilDomEventsElement>;
+            /**
+             * Component that triggers event when intercepted on scroll of page.
+             */
+            "klevu-util-infinite-scroll": LocalJSX.KlevuUtilInfiniteScroll & JSXBase.HTMLAttributes<HTMLKlevuUtilInfiniteScrollElement>;
             /**
              * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
              * to prevent problems with CSS stylings.

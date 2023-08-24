@@ -183,6 +183,7 @@ export const KlevuLoadingIndicator = /*@__PURE__*/ defineContainer<JSX.KlevuLoad
 
 export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchandising>('klevu-merchandising', undefined, [
   'usePagination',
+  'useInfiniteScroll',
   'limit',
   'category',
   'categoryTitle',
@@ -390,6 +391,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'filterCount',
   'filterCustomOrder',
   'usePagination',
+  'useInfiniteScroll',
   'tSearchTitle',
   'tLoadMore',
   'data'
@@ -460,6 +462,14 @@ export const KlevuUtilDomEvents = /*@__PURE__*/ defineContainer<JSX.KlevuUtilDom
   'filterSelectionUpdate',
   'filtersApplied',
   'clickEventSent'
+]);
+
+
+export const KlevuUtilInfiniteScroll = /*@__PURE__*/ defineContainer<JSX.KlevuUtilInfiniteScroll>('klevu-util-infinite-scroll', undefined, [
+  'infiniteScrollPauseThreshold',
+  'enabled',
+  'loadMore',
+  'infiniteScrollingPaused'
 ]);
 
 
