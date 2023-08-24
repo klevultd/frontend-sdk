@@ -32,12 +32,18 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-search-result=${ifDefined(args.tSearchResults)}
     t-start-chat=${ifDefined(args.tStartChat)}
     t-categories-caption=${ifDefined(args.tCategoriesCaption)}
+    show-ratings=${ifDefined(args.showRatings)}
+    show-ratings-count=${ifDefined(args.showRatingsCount)}
   ></klevu-quicksearch>`,
 }
 
 export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
   render: (args) => html`
-    <klevu-quicksearch class="customized">
+    <klevu-quicksearch
+      class="customized"
+      show-ratings=${ifDefined(args.showRatings)}
+      show-ratings-count=${ifDefined(args.showRatingsCount)}
+    >
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>
       <div slot="last-clicked-products">This will be replace by script below</div>

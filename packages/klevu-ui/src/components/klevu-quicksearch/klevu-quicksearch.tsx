@@ -27,6 +27,7 @@ import {
 } from "../klevu-search-field/klevu-search-field"
 import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 export type KlevuQuicksearchResultVarint = "simple" | "full"
 
@@ -124,6 +125,15 @@ export class KlevuQuicksearch {
    * Recentely clicked tab caption
    */
   @Prop() tLastClickedProductsCaption = getTranslation("quicksearch.tLastClickedProductsCaption")
+  /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean = false
+
+  /**
+   * Show ratings count
+   */
+  @Prop() showRatingsCount?: boolean = false
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -226,6 +236,12 @@ export class KlevuQuicksearch {
       this.trendingProducts = resultObject.records
       this.#emitChangedData()
     }
+    const settings = getKMCSettings()
+    if (settings) {
+      this.showRatings = this.showRatings ?? (settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false)
+      this.showRatingsCount =
+        this.showRatingsCount ?? (settings.klevu_uc_userOptions?.showRatingsCountOnQuickSearches || false)
+    }
   }
 
   #onPopupOpen() {
@@ -320,6 +336,8 @@ export class KlevuQuicksearch {
                       fixedWidth
                       variant={isMobile ? "line" : "small"}
                       exportparts={parts["klevu-product"]}
+                      showRatings={this.showRatings}
+                      showRatingsCount={this.showRatingsCount}
                     ></klevu-product>
                   ))}
                 </slot>

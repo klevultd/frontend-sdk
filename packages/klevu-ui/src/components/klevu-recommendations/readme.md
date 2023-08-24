@@ -45,6 +45,7 @@ graph TD;
   klevu-button --> klevu-typography
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
+  klevu-product --> klevu-rating
   klevu-product --> klevu-button
   style klevu-recommendations fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -28,5 +28,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     use-pagination=${ifDefined(args.usePagination)}
     t-search-title=${ifDefined(args.tSearchTitle)}
     t-load-more=${ifDefined(args.loadMore)}
+    show-ratings=${ifDefined(args.showRatings)}
+    show-ratings-count=${ifDefined(args.showRatingsCount)}
   ></klevu-search-landing-page>`,
 }

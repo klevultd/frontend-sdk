@@ -37,7 +37,6 @@ export function CategoryPage() {
       <KlevuMerchandising
         category={params.id}
         categoryTitle={navItem.label}
-        renderProductSlot={renderProductSlot}
       ></KlevuMerchandising>
     </Fragment>
   )

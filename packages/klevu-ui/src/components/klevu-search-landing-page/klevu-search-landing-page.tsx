@@ -23,6 +23,7 @@ import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 /**
  * Full app component for search landing page
@@ -65,6 +66,16 @@ export class KlevuSearchLandingPage {
   @Prop() usePagination?: boolean
 
   /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean = false
+
+  /**
+   * Show ratings count
+   */
+  @Prop() showRatingsCount?: boolean = false
+
+  /**
    * The title of the page
    */
   @Prop() tSearchTitle = getTranslation("searchLandingPage.tSearchTitle")
@@ -86,6 +97,13 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (settings) {
+      this.showRatings =
+        this.showRatings ?? (settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false)
+      this.showRatingsCount =
+        this.showRatingsCount ?? (settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false)
+    }
     await this.#fetchData()
   }
 
@@ -235,7 +253,13 @@ export class KlevuSearchLandingPage {
           <slot name="content" slot="content">
             <klevu-product-grid slot="content">
               {this.results?.map((p) => (
-                <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}></klevu-product>
+                <klevu-product
+                  product={p}
+                  fixedWidth
+                  exportparts={parts["klevu-product"]}
+                  showRatings={this.showRatings}
+                  showRatingsCount={this.showRatingsCount}
+                ></klevu-product>
               ))}
             </klevu-product-grid>
           </slot>
@@ -246,7 +270,7 @@ export class KlevuSearchLandingPage {
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>
             ) : this.#resultObject?.getPage ? (
-              <klevu-button onClick={this.loadMore.bind(this)}>${this.tLoadMore}</klevu-button>
+              <klevu-button onClick={this.loadMore.bind(this)}>{this.tLoadMore}</klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

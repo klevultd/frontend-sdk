@@ -582,6 +582,14 @@ export namespace Components {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
@@ -792,6 +800,14 @@ export namespace Components {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatingsCount"?: boolean;
         /**
           * Text for add to cart button
          */
@@ -1081,6 +1097,14 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * How many products to show in simple variant
          */
         "simpleResultCount": number;
@@ -1232,6 +1256,14 @@ export namespace Components {
           * How many results to display on a page
          */
         "limit": number;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
         /**
           * In which order to set the products
          */
@@ -2739,6 +2771,14 @@ declare namespace LocalJSX {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
@@ -2958,6 +2998,14 @@ declare namespace LocalJSX {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatingsCount"?: boolean;
         /**
           * Text for add to cart button
          */
@@ -3251,6 +3299,14 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * How many products to show in simple variant
          */
         "simpleResultCount"?: number;
@@ -3402,6 +3458,14 @@ declare namespace LocalJSX {
          */
         "limit"?: number;
         "onData"?: (event: KlevuSearchLandingPageCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
         /**
           * In which order to set the products
          */

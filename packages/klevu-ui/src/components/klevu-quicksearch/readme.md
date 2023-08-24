@@ -21,6 +21,8 @@ Full app to create search bar that popups trending products and search results.
 | `searchCmsPages`              | `search-cms-pages`                | Should component search for CMS pages too              | `boolean \| undefined`                                                                                                                                                            | `undefined`                                                 |
 | `searchFieldVariant`          | `search-field-variant`            | Change variant of the search field                     | `"default" \| "pill"`                                                                                                                                                             | `"pill"`                                                    |
 | `searchText`                  | `search-text`                     | Text of search button                                  | `string \| undefined`                                                                                                                                                             | `undefined`                                                 |
+| `showRatings`                 | `show-ratings`                    | Show ratings                                           | `boolean \| undefined`                                                                                                                                                            | `false`                                                     |
+| `showRatingsCount`            | `show-ratings-count`              | Show ratings count                                     | `boolean \| undefined`                                                                                                                                                            | `false`                                                     |
 | `simpleResultCount`           | `simple-result-count`             | How many products to show in simple variant            | `number`                                                                                                                                                                          | `3`                                                         |
 | `tCategoriesCaption`          | `t-categories-caption`            | Title of categories section                            | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tCategoriesCaption")`          |
 | `tLastClickedProductsCaption` | `t-last-clicked-products-caption` | Recentely clicked tab caption                          | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tLastClickedProductsCaption")` |
@@ -114,6 +116,7 @@ graph TD;
   klevu-slides --> klevu-util-scrollbars
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
+  klevu-product --> klevu-rating
   klevu-product --> klevu-button
   klevu-modal --> klevu-icon
   klevu-suggestions-list --> klevu-typography
