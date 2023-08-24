@@ -1,0 +1,53 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import * as Stories from "./klevu-infinite-scroll.stories"
+
+<Meta of={Stories} />
+
+# Klevu-infinite-scroll
+
+<Markdown>{Stories.description}</Markdown>
+
+### Infinite Scrolling and "Load More" Button
+
+This code snippet represents a web page with a list of items that employs infinite scrolling and includes a "Load More" button for additional content loading.
+
+<Canvas of={Stories.InfiniteScroll} />
+
+## Description of example code
+
+### HTML Structure
+
+The web page consists of two main elements: a container for displaying items and an "Infinite Scroll" component.
+
+### Container for Displaying Items
+
+Inside the container, there are ten individual items, each marked with a number from 1 to 10. These items are styled using CSS to have a black background, white text, and are centered both horizontally and vertically on the page.
+
+### Infinite Scroll Component
+
+The "Infinite Scroll" component is responsible for enabling infinite scrolling behavior.
+
+The JavaScript code controls the behavior of the page, specifically focusing on infinite scrolling and the "Load More" button.
+
+## Initialization:
+
+The code starts with a counter set to 10, indicating that the last displayed item is 10.
+
+## Load More Event:
+
+When the "loadMore" event is triggered by the "Infinite Scroll" component, it calls the fetchMore function to load additional items.
+
+## Fetching More Items:
+
+The fetchMore function removes the "Load More" button if it exists and adds 10 more items to the container. Each new item is styled like the existing ones and is assigned a unique number, which increments with each addition.
+
+## Infinite Scrolling Paused Event:
+
+When the "infiniteScrollingPaused" event is triggered by the "Infinite Scroll" component (usually when the user scrolls to a certain point), it performs the following actions:
+
+Disables infinite scrolling to prevent automatic loading.\
+Dynamically creates a "Load More" button.\
+Adds a click event listener to the "Load More" button, which, when clicked, fetches and displays more items.\
+Re-enables infinite scrolling after clicking the "Load More" button.\
+
+This combination of infinite scrolling and the "Load More" button provides users with a seamless experience of exploring additional content when they reach the end of the initial list of items.

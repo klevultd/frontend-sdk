@@ -20,6 +20,7 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     category: "women",
     categoryTitle: "Women's products",
     limit: 24,
+    useInfiniteScroll: false,
   },
   render: (args) => html`<klevu-merchandising
     category=${ifDefined(args.category)}
@@ -29,6 +30,7 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     limit=${args.limit}
     sort=${ifDefined(args.sort)}
     use-pagination=${ifDefined(args.usePagination)}
+    use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
   ></klevu-merchandising>`,
 }
 
@@ -81,4 +83,23 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       }
     </style>
   `,
+}
+
+export const WithInfiniteScroll: StoryObj<KlevuMerchandising> = {
+  args: {
+    category: "women",
+    categoryTitle: "Women's products",
+    limit: 24,
+    useInfiniteScroll: true,
+  },
+  render: (args) => html`<klevu-merchandising
+    category=${ifDefined(args.category)}
+    category-title=${ifDefined(args.categoryTitle)}
+    filter-count=${ifDefined(args.filterCount)}
+    .filterCustomOrder=${args.filterCustomOrder}
+    limit=${args.limit}
+    sort=${ifDefined(args.sort)}
+    use-pagination=${ifDefined(args.usePagination)}
+    use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
+  ></klevu-merchandising>`,
 }

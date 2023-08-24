@@ -138,22 +138,6 @@ function App() {
               <KlevuQuicksearch
                 searchFieldVariant="default"
                 placeholder="Search here"
-                renderProductSlot={(product, slot) => {
-                  if (slot === "bottom") {
-                    const div = document.createElement("div")
-                    createRoot(div).render(
-                      <KlevuButton
-                        onClick={() => {
-                          cart.add(product)
-                        }}
-                      >
-                        <KlevuIcon name="Add" /> Add to cart
-                      </KlevuButton>,
-                    )
-                    return div
-                  }
-                  return null
-                }}
               />
             </li>
             <li>

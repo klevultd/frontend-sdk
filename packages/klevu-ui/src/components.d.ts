@@ -430,6 +430,18 @@ export namespace Components {
         "name": string;
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
+     *                                Listen to this event to allow further loading on user input.
+     * @prop enabled - Whether infinite scrolling is enabled
+     * @event loadMore - Event emitted when infinite scroll element is intercepted
+     * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+     */
+    interface KlevuInfiniteScroll {
+        "enabled": boolean;
+        "infiniteScrollPauseThreshold": number;
+    }
+    /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
      * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
      * configuration for all components on the page and provide few global settings for all components:
@@ -593,6 +605,10 @@ export namespace Components {
           * Text for load more button
          */
         "tLoadMore": any;
+        /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
         /**
           * Should display pagination instead of load next
          */
@@ -1241,6 +1257,10 @@ export namespace Components {
          */
         "term": string;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
@@ -1481,6 +1501,10 @@ export interface KlevuFacetCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuFacetListElement;
+}
+export interface KlevuInfiniteScrollCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuInfiniteScrollElement;
 }
 export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1732,6 +1756,20 @@ declare global {
     var HTMLKlevuIconElement: {
         prototype: HTMLKlevuIconElement;
         new (): HTMLKlevuIconElement;
+    };
+    /**
+     * Component that triggers event when intercepted on scroll of page.
+     * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
+     *                                Listen to this event to allow further loading on user input.
+     * @prop enabled - Whether infinite scrolling is enabled
+     * @event loadMore - Event emitted when infinite scroll element is intercepted
+     * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+     */
+    interface HTMLKlevuInfiniteScrollElement extends Components.KlevuInfiniteScroll, HTMLStencilElement {
+    }
+    var HTMLKlevuInfiniteScrollElement: {
+        prototype: HTMLKlevuInfiniteScrollElement;
+        new (): HTMLKlevuInfiniteScrollElement;
     };
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -2143,6 +2181,7 @@ declare global {
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
         "klevu-icon": HTMLKlevuIconElement;
+        "klevu-infinite-scroll": HTMLKlevuInfiniteScrollElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
@@ -2586,6 +2625,20 @@ declare namespace LocalJSX {
         "name": string;
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
+     *                                Listen to this event to allow further loading on user input.
+     * @prop enabled - Whether infinite scrolling is enabled
+     * @event loadMore - Event emitted when infinite scroll element is intercepted
+     * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+     */
+    interface KlevuInfiniteScroll {
+        "enabled"?: boolean;
+        "infiniteScrollPauseThreshold"?: number;
+        "onInfiniteScrollingPaused"?: (event: KlevuInfiniteScrollCustomEvent<void>) => void;
+        "onLoadMore"?: (event: KlevuInfiniteScrollCustomEvent<void>) => void;
+    }
+    /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
      * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
      * configuration for all components on the page and provide few global settings for all components:
@@ -2742,6 +2795,10 @@ declare namespace LocalJSX {
           * Text for load more button
          */
         "tLoadMore"?: any;
+        /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
         /**
           * Should display pagination instead of load next
          */
@@ -3403,6 +3460,10 @@ declare namespace LocalJSX {
          */
         "term": string;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
@@ -3650,6 +3711,7 @@ declare namespace LocalJSX {
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
         "klevu-icon": KlevuIcon;
+        "klevu-infinite-scroll": KlevuInfiniteScroll;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
@@ -3783,6 +3845,15 @@ declare module "@stencil/core" {
              * Klevu icon component. Uses Google Material Icons.
              */
             "klevu-icon": LocalJSX.KlevuIcon & JSXBase.HTMLAttributes<HTMLKlevuIconElement>;
+            /**
+             * Component that triggers event when intercepted on scroll of page.
+             * @prop infiniteScrollPauseThreshold - The number of pages after which triggers infiniteScrollingPaused event.
+             *                                Listen to this event to allow further loading on user input.
+             * @prop enabled - Whether infinite scrolling is enabled
+             * @event loadMore - Event emitted when infinite scroll element is intercepted
+             * @event infiniteLoadingPaused - Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+             */
+            "klevu-infinite-scroll": LocalJSX.KlevuInfiniteScroll & JSXBase.HTMLAttributes<HTMLKlevuInfiniteScrollElement>;
             /**
              * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
              * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
