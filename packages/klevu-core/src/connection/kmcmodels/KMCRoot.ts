@@ -211,17 +211,17 @@ interface KlevuUcUserOptions {
    * Controls display of ratings and ratings count in product card of Category page
    */
   showRatingsOnCategoryPage: boolean
-  showRatingsOnQuickSearches: boolean
+  showRatingsCountOnCategoryPage: boolean
   /**
    * Controls display of ratings and ratings count in product card of Search results page
    */
   showRatingsOnSearchResultsLandingPage: boolean
-  showRatingsCountOnCategoryPage: boolean
+  showRatingsCountOnSearchResultsLandingPage: boolean
   /**
    * Controls display of ratings and ratings count in product card of Quick search
    */
+  showRatingsOnQuickSearches: boolean
   showRatingsCountOnQuickSearches: boolean
-  showRatingsCountOnSearchResultsLandingPage: boolean
   /**
    * Show recently viewed products. Show search-led clicked products based on shopper's personalized search history.
    */
