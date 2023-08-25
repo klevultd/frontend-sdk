@@ -312,18 +312,27 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
 
 export const KlevuQuery = /*@__PURE__*/ defineContainer<JSX.KlevuQuery>('klevu-query', undefined, [
   'type',
+  'disableInitialFetch',
+  'searchSuggestions',
   'sendSearchViewEvent',
   'options',
   'sort',
   'limit',
   'offset',
+  'filterGet',
   'filterCount',
+  'filterWithPrices',
   'category',
   'categoryTitle',
   'searchTerm',
   'recommendationId',
+  'recommendationCartProductIds',
+  'recommendationCurrentProductId',
+  'recommendationItemGroupId',
+  'recommendationCategoryPath',
   'manager',
   'updateOnFilterChange',
+  'overrideModifiers',
   'klevuQueryResult'
 ]);
 

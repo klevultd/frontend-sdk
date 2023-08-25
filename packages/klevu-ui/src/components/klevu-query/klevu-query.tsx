@@ -5,7 +5,6 @@ import {
   KlevuDomEvents,
   KlevuFetch,
   KlevuFetchModifer,
-  KlevuFetchQueryResult,
   KlevuKMCRecommendationOptions,
   KlevuListenDomEvent,
   KlevuMerchandisingOptions,
@@ -13,11 +12,13 @@ import {
   KlevuResponseQueryObject,
   KlevuSearchOptions,
   KlevuSearchSorting,
+  KlevuSuggestionResult,
   kmcRecommendation,
   listFilters,
   search,
   sendMerchandisingViewEvent,
   sendSearchEvent,
+  suggestions,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Listen, Method, Prop, Watch } from "@stencil/core"
 import { KlevuProductCustomEvent } from "../../components"
@@ -42,6 +43,16 @@ export class KlevuQuery {
    * What kind of query
    */
   @Prop() type!: "search" | "merchandising" | "recommendation"
+
+  /**
+   * By default component will fetch results on init or on property change. This can be disabled with this prop.
+   */
+  @Prop() disableInitialFetch?: boolean
+
+  /**
+   * When searching should search suggestions be fetched
+   */
+  @Prop() searchSuggestions?: boolean
 
   /**
    * Should search view event be sent. View event is important for analytical cases.
@@ -70,9 +81,19 @@ export class KlevuQuery {
   @Prop() offset?: number
 
   /**
+   * Fetch filters on the request
+   */
+  @Prop() filterGet?: boolean
+
+  /**
    * To how many filters limit results to
    */
   @Prop() filterCount?: number
+
+  /**
+   * Should get price filters
+   */
+  @Prop() filterWithPrices?: boolean
 
   /**
    * Which category to do merchandising. Required for "merchandising" type
@@ -95,6 +116,26 @@ export class KlevuQuery {
   @Prop() recommendationId?: string
 
   /**
+   * Which products are in cart. Required for some recommendation types
+   */
+  @Prop() recommendationCartProductIds?: string[]
+
+  /**
+   * Which product is currently being viewed. Required for some recommendation types
+   */
+  @Prop() recommendationCurrentProductId?: string
+
+  /**
+   * What is the item group id of the product being viewed. Required for some recommendation types
+   */
+  @Prop() recommendationItemGroupId?: string
+
+  /**
+   * Which category path to use for recommendation. Required for some recommendation types
+   */
+  @Prop() recommendationCategoryPath?: string
+
+  /**
    * @klevu/core FilterManager used for filters. If none is set, new one is created
    */
   @Prop() manager: FilterManager = new FilterManager()
@@ -103,6 +144,11 @@ export class KlevuQuery {
    * Should component listen to changes to filters
    */
   @Prop() updateOnFilterChange?: boolean
+
+  /**
+   * Override default modifiers. This will disable default modifiers and ones set by filter props
+   */
+  @Prop() overrideModifiers?: KlevuFetchModifer[]
 
   @Watch("manager")
   @Watch("recommendationId")
@@ -116,14 +162,14 @@ export class KlevuQuery {
   @Watch("options")
   @Watch("type")
   onPropertyChange() {
-    this.fetchAgain()
+    this.fetch()
   }
 
   /**
-   * Force component to fetch results again
+   * Force component to fetch results. This is called automatically when properties change.
    */
   @Method()
-  async fetchAgain() {
+  async fetch() {
     await this.#fetch()
   }
 
@@ -134,12 +180,16 @@ export class KlevuQuery {
   })
   klevuQueryResult!: EventEmitter<{
     result: KlevuQueryResult
+    suggestions?: KlevuSuggestionResult
     manager: FilterManager
   }>
 
   async connectedCallback() {
     await KlevuInit.ready()
-    await this.#fetch()
+
+    if (!this.disableInitialFetch) {
+      await this.#fetch()
+    }
 
     if (this.updateOnFilterChange) {
       this.#stopFilterListening = KlevuListenDomEvent(KlevuDomEvents.FilterSelectionUpdate, async () => {
@@ -197,21 +247,38 @@ export class KlevuQuery {
       ...this.options,
     }
 
+    const modifiers: KlevuFetchModifer[] = []
+
+    if (this.filterGet) {
+      modifiers.push(
+        listFilters({
+          filterManager: this.manager,
+          limit: this.filterCount,
+          rangeFilterSettings: this.filterWithPrices
+            ? [
+                {
+                  key: "klevu_price",
+                  minMax: true,
+                },
+              ]
+            : undefined,
+        })
+      )
+      modifiers.push(applyFilterWithManager(this.manager))
+    }
+
     switch (this.type) {
       case "merchandising": {
         if (!this.category || !this.categoryTitle) {
           throw new Error("Missing category or category title")
         }
 
-        const result = await KlevuFetch(
-          categoryMerchandising(
-            this.category,
-            options,
-            sendMerchandisingViewEvent(this.categoryTitle),
-            listFilters({ filterManager: this.manager, limit: this.filterCount }),
-            applyFilterWithManager(this.manager)
-          )
-        )
+        if (this.sendSearchViewEvent) {
+          modifiers.push(sendMerchandisingViewEvent(this.categoryTitle))
+        }
+
+        const usedModifiers = this.overrideModifiers || modifiers
+        const result = await KlevuFetch(categoryMerchandising(this.category, options, ...usedModifiers))
         const resultObject = result.queriesById("klevuquery")
 
         if (!resultObject) {
@@ -230,7 +297,19 @@ export class KlevuQuery {
         if (!this.recommendationId) {
           throw new Error("Recommendation requires KMC id")
         }
-        const result = await KlevuFetch(kmcRecommendation(this.recommendationId))
+        const usedModifiers = this.overrideModifiers || modifiers
+        const result = await KlevuFetch(
+          kmcRecommendation(
+            this.recommendationId,
+            {
+              cartProductIds: this.recommendationCartProductIds,
+              categoryPath: this.recommendationCategoryPath,
+              currentProductId: this.recommendationCurrentProductId,
+              itemGroupId: this.recommendationItemGroupId,
+            },
+            ...usedModifiers
+          )
+        )
         const resultObject = result.queriesById("klevuquery")
 
         if (!resultObject) {
@@ -250,13 +329,20 @@ export class KlevuQuery {
           throw new Error("Search query requires search term")
         }
 
-        const modifiers: KlevuFetchModifer[] = []
         if (this.sendSearchViewEvent) {
           modifiers.push(sendSearchEvent())
         }
 
-        const result = await KlevuFetch(search(this.searchTerm, options, ...modifiers))
+        const usedModifiers = this.overrideModifiers || modifiers
+        const queries = [search(this.searchTerm, options, ...usedModifiers)]
+
+        if (this.searchSuggestions) {
+          queries.push(suggestions(this.searchTerm))
+        }
+
+        const result = await KlevuFetch(...queries)
         const resultObject = result.queriesById("klevuquery")
+        const suggestionsResult = result.suggestionsById("suggestions")
 
         if (!resultObject) {
           console.error("KlevuQuery: Response meta", result.apiResponse?.meta)
@@ -267,6 +353,7 @@ export class KlevuQuery {
         this.klevuQueryResult.emit({
           result: resultObject,
           manager: this.manager,
+          suggestions: suggestionsResult,
         })
         break
       }
