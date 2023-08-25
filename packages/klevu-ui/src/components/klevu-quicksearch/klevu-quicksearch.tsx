@@ -128,12 +128,12 @@ export class KlevuQuicksearch {
   /**
    * Show ratings
    */
-  @Prop() showRatings?: boolean = false
+  @Prop() showRatings?: boolean
 
   /**
    * Show ratings count
    */
-  @Prop() showRatingsCount?: boolean = false
+  @Prop() showRatingsCount?: boolean
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -237,10 +237,12 @@ export class KlevuQuicksearch {
       this.#emitChangedData()
     }
     const settings = getKMCSettings()
+
     if (settings) {
-      this.showRatings = this.showRatings ?? (settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false)
-      this.showRatingsCount =
-        this.showRatingsCount ?? (settings.klevu_uc_userOptions?.showRatingsCountOnQuickSearches || false)
+      if (this.showRatings === undefined)
+        this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false
+      if (this.showRatingsCount === undefined)
+        this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnQuickSearches || false
     }
   }
 
@@ -356,7 +358,13 @@ export class KlevuQuicksearch {
               <div class="lineproducts">
                 <slot name="search-products">
                   {this.products?.map((p) => (
-                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                    <klevu-product
+                      product={p}
+                      variant="line"
+                      exportparts={parts["klevu-product"]}
+                      showRatings={this.showRatings}
+                      showRatingsCount={this.showRatingsCount}
+                    ></klevu-product>
                   ))}
                 </slot>
               </div>

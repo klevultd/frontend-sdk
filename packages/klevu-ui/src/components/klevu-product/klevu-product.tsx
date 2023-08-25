@@ -284,20 +284,7 @@ export class KlevuProduct {
                 )}
               </div>
             </slot>
-            <slot name="ratings">
-              {this.showRatings && (
-                <div class="ratings">
-                  {this.product.rating ? (
-                    <Fragment>
-                      <klevu-rating rating={this.product.rating} />
-                      {this.showRatingsCount && <span>({this.product.ratingCount})</span>}
-                    </Fragment>
-                  ) : (
-                    <span>&nbsp;</span>
-                  )}
-                </div>
-              )}
-            </slot>
+            {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
 
             <slot name="addtocart">
               {this.showAddToCart ? (
@@ -313,8 +300,26 @@ export class KlevuProduct {
             </slot>
           </a>
           <slot name="bottom"></slot>
+          {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
         </div>
       </Host>
+    )
+  }
+
+  #renderRatings() {
+    return (
+      this.showRatings && (
+        <div class="ratings">
+          {this.product?.rating ? (
+            <Fragment>
+              <klevu-rating rating={this.product.rating} />
+              {this.showRatingsCount && this.product.ratingCount && <span>({this.product.ratingCount})</span>}
+            </Fragment>
+          ) : (
+            <span>&nbsp;</span>
+          )}
+        </div>
+      )
     )
   }
 

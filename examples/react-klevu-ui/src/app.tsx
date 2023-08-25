@@ -69,24 +69,7 @@ export function App() {
               ))}
             </ul>
 
-            <KlevuQuicksearch
-              renderProductSlot={(product, slot) => {
-                if (slot === "bottom") {
-                  const div = document.createElement("div")
-                  createRoot(div).render(
-                    <KlevuButton
-                      onClick={() => {
-                        cart.add(product)
-                      }}
-                    >
-                      Add to cart
-                    </KlevuButton>
-                  )
-                  return div
-                }
-                return null
-              }}
-            />
+            <KlevuQuicksearch />
             <KlevuButton
               onClick={() => navigate("/cart")}
               style={{ whiteSpace: "nowrap" }}

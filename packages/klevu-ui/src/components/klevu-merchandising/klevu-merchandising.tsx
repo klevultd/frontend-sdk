@@ -92,12 +92,12 @@ export class KlevuMerchandising {
   /**
    * Show ratings
    */
-  @Prop() showRatings?: boolean = false
+  @Prop() showRatings?: boolean
 
   /**
    * Show ratings count
    */
-  @Prop() showRatingsCount?: boolean = false
+  @Prop() showRatingsCount?: boolean
 
   @State() currentViewPortSize?: ViewportSize
 
@@ -121,9 +121,10 @@ export class KlevuMerchandising {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
-      this.showRatings = this.showRatings ?? (settings.klevu_uc_userOptions?.showRatingsOnCategoryPage || false)
-      this.showRatingsCount =
-        this.showRatingsCount ?? (settings.klevu_uc_userOptions?.showRatingsCountOnCategoryPage || false)
+      if (this.showRatings === undefined)
+        this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnCategoryPage || false
+      if (this.showRatingsCount === undefined)
+        this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnCategoryPage || false
     }
     await this.#fetchData()
   }

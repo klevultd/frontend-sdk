@@ -75,16 +75,16 @@ with --kleu-product-width and --klevu-product-small-width css variables.
 
 - [klevu-icon](../klevu-icon)
 - [klevu-typography](../klevu-typography)
-- [klevu-rating](../klevu-rating)
 - [klevu-button](../klevu-button)
+- [klevu-rating](../klevu-rating)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
-  klevu-product --> klevu-rating
   klevu-product --> klevu-button
+  klevu-product --> klevu-rating
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
   klevu-chat-messages --> klevu-product

@@ -68,12 +68,12 @@ export class KlevuSearchLandingPage {
   /**
    * Show ratings
    */
-  @Prop() showRatings?: boolean = false
+  @Prop() showRatings?: boolean
 
   /**
    * Show ratings count
    */
-  @Prop() showRatingsCount?: boolean = false
+  @Prop() showRatingsCount?: boolean
 
   /**
    * The title of the page
@@ -99,10 +99,10 @@ export class KlevuSearchLandingPage {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
-      this.showRatings =
-        this.showRatings ?? (settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false)
-      this.showRatingsCount =
-        this.showRatingsCount ?? (settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false)
+      if (this.showRatings === undefined)
+        this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
+      if (this.showRatingsCount === undefined)
+        this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false
     }
     await this.#fetchData()
   }
