@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -602,6 +602,10 @@ export namespace Components {
          */
         "tLoadMore": any;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -1004,13 +1008,25 @@ export namespace Components {
          */
         "categoryTitle"?: string;
         /**
-          * Force component to fetch results again
+          * By default component will fetch results on init or on property change. This can be disabled with this prop.
          */
-        "fetchAgain": () => Promise<void>;
+        "disableInitialFetch"?: boolean;
+        /**
+          * Force component to fetch results. This is called automatically when properties change.
+         */
+        "fetch": () => Promise<void>;
         /**
           * To how many filters limit results to
          */
         "filterCount"?: number;
+        /**
+          * Fetch filters on the request
+         */
+        "filterGet"?: boolean;
+        /**
+          * Should get price filters
+         */
+        "filterWithPrices"?: boolean;
         /**
           * What's the limit on page
          */
@@ -1028,9 +1044,33 @@ export namespace Components {
          */
         "options"?: AllQueryOptions;
         /**
+          * Override default modifiers. This will disable default modifiers and ones set by filter props
+         */
+        "overrideModifiers"?: KlevuFetchModifer[];
+        /**
+          * Which products are in cart. Required for some recommendation types
+         */
+        "recommendationCartProductIds"?: string[];
+        /**
+          * Which category path to use for recommendation. Required for some recommendation types
+         */
+        "recommendationCategoryPath"?: string;
+        /**
+          * Which product is currently being viewed. Required for some recommendation types
+         */
+        "recommendationCurrentProductId"?: string;
+        /**
           * Which recommendation to fetch from Klevu Merchant Center. Required for "recommendation" type
          */
         "recommendationId"?: string;
+        /**
+          * What is the item group id of the product being viewed. Required for some recommendation types
+         */
+        "recommendationItemGroupId"?: string;
+        /**
+          * When searching should search suggestions be fetched
+         */
+        "searchSuggestions"?: boolean;
         /**
           * What to search. Required for "search" type.
          */
@@ -1281,6 +1321,10 @@ export namespace Components {
          */
         "term": string;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
@@ -1452,6 +1496,19 @@ export namespace Components {
     interface KlevuUtilDomEvents {
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface KlevuUtilInfiniteScroll {
+        /**
+          * Whether infinite scrolling is enabled
+         */
+        "enabled": boolean;
+        /**
+          * The number of pages after which triggers infiniteScrollingPaused event. Listen to this event to allow further loading on user input.
+         */
+        "infiniteScrollPauseThreshold": number;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -1597,6 +1654,10 @@ export interface KlevuTextfieldCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuUtilDomEventsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuUtilDomEventsElement;
+}
+export interface KlevuUtilInfiniteScrollCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuUtilInfiniteScrollElement;
 }
 export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2139,6 +2200,15 @@ declare global {
         new (): HTMLKlevuUtilDomEventsElement;
     };
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface HTMLKlevuUtilInfiniteScrollElement extends Components.KlevuUtilInfiniteScroll, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilInfiniteScrollElement: {
+        prototype: HTMLKlevuUtilInfiniteScrollElement;
+        new (): HTMLKlevuUtilInfiniteScrollElement;
+    };
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -2212,6 +2282,7 @@ declare global {
         "klevu-textfield": HTMLKlevuTextfieldElement;
         "klevu-typography": HTMLKlevuTypographyElement;
         "klevu-util-dom-events": HTMLKlevuUtilDomEventsElement;
+        "klevu-util-infinite-scroll": HTMLKlevuUtilInfiniteScrollElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
@@ -2791,6 +2862,10 @@ declare namespace LocalJSX {
          */
         "tLoadMore"?: any;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -3202,9 +3277,21 @@ declare namespace LocalJSX {
          */
         "categoryTitle"?: string;
         /**
+          * By default component will fetch results on init or on property change. This can be disabled with this prop.
+         */
+        "disableInitialFetch"?: boolean;
+        /**
           * To how many filters limit results to
          */
         "filterCount"?: number;
+        /**
+          * Fetch filters on the request
+         */
+        "filterGet"?: boolean;
+        /**
+          * Should get price filters
+         */
+        "filterWithPrices"?: boolean;
         /**
           * What's the limit on page
          */
@@ -3219,6 +3306,7 @@ declare namespace LocalJSX {
         "offset"?: number;
         "onKlevuQueryResult"?: (event: KlevuQueryCustomEvent<{
     result: KlevuQueryResult
+    suggestions?: KlevuSuggestionResult
     manager: FilterManager
   }>) => void;
         /**
@@ -3226,9 +3314,33 @@ declare namespace LocalJSX {
          */
         "options"?: AllQueryOptions;
         /**
+          * Override default modifiers. This will disable default modifiers and ones set by filter props
+         */
+        "overrideModifiers"?: KlevuFetchModifer[];
+        /**
+          * Which products are in cart. Required for some recommendation types
+         */
+        "recommendationCartProductIds"?: string[];
+        /**
+          * Which category path to use for recommendation. Required for some recommendation types
+         */
+        "recommendationCategoryPath"?: string;
+        /**
+          * Which product is currently being viewed. Required for some recommendation types
+         */
+        "recommendationCurrentProductId"?: string;
+        /**
           * Which recommendation to fetch from Klevu Merchant Center. Required for "recommendation" type
          */
         "recommendationId"?: string;
+        /**
+          * What is the item group id of the product being viewed. Required for some recommendation types
+         */
+        "recommendationItemGroupId"?: string;
+        /**
+          * When searching should search suggestions be fetched
+         */
+        "searchSuggestions"?: boolean;
         /**
           * What to search. Required for "search" type.
          */
@@ -3483,6 +3595,10 @@ declare namespace LocalJSX {
          */
         "term": string;
         /**
+          * Should use infinite scroll component to trigger load next
+         */
+        "useInfiniteScroll"?: boolean;
+        /**
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
@@ -3691,6 +3807,27 @@ declare namespace LocalJSX {
         "onLastSearchUpdate"?: (event: KlevuUtilDomEventsCustomEvent<void>) => void;
     }
     /**
+     * Component that triggers event when intercepted on scroll of page.
+     */
+    interface KlevuUtilInfiniteScroll {
+        /**
+          * Whether infinite scrolling is enabled
+         */
+        "enabled"?: boolean;
+        /**
+          * The number of pages after which triggers infiniteScrollingPaused event. Listen to this event to allow further loading on user input.
+         */
+        "infiniteScrollPauseThreshold"?: number;
+        /**
+          * Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
+         */
+        "onInfiniteScrollingPaused"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+        /**
+          * Event emitted when infinite scroll element is intercepted
+         */
+        "onLoadMore"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+    }
+    /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
      * to prevent problems with CSS stylings.
      * Does not move styles, so create a child component that has styles defined in shadow DOM.
@@ -3759,6 +3896,7 @@ declare namespace LocalJSX {
         "klevu-textfield": KlevuTextfield;
         "klevu-typography": KlevuTypography;
         "klevu-util-dom-events": KlevuUtilDomEvents;
+        "klevu-util-infinite-scroll": KlevuUtilInfiniteScroll;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
         "klevu-util-viewport": KlevuUtilViewport;
@@ -4083,6 +4221,10 @@ declare module "@stencil/core" {
              * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
              */
             "klevu-util-dom-events": LocalJSX.KlevuUtilDomEvents & JSXBase.HTMLAttributes<HTMLKlevuUtilDomEventsElement>;
+            /**
+             * Component that triggers event when intercepted on scroll of page.
+             */
+            "klevu-util-infinite-scroll": LocalJSX.KlevuUtilInfiniteScroll & JSXBase.HTMLAttributes<HTMLKlevuUtilInfiniteScrollElement>;
             /**
              * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
              * to prevent problems with CSS stylings.

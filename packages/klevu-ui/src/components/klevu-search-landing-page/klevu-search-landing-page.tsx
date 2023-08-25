@@ -64,7 +64,10 @@ export class KlevuSearchLandingPage {
    * Use pagination instead of loading more
    */
   @Prop() usePagination?: boolean
-
+  /**
+   * Should use infinite scroll component to trigger load next
+   */
+  @Prop() useInfiniteScroll?: boolean
   /**
    * Show ratings
    */
@@ -88,6 +91,8 @@ export class KlevuSearchLandingPage {
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
+  @State() infiniteScrollingPaused?: boolean = false
+  @State() loading?: boolean = false
 
   #resultObject?: KlevuResponseQueryObject
 
@@ -113,6 +118,7 @@ export class KlevuSearchLandingPage {
   }
 
   async #fetchData() {
+    this.loading = true
     const result = await KlevuFetch(
       search(
         this.term,
@@ -134,9 +140,11 @@ export class KlevuSearchLandingPage {
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
+    this.loading = false
   }
 
   async loadMore() {
+    this.loading = true
     if (!this.#resultObject?.getPage) {
       return
     }
@@ -144,16 +152,29 @@ export class KlevuSearchLandingPage {
     this.#resultObject = nextResultObject?.queriesById("search")
     this.results = [...this.results, ...(this.#resultObject?.records ?? [])]
     this.#emitChanges()
+    this.loading = false
+  }
+
+  @Listen("loadMore")
+  infiniteScrollLoadMoreHandler() {
+    this.loadMore()
+  }
+
+  @Listen("infiniteScrollingPaused")
+  infiniteLoadPausedHandler() {
+    this.infiniteScrollingPaused = true
   }
 
   async paginationChange(event: KlevuPaginationCustomEvent<number>) {
     if (!this.#resultObject?.getPage) {
       return
     }
+    this.loading = true
     const nextResultObject = await this.#resultObject.getPage({ pageIndex: event.detail - 1 })
     this.#resultObject = nextResultObject?.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
+    this.loading = false
   }
 
   @Listen("productClick")
@@ -198,6 +219,7 @@ export class KlevuSearchLandingPage {
       records: this.results,
       manager: this.manager,
     })
+    this.infiniteScrollingPaused = false
   }
 
   async componentDidLoad() {
@@ -224,7 +246,7 @@ export class KlevuSearchLandingPage {
 
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
-
+    const showInfiniteScroll = this.useInfiniteScroll && !this.infiniteScrollingPaused && this.results.length > 0
     return (
       <Host>
         <klevu-util-viewport
@@ -262,14 +284,20 @@ export class KlevuSearchLandingPage {
                 ></klevu-product>
               ))}
             </klevu-product-grid>
+            {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}
           </slot>
           <div slot="footer" class="footer">
-            {this.usePagination && this.#resultObject ? (
+            {showInfiniteScroll ? (
+              <klevu-util-infinite-scroll
+                infiniteScrollPauseThreshold={0}
+                enabled={!!this.#resultObject?.hasNextPage() && !this.loading}
+              ></klevu-util-infinite-scroll>
+            ) : this.usePagination && this.#resultObject ? (
               <klevu-pagination
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>
-            ) : this.#resultObject?.getPage ? (
+            ) : this.#resultObject?.hasNextPage() ? (
               <klevu-button onClick={this.loadMore.bind(this)}>{this.tLoadMore}</klevu-button>
             ) : null}
           </div>
