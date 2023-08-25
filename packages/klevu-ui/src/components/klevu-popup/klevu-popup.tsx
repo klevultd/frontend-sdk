@@ -112,6 +112,7 @@ export class KlevuPopup {
       this.dialogRef?.show()
     }
     this.#updatePopupPosition()
+    this.#attachBackdropClick()
     this.klevuPopupOpen.emit()
   }
 
@@ -176,6 +177,7 @@ export class KlevuPopup {
   async closeModal() {
     const event = this.klevuPopupClose.emit()
     if (!event.defaultPrevented) {
+      this.#detachBackdropClick()
       this.dialogRef?.close()
     }
   }
@@ -205,9 +207,38 @@ export class KlevuPopup {
     }
   }
 
-  connectedCallback() {
-    if (this.closeAtOutsideClick) {
+  #backdropClick(event: MouseEvent) {
+    if (!this.dialogRef || !this.dialogRef.open) {
+      return
+    }
+
+    const rect = this.dialogRef.getBoundingClientRect()
+    const isInDialog =
+      rect.top <= event.clientY &&
+      event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX &&
+      event.clientX <= rect.left + rect.width
+
+    const eventTarget = event.target as HTMLElement | null
+
+    if (!isInDialog && eventTarget?.tagName === "DIALOG") {
+      this.dialogRef.close()
+    }
+  }
+
+  #attachBackdropClick() {
+    if (this.closeAtOutsideClick && this.useBackground) {
+      this.dialogRef?.addEventListener("click", this.#backdropClick.bind(this))
+    } else if (this.closeAtOutsideClick) {
       document.addEventListener("click", this.#closeEvent.bind(this))
+    }
+  }
+
+  #detachBackdropClick() {
+    if (this.closeAtOutsideClick && this.useBackground) {
+      this.dialogRef?.removeEventListener("click", this.#backdropClick.bind(this))
+    } else if (this.closeAtOutsideClick) {
+      document.removeEventListener("click", this.#closeEvent)
     }
   }
 
@@ -234,9 +265,7 @@ export class KlevuPopup {
   }
 
   detachedCallback() {
-    if (this.closeAtOutsideClick) {
-      document.removeEventListener("click", this.#closeEvent)
-    }
+    this.#detachBackdropClick()
     this.#stopUpdatePos?.()
   }
 
