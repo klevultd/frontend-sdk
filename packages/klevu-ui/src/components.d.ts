@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -992,13 +992,25 @@ export namespace Components {
          */
         "categoryTitle"?: string;
         /**
-          * Force component to fetch results again
+          * By default component will fetch results on init or on property change. This can be disabled with this prop.
          */
-        "fetchAgain": () => Promise<void>;
+        "disableInitialFetch"?: boolean;
+        /**
+          * Force component to fetch results. This is called automatically when properties change.
+         */
+        "fetch": () => Promise<void>;
         /**
           * To how many filters limit results to
          */
         "filterCount"?: number;
+        /**
+          * Fetch filters on the request
+         */
+        "filterGet"?: boolean;
+        /**
+          * Should get price filters
+         */
+        "filterWithPrices"?: boolean;
         /**
           * What's the limit on page
          */
@@ -1016,9 +1028,33 @@ export namespace Components {
          */
         "options"?: AllQueryOptions;
         /**
+          * Override default modifiers. This will disable default modifiers and ones set by filter props
+         */
+        "overrideModifiers"?: KlevuFetchModifer[];
+        /**
+          * Which products are in cart. Required for some recommendation types
+         */
+        "recommendationCartProductIds"?: string[];
+        /**
+          * Which category path to use for recommendation. Required for some recommendation types
+         */
+        "recommendationCategoryPath"?: string;
+        /**
+          * Which product is currently being viewed. Required for some recommendation types
+         */
+        "recommendationCurrentProductId"?: string;
+        /**
           * Which recommendation to fetch from Klevu Merchant Center. Required for "recommendation" type
          */
         "recommendationId"?: string;
+        /**
+          * What is the item group id of the product being viewed. Required for some recommendation types
+         */
+        "recommendationItemGroupId"?: string;
+        /**
+          * When searching should search suggestions be fetched
+         */
+        "searchSuggestions"?: boolean;
         /**
           * What to search. Required for "search" type.
          */
@@ -3193,9 +3229,21 @@ declare namespace LocalJSX {
          */
         "categoryTitle"?: string;
         /**
+          * By default component will fetch results on init or on property change. This can be disabled with this prop.
+         */
+        "disableInitialFetch"?: boolean;
+        /**
           * To how many filters limit results to
          */
         "filterCount"?: number;
+        /**
+          * Fetch filters on the request
+         */
+        "filterGet"?: boolean;
+        /**
+          * Should get price filters
+         */
+        "filterWithPrices"?: boolean;
         /**
           * What's the limit on page
          */
@@ -3210,6 +3258,7 @@ declare namespace LocalJSX {
         "offset"?: number;
         "onKlevuQueryResult"?: (event: KlevuQueryCustomEvent<{
     result: KlevuQueryResult
+    suggestions?: KlevuSuggestionResult
     manager: FilterManager
   }>) => void;
         /**
@@ -3217,9 +3266,33 @@ declare namespace LocalJSX {
          */
         "options"?: AllQueryOptions;
         /**
+          * Override default modifiers. This will disable default modifiers and ones set by filter props
+         */
+        "overrideModifiers"?: KlevuFetchModifer[];
+        /**
+          * Which products are in cart. Required for some recommendation types
+         */
+        "recommendationCartProductIds"?: string[];
+        /**
+          * Which category path to use for recommendation. Required for some recommendation types
+         */
+        "recommendationCategoryPath"?: string;
+        /**
+          * Which product is currently being viewed. Required for some recommendation types
+         */
+        "recommendationCurrentProductId"?: string;
+        /**
           * Which recommendation to fetch from Klevu Merchant Center. Required for "recommendation" type
          */
         "recommendationId"?: string;
+        /**
+          * What is the item group id of the product being viewed. Required for some recommendation types
+         */
+        "recommendationItemGroupId"?: string;
+        /**
+          * When searching should search suggestions be fetched
+         */
+        "searchSuggestions"?: boolean;
         /**
           * What to search. Required for "search" type.
          */

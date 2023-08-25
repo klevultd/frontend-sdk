@@ -1,0 +1,66 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import * as Stories from "./klevu-query.stories"
+
+<Meta of={Stories} />
+
+# Building a Live Search Interface with Klevu Components
+
+This code example illustrates the creation of a live search interface using
+Klevu components. The interface consists of a search query element, a text input
+field, and a result display area. Users can input search queries, and the
+results are displayed dynamically.
+
+## HTML Markup
+
+The HTML structure of the live search interface consists of the following
+elements:
+
+1. **Klevu Query (`klevu-query`)**:
+
+   - An element with the ID `customquery`, which represents a Klevu query for
+     searching.
+   - Type is set to `search`, indicating a search query.
+   - `disable-initial-fetch` is used to prevent `klevu-query` to fetch results right away.
+
+2. **Klevu Textfield (`klevu-textfield`)**:
+
+   - A text input field with a placeholder "Type something here!" for user
+     input.
+
+3. **Result Display Area (`<div id="result"></div>`)**:
+   - An empty `<div>` element with the ID `result`, where search results will be
+     displayed.
+
+## CSS Styling
+
+Custom CSS styling is applied to the `klevu-textfield` to set its width and
+margin, ensuring it integrates well with the interface.
+
+## JavaScript Logic
+
+The JavaScript logic in the `<script>` block handles the dynamic behavior of the
+live search interface:
+
+- **Event Listeners**:
+
+  - A listener is set up to detect changes in the text input field
+    (`klevu-textfield`). When the input changes (`klevuTextChanged` event), the
+    search term is updated in the `klevu-query` element.
+  - Another listener is added to the `klevuQueryResult` event of the
+    `klevu-query` element. When search results are obtained, this event is
+    triggered.
+
+- **Search Logic**:
+  - The code checks for a minimum search term length of three characters to
+    avoid unnecessary searches.
+  - When search results are received, the result display area is cleared.
+  - A `klevu-product-grid` element is created to display the search results.
+  - Each item in the search results is represented as a `klevu-product` element
+    and added to the product grid.
+  - The search count is incremented and displayed along with a horizontal line
+    (`<hr>`) to separate search results.
+
+By combining HTML, CSS, and JavaScript, this live search interface provides a
+dynamic way for users to search and view results interactively.
+
+<Canvas sourceState="open" of={Stories.CustomQuery} />
