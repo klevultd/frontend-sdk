@@ -232,6 +232,6 @@ klevu-button.addToCart {
 
 .ratings {
   display: flex;
-  gap: 5px;
-  margin: 5px 0;
+  gap: var(--klevu-spacing-small, 4px);
+  margin: var(--klevu-spacing-small, 4px) 0;
 }
