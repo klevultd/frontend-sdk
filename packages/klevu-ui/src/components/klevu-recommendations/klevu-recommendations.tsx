@@ -4,12 +4,14 @@ import {
   KlevuResponseQueryObject,
   kmcRecommendation,
   sendRecommendationViewEvent,
+  KlevuFetchFunctionReturnValue,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Listen, Prop, State } from "@stencil/core"
 
 import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { parts } from "../../utils/parts"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 /**
  * Full recommendation banner solution
@@ -32,7 +34,7 @@ export class KlevuRecommendations {
   /**
    * Title of the recommendation
    */
-  @Prop() recommendationTitle!: string
+  @Prop() recommendationTitle?: string
   /**
    * The ID of the recommendation
    */
@@ -72,19 +74,23 @@ export class KlevuRecommendations {
       throw new Error("recommendationId is required")
     }
 
-    const res = await KlevuFetch(
-      kmcRecommendation(
-        this.recommendationId,
-        {
-          id: "recommendation",
-          cartProductIds: this.cartProductIds,
-          categoryPath: this.categoryPath,
-          currentProductId: this.currentProductId,
-          itemGroupId: this.itemGroupId,
-        },
-        sendRecommendationViewEvent(this.recommendationTitle)
-      )
-    )
+    let fetchOptions: KlevuFetchFunctionReturnValue = await kmcRecommendation(this.recommendationId, {
+      id: "recommendation",
+      cartProductIds: this.cartProductIds,
+      categoryPath: this.categoryPath,
+      currentProductId: this.currentProductId,
+      itemGroupId: this.itemGroupId,
+    })
+
+    const settings = getKMCSettings()
+    if (settings) {
+      if (this.recommendationTitle === undefined) this.recommendationTitle = fetchOptions.title || ""
+    }
+    fetchOptions = {
+      ...fetchOptions,
+      modifiers: [sendRecommendationViewEvent(this.recommendationTitle || ""), ...(fetchOptions.modifiers || [])],
+    }
+    const res = await KlevuFetch(fetchOptions)
 
     this.#responseObject = res.queriesById("recommendation")
     if (this.#responseObject) {

@@ -26,6 +26,6 @@ export const Recommendations: StoryObj<KlevuRecommendations> = {
     current-product-id=${ifDefined(args.currentProductId)}
     item-group-id=${ifDefined(args.itemGroupId)}
     recommendation-id=${ifDefined(args.recommendationId)}
-    recommendation-title=${ifDefined(args.recommendationTitle)}
+    recommendation-title=${ifDefined(args.recommendationTitle || undefined)}
   ></klevu-recommendations>`,
 }

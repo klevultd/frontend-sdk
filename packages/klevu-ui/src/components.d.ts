@@ -1215,7 +1215,7 @@ export namespace Components {
         /**
           * Title of the recommendation
          */
-        "recommendationTitle": string;
+        "recommendationTitle"?: string;
     }
     /**
      * Plain textfield that does the searching. It queries Klevu and returns the results
@@ -3497,7 +3497,7 @@ declare namespace LocalJSX {
         /**
           * Title of the recommendation
          */
-        "recommendationTitle": string;
+        "recommendationTitle"?: string;
     }
     /**
      * Plain textfield that does the searching. It queries Klevu and returns the results
