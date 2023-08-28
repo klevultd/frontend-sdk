@@ -765,6 +765,10 @@ export namespace Components {
          */
         "hideDescription"?: boolean;
         /**
+          * When mousing over product, show hover image if available
+         */
+        "hideHoverImage"?: boolean;
+        /**
           * Hides image
          */
         "hideImage"?: boolean;
@@ -3029,6 +3033,10 @@ declare namespace LocalJSX {
           * Hides description from info
          */
         "hideDescription"?: boolean;
+        /**
+          * When mousing over product, show hover image if available
+         */
+        "hideHoverImage"?: boolean;
         /**
           * Hides image
          */
