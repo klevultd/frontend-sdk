@@ -193,7 +193,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
           api-key=${key}
           url=${url}
           language=${ifDefined(language === null ? undefined : language)}
-          kmc-load-settings
+          kmc-load-defaults
         >
           ${story()}
         </klevu-init>
