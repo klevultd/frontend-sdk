@@ -23,6 +23,7 @@ import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 /**
  * Full app component for search landing page
@@ -68,6 +69,16 @@ export class KlevuSearchLandingPage {
    */
   @Prop() useInfiniteScroll?: boolean
   /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean
+
+  /**
+   * Show ratings count
+   */
+  @Prop() showRatingsCount?: boolean
+
+  /**
    * The title of the page
    */
   @Prop() tSearchTitle = getTranslation("searchLandingPage.tSearchTitle")
@@ -91,6 +102,13 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (settings) {
+      if (this.showRatings === undefined)
+        this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
+      if (this.showRatingsCount === undefined)
+        this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false
+    }
     await this.#fetchData()
   }
 
@@ -257,7 +275,13 @@ export class KlevuSearchLandingPage {
           <slot name="content" slot="content">
             <klevu-product-grid slot="content">
               {this.results?.map((p) => (
-                <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}></klevu-product>
+                <klevu-product
+                  product={p}
+                  fixedWidth
+                  exportparts={parts["klevu-product"]}
+                  showRatings={this.showRatings}
+                  showRatingsCount={this.showRatingsCount}
+                ></klevu-product>
               ))}
             </klevu-product-grid>
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}

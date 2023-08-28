@@ -23,6 +23,7 @@ import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 import { getTranslation } from "../../utils/getTranslation"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 /**
  * Full merchandising app to power up your product grid pages
@@ -92,6 +93,15 @@ export class KlevuMerchandising {
    */
   @Prop()
   sortOptions?: Array<{ value: KlevuSearchSorting; text: string }>
+  /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean
+
+  /**
+   * Show ratings count
+   */
+  @Prop() showRatingsCount?: boolean
 
   @State() currentViewPortSize?: ViewportSize
 
@@ -115,6 +125,13 @@ export class KlevuMerchandising {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (settings) {
+      if (this.showRatings === undefined)
+        this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnCategoryPage || false
+      if (this.showRatingsCount === undefined)
+        this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnCategoryPage || false
+    }
     await this.#fetchData()
   }
 
@@ -284,7 +301,13 @@ export class KlevuMerchandising {
           <slot name="content" slot="content">
             <klevu-product-grid>
               {this.results.map((p) => (
-                <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}></klevu-product>
+                <klevu-product
+                  product={p}
+                  fixedWidth
+                  exportparts={parts["klevu-product"]}
+                  showRatings={this.showRatings}
+                  showRatingsCount={this.showRatingsCount}
+                ></klevu-product>
               ))}
             </klevu-product-grid>
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}

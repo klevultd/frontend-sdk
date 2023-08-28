@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State, Fragment } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 import { getTranslation } from "../../utils/getTranslation"
@@ -51,6 +51,16 @@ export class KlevuProduct {
    * Show add to cart button
    */
   @Prop() showAddToCart?: boolean
+
+  /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean
+
+  /**
+   * Show ratings
+   */
+  @Prop() showRatingsCount?: boolean
 
   /**
    * Text for add to cart button
@@ -274,6 +284,8 @@ export class KlevuProduct {
                 )}
               </div>
             </slot>
+            {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
+
             <slot name="addtocart">
               {this.showAddToCart ? (
                 <klevu-button
@@ -288,8 +300,26 @@ export class KlevuProduct {
             </slot>
           </a>
           <slot name="bottom"></slot>
+          {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
         </div>
       </Host>
+    )
+  }
+
+  #renderRatings() {
+    return (
+      this.showRatings && (
+        <div class="ratings">
+          {this.product?.rating ? (
+            <Fragment>
+              <klevu-rating rating={this.product.rating} />
+              {this.showRatingsCount && this.product.ratingCount && <span>({this.product.ratingCount})</span>}
+            </Fragment>
+          ) : (
+            <span>&nbsp;</span>
+          )}
+        </div>
+      )
     )
   }
 

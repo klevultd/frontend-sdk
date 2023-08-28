@@ -96,6 +96,7 @@ graph TD;
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   klevu-product --> klevu-button
+  klevu-product --> klevu-rating
   klevu-modal --> klevu-icon
   klevu-quicksearch --> klevu-moi
   style klevu-moi fill:#f9f,stroke:#333,stroke-width:4px

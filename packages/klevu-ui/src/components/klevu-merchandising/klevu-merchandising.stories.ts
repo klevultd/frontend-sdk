@@ -30,6 +30,8 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     limit=${args.limit}
     sort=${ifDefined(args.sort)}
     use-pagination=${ifDefined(args.usePagination)}
+    show-ratings=${ifDefined(args.showRatings)}
+    show-ratings-count=${ifDefined(args.showRatingsCount)}
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
   ></klevu-merchandising>`,
 }
@@ -56,6 +58,8 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       category=${ifDefined(args.category)}
       category-title=${ifDefined(args.categoryTitle)}
       limit=${args.limit}
+      show-ratings=${ifDefined(args.showRatings)}
+      show-ratings-count=${ifDefined(args.showRatingsCount)}
     >
       <div slot="content"></div>
     </klevu-merchandising>

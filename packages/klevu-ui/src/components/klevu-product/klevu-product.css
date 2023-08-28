@@ -229,3 +229,9 @@ klevu-button.addToCart {
     background-position: 0% 50%;
   }
 }
+
+.ratings {
+  display: flex;
+  gap: var(--klevu-spacing-small, 4px);
+  margin: var(--klevu-spacing-small, 4px) 0;
+}
