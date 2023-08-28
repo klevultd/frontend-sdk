@@ -135,17 +135,17 @@ export class KlevuMerchandising {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
-      if (this.showRatings === undefined)
+      if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnCategoryPage || false
-      if (this.showRatingsCount === undefined)
+      }
+      if (this.showRatingsCount === undefined) {
         this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnCategoryPage || false
+      }
+      if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInCatNav) {
+        this.usePersonalisation = true
+      }
     }
     await this.#fetchData()
-
-    const settings = getKMCSettings()
-    if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInCatNav) {
-      this.usePersonalisation = true
-    }
   }
 
   @Watch("category")

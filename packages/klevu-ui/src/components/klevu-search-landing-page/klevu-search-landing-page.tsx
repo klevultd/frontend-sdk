@@ -111,17 +111,17 @@ export class KlevuSearchLandingPage {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
-      if (this.showRatings === undefined)
+      if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
-      if (this.showRatingsCount === undefined)
+      }
+      if (this.showRatingsCount === undefined) {
         this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false
+      }
+      if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
+        this.usePersonalisation = true
+      }
     }
     await this.#fetchData()
-
-    const settings = getKMCSettings()
-    if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
-      this.usePersonalisation = true
-    }
   }
 
   @Watch("term")
