@@ -32,6 +32,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     show-ratings=${ifDefined(args.showRatings)}
     show-ratings-count=${ifDefined(args.showRatingsCount)}
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
+    use-personalisation=${ifDefined(args.usePersonalisation)}
   ></klevu-search-landing-page>`,
 }
 
@@ -40,15 +41,5 @@ export const WithInfiniteScroll: StoryObj<KlevuSearchLandingPage> = {
     term: "red shoes",
     useInfiniteScroll: true,
   },
-  render: (args) => html`<klevu-search-landing-page
-    filter-count=${ifDefined(args.filterCount)}
-    .filterCustomOrder=${args.filterCustomOrder}
-    limit=${ifDefined(args.limit)}
-    sort=${ifDefined(args.sort)}
-    term=${ifDefined(args.term)}
-    use-pagination=${ifDefined(args.usePagination)}
-    t-search-title=${ifDefined(args.tSearchTitle)}
-    t-load-more=${ifDefined(args.loadMore)}
-    use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
-  ></klevu-search-landing-page>`,
+  render: SearchLandingPage.render,
 }

@@ -3,11 +3,13 @@ import {
   categoryMerchandising,
   FilterManager,
   KlevuFetch,
+  KlevuFetchModifer,
   KlevuMerchandisingOptions,
   KlevuRecord,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   listFilters,
+  personalisation,
   sendMerchandisingViewEvent,
 } from "@klevu/core"
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
@@ -103,6 +105,12 @@ export class KlevuMerchandising {
    */
   @Prop() showRatingsCount?: boolean
 
+  /**
+   * Enable personalisation
+   */
+  @Prop()
+  usePersonalisation?: boolean
+
   @State() currentViewPortSize?: ViewportSize
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
@@ -127,10 +135,15 @@ export class KlevuMerchandising {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
-      if (this.showRatings === undefined)
+      if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnCategoryPage || false
-      if (this.showRatingsCount === undefined)
+      }
+      if (this.showRatingsCount === undefined) {
         this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnCategoryPage || false
+      }
+      if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInCatNav) {
+        this.usePersonalisation = true
+      }
     }
     await this.#fetchData()
   }
@@ -145,23 +158,28 @@ export class KlevuMerchandising {
 
   async #fetchData() {
     this.loading = true
+
+    const modifiers: KlevuFetchModifer[] = [
+      sendMerchandisingViewEvent(this.categoryTitle),
+      listFilters({
+        filterManager: this.manager,
+        limit: this.filterCount,
+        rangeFilterSettings: [
+          {
+            key: "klevu_price",
+            minMax: true,
+          },
+        ],
+      }),
+      applyFilterWithManager(this.manager),
+    ]
+
+    if (this.usePersonalisation) {
+      modifiers.push(personalisation())
+    }
+
     const result = await KlevuFetch(
-      categoryMerchandising(
-        this.category,
-        { limit: this.limit, sort: this.sort, ...this.options },
-        sendMerchandisingViewEvent(this.categoryTitle),
-        listFilters({
-          filterManager: this.manager,
-          limit: this.filterCount,
-          rangeFilterSettings: [
-            {
-              key: "klevu_price",
-              minMax: true,
-            },
-          ],
-        }),
-        applyFilterWithManager(this.manager)
-      )
+      categoryMerchandising(this.category, { limit: this.limit, sort: this.sort, ...this.options }, ...modifiers)
     )
     this.#resultObject = result.queriesById("categoryMerchandising")
     this.results = this.#resultObject?.records ?? []

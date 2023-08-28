@@ -2,7 +2,6 @@
 
 <!-- Auto Generated Below -->
 
-
 ## Overview
 
 Full app component for search landing page
@@ -23,13 +22,11 @@ Full app component for search landing page
 | `useInfiniteScroll` | `use-infinite-scroll` | Should use infinite scroll component to trigger load next | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
 | `usePagination`     | `use-pagination`      | Use pagination instead of loading more                    | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
 
-
 ## Events
 
 | Event  | Description | Type                                                                                                       |
 | ------ | ----------- | ---------------------------------------------------------------------------------------------------------- |
 | `data` |             | `CustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager; }>` |
-
 
 ## Slots
 
@@ -39,7 +36,6 @@ Full app component for search landing page
 | `"facets"`  | Sidebar of facets content                       |
 | `"footer"`  | Footer container                                |
 | `"header"`  | Header container                                |
-
 
 ## Dependencies
 
@@ -58,6 +54,7 @@ Full app component for search landing page
 - [klevu-button](../klevu-button)
 
 ### Graph
+
 ```mermaid
 graph TD;
   klevu-search-landing-page --> klevu-util-viewport
@@ -100,6 +97,4 @@ graph TD;
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
-
-
+---

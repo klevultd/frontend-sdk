@@ -2,10 +2,12 @@ import {
   applyFilterWithManager,
   FilterManager,
   KlevuFetch,
+  KlevuFetchModifer,
   KlevuRecord,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   listFilters,
+  personalisation,
   search,
   sendSearchEvent,
 } from "@klevu/core"
@@ -88,6 +90,11 @@ export class KlevuSearchLandingPage {
    */
   @Prop() tLoadMore = getTranslation("searchLandingPage.tLoadMore")
 
+  /**
+   * Enable personalization
+   */
+  @Prop() usePersonalisation?: boolean
+
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
@@ -104,10 +111,15 @@ export class KlevuSearchLandingPage {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
-      if (this.showRatings === undefined)
+      if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
-      if (this.showRatingsCount === undefined)
+      }
+      if (this.showRatingsCount === undefined) {
         this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false
+      }
+      if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
+        this.usePersonalisation = true
+      }
     }
     await this.#fetchData()
   }
@@ -119,24 +131,27 @@ export class KlevuSearchLandingPage {
 
   async #fetchData() {
     this.loading = true
-    const result = await KlevuFetch(
-      search(
-        this.term,
-        { limit: this.limit, sort: this.sort },
-        sendSearchEvent(),
-        listFilters({
-          filterManager: this.manager,
-          limit: this.filterCount,
-          rangeFilterSettings: [
-            {
-              key: "klevu_price",
-              minMax: true,
-            },
-          ],
-        }),
-        applyFilterWithManager(this.manager)
-      )
-    )
+
+    const modifiers: KlevuFetchModifer[] = [
+      sendSearchEvent(),
+      listFilters({
+        filterManager: this.manager,
+        limit: this.filterCount,
+        rangeFilterSettings: [
+          {
+            key: "klevu_price",
+            minMax: true,
+          },
+        ],
+      }),
+      applyFilterWithManager(this.manager),
+    ]
+
+    if (this.usePersonalisation) {
+      modifiers.push(personalisation())
+    }
+
+    const result = await KlevuFetch(search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers))
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()

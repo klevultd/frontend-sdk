@@ -135,6 +135,11 @@ export class KlevuQuicksearch {
    */
   @Prop() showRatingsCount?: boolean
 
+  /**
+   * Enable personalisation
+   */
+  @Prop() usePersonalisation?: boolean
+
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
   @State() suggestions: string[] = []
@@ -239,10 +244,15 @@ export class KlevuQuicksearch {
     const settings = getKMCSettings()
 
     if (settings) {
-      if (this.showRatings === undefined)
+      if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false
-      if (this.showRatingsCount === undefined)
+      }
+      if (this.showRatingsCount === undefined) {
         this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnQuickSearches || false
+      }
+      if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
+        this.usePersonalisation = true
+      }
     }
   }
 
@@ -291,6 +301,7 @@ export class KlevuQuicksearch {
             searchCategories={this.searchCategories}
             onFocus={() => this.popup?.openModal()}
             variant={this.searchFieldVariant}
+            usePersonalisation={this.usePersonalisation}
           ></klevu-search-field>
           <div class="content" slot="content">
             {(this.products ?? []).length > 0

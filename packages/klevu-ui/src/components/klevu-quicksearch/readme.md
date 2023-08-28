@@ -29,6 +29,7 @@ Full app to create search bar that popups trending products and search results.
 | `tSearchResults`              | `t-search-results`                | Title of search results                                | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tSearchResults")`              |
 | `tStartChat`                  | `t-start-chat`                    | Title of button to start Moi session                   | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tStartChat")`                  |
 | `tTrendingCaption`            | `t-trending-caption`              | Trending tab caption                                   | `any`                                                                                                                                                                             | `getTranslation("quicksearch.tTrendingCaption")`            |
+| `usePersonalisation`          | `use-personalisation`             | Enable personalisation                                 | `boolean \| undefined`                                                                                                                                                            | `undefined`                                                 |
 
 
 ## Events

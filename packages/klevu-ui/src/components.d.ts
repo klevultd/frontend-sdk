@@ -609,6 +609,10 @@ export namespace Components {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Stylized modal dialog.
@@ -1172,6 +1176,10 @@ export namespace Components {
           * Trending tab caption
          */
         "tTrendingCaption": any;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Klevu ratings component
@@ -1280,6 +1288,10 @@ export namespace Components {
          */
         "tSearchText": any;
         /**
+          * Enable personalisation on the query
+         */
+        "usePersonalisation"?: boolean;
+        /**
           * Variant of the search field
          */
         "variant": SearchFieldVariant1;
@@ -1332,6 +1344,10 @@ export namespace Components {
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalization
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Horizontal slider component. By default used for price range in this package. But can
@@ -2873,6 +2889,10 @@ declare namespace LocalJSX {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Stylized modal dialog.
@@ -3450,6 +3470,10 @@ declare namespace LocalJSX {
           * Trending tab caption
          */
         "tTrendingCaption"?: any;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Klevu ratings component
@@ -3557,6 +3581,10 @@ declare namespace LocalJSX {
          */
         "tSearchText"?: any;
         /**
+          * Enable personalisation on the query
+         */
+        "usePersonalisation"?: boolean;
+        /**
           * Variant of the search field
          */
         "variant"?: SearchFieldVariant1;
@@ -3610,6 +3638,10 @@ declare namespace LocalJSX {
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalization
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Horizontal slider component. By default used for price range in this package. But can
