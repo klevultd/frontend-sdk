@@ -259,7 +259,7 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
   'hideImage',
   'hideBrand',
   'fixedWidth',
-  'showHoverImage',
+  'hideHoverImage',
   'keyBrand',
   'keyName',
   'keyDescription',

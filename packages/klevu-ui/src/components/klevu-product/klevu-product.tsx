@@ -99,7 +99,7 @@ export class KlevuProduct {
   /**
    * When mousing over product, show hover image if available
    */
-  @Prop() showHoverImage?: boolean
+  @Prop() hideHoverImage?: boolean
 
   /**
    * What key to use for brand value
@@ -151,8 +151,11 @@ export class KlevuProduct {
       if (this.showAddToCart === undefined) {
         this.showAddToCart = settings.klevu_addToCartEnabled
       }
-      if (this.showHoverImage === undefined) {
-        this.showHoverImage = settings.klevu_uc_userOptions.showRolloverImage
+      if (this.hideHoverImage === undefined) {
+        this.hideHoverImage = !Boolean(settings.klevu_uc_userOptions.showRolloverImage)
+      }
+      if (this.hideSwatches === undefined) {
+        this.hideSwatches = !Boolean(settings.klevu_uc_userOptions.showProductSwatches)
       }
     }
   }
@@ -255,7 +258,7 @@ export class KlevuProduct {
                         backgroundImage: `url(${this.hoverImage || this.product.image})`,
                       }}
                     >
-                      {this.showHoverImage && this.product.imageHover ? (
+                      {!this.hideHoverImage && this.product.imageHover ? (
                         <div
                           class="hover"
                           style={{
