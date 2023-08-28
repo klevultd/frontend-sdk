@@ -433,6 +433,5 @@ export async function kmcRecommendation(
     },
     modifiers,
     configOverride,
-    title: kmcConfig.metadata.title,
   }
 }

@@ -82,10 +82,8 @@ export class KlevuRecommendations {
       itemGroupId: this.itemGroupId,
     })
 
-    const settings = getKMCSettings()
-    if (settings) {
-      if (this.recommendationTitle === undefined) this.recommendationTitle = fetchOptions.title || ""
-    }
+    if (this.recommendationTitle === undefined)
+      this.recommendationTitle = fetchOptions.params?.kmcConfig?.metadata.title || ""
     fetchOptions = {
       ...fetchOptions,
       modifiers: [sendRecommendationViewEvent(this.recommendationTitle || ""), ...(fetchOptions.modifiers || [])],

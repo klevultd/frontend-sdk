@@ -85,10 +85,6 @@ export type KlevuFetchFunctionReturnValue = {
    * Local memory cache products from previous results. Used by analytics when making page changes
    */
   previousResultRecords?: KlevuRecord[]
-  /**
-   * Recommendation title as set in KMC
-   */
-  title?: string
 }
 
 export * from "./categoryMerchandising/categoryMerchandising.js"
