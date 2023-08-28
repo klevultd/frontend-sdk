@@ -7,6 +7,7 @@ import {
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   KlevuTypeOfRecord,
+  personalisation,
   search,
   sendSearchEvent,
   suggestions,
@@ -94,6 +95,11 @@ export class KlevuSearchField {
   @Prop() variant: SearchFieldVariant = "default"
 
   /**
+   * Enable personalisation on the query
+   */
+  @Prop() usePersonalisation?: boolean
+
+  /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
   @Event({
@@ -151,6 +157,10 @@ export class KlevuSearchField {
 
     if (this.sendAnalytics) {
       searchModifiers.push(sendSearchEvent())
+    }
+
+    if (this.usePersonalisation) {
+      searchModifiers.push(personalisation())
     }
 
     const allSearchQueries: KlevuFetchFunctionReturnValue[] = []
