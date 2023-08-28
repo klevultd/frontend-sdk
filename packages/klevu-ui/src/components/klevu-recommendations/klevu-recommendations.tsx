@@ -84,7 +84,7 @@ export class KlevuRecommendations {
           currentProductId: this.currentProductId,
           itemGroupId: this.itemGroupId,
         },
-        sendRecommendationViewEvent()
+        sendRecommendationViewEvent(this.recommendationTitle)
       )
     )
 
