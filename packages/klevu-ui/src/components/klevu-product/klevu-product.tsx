@@ -258,7 +258,7 @@ export class KlevuProduct {
                         backgroundImage: `url(${this.hoverImage || this.product.image})`,
                       }}
                     >
-                      {!this.hideHoverImage && this.product.imageHover ? (
+                      {this.hideHoverImage !== true && this.product.imageHover ? (
                         <div
                           class="hover"
                           style={{
