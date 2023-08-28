@@ -74,24 +74,25 @@ export class KlevuRecommendations {
       throw new Error("recommendationId is required")
     }
 
-    let fetchOptions: KlevuFetchFunctionReturnValue = await kmcRecommendation(this.recommendationId, {
-      id: "recommendation",
-      cartProductIds: this.cartProductIds,
-      categoryPath: this.categoryPath,
-      currentProductId: this.currentProductId,
-      itemGroupId: this.itemGroupId,
-    })
-
-    if (this.recommendationTitle === undefined)
-      this.recommendationTitle = fetchOptions.params?.kmcConfig?.metadata.title || ""
-    fetchOptions = {
-      ...fetchOptions,
-      modifiers: [sendRecommendationViewEvent(this.recommendationTitle || ""), ...(fetchOptions.modifiers || [])],
-    }
-    const res = await KlevuFetch(fetchOptions)
+    const res = await KlevuFetch(
+      kmcRecommendation(
+        this.recommendationId,
+        {
+          id: "recommendation",
+          cartProductIds: this.cartProductIds,
+          categoryPath: this.categoryPath,
+          currentProductId: this.currentProductId,
+          itemGroupId: this.itemGroupId,
+        },
+        sendRecommendationViewEvent()
+      )
+    )
 
     this.#responseObject = res.queriesById("recommendation")
     if (this.#responseObject) {
+      if (this.recommendationTitle === undefined) {
+        this.recommendationTitle = this.#responseObject.getQueryParameters()?.kmcConfig?.metadata.title
+      }
       this.products = this.#responseObject.records
       this.data.emit(this.#responseObject)
     }

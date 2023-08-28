@@ -18,7 +18,6 @@ export default meta
 export const Recommendations: StoryObj<KlevuRecommendations> = {
   args: {
     recommendationId: "k-b1c018f7-ee85-45c0-b65f-b9556f7dc15d",
-    recommendationTitle: "Trending products",
   },
   render: (args) => html`<klevu-recommendations
     .cartProductIds=${args.cartProductIds}
