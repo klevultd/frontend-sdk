@@ -250,24 +250,22 @@ export class KlevuProduct {
             {this.hideImage ? null : (
               <slot name="image">
                 {this.product?.image || this.hoverImage ? (
-                  <Fragment>
-                    <div
-                      class="image"
-                      part="product-image"
-                      style={{
-                        backgroundImage: `url(${this.hoverImage || this.product.image})`,
-                      }}
-                    >
-                      {this.hideHoverImage !== true && this.product.imageHover ? (
-                        <div
-                          class="hover"
-                          style={{
-                            backgroundImage: `url(${this.product.imageHover})`,
-                          }}
-                        ></div>
-                      ) : null}
-                    </div>
-                  </Fragment>
+                  <div
+                    class="image"
+                    part="product-image"
+                    style={{
+                      backgroundImage: `url(${this.hoverImage || this.product.image})`,
+                    }}
+                  >
+                    {this.hideHoverImage !== true && this.product.imageHover ? (
+                      <div
+                        class="hover"
+                        style={{
+                          backgroundImage: `url(${this.product.imageHover})`,
+                        }}
+                      ></div>
+                    ) : null}
+                  </div>
                 ) : (
                   <div class="image no-image" part="product-image">
                     <klevu-icon name="image_not_supported"></klevu-icon>
