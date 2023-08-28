@@ -16,6 +16,7 @@ import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } f
 import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { getTranslation } from "../../utils/getTranslation"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 export type SearchResultsEventData = {
   fallback?: KlevuResponseQueryObject
@@ -125,6 +126,10 @@ export class KlevuSearchField {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
+      this.usePersonalisation = true
+    }
   }
 
   /**
