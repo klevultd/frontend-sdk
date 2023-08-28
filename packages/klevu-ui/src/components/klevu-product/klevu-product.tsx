@@ -97,6 +97,11 @@ export class KlevuProduct {
   @Prop() fixedWidth?: boolean
 
   /**
+   * When mousing over product, show hover image if available
+   */
+  @Prop() showHoverImage?: boolean
+
+  /**
    * What key to use for brand value
    */
   @Prop() keyBrand = "brand"
@@ -145,6 +150,9 @@ export class KlevuProduct {
       }
       if (this.showAddToCart === undefined) {
         this.showAddToCart = settings.klevu_addToCartEnabled
+      }
+      if (this.showHoverImage === undefined) {
+        this.showHoverImage = settings.klevu_uc_userOptions.showRolloverImage
       }
     }
   }
@@ -239,13 +247,24 @@ export class KlevuProduct {
             {this.hideImage ? null : (
               <slot name="image">
                 {this.product?.image || this.hoverImage ? (
-                  <div
-                    class="image"
-                    part="product-image"
-                    style={{
-                      backgroundImage: `url(${this.hoverImage || this.product.image})`,
-                    }}
-                  ></div>
+                  <Fragment>
+                    <div
+                      class="image"
+                      part="product-image"
+                      style={{
+                        backgroundImage: `url(${this.hoverImage || this.product.image})`,
+                      }}
+                    >
+                      {this.showHoverImage && this.product.imageHover ? (
+                        <div
+                          class="hover"
+                          style={{
+                            backgroundImage: `url(${this.product.imageHover})`,
+                          }}
+                        ></div>
+                      ) : null}
+                    </div>
+                  </Fragment>
                 ) : (
                   <div class="image no-image" part="product-image">
                     <klevu-icon name="image_not_supported"></klevu-icon>
