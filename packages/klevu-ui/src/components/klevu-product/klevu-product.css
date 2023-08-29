@@ -218,6 +218,11 @@ klevu-button.addToCart {
   margin-top: var(--klevu-spacing-04);
 }
 
+.vatcaption {
+  display: block;
+  --klevu-typography-color: var(--klevu-color-neutral-6);
+}
+
 /* Hover image */
 .image .hover {
   opacity: 0;

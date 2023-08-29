@@ -828,6 +828,10 @@ export namespace Components {
           * What variant of product to render
          */
         "variant": KlevuProductVariant;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Component to place products on grid. Very simple container for products.
@@ -3117,6 +3121,10 @@ declare namespace LocalJSX {
           * What variant of product to render
          */
         "variant"?: KlevuProductVariant;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Component to place products on grid. Very simple container for products.

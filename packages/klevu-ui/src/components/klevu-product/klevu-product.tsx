@@ -117,6 +117,11 @@ export class KlevuProduct {
   @Prop() keyDescription = "shortDesc"
 
   /**
+   * Text to be added after the price. Usually used to indicate that does the price include VAT or not.
+   */
+  @Prop() vatCaption?: string
+
+  /**
    * Turns the component into a product wrapper that handles events
    * automatically. It assumes that whole product is clickable.
    *
@@ -156,6 +161,10 @@ export class KlevuProduct {
       }
       if (this.hideSwatches === undefined) {
         this.hideSwatches = !Boolean(settings.klevu_uc_userOptions.showProductSwatches)
+      }
+
+      if (this.vatCaption === undefined) {
+        this.vatCaption = settings.klevu_uc_userOptions.vatCaption
       }
     }
   }
@@ -292,15 +301,22 @@ export class KlevuProduct {
                   </klevu-typography>
                 )}
                 {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
-                  <klevu-typography
-                    variant="body-l-bold"
-                    class={{
-                      isOnSale,
-                      price: true,
-                    }}
-                  >
-                    {renderPrice(this.product.salePrice, this.product.currency)}
-                  </klevu-typography>
+                  <Fragment>
+                    <klevu-typography
+                      variant="body-l-bold"
+                      class={{
+                        isOnSale,
+                        price: true,
+                      }}
+                    >
+                      {renderPrice(this.product.salePrice, this.product.currency)}
+                    </klevu-typography>
+                    {this.vatCaption && (
+                      <klevu-typography class="vatcaption" variant="body-s">
+                        ({this.vatCaption})
+                      </klevu-typography>
+                    )}
+                  </Fragment>
                 )}
               </div>
             </slot>

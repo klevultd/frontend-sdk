@@ -30,6 +30,7 @@ const productRender = (args: KlevuProduct, className?: string) => html` <klevu-p
   show-add-to-cart=${ifDefined(args.showAddToCart)}
   t-add-to-cart=${ifDefined(args.tAddToCart)}
   hide-hover-image=${ifDefined(args.hideHoverImage)}
+  vat-caption=${ifDefined(args.vatCaption)}
 ></klevu-product>`
 
 const meta: Meta = {
