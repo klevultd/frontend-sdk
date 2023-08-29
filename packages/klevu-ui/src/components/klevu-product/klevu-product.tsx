@@ -164,7 +164,6 @@ export class KlevuProduct {
       }
 
       if (this.vatCaption === undefined) {
-        console.log(settings.klevu_uc_userOptions.vatCaption)
         this.vatCaption = settings.klevu_uc_userOptions.vatCaption
       }
     }
