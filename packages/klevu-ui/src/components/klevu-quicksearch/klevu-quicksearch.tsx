@@ -211,6 +211,7 @@ export class KlevuQuicksearch {
         } else {
           this.noResultsMessage = ""
         }
+        this.products = []
       }
     } else {
       this.#resultObject = event.detail.search
