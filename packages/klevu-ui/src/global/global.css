@@ -21,6 +21,8 @@
   --klevu-color-positive: #2e9c40;
   --klevu-color-negative: #ad2d2d;
 
+  --klevu-color-border: #e0e0e0;
+
   /** spacing */
   --klevu-spacing-01: 1px;
   --klevu-spacing-02: 4px;

@@ -88,3 +88,8 @@ klevu-moi {
     float: right;
   }
 }
+
+.noResultsMessage {
+  text-align: center;
+  border-bottom: 1px solid var(--klevu-color-border, #d6d6d6);
+}

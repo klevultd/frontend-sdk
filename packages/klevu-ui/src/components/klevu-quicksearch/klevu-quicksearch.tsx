@@ -7,6 +7,7 @@ import {
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   trendingProducts,
+  KMCRootObject,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -37,6 +38,8 @@ export type KlevuQuicksearchDataEvent = {
   searchResult?: KlevuQueryResult
 }
 
+type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
+
 /**
  * Full app to create search bar that popups trending products and search results.
  *
@@ -44,6 +47,7 @@ export type KlevuQuicksearchDataEvent = {
  * @slot search-products - Slot to replace search results listings
  * @slot trending-products - Slot to replace trending products listings
  * @slot last-clicked-products - Slot to replace last clicked products
+ * @slot noResults - Show message when no results found
  */
 @Component({
   tag: "klevu-quicksearch",
@@ -140,6 +144,11 @@ export class KlevuQuicksearch {
    */
   @Prop() usePersonalisation?: boolean
 
+  /**
+   * Show fallback products instead of No results message
+   */
+  @Prop() showFallbackProducts?: boolean = false
+
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
   @State() suggestions: string[] = []
@@ -150,6 +159,7 @@ export class KlevuQuicksearch {
   @State() lastClickedProducts?: KlevuRecord[]
   @State() activeTab: "trending" | "last" = "trending"
   @State() chat = false
+  @State() noResultsMessage: string = ""
 
   #searchField?: HTMLKlevuSearchFieldElement
 
@@ -157,6 +167,8 @@ export class KlevuQuicksearch {
 
   popup?: HTMLKlevuPopupElement
 
+  #searchTerm: string = ""
+  #noResultsOptions?: NoResultsOptions
   /**
    * When the data in the component changes. This event can be used to replace
    * whole rendering of products when used with slots properly.
@@ -184,9 +196,22 @@ export class KlevuQuicksearch {
 
   @Listen("klevuSearchResults")
   async onResults(event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) {
+    this.#searchTerm = event.detail.search?.query.meta.searchedTerm || ""
     if (event.detail.search?.records.length === 0) {
-      this.#resultObject = event.detail.fallback
-      this.products = event.detail.fallback?.records
+      if (this.showFallbackProducts) {
+        this.#resultObject = event.detail.fallback
+        this.products = event.detail.fallback?.records
+      } else {
+        this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+        if (this.#searchTerm) {
+          const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
+            (m) => m.showForTerms && m.showForTerms.includes(this.#searchTerm)
+          )
+          if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message
+        } else {
+          this.noResultsMessage = ""
+        }
+      }
     } else {
       this.#resultObject = event.detail.search
       this.products = event.detail.search?.records
@@ -244,6 +269,7 @@ export class KlevuQuicksearch {
     const settings = getKMCSettings()
 
     if (settings) {
+      this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
       if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false
       }
@@ -308,7 +334,7 @@ export class KlevuQuicksearch {
               ? this.#renderResultPage()
               : this.products?.length === 0 && this.trendingProducts.length > 0
               ? this.#renderTrendingPage()
-              : null}
+              : this.#renderNoResultsMessage()}
           </div>
         </klevu-popup>
         {this.chat && <klevu-moi></klevu-moi>}
@@ -386,6 +412,18 @@ export class KlevuQuicksearch {
     )
   }
 
+  #renderNoResultsMessage() {
+    return (
+      <slot name="noResults">
+        {this.noResultsMessage ? (
+          <p class="noResultsMessage">
+            <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
+          </p>
+        ) : null}
+      </slot>
+    )
+  }
+
   #renderTrendingPage() {
     return (
       <Fragment>
@@ -403,6 +441,7 @@ export class KlevuQuicksearch {
           ></klevu-latest-searches>
         </aside>
         <section>
+          {this.#renderNoResultsMessage()}
           <div class="tabrow">
             <klevu-tab
               caption={this.tTrendingCaption}

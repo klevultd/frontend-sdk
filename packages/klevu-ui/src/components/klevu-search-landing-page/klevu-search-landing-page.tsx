@@ -10,6 +10,7 @@ import {
   personalisation,
   search,
   sendSearchEvent,
+  KMCRootObject,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -27,6 +28,8 @@ import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 
+type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
+
 /**
  * Full app component for search landing page
  *
@@ -34,6 +37,7 @@ import { getKMCSettings } from "../../utils/getKMCSettings"
  * @slot footer - Footer container
  * @slot content - Product grid items including the grid container
  * @slot facets - Sidebar of facets content
+ * @slot noResults - Show message when no results found
  */
 @Component({
   tag: "klevu-search-landing-page",
@@ -100,6 +104,9 @@ export class KlevuSearchLandingPage {
   @State() currentViewPortSize?: ViewportSize
   @State() infiniteScrollingPaused?: boolean = false
   @State() loading?: boolean = false
+  @State() noResultsMessage: string = ""
+
+  #noResultsOptions?: NoResultsOptions
 
   #resultObject?: KlevuResponseQueryObject
 
@@ -111,6 +118,7 @@ export class KlevuSearchLandingPage {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
+      this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
       if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
       }
@@ -156,6 +164,18 @@ export class KlevuSearchLandingPage {
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
     this.loading = false
+    if (this.results.length === 0) this.#handleNoResults()
+    else this.noResultsMessage = ""
+  }
+
+  #handleNoResults() {
+    this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+    if (this.term) {
+      const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
+        (m) => m.showForTerms && m.showForTerms.includes(this.term)
+      )
+      if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message
+    }
   }
 
   async loadMore() {
@@ -288,17 +308,28 @@ export class KlevuSearchLandingPage {
             <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
           </div>
           <slot name="content" slot="content">
-            <klevu-product-grid slot="content">
-              {this.results?.map((p) => (
-                <klevu-product
-                  product={p}
-                  fixedWidth
-                  exportparts={parts["klevu-product"]}
-                  showRatings={this.showRatings}
-                  showRatingsCount={this.showRatingsCount}
-                ></klevu-product>
-              ))}
-            </klevu-product-grid>
+            {this.results?.length > 0 ? (
+              <klevu-product-grid slot="content">
+                {this.results?.map((p) => (
+                  <klevu-product
+                    product={p}
+                    fixedWidth
+                    exportparts={parts["klevu-product"]}
+                    showRatings={this.showRatings}
+                    showRatingsCount={this.showRatingsCount}
+                  ></klevu-product>
+                ))}
+              </klevu-product-grid>
+            ) : (
+              <slot name="noResults">
+                {this.noResultsMessage ? (
+                  <p class="noResultsMessage">
+                    <klevu-typography variant="body-l">{this.noResultsMessage}</klevu-typography>
+                  </p>
+                ) : null}
+              </slot>
+            )}
+
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}
           </slot>
           <div slot="footer" class="footer">

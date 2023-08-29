@@ -1145,6 +1145,10 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show fallback products instead of No results message
+         */
+        "showFallbackProducts"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3438,6 +3442,10 @@ declare namespace LocalJSX {
           * Text of search button
          */
         "searchText"?: string;
+        /**
+          * Show fallback products instead of No results message
+         */
+        "showFallbackProducts"?: boolean;
         /**
           * Show ratings
          */

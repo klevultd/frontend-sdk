@@ -2,25 +2,28 @@
 
 <!-- Auto Generated Below -->
 
+
 ## Overview
 
 Full app component for search landing page
 
 ## Properties
 
-| Property            | Attribute             | Description                                               | Type                                                                                                                                                                                                                                                                                                                                                    | Default                                            |
-| ------------------- | --------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| `filterCount`       | `filter-count`        | How many products to display in filters                   | `number \| undefined`                                                                                                                                                                                                                                                                                                                                   | `undefined`                                        |
-| `filterCustomOrder` | --                    | Order filters in a customer order                         | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                                                             | `undefined`                                        |
-| `limit`             | `limit`               | How many results to display on a page                     | `number`                                                                                                                                                                                                                                                                                                                                                | `24`                                               |
-| `showRatings`       | `show-ratings`        | Show ratings                                              | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
-| `showRatingsCount`  | `show-ratings-count`  | Show ratings count                                        | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
-| `sort`              | `sort`                | In which order to set the products                        | `KlevuSearchSorting.AdvancedSorting \| KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined`                                        |
-| `tLoadMore`         | `t-load-more`         | Text of load more button                                  | `any`                                                                                                                                                                                                                                                                                                                                                   | `getTranslation("searchLandingPage.tLoadMore")`    |
-| `tSearchTitle`      | `t-search-title`      | The title of the page                                     | `any`                                                                                                                                                                                                                                                                                                                                                   | `getTranslation("searchLandingPage.tSearchTitle")` |
-| `term` _(required)_ | `term`                | What term was used for search                             | `string`                                                                                                                                                                                                                                                                                                                                                | `undefined`                                        |
-| `useInfiniteScroll` | `use-infinite-scroll` | Should use infinite scroll component to trigger load next | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
-| `usePagination`     | `use-pagination`      | Use pagination instead of loading more                    | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+| Property             | Attribute             | Description                                               | Type                                                                                                                                                                                                                                                                                                                                                    | Default                                            |
+| -------------------- | --------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `filterCount`        | `filter-count`        | How many products to display in filters                   | `number \| undefined`                                                                                                                                                                                                                                                                                                                                   | `undefined`                                        |
+| `filterCustomOrder`  | --                    | Order filters in a customer order                         | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                                                             | `undefined`                                        |
+| `limit`              | `limit`               | How many results to display on a page                     | `number`                                                                                                                                                                                                                                                                                                                                                | `24`                                               |
+| `showRatings`        | `show-ratings`        | Show ratings                                              | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+| `showRatingsCount`   | `show-ratings-count`  | Show ratings count                                        | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+| `sort`               | `sort`                | In which order to set the products                        | `KlevuSearchSorting.AdvancedSorting \| KlevuSearchSorting.NameAsc \| KlevuSearchSorting.NameDesc \| KlevuSearchSorting.NewArrivalAsc \| KlevuSearchSorting.NewArrivalDesc \| KlevuSearchSorting.PriceAsc \| KlevuSearchSorting.PriceDesc \| KlevuSearchSorting.RatingAsc \| KlevuSearchSorting.RatingDesc \| KlevuSearchSorting.Relevance \| undefined` | `undefined`                                        |
+| `tLoadMore`          | `t-load-more`         | Text of load more button                                  | `any`                                                                                                                                                                                                                                                                                                                                                   | `getTranslation("searchLandingPage.tLoadMore")`    |
+| `tSearchTitle`       | `t-search-title`      | The title of the page                                     | `any`                                                                                                                                                                                                                                                                                                                                                   | `getTranslation("searchLandingPage.tSearchTitle")` |
+| `term` _(required)_  | `term`                | What term was used for search                             | `string`                                                                                                                                                                                                                                                                                                                                                | `undefined`                                        |
+| `useInfiniteScroll`  | `use-infinite-scroll` | Should use infinite scroll component to trigger load next | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+| `usePagination`      | `use-pagination`      | Use pagination instead of loading more                    | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+| `usePersonalisation` | `use-personalisation` | Enable personalization                                    | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+
 
 ## Events
 
@@ -28,14 +31,17 @@ Full app component for search landing page
 | ------ | ----------- | ---------------------------------------------------------------------------------------------------------- |
 | `data` |             | `CustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager; }>` |
 
+
 ## Slots
 
-| Slot        | Description                                     |
-| ----------- | ----------------------------------------------- |
-| `"content"` | Product grid items including the grid container |
-| `"facets"`  | Sidebar of facets content                       |
-| `"footer"`  | Footer container                                |
-| `"header"`  | Header container                                |
+| Slot          | Description                                     |
+| ------------- | ----------------------------------------------- |
+| `"content"`   | Product grid items including the grid container |
+| `"facets"`    | Sidebar of facets content                       |
+| `"footer"`    | Footer container                                |
+| `"header"`    | Header container                                |
+| `"noResults"` | Show message when no results found              |
+
 
 ## Dependencies
 
@@ -54,7 +60,6 @@ Full app component for search landing page
 - [klevu-button](../klevu-button)
 
 ### Graph
-
 ```mermaid
 graph TD;
   klevu-search-landing-page --> klevu-util-viewport
@@ -97,4 +102,6 @@ graph TD;
   style klevu-search-landing-page fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
----
+----------------------------------------------
+
+
