@@ -25,11 +25,11 @@ display.
 
 2. **JavaScript Customization:** The JavaScript code targets the
    `klevu-merchandising.customized` element and the `content` slot within it. It
-   listens for the `"data"` event on the merchandising component. Upon data
+   listens for the `"klevuData"` event on the merchandising component. Upon klevuData
    reception, it clears the content of the `content` slot and populates it with
    a `klevu-grid` element.
 
-   - For each record in the event data, a `klevu-product` element is created.
+   - For each record in the event klevuData, a `klevu-product` element is created.
      The `product` attribute of the element is set to the record, and it's
      marked as a wrapper. The inner HTML of the element contains an image tag
      displaying the product's image.

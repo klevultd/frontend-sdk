@@ -2750,7 +2750,7 @@ declare namespace LocalJSX {
      * Generic layout used in merchansiding and search landing page
      */
     interface KlevuLayoutResults {
-        "onDrawerOpened"?: (event: KlevuLayoutResultsCustomEvent<void>) => void;
+        "onKlevuDrawerOpened"?: (event: KlevuLayoutResultsCustomEvent<void>) => void;
     }
     /**
      * Single list item for listing things.
@@ -2804,7 +2804,7 @@ declare namespace LocalJSX {
           * Count of products for page
          */
         "limit"?: number;
-        "onData"?: (event: KlevuMerchandisingCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
+        "onKlevuData"?: (event: KlevuMerchandisingCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
         /**
           * Object to override and settings on search options
          */
@@ -3333,7 +3333,7 @@ declare namespace LocalJSX {
         /**
           * When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.
          */
-        "onData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
+        "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
         /**
           * Placeholder for input text
          */
@@ -3425,7 +3425,7 @@ declare namespace LocalJSX {
         /**
           * When Recommndations data is available or updated
          */
-        "onData"?: (event: KlevuRecommendationsCustomEvent<KlevuResponseQueryObject>) => void;
+        "onKlevuData"?: (event: KlevuRecommendationsCustomEvent<KlevuResponseQueryObject>) => void;
         /**
           * The ID of the recommendation
          */
@@ -3513,7 +3513,7 @@ declare namespace LocalJSX {
           * How many results to display on a page
          */
         "limit"?: number;
-        "onData"?: (event: KlevuSearchLandingPageCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
+        "onKlevuData"?: (event: KlevuSearchLandingPageCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
         /**
           * In which order to set the products
          */
@@ -3728,19 +3728,19 @@ declare namespace LocalJSX {
      * https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
      */
     interface KlevuUtilDomEvents {
-        "onClickEventSent"?: (event: KlevuUtilDomEventsCustomEvent<{
+        "onKlevuClickEventSent"?: (event: KlevuUtilDomEventsCustomEvent<{
     productId: string
     product?: Partial<KlevuRecord>
   }>) => void;
-        "onFilterSelectionUpdate"?: (event: KlevuUtilDomEventsCustomEvent<{
+        "onKlevuFilterSelectionUpdate"?: (event: KlevuUtilDomEventsCustomEvent<{
     key: string
     name: string
     selected: boolean
   }>) => void;
-        "onFiltersApplied"?: (event: KlevuUtilDomEventsCustomEvent<{
+        "onKlevuFiltersApplied"?: (event: KlevuUtilDomEventsCustomEvent<{
     filters: FilterManagerFilters[]
   }>) => void;
-        "onLastSearchUpdate"?: (event: KlevuUtilDomEventsCustomEvent<void>) => void;
+        "onKlevuLastSearchUpdate"?: (event: KlevuUtilDomEventsCustomEvent<void>) => void;
     }
     /**
      * Component that triggers event when intercepted on scroll of page.
@@ -3757,11 +3757,11 @@ declare namespace LocalJSX {
         /**
           * Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
          */
-        "onInfiniteScrollingPaused"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+        "onKlevuInfiniteScrollingPaused"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
         /**
           * Event emitted when infinite scroll element is intercepted
          */
-        "onLoadMore"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
+        "onKlevuLoadMore"?: (event: KlevuUtilInfiniteScrollCustomEvent<void>) => void;
     }
     /**
      * Portal component to move content to end of body instead of normal DOM position. Typically used for popups
@@ -3781,7 +3781,7 @@ declare namespace LocalJSX {
         "overflowY"?: OverflowBehavior;
     }
     interface KlevuUtilViewport {
-        "onSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
+        "onKlevuSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
         /**
           * List of sizes to listen for
          */

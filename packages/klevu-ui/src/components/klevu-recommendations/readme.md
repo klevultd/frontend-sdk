@@ -21,9 +21,9 @@ Full recommendation banner solution
 
 ## Events
 
-| Event  | Description                                      | Type                                    |
-| ------ | ------------------------------------------------ | --------------------------------------- |
-| `data` | When Recommndations data is available or updated | `CustomEvent<KlevuResponseQueryObject>` |
+| Event       | Description                                      | Type                                    |
+| ----------- | ------------------------------------------------ | --------------------------------------- |
+| `klevuData` | When Recommndations data is available or updated | `CustomEvent<KlevuResponseQueryObject>` |
 
 
 ## Dependencies

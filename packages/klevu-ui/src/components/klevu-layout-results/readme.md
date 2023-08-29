@@ -11,9 +11,9 @@ Generic layout used in merchansiding and search landing page
 
 ## Events
 
-| Event          | Description | Type                |
-| -------------- | ----------- | ------------------- |
-| `drawerOpened` |             | `CustomEvent<void>` |
+| Event               | Description | Type                |
+| ------------------- | ----------- | ------------------- |
+| `klevuDrawerOpened` |             | `CustomEvent<void>` |
 
 
 ## Methods

@@ -165,7 +165,7 @@ export const KlevuLatestSearches = /*@__PURE__*/ defineContainer<JSX.KlevuLatest
 
 
 export const KlevuLayoutResults = /*@__PURE__*/ defineContainer<JSX.KlevuLayoutResults>('klevu-layout-results', undefined, [
-  'drawerOpened'
+  'klevuDrawerOpened'
 ]);
 
 
@@ -193,7 +193,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'options',
   'filterCustomOrder',
   'sortOptions',
-  'data'
+  'klevuData'
 ]);
 
 
@@ -354,7 +354,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'tCategoriesCaption',
   'tTrendingCaption',
   'tLastClickedProductsCaption',
-  'data'
+  'klevuData'
 ]);
 
 
@@ -371,7 +371,7 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
   'categoryPath',
   'currentProductId',
   'itemGroupId',
-  'data'
+  'klevuData'
 ]);
 
 
@@ -403,7 +403,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'useInfiniteScroll',
   'tSearchTitle',
   'tLoadMore',
-  'data'
+  'klevuData'
 ]);
 
 
@@ -467,18 +467,18 @@ export const KlevuTypography = /*@__PURE__*/ defineContainer<JSX.KlevuTypography
 
 
 export const KlevuUtilDomEvents = /*@__PURE__*/ defineContainer<JSX.KlevuUtilDomEvents>('klevu-util-dom-events', undefined, [
-  'lastSearchUpdate',
-  'filterSelectionUpdate',
-  'filtersApplied',
-  'clickEventSent'
+  'klevuLastSearchUpdate',
+  'klevuFilterSelectionUpdate',
+  'klevuFiltersApplied',
+  'klevuClickEventSent'
 ]);
 
 
 export const KlevuUtilInfiniteScroll = /*@__PURE__*/ defineContainer<JSX.KlevuUtilInfiniteScroll>('klevu-util-infinite-scroll', undefined, [
   'infiniteScrollPauseThreshold',
   'enabled',
-  'loadMore',
-  'infiniteScrollingPaused'
+  'klevuLoadMore',
+  'klevuInfiniteScrollingPaused'
 ]);
 
 
@@ -493,6 +493,6 @@ export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilSc
 
 export const KlevuUtilViewport = /*@__PURE__*/ defineContainer<JSX.KlevuUtilViewport>('klevu-util-viewport', undefined, [
   'sizes',
-  'sizeChanged'
+  'klevuSizeChanged'
 ]);
 

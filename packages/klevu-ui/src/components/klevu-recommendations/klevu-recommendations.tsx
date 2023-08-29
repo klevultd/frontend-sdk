@@ -27,7 +27,7 @@ export class KlevuRecommendations {
     composed: true,
     cancelable: true,
   })
-  data!: EventEmitter<KlevuResponseQueryObject>
+  klevuData!: EventEmitter<KlevuResponseQueryObject>
 
   /**
    * Title of the recommendation
@@ -89,7 +89,7 @@ export class KlevuRecommendations {
     this.#responseObject = res.queriesById("recommendation")
     if (this.#responseObject) {
       this.products = this.#responseObject.records
-      this.data.emit(this.#responseObject)
+      this.klevuData.emit(this.#responseObject)
     }
   }
 

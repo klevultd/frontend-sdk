@@ -25,38 +25,38 @@ export class KlevuUtilDomEvents {
   }
 
   #clickSendEventHandler = (e: any) => {
-    this.clickEventSent.emit(e.detail)
+    this.klevuClickEventSent.emit(e.detail)
   }
 
   #filtersAppliedEventHandler = (e: any) => {
-    this.filtersApplied.emit(e.detail)
+    this.klevuFiltersApplied.emit(e.detail)
   }
 
   #filterSelectionUpdateEventHandler = (e: any) => {
-    this.filterSelectionUpdate.emit(e.detail)
+    this.klevuFilterSelectionUpdate.emit(e.detail)
   }
 
   #lastSearchUpdateEventHandler = (e: any) => {
-    this.lastSearchUpdate.emit(e.detail)
+    this.klevuLastSearchUpdate.emit(e.detail)
   }
 
   @Event({ composed: true })
-  lastSearchUpdate!: EventEmitter<void>
+  klevuLastSearchUpdate!: EventEmitter<void>
 
   @Event({ composed: true })
-  filterSelectionUpdate!: EventEmitter<{
+  klevuFilterSelectionUpdate!: EventEmitter<{
     key: string
     name: string
     selected: boolean
   }>
 
   @Event({ composed: true })
-  filtersApplied!: EventEmitter<{
+  klevuFiltersApplied!: EventEmitter<{
     filters: FilterManagerFilters[]
   }>
 
   @Event({ composed: true })
-  clickEventSent!: EventEmitter<{
+  klevuClickEventSent!: EventEmitter<{
     productId: string
     product?: Partial<KlevuRecord>
   }>

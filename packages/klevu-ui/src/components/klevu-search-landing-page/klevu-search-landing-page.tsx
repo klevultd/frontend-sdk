@@ -137,16 +137,6 @@ export class KlevuSearchLandingPage {
     this.loading = false
   }
 
-  @Listen("loadMore")
-  infiniteScrollLoadMoreHandler() {
-    this.loadMore()
-  }
-
-  @Listen("infiniteScrollingPaused")
-  infiniteLoadPausedHandler() {
-    this.infiniteScrollingPaused = true
-  }
-
   async paginationChange(event: KlevuPaginationCustomEvent<number>) {
     if (!this.#resultObject?.getPage) {
       return
@@ -159,7 +149,7 @@ export class KlevuSearchLandingPage {
     this.loading = false
   }
 
-  @Listen("productClick")
+  @Listen("klevuProductClick")
   productClickHandler(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
     if (this.#resultObject?.searchClickEvent && event.detail.product.id) {
       this.#resultObject.searchClickEvent({
@@ -186,7 +176,7 @@ export class KlevuSearchLandingPage {
   @Event({
     composed: true,
   })
-  data!: EventEmitter<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>
+  klevuData!: EventEmitter<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>
 
   #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
     this.currentViewPortSize = event.detail
@@ -196,7 +186,7 @@ export class KlevuSearchLandingPage {
     if (!this.#resultObject) {
       return
     }
-    this.data.emit({
+    this.klevuData.emit({
       resultObject: this.#resultObject,
       records: this.results,
       manager: this.manager,
@@ -232,11 +222,11 @@ export class KlevuSearchLandingPage {
     return (
       <Host>
         <klevu-util-viewport
-          onSizeChanged={this.#sizeChange.bind(this)}
+          onKlevuSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
         <klevu-layout-results
-          onDrawerOpened={this.#mobileDrawerOpened.bind(this)}
+          onKlevuDrawerOpened={this.#mobileDrawerOpened.bind(this)}
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">
@@ -265,7 +255,13 @@ export class KlevuSearchLandingPage {
           <div slot="footer" class="footer">
             {showInfiniteScroll ? (
               <klevu-util-infinite-scroll
-                infiniteScrollPauseThreshold={0}
+                onKlevuLoadMore={() => {
+                  this.loadMore()
+                }}
+                onKlevuInfiniteScrollingPaused={() => {
+                  this.infiniteScrollingPaused = true
+                }}
+                infiniteScrollPauseThreshold={3}
                 enabled={!!this.#resultObject?.hasNextPage() && !this.loading}
               ></klevu-util-infinite-scroll>
             ) : this.usePagination && this.#resultObject ? (
