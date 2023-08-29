@@ -582,6 +582,14 @@ export namespace Components {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
@@ -601,6 +609,10 @@ export namespace Components {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Stylized modal dialog.
@@ -757,6 +769,10 @@ export namespace Components {
          */
         "hideDescription"?: boolean;
         /**
+          * When mousing over product, show hover image if available
+         */
+        "hideHoverImage"?: boolean;
+        /**
           * Hides image
          */
         "hideImage"?: boolean;
@@ -796,6 +812,14 @@ export namespace Components {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatingsCount"?: boolean;
         /**
           * Text for add to cart button
          */
@@ -1121,6 +1145,14 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * How many products to show in simple variant
          */
         "simpleResultCount": number;
@@ -1144,6 +1176,10 @@ export namespace Components {
           * Trending tab caption
          */
         "tTrendingCaption": any;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Klevu ratings component
@@ -1187,7 +1223,7 @@ export namespace Components {
         /**
           * Title of the recommendation
          */
-        "recommendationTitle": string;
+        "recommendationTitle"?: string;
     }
     /**
      * Plain textfield that does the searching. It queries Klevu and returns the results
@@ -1252,6 +1288,10 @@ export namespace Components {
          */
         "tSearchText": any;
         /**
+          * Enable personalisation on the query
+         */
+        "usePersonalisation"?: boolean;
+        /**
           * Variant of the search field
          */
         "variant": SearchFieldVariant1;
@@ -1272,6 +1312,14 @@ export namespace Components {
           * How many results to display on a page
          */
         "limit": number;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
         /**
           * In which order to set the products
          */
@@ -1296,6 +1344,10 @@ export namespace Components {
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalization
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Horizontal slider component. By default used for price range in this package. But can
@@ -2810,6 +2862,14 @@ declare namespace LocalJSX {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
@@ -2829,6 +2889,10 @@ declare namespace LocalJSX {
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Stylized modal dialog.
@@ -2990,6 +3054,10 @@ declare namespace LocalJSX {
          */
         "hideDescription"?: boolean;
         /**
+          * When mousing over product, show hover image if available
+         */
+        "hideHoverImage"?: boolean;
+        /**
           * Hides image
          */
         "hideImage"?: boolean;
@@ -3033,6 +3101,14 @@ declare namespace LocalJSX {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings
+         */
+        "showRatingsCount"?: boolean;
         /**
           * Text for add to cart button
          */
@@ -3363,6 +3439,14 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
+        /**
           * How many products to show in simple variant
          */
         "simpleResultCount"?: number;
@@ -3386,6 +3470,10 @@ declare namespace LocalJSX {
           * Trending tab caption
          */
         "tTrendingCaption"?: any;
+        /**
+          * Enable personalisation
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Klevu ratings component
@@ -3433,7 +3521,7 @@ declare namespace LocalJSX {
         /**
           * Title of the recommendation
          */
-        "recommendationTitle": string;
+        "recommendationTitle"?: string;
     }
     /**
      * Plain textfield that does the searching. It queries Klevu and returns the results
@@ -3493,6 +3581,10 @@ declare namespace LocalJSX {
          */
         "tSearchText"?: any;
         /**
+          * Enable personalisation on the query
+         */
+        "usePersonalisation"?: boolean;
+        /**
           * Variant of the search field
          */
         "variant"?: SearchFieldVariant1;
@@ -3514,6 +3606,14 @@ declare namespace LocalJSX {
          */
         "limit"?: number;
         "onKlevuData"?: (event: KlevuSearchLandingPageCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
+        /**
+          * Show ratings
+         */
+        "showRatings"?: boolean;
+        /**
+          * Show ratings count
+         */
+        "showRatingsCount"?: boolean;
         /**
           * In which order to set the products
          */
@@ -3538,6 +3638,10 @@ declare namespace LocalJSX {
           * Use pagination instead of loading more
          */
         "usePagination"?: boolean;
+        /**
+          * Enable personalization
+         */
+        "usePersonalisation"?: boolean;
     }
     /**
      * Horizontal slider component. By default used for price range in this package. But can

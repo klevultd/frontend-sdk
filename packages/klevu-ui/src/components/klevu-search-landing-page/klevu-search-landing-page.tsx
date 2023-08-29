@@ -2,10 +2,12 @@ import {
   applyFilterWithManager,
   FilterManager,
   KlevuFetch,
+  KlevuFetchModifer,
   KlevuRecord,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   listFilters,
+  personalisation,
   search,
   sendSearchEvent,
 } from "@klevu/core"
@@ -23,6 +25,7 @@ import { KlevuInit } from "../klevu-init/klevu-init"
 import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
 import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 /**
  * Full app component for search landing page
@@ -68,6 +71,16 @@ export class KlevuSearchLandingPage {
    */
   @Prop() useInfiniteScroll?: boolean
   /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean
+
+  /**
+   * Show ratings count
+   */
+  @Prop() showRatingsCount?: boolean
+
+  /**
    * The title of the page
    */
   @Prop() tSearchTitle = getTranslation("searchLandingPage.tSearchTitle")
@@ -76,6 +89,11 @@ export class KlevuSearchLandingPage {
    * Text of load more button
    */
   @Prop() tLoadMore = getTranslation("searchLandingPage.tLoadMore")
+
+  /**
+   * Enable personalization
+   */
+  @Prop() usePersonalisation?: boolean
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -91,6 +109,18 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (settings) {
+      if (this.showRatings === undefined) {
+        this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
+      }
+      if (this.showRatingsCount === undefined) {
+        this.showRatingsCount = settings.klevu_uc_userOptions?.showRatingsCountOnSearchResultsLandingPage || false
+      }
+      if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
+        this.usePersonalisation = true
+      }
+    }
     await this.#fetchData()
   }
 
@@ -101,24 +131,27 @@ export class KlevuSearchLandingPage {
 
   async #fetchData() {
     this.loading = true
-    const result = await KlevuFetch(
-      search(
-        this.term,
-        { limit: this.limit, sort: this.sort },
-        sendSearchEvent(),
-        listFilters({
-          filterManager: this.manager,
-          limit: this.filterCount,
-          rangeFilterSettings: [
-            {
-              key: "klevu_price",
-              minMax: true,
-            },
-          ],
-        }),
-        applyFilterWithManager(this.manager)
-      )
-    )
+
+    const modifiers: KlevuFetchModifer[] = [
+      sendSearchEvent(),
+      listFilters({
+        filterManager: this.manager,
+        limit: this.filterCount,
+        rangeFilterSettings: [
+          {
+            key: "klevu_price",
+            minMax: true,
+          },
+        ],
+      }),
+      applyFilterWithManager(this.manager),
+    ]
+
+    if (this.usePersonalisation) {
+      modifiers.push(personalisation())
+    }
+
+    const result = await KlevuFetch(search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers))
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
@@ -247,7 +280,13 @@ export class KlevuSearchLandingPage {
           <slot name="content" slot="content">
             <klevu-product-grid slot="content">
               {this.results?.map((p) => (
-                <klevu-product product={p} fixedWidth exportparts={parts["klevu-product"]}></klevu-product>
+                <klevu-product
+                  product={p}
+                  fixedWidth
+                  exportparts={parts["klevu-product"]}
+                  showRatings={this.showRatings}
+                  showRatingsCount={this.showRatingsCount}
+                ></klevu-product>
               ))}
             </klevu-product-grid>
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}

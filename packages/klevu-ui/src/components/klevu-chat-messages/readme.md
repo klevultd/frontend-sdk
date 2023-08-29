@@ -68,6 +68,7 @@ graph TD;
   klevu-product --> klevu-icon
   klevu-product --> klevu-typography
   klevu-product --> klevu-button
+  klevu-product --> klevu-rating
   klevu-moi --> klevu-chat-messages
   klevu-product-query-popup --> klevu-chat-messages
   style klevu-chat-messages fill:#f9f,stroke:#333,stroke-width:4px

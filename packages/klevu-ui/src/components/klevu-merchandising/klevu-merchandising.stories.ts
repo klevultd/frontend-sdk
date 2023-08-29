@@ -30,7 +30,10 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     limit=${args.limit}
     sort=${ifDefined(args.sort)}
     use-pagination=${ifDefined(args.usePagination)}
+    show-ratings=${ifDefined(args.showRatings)}
+    show-ratings-count=${ifDefined(args.showRatingsCount)}
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
+    use-personalisation=${ifDefined(args.usePersonalisation)}
   ></klevu-merchandising>`,
 }
 
@@ -56,6 +59,8 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       category=${ifDefined(args.category)}
       category-title=${ifDefined(args.categoryTitle)}
       limit=${args.limit}
+      show-ratings=${ifDefined(args.showRatings)}
+      show-ratings-count=${ifDefined(args.showRatingsCount)}
     >
       <div slot="content"></div>
     </klevu-merchandising>
@@ -92,14 +97,5 @@ export const WithInfiniteScroll: StoryObj<KlevuMerchandising> = {
     limit: 24,
     useInfiniteScroll: true,
   },
-  render: (args) => html`<klevu-merchandising
-    category=${ifDefined(args.category)}
-    category-title=${ifDefined(args.categoryTitle)}
-    filter-count=${ifDefined(args.filterCount)}
-    .filterCustomOrder=${args.filterCustomOrder}
-    limit=${args.limit}
-    sort=${ifDefined(args.sort)}
-    use-pagination=${ifDefined(args.usePagination)}
-    use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
-  ></klevu-merchandising>`,
+  render: Merchandising.render,
 }

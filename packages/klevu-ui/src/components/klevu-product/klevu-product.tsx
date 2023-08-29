@@ -1,5 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, State, Fragment } from "@stencil/core"
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 import { getTranslation } from "../../utils/getTranslation"
@@ -53,6 +53,16 @@ export class KlevuProduct {
   @Prop() showAddToCart?: boolean
 
   /**
+   * Show ratings
+   */
+  @Prop() showRatings?: boolean
+
+  /**
+   * Show ratings
+   */
+  @Prop() showRatingsCount?: boolean
+
+  /**
    * Text for add to cart button
    */
   @Prop() tAddToCart?: string
@@ -85,6 +95,11 @@ export class KlevuProduct {
    * Force certain width for product. Do not use max-width
    */
   @Prop() fixedWidth?: boolean
+
+  /**
+   * When mousing over product, show hover image if available
+   */
+  @Prop() hideHoverImage?: boolean
 
   /**
    * What key to use for brand value
@@ -135,6 +150,12 @@ export class KlevuProduct {
       }
       if (this.showAddToCart === undefined) {
         this.showAddToCart = settings.klevu_addToCartEnabled
+      }
+      if (this.hideHoverImage === undefined) {
+        this.hideHoverImage = !Boolean(settings.klevu_uc_userOptions.showRolloverImage)
+      }
+      if (this.hideSwatches === undefined) {
+        this.hideSwatches = !Boolean(settings.klevu_uc_userOptions.showProductSwatches)
       }
     }
   }
@@ -235,7 +256,16 @@ export class KlevuProduct {
                     style={{
                       backgroundImage: `url(${this.hoverImage || this.product.image})`,
                     }}
-                  ></div>
+                  >
+                    {this.hideHoverImage !== true && this.product.imageHover ? (
+                      <div
+                        class="hover"
+                        style={{
+                          backgroundImage: `url(${this.product.imageHover})`,
+                        }}
+                      ></div>
+                    ) : null}
+                  </div>
                 ) : (
                   <div class="image no-image" part="product-image">
                     <klevu-icon name="image_not_supported"></klevu-icon>
@@ -274,6 +304,8 @@ export class KlevuProduct {
                 )}
               </div>
             </slot>
+            {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
+
             <slot name="addtocart">
               {this.showAddToCart ? (
                 <klevu-button
@@ -288,8 +320,26 @@ export class KlevuProduct {
             </slot>
           </a>
           <slot name="bottom"></slot>
+          {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
         </div>
       </Host>
+    )
+  }
+
+  #renderRatings() {
+    return (
+      this.showRatings && (
+        <div class="ratings">
+          {this.product?.rating ? (
+            <Fragment>
+              <klevu-rating rating={this.product.rating} />
+              {this.showRatingsCount && this.product.ratingCount && <span>({this.product.ratingCount})</span>}
+            </Fragment>
+          ) : (
+            <span>&nbsp;</span>
+          )}
+        </div>
+      )
     )
   }
 

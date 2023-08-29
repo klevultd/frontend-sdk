@@ -218,6 +218,22 @@ klevu-button.addToCart {
   margin-top: var(--klevu-spacing-04);
 }
 
+/* Hover image */
+.image .hover {
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: var(--image-aspect-ratio);
+  background-size: var(--image-fill);
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image:hover .hover {
+  opacity: 1;
+}
+
 @keyframes loadinggradient {
   0% {
     background-position: 0% 50%;
@@ -228,4 +244,10 @@ klevu-button.addToCart {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.ratings {
+  display: flex;
+  gap: var(--klevu-spacing-small, 4px);
+  margin: var(--klevu-spacing-small, 4px) 0;
 }

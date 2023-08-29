@@ -7,6 +7,7 @@ import {
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   KlevuTypeOfRecord,
+  personalisation,
   search,
   sendSearchEvent,
   suggestions,
@@ -15,6 +16,7 @@ import { Component, Event, EventEmitter, h, Host, Method, Prop, State, Watch } f
 import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { getTranslation } from "../../utils/getTranslation"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
 export type SearchResultsEventData = {
   fallback?: KlevuResponseQueryObject
@@ -94,6 +96,11 @@ export class KlevuSearchField {
   @Prop() variant: SearchFieldVariant = "default"
 
   /**
+   * Enable personalisation on the query
+   */
+  @Prop() usePersonalisation?: boolean
+
+  /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
   @Event({
@@ -119,6 +126,10 @@ export class KlevuSearchField {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    const settings = getKMCSettings()
+    if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
+      this.usePersonalisation = true
+    }
   }
 
   /**
@@ -151,6 +162,10 @@ export class KlevuSearchField {
 
     if (this.sendAnalytics) {
       searchModifiers.push(sendSearchEvent())
+    }
+
+    if (this.usePersonalisation) {
+      searchModifiers.push(personalisation())
     }
 
     const allSearchQueries: KlevuFetchFunctionReturnValue[] = []

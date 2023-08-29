@@ -111,7 +111,7 @@ export class KlevuInit {
     }
     if (this.translation) {
       window["klevu_ui_translations"] = this.translation
-    } else if (this.language != "en") {
+    } else if (this.language && this.language != "en") {
       window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
     }
 

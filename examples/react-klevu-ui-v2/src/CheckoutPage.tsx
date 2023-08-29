@@ -125,9 +125,6 @@ export function CheckoutPage() {
             <div slot="info">
               <h4>{product.price}</h4>
             </div>
-            {/* {this.#internalRenderProductSlot(product, "image")}
-              {this.#internalRenderProductSlot(product, "info")}
-              {this.#internalRenderProductSlot(product, "bottom")} */}
           </KlevuProduct>
         ))}
       </KlevuSlides>
@@ -153,9 +150,6 @@ export function CheckoutPage() {
             <div slot="info">
               <h4>{product.price}</h4>
             </div>
-            {/* {this.#internalRenderProductSlot(product, "image")}
-              {this.#internalRenderProductSlot(product, "info")}
-              {this.#internalRenderProductSlot(product, "bottom")} */}
           </KlevuProduct>
         ))}
       </Carousel>

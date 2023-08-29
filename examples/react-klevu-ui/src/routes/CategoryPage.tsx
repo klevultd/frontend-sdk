@@ -11,33 +11,11 @@ export function CategoryPage() {
   const cart = useCart()
   const navItem = nav.find((n) => n.key === params.id)
 
-  const renderProductSlot = useCallback(
-    (product: KlevuRecord, slot: string) => {
-      if (slot === "bottom") {
-        const div = document.createElement("div")
-        createRoot(div).render(
-          <KlevuButton
-            onClick={() => {
-              cart.add(product)
-            }}
-          >
-            Add to cart
-          </KlevuButton>
-        )
-        return div
-      }
-
-      return null
-    },
-    []
-  )
-
   return (
     <Fragment>
       <KlevuMerchandising
         category={params.id}
         categoryTitle={navItem.label}
-        renderProductSlot={renderProductSlot}
       ></KlevuMerchandising>
     </Fragment>
   )

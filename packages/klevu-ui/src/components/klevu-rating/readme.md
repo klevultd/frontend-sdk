@@ -22,11 +22,13 @@ Klevu ratings component
 ### Used by
 
  - [klevu-facet](../klevu-facet)
+ - [klevu-product](../klevu-product)
 
 ### Graph
 ```mermaid
 graph TD;
   klevu-facet --> klevu-rating
+  klevu-product --> klevu-rating
   style klevu-rating fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

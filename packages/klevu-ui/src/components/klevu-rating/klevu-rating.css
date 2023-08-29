@@ -2,10 +2,10 @@
   display: block;
 }
 
-svg  {
-  color: #ccc;
-  margin: 0px 1px;
+svg {
+  color: transparent;
+  margin: 0px var(--klevu-spacing-xsmall, 2px);
 }
 .filled {
-  color: #FFD707;
+  fill: #ffd707;
 }

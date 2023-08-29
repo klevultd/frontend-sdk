@@ -155,11 +155,6 @@ function App() {
                     variant="pill"
                     searchProducts
                     onKlevuSearchResults={(param) => {
-                      // console.log(
-                      //   "onKlevuSearchResults",
-                      //   param.detail.search.responseObject.apiResponse
-                      //     .queryResults[0].records,
-                      // )
                       setSearchSuggestions(
                         param.detail.search.responseObject.apiResponse
                           .queryResults[0].records,
