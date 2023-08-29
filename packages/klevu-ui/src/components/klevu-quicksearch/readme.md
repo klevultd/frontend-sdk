@@ -34,9 +34,9 @@ Full app to create search bar that popups trending products and search results.
 
 ## Events
 
-| Event  | Description                                                                                                                          | Type                                                                                                                                                              |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data` | When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly. | `CustomEvent<{ trendingProducts?: KlevuRecord[] \| undefined; lastClickedProducts?: KlevuRecord[] \| undefined; searchResult?: KlevuQueryResult \| undefined; }>` |
+| Event       | Description                                                                                                                          | Type                                                                                                                                                              |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `klevuData` | When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly. | `CustomEvent<{ trendingProducts?: KlevuRecord[] \| undefined; lastClickedProducts?: KlevuRecord[] \| undefined; searchResult?: KlevuQueryResult \| undefined; }>` |
 
 
 ## Slots

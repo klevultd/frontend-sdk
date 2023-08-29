@@ -71,7 +71,7 @@ export const InfiniteScroll: StoryObj<KlevuUtilInfiniteScroll> = {
       const klevuInfiniteScroll = document.querySelector("klevu-util-infinite-scroll")
 
       // Event listener for when infinite scrolling is paused
-      document.querySelector("klevu-util-infinite-scroll").addEventListener("infiniteScrollingPaused", () => {
+      document.querySelector("klevu-util-infinite-scroll").addEventListener("klevuInfiniteScrollingPaused", () => {
         // Disable the infinite scroll
         klevuInfiniteScroll.setAttribute("enabled", false)
 
@@ -91,7 +91,7 @@ export const InfiniteScroll: StoryObj<KlevuUtilInfiniteScroll> = {
       })
 
       // Event listener for loading more items
-      document.querySelector("klevu-util-infinite-scroll").addEventListener("loadMore", () => {
+      document.querySelector("klevu-util-infinite-scroll").addEventListener("klevuLoadMore", () => {
         fetchMore() // Call the fetchMore function
       })
 

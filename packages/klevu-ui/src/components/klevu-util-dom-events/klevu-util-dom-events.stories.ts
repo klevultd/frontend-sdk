@@ -21,7 +21,7 @@ export default meta
 export const DomEvents: StoryObj<KlevuUtilDomEvents> = {
   render: (args) => html`
     <klevu-util-dom-events
-      @filterSelectionUpdate=${(e: any) => {
+      @klevuFilterSelectionUpdate=${(e: any) => {
         console.log(e.detail)
       }}
     ></klevu-util-dom-events>

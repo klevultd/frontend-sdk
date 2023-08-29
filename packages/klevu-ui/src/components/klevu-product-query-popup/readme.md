@@ -1,7 +1,5 @@
 # klevu-product-query
 
-
-
 <!-- Auto Generated Below -->
 
 

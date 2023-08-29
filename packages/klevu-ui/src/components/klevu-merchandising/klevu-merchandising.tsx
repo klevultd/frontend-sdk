@@ -129,7 +129,7 @@ export class KlevuMerchandising {
   @Event({
     composed: true,
   })
-  data!: EventEmitter<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>
+  klevuData!: EventEmitter<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -199,12 +199,12 @@ export class KlevuMerchandising {
     this.loading = false
   }
 
-  @Listen("loadMore")
+  @Listen("klevuLoadMore")
   infiniteScrollLoadMoreHandler() {
     this.#loadMore()
   }
 
-  @Listen("infiniteScrollingPaused")
+  @Listen("klevuInfiniteScrollingPaused")
   infiniteLoadPausedHandler() {
     this.infiniteScrollingPaused = true
   }
@@ -226,7 +226,7 @@ export class KlevuMerchandising {
     if (!this.#resultObject) {
       return
     }
-    this.data.emit({
+    this.klevuData.emit({
       resultObject: this.#resultObject,
       records: this.results,
       manager: this.manager,
@@ -239,7 +239,7 @@ export class KlevuMerchandising {
     await this.#fetchData()
   }
 
-  @Listen("productClick")
+  @Listen("klevuProductClick")
   productClickHandler(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
     if (!event.detail.product.id || !event.detail.product.itemGroupId) {
       return
@@ -291,11 +291,11 @@ export class KlevuMerchandising {
     return (
       <Host>
         <klevu-util-viewport
-          onSizeChanged={this.#sizeChange.bind(this)}
+          onKlevuSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.#viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
         <klevu-layout-results
-          onDrawerOpened={this.#mobileDrawerOpened.bind(this)}
+          onKlevuDrawerOpened={this.#mobileDrawerOpened.bind(this)}
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">

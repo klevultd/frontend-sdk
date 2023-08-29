@@ -164,10 +164,10 @@ export class KlevuQuicksearch {
   @Event({
     composed: true,
   })
-  data!: EventEmitter<KlevuQuicksearchDataEvent>
+  klevuData!: EventEmitter<KlevuQuicksearchDataEvent>
 
   #emitChangedData() {
-    this.data.emit({
+    this.klevuData.emit({
       lastClickedProducts: this.lastClickedProducts,
       trendingProducts: this.trendingProducts,
       searchResult: this.queryResult,
@@ -277,7 +277,7 @@ export class KlevuQuicksearch {
     return (
       <Host>
         <klevu-util-viewport
-          onSizeChanged={this.#sizeChange.bind(this)}
+          onKlevuSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
         <klevu-popup

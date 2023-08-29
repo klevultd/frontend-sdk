@@ -7,7 +7,7 @@ export type ViewportSize = { name: ViewportSizeName; minWidth: number; maxWidth:
   tag: "klevu-util-viewport",
 })
 export class KlevuUtilViewport {
-  @Event() sizeChanged!: EventEmitter<ViewportSize>
+  @Event() klevuSizeChanged!: EventEmitter<ViewportSize>
 
   /**
    * List of sizes to listen for
@@ -54,7 +54,7 @@ export class KlevuUtilViewport {
     // Find the name of the matching size and emit an event
     for (const size of this.sizes) {
       if (q.media.indexOf(`min-width: ${size.minWidth}px`) > -1) {
-        this.sizeChanged.emit(size)
+        this.klevuSizeChanged.emit(size)
       }
     }
   }

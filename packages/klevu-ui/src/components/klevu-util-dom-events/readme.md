@@ -12,12 +12,12 @@ https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
 
 ## Events
 
-| Event                   | Description | Type                                                                               |
-| ----------------------- | ----------- | ---------------------------------------------------------------------------------- |
-| `clickEventSent`        |             | `CustomEvent<{ productId: string; product?: Partial<KlevuRecord> \| undefined; }>` |
-| `filtersApplied`        |             | `CustomEvent<{ filters: FilterManagerFilters[]; }>`                                |
-| `filterSelectionUpdate` |             | `CustomEvent<{ key: string; name: string; selected: boolean; }>`                   |
-| `lastSearchUpdate`      |             | `CustomEvent<void>`                                                                |
+| Event                        | Description | Type                                                                               |
+| ---------------------------- | ----------- | ---------------------------------------------------------------------------------- |
+| `klevuClickEventSent`        |             | `CustomEvent<{ productId: string; product?: Partial<KlevuRecord> \| undefined; }>` |
+| `klevuFiltersApplied`        |             | `CustomEvent<{ filters: FilterManagerFilters[]; }>`                                |
+| `klevuFilterSelectionUpdate` |             | `CustomEvent<{ key: string; name: string; selected: boolean; }>`                   |
+| `klevuLastSearchUpdate`      |             | `CustomEvent<void>`                                                                |
 
 
 ----------------------------------------------
