@@ -193,14 +193,17 @@ export class KlevuQuicksearch {
   #setNoResults() {
     this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
 
-    this.noResultsBannerDetails = this.#noResultsOptions?.banners.filter((m) => m.showForTerms === null) || []
+    this.noResultsBannerDetails =
+      this.#noResultsOptions?.banners.filter((m) => m.showOnQuickSearch && m.showForTerms === null) || []
     if (this.#searchTerm) {
       const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
         (m) => m.showForTerms && m.showForTerms.includes(this.#searchTerm)
       )
       if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message || ""
       const searchTermSpecificBanner =
-        this.#noResultsOptions?.banners.filter((m) => m.showForTerms && m.showForTerms.includes(this.#searchTerm)) || []
+        this.#noResultsOptions?.banners.filter(
+          (m) => m.showOnQuickSearch && m.showForTerms && m.showForTerms.includes(this.#searchTerm)
+        ) || []
       if (searchTermSpecificBanner.length > 0) this.noResultsBannerDetails.unshift(...searchTermSpecificBanner)
     }
   }
