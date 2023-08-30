@@ -26,6 +26,7 @@ Fetches and displays most popular searches from Klevu Merchant center
 ### Used by
 
  - [klevu-quicksearch](../klevu-quicksearch)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
 
 ### Depends on
 
@@ -40,6 +41,7 @@ graph TD;
   klevu-list --> klevu-icon
   klevu-list --> klevu-typography
   klevu-quicksearch --> klevu-popular-searches
+  klevu-search-landing-page --> klevu-popular-searches
   style klevu-popular-searches fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

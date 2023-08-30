@@ -271,6 +271,7 @@ interface PriceFormatter {
 interface NoResultsOptions {
   showPopularProducts?: boolean
   showPopularKeywords?: boolean
+  productsHeading?: string
   messages: Message[]
   banners: Banner[]
 }

@@ -363,7 +363,6 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'showRatings',
   'showRatingsCount',
   'usePersonalisation',
-  'showFallbackProducts',
   'data'
 ]);
 

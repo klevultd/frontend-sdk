@@ -22,3 +22,8 @@
 .noResultsMessage {
   text-align: center;
 }
+
+.noResultsBannerImage {
+  max-width: 100%;
+  margin-top: var(--klevu-spacing-04);
+}

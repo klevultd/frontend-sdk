@@ -11,8 +11,9 @@ import {
   search,
   sendSearchEvent,
   KMCRootObject,
+  trendingProducts,
 } from "@klevu/core"
-import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import {
   KlevuPaginationCustomEvent,
@@ -29,7 +30,7 @@ import { stringConcat } from "../../utils/stringConcat"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 
 type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
-
+type Banner = NoResultsOptions["banners"][0]
 /**
  * Full app component for search landing page
  *
@@ -105,7 +106,8 @@ export class KlevuSearchLandingPage {
   @State() infiniteScrollingPaused?: boolean = false
   @State() loading?: boolean = false
   @State() noResultsMessage: string = ""
-
+  @State() trendingProducts: KlevuRecord[] = []
+  @State() noResultsBannerDetails: Banner[] = []
   #noResultsOptions?: NoResultsOptions
 
   #resultObject?: KlevuResponseQueryObject
@@ -127,6 +129,19 @@ export class KlevuSearchLandingPage {
       }
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
+      }
+    }
+    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
+    if (showPopularProducts) {
+      const trendingProductsQuery = await KlevuFetch(
+        trendingProducts({
+          limit: 4,
+        })
+      )
+      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+      if (resultObject) {
+        this.trendingProducts = resultObject.records
+        // this.#emitChangedData()
       }
     }
     await this.#fetchData()
@@ -164,17 +179,25 @@ export class KlevuSearchLandingPage {
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
     this.loading = false
-    if (this.results.length === 0) this.#handleNoResults()
-    else this.noResultsMessage = ""
+
+    this.noResultsMessage = ""
+    this.noResultsBannerDetails = []
+    if (this.results.length === 0) {
+      this.#handleNoResults()
+    }
   }
 
   #handleNoResults() {
     this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+    this.noResultsBannerDetails = this.#noResultsOptions?.banners.filter((m) => m.showForTerms === null) || []
     if (this.term) {
       const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
         (m) => m.showForTerms && m.showForTerms.includes(this.term)
       )
       if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message
+      const searchTermSpecificBanner =
+        this.#noResultsOptions?.banners.filter((m) => m.showForTerms && m.showForTerms.includes(this.term)) || []
+      if (searchTermSpecificBanner.length > 0) this.noResultsBannerDetails.unshift(...searchTermSpecificBanner)
     }
   }
 
@@ -279,6 +302,10 @@ export class KlevuSearchLandingPage {
     this.#facetListElement.updateApplyFilterState()
   }
 
+  #handlePopularKeywordClick(keyword: string) {
+    this.term = keyword
+  }
+
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
     const showInfiniteScroll = this.useInfiniteScroll && !this.infiniteScrollingPaused && this.results.length > 0
@@ -305,7 +332,9 @@ export class KlevuSearchLandingPage {
             <klevu-typography slot="header" variant="h1">
               {stringConcat(this.tSearchTitle, [this.term])}
             </klevu-typography>
-            <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+            {this.results?.length > 0 && (
+              <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+            )}
           </div>
           <slot name="content" slot="content">
             {this.results?.length > 0 ? (
@@ -324,9 +353,33 @@ export class KlevuSearchLandingPage {
               <slot name="noResults">
                 {this.noResultsMessage ? (
                   <p class="noResultsMessage">
-                    <klevu-typography variant="body-l">{this.noResultsMessage}</klevu-typography>
+                    <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
                   </p>
                 ) : null}
+                <Fragment>
+                  <slot name="trending-products">
+                    {this.trendingProducts.length > 0 && (
+                      <Fragment>
+                        <klevu-typography variant="body-s">
+                          {this.#noResultsOptions?.productsHeading || ""}
+                        </klevu-typography>
+                        {this.trendingProducts?.map((p) => (
+                          <klevu-product
+                            product={p}
+                            variant="line"
+                            exportparts={parts["klevu-product"]}
+                          ></klevu-product>
+                        ))}
+                      </Fragment>
+                    )}
+                  </slot>
+                </Fragment>
+                {this.#renderBanners()}
+                {this.#noResultsOptions?.showPopularKeywords && (
+                  <klevu-popular-searches
+                    onKlevuPopularSearchClicked={(event) => this.#handlePopularKeywordClick(event.detail)}
+                  ></klevu-popular-searches>
+                )}
               </slot>
             )}
 
@@ -350,5 +403,17 @@ export class KlevuSearchLandingPage {
         </klevu-layout-results>
       </Host>
     )
+  }
+  #renderBanners() {
+    return this.noResultsBannerDetails.map((banner) => (
+      <a href={banner.redirectUrl}>
+        <img
+          class="noResultsBannerImage"
+          src={banner.bannerImageUrl}
+          alt={banner.bannerAltTag}
+          title={banner.bannerAltTag}
+        />
+      </a>
+    ))
   }
 }

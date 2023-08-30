@@ -34,7 +34,6 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-categories-caption=${ifDefined(args.tCategoriesCaption)}
     show-ratings=${ifDefined(args.showRatings)}
     show-ratings-count=${ifDefined(args.showRatingsCount)}
-    show-fallback-products=${ifDefined(args.showFallbackProducts)}
   ></klevu-quicksearch>`,
 }
 
@@ -44,7 +43,6 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       class="customized"
       show-ratings=${ifDefined(args.showRatings)}
       show-ratings-count=${ifDefined(args.showRatingsCount)}
-      show-fallback-products=${ifDefined(args.showFallbackProducts)}
     >
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>
