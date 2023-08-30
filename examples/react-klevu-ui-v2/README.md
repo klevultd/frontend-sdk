@@ -243,7 +243,7 @@ const [recsProducts, setRecsProducts] = useState([])
 <KlevuRecommendations
           recommendationId={recsId}
           recommendationTitle="Customized Recommendation"
-          onData={(e) => setRecsProducts(e.detail.records)}
+          onKlevuData={(e) => setRecsProducts(e.detail.records)}
 >
    {recsProducts.map((product) => (
       <KlevuProduct product={product}>

@@ -37,7 +37,7 @@ export class KlevuLayoutResults {
   }
 
   @Event({ composed: true })
-  drawerOpened!: EventEmitter<void>
+  klevuDrawerOpened!: EventEmitter<void>
 
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
@@ -45,7 +45,7 @@ export class KlevuLayoutResults {
     return (
       <Host>
         <klevu-util-viewport
-          onSizeChanged={this.#sizeChange.bind(this)}
+          onKlevuSizeChanged={this.#sizeChange.bind(this)}
           ref={(el) => (this.viewportUtil = el as HTMLKlevuUtilViewportElement)}
         ></klevu-util-viewport>
         <header class="header">
@@ -54,7 +54,7 @@ export class KlevuLayoutResults {
             <klevu-button
               onClick={async (event) => {
                 await this.drawerElement?.openModal()
-                this.drawerOpened.emit()
+                this.klevuDrawerOpened.emit()
                 event.stopPropagation()
                 return false
               }}

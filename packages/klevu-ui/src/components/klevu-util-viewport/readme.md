@@ -14,9 +14,9 @@
 
 ## Events
 
-| Event         | Description | Type                                                                           |
-| ------------- | ----------- | ------------------------------------------------------------------------------ |
-| `sizeChanged` |             | `CustomEvent<{ name: ViewportSizeName; minWidth: number; maxWidth: number; }>` |
+| Event              | Description | Type                                                                           |
+| ------------------ | ----------- | ------------------------------------------------------------------------------ |
+| `klevuSizeChanged` |             | `CustomEvent<{ name: ViewportSizeName; minWidth: number; maxWidth: number; }>` |
 
 
 ## Methods

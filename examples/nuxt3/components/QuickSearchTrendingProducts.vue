@@ -7,7 +7,7 @@
           v-for="(product, index) in quickSearchStore.trendingProducts"
           :key="index"
           :product="product"
-          @clickHandler="productClick"
+          @clickHandler="klevuProductClick"
           classes="p-4 w-1/2 lg:w-1/3"
         />
       </div>

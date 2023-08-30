@@ -28,9 +28,9 @@ Full app component for search landing page
 
 ## Events
 
-| Event  | Description | Type                                                                                                       |
-| ------ | ----------- | ---------------------------------------------------------------------------------------------------------- |
-| `data` |             | `CustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager; }>` |
+| Event       | Description | Type                                                                                                       |
+| ----------- | ----------- | ---------------------------------------------------------------------------------------------------------- |
+| `klevuData` |             | `CustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager; }>` |
 
 
 ## Slots

@@ -70,7 +70,7 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       const gridElement = document.createElement("klevu-grid")
       contentSlot.appendChild(gridElement)
 
-      merch.addEventListener("data", (event) => {
+      merch.addEventListener("klevuData", (event) => {
         gridElement.innerHTML = ""
         for (const record of event.detail.records) {
           const p = document.createElement("klevu-product")

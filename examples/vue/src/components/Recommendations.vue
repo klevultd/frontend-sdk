@@ -9,9 +9,9 @@ const searchStore = useSearch()
 const props = defineProps({
   title: String,
 })
-const emit = defineEmits(["productClick"])
+const emit = defineEmits(["klevuProductClick"])
 const recommendationClickHandler = function (product, index) {
-  emit("productClick", product, index)
+  emit("klevuProductClick", product, index)
 }
 
 const numOfRecs = computed(() => {

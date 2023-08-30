@@ -160,7 +160,7 @@ initialFetch()
           v-for="product in searchStore.products"
           :key="product.id"
           :product="product"
-          @clickHandler="productClick"
+          @clickHandler="klevuProductClick"
           classes="p-2 md:w-1/3 lg:w-1/4 mb-5"
         />
         <div class="w-full" v-if="searchStore.showMore">

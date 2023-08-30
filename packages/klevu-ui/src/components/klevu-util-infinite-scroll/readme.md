@@ -19,10 +19,10 @@ Component that triggers event when intercepted on scroll of page.
 
 ## Events
 
-| Event                     | Description                                                                            | Type                |
-| ------------------------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `infiniteScrollingPaused` | Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold | `CustomEvent<void>` |
-| `loadMore`                | Event emitted when infinite scroll element is intercepted                              | `CustomEvent<void>` |
+| Event                          | Description                                                                            | Type                |
+| ------------------------------ | -------------------------------------------------------------------------------------- | ------------------- |
+| `klevuInfiniteScrollingPaused` | Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold | `CustomEvent<void>` |
+| `klevuLoadMore`                | Event emitted when infinite scroll element is intercepted                              | `CustomEvent<void>` |
 
 
 ## Dependencies

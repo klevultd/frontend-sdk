@@ -29,7 +29,7 @@ export class KlevuRecommendations {
     composed: true,
     cancelable: true,
   })
-  data!: EventEmitter<KlevuResponseQueryObject>
+  klevuData!: EventEmitter<KlevuResponseQueryObject>
 
   /**
    * Title of the recommendation
@@ -94,7 +94,7 @@ export class KlevuRecommendations {
         this.recommendationTitle = this.#responseObject.getQueryParameters()?.kmcConfig?.metadata.title
       }
       this.products = this.#responseObject.records
-      this.data.emit(this.#responseObject)
+      this.klevuData.emit(this.#responseObject)
     }
   }
 

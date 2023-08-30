@@ -13,14 +13,14 @@ export class KlevuUtilInfiniteScroll {
   @Event({
     composed: true,
   })
-  loadMore!: EventEmitter<void>
+  klevuLoadMore!: EventEmitter<void>
   /**
    * Event emitted when infinite loading reaches a multiple of infiniteScrollPauseThreshold
    */
   @Event({
     composed: true,
   })
-  infiniteScrollingPaused!: EventEmitter<void>
+  klevuInfiniteScrollingPaused!: EventEmitter<void>
 
   /**
    * The number of pages after which triggers infiniteScrollingPaused event.
@@ -42,13 +42,13 @@ export class KlevuUtilInfiniteScroll {
 
   #loadMore = () => {
     if (this.infiniteScrollPauseThreshold === 0) {
-      this.loadMore.emit()
+      this.klevuLoadMore.emit()
       return
     }
     if (this.#loadMoreCount % this.infiniteScrollPauseThreshold === 0) {
-      this.infiniteScrollingPaused.emit()
+      this.klevuInfiniteScrollingPaused.emit()
     } else {
-      this.loadMore.emit()
+      this.klevuLoadMore.emit()
     }
     this.#loadMoreCount++
   }

@@ -55,7 +55,7 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       const trendingProductsSlot = document.querySelector('div[slot="trending-products"]')
 
       // when ever the data changes inside the quicksearch component we will receive it
-      qs.addEventListener("data", (event) => {
+      qs.addEventListener("klevuData", (event) => {
         // empty from previous content
         productsSlot.innerHTML = ""
         lastClickedSlot.innerHTML = ""

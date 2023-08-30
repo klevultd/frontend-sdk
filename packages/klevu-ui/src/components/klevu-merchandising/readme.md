@@ -29,9 +29,9 @@ Full merchandising app to power up your product grid pages
 
 ## Events
 
-| Event  | Description | Type                                                                                                       |
-| ------ | ----------- | ---------------------------------------------------------------------------------------------------------- |
-| `data` |             | `CustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager; }>` |
+| Event       | Description | Type                                                                                                       |
+| ----------- | ----------- | ---------------------------------------------------------------------------------------------------------- |
+| `klevuData` |             | `CustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager; }>` |
 
 
 ## Slots
