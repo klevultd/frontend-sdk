@@ -416,6 +416,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'tSearchTitle',
   'tLoadMore',
   'usePersonalisation',
+  'popularProductsResultCount',
   'data'
 ]);
 

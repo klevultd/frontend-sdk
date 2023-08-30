@@ -1313,6 +1313,10 @@ export namespace Components {
          */
         "limit": number;
         /**
+          * How many products to show in popular products
+         */
+        "popularProductsResultCount": number;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3606,6 +3610,10 @@ declare namespace LocalJSX {
          */
         "limit"?: number;
         "onData"?: (event: KlevuSearchLandingPageCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
+        /**
+          * How many products to show in popular products
+         */
+        "popularProductsResultCount"?: number;
         /**
           * Show ratings
          */

@@ -99,6 +99,10 @@ export class KlevuSearchLandingPage {
    * Enable personalization
    */
   @Prop() usePersonalisation?: boolean
+  /**
+   * How many products to show in popular products
+   */
+  @Prop() popularProductsResultCount: number = 3
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -135,13 +139,12 @@ export class KlevuSearchLandingPage {
     if (showPopularProducts) {
       const trendingProductsQuery = await KlevuFetch(
         trendingProducts({
-          limit: 4,
+          limit: this.popularProductsResultCount,
         })
       )
       const resultObject = trendingProductsQuery.queriesById("trendingProducts")
       if (resultObject) {
         this.trendingProducts = resultObject.records
-        // this.#emitChangedData()
       }
     }
     await this.#fetchData()
