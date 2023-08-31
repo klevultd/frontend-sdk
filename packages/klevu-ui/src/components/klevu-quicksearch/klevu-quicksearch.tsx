@@ -480,52 +480,49 @@ export class KlevuQuicksearch {
                 <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
               </p>
             ) : null}
-
-            <Fragment>
-              <div class="tabrow">
-                {this.showTrendingProducts && (
-                  <klevu-tab
-                    caption={stringConcat(this.trendingCaption || "", [`${this.trendingProducts?.length ?? 0}`])}
-                    active={this.activeTab === "trending"}
-                    onClick={() => (this.activeTab = "trending")}
-                  ></klevu-tab>
-                )}
-                {this.showRecentlyViewedProducts && (
-                  <klevu-tab
-                    caption={stringConcat(this.lastClickedProductsCaption || "", [
-                      `${this.lastClickedProducts?.length ?? 0}`,
-                    ])}
-                    active={this.activeTab === "last"}
-                    onClick={() => {
-                      if (this.lastClickedProducts?.length === 0) {
-                        return
-                      }
-                      this.activeTab = "last"
-                    }}
-                    disabled={this.lastClickedProducts?.length === 0}
-                  ></klevu-tab>
-                )}
-              </div>
-              {this.activeTab === "trending" && this.showTrendingProducts && (
-                <Fragment>
-                  <klevu-typography variant="body-s">{this.popularProductsTitle}</klevu-typography>
-                  <slot name="trending-products">
-                    {this.trendingProducts?.map((p) => (
-                      <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                    ))}
-                  </slot>
-                </Fragment>
+            <div class="tabrow">
+              {this.showTrendingProducts && (
+                <klevu-tab
+                  caption={stringConcat(this.trendingCaption || "", [`${this.trendingProducts?.length ?? 0}`])}
+                  active={this.activeTab === "trending"}
+                  onClick={() => (this.activeTab = "trending")}
+                ></klevu-tab>
               )}
-              {this.activeTab === "last" && this.showRecentlyViewedProducts && (
-                <Fragment>
-                  <slot name="last-clicked-products">
-                    {this.lastClickedProducts?.map((p) => (
-                      <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                    ))}
-                  </slot>
-                </Fragment>
+              {this.showRecentlyViewedProducts && (
+                <klevu-tab
+                  caption={stringConcat(this.lastClickedProductsCaption || "", [
+                    `${this.lastClickedProducts?.length ?? 0}`,
+                  ])}
+                  active={this.activeTab === "last"}
+                  onClick={() => {
+                    if (this.lastClickedProducts?.length === 0) {
+                      return
+                    }
+                    this.activeTab = "last"
+                  }}
+                  disabled={this.lastClickedProducts?.length === 0}
+                ></klevu-tab>
               )}
-            </Fragment>
+            </div>
+            {this.activeTab === "trending" && this.showTrendingProducts && (
+              <Fragment>
+                <klevu-typography variant="body-s">{this.popularProductsTitle}</klevu-typography>
+                <slot name="trending-products">
+                  {this.trendingProducts?.map((p) => (
+                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                  ))}
+                </slot>
+              </Fragment>
+            )}
+            {this.activeTab === "last" && this.showRecentlyViewedProducts && (
+              <Fragment>
+                <slot name="last-clicked-products">
+                  {this.lastClickedProducts?.map((p) => (
+                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                  ))}
+                </slot>
+              </Fragment>
+            )}
             {this.#renderBanners()}
           </slot>
         </section>
