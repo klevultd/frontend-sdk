@@ -45,6 +45,7 @@ Full app to create search bar that popups trending products and search results.
 | ------------------------- | ------------------------------------------ |
 | `"content"`               | Popup content                              |
 | `"last-clicked-products"` | Slot to replace last clicked products      |
+| `"noResults"`             | Show message when no results found         |
 | `"search-products"`       | Slot to replace search results listings    |
 | `"trending-products"`     | Slot to replace trending products listings |
 

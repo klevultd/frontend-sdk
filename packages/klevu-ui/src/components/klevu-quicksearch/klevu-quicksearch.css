@@ -6,6 +6,7 @@
 .content {
   display: flex;
   padding: var(--klevu-spacing-04);
+  width: 600px;
 }
 
 .content aside {
@@ -87,4 +88,14 @@ klevu-moi {
     display: block;
     float: right;
   }
+}
+
+.noResultsMessage {
+  text-align: center;
+  border-bottom: 1px solid var(--klevu-color-neutral-5, #d6d6d6);
+}
+
+.noResultsBannerImage {
+  max-width: 100%;
+  margin-top: var(--klevu-spacing-04);
 }

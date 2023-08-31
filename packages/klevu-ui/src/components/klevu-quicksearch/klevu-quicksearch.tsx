@@ -7,6 +7,7 @@ import {
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   trendingProducts,
+  KMCRootObject,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -37,6 +38,8 @@ export type KlevuQuicksearchDataEvent = {
   searchResult?: KlevuQueryResult
 }
 
+type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
+type Banner = NoResultsOptions["banners"][0]
 /**
  * Full app to create search bar that popups trending products and search results.
  *
@@ -44,6 +47,7 @@ export type KlevuQuicksearchDataEvent = {
  * @slot search-products - Slot to replace search results listings
  * @slot trending-products - Slot to replace trending products listings
  * @slot last-clicked-products - Slot to replace last clicked products
+ * @slot noResults - Show message when no results found
  */
 @Component({
   tag: "klevu-quicksearch",
@@ -150,6 +154,8 @@ export class KlevuQuicksearch {
   @State() lastClickedProducts?: KlevuRecord[]
   @State() activeTab: "trending" | "last" = "trending"
   @State() chat = false
+  @State() noResultsMessage: string = ""
+  @State() noResultsBannerDetails: Banner[] = []
 
   #searchField?: HTMLKlevuSearchFieldElement
 
@@ -157,6 +163,8 @@ export class KlevuQuicksearch {
 
   popup?: HTMLKlevuPopupElement
 
+  #searchTerm: string = ""
+  #noResultsOptions?: NoResultsOptions
   /**
    * When the data in the component changes. This event can be used to replace
    * whole rendering of products when used with slots properly.
@@ -182,11 +190,38 @@ export class KlevuQuicksearch {
     }
   }
 
+  #setNoResults() {
+    this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+
+    this.noResultsBannerDetails =
+      this.#noResultsOptions?.banners.filter((m) => m.showOnQuickSearch && m.showForTerms === null) || []
+    if (this.#searchTerm) {
+      const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
+        (m) => m.showForTerms && m.showForTerms.includes(this.#searchTerm)
+      )
+      if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message || ""
+      const searchTermSpecificBanner =
+        this.#noResultsOptions?.banners.filter(
+          (m) => m.showOnQuickSearch && m.showForTerms && m.showForTerms.includes(this.#searchTerm)
+        ) || []
+      if (searchTermSpecificBanner.length > 0) this.noResultsBannerDetails.unshift(...searchTermSpecificBanner)
+    }
+  }
+
   @Listen("klevuSearchResults")
   async onResults(event: KlevuSearchFieldCustomEvent<SearchResultsEventData>) {
+    this.#searchTerm = event.detail.search?.query.meta.searchedTerm || ""
+    // Reset the values before assigning new based on logic
+    this.noResultsMessage = ""
+    this.noResultsBannerDetails = []
+    this.products = []
     if (event.detail.search?.records.length === 0) {
-      this.#resultObject = event.detail.fallback
-      this.products = event.detail.fallback?.records
+      if (event.detail.fallback?.records && event.detail.fallback?.records.length > 0) {
+        this.#resultObject = event.detail.fallback
+        this.products = event.detail.fallback?.records
+      } else {
+        this.#setNoResults()
+      }
     } else {
       this.#resultObject = event.detail.search
       this.products = event.detail.search?.records
@@ -231,19 +266,10 @@ export class KlevuQuicksearch {
 
   async connectedCallback() {
     await KlevuInit.ready()
-    const trendingProductsQuery = await KlevuFetch(
-      trendingProducts({
-        limit: this.simpleResultCount,
-      })
-    )
-    const resultObject = trendingProductsQuery.queriesById("trendingProducts")
-    if (resultObject) {
-      this.trendingProducts = resultObject.records
-      this.#emitChangedData()
-    }
     const settings = getKMCSettings()
 
     if (settings) {
+      this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
       if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false
       }
@@ -252,6 +278,19 @@ export class KlevuQuicksearch {
       }
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
+      }
+    }
+    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
+    if (showPopularProducts) {
+      const trendingProductsQuery = await KlevuFetch(
+        trendingProducts({
+          limit: this.simpleResultCount,
+        })
+      )
+      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+      if (resultObject) {
+        this.trendingProducts = resultObject.records
+        this.#emitChangedData()
       }
     }
   }
@@ -304,11 +343,7 @@ export class KlevuQuicksearch {
             usePersonalisation={this.usePersonalisation}
           ></klevu-search-field>
           <div class="content" slot="content">
-            {(this.products ?? []).length > 0
-              ? this.#renderResultPage()
-              : this.products?.length === 0 && this.trendingProducts.length > 0
-              ? this.#renderTrendingPage()
-              : null}
+            {(this.products ?? []).length > 0 ? this.#renderResultPage() : this.#renderNoResultsPage()}
           </div>
         </klevu-popup>
         {this.chat && <klevu-moi></klevu-moi>}
@@ -386,7 +421,7 @@ export class KlevuQuicksearch {
     )
   }
 
-  #renderTrendingPage() {
+  #renderNoResultsPage() {
     return (
       <Fragment>
         <aside>
@@ -395,52 +430,83 @@ export class KlevuQuicksearch {
               {this.tStartChat}
             </klevu-button>
           )}
-          <klevu-popular-searches
-            onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
-          ></klevu-popular-searches>
+          {this.#noResultsOptions?.showPopularKeywords && (
+            <klevu-popular-searches
+              onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
+            ></klevu-popular-searches>
+          )}
           <klevu-latest-searches
             onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-latest-searches>
         </aside>
         <section>
-          <div class="tabrow">
-            <klevu-tab
-              caption={this.tTrendingCaption}
-              active={this.activeTab === "trending"}
-              onClick={() => (this.activeTab = "trending")}
-            ></klevu-tab>
-            <klevu-tab
-              caption={stringConcat(this.tLastClickedProductsCaption, [`${this.lastClickedProducts?.length ?? 0}`])}
-              active={this.activeTab === "last"}
-              onClick={() => {
-                if (this.lastClickedProducts?.length === 0) {
-                  return
-                }
-                this.activeTab = "last"
-              }}
-              disabled={this.lastClickedProducts?.length === 0}
-            ></klevu-tab>
-          </div>
-          {this.activeTab === "trending" && (
-            <Fragment>
-              <slot name="trending-products">
-                {this.trendingProducts?.map((p) => (
-                  <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                ))}
-              </slot>
-            </Fragment>
-          )}
-          {this.activeTab === "last" && (
-            <Fragment>
-              <slot name="last-clicked-products">
-                {this.lastClickedProducts?.map((p) => (
-                  <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                ))}
-              </slot>
-            </Fragment>
-          )}
+          <slot name="noResults">
+            {this.noResultsMessage ? (
+              <p class="noResultsMessage">
+                <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
+              </p>
+            ) : null}
+            {this.trendingProducts.length > 0 && (
+              <Fragment>
+                <div class="tabrow">
+                  <klevu-tab
+                    caption={this.tTrendingCaption}
+                    active={this.activeTab === "trending"}
+                    onClick={() => (this.activeTab = "trending")}
+                  ></klevu-tab>
+                  <klevu-tab
+                    caption={stringConcat(this.tLastClickedProductsCaption, [
+                      `${this.lastClickedProducts?.length ?? 0}`,
+                    ])}
+                    active={this.activeTab === "last"}
+                    onClick={() => {
+                      if (this.lastClickedProducts?.length === 0) {
+                        return
+                      }
+                      this.activeTab = "last"
+                    }}
+                    disabled={this.lastClickedProducts?.length === 0}
+                  ></klevu-tab>
+                </div>
+                {this.activeTab === "trending" && (
+                  <Fragment>
+                    <klevu-typography variant="body-s">
+                      {this.#noResultsOptions?.productsHeading || ""}
+                    </klevu-typography>
+                    <slot name="trending-products">
+                      {this.trendingProducts?.map((p) => (
+                        <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                      ))}
+                    </slot>
+                  </Fragment>
+                )}
+                {this.activeTab === "last" && (
+                  <Fragment>
+                    <slot name="last-clicked-products">
+                      {this.lastClickedProducts?.map((p) => (
+                        <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                      ))}
+                    </slot>
+                  </Fragment>
+                )}
+              </Fragment>
+            )}
+            {this.#renderBanners()}
+          </slot>
         </section>
       </Fragment>
     )
+  }
+  #renderBanners() {
+    return this.noResultsBannerDetails.map((banner) => (
+      <a href={banner.redirectUrl}>
+        <img
+          class="noResultsBannerImage"
+          src={banner.bannerImageUrl}
+          alt={banner.bannerAltTag}
+          title={banner.bannerAltTag}
+        />
+      </a>
+    ))
   }
 }

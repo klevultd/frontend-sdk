@@ -10,8 +10,10 @@ import {
   personalisation,
   search,
   sendSearchEvent,
+  KMCRootObject,
+  trendingProducts,
 } from "@klevu/core"
-import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter } from "@stencil/core"
+import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import {
   KlevuPaginationCustomEvent,
@@ -27,6 +29,8 @@ import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 
+type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
+type Banner = NoResultsOptions["banners"][0]
 /**
  * Full app component for search landing page
  *
@@ -34,6 +38,7 @@ import { getKMCSettings } from "../../utils/getKMCSettings"
  * @slot footer - Footer container
  * @slot content - Product grid items including the grid container
  * @slot facets - Sidebar of facets content
+ * @slot noResults - Show message when no results found
  */
 @Component({
   tag: "klevu-search-landing-page",
@@ -94,12 +99,20 @@ export class KlevuSearchLandingPage {
    * Enable personalization
    */
   @Prop() usePersonalisation?: boolean
+  /**
+   * How many products to show in popular products
+   */
+  @Prop() popularProductsResultCount: number = 3
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
   @State() infiniteScrollingPaused?: boolean = false
   @State() loading?: boolean = false
+  @State() noResultsMessage: string = ""
+  @State() trendingProducts: KlevuRecord[] = []
+  @State() noResultsBannerDetails: Banner[] = []
+  #noResultsOptions?: NoResultsOptions
 
   #resultObject?: KlevuResponseQueryObject
 
@@ -111,6 +124,7 @@ export class KlevuSearchLandingPage {
     await KlevuInit.ready()
     const settings = getKMCSettings()
     if (settings) {
+      this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
       if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnSearchResultsLandingPage || false
       }
@@ -119,6 +133,18 @@ export class KlevuSearchLandingPage {
       }
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
+      }
+    }
+    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
+    if (showPopularProducts) {
+      const trendingProductsQuery = await KlevuFetch(
+        trendingProducts({
+          limit: this.popularProductsResultCount,
+        })
+      )
+      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+      if (resultObject) {
+        this.trendingProducts = resultObject.records
       }
     }
     await this.#fetchData()
@@ -156,6 +182,29 @@ export class KlevuSearchLandingPage {
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
     this.loading = false
+
+    this.noResultsMessage = ""
+    this.noResultsBannerDetails = []
+    if (this.results.length === 0) {
+      this.#handleNoResults()
+    }
+  }
+
+  #handleNoResults() {
+    this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+    this.noResultsBannerDetails =
+      this.#noResultsOptions?.banners.filter((m) => m.showOnLandingPage && m.showForTerms === null) || []
+    if (this.term) {
+      const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
+        (m) => m.showForTerms && m.showForTerms.includes(this.term)
+      )
+      if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message
+      const searchTermSpecificBanner =
+        this.#noResultsOptions?.banners.filter(
+          (m) => m.showOnLandingPage && m.showForTerms && m.showForTerms.includes(this.term)
+        ) || []
+      if (searchTermSpecificBanner.length > 0) this.noResultsBannerDetails.unshift(...searchTermSpecificBanner)
+    }
   }
 
   async loadMore() {
@@ -249,6 +298,10 @@ export class KlevuSearchLandingPage {
     this.#facetListElement.updateApplyFilterState()
   }
 
+  #handlePopularKeywordClick(keyword: string) {
+    this.term = keyword
+  }
+
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
     const showInfiniteScroll = this.useInfiniteScroll && !this.infiniteScrollingPaused && this.results.length > 0
@@ -275,20 +328,57 @@ export class KlevuSearchLandingPage {
             <klevu-typography slot="header" variant="h1">
               {stringConcat(this.tSearchTitle, [this.term])}
             </klevu-typography>
-            <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+            {this.results?.length > 0 && (
+              <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+            )}
           </div>
           <slot name="content" slot="content">
-            <klevu-product-grid slot="content">
-              {this.results?.map((p) => (
-                <klevu-product
-                  product={p}
-                  fixedWidth
-                  exportparts={parts["klevu-product"]}
-                  showRatings={this.showRatings}
-                  showRatingsCount={this.showRatingsCount}
-                ></klevu-product>
-              ))}
-            </klevu-product-grid>
+            {this.results?.length > 0 ? (
+              <klevu-product-grid slot="content">
+                {this.results?.map((p) => (
+                  <klevu-product
+                    product={p}
+                    fixedWidth
+                    exportparts={parts["klevu-product"]}
+                    showRatings={this.showRatings}
+                    showRatingsCount={this.showRatingsCount}
+                  ></klevu-product>
+                ))}
+              </klevu-product-grid>
+            ) : (
+              <slot name="noResults">
+                {this.noResultsMessage ? (
+                  <p class="noResultsMessage">
+                    <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
+                  </p>
+                ) : null}
+                <Fragment>
+                  <slot name="trending-products">
+                    {this.trendingProducts.length > 0 && (
+                      <Fragment>
+                        <klevu-typography variant="body-s">
+                          {this.#noResultsOptions?.productsHeading || ""}
+                        </klevu-typography>
+                        {this.trendingProducts?.map((p) => (
+                          <klevu-product
+                            product={p}
+                            variant="line"
+                            exportparts={parts["klevu-product"]}
+                          ></klevu-product>
+                        ))}
+                      </Fragment>
+                    )}
+                  </slot>
+                </Fragment>
+                {this.#renderBanners()}
+                {this.#noResultsOptions?.showPopularKeywords && (
+                  <klevu-popular-searches
+                    onKlevuPopularSearchClicked={(event) => this.#handlePopularKeywordClick(event.detail)}
+                  ></klevu-popular-searches>
+                )}
+              </slot>
+            )}
+
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}
           </slot>
           <div slot="footer" class="footer">
@@ -315,5 +405,17 @@ export class KlevuSearchLandingPage {
         </klevu-layout-results>
       </Host>
     )
+  }
+  #renderBanners() {
+    return this.noResultsBannerDetails.map((banner) => (
+      <a href={banner.redirectUrl}>
+        <img
+          class="noResultsBannerImage"
+          src={banner.bannerImageUrl}
+          alt={banner.bannerAltTag}
+          title={banner.bannerAltTag}
+        />
+      </a>
+    ))
   }
 }
