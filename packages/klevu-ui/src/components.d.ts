@@ -1121,9 +1121,17 @@ export namespace Components {
          */
         "fullResultCount": number;
         /**
+          * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
+         */
+        "lastClickedProductsCaption"?: string;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
+        /**
+          * Popular products section heading
+         */
+        "popularProductsTitle"?: string;
         /**
           * Anchor popup to witch side
          */
@@ -1149,6 +1157,10 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show popular keywords
+         */
+        "showPopularKeywords"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -1156,6 +1168,14 @@ export namespace Components {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show recently viewed products
+         */
+        "showRecentlyViewedProducts"?: boolean;
+        /**
+          * Show trending products
+         */
+        "showTrendingProducts"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -1165,10 +1185,6 @@ export namespace Components {
          */
         "tCategoriesCaption": any;
         /**
-          * Recently clicked tab caption
-         */
-        "tLastClickedProductsCaption": string;
-        /**
           * Title of search results
          */
         "tSearchResults": any;
@@ -1177,9 +1193,9 @@ export namespace Components {
          */
         "tStartChat": any;
         /**
-          * Trending tab caption
+          * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
-        "tTrendingCaption": string;
+        "trendingCaption"?: string;
         /**
           * Enable personalisation
          */
@@ -3419,6 +3435,10 @@ declare namespace LocalJSX {
          */
         "fullResultCount"?: number;
         /**
+          * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
+         */
+        "lastClickedProductsCaption"?: string;
+        /**
           * When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.
          */
         "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
@@ -3426,6 +3446,10 @@ declare namespace LocalJSX {
           * Placeholder for input text
          */
         "placeholder"?: string;
+        /**
+          * Popular products section heading
+         */
+        "popularProductsTitle"?: string;
         /**
           * Anchor popup to witch side
          */
@@ -3451,6 +3475,10 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
+          * Show popular keywords
+         */
+        "showPopularKeywords"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3458,6 +3486,14 @@ declare namespace LocalJSX {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show recently viewed products
+         */
+        "showRecentlyViewedProducts"?: boolean;
+        /**
+          * Show trending products
+         */
+        "showTrendingProducts"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -3467,10 +3503,6 @@ declare namespace LocalJSX {
          */
         "tCategoriesCaption"?: any;
         /**
-          * Recently clicked tab caption
-         */
-        "tLastClickedProductsCaption"?: string;
-        /**
           * Title of search results
          */
         "tSearchResults"?: any;
@@ -3479,9 +3511,9 @@ declare namespace LocalJSX {
          */
         "tStartChat"?: any;
         /**
-          * Trending tab caption
+          * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
-        "tTrendingCaption"?: string;
+        "trendingCaption"?: string;
         /**
           * Enable personalisation
          */

@@ -37,8 +37,8 @@ export type KlevuQuicksearchDataEvent = {
   lastClickedProducts?: KlevuRecord[]
   searchResult?: KlevuQueryResult
 }
-
-type Banner = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]["banners"][0]
+type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
+type Banner = NoResultsOptions["banners"][0]
 /**
  * Full app to create search bar that popups trending products and search results.
  *
@@ -121,13 +121,22 @@ export class KlevuQuicksearch {
 
   /**
    * Trending tab caption
+   * Supports showing the count in place of %s in the value
+   * eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
    */
-  @Prop() tTrendingCaption = ""
+  @Prop() trendingCaption?: string
+
+  /**
+   * Popular products section heading
+   */
+  @Prop() popularProductsTitle?: string
 
   /**
    * Recently clicked tab caption
+   * Supports showing the count in place of %s in the value
+   * eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
    */
-  @Prop() tLastClickedProductsCaption = ""
+  @Prop() lastClickedProductsCaption?: string
   /**
    * Show ratings
    */
@@ -137,6 +146,20 @@ export class KlevuQuicksearch {
    * Show ratings count
    */
   @Prop() showRatingsCount?: boolean
+
+  /**
+   * Show trending products
+   */
+  @Prop() showTrendingProducts?: boolean
+
+  /**
+   * Show recently viewed products
+   */
+  @Prop() showRecentlyViewedProducts?: boolean
+  /**
+   * Show popular keywords
+   */
+  @Prop() showPopularKeywords?: boolean
 
   /**
    * Enable personalisation
@@ -163,7 +186,7 @@ export class KlevuQuicksearch {
   popup?: HTMLKlevuPopupElement
 
   #searchTerm: string = ""
-  #kmcSettings?: KMCRootObject
+  #noResultsOptions?: NoResultsOptions
   /**
    * When the data in the component changes. This event can be used to replace
    * whole rendering of products when used with slots properly.
@@ -190,21 +213,17 @@ export class KlevuQuicksearch {
   }
 
   #setNoResults() {
-    this.noResultsMessage =
-      this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.messages.find((m) => m.showForTerms === null)?.message ||
-      ""
+    this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
 
     this.noResultsBannerDetails =
-      this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.banners.filter(
-        (m) => m.showOnQuickSearch && m.showForTerms === null
-      ) || []
+      this.#noResultsOptions?.banners.filter((m) => m.showOnQuickSearch && m.showForTerms === null) || []
     if (this.#searchTerm) {
-      const searchTermSpecificMessage = this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.messages.find(
+      const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
         (m) => m.showForTerms && m.showForTerms.includes(this.#searchTerm)
       )
       if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message || ""
       const searchTermSpecificBanner =
-        this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.banners.filter(
+        this.#noResultsOptions?.banners.filter(
           (m) => m.showOnQuickSearch && m.showForTerms && m.showForTerms.includes(this.#searchTerm)
         ) || []
       if (searchTermSpecificBanner.length > 0) this.noResultsBannerDetails.unshift(...searchTermSpecificBanner)
@@ -272,7 +291,7 @@ export class KlevuQuicksearch {
     const settings = getKMCSettings()
 
     if (settings) {
-      this.#kmcSettings = settings
+      this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
       if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false
       }
@@ -282,18 +301,30 @@ export class KlevuQuicksearch {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-    }
-    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
-    if (showPopularProducts) {
-      const trendingProductsQuery = await KlevuFetch(
-        trendingProducts({
-          limit: this.simpleResultCount,
-        })
-      )
-      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
-      if (resultObject) {
-        this.trendingProducts = resultObject.records
-        this.#emitChangedData()
+      if (this.showPopularKeywords === undefined)
+        this.showPopularKeywords = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
+      if (this.showTrendingProducts === undefined)
+        this.showTrendingProducts = settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
+      if (this.showRecentlyViewedProducts === undefined)
+        this.showRecentlyViewedProducts = settings?.klevu_uc_userOptions.showRecentlyViewedItems
+      if (this.lastClickedProductsCaption === undefined)
+        this.lastClickedProductsCaption = settings?.klevu_uc_userOptions.showRecentlyViewedItemsCaption || ""
+      if (this.trendingCaption === undefined)
+        this.trendingCaption = settings?.klevu_uc_userOptions.showTrendingProductsCaption || ""
+      if (this.popularProductsTitle === undefined)
+        this.popularProductsTitle = settings?.klevu_uc_userOptions.noResultsOptions.productsHeading || ""
+
+      if (this.showTrendingProducts) {
+        const trendingProductsQuery = await KlevuFetch(
+          trendingProducts({
+            limit: this.simpleResultCount,
+          })
+        )
+        const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+        if (resultObject) {
+          this.trendingProducts = resultObject.records
+          this.#emitChangedData()
+        }
       }
     }
   }
@@ -433,7 +464,7 @@ export class KlevuQuicksearch {
               {this.tStartChat}
             </klevu-button>
           )}
-          {this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords && (
+          {this.showPopularKeywords && (
             <klevu-popular-searches
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
@@ -452,27 +483,18 @@ export class KlevuQuicksearch {
 
             <Fragment>
               <div class="tabrow">
-                {this.#kmcSettings?.klevu_uc_userOptions.showTrendingProducts && (
+                {this.showTrendingProducts && (
                   <klevu-tab
-                    caption={stringConcat(
-                      `${
-                        this.tTrendingCaption || this.#kmcSettings.klevu_uc_userOptions.showTrendingProductsCaption
-                      } (%s)`,
-                      [`${this.trendingProducts?.length ?? 0}`]
-                    )}
+                    caption={stringConcat(this.trendingCaption || "", [`${this.trendingProducts?.length ?? 0}`])}
                     active={this.activeTab === "trending"}
                     onClick={() => (this.activeTab = "trending")}
                   ></klevu-tab>
                 )}
-                {this.#kmcSettings?.klevu_uc_userOptions.showRecentlyViewedItems && (
+                {this.showRecentlyViewedProducts && (
                   <klevu-tab
-                    caption={stringConcat(
-                      `${
-                        this.tLastClickedProductsCaption ||
-                        this.#kmcSettings.klevu_uc_userOptions.showRecentlyViewedItemsCaption
-                      } (%s)`,
-                      [`${this.lastClickedProducts?.length ?? 0}`]
-                    )}
+                    caption={stringConcat(this.lastClickedProductsCaption || "", [
+                      `${this.lastClickedProducts?.length ?? 0}`,
+                    ])}
                     active={this.activeTab === "last"}
                     onClick={() => {
                       if (this.lastClickedProducts?.length === 0) {
@@ -484,11 +506,9 @@ export class KlevuQuicksearch {
                   ></klevu-tab>
                 )}
               </div>
-              {this.activeTab === "trending" && this.#kmcSettings?.klevu_uc_userOptions.showTrendingProducts && (
+              {this.activeTab === "trending" && this.showTrendingProducts && (
                 <Fragment>
-                  <klevu-typography variant="body-s">
-                    {this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.productsHeading || ""}
-                  </klevu-typography>
+                  <klevu-typography variant="body-s">{this.popularProductsTitle}</klevu-typography>
                   <slot name="trending-products">
                     {this.trendingProducts?.map((p) => (
                       <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
@@ -496,7 +516,7 @@ export class KlevuQuicksearch {
                   </slot>
                 </Fragment>
               )}
-              {this.activeTab === "last" && this.#kmcSettings?.klevu_uc_userOptions.showRecentlyViewedItems && (
+              {this.activeTab === "last" && this.showRecentlyViewedProducts && (
                 <Fragment>
                   <slot name="last-clicked-products">
                     {this.lastClickedProducts?.map((p) => (

@@ -359,10 +359,14 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'tSearchResults',
   'tStartChat',
   'tCategoriesCaption',
-  'tTrendingCaption',
-  'tLastClickedProductsCaption',
+  'trendingCaption',
+  'popularProductsTitle',
+  'lastClickedProductsCaption',
   'showRatings',
   'showRatingsCount',
+  'showTrendingProducts',
+  'showRecentlyViewedProducts',
+  'showPopularKeywords',
   'usePersonalisation',
   'klevuData'
 ]);
