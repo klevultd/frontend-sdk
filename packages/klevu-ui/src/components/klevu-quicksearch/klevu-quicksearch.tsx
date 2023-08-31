@@ -504,7 +504,7 @@ export class KlevuQuicksearch {
                 ></klevu-tab>
               )}
             </div>
-            {this.activeTab === "trending" && this.showTrendingProducts && (
+            {this.activeTab === "trending" && (
               <Fragment>
                 <klevu-typography variant="body-s">{this.popularProductsTitle}</klevu-typography>
                 <slot name="trending-products">
@@ -514,7 +514,7 @@ export class KlevuQuicksearch {
                 </slot>
               </Fragment>
             )}
-            {this.activeTab === "last" && this.showRecentlyViewedProducts && (
+            {this.activeTab === "last" && (
               <Fragment>
                 <slot name="last-clicked-products">
                   {this.lastClickedProducts?.map((p) => (
