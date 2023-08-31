@@ -2,7 +2,7 @@
  * KMC banner model
  */
 
-interface KlevuBanner {
+export interface KlevuBanner {
   showForTerms: string[]
   showOnLandingPage: boolean
   bannerAltTag: string

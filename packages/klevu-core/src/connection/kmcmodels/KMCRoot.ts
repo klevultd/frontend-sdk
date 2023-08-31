@@ -272,11 +272,11 @@ interface NoResultsOptions {
   showPopularProducts?: boolean
   showPopularKeywords?: boolean
   productsHeading?: string
-  messages: Message[]
-  banners: Banner[]
+  messages: KlevuMessage[]
+  banners: KlevuNoResultBanner[]
 }
 
-interface Banner {
+interface KlevuNoResultBanner {
   showForTerms: string[]
   showOnLandingPage: boolean
   bannerAltTag: string
@@ -286,7 +286,7 @@ interface Banner {
   bannerRef: number
 }
 
-interface Message {
+interface KlevuMessage {
   showForTerms: string[] | null
   message: string
 }
