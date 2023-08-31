@@ -38,8 +38,7 @@ export type KlevuQuicksearchDataEvent = {
   searchResult?: KlevuQueryResult
 }
 
-type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
-type Banner = NoResultsOptions["banners"][0]
+type Banner = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]["banners"][0]
 /**
  * Full app to create search bar that popups trending products and search results.
  *
@@ -123,12 +122,12 @@ export class KlevuQuicksearch {
   /**
    * Trending tab caption
    */
-  @Prop() tTrendingCaption = getTranslation("quicksearch.tTrendingCaption")
+  @Prop() tTrendingCaption = ""
 
   /**
-   * Recentely clicked tab caption
+   * Recently clicked tab caption
    */
-  @Prop() tLastClickedProductsCaption = getTranslation("quicksearch.tLastClickedProductsCaption")
+  @Prop() tLastClickedProductsCaption = ""
   /**
    * Show ratings
    */
@@ -164,7 +163,7 @@ export class KlevuQuicksearch {
   popup?: HTMLKlevuPopupElement
 
   #searchTerm: string = ""
-  #noResultsOptions?: NoResultsOptions
+  #kmcSettings?: KMCRootObject
   /**
    * When the data in the component changes. This event can be used to replace
    * whole rendering of products when used with slots properly.
@@ -191,17 +190,21 @@ export class KlevuQuicksearch {
   }
 
   #setNoResults() {
-    this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+    this.noResultsMessage =
+      this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.messages.find((m) => m.showForTerms === null)?.message ||
+      ""
 
     this.noResultsBannerDetails =
-      this.#noResultsOptions?.banners.filter((m) => m.showOnQuickSearch && m.showForTerms === null) || []
+      this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.banners.filter(
+        (m) => m.showOnQuickSearch && m.showForTerms === null
+      ) || []
     if (this.#searchTerm) {
-      const searchTermSpecificMessage = this.#noResultsOptions?.messages.find(
+      const searchTermSpecificMessage = this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.messages.find(
         (m) => m.showForTerms && m.showForTerms.includes(this.#searchTerm)
       )
       if (searchTermSpecificMessage) this.noResultsMessage = searchTermSpecificMessage?.message || ""
       const searchTermSpecificBanner =
-        this.#noResultsOptions?.banners.filter(
+        this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.banners.filter(
           (m) => m.showOnQuickSearch && m.showForTerms && m.showForTerms.includes(this.#searchTerm)
         ) || []
       if (searchTermSpecificBanner.length > 0) this.noResultsBannerDetails.unshift(...searchTermSpecificBanner)
@@ -269,7 +272,7 @@ export class KlevuQuicksearch {
     const settings = getKMCSettings()
 
     if (settings) {
-      this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
+      this.#kmcSettings = settings
       if (this.showRatings === undefined) {
         this.showRatings = settings.klevu_uc_userOptions?.showRatingsOnQuickSearches || false
       }
@@ -430,7 +433,7 @@ export class KlevuQuicksearch {
               {this.tStartChat}
             </klevu-button>
           )}
-          {this.#noResultsOptions?.showPopularKeywords && (
+          {this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords && (
             <klevu-popular-searches
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
@@ -446,18 +449,30 @@ export class KlevuQuicksearch {
                 <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
               </p>
             ) : null}
-            {this.trendingProducts.length > 0 && (
-              <Fragment>
-                <div class="tabrow">
+
+            <Fragment>
+              <div class="tabrow">
+                {this.#kmcSettings?.klevu_uc_userOptions.showTrendingProducts && (
                   <klevu-tab
-                    caption={this.tTrendingCaption}
+                    caption={stringConcat(
+                      `${
+                        this.tTrendingCaption || this.#kmcSettings.klevu_uc_userOptions.showTrendingProductsCaption
+                      } (%s)`,
+                      [`${this.trendingProducts?.length ?? 0}`]
+                    )}
                     active={this.activeTab === "trending"}
                     onClick={() => (this.activeTab = "trending")}
                   ></klevu-tab>
+                )}
+                {this.#kmcSettings?.klevu_uc_userOptions.showRecentlyViewedItems && (
                   <klevu-tab
-                    caption={stringConcat(this.tLastClickedProductsCaption, [
-                      `${this.lastClickedProducts?.length ?? 0}`,
-                    ])}
+                    caption={stringConcat(
+                      `${
+                        this.tLastClickedProductsCaption ||
+                        this.#kmcSettings.klevu_uc_userOptions.showRecentlyViewedItemsCaption
+                      } (%s)`,
+                      [`${this.lastClickedProducts?.length ?? 0}`]
+                    )}
                     active={this.activeTab === "last"}
                     onClick={() => {
                       if (this.lastClickedProducts?.length === 0) {
@@ -467,30 +482,30 @@ export class KlevuQuicksearch {
                     }}
                     disabled={this.lastClickedProducts?.length === 0}
                   ></klevu-tab>
-                </div>
-                {this.activeTab === "trending" && (
-                  <Fragment>
-                    <klevu-typography variant="body-s">
-                      {this.#noResultsOptions?.productsHeading || ""}
-                    </klevu-typography>
-                    <slot name="trending-products">
-                      {this.trendingProducts?.map((p) => (
-                        <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                      ))}
-                    </slot>
-                  </Fragment>
                 )}
-                {this.activeTab === "last" && (
-                  <Fragment>
-                    <slot name="last-clicked-products">
-                      {this.lastClickedProducts?.map((p) => (
-                        <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                      ))}
-                    </slot>
-                  </Fragment>
-                )}
-              </Fragment>
-            )}
+              </div>
+              {this.activeTab === "trending" && this.#kmcSettings?.klevu_uc_userOptions.showTrendingProducts && (
+                <Fragment>
+                  <klevu-typography variant="body-s">
+                    {this.#kmcSettings?.klevu_uc_userOptions.noResultsOptions.productsHeading || ""}
+                  </klevu-typography>
+                  <slot name="trending-products">
+                    {this.trendingProducts?.map((p) => (
+                      <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                    ))}
+                  </slot>
+                </Fragment>
+              )}
+              {this.activeTab === "last" && this.#kmcSettings?.klevu_uc_userOptions.showRecentlyViewedItems && (
+                <Fragment>
+                  <slot name="last-clicked-products">
+                    {this.lastClickedProducts?.map((p) => (
+                      <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                    ))}
+                  </slot>
+                </Fragment>
+              )}
+            </Fragment>
             {this.#renderBanners()}
           </slot>
         </section>

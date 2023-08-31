@@ -1165,9 +1165,9 @@ export namespace Components {
          */
         "tCategoriesCaption": any;
         /**
-          * Recentely clicked tab caption
+          * Recently clicked tab caption
          */
-        "tLastClickedProductsCaption": any;
+        "tLastClickedProductsCaption": string;
         /**
           * Title of search results
          */
@@ -1179,7 +1179,7 @@ export namespace Components {
         /**
           * Trending tab caption
          */
-        "tTrendingCaption": any;
+        "tTrendingCaption": string;
         /**
           * Enable personalisation
          */
@@ -3467,9 +3467,9 @@ declare namespace LocalJSX {
          */
         "tCategoriesCaption"?: any;
         /**
-          * Recentely clicked tab caption
+          * Recently clicked tab caption
          */
-        "tLastClickedProductsCaption"?: any;
+        "tLastClickedProductsCaption"?: string;
         /**
           * Title of search results
          */
@@ -3481,7 +3481,7 @@ declare namespace LocalJSX {
         /**
           * Trending tab caption
          */
-        "tTrendingCaption"?: any;
+        "tTrendingCaption"?: string;
         /**
           * Enable personalisation
          */
