@@ -9,6 +9,7 @@ import { extractActiveFilters } from "../utils/extractActiveFilters.js"
 import { KlevuFetch, removeListFilters } from "./klevuFetch.js"
 import { KlevuResponseObject } from "./responseObject.js"
 import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
+import { getBanners } from "./resultHelpers/getBanners.js"
 
 /**
  * Result object for each query. A storage for results. Can be used to fetch more data, send events etc.
@@ -332,6 +333,18 @@ export class KlevuResponseQueryObject {
 
   annotationsById(productId: string, languageCode: string) {
     return getAnnotationsForProduct(this.query, productId, languageCode)
+  }
+
+  /**
+   * @returns List of banners that were received for this query
+   * @param params in case of search query you need to specify location of search
+   */
+  async getBanners(
+    params: {
+      searchType?: "quicksearch" | "landingpage"
+    } = {}
+  ) {
+    return getBanners(this, params.searchType)
   }
 
   /**
