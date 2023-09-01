@@ -35,6 +35,7 @@
     "tStartChat": "Start chat",
     "tCategoriesCaption": "Categories",
     "tTrendingCaption": "Trending",
+    "tPopularProductsTitle": "You may like",
     "tLastClickedProductsCaption": "Recently viewed (%s)"
   },
   "searchField": {
