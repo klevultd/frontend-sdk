@@ -90,7 +90,7 @@ export class KlevuProductQuery {
   /**
    * How many pixels to offset the popup from origin
    */
-  @Prop() popupOffset?: number
+  @Prop() popupOffset = 5
 
   /**
    * Disable closing the popup when clicking outside of it
