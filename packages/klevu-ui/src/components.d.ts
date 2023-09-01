@@ -812,6 +812,7 @@ export namespace Components {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        "showProductCode"?: boolean;
         /**
           * Show ratings
          */
@@ -1149,6 +1150,10 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show popular keywords
+         */
+        "showPopularKeywords"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -1156,6 +1161,14 @@ export namespace Components {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show recently viewed products
+         */
+        "showRecentlyViewedProducts"?: boolean;
+        /**
+          * Show trending products
+         */
+        "showTrendingProducts"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -1165,9 +1178,13 @@ export namespace Components {
          */
         "tCategoriesCaption": any;
         /**
-          * Recentely clicked tab caption
+          * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
-        "tLastClickedProductsCaption": any;
+        "tLastClickedProductsCaption"?: string;
+        /**
+          * Popular products section heading
+         */
+        "tPopularProductsTitle"?: string;
         /**
           * Title of search results
          */
@@ -1177,9 +1194,9 @@ export namespace Components {
          */
         "tStartChat": any;
         /**
-          * Trending tab caption
+          * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
-        "tTrendingCaption": any;
+        "tTrendingCaption"?: string;
         /**
           * Enable personalisation
          */
@@ -1328,6 +1345,10 @@ export namespace Components {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show the quick search box at the top of the page
+         */
+        "showSearch"?: boolean;
         /**
           * In which order to set the products
          */
@@ -3109,6 +3130,7 @@ declare namespace LocalJSX {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        "showProductCode"?: boolean;
         /**
           * Show ratings
          */
@@ -3451,6 +3473,10 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
+          * Show popular keywords
+         */
+        "showPopularKeywords"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3458,6 +3484,14 @@ declare namespace LocalJSX {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show recently viewed products
+         */
+        "showRecentlyViewedProducts"?: boolean;
+        /**
+          * Show trending products
+         */
+        "showTrendingProducts"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -3467,9 +3501,13 @@ declare namespace LocalJSX {
          */
         "tCategoriesCaption"?: any;
         /**
-          * Recentely clicked tab caption
+          * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
-        "tLastClickedProductsCaption"?: any;
+        "tLastClickedProductsCaption"?: string;
+        /**
+          * Popular products section heading
+         */
+        "tPopularProductsTitle"?: string;
         /**
           * Title of search results
          */
@@ -3479,9 +3517,9 @@ declare namespace LocalJSX {
          */
         "tStartChat"?: any;
         /**
-          * Trending tab caption
+          * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
-        "tTrendingCaption"?: any;
+        "tTrendingCaption"?: string;
         /**
           * Enable personalisation
          */
@@ -3630,6 +3668,10 @@ declare namespace LocalJSX {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show the quick search box at the top of the page
+         */
+        "showSearch"?: boolean;
         /**
           * In which order to set the products
          */

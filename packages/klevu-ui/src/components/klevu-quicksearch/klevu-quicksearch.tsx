@@ -37,7 +37,6 @@ export type KlevuQuicksearchDataEvent = {
   lastClickedProducts?: KlevuRecord[]
   searchResult?: KlevuQueryResult
 }
-
 type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
 type Banner = NoResultsOptions["banners"][0]
 /**
@@ -122,13 +121,22 @@ export class KlevuQuicksearch {
 
   /**
    * Trending tab caption
+   * Supports showing the count in place of %s in the value
+   * eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
    */
-  @Prop() tTrendingCaption = getTranslation("quicksearch.tTrendingCaption")
+  @Prop() tTrendingCaption?: string
 
   /**
-   * Recentely clicked tab caption
+   * Popular products section heading
    */
-  @Prop() tLastClickedProductsCaption = getTranslation("quicksearch.tLastClickedProductsCaption")
+  @Prop() tPopularProductsTitle?: string
+
+  /**
+   * Recently clicked tab caption
+   * Supports showing the count in place of %s in the value
+   * eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
+   */
+  @Prop() tLastClickedProductsCaption?: string
   /**
    * Show ratings
    */
@@ -138,6 +146,20 @@ export class KlevuQuicksearch {
    * Show ratings count
    */
   @Prop() showRatingsCount?: boolean
+
+  /**
+   * Show trending products
+   */
+  @Prop() showTrendingProducts?: boolean
+
+  /**
+   * Show recently viewed products
+   */
+  @Prop() showRecentlyViewedProducts?: boolean
+  /**
+   * Show popular keywords
+   */
+  @Prop() showPopularKeywords?: boolean
 
   /**
    * Enable personalisation
@@ -279,18 +301,35 @@ export class KlevuQuicksearch {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-    }
-    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
-    if (showPopularProducts) {
-      const trendingProductsQuery = await KlevuFetch(
-        trendingProducts({
-          limit: this.simpleResultCount,
-        })
-      )
-      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
-      if (resultObject) {
-        this.trendingProducts = resultObject.records
-        this.#emitChangedData()
+      if (this.showPopularKeywords === undefined)
+        this.showPopularKeywords = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
+      if (this.showTrendingProducts === undefined)
+        this.showTrendingProducts = settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
+      if (this.showRecentlyViewedProducts === undefined)
+        this.showRecentlyViewedProducts = settings?.klevu_uc_userOptions.showRecentlyViewedItems
+      if (this.tLastClickedProductsCaption === undefined)
+        this.tLastClickedProductsCaption =
+          settings?.klevu_uc_userOptions.showRecentlyViewedItemsCaption ??
+          getTranslation("quicksearch.tLastClickedProductsCaption")
+      if (this.tTrendingCaption === undefined)
+        this.tTrendingCaption =
+          settings?.klevu_uc_userOptions.showTrendingProductsCaption ?? getTranslation("quicksearch.tTrendingCaption")
+      if (this.tPopularProductsTitle === undefined)
+        this.tPopularProductsTitle =
+          settings?.klevu_uc_userOptions.noResultsOptions.productsHeading ??
+          getTranslation("quicksearch.tPopularProductsTitle")
+
+      if (this.showTrendingProducts) {
+        const trendingProductsQuery = await KlevuFetch(
+          trendingProducts({
+            limit: this.simpleResultCount,
+          })
+        )
+        const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+        if (resultObject) {
+          this.trendingProducts = resultObject.records
+          this.#emitChangedData()
+        }
       }
     }
   }
@@ -430,7 +469,7 @@ export class KlevuQuicksearch {
               {this.tStartChat}
             </klevu-button>
           )}
-          {this.#noResultsOptions?.showPopularKeywords && (
+          {this.showPopularKeywords && (
             <klevu-popular-searches
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
@@ -446,49 +485,50 @@ export class KlevuQuicksearch {
                 <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
               </p>
             ) : null}
-            {this.trendingProducts.length > 0 && (
+            <div class="tabrow">
+              {this.showTrendingProducts && (
+                <klevu-tab
+                  caption={stringConcat(this.tTrendingCaption ?? getTranslation("quicksearch.tTrendingCaption"), [
+                    `${this.trendingProducts?.length ?? 0}`,
+                  ])}
+                  active={this.activeTab === "trending"}
+                  onClick={() => (this.activeTab = "trending")}
+                ></klevu-tab>
+              )}
+              {this.showRecentlyViewedProducts && (
+                <klevu-tab
+                  caption={stringConcat(
+                    this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
+                    [`${this.lastClickedProducts?.length ?? 0}`]
+                  )}
+                  active={this.activeTab === "last"}
+                  onClick={() => {
+                    if (this.lastClickedProducts?.length === 0) {
+                      return
+                    }
+                    this.activeTab = "last"
+                  }}
+                  disabled={this.lastClickedProducts?.length === 0}
+                ></klevu-tab>
+              )}
+            </div>
+            {this.activeTab === "trending" && (
               <Fragment>
-                <div class="tabrow">
-                  <klevu-tab
-                    caption={this.tTrendingCaption}
-                    active={this.activeTab === "trending"}
-                    onClick={() => (this.activeTab = "trending")}
-                  ></klevu-tab>
-                  <klevu-tab
-                    caption={stringConcat(this.tLastClickedProductsCaption, [
-                      `${this.lastClickedProducts?.length ?? 0}`,
-                    ])}
-                    active={this.activeTab === "last"}
-                    onClick={() => {
-                      if (this.lastClickedProducts?.length === 0) {
-                        return
-                      }
-                      this.activeTab = "last"
-                    }}
-                    disabled={this.lastClickedProducts?.length === 0}
-                  ></klevu-tab>
-                </div>
-                {this.activeTab === "trending" && (
-                  <Fragment>
-                    <klevu-typography variant="body-s">
-                      {this.#noResultsOptions?.productsHeading || ""}
-                    </klevu-typography>
-                    <slot name="trending-products">
-                      {this.trendingProducts?.map((p) => (
-                        <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                      ))}
-                    </slot>
-                  </Fragment>
-                )}
-                {this.activeTab === "last" && (
-                  <Fragment>
-                    <slot name="last-clicked-products">
-                      {this.lastClickedProducts?.map((p) => (
-                        <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
-                      ))}
-                    </slot>
-                  </Fragment>
-                )}
+                <klevu-typography variant="body-s">{this.tPopularProductsTitle}</klevu-typography>
+                <slot name="trending-products">
+                  {this.trendingProducts?.map((p) => (
+                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                  ))}
+                </slot>
+              </Fragment>
+            )}
+            {this.activeTab === "last" && (
+              <Fragment>
+                <slot name="last-clicked-products">
+                  {this.lastClickedProducts?.map((p) => (
+                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                  ))}
+                </slot>
               </Fragment>
             )}
             {this.#renderBanners()}

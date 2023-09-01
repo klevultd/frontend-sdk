@@ -34,6 +34,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
     popular-products-result-Count=${ifDefined(args.popularProductsResultCount)}
+    show-search=${ifDefined(args.showSearch)}
   ></klevu-search-landing-page>`,
 }
 

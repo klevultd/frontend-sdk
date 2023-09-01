@@ -6,7 +6,7 @@
 .content {
   display: flex;
   padding: var(--klevu-spacing-04);
-  width: 600px;
+  max-width: 800px;
 }
 
 .content aside {

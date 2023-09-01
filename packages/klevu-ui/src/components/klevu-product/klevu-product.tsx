@@ -121,6 +121,7 @@ export class KlevuProduct {
    */
   @Prop() vatCaption?: string
 
+  @Prop() showProductCode?: boolean
   /**
    * Turns the component into a product wrapper that handles events
    * automatically. It assumes that whole product is clickable.
@@ -166,6 +167,25 @@ export class KlevuProduct {
       if (this.vatCaption === undefined) {
         this.vatCaption = settings.klevu_uc_userOptions.vatCaption
       }
+
+      if (this.showProductCode === undefined) {
+        this.showProductCode = settings.klevu_showProductCode
+      }
+    }
+  }
+
+  #formatSKU(sku?: string) {
+    if (!sku) {
+      return ""
+    }
+    let formattedSKU = sku.toUpperCase()
+    if (sku.includes(";;;;")) {
+      formattedSKU = formattedSKU.split(";;;;")[0]
+    }
+    if (formattedSKU.startsWith("(") && formattedSKU.endsWith(")")) {
+      return formattedSKU
+    } else {
+      return "(" + formattedSKU + ")"
     }
   }
 
@@ -292,7 +312,7 @@ export class KlevuProduct {
                 )}
                 {this.hideName || !this.product[this.keyName] ? null : (
                   <klevu-typography class="productname" variant="body-s">
-                    {this.product[this.keyName]}
+                    {`${this.product[this.keyName]} ${this.showProductCode ? this.#formatSKU(this.product.sku) : ""}`}
                   </klevu-typography>
                 )}
                 {this.hideDescription || !this.product[this.keyDescription] ? null : (

@@ -103,6 +103,10 @@ export class KlevuSearchLandingPage {
    * How many products to show in popular products
    */
   @Prop() popularProductsResultCount: number = 3
+  /**
+   * Show the quick search box at the top of the page
+   */
+  @Prop() showSearch?: boolean
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -134,6 +138,7 @@ export class KlevuSearchLandingPage {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
+      if (this.showSearch === undefined) this.showSearch = settings?.klevu_uc_userOptions.showSearchBoxOnLandingPage
     }
     const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
     if (showPopularProducts) {
@@ -325,12 +330,15 @@ export class KlevuSearchLandingPage {
             ></klevu-facet-list>
           </slot>
           <div slot="header" class="header">
-            <klevu-typography slot="header" variant="h1">
-              {stringConcat(this.tSearchTitle, [this.term])}
-            </klevu-typography>
-            {this.results?.length > 0 && (
-              <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
-            )}
+            {this.showSearch && <klevu-quicksearch />}
+            <div class="info">
+              <klevu-typography slot="header" variant="h1">
+                {stringConcat(this.tSearchTitle, [this.term])}
+              </klevu-typography>
+              {this.results?.length > 0 && (
+                <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+              )}
+            </div>
           </div>
           <slot name="content" slot="content">
             {this.results?.length > 0 ? (
