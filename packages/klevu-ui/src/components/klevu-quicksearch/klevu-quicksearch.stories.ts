@@ -37,9 +37,9 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     show-popular-keywords=${ifDefined(args.showPopularKeywords)}
     show-trending-products=${ifDefined(args.showTrendingProducts)}
     show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
-    last-clicked-products-caption=${ifDefined(args.lastClickedProductsCaption)}
-    trending-caption=${ifDefined(args.trendingCaption)}
-    popular-products-title=${ifDefined(args.popularProductsTitle)}
+    t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
+    t-trending-caption=${ifDefined(args.tTrendingCaption)}
+    t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
   ></klevu-quicksearch>`,
 }
 
@@ -52,9 +52,9 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       show-popular-keywords=${ifDefined(args.showPopularKeywords)}
       show-trending-products=${ifDefined(args.showTrendingProducts)}
       show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
-      last-clicked-products-caption=${ifDefined(args.lastClickedProductsCaption)}
-      trending-caption=${ifDefined(args.trendingCaption)}
-      popular-products-title=${ifDefined(args.popularProductsTitle)}
+      t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
+      t-trending-caption=${ifDefined(args.tTrendingCaption)}
+      t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
     >
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>

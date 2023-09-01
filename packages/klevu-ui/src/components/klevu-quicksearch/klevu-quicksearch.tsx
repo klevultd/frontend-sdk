@@ -124,19 +124,19 @@ export class KlevuQuicksearch {
    * Supports showing the count in place of %s in the value
    * eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
    */
-  @Prop() trendingCaption?: string
+  @Prop() tTrendingCaption?: string
 
   /**
    * Popular products section heading
    */
-  @Prop() popularProductsTitle?: string
+  @Prop() tPopularProductsTitle?: string
 
   /**
    * Recently clicked tab caption
    * Supports showing the count in place of %s in the value
    * eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
    */
-  @Prop() lastClickedProductsCaption?: string
+  @Prop() tLastClickedProductsCaption?: string
   /**
    * Show ratings
    */
@@ -307,12 +307,17 @@ export class KlevuQuicksearch {
         this.showTrendingProducts = settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
       if (this.showRecentlyViewedProducts === undefined)
         this.showRecentlyViewedProducts = settings?.klevu_uc_userOptions.showRecentlyViewedItems
-      if (this.lastClickedProductsCaption === undefined)
-        this.lastClickedProductsCaption = settings?.klevu_uc_userOptions.showRecentlyViewedItemsCaption || ""
-      if (this.trendingCaption === undefined)
-        this.trendingCaption = settings?.klevu_uc_userOptions.showTrendingProductsCaption || ""
-      if (this.popularProductsTitle === undefined)
-        this.popularProductsTitle = settings?.klevu_uc_userOptions.noResultsOptions.productsHeading || ""
+      if (this.tLastClickedProductsCaption === undefined)
+        this.tLastClickedProductsCaption =
+          settings?.klevu_uc_userOptions.showRecentlyViewedItemsCaption ??
+          getTranslation("quicksearch.tLastClickedProductsCaption")
+      if (this.tTrendingCaption === undefined)
+        this.tTrendingCaption =
+          settings?.klevu_uc_userOptions.showTrendingProductsCaption ?? getTranslation("quicksearch.tTrendingCaption")
+      if (this.tPopularProductsTitle === undefined)
+        this.tPopularProductsTitle =
+          settings?.klevu_uc_userOptions.noResultsOptions.productsHeading ??
+          getTranslation("quicksearch.tPopularProductsTitle")
 
       if (this.showTrendingProducts) {
         const trendingProductsQuery = await KlevuFetch(
@@ -483,16 +488,19 @@ export class KlevuQuicksearch {
             <div class="tabrow">
               {this.showTrendingProducts && (
                 <klevu-tab
-                  caption={stringConcat(this.trendingCaption || "", [`${this.trendingProducts?.length ?? 0}`])}
+                  caption={stringConcat(this.tTrendingCaption ?? getTranslation("quicksearch.tTrendingCaption"), [
+                    `${this.trendingProducts?.length ?? 0}`,
+                  ])}
                   active={this.activeTab === "trending"}
                   onClick={() => (this.activeTab = "trending")}
                 ></klevu-tab>
               )}
               {this.showRecentlyViewedProducts && (
                 <klevu-tab
-                  caption={stringConcat(this.lastClickedProductsCaption || "", [
-                    `${this.lastClickedProducts?.length ?? 0}`,
-                  ])}
+                  caption={stringConcat(
+                    this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
+                    [`${this.lastClickedProducts?.length ?? 0}`]
+                  )}
                   active={this.activeTab === "last"}
                   onClick={() => {
                     if (this.lastClickedProducts?.length === 0) {
@@ -506,7 +514,7 @@ export class KlevuQuicksearch {
             </div>
             {this.activeTab === "trending" && (
               <Fragment>
-                <klevu-typography variant="body-s">{this.popularProductsTitle}</klevu-typography>
+                <klevu-typography variant="body-s">{this.tPopularProductsTitle}</klevu-typography>
                 <slot name="trending-products">
                   {this.trendingProducts?.map((p) => (
                     <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
