@@ -1,4 +1,4 @@
-interface KlevuKeywordUrlMap {
+export interface KlevuKeywordUrlMap {
   keywords: string[]
   url: string
 }
