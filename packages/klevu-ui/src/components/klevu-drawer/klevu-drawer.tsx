@@ -7,6 +7,7 @@ import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
  * @slot content - Content to display in drawer
  * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
  * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+ * @cssprop --klevu-drawer-width 400px width of drawer
  */
 @Component({
   tag: "klevu-drawer",
@@ -100,9 +101,11 @@ export class KlevuDrawer {
             right: this.anchor === "right",
           }}
         >
-          <div class={{ innercontainer: true, insertypadding: Boolean(this.insertYPadding) }}>
-            <slot name="content" />
-          </div>
+          <klevu-util-scrollbars overflowY="scroll">
+            <div class={{ innercontainer: true, insertypadding: Boolean(this.insertYPadding) }}>
+              <slot name="content" />
+            </div>
+          </klevu-util-scrollbars>
         </div>
         {this.background ? (
           <div onClick={this.closeModal.bind(this)} class={{ background: true, show: this.open }}></div>

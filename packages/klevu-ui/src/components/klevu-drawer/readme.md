@@ -55,9 +55,14 @@ Type: `Promise<void>`
 
  - [klevu-layout-results](../klevu-layout-results)
 
+### Depends on
+
+- [klevu-util-scrollbars](../klevu-util-scrollbars)
+
 ### Graph
 ```mermaid
 graph TD;
+  klevu-drawer --> klevu-util-scrollbars
   klevu-layout-results --> klevu-drawer
   style klevu-drawer fill:#f9f,stroke:#333,stroke-width:4px
 ```

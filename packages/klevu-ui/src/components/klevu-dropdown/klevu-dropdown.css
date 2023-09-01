@@ -64,5 +64,5 @@ select:focus {
 }
 
 .selectcontainer.disabled .triangle {
-  background-color: var(--klevu-color-border);
+  background-color: var(--klevu-color-neutral-4);
 }

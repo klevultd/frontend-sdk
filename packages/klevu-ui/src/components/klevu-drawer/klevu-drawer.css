@@ -1,6 +1,7 @@
 :host {
   display: block;
-  --klevu-drawer-ypadding: var(--klevu-spacing-07);
+  --klevu-drawer-ypadding: var(--klevu-spacing-04);
+  --klevu-drawer-width: 400px;
 }
 
 .drawer {
@@ -11,18 +12,17 @@
   z-index: 1000;
   background: #fff;
   transition: left 0.4s, right 0.4s;
+  width: var(--klevu-drawer-width);
 }
 
 .drawer.left {
   left: -100%;
-  border-right: 1px solid var(--klevu-color-border);
-  padding-right: var(--klevu-spacing-04);
+  border-right: 1px solid var(--klevu-color-neutral-3);
 }
 
 .drawer.right {
   right: -100%;
-  border-left: 1px solid var(--klevu-color-border);
-  padding-left: var(--klevu-spacing-04);
+  border-left: 1px solid var(--klevu-color-neutral-3);
 }
 
 .drawer.left.show {
@@ -51,7 +51,7 @@
 .innercontainer {
   height: 100%;
   width: 100%;
-  overflow-y: scroll;
+  box-sizing: border-box;
 }
 
 .insertypadding {

@@ -268,6 +268,7 @@ export namespace Components {
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface KlevuDrawer {
         /**
@@ -754,6 +755,7 @@ export namespace Components {
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
      * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     * @cssprop --klevu-product-border none Border style of the product
      */
     interface KlevuProduct {
         /**
@@ -878,7 +880,7 @@ export namespace Components {
         /**
           * How many pixels to offset the popup from origin
          */
-        "popupOffset"?: number;
+        "popupOffset": number;
         /**
           * Title of the popup
          */
@@ -1830,6 +1832,7 @@ declare global {
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -2035,6 +2038,7 @@ declare global {
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
      * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     * @cssprop --klevu-product-border none Border style of the product
      */
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
@@ -2573,6 +2577,7 @@ declare namespace LocalJSX {
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface KlevuDrawer {
         /**
@@ -3063,6 +3068,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
      * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     * @cssprop --klevu-product-border none Border style of the product
      */
     interface KlevuProduct {
         /**
@@ -4066,6 +4072,7 @@ declare module "@stencil/core" {
              * Component to create offscreen drawer on left or right side of the screen
              * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
              * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+             * @cssprop --klevu-drawer-width 400px width of drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**
@@ -4191,6 +4198,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-product-small-width - Width of the product when small variant is used
              * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
              * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+             * @cssprop --klevu-product-border none Border style of the product
              */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**
