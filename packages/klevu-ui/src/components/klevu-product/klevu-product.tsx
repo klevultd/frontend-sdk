@@ -121,7 +121,18 @@ export class KlevuProduct {
    */
   @Prop() vatCaption?: string
 
+  /**
+   * To show the product code next to product name.
+   */
   @Prop() showProductCode?: boolean
+  /**
+   * Caption to show if product is out of stock
+   */
+  @Prop() oosCaption?: string
+  /**
+   * Fallback image url to be used when the product image fails to load.
+   */
+  @Prop() fallbackProductImageUrl?: string
   /**
    * Turns the component into a product wrapper that handles events
    * automatically. It assumes that whole product is clickable.
@@ -168,9 +179,10 @@ export class KlevuProduct {
         this.vatCaption = settings.klevu_uc_userOptions.vatCaption
       }
 
-      if (this.showProductCode === undefined) {
-        this.showProductCode = settings.klevu_showProductCode
-      }
+      if (this.showProductCode === undefined) this.showProductCode = settings.klevu_showProductCode
+      if (this.fallbackProductImageUrl === undefined)
+        this.fallbackProductImageUrl = settings.klevu_uc_userOptions.noImageUrl
+      if (this.oosCaption === undefined) this.oosCaption = settings.klevu_uc_userOptions.outOfStockCaption
     }
   }
 
@@ -283,14 +295,16 @@ export class KlevuProduct {
                     class="image"
                     part="product-image"
                     style={{
-                      backgroundImage: `url(${this.hoverImage || this.product.image})`,
+                      backgroundImage: `url(${this.hoverImage || this.product.image}), url(${
+                        this.fallbackProductImageUrl
+                      })`,
                     }}
                   >
                     {this.hideHoverImage !== true && this.product.imageHover ? (
                       <div
                         class="hover"
                         style={{
-                          backgroundImage: `url(${this.product.imageHover})`,
+                          backgroundImage: `url(${this.product.imageHover}), url(${this.fallbackProductImageUrl})`,
                         }}
                       ></div>
                     ) : null}
@@ -320,7 +334,10 @@ export class KlevuProduct {
                     {this.product[this.keyDescription].substring(0, 100)}
                   </klevu-typography>
                 )}
-                {this.hidePrice || !this.product.salePrice || !this.product.currency ? null : (
+                {this.hidePrice ||
+                !this.product.salePrice ||
+                !this.product.currency ||
+                this.product.inStock === "no" ? null : (
                   <Fragment>
                     <klevu-typography
                       variant="body-l-bold"
@@ -337,6 +354,11 @@ export class KlevuProduct {
                       </klevu-typography>
                     )}
                   </Fragment>
+                )}
+                {this.product.inStock === "no" && this.oosCaption && (
+                  <klevu-typography class="ooscaption" variant="body-s">
+                    {this.oosCaption}
+                  </klevu-typography>
                 )}
               </div>
             </slot>

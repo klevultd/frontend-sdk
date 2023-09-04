@@ -222,6 +222,10 @@ klevu-button.addToCart {
   display: block;
   --klevu-typography-color: var(--klevu-color-neutral-6);
 }
+.ooscaption {
+  display: block;
+  --klevu-typography-color: var(--klevu-color-oos-caption, #ff0000);
+}
 
 /* Hover image */
 .image .hover {

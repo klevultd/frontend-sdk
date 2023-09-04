@@ -757,6 +757,10 @@ export namespace Components {
      */
     interface KlevuProduct {
         /**
+          * Fallback image url to be used when the product image fails to load.
+         */
+        "fallbackProductImageUrl"?: string;
+        /**
           * Force certain width for product. Do not use max-width
          */
         "fixedWidth"?: boolean;
@@ -805,6 +809,10 @@ export namespace Components {
          */
         "keyName": string;
         /**
+          * Caption to show if product is out of stock
+         */
+        "oosCaption"?: string;
+        /**
           * Product data
          */
         "product"?: Partial<KlevuRecord>;
@@ -812,6 +820,9 @@ export namespace Components {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        /**
+          * To show the product code next to product name.
+         */
         "showProductCode"?: boolean;
         /**
           * Show ratings
@@ -1150,9 +1161,13 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show popular keywords on no results page
+         */
+        "showPopularKeywordsOnNoResultsPage"?: boolean;
+        /**
           * Show popular keywords
          */
-        "showPopularKeywords"?: boolean;
+        "showPopularSearches"?: boolean;
         /**
           * Show ratings
          */
@@ -1162,6 +1177,10 @@ export namespace Components {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show recent searches
+         */
+        "showRecentSearches"?: boolean;
+        /**
           * Show recently viewed products
          */
         "showRecentlyViewedProducts"?: boolean;
@@ -1169,6 +1188,10 @@ export namespace Components {
           * Show trending products
          */
         "showTrendingProducts"?: boolean;
+        /**
+          * Show trending products on no results page
+         */
+        "showTrendingProductsOnNoResultsPage"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -1182,9 +1205,9 @@ export namespace Components {
          */
         "tLastClickedProductsCaption"?: string;
         /**
-          * Popular products section heading
+          * Popular products section heading shown on no results page
          */
-        "tPopularProductsTitle"?: string;
+        "tPopularProductsTitleOnNoResultsPage"?: string;
         /**
           * Title of search results
          */
@@ -3071,6 +3094,10 @@ declare namespace LocalJSX {
      */
     interface KlevuProduct {
         /**
+          * Fallback image url to be used when the product image fails to load.
+         */
+        "fallbackProductImageUrl"?: string;
+        /**
           * Force certain width for product. Do not use max-width
          */
         "fixedWidth"?: boolean;
@@ -3123,6 +3150,10 @@ declare namespace LocalJSX {
          */
         "onKlevuProductClick"?: (event: KlevuProductCustomEvent<KlevuProductOnProductClick>) => void;
         /**
+          * Caption to show if product is out of stock
+         */
+        "oosCaption"?: string;
+        /**
           * Product data
          */
         "product"?: Partial<KlevuRecord>;
@@ -3130,6 +3161,9 @@ declare namespace LocalJSX {
           * Show add to cart button
          */
         "showAddToCart"?: boolean;
+        /**
+          * To show the product code next to product name.
+         */
         "showProductCode"?: boolean;
         /**
           * Show ratings
@@ -3473,9 +3507,13 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
+          * Show popular keywords on no results page
+         */
+        "showPopularKeywordsOnNoResultsPage"?: boolean;
+        /**
           * Show popular keywords
          */
-        "showPopularKeywords"?: boolean;
+        "showPopularSearches"?: boolean;
         /**
           * Show ratings
          */
@@ -3485,6 +3523,10 @@ declare namespace LocalJSX {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show recent searches
+         */
+        "showRecentSearches"?: boolean;
+        /**
           * Show recently viewed products
          */
         "showRecentlyViewedProducts"?: boolean;
@@ -3492,6 +3534,10 @@ declare namespace LocalJSX {
           * Show trending products
          */
         "showTrendingProducts"?: boolean;
+        /**
+          * Show trending products on no results page
+         */
+        "showTrendingProductsOnNoResultsPage"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -3505,9 +3551,9 @@ declare namespace LocalJSX {
          */
         "tLastClickedProductsCaption"?: string;
         /**
-          * Popular products section heading
+          * Popular products section heading shown on no results page
          */
-        "tPopularProductsTitle"?: string;
+        "tPopularProductsTitleOnNoResultsPage"?: string;
         /**
           * Title of search results
          */
