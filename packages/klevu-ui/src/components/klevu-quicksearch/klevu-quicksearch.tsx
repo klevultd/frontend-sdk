@@ -497,7 +497,7 @@ export class KlevuQuicksearch {
             </klevu-button>
           )}
           {((this.showPopularSearches && !this.#isNoResultsPage()) ||
-            (this.showPopularKeywordsOnNoResultsPage && this.#isNoResultsPage.call(this))) && (
+            (this.showPopularKeywordsOnNoResultsPage && this.#isNoResultsPage())) && (
             <klevu-popular-searches
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
@@ -518,7 +518,7 @@ export class KlevuQuicksearch {
             ) : null}
             <div class="tabrow">
               {((this.showTrendingProducts && !this.#isNoResultsPage()) ||
-                (this.showTrendingProductsOnNoResultsPage && this.#isNoResultsPage.call(this))) && (
+                (this.showTrendingProductsOnNoResultsPage && this.#isNoResultsPage())) && (
                 <klevu-tab
                   caption={stringConcat(this.tTrendingCaption ?? getTranslation("quicksearch.tTrendingCaption"), [
                     `${this.trendingProducts?.length ?? 0}`,
