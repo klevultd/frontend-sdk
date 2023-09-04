@@ -7,9 +7,11 @@ import { KlevuFetchFunctionReturnValue } from "../queries/index.js"
 import { FilterManager } from "../store/filterManager.js"
 import { extractActiveFilters } from "../utils/extractActiveFilters.js"
 import { KlevuFetch, removeListFilters } from "./klevuFetch.js"
+import { KlevuKeywordUrlMap } from "./kmcmodels/KMCMaps.js"
 import { KlevuResponseObject } from "./responseObject.js"
 import { getAnnotationsForProduct } from "./resultHelpers/getAnnotationsForProduct.js"
 import { getBanners } from "./resultHelpers/getBanners.js"
+import { getRedirects } from "./resultHelpers/getRedirects.js"
 
 /**
  * Result object for each query. A storage for results. Can be used to fetch more data, send events etc.
@@ -50,6 +52,11 @@ export class KlevuResponseQueryObject {
    */
   recommendationClickEvent?: KlevuFetchQueryResult["recommendationClickEvent"]
 
+  /**
+   * Fetches redirects for this query. This is available only for search queries
+   */
+  getRedirects?: () => Promise<KlevuKeywordUrlMap[]>
+
   constructor(
     responseObject: KlevuResponseObject,
     query: KlevuQueryResult,
@@ -58,7 +65,8 @@ export class KlevuResponseQueryObject {
     this.responseObject = responseObject
     this.query = query
     this.func = func
-    this.initEventFunctions()
+    this.#initEventFunctions()
+    this.#initRedirects()
   }
 
   /**
@@ -178,7 +186,19 @@ export class KlevuResponseQueryObject {
     return Math.ceil(this.query.meta.totalResultsFound / this.query.meta.offset)
   }
 
-  private initEventFunctions() {
+  #initRedirects() {
+    if (this.func.klevuFunctionId === "search") {
+      this.getRedirects = () => {
+        if (!this.func.params?.term) {
+          return Promise.resolve([])
+        }
+
+        return getRedirects(this.func.params.term)
+      }
+    }
+  }
+
+  #initEventFunctions() {
     switch (this.func?.klevuFunctionId) {
       case "search": {
         this.searchClickEvent = function ({

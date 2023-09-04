@@ -890,7 +890,7 @@ export namespace Components {
         /**
           * How many pixels to offset the popup from origin
          */
-        "popupOffset"?: number;
+        "popupOffset": number;
         /**
           * Title of the popup
          */
@@ -1204,6 +1204,10 @@ export namespace Components {
           * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
         "tLastClickedProductsCaption"?: string;
+        /**
+          * Popular products section heading
+         */
+        "tPopularProductsTitle"?: string;
         /**
           * Popular products section heading shown on no results page
          */
@@ -3550,6 +3554,10 @@ declare namespace LocalJSX {
           * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
         "tLastClickedProductsCaption"?: string;
+        /**
+          * Popular products section heading
+         */
+        "tPopularProductsTitle"?: string;
         /**
           * Popular products section heading shown on no results page
          */

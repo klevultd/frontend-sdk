@@ -56,11 +56,11 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       show-trending-products=${ifDefined(args.showTrendingProducts)}
       show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
       show-recent-searches=${ifDefined(args.showRecentSearches)}
+      show-popular-keywords-on-no-results-page=${ifDefined(args.showPopularKeywordsOnNoResultsPage)}
+      show-trending-products-on-no-results-page=${ifDefined(args.showTrendingProductsOnNoResultsPage)}
       t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
       t-trending-caption=${ifDefined(args.tTrendingCaption)}
       t-popular-products-title-on-no-results-page=${ifDefined(args.tPopularProductsTitleOnNoResultsPage)}
-      show-popular-keywords-on-no-results-page=${ifDefined(args.showPopularKeywordsOnNoResultsPage)}
-      show-trending-products-on-no-results-page=${ifDefined(args.showTrendingProductsOnNoResultsPage)}
     >
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>

@@ -127,6 +127,11 @@ export class KlevuQuicksearch {
   @Prop() tTrendingCaption?: string
 
   /**
+   * Popular products section heading
+   */
+  @Prop() tPopularProductsTitle?: string
+
+  /**
    * Recently clicked tab caption
    * Supports showing the count in place of %s in the value
    * eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
@@ -316,7 +321,6 @@ export class KlevuQuicksearch {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-
       if (this.showRecentlyViewedProducts === undefined)
         this.showRecentlyViewedProducts = settings?.klevu_uc_userOptions.showRecentlyViewedItems
       if (this.tLastClickedProductsCaption === undefined)
@@ -341,7 +345,6 @@ export class KlevuQuicksearch {
       if (this.showPopularKeywordsOnNoResultsPage === undefined)
         this.showPopularKeywordsOnNoResultsPage = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
 
-      console.log(this.showTrendingProducts || this.showTrendingProductsOnNoResultsPage)
       if (this.showTrendingProducts || this.showTrendingProductsOnNoResultsPage) {
         const trendingProductsQuery = await KlevuFetch(
           trendingProducts({

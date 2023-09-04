@@ -15,9 +15,13 @@ const ONE_DAY = 86_400_000
  *
  * @category KlevuFetch
  * @param ignoreCache If true, will ignore cache and fetch data from server
+ * @param cacheLength How long to cache data in milliseconds
  * @returns
  */
-export async function KlevuKMCSettings(ignoreCache?: boolean): Promise<{
+export async function KlevuKMCSettings(
+  ignoreCache?: boolean,
+  cacheLength = ONE_DAY
+): Promise<{
   root?: KMCRootObject
   banner?: KMCBannerRootObject
   maps?: KMCMapsRootObject
@@ -25,7 +29,7 @@ export async function KlevuKMCSettings(ignoreCache?: boolean): Promise<{
   if (isBrowser() && window.localStorage && ignoreCache !== true) {
     const ts = window.localStorage.getItem(STORAGE_TS_KEY)
     const res = window.localStorage.getItem(STORAGE_KEY)
-    if (res && ts && new Date().getTime() - parseInt(ts, 10) < ONE_DAY) {
+    if (res && ts && new Date().getTime() - parseInt(ts, 10) < cacheLength) {
       return JSON.parse(res)
     }
   }
