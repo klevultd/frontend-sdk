@@ -95,6 +95,11 @@ export class KlevuQuicksearch {
   @Prop() simpleResultCount: number = 3
 
   /**
+   * How many products to show in Popular products section
+   */
+  @Prop() popularProductsCount: number = 10
+
+  /**
    * How many products to show in full variant
    */
   @Prop() fullResultCount: number = 9
@@ -322,7 +327,7 @@ export class KlevuQuicksearch {
       if (this.showTrendingProducts) {
         const trendingProductsQuery = await KlevuFetch(
           trendingProducts({
-            limit: this.simpleResultCount,
+            limit: this.popularProductsCount,
           })
         )
         const resultObject = trendingProductsQuery.queriesById("trendingProducts")
