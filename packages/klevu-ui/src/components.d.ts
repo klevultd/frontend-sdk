@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -878,7 +878,7 @@ export namespace Components {
         /**
           * How many pixels to offset the popup from origin
          */
-        "popupOffset"?: number;
+        "popupOffset": number;
         /**
           * Title of the popup
          */
@@ -1108,6 +1108,10 @@ export namespace Components {
      * Full app to create search bar that popups trending products and search results.
      */
     interface KlevuQuicksearch {
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "customUrlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable Klevu MOI chat
          */
@@ -3423,6 +3427,10 @@ declare namespace LocalJSX {
      */
     interface KlevuQuicksearch {
         /**
+          * Pass your own redirect urls for a keyword
+         */
+        "customUrlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
+        /**
           * Enable Klevu MOI chat
          */
         "enableChat"?: boolean;
@@ -3438,6 +3446,14 @@ declare namespace LocalJSX {
           * When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.
          */
         "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
+        /**
+          * Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event
+         */
+        "onKlevuRedirect"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
+        /**
+          * When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects
+         */
+        "onKlevuSearch"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
         /**
           * Placeholder for input text
          */
