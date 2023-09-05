@@ -43,7 +43,7 @@ Full app to create search bar that popups trending products and search results.
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `klevuData`     | When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.             | `CustomEvent<{ trendingProducts?: KlevuRecord[] \| undefined; lastClickedProducts?: KlevuRecord[] \| undefined; searchResult?: KlevuQueryResult \| undefined; }>` |
 | `klevuRedirect` | Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event | `CustomEvent<string>`                                                                                                                                             |
-| `klevuSearch`   | When user clicks search button. Returns the search term. This event is emitted after looking at redirect options                                 | `CustomEvent<string>`                                                                                                                                             |
+| `klevuSearch`   | When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects                        | `CustomEvent<string>`                                                                                                                                             |
 
 
 ## Slots
