@@ -80,6 +80,7 @@ graph TD;
   klevu-layout-results --> klevu-drawer
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
+  klevu-drawer --> klevu-util-scrollbars
   klevu-facet-list --> klevu-facet
   klevu-facet-list --> klevu-button
   klevu-facet --> klevu-accordion

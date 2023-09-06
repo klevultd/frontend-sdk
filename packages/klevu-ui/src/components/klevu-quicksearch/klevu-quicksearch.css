@@ -13,7 +13,7 @@
   width: 180px;
   flex-shrink: 0;
   padding-right: var(--klevu-spacing-04);
-  border-right: 1px solid var(--klevu-color-border);
+  border-right: 1px solid var(--klevu-color-neutral-4);
   margin-right: var(--klevu-spacing-04);
 }
 

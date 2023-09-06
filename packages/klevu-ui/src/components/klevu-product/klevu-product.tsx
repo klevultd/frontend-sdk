@@ -31,6 +31,7 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @cssprop --klevu-product-small-width - Width of the product when small variant is used
  * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
  * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+ * @cssprop --klevu-product-border none Border style of the product
  */
 @Component({
   tag: "klevu-product",
