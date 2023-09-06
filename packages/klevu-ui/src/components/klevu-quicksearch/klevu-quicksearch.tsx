@@ -175,7 +175,7 @@ export class KlevuQuicksearch {
   /**
    * Pass your own redirect urls for a keyword
    */
-  @Prop() customUrlRedirects?: KMCMapsRootObject["klevu_keywordUrlMap"]
+  @Prop() urlRedirects?: KMCMapsRootObject["klevu_keywordUrlMap"]
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -223,7 +223,7 @@ export class KlevuQuicksearch {
   @Event({
     composed: true,
   })
-  klevuRedirect!: EventEmitter<string>
+  klevuRedirect!: EventEmitter<KMCMapsRootObject["klevu_keywordUrlMap"][0]>
 
   #emitChangedData() {
     this.klevuData.emit({
@@ -322,16 +322,16 @@ export class KlevuQuicksearch {
 
   async #handleUrlRedirects(term: string) {
     let redirect: KMCMapsRootObject["klevu_keywordUrlMap"][0] | undefined
-    if (this.customUrlRedirects === undefined && this.#resultObject?.getRedirects) {
+    if (this.urlRedirects === undefined && this.#resultObject?.getRedirects) {
       const redirects = await this.#resultObject.getRedirects()
       if (redirects && redirects.length > 0) {
         redirect = redirects[0]
       }
     } else {
-      redirect = this.customUrlRedirects?.find((redirects) => redirects.keywords.includes(term))
+      redirect = this.urlRedirects?.find((redirects) => redirects.keywords.includes(term))
     }
     if (redirect) {
-      const emittedEvent = this.klevuRedirect.emit(redirect.url)
+      const emittedEvent = this.klevuRedirect.emit(redirect)
       if (!emittedEvent.defaultPrevented) {
         window.location.href = redirect.url
       }
