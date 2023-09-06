@@ -1109,10 +1109,6 @@ export namespace Components {
      */
     interface KlevuQuicksearch {
         /**
-          * Pass your own redirect urls for a keyword
-         */
-        "customUrlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
-        /**
           * Enable Klevu MOI chat
          */
         "enableChat"?: boolean;
@@ -1204,6 +1200,10 @@ export namespace Components {
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable personalisation
          */
@@ -3431,10 +3431,6 @@ declare namespace LocalJSX {
      */
     interface KlevuQuicksearch {
         /**
-          * Pass your own redirect urls for a keyword
-         */
-        "customUrlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
-        /**
           * Enable Klevu MOI chat
          */
         "enableChat"?: boolean;
@@ -3453,7 +3449,7 @@ declare namespace LocalJSX {
         /**
           * Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event
          */
-        "onKlevuRedirect"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
+        "onKlevuRedirect"?: (event: KlevuQuicksearchCustomEvent<KMCMapsRootObject["klevu_keywordUrlMap"][0]>) => void;
         /**
           * When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects
          */
@@ -3538,6 +3534,10 @@ declare namespace LocalJSX {
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable personalisation
          */
