@@ -62,6 +62,7 @@ graph TD;
   klevu-layout-results --> klevu-drawer
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
+  klevu-drawer --> klevu-util-scrollbars
   klevu-merchandising --> klevu-layout-results
   klevu-search-landing-page --> klevu-layout-results
   style klevu-layout-results fill:#f9f,stroke:#333,stroke-width:4px

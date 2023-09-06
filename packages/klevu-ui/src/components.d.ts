@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -268,6 +268,7 @@ export namespace Components {
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface KlevuDrawer {
         /**
@@ -754,6 +755,7 @@ export namespace Components {
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
      * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     * @cssprop --klevu-product-border none Border style of the product
      */
     interface KlevuProduct {
         /**
@@ -1137,6 +1139,10 @@ export namespace Components {
          */
         "placeholder"?: string;
         /**
+          * How many products to show in Popular products section
+         */
+        "popularProductsCount": number;
+        /**
           * Anchor popup to witch side
          */
         "popupAnchor"?: Placement;
@@ -1224,6 +1230,10 @@ export namespace Components {
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable personalisation
          */
@@ -1862,6 +1872,7 @@ declare global {
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -2067,6 +2078,7 @@ declare global {
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
      * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     * @cssprop --klevu-product-border none Border style of the product
      */
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
@@ -2605,6 +2617,7 @@ declare namespace LocalJSX {
      * Component to create offscreen drawer on left or right side of the screen
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface KlevuDrawer {
         /**
@@ -3095,6 +3108,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
      * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+     * @cssprop --klevu-product-border none Border style of the product
      */
     interface KlevuProduct {
         /**
@@ -3483,9 +3497,21 @@ declare namespace LocalJSX {
          */
         "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
         /**
+          * Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event
+         */
+        "onKlevuRedirect"?: (event: KlevuQuicksearchCustomEvent<KMCMapsRootObject["klevu_keywordUrlMap"][0]>) => void;
+        /**
+          * When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects
+         */
+        "onKlevuSearch"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
+        /**
+          * How many products to show in Popular products section
+         */
+        "popularProductsCount"?: number;
         /**
           * Anchor popup to witch side
          */
@@ -3574,6 +3600,10 @@ declare namespace LocalJSX {
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable personalisation
          */
@@ -4130,6 +4160,7 @@ declare module "@stencil/core" {
              * Component to create offscreen drawer on left or right side of the screen
              * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
              * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
+             * @cssprop --klevu-drawer-width 400px width of drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**
@@ -4255,6 +4286,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-product-small-width - Width of the product when small variant is used
              * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
              * @cssprop --klevu-product-image-fill - How to fill image to it's space.
+             * @cssprop --klevu-product-border none Border style of the product
              */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**

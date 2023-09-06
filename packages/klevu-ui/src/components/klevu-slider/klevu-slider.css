@@ -162,32 +162,6 @@
 }
 /* Handle stripes;
   */
-/*
-.noUi-handle:before,
-.noUi-handle:after {
-  content: "";
-  display: block;
-  position: absolute;
-  height: 14px;
-  width: 1px;
-  background: var(--klevu-color-border);
-  left: 14px;
-  top: 6px;
-}
-.noUi-handle:after {
-  left: 17px;
-}
-.noUi-vertical .noUi-handle:before,
-.noUi-vertical .noUi-handle:after {
-  width: 14px;
-  height: 1px;
-  left: 6px;
-  top: 14px;
-}
-.noUi-vertical .noUi-handle:after {
-  top: 17px;
-}
-*/
 /* Disabled state;
   */
 [disabled] .noUi-connect {
