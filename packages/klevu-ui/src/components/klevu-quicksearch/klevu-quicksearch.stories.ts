@@ -41,6 +41,7 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-trending-caption=${ifDefined(args.tTrendingCaption)}
     t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
     .customUrlRedirects=${args.customUrlRedirects}
+    popular-products-count=${ifDefined(args.popularProductsCount)}
   ></klevu-quicksearch>`,
 }
 
@@ -57,6 +58,7 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       t-trending-caption=${ifDefined(args.tTrendingCaption)}
       t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
       .customUrlRedirects=${args.customUrlRedirects}
+      popular-products-count=${ifDefined(args.popularProductsCount)}
     >
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>

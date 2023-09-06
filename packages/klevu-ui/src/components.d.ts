@@ -1129,6 +1129,10 @@ export namespace Components {
          */
         "placeholder"?: string;
         /**
+          * How many products to show in Popular products section
+         */
+        "popularProductsCount": number;
+        /**
           * Anchor popup to witch side
          */
         "popupAnchor"?: Placement;
@@ -3458,6 +3462,10 @@ declare namespace LocalJSX {
           * Placeholder for input text
          */
         "placeholder"?: string;
+        /**
+          * How many products to show in Popular products section
+         */
+        "popularProductsCount"?: number;
         /**
           * Anchor popup to witch side
          */
