@@ -129,7 +129,7 @@ export class KlevuProduct {
   /**
    * Caption to show if product is out of stock
    */
-  @Prop() oosCaption?: string
+  @Prop() outOfStockCaption?: string
   /**
    * Fallback image url to be used when the product image fails to load.
    */
@@ -180,10 +180,15 @@ export class KlevuProduct {
         this.vatCaption = settings.klevu_uc_userOptions.vatCaption
       }
 
-      if (this.showProductCode === undefined) this.showProductCode = settings.klevu_showProductCode
-      if (this.fallbackProductImageUrl === undefined)
+      if (this.showProductCode === undefined) {
+        this.showProductCode = settings.klevu_showProductCode
+      }
+      if (this.fallbackProductImageUrl === undefined) {
         this.fallbackProductImageUrl = settings.klevu_uc_userOptions.noImageUrl
-      if (this.oosCaption === undefined) this.oosCaption = settings.klevu_uc_userOptions.outOfStockCaption
+      }
+      if (this.outOfStockCaption === undefined) {
+        this.outOfStockCaption = settings.klevu_uc_userOptions.outOfStockCaption
+      }
     }
   }
 
@@ -356,9 +361,9 @@ export class KlevuProduct {
                     )}
                   </Fragment>
                 )}
-                {this.product.inStock === "no" && this.oosCaption && (
-                  <klevu-typography class="ooscaption" variant="body-s">
-                    {this.oosCaption}
+                {this.product.inStock === "no" && this.outOfStockCaption && (
+                  <klevu-typography class="outOfStockCaption" variant="body-s">
+                    {this.outOfStockCaption}
                   </klevu-typography>
                 )}
               </div>

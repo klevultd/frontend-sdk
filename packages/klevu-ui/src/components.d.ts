@@ -813,7 +813,7 @@ export namespace Components {
         /**
           * Caption to show if product is out of stock
          */
-        "oosCaption"?: string;
+        "outOfStockCaption"?: string;
         /**
           * Product data
          */
@@ -3170,7 +3170,7 @@ declare namespace LocalJSX {
         /**
           * Caption to show if product is out of stock
          */
-        "oosCaption"?: string;
+        "outOfStockCaption"?: string;
         /**
           * Product data
          */

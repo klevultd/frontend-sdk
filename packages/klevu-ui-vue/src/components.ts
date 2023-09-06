@@ -266,7 +266,7 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
   'keyDescription',
   'vatCaption',
   'showProductCode',
-  'oosCaption',
+  'outOfStockCaption',
   'fallbackProductImageUrl',
   'isWrapper',
   'klevuProductClick'
