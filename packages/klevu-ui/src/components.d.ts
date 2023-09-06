@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -1202,6 +1202,10 @@ export namespace Components {
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable personalisation
          */
@@ -3449,6 +3453,14 @@ declare namespace LocalJSX {
          */
         "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
         /**
+          * Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event
+         */
+        "onKlevuRedirect"?: (event: KlevuQuicksearchCustomEvent<KMCMapsRootObject["klevu_keywordUrlMap"][0]>) => void;
+        /**
+          * When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects
+         */
+        "onKlevuSearch"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -3528,6 +3540,10 @@ declare namespace LocalJSX {
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
+        /**
+          * Pass your own redirect urls for a keyword
+         */
+        "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
           * Enable personalisation
          */

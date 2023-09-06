@@ -8,6 +8,7 @@ import {
   KlevuSearchSorting,
   trendingProducts,
   KMCRootObject,
+  KMCMapsRootObject,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -171,6 +172,11 @@ export class KlevuQuicksearch {
    */
   @Prop() usePersonalisation?: boolean
 
+  /**
+   * Pass your own redirect urls for a keyword
+   */
+  @Prop() urlRedirects?: KMCMapsRootObject["klevu_keywordUrlMap"]
+
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
   @State() suggestions: string[] = []
@@ -200,6 +206,24 @@ export class KlevuQuicksearch {
     composed: true,
   })
   klevuData!: EventEmitter<KlevuQuicksearchDataEvent>
+  /**
+   * When user clicks search button. Returns the search term.
+   * This event is emitted when there is no url matched for redirects
+   */
+  @Event({
+    composed: true,
+  })
+  klevuSearch!: EventEmitter<string>
+
+  /**
+   * Will be emitted when there is a url match for redirects.
+   * You can override the default behaviour of redirects by
+   * preventing default of this event
+   */
+  @Event({
+    composed: true,
+  })
+  klevuRedirect!: EventEmitter<KMCMapsRootObject["klevu_keywordUrlMap"][0]>
 
   #emitChangedData() {
     this.klevuData.emit({
@@ -289,6 +313,31 @@ export class KlevuQuicksearch {
   @Listen("klevuChatLayoutClose")
   onChatLayoutClose() {
     this.chat = false
+  }
+
+  @Listen("klevuSearchClick")
+  onKlevuSearchclick(event: CustomEvent<string>) {
+    setTimeout(() => this.#handleUrlRedirects(event.detail), 200)
+  }
+
+  async #handleUrlRedirects(term: string) {
+    let redirect: KMCMapsRootObject["klevu_keywordUrlMap"][0] | undefined
+    if (this.urlRedirects === undefined && this.#resultObject?.getRedirects) {
+      const redirects = await this.#resultObject.getRedirects()
+      if (redirects && redirects.length > 0) {
+        redirect = redirects[0]
+      }
+    } else {
+      redirect = this.urlRedirects?.find((redirects) => redirects.keywords.includes(term))
+    }
+    if (redirect) {
+      const emittedEvent = this.klevuRedirect.emit(redirect)
+      if (!emittedEvent.defaultPrevented) {
+        window.location.href = redirect.url
+      }
+    } else {
+      this.klevuSearch.emit(term)
+    }
   }
 
   async connectedCallback() {
