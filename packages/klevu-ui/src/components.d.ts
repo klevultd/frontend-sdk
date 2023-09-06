@@ -878,7 +878,7 @@ export namespace Components {
         /**
           * How many pixels to offset the popup from origin
          */
-        "popupOffset"?: number;
+        "popupOffset": number;
         /**
           * Title of the popup
          */
@@ -1124,6 +1124,10 @@ export namespace Components {
           * Placeholder for input text
          */
         "placeholder"?: string;
+        /**
+          * How many products to show in Popular products section
+         */
+        "popularProductsCount": number;
         /**
           * Anchor popup to witch side
          */
@@ -3442,6 +3446,10 @@ declare namespace LocalJSX {
           * Placeholder for input text
          */
         "placeholder"?: string;
+        /**
+          * How many products to show in Popular products section
+         */
+        "popularProductsCount"?: number;
         /**
           * Anchor popup to witch side
          */
