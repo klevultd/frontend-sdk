@@ -265,6 +265,9 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
   'keyName',
   'keyDescription',
   'vatCaption',
+  'showProductCode',
+  'outOfStockCaption',
+  'fallbackProductImageUrl',
   'isWrapper',
   'klevuProductClick'
 ]);
@@ -367,8 +370,12 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'showRatingsCount',
   'showTrendingProducts',
   'showRecentlyViewedProducts',
-  'showPopularKeywords',
+  'showPopularSearches',
+  'showRecentSearches',
   'usePersonalisation',
+  'showPopularKeywordsOnNoResultsPage',
+  'tPopularProductsTitleOnNoResultsPage',
+  'showTrendingProductsOnNoResultsPage',
   'urlRedirects',
   'klevuData',
   'klevuSearch',
@@ -426,6 +433,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'tLoadMore',
   'usePersonalisation',
   'popularProductsResultCount',
+  'showSearch',
   'klevuData'
 ]);
 

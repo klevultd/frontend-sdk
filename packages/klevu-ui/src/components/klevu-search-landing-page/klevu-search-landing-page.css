@@ -3,9 +3,13 @@
 }
 
 .header {
+  width: 100%;
+}
+.header .info {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: var(--klevu-spacing-04);
 }
 
 .footer {

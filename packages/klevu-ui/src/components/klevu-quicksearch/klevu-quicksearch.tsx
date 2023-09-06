@@ -165,13 +165,31 @@ export class KlevuQuicksearch {
   /**
    * Show popular keywords
    */
-  @Prop() showPopularKeywords?: boolean
+  @Prop() showPopularSearches?: boolean
+  /**
+   * Show recent searches
+   */
+  @Prop() showRecentSearches?: boolean
 
   /**
    * Enable personalisation
    */
   @Prop() usePersonalisation?: boolean
 
+  // No results page props
+  /**
+   * Show popular keywords on no results page
+   */
+  @Prop() showPopularKeywordsOnNoResultsPage?: boolean
+  /**
+   * Popular products section heading shown on no results page
+   */
+  @Prop() tPopularProductsTitleOnNoResultsPage?: string
+
+  /**
+   * Show trending products on no results page
+   */
+  @Prop() showTrendingProductsOnNoResultsPage?: boolean
   /**
    * Pass your own redirect urls for a keyword
    */
@@ -238,6 +256,7 @@ export class KlevuQuicksearch {
     if (event.detail.length === 0) {
       this.suggestions = []
       this.products = []
+      this.#searchTerm = ""
     }
   }
 
@@ -355,25 +374,42 @@ export class KlevuQuicksearch {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-      if (this.showPopularKeywords === undefined)
-        this.showPopularKeywords = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
-      if (this.showTrendingProducts === undefined)
-        this.showTrendingProducts = settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
-      if (this.showRecentlyViewedProducts === undefined)
+      if (this.showRecentlyViewedProducts === undefined) {
         this.showRecentlyViewedProducts = settings?.klevu_uc_userOptions.showRecentlyViewedItems
-      if (this.tLastClickedProductsCaption === undefined)
+      }
+      if (this.tLastClickedProductsCaption === undefined) {
         this.tLastClickedProductsCaption =
           settings?.klevu_uc_userOptions.showRecentlyViewedItemsCaption ??
           getTranslation("quicksearch.tLastClickedProductsCaption")
-      if (this.tTrendingCaption === undefined)
+      }
+      if (this.tTrendingCaption === undefined) {
         this.tTrendingCaption =
           settings?.klevu_uc_userOptions.showTrendingProductsCaption ?? getTranslation("quicksearch.tTrendingCaption")
-      if (this.tPopularProductsTitle === undefined)
-        this.tPopularProductsTitle =
+      }
+      if (this.showRecentSearches === undefined) {
+        this.showRecentSearches = settings?.klevu_showRecentSerches
+      }
+      if (this.showPopularSearches === undefined) {
+        this.showPopularSearches = settings?.klevu_showPopularSearches
+      }
+      if (this.showTrendingProducts === undefined) {
+        this.showTrendingProducts = settings?.klevu_uc_userOptions.showTrendingProducts
+      }
+
+      // No results page settings
+      if (this.tPopularProductsTitleOnNoResultsPage === undefined) {
+        this.tPopularProductsTitleOnNoResultsPage =
           settings?.klevu_uc_userOptions.noResultsOptions.productsHeading ??
           getTranslation("quicksearch.tPopularProductsTitle")
+      }
+      if (this.showTrendingProductsOnNoResultsPage === undefined) {
+        this.showTrendingProductsOnNoResultsPage = settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
+      }
+      if (this.showPopularKeywordsOnNoResultsPage === undefined) {
+        this.showPopularKeywordsOnNoResultsPage = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
+      }
 
-      if (this.showTrendingProducts) {
+      if (this.showTrendingProducts || this.showTrendingProductsOnNoResultsPage) {
         const trendingProductsQuery = await KlevuFetch(
           trendingProducts({
             limit: this.popularProductsCount,
@@ -515,6 +551,7 @@ export class KlevuQuicksearch {
   }
 
   #renderNoResultsPage() {
+    const isNoResultsPage = !!this.#searchTerm
     return (
       <Fragment>
         <aside>
@@ -523,24 +560,29 @@ export class KlevuQuicksearch {
               {this.tStartChat}
             </klevu-button>
           )}
-          {this.showPopularKeywords && (
+          {((this.showPopularSearches && !isNoResultsPage) ||
+            (this.showPopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
             <klevu-popular-searches
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
           )}
-          <klevu-latest-searches
-            onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
-          ></klevu-latest-searches>
+
+          {this.showRecentSearches && !isNoResultsPage && (
+            <klevu-latest-searches
+              onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
+            ></klevu-latest-searches>
+          )}
         </aside>
         <section>
           <slot name="noResults">
-            {this.noResultsMessage ? (
+            {isNoResultsPage && this.noResultsMessage ? (
               <p class="noResultsMessage">
                 <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
               </p>
             ) : null}
             <div class="tabrow">
-              {this.showTrendingProducts && (
+              {((this.showTrendingProducts && !isNoResultsPage) ||
+                (this.showTrendingProductsOnNoResultsPage && isNoResultsPage)) && (
                 <klevu-tab
                   caption={stringConcat(this.tTrendingCaption ?? getTranslation("quicksearch.tTrendingCaption"), [
                     `${this.trendingProducts?.length ?? 0}`,
@@ -549,7 +591,7 @@ export class KlevuQuicksearch {
                   onClick={() => (this.activeTab = "trending")}
                 ></klevu-tab>
               )}
-              {this.showRecentlyViewedProducts && (
+              {this.showRecentlyViewedProducts && !isNoResultsPage && (
                 <klevu-tab
                   caption={stringConcat(
                     this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
@@ -568,7 +610,9 @@ export class KlevuQuicksearch {
             </div>
             {this.activeTab === "trending" && (
               <Fragment>
-                <klevu-typography variant="body-s">{this.tPopularProductsTitle}</klevu-typography>
+                {isNoResultsPage && (
+                  <klevu-typography variant="body-s">{this.tPopularProductsTitleOnNoResultsPage}</klevu-typography>
+                )}
                 <slot name="trending-products">
                   {this.trendingProducts?.map((p) => (
                     <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
