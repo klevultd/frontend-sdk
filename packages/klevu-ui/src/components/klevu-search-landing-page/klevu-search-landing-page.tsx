@@ -111,7 +111,7 @@ export class KlevuSearchLandingPage {
   /**
    * Show price as options
    */
-  @Prop() showPriceAsOptions?: boolean
+  @Prop() showPriceAsSlider?: boolean
   /**
    * The factor to use to generate the ranges
    */
@@ -154,8 +154,8 @@ export class KlevuSearchLandingPage {
       if (this.showSearch === undefined) {
         this.showSearch = settings?.klevu_uc_userOptions.showSearchBoxOnLandingPage
       }
-      if (this.showPriceAsOptions === undefined) {
-        this.showPriceAsOptions = settings.klevu_showPriceSlider
+      if (this.showPriceAsSlider === undefined) {
+        this.showPriceAsSlider = settings.klevu_showPriceSlider
       }
       if (this.priceInterval === undefined) {
         this.priceInterval = parseInt(settings.klevu_uc_userOptions.priceInterval, 10)
@@ -186,15 +186,15 @@ export class KlevuSearchLandingPage {
 
   async #fetchData() {
     this.loading = true
-    const rangeFilterSetting = this.showPriceAsOptions
+    const rangeFilterSetting = this.showPriceAsSlider
       ? {
           key: "klevu_price",
-          rangeInterval: this.priceInterval,
-          minMax: false,
+          minMax: true,
         }
       : {
           key: "klevu_price",
-          minMax: true,
+          rangeInterval: this.priceInterval,
+          minMax: false,
         }
     const modifiers: KlevuFetchModifer[] = [
       sendSearchEvent(),

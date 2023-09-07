@@ -1385,7 +1385,7 @@ export namespace Components {
         /**
           * Show price as options
          */
-        "showPriceAsOptions"?: boolean;
+        "showPriceAsSlider"?: boolean;
         /**
           * Show ratings
          */
@@ -3767,7 +3767,7 @@ declare namespace LocalJSX {
         /**
           * Show price as options
          */
-        "showPriceAsOptions"?: boolean;
+        "showPriceAsSlider"?: boolean;
         /**
           * Show ratings
          */
