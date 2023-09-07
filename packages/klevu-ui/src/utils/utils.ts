@@ -1,4 +1,5 @@
 import { KlevuRecord } from "@klevu/core"
+import { getKMCSettings } from "./getKMCSettings"
 
 type PriceFormatSettings = {
   thousandSeparator: string
@@ -20,8 +21,8 @@ export function renderPrice(amount: number | string, currency: string): string {
     return window["klevu_ui_settings"].renderPrice(amount, currency)
   }
   // Use KMC settings to format price
-  const priceSettings: PriceFormatSettings | undefined =
-    window["klevu_ui_kmc_settings"]?.klevu_uc_userOptions.priceFormatter
+  const kmcSettings = getKMCSettings()
+  const priceSettings: PriceFormatSettings | undefined = kmcSettings?.klevu_uc_userOptions.priceFormatter
   if (priceSettings) {
     // Format amount to decimal
     let formattedAmount = new Intl.NumberFormat(undefined, {
