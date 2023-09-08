@@ -2,7 +2,15 @@ import { KMCRootObject, KlevuConfig, KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
+import { getKMCSettings } from "../../utils/getKMCSettings"
 
+type PriceFormatSettings = {
+  thousandSeparator: string
+  decimalPlaces: string
+  decimalSeparator: string
+  appendCurrencyAtLast: boolean
+  currencySymbol: string
+}
 /**
  * List of available translations
  */
@@ -106,9 +114,6 @@ export class KlevuInit {
       url: this.url,
     })
 
-    if (this.settings) {
-      window["klevu_ui_settings"] = this.settings
-    }
     if (this.translation) {
       window["klevu_ui_translations"] = this.translation
     } else if (this.language && this.language != "en") {
@@ -119,6 +124,48 @@ export class KlevuInit {
       const data = await KlevuKMCSettings()
       window["klevu_ui_kmc_settings"] = data.root
     }
+    console.log("KMC render price", this.settings?.renderPrice)
+
+    if (this.settings?.renderPrice === undefined) {
+      this.settings = {
+        ...(this.settings || {}),
+        renderPrice: this.#renderPriceKMCSettings,
+      }
+    }
+    if (this.settings) {
+      window["klevu_ui_settings"] = this.settings
+    }
+  }
+
+  #renderPriceKMCSettings(amount: string | number, currency: string) {
+    // Use KMC settings to format price
+    const kmcSettings = getKMCSettings()
+    console.log("KMC settings", kmcSettings)
+    const priceSettings: PriceFormatSettings | undefined = kmcSettings?.klevu_uc_userOptions.priceFormatter
+    if (priceSettings) {
+      // Format amount to decimal
+      let formattedAmount = new Intl.NumberFormat(undefined, {
+        maximumFractionDigits: parseInt(priceSettings.decimalPlaces, 10),
+      }).format(parseFloat(amount.toString()))
+
+      let [integerPart, decimalPart = ""] = formattedAmount.split(".")
+
+      // Replace thousands separator
+      formattedAmount = integerPart.replace(/,/, priceSettings.thousandSeparator)
+
+      // Combine back with decimal separator if exists
+      if (decimalPart) {
+        formattedAmount += priceSettings.decimalSeparator + decimalPart
+      }
+
+      if (priceSettings.appendCurrencyAtLast) {
+        formattedAmount = `${formattedAmount} ${priceSettings.currencySymbol}`
+      } else {
+        formattedAmount = `${priceSettings.currencySymbol} ${formattedAmount}`
+      }
+      return formattedAmount
+    }
+    return amount.toString()
   }
 
   /**

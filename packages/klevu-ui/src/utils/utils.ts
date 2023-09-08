@@ -1,13 +1,4 @@
 import { KlevuRecord } from "@klevu/core"
-import { getKMCSettings } from "./getKMCSettings"
-
-type PriceFormatSettings = {
-  thousandSeparator: string
-  decimalPlaces: string
-  decimalSeparator: string
-  appendCurrencyAtLast: boolean
-  currencySymbol: string
-}
 
 /**
  * Render given price with browsers own currency format.
@@ -20,33 +11,8 @@ export function renderPrice(amount: number | string, currency: string): string {
   if (window?.["klevu_ui_settings"]?.renderPrice) {
     return window["klevu_ui_settings"].renderPrice(amount, currency)
   }
-  // Use KMC settings to format price
-  const kmcSettings = getKMCSettings()
-  const priceSettings: PriceFormatSettings | undefined = kmcSettings?.klevu_uc_userOptions.priceFormatter
-  if (priceSettings) {
-    // Format amount to decimal
-    let formattedAmount = new Intl.NumberFormat(undefined, {
-      maximumFractionDigits: parseInt(priceSettings.decimalPlaces, 10),
-    }).format(parseFloat(amount.toString()))
-
-    let [integerPart, decimalPart = ""] = formattedAmount.split(".")
-
-    // Replace thousands separator
-    formattedAmount = integerPart.replace(/,/, priceSettings.thousandSeparator)
-
-    // Combine back with decimal separator if exists
-    if (decimalPart) {
-      formattedAmount += priceSettings.decimalSeparator + decimalPart
-    }
-
-    if (priceSettings.appendCurrencyAtLast) {
-      formattedAmount = `${formattedAmount} ${priceSettings.currencySymbol}`
-    } else {
-      formattedAmount = `${priceSettings.currencySymbol} ${formattedAmount}`
-    }
-    return formattedAmount
-  }
-  return amount.toString()
+  const price = typeof amount === "string" ? parseFloat(amount) : amount
+  return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(price)
 }
 
 /**
