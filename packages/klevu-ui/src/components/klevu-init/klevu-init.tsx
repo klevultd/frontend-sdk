@@ -124,7 +124,6 @@ export class KlevuInit {
       const data = await KlevuKMCSettings()
       window["klevu_ui_kmc_settings"] = data.root
     }
-    console.log("KMC render price", this.settings?.renderPrice)
 
     if (this.settings?.renderPrice === undefined) {
       this.settings = {
@@ -140,7 +139,6 @@ export class KlevuInit {
   #renderPriceKMCSettings(amount: string | number, currency: string) {
     // Use KMC settings to format price
     const kmcSettings = getKMCSettings()
-    console.log("KMC settings", kmcSettings)
     const priceSettings: PriceFormatSettings | undefined = kmcSettings?.klevu_uc_userOptions.priceFormatter
     if (priceSettings) {
       // Format amount to decimal
