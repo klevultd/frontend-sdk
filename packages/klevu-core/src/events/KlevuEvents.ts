@@ -45,7 +45,8 @@ export class KlevuEvents {
   }: {
     items: Array<{
       amount: number
-      product: Pick<KlevuRecord, "id"> & Partial<KlevuRecord>
+      product: Pick<KlevuRecord, "id"> &
+        Partial<Pick<KlevuRecord, "currency" | "itemGroupId" | "salePrice">>
       variantId?: string
       override?: Partial<V1CheckedOutProductsEvent>
     }>
@@ -88,7 +89,15 @@ export class KlevuEvents {
     override = {},
   }: {
     recommendationMetadata: RecommendationViewEventMetaData
-    products: Array<Pick<KlevuRecord, "id"> & Partial<KlevuRecord>>
+    products: Array<
+      Pick<KlevuRecord, "id"> &
+        Partial<
+          Pick<
+            KlevuRecord,
+            "itemGroupId" | "name" | "price" | "currency" | "brand" | "category"
+          >
+        >
+    >
     override?: Partial<KlevuEventV2Data>
   }) {
     const data: KlevuEventV2Data = {
@@ -139,7 +148,18 @@ export class KlevuEvents {
     override = {},
   }: {
     recommendationMetadata: RecommendationViewEventMetaData
-    product: Pick<KlevuRecord, "id"> & Partial<KlevuRecord>
+    product: Pick<KlevuRecord, "id"> &
+      Partial<
+        Pick<
+          KlevuRecord,
+          | "itemGroupId"
+          | "name"
+          | "salePrice"
+          | "currency"
+          | "brand"
+          | "category"
+        >
+      >
     productIndexInList: number
     variantId?: string
     override?: Partial<KlevuEventV2Data>
@@ -190,7 +210,8 @@ export class KlevuEvents {
     activeFilters,
     override = {},
   }: {
-    product: Partial<KlevuRecord>
+    product: Pick<KlevuRecord, "id"> &
+      Partial<Pick<KlevuRecord, "itemGroupId" | "name" | "url">>
     searchTerm?: string
     variantId?: string
     activeFilters?: string
@@ -311,7 +332,10 @@ export class KlevuEvents {
    * @param override Ability to override any analytical keys in low level
    */
   static categoryMerchandisingProductClick(
-    product: Pick<KlevuRecord, "id"> & Partial<KlevuRecord>,
+    product: Pick<KlevuRecord, "id"> &
+      Partial<
+        Pick<KlevuRecord, "itemGroupId" | "name" | "url" | "salePrice" | "sku">
+      >,
     categoryTitle: string,
     klevuCategory: string,
     variantId?: string,
