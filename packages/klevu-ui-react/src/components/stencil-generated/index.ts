@@ -10,6 +10,7 @@ import { defineCustomElements } from '@klevu/ui/loader';
 defineCustomElements();
 export const KlevuAccordion = /*@__PURE__*/createReactComponent<JSX.KlevuAccordion, HTMLKlevuAccordionElement>('klevu-accordion');
 export const KlevuBadge = /*@__PURE__*/createReactComponent<JSX.KlevuBadge, HTMLKlevuBadgeElement>('klevu-badge');
+export const KlevuBanner = /*@__PURE__*/createReactComponent<JSX.KlevuBanner, HTMLKlevuBannerElement>('klevu-banner');
 export const KlevuButton = /*@__PURE__*/createReactComponent<JSX.KlevuButton, HTMLKlevuButtonElement>('klevu-button');
 export const KlevuChatBubble = /*@__PURE__*/createReactComponent<JSX.KlevuChatBubble, HTMLKlevuChatBubbleElement>('klevu-chat-bubble');
 export const KlevuChatLayout = /*@__PURE__*/createReactComponent<JSX.KlevuChatLayout, HTMLKlevuChatLayoutElement>('klevu-chat-layout');

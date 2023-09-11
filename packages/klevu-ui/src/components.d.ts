@@ -85,6 +85,15 @@ export namespace Components {
         "neutral"?: number;
     }
     /**
+     * Component that displays a typical klevu banner
+     */
+    interface KlevuBanner {
+        "altText"?: string;
+        "imageUrl"?: string;
+        "linkUrl"?: string;
+        "target": "_blank" | "_self";
+    }
+    /**
      * Basic button component
      * @csspart button-base - The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
@@ -1625,6 +1634,10 @@ export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBadgeElement;
 }
+export interface KlevuBannerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuBannerElement;
+}
 export interface KlevuChatBubbleCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuChatBubbleElement;
@@ -1773,6 +1786,15 @@ declare global {
     var HTMLKlevuBadgeElement: {
         prototype: HTMLKlevuBadgeElement;
         new (): HTMLKlevuBadgeElement;
+    };
+    /**
+     * Component that displays a typical klevu banner
+     */
+    interface HTMLKlevuBannerElement extends Components.KlevuBanner, HTMLStencilElement {
+    }
+    var HTMLKlevuBannerElement: {
+        prototype: HTMLKlevuBannerElement;
+        new (): HTMLKlevuBannerElement;
     };
     /**
      * Basic button component
@@ -2328,6 +2350,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "klevu-accordion": HTMLKlevuAccordionElement;
         "klevu-badge": HTMLKlevuBadgeElement;
+        "klevu-banner": HTMLKlevuBannerElement;
         "klevu-button": HTMLKlevuButtonElement;
         "klevu-chat-bubble": HTMLKlevuChatBubbleElement;
         "klevu-chat-layout": HTMLKlevuChatLayoutElement;
@@ -2409,6 +2432,16 @@ declare namespace LocalJSX {
          */
         "neutral"?: number;
         "onKlevuBadgeClose"?: (event: KlevuBadgeCustomEvent<void>) => void;
+    }
+    /**
+     * Component that displays a typical klevu banner
+     */
+    interface KlevuBanner {
+        "altText"?: string;
+        "imageUrl"?: string;
+        "linkUrl"?: string;
+        "onKlevuBannerClick"?: (event: KlevuBannerCustomEvent<any>) => void;
+        "target"?: "_blank" | "_self";
     }
     /**
      * Basic button component
@@ -4036,6 +4069,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "klevu-accordion": KlevuAccordion;
         "klevu-badge": KlevuBadge;
+        "klevu-banner": KlevuBanner;
         "klevu-button": KlevuButton;
         "klevu-chat-bubble": KlevuChatBubble;
         "klevu-chat-layout": KlevuChatLayout;
@@ -4102,6 +4136,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
+            /**
+             * Component that displays a typical klevu banner
+             */
+            "klevu-banner": LocalJSX.KlevuBanner & JSXBase.HTMLAttributes<HTMLKlevuBannerElement>;
             /**
              * Basic button component
              * @csspart button-base - The button element
