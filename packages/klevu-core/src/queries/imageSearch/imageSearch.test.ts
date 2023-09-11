@@ -36,10 +36,7 @@ test("Image search with url as param", async () => {
 
 test("Image search with blob as param", async () => {
   const base64Data = "aGV5IHRoZXJl"
-  const base64Response = await global.fetch(
-    `data:image/jpeg;base64,${base64Data}`
-  )
-  const blob = await base64Response.blob()
+  const blob = new Blob([base64Data], { type: "image/jpeg" })
   global.fetch = jest.fn().mockImplementationOnce(() =>
     Promise.resolve({
       status: 200,
@@ -68,10 +65,7 @@ test("Image search with blob as param", async () => {
 
 test("Image search with blob as param and upload fails", async () => {
   const base64Data = "aGV5IHRoZXJl"
-  const base64Response = await global.fetch(
-    `data:image/jpeg;base64,${base64Data}`
-  )
-  const blob = await base64Response.blob()
+  const blob = new Blob([base64Data], { type: "image/jpeg" })
   global.fetch = jest.fn().mockImplementationOnce(() =>
     Promise.resolve({
       status: 500,
