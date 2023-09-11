@@ -108,6 +108,19 @@ export class KlevuSearchLandingPage {
    */
   @Prop() showSearch?: boolean
 
+  /**
+   * Show price as options
+   */
+  @Prop() showPriceAsSlider?: boolean
+  /**
+   * The factor to use to generate the ranges
+   */
+  @Prop() priceInterval = 500
+  /**
+   * Hides price from search results
+   */
+  @Prop() hidePrice?: boolean
+
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
@@ -138,7 +151,18 @@ export class KlevuSearchLandingPage {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-      if (this.showSearch === undefined) this.showSearch = settings?.klevu_uc_userOptions.showSearchBoxOnLandingPage
+      if (this.showSearch === undefined) {
+        this.showSearch = settings?.klevu_uc_userOptions.showSearchBoxOnLandingPage
+      }
+      if (this.showPriceAsSlider === undefined) {
+        this.showPriceAsSlider = settings.klevu_showPriceSlider
+      }
+      if (this.priceInterval === undefined) {
+        this.priceInterval = parseInt(settings.klevu_uc_userOptions.priceInterval, 10)
+      }
+      if (this.hidePrice === undefined) {
+        this.hidePrice = !settings.klevu_showPrices
+      }
     }
     const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
     if (showPopularProducts) {
@@ -162,18 +186,22 @@ export class KlevuSearchLandingPage {
 
   async #fetchData() {
     this.loading = true
-
+    const rangeFilterSetting = this.showPriceAsSlider
+      ? {
+          key: "klevu_price",
+          minMax: true,
+        }
+      : {
+          key: "klevu_price",
+          rangeInterval: this.priceInterval,
+          minMax: false,
+        }
     const modifiers: KlevuFetchModifer[] = [
       sendSearchEvent(),
       listFilters({
         filterManager: this.manager,
         limit: this.filterCount,
-        rangeFilterSettings: [
-          {
-            key: "klevu_price",
-            minMax: true,
-          },
-        ],
+        rangeFilterSettings: [rangeFilterSetting],
       }),
       applyFilterWithManager(this.manager),
     ]
@@ -345,6 +373,7 @@ export class KlevuSearchLandingPage {
               <klevu-product-grid slot="content">
                 {this.results?.map((p) => (
                   <klevu-product
+                    hidePrice={this.hidePrice}
                     product={p}
                     fixedWidth
                     exportparts={parts["klevu-product"]}
@@ -369,6 +398,7 @@ export class KlevuSearchLandingPage {
                         </klevu-typography>
                         {this.trendingProducts?.map((p) => (
                           <klevu-product
+                            hidePrice={this.hidePrice}
                             product={p}
                             variant="line"
                             exportparts={parts["klevu-product"]}

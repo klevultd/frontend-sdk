@@ -434,6 +434,9 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'usePersonalisation',
   'popularProductsResultCount',
   'showSearch',
+  'showPriceAsSlider',
+  'priceInterval',
+  'hidePrice',
   'klevuData'
 ]);
 
