@@ -1367,6 +1367,10 @@ export namespace Components {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hide filters on results page
+         */
+        "hideFilters"?: boolean;
+        /**
           * Hides price from search results
          */
         "hidePrice"?: boolean;
@@ -1418,6 +1422,10 @@ export namespace Components {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Specify whether to show checkboxes or radio buttons for filters
+         */
+        "useMultiSelectFilters"?: boolean;
         /**
           * Use pagination instead of loading more
          */
@@ -3748,6 +3756,10 @@ declare namespace LocalJSX {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hide filters on results page
+         */
+        "hideFilters"?: boolean;
+        /**
           * Hides price from search results
          */
         "hidePrice"?: boolean;
@@ -3800,6 +3812,10 @@ declare namespace LocalJSX {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Specify whether to show checkboxes or radio buttons for filters
+         */
+        "useMultiSelectFilters"?: boolean;
         /**
           * Use pagination instead of loading more
          */

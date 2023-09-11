@@ -107,6 +107,15 @@ export class KlevuSearchLandingPage {
    * Show the quick search box at the top of the page
    */
   @Prop() showSearch?: boolean
+  /**
+   * Hide filters on results page
+   */
+  @Prop() hideFilters?: boolean
+
+  /**
+   * Specify whether to show checkboxes or radio buttons for filters
+   */
+  @Prop() useMultiSelectFilters?: boolean
 
   /**
    * Show price as options
@@ -152,6 +161,13 @@ export class KlevuSearchLandingPage {
         this.usePersonalisation = true
       }
       if (this.showSearch === undefined) {
+        this.showSearch = settings.klevu_uc_userOptions.showSearchBoxOnLandingPage
+      }
+      if (this.hideFilters === undefined) {
+        this.hideFilters = !settings.klevu_filtersEnabled
+      }
+      if (this.useMultiSelectFilters === undefined) {
+        this.useMultiSelectFilters = settings.klevu_multiSelectFilters
         this.showSearch = settings?.klevu_uc_userOptions.showSearchBoxOnLandingPage
       }
       if (this.showPriceAsSlider === undefined) {
@@ -349,13 +365,16 @@ export class KlevuSearchLandingPage {
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">
-            <klevu-facet-list
-              ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
-              customOrder={this.filterCustomOrder}
-              manager={this.manager}
-              useApplyButton={isMobile}
-              onKlevuApplyFilters={this.#applyFilters.bind(this)}
-            ></klevu-facet-list>
+            {!this.hideFilters && (
+              <klevu-facet-list
+                ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
+                customOrder={this.filterCustomOrder}
+                manager={this.manager}
+                useApplyButton={isMobile}
+                onKlevuApplyFilters={this.#applyFilters.bind(this)}
+                mode={this.useMultiSelectFilters ? "checkbox" : "radio"}
+              ></klevu-facet-list>
+            )}
           </slot>
           <div slot="header" class="header">
             {this.showSearch && <klevu-quicksearch />}
