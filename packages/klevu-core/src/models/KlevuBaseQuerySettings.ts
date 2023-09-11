@@ -201,7 +201,7 @@ export type KlevuBaseQuerySettings = {
       /**
        * Id's of records
        */
-      records: Array<{ itemGroupId: string } | { id: string }>
+      records: Array<{ itemGroupId: string } | { id: string } | { url: string }>
     }>
   }
 
