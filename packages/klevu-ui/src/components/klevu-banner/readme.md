@@ -33,6 +33,23 @@ Component that displays a typical klevu banner
 | `"banner-image"` |             |
 
 
+## Dependencies
+
+### Used by
+
+ - [klevu-merchandising](../klevu-merchandising)
+ - [klevu-quicksearch](../klevu-quicksearch)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
+
+### Graph
+```mermaid
+graph TD;
+  klevu-merchandising --> klevu-banner
+  klevu-quicksearch --> klevu-banner
+  klevu-search-landing-page --> klevu-banner
+  style klevu-banner fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 

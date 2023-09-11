@@ -2,6 +2,7 @@ import {
   applyFilterWithManager,
   categoryMerchandising,
   FilterManager,
+  KlevuBanner,
   KlevuFetch,
   KlevuFetchModifer,
   KlevuMerchandisingOptions,
@@ -121,6 +122,8 @@ export class KlevuMerchandising {
   @State() manager = new FilterManager()
   @State() loading: boolean = false
   @State() infiniteScrollingPaused?: boolean = false
+  @State() searchResultTopBanners: KlevuBanner[] = []
+  @State() searchResultBottomBanners: KlevuBanner[] = []
 
   @Element() el!: HTMLElement
 
@@ -183,6 +186,11 @@ export class KlevuMerchandising {
     )
     this.#resultObject = result.queriesById("categoryMerchandising")
     this.results = this.#resultObject?.records ?? []
+
+    const allBanners = await this.#resultObject.getBanners()
+    this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
+    this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
+
     this.#emitChanges()
     this.loading = false
   }
@@ -317,6 +325,11 @@ export class KlevuMerchandising {
             ></klevu-sort>
           </div>
           <slot name="content" slot="content">
+            <slot name="topbanners">
+              {this.searchResultTopBanners.map((b) => (
+                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+              ))}
+            </slot>
             <klevu-product-grid>
               {this.results.map((p) => (
                 <klevu-product
@@ -329,6 +342,11 @@ export class KlevuMerchandising {
               ))}
             </klevu-product-grid>
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}
+            <slot name="bottombanners">
+              {this.searchResultBottomBanners.map((b) => (
+                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+              ))}
+            </slot>
           </slot>
           <div slot="footer" class="footer">
             {showInfiniteScroll ? (

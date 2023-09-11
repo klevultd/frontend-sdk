@@ -53,6 +53,7 @@ Full merchandising app to power up your product grid pages
 - [klevu-facet-list](../klevu-facet-list)
 - [klevu-typography](../klevu-typography)
 - [klevu-sort](../klevu-sort)
+- [klevu-banner](../klevu-banner)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-loading-indicator](../klevu-loading-indicator)
@@ -68,6 +69,7 @@ graph TD;
   klevu-merchandising --> klevu-facet-list
   klevu-merchandising --> klevu-typography
   klevu-merchandising --> klevu-sort
+  klevu-merchandising --> klevu-banner
   klevu-merchandising --> klevu-product-grid
   klevu-merchandising --> klevu-product
   klevu-merchandising --> klevu-loading-indicator

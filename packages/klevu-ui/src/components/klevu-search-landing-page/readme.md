@@ -55,6 +55,7 @@ Full app component for search landing page
 - [klevu-quicksearch](../klevu-quicksearch)
 - [klevu-typography](../klevu-typography)
 - [klevu-sort](../klevu-sort)
+- [klevu-banner](../klevu-banner)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-popular-searches](../klevu-popular-searches)
@@ -72,6 +73,7 @@ graph TD;
   klevu-search-landing-page --> klevu-quicksearch
   klevu-search-landing-page --> klevu-typography
   klevu-search-landing-page --> klevu-sort
+  klevu-search-landing-page --> klevu-banner
   klevu-search-landing-page --> klevu-product-grid
   klevu-search-landing-page --> klevu-product
   klevu-search-landing-page --> klevu-popular-searches
@@ -107,6 +109,7 @@ graph TD;
   klevu-quicksearch --> klevu-cms-list
   klevu-quicksearch --> klevu-typography
   klevu-quicksearch --> klevu-sort
+  klevu-quicksearch --> klevu-banner
   klevu-quicksearch --> klevu-product-grid
   klevu-quicksearch --> klevu-product
   klevu-quicksearch --> klevu-pagination

@@ -1,6 +1,6 @@
 import { KlevuGetBannersByType } from "../../utils/getBannersByType.js"
 import { KlevuKMCSettings } from "../kmc.js"
-import { KlevuBanner } from "../kmcmodels/KMCBanner.js"
+import { KlevuBanner } from "../../models/KMCBanner.js"
 import { KlevuResponseQueryObject } from "../responseQueryObject.js"
 
 export async function getBanners(

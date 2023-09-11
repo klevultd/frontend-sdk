@@ -12,6 +12,7 @@ import {
   sendSearchEvent,
   KMCRootObject,
   trendingProducts,
+  KlevuBanner,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -116,6 +117,8 @@ export class KlevuSearchLandingPage {
   @State() noResultsMessage: string = ""
   @State() trendingProducts: KlevuRecord[] = []
   @State() noResultsBannerDetails: Banner[] = []
+  @State() searchResultTopBanners: KlevuBanner[] = []
+  @State() searchResultBottomBanners: KlevuBanner[] = []
   #noResultsOptions?: NoResultsOptions
 
   #resultObject?: KlevuResponseQueryObject
@@ -187,6 +190,10 @@ export class KlevuSearchLandingPage {
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
     this.loading = false
+
+    const allBanners = (await this.#resultObject.getBanners({ searchType: "quicksearch" })) ?? []
+    this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
+    this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
 
     this.noResultsMessage = ""
     this.noResultsBannerDetails = []
@@ -341,6 +348,11 @@ export class KlevuSearchLandingPage {
             </div>
           </div>
           <slot name="content" slot="content">
+            <slot name="topbanners">
+              {this.searchResultTopBanners.map((b) => (
+                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+              ))}
+            </slot>
             {this.results?.length > 0 ? (
               <klevu-product-grid slot="content">
                 {this.results?.map((p) => (
@@ -378,7 +390,7 @@ export class KlevuSearchLandingPage {
                     )}
                   </slot>
                 </Fragment>
-                {this.#renderBanners()}
+                {this.#renderNoResultBanners()}
                 {this.#noResultsOptions?.showPopularKeywords && (
                   <klevu-popular-searches
                     onKlevuPopularSearchClicked={(event) => this.#handlePopularKeywordClick(event.detail)}
@@ -388,6 +400,11 @@ export class KlevuSearchLandingPage {
             )}
 
             {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}
+            <slot name="bottombanners">
+              {this.searchResultBottomBanners.map((b) => (
+                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+              ))}
+            </slot>
           </slot>
           <div slot="footer" class="footer">
             {showInfiniteScroll ? (
@@ -414,7 +431,7 @@ export class KlevuSearchLandingPage {
       </Host>
     )
   }
-  #renderBanners() {
+  #renderNoResultBanners() {
     return this.noResultsBannerDetails.map((banner) => (
       <a href={banner.redirectUrl}>
         <img
