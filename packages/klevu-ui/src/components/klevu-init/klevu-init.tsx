@@ -4,13 +4,6 @@ import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 
-type PriceFormatSettings = {
-  thousandSeparator: string
-  decimalPlaces: string
-  decimalSeparator: string
-  appendCurrencyAtLast: boolean
-  currencySymbol: string
-}
 /**
  * List of available translations
  */
@@ -124,7 +117,8 @@ export class KlevuInit {
       const data = await KlevuKMCSettings()
       window["klevu_ui_kmc_settings"] = data.root
       if (this.settings?.renderPrice === undefined) {
-        const priceSettings: PriceFormatSettings | undefined = data.root?.klevu_uc_userOptions.priceFormatter
+        const priceSettings: KMCRootObject["klevu_uc_userOptions"]["priceFormatter"] | undefined =
+          data.root?.klevu_uc_userOptions.priceFormatter
         if (priceSettings) {
           this.settings = {
             ...(this.settings || {}),
@@ -139,7 +133,11 @@ export class KlevuInit {
     }
   }
 
-  #renderPriceKMCSettings(amount: string | number, currency: string, priceSettings: PriceFormatSettings) {
+  #renderPriceKMCSettings(
+    amount: string | number,
+    currency: string,
+    priceSettings: KMCRootObject["klevu_uc_userOptions"]["priceFormatter"]
+  ) {
     // Format amount to decimal
     let formattedAmount = new Intl.NumberFormat(undefined, {
       maximumFractionDigits: parseInt(priceSettings.decimalPlaces, 10),
