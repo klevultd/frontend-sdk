@@ -108,9 +108,9 @@ export class KlevuSearchLandingPage {
    */
   @Prop() showSearch?: boolean
   /**
-   * Show filters on results page
+   * Hide filters on results page
    */
-  @Prop() showFilters?: boolean
+  @Prop() hideFilters?: boolean
 
   /**
    * Specify whether to show checkboxes or radio buttons for filters
@@ -150,8 +150,8 @@ export class KlevuSearchLandingPage {
       if (this.showSearch === undefined) {
         this.showSearch = settings.klevu_uc_userOptions.showSearchBoxOnLandingPage
       }
-      if (this.showFilters === undefined) {
-        this.showFilters = settings.klevu_filtersEnabled
+      if (this.hideFilters === undefined) {
+        this.hideFilters = !settings.klevu_filtersEnabled
       }
       if (this.useMultiSelectFilters === undefined) {
         this.useMultiSelectFilters = settings.klevu_multiSelectFilters
@@ -338,7 +338,7 @@ export class KlevuSearchLandingPage {
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">
-            {this.showFilters && (
+            {!this.hideFilters && (
               <klevu-facet-list
                 ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
                 customOrder={this.filterCustomOrder}

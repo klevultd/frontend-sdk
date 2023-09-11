@@ -35,7 +35,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     use-personalisation=${ifDefined(args.usePersonalisation)}
     popular-products-result-Count=${ifDefined(args.popularProductsResultCount)}
     show-search=${ifDefined(args.showSearch)}
-    show-filters=${ifDefined(args.showFilters)}
+    hide-filters=${ifDefined(args.hideFilters)}
     use-multi-select-filters=${ifDefined(args.useMultiSelectFilters)}
   ></klevu-search-landing-page>`,
 }

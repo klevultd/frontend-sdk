@@ -1367,6 +1367,10 @@ export namespace Components {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hide filters on results page
+         */
+        "hideFilters"?: boolean;
+        /**
           * How many results to display on a page
          */
         "limit": number;
@@ -1374,10 +1378,6 @@ export namespace Components {
           * How many products to show in popular products
          */
         "popularProductsResultCount": number;
-        /**
-          * Show filters on results page
-         */
-        "showFilters"?: boolean;
         /**
           * Show ratings
          */
@@ -3744,6 +3744,10 @@ declare namespace LocalJSX {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hide filters on results page
+         */
+        "hideFilters"?: boolean;
+        /**
           * How many results to display on a page
          */
         "limit"?: number;
@@ -3752,10 +3756,6 @@ declare namespace LocalJSX {
           * How many products to show in popular products
          */
         "popularProductsResultCount"?: number;
-        /**
-          * Show filters on results page
-         */
-        "showFilters"?: boolean;
         /**
           * Show ratings
          */
