@@ -2,6 +2,7 @@ import { notEmpty } from "../utils/notEmpty.js"
 import { KlevuRecord } from "../models/KlevuRecord.js"
 import { isBrowser } from "../utils/isBrowser.js"
 import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
+import { KlevuConfig } from "../config.js"
 
 const ONE_HOUR = 36000000
 const STORAGE_KEY = "klevu-last-clicks"
@@ -24,6 +25,9 @@ class LastClickedProducts {
   }> = []
 
   private save() {
+    if (KlevuConfig.getDefault().disableClickTracking) {
+      return
+    }
     if (isBrowser() && window.localStorage) {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.clicks))
     }
@@ -48,6 +52,10 @@ class LastClickedProducts {
    * @param productId
    */
   click(productId: string, product?: Partial<KlevuRecord>) {
+    if (KlevuConfig.getDefault().disableClickTracking) {
+      return
+    }
+
     this.clicks.push({
       ts: new Date(),
       id: productId,
@@ -75,6 +83,11 @@ class LastClickedProducts {
    * @returns
    */
   getLastClickedLatestsFirst(n = 10): string[] {
+    if (KlevuConfig.getDefault().disableClickTracking) {
+      console.warn("Click tracking is disabled. Returning empty array.")
+      return []
+    }
+
     return Array.from(this.clicks.map((i) => i.id))
       .reverse()
       .slice(0, n)
@@ -87,6 +100,11 @@ class LastClickedProducts {
    * @returns
    */
   getProducts(n = 10) {
+    if (KlevuConfig.getDefault().disableClickTracking) {
+      console.warn("Click tracking is disabled. Returning empty array.")
+      return []
+    }
+
     return Array.from(this.clicks.map((i) => i.product).filter(notEmpty))
       .reverse()
       .slice(0, n)
@@ -99,6 +117,11 @@ class LastClickedProducts {
    * @returns
    */
   getCategoryPersonalisationIds(categoryPath: string): string[] {
+    if (KlevuConfig.getDefault().disableClickTracking) {
+      console.warn("Click tracking is disabled. Returning empty array.")
+      return []
+    }
+
     const currentClicks = this.clicks
     if (currentClicks.length < 3) {
       return []
