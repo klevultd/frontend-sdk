@@ -107,6 +107,15 @@ export class KlevuSearchLandingPage {
    * Show the quick search box at the top of the page
    */
   @Prop() showSearch?: boolean
+  /**
+   * Show filters on results page
+   */
+  @Prop() showFilters?: boolean
+
+  /**
+   * Specify whether to show checkboxes or radio buttons for filters
+   */
+  @Prop() useMultiSelectFilters?: boolean
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -138,7 +147,15 @@ export class KlevuSearchLandingPage {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-      if (this.showSearch === undefined) this.showSearch = settings?.klevu_uc_userOptions.showSearchBoxOnLandingPage
+      if (this.showSearch === undefined) {
+        this.showSearch = settings.klevu_uc_userOptions.showSearchBoxOnLandingPage
+      }
+      if (this.showFilters === undefined) {
+        this.showFilters = settings.klevu_filtersEnabled
+      }
+      if (this.useMultiSelectFilters === undefined) {
+        this.useMultiSelectFilters = settings.klevu_multiSelectFilters
+      }
     }
     const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
     if (showPopularProducts) {
@@ -321,13 +338,16 @@ export class KlevuSearchLandingPage {
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">
-            <klevu-facet-list
-              ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
-              customOrder={this.filterCustomOrder}
-              manager={this.manager}
-              useApplyButton={isMobile}
-              onKlevuApplyFilters={this.#applyFilters.bind(this)}
-            ></klevu-facet-list>
+            {this.showFilters && (
+              <klevu-facet-list
+                ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
+                customOrder={this.filterCustomOrder}
+                manager={this.manager}
+                useApplyButton={isMobile}
+                onKlevuApplyFilters={this.#applyFilters.bind(this)}
+                mode={this.useMultiSelectFilters ? "checkbox" : "radio"}
+              ></klevu-facet-list>
+            )}
           </slot>
           <div slot="header" class="header">
             {this.showSearch && <klevu-quicksearch />}

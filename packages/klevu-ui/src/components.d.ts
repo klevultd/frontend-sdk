@@ -1375,6 +1375,10 @@ export namespace Components {
          */
         "popularProductsResultCount": number;
         /**
+          * Show filters on results page
+         */
+        "showFilters"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -1406,6 +1410,10 @@ export namespace Components {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Specify whether to show checkboxes or radio buttons for filters
+         */
+        "useMultiSelectFilters"?: boolean;
         /**
           * Use pagination instead of loading more
          */
@@ -3745,6 +3753,10 @@ declare namespace LocalJSX {
          */
         "popularProductsResultCount"?: number;
         /**
+          * Show filters on results page
+         */
+        "showFilters"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3776,6 +3788,10 @@ declare namespace LocalJSX {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Specify whether to show checkboxes or radio buttons for filters
+         */
+        "useMultiSelectFilters"?: boolean;
         /**
           * Use pagination instead of loading more
          */
