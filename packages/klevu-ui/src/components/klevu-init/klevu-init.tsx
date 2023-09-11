@@ -2,7 +2,6 @@ import { KMCRootObject, KlevuConfig, KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Method, Prop } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
-import { getKMCSettings } from "../../utils/getKMCSettings"
 
 /**
  * List of available translations
