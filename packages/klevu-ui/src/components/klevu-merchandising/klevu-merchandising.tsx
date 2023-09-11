@@ -35,6 +35,8 @@ import { getKMCSettings } from "../../utils/getKMCSettings"
  * @slot footer - Footer container
  * @slot content - Product grid items including the grid container
  * @slot facets - Sidebar of facets content
+ * @slot topbanners - Top banner content
+ * @slot bottombanners - Bottom banner content
  */
 @Component({
   tag: "klevu-merchandising",

@@ -36,12 +36,14 @@ Full merchandising app to power up your product grid pages
 
 ## Slots
 
-| Slot        | Description                                     |
-| ----------- | ----------------------------------------------- |
-| `"content"` | Product grid items including the grid container |
-| `"facets"`  | Sidebar of facets content                       |
-| `"footer"`  | Footer container                                |
-| `"header"`  | Header container                                |
+| Slot              | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| `"bottombanners"` | Bottom banner content                           |
+| `"content"`       | Product grid items including the grid container |
+| `"facets"`        | Sidebar of facets content                       |
+| `"footer"`        | Footer container                                |
+| `"header"`        | Header container                                |
+| `"topbanners"`    | Top banner content                              |
 
 
 ## Dependencies

@@ -49,6 +49,8 @@ type Banner = NoResultsOptions["banners"][0]
  * @slot trending-products - Slot to replace trending products listings
  * @slot last-clicked-products - Slot to replace last clicked products
  * @slot noResults - Show message when no results found
+ * @slot topbanners - Top banner content
+ * @slot bottombanners - Bottom banner content
  */
 @Component({
   tag: "klevu-quicksearch",

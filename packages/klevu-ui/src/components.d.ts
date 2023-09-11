@@ -88,9 +88,21 @@ export namespace Components {
      * Component that displays a typical klevu banner
      */
     interface KlevuBanner {
-        "altText"?: string;
-        "imageUrl"?: string;
-        "linkUrl"?: string;
+        /**
+          * The alt text to display for iamge
+         */
+        "altText": string;
+        /**
+          * The image url to display
+         */
+        "imageUrl": string;
+        /**
+          * The link url to navigate to
+         */
+        "linkUrl": string;
+        /**
+          * The target to open the link in
+         */
         "target": "_blank" | "_self";
     }
     /**
@@ -2437,10 +2449,25 @@ declare namespace LocalJSX {
      * Component that displays a typical klevu banner
      */
     interface KlevuBanner {
-        "altText"?: string;
-        "imageUrl"?: string;
-        "linkUrl"?: string;
-        "onKlevuBannerClick"?: (event: KlevuBannerCustomEvent<any>) => void;
+        /**
+          * The alt text to display for iamge
+         */
+        "altText": string;
+        /**
+          * The image url to display
+         */
+        "imageUrl": string;
+        /**
+          * The link url to navigate to
+         */
+        "linkUrl": string;
+        /**
+          * Event emitted when the banner is clicked. Sends the link url as the event detail  If defaultPrevented is called on the event, the link will not be followed
+         */
+        "onKlevuBannerClick"?: (event: KlevuBannerCustomEvent<string>) => void;
+        /**
+          * The target to open the link in
+         */
         "target"?: "_blank" | "_self";
     }
     /**

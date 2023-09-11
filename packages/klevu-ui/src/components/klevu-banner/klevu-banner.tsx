@@ -9,21 +9,49 @@ import { Component, Event, EventEmitter, Host, Prop, h } from "@stencil/core"
   shadow: true,
 })
 export class KlevuBanner {
-  @Prop() imageUrl?: string
-  @Prop() linkUrl?: string
-  @Prop() altText?: string
+  /**
+   * The image url to display
+   */
+  @Prop() imageUrl!: string
+
+  /**
+   * The link url to navigate to
+   */
+  @Prop() linkUrl!: string
+
+  /**
+   * The alt text to display for iamge
+   */
+  @Prop() altText!: string
+
+  /**
+   * The target to open the link in
+   */
   @Prop() target: "_blank" | "_self" = "_blank"
 
+  /**
+   * Event emitted when the banner is clicked. Sends the link url as the event detail
+   *
+   * If defaultPrevented is called on the event, the link will not be followed
+   */
   @Event({
     composed: true,
   })
-  klevuBannerClick!: EventEmitter
+  klevuBannerClick!: EventEmitter<string>
+
+  #click(event: Event) {
+    const sent = this.klevuBannerClick.emit(this.linkUrl)
+    if (sent.defaultPrevented) {
+      event.preventDefault()
+      return false
+    }
+  }
 
   render() {
     return (
       <Host>
         <slot>
-          <a href={this.linkUrl} target={this.target}>
+          <a href={this.linkUrl} target={this.target} onClick={this.#click}>
             <img part="banner-image" src={this.imageUrl} alt={this.altText} />
           </a>
         </slot>

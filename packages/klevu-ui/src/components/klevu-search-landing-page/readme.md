@@ -36,13 +36,15 @@ Full app component for search landing page
 
 ## Slots
 
-| Slot          | Description                                     |
-| ------------- | ----------------------------------------------- |
-| `"content"`   | Product grid items including the grid container |
-| `"facets"`    | Sidebar of facets content                       |
-| `"footer"`    | Footer container                                |
-| `"header"`    | Header container                                |
-| `"noResults"` | Show message when no results found              |
+| Slot              | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| `"bottombanners"` | Bottom banner content                           |
+| `"content"`       | Product grid items including the grid container |
+| `"facets"`        | Sidebar of facets content                       |
+| `"footer"`        | Footer container                                |
+| `"header"`        | Header container                                |
+| `"noResults"`     | Show message when no results found              |
+| `"topbanners"`    | Top banner content                              |
 
 
 ## Dependencies

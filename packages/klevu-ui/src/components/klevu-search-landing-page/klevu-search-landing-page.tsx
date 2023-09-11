@@ -40,6 +40,8 @@ type Banner = NoResultsOptions["banners"][0]
  * @slot content - Product grid items including the grid container
  * @slot facets - Sidebar of facets content
  * @slot noResults - Show message when no results found
+ * @slot topbanners - Top banner content
+ * @slot bottombanners - Bottom banner content
  */
 @Component({
   tag: "klevu-search-landing-page",
