@@ -1367,6 +1367,14 @@ export namespace Components {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hide filters on results page
+         */
+        "hideFilters"?: boolean;
+        /**
+          * Hides price from search results
+         */
+        "hidePrice"?: boolean;
+        /**
           * How many results to display on a page
          */
         "limit": number;
@@ -1374,6 +1382,14 @@ export namespace Components {
           * How many products to show in popular products
          */
         "popularProductsResultCount": number;
+        /**
+          * The factor to use to generate the ranges
+         */
+        "priceInterval": number;
+        /**
+          * Show price as options
+         */
+        "showPriceAsSlider"?: boolean;
         /**
           * Show ratings
          */
@@ -1406,6 +1422,10 @@ export namespace Components {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Specify whether to show checkboxes or radio buttons for filters
+         */
+        "useMultiSelectFilters"?: boolean;
         /**
           * Use pagination instead of loading more
          */
@@ -3736,6 +3756,14 @@ declare namespace LocalJSX {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hide filters on results page
+         */
+        "hideFilters"?: boolean;
+        /**
+          * Hides price from search results
+         */
+        "hidePrice"?: boolean;
+        /**
           * How many results to display on a page
          */
         "limit"?: number;
@@ -3744,6 +3772,14 @@ declare namespace LocalJSX {
           * How many products to show in popular products
          */
         "popularProductsResultCount"?: number;
+        /**
+          * The factor to use to generate the ranges
+         */
+        "priceInterval"?: number;
+        /**
+          * Show price as options
+         */
+        "showPriceAsSlider"?: boolean;
         /**
           * Show ratings
          */
@@ -3776,6 +3812,10 @@ declare namespace LocalJSX {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Specify whether to show checkboxes or radio buttons for filters
+         */
+        "useMultiSelectFilters"?: boolean;
         /**
           * Use pagination instead of loading more
          */
