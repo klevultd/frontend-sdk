@@ -35,7 +35,6 @@ export async function imageSearch(
       }`,
       { method: "POST", body: form }
     )
-    console.log("imageUrlResponse", imageUrlResponse)
     if (imageUrlResponse.status !== 200) {
       console.warn("Failed to upload image: " + imageUrlResponse.status)
       throw new Error("Failed to upload image")
