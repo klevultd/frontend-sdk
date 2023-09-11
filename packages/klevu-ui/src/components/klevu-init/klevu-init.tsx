@@ -106,9 +106,6 @@ export class KlevuInit {
       url: this.url,
     })
 
-    if (this.settings) {
-      window["klevu_ui_settings"] = this.settings
-    }
     if (this.translation) {
       window["klevu_ui_translations"] = this.translation
     } else if (this.language && this.language != "en") {
@@ -118,7 +115,49 @@ export class KlevuInit {
     if (this.kmcLoadDefaults) {
       const data = await KlevuKMCSettings()
       window["klevu_ui_kmc_settings"] = data.root
+      if (this.settings?.renderPrice === undefined) {
+        const priceSettings: KMCRootObject["klevu_uc_userOptions"]["priceFormatter"] | undefined =
+          data.root?.klevu_uc_userOptions.priceFormatter
+        if (priceSettings) {
+          this.settings = {
+            ...(this.settings || {}),
+            renderPrice: (...params) => this.#renderPriceKMCSettings(...params, priceSettings),
+          }
+        }
+      }
     }
+
+    if (this.settings) {
+      window["klevu_ui_settings"] = this.settings
+    }
+  }
+
+  #renderPriceKMCSettings(
+    amount: string | number,
+    currency: string,
+    priceSettings: KMCRootObject["klevu_uc_userOptions"]["priceFormatter"]
+  ) {
+    // Format amount to decimal
+    let formattedAmount = new Intl.NumberFormat(undefined, {
+      maximumFractionDigits: parseInt(priceSettings.decimalPlaces, 10),
+    }).format(parseFloat(amount.toString()))
+
+    let [integerPart, decimalPart = ""] = formattedAmount.split(".")
+
+    // Replace thousands separator
+    formattedAmount = integerPart.replace(/,/, priceSettings.thousandSeparator)
+
+    // Combine back with decimal separator if exists
+    if (decimalPart) {
+      formattedAmount += priceSettings.decimalSeparator + decimalPart
+    }
+
+    if (priceSettings.appendCurrencyAtLast) {
+      formattedAmount = `${formattedAmount} ${priceSettings.currencySymbol}`
+    } else {
+      formattedAmount = `${priceSettings.currencySymbol} ${formattedAmount}`
+    }
+    return formattedAmount
   }
 
   /**

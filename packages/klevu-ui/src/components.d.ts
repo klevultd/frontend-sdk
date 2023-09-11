@@ -1371,6 +1371,10 @@ export namespace Components {
          */
         "hideFilters"?: boolean;
         /**
+          * Hides price from search results
+         */
+        "hidePrice"?: boolean;
+        /**
           * How many results to display on a page
          */
         "limit": number;
@@ -1378,6 +1382,14 @@ export namespace Components {
           * How many products to show in popular products
          */
         "popularProductsResultCount": number;
+        /**
+          * The factor to use to generate the ranges
+         */
+        "priceInterval": number;
+        /**
+          * Show price as options
+         */
+        "showPriceAsSlider"?: boolean;
         /**
           * Show ratings
          */
@@ -3748,6 +3760,10 @@ declare namespace LocalJSX {
          */
         "hideFilters"?: boolean;
         /**
+          * Hides price from search results
+         */
+        "hidePrice"?: boolean;
+        /**
           * How many results to display on a page
          */
         "limit"?: number;
@@ -3756,6 +3772,14 @@ declare namespace LocalJSX {
           * How many products to show in popular products
          */
         "popularProductsResultCount"?: number;
+        /**
+          * The factor to use to generate the ranges
+         */
+        "priceInterval"?: number;
+        /**
+          * Show price as options
+         */
+        "showPriceAsSlider"?: boolean;
         /**
           * Show ratings
          */

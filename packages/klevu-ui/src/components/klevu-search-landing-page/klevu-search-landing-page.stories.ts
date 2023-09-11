@@ -37,6 +37,9 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     show-search=${ifDefined(args.showSearch)}
     hide-filters=${ifDefined(args.hideFilters)}
     use-multi-select-filters=${ifDefined(args.useMultiSelectFilters)}
+    show-price-as-slider=${ifDefined(args.showPriceAsSlider)}
+    price-interval=${ifDefined(args.priceInterval)}
+    hide-price=${ifDefined(args.hidePrice)}
   ></klevu-search-landing-page>`,
 }
 
