@@ -28,7 +28,11 @@ export async function imageSearch(
     url = image
   } else {
     const form = new FormData()
-    form.append("image", image)
+    form.append(
+      "image",
+      image,
+      image.name || KlevuConfig.getDefault().apiKey + ".jpg"
+    )
     const imageUrlResponse = await fetch(
       `https://api.ksearchnet.com/image/store/${
         KlevuConfig.getDefault().apiKey
