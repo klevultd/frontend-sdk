@@ -6,6 +6,7 @@ import {
 import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
+import fetch from "node-fetch"
 
 /**
  * Uploads the image if blob passed or uses url to perform search
@@ -43,7 +44,7 @@ export async function imageSearch(
       console.warn("Failed to upload image: " + imageUrlResponse.status)
       throw new Error("Failed to upload image")
     }
-    url = (await imageUrlResponse.json()).url
+    url = ((await imageUrlResponse.json()) as { url: string }).url
   }
   if (!url) {
     throw new Error("Image url is required.")
