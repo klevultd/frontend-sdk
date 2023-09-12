@@ -6,7 +6,6 @@ import {
 import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
-import fetch from "node-fetch"
 
 /**
  * Uploads the image if blob passed or uses url to perform search
