@@ -1,5 +1,14 @@
+import { KlevuConfig } from "../index.js"
 import { KlevuRecord } from "../models/KlevuRecord.js"
 import { KlevuLastClickedProducts } from "./lastClickedProducts.js"
+
+beforeEach(() => {
+  KlevuConfig.init({
+    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-160320037354512854",
+    disableClickTrackStoring: false,
+  })
+})
 
 test("Product is added last clicks", () => {
   KlevuLastClickedProducts.click("1", {
@@ -46,4 +55,18 @@ test("Cache should work", () => {
   expect(
     KlevuLastClickedProducts.getCategoryPersonalisationIds("foo").length
   ).toBe(3)
+})
+
+test("Disabled click tracking should return empty array", () => {
+  KlevuConfig.getDefault().disableClickTracking = true
+
+  KlevuLastClickedProducts.click("4", {
+    id: "4",
+    name: "product 4",
+  } as KlevuRecord)
+  expect(
+    KlevuLastClickedProducts.getCategoryPersonalisationIds("foo").length
+  ).toBe(0)
+  expect(KlevuLastClickedProducts.getProducts(1).length).toBe(0)
+  expect(KlevuLastClickedProducts.getLastClickedLatestsFirst(1).length).toBe(0)
 })
