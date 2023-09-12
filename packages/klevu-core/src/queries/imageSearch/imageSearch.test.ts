@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { KlevuConfig, KlevuTypeOfRecord, imageSearch } from "../../index.js"
 import axios from "axios"
+import fetch from "node-fetch"
 
 beforeEach(() => {
   KlevuConfig.init({
