@@ -120,8 +120,8 @@ export class KlevuRecommendations {
 
     return (
       <Host>
-        <klevu-slides heading={this.recommendationTitle}>
-          <slot>
+        <slot>
+          <klevu-slides heading={this.recommendationTitle}>
             {this.products.map((product) => (
               <klevu-product
                 exportparts={parts["klevu-product"]}
@@ -132,8 +132,8 @@ export class KlevuRecommendations {
                 }}
               ></klevu-product>
             ))}
-          </slot>
-        </klevu-slides>
+          </klevu-slides>
+        </slot>
       </Host>
     )
   }

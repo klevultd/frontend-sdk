@@ -1,0 +1,49 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import * as Stories from "./klevu-recommendations.stories"
+
+<Meta of={Stories} />
+
+# Creating Custom Recommendations with Klevu Recommendations
+
+This code example demonstrates the creation of custom product recommendations using Klevu components. The
+recommendations are displayed as a set of product slides within a `klevu-recommendations` element.
+
+## HTML Markup
+
+The HTML structure for custom recommendations consists of the following elements:
+
+1. **Klevu Recommendations (`klevu-recommendations`)**:
+
+   - An element with the ID `customized`, representing customized product recommendations.
+   - `recommendation-title` is set to "A custom recommendation" to specify the title of the recommendation section. Used for analytics.
+   - `recommendation-id` is assigned a unique identifier for the recommendation source.
+
+2. **Klevu Slides (`klevu-slides`)**:
+   - Your custom code to display a vertical slider of product recommendations.
+   - A child element of `klevu-recommendations` used to organize and display the product recommendations.
+   - The `heading` attribute is set to "A custom recommendation" to provide a heading for the slides.
+
+## JavaScript Logic
+
+The JavaScript logic within the `<script>` block controls the behavior of the custom recommendations:
+
+- **Event Listener**:
+
+  - An event listener is added to the `klevuData` event of the `klevu-recommendations` element. This event is triggered
+    when recommendation data is available.
+
+- **Updating Slides**:
+  - Upon receiving the recommendation data, the content of the slides (`klevu-slides`) is cleared (`slides.innerHTML =
+""`).
+  - For each item in the recommendation records, a `klevu-product` element is created to represent the product.
+  - isWrapper is set to true to indicate that the product is a wrapper element and it should send analytics data.
+  - The product information is assigned to the `klevu-product` element.
+  - Styling is applied to the product element, including a red border, padding, and a cursor pointer.
+  - The product name is displayed within a `<div>` element and added as a child to the product.
+  - The product is then appended to the slides.
+
+This code example showcases how to create and customize product recommendations using Klevu components. The custom
+recommendations are dynamically updated based on the received data, providing a personalized and engaging user
+experience.
+
+<Canvas of={Stories.Customized} sourceState="shown" />
