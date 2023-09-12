@@ -43,7 +43,7 @@ export async function imageSearch(
       console.warn("Failed to upload image: " + imageUrlResponse.status)
       throw new Error("Failed to upload image")
     }
-    url = ((await imageUrlResponse.json()) as { url: string }).url
+    url = (await imageUrlResponse.json()).url
   }
   if (!url) {
     throw new Error("Image url is required.")
