@@ -1,5 +1,5 @@
 import { KlevuKMCSettings } from "../kmc.js"
-import { KlevuKeywordUrlMap } from "../kmcmodels/KMCMaps.js"
+import { KlevuKeywordUrlMap } from "../../models/KMCMaps.js"
 
 export async function getRedirects(
   term: string

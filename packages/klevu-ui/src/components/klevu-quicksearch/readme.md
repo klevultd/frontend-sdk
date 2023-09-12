@@ -55,10 +55,12 @@ Full app to create search bar that popups trending products and search results.
 
 | Slot                      | Description                                |
 | ------------------------- | ------------------------------------------ |
+| `"bottombanners"`         | Bottom banner content                      |
 | `"content"`               | Popup content                              |
 | `"last-clicked-products"` | Slot to replace last clicked products      |
 | `"noResults"`             | Show message when no results found         |
 | `"search-products"`       | Slot to replace search results listings    |
+| `"topbanners"`            | Top banner content                         |
 | `"trending-products"`     | Slot to replace trending products listings |
 
 
@@ -78,6 +80,7 @@ Full app to create search bar that popups trending products and search results.
 - [klevu-cms-list](../klevu-cms-list)
 - [klevu-typography](../klevu-typography)
 - [klevu-sort](../klevu-sort)
+- [klevu-banner](../klevu-banner)
 - [klevu-product-grid](../klevu-product-grid)
 - [klevu-product](../klevu-product)
 - [klevu-pagination](../klevu-pagination)
@@ -97,6 +100,7 @@ graph TD;
   klevu-quicksearch --> klevu-cms-list
   klevu-quicksearch --> klevu-typography
   klevu-quicksearch --> klevu-sort
+  klevu-quicksearch --> klevu-banner
   klevu-quicksearch --> klevu-product-grid
   klevu-quicksearch --> klevu-product
   klevu-quicksearch --> klevu-pagination

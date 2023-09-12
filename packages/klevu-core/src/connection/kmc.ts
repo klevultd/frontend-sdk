@@ -1,8 +1,8 @@
 import { KlevuConfig } from "../index.js"
 import { isBrowser } from "../utils/isBrowser.js"
-import { KMCBannerRootObject } from "./kmcmodels/KMCBanner.js"
-import { KMCMapsRootObject } from "./kmcmodels/KMCMaps.js"
-import { KMCRootObject } from "./kmcmodels/KMCRoot.js"
+import { KMCBannerRootObject } from "../models/KMCBanner.js"
+import { KMCMapsRootObject } from "../models/KMCMaps.js"
+import { KMCRootObject } from "../models/KMCRoot.js"
 import { get } from "./fetch.js"
 
 const url = "https://js.klevu.com/klevu-js-v1/klevu-js-api/"

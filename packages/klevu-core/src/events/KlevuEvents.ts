@@ -45,7 +45,8 @@ export class KlevuEvents {
   }: {
     items: Array<{
       amount: number
-      product: Partial<KlevuRecord>
+      product: Pick<KlevuRecord, "id"> &
+        Partial<Pick<KlevuRecord, "currency" | "itemGroupId" | "salePrice">>
       variantId?: string
       override?: Partial<V1CheckedOutProductsEvent>
     }>
@@ -88,7 +89,15 @@ export class KlevuEvents {
     override = {},
   }: {
     recommendationMetadata: RecommendationViewEventMetaData
-    products: Array<Partial<KlevuRecord>>
+    products: Array<
+      Pick<KlevuRecord, "id"> &
+        Partial<
+          Pick<
+            KlevuRecord,
+            "itemGroupId" | "name" | "price" | "currency" | "brand" | "category"
+          >
+        >
+    >
     override?: Partial<KlevuEventV2Data>
   }) {
     const data: KlevuEventV2Data = {
@@ -139,7 +148,18 @@ export class KlevuEvents {
     override = {},
   }: {
     recommendationMetadata: RecommendationViewEventMetaData
-    product: Partial<KlevuRecord>
+    product: Pick<KlevuRecord, "id"> &
+      Partial<
+        Pick<
+          KlevuRecord,
+          | "itemGroupId"
+          | "name"
+          | "salePrice"
+          | "currency"
+          | "brand"
+          | "category"
+        >
+      >
     productIndexInList: number
     variantId?: string
     override?: Partial<KlevuEventV2Data>
@@ -162,7 +182,7 @@ export class KlevuEvents {
           item_group_id: product.itemGroupId || product.id,
           item_name: product.name ?? "unknown",
           item_variant_id: variantId || product.id,
-          price: product.price ?? "0",
+          price: product.salePrice ?? "0",
           currency: product.currency,
           item_brand: product.brand,
           item_category: product.category,
@@ -190,7 +210,8 @@ export class KlevuEvents {
     activeFilters,
     override = {},
   }: {
-    product: Partial<KlevuRecord>
+    product: Pick<KlevuRecord, "id"> &
+      Partial<Pick<KlevuRecord, "itemGroupId" | "name" | "url">>
     searchTerm?: string
     variantId?: string
     activeFilters?: string
@@ -311,7 +332,10 @@ export class KlevuEvents {
    * @param override Ability to override any analytical keys in low level
    */
   static categoryMerchandisingProductClick(
-    product: Partial<KlevuRecord>,
+    product: Pick<KlevuRecord, "id"> &
+      Partial<
+        Pick<KlevuRecord, "itemGroupId" | "name" | "url" | "salePrice" | "sku">
+      >,
     categoryTitle: string,
     klevuCategory: string,
     variantId?: string,
