@@ -9,6 +9,7 @@ import {
   trendingProducts,
   KMCRootObject,
   KMCMapsRootObject,
+  KlevuBanner,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -48,6 +49,8 @@ type Banner = NoResultsOptions["banners"][0]
  * @slot trending-products - Slot to replace trending products listings
  * @slot last-clicked-products - Slot to replace last clicked products
  * @slot noResults - Show message when no results found
+ * @slot topbanners - Top banner content
+ * @slot bottombanners - Bottom banner content
  */
 @Component({
   tag: "klevu-quicksearch",
@@ -207,6 +210,8 @@ export class KlevuQuicksearch {
   @State() chat = false
   @State() noResultsMessage: string = ""
   @State() noResultsBannerDetails: Banner[] = []
+  @State() searchResultTopBanners: KlevuBanner[] = []
+  @State() searchResultBottomBanners: KlevuBanner[] = []
 
   #searchField?: HTMLKlevuSearchFieldElement
 
@@ -300,6 +305,9 @@ export class KlevuQuicksearch {
     this.categories = event.detail.category?.records
     this.popup?.openModal()
     this.queryResult = await this.#searchField?.getQueryResult("search")
+    const allBanners = (await event.detail.search?.getBanners({ searchType: "quicksearch" })) ?? []
+    this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
+    this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
     this.#emitChangedData()
   }
 
@@ -505,6 +513,11 @@ export class KlevuQuicksearch {
                   onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
                 ></klevu-sort>
               </div>
+              <slot name="topbanners">
+                {this.searchResultTopBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
               <klevu-product-grid itemsPerRow={isMobile ? undefined : 3}>
                 <slot name="search-products">
                   {this.products?.map((p) => (
@@ -523,6 +536,11 @@ export class KlevuQuicksearch {
                 queryResult={this.queryResult}
                 onKlevuPaginationChange={this.#searchPageChange.bind(this)}
               ></klevu-pagination>
+              <slot name="bottombanners">
+                {this.searchResultBottomBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
             </Fragment>
           )}
           {this.resultVariant === "simple" && (
@@ -530,6 +548,11 @@ export class KlevuQuicksearch {
               <div class="resultheader">
                 <klevu-typography variant="h3">{this.tSearchResults}</klevu-typography>
               </div>
+              <slot name="topbanners">
+                {this.searchResultTopBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
               <div class="lineproducts">
                 <slot name="search-products">
                   {this.products?.map((p) => (
@@ -543,6 +566,11 @@ export class KlevuQuicksearch {
                   ))}
                 </slot>
               </div>
+              <slot name="bottombanners">
+                {this.searchResultBottomBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
             </Fragment>
           )}
         </section>

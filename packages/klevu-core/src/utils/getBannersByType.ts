@@ -1,4 +1,4 @@
-import { KlevuBanner } from "../connection/kmcmodels/KMCBanner.js"
+import { KlevuBanner } from "../models/KMCBanner.js"
 
 type KlevuBannerSearchType = "landingpage" | "quicksearch" | "merchandising"
 

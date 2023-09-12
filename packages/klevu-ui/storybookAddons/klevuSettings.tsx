@@ -39,11 +39,13 @@ export const Tool = memo(function KlevuSettings() {
   const [apiKey, setApiKey] = useState(localStorage.getItem("klevu-api-key") || "")
   const [url, setUrl] = useState(localStorage.getItem("klevu-url") || "")
   const [language, setLanguage] = useState(localStorage.getItem("klevu-language") || undefined)
+  const [useKMC, setUseKMC] = useState<boolean>(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
 
   const onSave = (e) => {
     localStorage.setItem("klevu-api-key", apiKey)
     localStorage.setItem("klevu-url", url)
     localStorage.setItem("klevu-language", language ?? "")
+    localStorage.setItem("klevu-use-kmc", useKMC.toString() ?? "true")
     window.location.reload()
   }
 
@@ -51,6 +53,7 @@ export const Tool = memo(function KlevuSettings() {
     setApiKey(localStorage.getItem("klevu-api-key") || "")
     setUrl(localStorage.getItem("klevu-url") || "")
     setLanguage(localStorage.getItem("klevu-language") || undefined)
+    setUseKMC(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
     setIsOpen(false)
   }
 
@@ -110,6 +113,10 @@ export const Tool = memo(function KlevuSettings() {
                   <option value="fi">Finnish</option>
                   <option value="es">Spanish</option>
                 </select>
+                <div>
+                  <input type="checkbox" checked={useKMC} onChange={(e) => setUseKMC(Boolean(e.target.checked))} /> Use
+                  KMC
+                </div>
                 <div
                   style={{
                     display: "flex",

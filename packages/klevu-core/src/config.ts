@@ -35,6 +35,11 @@ type KlevuConfiguration = {
    *
    */
   axios?: AxiosStatic
+
+  /**
+   * Prevent clicks being tracked in memory or stored in local storage. This will break personalisation and recommendations.
+   */
+  disableClickTrackStoring?: boolean
 }
 
 export class KlevuConfig {
@@ -47,6 +52,7 @@ export class KlevuConfig {
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
+  disableClickTracking = false
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -60,6 +66,8 @@ export class KlevuConfig {
     if (config.axios) {
       this.axios = config.axios.create()
     }
+
+    this.disableClickTracking = config.disableClickTrackStoring ?? false
   }
 
   static init(config: KlevuConfiguration) {

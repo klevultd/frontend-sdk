@@ -185,6 +185,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
     const key = localStorage.getItem("klevu-api-key")
     const url = localStorage.getItem("klevu-url")
     const language = localStorage.getItem("klevu-language")
+    const useKMC = localStorage.getItem("klevu-use-kmc") === "false" ? false : true
 
     if (key && url) {
       return html`
@@ -193,7 +194,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
           api-key=${key}
           url=${url}
           language=${ifDefined(language === null ? undefined : language)}
-          kmc-load-defaults
+          kmc-load-defaults=${useKMC}
         >
           ${story()}
         </klevu-init>
@@ -207,6 +208,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
         url="https://eucs29v2.ksearchnet.com/cs/v2/search"
         kmc-load-defaults
         language=${ifDefined(language === null ? undefined : language)}
+        kmc-load-defaults=${useKMC}
       >
         ${story()}
       </klevu-init>
