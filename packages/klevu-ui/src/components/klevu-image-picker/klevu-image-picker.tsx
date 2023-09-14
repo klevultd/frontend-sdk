@@ -20,7 +20,24 @@ export class KlevuImagePicker {
    * To be used to display loading indicator
    */
   @Prop() isLoading: boolean = false
+  /**
+   * Provide max file size in MBs
+   */
+  @Prop() maxFileSize: number = 5
 
+  #handleImageSelection(e: Event) {
+    e.preventDefault()
+    e.stopPropagation()
+    const target = e.target as HTMLInputElement
+    if (target?.files && target?.files.length > 0) {
+      var fileSize = target.files[0].size / 1024 / 1024
+      if (fileSize > this.maxFileSize) {
+        alert(`File size exceeds ${this.maxFileSize} MiB`)
+      } else {
+        this.klevuImageSelected.emit({ image: target.files[0], name: target.files[0].name })
+      }
+    }
+  }
   render() {
     return (
       <Host>
@@ -56,14 +73,7 @@ export class KlevuImagePicker {
             onFocus={(e) => {
               e.stopPropagation()
             }}
-            onChange={(e: Event) => {
-              e.preventDefault()
-              e.stopPropagation()
-              const target = e.target as HTMLInputElement
-              if (target?.files && target?.files.length > 0) {
-                this.klevuImageSelected.emit({ image: target.files[0], name: target.files[0].name })
-              }
-            }}
+            onChange={this.#handleImageSelection.bind(this)}
           />
           <p class="info">
             <klevu-icon name="info" />

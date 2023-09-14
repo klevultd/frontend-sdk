@@ -158,6 +158,7 @@ export const KlevuIcon = /*@__PURE__*/ defineContainer<JSX.KlevuIcon>('klevu-ico
 
 export const KlevuImagePicker = /*@__PURE__*/ defineContainer<JSX.KlevuImagePicker>('klevu-image-picker', undefined, [
   'isLoading',
+  'maxFileSize',
   'klevuImageSelected'
 ]);
 

@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property    | Attribute    | Description                             | Type      | Default |
-| ----------- | ------------ | --------------------------------------- | --------- | ------- |
-| `isLoading` | `is-loading` | To be used to display loading indicator | `boolean` | `false` |
+| Property      | Attribute       | Description                             | Type      | Default |
+| ------------- | --------------- | --------------------------------------- | --------- | ------- |
+| `isLoading`   | `is-loading`    | To be used to display loading indicator | `boolean` | `false` |
+| `maxFileSize` | `max-file-size` | Provide max file size in MBs            | `number`  | `5`     |
 
 
 ## Events

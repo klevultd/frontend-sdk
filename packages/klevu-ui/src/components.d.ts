@@ -458,6 +458,10 @@ export namespace Components {
           * To be used to display loading indicator
          */
         "isLoading": boolean;
+        /**
+          * Provide max file size in MBs
+         */
+        "maxFileSize": number;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -2897,6 +2901,10 @@ declare namespace LocalJSX {
           * To be used to display loading indicator
          */
         "isLoading"?: boolean;
+        /**
+          * Provide max file size in MBs
+         */
+        "maxFileSize"?: number;
         /**
           * This event is fired when an image is selected.
          */

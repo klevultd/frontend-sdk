@@ -15,8 +15,8 @@ const meta: Meta = {
 export default meta
 
 export const imagePicker: StoryObj<KlevuImagePicker> = {
-  render: () =>
-    html`<klevu-image-picker></klevu-image-picker>
+  render: (args) =>
+    html`<klevu-image-picker max-file-size=${args.maxFileSize}></klevu-image-picker>
       <script>
         const imgPicker = document.querySelector("klevu-image-picker")
         imgPicker.addEventListener("klevuImageSelected", (event) => {
