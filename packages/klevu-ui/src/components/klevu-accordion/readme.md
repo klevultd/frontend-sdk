@@ -29,6 +29,7 @@ Component that wrap two slots to create accordion element.
 ### Used by
 
  - [klevu-facet](../klevu-facet)
+ - [klevu-image-picker](../klevu-image-picker)
 
 ### Depends on
 
@@ -41,6 +42,7 @@ graph TD;
   klevu-accordion --> klevu-typography
   klevu-accordion --> klevu-icon
   klevu-facet --> klevu-accordion
+  klevu-image-picker --> klevu-accordion
   style klevu-accordion fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

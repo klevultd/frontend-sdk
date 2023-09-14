@@ -13,6 +13,7 @@ Simple loading indicator
 
 ### Used by
 
+ - [klevu-image-picker](../klevu-image-picker)
  - [klevu-merchandising](../klevu-merchandising)
  - [klevu-moi](../klevu-moi)
  - [klevu-product-query-popup](../klevu-product-query-popup)
@@ -21,6 +22,7 @@ Simple loading indicator
 ### Graph
 ```mermaid
 graph TD;
+  klevu-image-picker --> klevu-loading-indicator
   klevu-merchandising --> klevu-loading-indicator
   klevu-moi --> klevu-loading-indicator
   klevu-product-query-popup --> klevu-loading-indicator

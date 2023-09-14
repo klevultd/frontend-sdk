@@ -304,7 +304,9 @@ export class KlevuSearchField {
           aria-role="search"
           variant={this.variant}
           icon="search"
-        ></klevu-textfield>
+        >
+          <slot name="end-of-input" slot="end"></slot>
+        </klevu-textfield>
         {this.variant !== "pill" && (
           <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.tSearchText}</klevu-button>
         )}

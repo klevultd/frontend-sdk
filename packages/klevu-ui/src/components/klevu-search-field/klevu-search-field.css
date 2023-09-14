@@ -1,6 +1,9 @@
 :host {
   display: flex;
 }
+div {
+  position: relative;
+}
 
 klevu-textfield {
   width: 100%;

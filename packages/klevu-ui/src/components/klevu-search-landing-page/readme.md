@@ -15,6 +15,7 @@ Full app component for search landing page
 | `filterCustomOrder`          | --                              | Order filters in a customer order                               | `undefined \| { [key: string]: string[]; }`                                                                                                                                                                                                                                                                                                             | `undefined`                                        |
 | `hideFilters`                | `hide-filters`                  | Hide filters on results page                                    | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
 | `hidePrice`                  | `hide-price`                    | Hides price from search results                                 | `boolean \| undefined`                                                                                                                                                                                                                                                                                                                                  | `undefined`                                        |
+| `imageUrlForSearch`          | `image-url-for-search`          | Pass image url if performing image search                       | `string`                                                                                                                                                                                                                                                                                                                                                | `""`                                               |
 | `limit`                      | `limit`                         | How many results to display on a page                           | `number`                                                                                                                                                                                                                                                                                                                                                | `24`                                               |
 | `popularProductsResultCount` | `popular-products-result-count` | How many products to show in popular products                   | `number`                                                                                                                                                                                                                                                                                                                                                | `3`                                                |
 | `priceInterval`              | `price-interval`                | The factor to use to generate the ranges                        | `number`                                                                                                                                                                                                                                                                                                                                                | `500`                                              |
@@ -61,6 +62,9 @@ Full app component for search landing page
 - [klevu-facet-list](../klevu-facet-list)
 - [klevu-quicksearch](../klevu-quicksearch)
 - [klevu-typography](../klevu-typography)
+- [klevu-popup](../klevu-popup)
+- [klevu-image-picker](../klevu-image-picker)
+- [klevu-icon](../klevu-icon)
 - [klevu-sort](../klevu-sort)
 - [klevu-banner](../klevu-banner)
 - [klevu-product-grid](../klevu-product-grid)
@@ -79,6 +83,9 @@ graph TD;
   klevu-search-landing-page --> klevu-facet-list
   klevu-search-landing-page --> klevu-quicksearch
   klevu-search-landing-page --> klevu-typography
+  klevu-search-landing-page --> klevu-popup
+  klevu-search-landing-page --> klevu-image-picker
+  klevu-search-landing-page --> klevu-icon
   klevu-search-landing-page --> klevu-sort
   klevu-search-landing-page --> klevu-banner
   klevu-search-landing-page --> klevu-product-grid
@@ -111,6 +118,8 @@ graph TD;
   klevu-quicksearch --> klevu-util-viewport
   klevu-quicksearch --> klevu-popup
   klevu-quicksearch --> klevu-search-field
+  klevu-quicksearch --> klevu-image-picker
+  klevu-quicksearch --> klevu-icon
   klevu-quicksearch --> klevu-moi
   klevu-quicksearch --> klevu-suggestions-list
   klevu-quicksearch --> klevu-cms-list
@@ -127,6 +136,10 @@ graph TD;
   klevu-search-field --> klevu-textfield
   klevu-search-field --> klevu-button
   klevu-textfield --> klevu-icon
+  klevu-image-picker --> klevu-typography
+  klevu-image-picker --> klevu-loading-indicator
+  klevu-image-picker --> klevu-icon
+  klevu-image-picker --> klevu-accordion
   klevu-moi --> klevu-chat-layout
   klevu-moi --> klevu-typography
   klevu-moi --> klevu-button

@@ -28,6 +28,7 @@ Klevu typography component. This component is used in most places to set correct
  - [klevu-chip](../klevu-chip)
  - [klevu-cms-list](../klevu-cms-list)
  - [klevu-facet](../klevu-facet)
+ - [klevu-image-picker](../klevu-image-picker)
  - [klevu-latest-searches](../klevu-latest-searches)
  - [klevu-list](../klevu-list)
  - [klevu-merchandising](../klevu-merchandising)
@@ -53,6 +54,7 @@ graph TD;
   klevu-chip --> klevu-typography
   klevu-cms-list --> klevu-typography
   klevu-facet --> klevu-typography
+  klevu-image-picker --> klevu-typography
   klevu-latest-searches --> klevu-typography
   klevu-list --> klevu-typography
   klevu-merchandising --> klevu-typography

@@ -27,12 +27,15 @@ Klevu icon component. Uses Google Material Icons.
  - [klevu-checkbox](../klevu-checkbox)
  - [klevu-chip](../klevu-chip)
  - [klevu-dropdown](../klevu-dropdown)
+ - [klevu-image-picker](../klevu-image-picker)
  - [klevu-layout-results](../klevu-layout-results)
  - [klevu-list](../klevu-list)
  - [klevu-modal](../klevu-modal)
  - [klevu-pagination](../klevu-pagination)
  - [klevu-product](../klevu-product)
  - [klevu-product-query-popup](../klevu-product-query-popup)
+ - [klevu-quicksearch](../klevu-quicksearch)
+ - [klevu-search-landing-page](../klevu-search-landing-page)
  - [klevu-textfield](../klevu-textfield)
 
 ### Graph
@@ -45,12 +48,15 @@ graph TD;
   klevu-checkbox --> klevu-icon
   klevu-chip --> klevu-icon
   klevu-dropdown --> klevu-icon
+  klevu-image-picker --> klevu-icon
   klevu-layout-results --> klevu-icon
   klevu-list --> klevu-icon
   klevu-modal --> klevu-icon
   klevu-pagination --> klevu-icon
   klevu-product --> klevu-icon
   klevu-product-query-popup --> klevu-icon
+  klevu-quicksearch --> klevu-icon
+  klevu-search-landing-page --> klevu-icon
   klevu-textfield --> klevu-icon
   style klevu-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```

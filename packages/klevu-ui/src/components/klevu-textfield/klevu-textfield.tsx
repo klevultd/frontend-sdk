@@ -112,6 +112,7 @@ export class KlevuTextfield {
           }}
         />
         {this.icon && <klevu-icon class="icon" name={this.icon} />}
+        <slot name="end"></slot>
         {this.clearButton && this.value?.length > 0 && (
           <klevu-icon
             name="clear"

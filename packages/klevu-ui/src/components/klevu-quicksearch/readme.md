@@ -12,6 +12,7 @@ Full app to create search bar that popups trending products and search results.
 | Property                               | Attribute                                     | Description                                                                                                                                                            | Type                                                                                                                                                                              | Default                                            |
 | -------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | `enableChat`                           | `enable-chat`                                 | Enable Klevu MOI chat                                                                                                                                                  | `boolean \| undefined`                                                                                                                                                            | `undefined`                                        |
+| `enableImageSearch`                    | `enable-image-search`                         | Enable image search feature                                                                                                                                            | `boolean`                                                                                                                                                                         | `false`                                            |
 | `fallbackTerm`                         | `fallback-term`                               | What term should be used if there isn't enough results                                                                                                                 | `string \| undefined`                                                                                                                                                             | `undefined`                                        |
 | `fullResultCount`                      | `full-result-count`                           | How many products to show in full variant                                                                                                                              | `number`                                                                                                                                                                          | `9`                                                |
 | `placeholder`                          | `placeholder`                                 | Placeholder for input text                                                                                                                                             | `string \| undefined`                                                                                                                                                             | `undefined`                                        |
@@ -44,11 +45,12 @@ Full app to create search bar that popups trending products and search results.
 
 ## Events
 
-| Event           | Description                                                                                                                                      | Type                                                                                                                                                              |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `klevuData`     | When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.             | `CustomEvent<{ trendingProducts?: KlevuRecord[] \| undefined; lastClickedProducts?: KlevuRecord[] \| undefined; searchResult?: KlevuQueryResult \| undefined; }>` |
-| `klevuRedirect` | Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event | `CustomEvent<KlevuKeywordUrlMap>`                                                                                                                                 |
-| `klevuSearch`   | When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects                        | `CustomEvent<string>`                                                                                                                                             |
+| Event              | Description                                                                                                                                      | Type                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `klevuData`        | When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.             | `CustomEvent<{ trendingProducts?: KlevuRecord[] \| undefined; lastClickedProducts?: KlevuRecord[] \| undefined; searchResult?: KlevuQueryResult \| undefined; }>` |
+| `klevuImageSearch` | This event is emitted once the image to be used for search is uploaded. The event contains the url to be passed to search api.                   | `CustomEvent<string>`                                                                                                                                             |
+| `klevuRedirect`    | Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event | `CustomEvent<KlevuKeywordUrlMap>`                                                                                                                                 |
+| `klevuSearch`      | When user clicks search button. Returns the search term. This event is emitted when there is no url matched for redirects                        | `CustomEvent<string>`                                                                                                                                             |
 
 
 ## Slots
@@ -75,6 +77,8 @@ Full app to create search bar that popups trending products and search results.
 - [klevu-util-viewport](../klevu-util-viewport)
 - [klevu-popup](../klevu-popup)
 - [klevu-search-field](../klevu-search-field)
+- [klevu-image-picker](../klevu-image-picker)
+- [klevu-icon](../klevu-icon)
 - [klevu-moi](../klevu-moi)
 - [klevu-suggestions-list](../klevu-suggestions-list)
 - [klevu-cms-list](../klevu-cms-list)
@@ -95,6 +99,8 @@ graph TD;
   klevu-quicksearch --> klevu-util-viewport
   klevu-quicksearch --> klevu-popup
   klevu-quicksearch --> klevu-search-field
+  klevu-quicksearch --> klevu-image-picker
+  klevu-quicksearch --> klevu-icon
   klevu-quicksearch --> klevu-moi
   klevu-quicksearch --> klevu-suggestions-list
   klevu-quicksearch --> klevu-cms-list
@@ -113,6 +119,12 @@ graph TD;
   klevu-textfield --> klevu-icon
   klevu-button --> klevu-icon
   klevu-button --> klevu-typography
+  klevu-image-picker --> klevu-typography
+  klevu-image-picker --> klevu-loading-indicator
+  klevu-image-picker --> klevu-icon
+  klevu-image-picker --> klevu-accordion
+  klevu-accordion --> klevu-typography
+  klevu-accordion --> klevu-icon
   klevu-moi --> klevu-chat-layout
   klevu-moi --> klevu-typography
   klevu-moi --> klevu-button
