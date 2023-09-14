@@ -3,9 +3,9 @@ import {
   KlevuSearchOptions,
   search,
 } from "../index.js"
-import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
+import { KlevuUploadImageForSearch } from "../../utils/uploadImageForSearch.js"
 
 /**
  * Uploads the image if blob passed or uses url to perform search
@@ -27,23 +27,7 @@ export async function imageSearch(
   if (typeof image === "string") {
     url = image
   } else {
-    const form = new FormData()
-    form.append(
-      "image",
-      image,
-      image.name || KlevuConfig.getDefault().apiKey + ".jpg"
-    )
-    const imageUrlResponse = await fetch(
-      `https://api.ksearchnet.com/image/store/${
-        KlevuConfig.getDefault().apiKey
-      }`,
-      { method: "POST", body: form }
-    )
-    if (imageUrlResponse.status !== 200) {
-      console.warn("Failed to upload image: " + imageUrlResponse.status)
-      throw new Error("Failed to upload image")
-    }
-    url = (await imageUrlResponse.json()).url
+    url = await KlevuUploadImageForSearch(image)
   }
   if (!url) {
     throw new Error("Image url is required.")
