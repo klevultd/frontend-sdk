@@ -1,4 +1,5 @@
 import {
+  abTest,
   applyFilterWithManager,
   categoryMerchandising,
   FilterManager,
@@ -114,6 +115,12 @@ export class KlevuMerchandising {
   @Prop()
   usePersonalisation?: boolean
 
+  /**
+   * Overrides KMC setting to use ABtest for results
+   */
+  @Prop()
+  useABTest?: boolean
+
   @State() currentViewPortSize?: ViewportSize
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
@@ -149,6 +156,9 @@ export class KlevuMerchandising {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInCatNav) {
         this.usePersonalisation = true
       }
+      if (this.useABTest === undefined) {
+        this.useABTest = settings.klevu_abTestActive
+      }
     }
     await this.#fetchData()
   }
@@ -181,6 +191,9 @@ export class KlevuMerchandising {
 
     if (this.usePersonalisation) {
       modifiers.push(personalisation())
+    }
+    if (this.useABTest) {
+      modifiers.push(abTest())
     }
 
     const result = await KlevuFetch(
