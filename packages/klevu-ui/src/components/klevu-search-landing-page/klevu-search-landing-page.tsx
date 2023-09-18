@@ -302,7 +302,7 @@ export class KlevuSearchLandingPage {
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterManagerFiltersUpdated() {
     if (this.#isMobile()) {
-      this.#layoutElement.closeDrawer()
+      return
     }
     this.#fetchData()
   }
