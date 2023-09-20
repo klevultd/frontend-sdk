@@ -23,7 +23,7 @@ export const Popup: StoryObj<KlevuPopup> = {
   render: (args) => html`<klevu-popup
     anchor=${ifDefined(args.anchor)}
     close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-    fullwidth-content=${ifDefined(args.fullwidthContent)}
+    fullscreen-on-mobile-size=${ifDefined(args.fullscreenOnMobileSize)}
     open-at-focus=${ifDefined(args.openAtFocus)}
     start-open=${ifDefined(args.startOpen)}
     elevation=${ifDefined(args.elevation)}
@@ -44,7 +44,7 @@ export const ButtonSource: StoryObj<KlevuPopup> = {
   render: (args) => html`<klevu-popup
     anchor=${ifDefined(args.anchor)}
     close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-    fullwidth-content=${ifDefined(args.fullwidthContent)}
+    fullscreen-on-mobile-size=${ifDefined(args.fullscreenOnMobileSize)}
     open-at-focus=${ifDefined(args.openAtFocus)}
     start-open=${ifDefined(args.startOpen)}
     elevation=${ifDefined(args.elevation)}
@@ -64,7 +64,7 @@ export const ExternalSource: StoryObj<KlevuPopup> = {
       id="external-popup"
       anchor=${ifDefined(args.anchor)}
       close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-      fullwidth-content=${ifDefined(args.fullwidthContent)}
+      fullscreen-on-mobile-size=${ifDefined(args.fullscreenOnMobileSize)}
       open-at-focus=${ifDefined(args.openAtFocus)}
       start-open=${ifDefined(args.startOpen)}
       elevation=${ifDefined(args.elevation)}
@@ -75,8 +75,11 @@ export const ExternalSource: StoryObj<KlevuPopup> = {
     <p>This is some text to separate popup from the origin</p>
     <klevu-button id="thebutton" is-secondary>My button</klevu-button>
     <script>
-      const origin = document.querySelector("#thebutton")
-      const popup = document.querySelector("#external-popup")
-      popup.originElement = origin
+      function attachOriginElement() {
+        const origin = document.querySelector("#thebutton")
+        const popup = document.querySelector("#external-popup")
+        popup.originElement = origin
+      }
+      attachOriginElement()
     </script> `,
 }
