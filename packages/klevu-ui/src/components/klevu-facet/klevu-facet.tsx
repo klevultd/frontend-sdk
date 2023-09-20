@@ -103,6 +103,7 @@ export class KlevuFacet {
   @Prop() labelOverride?: string
 
   @Prop() tMore = getTranslation("facet.tMore")
+  @Prop() tAll = getTranslation("facet.tAll")
 
   /**
    * Converts the color filters to swatches
@@ -268,44 +269,67 @@ export class KlevuFacet {
               })}
             </div>
           ) : (
-            opts.map((o) => (
-              <div class="option">
-                {this.mode === "checkbox" ? (
-                  <klevu-checkbox
-                    checked={o.selected}
+            <Fragment>
+              {this.mode === "radio" && (
+                <div class="container">
+                  <input
+                    type="radio"
+                    id={this.option!.key}
                     name={this.option!.key}
-                    onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
-                      this.manager.toggleOption(this.option!.key, o.value)
+                    value="all"
+                    checked={this.option.options.every((opt) => !opt.selected)}
+                    onClick={() => {
+                      const currentSelectedOption = this.option?.options.find((opt) => opt.selected)
+                      if (currentSelectedOption?.name) {
+                        this.manager.toggleOption(this.option!.key, currentSelectedOption.name)
+                      }
                     }}
-                  >
-                    <div class="container">
-                      <span class="name">
-                        <span>{resolveFacetLabel(o, this.option)}</span>
-                      </span>
-                      <span class="count">({o.count})</span>
-                    </div>
-                  </klevu-checkbox>
-                ) : (
-                  <div class="container">
-                    <input
-                      type="radio"
-                      id={this.option!.key}
-                      name={this.option!.key}
-                      value={o.value}
+                  />
+                  <label htmlFor={this.option!.key} class="name">
+                    <span>{this.tAll}</span>
+                  </label>
+                  <span class="count">({this.option.options.reduce((total, opt) => opt.count + total, 0)})</span>
+                </div>
+              )}
+              {opts.map((o) => (
+                <div class="option">
+                  {this.mode === "checkbox" ? (
+                    <klevu-checkbox
                       checked={o.selected}
-                      onClick={() => {
-                        this.manager.clearOptionSelections(this.option!.key)
+                      name={this.option!.key}
+                      onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {
                         this.manager.toggleOption(this.option!.key, o.value)
                       }}
-                    />
-                    <label htmlFor={this.option!.key} class="name">
-                      <span>{resolveFacetLabel(o, this.option)}</span>
-                    </label>
-                    <span class="count">({o.count})</span>
-                  </div>
-                )}
-              </div>
-            ))
+                    >
+                      <div class="container">
+                        <span class="name">
+                          <span>{resolveFacetLabel(o, this.option)}</span>
+                        </span>
+                        <span class="count">({o.count})</span>
+                      </div>
+                    </klevu-checkbox>
+                  ) : (
+                    <div class="container">
+                      <input
+                        type="radio"
+                        id={this.option!.key}
+                        name={this.option!.key}
+                        value={o.value}
+                        checked={o.selected}
+                        onClick={() => {
+                          this.manager.clearOptionSelections(this.option!.key)
+                          this.manager.toggleOption(this.option!.key, o.value)
+                        }}
+                      />
+                      <label htmlFor={this.option!.key} class="name">
+                        <span>{resolveFacetLabel(o, this.option)}</span>
+                      </label>
+                      <span class="count">({o.count})</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </Fragment>
           )}
           {showAllButton ? (
             <klevu-button

@@ -130,6 +130,7 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'accordionStartOpen',
   'labelOverride',
   'tMore',
+  'tAll',
   'useColorSwatch',
   'colorSwatchOverrides',
   'klevuFilterSelectionUpdate'
