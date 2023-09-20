@@ -134,6 +134,7 @@ export class KlevuPopup {
       })
     } else {
       const { x, y } = await computePosition(this.#originElement, this.#contentElement, {
+        strategy: "fixed",
         placement: this.anchor,
         middleware: [
           offset(this.offset),
