@@ -13,10 +13,14 @@ import {
   KMCRootObject,
   trendingProducts,
   KlevuBanner,
+  imageSearch,
+  KlevuUploadImageForSearch,
+  klaviyo,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import {
+  KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
   KlevuProductCustomEvent,
   KlevuSortCustomEvent,
@@ -121,6 +125,11 @@ export class KlevuSearchLandingPage {
   @Prop() useMultiSelectFilters?: boolean
 
   /**
+   * Enable Klaviyo integration
+   */
+  @Prop() useKlaviyo?: boolean
+
+  /**
    * Show price as options
    */
   @Prop() showPriceAsSlider?: boolean
@@ -132,6 +141,10 @@ export class KlevuSearchLandingPage {
    * Hides price from search results
    */
   @Prop() hidePrice?: boolean
+  /**
+   * Pass image url if performing image search
+   */
+  @Prop() imageUrlForSearch = ""
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -143,10 +156,11 @@ export class KlevuSearchLandingPage {
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
   @State() searchResultBottomBanners: KlevuBanner[] = []
+  @State() isUploadingImage = false
   #noResultsOptions?: NoResultsOptions
 
   #resultObject?: KlevuResponseQueryObject
-
+  #imagePickerPopupRef?: HTMLKlevuPopupElement
   #viewportUtil!: HTMLKlevuUtilViewportElement
   #layoutElement!: HTMLKlevuLayoutResultsElement
   #facetListElement!: HTMLKlevuFacetListElement
@@ -227,11 +241,19 @@ export class KlevuSearchLandingPage {
       applyFilterWithManager(this.manager),
     ]
 
-    if (this.usePersonalisation) {
+    if (this.usePersonalisation && !this.imageUrlForSearch) {
       modifiers.push(personalisation())
     }
 
-    const result = await KlevuFetch(search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers))
+    if (this.useKlaviyo) {
+      modifiers.push(klaviyo())
+    }
+
+    const result = await KlevuFetch(
+      this.imageUrlForSearch
+        ? imageSearch(this.imageUrlForSearch, { limit: this.limit, sort: this.sort }, ...modifiers)
+        : search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers)
+    )
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
@@ -354,6 +376,15 @@ export class KlevuSearchLandingPage {
     this.term = keyword
   }
 
+  async #handleImageSelection(event: CustomEvent<KlevuImageSelectedEvent>) {
+    this.isUploadingImage = true
+    const imageUrl = await KlevuUploadImageForSearch(event.detail.image)
+    this.imageUrlForSearch = imageUrl
+    this.#fetchData()
+    this.#imagePickerPopupRef?.closeModal()
+    this.isUploadingImage = false
+  }
+
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
     const showInfiniteScroll = this.useInfiniteScroll && !this.infiniteScrollingPaused && this.results.length > 0
@@ -382,9 +413,34 @@ export class KlevuSearchLandingPage {
           <div slot="header" class="header">
             {this.showSearch && <klevu-quicksearch />}
             <div class="info">
-              <klevu-typography slot="header" variant="h1">
-                {stringConcat(this.tSearchTitle, [this.term])}
-              </klevu-typography>
+              {this.imageUrlForSearch ? (
+                this.#resultObject && (
+                  <div class="imageSearchResults">
+                    <div class="image">
+                      <img src={this.imageUrlForSearch} alt="" />
+                    </div>
+                    <klevu-typography slot="header" variant="h1">
+                      We found {this.#resultObject?.meta.totalResultsFound} matches to your uploaded photo
+                    </klevu-typography>
+                    <klevu-popup ref={(el) => (this.#imagePickerPopupRef = el)} popupWidth={400} anchor="bottom-end">
+                      <div class="image-picker" slot="content">
+                        <klevu-image-picker
+                          isLoading={this.isUploadingImage}
+                          onKlevuImageSelected={this.#handleImageSelection.bind(this)}
+                        />
+                      </div>
+                      <label slot="origin">
+                        <klevu-icon name="upload" />
+                        <span>Try another photo</span>
+                      </label>
+                    </klevu-popup>
+                  </div>
+                )
+              ) : (
+                <klevu-typography slot="header" variant="h1">
+                  {stringConcat(this.tSearchTitle, [this.term])}
+                </klevu-typography>
+              )}
               {this.results?.length > 0 && (
                 <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
               )}

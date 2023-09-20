@@ -20,18 +20,19 @@ export const Popup: StoryObj<KlevuPopup> = {
     startOpen: false,
     anchor: "bottom-start",
   },
-  render: (args) => html`<klevu-popup
-    anchor=${ifDefined(args.anchor)}
-    close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-    fullwidth-content=${ifDefined(args.fullwidthContent)}
-    open-at-focus=${ifDefined(args.openAtFocus)}
-    start-open=${ifDefined(args.startOpen)}
-    elevation=${ifDefined(args.elevation)}
-    offset=${ifDefined(args.offset)}
-  >
-    <klevu-search-field slot="origin"></klevu-search-field>
-    <div slot="content">Hello world popup</div>
-  </klevu-popup>`,
+  render: (args) => html` <div style="height: 1500px">
+    <klevu-popup
+      anchor=${ifDefined(args.anchor)}
+      close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+      open-at-focus=${ifDefined(args.openAtFocus)}
+      start-open=${ifDefined(args.startOpen)}
+      elevation=${ifDefined(args.elevation)}
+      offset=${ifDefined(args.offset)}
+    >
+      <klevu-search-field slot="origin"></klevu-search-field>
+      <div slot="content">Hello world popup</div>
+    </klevu-popup>
+  </div>`,
 }
 
 export const ButtonSource: StoryObj<KlevuPopup> = {
@@ -44,7 +45,6 @@ export const ButtonSource: StoryObj<KlevuPopup> = {
   render: (args) => html`<klevu-popup
     anchor=${ifDefined(args.anchor)}
     close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-    fullwidth-content=${ifDefined(args.fullwidthContent)}
     open-at-focus=${ifDefined(args.openAtFocus)}
     start-open=${ifDefined(args.startOpen)}
     elevation=${ifDefined(args.elevation)}
@@ -64,7 +64,6 @@ export const ExternalSource: StoryObj<KlevuPopup> = {
       id="external-popup"
       anchor=${ifDefined(args.anchor)}
       close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
-      fullwidth-content=${ifDefined(args.fullwidthContent)}
       open-at-focus=${ifDefined(args.openAtFocus)}
       start-open=${ifDefined(args.startOpen)}
       elevation=${ifDefined(args.elevation)}

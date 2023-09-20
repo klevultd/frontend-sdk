@@ -1,5 +1,6 @@
 import {
   fallback,
+  klaviyo,
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
   KlevuFetchModifer,
@@ -101,6 +102,11 @@ export class KlevuSearchField {
   @Prop() usePersonalisation?: boolean
 
   /**
+   * Enable Klaviyo integration for search terms and clicks
+   */
+  @Prop() useKlaviyo?: boolean
+
+  /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
   @Event({
@@ -166,6 +172,11 @@ export class KlevuSearchField {
 
     if (this.usePersonalisation) {
       searchModifiers.push(personalisation())
+    }
+
+    if (this.useKlaviyo) {
+      console.log("pushing klaviyo")
+      searchModifiers.push(klaviyo())
     }
 
     const allSearchQueries: KlevuFetchFunctionReturnValue[] = []
@@ -304,7 +315,9 @@ export class KlevuSearchField {
           aria-role="search"
           variant={this.variant}
           icon="search"
-        ></klevu-textfield>
+        >
+          <slot name="end-of-input" slot="end"></slot>
+        </klevu-textfield>
         {this.variant !== "pill" && (
           <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.tSearchText}</klevu-button>
         )}
