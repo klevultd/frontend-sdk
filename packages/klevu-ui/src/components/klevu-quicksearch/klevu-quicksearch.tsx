@@ -179,7 +179,11 @@ export class KlevuQuicksearch {
    */
   @Prop() usePersonalisation?: boolean
 
-  // No results page props
+  /**
+   * Enables Klaviyo click tracking
+   */
+  @Prop() useKlaviyo?: boolean
+
   /**
    * Show popular keywords on no results page
    */
@@ -478,6 +482,7 @@ export class KlevuQuicksearch {
             onFocus={() => this.popup?.openModal()}
             variant={this.searchFieldVariant}
             usePersonalisation={this.usePersonalisation}
+            useKlaviyo={this.useKlaviyo}
           ></klevu-search-field>
           <div class="content" slot="content">
             {(this.products ?? []).length > 0 ? this.#renderResultPage() : this.#renderNoResultsPage()}
