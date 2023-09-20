@@ -49,6 +49,9 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
     .urlRedirects=${args.urlRedirects}
     popular-products-count=${ifDefined(args.popularProductsCount)}
+    enable-image-search=${ifDefined(args.enableImageSearch)}
+    use-personalisation=${ifDefined(args.usePersonalisation)}
+    use-klaviyo=${ifDefined(args.useKlaviyo)}
   ></klevu-quicksearch>`,
 }
 
@@ -59,23 +62,7 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
     showPopularSearches: true,
   },
   render: (args) => html`
-    <klevu-quicksearch
-      class="customized"
-      show-ratings=${ifDefined(args.showRatings)}
-      show-ratings-count=${ifDefined(args.showRatingsCount)}
-      show-popular-searches=${ifDefined(args.showPopularSearches)}
-      show-trending-products=${ifDefined(args.showTrendingProducts)}
-      show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
-      show-recent-searches=${ifDefined(args.showRecentSearches)}
-      show-popular-keywords-on-no-results-page=${ifDefined(args.showPopularKeywordsOnNoResultsPage)}
-      show-trending-products-on-no-results-page=${ifDefined(args.showTrendingProductsOnNoResultsPage)}
-      t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
-      t-trending-caption=${ifDefined(args.tTrendingCaption)}
-      t-popular-products-title-on-no-results-page=${ifDefined(args.tPopularProductsTitleOnNoResultsPage)}
-      t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
-      .urlRedirects=${args.urlRedirects}
-      popular-products-count=${ifDefined(args.popularProductsCount)}
-    >
+    <klevu-quicksearch class="customized">
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>
       <div slot="last-clicked-products">This will be replace by script below</div>
@@ -156,4 +143,42 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       }
     </style>
   `,
+}
+
+export const QuicksearchOnImage: StoryObj<KlevuQuicksearch> = {
+  render: (args) => html`<klevu-quicksearch
+      fallback-term=${ifDefined(args.fallbackTerm)}
+      popup-anchor=${ifDefined(args.popupAnchor)}
+      search-categories=${ifDefined(args.searchCategories)}
+      search-cms-cages=${ifDefined(args.searchCmsPages)}
+      placeholder=${ifDefined(args.placeholder)}
+      search-field-variant=${ifDefined(args.searchFieldVariant)}
+      t-search-result=${ifDefined(args.tSearchResults)}
+      t-start-chat=${ifDefined(args.tStartChat)}
+      t-categories-caption=${ifDefined(args.tCategoriesCaption)}
+      show-ratings=${ifDefined(args.showRatings)}
+      show-ratings-count=${ifDefined(args.showRatingsCount)}
+      show-popular-searches=${ifDefined(args.showPopularSearches)}
+      show-trending-products=${ifDefined(args.showTrendingProducts)}
+      show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
+      show-recent-searches=${ifDefined(args.showRecentSearches)}
+      show-popular-keywords-on-no-results-page=${ifDefined(args.showPopularKeywordsOnNoResultsPage)}
+      show-trending-products-on-no-results-page=${ifDefined(args.showTrendingProductsOnNoResultsPage)}
+      t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
+      t-trending-caption=${ifDefined(args.tTrendingCaption)}
+      t-popular-products-title-on-no-results-page=${ifDefined(args.tPopularProductsTitleOnNoResultsPage)}
+      t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
+      .urlRedirects=${args.urlRedirects}
+      popular-products-count=${ifDefined(args.popularProductsCount)}
+      enable-image-search="true"
+    ></klevu-quicksearch>
+    <script>
+      const qs = document.querySelector("klevu-quicksearch")
+
+      // when ever the data changes inside the quicksearch component we will receive it
+      qs.addEventListener("klevuImageSearch", (event) => {
+        alert("klevuImageSearch event fired, check console for event payload details")
+        console.log(event.detail)
+      })
+    </script> `,
 }

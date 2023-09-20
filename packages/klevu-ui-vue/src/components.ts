@@ -130,6 +130,7 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'accordionStartOpen',
   'labelOverride',
   'tMore',
+  'tAll',
   'useColorSwatch',
   'colorSwatchOverrides',
   'klevuFilterSelectionUpdate'
@@ -153,6 +154,13 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
 
 export const KlevuIcon = /*@__PURE__*/ defineContainer<JSX.KlevuIcon>('klevu-icon', undefined, [
   'name'
+]);
+
+
+export const KlevuImagePicker = /*@__PURE__*/ defineContainer<JSX.KlevuImagePicker>('klevu-image-picker', undefined, [
+  'isLoading',
+  'maxFileSize',
+  'klevuImageSelected'
 ]);
 
 
@@ -383,12 +391,15 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'showPopularSearches',
   'showRecentSearches',
   'usePersonalisation',
+  'useKlaviyo',
   'showPopularKeywordsOnNoResultsPage',
   'tPopularProductsTitleOnNoResultsPage',
   'showTrendingProductsOnNoResultsPage',
   'urlRedirects',
+  'enableImageSearch',
   'klevuData',
   'klevuSearch',
+  'klevuImageSearch',
   'klevuRedirect'
 ]);
 
@@ -423,6 +434,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'sort',
   'variant',
   'usePersonalisation',
+  'useKlaviyo',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'
@@ -446,9 +458,11 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'showSearch',
   'hideFilters',
   'useMultiSelectFilters',
+  'useKlaviyo',
   'showPriceAsSlider',
   'priceInterval',
   'hidePrice',
+  'imageUrlForSearch',
   'klevuData'
 ]);
 

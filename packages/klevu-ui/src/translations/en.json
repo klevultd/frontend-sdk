@@ -6,7 +6,8 @@
     "tCaption": "CMS pages"
   },
   "facet": {
-    "tMore": "More"
+    "tMore": "More",
+    "tAll": "All"
   },
   "latestSearches": {
     "tCaption": "Last searches"

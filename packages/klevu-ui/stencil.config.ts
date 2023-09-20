@@ -38,10 +38,12 @@ export const config: Config = {
         },
       ],
     },
+    /*
     {
       type: "docs-readme",
       footer: "",
     },
+    */
     {
       type: "docs-json",
       file: "dist/docs/klevu-ui-docs.json",

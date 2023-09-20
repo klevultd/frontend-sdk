@@ -6,7 +6,8 @@
     "tCaption": "CMS-sivut"
   },
   "facet": {
-    "tMore": "Lisää"
+    "tMore": "Lisää",
+    "tAll": "Kaikki"
   },
   "latestSearches": {
     "tCaption": "Viimeisimmät haut"

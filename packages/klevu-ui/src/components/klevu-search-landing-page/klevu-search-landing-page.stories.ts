@@ -33,6 +33,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     show-ratings-count=${ifDefined(args.showRatingsCount)}
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
+    use-klaviyo=${ifDefined(args.useKlaviyo)}
     popular-products-result-Count=${ifDefined(args.popularProductsResultCount)}
     show-search=${ifDefined(args.showSearch)}
     hide-filters=${ifDefined(args.hideFilters)}
@@ -40,12 +41,21 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     show-price-as-slider=${ifDefined(args.showPriceAsSlider)}
     price-interval=${ifDefined(args.priceInterval)}
     hide-price=${ifDefined(args.hidePrice)}
+    image-url-for-search=${ifDefined(args.imageUrlForSearch)}
   ></klevu-search-landing-page>`,
 }
 
 export const WithInfiniteScroll: StoryObj<KlevuSearchLandingPage> = {
   args: {
     term: "red shoes",
+    useInfiniteScroll: true,
+  },
+  render: SearchLandingPage.render,
+}
+
+export const WithImageSearch: StoryObj<KlevuSearchLandingPage> = {
+  args: {
+    imageUrlForSearch: "https://picsum.photos/600/600",
     useInfiniteScroll: true,
   },
   render: SearchLandingPage.render,
