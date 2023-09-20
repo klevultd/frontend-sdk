@@ -10,10 +10,12 @@ import {
   KMCRootObject,
   KMCMapsRootObject,
   KlevuBanner,
+  KlevuUploadImageForSearch,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { parts } from "../../utils/parts"
 import {
+  KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
   KlevuSearchFieldCustomEvent,
   KlevuTextfieldCustomEvent,
@@ -201,6 +203,10 @@ export class KlevuQuicksearch {
    * Pass your own redirect urls for a keyword
    */
   @Prop() urlRedirects?: KMCMapsRootObject["klevu_keywordUrlMap"]
+  /**
+   * Enable image search feature
+   */
+  @Prop() enableImageSearch = false
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -216,12 +222,13 @@ export class KlevuQuicksearch {
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
   @State() searchResultBottomBanners: KlevuBanner[] = []
-
+  @State() isUploadingImage: boolean = false
   #searchField?: HTMLKlevuSearchFieldElement
 
   #resultObject?: KlevuResponseQueryObject
 
   popup?: HTMLKlevuPopupElement
+  #imagePickerPopupRef?: HTMLKlevuPopupElement
 
   #searchTerm: string = ""
   #noResultsOptions?: NoResultsOptions
@@ -241,6 +248,15 @@ export class KlevuQuicksearch {
     composed: true,
   })
   klevuSearch!: EventEmitter<string>
+
+  /**
+   * This event is emitted once the image to be used for search is
+   * uploaded. The event contains the url to be passed to search api.
+   */
+  @Event({
+    composed: true,
+  })
+  klevuImageSearch!: EventEmitter<string>
 
   /**
    * Will be emitted when there is a url match for redirects.
@@ -454,6 +470,14 @@ export class KlevuQuicksearch {
     this.currentViewPortSize = event.detail
   }
 
+  async #handleImageSelection(event: CustomEvent<KlevuImageSelectedEvent>) {
+    this.isUploadingImage = true
+    const imageUrl = await KlevuUploadImageForSearch(event.detail.image)
+    this.klevuImageSearch.emit(imageUrl)
+    this.isUploadingImage = false
+    this.#imagePickerPopupRef?.closeModal()
+  }
+
   render() {
     return (
       <Host>
@@ -464,7 +488,6 @@ export class KlevuQuicksearch {
         <klevu-popup
           anchor={this.popupAnchor}
           ref={(el) => (this.popup = el)}
-          openAtFocus
           onKlevuPopupOpen={this.#onPopupOpen.bind(this)}
           elevation={2}
         >
@@ -480,11 +503,24 @@ export class KlevuQuicksearch {
             fallback-term={this.fallbackTerm}
             searchCmsPages={this.searchCmsPages}
             searchCategories={this.searchCategories}
-            onFocus={() => this.popup?.openModal()}
             variant={this.searchFieldVariant}
             usePersonalisation={this.usePersonalisation}
             useKlaviyo={this.useKlaviyo}
-          ></klevu-search-field>
+          >
+            {this.enableImageSearch && (
+              <div slot="end-of-input">
+                <klevu-popup popupWidth={400} anchor="bottom-end" ref={(el) => (this.#imagePickerPopupRef = el)}>
+                  <div class="image-picker" slot="content">
+                    <klevu-image-picker
+                      isLoading={this.isUploadingImage}
+                      onKlevuImageSelected={this.#handleImageSelection.bind(this)}
+                    />
+                  </div>
+                  <klevu-icon slot="origin" name="photo_camera" class="photo-camera"></klevu-icon>
+                </klevu-popup>
+              </div>
+            )}
+          </klevu-search-field>
           <div class="content" slot="content">
             {(this.products ?? []).length > 0 ? this.#renderResultPage() : this.#renderNoResultsPage()}
           </div>

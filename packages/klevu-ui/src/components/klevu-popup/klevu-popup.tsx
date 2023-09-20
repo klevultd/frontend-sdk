@@ -106,6 +106,9 @@ export class KlevuPopup {
   }
 
   async #internalOpen() {
+    if (this.toggle && this.dialogRef?.open) {
+      this.closeModal()
+    }
     if (this.useBackground) {
       this.dialogRef?.showModal()
     } else {
@@ -182,29 +185,27 @@ export class KlevuPopup {
     }
   }
 
-  @Listen("click", {
-    capture: true,
-  })
-  childItemClicked(event: PointerEvent) {
-    if (event.composedPath().some((e: any) => e.localName === "slot" && e.name === "origin")) {
-      if (this.toggle && this.dialogRef?.open) {
-        this.closeModal()
-      } else {
-        this.#internalOpen()
-      }
+  #childItemClicked(event: Event) {
+    if (event.defaultPrevented) {
+      return
     }
+    this.#internalOpen()
+    event.preventDefault()
+    event.stopPropagation()
+    return false
   }
 
-  @Listen("focus", {
-    capture: true,
-  })
-  childItemFocused(event: FocusEvent) {
+  #childItemFocussed(event: Event) {
     if (!this.openAtFocus) {
       return
     }
-    if (event.composedPath().some((e: any) => e.localName === "slot" && e.name === "origin")) {
-      this.#internalOpen()
+    if (event.defaultPrevented) {
+      return
     }
+    this.#internalOpen()
+    event.preventDefault()
+    event.stopPropagation()
+    return false
   }
 
   #backdropClick(event: MouseEvent) {
@@ -283,7 +284,13 @@ export class KlevuPopup {
 
     return (
       <Host>
-        <div id="origin" class="originContainer" part="popup-origin">
+        <div
+          id="origin"
+          class="originContainer"
+          part="popup-origin"
+          onClick={this.#childItemClicked.bind(this)}
+          onFocus={this.#childItemFocussed.bind(this)}
+        >
           <slot name="origin" />
         </div>
         <dialog

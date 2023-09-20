@@ -99,3 +99,7 @@ klevu-moi {
   max-width: 100%;
   margin-top: var(--klevu-spacing-04);
 }
+
+klevu-icon.photo-camera {
+  cursor: pointer;
+}
