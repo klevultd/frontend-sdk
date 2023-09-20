@@ -1,8 +1,6 @@
 # klevu-query
 
-`klevu-query` component is a special kind of component that makes queries to Klevu defined by the `type` parameter. It also listens to clicks to `klevu-product` and sends analytical data to Klevu based on that.
 
-This components gives you ability to create any kind of UI with Klevu components or by using your components. Just use `klevu-query` to fetch the data and `klevu-product` to render the product cards.
 
 <!-- Auto Generated Below -->
 
@@ -65,4 +63,4 @@ Type: `Promise<void>`
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*
