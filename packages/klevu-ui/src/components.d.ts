@@ -636,6 +636,10 @@ export namespace Components {
          */
         "tLoadMore": any;
         /**
+          * Overrides KMC setting to use ABtest for results
+         */
+        "useABTest"?: boolean;
+        /**
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
@@ -3075,6 +3079,10 @@ declare namespace LocalJSX {
           * Text for load more button
          */
         "tLoadMore"?: any;
+        /**
+          * Overrides KMC setting to use ABtest for results
+         */
+        "useABTest"?: boolean;
         /**
           * Should use infinite scroll component to trigger load next
          */

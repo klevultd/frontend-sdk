@@ -212,6 +212,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'showRatings',
   'showRatingsCount',
   'usePersonalisation',
+  'useABTest',
   'klevuData'
 ]);
 
