@@ -2,6 +2,9 @@ import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stenci
 
 export type KlevuImageSelectedEvent = { name: string; image: Blob }
 
+/**
+ * This component allows you to select an image from the file system.
+ */
 @Component({
   tag: "klevu-image-picker",
   styleUrl: "klevu-image-picker.css",

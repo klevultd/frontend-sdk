@@ -5,6 +5,10 @@
 <!-- Auto Generated Below -->
 
 
+## Overview
+
+This component allows you to select an image from the file system.
+
 ## Properties
 
 | Property      | Attribute       | Description                             | Type      | Default |

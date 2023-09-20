@@ -453,6 +453,9 @@ export namespace Components {
          */
         "name": string;
     }
+    /**
+     * This component allows you to select an image from the file system.
+     */
     interface KlevuImagePicker {
         /**
           * To be used to display loading indicator
@@ -2003,6 +2006,9 @@ declare global {
         prototype: HTMLKlevuIconElement;
         new (): HTMLKlevuIconElement;
     };
+    /**
+     * This component allows you to select an image from the file system.
+     */
     interface HTMLKlevuImagePickerElement extends Components.KlevuImagePicker, HTMLStencilElement {
     }
     var HTMLKlevuImagePickerElement: {
@@ -2900,6 +2906,9 @@ declare namespace LocalJSX {
          */
         "name": string;
     }
+    /**
+     * This component allows you to select an image from the file system.
+     */
     interface KlevuImagePicker {
         /**
           * To be used to display loading indicator
@@ -4355,6 +4364,9 @@ declare module "@stencil/core" {
              * Klevu icon component. Uses Google Material Icons.
              */
             "klevu-icon": LocalJSX.KlevuIcon & JSXBase.HTMLAttributes<HTMLKlevuIconElement>;
+            /**
+             * This component allows you to select an image from the file system.
+             */
             "klevu-image-picker": LocalJSX.KlevuImagePicker & JSXBase.HTMLAttributes<HTMLKlevuImagePickerElement>;
             /**
              * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
