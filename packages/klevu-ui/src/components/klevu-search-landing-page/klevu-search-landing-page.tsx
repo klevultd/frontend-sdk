@@ -13,6 +13,7 @@ import {
   KMCRootObject,
   trendingProducts,
   KlevuBanner,
+  klaviyo,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import { parts } from "../../utils/parts"
@@ -119,6 +120,11 @@ export class KlevuSearchLandingPage {
    * Specify whether to show checkboxes or radio buttons for filters
    */
   @Prop() useMultiSelectFilters?: boolean
+
+  /**
+   * Enable Klaviyo integration
+   */
+  @Prop() useKlaviyo?: boolean
 
   /**
    * Show price as options
@@ -229,6 +235,10 @@ export class KlevuSearchLandingPage {
 
     if (this.usePersonalisation) {
       modifiers.push(personalisation())
+    }
+
+    if (this.useKlaviyo) {
+      modifiers.push(klaviyo())
     }
 
     const result = await KlevuFetch(search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers))
