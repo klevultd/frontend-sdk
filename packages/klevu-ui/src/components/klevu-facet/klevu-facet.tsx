@@ -127,6 +127,9 @@ export class KlevuFacet {
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
   filterSelectionUpdate(event: any) {
+    if (event.detail.key !== this.option?.key) {
+      return
+    }
     forceUpdate(this.el)
 
     this.klevuFilterSelectionUpdate.emit({
