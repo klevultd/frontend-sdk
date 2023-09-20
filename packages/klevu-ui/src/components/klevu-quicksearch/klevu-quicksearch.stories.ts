@@ -21,6 +21,9 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     fallbackTerm: "shoes",
     searchCategories: true,
     searchCmsPages: true,
+    showTrendingProducts: true,
+    showRecentSearches: true,
+    showPopularSearches: true,
   },
   render: (args) => html`<klevu-quicksearch
     fallback-term=${ifDefined(args.fallbackTerm)}
@@ -50,6 +53,11 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
 }
 
 export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
+  args: {
+    showTrendingProducts: true,
+    showRecentSearches: true,
+    showPopularSearches: true,
+  },
   render: (args) => html`
     <klevu-quicksearch
       class="customized"

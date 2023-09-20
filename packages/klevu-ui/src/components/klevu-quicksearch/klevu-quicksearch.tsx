@@ -416,18 +416,17 @@ export class KlevuQuicksearch {
       if (this.showPopularKeywordsOnNoResultsPage === undefined) {
         this.showPopularKeywordsOnNoResultsPage = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
       }
-
-      if (this.showTrendingProducts || this.showTrendingProductsOnNoResultsPage) {
-        const trendingProductsQuery = await KlevuFetch(
-          trendingProducts({
-            limit: this.popularProductsCount,
-          })
-        )
-        const resultObject = trendingProductsQuery.queriesById("trendingProducts")
-        if (resultObject) {
-          this.trendingProducts = resultObject.records
-          this.#emitChangedData()
-        }
+    }
+    if (this.showTrendingProducts || this.showTrendingProductsOnNoResultsPage) {
+      const trendingProductsQuery = await KlevuFetch(
+        trendingProducts({
+          limit: this.popularProductsCount,
+        })
+      )
+      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+      if (resultObject) {
+        this.trendingProducts = resultObject.records
+        this.#emitChangedData()
       }
     }
   }
