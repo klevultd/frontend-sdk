@@ -84,3 +84,11 @@ klevu-icon.clear {
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+slot[name="end"] {
+  position: absolute;
+  display: block;
+  top: 50%;
+  right: var(--klevu-spacing-04);
+  transform: translateY(-50%);
+}
