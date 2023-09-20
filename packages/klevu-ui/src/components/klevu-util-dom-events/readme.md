@@ -22,4 +22,4 @@ https://docs.klevu.com/headless-sdk/events-analytics#dhk6Y
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

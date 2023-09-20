@@ -1,4 +1,4 @@
-# klevu-infinite-scroll
+# klevu-util-infinite-scroll
 
 
 
@@ -42,4 +42,4 @@ graph TD;
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*

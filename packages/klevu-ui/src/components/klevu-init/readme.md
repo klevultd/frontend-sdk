@@ -1,5 +1,7 @@
 # klevu-init
 
+
+
 <!-- Auto Generated Below -->
 
 
@@ -61,4 +63,4 @@ Type: `Promise<KlevuUIGlobalSettings | undefined>`
 
 ----------------------------------------------
 
-
+*Built with [StencilJS](https://stenciljs.com/)*
