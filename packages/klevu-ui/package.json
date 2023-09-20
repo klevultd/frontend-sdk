@@ -31,7 +31,7 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build",
     "build:watch": "stencil build --watch",
     "build:all": "npm run build && cd ../klevu-ui-react && npm run build && cd ../klevu-ui-vue && npm run build && cd ../klevu-ui",
     "start": "stencil build --dev --watch --serve",
