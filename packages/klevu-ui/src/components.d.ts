@@ -386,6 +386,7 @@ export namespace Components {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
+        "tAll": any;
         "tMore": any;
         /**
           * Converts the color filters to swatches
@@ -2851,6 +2852,7 @@ declare namespace LocalJSX {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
+        "tAll"?: any;
         "tMore"?: any;
         /**
           * Converts the color filters to swatches
