@@ -1279,6 +1279,10 @@ export namespace Components {
          */
         "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
+          * Enables Klaviyo click tracking
+         */
+        "useKlaviyo"?: boolean;
+        /**
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
@@ -1390,6 +1394,10 @@ export namespace Components {
          */
         "tSearchText": any;
         /**
+          * Enable Klaviyo integration for search terms and clicks
+         */
+        "useKlaviyo"?: boolean;
+        /**
           * Enable personalisation on the query
          */
         "usePersonalisation"?: boolean;
@@ -1470,6 +1478,10 @@ export namespace Components {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Enable Klaviyo integration
+         */
+        "useKlaviyo"?: boolean;
         /**
           * Specify whether to show checkboxes or radio buttons for filters
          */
@@ -3755,6 +3767,10 @@ declare namespace LocalJSX {
          */
         "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
         /**
+          * Enables Klaviyo click tracking
+         */
+        "useKlaviyo"?: boolean;
+        /**
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
@@ -3865,6 +3881,10 @@ declare namespace LocalJSX {
          */
         "tSearchText"?: any;
         /**
+          * Enable Klaviyo integration for search terms and clicks
+         */
+        "useKlaviyo"?: boolean;
+        /**
           * Enable personalisation on the query
          */
         "usePersonalisation"?: boolean;
@@ -3946,6 +3966,10 @@ declare namespace LocalJSX {
           * Should use infinite scroll component to trigger load next
          */
         "useInfiniteScroll"?: boolean;
+        /**
+          * Enable Klaviyo integration
+         */
+        "useKlaviyo"?: boolean;
         /**
           * Specify whether to show checkboxes or radio buttons for filters
          */

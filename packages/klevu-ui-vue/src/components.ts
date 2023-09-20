@@ -390,6 +390,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'showPopularSearches',
   'showRecentSearches',
   'usePersonalisation',
+  'useKlaviyo',
   'showPopularKeywordsOnNoResultsPage',
   'tPopularProductsTitleOnNoResultsPage',
   'showTrendingProductsOnNoResultsPage',
@@ -432,6 +433,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'sort',
   'variant',
   'usePersonalisation',
+  'useKlaviyo',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'
@@ -455,6 +457,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'showSearch',
   'hideFilters',
   'useMultiSelectFilters',
+  'useKlaviyo',
   'showPriceAsSlider',
   'priceInterval',
   'hidePrice',

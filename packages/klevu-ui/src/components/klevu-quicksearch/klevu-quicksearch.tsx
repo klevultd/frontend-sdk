@@ -181,7 +181,11 @@ export class KlevuQuicksearch {
    */
   @Prop() usePersonalisation?: boolean
 
-  // No results page props
+  /**
+   * Enables Klaviyo click tracking
+   */
+  @Prop() useKlaviyo?: boolean
+
   /**
    * Show popular keywords on no results page
    */
@@ -451,6 +455,7 @@ export class KlevuQuicksearch {
   #onPopupOpen() {
     this.lastClickedProducts = KlevuLastClickedProducts.getProducts(3) as KlevuRecord[]
     this.#emitChangedData()
+    this.#searchField?.shadowRoot?.querySelector("klevu-textfield")?.shadowRoot?.querySelector("input")?.focus()
   }
 
   #startSearch(term: string) {
@@ -500,6 +505,7 @@ export class KlevuQuicksearch {
             searchCategories={this.searchCategories}
             variant={this.searchFieldVariant}
             usePersonalisation={this.usePersonalisation}
+            useKlaviyo={this.useKlaviyo}
           >
             {this.enableImageSearch && (
               <div slot="end-of-input">
