@@ -439,6 +439,7 @@ export class KlevuQuicksearch {
   #onPopupOpen() {
     this.lastClickedProducts = KlevuLastClickedProducts.getProducts(3) as KlevuRecord[]
     this.#emitChangedData()
+    this.#searchField?.shadowRoot?.querySelector("klevu-textfield")?.shadowRoot?.querySelector("input")?.focus()
   }
 
   #startSearch(term: string) {
