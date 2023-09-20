@@ -312,12 +312,6 @@ export class KlevuSearchLandingPage {
   }
 
   @Listen("klevu-filter-selection-updates", { target: "document" })
-  filterSelectionUpdate() {
-    this.#fetchData()
-    this.#layoutElement.closeDrawer()
-  }
-
-  @Listen("klevu-filter-selection-updates", { target: "document" })
   filterManagerFiltersUpdated() {
     if (this.#isMobile()) {
       return
