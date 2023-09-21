@@ -4,8 +4,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js"
 import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuChatLayout } from "./klevu-chat-layout"
 import { MoiMessages } from "@klevu/core"
-export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-chat-bubble")
-const productItem = mockProducts[0]
+export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-chat-layout")
 
 const meta: Meta = {
   title: "Layout/Chat",
@@ -177,14 +176,11 @@ const messages: MoiMessages = [
 export default meta
 
 export const ChatLayout: StoryObj<KlevuChatLayout & { remote: boolean }> = {
-  args: {
-    showLoading: false,
-  },
   render: (args) =>
     html`
       <klevu-chat-layout
-        show-loading=${ifDefined(args.showLoading)}
-        style="height: 500px; border: 1px solid black; overflow: hidden;"
+        use-native-scrollbars=${ifDefined(args.useNativeScrollbars)}
+        style="height: 500px; border: 1px solid black;"
       >
         <klevu-chat-messages .messages=${messages as any}></klevu-chat-messages>
         <div slot="menu">Hello menu!</div>

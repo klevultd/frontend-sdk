@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop, Listen } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop } from "@stencil/core"
 
 /**
  * Component that wraps chat elements into a layout.
@@ -22,13 +22,10 @@ export class KlevuChatLayout {
   #popupElement?: HTMLKlevuPopupElement
 
   /**
-   * Show loading indicator
+   * Use native scrollbars instead of custom ones in content
    */
   @Prop()
-  showLoading = false
-
-  @Prop()
-  elementForHeightCalculation?: HTMLElement
+  useNativeScrollbars?: boolean
 
   /**
    * Current value of the text field
@@ -65,12 +62,19 @@ export class KlevuChatLayout {
   @Method()
   async scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
     const instance = await this.#scrollElement?.getInstance()
-    if (instance) {
-      instance.update(true)
+    if (instance?.customInstance) {
+      instance.customInstance.update(true)
       setTimeout(() => {
-        instance.elements().viewport.scrollTo({
-          top: instance.elements().viewport.scrollHeight,
+        instance.customInstance?.elements().viewport.scrollTo({
+          top: instance.customInstance?.elements().viewport.scrollHeight,
           behavior: behavior as any,
+        })
+      }, 20)
+    } else if (instance?.nativeContainer) {
+      setTimeout(() => {
+        instance.nativeContainer?.scroll({
+          top: instance.nativeContainer.scrollHeight,
+          behavior: behavior,
         })
       }, 20)
     }
@@ -101,7 +105,12 @@ export class KlevuChatLayout {
           <slot name="header"></slot>
         </header>
         <main>
-          <klevu-util-scrollbars overflowX="hidden" overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+          <klevu-util-scrollbars
+            overflowX="hidden"
+            overflowY="scroll"
+            useNative={this.useNativeScrollbars}
+            ref={(el) => (this.#scrollElement = el)}
+          >
             <slot></slot>
           </klevu-util-scrollbars>
         </main>

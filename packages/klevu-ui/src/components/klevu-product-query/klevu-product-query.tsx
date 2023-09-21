@@ -102,6 +102,11 @@ export class KlevuProductQuery {
    */
   @Prop() settings?: MoiRequest["klevuSettings"]
 
+  /**
+   * Use native scrollbars instead of custom ones
+   */
+  @Prop() useNativeScrollbars?: boolean
+
   async connectedCallback() {
     this.config = await this.el.closest("klevu-init")?.getConfig()
     this.#checkIsPQAEnabled()
@@ -151,6 +156,7 @@ export class KlevuProductQuery {
               originElement={this.origin}
               disableCloseOutsideClick={this.disableCloseOutsideClick}
               config={this.config}
+              useNativeScrollbars={this.useNativeScrollbars}
             >
               <slot name="after-fineprint" slot="after-fineprint"></slot>
             </klevu-product-query-popup>

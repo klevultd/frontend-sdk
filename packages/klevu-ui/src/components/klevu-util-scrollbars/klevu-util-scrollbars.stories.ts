@@ -23,7 +23,11 @@ export const UtilScrollbars: StoryObj<KlevuUtilScrollbars> = {
     <div style="max-width: 400px">
       <p>This is a content without scrollbars that is followed by a content with scrollbars.</p>
 
-      <klevu-util-scrollbars .overflowX=${args.overflowX} .overflowY=${args.overflowY}>
+      <klevu-util-scrollbars
+        .overflowX=${args.overflowX}
+        .overflowY=${args.overflowY}
+        disable=${ifDefined(args.useNative)}
+      >
         <div style="display: block; height: 200px; width: 600px;">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
