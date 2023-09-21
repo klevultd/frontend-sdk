@@ -1180,6 +1180,30 @@ export namespace Components {
          */
         "fullResultCount": number;
         /**
+          * Hide popular keywords on no results page
+         */
+        "hidePopularKeywordsOnNoResultsPage"?: boolean;
+        /**
+          * Hide popular keywords
+         */
+        "hidePopularSearches"?: boolean;
+        /**
+          * Hide recent searches
+         */
+        "hideRecentSearches"?: boolean;
+        /**
+          * Hide recently viewed products
+         */
+        "hideRecentlyViewedProducts"?: boolean;
+        /**
+          * Hide trending products
+         */
+        "hideTrendingProducts"?: boolean;
+        /**
+          * HHide trending products on no results page
+         */
+        "hideTrendingProductsOnNoResultsPage"?: boolean;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -1212,14 +1236,6 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
-          * Show popular keywords on no results page
-         */
-        "showPopularKeywordsOnNoResultsPage"?: boolean;
-        /**
-          * Show popular keywords
-         */
-        "showPopularSearches"?: boolean;
-        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -1227,22 +1243,6 @@ export namespace Components {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
-        /**
-          * Show recent searches
-         */
-        "showRecentSearches"?: boolean;
-        /**
-          * Show recently viewed products
-         */
-        "showRecentlyViewedProducts"?: boolean;
-        /**
-          * Show trending products
-         */
-        "showTrendingProducts"?: boolean;
-        /**
-          * Show trending products on no results page
-         */
-        "showTrendingProductsOnNoResultsPage"?: boolean;
         /**
           * How many products to show in simple variant
          */
@@ -3653,6 +3653,30 @@ declare namespace LocalJSX {
          */
         "fullResultCount"?: number;
         /**
+          * Hide popular keywords on no results page
+         */
+        "hidePopularKeywordsOnNoResultsPage"?: boolean;
+        /**
+          * Hide popular keywords
+         */
+        "hidePopularSearches"?: boolean;
+        /**
+          * Hide recent searches
+         */
+        "hideRecentSearches"?: boolean;
+        /**
+          * Hide recently viewed products
+         */
+        "hideRecentlyViewedProducts"?: boolean;
+        /**
+          * Hide trending products
+         */
+        "hideTrendingProducts"?: boolean;
+        /**
+          * HHide trending products on no results page
+         */
+        "hideTrendingProductsOnNoResultsPage"?: boolean;
+        /**
           * When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.
          */
         "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
@@ -3701,14 +3725,6 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
-          * Show popular keywords on no results page
-         */
-        "showPopularKeywordsOnNoResultsPage"?: boolean;
-        /**
-          * Show popular keywords
-         */
-        "showPopularSearches"?: boolean;
-        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3716,22 +3732,6 @@ declare namespace LocalJSX {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
-        /**
-          * Show recent searches
-         */
-        "showRecentSearches"?: boolean;
-        /**
-          * Show recently viewed products
-         */
-        "showRecentlyViewedProducts"?: boolean;
-        /**
-          * Show trending products
-         */
-        "showTrendingProducts"?: boolean;
-        /**
-          * Show trending products on no results page
-         */
-        "showTrendingProductsOnNoResultsPage"?: boolean;
         /**
           * How many products to show in simple variant
          */

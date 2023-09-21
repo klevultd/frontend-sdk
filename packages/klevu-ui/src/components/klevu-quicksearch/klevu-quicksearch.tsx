@@ -159,22 +159,22 @@ export class KlevuQuicksearch {
   @Prop() showRatingsCount?: boolean
 
   /**
-   * Show trending products
+   * Hide trending products
    */
-  @Prop() showTrendingProducts?: boolean
+  @Prop() hideTrendingProducts?: boolean
 
   /**
-   * Show recently viewed products
+   * Hide recently viewed products
    */
-  @Prop() showRecentlyViewedProducts?: boolean
+  @Prop() hideRecentlyViewedProducts?: boolean
   /**
-   * Show popular keywords
+   * Hide popular keywords
    */
-  @Prop() showPopularSearches?: boolean
+  @Prop() hidePopularSearches?: boolean
   /**
-   * Show recent searches
+   * Hide recent searches
    */
-  @Prop() showRecentSearches?: boolean
+  @Prop() hideRecentSearches?: boolean
 
   /**
    * Enable personalisation
@@ -187,18 +187,18 @@ export class KlevuQuicksearch {
   @Prop() useKlaviyo?: boolean
 
   /**
-   * Show popular keywords on no results page
+   * Hide popular keywords on no results page
    */
-  @Prop() showPopularKeywordsOnNoResultsPage?: boolean
+  @Prop() hidePopularKeywordsOnNoResultsPage?: boolean
   /**
    * Popular products section heading shown on no results page
    */
   @Prop() tPopularProductsTitleOnNoResultsPage?: string
 
   /**
-   * Show trending products on no results page
+   * HHide trending products on no results page
    */
-  @Prop() showTrendingProductsOnNoResultsPage?: boolean
+  @Prop() hideTrendingProductsOnNoResultsPage?: boolean
   /**
    * Pass your own redirect urls for a keyword
    */
@@ -216,7 +216,7 @@ export class KlevuQuicksearch {
   @State() queryResult?: KlevuQueryResult
   @State() searchSort?: KlevuSearchSorting
   @State() lastClickedProducts?: KlevuRecord[]
-  @State() activeTab: "trending" | "last" = "trending"
+  @State() activeTab: "trending" | "last" | "" = "trending"
   @State() chat = false
   @State() noResultsMessage: string = ""
   @State() noResultsBannerDetails: Banner[] = []
@@ -402,8 +402,8 @@ export class KlevuQuicksearch {
       if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
         this.usePersonalisation = true
       }
-      if (this.showRecentlyViewedProducts === undefined) {
-        this.showRecentlyViewedProducts = settings?.klevu_uc_userOptions.showRecentlyViewedItems
+      if (this.hideRecentlyViewedProducts === undefined) {
+        this.hideRecentlyViewedProducts = !settings?.klevu_uc_userOptions.showRecentlyViewedItems
       }
       if (this.tLastClickedProductsCaption === undefined) {
         this.tLastClickedProductsCaption =
@@ -414,14 +414,14 @@ export class KlevuQuicksearch {
         this.tTrendingCaption =
           settings?.klevu_uc_userOptions.showTrendingProductsCaption ?? getTranslation("quicksearch.tTrendingCaption")
       }
-      if (this.showRecentSearches === undefined) {
-        this.showRecentSearches = settings?.klevu_showRecentSerches
+      if (this.hideRecentSearches === undefined) {
+        this.hideRecentSearches = !settings?.klevu_showRecentSerches
       }
-      if (this.showPopularSearches === undefined) {
-        this.showPopularSearches = settings?.klevu_showPopularSearches
+      if (this.hidePopularSearches === undefined) {
+        this.hidePopularSearches = !settings?.klevu_showPopularSearches
       }
-      if (this.showTrendingProducts === undefined) {
-        this.showTrendingProducts = settings?.klevu_uc_userOptions.showTrendingProducts
+      if (this.hideTrendingProducts === undefined) {
+        this.hideTrendingProducts = !settings?.klevu_uc_userOptions.showTrendingProducts
       }
 
       // No results page settings
@@ -430,24 +430,30 @@ export class KlevuQuicksearch {
           settings?.klevu_uc_userOptions.noResultsOptions.productsHeading ??
           getTranslation("quicksearch.tPopularProductsTitle")
       }
-      if (this.showTrendingProductsOnNoResultsPage === undefined) {
-        this.showTrendingProductsOnNoResultsPage = settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
+      if (this.hideTrendingProductsOnNoResultsPage === undefined) {
+        this.hideTrendingProductsOnNoResultsPage = !settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
       }
-      if (this.showPopularKeywordsOnNoResultsPage === undefined) {
-        this.showPopularKeywordsOnNoResultsPage = settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
+      if (this.hidePopularKeywordsOnNoResultsPage === undefined) {
+        this.hidePopularKeywordsOnNoResultsPage = !settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
       }
-
-      if (this.showTrendingProducts || this.showTrendingProductsOnNoResultsPage) {
-        const trendingProductsQuery = await KlevuFetch(
-          trendingProducts({
-            limit: this.popularProductsCount,
-          })
-        )
-        const resultObject = trendingProductsQuery.queriesById("trendingProducts")
-        if (resultObject) {
-          this.trendingProducts = resultObject.records
-          this.#emitChangedData()
-        }
+    }
+    if (this.hideTrendingProducts) {
+      if (this.hideRecentSearches) {
+        this.activeTab = ""
+      } else {
+        this.activeTab = "last"
+      }
+    }
+    if (!this.hideTrendingProducts || !this.hideTrendingProductsOnNoResultsPage) {
+      const trendingProductsQuery = await KlevuFetch(
+        trendingProducts({
+          limit: this.popularProductsCount,
+        })
+      )
+      const resultObject = trendingProductsQuery.queriesById("trendingProducts")
+      if (resultObject) {
+        this.trendingProducts = resultObject.records
+        this.#emitChangedData()
       }
     }
   }
@@ -630,14 +636,14 @@ export class KlevuQuicksearch {
               {this.tStartChat}
             </klevu-button>
           )}
-          {((this.showPopularSearches && !isNoResultsPage) ||
-            (this.showPopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
+          {((!this.hidePopularSearches && !isNoResultsPage) ||
+            (!this.hidePopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
             <klevu-popular-searches
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
           )}
 
-          {this.showRecentSearches && !isNoResultsPage && (
+          {!this.hideRecentSearches && !isNoResultsPage && (
             <klevu-latest-searches
               onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-latest-searches>
@@ -651,8 +657,8 @@ export class KlevuQuicksearch {
               </p>
             ) : null}
             <div class="tabrow">
-              {((this.showTrendingProducts && !isNoResultsPage) ||
-                (this.showTrendingProductsOnNoResultsPage && isNoResultsPage)) && (
+              {((!this.hideTrendingProducts && !isNoResultsPage) ||
+                (!this.hideTrendingProductsOnNoResultsPage && isNoResultsPage)) && (
                 <klevu-tab
                   caption={stringConcat(this.tTrendingCaption ?? getTranslation("quicksearch.tTrendingCaption"), [
                     `${this.trendingProducts?.length ?? 0}`,
@@ -661,7 +667,7 @@ export class KlevuQuicksearch {
                   onClick={() => (this.activeTab = "trending")}
                 ></klevu-tab>
               )}
-              {this.showRecentlyViewedProducts && !isNoResultsPage && (
+              {!this.hideRecentlyViewedProducts && !isNoResultsPage && (
                 <klevu-tab
                   caption={stringConcat(
                     this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
@@ -678,7 +684,7 @@ export class KlevuQuicksearch {
                 ></klevu-tab>
               )}
             </div>
-            {this.activeTab === "trending" && (
+            {!this.hideTrendingProducts && this.activeTab === "trending" && (
               <Fragment>
                 {isNoResultsPage && (
                   <klevu-typography variant="body-s">{this.tPopularProductsTitleOnNoResultsPage}</klevu-typography>
@@ -690,7 +696,7 @@ export class KlevuQuicksearch {
                 </slot>
               </Fragment>
             )}
-            {this.activeTab === "last" && (
+            {!this.hideRecentlyViewedProducts && this.activeTab === "last" && (
               <Fragment>
                 <slot name="last-clicked-products">
                   {this.lastClickedProducts?.map((p) => (
