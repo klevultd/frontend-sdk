@@ -34,9 +34,15 @@ export class KlevuSlides {
 
   #prev = async () => {
     const instance = await this.#scrollElement?.getInstance()
-    if (instance) {
-      instance.elements().viewport.scrollTo({
-        left: instance.elements().viewport.scrollLeft - (await this.#calcAmountToSlide()),
+    if (instance?.customInstance) {
+      const elements = instance.customInstance.elements()
+      elements.viewport.scrollTo({
+        left: elements.viewport.scrollLeft - (await this.#calcAmountToSlide()),
+        behavior: "smooth",
+      })
+    } else if (instance?.nativeContainer) {
+      instance.nativeContainer.scroll({
+        left: instance.nativeContainer.scrollLeft - (await this.#calcAmountToSlide()),
         behavior: "smooth",
       })
     }
@@ -44,9 +50,15 @@ export class KlevuSlides {
 
   #next = async () => {
     const instance = await this.#scrollElement?.getInstance()
-    if (instance) {
-      instance.elements().viewport.scrollTo({
-        left: instance.elements().viewport.scrollLeft + (await this.#calcAmountToSlide()),
+    if (instance?.customInstance) {
+      const elements = instance.customInstance.elements()
+      elements.viewport.scrollTo({
+        left: elements.viewport.scrollLeft + (await this.#calcAmountToSlide()),
+        behavior: "smooth",
+      })
+    } else if (instance?.nativeContainer) {
+      instance.nativeContainer.scroll({
+        left: instance.nativeContainer.scrollLeft + (await this.#calcAmountToSlide()),
         behavior: "smooth",
       })
     }

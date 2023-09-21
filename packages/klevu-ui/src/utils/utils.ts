@@ -88,6 +88,11 @@ export type KlevuUIGlobalSettings = {
    * @param event Event that triggered the add to cart
    */
   addToCart?: (product: Partial<KlevuRecord>, event: Event) => void
+
+  /**
+   * Disables custom scrollbars and uses native browser ones instead.
+   */
+  useNativeScrollbars?: boolean
 }
 
 export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {

@@ -50,8 +50,7 @@ export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble
 
 
 export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
-  'showLoading',
-  'elementForHeightCalculation',
+  'useNativeScrollbars',
   'klevuChatLayoutMessageSent'
 ]);
 
@@ -310,7 +309,8 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'popupAnchor',
   'popupOffset',
   'disableCloseOutsideClick',
-  'settings'
+  'settings',
+  'useNativeScrollbars'
 ]);
 
 
@@ -334,7 +334,8 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'settings',
   'originElement',
   'disableCloseOutsideClick',
-  'config'
+  'config',
+  'useNativeScrollbars'
 ]);
 
 
@@ -547,7 +548,8 @@ export const KlevuUtilPortal = /*@__PURE__*/ defineContainer<JSX.KlevuUtilPortal
 
 export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilScrollbars>('klevu-util-scrollbars', undefined, [
   'overflowX',
-  'overflowY'
+  'overflowY',
+  'disable'
 ]);
 
 

@@ -34,6 +34,7 @@ const chatRender = (args: KlevuProductQuery) => {
       popup-offset=${ifDefined(args.popupOffset)}
       settings=${ifDefined(JSON.stringify(args.settings))}
       disable-close-outside-click=${ifDefined(args.disableCloseOutsideClick)}
+      use-native-scrollbars=${ifDefined(args.useNativeScrollbars)}
     ></klevu-product-query>
   `
 }
