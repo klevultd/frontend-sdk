@@ -71,10 +71,12 @@ export class KlevuChatLayout {
         })
       }, 20)
     } else if (instance?.nativeContainer) {
-      instance.nativeContainer.scrollTo({
-        top: instance.nativeContainer.scrollHeight,
-        behavior: behavior,
-      })
+      setTimeout(() => {
+        instance.nativeContainer?.scroll({
+          top: instance.nativeContainer.scrollHeight,
+          behavior: behavior,
+        })
+      }, 20)
     }
   }
 
