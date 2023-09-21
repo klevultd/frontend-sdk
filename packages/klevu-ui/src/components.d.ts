@@ -785,7 +785,8 @@ export namespace Components {
         "useBackground": boolean;
     }
     /**
-     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * Generic product component that renders product based on KlevuRecord of
+     * @klevu /core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
      * with --kleu-product-width and --klevu-product-small-width css variables.
@@ -2174,7 +2175,8 @@ declare global {
         new (): HTMLKlevuPopupElement;
     };
     /**
-     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * Generic product component that renders product based on KlevuRecord of
+     * @klevu /core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
      * with --kleu-product-width and --klevu-product-small-width css variables.
@@ -3253,7 +3255,8 @@ declare namespace LocalJSX {
         "useBackground"?: boolean;
     }
     /**
-     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * Generic product component that renders product based on KlevuRecord of
+     * @klevu /core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
      * with --kleu-product-width and --klevu-product-small-width css variables.
@@ -4485,7 +4488,8 @@ declare module "@stencil/core" {
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             /**
-             * Generic product component that renders product based on KlevuRecord of @klevu/core
+             * Generic product component that renders product based on KlevuRecord of
+             * @klevu /core
              * All parts of the component can be replaced with slots.
              * By default the products fill the whole space, but it can be limited
              * with --kleu-product-width and --klevu-product-small-width css variables.
