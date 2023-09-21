@@ -21,9 +21,6 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     fallbackTerm: "shoes",
     searchCategories: true,
     searchCmsPages: true,
-    showTrendingProducts: true,
-    showRecentSearches: true,
-    showPopularSearches: true,
   },
   render: (args) => html`<klevu-quicksearch
     fallback-term=${ifDefined(args.fallbackTerm)}
@@ -37,12 +34,12 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-categories-caption=${ifDefined(args.tCategoriesCaption)}
     show-ratings=${ifDefined(args.showRatings)}
     show-ratings-count=${ifDefined(args.showRatingsCount)}
-    show-popular-searches=${ifDefined(args.showPopularSearches)}
-    show-trending-products=${ifDefined(args.showTrendingProducts)}
-    show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
-    show-recent-searches=${ifDefined(args.showRecentSearches)}
-    show-popular-keywords-on-no-results-page=${ifDefined(args.showPopularKeywordsOnNoResultsPage)}
-    show-trending-products-on-no-results-page=${ifDefined(args.showTrendingProductsOnNoResultsPage)}
+    hide-popular-searches=${ifDefined(args.hidePopularSearches)}
+    hide-trending-products=${ifDefined(args.hideTrendingProducts)}
+    hide-recently-viewed-products=${ifDefined(args.hideRecentlyViewedProducts)}
+    hide-recent-searches=${ifDefined(args.hideRecentSearches)}
+    hide-popular-keywords-on-no-results-page=${ifDefined(args.hidePopularKeywordsOnNoResultsPage)}
+    hide-trending-products-on-no-results-page=${ifDefined(args.hideTrendingProductsOnNoResultsPage)}
     t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
     t-trending-caption=${ifDefined(args.tTrendingCaption)}
     t-popular-products-title-on-no-results-page=${ifDefined(args.tPopularProductsTitleOnNoResultsPage)}
@@ -56,11 +53,6 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
 }
 
 export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
-  args: {
-    showTrendingProducts: true,
-    showRecentSearches: true,
-    showPopularSearches: true,
-  },
   render: (args) => html`
     <klevu-quicksearch class="customized">
       <div slot="search-products">This will be replaced by script below</div>
@@ -158,12 +150,12 @@ export const QuicksearchOnImage: StoryObj<KlevuQuicksearch> = {
       t-categories-caption=${ifDefined(args.tCategoriesCaption)}
       show-ratings=${ifDefined(args.showRatings)}
       show-ratings-count=${ifDefined(args.showRatingsCount)}
-      show-popular-searches=${ifDefined(args.showPopularSearches)}
-      show-trending-products=${ifDefined(args.showTrendingProducts)}
-      show-recently-viewed-products=${ifDefined(args.showRecentlyViewedProducts)}
-      show-recent-searches=${ifDefined(args.showRecentSearches)}
-      show-popular-keywords-on-no-results-page=${ifDefined(args.showPopularKeywordsOnNoResultsPage)}
-      show-trending-products-on-no-results-page=${ifDefined(args.showTrendingProductsOnNoResultsPage)}
+      hide-popular-searches=${ifDefined(args.hidePopularSearches)}
+      hide-trending-products=${ifDefined(args.hideTrendingProducts)}
+      hide-recently-viewed-products=${ifDefined(args.hideRecentlyViewedProducts)}
+      hide-recent-searches=${ifDefined(args.hideRecentSearches)}
+      hide-popular-keywords-on-no-results-page=${ifDefined(args.hidePopularKeywordsOnNoResultsPage)}
+      hide-trending-products-on-no-results-page=${ifDefined(args.hideTrendingProductsOnNoResultsPage)}
       t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
       t-trending-caption=${ifDefined(args.tTrendingCaption)}
       t-popular-products-title-on-no-results-page=${ifDefined(args.tPopularProductsTitleOnNoResultsPage)}
