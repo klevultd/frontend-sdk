@@ -549,7 +549,7 @@ export const KlevuUtilPortal = /*@__PURE__*/ defineContainer<JSX.KlevuUtilPortal
 export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilScrollbars>('klevu-util-scrollbars', undefined, [
   'overflowX',
   'overflowY',
-  'disable'
+  'useNative'
 ]);
 
 

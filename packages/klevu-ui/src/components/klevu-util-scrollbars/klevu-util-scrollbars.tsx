@@ -31,13 +31,13 @@ export class KlevuUtilScrollbars {
   /**
    * Disables the custom scrollbar and use native scrollbars instead.
    */
-  @Prop() disable?: boolean
+  @Prop() useNative?: boolean
 
   componentDidLoad() {
     this.#initCustomScrollbars()
 
-    if (this.disable === undefined && window.klevu_ui_settings?.useNativeScrollbars === true) {
-      this.disable = true
+    if (this.useNative === undefined && window.klevu_ui_settings?.useNativeScrollbars === true) {
+      this.useNative = true
     }
   }
 
@@ -49,7 +49,7 @@ export class KlevuUtilScrollbars {
   }
 
   #initCustomScrollbars() {
-    if (!this.container || this.disable) {
+    if (!this.container || this.useNative) {
       return
     }
     const options: PartialOptions = {
@@ -81,8 +81,8 @@ export class KlevuUtilScrollbars {
   }
 
   render() {
-    if (this.disable) {
-      return this.renderDisabled()
+    if (this.useNative) {
+      return this.renderNative()
     }
     return (
       <Host>
@@ -98,7 +98,7 @@ export class KlevuUtilScrollbars {
     )
   }
 
-  renderDisabled() {
+  renderNative() {
     let overflowX = this.overflowX
     if (overflowX === "visible-hidden") {
       overflowX = "hidden"
@@ -118,7 +118,7 @@ export class KlevuUtilScrollbars {
       <Host>
         <div
           class={{
-            disabled: true,
+            native: true,
           }}
           style={{
             overflowX: this.overflowX,

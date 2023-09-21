@@ -106,7 +106,7 @@ export class KlevuChatLayout {
           <klevu-util-scrollbars
             overflowX="hidden"
             overflowY="scroll"
-            disable={this.useNativeScrollbars}
+            useNative={this.useNativeScrollbars}
             ref={(el) => (this.#scrollElement = el)}
           >
             <slot></slot>

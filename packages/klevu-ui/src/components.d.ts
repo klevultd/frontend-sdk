@@ -1697,10 +1697,6 @@ export namespace Components {
      * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface KlevuUtilScrollbars {
-        /**
-          * Disables the custom scrollbar and use native scrollbars instead.
-         */
-        "disable"?: boolean;
         "getContainer": () => Promise<HTMLDivElement | undefined>;
         "getInstance": () => Promise<{ customInstance: OverlayScrollbars | undefined; nativeContainer: HTMLDivElement | undefined; }>;
         /**
@@ -1711,6 +1707,10 @@ export namespace Components {
           * The overflow behavior of the vertical scrollbar.
          */
         "overflowY"?: OverflowBehavior;
+        /**
+          * Disables the custom scrollbar and use native scrollbars instead.
+         */
+        "useNative"?: boolean;
     }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
@@ -4251,10 +4251,6 @@ declare namespace LocalJSX {
      */
     interface KlevuUtilScrollbars {
         /**
-          * Disables the custom scrollbar and use native scrollbars instead.
-         */
-        "disable"?: boolean;
-        /**
           * The overflow behavior of the horizontal scrollbar.
          */
         "overflowX"?: OverflowBehavior;
@@ -4262,6 +4258,10 @@ declare namespace LocalJSX {
           * The overflow behavior of the vertical scrollbar.
          */
         "overflowY"?: OverflowBehavior;
+        /**
+          * Disables the custom scrollbar and use native scrollbars instead.
+         */
+        "useNative"?: boolean;
     }
     interface KlevuUtilViewport {
         "onKlevuSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
