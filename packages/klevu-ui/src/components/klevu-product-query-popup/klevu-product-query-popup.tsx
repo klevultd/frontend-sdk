@@ -140,6 +140,11 @@ export class KlevuProductQueryPopup {
    */
   @Prop() config?: KlevuConfig
 
+  /**
+   * Use native scrollbars instead of custom ones
+   */
+  @Prop() useNativeScrollbars?: boolean
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -302,7 +307,7 @@ export class KlevuProductQueryPopup {
   #renderChat() {
     return (
       <Fragment>
-        <klevu-chat-layout ref={(el) => (this.#layoutElement = el)} elementForHeightCalculation={this.#contentDiv}>
+        <klevu-chat-layout useNativeScrollbars={this.useNativeScrollbars} ref={(el) => (this.#layoutElement = el)}>
           <div part="product-query-header" slot="header">
             <div class="header">
               <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>

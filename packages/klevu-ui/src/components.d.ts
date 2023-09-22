@@ -175,15 +175,14 @@ export namespace Components {
           * Close the popup menu
          */
         "closePopup": () => Promise<void>;
-        "elementForHeightCalculation"?: HTMLElement;
         /**
           * Scroll current chat to bottom of page
          */
         "scrollMainToBottom": (behavior?: "smooth" | "instant") => Promise<void>;
         /**
-          * Show loading indicator
+          * Use native scrollbars instead of custom ones in content
          */
-        "showLoading": boolean;
+        "useNativeScrollbars"?: boolean;
     }
     interface KlevuChatMessages {
         /**
@@ -785,7 +784,8 @@ export namespace Components {
         "useBackground": boolean;
     }
     /**
-     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * Generic product component that renders product based on KlevuRecord of
+     * @klevu /core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
      * with --kleu-product-width and --klevu-product-small-width css variables.
@@ -966,6 +966,10 @@ export namespace Components {
           * Use dark background with the popup
          */
         "useBackground"?: boolean;
+        /**
+          * Use native scrollbars instead of custom ones
+         */
+        "useNativeScrollbars"?: boolean;
     }
     /**
      * Klevu Product Query popup application that shows a popup for asking questions about a product
@@ -1057,6 +1061,10 @@ export namespace Components {
           * Use dark background with the popup
          */
         "useBackground"?: boolean;
+        /**
+          * Use native scrollbars instead of custom ones
+         */
+        "useNativeScrollbars"?: boolean;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -1690,9 +1698,19 @@ export namespace Components {
      */
     interface KlevuUtilScrollbars {
         "getContainer": () => Promise<HTMLDivElement | undefined>;
-        "getInstance": () => Promise<OverlayScrollbars | undefined>;
+        "getInstance": () => Promise<{ customInstance: OverlayScrollbars | undefined; nativeContainer: HTMLDivElement | undefined; }>;
+        /**
+          * The overflow behavior of the horizontal scrollbar.
+         */
         "overflowX"?: OverflowBehavior;
+        /**
+          * The overflow behavior of the vertical scrollbar.
+         */
         "overflowY"?: OverflowBehavior;
+        /**
+          * Disables the custom scrollbar and use native scrollbars instead.
+         */
+        "useNative"?: boolean;
     }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
@@ -2174,7 +2192,8 @@ declare global {
         new (): HTMLKlevuPopupElement;
     };
     /**
-     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * Generic product component that renders product based on KlevuRecord of
+     * @klevu /core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
      * with --kleu-product-width and --klevu-product-small-width css variables.
@@ -2609,15 +2628,14 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface KlevuChatLayout {
-        "elementForHeightCalculation"?: HTMLElement;
         /**
           * Event emitted when user sends a message
          */
         "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
         /**
-          * Show loading indicator
+          * Use native scrollbars instead of custom ones in content
          */
-        "showLoading"?: boolean;
+        "useNativeScrollbars"?: boolean;
     }
     interface KlevuChatMessages {
         /**
@@ -3253,7 +3271,8 @@ declare namespace LocalJSX {
         "useBackground"?: boolean;
     }
     /**
-     * Generic product component that renders product based on KlevuRecord of @klevu/core
+     * Generic product component that renders product based on KlevuRecord of
+     * @klevu /core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
      * with --kleu-product-width and --klevu-product-small-width css variables.
@@ -3438,6 +3457,10 @@ declare namespace LocalJSX {
           * Use dark background with the popup
          */
         "useBackground"?: boolean;
+        /**
+          * Use native scrollbars instead of custom ones
+         */
+        "useNativeScrollbars"?: boolean;
     }
     /**
      * Klevu Product Query popup application that shows a popup for asking questions about a product
@@ -3529,6 +3552,10 @@ declare namespace LocalJSX {
           * Use dark background with the popup
          */
         "useBackground"?: boolean;
+        /**
+          * Use native scrollbars instead of custom ones
+         */
+        "useNativeScrollbars"?: boolean;
     }
     /**
      * __klevu-query__ component is a special kind of component that makes queries to Klevu defined by the
@@ -4223,8 +4250,18 @@ declare namespace LocalJSX {
      * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface KlevuUtilScrollbars {
+        /**
+          * The overflow behavior of the horizontal scrollbar.
+         */
         "overflowX"?: OverflowBehavior;
+        /**
+          * The overflow behavior of the vertical scrollbar.
+         */
         "overflowY"?: OverflowBehavior;
+        /**
+          * Disables the custom scrollbar and use native scrollbars instead.
+         */
+        "useNative"?: boolean;
     }
     interface KlevuUtilViewport {
         "onKlevuSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
@@ -4485,7 +4522,8 @@ declare module "@stencil/core" {
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             /**
-             * Generic product component that renders product based on KlevuRecord of @klevu/core
+             * Generic product component that renders product based on KlevuRecord of
+             * @klevu /core
              * All parts of the component can be replaced with slots.
              * By default the products fill the whole space, but it can be limited
              * with --kleu-product-width and --klevu-product-small-width css variables.

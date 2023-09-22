@@ -167,6 +167,14 @@ export type KlevuQueryResult = {
      * The search term submitted for this query.
      */
     searchedTerm: string
+    /**
+     * The urls processed in case of image search
+     */
+    klevuImageData?: {
+      processed: {
+        urls: string[]
+      }[]
+    }
   }
   records: Array<{ id: string } & KlevuRecord>
 }

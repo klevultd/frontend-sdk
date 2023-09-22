@@ -31,7 +31,11 @@ export function sendSearchEvent(
       }
 
       KlevuEvents.search({
-        term,
+        term:
+          meta.klevuImageData?.processed &&
+          meta.klevuImageData?.processed?.length > 0
+            ? "KLEVU_IMAGE_SEARCH"
+            : term,
         totalResults: meta.totalResultsFound,
         typeOfSearch: meta.typeOfSearch,
         override,

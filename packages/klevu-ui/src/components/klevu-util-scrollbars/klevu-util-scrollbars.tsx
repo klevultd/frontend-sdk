@@ -17,12 +17,28 @@ export class KlevuUtilScrollbars {
   @Element() el!: HTMLElement
   container?: HTMLDivElement
   instance?: OverlayScrollbars
+  nativeContainer?: HTMLDivElement
 
+  /**
+   * The overflow behavior of the horizontal scrollbar.
+   */
   @Prop() overflowX?: OverflowBehavior
+  /**
+   * The overflow behavior of the vertical scrollbar.
+   */
   @Prop() overflowY?: OverflowBehavior
+
+  /**
+   * Disables the custom scrollbar and use native scrollbars instead.
+   */
+  @Prop() useNative?: boolean
 
   componentDidLoad() {
     this.#initCustomScrollbars()
+
+    if (this.useNative === undefined && window.klevu_ui_settings?.useNativeScrollbars === true) {
+      this.useNative = true
+    }
   }
 
   @Watch("overflowX")
@@ -33,7 +49,7 @@ export class KlevuUtilScrollbars {
   }
 
   #initCustomScrollbars() {
-    if (!this.container) {
+    if (!this.container || this.useNative) {
       return
     }
     const options: PartialOptions = {
@@ -58,10 +74,16 @@ export class KlevuUtilScrollbars {
 
   @Method()
   async getInstance() {
-    return this.instance
+    return {
+      customInstance: this.instance,
+      nativeContainer: this.nativeContainer,
+    }
   }
 
   render() {
+    if (this.useNative) {
+      return this.renderNative()
+    }
     return (
       <Host>
         <div
@@ -69,6 +91,40 @@ export class KlevuUtilScrollbars {
             height: "100%",
           }}
           ref={(el) => (this.container = el)}
+        >
+          <slot></slot>
+        </div>
+      </Host>
+    )
+  }
+
+  renderNative() {
+    let overflowX = this.overflowX
+    if (overflowX === "visible-hidden") {
+      overflowX = "hidden"
+    }
+    if (overflowX === "visible-scroll") {
+      overflowX = "scroll"
+    }
+    let overflowY = this.overflowY
+    if (overflowY === "visible-hidden") {
+      overflowY = "hidden"
+    }
+    if (overflowY === "visible-scroll") {
+      overflowY = "scroll"
+    }
+
+    return (
+      <Host>
+        <div
+          class={{
+            native: true,
+          }}
+          style={{
+            overflowX: this.overflowX,
+            overflowY: this.overflowY,
+          }}
+          ref={(el) => (this.nativeContainer = el)}
         >
           <slot></slot>
         </div>
