@@ -1,4 +1,5 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-merchandising.stories"
 
 <Meta of={Stories} />
@@ -43,4 +44,4 @@ customization within the `klevu-merchandising` component.
 
 <Canvas of={Stories.CustomizedMerchandising} />
 
-<Canvas of={Stories.WithInfiniteScroll} />
+<KlevuAutoDocs of={Stories} />

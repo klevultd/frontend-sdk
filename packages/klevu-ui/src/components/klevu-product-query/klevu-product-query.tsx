@@ -7,14 +7,14 @@ import { parts } from "../../utils/parts"
 /**
  * Button that is placed on the site to start a product query session
  *
- * @csspart product-query-header - Header of the popup
- * @csspart product-query-footer - Footer of the popup where input is
- * @csspart product-query-feedback - Feedback section of the popup when it is being closed
- * @csspart product-query-open-button - Button that opens the popup
- * @csspart product-query-button-icon - Icon of the button that opens the popup
- * @csspart popup-origin - Popup origin element
- * @csspart popup-content - Popup content element
- * @csspart button-base - The button element
+ * @csspart product-query-header Header of the popup
+ * @csspart product-query-footer Footer of the popup where input is
+ * @csspart product-query-feedback Feedback section of the popup when it is being closed
+ * @csspart product-query-open-button Button that opens the popup
+ * @csspart product-query-button-icon Icon of the button that opens the popup
+ * @csspart popup-origin Popup origin element
+ * @csspart popup-content Popup content element
+ * @csspart button-base The button element
  *
  * @slot before-button-text - Before origin button text
  * @slot after-button-text - After origin button text

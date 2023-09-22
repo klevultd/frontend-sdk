@@ -1,0 +1,71 @@
+import { Meta } from "@storybook/addon-docs"
+import { KlevuAllEvents } from "../../.storybook/blocks/KlevuAllEvents"
+
+<Meta title="Guides/Events" />
+
+# Listening to Klevu Web Component Events
+
+Klevu Web components offer a rich set of events that you can listen to in order to respond to user interactions and
+customize the behavior of your e-commerce website. This documentation page provides an overview of the standard way to
+listen to events emitted by Klevu Web components. Below is a listing of events from various components along with the
+typings of the `CustomEvent` detail property.
+
+## Event Listening
+
+To listen to events emitted by Klevu Web components, you can use the standard event listening approach in JavaScript.
+Here's how you can do it:
+
+```javascript
+// Select the element that contains the Klevu Web component
+const componentElement = document.querySelector("#your-component-id")
+
+// Add an event listener to the component element
+componentElement.addEventListener("event-name", (event) => {
+  // Access event details from the event object
+  const eventData = event.detail
+  // Your custom logic based on the event
+})
+```
+
+## Listening to Events with React
+
+If you are using React to build your e-commerce website and want to listen to events emitted by Klevu Web components, you can achieve this by using React component properties directly.
+
+First, make sure you have imported the React components from `@klevu/ui-react`. These components follow PascalCase naming conventions.
+
+Here's an example of how to listen to a Klevu Web component event in a React component:
+
+```javascript
+import React from "react"
+import { KlevuFacet, KlevuSearchField } from "@klevu/ui-react"
+
+function YourComponent() {
+  // Define a custom event handler function
+  const handleEvent = (event) => {
+    // Access event details from the event object
+    const eventData = event.detail
+    // Your custom logic based on the event
+  }
+
+  return (
+    <div>
+      {/* Example of listening to an event on the Facet component */}
+      <KlevuFacet onKlevuFilterSelectionUpdate={handleEvent} />
+
+      {/* Example of listening to an event on the SearchField component */}
+      <KlevuSearchField onKlevuSearchClick={handleEvent} />
+    </div>
+  )
+}
+
+export default YourComponent
+```
+
+Please refer to the specific component's documentation for more details on each event and its usage. Listening to these
+events allows you to create dynamic and interactive experiences for your users, enhancing the overall functionality of
+your e-commerce website.
+
+## List of all events in all components
+
+<KlevuAllEvents />
+```

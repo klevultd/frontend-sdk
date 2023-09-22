@@ -20,12 +20,12 @@ import { getTranslation } from "../../utils/getTranslation"
 /**
  * Klevu Product Query popup application that shows a popup for asking questions about a product
  *
- * @csspart product-query-header - Header of the popup
- * @csspart product-query-footer - Footer of the popup where input is
- * @csspart product-query-feedback - Feedback section of the popup when it is being closed
- * @csspart product-query-open-button - Button that opens the popup
- * @csspart popup-origin - Popup origin element
- * @csspart popup-content - Popup content element
+ * @csspart product-query-header Header of the popup
+ * @csspart product-query-footer Footer of the popup where input is
+ * @csspart product-query-feedback Feedback section of the popup when it is being closed
+ * @csspart product-query-open-button Button that opens the popup
+ * @csspart popup-origin Popup origin element
+ * @csspart popup-content Popup content element
  *
  * @slot fineprint - Fine print of the popup
  */

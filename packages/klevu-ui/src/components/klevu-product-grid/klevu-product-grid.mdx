@@ -1,5 +1,5 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
-
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-product-grid.stories"
 
 <Meta of={Stories} />
@@ -16,3 +16,5 @@ It is possible to set a custom number of columns with itemsPerRow parameter.
 In this example we also change the width of the product with CSS variable.
 
 <Canvas of={Stories.ProductGridWithItemsPerRow} />
+
+<KlevuAutoDocs of={Stories} />

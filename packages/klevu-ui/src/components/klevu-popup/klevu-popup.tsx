@@ -7,8 +7,8 @@ import { Component, Element, h, Host, Listen, Method, Prop, State, Event, EventE
  * @slot origin - Popoup origin that opens content of popup
  * @slot content - Content of the popup
  *
- * @csspart popup-origin - Origin component
- * @csspart popup-content - Content component
+ * @csspart popup-origin Origin component
+ * @csspart popup-content Content component
  */
 @Component({
   tag: "klevu-popup",

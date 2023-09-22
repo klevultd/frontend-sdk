@@ -1,4 +1,5 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-facet-list.stories"
 
 <Meta of={Stories} />
@@ -34,3 +35,5 @@ const MyComp = () => {
 ## Example with color swatches
 
 <Canvas of={Stories.FacetListColorSwatches} />
+
+<KlevuAutoDocs of={Stories} />

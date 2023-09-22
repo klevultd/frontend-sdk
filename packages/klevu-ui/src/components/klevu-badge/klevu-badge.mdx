@@ -1,4 +1,5 @@
 import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as BadgeStories from "./klevu-badge.stories"
 
 <Meta of={BadgeStories} />
@@ -26,3 +27,5 @@ Badges can be in neutral colors. Colors are set in css properties and can be cha
 Any color can be set to badget with css property.
 
 <Canvas of={BadgeStories.CustomColor} />
+
+<KlevuAutoDocs of={BadgeStories} />
