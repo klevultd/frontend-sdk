@@ -34,7 +34,7 @@
   flex-direction: column;
   max-width: var(--width);
 }
-.container.default,
+.container.default a,
 .container.small a {
   display: flex;
   flex-direction: column;
