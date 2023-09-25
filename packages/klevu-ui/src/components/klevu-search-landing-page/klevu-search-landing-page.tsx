@@ -145,6 +145,10 @@ export class KlevuSearchLandingPage {
    * Pass image url if performing image search
    */
   @Prop() imageUrlForSearch = ""
+  /**
+   * Show variants count
+   */
+  @Prop() showVariantsCount = false
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -462,6 +466,7 @@ export class KlevuSearchLandingPage {
                     exportparts={parts["klevu-product"]}
                     showRatings={this.showRatings}
                     showRatingsCount={this.showRatingsCount}
+                    showVariantsCount={this.showVariantsCount}
                   ></klevu-product>
                 ))}
               </klevu-product-grid>

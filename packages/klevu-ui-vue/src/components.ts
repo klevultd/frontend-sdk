@@ -286,6 +286,7 @@ export const KlevuProduct = /*@__PURE__*/ defineContainer<JSX.KlevuProduct>('kle
   'outOfStockCaption',
   'fallbackProductImageUrl',
   'isWrapper',
+  'showVariantsCount',
   'klevuProductClick'
 ]);
 
@@ -464,6 +465,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'priceInterval',
   'hidePrice',
   'imageUrlForSearch',
+  'showVariantsCount',
   'klevuData'
 ]);
 

@@ -147,6 +147,10 @@ export class KlevuProduct {
    * send correct data to Klevu analytics
    */
   @Prop() isWrapper?: boolean
+  /**
+   * Show variants count
+   */
+  @Prop() showVariantsCount = false
 
   @State() hoverImage?: string
 
@@ -367,6 +371,11 @@ export class KlevuProduct {
                   </klevu-typography>
                 )}
               </div>
+            </slot>
+            <slot name="variantsCount">
+              {this.showVariantsCount && this.product.totalVariants !== undefined && (
+                <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
+              )}
             </slot>
             {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
 

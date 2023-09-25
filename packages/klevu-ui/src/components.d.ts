@@ -876,6 +876,10 @@ export namespace Components {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show variants count
+         */
+        "showVariantsCount": boolean;
+        /**
           * Text for add to cart button
          */
         "tAddToCart"?: string;
@@ -1467,6 +1471,10 @@ export namespace Components {
           * Show the quick search box at the top of the page
          */
         "showSearch"?: boolean;
+        /**
+          * Show variants count
+         */
+        "showVariantsCount": boolean;
         /**
           * In which order to set the products
          */
@@ -3367,6 +3375,10 @@ declare namespace LocalJSX {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show variants count
+         */
+        "showVariantsCount"?: boolean;
+        /**
           * Text for add to cart button
          */
         "tAddToCart"?: string;
@@ -3975,6 +3987,10 @@ declare namespace LocalJSX {
           * Show the quick search box at the top of the page
          */
         "showSearch"?: boolean;
+        /**
+          * Show variants count
+         */
+        "showVariantsCount"?: boolean;
         /**
           * In which order to set the products
          */
