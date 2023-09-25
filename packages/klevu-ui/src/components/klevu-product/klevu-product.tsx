@@ -147,6 +147,10 @@ export class KlevuProduct {
    * send correct data to Klevu analytics
    */
   @Prop() isWrapper?: boolean
+  /**
+   * Show variants count
+   */
+  @Prop() showVariantsCount = false
 
   @State() hoverImage?: string
 
@@ -368,6 +372,11 @@ export class KlevuProduct {
                 )}
               </div>
             </slot>
+            {this.showVariantsCount && this.product.totalVariants !== undefined && this.variant !== "line" && (
+              <slot name="variantsCount">
+                <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
+              </slot>
+            )}
             {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
 
             <slot name="addtocart">
@@ -384,6 +393,11 @@ export class KlevuProduct {
             </slot>
           </a>
           <slot name="bottom"></slot>
+          {this.showVariantsCount && this.product.totalVariants !== undefined && this.variant === "line" && (
+            <slot name="variantsCount">
+              <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
+            </slot>
+          )}
           {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
         </div>
       </Host>

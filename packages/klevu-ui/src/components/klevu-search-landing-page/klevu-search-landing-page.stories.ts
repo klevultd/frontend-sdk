@@ -42,6 +42,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     price-interval=${ifDefined(args.priceInterval)}
     hide-price=${ifDefined(args.hidePrice)}
     image-url-for-search=${ifDefined(args.imageUrlForSearch)}
+    show-variants-count=${ifDefined(args.showVariantsCount)}
   ></klevu-search-landing-page>`,
 }
 
