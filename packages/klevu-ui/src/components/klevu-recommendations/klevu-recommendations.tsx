@@ -10,8 +10,7 @@ import { Component, Event, EventEmitter, h, Host, Listen, Prop, State } from "@s
 
 import { KlevuProductCustomEvent } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { parts } from "../../utils/parts"
-import { getKMCSettings } from "../../utils/getKMCSettings"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Full recommendation banner solution
@@ -124,7 +123,7 @@ export class KlevuRecommendations {
           <klevu-slides heading={this.recommendationTitle}>
             {this.products.map((product) => (
               <klevu-product
-                exportparts={parts["klevu-product"]}
+                exportparts={partsExports("klevu-product")}
                 fixedWidth
                 product={product}
                 style={{

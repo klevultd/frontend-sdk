@@ -1,4 +1,5 @@
 import { Component, Element, Event, EventEmitter, Host, State, h, Method, Prop } from "@stencil/core"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Component that wraps chat elements into a layout.
@@ -119,7 +120,11 @@ export class KlevuChatLayout {
             <slot name="actions"></slot>
             <div class="inputs">
               {this.menuSlotCount > 0 ? (
-                <klevu-popup anchor="top-start" ref={(el) => (this.#popupElement = el)}>
+                <klevu-popup
+                  exportparts={partsExports("klevu-popup")}
+                  anchor="top-start"
+                  ref={(el) => (this.#popupElement = el)}
+                >
                   <div slot="content">
                     <slot name="menu"></slot>
                   </div>

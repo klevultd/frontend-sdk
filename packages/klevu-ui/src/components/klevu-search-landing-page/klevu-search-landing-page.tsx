@@ -18,7 +18,6 @@ import {
   klaviyo,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
-import { parts } from "../../utils/parts"
 import {
   KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
@@ -29,10 +28,11 @@ import {
 } from "../../components"
 
 import { KlevuInit } from "../klevu-init/klevu-init"
-import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/klevu-product"
+import { KlevuProductOnProductClick } from "../klevu-product/klevu-product"
 import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
 import { getKMCSettings } from "../../utils/getKMCSettings"
+import { partsExports } from "../../utils/partsExports"
 
 type NoResultsOptions = KMCRootObject["klevu_uc_userOptions"]["noResultsOptions"]
 type Banner = NoResultsOptions["banners"][0]
@@ -426,7 +426,12 @@ export class KlevuSearchLandingPage {
                     <klevu-typography slot="header" variant="h1">
                       We found {this.#resultObject?.meta.totalResultsFound} matches to your uploaded photo
                     </klevu-typography>
-                    <klevu-popup ref={(el) => (this.#imagePickerPopupRef = el)} popupWidth={400} anchor="bottom-end">
+                    <klevu-popup
+                      exportparts={partsExports("klevu-popup")}
+                      ref={(el) => (this.#imagePickerPopupRef = el)}
+                      popupWidth={400}
+                      anchor="bottom-end"
+                    >
                       <div class="image-picker" slot="content">
                         <klevu-image-picker
                           isLoading={this.isUploadingImage}
@@ -463,7 +468,7 @@ export class KlevuSearchLandingPage {
                     hidePrice={this.hidePrice}
                     product={p}
                     fixedWidth
-                    exportparts={parts["klevu-product"]}
+                    exportparts={partsExports("klevu-product")}
                     showRatings={this.showRatings}
                     showRatingsCount={this.showRatingsCount}
                     showVariantsCount={this.showVariantsCount}
@@ -489,7 +494,7 @@ export class KlevuSearchLandingPage {
                             hidePrice={this.hidePrice}
                             product={p}
                             variant="line"
-                            exportparts={parts["klevu-product"]}
+                            exportparts={partsExports("klevu-product")}
                           ></klevu-product>
                         ))}
                       </Fragment>
