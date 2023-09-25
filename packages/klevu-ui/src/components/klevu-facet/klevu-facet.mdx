@@ -1,4 +1,5 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-facet.stories"
 
 <Meta of={Stories} />
@@ -54,3 +55,5 @@ Facet can also be used to display a slider. This is useful for price or other nu
 Change the facet to show color swatches
 
 <Canvas sourceState="none" of={Stories.ColorSwatches} />
+
+<KlevuAutoDocs of={Stories} />

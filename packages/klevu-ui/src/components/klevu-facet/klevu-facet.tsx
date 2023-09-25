@@ -50,7 +50,7 @@ export type KlevuSelectionUpdatedEventDetail = {
  *
  * Manager property must be set for this component to work.
  *
- * @csspart facet-heading - Heading of the facet
+ * @csspart facet-heading Heading of the facet
  */
 @Component({
   tag: "klevu-facet",

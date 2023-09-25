@@ -74,6 +74,7 @@ export function autofillMeta(tag: string, meta: Meta = {}): Meta {
       continue
     }
     handles.push(e.event)
+    /*
     argTypes[e.event] = {
       action: e.docs,
       description: e.docs,
@@ -81,7 +82,9 @@ export function autofillMeta(tag: string, meta: Meta = {}): Meta {
         category: "Events",
       },
     }
+    */
   }
+  /*
   for (const s of comp.slots) {
     if (!s.name) {
       continue
@@ -146,6 +149,7 @@ export function autofillMeta(tag: string, meta: Meta = {}): Meta {
       },
     }
   }
+  */
 
   const sortKeys = ["Attributes", "Properties", "Events", "Slots", "Methods", "CSS Properties", "CSS Parts"]
 

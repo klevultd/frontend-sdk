@@ -11,11 +11,11 @@ export type KlevuProductVariant = "line" | "small" | "default"
 export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
 
 /**
- * Generic product component that renders product based on KlevuRecord of @klevu/core
+ * Generic product component that renders product based on KlevuRecord of klevu/core
  * All parts of the component can be replaced with slots.
  *
  * By default the products fill the whole space, but it can be limited
- * with --kleu-product-width and --klevu-product-small-width css variables.
+ * with --klevu-product-width and --klevu-product-small-width css variables.
  *
  * @slot top - Empty are before any product content
  * @slot image - Image region of component
@@ -23,9 +23,9 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @slot bottom - Empty are after product content
  * @slot addtocart - Add to cart button slot at the end of the component
  *
- * @csspart product-image - The image element of component
- * @csspart product-container - The container element of whole
- * @csspart product-swatch - Single swatch element under the image
+ * @csspart product-image The image element of component
+ * @csspart product-container The container element of whole
+ * @csspart product-swatch Single swatch element under the image
  *
  * @cssprop --klevu-product-width - Width of the product
  * @cssprop --klevu-product-small-width - Width of the product when small variant is used

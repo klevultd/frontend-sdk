@@ -1,4 +1,5 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-recommendations.stories"
 
 <Meta of={Stories} />
@@ -12,3 +13,5 @@ In a default case we can fetch recommendation from Klevu Merchant Center with a 
 <Canvas of={Stories.Recommendations} />
 
 <Controls />
+
+<KlevuAutoDocs of={Stories} />

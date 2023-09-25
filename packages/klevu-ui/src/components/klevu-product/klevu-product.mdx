@@ -1,3 +1,4 @@
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import { Controls, Canvas, Meta, Story, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-product.stories"
 
@@ -7,18 +8,9 @@ import * as Stories from "./klevu-product.stories"
 
 <Markdown>{Stories.description}</Markdown>
 
-## Default product
-
-Default product has bigger image and more information than rest of the variants.
-
-Here are four products.
-
-1. Without any modifications
-2. Style modifications with CSS properties through style attribute
-3. Style modifications in `style` tag with CSS parts and CSS properties.
-4. Undefined loading product.
-
 <Canvas of={Stories.Product} />
+
+<KlevuAutoDocs of={Stories} />
 
 ## Smaller products
 

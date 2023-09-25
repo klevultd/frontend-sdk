@@ -1,4 +1,5 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-util-infinite-scroll.stories"
 
 <Meta of={Stories} />
@@ -51,3 +52,5 @@ Adds a click event listener to the "Load More" button, which, when clicked, fetc
 Re-enables infinite scrolling after clicking the "Load More" button.\
 
 This combination of infinite scrolling and the "Load More" button provides users with a seamless experience of exploring additional content when they reach the end of the initial list of items.
+
+<KlevuAutoDocs of={Stories} />

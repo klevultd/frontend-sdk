@@ -109,7 +109,7 @@ export namespace Components {
     }
     /**
      * Basic button component
-     * @csspart button-base - The button element
+     * @csspart button-base The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -346,7 +346,7 @@ export namespace Components {
     /**
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
-     * @csspart facet-heading - Heading of the facet
+     * @csspart facet-heading Heading of the facet
      */
     interface KlevuFacet {
         /**
@@ -726,8 +726,8 @@ export namespace Components {
     }
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin - Origin component
-     * @csspart popup-content - Content component
+     * @csspart popup-origin Origin component
+     * @csspart popup-content Content component
      */
     interface KlevuPopup {
         /**
@@ -784,14 +784,13 @@ export namespace Components {
         "useBackground": boolean;
     }
     /**
-     * Generic product component that renders product based on KlevuRecord of
-     * @klevu /core
+     * Generic product component that renders product based on KlevuRecord of klevu/core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
-     * with --kleu-product-width and --klevu-product-small-width css variables.
-     * @csspart product-image - The image element of component
-     * @csspart product-container - The container element of whole
-     * @csspart product-swatch - Single swatch element under the image
+     * with --klevu-product-width and --klevu-product-small-width css variables.
+     * @csspart product-image The image element of component
+     * @csspart product-container The container element of whole
+     * @csspart product-swatch Single swatch element under the image
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -904,14 +903,14 @@ export namespace Components {
     }
     /**
      * Button that is placed on the site to start a product query session
-     * @csspart product-query-header - Header of the popup
-     * @csspart product-query-footer - Footer of the popup where input is
-     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-     * @csspart product-query-open-button - Button that opens the popup
-     * @csspart product-query-button-icon - Icon of the button that opens the popup
-     * @csspart popup-origin - Popup origin element
-     * @csspart popup-content - Popup content element
-     * @csspart button-base - The button element
+     * @csspart product-query-header Header of the popup
+     * @csspart product-query-footer Footer of the popup where input is
+     * @csspart product-query-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button Button that opens the popup
+     * @csspart product-query-button-icon Icon of the button that opens the popup
+     * @csspart popup-origin Popup origin element
+     * @csspart popup-content Popup content element
+     * @csspart button-base The button element
      */
     interface KlevuProductQuery {
         /**
@@ -977,12 +976,12 @@ export namespace Components {
     }
     /**
      * Klevu Product Query popup application that shows a popup for asking questions about a product
-     * @csspart product-query-header - Header of the popup
-     * @csspart product-query-footer - Footer of the popup where input is
-     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-     * @csspart product-query-open-button - Button that opens the popup
-     * @csspart popup-origin - Popup origin element
-     * @csspart popup-content - Popup content element
+     * @csspart product-query-header Header of the popup
+     * @csspart product-query-footer Footer of the popup where input is
+     * @csspart product-query-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button Button that opens the popup
+     * @csspart popup-origin Popup origin element
+     * @csspart popup-content Popup content element
      */
     interface KlevuProductQueryPopup {
         /**
@@ -1904,7 +1903,7 @@ declare global {
     };
     /**
      * Basic button component
-     * @csspart button-base - The button element
+     * @csspart button-base The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -2022,7 +2021,7 @@ declare global {
     /**
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
-     * @csspart facet-heading - Heading of the facet
+     * @csspart facet-heading Heading of the facet
      */
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
@@ -2194,8 +2193,8 @@ declare global {
     };
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin - Origin component
-     * @csspart popup-content - Content component
+     * @csspart popup-origin Origin component
+     * @csspart popup-content Content component
      */
     interface HTMLKlevuPopupElement extends Components.KlevuPopup, HTMLStencilElement {
     }
@@ -2204,14 +2203,13 @@ declare global {
         new (): HTMLKlevuPopupElement;
     };
     /**
-     * Generic product component that renders product based on KlevuRecord of
-     * @klevu /core
+     * Generic product component that renders product based on KlevuRecord of klevu/core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
-     * with --kleu-product-width and --klevu-product-small-width css variables.
-     * @csspart product-image - The image element of component
-     * @csspart product-container - The container element of whole
-     * @csspart product-swatch - Single swatch element under the image
+     * with --klevu-product-width and --klevu-product-small-width css variables.
+     * @csspart product-image The image element of component
+     * @csspart product-container The container element of whole
+     * @csspart product-swatch Single swatch element under the image
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -2236,14 +2234,14 @@ declare global {
     };
     /**
      * Button that is placed on the site to start a product query session
-     * @csspart product-query-header - Header of the popup
-     * @csspart product-query-footer - Footer of the popup where input is
-     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-     * @csspart product-query-open-button - Button that opens the popup
-     * @csspart product-query-button-icon - Icon of the button that opens the popup
-     * @csspart popup-origin - Popup origin element
-     * @csspart popup-content - Popup content element
-     * @csspart button-base - The button element
+     * @csspart product-query-header Header of the popup
+     * @csspart product-query-footer Footer of the popup where input is
+     * @csspart product-query-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button Button that opens the popup
+     * @csspart product-query-button-icon Icon of the button that opens the popup
+     * @csspart popup-origin Popup origin element
+     * @csspart popup-content Popup content element
+     * @csspart button-base The button element
      */
     interface HTMLKlevuProductQueryElement extends Components.KlevuProductQuery, HTMLStencilElement {
     }
@@ -2253,12 +2251,12 @@ declare global {
     };
     /**
      * Klevu Product Query popup application that shows a popup for asking questions about a product
-     * @csspart product-query-header - Header of the popup
-     * @csspart product-query-footer - Footer of the popup where input is
-     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-     * @csspart product-query-open-button - Button that opens the popup
-     * @csspart popup-origin - Popup origin element
-     * @csspart popup-content - Popup content element
+     * @csspart product-query-header Header of the popup
+     * @csspart product-query-footer Footer of the popup where input is
+     * @csspart product-query-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button Button that opens the popup
+     * @csspart popup-origin Popup origin element
+     * @csspart popup-content Popup content element
      */
     interface HTMLKlevuProductQueryPopupElement extends Components.KlevuProductQueryPopup, HTMLStencilElement {
     }
@@ -2577,7 +2575,7 @@ declare namespace LocalJSX {
     }
     /**
      * Basic button component
-     * @csspart button-base - The button element
+     * @csspart button-base The button element
      * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
      * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
      * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -2839,7 +2837,7 @@ declare namespace LocalJSX {
     /**
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
-     * @csspart facet-heading - Heading of the facet
+     * @csspart facet-heading Heading of the facet
      */
     interface KlevuFacet {
         /**
@@ -3228,8 +3226,8 @@ declare namespace LocalJSX {
     }
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin - Origin component
-     * @csspart popup-content - Content component
+     * @csspart popup-origin Origin component
+     * @csspart popup-content Content component
      */
     interface KlevuPopup {
         /**
@@ -3283,14 +3281,13 @@ declare namespace LocalJSX {
         "useBackground"?: boolean;
     }
     /**
-     * Generic product component that renders product based on KlevuRecord of
-     * @klevu /core
+     * Generic product component that renders product based on KlevuRecord of klevu/core
      * All parts of the component can be replaced with slots.
      * By default the products fill the whole space, but it can be limited
-     * with --kleu-product-width and --klevu-product-small-width css variables.
-     * @csspart product-image - The image element of component
-     * @csspart product-container - The container element of whole
-     * @csspart product-swatch - Single swatch element under the image
+     * with --klevu-product-width and --klevu-product-small-width css variables.
+     * @csspart product-image The image element of component
+     * @csspart product-container The container element of whole
+     * @csspart product-swatch Single swatch element under the image
      * @cssprop --klevu-product-width - Width of the product
      * @cssprop --klevu-product-small-width - Width of the product when small variant is used
      * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -3407,14 +3404,14 @@ declare namespace LocalJSX {
     }
     /**
      * Button that is placed on the site to start a product query session
-     * @csspart product-query-header - Header of the popup
-     * @csspart product-query-footer - Footer of the popup where input is
-     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-     * @csspart product-query-open-button - Button that opens the popup
-     * @csspart product-query-button-icon - Icon of the button that opens the popup
-     * @csspart popup-origin - Popup origin element
-     * @csspart popup-content - Popup content element
-     * @csspart button-base - The button element
+     * @csspart product-query-header Header of the popup
+     * @csspart product-query-footer Footer of the popup where input is
+     * @csspart product-query-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button Button that opens the popup
+     * @csspart product-query-button-icon Icon of the button that opens the popup
+     * @csspart popup-origin Popup origin element
+     * @csspart popup-content Popup content element
+     * @csspart button-base The button element
      */
     interface KlevuProductQuery {
         /**
@@ -3480,12 +3477,12 @@ declare namespace LocalJSX {
     }
     /**
      * Klevu Product Query popup application that shows a popup for asking questions about a product
-     * @csspart product-query-header - Header of the popup
-     * @csspart product-query-footer - Footer of the popup where input is
-     * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-     * @csspart product-query-open-button - Button that opens the popup
-     * @csspart popup-origin - Popup origin element
-     * @csspart popup-content - Popup content element
+     * @csspart product-query-header Header of the popup
+     * @csspart product-query-footer Footer of the popup where input is
+     * @csspart product-query-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-open-button Button that opens the popup
+     * @csspart popup-origin Popup origin element
+     * @csspart popup-content Popup content element
      */
     interface KlevuProductQueryPopup {
         /**
@@ -4371,7 +4368,7 @@ declare module "@stencil/core" {
             "klevu-banner": LocalJSX.KlevuBanner & JSXBase.HTMLAttributes<HTMLKlevuBannerElement>;
             /**
              * Basic button component
-             * @csspart button-base - The button element
+             * @csspart button-base The button element
              * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
              * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
              * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
@@ -4439,7 +4436,7 @@ declare module "@stencil/core" {
             /**
              * Rendering items of single facet with all its options or a slider.
              * Manager property must be set for this component to work.
-             * @csspart facet-heading - Heading of the facet
+             * @csspart facet-heading Heading of the facet
              */
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             /**
@@ -4541,19 +4538,18 @@ declare module "@stencil/core" {
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             /**
              * Popup component where clicking origin component popups the the content
-             * @csspart popup-origin - Origin component
-             * @csspart popup-content - Content component
+             * @csspart popup-origin Origin component
+             * @csspart popup-content Content component
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
             /**
-             * Generic product component that renders product based on KlevuRecord of
-             * @klevu /core
+             * Generic product component that renders product based on KlevuRecord of klevu/core
              * All parts of the component can be replaced with slots.
              * By default the products fill the whole space, but it can be limited
-             * with --kleu-product-width and --klevu-product-small-width css variables.
-             * @csspart product-image - The image element of component
-             * @csspart product-container - The container element of whole
-             * @csspart product-swatch - Single swatch element under the image
+             * with --klevu-product-width and --klevu-product-small-width css variables.
+             * @csspart product-image The image element of component
+             * @csspart product-container The container element of whole
+             * @csspart product-swatch Single swatch element under the image
              * @cssprop --klevu-product-width - Width of the product
              * @cssprop --klevu-product-small-width - Width of the product when small variant is used
              * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
@@ -4568,24 +4564,24 @@ declare module "@stencil/core" {
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
             /**
              * Button that is placed on the site to start a product query session
-             * @csspart product-query-header - Header of the popup
-             * @csspart product-query-footer - Footer of the popup where input is
-             * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-             * @csspart product-query-open-button - Button that opens the popup
-             * @csspart product-query-button-icon - Icon of the button that opens the popup
-             * @csspart popup-origin - Popup origin element
-             * @csspart popup-content - Popup content element
-             * @csspart button-base - The button element
+             * @csspart product-query-header Header of the popup
+             * @csspart product-query-footer Footer of the popup where input is
+             * @csspart product-query-feedback Feedback section of the popup when it is being closed
+             * @csspart product-query-open-button Button that opens the popup
+             * @csspart product-query-button-icon Icon of the button that opens the popup
+             * @csspart popup-origin Popup origin element
+             * @csspart popup-content Popup content element
+             * @csspart button-base The button element
              */
             "klevu-product-query": LocalJSX.KlevuProductQuery & JSXBase.HTMLAttributes<HTMLKlevuProductQueryElement>;
             /**
              * Klevu Product Query popup application that shows a popup for asking questions about a product
-             * @csspart product-query-header - Header of the popup
-             * @csspart product-query-footer - Footer of the popup where input is
-             * @csspart product-query-feedback - Feedback section of the popup when it is being closed
-             * @csspart product-query-open-button - Button that opens the popup
-             * @csspart popup-origin - Popup origin element
-             * @csspart popup-content - Popup content element
+             * @csspart product-query-header Header of the popup
+             * @csspart product-query-footer Footer of the popup where input is
+             * @csspart product-query-feedback Feedback section of the popup when it is being closed
+             * @csspart product-query-open-button Button that opens the popup
+             * @csspart popup-origin Popup origin element
+             * @csspart popup-content Popup content element
              */
             "klevu-product-query-popup": LocalJSX.KlevuProductQueryPopup & JSXBase.HTMLAttributes<HTMLKlevuProductQueryPopupElement>;
             /**
