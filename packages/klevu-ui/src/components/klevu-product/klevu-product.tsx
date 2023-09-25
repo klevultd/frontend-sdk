@@ -372,11 +372,11 @@ export class KlevuProduct {
                 )}
               </div>
             </slot>
-            <slot name="variantsCount">
-              {this.showVariantsCount && this.product.totalVariants !== undefined && (
+            {this.showVariantsCount && this.product.totalVariants !== undefined && this.variant !== "line" && (
+              <slot name="variantsCount">
                 <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
-              )}
-            </slot>
+              </slot>
+            )}
             {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
 
             <slot name="addtocart">
@@ -393,6 +393,11 @@ export class KlevuProduct {
             </slot>
           </a>
           <slot name="bottom"></slot>
+          {this.showVariantsCount && this.product.totalVariants !== undefined && this.variant === "line" && (
+            <slot name="variantsCount">
+              <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
+            </slot>
+          )}
           {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
         </div>
       </Host>

@@ -49,6 +49,7 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     enable-image-search=${ifDefined(args.enableImageSearch)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
     use-klaviyo=${ifDefined(args.useKlaviyo)}
+    show-variants-count=${ifDefined(args.showVariantsCount)}
   ></klevu-quicksearch>`,
 }
 

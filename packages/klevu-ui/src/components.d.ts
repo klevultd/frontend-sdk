@@ -1256,6 +1256,10 @@ export namespace Components {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show variants count
+         */
+        "showVariantsCount": boolean;
+        /**
           * How many products to show in simple variant
          */
         "simpleResultCount": number;
@@ -3771,6 +3775,10 @@ declare namespace LocalJSX {
           * Show ratings count
          */
         "showRatingsCount"?: boolean;
+        /**
+          * Show variants count
+         */
+        "showVariantsCount"?: boolean;
         /**
           * How many products to show in simple variant
          */

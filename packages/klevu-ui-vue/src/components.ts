@@ -399,6 +399,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'hideTrendingProductsOnNoResultsPage',
   'urlRedirects',
   'enableImageSearch',
+  'showVariantsCount',
   'klevuData',
   'klevuSearch',
   'klevuImageSearch',

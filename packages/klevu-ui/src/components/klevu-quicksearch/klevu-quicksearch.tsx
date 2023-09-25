@@ -207,6 +207,10 @@ export class KlevuQuicksearch {
    * Enable image search feature
    */
   @Prop() enableImageSearch = false
+  /**
+   * Show variants count
+   */
+  @Prop() showVariantsCount = false
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -571,6 +575,7 @@ export class KlevuQuicksearch {
                   {this.products?.map((p) => (
                     <klevu-product
                       product={p}
+                      showVariantsCount={this.showVariantsCount}
                       fixedWidth
                       variant={isMobile ? "line" : "small"}
                       exportparts={parts["klevu-product"]}
@@ -606,6 +611,7 @@ export class KlevuQuicksearch {
                   {this.products?.map((p) => (
                     <klevu-product
                       product={p}
+                      showVariantsCount={this.showVariantsCount}
                       variant="line"
                       exportparts={parts["klevu-product"]}
                       showRatings={this.showRatings}
