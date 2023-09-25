@@ -39,7 +39,7 @@ export type SearchFieldVariant = "default" | "pill"
   shadow: true,
 })
 export class KlevuSearchField {
-  @State() term = ""
+  @Prop() term = ""
 
   /**
    * The placeholder text to display in the search field.
@@ -135,6 +135,9 @@ export class KlevuSearchField {
     const settings = getKMCSettings()
     if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
       this.usePersonalisation = true
+    }
+    if (this.term) {
+      await this.#doSearch(this.term)
     }
   }
 
@@ -295,9 +298,13 @@ export class KlevuSearchField {
     this.#doSearch(this.term)
   }
 
+  @Watch("term")
+  async termChanged() {
+    this.#doSearch(this.term)
+  }
+
   #handleChange = (event: CustomEvent<string>) => {
     this.term = event.detail
-    this.#doSearch(event.detail)
   }
 
   #handleSearchClick = () => {

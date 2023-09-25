@@ -369,6 +369,7 @@ export const KlevuQuery = /*@__PURE__*/ defineContainer<JSX.KlevuQuery>('klevu-q
 
 export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksearch>('klevu-quicksearch', undefined, [
   'fallbackTerm',
+  'term',
   'popupAnchor',
   'searchCategories',
   'searchCmsPages',
@@ -425,6 +426,7 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
 
 
 export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchField>('klevu-search-field', undefined, [
+  'term',
   'tPlaceholder',
   'tSearchText',
   'limit',

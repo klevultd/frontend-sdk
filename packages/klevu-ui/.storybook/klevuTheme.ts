@@ -36,7 +36,7 @@ export default create({
   */
 
   brandTitle: "Klevu Web Components",
-  brandUrl: "https://developers.klevu.com",
+  brandUrl: "https://webcomponents.klevu.com/",
   brandImage: "/klevu-color.svg",
   brandTarget: "_self",
 })

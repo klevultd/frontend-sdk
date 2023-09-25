@@ -36,6 +36,7 @@ export const SearchField: StoryObj<KlevuSearchField> = {
     search-suggestions=${ifDefined(args.searchSuggestions)}
     send-analytics=${ifDefined(args.sendAnalytics)}
     variant=${ifDefined(args.variant)}
+    term=${ifDefined(args.term)}
   >
   </klevu-search-field>`,
 }
