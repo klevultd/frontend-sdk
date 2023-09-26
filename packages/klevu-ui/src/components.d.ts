@@ -59,6 +59,9 @@ export namespace Components {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -1868,6 +1871,9 @@ declare global {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
     }
@@ -2505,6 +2511,9 @@ declare namespace LocalJSX {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -4333,6 +4342,9 @@ declare module "@stencil/core" {
              * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
              * @cssprop --klevu-accordion-background transparent Header background
              * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+             * @csspart accordion-header The label of the accordion
+             * @csspart accordion-content The content of the accordion
+             * @csspart accordion-icon The icon of the accordion
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             /**

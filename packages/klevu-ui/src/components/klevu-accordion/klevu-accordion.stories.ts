@@ -43,6 +43,17 @@ export const Accordion: StoryObj<KlevuAccordion> = {
         aliquet. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl aliquet. Sed euismod nunc vitae nisl aliquet, nec
         lacinia nisl aliquet.
       </div>
+      <style>
+        klevu-accordion::part(accordion-header) {
+          color: red;
+        }
+        klevu-accordion::part(accordion-content) {
+          color: green;
+        }
+        klevu-accordion::part(accordion-icon) {
+          color: purple;
+        }
+      </style>
     </klevu-accordion>
   `,
 }

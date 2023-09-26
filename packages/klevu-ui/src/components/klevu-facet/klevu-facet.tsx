@@ -16,6 +16,7 @@ import { getGlobalSettings } from "../../utils/utils"
 import { getTranslation } from "../../utils/getTranslation"
 import { KlevuOnSwatchClick, KlevuSwatch } from "../klevu-color-swatch/klevu-color-swatch"
 import { KlevuColorSwatchOverride } from "../klevu-facet-list/klevu-facet-list"
+import { partsExports } from "../../utils/partsExports"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 type OptionType = {
@@ -145,7 +146,9 @@ export class KlevuFacet {
         {this.option ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.#renderOptions()}</klevu-accordion>
+              <klevu-accordion startOpen={this.accordionStartOpen} exportparts={partsExports("klevu-accordion")}>
+                {this.#renderOptions()}
+              </klevu-accordion>
             ) : (
               this.#renderOptions()
             )}
@@ -153,7 +156,9 @@ export class KlevuFacet {
         ) : this.slider ? (
           <Fragment>
             {this.accordion ? (
-              <klevu-accordion startOpen={this.accordionStartOpen}>{this.#renderSlider()}</klevu-accordion>
+              <klevu-accordion startOpen={this.accordionStartOpen} exportparts={partsExports("klevu-accordion")}>
+                {this.#renderSlider()}
+              </klevu-accordion>
             ) : (
               this.#renderSlider()
             )}
