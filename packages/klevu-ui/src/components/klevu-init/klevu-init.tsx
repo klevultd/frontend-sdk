@@ -33,40 +33,11 @@ export type Translation = typeof en
  *
  * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
  *
- * @cssprop --klevu-color-primary #2b4af7 The primary color
- * @cssprop --klevu-color-primary-darker #0d2ee8  Darker variant of primary color
- *
- * @cssprop --klevu-color-positive #2e9c40 Positive color
- * @cssprop --klevu-color-negative #ad2d2d Negative color
- *
- * @cssprop --klevu-color-neutral-1 #ffffff Background color
- * @cssprop --klevu-color-neutral-2 #f6f6f6
- * @cssprop --klevu-color-neutral-3 #ededed
- * @cssprop --klevu-color-neutral-4 #e3e3e3
- * @cssprop --klevu-color-neutral-5 #d6d6d6
- * @cssprop --klevu-color-neutral-6 #919191
- * @cssprop --klevu-color-neutral-7 #757575
- * @cssprop --klevu-color-neutral-8 #191919 Text color
- *
- * @cssprop --klevu-color-accent-1 #8eedd3 Accent color
- * @cssprop --klevu-color-accent-2 #ffcb9f Accent color
- * @cssprop --klevu-color-accent-3 #ffb8d6 Accent color
- * @cssprop --klevu-color-accent-4 #c3d7ff Accent color
- *
- * @cssprop --klevu-spacing-01 1px Spacing 01
- * @cssprop --klevu-spacing-02 4px Spacing 02
- * @cssprop --klevu-spacing-03 8px Spacing 03
- * @cssprop --klevu-spacing-04 12px Spacing 04
- * @cssprop --klevu-spacing-05 16px Spacing 05
- * @cssprop --klevu-spacing-06 24px Spacing 06
- * @cssprop --klevu-spacing-07 32px Spacing 07
- * @cssprop --klevu-spacing-08 40px Spacing 08
- * @cssprop --klevu-spacing-09 48px Spacing 09
- * @cssprop --klevu-spacing-10 64px Spacing 10
  */
 @Component({
   tag: "klevu-init",
   shadow: true,
+  styleUrl: "klevu-init.css",
 })
 export class KlevuInit {
   /**

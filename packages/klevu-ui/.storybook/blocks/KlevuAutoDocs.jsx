@@ -194,7 +194,7 @@ function renderCSSProps(comp) {
 
   const subProps = []
   const depComp = Object.keys(comp.dependencyGraph)
-  const depsToCheck = []
+  const depsToCheck = ["klevu-init"]
   for (const dependency of depComp) {
     for (const subDep of comp.dependencyGraph[dependency]) {
       if (depsToCheck.indexOf(subDep) === -1 && subDep !== comp.tag) {

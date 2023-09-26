@@ -1,0 +1,30 @@
+:host {
+  /**
+  * @prop --klevu-color-primary #2b4af7: The primary color
+  * @prop --klevu-color-primary-darker #0d2ee8: Darker variant of primary color
+  * @prop --klevu-color-positive #2e9c40: Positive color
+  * @prop --klevu-color-negative #ad2d2d: Negative color
+  * @prop --klevu-color-neutral-1 #ffffff: Background color
+  * @prop --klevu-color-neutral-2 #f6f6f6
+  * @prop --klevu-color-neutral-3 #ededed
+  * @prop --klevu-color-neutral-4 #e3e3e3
+  * @prop --klevu-color-neutral-5 #d6d6d6
+  * @prop --klevu-color-neutral-6 #919191
+  * @prop --klevu-color-neutral-7 #757575
+  * @prop --klevu-color-neutral-8 #191919: Text color
+  * @prop --klevu-color-accent-1 #8eedd3: Accent color
+  * @prop --klevu-color-accent-2 #ffcb9f: Accent color
+  * @prop --klevu-color-accent-3 #ffb8d6: Accent color
+  * @prop --klevu-color-accent-4 #c3d7ff: Accent color
+  * @prop --klevu-spacing-01 1px: Spacing 01
+  * @prop --klevu-spacing-02 4px: Spacing 02
+  * @prop --klevu-spacing-03 8px: Spacing 03
+  * @prop --klevu-spacing-04 12px: Spacing 04
+  * @prop --klevu-spacing-05 16px: Spacing 05
+  * @prop --klevu-spacing-06 24px: Spacing 06
+  * @prop --klevu-spacing-07 32px: Spacing 07
+  * @prop --klevu-spacing-08 40px: Spacing 08
+  * @prop --klevu-spacing-09 48px: Spacing 09
+  * @prop --klevu-spacing-10 64px: Spacing 10
+  */
+}

@@ -1,6 +1,6 @@
 :host {
   /**
-   * @prop --klevu-loading-indicator-color --klevu-color-primary: Color of the loading indicator
+   * @prop --klevu-loading-indicator-color var(--klevu-color-primary): Color of the loading indicator
    */
   display: inline-block;
   --klevu-loading-indicator-color: var(--klevu-color-primary);
