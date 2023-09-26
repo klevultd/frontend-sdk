@@ -397,8 +397,8 @@ export class KlevuQuicksearch {
   }
 
   @Watch("term")
-  async propsChanged() {
-    if (this.term) {
+  async termChanged() {
+    if (this.term !== undefined) {
       this.#startSearch(this.term)
     }
   }

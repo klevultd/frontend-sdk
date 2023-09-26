@@ -136,7 +136,7 @@ export class KlevuSearchField {
     if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
       this.usePersonalisation = true
     }
-    if (this.term) {
+    if (this.term !== undefined) {
       await this.#doSearch(this.term)
     }
   }
