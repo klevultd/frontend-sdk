@@ -15,7 +15,6 @@ import {
   sendMerchandisingViewEvent,
 } from "@klevu/core"
 import { Component, Element, Event, EventEmitter, h, Host, Listen, Prop, State, Watch } from "@stencil/core"
-import { parts } from "../../utils/parts"
 import {
   KlevuPaginationCustomEvent,
   KlevuProductCustomEvent,
@@ -28,6 +27,7 @@ import { KlevuProductOnProductClick, KlevuProductSlots } from "../klevu-product/
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
 import { getTranslation } from "../../utils/getTranslation"
 import { getKMCSettings } from "../../utils/getKMCSettings"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Full merchandising app to power up your product grid pages
@@ -350,7 +350,7 @@ export class KlevuMerchandising {
                 <klevu-product
                   product={p}
                   fixedWidth
-                  exportparts={parts["klevu-product"]}
+                  exportparts={partsExports("klevu-product")}
                   showRatings={this.showRatings}
                   showRatingsCount={this.showRatingsCount}
                 ></klevu-product>
