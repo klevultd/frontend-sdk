@@ -6,7 +6,7 @@ import { KlevuUtilScrollbars } from "./klevu-util-scrollbars"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-util-scrollbars")
 
 const meta: Meta = {
-  title: "Utils/UtilScrollbars",
+  title: "Utils/Scrollbars",
   component: "klevu-util-scrollbars",
   argTypes,
   parameters,
@@ -15,7 +15,7 @@ const meta: Meta = {
 
 export default meta
 
-export const UtilScrollbars: StoryObj<KlevuUtilScrollbars> = {
+export const Scrollbars: StoryObj<KlevuUtilScrollbars> = {
   args: {
     overflowY: "scroll",
   },

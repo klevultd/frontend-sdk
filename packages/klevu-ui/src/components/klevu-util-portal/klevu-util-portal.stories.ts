@@ -6,7 +6,7 @@ import { KlevuUtilPortal } from "./klevu-util-portal"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-util-portal")
 
 const meta: Meta = {
-  title: "Utils/UtilPortal",
+  title: "Utils/Portal",
   component: "klevu-util-portal",
   argTypes,
   parameters,
@@ -15,7 +15,7 @@ const meta: Meta = {
 
 export default meta
 
-export const UtilPortal: StoryObj<KlevuUtilPortal> = {
+export const Portal: StoryObj<KlevuUtilPortal> = {
   render: (args) =>
     html` <klevu-util-portal>This content is portalled to end of <strong>&lt;body&gt;</strong>.</klevu-util-portal> `,
 }
