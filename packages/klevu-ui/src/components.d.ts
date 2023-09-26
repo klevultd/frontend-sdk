@@ -56,8 +56,6 @@ export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewpo
 export namespace Components {
     /**
      * Component that wrap two slots to create accordion element.
-     * @csspart accordion-header Header of the accordion
-     * @csspart accordion-content Content of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -1770,8 +1768,6 @@ export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
 declare global {
     /**
      * Component that wrap two slots to create accordion element.
-     * @csspart accordion-header Header of the accordion
-     * @csspart accordion-content Content of the accordion
      */
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
     }
@@ -2312,8 +2308,6 @@ declare global {
 declare namespace LocalJSX {
     /**
      * Component that wrap two slots to create accordion element.
-     * @csspart accordion-header Header of the accordion
-     * @csspart accordion-content Content of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -4045,8 +4039,6 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             /**
              * Component that wrap two slots to create accordion element.
-             * @csspart accordion-header Header of the accordion
-             * @csspart accordion-content Content of the accordion
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             /**
