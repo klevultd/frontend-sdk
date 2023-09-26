@@ -17,7 +17,10 @@
 }
 
 :host(.selected) {
-  background-color: var(--klevu-chip-selected-background, rgba(var(--klevu-color-primary-rgb), 0.2));
+  background-color: var(
+    --klevu-chip-selected-background,
+    color-mix(in srgb, var(--klevu-color-primary), transparent 80%)
+  );
   border-color: var(--klevu-chip-selected-border, var(--klevu-color-primary));
 }
 
