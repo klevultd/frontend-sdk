@@ -28,5 +28,12 @@ export const Init: StoryObj<KlevuInit> = {
       renderPrice: (amount, currency) => `${amount} ${currency}`,
     },
   },
-  render: (args) => html`<klevu-init api-key=${args.apiKey} url=${args.url} .settings=${args.settings}></klevu-init>`,
+  render: (args) =>
+    html`<klevu-init api-key=${args.apiKey} url=${args.url} .settings=${args.settings}
+      >This message is added to show that klevu was initialized with
+      <ul>
+        <li>URL = <b>${args.url}</b></li>
+        <li>API Key = <b>${args.apiKey}</b></li>
+      </ul>
+    </klevu-init>`,
 }
