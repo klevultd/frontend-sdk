@@ -1,4 +1,8 @@
 :host {
+  /**
+  * @prop --klevu-accordion-background transparent: Header background
+  * @prop --klevu-accordion-content-height 600px: Maxium height for content
+  */
   --klevu-accordion-background: inherit;
 
   display: block;

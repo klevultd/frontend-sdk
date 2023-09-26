@@ -1,4 +1,9 @@
 :host {
+  /**
+  * @prop --klevu-util-scrollbar-handle-bg var(--klevu-color-neutral-5): The background color of the scrollbar handle.
+  * @prop --klevu-util-scrollbar-handle-bg-hover var(--klevu-color-neutral-6): The background color of the scrollbar handle when hovered.
+  * @prop --klevu-util-scrollbar-handle-bg-active var(--klevu-color-neutral-7): The background color of the scrollbar handle when active.
+  */
   display: block;
   height: 100%;
 }

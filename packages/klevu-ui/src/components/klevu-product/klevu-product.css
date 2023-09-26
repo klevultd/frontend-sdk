@@ -1,4 +1,11 @@
 :host {
+  /**
+  * @prop --klevu-product-width: Width of the product
+  * @prop --klevu-product-small-width: Width of the product when small variant is used
+  * @prop --klevu-product-image-aspect-ratio: On what aspect the background image will be
+  * @prop --klevu-product-image-fill: How to fill image to it's space.
+  * @prop --klevu-product-border none: Border style of the product
+  */
   display: inline-block;
   --loading-animation-time: 5s;
   --width: var(--klevu-product-width, inherit);

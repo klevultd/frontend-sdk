@@ -5,13 +5,6 @@ import { Component, h, Prop } from "@stencil/core"
  *
  * @slot default - Button text
  * @csspart button-base The button element
- * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
- * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
- * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
- * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
- * @cssprop --klevu-button-text-align center Align text on button
- * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
- * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
  */
 @Component({
   tag: "klevu-button",

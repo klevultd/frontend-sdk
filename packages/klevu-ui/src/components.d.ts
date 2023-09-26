@@ -56,9 +56,6 @@ export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewpo
 export namespace Components {
     /**
      * Component that wrap two slots to create accordion element.
-     * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
-     * @cssprop --klevu-accordion-background transparent Header background
-     * @cssprop --klevu-accordion-content-height 600px Maxium height for content
      */
     interface KlevuAccordion {
         /**
@@ -73,8 +70,6 @@ export namespace Components {
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
      * used to display things on top of product.
-     * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
-     * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
     interface KlevuBadge {
         /**
@@ -110,13 +105,6 @@ export namespace Components {
     /**
      * Basic button component
      * @csspart button-base The button element
-     * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
-     * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
-     * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
-     * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
-     * @cssprop --klevu-button-text-align center Align text on button
-     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
-     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface KlevuButton {
         /**
@@ -143,10 +131,6 @@ export namespace Components {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
-     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
-     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
-     * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
-     * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
         /**
@@ -168,7 +152,6 @@ export namespace Components {
     }
     /**
      * Component that wraps chat elements into a layout.
-     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface KlevuChatLayout {
         /**
@@ -204,8 +187,6 @@ export namespace Components {
     }
     /**
      * Checkbox component
-     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
-     * @cssprop --klevu-checkbox-size 20px Size of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -224,10 +205,6 @@ export namespace Components {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-     * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
-     * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
-     * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
-     * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
      */
     interface KlevuChip {
         /**
@@ -258,11 +235,6 @@ export namespace Components {
     }
     /**
      * Color Swatch component
-     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
-     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
-     * @cssprop --klevu-color-swatch-size 25px Size of swatch
-     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
-     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface KlevuColorSwatch {
         /**
@@ -288,9 +260,6 @@ export namespace Components {
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
-     * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
-     * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
-     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface KlevuDrawer {
         /**
@@ -318,8 +287,6 @@ export namespace Components {
     }
     /**
      * Simple native dropdown component for dropdown
-     * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
-     * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
      */
     interface KlevuDropdown {
         /**
@@ -394,7 +361,6 @@ export namespace Components {
     }
     /**
      * Render all facets of filter manager
-     * @cssprop --klevu-face-list-width 200px Width of the facet listing
      */
     interface KlevuFacetList {
         /**
@@ -586,7 +552,6 @@ export namespace Components {
     }
     /**
      * Simple loading indicator
-     * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
      */
     interface KlevuLoadingIndicator {
     }
@@ -692,10 +657,6 @@ export namespace Components {
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
-     * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
-     * @cssprop --klevu-pagination-text-color - text color of item
-     * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
-     * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
      */
     interface KlevuPagination {
         /**
@@ -791,11 +752,6 @@ export namespace Components {
      * @csspart product-image The image element of component
      * @csspart product-container The container element of whole
      * @csspart product-swatch Single swatch element under the image
-     * @cssprop --klevu-product-width - Width of the product
-     * @cssprop --klevu-product-small-width - Width of the product when small variant is used
-     * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
-     * @cssprop --klevu-product-image-fill - How to fill image to it's space.
-     * @cssprop --klevu-product-border none Border style of the product
      */
     interface KlevuProduct {
         /**
@@ -893,7 +849,6 @@ export namespace Components {
     }
     /**
      * Component to place products on grid. Very simple container for products.
-     * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
      */
     interface KlevuProductGrid {
         /**
@@ -1542,7 +1497,6 @@ export namespace Components {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
-     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface KlevuSlides {
         /**
@@ -1637,28 +1591,6 @@ export namespace Components {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
-     * @cssprop --klevu-typography-color - Color of the text that overrides the default
-     * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
-     * @cssprop --klevu-h1-size 24px H1 size
-     * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
-     * @cssprop --klevu-h1-weight 700 H1 weight
-     * @cssprop --klevu-h2-size 20px H2 size
-     * @cssprop --klevu-h2-lineheight calc(24em/20) H2 line-height
-     * @cssprop --klevu-h2-weight 700 H2 weight
-     * @cssprop --klevu-h3-size 16px H3 size
-     * @cssprop --klevu-h3-lineheight calc(20em/16) H3 line-height
-     * @cssprop --klevu-h3-weight 700 H3 weight
-     * @cssprop --klevu-h4-size 14px H4 size
-     * @cssprop --klevu-h4-lineheight calc(18em/14) H4 line-height
-     * @cssprop --klevu-h4-weight 700 H4 weight
-     * @cssprop --klevu-body-l-size 20px Body large size
-     * @cssprop --klevu-body-l-line-height calc(28em/20) Body large line-height
-     * @cssprop --klevu-body-m-size 16px Body medium size
-     * @cssprop --klevu-body-m-line-height calc(24em/16) Body medium line-height
-     * @cssprop --klevu-body-s-size 14px  Body small size
-     * @cssprop --klevu-body-s-line-height calc(20em/14) Body small line-height
-     * @cssprop --klevu-body-xs-size 12px Body extra small size
-     * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
      */
     interface KlevuTypography {
         /**
@@ -1698,9 +1630,6 @@ export namespace Components {
     }
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
-     * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
-     * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
-     * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface KlevuUtilScrollbars {
         "getContainer": () => Promise<HTMLDivElement | undefined>;
@@ -1865,9 +1794,6 @@ export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
 declare global {
     /**
      * Component that wrap two slots to create accordion element.
-     * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
-     * @cssprop --klevu-accordion-background transparent Header background
-     * @cssprop --klevu-accordion-content-height 600px Maxium height for content
      */
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
     }
@@ -1878,8 +1804,6 @@ declare global {
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
      * used to display things on top of product.
-     * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
-     * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
     interface HTMLKlevuBadgeElement extends Components.KlevuBadge, HTMLStencilElement {
     }
@@ -1899,13 +1823,6 @@ declare global {
     /**
      * Basic button component
      * @csspart button-base The button element
-     * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
-     * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
-     * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
-     * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
-     * @cssprop --klevu-button-text-align center Align text on button
-     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
-     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface HTMLKlevuButtonElement extends Components.KlevuButton, HTMLStencilElement {
     }
@@ -1915,10 +1832,6 @@ declare global {
     };
     /**
      * Container for chat items. Very simple component, just a wrapper.
-     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
-     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
-     * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
-     * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1928,7 +1841,6 @@ declare global {
     };
     /**
      * Component that wraps chat elements into a layout.
-     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface HTMLKlevuChatLayoutElement extends Components.KlevuChatLayout, HTMLStencilElement {
     }
@@ -1944,8 +1856,6 @@ declare global {
     };
     /**
      * Checkbox component
-     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
-     * @cssprop --klevu-checkbox-size 20px Size of the checkbox
      */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
@@ -1956,10 +1866,6 @@ declare global {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-     * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
-     * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
-     * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
-     * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
      */
     interface HTMLKlevuChipElement extends Components.KlevuChip, HTMLStencilElement {
     }
@@ -1978,11 +1884,6 @@ declare global {
     };
     /**
      * Color Swatch component
-     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
-     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
-     * @cssprop --klevu-color-swatch-size 25px Size of swatch
-     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
-     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface HTMLKlevuColorSwatchElement extends Components.KlevuColorSwatch, HTMLStencilElement {
     }
@@ -1992,9 +1893,6 @@ declare global {
     };
     /**
      * Component to create offscreen drawer on left or right side of the screen
-     * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
-     * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
-     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -2004,8 +1902,6 @@ declare global {
     };
     /**
      * Simple native dropdown component for dropdown
-     * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
-     * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
      */
     interface HTMLKlevuDropdownElement extends Components.KlevuDropdown, HTMLStencilElement {
     }
@@ -2026,7 +1922,6 @@ declare global {
     };
     /**
      * Render all facets of filter manager
-     * @cssprop --klevu-face-list-width 200px Width of the facet listing
      */
     interface HTMLKlevuFacetListElement extends Components.KlevuFacetList, HTMLStencilElement {
     }
@@ -2129,7 +2024,6 @@ declare global {
     };
     /**
      * Simple loading indicator
-     * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
      */
     interface HTMLKlevuLoadingIndicatorElement extends Components.KlevuLoadingIndicator, HTMLStencilElement {
     }
@@ -2166,10 +2060,6 @@ declare global {
     };
     /**
      * Pagination component. Either provide numbers or query result to display the component.
-     * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
-     * @cssprop --klevu-pagination-text-color - text color of item
-     * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
-     * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
      */
     interface HTMLKlevuPaginationElement extends Components.KlevuPagination, HTMLStencilElement {
     }
@@ -2205,11 +2095,6 @@ declare global {
      * @csspart product-image The image element of component
      * @csspart product-container The container element of whole
      * @csspart product-swatch Single swatch element under the image
-     * @cssprop --klevu-product-width - Width of the product
-     * @cssprop --klevu-product-small-width - Width of the product when small variant is used
-     * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
-     * @cssprop --klevu-product-image-fill - How to fill image to it's space.
-     * @cssprop --klevu-product-border none Border style of the product
      */
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
@@ -2219,7 +2104,6 @@ declare global {
     };
     /**
      * Component to place products on grid. Very simple container for products.
-     * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
      */
     interface HTMLKlevuProductGridElement extends Components.KlevuProductGrid, HTMLStencilElement {
     }
@@ -2322,7 +2206,6 @@ declare global {
     };
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
-     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
@@ -2369,28 +2252,6 @@ declare global {
     };
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
-     * @cssprop --klevu-typography-color - Color of the text that overrides the default
-     * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
-     * @cssprop --klevu-h1-size 24px H1 size
-     * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
-     * @cssprop --klevu-h1-weight 700 H1 weight
-     * @cssprop --klevu-h2-size 20px H2 size
-     * @cssprop --klevu-h2-lineheight calc(24em/20) H2 line-height
-     * @cssprop --klevu-h2-weight 700 H2 weight
-     * @cssprop --klevu-h3-size 16px H3 size
-     * @cssprop --klevu-h3-lineheight calc(20em/16) H3 line-height
-     * @cssprop --klevu-h3-weight 700 H3 weight
-     * @cssprop --klevu-h4-size 14px H4 size
-     * @cssprop --klevu-h4-lineheight calc(18em/14) H4 line-height
-     * @cssprop --klevu-h4-weight 700 H4 weight
-     * @cssprop --klevu-body-l-size 20px Body large size
-     * @cssprop --klevu-body-l-line-height calc(28em/20) Body large line-height
-     * @cssprop --klevu-body-m-size 16px Body medium size
-     * @cssprop --klevu-body-m-line-height calc(24em/16) Body medium line-height
-     * @cssprop --klevu-body-s-size 14px  Body small size
-     * @cssprop --klevu-body-s-line-height calc(20em/14) Body small line-height
-     * @cssprop --klevu-body-xs-size 12px Body extra small size
-     * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
      */
     interface HTMLKlevuTypographyElement extends Components.KlevuTypography, HTMLStencilElement {
     }
@@ -2430,9 +2291,6 @@ declare global {
     };
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
-     * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
-     * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
-     * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface HTMLKlevuUtilScrollbarsElement extends Components.KlevuUtilScrollbars, HTMLStencilElement {
     }
@@ -2502,9 +2360,6 @@ declare global {
 declare namespace LocalJSX {
     /**
      * Component that wrap two slots to create accordion element.
-     * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
-     * @cssprop --klevu-accordion-background transparent Header background
-     * @cssprop --klevu-accordion-content-height 600px Maxium height for content
      */
     interface KlevuAccordion {
         /**
@@ -2519,8 +2374,6 @@ declare namespace LocalJSX {
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
      * used to display things on top of product.
-     * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
-     * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
      */
     interface KlevuBadge {
         /**
@@ -2561,13 +2414,6 @@ declare namespace LocalJSX {
     /**
      * Basic button component
      * @csspart button-base The button element
-     * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
-     * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
-     * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
-     * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
-     * @cssprop --klevu-button-text-align center Align text on button
-     * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
-     * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
      */
     interface KlevuButton {
         /**
@@ -2594,10 +2440,6 @@ declare namespace LocalJSX {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
-     * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
-     * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
-     * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
-     * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
      */
     interface KlevuChatBubble {
         /**
@@ -2620,7 +2462,6 @@ declare namespace LocalJSX {
     }
     /**
      * Component that wraps chat elements into a layout.
-     * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
      */
     interface KlevuChatLayout {
         /**
@@ -2668,8 +2509,6 @@ declare namespace LocalJSX {
     }
     /**
      * Checkbox component
-     * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
-     * @cssprop --klevu-checkbox-size 20px Size of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -2689,10 +2528,6 @@ declare namespace LocalJSX {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-     * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
-     * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
-     * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
-     * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
      */
     interface KlevuChip {
         /**
@@ -2728,11 +2563,6 @@ declare namespace LocalJSX {
     }
     /**
      * Color Swatch component
-     * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
-     * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
-     * @cssprop --klevu-color-swatch-size 25px Size of swatch
-     * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
-     * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
      */
     interface KlevuColorSwatch {
         /**
@@ -2762,9 +2592,6 @@ declare namespace LocalJSX {
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
-     * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
-     * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
-     * @cssprop --klevu-drawer-width 400px width of drawer
      */
     interface KlevuDrawer {
         /**
@@ -2790,8 +2617,6 @@ declare namespace LocalJSX {
     }
     /**
      * Simple native dropdown component for dropdown
-     * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
-     * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
      */
     interface KlevuDropdown {
         /**
@@ -2874,7 +2699,6 @@ declare namespace LocalJSX {
     }
     /**
      * Render all facets of filter manager
-     * @cssprop --klevu-face-list-width 200px Width of the facet listing
      */
     interface KlevuFacetList {
         /**
@@ -3062,7 +2886,6 @@ declare namespace LocalJSX {
     }
     /**
      * Simple loading indicator
-     * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
      */
     interface KlevuLoadingIndicator {
     }
@@ -3169,10 +2992,6 @@ declare namespace LocalJSX {
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
-     * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
-     * @cssprop --klevu-pagination-text-color - text color of item
-     * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
-     * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
      */
     interface KlevuPagination {
         /**
@@ -3273,11 +3092,6 @@ declare namespace LocalJSX {
      * @csspart product-image The image element of component
      * @csspart product-container The container element of whole
      * @csspart product-swatch Single swatch element under the image
-     * @cssprop --klevu-product-width - Width of the product
-     * @cssprop --klevu-product-small-width - Width of the product when small variant is used
-     * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
-     * @cssprop --klevu-product-image-fill - How to fill image to it's space.
-     * @cssprop --klevu-product-border none Border style of the product
      */
     interface KlevuProduct {
         /**
@@ -3379,7 +3193,6 @@ declare namespace LocalJSX {
     }
     /**
      * Component to place products on grid. Very simple container for products.
-     * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
      */
     interface KlevuProductGrid {
         /**
@@ -4049,7 +3862,6 @@ declare namespace LocalJSX {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
-     * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
      */
     interface KlevuSlides {
         /**
@@ -4164,28 +3976,6 @@ declare namespace LocalJSX {
     }
     /**
      * Klevu typography component. This component is used in most places to set correct font in component pieces.
-     * @cssprop --klevu-typography-color - Color of the text that overrides the default
-     * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
-     * @cssprop --klevu-h1-size 24px H1 size
-     * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
-     * @cssprop --klevu-h1-weight 700 H1 weight
-     * @cssprop --klevu-h2-size 20px H2 size
-     * @cssprop --klevu-h2-lineheight calc(24em/20) H2 line-height
-     * @cssprop --klevu-h2-weight 700 H2 weight
-     * @cssprop --klevu-h3-size 16px H3 size
-     * @cssprop --klevu-h3-lineheight calc(20em/16) H3 line-height
-     * @cssprop --klevu-h3-weight 700 H3 weight
-     * @cssprop --klevu-h4-size 14px H4 size
-     * @cssprop --klevu-h4-lineheight calc(18em/14) H4 line-height
-     * @cssprop --klevu-h4-weight 700 H4 weight
-     * @cssprop --klevu-body-l-size 20px Body large size
-     * @cssprop --klevu-body-l-line-height calc(28em/20) Body large line-height
-     * @cssprop --klevu-body-m-size 16px Body medium size
-     * @cssprop --klevu-body-m-line-height calc(24em/16) Body medium line-height
-     * @cssprop --klevu-body-s-size 14px  Body small size
-     * @cssprop --klevu-body-s-line-height calc(20em/14) Body small line-height
-     * @cssprop --klevu-body-xs-size 12px Body extra small size
-     * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
      */
     interface KlevuTypography {
         /**
@@ -4246,9 +4036,6 @@ declare namespace LocalJSX {
     }
     /**
      * Utility that replaces the default browser scrollbar with a custom one.
-     * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
-     * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
-     * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
      */
     interface KlevuUtilScrollbars {
         /**
@@ -4330,16 +4117,11 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             /**
              * Component that wrap two slots to create accordion element.
-             * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
-             * @cssprop --klevu-accordion-background transparent Header background
-             * @cssprop --klevu-accordion-content-height 600px Maxium height for content
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             /**
              * Basic badge component. Can be used to display small information on top of other elements. Typically
              * used to display things on top of product.
-             * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
-             * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
@@ -4349,42 +4131,24 @@ declare module "@stencil/core" {
             /**
              * Basic button component
              * @csspart button-base The button element
-             * @cssprop --klevu-button-background-color --klevu-color-primary Background color of button
-             * @cssprop --klevu-button-border --klevu-color-primary-border Border color of button
-             * @cssprop --klevu-button-text-color --klevu-color-primary-text Button text color
-             * @cssprop --klebu-button-padding --klevu-spacing-04 Padding on button
-             * @cssprop --klevu-button-text-align center Align text on button
-             * @cssprop --klevu-button-padding calculated Override buttom padding with custom value
-             * @cssprop --klevu-button-font-size --klevu-body-s-size Size of button text
              */
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
              * Container for chat items. Very simple component, just a wrapper.
-             * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
-             * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
-             * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
-             * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**
              * Component that wraps chat elements into a layout.
-             * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
              */
             "klevu-chat-layout": LocalJSX.KlevuChatLayout & JSXBase.HTMLAttributes<HTMLKlevuChatLayoutElement>;
             "klevu-chat-messages": LocalJSX.KlevuChatMessages & JSXBase.HTMLAttributes<HTMLKlevuChatMessagesElement>;
             /**
              * Checkbox component
-             * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
-             * @cssprop --klevu-checkbox-size 20px Size of the checkbox
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             /**
              * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
              * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
-             * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
-             * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
-             * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
-             * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
              */
             "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**
@@ -4393,24 +4157,14 @@ declare module "@stencil/core" {
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
             /**
              * Color Swatch component
-             * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
-             * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
-             * @cssprop --klevu-color-swatch-size 25px Size of swatch
-             * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
-             * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
              */
             "klevu-color-swatch": LocalJSX.KlevuColorSwatch & JSXBase.HTMLAttributes<HTMLKlevuColorSwatchElement>;
             /**
              * Component to create offscreen drawer on left or right side of the screen
-             * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
-             * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
-             * @cssprop --klevu-drawer-width 400px width of drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**
              * Simple native dropdown component for dropdown
-             * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
-             * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
              */
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             /**
@@ -4421,7 +4175,6 @@ declare module "@stencil/core" {
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             /**
              * Render all facets of filter manager
-             * @cssprop --klevu-face-list-width 200px Width of the facet listing
              */
             "klevu-facet-list": LocalJSX.KlevuFacetList & JSXBase.HTMLAttributes<HTMLKlevuFacetListElement>;
             /**
@@ -4489,7 +4242,6 @@ declare module "@stencil/core" {
             "klevu-list": LocalJSX.KlevuList & JSXBase.HTMLAttributes<HTMLKlevuListElement>;
             /**
              * Simple loading indicator
-             * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
              */
             "klevu-loading-indicator": LocalJSX.KlevuLoadingIndicator & JSXBase.HTMLAttributes<HTMLKlevuLoadingIndicatorElement>;
             /**
@@ -4506,10 +4258,6 @@ declare module "@stencil/core" {
             "klevu-moi": LocalJSX.KlevuMoi & JSXBase.HTMLAttributes<HTMLKlevuMoiElement>;
             /**
              * Pagination component. Either provide numbers or query result to display the component.
-             * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
-             * @cssprop --klevu-pagination-text-color - text color of item
-             * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
-             * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
              */
             "klevu-pagination": LocalJSX.KlevuPagination & JSXBase.HTMLAttributes<HTMLKlevuPaginationElement>;
             /**
@@ -4530,16 +4278,10 @@ declare module "@stencil/core" {
              * @csspart product-image The image element of component
              * @csspart product-container The container element of whole
              * @csspart product-swatch Single swatch element under the image
-             * @cssprop --klevu-product-width - Width of the product
-             * @cssprop --klevu-product-small-width - Width of the product when small variant is used
-             * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
-             * @cssprop --klevu-product-image-fill - How to fill image to it's space.
-             * @cssprop --klevu-product-border none Border style of the product
              */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**
              * Component to place products on grid. Very simple container for products.
-             * @cssprop --klevu-product-grid-spacing --klevu-spacing-05 spacing between grid items;
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
             /**
@@ -4592,7 +4334,6 @@ declare module "@stencil/core" {
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             /**
              * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
-             * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
              */
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             /**
@@ -4614,28 +4355,6 @@ declare module "@stencil/core" {
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             /**
              * Klevu typography component. This component is used in most places to set correct font in component pieces.
-             * @cssprop --klevu-typography-color - Color of the text that overrides the default
-             * @cssprop --klevu-typography-font-weight - Font weight that overrides the default
-             * @cssprop --klevu-h1-size 24px H1 size
-             * @cssprop --klevu-h1-lineheight calc(28em/24) H1 line-height
-             * @cssprop --klevu-h1-weight 700 H1 weight
-             * @cssprop --klevu-h2-size 20px H2 size
-             * @cssprop --klevu-h2-lineheight calc(24em/20) H2 line-height
-             * @cssprop --klevu-h2-weight 700 H2 weight
-             * @cssprop --klevu-h3-size 16px H3 size
-             * @cssprop --klevu-h3-lineheight calc(20em/16) H3 line-height
-             * @cssprop --klevu-h3-weight 700 H3 weight
-             * @cssprop --klevu-h4-size 14px H4 size
-             * @cssprop --klevu-h4-lineheight calc(18em/14) H4 line-height
-             * @cssprop --klevu-h4-weight 700 H4 weight
-             * @cssprop --klevu-body-l-size 20px Body large size
-             * @cssprop --klevu-body-l-line-height calc(28em/20) Body large line-height
-             * @cssprop --klevu-body-m-size 16px Body medium size
-             * @cssprop --klevu-body-m-line-height calc(24em/16) Body medium line-height
-             * @cssprop --klevu-body-s-size 14px  Body small size
-             * @cssprop --klevu-body-s-line-height calc(20em/14) Body small line-height
-             * @cssprop --klevu-body-xs-size 12px Body extra small size
-             * @cssprop --klevu-body-xs-line-height calc(16em/12) Body extra small line-height
              */
             "klevu-typography": LocalJSX.KlevuTypography & JSXBase.HTMLAttributes<HTMLKlevuTypographyElement>;
             /**
@@ -4655,9 +4374,6 @@ declare module "@stencil/core" {
             "klevu-util-portal": LocalJSX.KlevuUtilPortal & JSXBase.HTMLAttributes<HTMLKlevuUtilPortalElement>;
             /**
              * Utility that replaces the default browser scrollbar with a custom one.
-             * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
-             * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
-             * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
              */
             "klevu-util-scrollbars": LocalJSX.KlevuUtilScrollbars & JSXBase.HTMLAttributes<HTMLKlevuUtilScrollbarsElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;

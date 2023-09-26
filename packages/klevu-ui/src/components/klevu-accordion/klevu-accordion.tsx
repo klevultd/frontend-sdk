@@ -6,9 +6,6 @@ import { Component, h, Host, Prop } from "@stencil/core"
  * @slot header - Element that has title that can be clicked
  * @slot content - Element containing content of the accordion
  * @slot icon - Icon element
- * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
- * @cssprop --klevu-accordion-background transparent Header background
- * @cssprop --klevu-accordion-content-height 600px Maxium height for content
  */
 @Component({
   tag: "klevu-accordion",

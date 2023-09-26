@@ -12,13 +12,20 @@ export const KlevuAutoDocs = ({ of }) => {
   const resolvedOf = useOf(of || "story", ["story", "meta"])
   switch (resolvedOf.type) {
     case "story": {
-      console.log("story", resolvedOf.story.id)
       break
     }
     case "meta": {
-      console.log(resolvedOf)
       const comp = jsdocs.components.find((c) => c.tag === resolvedOf.preparedMeta.component)
-      return [renderEvents(comp), renderSlots(comp), renderParts(comp), renderCSSProps(comp), renderMethods(comp)]
+
+      return (
+        <React.Fragment>
+          {renderEvents(comp)}
+          {renderSlots(comp)}
+          {renderParts(comp)}
+          {renderCSSProps(comp)}
+          {renderMethods(comp)}
+        </React.Fragment>
+      )
     }
   }
   return null
@@ -37,25 +44,29 @@ function renderEvents(comp) {
         <a href="../?path=/docs/guides-events--docs">here</a> for guidance.
       </p>
       <table className="klevu-autodocs">
-        <tr>
-          <th>Event name</th>
-          <th>Description</th>
-          <th>
-            <em>e.detail</em> typing
-          </th>
-        </tr>
-        {comp?.events.map((e) => (
+        <thead>
           <tr>
-            <td>{e.event}</td>
-            <td>{e.docs}</td>
-            <td
-              className="klevuHighlight"
-              dangerouslySetInnerHTML={{
-                __html: hljs.highlight(e.complexType.resolved, { language: "typescript" }).value,
-              }}
-            ></td>
+            <th>Event name</th>
+            <th>Description</th>
+            <th>
+              <em>e.detail</em> typing
+            </th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {comp?.events.map((e, index) => (
+            <tr key={index}>
+              <td>{e.event}</td>
+              <td>{e.docs}</td>
+              <td
+                className="klevuHighlight"
+                dangerouslySetInnerHTML={{
+                  __html: hljs.highlight(e.complexType.resolved, { language: "typescript" }).value,
+                }}
+              ></td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </React.Fragment>
   )
@@ -73,16 +84,20 @@ function renderSlots(comp) {
         Read how to use slots in <a href="../?path=/docs/guides-styling-components--docs#slots">here</a>.
       </p>
       <table className="klevu-autodocs">
-        <tr>
-          <th>Slot name</th>
-          <th>Description</th>
-        </tr>
-        {comp?.slots.map((e) => (
+        <thead>
           <tr>
-            <td>{e.name}</td>
-            <td>{e.docs}</td>
+            <th>Slot name</th>
+            <th>Description</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {comp?.slots.map((e, index) => (
+            <tr key={index}>
+              <td>{e.name}</td>
+              <td>{e.docs}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </React.Fragment>
   )
@@ -131,69 +146,85 @@ function renderParts(comp) {
         Read how to use CSS parts in <a href="../?path=/docs/guides-styling-components--docs#part">here</a>.
       </p>
       <table className="klevu-autodocs">
-        <tr>
-          <th>Part name</th>
-          <th>Description</th>
-        </tr>
-        {cssParts.map((e) => (
+        <thead>
           <tr>
-            <td>{e.name}</td>
-            <td>{e.docs}</td>
+            <th>Part name</th>
+            <th>Description</th>
           </tr>
-        ))}
-        {subParts.length > 0 ? (
-          <React.Fragment>
-            <tr>
-              <td colspan="2" style={{ textAlign: "center" }}>
-                <strong>Dependency parts</strong>
-              </td>
+        </thead>
+        <tbody>
+          {cssParts.map((e, index) => (
+            <tr key={index}>
+              <td>{e.name}</td>
+              <td>{e.docs}</td>
             </tr>
-            {subParts.map((e) => (
+          ))}
+          {subParts.length > 0 ? (
+            <React.Fragment>
               <tr>
-                <td>{e.name}</td>
-                <td>{e.docs}</td>
+                <td colSpan="2" style={{ textAlign: "center" }}>
+                  <strong>Dependency parts</strong>
+                </td>
               </tr>
-            ))}
-          </React.Fragment>
-        ) : null}
+              {subParts.map((e, index) => (
+                <tr key={index}>
+                  <td>{e.name}</td>
+                  <td>{e.docs}</td>
+                </tr>
+              ))}
+            </React.Fragment>
+          ) : null}
+        </tbody>
       </table>
     </React.Fragment>
   )
 }
 
 function renderCSSProps(comp) {
-  const cssProps = comp.docsTags
-    .filter((t) => t.name === "cssprop")
-    .map((t) => {
-      const [name, defaultVal, ...parts] = t.text.split(" ")
+  const cssProps = comp.styles
+    .filter((s) => s.annotation === "prop")
+    .map((s) => {
+      const [name, ...defaultVal] = s.name.split(" ")
       return {
         name,
         defaultVal,
-        docs: parts.join(" "),
+        docs: s.docs,
       }
     })
 
   const subProps = []
-  comp.dependencies.forEach((dep) => {
-    jsdocs.components
-      .find((c) => c.tag === dep)
-      .docsTags.filter((t) => t.name === "cssprop")
-      .map((t) => {
-        const [name, defaultVal, ...parts] = t.text.split(" ")
+  const depComp = Object.keys(comp.dependencyGraph)
+  const depsToCheck = []
+  for (const dependency of depComp) {
+    for (const subDep of comp.dependencyGraph[dependency]) {
+      if (depsToCheck.indexOf(subDep) === -1 && subDep !== comp.tag) {
+        depsToCheck.push(subDep)
+      }
+    }
+  }
+  for (const subDep of depsToCheck) {
+    const dep = jsdocs.components.find((c) => c.tag === subDep)
+
+    if (!dep) {
+      continue
+    }
+
+    dep.styles
+      .filter((s) => s.annotation === "prop")
+      .map((s) => {
+        const [name, ...defaultVal] = s.name.split(" ")
         return {
           name,
           defaultVal,
-          docs: parts.join(" "),
+          docs: s.docs,
         }
       })
-      .forEach((e) => {
-        if (subProps.some((p) => p.name === e.name)) {
-          return
+      .forEach((style) => {
+        if (!subProps.some((subStyle) => subStyle.name === style.name)) {
+          subProps.push(style)
         }
-
-        subProps.push(e)
       })
-  })
+  }
 
   if (cssProps.length === 0 && subProps.length === 0) {
     return null
@@ -203,42 +234,44 @@ function renderCSSProps(comp) {
     <React.Fragment>
       <h2>CSS Properties</h2>
       <table className="klevu-autodocs">
-        <tr>
-          <th>CSS variable</th>
-          <th>Description</th>
-          <th>Default value</th>
-        </tr>
-        {cssProps.map((e) => (
+        <thead>
           <tr>
-            <td>{e.name}</td>
-            <td>{e.docs}</td>
-            <td>{e.defaultVal}</td>
+            <th>CSS variable</th>
+            <th>Description</th>
+            <th>Default value</th>
           </tr>
-        ))}
-        {subProps.length > 0 ? (
-          <React.Fragment>
-            <tr>
-              <td colspan="3" style={{ textAlign: "center" }}>
-                <strong>Dependency CSS variables</strong>
-              </td>
+        </thead>
+        <tbody>
+          {cssProps.map((e, index) => (
+            <tr key={index}>
+              <td>{e.name}</td>
+              <td>{e.docs}</td>
+              <td>{e.defaultVal}</td>
             </tr>
-            {subProps.map((e) => (
+          ))}
+          {subProps.length > 0 ? (
+            <React.Fragment>
               <tr>
-                <td>{e.name}</td>
-                <td>{e.docs}</td>
-                <td>{e.defaultVal}</td>
+                <td colSpan="3" style={{ textAlign: "center" }}>
+                  <strong>Dependency CSS variables</strong>
+                </td>
               </tr>
-            ))}
-          </React.Fragment>
-        ) : null}
+              {subProps.map((e, index) => (
+                <tr key={index}>
+                  <td>{e.name}</td>
+                  <td>{e.docs}</td>
+                  <td>{e.defaultVal}</td>
+                </tr>
+              ))}
+            </React.Fragment>
+          ) : null}
+        </tbody>
       </table>
     </React.Fragment>
   )
 }
 
 function renderMethods(comp) {
-  console.log(comp)
-
   if (comp.methods.length === 0) {
     return null
   }
@@ -247,23 +280,27 @@ function renderMethods(comp) {
     <React.Fragment>
       <h2>Methods</h2>
       <table className="klevu-autodocs">
-        <tr>
-          <th>Name</th>
-          <th>Docs</th>
-          <th>Signature</th>
-        </tr>
-        {comp.methods.map((e) => (
+        <thead>
           <tr>
-            <td>{e.name}</td>
-            <td>{e.docs}</td>
-            <td
-              className="klevuHighlight"
-              dangerouslySetInnerHTML={{
-                __html: hljs.highlight(e.signature, { language: "typescript" }).value,
-              }}
-            ></td>
+            <th>Name</th>
+            <th>Docs</th>
+            <th>Signature</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {comp.methods.map((e, index) => (
+            <tr key={index}>
+              <td>{e.name}</td>
+              <td>{e.docs}</td>
+              <td
+                className="klevuHighlight"
+                dangerouslySetInnerHTML={{
+                  __html: hljs.highlight(e.signature, { language: "typescript" }).value,
+                }}
+              ></td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </React.Fragment>
   )

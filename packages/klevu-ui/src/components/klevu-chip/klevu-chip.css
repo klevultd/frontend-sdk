@@ -1,4 +1,10 @@
 :host {
+  /**
+  * @prop --klevu-chip-radius var(--klevu-border-radius-xxl: Border radius of the chip
+  * @prop --klevu-chip-border var(--klevu-color-neutral-5: Border color of the chip
+  * @prop --klevu-chip-selected-background klevu-color-primary-with-opacity: Selected background color of the chip
+  * @prop --klevu-chip-selected-border var(--klevu-color-primary): Selected border color of the chip
+  */
   display: inline-flex;
   padding: var(--klevu-spacing-02) var(--klevu-spacing-05);
   border-radius: var(--klevu-chip-radius, var(--klevu-border-radius-xxl));

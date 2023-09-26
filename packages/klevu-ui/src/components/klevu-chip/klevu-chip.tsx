@@ -5,10 +5,6 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  *
  * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
  *
- * @cssprop --klevu-chip-radius --klevu-border-radius-xxl Border radius of the chip
- * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
- * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
- * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
  */
 @Component({
   tag: "klevu-chip",

@@ -1,4 +1,9 @@
 :host {
+  /**
+  * @prop --klevu-drawer-max-width max-content: maxium width of drawer content
+  * @prop --klevu-drawer-background-color rgba(0,0,0,0.2): color of backround overlay
+  * @prop --klevu-drawer-width 400px: width of drawer
+  */
   display: block;
   --klevu-drawer-ypadding: var(--klevu-spacing-04);
   --klevu-drawer-width: 400px;

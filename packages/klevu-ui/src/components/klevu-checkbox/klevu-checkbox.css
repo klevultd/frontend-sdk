@@ -1,4 +1,8 @@
 :host {
+  /**
+  * @prop --klevu-checkbox-color var(--klevu-color-primary): Color of the checkbox background and border
+  * @prop --klevu-checkbox-size 20px: Size of the checkbox
+  */
   --klevu-checkbox-color: var(--klevu-color-primary);
   --klevu-checkbox-size: 20px;
   display: flex;

@@ -1,4 +1,10 @@
 :host {
+  /**
+  * @prop --klevu-pagination-background-color var(--klevu-color-dim-background): background color of item
+  * @prop --klevu-pagination-text-color: text color of item
+  * @prop --klevu-pagination-selected-background-color var(--klevu-color-primary): background color of selected item
+  * @prop --klevu-pagination-selected-text-color var(--klevu-color-primary-text): text color of selected item
+  */
   --klevu-pagination-selected-color: var(--klevu-color-primary);
 
   display: flex;

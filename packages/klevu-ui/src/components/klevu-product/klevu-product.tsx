@@ -26,12 +26,6 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @csspart product-image The image element of component
  * @csspart product-container The container element of whole
  * @csspart product-swatch Single swatch element under the image
- *
- * @cssprop --klevu-product-width - Width of the product
- * @cssprop --klevu-product-small-width - Width of the product when small variant is used
- * @cssprop --klevu-product-image-aspect-ratio - On what aspect the background image will be
- * @cssprop --klevu-product-image-fill - How to fill image to it's space.
- * @cssprop --klevu-product-border none Border style of the product
  */
 @Component({
   tag: "klevu-product",

@@ -1,4 +1,7 @@
 :host {
+  /**
+  * @prop --klevu-chat-layout-max-height 100vh: The maxium height for the chat layout.
+  */
   height: 100%;
   display: flex !important;
   flex-direction: column;
