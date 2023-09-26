@@ -50,6 +50,7 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     use-personalisation=${ifDefined(args.usePersonalisation)}
     use-klaviyo=${ifDefined(args.useKlaviyo)}
     show-variants-count=${ifDefined(args.showVariantsCount)}
+    term=${ifDefined(args.term)}
   ></klevu-quicksearch>`,
 }
 

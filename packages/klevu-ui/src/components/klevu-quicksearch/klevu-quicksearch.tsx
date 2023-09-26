@@ -12,7 +12,7 @@ import {
   KlevuBanner,
   KlevuUploadImageForSearch,
 } from "@klevu/core"
-import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter, Watch } from "@stencil/core"
 import {
   KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
@@ -64,6 +64,10 @@ export class KlevuQuicksearch {
    * What term should be used if there isn't enough results
    */
   @Prop() fallbackTerm?: string
+  /**
+   * Load with default term
+   */
+  @Prop() term?: string
   /**
    * Anchor popup to witch side
    */
@@ -327,7 +331,6 @@ export class KlevuQuicksearch {
     }
     this.cmsPages = event.detail.cms?.records
     this.categories = event.detail.category?.records
-    this.popup?.openModal()
     this.queryResult = await this.#searchField?.getQueryResult("search")
     const allBanners = (await event.detail.search?.getBanners({ searchType: "quicksearch" })) ?? []
     this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
@@ -388,6 +391,15 @@ export class KlevuQuicksearch {
       }
     } else {
       this.klevuSearch.emit(term)
+    }
+    this.popup?.closeModal()
+    this.#searchField?.blur()
+  }
+
+  @Watch("term")
+  async termChanged() {
+    if (this.term !== undefined) {
+      this.#startSearch(this.term)
     }
   }
 
@@ -503,6 +515,7 @@ export class KlevuQuicksearch {
           exportparts={partsExports("klevu-popup")}
         >
           <klevu-search-field
+            term={this.term}
             ref={(el) => (this.#searchField = el)}
             limit={this.resultVariant === "simple" ? this.simpleResultCount : this.fullResultCount}
             sort={this.searchSort}

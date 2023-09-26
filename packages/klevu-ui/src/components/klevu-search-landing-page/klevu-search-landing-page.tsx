@@ -275,7 +275,9 @@ export class KlevuSearchLandingPage {
   }
 
   #handleNoResults() {
-    this.noResultsMessage = this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message || ""
+    this.noResultsMessage =
+      this.#noResultsOptions?.messages.find((m) => m.showForTerms === null)?.message ||
+      getTranslation("searchLandingPage.tNoResultsFound")
     this.noResultsBannerDetails =
       this.#noResultsOptions?.banners.filter((m) => m.showOnLandingPage && m.showForTerms === null) || []
     if (this.term) {
@@ -376,8 +378,8 @@ export class KlevuSearchLandingPage {
     this.#facetListElement.updateApplyFilterState()
   }
 
-  #handlePopularKeywordClick(keyword: string) {
-    this.term = keyword
+  #updateTerm(term: string) {
+    this.term = term
   }
 
   async #handleImageSelection(event: CustomEvent<KlevuImageSelectedEvent>) {
@@ -415,7 +417,9 @@ export class KlevuSearchLandingPage {
             )}
           </slot>
           <div slot="header" class="header">
-            {this.showSearch && <klevu-quicksearch />}
+            {this.showSearch && (
+              <klevu-quicksearch term={this.term} onKlevuSearch={(event) => this.#updateTerm(event.detail)} />
+            )}
             <div class="info">
               {this.imageUrlForSearch ? (
                 this.#resultObject && (
@@ -477,7 +481,7 @@ export class KlevuSearchLandingPage {
               </klevu-product-grid>
             ) : (
               <slot name="noResults">
-                {this.noResultsMessage ? (
+                {!this.loading && this.noResultsMessage ? (
                   <p class="noResultsMessage">
                     <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
                   </p>
@@ -501,10 +505,10 @@ export class KlevuSearchLandingPage {
                     )}
                   </slot>
                 </Fragment>
-                {this.#renderNoResultBanners()}
+                {!this.loading && this.#renderNoResultBanners()}
                 {this.#noResultsOptions?.showPopularKeywords && (
                   <klevu-popular-searches
-                    onKlevuPopularSearchClicked={(event) => this.#handlePopularKeywordClick(event.detail)}
+                    onKlevuPopularSearchClicked={(event) => this.#updateTerm(event.detail)}
                   ></klevu-popular-searches>
                 )}
               </slot>

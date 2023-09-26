@@ -45,7 +45,8 @@
   },
   "searchLandingPage": {
     "tSearchTitle": "Searching term \"%s\"",
-    "tLoadMore": "Load more"
+    "tLoadMore": "Load more",
+    "tNoResultsFound": "No results found"
   },
   "sort": {
     "tRelevance": "Relevance",

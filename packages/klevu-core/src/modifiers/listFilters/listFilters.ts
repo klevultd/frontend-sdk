@@ -69,7 +69,7 @@ export function listFilters(options?: Partial<Options>): KlevuFetchModifer {
       }
 
       for (const qr of result.apiResponse?.queryResults ?? []) {
-        if (qr.filters && qr.filters.length > 0) {
+        if (qr.filters) {
           options.filterManager.initFromListFilters(qr.filters)
         }
       }

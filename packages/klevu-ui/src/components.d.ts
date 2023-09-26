@@ -1281,6 +1281,10 @@ export namespace Components {
          */
         "tTrendingCaption"?: string;
         /**
+          * Load with default term
+         */
+        "term"?: string;
+        /**
           * Pass your own redirect urls for a keyword
          */
         "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
@@ -1399,6 +1403,7 @@ export namespace Components {
           * Button text
          */
         "tSearchText": any;
+        "term": string;
         /**
           * Enable Klaviyo integration for search terms and clicks
          */
@@ -3779,6 +3784,10 @@ declare namespace LocalJSX {
          */
         "tTrendingCaption"?: string;
         /**
+          * Load with default term
+         */
+        "term"?: string;
+        /**
           * Pass your own redirect urls for a keyword
          */
         "urlRedirects"?: KMCMapsRootObject["klevu_keywordUrlMap"];
@@ -3896,6 +3905,7 @@ declare namespace LocalJSX {
           * Button text
          */
         "tSearchText"?: any;
+        "term"?: string;
         /**
           * Enable Klaviyo integration for search terms and clicks
          */
