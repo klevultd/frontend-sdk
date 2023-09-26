@@ -2,19 +2,12 @@ import { Placement } from "@floating-ui/dom"
 import { KlevuConfig, MoiRequest } from "@klevu/core"
 import { Component, Element, Fragment, Host, Prop, State, h } from "@stencil/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
-import { parts } from "../../utils/parts"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Button that is placed on the site to start a product query session
  *
- * @csspart product-query-header Header of the popup
- * @csspart product-query-footer Footer of the popup where input is
- * @csspart product-query-feedback Feedback section of the popup when it is being closed
  * @csspart product-query-open-button Button that opens the popup
- * @csspart product-query-button-icon Icon of the button that opens the popup
- * @csspart popup-origin Popup origin element
- * @csspart popup-content Popup content element
- * @csspart button-base The button element
  *
  * @slot before-button-text - Before origin button text
  * @slot after-button-text - After origin button text
@@ -132,7 +125,7 @@ export class KlevuProductQuery {
         <klevu-button
           ref={(el) => (this.origin = el)}
           part="klevu-query-open-button"
-          exportparts={parts["klevu-button"]}
+          exportparts={partsExports("klevu-button")}
         >
           <slot name="before-button-text"></slot>
           {this.buttonText}
@@ -151,7 +144,7 @@ export class KlevuProductQuery {
               settings={this.settings}
               popupAnchor={this.popupAnchor}
               popupOffset={this.popupOffset}
-              exportparts={parts["klevu-product-query-popup"]}
+              exportparts={partsExports("klevu-product-query-popup")}
               useBackground={this.useBackground}
               originElement={this.origin}
               disableCloseOutsideClick={this.disableCloseOutsideClick}

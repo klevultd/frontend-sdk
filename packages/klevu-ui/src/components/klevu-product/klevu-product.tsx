@@ -3,8 +3,8 @@ import { Component, Event, EventEmitter, h, Host, Prop, State, Fragment } from "
 import { getGlobalSettings, renderPrice } from "../../utils/utils"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 import { getTranslation } from "../../utils/getTranslation"
-import { parts } from "../../utils/parts"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { partsExports } from "../../utils/partsExports"
 
 export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; originalEvent: MouseEvent }
 export type KlevuProductVariant = "line" | "small" | "default"
@@ -385,7 +385,7 @@ export class KlevuProduct {
                   class="addToCart"
                   onClick={this.#addToCart.bind(this)}
                   fullWidth
-                  exportparts={parts["klevu-button"]}
+                  exportparts={partsExports("klevu-button")}
                 >
                   {this.tAddToCart}
                 </klevu-button>

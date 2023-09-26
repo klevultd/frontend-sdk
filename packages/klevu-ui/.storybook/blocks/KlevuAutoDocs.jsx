@@ -3,6 +3,7 @@ import jsdocs from "../../dist/docs/klevu-ui-docs.json"
 import React from "react"
 import hljs from "highlight.js/lib/core"
 import typescript from "highlight.js/lib/languages/typescript"
+import { parts } from "../../src/utils/parts"
 
 // Then register the languages you need
 hljs.registerLanguage("typescript", typescript)
@@ -88,6 +89,8 @@ function renderSlots(comp) {
 }
 
 function renderParts(comp) {
+  const depComps = parts[comp.tag] ? Object.keys(parts[comp.tag].exportedcomponents) : []
+
   const cssParts = comp.docsTags
     .filter((t) => t.name === "csspart")
     .map((t) => {
@@ -98,7 +101,26 @@ function renderParts(comp) {
       }
     })
 
-  if (cssParts.length === 0) {
+  const subParts = []
+  jsdocs.components.forEach((c) => {
+    if (!depComps.includes(c.tag)) {
+      return
+    }
+
+    subParts.push(
+      ...c.docsTags
+        .filter((t) => t.name === "csspart")
+        .map((t) => {
+          const [name, ...parts] = t.text.split(" ")
+          return {
+            name,
+            docs: parts.join(" "),
+          }
+        })
+    )
+  })
+
+  if (cssParts.length === 0 && subParts.length === 0) {
     return null
   }
 
@@ -119,6 +141,21 @@ function renderParts(comp) {
             <td>{e.docs}</td>
           </tr>
         ))}
+        {subParts.length > 0 ? (
+          <React.Fragment>
+            <tr>
+              <td colspan="2" style={{ textAlign: "center" }}>
+                <strong>Dependency parts</strong>
+              </td>
+            </tr>
+            {subParts.map((e) => (
+              <tr>
+                <td>{e.name}</td>
+                <td>{e.docs}</td>
+              </tr>
+            ))}
+          </React.Fragment>
+        ) : null}
       </table>
     </React.Fragment>
   )
@@ -136,7 +173,29 @@ function renderCSSProps(comp) {
       }
     })
 
-  if (cssProps.length === 0) {
+  const subProps = []
+  comp.dependencies.forEach((dep) => {
+    jsdocs.components
+      .find((c) => c.tag === dep)
+      .docsTags.filter((t) => t.name === "cssprop")
+      .map((t) => {
+        const [name, defaultVal, ...parts] = t.text.split(" ")
+        return {
+          name,
+          defaultVal,
+          docs: parts.join(" "),
+        }
+      })
+      .forEach((e) => {
+        if (subProps.some((p) => p.name === e.name)) {
+          return
+        }
+
+        subProps.push(e)
+      })
+  })
+
+  if (cssProps.length === 0 && subProps.length === 0) {
     return null
   }
 
@@ -156,6 +215,22 @@ function renderCSSProps(comp) {
             <td>{e.defaultVal}</td>
           </tr>
         ))}
+        {subProps.length > 0 ? (
+          <React.Fragment>
+            <tr>
+              <td colspan="3" style={{ textAlign: "center" }}>
+                <strong>Dependency CSS variables</strong>
+              </td>
+            </tr>
+            {subProps.map((e) => (
+              <tr>
+                <td>{e.name}</td>
+                <td>{e.docs}</td>
+                <td>{e.defaultVal}</td>
+              </tr>
+            ))}
+          </React.Fragment>
+        ) : null}
       </table>
     </React.Fragment>
   )

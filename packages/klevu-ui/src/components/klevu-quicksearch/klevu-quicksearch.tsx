@@ -13,7 +13,6 @@ import {
   KlevuUploadImageForSearch,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter } from "@stencil/core"
-import { parts } from "../../utils/parts"
 import {
   KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
@@ -33,6 +32,7 @@ import {
 import { getTranslation } from "../../utils/getTranslation"
 import { stringConcat } from "../../utils/stringConcat"
 import { getKMCSettings } from "../../utils/getKMCSettings"
+import { partsExports } from "../../utils/partsExports"
 
 export type KlevuQuicksearchResultVarint = "simple" | "full"
 
@@ -500,6 +500,7 @@ export class KlevuQuicksearch {
           ref={(el) => (this.popup = el)}
           onKlevuPopupOpen={this.#onPopupOpen.bind(this)}
           elevation={2}
+          exportparts={partsExports("klevu-popup")}
         >
           <klevu-search-field
             ref={(el) => (this.#searchField = el)}
@@ -519,7 +520,12 @@ export class KlevuQuicksearch {
           >
             {this.enableImageSearch && (
               <div slot="end-of-input">
-                <klevu-popup popupWidth={400} anchor="bottom-end" ref={(el) => (this.#imagePickerPopupRef = el)}>
+                <klevu-popup
+                  exportparts={partsExports("klevu-popup")}
+                  popupWidth={400}
+                  anchor="bottom-end"
+                  ref={(el) => (this.#imagePickerPopupRef = el)}
+                >
                   <div class="image-picker" slot="content">
                     <klevu-image-picker
                       isLoading={this.isUploadingImage}
@@ -578,7 +584,7 @@ export class KlevuQuicksearch {
                       showVariantsCount={this.showVariantsCount}
                       fixedWidth
                       variant={isMobile ? "line" : "small"}
-                      exportparts={parts["klevu-product"]}
+                      exportparts={partsExports("klevu-product")}
                       showRatings={this.showRatings}
                       showRatingsCount={this.showRatingsCount}
                     ></klevu-product>
@@ -613,7 +619,7 @@ export class KlevuQuicksearch {
                       product={p}
                       showVariantsCount={this.showVariantsCount}
                       variant="line"
-                      exportparts={parts["klevu-product"]}
+                      exportparts={partsExports("klevu-product")}
                       showRatings={this.showRatings}
                       showRatingsCount={this.showRatingsCount}
                     ></klevu-product>
@@ -697,7 +703,11 @@ export class KlevuQuicksearch {
                 )}
                 <slot name="trending-products">
                   {this.trendingProducts?.map((p) => (
-                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                    <klevu-product
+                      product={p}
+                      variant="line"
+                      exportparts={partsExports("klevu-product")}
+                    ></klevu-product>
                   ))}
                 </slot>
               </Fragment>
@@ -706,7 +716,11 @@ export class KlevuQuicksearch {
               <Fragment>
                 <slot name="last-clicked-products">
                   {this.lastClickedProducts?.map((p) => (
-                    <klevu-product product={p} variant="line" exportparts={parts["klevu-product"]}></klevu-product>
+                    <klevu-product
+                      product={p}
+                      variant="line"
+                      exportparts={partsExports("klevu-product")}
+                    ></klevu-product>
                   ))}
                 </slot>
               </Fragment>

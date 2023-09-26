@@ -14,18 +14,15 @@ import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
 import { onKlevuMessageFeedbackDetails } from "../klevu-chat-messages/klevu-chat-messages"
 import { KlevuMessageFeedbackReasonDetails } from "../klevu-chat-bubble/klevu-chat-bubble"
-import { parts } from "../../utils/parts"
 import { getTranslation } from "../../utils/getTranslation"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Klevu Product Query popup application that shows a popup for asking questions about a product
  *
- * @csspart product-query-header Header of the popup
- * @csspart product-query-footer Footer of the popup where input is
- * @csspart product-query-feedback Feedback section of the popup when it is being closed
- * @csspart product-query-open-button Button that opens the popup
- * @csspart popup-origin Popup origin element
- * @csspart popup-content Popup content element
+ * @csspart product-query-popup-header Header of the popup
+ * @csspart product-query-popup-footer Footer of the popup where input is
+ * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
  *
  * @slot fineprint - Fine print of the popup
  */
@@ -282,7 +279,7 @@ export class KlevuProductQueryPopup {
       <Host>
         <klevu-popup
           ref={(el) => (this.#popup = el)}
-          exportparts={parts["klevu-popup"]}
+          exportparts={partsExports("klevu-popup")}
           onKlevuPopupClose={this.#closeModal.bind(this)}
           onKlevuPopupOpen={() => {
             this.#start()
@@ -308,7 +305,7 @@ export class KlevuProductQueryPopup {
     return (
       <Fragment>
         <klevu-chat-layout useNativeScrollbars={this.useNativeScrollbars} ref={(el) => (this.#layoutElement = el)}>
-          <div part="product-query-header" slot="header">
+          <div part="product-query-popup-header" slot="header">
             <div class="header">
               <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
               <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
@@ -335,7 +332,7 @@ export class KlevuProductQueryPopup {
               ) : null}
             </div>
           </klevu-chat-messages>
-          <div part="product-query-footer" slot="footer">
+          <div part="product-query-popup-footer" slot="footer">
             {!this.registered ? (
               <Fragment>
                 <div class="inputs">
@@ -383,7 +380,7 @@ export class KlevuProductQueryPopup {
 
   #renderFeedback() {
     return (
-      <div class="pqa_feedback" part="product-query-feedback">
+      <div class="pqa_feedback" part="product-query-popup-feedback">
         <klevu-typography variant="body-l-bold">{this.tRateExperienceTitle}</klevu-typography>
         <klevu-typography variant="body-m">{this.tRateExperienceText}</klevu-typography>
         <div>
