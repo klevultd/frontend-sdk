@@ -59,6 +59,7 @@ export namespace Components {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-base The container element for the accordion
      * @csspart accordion-header The label of the accordion
      * @csspart accordion-content The content of the accordion
      * @csspart accordion-icon The icon of the accordion
@@ -78,6 +79,7 @@ export namespace Components {
      * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+     * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
         /**
@@ -150,6 +152,10 @@ export namespace Components {
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface KlevuChatBubble {
         /**
@@ -209,6 +215,9 @@ export namespace Components {
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -231,6 +240,9 @@ export namespace Components {
      * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
      * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
      * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface KlevuChip {
         /**
@@ -1871,6 +1883,7 @@ declare global {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-base The container element for the accordion
      * @csspart accordion-header The label of the accordion
      * @csspart accordion-content The content of the accordion
      * @csspart accordion-icon The icon of the accordion
@@ -1886,6 +1899,7 @@ declare global {
      * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+     * @csspart badge-content The content of the badge
      */
     interface HTMLKlevuBadgeElement extends Components.KlevuBadge, HTMLStencilElement {
     }
@@ -1925,6 +1939,10 @@ declare global {
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1952,6 +1970,9 @@ declare global {
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
@@ -1966,6 +1987,9 @@ declare global {
      * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
      * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
      * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface HTMLKlevuChipElement extends Components.KlevuChip, HTMLStencilElement {
     }
@@ -2511,6 +2535,7 @@ declare namespace LocalJSX {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-base The container element for the accordion
      * @csspart accordion-header The label of the accordion
      * @csspart accordion-content The content of the accordion
      * @csspart accordion-icon The icon of the accordion
@@ -2530,6 +2555,7 @@ declare namespace LocalJSX {
      * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+     * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
         /**
@@ -2607,6 +2633,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface KlevuChatBubble {
         /**
@@ -2679,6 +2709,9 @@ declare namespace LocalJSX {
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -2702,6 +2735,9 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
      * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
      * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface KlevuChip {
         /**
@@ -4342,6 +4378,7 @@ declare module "@stencil/core" {
              * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
              * @cssprop --klevu-accordion-background transparent Header background
              * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+             * @csspart accordion-base The container element for the accordion
              * @csspart accordion-header The label of the accordion
              * @csspart accordion-content The content of the accordion
              * @csspart accordion-icon The icon of the accordion
@@ -4352,6 +4389,7 @@ declare module "@stencil/core" {
              * used to display things on top of product.
              * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
              * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+             * @csspart badge-content The content of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
@@ -4376,6 +4414,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
              * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
              * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+             * @csspart chat-bubble-base The container for the chat bubble
+             * @csspart chat-bubble-positive-feedback The positive feedback section
+             * @csspart chat-bubble-negative-feedback The negative feedback section
+             * @csspart chat-bubble-feedback-reasons The feedback reasons section
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**
@@ -4388,6 +4430,9 @@ declare module "@stencil/core" {
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
              * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+             * @csspart checkbox-base The container element of the checkbox
+             * @csspart checkbox-box The checkbox element
+             * @csspart checkbox-content The label of the checkbox
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             /**
@@ -4397,6 +4442,9 @@ declare module "@stencil/core" {
              * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
              * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
              * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+             * @csspart chip-base The container for the chip
+             * @csspart chip-icon The icon for the close button
+             * @csspart chip-content The content for the chip
              */
             "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**

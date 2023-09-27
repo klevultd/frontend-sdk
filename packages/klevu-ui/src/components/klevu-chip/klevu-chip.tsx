@@ -9,6 +9,9 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
  * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
  * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+ * @csspart chip-base The container for the chip
+ * @csspart chip-icon The icon for the close button
+ * @csspart chip-content The content for the chip
  */
 @Component({
   tag: "klevu-chip",
@@ -44,10 +47,12 @@ export class KlevuChip {
   render() {
     return (
       <Host class={{ removable: Boolean(this.removable), selected: Boolean(this.selected) }}>
-        {this.removable && <klevu-icon name="close" onClick={this.#close.bind(this)} />}
-        <klevu-typography variant="body-xs">
-          <slot></slot>
-        </klevu-typography>
+        <div part="chip-base">
+          {this.removable && <klevu-icon part="chip-icon" name="close" onClick={this.#close.bind(this)} />}
+          <klevu-typography variant="body-xs" part="chip-content">
+            <slot></slot>
+          </klevu-typography>
+        </div>
       </Host>
     )
   }

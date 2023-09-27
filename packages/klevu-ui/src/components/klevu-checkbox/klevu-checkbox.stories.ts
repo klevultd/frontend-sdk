@@ -34,3 +34,33 @@ export const Checkbox: StoryObj<KlevuCheckbox & { text?: string }> = {
     >${ifDefined(args.text)}</klevu-checkbox
   >`,
 }
+
+export const StyledCheckbox: StoryObj<KlevuCheckbox & { text?: string }> = {
+  args: {
+    text: "Content related to checkbox",
+  },
+  argTypes: {
+    text: {
+      description: "Text to be displayed next to checkbox",
+      control: {
+        type: "text",
+      },
+    },
+  },
+  render: (args) => html`<div id="styledCheckbox">
+      <klevu-checkbox
+        checked=${ifDefined(args.checked)}
+        disabled=${ifDefined(args.disabled)}
+        name=${ifDefined(args.name)}
+        >${ifDefined(args.text)}</klevu-checkbox
+      >
+    </div>
+    <style>
+      #styledCheckbox klevu-checkbox::part(checkbox-box) {
+        background-color: red;
+      }
+      #styledCheckbox klevu-checkbox::part(checkbox-content) {
+        font-style: italic;
+      }
+    </style>`,
+}

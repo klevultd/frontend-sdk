@@ -300,6 +300,7 @@ export class KlevuFacet {
                 <div class="option">
                   {this.mode === "checkbox" ? (
                     <klevu-checkbox
+                      exportparts={partsExports("klevu-checkbox")}
                       checked={o.selected}
                       name={this.option!.key}
                       onKlevuCheckboxChange={(event: CustomEvent<boolean>) => {

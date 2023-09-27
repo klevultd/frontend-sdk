@@ -9,6 +9,7 @@ import { Component, h, Host, Prop } from "@stencil/core"
  * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
  * @cssprop --klevu-accordion-background transparent Header background
  * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+ * @csspart accordion-base The container element for the accordion
  * @csspart accordion-header The label of the accordion
  * @csspart accordion-content The content of the accordion
  * @csspart accordion-icon The icon of the accordion
@@ -44,17 +45,19 @@ export class KlevuAccordion {
   render() {
     return (
       <Host>
-        <input type="checkbox" id={this.#id} checked={this.open} onChange={() => (this.open = !this.open)} />
-        <label htmlFor={this.#id}>
-          <klevu-typography variant="body-s-bold">
-            <span part="accordion-header">
-              <slot name="header"></slot>
-            </span>
-          </klevu-typography>
-          <klevu-icon name="expand_more" part="accordion-icon"></klevu-icon>
-        </label>
-        <div class="content" part="accordion-content">
-          <slot name="content"></slot>
+        <div part="accordion-base">
+          <input type="checkbox" id={this.#id} checked={this.open} onChange={() => (this.open = !this.open)} />
+          <label htmlFor={this.#id}>
+            <klevu-typography variant="body-s-bold">
+              <span part="accordion-header">
+                <slot name="header"></slot>
+              </span>
+            </klevu-typography>
+            <klevu-icon name="expand_more" part="accordion-icon"></klevu-icon>
+          </label>
+          <div class="content" part="accordion-content">
+            <slot name="content"></slot>
+          </div>
         </div>
       </Host>
     )

@@ -4,14 +4,36 @@ export const parts = {
     local: ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
     exportedcomponents: {},
   },
+  "klevu-badge": {
+    local: ["badge-content"],
+    exportedcomponents: {},
+  },
   "klevu-button": {
     local: ["button-base"],
+    exportedcomponents: {},
+  },
+  "klevu-chat-bubble": {
+    local: [
+      "chat-bubble-base",
+      "chat-bubble-positive-feedback",
+      "chat-bubble-negative-feedback",
+      "chat-bubble-feedback-reasons",
+    ],
+    exportedcomponents: { "klevu-button": ["button-base"] },
+  },
+  "klevu-checkbox": {
+    local: ["checkbox-base", "checkbox-box", "checkbox-content"],
+    exportedcomponents: {},
+  },
+  "klevu-chip": {
+    local: ["chip-base", "chip-icon", "chip-content"],
     exportedcomponents: {},
   },
   "klevu-facet": {
     local: ["facet-heading"],
     exportedcomponents: {
       "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
+      "klevu-checkbox": ["checkbox-base", "checkbox-box", "checkbox-content"],
       "klevu-button": ["button-base"],
     },
   },
@@ -33,6 +55,12 @@ export const parts = {
         "product-query-popup-feedback",
       ],
       "klevu-popup": ["popup-origin", "popup-content"],
+      "klevu-chat-bubble": [
+        "chat-bubble-base",
+        "chat-bubble-positive-feedback",
+        "chat-bubble-negative-feedback",
+        "chat-bubble-feedback-reasons",
+      ],
       "klevu-product": ["product-image", "product-container", "product-swatch"],
     },
   },
@@ -41,6 +69,12 @@ export const parts = {
     exportedcomponents: {
       "klevu-popup": ["popup-origin", "popup-content"],
       "klevu-button": ["button-base"],
+      "klevu-chat-bubble": [
+        "chat-bubble-base",
+        "chat-bubble-positive-feedback",
+        "chat-bubble-negative-feedback",
+        "chat-bubble-feedback-reasons",
+      ],
       "klevu-product": ["product-image", "product-container", "product-swatch"],
     },
   },
