@@ -1,6 +1,7 @@
 import { useOf } from "@storybook/blocks"
 import jsdocs from "../../dist/docs/klevu-ui-docs.json"
 import React from "react"
+import { useState, useEffect } from "react"
 import hljs from "highlight.js/lib/core"
 import typescript from "highlight.js/lib/languages/typescript"
 import { parts } from "../../src/utils/parts"
@@ -9,6 +10,10 @@ import { parts } from "../../src/utils/parts"
 hljs.registerLanguage("typescript", typescript)
 
 export const KlevuAutoDocs = ({ of }) => {
+  console.log({
+    data: getElementCSSVariables(getAllCSSVariableNames()),
+  })
+
   const resolvedOf = useOf(of || "story", ["story", "meta"])
   switch (resolvedOf.type) {
     case "story": {
@@ -180,21 +185,26 @@ function renderParts(comp) {
   )
 }
 
-function renderCSSProps(comp) {
-  const cssProps = comp.styles
+function filterAndTransformStyles(styles) {
+  return styles
     .filter((s) => s.annotation === "prop")
     .map((s) => {
       const [name, ...defaultVal] = s.name.split(" ")
       return {
         name,
-        defaultVal,
+        defaultVal: defaultVal.join(" "),
         docs: s.docs,
       }
     })
+}
+
+function renderCSSProps(comp) {
+  const [showGlobalProps, setShowGlobalProps] = React.useState(false)
+  const cssProps = filterAndTransformStyles(comp.styles)
 
   const subProps = []
   const depComp = Object.keys(comp.dependencyGraph)
-  const depsToCheck = ["klevu-init"]
+  const depsToCheck = []
   for (const dependency of depComp) {
     for (const subDep of comp.dependencyGraph[dependency]) {
       if (depsToCheck.indexOf(subDep) === -1 && subDep !== comp.tag) {
@@ -209,22 +219,14 @@ function renderCSSProps(comp) {
       continue
     }
 
-    dep.styles
-      .filter((s) => s.annotation === "prop")
-      .map((s) => {
-        const [name, ...defaultVal] = s.name.split(" ")
-        return {
-          name,
-          defaultVal,
-          docs: s.docs,
-        }
-      })
-      .forEach((style) => {
-        if (!subProps.some((subStyle) => subStyle.name === style.name)) {
-          subProps.push(style)
-        }
-      })
+    filterAndTransformStyles(dep.styles).forEach((style) => {
+      if (!subProps.some((subStyle) => subStyle.name === style.name)) {
+        subProps.push(style)
+      }
+    })
   }
+
+  const initProps = filterAndTransformStyles(jsdocs.components.find((c) => c.tag === "klevu-init").styles)
 
   if (cssProps.length === 0 && subProps.length === 0) {
     return null
@@ -246,7 +248,9 @@ function renderCSSProps(comp) {
             <tr key={index}>
               <td>{e.name}</td>
               <td>{e.docs}</td>
-              <td>{e.defaultVal}</td>
+              <td>
+                <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} />
+              </td>
             </tr>
           ))}
           {subProps.length > 0 ? (
@@ -260,11 +264,37 @@ function renderCSSProps(comp) {
                 <tr key={index}>
                   <td>{e.name}</td>
                   <td>{e.docs}</td>
-                  <td>{e.defaultVal}</td>
+                  <td>
+                    <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} />
+                  </td>
                 </tr>
               ))}
             </React.Fragment>
           ) : null}
+          <tr>
+            <td colSpan="3" style={{ textAlign: "center" }}>
+              <strong>Global CSS variables</strong>
+            </td>
+          </tr>
+          {showGlobalProps ? (
+            <React.Fragment>
+              {initProps.map((e, index) => (
+                <tr key={index}>
+                  <td>{e.name}</td>
+                  <td>{e.docs}</td>
+                  <td>
+                    <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} />
+                  </td>
+                </tr>
+              ))}
+            </React.Fragment>
+          ) : (
+            <tr>
+              <td colSpan="3">
+                <button onClick={() => setShowGlobalProps(true)}>Show global CSS variables</button>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </React.Fragment>
@@ -305,3 +335,121 @@ function renderMethods(comp) {
     </React.Fragment>
   )
 }
+
+function CSSPropertyEditor({ name, defaultVal }) {
+  let key, value, type
+  const current = getElementCSSVariables([name])
+  if (current[0]) {
+    key = current[0].key
+    value = current[0].value
+    type = current[0].type
+  }
+
+  const isModified = value !== undefined && value !== defaultVal
+
+  if (isModified) {
+    console.log("Modified value", name, value, defaultVal)
+  }
+
+  const [currentValue, setCurrentValue] = useState(defaultVal)
+
+  const isColor = CSS.supports("color", currentValue)
+
+  const onChange = (e) => {
+    setCurrentValue(e.target.value)
+    document.documentElement.style.setProperty(name, e.target.value)
+  }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "4px",
+      }}
+    >
+      {isColor ? (
+        <input
+          type="color"
+          style={{
+            padding: "0px",
+            appearance: "none",
+            border: "none",
+            width: "20px",
+            boxSizing: "border-box",
+          }}
+          value={currentValue}
+          onChange={onChange}
+        />
+      ) : null}
+      <input
+        type="text"
+        style={{
+          minWidth: "200px",
+          padding: "4px",
+          border: isModified ? "1px solid #fdd" : "1px solid #ddd",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+        value={currentValue}
+        onChange={onChange}
+      />
+    </div>
+  )
+}
+
+const getAllCSSVariableNames = () => {
+  const styleSheets = document.styleSheets
+  const cssVars = []
+
+  Array.from(styleSheets).forEach((styleSheet) => {
+    try {
+      if (!styleSheet || !styleSheet["cssRules"]) {
+        return []
+      }
+    } catch {
+      return []
+    }
+    return Array.from(styleSheet.cssRules).forEach((rule) => {
+      if (!rule || !rule["style"]) {
+        return
+      }
+
+      Array.from(rule["style"]).forEach((style) => {
+        if (style.startsWith("--") && cssVars.indexOf(style) == -1) {
+          cssVars.push(style)
+        }
+      })
+    })
+  })
+
+  return cssVars
+}
+
+const getElementCSSVariables = (allCSSVars, element = document.body) => {
+  const elStyles = window.getComputedStyle(element)
+  const cssVars = []
+
+  allCSSVars.forEach((key) => {
+    const value = elStyles.getPropertyValue(key)
+
+    if (value) {
+      cssVars.push({
+        key,
+        value: value.trim(),
+        type: getType(value),
+      })
+    }
+  })
+
+  return cssVars
+}
+
+const getType = (value) => {
+  if (CSS.supports("color", value)) {
+    return "color"
+  }
+
+  return "text"
+}
+
+const saveCSSVariable = (saveName, variableName, variableValue) => {}
