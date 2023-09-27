@@ -1,10 +1,12 @@
 :host {
+  /**
+   * @prop --klevu-dropdown-padding calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)): Padding around dropdown
+   */
+  --padding: var(--klevu-dropdown-padding, calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)));
   display: block;
 }
 
 select {
-  --padding: calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2));
-
   font-size: var(--klevu-body-s-size);
   font-weight: var(--klevu-body-s-weight);
   appearance: none;

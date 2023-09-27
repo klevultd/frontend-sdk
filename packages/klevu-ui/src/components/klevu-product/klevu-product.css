@@ -12,7 +12,7 @@
   --small-width: var(--klevu-product-small-width, 150px);
   --image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
   --image-fill: var(--klevu-product-image-fill, cover);
-  --klevu-product-border: none;
+  --border: var(--klevu-product-border, none);
 }
 
 :host(.line) {
@@ -30,7 +30,7 @@
 .container {
   display: block;
   padding: var(--klevu-spacing-04);
-  border: var(--klevu-product-border);
+  border: var(--border);
   border-radius: var(--klevu-border-radius-s);
   box-sizing: border-box;
   height: 100%;

@@ -2,23 +2,23 @@
   /**
   * @prop --klevu-color-swatch-border #8c8c8c: Border on swatch
   * @prop --klevu-color-swatch-default-background #000: Shown when color not found in css
-  * @prop --klevu-color-swatch-size 25px: Size of swatch
-  * @prop --klevu-color-swatch-selected-color #2b4af7: Ring color when selected
-  * @prop --klevu-color-swatch-border-radius: 50% To change the shape of swatch
+  * @prop --klevu-color-swatch-size var(--klevu-size-l): Size of swatch
+  * @prop --klevu-color-swatch-selected-color var(--klevu-color-primary): Ring color when selected
+  * @prop --klevu-color-swatch-border-radius var(--klevu-border-radius-xxl): To change the shape of swatch
   */
 
   display: block;
-  --klevu-color-swatch-default-background: #000;
-  --klevu-color-swatch-size: 25px;
-  --klevu-color-swatch-selected-color: #2b4af7;
-  --klevu-color-swatch-border-radius: 50%;
+  --default-background: var(--klevu-color-swatch-default-background, #000);
+  --size: var(--klevu-color-swatch-size, var(--klevu-size-l));
+  --selected-color: var(--klevu-color-swatch-selected-color, var(--klevu-color-primary));
+  --border-radius: var(--klevu-color-swatch-border-radius, var(--klevu-border-radius-xxl));
 }
 
 .circle {
-  height: var(--klevu-color-swatch-size);
-  width: var(--klevu-color-swatch-size);
-  background-color: var(--klevu-color-swatch-default-background);
-  border-radius: var(--klevu-color-swatch-border-radius);
+  height: var(--size);
+  width: var(--size);
+  background-color: var(--default-background);
+  border-radius: var(--border-radius);
   background-size: cover;
   display: inline-block;
   position: relative;
@@ -31,6 +31,6 @@
   left: -4px;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
-  border: 2px solid var(--klevu-color-swatch-selected-color);
-  border-radius: var(--klevu-color-swatch-border-radius);
+  border: 2px solid var(--selected-color);
+  border-radius: var(--border-radius);
 }

@@ -3,21 +3,24 @@
   * @prop --klevu-drawer-max-width max-content: maxium width of drawer content
   * @prop --klevu-drawer-background-color rgba(0,0,0,0.2): color of backround overlay
   * @prop --klevu-drawer-width 400px: width of drawer
+  * @prop --klevu-drawer-y-padding var(--klevu-spacing-04): padding on top and bottom of drawer
   */
   display: block;
-  --klevu-drawer-ypadding: var(--klevu-spacing-04);
-  --klevu-drawer-width: 400px;
+  --ypadding: var(--klevu-drawer-y-padding, var(--klevu-spacing-04));
+  --max-width: var(--klevu-drawer-max-width, max-content);
+  --width: var(--klevu-drawer-width, 400px);
+  --background-color: var(--klevu-drawer-background-color, rgba(0, 0, 0, 0.2));
 }
 
 .drawer {
   position: fixed;
   top: 0;
   height: 100vh;
-  max-width: var(--klevu-drawer-max-width, max-content);
+  max-width: var(--max-width);
   z-index: 1000;
   background: #fff;
   transition: left 0.4s, right 0.4s;
-  width: var(--klevu-drawer-width);
+  width: var(--width);
 }
 
 .drawer.left {
@@ -45,7 +48,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--klevu-drawer-background-color, rgba(0, 0, 0, 0.2));
+  background: var(--background-color);
   z-index: 999;
 }
 
@@ -60,5 +63,5 @@
 }
 
 .insertypadding {
-  padding: 0 var(--klevu-drawer-ypadding);
+  padding: 0 var(--ypadding);
 }

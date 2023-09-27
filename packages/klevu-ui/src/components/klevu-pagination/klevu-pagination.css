@@ -1,11 +1,8 @@
 :host {
   /**
-  * @prop --klevu-pagination-background-color var(--klevu-color-dim-background): background color of item
-  * @prop --klevu-pagination-text-color: text color of item
-  * @prop --klevu-pagination-selected-background-color var(--klevu-color-primary): background color of selected item
   * @prop --klevu-pagination-selected-text-color var(--klevu-color-primary-text): text color of selected item
   */
-  --klevu-pagination-selected-color: var(--klevu-color-primary);
+  --selected-color: var(--klevu-pagination-selected-color, var(--klevu-color-primary));
 
   display: flex;
   gap: var(--klevu-spacing-03);
@@ -29,13 +26,13 @@ klevu-icon {
 span.current {
   font-weight: bold;
   cursor: inherit;
-  border: 1px solid var(--klevu-pagination-selected-color);
-  color: var(--klevu-pagination-selected-color);
+  border: 1px solid var(--selected-color);
+  color: var(--selected-color);
 }
 
 span:not(.disabled):not(.current):hover,
 klevu-icon:not(.disabled):not(.current):hover {
-  color: var(--klevu-pagination-selected-color);
+  color: var(--selected-color);
   background-color: var(--klevu-color-neutral-2);
   cursor: pointer;
 }

@@ -1,6 +1,6 @@
 :host {
   /**
-   * @prop --klevu-slides-item-width: Force a width for each item in the slides
+   * @prop --klevu-slides-item-width inherit: Force a width for each item in the slides
    */
   display: block;
   --item-width: var(--klevu-slides-item-width, inherit);

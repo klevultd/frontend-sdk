@@ -1,6 +1,11 @@
 :host {
+  /**
+   * @prop --klevu-moi-slides-width 200px: Width of each product slide
+   * @prop --klevu-moi-height 550px: Height of the popup
+   * @prop --klevu-moi-width 640px: Width of the popup
+   */
   display: block;
-  --klevu-slides-item-width: 200px;
+  --klevu-slides-item-width: var(--klevu-moi-slides-width, 200px);
   --container-height: var(--klevu-moi-height, 550px);
   --container-width: var(--klevu-moi-width, 640px);
 }

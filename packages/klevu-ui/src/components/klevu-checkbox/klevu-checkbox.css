@@ -3,15 +3,15 @@
   * @prop --klevu-checkbox-color var(--klevu-color-primary): Color of the checkbox background and border
   * @prop --klevu-checkbox-size 20px: Size of the checkbox
   */
-  --klevu-checkbox-color: var(--klevu-color-primary);
-  --klevu-checkbox-size: 20px;
+  --color: var(--klevu-checkbox-color, var(--klevu-color-primary));
+  --size: var(--klevu-checkbox-size, 20px);
   display: flex;
 }
 
 .check {
   display: block;
-  width: var(--klevu-checkbox-size);
-  height: var(--klevu-checkbox-size);
+  width: var(--size);
+  height: var(--size);
   position: relative;
 }
 
@@ -20,7 +20,7 @@
   user-select: none;
   display: block;
   width: 100%;
-  height: var(--klevu-checkbox-size);
+  height: var(--size);
   min-width: 0;
 }
 
@@ -30,8 +30,8 @@ input[type="checkbox"] {
   margin: 0;
   font: inherit;
   color: currentColor;
-  width: var(--klevu-checkbox-size);
-  height: var(--klevu-checkbox-size);
+  width: var(--size);
+  height: var(--size);
   border: 1px solid var(--klevu-color-neutral-5);
   border-radius: var(--klevu-border-radius-s);
   display: inline-block;
@@ -50,17 +50,17 @@ input[type="checkbox"]:focus::after {
   left: -3px;
   width: calc(100% + 3px);
   height: calc(100% + 3px);
-  border: 2px solid var(--klevu-checkbox-color);
+  border: 2px solid var(--color);
   border-radius: calc(var(--klevu-border-radius-s) + 2px);
 }
 
 input[type="checkbox"]:hover {
-  border-color: var(--klevu-checkbox-color);
+  border-color: var(--color);
 }
 
 input[type="checkbox"]:checked {
-  background-color: var(--klevu-checkbox-color);
-  border-color: var(--klevu-checkbox-color);
+  background-color: var(--color);
+  border-color: var(--color);
 }
 
 klevu-icon {
