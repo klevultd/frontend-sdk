@@ -56,6 +56,10 @@ export { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewpo
 export namespace Components {
     /**
      * Component that wrap two slots to create accordion element.
+     * @csspart accordion-base The container element for the accordion
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -69,7 +73,8 @@ export namespace Components {
     }
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
-     * used to display things on top of product.
+     * used to display things on top of product
+     * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
         /**
@@ -131,6 +136,10 @@ export namespace Components {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface KlevuChatBubble {
         /**
@@ -187,6 +196,9 @@ export namespace Components {
     }
     /**
      * Checkbox component
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -205,6 +217,9 @@ export namespace Components {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface KlevuChip {
         /**
@@ -260,6 +275,9 @@ export namespace Components {
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
+     * @csspart drawer-base The container of the drawer
+     * @csspart drawer-origin The origin of the drawer
+     * @csspart drawer-content The content of the drawer
      */
     interface KlevuDrawer {
         /**
@@ -287,6 +305,8 @@ export namespace Components {
     }
     /**
      * Simple native dropdown component for dropdown
+     * @csspart dropdown-base The container for the dropdown
+     * @csspart dropdown-select The select box
      */
     interface KlevuDropdown {
         /**
@@ -300,7 +320,7 @@ export namespace Components {
         /**
           * Options to display in dropdown
          */
-        "options": Array<{ value: string; text: String }>;
+        "options": Array<{ value: string; text: string }>;
         /**
           * Which element value is selected
          */
@@ -504,6 +524,11 @@ export namespace Components {
     }
     /**
      * Single list item for listing things.
+     * @csspart list-base The container for the list
+     * @csspart list-icon The icon element of the list
+     * @csspart list-image The image element of the list
+     * @csspart list-content The content of the list
+     * @csspart list-button The button element in the list
      */
     interface KlevuList {
         /**
@@ -526,6 +551,7 @@ export namespace Components {
     }
     /**
      * Simple loading indicator
+     * @csspart loading-indicator-base The container for the loading indicator
      */
     interface KlevuLoadingIndicator {
     }
@@ -596,6 +622,10 @@ export namespace Components {
     }
     /**
      * Stylized modal dialog.
+     * @csspart modal-base The container for modal dialog
+     * @csspart modal-header The header for modal dialog
+     * @csspart modal-dialog The dialog component
+     * @csspart modal-body The body for modal dialog
      */
     interface KlevuModal {
         /**
@@ -631,6 +661,9 @@ export namespace Components {
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
+     * @csspart pagination-base The container for pagination
+     * @csspart pagination-navigation-previous The previous page button
+     * @csspart pagination-navigation-next The next page button
      */
     interface KlevuPagination {
         /**
@@ -652,6 +685,9 @@ export namespace Components {
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
+     * @csspart popular-searches-base The container for the popular searches
+     * @csspart popular-searches-caption The caption for the search
+     * @csspart popular-searches-list-item The list item in search
      */
     interface KlevuPopularSearches {
         /**
@@ -661,7 +697,7 @@ export namespace Components {
     }
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin Origin component
+     * @csspart popup-base The container for the popup
      * @csspart popup-content Content component
      */
     interface KlevuPopup {
@@ -1230,6 +1266,8 @@ export namespace Components {
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
      * @prop ratingRange - The number of stars to show
+     * @csspart rating-base The container for rating component
+     * @csspart rating-star The star component
      */
     interface KlevuRating {
         /**
@@ -1515,6 +1553,8 @@ export namespace Components {
     /**
      * Very simple tab component. Use like a button, but with a caption.
      * Use standard onClick event to handle click.
+     * @csspart tab-base The tab container
+     * @csspart tab-caption The caption for the tab
      */
     interface KlevuTab {
         /**
@@ -1532,6 +1572,10 @@ export namespace Components {
     }
     /**
      * Branded text field component
+     * @csspart textfield-base The container for input box
+     * @csspart textfield-icon The icon at beginning of input
+     * @csspart textfield-input The input box
+     * @csspart textfield-clearbutton The clear button at the end of input
      */
     interface KlevuTextfield {
         /**
@@ -1768,6 +1812,10 @@ export interface KlevuUtilViewportCustomEvent<T> extends CustomEvent<T> {
 declare global {
     /**
      * Component that wrap two slots to create accordion element.
+     * @csspart accordion-base The container element for the accordion
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
     }
@@ -1778,6 +1826,7 @@ declare global {
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
      * used to display things on top of product.
+     * @csspart badge-content The content of the badge
      */
     interface HTMLKlevuBadgeElement extends Components.KlevuBadge, HTMLStencilElement {
     }
@@ -1806,6 +1855,10 @@ declare global {
     };
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1830,6 +1883,9 @@ declare global {
     };
     /**
      * Checkbox component
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
@@ -1840,6 +1896,9 @@ declare global {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface HTMLKlevuChipElement extends Components.KlevuChip, HTMLStencilElement {
     }
@@ -1867,6 +1926,9 @@ declare global {
     };
     /**
      * Component to create offscreen drawer on left or right side of the screen
+     * @csspart drawer-base The container of the drawer
+     * @csspart drawer-origin The origin of the drawer
+     * @csspart drawer-content The content of the drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -1876,6 +1938,8 @@ declare global {
     };
     /**
      * Simple native dropdown component for dropdown
+     * @csspart dropdown-base The container for the dropdown
+     * @csspart dropdown-select The select box
      */
     interface HTMLKlevuDropdownElement extends Components.KlevuDropdown, HTMLStencilElement {
     }
@@ -1963,6 +2027,11 @@ declare global {
     };
     /**
      * Single list item for listing things.
+     * @csspart list-base The container for the list
+     * @csspart list-icon The icon element of the list
+     * @csspart list-image The image element of the list
+     * @csspart list-content The content of the list
+     * @csspart list-button The button element in the list
      */
     interface HTMLKlevuListElement extends Components.KlevuList, HTMLStencilElement {
     }
@@ -1972,6 +2041,7 @@ declare global {
     };
     /**
      * Simple loading indicator
+     * @csspart loading-indicator-base The container for the loading indicator
      */
     interface HTMLKlevuLoadingIndicatorElement extends Components.KlevuLoadingIndicator, HTMLStencilElement {
     }
@@ -1990,6 +2060,10 @@ declare global {
     };
     /**
      * Stylized modal dialog.
+     * @csspart modal-base The container for modal dialog
+     * @csspart modal-header The header for modal dialog
+     * @csspart modal-dialog The dialog component
+     * @csspart modal-body The body for modal dialog
      */
     interface HTMLKlevuModalElement extends Components.KlevuModal, HTMLStencilElement {
     }
@@ -2008,6 +2082,9 @@ declare global {
     };
     /**
      * Pagination component. Either provide numbers or query result to display the component.
+     * @csspart pagination-base The container for pagination
+     * @csspart pagination-navigation-previous The previous page button
+     * @csspart pagination-navigation-next The next page button
      */
     interface HTMLKlevuPaginationElement extends Components.KlevuPagination, HTMLStencilElement {
     }
@@ -2017,6 +2094,9 @@ declare global {
     };
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
+     * @csspart popular-searches-base The container for the popular searches
+     * @csspart popular-searches-caption The caption for the search
+     * @csspart popular-searches-list-item The list item in search
      */
     interface HTMLKlevuPopularSearchesElement extends Components.KlevuPopularSearches, HTMLStencilElement {
     }
@@ -2026,7 +2106,7 @@ declare global {
     };
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin Origin component
+     * @csspart popup-base The container for the popup
      * @csspart popup-content Content component
      */
     interface HTMLKlevuPopupElement extends Components.KlevuPopup, HTMLStencilElement {
@@ -2107,6 +2187,8 @@ declare global {
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
      * @prop ratingRange - The number of stars to show
+     * @csspart rating-base The container for rating component
+     * @csspart rating-star The star component
      */
     interface HTMLKlevuRatingElement extends Components.KlevuRating, HTMLStencilElement {
     }
@@ -2182,6 +2264,8 @@ declare global {
     /**
      * Very simple tab component. Use like a button, but with a caption.
      * Use standard onClick event to handle click.
+     * @csspart tab-base The tab container
+     * @csspart tab-caption The caption for the tab
      */
     interface HTMLKlevuTabElement extends Components.KlevuTab, HTMLStencilElement {
     }
@@ -2191,6 +2275,10 @@ declare global {
     };
     /**
      * Branded text field component
+     * @csspart textfield-base The container for input box
+     * @csspart textfield-icon The icon at beginning of input
+     * @csspart textfield-input The input box
+     * @csspart textfield-clearbutton The clear button at the end of input
      */
     interface HTMLKlevuTextfieldElement extends Components.KlevuTextfield, HTMLStencilElement {
     }
@@ -2308,6 +2396,10 @@ declare global {
 declare namespace LocalJSX {
     /**
      * Component that wrap two slots to create accordion element.
+     * @csspart accordion-base The container element for the accordion
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -2322,6 +2414,7 @@ declare namespace LocalJSX {
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
      * used to display things on top of product.
+     * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
         /**
@@ -2388,6 +2481,10 @@ declare namespace LocalJSX {
     }
     /**
      * Container for chat items. Very simple component, just a wrapper.
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface KlevuChatBubble {
         /**
@@ -2457,6 +2554,9 @@ declare namespace LocalJSX {
     }
     /**
      * Checkbox component
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -2476,6 +2576,9 @@ declare namespace LocalJSX {
     /**
      * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
      * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface KlevuChip {
         /**
@@ -2540,6 +2643,9 @@ declare namespace LocalJSX {
     }
     /**
      * Component to create offscreen drawer on left or right side of the screen
+     * @csspart drawer-base The container of the drawer
+     * @csspart drawer-origin The origin of the drawer
+     * @csspart drawer-content The content of the drawer
      */
     interface KlevuDrawer {
         /**
@@ -2565,6 +2671,8 @@ declare namespace LocalJSX {
     }
     /**
      * Simple native dropdown component for dropdown
+     * @csspart dropdown-base The container for the dropdown
+     * @csspart dropdown-select The select box
      */
     interface KlevuDropdown {
         /**
@@ -2582,7 +2690,7 @@ declare namespace LocalJSX {
         /**
           * Options to display in dropdown
          */
-        "options": Array<{ value: string; text: String }>;
+        "options": Array<{ value: string; text: string }>;
         /**
           * Which element value is selected
          */
@@ -2786,6 +2894,11 @@ declare namespace LocalJSX {
     }
     /**
      * Single list item for listing things.
+     * @csspart list-base The container for the list
+     * @csspart list-icon The icon element of the list
+     * @csspart list-image The image element of the list
+     * @csspart list-content The content of the list
+     * @csspart list-button The button element in the list
      */
     interface KlevuList {
         /**
@@ -2808,6 +2921,7 @@ declare namespace LocalJSX {
     }
     /**
      * Simple loading indicator
+     * @csspart loading-indicator-base The container for the loading indicator
      */
     interface KlevuLoadingIndicator {
     }
@@ -2879,6 +2993,10 @@ declare namespace LocalJSX {
     }
     /**
      * Stylized modal dialog.
+     * @csspart modal-base The container for modal dialog
+     * @csspart modal-header The header for modal dialog
+     * @csspart modal-dialog The dialog component
+     * @csspart modal-body The body for modal dialog
      */
     interface KlevuModal {
         /**
@@ -2914,6 +3032,9 @@ declare namespace LocalJSX {
     }
     /**
      * Pagination component. Either provide numbers or query result to display the component.
+     * @csspart pagination-base The container for pagination
+     * @csspart pagination-navigation-previous The previous page button
+     * @csspart pagination-navigation-next The next page button
      */
     interface KlevuPagination {
         /**
@@ -2939,6 +3060,9 @@ declare namespace LocalJSX {
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
+     * @csspart popular-searches-base The container for the popular searches
+     * @csspart popular-searches-caption The caption for the search
+     * @csspart popular-searches-list-item The list item in search
      */
     interface KlevuPopularSearches {
         /**
@@ -2952,7 +3076,7 @@ declare namespace LocalJSX {
     }
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin Origin component
+     * @csspart popup-base The container for the popup
      * @csspart popup-content Content component
      */
     interface KlevuPopup {
@@ -3539,6 +3663,8 @@ declare namespace LocalJSX {
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
      * @prop ratingRange - The number of stars to show
+     * @csspart rating-base The container for rating component
+     * @csspart rating-star The star component
      */
     interface KlevuRating {
         /**
@@ -3836,6 +3962,8 @@ declare namespace LocalJSX {
     /**
      * Very simple tab component. Use like a button, but with a caption.
      * Use standard onClick event to handle click.
+     * @csspart tab-base The tab container
+     * @csspart tab-caption The caption for the tab
      */
     interface KlevuTab {
         /**
@@ -3853,6 +3981,10 @@ declare namespace LocalJSX {
     }
     /**
      * Branded text field component
+     * @csspart textfield-base The container for input box
+     * @csspart textfield-icon The icon at beginning of input
+     * @csspart textfield-input The input box
+     * @csspart textfield-clearbutton The clear button at the end of input
      */
     interface KlevuTextfield {
         /**
@@ -4039,11 +4171,17 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             /**
              * Component that wrap two slots to create accordion element.
+             * @csspart accordion-base The container element for the accordion
+             * @csspart accordion-header The label of the accordion
+             * @csspart accordion-content The content of the accordion
+             * @csspart accordion-icon The icon of the accordion
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             /**
              * Basic badge component. Can be used to display small information on top of other elements. Typically
              * used to display things on top of product.
+             *
+             * @csspart badge-content The content of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
@@ -4057,6 +4195,10 @@ declare module "@stencil/core" {
             "klevu-button": LocalJSX.KlevuButton & JSXBase.HTMLAttributes<HTMLKlevuButtonElement>;
             /**
              * Container for chat items. Very simple component, just a wrapper.
+             * @csspart chat-bubble-base The container for the chat bubble
+             * @csspart chat-bubble-positive-feedback The positive feedback section
+             * @csspart chat-bubble-negative-feedback The negative feedback section
+             * @csspart chat-bubble-feedback-reasons The feedback reasons section
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**
@@ -4066,11 +4208,17 @@ declare module "@stencil/core" {
             "klevu-chat-messages": LocalJSX.KlevuChatMessages & JSXBase.HTMLAttributes<HTMLKlevuChatMessagesElement>;
             /**
              * Checkbox component
+             * @csspart checkbox-base The container element of the checkbox
+             * @csspart checkbox-box The checkbox element
+             * @csspart checkbox-content The label of the checkbox
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             /**
              * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
              * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
+             * @csspart chip-base The container for the chip
+             * @csspart chip-icon The icon for the close button
+             * @csspart chip-content The content for the chip
              */
             "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**
@@ -4083,10 +4231,15 @@ declare module "@stencil/core" {
             "klevu-color-swatch": LocalJSX.KlevuColorSwatch & JSXBase.HTMLAttributes<HTMLKlevuColorSwatchElement>;
             /**
              * Component to create offscreen drawer on left or right side of the screen
+             * @csspart drawer-base The container of the drawer
+             * @csspart drawer-origin The origin of the drawer
+             * @csspart drawer-content The content of the drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**
              * Simple native dropdown component for dropdown
+             * @csspart dropdown-base The container for the dropdown
+             * @csspart dropdown-select The select box
              */
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             /**
@@ -4134,10 +4287,16 @@ declare module "@stencil/core" {
             "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
             /**
              * Single list item for listing things.
+             * @csspart list-base The container for the list
+             * @csspart list-icon The icon element of the list
+             * @csspart list-image The image element of the list
+             * @csspart list-content The content of the list
+             * @csspart list-button The button element in the list
              */
             "klevu-list": LocalJSX.KlevuList & JSXBase.HTMLAttributes<HTMLKlevuListElement>;
             /**
              * Simple loading indicator
+             * @csspart loading-indicator-base The container for the loading indicator
              */
             "klevu-loading-indicator": LocalJSX.KlevuLoadingIndicator & JSXBase.HTMLAttributes<HTMLKlevuLoadingIndicatorElement>;
             /**
@@ -4146,6 +4305,10 @@ declare module "@stencil/core" {
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
             /**
              * Stylized modal dialog.
+             * @csspart modal-base The container for modal dialog
+             * @csspart modal-header The header for modal dialog
+             * @csspart modal-dialog The dialog component
+             * @csspart modal-body The body for modal dialog
              */
             "klevu-modal": LocalJSX.KlevuModal & JSXBase.HTMLAttributes<HTMLKlevuModalElement>;
             /**
@@ -4154,15 +4317,21 @@ declare module "@stencil/core" {
             "klevu-moi": LocalJSX.KlevuMoi & JSXBase.HTMLAttributes<HTMLKlevuMoiElement>;
             /**
              * Pagination component. Either provide numbers or query result to display the component.
+             * @csspart pagination-base The container for pagination
+             * @csspart pagination-navigation-previous The previous page button
+             * @csspart pagination-navigation-next The next page button
              */
             "klevu-pagination": LocalJSX.KlevuPagination & JSXBase.HTMLAttributes<HTMLKlevuPaginationElement>;
             /**
              * Fetches and displays most popular searches from Klevu Merchant center
+             * @csspart popular-searches-base The container for the popular searches
+             * @csspart popular-searches-caption The caption for the search
+             * @csspart popular-searches-list-item The list item in search
              */
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             /**
              * Popup component where clicking origin component popups the the content
-             * @csspart popup-origin Origin component
+             * @csspart popup-base The container for the popup
              * @csspart popup-content Content component
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
@@ -4208,6 +4377,8 @@ declare module "@stencil/core" {
              * Klevu ratings component
              * @prop rating - The rating value as a number to show
              * @prop ratingRange - The number of stars to show
+             * @csspart rating-base The container for rating component
+             * @csspart rating-star The star component
              */
             "klevu-rating": LocalJSX.KlevuRating & JSXBase.HTMLAttributes<HTMLKlevuRatingElement>;
             /**
@@ -4243,10 +4414,16 @@ declare module "@stencil/core" {
             /**
              * Very simple tab component. Use like a button, but with a caption.
              * Use standard onClick event to handle click.
+             * @csspart tab-base The tab container
+             * @csspart tab-caption The caption for the tab
              */
             "klevu-tab": LocalJSX.KlevuTab & JSXBase.HTMLAttributes<HTMLKlevuTabElement>;
             /**
              * Branded text field component
+             * @csspart textfield-base The container for input box
+             * @csspart textfield-icon The icon at beginning of input
+             * @csspart textfield-input The input box
+             * @csspart textfield-clearbutton The clear button at the end of input
              */
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             /**

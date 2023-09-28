@@ -26,15 +26,27 @@ export const Facet: StoryObj<KlevuFacet> = {
   },
   render: (args) =>
     html`<klevu-facet
-      accordion=${ifDefined(args.accordion)}
-      accordion-start-open=${ifDefined(args.accordionStartOpen)}
-      .customOrder=${args.customOrder}
-      .manager=${args.manager}
-      mode=${ifDefined(args.mode)}
-      .option=${args.option}
-      .slider=${args.slider}
-      labelOverride=${ifDefined(args.labelOverride)}
-    ></klevu-facet>`,
+        accordion=${true}
+        accordion-start-open=${ifDefined(args.accordionStartOpen)}
+        .customOrder=${args.customOrder}
+        .manager=${args.manager}
+        mode=${ifDefined(args.mode)}
+        .option=${args.option}
+        .slider=${args.slider}
+        labelOverride=${ifDefined(args.labelOverride)}
+      ></klevu-facet>
+      <style>
+        klevu-facet::part(accordion-header) {
+          --klevu-typography-color: blue;
+          font-size: 30px;
+        }
+        klevu-facet::part(accordion-content) {
+          color: green;
+        }
+        klevu-facet::part(accordion-icon) {
+          color: red;
+        }
+      </style>`,
 }
 
 export const FacetWithRadio: StoryObj<KlevuFacet> = {

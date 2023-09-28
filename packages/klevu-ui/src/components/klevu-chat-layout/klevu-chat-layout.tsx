@@ -131,6 +131,7 @@ export class KlevuChatLayout {
                 </klevu-popup>
               ) : null}
               <klevu-textfield
+                exportparts={partsExports("klevu-textfield")}
                 variant="pill"
                 value={this.text}
                 onKlevuTextChanged={(e) => {

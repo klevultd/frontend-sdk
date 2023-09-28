@@ -18,6 +18,7 @@ import { debounce } from "../../utils/utils"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { getTranslation } from "../../utils/getTranslation"
 import { getKMCSettings } from "../../utils/getKMCSettings"
+import { partsExports } from "../../utils/partsExports"
 
 export type SearchResultsEventData = {
   fallback?: KlevuResponseQueryObject
@@ -315,6 +316,7 @@ export class KlevuSearchField {
     return (
       <Host>
         <klevu-textfield
+          exportparts={partsExports("klevu-textfield")}
           value={this.term}
           placeholder={this.tPlaceholder}
           onKlevuTextChanged={this.#handleChange.bind(this)}

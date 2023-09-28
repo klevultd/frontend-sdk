@@ -2,9 +2,13 @@ import { KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { getTranslation } from "../../utils/getTranslation"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Fetches and displays most popular searches from Klevu Merchant center
+ * @csspart popular-searches-base The container for the popular searches
+ * @csspart popular-searches-caption The caption for the search
+ * @csspart popular-searches-list-item The list item in search
  */
 @Component({
   tag: "klevu-popular-searches",
@@ -45,14 +49,23 @@ export class KlevuPopularSearches {
     }
     return (
       <Host>
-        <klevu-typography class="caption" variant="h3">
-          {this.tCaption}
-        </klevu-typography>
-        {this.popularSearches.map((s) => (
-          <klevu-list condensed noXPadding onClick={() => this.#popularSearchClick(s)}>
-            <span slot="primary">{s}</span>
-          </klevu-list>
-        ))}
+        <div part="popular-searches-base">
+          <klevu-typography class="caption" variant="h3" part="popular-searches-caption">
+            {this.tCaption}
+          </klevu-typography>
+          {this.popularSearches.map((s) => (
+            <klevu-list
+              condensed
+              noXPadding
+              onClick={() => this.#popularSearchClick(s)}
+              exportparts={partsExports("klevu-list")}
+            >
+              <span part="popular-searches-list-item" slot="primary">
+                {s}
+              </span>
+            </klevu-list>
+          ))}
+        </div>
       </Host>
     )
   }

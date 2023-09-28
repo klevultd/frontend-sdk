@@ -10,6 +10,10 @@ export type KlevuMessageFeedbackReasonDetails = {
 /**
  * Container for chat items. Very simple component, just a wrapper.
  *
+ * @csspart chat-bubble-base The container for the chat bubble
+ * @csspart chat-bubble-positive-feedback The positive feedback section
+ * @csspart chat-bubble-negative-feedback The negative feedback section
+ * @csspart chat-bubble-feedback-reasons The feedback reasons section
  */
 @Component({
   tag: "klevu-chat-bubble",
@@ -49,13 +53,20 @@ export class KlevuChatBubble {
           remote: Boolean(this.remote),
         }}
       >
+        {/* <div part="chat-bubble-base"> */}
         <klevu-typography variant="body-s">
           <slot></slot>
         </klevu-typography>
-        {this.feedback?.thumbs === "up" && <klevu-icon class="positive_feedback" name="thumb_up" />}
-        {this.feedback?.thumbs === "down" && <klevu-icon class="negative_feedback" name="thumb_down" />}
+        {this.feedback?.thumbs === "up" && (
+          <div>
+            <klevu-icon part="chat-bubble-positive-feedback" class="positive_feedback" name="thumb_up" />
+          </div>
+        )}
+        {this.feedback?.thumbs === "down" && (
+          <klevu-icon part="chat-bubble-negative-feedback" class="negative_feedback" name="thumb_down" />
+        )}
         {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
-          <div class="feedback_reasons">
+          <div class="feedback_reasons" part="chat-bubble-feedback-reasons">
             <span>{this.tRatingReason}</span>
             {this.feedbackReasons.map((reason) => (
               <klevu-button
@@ -70,6 +81,7 @@ export class KlevuChatBubble {
             ))}
           </div>
         )}
+        {/* </div> */}
       </Host>
     )
   }

@@ -7,7 +7,7 @@ import { Component, Element, h, Host, Listen, Method, Prop, State, Event, EventE
  * @slot origin - Popoup origin that opens content of popup
  * @slot content - Content of the popup
  *
- * @csspart popup-origin Origin component
+ * @csspart popup-base The container for the popup
  * @csspart popup-content Content component
  */
 @Component({
@@ -288,7 +288,7 @@ export class KlevuPopup {
         <div
           id="origin"
           class="originContainer"
-          part="popup-origin"
+          part="popup-base"
           onClick={this.#childItemClicked.bind(this)}
           onFocus={this.#childItemFocussed.bind(this)}
         >

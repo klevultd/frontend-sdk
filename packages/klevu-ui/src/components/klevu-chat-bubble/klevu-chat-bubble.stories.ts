@@ -31,3 +31,30 @@ export const ChatBubble: StoryObj<KlevuChatBubble> = {
     </klevu-chat-layout>
   `,
 }
+
+export const StyledChatBubble: StoryObj<KlevuChatBubble> = {
+  args: {
+    feedback: { id: "1", thumbs: "up" },
+    feedbackReasons: ["sampleReason"],
+  },
+  render: (args) => html`
+    <klevu-chat-bubble
+      id="styledChatBubble"
+      remote=${ifDefined(args.remote)}
+      t-rating-reason=${ifDefined(args.tRatingReason)}
+      .feedback=${args.feedback}
+      .feedbackReasons=${args.feedbackReasons}
+      >Hello world! This is a content for chat bubble!</klevu-chat-bubble
+    >
+    <style>
+      #styledChatBubble::part(chat-bubble-positive-feedback) {
+        background-color: orange;
+        color: white;
+      }
+      #styledChatBubble::part(chat-bubble-feedback-reasons) {
+        color: blue;
+        font-weight: bold;
+      }
+    </style>
+  `,
+}

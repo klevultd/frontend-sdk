@@ -4,6 +4,10 @@ export type KlevuTextfieldVariant = "default" | "pill"
 
 /**
  * Branded text field component
+ * @csspart textfield-base The container for input box
+ * @csspart textfield-icon The icon at beginning of input
+ * @csspart textfield-input The input box
+ * @csspart textfield-clearbutton The clear button at the end of input
  */
 @Component({
   tag: "klevu-textfield",
@@ -85,8 +89,9 @@ export class KlevuTextfield {
 
   render() {
     return (
-      <div>
+      <div part="textfield-base">
         <input
+          part="textfield-input"
           type="text"
           ref={(el) => (this.textInput = el as HTMLInputElement)}
           value={this.value}
@@ -111,10 +116,11 @@ export class KlevuTextfield {
             this.klevuTextChanged.emit(el.value)
           }}
         />
-        {this.icon && <klevu-icon class="icon" name={this.icon} />}
+        {this.icon && <klevu-icon part="textfield-icon" class="icon" name={this.icon} />}
         <slot name="end"></slot>
         {this.clearButton && this.value?.length > 0 && (
           <klevu-icon
+            part="textfield-clearbutton"
             name="clear"
             class="clear"
             onClick={() => {

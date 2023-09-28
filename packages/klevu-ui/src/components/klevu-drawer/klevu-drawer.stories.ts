@@ -69,3 +69,31 @@ export const Drawer: StoryObj<KlevuDrawer> = {
     </div>
   </klevu-drawer>`,
 }
+
+export const StyledDrawer: StoryObj<KlevuDrawer> = {
+  args: {
+    anchor: "left",
+    insertYPadding: true,
+  },
+  render: (args) => html` <klevu-drawer
+      id="styledDrawer"
+      anchor=${ifDefined(args.anchor)}
+      background=${ifDefined(args.background)}
+      close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
+      start-open=${ifDefined(args.startOpen)}
+      insert-y-padding=${ifDefined(args.insertYPadding)}
+    >
+      <klevu-button slot="origin">Open drawer</klevu-button>
+      <div slot="content">Styled drawer</div>
+    </klevu-drawer>
+    <style>
+      #styledDrawer::part(drawer-origin) {
+        background-color: aqua;
+        padding: 10px;
+      }
+      #styledDrawer::part(drawer-content) {
+        font-style: italic;
+        font-size: 20px;
+      }
+    </style>`,
+}

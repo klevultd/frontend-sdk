@@ -324,7 +324,9 @@ export class KlevuProductQueryPopup {
             showFeedbackFor={this.showMessageFeedbackFor}
           >
             <div slot="chat-messages-after">
-              {this.showLoading ? <klevu-loading-indicator /> : null}
+              {this.showLoading ? (
+                <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
+              ) : null}
               {this.showLoadingSorry ? (
                 <klevu-typography class="loading-sorry" variant="body-xs">
                   {this.tLoadingSorry}
@@ -337,6 +339,7 @@ export class KlevuProductQueryPopup {
               <Fragment>
                 <div class="inputs">
                   <klevu-textfield
+                    exportparts={partsExports("klevu-textfield")}
                     value={this.name}
                     variant="pill"
                     placeholder="Name"
@@ -344,6 +347,7 @@ export class KlevuProductQueryPopup {
                     onKlevuTextChanged={(e) => (this.name = e.detail)}
                   ></klevu-textfield>
                   <klevu-textfield
+                    exportparts={partsExports("klevu-textfield")}
                     value={this.email}
                     variant="pill"
                     placeholder="Email"
@@ -359,6 +363,7 @@ export class KlevuProductQueryPopup {
             ) : (
               <div class="sendmessage">
                 <klevu-textfield
+                  exportparts={partsExports("klevu-textfield")}
                   value={this.text}
                   variant={this.textFieldVariant}
                   placeholder={this.tTextFieldPlaceholder}

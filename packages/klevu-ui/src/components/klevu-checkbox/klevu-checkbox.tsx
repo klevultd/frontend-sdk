@@ -5,6 +5,9 @@ import { Component, h, Prop, Event, EventEmitter, Host, Element, State } from "@
 
 /**
  * Checkbox component
+ * @csspart checkbox-base The container element of the checkbox
+ * @csspart checkbox-box The checkbox element
+ * @csspart checkbox-content The label of the checkbox
  */
 @Component({
   tag: "klevu-checkbox",
@@ -46,8 +49,9 @@ export class KlevuCheckbox {
   render() {
     return (
       <Host>
-        <div class="check">
+        <div class="check" part="checkbox-base">
           <input
+            part="checkbox-box"
             type="checkbox"
             checked={this.checked}
             disabled={this.disabled}
@@ -59,7 +63,7 @@ export class KlevuCheckbox {
         </div>
         {this.renderContent && (
           <label class="content" htmlFor={this.name}>
-            <klevu-typography variant="body-s" fullWidth>
+            <klevu-typography variant="body-s" fullWidth part="checkbox-content">
               <slot />
             </klevu-typography>
           </label>

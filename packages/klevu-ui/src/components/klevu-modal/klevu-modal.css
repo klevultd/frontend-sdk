@@ -5,15 +5,16 @@
 dialog {
   border: none !important;
   border-radius: var(--klevu-border-radius-m);
-  padding: var(--klevu-spacing-04);
+  padding: 0;
   box-shadow: var(--klevu-elevation-1);
 }
 
 main {
-  padding: var(--klevu-spacing-04) 0;
+  padding: var(--klevu-spacing-04);
 }
 
 header {
+  padding: var(--klevu-spacing-04);
   display: flex;
   justify-content: space-between;
   align-items: center;

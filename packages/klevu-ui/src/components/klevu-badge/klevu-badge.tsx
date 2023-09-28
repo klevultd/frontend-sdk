@@ -5,6 +5,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  * used to display things on top of product.
  *
  * @slot default - Badge content
+ * @csspart badge-content The content of the badge
  */
 @Component({
   tag: "klevu-badge",
@@ -34,7 +35,9 @@ export class KlevuBadge {
     return (
       <Host style={style}>
         <klevu-typography variant="body-xs">
-          <slot></slot>
+          <span part="badge-content">
+            <slot></slot>
+          </span>
         </klevu-typography>
       </Host>
     )

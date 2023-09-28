@@ -18,9 +18,27 @@ export default meta
 export const Rating: StoryObj<KlevuRating> = {
   args: {
     rating: 3,
-    ratingRange: 5
+    ratingRange: 5,
   },
   render: (args) => html`
     <klevu-rating rating=${ifDefined(args.rating)} rating-range=${ifDefined(args.ratingRange)}></klevu-rating>
+  `,
+}
+export const StyledRating: StoryObj<KlevuRating> = {
+  args: {
+    rating: 3,
+    ratingRange: 5,
+  },
+  render: (args) => html`
+    <klevu-rating
+      id="styledRating"
+      rating=${ifDefined(args.rating)}
+      rating-range=${ifDefined(args.ratingRange)}
+    ></klevu-rating>
+    <style>
+      #styledRating::part(rating-star) {
+        fill: red;
+      }
+    </style>
   `,
 }

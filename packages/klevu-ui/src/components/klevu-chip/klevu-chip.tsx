@@ -5,6 +5,9 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  *
  * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
  *
+ * @csspart chip-base The container for the chip
+ * @csspart chip-icon The icon for the close button
+ * @csspart chip-content The content for the chip
  */
 @Component({
   tag: "klevu-chip",
@@ -40,10 +43,12 @@ export class KlevuChip {
   render() {
     return (
       <Host class={{ removable: Boolean(this.removable), selected: Boolean(this.selected) }}>
-        {this.removable && <klevu-icon name="close" onClick={this.#close.bind(this)} />}
-        <klevu-typography variant="body-xs">
-          <slot></slot>
-        </klevu-typography>
+        <div part="chip-base">
+          {this.removable && <klevu-icon part="chip-icon" name="close" onClick={this.#close.bind(this)} />}
+          <klevu-typography variant="body-xs" part="chip-content">
+            <slot></slot>
+          </klevu-typography>
+        </div>
       </Host>
     )
   }

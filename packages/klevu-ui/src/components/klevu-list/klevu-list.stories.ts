@@ -101,3 +101,20 @@ export const ListWithUrl: StoryObj<KlevuList> = {
       <span slot="secondary">Seconday text on the list item</span>
     </klevu-list>`,
 }
+
+export const StyledList: StoryObj<KlevuList> = {
+  args: {
+    condensed: false,
+    noXPadding: false,
+  },
+  render: (args) => html`
+    <klevu-list id="styledList" condensed=${ifDefined(args.condensed)} no-x-padding=${ifDefined(args.noXPadding)}>
+      <span slot="primary">List items styled using parts</span>
+    </klevu-list>
+    <style>
+      #styledList::part(list-content) {
+        font-style: italic;
+      }
+    </style>
+  `,
+}

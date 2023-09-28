@@ -605,6 +605,7 @@ export class KlevuQuicksearch {
                 </slot>
               </klevu-product-grid>
               <klevu-pagination
+                exportparts={partsExports("klevu-pagination")}
                 queryResult={this.queryResult}
                 onKlevuPaginationChange={this.#searchPageChange.bind(this)}
               ></klevu-pagination>
@@ -664,6 +665,7 @@ export class KlevuQuicksearch {
           {((!this.hidePopularSearches && !isNoResultsPage) ||
             (!this.hidePopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
             <klevu-popular-searches
+              exportparts={partsExports("klevu-popular-searches")}
               onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-popular-searches>
           )}
@@ -685,6 +687,7 @@ export class KlevuQuicksearch {
               {((!this.hideTrendingProducts && !isNoResultsPage) ||
                 (!this.hideTrendingProductsOnNoResultsPage && isNoResultsPage)) && (
                 <klevu-tab
+                  exportparts={partsExports("klevu-tab")}
                   caption={stringConcat(this.tTrendingCaption ?? getTranslation("quicksearch.tTrendingCaption"), [
                     `${this.trendingProducts?.length ?? 0}`,
                   ])}
@@ -694,6 +697,7 @@ export class KlevuQuicksearch {
               )}
               {!this.hideRecentlyViewedProducts && !isNoResultsPage && (
                 <klevu-tab
+                  exportparts={partsExports("klevu-tab")}
                   caption={stringConcat(
                     this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
                     [`${this.lastClickedProducts?.length ?? 0}`]

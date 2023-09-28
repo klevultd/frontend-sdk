@@ -39,3 +39,13 @@ export const NeutralBadges: StoryObj<KlevuBadge> = {
 export const CustomColor: StoryObj<KlevuBadge> = {
   render: (args) => html`<klevu-badge style="--klevu-badge-background: salmon;">Badge 1</klevu-badge>`,
 }
+
+export const StyledBadgeUsingParts: StoryObj<KlevuBadge> = {
+  render: (args) => html`<klevu-badge id="badgeUsingParts" accent="2">Badge 1</klevu-badge>
+    <style>
+      #badgeUsingParts::part(badge-content) {
+        font-size: 18px;
+        font-style: italic;
+      }
+    </style>`,
+}

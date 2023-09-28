@@ -5,6 +5,11 @@ import { Component, Host, h, Prop, Fragment, Element, State, Listen } from "@ste
  *
  * @slot primary - Primary text
  * @slot secondary - Secondary text
+ * @csspart list-base The container for the list
+ * @csspart list-icon The icon element of the list
+ * @csspart list-image The image element of the list
+ * @csspart list-content The content of the list
+ * @csspart list-button The button element in the list
  */
 @Component({
   tag: "klevu-list",
@@ -54,9 +59,9 @@ export class KlevuList {
   #getContent() {
     return (
       <Fragment>
-        {this.icon && <klevu-icon class="icon" name={this.icon} />}
-        {this.image && <img class="image" src={this.image} />}
-        <div class="text">
+        {this.icon && <klevu-icon part="list-icon" class="icon" name={this.icon} />}
+        {this.image && <img part="list-image" class="image" src={this.image} />}
+        <div class="text" part="list-content">
           <klevu-typography variant="body-s">
             <slot name="primary"></slot>
           </klevu-typography>
@@ -71,7 +76,9 @@ export class KlevuList {
             </klevu-typography>
           )}
         </div>
-        <slot name="button"></slot>
+        <span part="list-button">
+          <slot name="button"></slot>
+        </span>
       </Fragment>
     )
   }
@@ -79,27 +86,29 @@ export class KlevuList {
   render() {
     return (
       <Host>
-        {Boolean(this.url) ? (
-          <a
-            class={{
-              condensed: this.condensed,
-              noXPadding: this.noXPadding,
-            }}
-            href={this.url}
-          >
-            {this.#getContent()}
-          </a>
-        ) : (
-          <div
-            class={{
-              container: true,
-              condensed: this.condensed,
-              noXPadding: this.noXPadding,
-            }}
-          >
-            {this.#getContent()}
-          </div>
-        )}
+        <div part="list-base">
+          {Boolean(this.url) ? (
+            <a
+              class={{
+                condensed: this.condensed,
+                noXPadding: this.noXPadding,
+              }}
+              href={this.url}
+            >
+              {this.#getContent()}
+            </a>
+          ) : (
+            <div
+              class={{
+                container: true,
+                condensed: this.condensed,
+                noXPadding: this.noXPadding,
+              }}
+            >
+              {this.#getContent()}
+            </div>
+          )}
+        </div>
       </Host>
     )
   }

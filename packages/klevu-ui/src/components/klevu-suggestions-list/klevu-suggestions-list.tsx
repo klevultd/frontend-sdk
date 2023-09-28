@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 import { stripTags } from "../../utils/utils"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
@@ -40,7 +41,7 @@ export class KlevuSuggestionsList {
           {this.caption}
         </klevu-typography>
         {this.suggestions.map((s) => (
-          <klevu-list condensed noXPadding>
+          <klevu-list condensed noXPadding exportparts={partsExports("klevu-list")}>
             <span slot="primary" innerHTML={s} onClick={() => this.#suggestionClick(stripTags(s))}></span>
           </klevu-list>
         ))}

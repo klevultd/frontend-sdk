@@ -3,7 +3,9 @@
   * @prop --klevu-pagination-selected-text-color var(--klevu-color-primary-text): text color of selected item
   */
   --selected-color: var(--klevu-pagination-selected-color, var(--klevu-color-primary));
+}
 
+:host div {
   display: flex;
   gap: var(--klevu-spacing-03);
   justify-content: center;

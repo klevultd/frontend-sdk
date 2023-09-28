@@ -6,6 +6,10 @@ import { Component, h, Host, Prop } from "@stencil/core"
  * @slot header - Element that has title that can be clicked
  * @slot content - Element containing content of the accordion
  * @slot icon - Icon element
+ * @csspart accordion-base The container element for the accordion
+ * @csspart accordion-header The label of the accordion
+ * @csspart accordion-content The content of the accordion
+ * @csspart accordion-icon The icon of the accordion
  */
 @Component({
   tag: "klevu-accordion",
@@ -38,15 +42,19 @@ export class KlevuAccordion {
   render() {
     return (
       <Host>
-        <input type="checkbox" id={this.#id} checked={this.open} onChange={() => (this.open = !this.open)} />
-        <label htmlFor={this.#id}>
-          <klevu-typography variant="body-s-bold">
-            <slot name="header"></slot>
-          </klevu-typography>
-          <klevu-icon name="expand_more"></klevu-icon>
-        </label>
-        <div class="content">
-          <slot name="content"></slot>
+        <div part="accordion-base">
+          <input type="checkbox" id={this.#id} checked={this.open} onChange={() => (this.open = !this.open)} />
+          <label htmlFor={this.#id}>
+            <klevu-typography variant="body-s-bold">
+              <span part="accordion-header">
+                <slot name="header"></slot>
+              </span>
+            </klevu-typography>
+            <klevu-icon name="expand_more" part="accordion-icon"></klevu-icon>
+          </label>
+          <div class="content" part="accordion-content">
+            <slot name="content"></slot>
+          </div>
         </div>
       </Host>
     )

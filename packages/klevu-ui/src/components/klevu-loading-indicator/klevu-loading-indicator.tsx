@@ -3,6 +3,7 @@ import { Component, Host, h } from "@stencil/core"
 /**
  * Simple loading indicator
  *
+ * @csspart loading-indicator-base The container for the loading indicator
  */
 @Component({
   tag: "klevu-loading-indicator",
@@ -13,7 +14,7 @@ export class KlevuLoadingIndicator {
   render() {
     return (
       <Host>
-        <div class="dot-pulse"></div>
+        <div part="loading-indicator-base" class="dot-pulse"></div>
       </Host>
     )
   }

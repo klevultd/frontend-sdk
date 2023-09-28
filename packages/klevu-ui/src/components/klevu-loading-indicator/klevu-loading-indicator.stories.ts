@@ -17,3 +17,15 @@ export default meta
 export const LoadingIndicator: StoryObj<KlevuLoadingIndicator> = {
   render: () => html`<klevu-loading-indicator></klevu-loading-indicator>`,
 }
+
+export const StyledLoadingIndicator: StoryObj<KlevuLoadingIndicator> = {
+  render: () => html`<klevu-loading-indicator id="styledLoadingIndicator"></klevu-loading-indicator></div>
+    <style>
+      #styledLoadingIndicator::part(loading-indicator-base)::before,
+      #styledLoadingIndicator::part(loading-indicator-base),
+      #styledLoadingIndicator::part(loading-indicator-base)::after {
+        color: red;
+        background-color: red;
+      }
+    </style> `,
+}

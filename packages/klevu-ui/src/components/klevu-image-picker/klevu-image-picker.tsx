@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stencil/core"
+import { partsExports } from "../../utils/partsExports"
 
 export type KlevuImageSelectedEvent = { name: string; image: Blob }
 
@@ -58,7 +59,7 @@ export class KlevuImagePicker {
           </p>
           <label htmlFor="select-image">
             {this.isLoading ? (
-              <klevu-loading-indicator />
+              <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
             ) : (
               <Fragment>
                 <klevu-icon name="upload" />
@@ -86,7 +87,7 @@ export class KlevuImagePicker {
               people or sensitive information.
             </klevu-typography>
           </p>
-          <klevu-accordion>
+          <klevu-accordion exportparts={partsExports("klevu-accordion")}>
             <span slot="header">How does this work?</span>
             <div slot="content">
               <klevu-typography variant="body-xs">
