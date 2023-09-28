@@ -508,13 +508,16 @@ export class KlevuSearchLandingPage {
                 {!this.loading && this.#renderNoResultBanners()}
                 {this.#noResultsOptions?.showPopularKeywords && (
                   <klevu-popular-searches
+                    exportparts={partsExports("klevu-popular-searches")}
                     onKlevuPopularSearchClicked={(event) => this.#updateTerm(event.detail)}
                   ></klevu-popular-searches>
                 )}
               </slot>
             )}
 
-            {this.loading && !this.infiniteScrollingPaused && <klevu-loading-indicator />}
+            {this.loading && !this.infiniteScrollingPaused && (
+              <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
+            )}
             <slot name="bottombanners">
               {this.searchResultBottomBanners.map((b) => (
                 <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
@@ -535,6 +538,7 @@ export class KlevuSearchLandingPage {
               ></klevu-util-infinite-scroll>
             ) : this.usePagination && this.#resultObject ? (
               <klevu-pagination
+                exportparts={partsExports("klevu-pagination")}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>

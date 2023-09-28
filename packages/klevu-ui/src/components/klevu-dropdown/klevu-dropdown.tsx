@@ -7,6 +7,8 @@ export type KlevuDropdownVariant = "default" | "inline"
  *
  * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
  * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+ * @csspart dropdown-base The container for the dropdown
+ * @csspart dropdown-select The select box
  */
 @Component({
   tag: "klevu-dropdown",
@@ -22,7 +24,7 @@ export class KlevuDropdown {
   /**
    * Options to display in dropdown
    */
-  @Prop() options!: Array<{ value: string; text: String }>
+  @Prop() options!: Array<{ value: string; text: string }>
   /**
    * Is element disabled
    */
@@ -59,8 +61,9 @@ export class KlevuDropdown {
             inline: this.variant === "inline",
             default: this.variant === "default",
           }}
+          part="dropdown-base"
         >
-          <select name={this.name} disabled={this.disabled} onChange={this.#onChange.bind(this)}>
+          <select name={this.name} disabled={this.disabled} onChange={this.#onChange.bind(this)} part="dropdown-select">
             {this.options?.map((o) => (
               <option selected={this.selected === o.value} value={o.value}>
                 {o.text}

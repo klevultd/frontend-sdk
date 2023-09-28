@@ -1,6 +1,7 @@
 import { KlevuRecord } from "@klevu/core"
 import { Component, Event, EventEmitter, Fragment, h, Host, Prop } from "@stencil/core"
 import { getTranslation } from "../../utils/getTranslation"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Component to display list of CMS page results
@@ -39,13 +40,18 @@ export class KlevuCmsList {
         {this.pages?.map((page) => {
           if (this.link) {
             return (
-              <klevu-list url={page.url} condensed noXPadding>
+              <klevu-list url={page.url} condensed noXPadding exportparts={partsExports("klevu-list")}>
                 <span slot="primary">{page.name}</span>
               </klevu-list>
             )
           }
           return (
-            <klevu-list onClick={() => this.klevuCmsPageClick.emit(page)} condensed noXPadding>
+            <klevu-list
+              onClick={() => this.klevuCmsPageClick.emit(page)}
+              exportparts={partsExports("klevu-list")}
+              condensed
+              noXPadding
+            >
               <span slot="primary">{page.name}</span>
             </klevu-list>
           )

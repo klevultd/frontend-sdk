@@ -2,6 +2,7 @@ import { Component, Host, h, State, Fragment, Prop, Event, EventEmitter, Listen,
 
 import { startMoi, MoiSession, MoiRequest, MoiProducts, MoiProduct, MoiMessages, KlevuConfig } from "@klevu/core"
 import { KlevuInit } from "../klevu-init/klevu-init"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Klevu MOI Application
@@ -261,7 +262,11 @@ export class KlevuMoi {
                 }}
                 messages={this.messages}
               ></klevu-chat-messages>
-              {this.loading && <klevu-loading-indicator></klevu-loading-indicator>}
+              {this.loading && (
+                <klevu-loading-indicator
+                  exportparts={partsExports("klevu-loading-indicator")}
+                ></klevu-loading-indicator>
+              )}
               <div slot="actions" class="genericactions">
                 {this.session?.genericOptions?.options.map((item) => (
                   <klevu-button

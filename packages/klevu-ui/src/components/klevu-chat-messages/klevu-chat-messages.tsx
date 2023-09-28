@@ -1,5 +1,6 @@
 import { MoiMessages, MoiProduct, MoiResponseFilter, MoiResponseText, MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stencil/core"
+import { partsExports } from "../../utils/partsExports"
 
 export type onKlevuMessageFeedbackDetails = {
   message: MoiResponseText["message"]
@@ -81,6 +82,7 @@ export class KlevuChatMessages {
               <Fragment>
                 <div class="message-container">
                   <klevu-chat-bubble
+                    exportparts={partsExports("klevu-chat-bubble")}
                     feedback={message.message.collectFeedback ? givenFeedback : undefined}
                     feedbackReasons={showFeedback ? this.feedbackReasons : undefined}
                     remote

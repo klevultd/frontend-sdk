@@ -51,3 +51,21 @@ export const FormFields: StoryObj<KlevuTextfield> = {
     ></klevu-dropdown>
   </div>`,
 }
+
+export const StyledTextfield: StoryObj<KlevuTextfield> = {
+  render: (args) => html`<klevu-textfield
+      id="styledTextField"
+      disabled=${ifDefined(args.disabled)}
+      placeholder=${ifDefined(args.placeholder)}
+      value=${ifDefined(args.value)}
+      error=${ifDefined(args.error)}
+      variant=${ifDefined(args.variant)}
+      icon=${ifDefined(args.icon)}
+      clear-button=${ifDefined(args.clearButton)}
+    ></klevu-textfield>
+    <style>
+      #styledTextField::part(textfield-input) {
+        background-color: aqua;
+      }
+    </style>`,
+}

@@ -46,3 +46,33 @@ export const Accordion: StoryObj<KlevuAccordion> = {
     </klevu-accordion>
   `,
 }
+
+export const StyledAccordion: StoryObj<KlevuAccordion> = {
+  args: {
+    startOpen: true,
+  },
+  render: (args) => html`
+    <klevu-accordion id="styledAccordion" startOpen=${ifDefined(args.startOpen)}>
+      <span slot="header">Heading</span>
+      <div slot="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl
+        aliquet. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl aliquet. Sed euismod nunc vitae nisl aliquet, nec
+        lacinia nisl aliquet.
+      </div>
+    </klevu-accordion>
+
+    <style>
+      #styledAccordion::part(accordion-header) {
+        font-style: italic;
+        background: rgba(#ccc, 0.3);
+      }
+      #styledAccordion::part(accordion-content) {
+        font-size: 12px;
+      }
+      #styledAccordion::part(accordion-icon) {
+        color: purple;
+        font-size: 30px;
+      }
+    </style>
+  `,
+}

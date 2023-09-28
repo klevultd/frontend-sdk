@@ -8,6 +8,9 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
  * @cssprop --klevu-pagination-text-color - text color of item
  * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
  * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+ * @csspart pagination-base The container for pagination
+ * @csspart pagination-navigation-previous The previous page button
+ * @csspart pagination-navigation-next The next page button
  */
 @Component({
   tag: "klevu-pagination",
@@ -91,36 +94,41 @@ export class KlevuPagination {
 
     return (
       <Host>
-        <klevu-icon
-          class={{
-            disabled: current === min,
-          }}
-          onClick={() => current !== min && this.klevuPaginationChange.emit(current - 1)}
-          name="navigate_before"
-        />
-        {pages.map((i) => {
-          if (i == -1) {
-            return <span class="disabled dots">...</span>
-          }
+        <div part="pagination-base">
+          <klevu-icon
+            class={{
+              disabled: current === min,
+            }}
+            onClick={() => current !== min && this.klevuPaginationChange.emit(current - 1)}
+            name="navigate_before"
+            part="pagination-navigation-previous"
+          />
+          {pages.map((i) => {
+            if (i == -1) {
+              return <span class="disabled dots">...</span>
+            }
 
-          return (
-            <span
-              class={{
-                current: current === i,
-              }}
-              onClick={() => current !== i && this.klevuPaginationChange.emit(i)}
-            >
-              {i}
-            </span>
-          )
-        })}
-        <klevu-icon
-          class={{
-            disabled: current === max,
-          }}
-          onClick={() => current !== max && this.klevuPaginationChange.emit(current + 1)}
-          name="navigate_next"
-        />
+            return (
+              <span
+                class={{
+                  current: current === i,
+                }}
+                onClick={() => current !== i && this.klevuPaginationChange.emit(i)}
+                part="pagination-page-number"
+              >
+                {i}
+              </span>
+            )
+          })}
+          <klevu-icon
+            class={{
+              disabled: current === max,
+            }}
+            onClick={() => current !== max && this.klevuPaginationChange.emit(current + 1)}
+            name="navigate_next"
+            part="pagination-navigation-next"
+          />
+        </div>
       </Host>
     )
   }

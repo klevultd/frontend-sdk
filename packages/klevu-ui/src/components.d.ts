@@ -59,6 +59,10 @@ export namespace Components {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-base The container element for the accordion
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -75,6 +79,7 @@ export namespace Components {
      * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+     * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
         /**
@@ -147,6 +152,10 @@ export namespace Components {
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface KlevuChatBubble {
         /**
@@ -206,6 +215,9 @@ export namespace Components {
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -228,6 +240,9 @@ export namespace Components {
      * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
      * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
      * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface KlevuChip {
         /**
@@ -291,6 +306,9 @@ export namespace Components {
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
      * @cssprop --klevu-drawer-width 400px width of drawer
+     * @csspart drawer-base The container of the drawer
+     * @csspart drawer-origin The origin of the drawer
+     * @csspart drawer-content The content of the drawer
      */
     interface KlevuDrawer {
         /**
@@ -320,6 +338,8 @@ export namespace Components {
      * Simple native dropdown component for dropdown
      * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
      * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+     * @csspart dropdown-base The container for the dropdown
+     * @csspart dropdown-select The select box
      */
     interface KlevuDropdown {
         /**
@@ -333,7 +353,7 @@ export namespace Components {
         /**
           * Options to display in dropdown
          */
-        "options": Array<{ value: string; text: String }>;
+        "options": Array<{ value: string; text: string }>;
         /**
           * Which element value is selected
          */
@@ -564,6 +584,11 @@ export namespace Components {
     }
     /**
      * Single list item for listing things.
+     * @csspart list-base The container for the list
+     * @csspart list-icon The icon element of the list
+     * @csspart list-image The image element of the list
+     * @csspart list-content The content of the list
+     * @csspart list-button The button element in the list
      */
     interface KlevuList {
         /**
@@ -587,6 +612,7 @@ export namespace Components {
     /**
      * Simple loading indicator
      * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+     * @csspart loading-indicator-base The container for the loading indicator
      */
     interface KlevuLoadingIndicator {
     }
@@ -657,6 +683,10 @@ export namespace Components {
     }
     /**
      * Stylized modal dialog.
+     * @csspart modal-base The container for modal dialog
+     * @csspart modal-header The header for modal dialog
+     * @csspart modal-dialog The dialog component
+     * @csspart modal-body The body for modal dialog
      */
     interface KlevuModal {
         /**
@@ -696,6 +726,9 @@ export namespace Components {
      * @cssprop --klevu-pagination-text-color - text color of item
      * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
      * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+     * @csspart pagination-base The container for pagination
+     * @csspart pagination-navigation-previous The previous page button
+     * @csspart pagination-navigation-next The next page button
      */
     interface KlevuPagination {
         /**
@@ -717,6 +750,9 @@ export namespace Components {
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
+     * @csspart popular-searches-base The container for the popular searches
+     * @csspart popular-searches-caption The caption for the search
+     * @csspart popular-searches-list-item The list item in search
      */
     interface KlevuPopularSearches {
         /**
@@ -726,7 +762,7 @@ export namespace Components {
     }
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin Origin component
+     * @csspart popup-base The container for the popup
      * @csspart popup-content Content component
      */
     interface KlevuPopup {
@@ -1301,6 +1337,8 @@ export namespace Components {
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
      * @prop ratingRange - The number of stars to show
+     * @csspart rating-base The container for rating component
+     * @csspart rating-star The star component
      */
     interface KlevuRating {
         /**
@@ -1587,6 +1625,8 @@ export namespace Components {
     /**
      * Very simple tab component. Use like a button, but with a caption.
      * Use standard onClick event to handle click.
+     * @csspart tab-base The tab container
+     * @csspart tab-caption The caption for the tab
      */
     interface KlevuTab {
         /**
@@ -1604,6 +1644,10 @@ export namespace Components {
     }
     /**
      * Branded text field component
+     * @csspart textfield-base The container for input box
+     * @csspart textfield-icon The icon at beginning of input
+     * @csspart textfield-input The input box
+     * @csspart textfield-clearbutton The clear button at the end of input
      */
     interface KlevuTextfield {
         /**
@@ -1868,6 +1912,10 @@ declare global {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-base The container element for the accordion
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface HTMLKlevuAccordionElement extends Components.KlevuAccordion, HTMLStencilElement {
     }
@@ -1880,6 +1928,7 @@ declare global {
      * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+     * @csspart badge-content The content of the badge
      */
     interface HTMLKlevuBadgeElement extends Components.KlevuBadge, HTMLStencilElement {
     }
@@ -1919,6 +1968,10 @@ declare global {
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface HTMLKlevuChatBubbleElement extends Components.KlevuChatBubble, HTMLStencilElement {
     }
@@ -1946,6 +1999,9 @@ declare global {
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface HTMLKlevuCheckboxElement extends Components.KlevuCheckbox, HTMLStencilElement {
     }
@@ -1960,6 +2016,9 @@ declare global {
      * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
      * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
      * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface HTMLKlevuChipElement extends Components.KlevuChip, HTMLStencilElement {
     }
@@ -1995,6 +2054,9 @@ declare global {
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
      * @cssprop --klevu-drawer-width 400px width of drawer
+     * @csspart drawer-base The container of the drawer
+     * @csspart drawer-origin The origin of the drawer
+     * @csspart drawer-content The content of the drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -2006,6 +2068,8 @@ declare global {
      * Simple native dropdown component for dropdown
      * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
      * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+     * @csspart dropdown-base The container for the dropdown
+     * @csspart dropdown-select The select box
      */
     interface HTMLKlevuDropdownElement extends Components.KlevuDropdown, HTMLStencilElement {
     }
@@ -2120,6 +2184,11 @@ declare global {
     };
     /**
      * Single list item for listing things.
+     * @csspart list-base The container for the list
+     * @csspart list-icon The icon element of the list
+     * @csspart list-image The image element of the list
+     * @csspart list-content The content of the list
+     * @csspart list-button The button element in the list
      */
     interface HTMLKlevuListElement extends Components.KlevuList, HTMLStencilElement {
     }
@@ -2130,6 +2199,7 @@ declare global {
     /**
      * Simple loading indicator
      * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+     * @csspart loading-indicator-base The container for the loading indicator
      */
     interface HTMLKlevuLoadingIndicatorElement extends Components.KlevuLoadingIndicator, HTMLStencilElement {
     }
@@ -2148,6 +2218,10 @@ declare global {
     };
     /**
      * Stylized modal dialog.
+     * @csspart modal-base The container for modal dialog
+     * @csspart modal-header The header for modal dialog
+     * @csspart modal-dialog The dialog component
+     * @csspart modal-body The body for modal dialog
      */
     interface HTMLKlevuModalElement extends Components.KlevuModal, HTMLStencilElement {
     }
@@ -2170,6 +2244,9 @@ declare global {
      * @cssprop --klevu-pagination-text-color - text color of item
      * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
      * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+     * @csspart pagination-base The container for pagination
+     * @csspart pagination-navigation-previous The previous page button
+     * @csspart pagination-navigation-next The next page button
      */
     interface HTMLKlevuPaginationElement extends Components.KlevuPagination, HTMLStencilElement {
     }
@@ -2179,6 +2256,9 @@ declare global {
     };
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
+     * @csspart popular-searches-base The container for the popular searches
+     * @csspart popular-searches-caption The caption for the search
+     * @csspart popular-searches-list-item The list item in search
      */
     interface HTMLKlevuPopularSearchesElement extends Components.KlevuPopularSearches, HTMLStencilElement {
     }
@@ -2188,7 +2268,7 @@ declare global {
     };
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin Origin component
+     * @csspart popup-base The container for the popup
      * @csspart popup-content Content component
      */
     interface HTMLKlevuPopupElement extends Components.KlevuPopup, HTMLStencilElement {
@@ -2275,6 +2355,8 @@ declare global {
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
      * @prop ratingRange - The number of stars to show
+     * @csspart rating-base The container for rating component
+     * @csspart rating-star The star component
      */
     interface HTMLKlevuRatingElement extends Components.KlevuRating, HTMLStencilElement {
     }
@@ -2351,6 +2433,8 @@ declare global {
     /**
      * Very simple tab component. Use like a button, but with a caption.
      * Use standard onClick event to handle click.
+     * @csspart tab-base The tab container
+     * @csspart tab-caption The caption for the tab
      */
     interface HTMLKlevuTabElement extends Components.KlevuTab, HTMLStencilElement {
     }
@@ -2360,6 +2444,10 @@ declare global {
     };
     /**
      * Branded text field component
+     * @csspart textfield-base The container for input box
+     * @csspart textfield-icon The icon at beginning of input
+     * @csspart textfield-input The input box
+     * @csspart textfield-clearbutton The clear button at the end of input
      */
     interface HTMLKlevuTextfieldElement extends Components.KlevuTextfield, HTMLStencilElement {
     }
@@ -2505,6 +2593,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
      * @cssprop --klevu-accordion-background transparent Header background
      * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+     * @csspart accordion-base The container element for the accordion
+     * @csspart accordion-header The label of the accordion
+     * @csspart accordion-content The content of the accordion
+     * @csspart accordion-icon The icon of the accordion
      */
     interface KlevuAccordion {
         /**
@@ -2521,6 +2613,7 @@ declare namespace LocalJSX {
      * used to display things on top of product.
      * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
      * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+     * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
         /**
@@ -2598,6 +2691,10 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
      * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
      * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+     * @csspart chat-bubble-base The container for the chat bubble
+     * @csspart chat-bubble-positive-feedback The positive feedback section
+     * @csspart chat-bubble-negative-feedback The negative feedback section
+     * @csspart chat-bubble-feedback-reasons The feedback reasons section
      */
     interface KlevuChatBubble {
         /**
@@ -2670,6 +2767,9 @@ declare namespace LocalJSX {
      * Checkbox component
      * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
      * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+     * @csspart checkbox-base The container element of the checkbox
+     * @csspart checkbox-box The checkbox element
+     * @csspart checkbox-content The label of the checkbox
      */
     interface KlevuCheckbox {
         /**
@@ -2693,6 +2793,9 @@ declare namespace LocalJSX {
      * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
      * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
      * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+     * @csspart chip-base The container for the chip
+     * @csspart chip-icon The icon for the close button
+     * @csspart chip-content The content for the chip
      */
     interface KlevuChip {
         /**
@@ -2765,6 +2868,9 @@ declare namespace LocalJSX {
      * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
      * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
      * @cssprop --klevu-drawer-width 400px width of drawer
+     * @csspart drawer-base The container of the drawer
+     * @csspart drawer-origin The origin of the drawer
+     * @csspart drawer-content The content of the drawer
      */
     interface KlevuDrawer {
         /**
@@ -2792,6 +2898,8 @@ declare namespace LocalJSX {
      * Simple native dropdown component for dropdown
      * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
      * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+     * @csspart dropdown-base The container for the dropdown
+     * @csspart dropdown-select The select box
      */
     interface KlevuDropdown {
         /**
@@ -2809,7 +2917,7 @@ declare namespace LocalJSX {
         /**
           * Options to display in dropdown
          */
-        "options": Array<{ value: string; text: String }>;
+        "options": Array<{ value: string; text: string }>;
         /**
           * Which element value is selected
          */
@@ -3040,6 +3148,11 @@ declare namespace LocalJSX {
     }
     /**
      * Single list item for listing things.
+     * @csspart list-base The container for the list
+     * @csspart list-icon The icon element of the list
+     * @csspart list-image The image element of the list
+     * @csspart list-content The content of the list
+     * @csspart list-button The button element in the list
      */
     interface KlevuList {
         /**
@@ -3063,6 +3176,7 @@ declare namespace LocalJSX {
     /**
      * Simple loading indicator
      * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+     * @csspart loading-indicator-base The container for the loading indicator
      */
     interface KlevuLoadingIndicator {
     }
@@ -3134,6 +3248,10 @@ declare namespace LocalJSX {
     }
     /**
      * Stylized modal dialog.
+     * @csspart modal-base The container for modal dialog
+     * @csspart modal-header The header for modal dialog
+     * @csspart modal-dialog The dialog component
+     * @csspart modal-body The body for modal dialog
      */
     interface KlevuModal {
         /**
@@ -3173,6 +3291,9 @@ declare namespace LocalJSX {
      * @cssprop --klevu-pagination-text-color - text color of item
      * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
      * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+     * @csspart pagination-base The container for pagination
+     * @csspart pagination-navigation-previous The previous page button
+     * @csspart pagination-navigation-next The next page button
      */
     interface KlevuPagination {
         /**
@@ -3198,6 +3319,9 @@ declare namespace LocalJSX {
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
+     * @csspart popular-searches-base The container for the popular searches
+     * @csspart popular-searches-caption The caption for the search
+     * @csspart popular-searches-list-item The list item in search
      */
     interface KlevuPopularSearches {
         /**
@@ -3211,7 +3335,7 @@ declare namespace LocalJSX {
     }
     /**
      * Popup component where clicking origin component popups the the content
-     * @csspart popup-origin Origin component
+     * @csspart popup-base The container for the popup
      * @csspart popup-content Content component
      */
     interface KlevuPopup {
@@ -3804,6 +3928,8 @@ declare namespace LocalJSX {
      * Klevu ratings component
      * @prop rating - The rating value as a number to show
      * @prop ratingRange - The number of stars to show
+     * @csspart rating-base The container for rating component
+     * @csspart rating-star The star component
      */
     interface KlevuRating {
         /**
@@ -4102,6 +4228,8 @@ declare namespace LocalJSX {
     /**
      * Very simple tab component. Use like a button, but with a caption.
      * Use standard onClick event to handle click.
+     * @csspart tab-base The tab container
+     * @csspart tab-caption The caption for the tab
      */
     interface KlevuTab {
         /**
@@ -4119,6 +4247,10 @@ declare namespace LocalJSX {
     }
     /**
      * Branded text field component
+     * @csspart textfield-base The container for input box
+     * @csspart textfield-icon The icon at beginning of input
+     * @csspart textfield-input The input box
+     * @csspart textfield-clearbutton The clear button at the end of input
      */
     interface KlevuTextfield {
         /**
@@ -4333,6 +4465,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-accordion-icon-color --klevu-h3-color Color of the icon
              * @cssprop --klevu-accordion-background transparent Header background
              * @cssprop --klevu-accordion-content-height 600px Maxium height for content
+             * @csspart accordion-base The container element for the accordion
+             * @csspart accordion-header The label of the accordion
+             * @csspart accordion-content The content of the accordion
+             * @csspart accordion-icon The icon of the accordion
              */
             "klevu-accordion": LocalJSX.KlevuAccordion & JSXBase.HTMLAttributes<HTMLKlevuAccordionElement>;
             /**
@@ -4340,6 +4476,7 @@ declare module "@stencil/core" {
              * used to display things on top of product.
              * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
              * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
+             * @csspart badge-content The content of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
@@ -4364,6 +4501,10 @@ declare module "@stencil/core" {
              * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
              * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
              * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+             * @csspart chat-bubble-base The container for the chat bubble
+             * @csspart chat-bubble-positive-feedback The positive feedback section
+             * @csspart chat-bubble-negative-feedback The negative feedback section
+             * @csspart chat-bubble-feedback-reasons The feedback reasons section
              */
             "klevu-chat-bubble": LocalJSX.KlevuChatBubble & JSXBase.HTMLAttributes<HTMLKlevuChatBubbleElement>;
             /**
@@ -4376,6 +4517,9 @@ declare module "@stencil/core" {
              * Checkbox component
              * @cssprop --klevu-checkbox-color --klevu-color-primary Color of the checkbox background and border
              * @cssprop --klevu-checkbox-size 20px Size of the checkbox
+             * @csspart checkbox-base The container element of the checkbox
+             * @csspart checkbox-box The checkbox element
+             * @csspart checkbox-content The label of the checkbox
              */
             "klevu-checkbox": LocalJSX.KlevuCheckbox & JSXBase.HTMLAttributes<HTMLKlevuCheckboxElement>;
             /**
@@ -4385,6 +4529,9 @@ declare module "@stencil/core" {
              * @cssprop --klevu-chip-border --klevu-color-neutral-5 Border color of the chip
              * @cssprop --klevu-chip-selected-background klevu-color-primary-with-opacity Selected background color of the chip
              * @cssprop --klevu-chip-selected-border --klevu-color-primary Selected border color of the chip
+             * @csspart chip-base The container for the chip
+             * @csspart chip-icon The icon for the close button
+             * @csspart chip-content The content for the chip
              */
             "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**
@@ -4405,12 +4552,17 @@ declare module "@stencil/core" {
              * @cssprop --klevu-drawer-max-width max-content maxium width of drawer content
              * @cssprop --klevu-drawer-background-color rgba(0,0,0,0.2) color of backround overlay
              * @cssprop --klevu-drawer-width 400px width of drawer
+             * @csspart drawer-base The container of the drawer
+             * @csspart drawer-origin The origin of the drawer
+             * @csspart drawer-content The content of the drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**
              * Simple native dropdown component for dropdown
              * @cssprop --klevu-dropdown-icon-clip-path polygon shape of the cut of icon
              * @cssprop --klevu-dropdown-icon-color --klevu-color-primary icon color
+             * @csspart dropdown-base The container for the dropdown
+             * @csspart dropdown-select The select box
              */
             "klevu-dropdown": LocalJSX.KlevuDropdown & JSXBase.HTMLAttributes<HTMLKlevuDropdownElement>;
             /**
@@ -4485,11 +4637,17 @@ declare module "@stencil/core" {
             "klevu-layout-results": LocalJSX.KlevuLayoutResults & JSXBase.HTMLAttributes<HTMLKlevuLayoutResultsElement>;
             /**
              * Single list item for listing things.
+             * @csspart list-base The container for the list
+             * @csspart list-icon The icon element of the list
+             * @csspart list-image The image element of the list
+             * @csspart list-content The content of the list
+             * @csspart list-button The button element in the list
              */
             "klevu-list": LocalJSX.KlevuList & JSXBase.HTMLAttributes<HTMLKlevuListElement>;
             /**
              * Simple loading indicator
              * @cssprop --klevu-loading-indicator-color --klevu-color-primary Color of the loading indicator
+             * @csspart loading-indicator-base The container for the loading indicator
              */
             "klevu-loading-indicator": LocalJSX.KlevuLoadingIndicator & JSXBase.HTMLAttributes<HTMLKlevuLoadingIndicatorElement>;
             /**
@@ -4498,6 +4656,10 @@ declare module "@stencil/core" {
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
             /**
              * Stylized modal dialog.
+             * @csspart modal-base The container for modal dialog
+             * @csspart modal-header The header for modal dialog
+             * @csspart modal-dialog The dialog component
+             * @csspart modal-body The body for modal dialog
              */
             "klevu-modal": LocalJSX.KlevuModal & JSXBase.HTMLAttributes<HTMLKlevuModalElement>;
             /**
@@ -4510,15 +4672,21 @@ declare module "@stencil/core" {
              * @cssprop --klevu-pagination-text-color - text color of item
              * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
              * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
+             * @csspart pagination-base The container for pagination
+             * @csspart pagination-navigation-previous The previous page button
+             * @csspart pagination-navigation-next The next page button
              */
             "klevu-pagination": LocalJSX.KlevuPagination & JSXBase.HTMLAttributes<HTMLKlevuPaginationElement>;
             /**
              * Fetches and displays most popular searches from Klevu Merchant center
+             * @csspart popular-searches-base The container for the popular searches
+             * @csspart popular-searches-caption The caption for the search
+             * @csspart popular-searches-list-item The list item in search
              */
             "klevu-popular-searches": LocalJSX.KlevuPopularSearches & JSXBase.HTMLAttributes<HTMLKlevuPopularSearchesElement>;
             /**
              * Popup component where clicking origin component popups the the content
-             * @csspart popup-origin Origin component
+             * @csspart popup-base The container for the popup
              * @csspart popup-content Content component
              */
             "klevu-popup": LocalJSX.KlevuPopup & JSXBase.HTMLAttributes<HTMLKlevuPopupElement>;
@@ -4570,6 +4738,8 @@ declare module "@stencil/core" {
              * Klevu ratings component
              * @prop rating - The rating value as a number to show
              * @prop ratingRange - The number of stars to show
+             * @csspart rating-base The container for rating component
+             * @csspart rating-star The star component
              */
             "klevu-rating": LocalJSX.KlevuRating & JSXBase.HTMLAttributes<HTMLKlevuRatingElement>;
             /**
@@ -4606,10 +4776,16 @@ declare module "@stencil/core" {
             /**
              * Very simple tab component. Use like a button, but with a caption.
              * Use standard onClick event to handle click.
+             * @csspart tab-base The tab container
+             * @csspart tab-caption The caption for the tab
              */
             "klevu-tab": LocalJSX.KlevuTab & JSXBase.HTMLAttributes<HTMLKlevuTabElement>;
             /**
              * Branded text field component
+             * @csspart textfield-base The container for input box
+             * @csspart textfield-icon The icon at beginning of input
+             * @csspart textfield-input The input box
+             * @csspart textfield-clearbutton The clear button at the end of input
              */
             "klevu-textfield": LocalJSX.KlevuTextfield & JSXBase.HTMLAttributes<HTMLKlevuTextfieldElement>;
             /**

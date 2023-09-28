@@ -15,7 +15,7 @@ const meta: Meta = {
 
 export default meta
 
-export const chip: StoryObj<KlevuChip> = {
+export const Chip: StoryObj<KlevuChip> = {
   args: {
     selected: true,
   },
@@ -55,6 +55,30 @@ export const chip: StoryObj<KlevuChip> = {
 
         .chiplist klevu-chip {
           cursor: pointer;
+        }
+      </style>
+    `,
+}
+
+export const StyledChip: StoryObj<KlevuChip> = {
+  args: {
+    selected: true,
+    removable: true,
+  },
+  render: (args) =>
+    html`
+      <klevu-chip id="styledChip" selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}
+        >A chip</klevu-chip
+      >
+
+      <style>
+        #styledChip::part(chip-icon) {
+          color: var(--klevu-chip-selected-background, rgba(var(--klevu-color-primary-rgb), 0.9));
+          font-size: 16px;
+        }
+        #styledChip::part(chip-content) {
+          color: white;
+          font-size: 20px;
         }
       </style>
     `,

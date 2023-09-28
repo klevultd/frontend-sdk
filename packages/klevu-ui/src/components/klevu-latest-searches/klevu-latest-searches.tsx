@@ -1,6 +1,7 @@
 import { KlevuLastSearches } from "@klevu/core"
 import { Component, h, Host, Prop, State, Event, EventEmitter } from "@stencil/core"
 import { getTranslation } from "../../utils/getTranslation"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Lists latest searches user has made on the site
@@ -45,7 +46,12 @@ export class KlevuLatestSearches {
           {this.tCaption}
         </klevu-typography>
         {this.lastSearches.map((ls) => (
-          <klevu-list condensed noXPadding onClick={() => this.#lastSearchClick(ls)}>
+          <klevu-list
+            condensed
+            noXPadding
+            onClick={() => this.#lastSearchClick(ls)}
+            exportparts={partsExports("klevu-list")}
+          >
             <span slot="primary">{ls}</span>
           </klevu-list>
         ))}

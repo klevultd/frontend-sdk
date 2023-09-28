@@ -17,6 +17,18 @@ export default meta
 export const imagePicker: StoryObj<KlevuImagePicker> = {
   render: (args) =>
     html`<klevu-image-picker max-file-size=${args.maxFileSize}></klevu-image-picker>
+      <style>
+        klevu-image-picker::part(accordion-header) {
+          font-style: italic;
+        }
+        klevu-image-picker::part(accordion-content) {
+          font-size: 12px;
+        }
+        klevu-image-picker::part(accordion-icon) {
+          color: purple;
+          font-size: 30px;
+        }
+      </style>
       <script>
         const imgPicker = document.querySelector("klevu-image-picker")
         imgPicker.addEventListener("klevuImageSelected", (event) => {

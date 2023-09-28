@@ -14,6 +14,10 @@ export type KlevuMessageFeedbackReasonDetails = {
  * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
  * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
  * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
+ * @csspart chat-bubble-base The container for the chat bubble
+ * @csspart chat-bubble-positive-feedback The positive feedback section
+ * @csspart chat-bubble-negative-feedback The negative feedback section
+ * @csspart chat-bubble-feedback-reasons The feedback reasons section
  */
 @Component({
   tag: "klevu-chat-bubble",
@@ -53,13 +57,20 @@ export class KlevuChatBubble {
           remote: Boolean(this.remote),
         }}
       >
+        {/* <div part="chat-bubble-base"> */}
         <klevu-typography variant="body-s">
           <slot></slot>
         </klevu-typography>
-        {this.feedback?.thumbs === "up" && <klevu-icon class="positive_feedback" name="thumb_up" />}
-        {this.feedback?.thumbs === "down" && <klevu-icon class="negative_feedback" name="thumb_down" />}
+        {this.feedback?.thumbs === "up" && (
+          <div>
+            <klevu-icon part="chat-bubble-positive-feedback" class="positive_feedback" name="thumb_up" />
+          </div>
+        )}
+        {this.feedback?.thumbs === "down" && (
+          <klevu-icon part="chat-bubble-negative-feedback" class="negative_feedback" name="thumb_down" />
+        )}
         {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
-          <div class="feedback_reasons">
+          <div class="feedback_reasons" part="chat-bubble-feedback-reasons">
             <span>{this.tRatingReason}</span>
             {this.feedbackReasons.map((reason) => (
               <klevu-button
@@ -74,6 +85,7 @@ export class KlevuChatBubble {
             ))}
           </div>
         )}
+        {/* </div> */}
       </Host>
     )
   }

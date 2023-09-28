@@ -18,3 +18,18 @@ export default meta
 export const PopularSearches: StoryObj<KlevuPopularSearches> = {
   render: (args) => html`<klevu-popular-searches t-caption=${ifDefined(args.tCaption)}></klevu-popular-searches>`,
 }
+
+export const StyledPopularSearches: StoryObj<KlevuPopularSearches> = {
+  render: (args) => html`<klevu-popular-searches
+      id="styledPopularSearch"
+      t-caption=${ifDefined(args.tCaption)}
+    ></klevu-popular-searches>
+    <style>
+      #styledPopularSearch::part(popular-searches-caption) {
+        font-style: italic;
+      }
+      #styledPopularSearch::part(popular-searches-list-item) {
+        color: red;
+      }
+    </style> `,
+}
