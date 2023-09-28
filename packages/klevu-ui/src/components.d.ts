@@ -73,7 +73,7 @@ export namespace Components {
     }
     /**
      * Basic badge component. Can be used to display small information on top of other elements. Typically
-     * used to display things on top of product
+     * used to display things on top of product.
      * @csspart badge-content The content of the badge
      */
     interface KlevuBadge {
@@ -4180,7 +4180,6 @@ declare module "@stencil/core" {
             /**
              * Basic badge component. Can be used to display small information on top of other elements. Typically
              * used to display things on top of product.
-             *
              * @csspart badge-content The content of the badge
              */
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;

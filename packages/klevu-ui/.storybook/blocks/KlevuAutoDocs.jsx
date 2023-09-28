@@ -463,7 +463,6 @@ const clearCSSVariables = (saveName) => {
 }
 
 const buttonStyle = {
-  padding: "8px 16px",
   border: "0",
   borderRadius: "4px",
   cursor: "pointer",
