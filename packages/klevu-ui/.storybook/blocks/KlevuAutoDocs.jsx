@@ -22,11 +22,11 @@ export const KlevuAutoDocs = ({ of }) => {
 
       return (
         <React.Fragment>
-          {renderEvents(comp)}
-          {renderSlots(comp)}
           {renderParts(comp)}
-          {renderCSSProps(comp)}
+          {renderSlots(comp)}
+          {renderEvents(comp)}
           {renderMethods(comp)}
+          {renderCSSProps(comp)}
         </React.Fragment>
       )
     }
