@@ -10,10 +10,6 @@ export type KlevuMessageFeedbackReasonDetails = {
 /**
  * Container for chat items. Very simple component, just a wrapper.
  *
- * @cssprop --klevu-chat-bubble-background --klevu-color-neutral-2 Background color of the bubble
- * @cssprop --klevu-chat-bubble-background-remote --klevu-color-primary Background color of the bubble when remote
- * @cssprop --klevu-chat-bubble-text-color inherit Text color of the bubble
- * @cssprop --klevu-chat-bubble-text-color-remote --klevu-color-neutral-1 Text color of the bubble when remote
  * @csspart chat-bubble-base The container for the chat bubble
  * @csspart chat-bubble-positive-feedback The positive feedback section
  * @csspart chat-bubble-negative-feedback The negative feedback section

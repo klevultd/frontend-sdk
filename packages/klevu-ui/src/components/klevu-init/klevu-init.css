@@ -1,0 +1,49 @@
+:host {
+  /**
+  * @prop --klevu-color-primary #2b4af7: The primary color
+  * @prop --klevu-color-primary-darker color-mix(in srgb, var(--klevu-color-primary), black 20%): Darker variant of primary color
+  * @prop --klevu-color-positive #2e9c40: Positive color
+  * @prop --klevu-color-negative #ad2d2d: Negative color
+  * @prop --klevu-color-neutral-1 #ffffff: Background color
+  * @prop --klevu-color-neutral-2 #f6f6f6: Neutral color between background and text
+  * @prop --klevu-color-neutral-3 #ededed: Neutral color between background and text
+  * @prop --klevu-color-neutral-4 #e3e3e3: Neutral color between background and text
+  * @prop --klevu-color-neutral-5 #d6d6d6: Neutral color between background and text
+  * @prop --klevu-color-neutral-6 #919191: Neutral color between background and text
+  * @prop --klevu-color-neutral-7 #757575: Neutral color between background and text
+  * @prop --klevu-color-neutral-8 #191919: Text color
+  * @prop --klevu-color-accent-1 #8eedd3: Accent color
+  * @prop --klevu-color-accent-2 #ffcb9f: Accent color
+  * @prop --klevu-color-accent-3 #ffb8d6: Accent color
+  * @prop --klevu-color-accent-4 #c3d7ff: Accent color
+  * @prop --klevu-spacing-01 1px: Spacing 01
+  * @prop --klevu-spacing-02 4px: Spacing 02
+  * @prop --klevu-spacing-03 8px: Spacing 03
+  * @prop --klevu-spacing-04 12px: Spacing 04
+  * @prop --klevu-spacing-05 16px: Spacing 05
+  * @prop --klevu-spacing-06 24px: Spacing 06
+  * @prop --klevu-spacing-07 32px: Spacing 07
+  * @prop --klevu-spacing-08 40px: Spacing 08
+  * @prop --klevu-spacing-09 48px: Spacing 09
+  * @prop --klevu-spacing-10 64px: Spacing 10
+  * @prop --klevu-size-s 16px: Basic small sizing to calculate component sizes
+  * @prop --klevu-size-m 20px: Basic medium sizing to calculate component sizes
+  * @prop --klevu-size-l 24px: Basic large sizing to calculate component sizes
+  * @prop --klevu-size-xl 36px: Basic extra large sizing to calculate component sizes
+  * @prop --klevu-opacity-disabled 0.35: Disabled opacity
+  * @prop --klevu-opacity-subtle 0.25: Subtle opacity
+  * @prop --klevu-border-radius-xs 2px: Border radius
+  * @prop --klevu-border-radius-s 4px: Border radius
+  * @prop --klevu-border-radius-m 8px: Border radius
+  * @prop --klevu-border-radius-l 12px: Border radius
+  * @prop --klevu-border-radius-xl 16px: Border radius
+  * @prop --klevu-border-radius-xxl 24px: Border radius
+  * @prop --klevu-elevation-1 0 0.5px 2px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.08): Elevation level 1 used in components
+  * @prop --klevu-elevation-2 0px 0.5px 3px rgba(0, 0, 0, 0.05), 2px 6px 12px rgba(0, 0, 0, 0.08): Elevation level 2 used in components
+  * @prop --klevu-elevation-3 0px 2px 3px rgba(0, 0, 0, 0.04), 6px 10px 24px rgba(0, 0, 0, 0.08): Elevation level 3 used in components
+  * @prop --klevu-animation-duration-slow 0.3s: Animation speed slow
+  * @prop --klevu-animation-duration-normal 0.2s: Animation speed normal
+  * @prop --klevu-animation-duration-fast 0.1s: Animation speed fast
+  * @prop --klevu-animation-timing-function ease-in-out: Animation easing function
+  */
+}

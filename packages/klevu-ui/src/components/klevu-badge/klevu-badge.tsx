@@ -5,8 +5,6 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  * used to display things on top of product.
  *
  * @slot default - Badge content
- * @cssprop --klevu-badge-background - Background color of the badge, if accent or neutral is not set
- * @cssprop --klevu-badge-border-radius --klevu-border-radius-xxl Border radius of the badge
  * @csspart badge-content The content of the badge
  */
 @Component({

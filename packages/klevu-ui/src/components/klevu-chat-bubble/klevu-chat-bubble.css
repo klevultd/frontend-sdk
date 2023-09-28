@@ -1,4 +1,11 @@
 :host {
+  /**
+  * @prop --klevu-chat-bubble-background var(--klevu-color-neutral-2): Background color of the bubble
+  * @prop --klevu-chat-bubble-background-remote var(--klevu-color-primary): Background color of the bubble when remote
+  * @prop --klevu-chat-bubble-text-color inherit: Text color of the bubble
+  * @prop --klevu-chat-bubble-text-color-remote var(--klevu-color-neutral-1): Text color of the bubble when remote
+  */
+
   position: relative;
   --background: var(--klevu-chat-bubble-background, var(--klevu-color-neutral-2));
   --background-remote: var(--klevu-chat-bubble-background-remote, var(--klevu-color-primary));

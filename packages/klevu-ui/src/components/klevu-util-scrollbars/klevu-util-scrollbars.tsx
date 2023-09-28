@@ -4,9 +4,6 @@ import { OverflowBehavior, OverlayScrollbars, PartialOptions } from "overlayscro
 /**
  * Utility that replaces the default browser scrollbar with a custom one.
  *
- * @cssprop --klevu-util-scrollbar-handle-bg --klevu-color-neutral-5 The background color of the scrollbar handle.
- * @cssprop --klevu-util-scrollbar-handle-bg-hover --klevu-color-neutral-6 The background color of the scrollbar handle when hovered.
- * @cssprop --klevu-util-scrollbar-handle-bg-active --klevu-color-neutral-7 The background color of the scrollbar handle when active.
  */
 @Component({
   tag: "klevu-util-scrollbars",

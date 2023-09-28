@@ -1,15 +1,14 @@
-/*
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
-  align-items: stretch;
-  justify-content: space-between;
+:host {
+  /**
+  * @prop --klevu-product-grid-spacing var(--klevu-spacing-05): spacing between grid items
+  * @prop --klevu-product-grid-product-width 250px: width of each product
+  */
+  --spacing: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
+  --product-width: var(--klevu-product-grid-product-width, 250px);
 }
-*/
 
 .gridcontainer {
   display: grid;
-  grid-gap: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
-  grid-template-columns: repeat(auto-fill, minmax(var(--klevu-grid-product-width, 250px), 1fr));
+  grid-gap: var(--grid-spacing);
+  grid-template-columns: repeat(auto-fill, minmax(var(--product-width), 1fr));
 }

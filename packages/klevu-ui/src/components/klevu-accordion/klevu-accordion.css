@@ -1,5 +1,9 @@
 :host {
-  --klevu-accordion-background: inherit;
+  /**
+  * @prop --klevu-accordion-background transparent: Header background
+  * @prop --klevu-accordion-content-height 600px: Maxium height for content
+  */
+  --background: var(--klevu-accordion-background, inherit);
 
   display: block;
   padding: var(--klevu-spacing-04) 0;
@@ -24,7 +28,7 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--klevu-accordion-background);
+  background: var(--background);
   transition: margin var(--klevu-animation-duration-slow) var(--klevu-animation-timing-function);
 }
 

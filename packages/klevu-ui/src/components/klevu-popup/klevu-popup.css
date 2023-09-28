@@ -1,4 +1,7 @@
 :host {
+  /**
+   * @prop --klevu-popup-spacing 0: Spacing around popup
+   */
   --spacing: var(--klevu-popup-spacing, 0);
 }
 

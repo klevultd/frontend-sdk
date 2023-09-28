@@ -36,21 +36,21 @@ klevu-chat-messages {
   cursor: pointer;
 }
 
-div[part="product-query-header"] {
+div[part="product-query-popup-header"] {
   width: 100%;
 }
 
-div[part="product-query-footer"] .inputs {
+div[part="product-query-popup-footer"] .inputs {
   display: flex;
   gap: var(--klevu-spacing-04);
 }
 
-div[part="product-query-footer"] .sendmessage {
+div[part="product-query-popup-footer"] .sendmessage {
   display: flex;
   gap: var(--klevu-spacing-04);
 }
 
-div[part="product-query-footer"] .sendmessage klevu-textfield {
+div[part="product-query-popup-footer"] .sendmessage klevu-textfield {
   width: 100%;
 }
 

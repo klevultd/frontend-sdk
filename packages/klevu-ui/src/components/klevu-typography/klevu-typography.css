@@ -1,66 +1,82 @@
 :host {
-  --klevu-typography-color: inherit;
+  /**
+  * @prop --klevu-typography-color: Color of the text that overrides the default
+  * @prop --klevu-typography-font-weight: Font weight that overrides the default
+  * @prop --klevu-h1-size 24px: H1 size
+  * @prop --klevu-h1-lineheight calc(28em / 24): H1 line-height
+  * @prop --klevu-h1-weight 700: H1 weight
+  * @prop --klevu-h2-size 20px: H2 size
+  * @prop --klevu-h2-lineheight calc(24em / 20): H2 line-height
+  * @prop --klevu-h2-weight 700: H2 weight
+  * @prop --klevu-h3-size 16px: H3 size
+  * @prop --klevu-h3-lineheight calc(20em / 16): H3 line-height
+  * @prop --klevu-h3-weight 700: H3 weight
+  * @prop --klevu-h4-size 14px: H4 size
+  * @prop --klevu-h4-lineheight calc(18em / 14): H4 line-height
+  * @prop --klevu-h4-weight 700: H4 weight
+  * @prop --klevu-body-l-size 20px: Body large size
+  * @prop --klevu-body-l-line-height calc(28em / 20): Body large line-height
+  * @prop --klevu-body-m-size 16px: Body medium size
+  * @prop --klevu-body-m-line-height calc(24em / 16): Body medium line-height
+  * @prop --klevu-body-s-size 14px:  Body small size
+  * @prop --klevu-body-s-line-height calc(20em / 14): Body small line-height
+  * @prop --klevu-body-xs-size 12px: Body extra small size
+  * @prop --klevu-body-xs-line-height calc(16em / 12): Body extra small line-height
+  */
   display: block;
 }
 
 span {
   display: inline-block;
+  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-h1 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h1-size));
   font-weight: var(--klevu-h1-weight);
   line-height: var(--klevu-h1-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-h2 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h2-size));
   font-weight: var(--klevu-h2-weight);
   line-height: var(--klevu-h2-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-h3 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h3-size));
   font-weight: var(--klevu-h3-weight);
   line-height: var(--klevu-h3-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-h4 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h4-size));
   font-weight: var(--klevu-h4-weight);
   line-height: var(--klevu-h4-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-body-l,
 .variant-body-l-bold {
   font-size: var(--klevu-typography-font-size, var(--klevu-body-l-size));
   line-height: var(--klevu-body-l-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-body-m,
 .variant-body-m-bold {
   font-size: var(--klevu-typography-font-size, var(--klevu-body-m-size));
   line-height: var(--klevu-body-m-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-body-s,
 .variant-body-s-bold {
   font-size: var(--klevu-typography-font-size, var(--klevu-body-s-size));
   line-height: var(--klevu-body-s-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-body-xs,
 .variant-body-xs-bold {
   font-size: var(--klevu-typography-font-size, var(--klevu-body-xs-size));
   line-height: var(--klevu-body-xs-line-height);
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
 }
 
 .variant-body-l,

@@ -1,4 +1,7 @@
 :host {
+  /**
+  * @prop --klevu-face-list-width 200px: Width of the facet listing
+  */
   display: block;
   width: var(--klevu-facet-list-width, 200px);
 }

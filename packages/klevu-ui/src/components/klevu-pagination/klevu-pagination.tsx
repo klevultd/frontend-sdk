@@ -4,10 +4,6 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 /**
  * Pagination component. Either provide numbers or query result to display the component.
  *
- * @cssprop --klevu-pagination-background-color --klevu-color-dim-background background color of item
- * @cssprop --klevu-pagination-text-color - text color of item
- * @cssprop --klevu-pagination-selected-background-color --klevu-color-primary background color of selected item
- * @cssprop --klevu-pagination-selected-text-color --klevu-color-primary-text text color of selected item
  * @csspart pagination-base The container for pagination
  * @csspart pagination-navigation-previous The previous page button
  * @csspart pagination-navigation-next The next page button

@@ -9,7 +9,6 @@ import { partsExports } from "../../utils/partsExports"
  * @slot default - Main content of the chat layout. Only one element should be used for this slot to make layout calculatios right.
  * @slot actions - Actions to be placed in the footer
  *
- * @cssprop --klevu-chat-layout-max-height 100vh The maxium height for the chat layout.
  */
 @Component({
   tag: "klevu-chat-layout",

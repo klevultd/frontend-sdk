@@ -3,7 +3,6 @@ import { Component, h, Host, Prop } from "@stencil/core"
 /**
  * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
  *
- * @cssprop --klevu-slides-item-width - Force a width for each item in the slides
  */
 @Component({
   tag: "klevu-slides",

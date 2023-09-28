@@ -1,7 +1,11 @@
 :host {
+  /**
+   * @prop --klevu-tab-color var(--klevu-color-primary): Color of the tab
+   * @prop --klevu-tab-padding var(--klevu-spacing-04): Padding of the tab
+   */
   display: inline-block;
-  --klevu-tab-color: var(--klevu-color-primary);
-  --klevu-tab-padding: var(--klevu-spacing-04);
+  --color: var(--klevu-tab-color, var(--klevu-color-primary));
+  --padding: var(--klevu-tab-padding, var(--klevu-spacing-04));
 }
 
 button {
@@ -21,7 +25,7 @@ button klevu-typography {
   border-radius: var(--klevu-border-radius-m);
   color: var(--klevu-color-neutral-7);
   display: block;
-  padding: 0 calc(var(--klevu-tab-padding) * 2);
+  padding: 0 calc(var(--padding) * 2);
   height: calc(100% - 4px);
   display: flex;
   align-items: center;
@@ -32,7 +36,7 @@ button:focus {
 }
 
 button.active {
-  border-bottom: 2px solid var(--klevu-tab-color);
+  border-bottom: 2px solid var(--color);
   padding-bottom: 0;
 }
 
@@ -50,5 +54,5 @@ button:disabled klevu-typography {
 
 button:focus klevu-typography {
   outline-offset: -2px;
-  outline: 2px solid var(--klevu-tab-color);
+  outline: 2px solid var(--color);
 }

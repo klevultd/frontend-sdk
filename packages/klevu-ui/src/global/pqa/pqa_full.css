@@ -92,8 +92,6 @@
   --klevu-product-image-fill: cover; /* cover, contain */
 
   --klevu-color-primary: #d8edfd;
-  --klevu-color-primary-rgb: 216, 237, 253;
-  --klevu-color-primary-darker: #b6ccdc;
 
   --klevu-chat-bubble-background: #d8edfd;
   --klevu-chat-bubble-text-color: #000;
@@ -109,12 +107,9 @@
 
 klevu-product-query-popup::part(product-query-footer) {
   --klevu-color-primary: #d8edfd;
-  --klevu-color-primary-rgb: 216, 237, 253;
-  --klevu-color-primary-darker: #b6ccdc;
   --klevu-button-text-color: #000;
 }
 
 klevu-product-query {
   --klevu-color-primary: #428bca;
-  --klevu-color-primary-darker: #407db3;
 }

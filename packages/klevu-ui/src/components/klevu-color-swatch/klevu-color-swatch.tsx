@@ -15,11 +15,6 @@ export type KlevuSwatch = {
 /**
  * Color Swatch component
  *
- * @cssprop --klevu-color-swatch-border #8c8c8c Border on swatch
- * @cssprop --klevu-color-swatch-default-background #000 Shown when color not found in css
- * @cssprop --klevu-color-swatch-size 25px Size of swatch
- * @cssprop --klevu-color-swatch-selected-color #2b4af7 Ring color when selected
- * @cssprop --klevu-color-swatch-border-radius 50% To change the shape of swatch
  */
 @Component({
   tag: "klevu-color-swatch",

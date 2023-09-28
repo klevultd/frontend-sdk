@@ -1,4 +1,12 @@
 :host {
+  /**
+  * @prop --klevu-util-scrollbar-handle-bg var(--klevu-color-neutral-5): The background color of the scrollbar handle.
+  * @prop --klevu-util-scrollbar-handle-bg-hover var(--klevu-color-neutral-6): The background color of the scrollbar handle when hovered.
+  * @prop --klevu-util-scrollbar-handle-bg-active var(--klevu-color-neutral-7): The background color of the scrollbar handle when active.
+  */
+  --handle-bg: var(--klevu-util-scrollbar-handle-bg, var(--klevu-color-neutral-5, rgba(0, 0, 0, 0.44)));
+  --handle-bg-hover: var(--klevu-util-scrollbar-handle-bg-hover, var(--klevu-color-neutral-6, rgba(0, 0, 0, 0.55)));
+  --handle-bg-active: var(--klevu-util-scrollbar-handle-bg-active, var(--klevu-color-neutral-7, rgba(0, 0, 0, 0.66)));
   display: block;
   height: 100%;
 }
@@ -691,12 +699,9 @@ body > .os-scrollbar {
   --os-track-border-radius: 10px;
   --os-handle-interactive-area-offset: 4px;
   --os-handle-border-radius: 10px;
-  --os-handle-bg: var(--klevu-util-scrollbar-handle-bg, var(--klevu-color-neutral-5, rgba(0, 0, 0, 0.44)));
-  --os-handle-bg-hover: var(--klevu-util-scrollbar-handle-bg-hover, var(--klevu-color-neutral-6, rgba(0, 0, 0, 0.55)));
-  --os-handle-bg-active: var(
-    --klevu-util-scrollbar-handle-bg-active,
-    var(--klevu-color-neutral-7, rgba(0, 0, 0, 0.66))
-  );
+  --os-handle-bg: var(--handle-bg);
+  --os-handle-bg-hover: var(--handle-bg-hover);
+  --os-handle-bg-active: var(--handle-bg-active);
 }
 /** improve usability by increasing clickable area */
 .os-theme-klevu .os-scrollbar-handle::after {
