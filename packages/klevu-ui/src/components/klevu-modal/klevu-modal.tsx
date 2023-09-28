@@ -2,6 +2,10 @@ import { Component, Host, h, Method, Prop, Event, EventEmitter } from "@stencil/
 
 /**
  * Stylized modal dialog.
+ * @csspart modal-base The container for modal dialog
+ * @csspart modal-header The header for modal dialog
+ * @csspart modal-dialog The dialog component
+ * @csspart modal-body The body for modal dialog
  */
 @Component({
   tag: "klevu-modal",
@@ -56,19 +60,21 @@ export class KlevuModal {
   render() {
     return (
       <Host>
-        <dialog ref={(el) => (this.#dialogRef = el)} onCancel={this.#close.bind(this)}>
-          <header>
-            <slot name="header"></slot>
-            <form method="dialog" onSubmit={this.#close.bind(this)}>
-              <button>
-                <klevu-icon name="close" />
-              </button>
-            </form>
-          </header>
-          <main>
-            <slot></slot>
-          </main>
-        </dialog>
+        <div part="modal-base">
+          <dialog ref={(el) => (this.#dialogRef = el)} onCancel={this.#close.bind(this)} part="modal-dialog">
+            <header part="modal-header">
+              <slot name="header"></slot>
+              <form method="dialog" onSubmit={this.#close.bind(this)}>
+                <button>
+                  <klevu-icon name="close" />
+                </button>
+              </form>
+            </header>
+            <main part="modal-body">
+              <slot></slot>
+            </main>
+          </dialog>
+        </div>
       </Host>
     )
   }

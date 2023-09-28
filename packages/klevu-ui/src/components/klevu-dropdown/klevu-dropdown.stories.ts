@@ -42,3 +42,40 @@ export const Dropdown: StoryObj<KlevuDropdown> = {
   >
   </klevu-dropdown>`,
 }
+
+export const StyledDropdown: StoryObj<KlevuDropdown> = {
+  args: {
+    options: [
+      {
+        value: "1",
+        text: "One",
+      },
+      {
+        value: "2",
+        text: "Two",
+      },
+      {
+        value: "3",
+        text: "Three",
+      },
+    ],
+  },
+
+  render: (args) => html`
+      <klevu-dropdown
+      id="styledDropdown"
+        .options=${args.options}
+        disabled=${ifDefined(args.disabled)}
+        name=${ifDefined(args.name)}
+        selected=${ifDefined(args.selected)}
+        variant=${ifDefined(args.variant)}
+      >
+      </klevu-dropdown>
+    </div>
+    <style>
+      #styledDropdown::part(dropdown-select) {
+        font-style: italic;
+        background-color: aqua;
+      }
+    </style> `,
+}

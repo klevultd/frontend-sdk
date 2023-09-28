@@ -22,3 +22,28 @@ export const Modal: StoryObj<KlevuModal> = {
     </div>
   `,
 }
+
+export const StyledModal: StoryObj<KlevuModal> = {
+  render: (args) => html`
+    <klevu-modal id="styledModal">
+      <div slot="header">Sample header</div>
+      Sample body
+    </klevu-modal>
+    <klevu-button onclick="document.getElementById('styledModal').openModal()">Open styled modal</klevu-button>
+    <style>
+      #styledModal::part(modal-header) {
+        font-weight: bold;
+        color: blue;
+        background-color: #ddd;
+      }
+      #styledModal::part(modal-body) {
+        font-style: italic;
+      }
+      #styledModal::part(modal-dialog) {
+        height: 200px;
+        width: 200px;
+        background-color: beige;
+      }
+    </style>
+  `,
+}

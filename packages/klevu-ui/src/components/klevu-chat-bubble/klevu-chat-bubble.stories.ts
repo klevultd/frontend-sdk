@@ -39,6 +39,7 @@ export const StyledChatBubble: StoryObj<KlevuChatBubble> = {
   },
   render: (args) => html`
     <klevu-chat-bubble
+      id="styledChatBubble"
       remote=${ifDefined(args.remote)}
       t-rating-reason=${ifDefined(args.tRatingReason)}
       .feedback=${args.feedback}
@@ -46,12 +47,13 @@ export const StyledChatBubble: StoryObj<KlevuChatBubble> = {
       >Hello world! This is a content for chat bubble!</klevu-chat-bubble
     >
     <style>
-      #styledChatBubble klevu-chat-bubble::part(chat-bubble-positive-feedback) {
+      #styledChatBubble::part(chat-bubble-positive-feedback) {
         background-color: orange;
         color: white;
       }
-      #styledChatBubble klevu-chat-bubble::part(chat-bubble-feedback-reasons) {
-        font-size: 20px;
+      #styledChatBubble::part(chat-bubble-feedback-reasons) {
+        color: blue;
+        font-weight: bold;
       }
     </style>
   `,

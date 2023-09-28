@@ -71,7 +71,7 @@ export class KlevuChatBubble {
         )}
         {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
           <div class="feedback_reasons" part="chat-bubble-feedback-reasons">
-            <span>1{this.tRatingReason}</span>
+            <span>{this.tRatingReason}</span>
             {this.feedbackReasons.map((reason) => (
               <klevu-button
                 size="tiny"

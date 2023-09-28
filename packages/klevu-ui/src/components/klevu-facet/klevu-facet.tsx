@@ -29,7 +29,7 @@ type OptionType = {
 const resolveFacetLabel = (option: OptionType, facet?: KlevuFilterResultOptions) => {
   if (facet) {
     if (facet.type === KlevuFilterType.Rating) {
-      return <klevu-rating rating={parseFloat(option.name)} />
+      return <klevu-rating exportparts={partsExports("klevu-rating")} rating={parseFloat(option.name)} />
     }
   }
   return option.name

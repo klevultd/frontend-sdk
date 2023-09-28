@@ -1,6 +1,7 @@
 import { Component, Host, h, State, Method, Event, EventEmitter } from "@stencil/core"
 import { KlevuUtilViewportCustomEvent } from "../../components"
 import { ViewportSize } from "../klevu-util-viewport/klevu-util-viewport"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Generic layout used in merchansiding and search landing page
@@ -65,7 +66,12 @@ export class KlevuLayoutResults {
         </header>
         <div class="container">
           {isMobile ? (
-            <klevu-drawer ref={(el) => (this.drawerElement = el as HTMLKlevuDrawerElement)} insertYPadding background>
+            <klevu-drawer
+              exportparts={partsExports("klevu-drawer")}
+              ref={(el) => (this.drawerElement = el as HTMLKlevuDrawerElement)}
+              insertYPadding
+              background
+            >
               <slot slot="content" name="sidebar"></slot>
             </klevu-drawer>
           ) : (

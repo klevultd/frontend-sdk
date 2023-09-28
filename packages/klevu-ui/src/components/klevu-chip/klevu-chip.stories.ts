@@ -67,17 +67,18 @@ export const StyledChip: StoryObj<KlevuChip> = {
   },
   render: (args) =>
     html`
-      <div id="styledChip">
-        <klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>
-      </div>
+      <klevu-chip id="styledChip" selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}
+        >A chip</klevu-chip
+      >
+
       <style>
-        #styledChip klevu-chip::part(chip-icon) {
+        #styledChip::part(chip-icon) {
           color: var(--klevu-chip-selected-background, rgba(var(--klevu-color-primary-rgb), 0.9));
           font-size: 16px;
         }
-        #styledChip klevu-chip::part(chip-content) {
+        #styledChip::part(chip-content) {
           color: white;
-          font-size: 16px;
+          font-size: 20px;
         }
       </style>
     `,

@@ -30,6 +30,32 @@ export const Pagination: StoryObj<KlevuPagination> = {
   ></klevu-pagination>`,
 }
 
+export const StyledPagination: StoryObj<KlevuPagination> = {
+  args: {
+    min: 1,
+    max: 6,
+    current: 3,
+  },
+
+  render: (args) => html` <klevu-pagination
+      id="styledPagination"
+      current=${ifDefined(args.current)}
+      max=${ifDefined(args.max)}
+      min=${ifDefined(args.min)}
+      .queryResult=${args.queryResult}
+    ></klevu-pagination>
+
+    <style>
+      #styledPagination::part(pagination-navigation-previous),
+      #styledPagination::part(pagination-navigation-next) {
+        color: green;
+      }
+      #styledPagination::part(pagination-page-number) {
+        color: red;
+      }
+    </style>`,
+}
+
 export const PaginationFromResults: StoryObj<KlevuPagination> = {
   ...Pagination,
   args: {

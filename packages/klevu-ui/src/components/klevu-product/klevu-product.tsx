@@ -410,7 +410,7 @@ export class KlevuProduct {
         <div class="ratings">
           {this.product?.rating ? (
             <Fragment>
-              <klevu-rating rating={this.product.rating} />
+              <klevu-rating exportparts={partsExports("klevu-rating")} rating={this.product.rating} />
               {this.showRatingsCount && this.product.ratingCount && <span>({this.product.ratingCount})</span>}
             </Fragment>
           ) : (

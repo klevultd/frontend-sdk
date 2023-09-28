@@ -41,9 +41,9 @@ export const CustomColor: StoryObj<KlevuBadge> = {
 }
 
 export const StyledBadgeUsingParts: StoryObj<KlevuBadge> = {
-  render: (args) => html`<div id="badgeUsingParts"><klevu-badge accent="2">Badge 1</klevu-badge></div>
+  render: (args) => html`<klevu-badge id="badgeUsingParts" accent="2">Badge 1</klevu-badge>
     <style>
-      #badgeUsingParts klevu-badge::part(badge-content) {
+      #badgeUsingParts::part(badge-content) {
         font-size: 18px;
         font-style: italic;
       }

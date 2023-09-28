@@ -29,21 +29,50 @@ export const parts = {
     local: ["chip-base", "chip-icon", "chip-content"],
     exportedcomponents: {},
   },
+  "klevu-drawer": {
+    local: ["drawer-base", "drawer-origin", "drawer-content"],
+    exportedcomponents: {},
+  },
+  "klevu-dropdown": {
+    local: ["dropdown-base", "dropdown-select"],
+    exportedcomponents: {},
+  },
   "klevu-facet": {
     local: ["facet-heading"],
     exportedcomponents: {
       "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
+      "klevu-rating": ["rating-base", "rating-star"],
       "klevu-checkbox": ["checkbox-base", "checkbox-box", "checkbox-content"],
       "klevu-button": ["button-base"],
     },
   },
+  "klevu-list": {
+    local: ["list-base", "list-icon", "list-image", "list-content", "list-button"],
+    exportedcomponents: {},
+  },
+  "klevu-loading-indicator": {
+    local: ["loading-indicator-base"],
+    exportedcomponents: {},
+  },
+  "klevu-modal": {
+    local: ["modal-base", "modal-header", "modal-dialog", "modal-body"],
+    exportedcomponents: {},
+  },
+  "klevu-pagination": {
+    local: ["pagination-base", "pagination-navigation-previous", "pagination-navigation-next"],
+    exportedcomponents: {},
+  },
+  "klevu-popular-searches": {
+    local: ["popular-searches-base", "popular-searches-caption", "popular-searches-list-item"],
+    exportedcomponents: { "klevu-list": ["list-base", "list-icon", "list-image", "list-content", "list-button"] },
+  },
   "klevu-popup": {
-    local: ["popup-origin", "popup-content"],
+    local: ["popup-base", "popup-content"],
     exportedcomponents: {},
   },
   "klevu-product": {
     local: ["product-image", "product-container", "product-swatch"],
-    exportedcomponents: { "klevu-button": ["button-base"] },
+    exportedcomponents: { "klevu-button": ["button-base"], "klevu-rating": ["rating-base", "rating-star"] },
   },
   "klevu-product-query": {
     local: ["product-query-open-button"],
@@ -54,7 +83,9 @@ export const parts = {
         "product-query-popup-footer",
         "product-query-popup-feedback",
       ],
-      "klevu-popup": ["popup-origin", "popup-content"],
+      "klevu-popup": ["popup-base", "popup-content"],
+      "klevu-loading-indicator": ["loading-indicator-base"],
+      "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
       "klevu-chat-bubble": [
         "chat-bubble-base",
         "chat-bubble-positive-feedback",
@@ -62,12 +93,15 @@ export const parts = {
         "chat-bubble-feedback-reasons",
       ],
       "klevu-product": ["product-image", "product-container", "product-swatch"],
+      "klevu-rating": ["rating-base", "rating-star"],
     },
   },
   "klevu-product-query-popup": {
     local: ["product-query-popup-header", "product-query-popup-footer", "product-query-popup-feedback"],
     exportedcomponents: {
-      "klevu-popup": ["popup-origin", "popup-content"],
+      "klevu-popup": ["popup-base", "popup-content"],
+      "klevu-loading-indicator": ["loading-indicator-base"],
+      "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
       "klevu-button": ["button-base"],
       "klevu-chat-bubble": [
         "chat-bubble-base",
@@ -76,6 +110,19 @@ export const parts = {
         "chat-bubble-feedback-reasons",
       ],
       "klevu-product": ["product-image", "product-container", "product-swatch"],
+      "klevu-rating": ["rating-base", "rating-star"],
     },
+  },
+  "klevu-rating": {
+    local: ["rating-base", "rating-star"],
+    exportedcomponents: {},
+  },
+  "klevu-tab": {
+    local: ["tab-base", "tab-caption"],
+    exportedcomponents: {},
+  },
+  "klevu-textfield": {
+    local: ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+    exportedcomponents: {},
   },
 }

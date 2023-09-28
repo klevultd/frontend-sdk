@@ -59,7 +59,7 @@ export class KlevuImagePicker {
           </p>
           <label htmlFor="select-image">
             {this.isLoading ? (
-              <klevu-loading-indicator />
+              <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
             ) : (
               <Fragment>
                 <klevu-icon name="upload" />
