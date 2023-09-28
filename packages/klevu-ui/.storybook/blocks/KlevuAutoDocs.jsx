@@ -6,14 +6,12 @@ import hljs from "highlight.js/lib/core"
 import typescript from "highlight.js/lib/languages/typescript"
 import { parts } from "../../src/utils/parts"
 
+const STYLES_SAVE_KEY = "klevu-ui-storybook-css-vars"
+
 // Then register the languages you need
 hljs.registerLanguage("typescript", typescript)
 
 export const KlevuAutoDocs = ({ of }) => {
-  console.log({
-    data: getElementCSSVariables(getAllCSSVariableNames()),
-  })
-
   const resolvedOf = useOf(of || "story", ["story", "meta"])
   switch (resolvedOf.type) {
     case "story": {
@@ -200,8 +198,16 @@ function filterAndTransformStyles(styles) {
 
 function renderCSSProps(comp) {
   const [showGlobalProps, setShowGlobalProps] = React.useState(false)
-  const cssProps = filterAndTransformStyles(comp.styles)
+  const [saveName, setSaveName] = React.useState("default")
 
+  useEffect(() => {
+    const saved = loadCSSVariables(saveName)
+    Object.keys(saved).forEach((key) => {
+      document.documentElement.style.setProperty(key, saved[key])
+    })
+  }, [])
+
+  const cssProps = filterAndTransformStyles(comp.styles)
   const subProps = []
   const depComp = Object.keys(comp.dependencyGraph)
   const depsToCheck = []
@@ -235,12 +241,30 @@ function renderCSSProps(comp) {
   return (
     <React.Fragment>
       <h2>CSS Properties</h2>
+      <p>
+        List of all CSS properties that affect this component. And in the end there are global CSS variables that might
+        affect the the look of this component.
+      </p>
+
       <table className="klevu-autodocs">
         <thead>
           <tr>
             <th>CSS variable</th>
             <th>Description</th>
             <th>Default value</th>
+          </tr>
+          <tr>
+            <th colSpan={3}>
+              <button
+                style={buttonStyle}
+                onClick={() => {
+                  clearCSSVariables(saveName)
+                  window.location.reload()
+                }}
+              >
+                Clear values
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -249,7 +273,7 @@ function renderCSSProps(comp) {
               <td>{e.name}</td>
               <td>{e.docs}</td>
               <td>
-                <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} />
+                <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} saveName={saveName} />
               </td>
             </tr>
           ))}
@@ -265,7 +289,7 @@ function renderCSSProps(comp) {
                   <td>{e.name}</td>
                   <td>{e.docs}</td>
                   <td>
-                    <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} />
+                    <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} saveName={saveName} />
                   </td>
                 </tr>
               ))}
@@ -283,15 +307,17 @@ function renderCSSProps(comp) {
                   <td>{e.name}</td>
                   <td>{e.docs}</td>
                   <td>
-                    <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} />
+                    <CSSPropertyEditor name={e.name} defaultVal={e.defaultVal} saveName={saveName} />
                   </td>
                 </tr>
               ))}
             </React.Fragment>
           ) : (
             <tr>
-              <td colSpan="3">
-                <button onClick={() => setShowGlobalProps(true)}>Show global CSS variables</button>
+              <td colSpan="3" style={{ textAlign: "center" }}>
+                <button style={buttonStyle} onClick={() => setShowGlobalProps(true)}>
+                  Show global CSS variables
+                </button>
               </td>
             </tr>
           )}
@@ -336,28 +362,22 @@ function renderMethods(comp) {
   )
 }
 
-function CSSPropertyEditor({ name, defaultVal }) {
-  let key, value, type
+function CSSPropertyEditor({ name, defaultVal, saveName }) {
+  let value, type
   const current = getElementCSSVariables([name])
   if (current[0]) {
-    key = current[0].key
     value = current[0].value
     type = current[0].type
   }
 
   const isModified = value !== undefined && value !== defaultVal
-
-  if (isModified) {
-    console.log("Modified value", name, value, defaultVal)
-  }
-
   const [currentValue, setCurrentValue] = useState(defaultVal)
-
   const isColor = CSS.supports("color", currentValue)
 
   const onChange = (e) => {
     setCurrentValue(e.target.value)
     document.documentElement.style.setProperty(name, e.target.value)
+    saveCSSVariable(saveName, name, e.target.value)
   }
 
   return (
@@ -397,34 +417,6 @@ function CSSPropertyEditor({ name, defaultVal }) {
   )
 }
 
-const getAllCSSVariableNames = () => {
-  const styleSheets = document.styleSheets
-  const cssVars = []
-
-  Array.from(styleSheets).forEach((styleSheet) => {
-    try {
-      if (!styleSheet || !styleSheet["cssRules"]) {
-        return []
-      }
-    } catch {
-      return []
-    }
-    return Array.from(styleSheet.cssRules).forEach((rule) => {
-      if (!rule || !rule["style"]) {
-        return
-      }
-
-      Array.from(rule["style"]).forEach((style) => {
-        if (style.startsWith("--") && cssVars.indexOf(style) == -1) {
-          cssVars.push(style)
-        }
-      })
-    })
-  })
-
-  return cssVars
-}
-
 const getElementCSSVariables = (allCSSVars, element = document.body) => {
   const elStyles = window.getComputedStyle(element)
   const cssVars = []
@@ -452,4 +444,52 @@ const getType = (value) => {
   return "text"
 }
 
-const saveCSSVariable = (saveName, variableName, variableValue) => {}
+const saveCSSVariable = (saveName, variableName, variableValue) => {
+  const store = JSON.parse(localStorage.getItem(STYLES_SAVE_KEY) || "{}")
+  store[saveName] = store[saveName] || {}
+  store[saveName][variableName] = variableValue
+  localStorage.setItem(STYLES_SAVE_KEY, JSON.stringify(store))
+}
+
+const loadCSSVariables = (saveName) => {
+  const store = JSON.parse(localStorage.getItem(STYLES_SAVE_KEY) || "{}")
+  return store[saveName] || {}
+}
+
+const clearCSSVariables = (saveName) => {
+  const store = JSON.parse(localStorage.getItem(STYLES_SAVE_KEY) || "{}")
+  store[saveName] = {}
+  localStorage.setItem(STYLES_SAVE_KEY, JSON.stringify(store))
+}
+
+const buttonStyle = {
+  padding: "8px 16px",
+  border: "0",
+  borderRadius: "4px",
+  cursor: "pointer",
+  display: "inline",
+  overflow: "visible",
+  padding: "10px 16px",
+  position: "relative",
+  textAlign: "center",
+  WebkitTextDecoration: "none",
+  textDecoration: "none",
+  transitionProperty: "background,box-shadow",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "ease-out",
+  verticalAlign: "top",
+  whiteSpace: "nowrap",
+  WebkitUserSelect: "none",
+  MozUserSelect: "none",
+  msUserSelect: "none",
+  userSelect: "none",
+  opacity: 1,
+  margin: "0",
+  background: "#F6F9FC",
+  fontSize: "12px",
+  fontWeight: 700,
+  lineHeight: 1,
+  color: "#2E3438",
+  boxShadow: "#D9E8F2 0 0 0 1px inset",
+  zIndex: 2,
+}

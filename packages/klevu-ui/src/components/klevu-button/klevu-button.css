@@ -1,7 +1,7 @@
 :host {
   /**
   * @prop --klevu-button-background-color var(--klevu-color-primary): Background color of button
-  * @prop --klevu-button-text-color var(--klevu-color-primary-text): Button text color
+  * @prop --klevu-button-text-color var(--klevu-color-neutral-1): Button text color
   * @prop --klebu-button-padding var(--klevu-spacing-04): Padding on button
   * @prop --klevu-button-text-align center: Align text on button
   * @prop --klevu-button-padding calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)): Override buttom padding with custom value
