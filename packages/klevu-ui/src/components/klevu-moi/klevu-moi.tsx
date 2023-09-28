@@ -307,7 +307,7 @@ export class KlevuMoi {
         </div>
 
         <klevu-modal ref={(el) => (this.#modalRef = el)}>
-          <klevu-product product={this.currentProduct}></klevu-product>
+          <klevu-product exportparts={partsExports("klevu-product")} product={this.currentProduct}></klevu-product>
         </klevu-modal>
       </Host>
     )
