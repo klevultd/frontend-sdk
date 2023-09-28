@@ -52,6 +52,9 @@ export type KlevuSelectionUpdatedEventDetail = {
  * Manager property must be set for this component to work.
  *
  * @csspart facet-heading Heading of the facet
+ * @csspart facet-radio The radio button for selection of facet
+ * @csspart facet-more-button The button to show more results
+ * @csspart facet-option-count The count of results per option
  */
 @Component({
   tag: "klevu-facet",
@@ -174,14 +177,11 @@ export class KlevuFacet {
     }
     return (
       <Fragment>
-        <klevu-typography
-          part="facet-heading"
-          class={{ accordion: Boolean(this.accordion) }}
-          variant="body-s-bold"
-          slot="header"
-        >
-          {this.labelOverride || this.slider.label}
-        </klevu-typography>
+        <span part="facet-heading">
+          <klevu-typography class={{ accordion: Boolean(this.accordion) }} variant="body-s-bold" slot="header">
+            {this.labelOverride || this.slider.label}
+          </klevu-typography>
+        </span>
         <klevu-slider
           slot="content"
           showTooltips
@@ -235,14 +235,11 @@ export class KlevuFacet {
 
     return (
       <Fragment>
-        <klevu-typography
-          part="facet-heading"
-          class={{ accordion: Boolean(this.accordion) }}
-          variant="body-s-bold"
-          slot="header"
-        >
-          {this.labelOverride || this.option.label}
-        </klevu-typography>
+        <span part="facet-heading">
+          <klevu-typography class={{ accordion: Boolean(this.accordion) }} variant="body-s-bold" slot="header">
+            {this.labelOverride || this.option.label}
+          </klevu-typography>
+        </span>
         <div class="options" slot="content">
           {this.useColorSwatch ? (
             <div class="colorSwatchContainer">
@@ -278,6 +275,7 @@ export class KlevuFacet {
               {this.mode === "radio" && (
                 <div class="container">
                   <input
+                    part="facet-radio"
                     type="radio"
                     id={this.option!.key}
                     name={this.option!.key}
@@ -293,7 +291,9 @@ export class KlevuFacet {
                   <label htmlFor={this.option!.key} class="name">
                     <span>{this.tAll}</span>
                   </label>
-                  <span class="count">({this.option.options.reduce((total, opt) => opt.count + total, 0)})</span>
+                  <span part="facet-option-count" class="count">
+                    ({this.option.options.reduce((total, opt) => opt.count + total, 0)})
+                  </span>
                 </div>
               )}
               {opts.map((o) => (
@@ -311,12 +311,15 @@ export class KlevuFacet {
                         <span class="name">
                           <span>{resolveFacetLabel(o, this.option)}</span>
                         </span>
-                        <span class="count">({o.count})</span>
+                        <span part="facet-option-count" class="count">
+                          ({o.count})
+                        </span>
                       </div>
                     </klevu-checkbox>
                   ) : (
                     <div class="container">
                       <input
+                        part="facet-radio"
                         type="radio"
                         id={this.option!.key}
                         name={this.option!.key}
@@ -330,7 +333,9 @@ export class KlevuFacet {
                       <label htmlFor={this.option!.key} class="name">
                         <span>{resolveFacetLabel(o, this.option)}</span>
                       </label>
-                      <span class="count">({o.count})</span>
+                      <span part="facet-option-count" class="count">
+                        ({o.count})
+                      </span>
                     </div>
                   )}
                 </div>
@@ -339,6 +344,7 @@ export class KlevuFacet {
           )}
           {showAllButton ? (
             <klevu-button
+              part="facet-more-button"
               style={{ "--klevu-button-text-align": "left" }}
               isTertiary
               fullWidth

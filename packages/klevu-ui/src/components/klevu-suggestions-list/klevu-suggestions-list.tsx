@@ -4,6 +4,7 @@ import { partsExports } from "../../utils/partsExports"
 
 /**
  * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
+ * @csspart suggestions-list-caption The caption to the list of suggestions
  */
 @Component({
   tag: "klevu-suggestions-list",
@@ -37,7 +38,7 @@ export class KlevuSuggestionsList {
 
     return (
       <Host>
-        <klevu-typography class="caption" variant="h3">
+        <klevu-typography class="caption" variant="h3" part="suggestions-list-caption">
           {this.caption}
         </klevu-typography>
         {this.suggestions.map((s) => (

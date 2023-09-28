@@ -24,8 +24,15 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @slot addtocart - Add to cart button slot at the end of the component
  *
  * @csspart product-image The image element of component
- * @csspart product-container The container element of whole
+ * @csspart product-base The container element of whole
  * @csspart product-swatch Single swatch element under the image
+ * @csspart product-brandname The brand name of the product
+ * @csspart product-name The name of the product
+ * @csspart product-description The description of the product
+ * @csspart product-price The price of the product
+ * @csspart product-vatcaption The vat caption of the product
+ * @csspart product-ooscaption The oos caption of the product
+ * @csspart product-variants-count The number of variants
  */
 @Component({
   tag: "klevu-product",
@@ -289,7 +296,7 @@ export class KlevuProduct {
 
     return (
       <Host class={{ line: this.variant === "line" }}>
-        <div part="product-container" class={containerClasses}>
+        <div part="product-base" class={containerClasses}>
           <slot name="top"></slot>
           <a href={settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
             {this.hideImage ? null : (
@@ -324,17 +331,17 @@ export class KlevuProduct {
               {this.#renderSwatch()}
               <div class="info">
                 {this.hideBrand || !this.product[this.keyBrand] ? null : (
-                  <klevu-typography class="brandname" variant="body-s-bold">
+                  <klevu-typography class="brandname" variant="body-s-bold" part="product-brandname">
                     {this.product[this.keyBrand]}
                   </klevu-typography>
                 )}
                 {this.hideName || !this.product[this.keyName] ? null : (
-                  <klevu-typography class="productname" variant="body-s">
+                  <klevu-typography class="productname" variant="body-s" part="product-name">
                     {`${this.product[this.keyName]} ${this.showProductCode ? this.#formatSKU(this.product.sku) : ""}`}
                   </klevu-typography>
                 )}
                 {this.hideDescription || !this.product[this.keyDescription] ? null : (
-                  <klevu-typography class="description" variant="body-xs">
+                  <klevu-typography class="description" variant="body-xs" part="product-description">
                     {this.product[this.keyDescription].substring(0, 100)}
                   </klevu-typography>
                 )}
@@ -349,18 +356,19 @@ export class KlevuProduct {
                         isOnSale,
                         price: true,
                       }}
+                      part="product-price"
                     >
                       {renderPrice(this.product.salePrice, this.product.currency)}
                     </klevu-typography>
                     {this.vatCaption && (
-                      <klevu-typography class="vatcaption" variant="body-s">
+                      <klevu-typography class="vatcaption" variant="body-s" part="product-vatcaption">
                         ({this.vatCaption})
                       </klevu-typography>
                     )}
                   </Fragment>
                 )}
                 {this.product.inStock === "no" && this.outOfStockCaption && (
-                  <klevu-typography class="outOfStockCaption" variant="body-s">
+                  <klevu-typography class="outOfStockCaption" variant="body-s" part="product-ooscaption">
                     {this.outOfStockCaption}
                   </klevu-typography>
                 )}
@@ -368,7 +376,10 @@ export class KlevuProduct {
             </slot>
             {this.showVariantsCount && this.product.totalVariants !== undefined && this.variant !== "line" && (
               <slot name="variantsCount">
-                <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
+                <klevu-typography
+                  variant="body-s"
+                  part="product-variants-count"
+                >{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
               </slot>
             )}
             {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
@@ -379,6 +390,7 @@ export class KlevuProduct {
                   class="addToCart"
                   onClick={this.#addToCart.bind(this)}
                   fullWidth
+                  size={this.variant === "small" ? "small" : "normal"}
                   exportparts={partsExports("klevu-button")}
                 >
                   {this.tAddToCart}
@@ -389,7 +401,10 @@ export class KlevuProduct {
           <slot name="bottom"></slot>
           {this.showVariantsCount && this.product.totalVariants !== undefined && this.variant === "line" && (
             <slot name="variantsCount">
-              <klevu-typography variant="body-s">{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
+              <klevu-typography
+                variant="body-s"
+                part="product-variants-count"
+              >{`+${this.product.totalVariants} variant(s)`}</klevu-typography>
             </slot>
           )}
           {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}

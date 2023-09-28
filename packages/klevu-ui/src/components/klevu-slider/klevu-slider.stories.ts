@@ -6,7 +6,7 @@ import { KlevuSlider } from "./klevu-slider"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-slider")
 
 const meta: Meta = {
-  title: "Components/Slider",
+  title: "Atoms/Slider",
   component: "klevu-slider",
   argTypes,
   parameters,

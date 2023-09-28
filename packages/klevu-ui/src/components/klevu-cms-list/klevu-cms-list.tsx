@@ -5,6 +5,7 @@ import { partsExports } from "../../utils/partsExports"
 
 /**
  * Component to display list of CMS page results
+ * @csspart cms-list-caption The caption for the cms list
  */
 @Component({
   tag: "klevu-cms-list",
@@ -33,7 +34,7 @@ export class KlevuCmsList {
   render() {
     return (
       <Host>
-        <klevu-typography class="caption" variant="h3">
+        <klevu-typography class="caption" variant="h3" part="cms-list-caption">
           {this.tCaption}
         </klevu-typography>
 

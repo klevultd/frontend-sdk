@@ -164,7 +164,9 @@ export class KlevuSlider {
     el.noUiSlider.on("end", (ev) => {
       this.klevuSliderChange.emit([parseFloat(ev[0]), parseFloat(ev[1])])
     })
-    mergeTooltips(el, 20, " - ")
+    if (this.showTooltips) {
+      mergeTooltips(el, 20, " - ")
+    }
   }
 
   render() {

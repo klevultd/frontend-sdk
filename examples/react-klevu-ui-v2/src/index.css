@@ -148,11 +148,11 @@ klevu-button::part(klevu-button) {
   cursor: pointer;
 }
 
-klevu-product::part(product-container) klevu-button::part(klevu-button) {
+klevu-product::part(product-base) klevu-button::part(klevu-button) {
   border: 3px dashed red;
 }
 
-klevu-product::part(product-container) {
+klevu-product::part(product-base) {
   border: 3px dashed orange;
 }
 .recsProduct klevu-button::part(klevu-button) {

@@ -15,5 +15,23 @@ const meta: Meta = {
 export default meta
 
 export const ChatMessages: StoryObj<KlevuChatMessages & { remote: boolean }> = {
-  render: (args) => html` <klevu-chat-messages .messages=${[]}></klevu-chat-messages> `,
+  args: {
+    messages: [
+      {
+        message: {
+          id: "1",
+          note: "",
+          type: "text",
+          value: "Hi",
+          collectFeedback: false,
+        },
+      },
+      {
+        local: {
+          message: "hello",
+        },
+      },
+    ],
+  },
+  render: (args) => html` <klevu-chat-messages .messages=${args.messages}></klevu-chat-messages> `,
 }

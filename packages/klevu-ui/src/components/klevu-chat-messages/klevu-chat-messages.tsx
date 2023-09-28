@@ -156,6 +156,7 @@ export class KlevuChatMessages {
             return (
               <div>
                 <klevu-slides
+                  exportparts={partsExports("klevu-slides")}
                   style={{
                     "--klevu-slides-item-width": "200px;",
                   }}

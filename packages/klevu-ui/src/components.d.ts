@@ -233,6 +233,7 @@ export namespace Components {
     }
     /**
      * Component to display list of CMS page results
+     * @csspart cms-list-caption The caption for the cms list
      */
     interface KlevuCmsList {
         /**
@@ -334,6 +335,9 @@ export namespace Components {
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
      * @csspart facet-heading Heading of the facet
+     * @csspart facet-radio The radio button for selection of facet
+     * @csspart facet-more-button The button to show more results
+     * @csspart facet-option-count The count of results per option
      */
     interface KlevuFacet {
         /**
@@ -506,6 +510,7 @@ export namespace Components {
     }
     /**
      * Lists latest searches user has made on the site
+     * @csspart latest-searches-caption The caption for the latest search list
      */
     interface KlevuLatestSearches {
         /**
@@ -760,8 +765,15 @@ export namespace Components {
      * By default the products fill the whole space, but it can be limited
      * with --klevu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image The image element of component
-     * @csspart product-container The container element of whole
+     * @csspart product-base The container element of whole
      * @csspart product-swatch Single swatch element under the image
+     * @csspart product-brandname The brand name of the product
+     * @csspart product-name The name of the product
+     * @csspart product-description The description of the product
+     * @csspart product-price The price of the product
+     * @csspart product-vatcaption The vat caption of the product
+     * @csspart product-ooscaption The oos caption of the product
+     * @csspart product-variants-count The number of variants
      */
     interface KlevuProduct {
         /**
@@ -859,6 +871,7 @@ export namespace Components {
     }
     /**
      * Component to place products on grid. Very simple container for products.
+     * @csspart product-grid-base The container for the grid
      */
     interface KlevuProductGrid {
         /**
@@ -1509,6 +1522,10 @@ export namespace Components {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @csspart slides-base The container for the slides component
+     * @csspart slides-heading The heading of the slides
+     * @csspart slides-previous-button The previous button
+     * @csspart slides-next-button The next button
      */
     interface KlevuSlides {
         /**
@@ -1539,6 +1556,7 @@ export namespace Components {
     }
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
+     * @csspart suggestions-list-caption The caption to the list of suggestions
      */
     interface KlevuSuggestionsList {
         /**
@@ -1908,6 +1926,7 @@ declare global {
     };
     /**
      * Component to display list of CMS page results
+     * @csspart cms-list-caption The caption for the cms list
      */
     interface HTMLKlevuCmsListElement extends Components.KlevuCmsList, HTMLStencilElement {
     }
@@ -1951,6 +1970,9 @@ declare global {
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
      * @csspart facet-heading Heading of the facet
+     * @csspart facet-radio The radio button for selection of facet
+     * @csspart facet-more-button The button to show more results
+     * @csspart facet-option-count The count of results per option
      */
     interface HTMLKlevuFacetElement extends Components.KlevuFacet, HTMLStencilElement {
     }
@@ -2009,6 +2031,7 @@ declare global {
     };
     /**
      * Lists latest searches user has made on the site
+     * @csspart latest-searches-caption The caption for the latest search list
      */
     interface HTMLKlevuLatestSearchesElement extends Components.KlevuLatestSearches, HTMLStencilElement {
     }
@@ -2121,8 +2144,15 @@ declare global {
      * By default the products fill the whole space, but it can be limited
      * with --klevu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image The image element of component
-     * @csspart product-container The container element of whole
+     * @csspart product-base The container element of whole
      * @csspart product-swatch Single swatch element under the image
+     * @csspart product-brandname The brand name of the product
+     * @csspart product-name The name of the product
+     * @csspart product-description The description of the product
+     * @csspart product-price The price of the product
+     * @csspart product-vatcaption The vat caption of the product
+     * @csspart product-ooscaption The oos caption of the product
+     * @csspart product-variants-count The number of variants
      */
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
@@ -2132,6 +2162,7 @@ declare global {
     };
     /**
      * Component to place products on grid. Very simple container for products.
+     * @csspart product-grid-base The container for the grid
      */
     interface HTMLKlevuProductGridElement extends Components.KlevuProductGrid, HTMLStencilElement {
     }
@@ -2236,6 +2267,10 @@ declare global {
     };
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @csspart slides-base The container for the slides component
+     * @csspart slides-heading The heading of the slides
+     * @csspart slides-previous-button The previous button
+     * @csspart slides-next-button The next button
      */
     interface HTMLKlevuSlidesElement extends Components.KlevuSlides, HTMLStencilElement {
     }
@@ -2254,6 +2289,7 @@ declare global {
     };
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
+     * @csspart suggestions-list-caption The caption to the list of suggestions
      */
     interface HTMLKlevuSuggestionsListElement extends Components.KlevuSuggestionsList, HTMLStencilElement {
     }
@@ -2596,6 +2632,7 @@ declare namespace LocalJSX {
     }
     /**
      * Component to display list of CMS page results
+     * @csspart cms-list-caption The caption for the cms list
      */
     interface KlevuCmsList {
         /**
@@ -2704,6 +2741,9 @@ declare namespace LocalJSX {
      * Rendering items of single facet with all its options or a slider.
      * Manager property must be set for this component to work.
      * @csspart facet-heading Heading of the facet
+     * @csspart facet-radio The radio button for selection of facet
+     * @csspart facet-more-button The button to show more results
+     * @csspart facet-option-count The count of results per option
      */
     interface KlevuFacet {
         /**
@@ -2875,6 +2915,7 @@ declare namespace LocalJSX {
     }
     /**
      * Lists latest searches user has made on the site
+     * @csspart latest-searches-caption The caption for the latest search list
      */
     interface KlevuLatestSearches {
         /**
@@ -3136,8 +3177,15 @@ declare namespace LocalJSX {
      * By default the products fill the whole space, but it can be limited
      * with --klevu-product-width and --klevu-product-small-width css variables.
      * @csspart product-image The image element of component
-     * @csspart product-container The container element of whole
+     * @csspart product-base The container element of whole
      * @csspart product-swatch Single swatch element under the image
+     * @csspart product-brandname The brand name of the product
+     * @csspart product-name The name of the product
+     * @csspart product-description The description of the product
+     * @csspart product-price The price of the product
+     * @csspart product-vatcaption The vat caption of the product
+     * @csspart product-ooscaption The oos caption of the product
+     * @csspart product-variants-count The number of variants
      */
     interface KlevuProduct {
         /**
@@ -3239,6 +3287,7 @@ declare namespace LocalJSX {
     }
     /**
      * Component to place products on grid. Very simple container for products.
+     * @csspart product-grid-base The container for the grid
      */
     interface KlevuProductGrid {
         /**
@@ -3910,6 +3959,10 @@ declare namespace LocalJSX {
     }
     /**
      * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+     * @csspart slides-base The container for the slides component
+     * @csspart slides-heading The heading of the slides
+     * @csspart slides-previous-button The previous button
+     * @csspart slides-next-button The next button
      */
     interface KlevuSlides {
         /**
@@ -3944,6 +3997,7 @@ declare namespace LocalJSX {
     }
     /**
      * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
+     * @csspart suggestions-list-caption The caption to the list of suggestions
      */
     interface KlevuSuggestionsList {
         /**
@@ -4222,6 +4276,7 @@ declare module "@stencil/core" {
             "klevu-chip": LocalJSX.KlevuChip & JSXBase.HTMLAttributes<HTMLKlevuChipElement>;
             /**
              * Component to display list of CMS page results
+             * @csspart cms-list-caption The caption for the cms list
              */
             "klevu-cms-list": LocalJSX.KlevuCmsList & JSXBase.HTMLAttributes<HTMLKlevuCmsListElement>;
             /**
@@ -4245,6 +4300,9 @@ declare module "@stencil/core" {
              * Rendering items of single facet with all its options or a slider.
              * Manager property must be set for this component to work.
              * @csspart facet-heading Heading of the facet
+             * @csspart facet-radio The radio button for selection of facet
+             * @csspart facet-more-button The button to show more results
+             * @csspart facet-option-count The count of results per option
              */
             "klevu-facet": LocalJSX.KlevuFacet & JSXBase.HTMLAttributes<HTMLKlevuFacetElement>;
             /**
@@ -4278,6 +4336,7 @@ declare module "@stencil/core" {
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;
             /**
              * Lists latest searches user has made on the site
+             * @csspart latest-searches-caption The caption for the latest search list
              */
             "klevu-latest-searches": LocalJSX.KlevuLatestSearches & JSXBase.HTMLAttributes<HTMLKlevuLatestSearchesElement>;
             /**
@@ -4340,12 +4399,20 @@ declare module "@stencil/core" {
              * By default the products fill the whole space, but it can be limited
              * with --klevu-product-width and --klevu-product-small-width css variables.
              * @csspart product-image The image element of component
-             * @csspart product-container The container element of whole
+             * @csspart product-base The container element of whole
              * @csspart product-swatch Single swatch element under the image
+             * @csspart product-brandname The brand name of the product
+             * @csspart product-name The name of the product
+             * @csspart product-description The description of the product
+             * @csspart product-price The price of the product
+             * @csspart product-vatcaption The vat caption of the product
+             * @csspart product-ooscaption The oos caption of the product
+             * @csspart product-variants-count The number of variants
              */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**
              * Component to place products on grid. Very simple container for products.
+             * @csspart product-grid-base The container for the grid
              */
             "klevu-product-grid": LocalJSX.KlevuProductGrid & JSXBase.HTMLAttributes<HTMLKlevuProductGridElement>;
             /**
@@ -4400,6 +4467,10 @@ declare module "@stencil/core" {
             "klevu-slider": LocalJSX.KlevuSlider & JSXBase.HTMLAttributes<HTMLKlevuSliderElement>;
             /**
              * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
+             * @csspart slides-base The container for the slides component
+             * @csspart slides-heading The heading of the slides
+             * @csspart slides-previous-button The previous button
+             * @csspart slides-next-button The next button
              */
             "klevu-slides": LocalJSX.KlevuSlides & JSXBase.HTMLAttributes<HTMLKlevuSlidesElement>;
             /**
@@ -4408,6 +4479,7 @@ declare module "@stencil/core" {
             "klevu-sort": LocalJSX.KlevuSort & JSXBase.HTMLAttributes<HTMLKlevuSortElement>;
             /**
              * Simple component to list suggestions. Takes in a parameter suggestions that will be rendered as a list
+             * @csspart suggestions-list-caption The caption to the list of suggestions
              */
             "klevu-suggestions-list": LocalJSX.KlevuSuggestionsList & JSXBase.HTMLAttributes<HTMLKlevuSuggestionsListElement>;
             /**

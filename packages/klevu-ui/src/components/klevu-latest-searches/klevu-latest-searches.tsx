@@ -5,6 +5,7 @@ import { partsExports } from "../../utils/partsExports"
 
 /**
  * Lists latest searches user has made on the site
+ * @csspart latest-searches-caption The caption for the latest search list
  */
 @Component({
   tag: "klevu-latest-searches",
@@ -42,7 +43,7 @@ export class KlevuLatestSearches {
 
     return (
       <Host>
-        <klevu-typography variant="h3" class="caption">
+        <klevu-typography variant="h3" class="caption" part="latest-searches-caption">
           {this.tCaption}
         </klevu-typography>
         {this.lastSearches.map((ls) => (

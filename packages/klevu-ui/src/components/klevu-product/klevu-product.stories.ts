@@ -100,7 +100,7 @@ export const CustomizedProducts: StoryObj<KlevuProduct> = {
       #modified {
         --klevu-product-width: 300px;
       }
-      klevu-product#modified::part(product-container) {
+      klevu-product#modified::part(product-base) {
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.35);
       }
     </style>
@@ -130,7 +130,7 @@ export const ProductWithoutImage: StoryObj<KlevuProduct> = {
       "without-image"
     )}
     <style>
-      klevu-product.without-image::part(product-container) {
+      klevu-product.without-image::part(product-base) {
         border: 1px solid black;
       }
     </style>
