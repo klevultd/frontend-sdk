@@ -183,9 +183,9 @@ export const StyledProduct: StoryObj<KlevuProduct> = {
       #styledProduct::part(product-price) {
         --klevu-typography-color: darkorange;
       }
-      #styledProduct::part(button-base) {
+      #styledProduct::part(product-addtocart) {
         --klevu-button-background-color: yellow;
-        --klevu-button-text-color: red; /* doesnt work*/
+        --klevu-button-text-color: red;
       }
     </style>`,
 }

@@ -33,6 +33,7 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @csspart product-vatcaption The vat caption of the product
  * @csspart product-ooscaption The oos caption of the product
  * @csspart product-variants-count The number of variants
+ * @csspart product-addtocart The add to cart button
  */
 @Component({
   tag: "klevu-product",
@@ -387,6 +388,7 @@ export class KlevuProduct {
             <slot name="addtocart">
               {this.showAddToCart ? (
                 <klevu-button
+                  part="product-addtocart"
                   class="addToCart"
                   onClick={this.#addToCart.bind(this)}
                   fullWidth

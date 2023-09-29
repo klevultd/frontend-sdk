@@ -774,6 +774,7 @@ export namespace Components {
      * @csspart product-vatcaption The vat caption of the product
      * @csspart product-ooscaption The oos caption of the product
      * @csspart product-variants-count The number of variants
+     * @csspart product-addtocart The add to cart button
      */
     interface KlevuProduct {
         /**
@@ -2153,6 +2154,7 @@ declare global {
      * @csspart product-vatcaption The vat caption of the product
      * @csspart product-ooscaption The oos caption of the product
      * @csspart product-variants-count The number of variants
+     * @csspart product-addtocart The add to cart button
      */
     interface HTMLKlevuProductElement extends Components.KlevuProduct, HTMLStencilElement {
     }
@@ -3186,6 +3188,7 @@ declare namespace LocalJSX {
      * @csspart product-vatcaption The vat caption of the product
      * @csspart product-ooscaption The oos caption of the product
      * @csspart product-variants-count The number of variants
+     * @csspart product-addtocart The add to cart button
      */
     interface KlevuProduct {
         /**
@@ -4408,6 +4411,7 @@ declare module "@stencil/core" {
              * @csspart product-vatcaption The vat caption of the product
              * @csspart product-ooscaption The oos caption of the product
              * @csspart product-variants-count The number of variants
+             * @csspart product-addtocart The add to cart button
              */
             "klevu-product": LocalJSX.KlevuProduct & JSXBase.HTMLAttributes<HTMLKlevuProductElement>;
             /**
