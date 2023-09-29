@@ -1142,6 +1142,9 @@ export namespace Components {
     }
     /**
      * Full app to create search bar that popups trending products and search results.
+     * @csspart quicksearch-content - The popup container
+     * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+     * @csspart quicksearch-main-area - Main content area container
      */
     interface KlevuQuicksearch {
         /**
@@ -2211,6 +2214,9 @@ declare global {
     };
     /**
      * Full app to create search bar that popups trending products and search results.
+     * @csspart quicksearch-content - The popup container
+     * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+     * @csspart quicksearch-main-area - Main content area container
      */
     interface HTMLKlevuQuicksearchElement extends Components.KlevuQuicksearch, HTMLStencilElement {
     }
@@ -3563,6 +3569,9 @@ declare namespace LocalJSX {
     }
     /**
      * Full app to create search bar that popups trending products and search results.
+     * @csspart quicksearch-content - The popup container
+     * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+     * @csspart quicksearch-main-area - Main content area container
      */
     interface KlevuQuicksearch {
         /**
@@ -4445,6 +4454,9 @@ declare module "@stencil/core" {
             "klevu-query": LocalJSX.KlevuQuery & JSXBase.HTMLAttributes<HTMLKlevuQueryElement>;
             /**
              * Full app to create search bar that popups trending products and search results.
+             * @csspart quicksearch-content - The popup container
+             * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+             * @csspart quicksearch-main-area - Main content area container
              */
             "klevu-quicksearch": LocalJSX.KlevuQuicksearch & JSXBase.HTMLAttributes<HTMLKlevuQuicksearchElement>;
             /**
