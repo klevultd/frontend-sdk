@@ -1,0 +1,16 @@
+import { Canvas, Meta, Controls } from "@storybook/addon-docs"
+import * as Stories from "./klevu-search-landing-page.stories"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+
+<Meta title="Apps/Search Landing Page/Examples/Stylished" />
+
+<Canvas of={Stories.Stylished} story={{ height: "500px" }} />
+
+Try editing the CSS in the editor below to see the changes in the preview above.
+
+<Controls of={Stories.Stylished} include="term" />
+
+<KlevuCSSEditor styleId="stylished" />
+
+<KlevuAutoDocs of={Stories} onlyStyles />

@@ -22,7 +22,7 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     limit: 24,
     useInfiniteScroll: false,
   },
-  render: (args) => html`<klevu-merchandising
+  render: (args) => html`<search-landing-page
     category=${ifDefined(args.category)}
     category-title=${ifDefined(args.categoryTitle)}
     filter-count=${ifDefined(args.filterCount)}
@@ -34,7 +34,7 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     show-ratings-count=${ifDefined(args.showRatingsCount)}
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
-  ></klevu-merchandising>`,
+  ></search-landing-page>`,
 }
 
 export const WithPagination: StoryObj<KlevuMerchandising> = {
@@ -54,7 +54,7 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
     limit: 12,
   },
   render: (args) => html`
-    <klevu-merchandising
+    <search-landing-page
       class="customized"
       category=${ifDefined(args.category)}
       category-title=${ifDefined(args.categoryTitle)}
@@ -63,7 +63,7 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       show-ratings-count=${ifDefined(args.showRatingsCount)}
     >
       <div slot="content"></div>
-    </klevu-merchandising>
+    </search-landing-page>
     <script>
       const merch = document.querySelector("klevu-merchandising.customized")
       const contentSlot = document.querySelector("klevu-merchandising.customized div[slot='content']")
@@ -104,7 +104,7 @@ export const Stylished: StoryObj<KlevuMerchandising> = {
   args: {
     category: "women",
   },
-  render: (args) => html`<klevu-merchandising class="stylished" .category=${args.category}></klevu-merchandising>
+  render: (args) => html`<search-landing-page class="stylished" .category=${args.category}></search-landing-page>
     <style id="stylished">
       klevu-merchandising.stylished::part(merchandising-sidebar) {
         border: 1px solid hotpink;

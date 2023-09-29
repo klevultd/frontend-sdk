@@ -1408,6 +1408,10 @@ export namespace Components {
     }
     /**
      * Full app component for search landing page
+     * @csspart search-landing-page-header The header container
+     * @csspart search-landing-page-content The content container
+     * @csspart search-landing-page-sidebar The sidebar container
+     * @csspart search-landing-page-footer The footer container
      */
     interface KlevuSearchLandingPage {
         /**
@@ -2266,6 +2270,10 @@ declare global {
     };
     /**
      * Full app component for search landing page
+     * @csspart search-landing-page-header The header container
+     * @csspart search-landing-page-content The content container
+     * @csspart search-landing-page-sidebar The sidebar container
+     * @csspart search-landing-page-footer The footer container
      */
     interface HTMLKlevuSearchLandingPageElement extends Components.KlevuSearchLandingPage, HTMLStencilElement {
     }
@@ -3858,6 +3866,10 @@ declare namespace LocalJSX {
     }
     /**
      * Full app component for search landing page
+     * @csspart search-landing-page-header The header container
+     * @csspart search-landing-page-content The content container
+     * @csspart search-landing-page-sidebar The sidebar container
+     * @csspart search-landing-page-footer The footer container
      */
     interface KlevuSearchLandingPage {
         /**
@@ -4494,6 +4506,10 @@ declare module "@stencil/core" {
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
             /**
              * Full app component for search landing page
+             * @csspart search-landing-page-header The header container
+             * @csspart search-landing-page-content The content container
+             * @csspart search-landing-page-sidebar The sidebar container
+             * @csspart search-landing-page-footer The footer container
              */
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
             /**
