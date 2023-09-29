@@ -3,10 +3,16 @@
   * @prop --klevu-badge-background: Background color of the badge, if accent or neutral is not set
   * @prop --klevu-badge-border-radius var(--klevu-border-radius-xxl): Border radius of the badge
   */
+  --background: var(--klevu-badge-background, var(--klevu-color-accent-1));
+  --border-radius: var(--klevu-badge-border-radius, var(--klevu-border-radius-xxl));
+  display: inline-block;
+}
+
+div {
   display: inline-block;
   padding: var(--klevu-spacing-02) var(--klevu-spacing-05);
-  background: var(--klevu-badge-background);
-  border-radius: var(--klevu-border-radius-xxl, var(--klevu-badge-border-radius));
+  background: var(--background);
+  border-radius: var(--border-radius);
   align-items: center;
 }
 
