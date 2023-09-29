@@ -99,3 +99,32 @@ export const WithInfiniteScroll: StoryObj<KlevuMerchandising> = {
   },
   render: Merchandising.render,
 }
+
+export const Stylished: StoryObj<KlevuMerchandising> = {
+  args: {
+    category: "women",
+  },
+  render: (args) => html`<klevu-merchandising class="stylished" .category=${args.category}></klevu-merchandising>
+    <style id="stylished">
+      klevu-merchandising.stylished::part(merchandising-sidebar) {
+        border: 1px solid hotpink;
+      }
+      klevu-merchandising.stylished::part(merchandising-header) {
+        border: 1px solid green;
+        color: green;
+        justify-content: center;
+      }
+      klevu-merchandising.stylished::part(merchandising-footer) {
+        border: 1px solid black;
+        color: black;
+      }
+      klevu-merchandising.stylished::part(merchandising-content) {
+        border: 1px solid blue;
+      }
+      klevu-merchandising.stylished::part(product-price) {
+        color: red;
+        display: block;
+        text-align: right;
+      }
+    </style>`,
+}

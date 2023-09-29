@@ -563,6 +563,10 @@ export namespace Components {
     }
     /**
      * Full merchandising app to power up your product grid pages
+     * @csspart merchandising-sidebar - Sidebar container
+     * @csspart merchandising-header - Header container
+     * @csspart merchandising-content - Content container
+     * @csspart merchandising-footer - Footer container
      */
     interface KlevuMerchandising {
         /**
@@ -2080,6 +2084,10 @@ declare global {
     };
     /**
      * Full merchandising app to power up your product grid pages
+     * @csspart merchandising-sidebar - Sidebar container
+     * @csspart merchandising-header - Header container
+     * @csspart merchandising-content - Content container
+     * @csspart merchandising-footer - Footer container
      */
     interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
     }
@@ -2979,6 +2987,10 @@ declare namespace LocalJSX {
     }
     /**
      * Full merchandising app to power up your product grid pages
+     * @csspart merchandising-sidebar - Sidebar container
+     * @csspart merchandising-header - Header container
+     * @csspart merchandising-content - Content container
+     * @csspart merchandising-footer - Footer container
      */
     interface KlevuMerchandising {
         /**
@@ -4375,6 +4387,10 @@ declare module "@stencil/core" {
             "klevu-loading-indicator": LocalJSX.KlevuLoadingIndicator & JSXBase.HTMLAttributes<HTMLKlevuLoadingIndicatorElement>;
             /**
              * Full merchandising app to power up your product grid pages
+             * @csspart merchandising-sidebar - Sidebar container
+             * @csspart merchandising-header - Header container
+             * @csspart merchandising-content - Content container
+             * @csspart merchandising-footer - Footer container
              */
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
             /**

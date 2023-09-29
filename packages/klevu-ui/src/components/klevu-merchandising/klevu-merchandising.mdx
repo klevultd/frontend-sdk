@@ -12,36 +12,4 @@ import * as Stories from "./klevu-merchandising.stories"
 
 <Controls />
 
-## Customizing Klevu Merchandising Component
-
-The provided code example demonstrates how to customize the
-`klevu-merchandising` component using JavaScript, CSS, and HTML attributes. The
-customization involves dynamic population and styling of the merchandising
-display.
-
-1. **Component Configuration:** The HTML markup includes a `klevu-merchandising`
-   component with the class `customized`. Attributes like `category`,
-   `category-title`, and `limit` are configured for the component. A `content`
-   slot is designated for displaying the merchandising content.
-
-2. **JavaScript Customization:** The JavaScript code targets the
-   `klevu-merchandising.customized` element and the `content` slot within it. It
-   listens for the `"klevuData"` event on the merchandising component. Upon klevuData
-   reception, it clears the content of the `content` slot and populates it with
-   a `klevu-grid` element.
-
-   - For each record in the event klevuData, a `klevu-product` element is created.
-     The `product` attribute of the element is set to the record, and it's
-     marked as a wrapper. The inner HTML of the element contains an image tag
-     displaying the product's image.
-
-3. **Custom CSS Styling:** The provided custom CSS styles target
-   `klevu-merchandising.customized` elements and adjust the width of images
-   displayed within them.
-
-This example highlights how to achieve dynamic product rendering and layout
-customization within the `klevu-merchandising` component.
-
-<Canvas of={Stories.CustomizedMerchandising} />
-
 <KlevuAutoDocs of={Stories} />
