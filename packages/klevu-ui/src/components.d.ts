@@ -79,11 +79,11 @@ export namespace Components {
      */
     interface KlevuBadge {
         /**
-          * Setting a acceent color to badge
+          * Setting a accent color to badge (1-4)
          */
         "accent"?: number;
         /**
-          * Setting a neutral color to badge
+          * Setting a neutral color to badge (1-8)
          */
         "neutral"?: number;
     }
@@ -1693,10 +1693,6 @@ export namespace Components {
         "sizes": ViewportSize[];
     }
 }
-export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLKlevuBadgeElement;
-}
 export interface KlevuBannerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBannerElement;
@@ -2459,14 +2455,13 @@ declare namespace LocalJSX {
      */
     interface KlevuBadge {
         /**
-          * Setting a acceent color to badge
+          * Setting a accent color to badge (1-4)
          */
         "accent"?: number;
         /**
-          * Setting a neutral color to badge
+          * Setting a neutral color to badge (1-8)
          */
         "neutral"?: number;
-        "onKlevuBadgeClose"?: (event: KlevuBadgeCustomEvent<void>) => void;
     }
     /**
      * Component that displays a typical klevu banner

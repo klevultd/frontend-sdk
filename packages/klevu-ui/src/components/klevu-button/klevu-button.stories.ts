@@ -42,23 +42,22 @@ export const Button: StoryObj<KlevuButton & { text?: string }> = {
   >`,
 }
 
-export const IconButton1: StoryObj<KlevuButton & { text?: string }> = {
+export const IconButton: StoryObj<KlevuButton & { text?: string }> = {
   ...Button,
   args: {
     icon: "chevron_left",
   },
 }
 
-export const IconButton2: StoryObj<KlevuButton & { text?: string }> = {
-  ...Button,
-  args: {
-    icon: "search",
-  },
-}
-
-export const IconButton3: StoryObj<KlevuButton & { text?: string }> = {
-  ...Button,
-  args: {
-    icon: "settings",
-  },
-}
+// export const StyledButton: StoryObj<KlevuButton & { text?: string }> = {
+//   ...Button,
+//   render: (args) => html`
+//     <klevu-button id="styledButton">CSS Styled Button</klevu-button>
+//     <style id="styled">
+//       #styledButton {
+//         --klevu-button-background-color: red;
+//         --klevu-button-text-color: yellow;
+//       }
+//     </style>
+//   `,
+// }

@@ -3,19 +3,12 @@ import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
 import * as BadgeStories from "./klevu-badge.stories"
 
-<Meta of={BadgeStories} />
+<Meta title="Atoms/Badge/Examples/Neutral Colors" />
 
-# Klevu-badge
+## Neutral colors
 
-<Markdown>{BadgeStories.description}</Markdown>
+Badges can be in neutral colors. Colors are set in css properties and can be changed by overriding them.
 
-## Badge
-
-Badge can be in accent or neutral colors. Colors are set in css properties and can be changed by overriding them.
-Accent takes precedence over neutral colors.
-
-<Canvas of={BadgeStories.Badges} />
-
-<Controls />
+<Canvas of={BadgeStories.NeutralBadges} />
 
 <KlevuAutoDocs of={BadgeStories} />
