@@ -6,6 +6,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  *
  * @slot default - Badge content
  * @csspart badge-content The content of the badge
+ * @csspart badge-base The container of the badge
  */
 @Component({
   tag: "klevu-badge",
@@ -26,20 +27,20 @@ export class KlevuBadge {
 
     if (this.accent || this.neutral) {
       style = {
-        "--klevu-badge-background": this.accent
+        "--background": this.accent
           ? `var(--klevu-color-accent-${this.accent})`
           : `var(--klevu-color-neutral-${this.neutral})`,
       }
     }
 
     return (
-      <Host style={style}>
+      <div style={style} part="badge-base">
         <klevu-typography variant="body-xs">
           <span part="badge-content">
             <slot></slot>
           </span>
         </klevu-typography>
-      </Host>
+      </div>
     )
   }
 }
