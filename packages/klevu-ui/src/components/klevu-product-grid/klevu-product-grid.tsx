@@ -2,7 +2,7 @@ import { Component, h, Host, Prop } from "@stencil/core"
 
 /**
  * Component to place products on grid. Very simple container for products.
- *
+ * @csspart product-grid-base The container for the grid
  */
 @Component({
   tag: "klevu-product-grid",
@@ -21,7 +21,7 @@ export class KlevuProductGrid {
     }
     return (
       <Host>
-        <div class="gridcontainer" style={style}>
+        <div class="gridcontainer" style={style} part="product-grid-base">
           <slot />
         </div>
       </Host>

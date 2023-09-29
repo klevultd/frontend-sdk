@@ -2,7 +2,10 @@ import { Component, h, Host, Prop } from "@stencil/core"
 
 /**
  * Horizontal slides component. Can be used to display a list of items horizontally. Has optional title and next/prev buttons.
- *
+ * @csspart slides-base The container for the slides component
+ * @csspart slides-heading The heading of the slides
+ * @csspart slides-previous-button The previous button
+ * @csspart slides-next-button The next button
  */
 @Component({
   tag: "klevu-slides",
@@ -87,33 +90,36 @@ export class KlevuSlides {
   render() {
     return (
       <Host>
-        {this.heading === undefined || !this.hideNextPrev ? (
-          <header>
-            <klevu-typography variant="h2">{this.heading}</klevu-typography>
-            {this.hideNextPrev ? null : (
-              <div>
-                <klevu-button
-                  class="prev"
-                  icon="chevron_left"
-                  onClick={this.#prev.bind(this)}
-                  isSecondary
-                ></klevu-button>
-                <klevu-button
-                  class="next"
-                  icon="chevron_right"
-                  onClick={this.#next.bind(this)}
-                  isSecondary
-                ></klevu-button>
-              </div>
-            )}
-          </header>
-        ) : null}
-
-        <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
-          <div class={{ slides: true }}>
-            <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
-          </div>
-        </klevu-util-scrollbars>
+        <div part="slides-base">
+          {this.heading === undefined || !this.hideNextPrev ? (
+            <header>
+              <klevu-typography variant="h2" part="slides-heading">
+                {this.heading}
+              </klevu-typography>
+              {this.hideNextPrev ? null : (
+                <div>
+                  <klevu-button
+                    part="slides-previous-button"
+                    class="prev"
+                    icon="chevron_left"
+                    onClick={this.#prev.bind(this)}
+                  ></klevu-button>
+                  <klevu-button
+                    part="slides-next-button"
+                    class="next"
+                    icon="chevron_right"
+                    onClick={this.#next.bind(this)}
+                  ></klevu-button>
+                </div>
+              )}
+            </header>
+          ) : null}
+          <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+            <div class={{ slides: true }}>
+              <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
+            </div>
+          </klevu-util-scrollbars>
+        </div>
       </Host>
     )
   }

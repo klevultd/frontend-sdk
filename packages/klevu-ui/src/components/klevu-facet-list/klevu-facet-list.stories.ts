@@ -102,3 +102,42 @@ export const FacetListColorSwatches: StoryObj<KlevuFacetList> = {
       .colorSwatches="${args.colorSwatches}"
     ></klevu-facet-list>`,
 }
+
+export const StyledFacetList: StoryObj<KlevuFacetList> = {
+  args: {
+    manager: manager,
+  },
+  render: (args) =>
+    html`<klevu-facet-list
+        id="styledFacetList"
+        accordion=${ifDefined(args.accordion)}
+        .customOrder=${args.customOrder}
+        .manager=${args.manager}
+        .mode=${args.mode}
+        use-apply-button="${ifDefined(args.useApplyButton)}"
+        defaultPriceLabel=${ifDefined(args.defaultPriceLabel)}
+      ></klevu-facet-list>
+      <style>
+        #styledFacetList::part(facet-heading) {
+          --klevu-typography-color: #555;
+          margin-bottom: 8px;
+        }
+        #styledFacetList::part(checkbox-box) {
+          background-color: azure;
+          outline: azure;
+        }
+        #styledFacetList::part(checkbox-box):hover {
+          background-color: azure;
+          border-color: orange;
+        }
+        #styledFacetList::part(checkbox-content) {
+          --klevu-typography-color: #555;
+        }
+        #styledFacetList::part(facet-option-count) {
+          font-style: italic;
+        }
+        #styledFacetList::part(facet-more-button) {
+          --klevu-color-primary: red;
+        }
+      </style>`,
+}

@@ -3,6 +3,7 @@ import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
 
 import { KlevuDropdownCustomEvent, KlevuDropdownVariant } from "../../components"
 import { getTranslation } from "../../utils/getTranslation"
+import { partsExports } from "../../utils/partsExports"
 
 /**
  * Sort dropdown. User can select what kind of sorting they want
@@ -55,6 +56,7 @@ export class KlevuSort {
     return (
       <Host>
         <klevu-dropdown
+          exportparts={partsExports("klevu-dropdown")}
           name="sort"
           options={this.options}
           selected={this.#selected}

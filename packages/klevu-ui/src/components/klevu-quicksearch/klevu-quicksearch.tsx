@@ -566,12 +566,18 @@ export class KlevuQuicksearch {
       <Fragment>
         <aside>
           <klevu-suggestions-list
+            exportparts={partsExports("klevu-suggestions-list")}
             suggestions={this.suggestions}
             onKlevuSuggestionClicked={(event) => this.#startSearch(event.detail)}
           ></klevu-suggestions-list>
           {this.cmsPages && this.cmsPages.length > 0 && <klevu-cms-list pages={this.cmsPages} link></klevu-cms-list>}
           {this.categories && this.categories.length > 0 && (
-            <klevu-cms-list pages={this.categories} tCaption={this.tCategoriesCaption} link></klevu-cms-list>
+            <klevu-cms-list
+              exportparts={partsExports("klevu-cms-list")}
+              pages={this.categories}
+              tCaption={this.tCategoriesCaption}
+              link
+            ></klevu-cms-list>
           )}
         </aside>
         <section>
@@ -672,6 +678,7 @@ export class KlevuQuicksearch {
 
           {!this.hideRecentSearches && !isNoResultsPage && (
             <klevu-latest-searches
+              exportparts={partsExports("klevu-latest-searches")}
               onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
             ></klevu-latest-searches>
           )}

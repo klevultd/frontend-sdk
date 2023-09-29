@@ -13,6 +13,7 @@ import {
   Method,
 } from "@stencil/core"
 import { KlevuFacetMode } from "../klevu-facet/klevu-facet"
+import { partsExports } from "../../utils/partsExports"
 
 export type KlevuColorSwatchOverride = {
   [key: string]: {
@@ -168,6 +169,7 @@ export class KlevuFacetList {
 
             return (
               <klevu-facet
+                exportparts={partsExports("klevu-facet")}
                 accordion={this.accordion}
                 accordionStartOpen={index === 0}
                 customOrder={this.customOrder?.[f.key]}
@@ -181,6 +183,7 @@ export class KlevuFacetList {
           } else if (FilterManager.isKlevuFilterResultSlider(f)) {
             return (
               <klevu-facet
+                exportparts={partsExports("klevu-facet")}
                 accordion={this.accordion}
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 slider={f}

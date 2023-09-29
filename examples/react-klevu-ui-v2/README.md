@@ -288,7 +288,7 @@ klevu-button::part(klevu-button) {
 ### Styling KlevuProduct container
 
 ```css
-klevu-product::part(product-container) {
+klevu-product::part(product-base {
   border: 3px dashed orange;
 }
 ```

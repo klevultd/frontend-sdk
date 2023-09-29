@@ -100,7 +100,7 @@ export const CustomizedProducts: StoryObj<KlevuProduct> = {
       #modified {
         --klevu-product-width: 300px;
       }
-      klevu-product#modified::part(product-container) {
+      klevu-product#modified::part(product-base) {
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.35);
       }
     </style>
@@ -130,9 +130,62 @@ export const ProductWithoutImage: StoryObj<KlevuProduct> = {
       "without-image"
     )}
     <style>
-      klevu-product.without-image::part(product-container) {
+      klevu-product.without-image::part(product-base) {
         border: 1px solid black;
       }
     </style>
   `,
+}
+
+export const StyledProduct: StoryObj<KlevuProduct> = {
+  args: {
+    product: productItem,
+    variant: "default",
+  },
+  render: (args) => html`<klevu-product
+      id="styledProduct"
+      style="--klevu-product-width: 300px"
+      variant=${args.variant}
+      .product=${args.product}
+      fixed-width=${ifDefined(args.fixedWidth)}
+      hide-brand=${ifDefined(args.hideBrand)}
+      hide-description=${ifDefined(args.hideDescription)}
+      hide-image=${ifDefined(args.hideImage)}
+      hide-price=${ifDefined(args.hidePrice)}
+      hide-name=${ifDefined(args.hideName)}
+      hide-swatches=${ifDefined(args.hideSwatches)}
+      key-brand=${ifDefined(args.keyBrand)}
+      key-name=${ifDefined(args.keyName)}
+      key-description=${ifDefined(args.keyDescription)}
+      show-add-to-cart=${ifDefined(args.showAddToCart)}
+      t-add-to-cart=${ifDefined(args.tAddToCart)}
+      hide-hover-image=${ifDefined(args.hideHoverImage)}
+      vat-caption=${ifDefined(args.vatCaption)}
+      show-variants-count=${ifDefined(args.showVariantsCount)}
+    ></klevu-product>
+    <style>
+      #styledProduct::part(product-base) {
+        border: 1px solid black;
+      }
+      #styledProduct::part(product-brandname) {
+        --klevu-typography-color: blue;
+      }
+      #styledProduct::part(product-name) {
+        --klevu-typography-color: red;
+        font-weight: bold; /* doesnt work*/
+      }
+      #styledProduct::part(product-description) {
+        --klevu-typography-color: green;
+      }
+      #styledProduct::part(product-base) {
+        border: 1px solid black;
+      }
+      #styledProduct::part(product-price) {
+        --klevu-typography-color: darkorange;
+      }
+      #styledProduct::part(product-addtocart) {
+        --klevu-button-background-color: yellow;
+        --klevu-button-text-color: red;
+      }
+    </style>`,
 }
