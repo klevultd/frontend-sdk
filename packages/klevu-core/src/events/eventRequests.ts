@@ -1,7 +1,6 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import { get, post } from "../connection/fetch.js"
 import { isBrowser } from "../utils/isBrowser.js"
-import { objectToQueryParameters } from "../utils/index.js"
 
 const KEY_PENDING_REQUESTS = "klevu-pending-analytics"
 
@@ -36,11 +35,9 @@ export type V1SearchEvent = {
 }
 
 export async function KlevuEventV1Search(event: V1SearchEvent) {
-  const url = `${
-    KlevuConfig.getDefault().eventsApiV1Url
-  }n-search/search${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}n-search/search`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -109,11 +106,9 @@ export type V1ProductTrackingEvent = {
 export async function KlevuEventV1ProductTracking(
   event: V1ProductTrackingEvent
 ) {
-  const url = `${
-    KlevuConfig.getDefault().eventsApiV1Url
-  }productTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}productTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -170,11 +165,9 @@ export type V1CheckedOutProductsEvent = {
 export async function KlevuEventV1CheckedOutProducts(
   event: V1CheckedOutProductsEvent
 ) {
-  const url = `${
-    KlevuConfig.getDefault().eventsApiV1Url
-  }productTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}productTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -225,9 +218,9 @@ export async function KlevuEventV1CategoryView(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }categoryProductViewTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  }categoryProductViewTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -297,9 +290,9 @@ export async function KlevuEventV1CategoryProductClick(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }categoryProductClickTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  }categoryProductClickTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -405,6 +398,21 @@ export async function KlevuEventV2(data: KlevuEventV2Data[]) {
   return res
 }
 
+async function sendGenericPostEvent(url: string, data: { [key: string]: any }) {
+  const formData = new FormData()
+  for (const key in data) {
+    if (data[key] !== undefined) {
+      formData.append(key, data[key])
+    }
+  }
+  if (isBrowser() && navigator.sendBeacon) {
+    if (navigator.sendBeacon(url, formData)) {
+      return
+    }
+  }
+  return await post(url, formData, true)
+}
+
 type PendingRequest = {
   id: string
   url: string
@@ -466,12 +474,16 @@ export async function runPendingAnalyticalRequests() {
   const requests = JSON.parse(data) as PendingRequest[]
 
   for await (const request of requests) {
-    if (request.data) {
-      await post(request.url, request.data, true)
-    } else {
-      await get(request.url, true)
+    try {
+      if (request.data) {
+        await sendGenericPostEvent(request.url, request.data)
+      } else {
+        await get(request.url, true)
+      }
+      removePendingRequest(request.id)
+    } catch (e) {
+      // we ignore errors here
     }
-    removePendingRequest(request.id)
   }
 }
 

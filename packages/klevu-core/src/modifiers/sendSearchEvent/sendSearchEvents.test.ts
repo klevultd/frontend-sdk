@@ -27,15 +27,7 @@ test("Sending search event", async () => {
 })
 
 test("Override IP with custom data", async () => {
-  const getSpySuccess = jest
-    .spyOn(KlevuConfig.default!.axios!, "get")
-    .mockImplementation(() => {
-      return new Promise((resolve, reject) => {
-        return resolve({
-          data: {},
-        })
-      })
-    })
+  const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
 
   await KlevuFetch(
     search(
@@ -49,8 +41,12 @@ test("Override IP with custom data", async () => {
     )
   )
 
-  expect(getSpySuccess).toHaveBeenCalledTimes(1)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("klevu_shopperIP=1.2.3.4")
+  expect(getSpySuccess).toHaveBeenCalledTimes(2)
+  expect(getSpySuccess).toHaveBeenLastCalledWith(
+    expect.anything(),
+    expect.objectContaining({
+      klevu_shopperIP: "1.2.3.4",
+    }),
+    expect.anything()
   )
 })

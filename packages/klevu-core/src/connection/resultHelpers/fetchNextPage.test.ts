@@ -109,15 +109,7 @@ test("Next page analytics test", async () => {
   expect(query?.categoryMerchandisingClickEvent).toBeDefined()
   const product = query!.records[0]
 
-  const getSpySuccess = jest
-    .spyOn(KlevuConfig.default!.axios!, "get")
-    .mockImplementation(() => {
-      return new Promise((resolve, reject) => {
-        return resolve({
-          data: {},
-        })
-      })
-    })
+  const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
 
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
@@ -130,7 +122,11 @@ test("Next page analytics test", async () => {
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+    expect.anything(),
+    expect.objectContaining({
+      klevu_shopperIP: "192.168.0.1",
+    }),
+    expect.anything()
   )
 
   // when doing it again, it should call the api again even though we have loaded results
@@ -147,9 +143,13 @@ test("Next page analytics test", async () => {
     },
   })
 
-  expect(getSpySuccess).toHaveBeenCalledTimes(2)
+  expect(getSpySuccess).toHaveBeenCalledTimes(3)
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+    expect.anything(),
+    expect.objectContaining({
+      klevu_shopperIP: "192.168.0.1",
+    }),
+    expect.anything()
   )
 
   // What if we do it third time?
@@ -166,9 +166,13 @@ test("Next page analytics test", async () => {
     },
   })
 
-  expect(getSpySuccess).toHaveBeenCalledTimes(3)
+  expect(getSpySuccess).toHaveBeenCalledTimes(5)
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("klevu_shopperIP=192.168.0.1")
+    expect.anything(),
+    expect.objectContaining({
+      klevu_shopperIP: "192.168.0.1",
+    }),
+    expect.anything()
   )
 
   // Redo second analytics
@@ -191,5 +195,5 @@ test("Next page analytics test", async () => {
     },
   })
 
-  expect(getSpySuccess).toHaveBeenCalledTimes(5)
+  expect(getSpySuccess).toHaveBeenCalledTimes(7)
 })
