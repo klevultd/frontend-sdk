@@ -107,8 +107,6 @@ function renderSlots(comp) {
 }
 
 function renderParts(comp) {
-  const depComps = parts[comp.tag] ? Object.keys(parts[comp.tag].exportedcomponents) : []
-
   const cssParts = comp.docsTags
     .filter((t) => t.name === "csspart")
     .map((t) => {
@@ -353,7 +351,7 @@ function CSSPropertyEditor({ name, defaultVal, saveName }) {
   }
 
   const isModified = value !== undefined && value !== defaultVal
-  const [currentValue, setCurrentValue] = useState(defaultVal)
+  const [currentValue, setCurrentValue] = useState(value || defaultVal)
   const isColor = CSS.supports("color", currentValue)
 
   const onChange = (e) => {

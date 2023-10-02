@@ -44,6 +44,7 @@ export const Customized: StoryObj<KlevuRecommendations> = {
       const recommendation = document.getElementById("customized")
       const slides = recommendation.querySelector("#customized klevu-slides")
       recommendation.addEventListener("klevuData", (e) => {
+        console.log(e)
         slides.innerHTML = ""
         e.detail.records.forEach((item) => {
           const product = document.createElement("klevu-product")
@@ -58,4 +59,29 @@ export const Customized: StoryObj<KlevuRecommendations> = {
         })
       })
     </script> `,
+}
+
+export const Stylished: StoryObj<KlevuRecommendations> = {
+  args: {
+    recommendationId: "k-b1c018f7-ee85-45c0-b65f-b9556f7dc15d",
+  },
+  render: (args) => html`<klevu-recommendations
+      class="stylished"
+      recommendation-id=${ifDefined(args.recommendationId)}
+      recommendation-title="A stylished recommendation"
+    ></klevu-recommendations>
+    <style id="stylished">
+      klevu-recommendations.stylished::part(slides-heading) {
+        color: red;
+        /* When styling text inside klevu-typography using CSS variables is required */
+        --klevu-typography-font-weight: bold;
+        --klevu-typography-font-size: 12px;
+      }
+      klevu-recommendations.stylished::part(button-base) {
+        background-color: hotpink;
+      }
+      klevu-recommendations.stylished::part(button-base):focus:after {
+        border: 2px solid black;
+      }
+    </style> `,
 }
