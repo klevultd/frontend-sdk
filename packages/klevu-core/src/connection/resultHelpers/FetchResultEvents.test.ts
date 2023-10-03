@@ -55,15 +55,7 @@ test("Search click should send a search event on first time, but not on second t
 
   const query = result.queriesById("test")
 
-  const getSpySuccess = jest
-    .spyOn(KlevuConfig.default!.axios!, "get")
-    .mockImplementation((params) => {
-      return new Promise((resolve) => {
-        return resolve({
-          data: {},
-        })
-      })
-    })
+  const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
 
   query?.searchClickEvent?.({
     productId: query.records[0].id,
@@ -71,10 +63,14 @@ test("Search click should send a search event on first time, but not on second t
   })
 
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("analytics/n-search")
+    expect.stringContaining("analytics/n-search"),
+    expect.anything(),
+    expect.anything()
   )
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("productTracking")
+    expect.stringContaining("productTracking"),
+    expect.anything(),
+    expect.anything()
   )
   expect(getSpySuccess).toHaveBeenCalledTimes(2)
 
@@ -85,7 +81,9 @@ test("Search click should send a search event on first time, but not on second t
 
   expect(getSpySuccess).toHaveBeenCalledTimes(3)
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("productTracking")
+    expect.stringContaining("productTracking"),
+    expect.anything(),
+    expect.anything()
   )
 })
 
@@ -160,15 +158,7 @@ test("Override user IP for request", async () => {
 
   const product = query!.records[0]
 
-  const getSpySuccess = jest
-    .spyOn(KlevuConfig.default!.axios!, "get")
-    .mockImplementation(() => {
-      return new Promise((resolve) => {
-        return resolve({
-          data: {},
-        })
-      })
-    })
+  const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
 
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
@@ -180,9 +170,9 @@ test("Override user IP for request", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining("klevu_shopperIP=192.168.0.1")
-  )
+  expect(
+    (getSpySuccess.mock.calls[0][1] as any).get("klevu_shopperIP")
+  ).toEqual("192.168.0.1")
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
@@ -207,15 +197,7 @@ test("Merchandising call has correct filters set", async () => {
   const query = result.queriesById("categoryMerchandising")
   expect(query?.categoryMerchandisingClickEvent).toBeDefined()
 
-  const getSpySuccess = jest
-    .spyOn(KlevuConfig.default!.axios!, "get")
-    .mockImplementation(() => {
-      return new Promise((resolve) => {
-        return resolve({
-          data: {},
-        })
-      })
-    })
+  const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
 
   const product = query!.records[0]
   query?.categoryMerchandisingClickEvent?.({
@@ -228,11 +210,9 @@ test("Merchandising call has correct filters set", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.stringContaining(
-      `klevu_activeFilters=${encodeURIComponent("color:Agate;;color:Amber")}`
-    )
-  )
+  expect(
+    (getSpySuccess.mock.calls[0][1] as any).get("klevu_activeFilters")
+  ).toEqual("color:Agate;;color:Amber")
 })
 
 test("Filters should not be set if there are no filters", async () => {
@@ -241,16 +221,7 @@ test("Filters should not be set if there are no filters", async () => {
   const query = result.queriesById("categoryMerchandising")
   expect(query?.categoryMerchandisingClickEvent).toBeDefined()
 
-  const getSpySuccess = jest
-    .spyOn(KlevuConfig.default!.axios!, "get")
-    .mockImplementation(() => {
-      return new Promise((resolve) => {
-        return resolve({
-          data: {},
-        })
-      })
-    })
-
+  const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
   const product = query!.records[0]
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
@@ -263,7 +234,11 @@ test("Filters should not be set if there are no filters", async () => {
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.not.stringContaining("klevu_activeFilters")
+    expect.anything(),
+    expect.not.objectContaining({
+      klevu_activeFilters: expect.anything(),
+    }),
+    expect.anything()
   )
 })
 
