@@ -1,5 +1,4 @@
 import { KlevuConfig } from "../config.js"
-import version from "../version.js"
 
 export async function get<T>(
   url: string,
@@ -14,7 +13,6 @@ export async function get<T>(
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "x-klevu-core": version,
     },
   })
 
@@ -33,17 +31,14 @@ export async function post<T>(
   const sendAsFormData = data instanceof FormData
 
   const axios = KlevuConfig.getDefault().axios
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const headers: any = {
-    "x-klevu-core": version,
-  }
-  if (!sendAsFormData) {
-    headers["Content-Type"] = "application/json"
-  }
   if (axios) {
     try {
       const res = await axios.post<T>(url, data, {
-        headers,
+        headers: sendAsFormData
+          ? undefined
+          : {
+              "Content-Type": "application/json",
+            },
       })
       return res.data
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,7 +50,11 @@ export async function post<T>(
   // Fetch will always return value. Even with 500 errors.
   const res = await fetch(url, {
     method: "POST",
-    headers,
+    headers: sendAsFormData
+      ? undefined
+      : {
+          "Content-Type": "application/json",
+        },
     body: sendAsFormData ? data : JSON.stringify(data),
   })
 
