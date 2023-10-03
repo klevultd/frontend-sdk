@@ -170,13 +170,9 @@ test("Override user IP for request", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.anything(),
-    expect.objectContaining({
-      klevu_shopperIP: "192.168.0.1",
-    }),
-    expect.anything()
-  )
+  expect(
+    (getSpySuccess.mock.calls[0][1] as any).get("klevu_shopperIP")
+  ).toEqual("192.168.0.1")
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
     product.id
@@ -214,13 +210,9 @@ test("Merchandising call has correct filters set", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.anything(),
-    expect.objectContaining({
-      klevu_activeFilters: "color:Agate;;color:Amber",
-    }),
-    expect.anything()
-  )
+  expect(
+    (getSpySuccess.mock.calls[0][1] as any).get("klevu_activeFilters")
+  ).toEqual("color:Agate;;color:Amber")
 })
 
 test("Filters should not be set if there are no filters", async () => {

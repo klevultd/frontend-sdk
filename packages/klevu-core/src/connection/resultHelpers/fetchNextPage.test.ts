@@ -121,13 +121,9 @@ test("Next page analytics test", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.anything(),
-    expect.objectContaining({
-      klevu_shopperIP: "192.168.0.1",
-    }),
-    expect.anything()
-  )
+  expect(
+    (getSpySuccess.mock.calls[0][1] as any).get("klevu_shopperIP")
+  ).toEqual("192.168.0.1")
 
   // when doing it again, it should call the api again even though we have loaded results
   const resultPage2 = await query!.getPage?.({
@@ -144,13 +140,9 @@ test("Next page analytics test", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(3)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.anything(),
-    expect.objectContaining({
-      klevu_shopperIP: "192.168.0.1",
-    }),
-    expect.anything()
-  )
+  expect(
+    (getSpySuccess.mock.calls[2][1] as any).get("klevu_shopperIP")
+  ).toEqual("192.168.0.1")
 
   // What if we do it third time?
   const resultPage3 = await query2!.getPage?.({
@@ -167,13 +159,9 @@ test("Next page analytics test", async () => {
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(5)
-  expect(getSpySuccess).toHaveBeenCalledWith(
-    expect.anything(),
-    expect.objectContaining({
-      klevu_shopperIP: "192.168.0.1",
-    }),
-    expect.anything()
-  )
+  expect(
+    (getSpySuccess.mock.calls[4][1] as any).get("klevu_shopperIP")
+  ).toEqual("192.168.0.1")
 
   // Redo second analytics
   query2?.categoryMerchandisingClickEvent?.({

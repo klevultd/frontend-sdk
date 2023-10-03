@@ -25,8 +25,7 @@ export async function get<T>(
 
 export async function post<T>(
   url: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any,
+  data: object | FormData,
   ignoreResult = false
 ): Promise<T | undefined> {
   const sendAsFormData = data instanceof FormData

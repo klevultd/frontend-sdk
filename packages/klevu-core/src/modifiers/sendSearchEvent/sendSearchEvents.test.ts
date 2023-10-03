@@ -42,11 +42,8 @@ test("Override IP with custom data", async () => {
   )
 
   expect(getSpySuccess).toHaveBeenCalledTimes(2)
-  expect(getSpySuccess).toHaveBeenLastCalledWith(
-    expect.anything(),
-    expect.objectContaining({
-      klevu_shopperIP: "1.2.3.4",
-    }),
-    expect.anything()
-  )
+
+  expect(
+    (getSpySuccess.mock.calls[1][1] as any).get("klevu_shopperIP")
+  ).toEqual("1.2.3.4")
 })

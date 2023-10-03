@@ -398,6 +398,7 @@ export async function KlevuEventV2(data: KlevuEventV2Data[]) {
   return res
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function sendGenericPostEvent(url: string, data: { [key: string]: any }) {
   const formData = new FormData()
   for (const key in data) {
@@ -425,17 +426,17 @@ function addPendingRequest(url: string, data?: object): string | void {
   }
 
   let requests: PendingRequest[] = []
-  const old = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  const old = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
   if (old) {
     try {
       requests = JSON.parse(old)
     } catch {
-      window.localStorage.removeItem(KEY_PENDING_REQUESTS)
+      window.sessionStorage.removeItem(KEY_PENDING_REQUESTS)
     }
   }
   const id = generateUID()
   requests.push({ id, url, data })
-  window.localStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+  window.sessionStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
   return id
 }
 
@@ -444,7 +445,7 @@ function removePendingRequest(id: string) {
     return
   }
 
-  const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  const data = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
   if (!data) {
     console.error("No pending requests!")
     return
@@ -455,7 +456,10 @@ function removePendingRequest(id: string) {
       requests.findIndex((r) => r.id === id),
       1
     )
-    window.localStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+    window.sessionStorage.setItem(
+      KEY_PENDING_REQUESTS,
+      JSON.stringify(requests)
+    )
   } catch (e) {
     console.error("Failed to save pending request")
   }
@@ -466,7 +470,7 @@ export async function runPendingAnalyticalRequests() {
     return
   }
 
-  const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  const data = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
   if (!data) {
     return
   }
