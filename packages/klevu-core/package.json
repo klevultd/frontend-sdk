@@ -21,12 +21,11 @@
   },
   "scripts": {
     "build:watch": "tsc --watch",
-    "build": "npm run generate:version && rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
+    "build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
     "qoc": "eslint src/",
     "docs": "rm -rf docs && (typedoc --entryDocument '' --plugin typedoc-plugin-markdown --out docs src/index.ts || true) && node split_docs.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest src --coverage && npm run qoc",
-    "test-single": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest",
-    "generate:version": "node version.js"
+    "test-single": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest"
   },
   "author": "Klevu",
   "contributors": [
