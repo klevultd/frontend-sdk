@@ -331,20 +331,30 @@ export class KlevuEvents {
    * @param activeFilters The string version of active filters applied to the query that got the products.
    * @param override Ability to override any analytical keys in low level
    */
-  static categoryMerchandisingProductClick(
+  static categoryMerchandisingProductClick({
+    product,
+    categoryTitle,
+    klevuCategory,
+    variantId,
+    productPosition,
+    abTestId,
+    abTestVariantId,
+    activeFilters,
+    override = {},
+  }: {
     product: Pick<KlevuRecord, "id"> &
       Partial<
         Pick<KlevuRecord, "itemGroupId" | "name" | "url" | "salePrice" | "sku">
-      >,
-    categoryTitle: string,
-    klevuCategory: string,
-    variantId?: string,
-    productPosition?: number,
-    abTestId?: string,
-    abTestVariantId?: string,
-    activeFilters?: string,
-    override: Partial<KlevuV1CategoryProductsClick> = {}
-  ) {
+      >
+    categoryTitle: string
+    klevuCategory: string
+    variantId?: string
+    productPosition?: number
+    abTestId?: string
+    abTestVariantId?: string
+    activeFilters?: string
+    override?: Partial<KlevuV1CategoryProductsClick>
+  }) {
     if (!product.id) {
       throw new Error("Cannot send event without product id")
     }
