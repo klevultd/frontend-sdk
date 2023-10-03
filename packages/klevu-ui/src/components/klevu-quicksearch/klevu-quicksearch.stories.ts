@@ -176,3 +176,35 @@ export const QuicksearchOnImage: StoryObj<KlevuQuicksearch> = {
       })
     </script> `,
 }
+
+export const Stylished: StoryObj<KlevuQuicksearch> = {
+  render: (args) => html` <klevu-quicksearch full-result-count="4" class="stylished"></klevu-quicksearch>
+    <style id="stylished">
+      klevu-quicksearch.stylished {
+        color: red;
+      }
+      klevu-quicksearch.stylished::part(quicksearch-content) {
+        color: green;
+        border: 1px solid pink;
+        --klevu-color-primary: red;
+        --klevu-color-primary-darker: #dd3333;
+      }
+      klevu-quicksearch.stylished::part(quicksearch-sidepanel) {
+        border: 1px solid fuchsia;
+      }
+      klevu-quicksearch.stylished::part(quicksearch-main-area) {
+        border: 1px solid hotpink;
+      }
+      klevu-quicksearch.stylished::part(product-base) {
+        margin: 10px 0;
+        border: 1px solid green;
+      }
+      klevu-quicksearch.stylished::part(product-price) {
+        color: red;
+        --klevu-typography-font-weight: 100;
+      }
+      klevu-quicksearch.stylished::part(button-base) {
+        background-color: black;
+      }
+    </style>`,
+}

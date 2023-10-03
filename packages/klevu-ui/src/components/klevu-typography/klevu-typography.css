@@ -24,34 +24,35 @@
   * @prop --klevu-body-xs-line-height calc(16em / 12): Body extra small line-height
   */
   display: block;
+  --font-weight: var(--klevu-typography-font-weight);
 }
 
 span {
   display: inline-block;
-  color: var(--klevu-typography-color, var(--klevu-color-neutral-8));
+  color: var(--klevu-typography-color, currentColor);
 }
 
 .variant-h1 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h1-size));
-  font-weight: var(--klevu-h1-weight);
+  font-weight: var(--font-weight, var(--klevu-h1-weight));
   line-height: var(--klevu-h1-line-height);
 }
 
 .variant-h2 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h2-size));
-  font-weight: var(--klevu-h2-weight);
+  font-weight: var(--font-weight, var(--klevu-h2-weight));
   line-height: var(--klevu-h2-line-height);
 }
 
 .variant-h3 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h3-size));
-  font-weight: var(--klevu-h3-weight);
+  font-weight: var(--font-weight, var(--klevu-h3-weight));
   line-height: var(--klevu-h3-line-height);
 }
 
 .variant-h4 {
   font-size: var(--klevu-typography-font-size, var(--klevu-h4-size));
-  font-weight: var(--klevu-h4-weight);
+  font-weight: var(--font-weight, var(--klevu-h4-weight));
   line-height: var(--klevu-h4-line-height);
 }
 
@@ -83,12 +84,12 @@ span {
 .variant-body-m,
 .variant-body-s,
 .variant-body-xs {
-  font-weight: var(--klevu-typography-font-weight, 400);
+  font-weight: var(--font-weight, var(--klevu-typography-font-weight, 400));
 }
 
 .variant-body-l-bold,
 .variant-body-m-bold,
 .variant-body-s-bold,
 .variant-body-xs-bold {
-  font-weight: var(--klevu-typography-font-weight, 600);
+  font-weight: var(--font-weight, var(--klevu-typography-font-weight, 600));
 }

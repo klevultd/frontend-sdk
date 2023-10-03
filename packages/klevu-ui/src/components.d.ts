@@ -563,6 +563,10 @@ export namespace Components {
     }
     /**
      * Full merchandising app to power up your product grid pages
+     * @csspart merchandising-sidebar - Sidebar container
+     * @csspart merchandising-header - Header container
+     * @csspart merchandising-content - Content container
+     * @csspart merchandising-footer - Footer container
      */
     interface KlevuMerchandising {
         /**
@@ -773,7 +777,7 @@ export namespace Components {
      * @csspart product-description The description of the product
      * @csspart product-price The price of the product
      * @csspart product-vatcaption The vat caption of the product
-     * @csspart product-ooscaption The oos caption of the product
+     * @csspart product-ooscaption The out of stock caption of the product
      * @csspart product-variants-count The number of variants
      * @csspart product-addtocart The add to cart button
      */
@@ -1142,6 +1146,9 @@ export namespace Components {
     }
     /**
      * Full app to create search bar that popups trending products and search results.
+     * @csspart quicksearch-content - The popup container
+     * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+     * @csspart quicksearch-main-area - Main content area container
      */
     interface KlevuQuicksearch {
         /**
@@ -1401,6 +1408,10 @@ export namespace Components {
     }
     /**
      * Full app component for search landing page
+     * @csspart search-landing-page-header The header container
+     * @csspart search-landing-page-content The content container
+     * @csspart search-landing-page-sidebar The sidebar container
+     * @csspart search-landing-page-footer The footer container
      */
     interface KlevuSearchLandingPage {
         /**
@@ -2077,6 +2088,10 @@ declare global {
     };
     /**
      * Full merchandising app to power up your product grid pages
+     * @csspart merchandising-sidebar - Sidebar container
+     * @csspart merchandising-header - Header container
+     * @csspart merchandising-content - Content container
+     * @csspart merchandising-footer - Footer container
      */
     interface HTMLKlevuMerchandisingElement extends Components.KlevuMerchandising, HTMLStencilElement {
     }
@@ -2154,7 +2169,7 @@ declare global {
      * @csspart product-description The description of the product
      * @csspart product-price The price of the product
      * @csspart product-vatcaption The vat caption of the product
-     * @csspart product-ooscaption The oos caption of the product
+     * @csspart product-ooscaption The out of stock caption of the product
      * @csspart product-variants-count The number of variants
      * @csspart product-addtocart The add to cart button
      */
@@ -2211,6 +2226,9 @@ declare global {
     };
     /**
      * Full app to create search bar that popups trending products and search results.
+     * @csspart quicksearch-content - The popup container
+     * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+     * @csspart quicksearch-main-area - Main content area container
      */
     interface HTMLKlevuQuicksearchElement extends Components.KlevuQuicksearch, HTMLStencilElement {
     }
@@ -2252,6 +2270,10 @@ declare global {
     };
     /**
      * Full app component for search landing page
+     * @csspart search-landing-page-header The header container
+     * @csspart search-landing-page-content The content container
+     * @csspart search-landing-page-sidebar The sidebar container
+     * @csspart search-landing-page-footer The footer container
      */
     interface HTMLKlevuSearchLandingPageElement extends Components.KlevuSearchLandingPage, HTMLStencilElement {
     }
@@ -2973,6 +2995,10 @@ declare namespace LocalJSX {
     }
     /**
      * Full merchandising app to power up your product grid pages
+     * @csspart merchandising-sidebar - Sidebar container
+     * @csspart merchandising-header - Header container
+     * @csspart merchandising-content - Content container
+     * @csspart merchandising-footer - Footer container
      */
     interface KlevuMerchandising {
         /**
@@ -3189,7 +3215,7 @@ declare namespace LocalJSX {
      * @csspart product-description The description of the product
      * @csspart product-price The price of the product
      * @csspart product-vatcaption The vat caption of the product
-     * @csspart product-ooscaption The oos caption of the product
+     * @csspart product-ooscaption The out of stock caption of the product
      * @csspart product-variants-count The number of variants
      * @csspart product-addtocart The add to cart button
      */
@@ -3563,6 +3589,9 @@ declare namespace LocalJSX {
     }
     /**
      * Full app to create search bar that popups trending products and search results.
+     * @csspart quicksearch-content - The popup container
+     * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+     * @csspart quicksearch-main-area - Main content area container
      */
     interface KlevuQuicksearch {
         /**
@@ -3837,6 +3866,10 @@ declare namespace LocalJSX {
     }
     /**
      * Full app component for search landing page
+     * @csspart search-landing-page-header The header container
+     * @csspart search-landing-page-content The content container
+     * @csspart search-landing-page-sidebar The sidebar container
+     * @csspart search-landing-page-footer The footer container
      */
     interface KlevuSearchLandingPage {
         /**
@@ -4366,6 +4399,10 @@ declare module "@stencil/core" {
             "klevu-loading-indicator": LocalJSX.KlevuLoadingIndicator & JSXBase.HTMLAttributes<HTMLKlevuLoadingIndicatorElement>;
             /**
              * Full merchandising app to power up your product grid pages
+             * @csspart merchandising-sidebar - Sidebar container
+             * @csspart merchandising-header - Header container
+             * @csspart merchandising-content - Content container
+             * @csspart merchandising-footer - Footer container
              */
             "klevu-merchandising": LocalJSX.KlevuMerchandising & JSXBase.HTMLAttributes<HTMLKlevuMerchandisingElement>;
             /**
@@ -4413,7 +4450,7 @@ declare module "@stencil/core" {
              * @csspart product-description The description of the product
              * @csspart product-price The price of the product
              * @csspart product-vatcaption The vat caption of the product
-             * @csspart product-ooscaption The oos caption of the product
+             * @csspart product-ooscaption The out of stock caption of the product
              * @csspart product-variants-count The number of variants
              * @csspart product-addtocart The add to cart button
              */
@@ -4445,6 +4482,9 @@ declare module "@stencil/core" {
             "klevu-query": LocalJSX.KlevuQuery & JSXBase.HTMLAttributes<HTMLKlevuQueryElement>;
             /**
              * Full app to create search bar that popups trending products and search results.
+             * @csspart quicksearch-content - The popup container
+             * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+             * @csspart quicksearch-main-area - Main content area container
              */
             "klevu-quicksearch": LocalJSX.KlevuQuicksearch & JSXBase.HTMLAttributes<HTMLKlevuQuicksearchElement>;
             /**
@@ -4466,6 +4506,10 @@ declare module "@stencil/core" {
             "klevu-search-field": LocalJSX.KlevuSearchField & JSXBase.HTMLAttributes<HTMLKlevuSearchFieldElement>;
             /**
              * Full app component for search landing page
+             * @csspart search-landing-page-header The header container
+             * @csspart search-landing-page-content The content container
+             * @csspart search-landing-page-sidebar The sidebar container
+             * @csspart search-landing-page-footer The footer container
              */
             "klevu-search-landing-page": LocalJSX.KlevuSearchLandingPage & JSXBase.HTMLAttributes<HTMLKlevuSearchLandingPageElement>;
             /**

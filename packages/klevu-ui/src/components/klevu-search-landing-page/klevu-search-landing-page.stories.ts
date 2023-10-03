@@ -61,3 +61,31 @@ export const WithImageSearch: StoryObj<KlevuSearchLandingPage> = {
   },
   render: SearchLandingPage.render,
 }
+
+export const Stylished: StoryObj<KlevuSearchLandingPage> = {
+  args: {
+    term: "hoodies",
+  },
+  render: (args) => html`<klevu-search-landing-page class="stylished" .term=${args.term}></klevu-search-landing-page>
+    <style id="stylished">
+      klevu-search-landing-page.stylished::part(search-landing-page-sidebar) {
+        border: 1px solid hotpink;
+      }
+      klevu-search-landing-page.stylished::part(search-landing-page-header) {
+        border: 1px solid green;
+        color: green;
+      }
+      klevu-search-landing-page.stylished::part(search-landing-page-footer) {
+        border: 1px solid black;
+        color: black;
+      }
+      klevu-search-landing-page.stylished::part(search-landing-page-content) {
+        border: 1px solid blue;
+      }
+      klevu-search-landing-page.stylished::part(product-price) {
+        color: red;
+        display: block;
+        text-align: right;
+      }
+    </style>`,
+}

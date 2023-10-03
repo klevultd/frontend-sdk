@@ -38,6 +38,11 @@ import { partsExports } from "../../utils/partsExports"
  * @slot facets - Sidebar of facets content
  * @slot topbanners - Top banner content
  * @slot bottombanners - Bottom banner content
+ *
+ * @csspart merchandising-sidebar - Sidebar container
+ * @csspart merchandising-header - Header container
+ * @csspart merchandising-content - Content container
+ * @csspart merchandising-footer - Footer container
  */
 @Component({
   tag: "klevu-merchandising",
@@ -322,16 +327,18 @@ export class KlevuMerchandising {
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">
-            <klevu-facet-list
-              ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
-              accordion
-              customOrder={this.filterCustomOrder}
-              manager={this.manager}
-              useApplyButton={this.#isMobile()}
-              onKlevuApplyFilters={this.#applyFilters.bind(this)}
-            ></klevu-facet-list>
+            <div part="merchandising-sidebar">
+              <klevu-facet-list
+                ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
+                accordion
+                customOrder={this.filterCustomOrder}
+                manager={this.manager}
+                useApplyButton={this.#isMobile()}
+                onKlevuApplyFilters={this.#applyFilters.bind(this)}
+              ></klevu-facet-list>
+            </div>
           </slot>
-          <div slot="header" class="header">
+          <div slot="header" class="header" part="merchandising-header">
             <klevu-typography variant="h1">{this.categoryTitle}</klevu-typography>
             <klevu-sort
               variant="inline"
@@ -340,32 +347,34 @@ export class KlevuMerchandising {
             ></klevu-sort>
           </div>
           <slot name="content" slot="content">
-            <slot name="topbanners">
-              {this.searchResultTopBanners.map((b) => (
-                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-              ))}
-            </slot>
-            <klevu-product-grid>
-              {this.results.map((p) => (
-                <klevu-product
-                  product={p}
-                  fixedWidth
-                  exportparts={partsExports("klevu-product")}
-                  showRatings={this.showRatings}
-                  showRatingsCount={this.showRatingsCount}
-                ></klevu-product>
-              ))}
-            </klevu-product-grid>
-            {this.loading && !this.infiniteScrollingPaused && (
-              <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
-            )}
-            <slot name="bottombanners">
-              {this.searchResultBottomBanners.map((b) => (
-                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-              ))}
-            </slot>
+            <div part="merchandising-content">
+              <slot name="topbanners">
+                {this.searchResultTopBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
+              <klevu-product-grid>
+                {this.results.map((p) => (
+                  <klevu-product
+                    product={p}
+                    fixedWidth
+                    exportparts={partsExports("klevu-product")}
+                    showRatings={this.showRatings}
+                    showRatingsCount={this.showRatingsCount}
+                  ></klevu-product>
+                ))}
+              </klevu-product-grid>
+              {this.loading && !this.infiniteScrollingPaused && (
+                <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
+              )}
+              <slot name="bottombanners">
+                {this.searchResultBottomBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
+            </div>
           </slot>
-          <div slot="footer" class="footer">
+          <div slot="footer" class="footer" part="merchandising-footer">
             {showInfiniteScroll ? (
               <klevu-util-infinite-scroll
                 infiniteScrollPauseThreshold={3}
