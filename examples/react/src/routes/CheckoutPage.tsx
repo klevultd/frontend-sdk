@@ -52,10 +52,11 @@ export function CheckoutPage() {
     const groupedProducts = groupBy(cart.items, (i) => i.id)
     const toBuy = Object.entries(groupedProducts).map((entry) => {
       const data: KlevuRecord[] = entry[1] as KlevuRecord[]
-      return {
-        amount: data.length,
+      const item: Parameters<typeof KlevuEvents.buy>[0]["items"][number] = {
         product: data[0],
+        amount: data.length,
       }
+      return item
     })
     KlevuEvents.buy({ items: toBuy })
 
