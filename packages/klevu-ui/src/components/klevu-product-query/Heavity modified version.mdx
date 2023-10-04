@@ -1,5 +1,7 @@
 import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import * as Stories from "./klevu-product-query.stories"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 
 <Meta title="Apps/Product Query/Examples/Heavily customized" />
 
@@ -75,3 +77,9 @@ This customization provides a distinct look and feel to the
 `klevu-product-query` component and its associated popup.
 
 <Canvas of={Stories.HeavilyModifedVersion} story={{ height: "600px" }} />
+
+Edit styles of example above in the editor below:
+
+<KlevuCSSEditor styleId="heavily_modified" />
+
+<KlevuAutoDocs of={Stories} onlyStyles />

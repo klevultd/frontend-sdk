@@ -86,6 +86,11 @@ export class KlevuProductQuery {
   @Prop() popupOffset = 5
 
   /**
+   * Set width of the popup content
+   */
+  @Prop() popupWidth?: number
+
+  /**
    * Disable closing the popup when clicking outside of it
    */
   @Prop() disableCloseOutsideClick?: boolean
@@ -144,6 +149,7 @@ export class KlevuProductQuery {
               settings={this.settings}
               popupAnchor={this.popupAnchor}
               popupOffset={this.popupOffset}
+              popupWidth={this.popupWidth}
               exportparts={partsExports("klevu-product-query-popup")}
               useBackground={this.useBackground}
               originElement={this.origin}

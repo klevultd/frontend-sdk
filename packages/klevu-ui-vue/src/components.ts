@@ -310,6 +310,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'useBackground',
   'popupAnchor',
   'popupOffset',
+  'popupWidth',
   'disableCloseOutsideClick',
   'settings',
   'useNativeScrollbars'
@@ -333,6 +334,7 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'useBackground',
   'popupAnchor',
   'popupOffset',
+  'popupWidth',
   'settings',
   'originElement',
   'disableCloseOutsideClick',
