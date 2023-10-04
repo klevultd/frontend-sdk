@@ -46,6 +46,11 @@ type Banner = NoResultsOptions["banners"][0]
  * @slot noResults - Show message when no results found
  * @slot topbanners - Top banner content
  * @slot bottombanners - Bottom banner content
+ *
+ * @csspart search-landing-page-header The header container
+ * @csspart search-landing-page-content The content container
+ * @csspart search-landing-page-sidebar The sidebar container
+ * @csspart search-landing-page-footer The footer container
  */
 @Component({
   tag: "klevu-search-landing-page",
@@ -405,18 +410,20 @@ export class KlevuSearchLandingPage {
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
         >
           <slot name="facets" slot="sidebar">
-            {!this.hideFilters && (
-              <klevu-facet-list
-                ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
-                customOrder={this.filterCustomOrder}
-                manager={this.manager}
-                useApplyButton={isMobile}
-                onKlevuApplyFilters={this.#applyFilters.bind(this)}
-                mode={this.useMultiSelectFilters ? "checkbox" : "radio"}
-              ></klevu-facet-list>
-            )}
+            <div part="search-landing-page-sidebar">
+              {!this.hideFilters && (
+                <klevu-facet-list
+                  ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
+                  customOrder={this.filterCustomOrder}
+                  manager={this.manager}
+                  useApplyButton={isMobile}
+                  onKlevuApplyFilters={this.#applyFilters.bind(this)}
+                  mode={this.useMultiSelectFilters ? "checkbox" : "radio"}
+                ></klevu-facet-list>
+              )}
+            </div>
           </slot>
-          <div slot="header" class="header">
+          <div slot="header" class="header" part="search-landing-page-header">
             {this.showSearch && (
               <klevu-quicksearch term={this.term} onKlevuSearch={(event) => this.#updateTerm(event.detail)} />
             )}
@@ -460,71 +467,73 @@ export class KlevuSearchLandingPage {
             </div>
           </div>
           <slot name="content" slot="content">
-            <slot name="topbanners">
-              {this.searchResultTopBanners.map((b) => (
-                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-              ))}
-            </slot>
-            {this.results?.length > 0 ? (
-              <klevu-product-grid slot="content">
-                {this.results?.map((p) => (
-                  <klevu-product
-                    hidePrice={this.hidePrice}
-                    product={p}
-                    fixedWidth
-                    exportparts={partsExports("klevu-product")}
-                    showRatings={this.showRatings}
-                    showRatingsCount={this.showRatingsCount}
-                    showVariantsCount={this.showVariantsCount}
-                  ></klevu-product>
+            <div part="search-landing-page-content">
+              <slot name="topbanners">
+                {this.searchResultTopBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
                 ))}
-              </klevu-product-grid>
-            ) : (
-              <slot name="noResults">
-                {!this.loading && this.noResultsMessage ? (
-                  <p class="noResultsMessage">
-                    <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
-                  </p>
-                ) : null}
-                <Fragment>
-                  <slot name="trending-products">
-                    {this.trendingProducts.length > 0 && (
-                      <Fragment>
-                        <klevu-typography variant="body-s">
-                          {this.#noResultsOptions?.productsHeading || ""}
-                        </klevu-typography>
-                        {this.trendingProducts?.map((p) => (
-                          <klevu-product
-                            hidePrice={this.hidePrice}
-                            product={p}
-                            variant="line"
-                            exportparts={partsExports("klevu-product")}
-                          ></klevu-product>
-                        ))}
-                      </Fragment>
-                    )}
-                  </slot>
-                </Fragment>
-                {!this.loading && this.#renderNoResultBanners()}
-                {this.#noResultsOptions?.showPopularKeywords && (
-                  <klevu-popular-searches
-                    exportparts={partsExports("klevu-popular-searches")}
-                    onKlevuPopularSearchClicked={(event) => this.#updateTerm(event.detail)}
-                  ></klevu-popular-searches>
-                )}
               </slot>
-            )}
+              {this.results?.length > 0 ? (
+                <klevu-product-grid slot="content">
+                  {this.results?.map((p) => (
+                    <klevu-product
+                      hidePrice={this.hidePrice}
+                      product={p}
+                      fixedWidth
+                      exportparts={partsExports("klevu-product")}
+                      showRatings={this.showRatings}
+                      showRatingsCount={this.showRatingsCount}
+                      showVariantsCount={this.showVariantsCount}
+                    ></klevu-product>
+                  ))}
+                </klevu-product-grid>
+              ) : (
+                <slot name="noResults">
+                  {!this.loading && this.noResultsMessage ? (
+                    <p class="noResultsMessage">
+                      <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
+                    </p>
+                  ) : null}
+                  <Fragment>
+                    <slot name="trending-products">
+                      {this.trendingProducts.length > 0 && (
+                        <Fragment>
+                          <klevu-typography variant="body-s">
+                            {this.#noResultsOptions?.productsHeading || ""}
+                          </klevu-typography>
+                          {this.trendingProducts?.map((p) => (
+                            <klevu-product
+                              hidePrice={this.hidePrice}
+                              product={p}
+                              variant="line"
+                              exportparts={partsExports("klevu-product")}
+                            ></klevu-product>
+                          ))}
+                        </Fragment>
+                      )}
+                    </slot>
+                  </Fragment>
+                  {!this.loading && this.#renderNoResultBanners()}
+                  {this.#noResultsOptions?.showPopularKeywords && (
+                    <klevu-popular-searches
+                      exportparts={partsExports("klevu-popular-searches")}
+                      onKlevuPopularSearchClicked={(event) => this.#updateTerm(event.detail)}
+                    ></klevu-popular-searches>
+                  )}
+                </slot>
+              )}
 
-            {this.loading && !this.infiniteScrollingPaused && (
-              <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
-            )}
-            <slot name="bottombanners">
-              {this.searchResultBottomBanners.map((b) => (
-                <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-              ))}
-            </slot>
+              {this.loading && !this.infiniteScrollingPaused && (
+                <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
+              )}
+              <slot name="bottombanners">
+                {this.searchResultBottomBanners.map((b) => (
+                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                ))}
+              </slot>
+            </div>
           </slot>
-          <div slot="footer" class="footer">
+          <div slot="footer" class="footer" part="search-landing-page-footer">
             {showInfiniteScroll ? (
               <klevu-util-infinite-scroll
                 onKlevuLoadMore={() => {

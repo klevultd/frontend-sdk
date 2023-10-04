@@ -31,7 +31,7 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
  * @csspart product-description The description of the product
  * @csspart product-price The price of the product
  * @csspart product-vatcaption The vat caption of the product
- * @csspart product-ooscaption The oos caption of the product
+ * @csspart product-ooscaption The out of stock caption of the product
  * @csspart product-variants-count The number of variants
  * @csspart product-addtocart The add to cart button
  */

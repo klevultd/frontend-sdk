@@ -9,16 +9,16 @@ import { KlevuLastSearches } from "../store/lastSearches.js"
 import {
   KlevuEventV1CategoryProductClick,
   KlevuEventV1CategoryView,
-  KlevuEventV1CheckedOutProducts,
   KlevuEventV1ProductTracking,
   KlevuEventV1Search,
   KlevuEventV2,
+  KlevuEventV2CheckedOutProducts,
   KlevuEventV2Data,
   KlevuV1CategoryProductsClick,
   KlevuV1CategoryProductsView,
-  V1CheckedOutProductsEvent,
   V1ProductTrackingEvent,
   V1SearchEvent,
+  V2CheckedOutProductsEvent,
 } from "./eventRequests.js"
 
 export type RecommendationViewEventMetaData = Pick<
@@ -41,39 +41,49 @@ export class KlevuEvents {
    *
    */
   static buy({
+    user,
     items,
   }: {
+    user?: {
+      ip_address?: string
+      email?: string
+    }
     items: Array<{
       amount: number
       product: Pick<KlevuRecord, "id"> &
-        Partial<Pick<KlevuRecord, "currency" | "itemGroupId" | "salePrice">>
+        Partial<
+          Pick<KlevuRecord, "currency" | "itemGroupId" | "salePrice" | "name">
+        >
       variantId?: string
-      override?: Partial<V1CheckedOutProductsEvent>
+      orderId?: string
+      orderLineId?: string
+      override?: Partial<
+        V2CheckedOutProductsEvent["event_data"]["items"][number]
+      >
     }>
   }) {
-    for (const item of items) {
-      const p = item.product
-
-      if (!p.id) {
-        throw new Error("Cannot send event without product id")
-      }
-
-      const data: V1CheckedOutProductsEvent = {
-        klevu_apiKey: KlevuConfig.getDefault().apiKey,
-        klevu_currency: p.currency ?? "usd",
-        klevu_productGroupId: p.itemGroupId || p.id,
-        klevu_productId: p.id,
-        klevu_salePrice: parseFloat(p.salePrice ?? "0"),
-        klevu_productVariantId: item.variantId || p.id,
-        klevu_type: "checkout",
-        klevu_unit: item.amount,
-      }
-
-      KlevuEventV1CheckedOutProducts({
-        ...data,
-        ...(item.override ?? {}),
-      })
+    const data: V2CheckedOutProductsEvent = {
+      event: "order_purchase",
+      event_version: "1.0.0",
+      event_apikey: KlevuConfig.getDefault().apiKey,
+      user_profile: user,
+      event_data: {
+        items: items.map((i) => ({
+          currency: i.product.currency ?? "USD",
+          item_group_id: i.product.itemGroupId ?? i.product.id,
+          item_id: i.product.id,
+          item_name: i.product.name ?? "unknown",
+          item_variant_id: i.variantId ?? i.product.id,
+          unit_price: parseFloat(i.product.salePrice ?? "0"),
+          order_id: i.orderId,
+          order_line_id: i.orderLineId,
+          units: i.amount,
+          ...(i.override ?? {}),
+        })),
+      },
     }
+
+    KlevuEventV2CheckedOutProducts(data)
   }
 
   /**
@@ -331,20 +341,30 @@ export class KlevuEvents {
    * @param activeFilters The string version of active filters applied to the query that got the products.
    * @param override Ability to override any analytical keys in low level
    */
-  static categoryMerchandisingProductClick(
+  static categoryMerchandisingProductClick({
+    product,
+    categoryTitle,
+    klevuCategory,
+    variantId,
+    productPosition,
+    abTestId,
+    abTestVariantId,
+    activeFilters,
+    override = {},
+  }: {
     product: Pick<KlevuRecord, "id"> &
       Partial<
         Pick<KlevuRecord, "itemGroupId" | "name" | "url" | "salePrice" | "sku">
-      >,
-    categoryTitle: string,
-    klevuCategory: string,
-    variantId?: string,
-    productPosition?: number,
-    abTestId?: string,
-    abTestVariantId?: string,
-    activeFilters?: string,
-    override: Partial<KlevuV1CategoryProductsClick> = {}
-  ) {
+      >
+    categoryTitle: string
+    klevuCategory: string
+    variantId?: string
+    productPosition?: number
+    abTestId?: string
+    abTestVariantId?: string
+    activeFilters?: string
+    override?: Partial<KlevuV1CategoryProductsClick>
+  }) {
     if (!product.id) {
       throw new Error("Cannot send event without product id")
     }

@@ -11,7 +11,7 @@ const STYLES_SAVE_KEY = "klevu-ui-storybook-css-vars"
 // Then register the languages you need
 hljs.registerLanguage("typescript", typescript)
 
-export const KlevuAutoDocs = ({ of }) => {
+export const KlevuAutoDocs = ({ of, onlyStyles }) => {
   const resolvedOf = useOf(of || "story", ["story", "meta"])
   switch (resolvedOf.type) {
     case "story": {
@@ -23,9 +23,9 @@ export const KlevuAutoDocs = ({ of }) => {
       return (
         <React.Fragment>
           {renderParts(comp)}
-          {renderSlots(comp)}
-          {renderEvents(comp)}
-          {renderMethods(comp)}
+          {onlyStyles ? null : renderSlots(comp)}
+          {onlyStyles ? null : renderEvents(comp)}
+          {onlyStyles ? null : renderMethods(comp)}
           {renderCSSProps(comp)}
         </React.Fragment>
       )
@@ -107,8 +107,6 @@ function renderSlots(comp) {
 }
 
 function renderParts(comp) {
-  const depComps = parts[comp.tag] ? Object.keys(parts[comp.tag].exportedcomponents) : []
-
   const cssParts = comp.docsTags
     .filter((t) => t.name === "csspart")
     .map((t) => {
@@ -120,11 +118,7 @@ function renderParts(comp) {
     })
 
   const subParts = []
-  jsdocs.components.forEach((c) => {
-    if (!depComps.includes(c.tag)) {
-      return
-    }
-
+  for (const c of getDependencies(comp)) {
     subParts.push(
       ...c.docsTags
         .filter((t) => t.name === "csspart")
@@ -136,7 +130,7 @@ function renderParts(comp) {
           }
         })
     )
-  })
+  }
 
   if (cssParts.length === 0 && subParts.length === 0) {
     return null
@@ -209,22 +203,7 @@ function renderCSSProps(comp) {
 
   const cssProps = filterAndTransformStyles(comp.styles)
   const subProps = []
-  const depComp = Object.keys(comp.dependencyGraph)
-  const depsToCheck = []
-  for (const dependency of depComp) {
-    for (const subDep of comp.dependencyGraph[dependency]) {
-      if (depsToCheck.indexOf(subDep) === -1 && subDep !== comp.tag) {
-        depsToCheck.push(subDep)
-      }
-    }
-  }
-  for (const subDep of depsToCheck) {
-    const dep = jsdocs.components.find((c) => c.tag === subDep)
-
-    if (!dep) {
-      continue
-    }
-
+  for (const dep of getDependencies(comp)) {
     filterAndTransformStyles(dep.styles).forEach((style) => {
       if (!subProps.some((subStyle) => subStyle.name === style.name)) {
         subProps.push(style)
@@ -243,7 +222,8 @@ function renderCSSProps(comp) {
       <h2>CSS Properties</h2>
       <p>
         List of all CSS properties that affect this component. And in the end there are global CSS variables that might
-        affect the the look of this component.
+        affect the the look of this component. Modifications here are applied in document level so any styles that are
+        declared in the component will override these.
       </p>
 
       <table className="klevu-autodocs">
@@ -371,7 +351,7 @@ function CSSPropertyEditor({ name, defaultVal, saveName }) {
   }
 
   const isModified = value !== undefined && value !== defaultVal
-  const [currentValue, setCurrentValue] = useState(defaultVal)
+  const [currentValue, setCurrentValue] = useState(value || defaultVal)
   const isColor = CSS.supports("color", currentValue)
 
   const onChange = (e) => {
@@ -442,6 +422,31 @@ const getType = (value) => {
   }
 
   return "text"
+}
+
+function getDependencies(comp) {
+  const depComp = Object.keys(comp.dependencyGraph)
+  const depsToCheck = []
+  for (const dependency of depComp) {
+    for (const subDep of comp.dependencyGraph[dependency]) {
+      if (depsToCheck.indexOf(subDep) === -1 && subDep !== comp.tag) {
+        depsToCheck.push(subDep)
+      }
+    }
+  }
+
+  const dependencies = []
+  for (const subDep of depsToCheck) {
+    const dep = jsdocs.components.find((c) => c.tag === subDep)
+
+    if (!dep) {
+      continue
+    }
+
+    dependencies.push(dep)
+  }
+
+  return dependencies
 }
 
 const saveCSSVariable = (saveName, variableName, variableValue) => {

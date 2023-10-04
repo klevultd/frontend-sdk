@@ -1,7 +1,6 @@
 import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
 import { get, post } from "../connection/fetch.js"
 import { isBrowser } from "../utils/isBrowser.js"
-import { objectToQueryParameters } from "../utils/index.js"
 
 const KEY_PENDING_REQUESTS = "klevu-pending-analytics"
 
@@ -36,11 +35,9 @@ export type V1SearchEvent = {
 }
 
 export async function KlevuEventV1Search(event: V1SearchEvent) {
-  const url = `${
-    KlevuConfig.getDefault().eventsApiV1Url
-  }n-search/search${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}n-search/search`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -109,17 +106,16 @@ export type V1ProductTrackingEvent = {
 export async function KlevuEventV1ProductTracking(
   event: V1ProductTrackingEvent
 ) {
-  const url = `${
-    KlevuConfig.getDefault().eventsApiV1Url
-  }productTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}productTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
   return res
 }
 
+/** @deprecated */
 export type V1CheckedOutProductsEvent = {
   /**
    * This is your Klevu JS API Key.
@@ -167,14 +163,92 @@ export type V1CheckedOutProductsEvent = {
   klevu_shopperIP?: string
 }
 
+export type V2CheckedOutProductsEvent = {
+  event: "order_purchase"
+  event_version: "1.0.0"
+  /**
+   * Your Klevu JS Api Key, eg. klevu-12345.
+   */
+  event_apikey: string
+  /**
+   * The optional json object that holds the user related information such as ip_address, email.
+   */
+  user_profile?: {
+    /**
+     * IP address of the shopper who purchased the product. If calling from javascript (i.e. an ajax call), this is an optional parameter.
+     */
+    ip_address?: string
+    /**
+     * Email id of the shopper who purchased the product.
+     */
+    email?: string
+  }
+  event_data: {
+    /**
+     * Depending on the number of orders, the item array accepts single or more orders.
+     */
+    items: Array<{
+      /**
+       * The unique identifier for your orders.
+       */
+      order_id?: string
+      /**
+       * The unique identifier for reference to a line on an order within the database.
+       */
+      order_line_id?: string
+      /**
+       * The name of the product.
+       */
+      item_name: string
+      /**
+       * The full ID of the product. eg. 12345-54321. This will match the unique value used in your data sync process with Klevu. For compound products consisting of a child/variant and a parent, this is usually parentId-childId.
+       */
+      item_id: string
+      /**
+       * The Parent ID of the product. eg. 12345. For compound products consisting of a child/variant and a parent, please specify the ID of the parent. For simple products, please re-use the same value as item_id
+       */
+      item_group_id: string
+      /**
+       * The Child ID of the product.eg. 54321. Please specify the ID of the child/variant product. For simple products, please re-use the same value as item_id.
+       */
+      item_variant_id: string
+      /**
+       * The final selling price of the product, for example 123.45
+       */
+      unit_price: number
+      /**
+       * The currency of the above price, eg. USD.
+       */
+      currency: string
+      /**
+       * The number of units sold for a product. In case if the parameter is mising, the default value will be 1
+       */
+      units?: number
+    }>
+  }
+}
+
+/**
+ * @deprecated Use KlevuEventV2CheckedOutProducts instead
+ */
 export async function KlevuEventV1CheckedOutProducts(
   event: V1CheckedOutProductsEvent
 ) {
-  const url = `${
-    KlevuConfig.getDefault().eventsApiV1Url
-  }productTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}productTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
+}
+
+export async function KlevuEventV2CheckedOutProducts(
+  event: V2CheckedOutProductsEvent
+) {
+  const url = `${KlevuConfig.getDefault().eventsApiV2Url}`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -225,9 +299,9 @@ export async function KlevuEventV1CategoryView(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }categoryProductViewTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  }categoryProductViewTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -297,9 +371,9 @@ export async function KlevuEventV1CategoryProductClick(
 ) {
   const url = `${
     KlevuConfig.getDefault().eventsApiV1Url
-  }categoryProductClickTracking${objectToQueryParameters(event)}`
-  const id = addPendingRequest(url)
-  const res = await get(url, true)
+  }categoryProductClickTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
   if (id) {
     removePendingRequest(id)
   }
@@ -405,6 +479,22 @@ export async function KlevuEventV2(data: KlevuEventV2Data[]) {
   return res
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function sendGenericPostEvent(url: string, data: { [key: string]: any }) {
+  const formData = new FormData()
+  for (const key in data) {
+    if (data[key] !== undefined) {
+      formData.append(key, data[key])
+    }
+  }
+  if (isBrowser() && navigator.sendBeacon) {
+    if (navigator.sendBeacon(url, formData)) {
+      return
+    }
+  }
+  return await post(url, formData, true)
+}
+
 type PendingRequest = {
   id: string
   url: string
@@ -417,17 +507,17 @@ function addPendingRequest(url: string, data?: object): string | void {
   }
 
   let requests: PendingRequest[] = []
-  const old = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  const old = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
   if (old) {
     try {
       requests = JSON.parse(old)
     } catch {
-      window.localStorage.removeItem(KEY_PENDING_REQUESTS)
+      window.sessionStorage.removeItem(KEY_PENDING_REQUESTS)
     }
   }
   const id = generateUID()
   requests.push({ id, url, data })
-  window.localStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+  window.sessionStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
   return id
 }
 
@@ -436,7 +526,7 @@ function removePendingRequest(id: string) {
     return
   }
 
-  const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  const data = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
   if (!data) {
     console.error("No pending requests!")
     return
@@ -447,7 +537,10 @@ function removePendingRequest(id: string) {
       requests.findIndex((r) => r.id === id),
       1
     )
-    window.localStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+    window.sessionStorage.setItem(
+      KEY_PENDING_REQUESTS,
+      JSON.stringify(requests)
+    )
   } catch (e) {
     console.error("Failed to save pending request")
   }
@@ -458,7 +551,7 @@ export async function runPendingAnalyticalRequests() {
     return
   }
 
-  const data = window.localStorage.getItem(KEY_PENDING_REQUESTS)
+  const data = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
   if (!data) {
     return
   }
@@ -466,12 +559,16 @@ export async function runPendingAnalyticalRequests() {
   const requests = JSON.parse(data) as PendingRequest[]
 
   for await (const request of requests) {
-    if (request.data) {
-      await post(request.url, request.data, true)
-    } else {
-      await get(request.url, true)
+    try {
+      if (request.data) {
+        await sendGenericPostEvent(request.url, request.data)
+      } else {
+        await get(request.url, true)
+      }
+      removePendingRequest(request.id)
+    } catch (e) {
+      // we ignore errors here
     }
-    removePendingRequest(request.id)
   }
 }
 

@@ -53,6 +53,10 @@ type Banner = NoResultsOptions["banners"][0]
  * @slot noResults - Show message when no results found
  * @slot topbanners - Top banner content
  * @slot bottombanners - Bottom banner content
+ *
+ * @csspart quicksearch-content - The popup container
+ * @csspart quicksearch-sidepanel - Sidepanel container sidepanel
+ * @csspart quicksearch-main-area - Main content area container
  */
 @Component({
   tag: "klevu-quicksearch",
@@ -550,7 +554,7 @@ export class KlevuQuicksearch {
               </div>
             )}
           </klevu-search-field>
-          <div class="content" slot="content">
+          <div class="content" slot="content" part="quicksearch-content">
             {(this.products ?? []).length > 0 ? this.#renderResultPage() : this.#renderNoResultsPage()}
           </div>
         </klevu-popup>
@@ -564,7 +568,7 @@ export class KlevuQuicksearch {
 
     return (
       <Fragment>
-        <aside>
+        <aside part="quicksearch-sidepanel">
           <klevu-suggestions-list
             exportparts={partsExports("klevu-suggestions-list")}
             suggestions={this.suggestions}
@@ -580,7 +584,7 @@ export class KlevuQuicksearch {
             ></klevu-cms-list>
           )}
         </aside>
-        <section>
+        <section part="quicksearch-main-area">
           {this.resultVariant === "full" && (
             <Fragment>
               <div class="resultheader">
@@ -662,9 +666,9 @@ export class KlevuQuicksearch {
     const isNoResultsPage = !!this.#searchTerm
     return (
       <Fragment>
-        <aside>
+        <aside part="quicksearch-sidepanel">
           {this.enableChat && (
-            <klevu-button size="small" onClick={() => (this.chat = true)}>
+            <klevu-button exportparts={partsExports("klevu-button")} size="small" onClick={() => (this.chat = true)}>
               {this.tStartChat}
             </klevu-button>
           )}
@@ -683,7 +687,7 @@ export class KlevuQuicksearch {
             ></klevu-latest-searches>
           )}
         </aside>
-        <section>
+        <section part="quicksearch-main-area">
           <slot name="noResults">
             {isNoResultsPage && this.noResultsMessage ? (
               <p class="noResultsMessage">

@@ -287,17 +287,17 @@ export class KlevuResponseQueryObject {
             abTestVariantId = this.func.params.abtest.abTestVariantId
           }
 
-          KlevuEvents.categoryMerchandisingProductClick(
-            record,
+          KlevuEvents.categoryMerchandisingProductClick({
+            product: record,
             categoryTitle,
-            q?.settings?.query?.categoryPath ?? "unknown",
+            klevuCategory: q?.settings?.query?.categoryPath ?? "unknown",
             variantId,
-            index + 1,
+            productPosition: index + 1,
             abTestId,
             abTestVariantId,
-            extractActiveFilters(this.query),
-            override
-          )
+            activeFilters: extractActiveFilters(this.query),
+            override,
+          })
 
           for (const hook of this.hooks ?? []) {
             hook({ type: "categoryMerchandising", productId, variantId })
