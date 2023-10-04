@@ -40,24 +40,7 @@ export class KlevuList {
 
   @Prop() noXPadding = false
 
-  @State() secondarySlotChildCount = 0
-
-  componentDidLoad() {
-    this.#checkSecondarySlotChildCount()
-  }
-
-  #checkSecondarySlotChildCount() {
-    const slot = this.el.shadowRoot?.querySelector("slot[name='secondary']") as HTMLSlotElement | null
-    this.secondarySlotChildCount = slot?.assignedElements().length ?? 0
-  }
-
-  @Listen("slotchange")
-  handleSlotChange() {
-    this.#checkSecondarySlotChildCount()
-  }
-
   #getContent() {
-    console.log(this.secondarySlotChildCount)
     return (
       <Fragment>
         {this.icon && <klevu-icon part="list-icon" class="icon" name={this.icon} />}

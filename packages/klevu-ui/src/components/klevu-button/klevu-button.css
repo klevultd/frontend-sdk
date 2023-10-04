@@ -9,7 +9,7 @@
   --background-hover: var(--klevu-button-background-hover, var(--klevu-color-primary-darker));
   --background-color: var(--klevu-button-background-color, var(--klevu-color-primary));
   --text-align: var(--klevu-button-text-align);
-  --padding: var(--klevu-button-padding, calc(var(--klevu-size-s) - (var(--klevu-body-s-size) / 2)));
+  --padding: var(--klevu-button-padding, calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)));
   --font-size: var(--klevu-button-font-size, var(--klevu-body-s-size));
   --text-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
 }
