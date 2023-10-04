@@ -10,8 +10,6 @@ const productItem = mockProducts[0]
 const productItem2 = fullMockRequest.queryResults?.[0].records[1]
 const productItem3 = fullMockRequest.queryResults?.[0].records[2]
 
-export const ProductItems = { productItem, productItem2, productItem3 }
-
 const productRender = (args: KlevuProduct, className?: string) => html` <klevu-product
   class=${ifDefined(className)}
   style="--klevu-product-width: 300px"

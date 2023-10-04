@@ -386,18 +386,19 @@ export class KlevuProduct {
             {this.variant !== "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
 
             <slot name="addtocart">
-              {this.showAddToCart ? (
-                <klevu-button
-                  part="product-addtocart"
-                  class="addToCart"
-                  onClick={this.#addToCart.bind(this)}
-                  fullWidth
-                  size={this.variant === "small" ? "small" : "normal"}
-                  exportparts={partsExports("klevu-button")}
-                >
-                  {this.tAddToCart}
-                </klevu-button>
-              ) : null}
+              <div class="addToCart">
+                {this.showAddToCart ? (
+                  <klevu-button
+                    part="product-addtocart"
+                    onClick={this.#addToCart.bind(this)}
+                    fullWidth
+                    size={this.variant === "small" ? "small" : "normal"}
+                    exportparts={partsExports("klevu-button")}
+                  >
+                    {this.tAddToCart}
+                  </klevu-button>
+                ) : null}
+              </div>
             </slot>
           </a>
           <slot name="bottom"></slot>
