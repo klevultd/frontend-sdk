@@ -177,8 +177,8 @@ export class KlevuFacet {
     }
     return (
       <Fragment>
-        <span part="facet-heading">
-          <klevu-typography class={{ accordion: Boolean(this.accordion) }} variant="body-s-bold" slot="header">
+        <span part="facet-heading" slot="header">
+          <klevu-typography class={{ accordion: Boolean(this.accordion) }} variant="body-s-bold">
             {this.labelOverride || this.slider.label}
           </klevu-typography>
         </span>
@@ -235,8 +235,8 @@ export class KlevuFacet {
 
     return (
       <Fragment>
-        <span part="facet-heading">
-          <klevu-typography class={{ accordion: Boolean(this.accordion) }} variant="body-s-bold" slot="header">
+        <span part="facet-heading" slot="header">
+          <klevu-typography class={{ accordion: Boolean(this.accordion) }} variant="body-s-bold">
             {this.labelOverride || this.option.label}
           </klevu-typography>
         </span>
