@@ -1,0 +1,24 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import * as Stories from "./klevu-pagination.stories"
+
+<Meta title="Atoms/Pagination/Examples/Pagination From Results" />
+
+## Pagination from query results
+
+Pagination can be automatically built from the @klevu/core query results. Just provide the query results property to the component.
+
+<Canvas of={Stories.PaginationFromResults} />
+
+### Here is the code for the above example in React (@klevu/ui-react):
+
+#### searchResponse - the @klevu/core query results object
+
+```jsx
+import React from "react"
+import { KlevuPagination } from "@klevu/ui-react"
+
+const MyComp = () => {
+  return <KlevuPagination queryResult={searchResponse.queryResults?.[0]}></KlevuPagination>
+}
+```

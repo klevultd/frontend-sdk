@@ -20,7 +20,7 @@ export const Popup: StoryObj<KlevuPopup> = {
     startOpen: false,
     anchor: "bottom-start",
   },
-  render: (args) => html` <div style="height: 1500px">
+  render: (args) => html`
     <klevu-popup
       anchor=${ifDefined(args.anchor)}
       close-at-outside-click=${ifDefined(args.closeAtOutsideClick)}
@@ -33,7 +33,7 @@ export const Popup: StoryObj<KlevuPopup> = {
       <klevu-search-field slot="origin"></klevu-search-field>
       <div slot="content">Hello world popup</div>
     </klevu-popup>
-  </div>`,
+  `,
 }
 
 export const ButtonSource: StoryObj<KlevuPopup> = {
@@ -72,10 +72,18 @@ export const ExternalSource: StoryObj<KlevuPopup> = {
       elevation=${ifDefined(args.elevation)}
       offset=${ifDefined(args.offset)}
     >
-      <div slot="content">This should position correctly to "My button"</div>
+      <div slot="content">Popup Content</div>
     </klevu-popup>
-    <p>This is some text to separate popup from the origin</p>
-    <klevu-button id="thebutton" is-secondary>My button</klevu-button>
+    <p>This is some text to separate popup from the origin. The popup element is above this text.</p>
+    <p>The button below is attached as an origin to the popup using script.</p>
+    <klevu-button id="thebutton" is-secondary>Open Popup</klevu-button>
+    <style>
+      #external-popup::part(popup-base) {
+        width: 50px;
+        height: 30px;
+        background-color: beige;
+      }
+    </style>
     <script>
       function attachOriginElement() {
         const origin = document.querySelector("#thebutton")

@@ -57,24 +57,14 @@ export class KlevuList {
   }
 
   #getContent() {
+    console.log(this.secondarySlotChildCount)
     return (
       <Fragment>
         {this.icon && <klevu-icon part="list-icon" class="icon" name={this.icon} />}
         {this.image && <img part="list-image" class="image" src={this.image} />}
         <div class="text" part="list-content">
-          <klevu-typography variant="body-s">
-            <slot name="primary"></slot>
-          </klevu-typography>
-          {this.secondarySlotChildCount > 0 && (
-            <klevu-typography
-              variant="body-s"
-              style={{
-                "--klevu-typography-color": "var(--klevu-color-neutral-7)",
-              }}
-            >
-              <slot name="secondary"></slot>
-            </klevu-typography>
-          )}
+          <slot name="primary"></slot>
+          <slot name="secondary"></slot>
         </div>
         <span part="list-button">
           <slot name="button"></slot>

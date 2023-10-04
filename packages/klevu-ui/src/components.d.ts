@@ -278,8 +278,8 @@ export namespace Components {
     /**
      * Component to create offscreen drawer on left or right side of the screen
      * @csspart drawer-base The container of the drawer
-     * @csspart drawer-origin The origin of the drawer
-     * @csspart drawer-content The content of the drawer
+     * @csspart drawer-origin The button that controls open of the drawer
+     * @csspart drawer-content The content inside the drawer
      */
     interface KlevuDrawer {
         /**
@@ -699,7 +699,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "tCaption": any;
+        "tCaption": string;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -1945,8 +1945,8 @@ declare global {
     /**
      * Component to create offscreen drawer on left or right side of the screen
      * @csspart drawer-base The container of the drawer
-     * @csspart drawer-origin The origin of the drawer
-     * @csspart drawer-content The content of the drawer
+     * @csspart drawer-origin The button that controls open of the drawer
+     * @csspart drawer-content The content inside the drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -2681,8 +2681,8 @@ declare namespace LocalJSX {
     /**
      * Component to create offscreen drawer on left or right side of the screen
      * @csspart drawer-base The container of the drawer
-     * @csspart drawer-origin The origin of the drawer
-     * @csspart drawer-content The content of the drawer
+     * @csspart drawer-origin The button that controls open of the drawer
+     * @csspart drawer-content The content inside the drawer
      */
     interface KlevuDrawer {
         /**
@@ -3113,7 +3113,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the list
          */
-        "tCaption"?: any;
+        "tCaption"?: string;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -4288,8 +4288,8 @@ declare module "@stencil/core" {
             /**
              * Component to create offscreen drawer on left or right side of the screen
              * @csspart drawer-base The container of the drawer
-             * @csspart drawer-origin The origin of the drawer
-             * @csspart drawer-content The content of the drawer
+             * @csspart drawer-origin The button that controls open of the drawer
+             * @csspart drawer-content The content inside the drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**

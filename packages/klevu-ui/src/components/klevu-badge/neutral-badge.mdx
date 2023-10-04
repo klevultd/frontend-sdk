@@ -3,16 +3,10 @@ import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
 import * as BadgeStories from "./klevu-badge.stories"
 
-<Meta title="Atoms/Badge/Examples/Styled Badge" />
+<Meta title="Atoms/Badge/Examples/Neutral Colors" />
 
-## Badge styled using parts
+## Neutral colors
 
-Provide your css into the selector
+Badges can be in neutral colors. Colors are set in css properties and can be changed by overriding them.
 
-<Canvas of={BadgeStories.StyledBadgeUsingParts} />
-
-Modify example above with following:
-
-<KlevuCSSEditor styleId="styled" />
-
-<KlevuAutoDocs of={BadgeStories} />
+<Canvas of={BadgeStories.NeutralBadges} />

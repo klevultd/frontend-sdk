@@ -2,6 +2,8 @@ import { Component, Host, h, Method, Prop, Event, EventEmitter } from "@stencil/
 
 /**
  * Stylized modal dialog.
+ * @slot header - The title of the modal
+ * @slot default - The content of the modal
  * @csspart modal-base The container for modal dialog
  * @csspart modal-header The header for modal dialog
  * @csspart modal-dialog The dialog component

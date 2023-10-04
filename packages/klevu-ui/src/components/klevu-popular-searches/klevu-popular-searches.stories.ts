@@ -24,7 +24,7 @@ export const StyledPopularSearches: StoryObj<KlevuPopularSearches> = {
       id="styledPopularSearch"
       t-caption=${ifDefined(args.tCaption)}
     ></klevu-popular-searches>
-    <style>
+    <style id="styled">
       #styledPopularSearch::part(popular-searches-caption) {
         font-style: italic;
       }

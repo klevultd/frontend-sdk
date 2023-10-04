@@ -1,0 +1,17 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+
+import * as Stories from "./klevu-drawer.stories"
+
+<Meta title="Atoms/Drawer/Examples/Styled Drawer" />
+
+## Styled Drawer
+
+<Canvas of={Stories.StyledDrawer} />
+
+Modify example above with following:
+
+<KlevuCSSEditor styleId="styled" />
+
+<KlevuAutoDocs of={Stories} />
