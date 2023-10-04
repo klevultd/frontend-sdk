@@ -117,7 +117,7 @@ export const StyledFacetList: StoryObj<KlevuFacetList> = {
         use-apply-button="${ifDefined(args.useApplyButton)}"
         defaultPriceLabel=${ifDefined(args.defaultPriceLabel)}
       ></klevu-facet-list>
-      <style>
+      <style id="styled">
         #styledFacetList::part(facet-heading) {
           --klevu-typography-color: #555;
           margin-bottom: 8px;

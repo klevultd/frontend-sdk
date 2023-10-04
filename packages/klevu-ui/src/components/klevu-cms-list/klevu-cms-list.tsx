@@ -24,7 +24,7 @@ export class KlevuCmsList {
   /**
    * Caption of the listing
    */
-  @Prop() tCaption = getTranslation("cmsList.tCaption")
+  @Prop() tCaption: string = getTranslation("cmsList.tCaption")
 
   @Event({
     composed: true,

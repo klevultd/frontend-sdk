@@ -1,4 +1,4 @@
-import { Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
 import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-chat-messages.stories"
 
@@ -9,5 +9,7 @@ import * as Stories from "./klevu-chat-messages.stories"
 <Markdown>{Stories.description}</Markdown>
 
 <Canvas of={Stories.ChatMessages} />
+
+<Controls />
 
 <KlevuAutoDocs of={Stories} />

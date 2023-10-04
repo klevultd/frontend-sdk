@@ -248,7 +248,7 @@ export namespace Components {
         /**
           * Caption of the listing
          */
-        "tCaption": any;
+        "tCaption": string;
     }
     /**
      * Color Swatch component
@@ -517,7 +517,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "tCaption": any;
+        "tCaption": string;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -1387,11 +1387,11 @@ export namespace Components {
         /**
           * The placeholder text to display in the search field.
          */
-        "tPlaceholder": any;
+        "tPlaceholder": string;
         /**
           * Button text
          */
-        "tSearchText": any;
+        "tSearchText": string;
         "term": string;
         /**
           * Enable Klaviyo integration for search terms and clicks
@@ -2674,7 +2674,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the listing
          */
-        "tCaption"?: any;
+        "tCaption"?: string;
     }
     /**
      * Color Swatch component
@@ -2952,7 +2952,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the list
          */
-        "tCaption"?: any;
+        "tCaption"?: string;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -3845,11 +3845,11 @@ declare namespace LocalJSX {
         /**
           * The placeholder text to display in the search field.
          */
-        "tPlaceholder"?: any;
+        "tPlaceholder"?: string;
         /**
           * Button text
          */
-        "tSearchText"?: any;
+        "tSearchText"?: string;
         "term"?: string;
         /**
           * Enable Klaviyo integration for search terms and clicks

@@ -28,7 +28,7 @@ export const Slides: StoryObj<KlevuSlides> = {
       >
         ${productElements()}</klevu-slides
       >
-      <style>
+      <style id="styled">
         #slides::part(slides-previous-button) {
           --klevu-button-background-color: var(--klevu-color-neutral-2);
           --klevu-button-background-hover: var(--klevu-color-neutral-4);
@@ -52,7 +52,7 @@ export const StyledSlides: StoryObj<KlevuSlides> = {
       >
         ${productElements()}</klevu-slides
       >
-      <style>
+      <style id="styled">
         #styledSlides::part(slides-heading) {
           --klevu-typography-color: darkorange;
         }

@@ -15,8 +15,11 @@ const meta: Meta = {
 export default meta
 
 export const imagePicker: StoryObj<KlevuImagePicker> = {
+  args: {
+    isLoading: false,
+  },
   render: (args) =>
-    html`<klevu-image-picker max-file-size=${args.maxFileSize}></klevu-image-picker>
+    html`<klevu-image-picker is-loading=${args.isLoading} max-file-size=${args.maxFileSize}></klevu-image-picker>
       <style>
         klevu-image-picker::part(accordion-header) {
           font-style: italic;

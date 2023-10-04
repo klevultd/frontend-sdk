@@ -28,32 +28,4 @@ const MyComp = () => {
 
 <Controls />
 
-# Variations
-
-It is possible to change all keys to be radio buttons instead of checkboxes by setting the mode to radio.
-
-<Canvas of={Stories.FacetWithRadio} />
-
-By default all options in facet are in order of most common to least common. This can be changed by setting the customOrder property to an array of option keys in the order you want them to appear.
-
-Here is how to do this with @klevu/ui-react. Green and petrol will be at the top. Rest are in order of most common to least common.
-
-<Canvas sourceState="none" of={Stories.CustomOrder} />
-
-```jsx
-<KlevuFacet manager={manager} option={manager.options[0]} customOrder={["green", "petrol"]} />
-```
-
-# Slider
-
-Facet can also be used to display a slider. This is useful for price or other numeric filters.
-
-<Canvas sourceState="none" of={Stories.Slider} />
-
-# Color Swatches
-
-Change the facet to show color swatches
-
-<Canvas sourceState="none" of={Stories.ColorSwatches} />
-
 <KlevuAutoDocs of={Stories} />

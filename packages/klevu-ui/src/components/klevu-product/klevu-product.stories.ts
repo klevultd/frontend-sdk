@@ -161,7 +161,7 @@ export const StyledProduct: StoryObj<KlevuProduct> = {
       vat-caption=${ifDefined(args.vatCaption)}
       show-variants-count=${ifDefined(args.showVariantsCount)}
     ></klevu-product>
-    <style>
+    <style id="styled">
       #styledProduct::part(product-base) {
         border: 1px solid black;
       }

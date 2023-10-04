@@ -45,12 +45,12 @@ export class KlevuSearchField {
   /**
    * The placeholder text to display in the search field.
    */
-  @Prop() tPlaceholder = getTranslation("searchField.tPlaceholder")
+  @Prop() tPlaceholder: string = getTranslation("searchField.tPlaceholder")
 
   /**
    * Button text
    */
-  @Prop() tSearchText = getTranslation("searchField.tSearchText")
+  @Prop() tSearchText: string = getTranslation("searchField.tSearchText")
 
   /**
    * Maximum amount of results
