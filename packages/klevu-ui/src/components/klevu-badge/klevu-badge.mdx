@@ -9,34 +9,13 @@ import * as BadgeStories from "./klevu-badge.stories"
 
 <Markdown>{BadgeStories.description}</Markdown>
 
-## Badge in accent colors
+## Badge
 
-Badge can be in accent colors. Colors are set in css properties and can be changed by overriding them.
+Badge can be in accent or neutral colors. Colors are set in css properties and can be changed by overriding them.
+Accent takes precedence over neutral colors.
 
 <Canvas of={BadgeStories.Badges} />
 
 <Controls />
-
-## Neutral colors
-
-Badges can be in neutral colors. Colors are set in css properties and can be changed by overriding them.
-
-<Canvas of={BadgeStories.NeutralBadges} />
-
-## Badge with custom color
-
-Any color can be set to badget with css property.
-
-<Canvas of={BadgeStories.CustomColor} />
-
-## Badge styled using parts
-
-Provide your css into the selector
-
-<Canvas of={BadgeStories.StyledBadgeUsingParts} />
-
-Modify example above with following:
-
-<KlevuCSSEditor styleId="styled" />
 
 <KlevuAutoDocs of={BadgeStories} />

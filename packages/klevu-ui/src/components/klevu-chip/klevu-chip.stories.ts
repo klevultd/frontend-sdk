@@ -23,9 +23,6 @@ export const Chip: StoryObj<KlevuChip> = {
     html`
       <div class="chiplist">
         <klevu-chip selected=${ifDefined(args.selected)} removable=${ifDefined(args.removable)}>A chip</klevu-chip>
-        <klevu-chip removable>Color: Blue</klevu-chip>
-        <klevu-chip removable>Price: $0 - $100</klevu-chip>
-        <klevu-chip removable>Size: XXL</klevu-chip>
       </div>
       <script>
         // should be const, but documentation breaks if set
@@ -71,14 +68,13 @@ export const StyledChip: StoryObj<KlevuChip> = {
         >A chip</klevu-chip
       >
 
-      <style>
+      <style id="styled">
         #styledChip::part(chip-icon) {
           color: var(--klevu-chip-selected-background, rgba(var(--klevu-color-primary-rgb), 0.9));
           font-size: 16px;
         }
         #styledChip::part(chip-content) {
-          color: white;
-          font-size: 20px;
+          --klevu-typography-color: darkorange;
         }
       </style>
     `,

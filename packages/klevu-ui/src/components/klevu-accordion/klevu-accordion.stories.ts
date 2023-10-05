@@ -8,8 +8,15 @@ export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta
 const meta: Meta = {
   title: "Atoms/Accordion",
   component: "klevu-accordion",
-  argTypes,
-  parameters,
+  argTypes: {
+    ...argTypes,
+    startOpen: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+
   decorators,
 }
 
@@ -20,28 +27,28 @@ export const Accordion: StoryObj<KlevuAccordion> = {
     startOpen: true,
   },
   render: (args) => html`
-    <klevu-accordion startOpen=${ifDefined(args.startOpen)}>
+    <klevu-accordion open=${ifDefined(args.open)} start-open=${ifDefined(args.startOpen)}>
       <span slot="header">Heading</span>
       <div slot="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl
-        aliquet. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl aliquet. Sed euismod nunc vitae nisl aliquet, nec
-        lacinia nisl aliquet.
+        The content of the accordion will be rendered in this section.
+        <br />
+        This is a long text to show in multilines
       </div>
     </klevu-accordion>
-    <klevu-accordion>
+    <klevu-accordion open=${ifDefined(args.open)}>
       <span slot="header">Second heading</span>
       <div slot="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl
-        aliquet. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl aliquet. Sed euismod nunc vitae nisl aliquet, nec
-        lacinia nisl aliquet.
+        The content of the accordion will be rendered in this section.
+        <br />
+        This is a long text to show in multilines
       </div>
     </klevu-accordion>
-    <klevu-accordion>
+    <klevu-accordion open=${ifDefined(args.open)}>
       <span slot="header">Third heading</span>
       <div slot="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl
-        aliquet. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl aliquet. Sed euismod nunc vitae nisl aliquet, nec
-        lacinia nisl aliquet.
+        The content of the accordion will be rendered in this section.
+        <br />
+        This is a long text to show in multilines
       </div>
     </klevu-accordion>
   `,
@@ -52,16 +59,12 @@ export const StyledAccordion: StoryObj<KlevuAccordion> = {
     startOpen: true,
   },
   render: (args) => html`
-    <klevu-accordion id="styledAccordion" startOpen=${ifDefined(args.startOpen)}>
+    <klevu-accordion open=${ifDefined(args.open)} id="styledAccordion" startOpen=${ifDefined(args.startOpen)}>
       <span slot="header">Heading</span>
-      <div slot="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl
-        aliquet. Sed euismod nunc vitae nisl aliquet, nec lacinia nisl aliquet. Sed euismod nunc vitae nisl aliquet, nec
-        lacinia nisl aliquet.
-      </div>
+      <div slot="content">The content of the accordion will be rendered in this section.</div>
     </klevu-accordion>
 
-    <style>
+    <style id="styled">
       #styledAccordion::part(accordion-header) {
         font-style: italic;
         background: rgba(#ccc, 0.3);

@@ -1,0 +1,12 @@
+import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import * as BadgeStories from "./klevu-badge.stories"
+
+<Meta title="Atoms/Badge/Examples/Neutral Colors" />
+
+## Neutral colors
+
+Badges can be in neutral colors. Colors are set in css properties and can be changed by overriding them.
+
+<Canvas of={BadgeStories.NeutralBadges} />

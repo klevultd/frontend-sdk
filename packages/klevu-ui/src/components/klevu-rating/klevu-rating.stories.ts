@@ -35,7 +35,7 @@ export const StyledRating: StoryObj<KlevuRating> = {
       rating=${ifDefined(args.rating)}
       rating-range=${ifDefined(args.ratingRange)}
     ></klevu-rating>
-    <style>
+    <style id="styled">
       #styledRating::part(rating-star) {
         fill: red;
       }

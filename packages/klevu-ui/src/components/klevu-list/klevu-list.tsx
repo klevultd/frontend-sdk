@@ -40,21 +40,14 @@ export class KlevuList {
 
   @Prop() noXPadding = false
 
-  @State() secondarySlotChildCount = 0
-
-  componentDidLoad() {
-    this.#checkSecondarySlotChildCount()
-  }
-
-  #checkSecondarySlotChildCount() {
-    const slot = this.el.shadowRoot?.querySelector("slot[name='secondary']") as HTMLSlotElement | null
-    this.secondarySlotChildCount = slot?.assignedElements().length ?? 0
-  }
-
-  @Listen("slotchange")
-  handleSlotChange() {
-    this.#checkSecondarySlotChildCount()
-  }
+  /**
+   * To render primary text with default styling
+   */
+  @Prop() primaryText = ""
+  /**
+   * To render secondary text with default styling
+   */
+  @Prop() secondaryText = ""
 
   #getContent() {
     return (
@@ -62,19 +55,21 @@ export class KlevuList {
         {this.icon && <klevu-icon part="list-icon" class="icon" name={this.icon} />}
         {this.image && <img part="list-image" class="image" src={this.image} />}
         <div class="text" part="list-content">
-          <klevu-typography variant="body-s">
-            <slot name="primary"></slot>
-          </klevu-typography>
-          {this.secondarySlotChildCount > 0 && (
-            <klevu-typography
-              variant="body-s"
-              style={{
-                "--klevu-typography-color": "var(--klevu-color-neutral-7)",
-              }}
-            >
-              <slot name="secondary"></slot>
-            </klevu-typography>
-          )}
+          <slot name="primary">
+            {this.primaryText && <klevu-typography variant="body-s">{this.primaryText}</klevu-typography>}
+          </slot>
+          <slot name="secondary">
+            {this.secondaryText && (
+              <klevu-typography
+                variant="body-s"
+                style={{
+                  "--klevu-typography-color": "var(--klevu-color-neutral-7)",
+                }}
+              >
+                {this.secondaryText}
+              </klevu-typography>
+            )}
+          </slot>
         </div>
         <span part="list-button">
           <slot name="button"></slot>

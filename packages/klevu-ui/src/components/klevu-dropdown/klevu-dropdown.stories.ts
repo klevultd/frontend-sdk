@@ -72,7 +72,7 @@ export const StyledDropdown: StoryObj<KlevuDropdown> = {
       >
       </klevu-dropdown>
     </div>
-    <style>
+    <style id="styled">
       #styledDropdown::part(dropdown-select) {
         font-style: italic;
         background-color: aqua;

@@ -54,7 +54,7 @@ export const StyledCheckbox: StoryObj<KlevuCheckbox & { text?: string }> = {
       name=${ifDefined(args.name)}
       >${ifDefined(args.text)}</klevu-checkbox
     >
-    <style>
+    <style id="styled">
       #styledCheckbox::part(checkbox-box) {
         background-color: red;
       }

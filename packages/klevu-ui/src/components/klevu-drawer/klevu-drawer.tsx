@@ -6,8 +6,8 @@ import { Component, Element, h, Host, Method, Prop, State } from "@stencil/core"
  * @slot origin - When origin element is clicked then content is shown
  * @slot content - Content to display in drawer
  * @csspart drawer-base The container of the drawer
- * @csspart drawer-origin The origin of the drawer
- * @csspart drawer-content The content of the drawer
+ * @csspart drawer-origin The button that controls open of the drawer
+ * @csspart drawer-content The content inside the drawer
  */
 @Component({
   tag: "klevu-drawer",

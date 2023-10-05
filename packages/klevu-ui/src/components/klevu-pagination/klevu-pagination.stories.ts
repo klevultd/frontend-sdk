@@ -45,7 +45,7 @@ export const StyledPagination: StoryObj<KlevuPagination> = {
       .queryResult=${args.queryResult}
     ></klevu-pagination>
 
-    <style>
+    <style id="styled">
       #styledPagination::part(pagination-navigation-previous),
       #styledPagination::part(pagination-navigation-next) {
         color: green;

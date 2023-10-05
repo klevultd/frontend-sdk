@@ -1,0 +1,16 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import * as Stories from "./klevu-pagination.stories"
+
+<Meta title="Atoms/Pagination/Examples/Styled Pagination" />
+
+## Styled Pagination
+
+<Canvas of={Stories.StyledPagination} />
+
+Modify example above with following:
+
+<KlevuCSSEditor styleId="styled" />
+
+<KlevuAutoDocs of={Stories} />

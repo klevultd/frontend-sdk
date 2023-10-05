@@ -50,7 +50,9 @@ export class KlevuAccordion {
                 <slot name="header"></slot>
               </span>
             </klevu-typography>
-            <klevu-icon name="expand_more" part="accordion-icon"></klevu-icon>
+            <slot name="icon">
+              <klevu-icon name="expand_more" part="accordion-icon"></klevu-icon>
+            </slot>
           </label>
           <div class="content" part="accordion-content">
             <slot name="content"></slot>

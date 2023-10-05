@@ -19,7 +19,7 @@ export class KlevuPopularSearches {
   /**
    * Caption of the list
    */
-  @Prop() tCaption = getTranslation("popularSearches.tCaption")
+  @Prop() tCaption: string = getTranslation("popularSearches.tCaption")
 
   @State() popularSearches: string[] = []
 

@@ -79,11 +79,11 @@ export namespace Components {
      */
     interface KlevuBadge {
         /**
-          * Setting a acceent color to badge
+          * Setting a accent color to badge (1-4)
          */
         "accent"?: number;
         /**
-          * Setting a neutral color to badge
+          * Setting a neutral color to badge (1-8)
          */
         "neutral"?: number;
     }
@@ -278,8 +278,8 @@ export namespace Components {
     /**
      * Component to create offscreen drawer on left or right side of the screen
      * @csspart drawer-base The container of the drawer
-     * @csspart drawer-origin The origin of the drawer
-     * @csspart drawer-content The content of the drawer
+     * @csspart drawer-origin The button that controls open of the drawer
+     * @csspart drawer-content The content inside the drawer
      */
     interface KlevuDrawer {
         /**
@@ -551,6 +551,14 @@ export namespace Components {
         "image"?: string;
         "noXPadding": boolean;
         /**
+          * To render primary text with default styling
+         */
+        "primaryText": string;
+        /**
+          * To render secondary text with default styling
+         */
+        "secondaryText": string;
+        /**
           * Make the whole thing clickable and navigate to this url.
          */
         "url"?: string;
@@ -703,7 +711,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "tCaption": any;
+        "tCaption": string;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -1704,10 +1712,6 @@ export namespace Components {
         "sizes": ViewportSize[];
     }
 }
-export interface KlevuBadgeCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLKlevuBadgeElement;
-}
 export interface KlevuBannerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuBannerElement;
@@ -1960,8 +1964,8 @@ declare global {
     /**
      * Component to create offscreen drawer on left or right side of the screen
      * @csspart drawer-base The container of the drawer
-     * @csspart drawer-origin The origin of the drawer
-     * @csspart drawer-content The content of the drawer
+     * @csspart drawer-origin The button that controls open of the drawer
+     * @csspart drawer-content The content inside the drawer
      */
     interface HTMLKlevuDrawerElement extends Components.KlevuDrawer, HTMLStencilElement {
     }
@@ -2481,14 +2485,13 @@ declare namespace LocalJSX {
      */
     interface KlevuBadge {
         /**
-          * Setting a acceent color to badge
+          * Setting a accent color to badge (1-4)
          */
         "accent"?: number;
         /**
-          * Setting a neutral color to badge
+          * Setting a neutral color to badge (1-8)
          */
         "neutral"?: number;
-        "onKlevuBadgeClose"?: (event: KlevuBadgeCustomEvent<void>) => void;
     }
     /**
      * Component that displays a typical klevu banner
@@ -2708,8 +2711,8 @@ declare namespace LocalJSX {
     /**
      * Component to create offscreen drawer on left or right side of the screen
      * @csspart drawer-base The container of the drawer
-     * @csspart drawer-origin The origin of the drawer
-     * @csspart drawer-content The content of the drawer
+     * @csspart drawer-origin The button that controls open of the drawer
+     * @csspart drawer-content The content inside the drawer
      */
     interface KlevuDrawer {
         /**
@@ -2983,6 +2986,14 @@ declare namespace LocalJSX {
         "image"?: string;
         "noXPadding"?: boolean;
         /**
+          * To render primary text with default styling
+         */
+        "primaryText"?: string;
+        /**
+          * To render secondary text with default styling
+         */
+        "secondaryText"?: string;
+        /**
           * Make the whole thing clickable and navigate to this url.
          */
         "url"?: string;
@@ -3144,7 +3155,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the list
          */
-        "tCaption"?: any;
+        "tCaption"?: string;
     }
     /**
      * Popup component where clicking origin component popups the the content
@@ -4326,8 +4337,8 @@ declare module "@stencil/core" {
             /**
              * Component to create offscreen drawer on left or right side of the screen
              * @csspart drawer-base The container of the drawer
-             * @csspart drawer-origin The origin of the drawer
-             * @csspart drawer-content The content of the drawer
+             * @csspart drawer-origin The button that controls open of the drawer
+             * @csspart drawer-content The content inside the drawer
              */
             "klevu-drawer": LocalJSX.KlevuDrawer & JSXBase.HTMLAttributes<HTMLKlevuDrawerElement>;
             /**

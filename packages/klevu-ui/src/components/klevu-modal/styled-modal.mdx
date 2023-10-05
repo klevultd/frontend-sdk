@@ -1,0 +1,16 @@
+import { Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import * as Stories from "./klevu-modal.stories"
+
+<Meta title="Atoms/Modal/Examples/Styled Modal" />
+
+## Styled Modal
+
+<Canvas of={Stories.StyledModal} />
+
+Modify example above with following:
+
+<KlevuCSSEditor styleId="styled" />
+
+<KlevuAutoDocs of={Stories} />
