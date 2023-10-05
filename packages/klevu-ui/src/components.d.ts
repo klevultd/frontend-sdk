@@ -551,6 +551,14 @@ export namespace Components {
         "image"?: string;
         "noXPadding": boolean;
         /**
+          * To render primary text with default styling
+         */
+        "primaryText": string;
+        /**
+          * To render secondary text with default styling
+         */
+        "secondaryText": string;
+        /**
           * Make the whole thing clickable and navigate to this url.
          */
         "url"?: string;
@@ -2977,6 +2985,14 @@ declare namespace LocalJSX {
          */
         "image"?: string;
         "noXPadding"?: boolean;
+        /**
+          * To render primary text with default styling
+         */
+        "primaryText"?: string;
+        /**
+          * To render secondary text with default styling
+         */
+        "secondaryText"?: string;
         /**
           * Make the whole thing clickable and navigate to this url.
          */

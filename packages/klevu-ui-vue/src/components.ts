@@ -189,7 +189,9 @@ export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-lis
   'image',
   'url',
   'condensed',
-  'noXPadding'
+  'noXPadding',
+  'primaryText',
+  'secondaryText'
 ]);
 
 

@@ -40,14 +40,36 @@ export class KlevuList {
 
   @Prop() noXPadding = false
 
+  /**
+   * To render primary text with default styling
+   */
+  @Prop() primaryText = ""
+  /**
+   * To render secondary text with default styling
+   */
+  @Prop() secondaryText = ""
+
   #getContent() {
     return (
       <Fragment>
         {this.icon && <klevu-icon part="list-icon" class="icon" name={this.icon} />}
         {this.image && <img part="list-image" class="image" src={this.image} />}
         <div class="text" part="list-content">
-          <slot name="primary"></slot>
-          <slot name="secondary"></slot>
+          <slot name="primary">
+            {this.primaryText && <klevu-typography variant="body-s">{this.primaryText}</klevu-typography>}
+          </slot>
+          <slot name="secondary">
+            {this.secondaryText && (
+              <klevu-typography
+                variant="body-s"
+                style={{
+                  "--klevu-typography-color": "var(--klevu-color-neutral-7)",
+                }}
+              >
+                {this.secondaryText}
+              </klevu-typography>
+            )}
+          </slot>
         </div>
         <span part="list-button">
           <slot name="button"></slot>

@@ -102,6 +102,21 @@ export const ListWithUrl: StoryObj<KlevuList> = {
     </klevu-list>`,
 }
 
+export const ListWithDefaultStyling: StoryObj<KlevuList> = {
+  render: () => html`<klevu-list
+      image="https://picsum.photos/200"
+      primary-text="List items with primary text 1"
+      secondary-text="Secondary text on the list item 1"
+    >
+    </klevu-list>
+    <klevu-list
+      image="https://picsum.photos/200"
+      primary-text="List items with primary text 2"
+      secondary-text="Secondary text on the list item 2"
+    >
+    </klevu-list>`,
+}
+
 export const StyledList: StoryObj<KlevuList> = {
   args: {
     condensed: false,
