@@ -17,7 +17,7 @@ export default meta
 
 export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
   args: {
-    term: "holis",
+    term: "jackets",
     useInfiniteScroll: false,
   },
   render: (args) => html`<klevu-search-landing-page
@@ -62,7 +62,7 @@ export const WithImageSearch: StoryObj<KlevuSearchLandingPage> = {
   render: SearchLandingPage.render,
 }
 
-export const Stylished: StoryObj<KlevuSearchLandingPage> = {
+export const Styled: StoryObj<KlevuSearchLandingPage> = {
   args: {
     term: "hoodies",
   },

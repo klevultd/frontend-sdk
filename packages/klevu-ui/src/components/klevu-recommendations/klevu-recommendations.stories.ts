@@ -61,7 +61,7 @@ export const Customized: StoryObj<KlevuRecommendations> = {
     </script> `,
 }
 
-export const Stylished: StoryObj<KlevuRecommendations> = {
+export const Styled: StoryObj<KlevuRecommendations> = {
   args: {
     recommendationId: "k-b1c018f7-ee85-45c0-b65f-b9556f7dc15d",
   },

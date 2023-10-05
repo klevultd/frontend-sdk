@@ -100,7 +100,7 @@ export const WithInfiniteScroll: StoryObj<KlevuMerchandising> = {
   render: Merchandising.render,
 }
 
-export const Stylished: StoryObj<KlevuMerchandising> = {
+export const Styled: StoryObj<KlevuMerchandising> = {
   args: {
     category: "women",
   },
