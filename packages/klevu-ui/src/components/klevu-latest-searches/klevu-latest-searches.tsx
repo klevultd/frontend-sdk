@@ -16,7 +16,7 @@ export class KlevuLatestSearches {
   /**
    * Caption of the list
    */
-  @Prop() tCaption: string = getTranslation("latestSearches.tCaption")
+  @Prop() tCaption = getTranslation("latestSearches.tCaption")
 
   @State() lastSearches: string[] = []
 

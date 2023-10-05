@@ -16,7 +16,7 @@ type Paths<T, D extends number = 10> = [D] extends [never]
     }[keyof T]
   : ""
 
-export function getTranslation(key: Paths<TranslationKeys, 10>) {
+export function getTranslation(key: Paths<TranslationKeys, 10>): string {
   const keys = key.split(".")
   let value = window.klevu_ui_translations || en
 
