@@ -23,8 +23,5 @@ export const ProductGrid: StoryObj<KlevuProductGrid> = {
 }
 
 export const ProductGridWithItemsPerRow: StoryObj<KlevuProductGrid> = {
-  ...ProductGrid,
-  args: {
-    itemsPerRow: 6,
-  },
+  render: () => html`<klevu-product-grid items-per-row="5">${productElements()}</klevu-product-grid>`,
 }

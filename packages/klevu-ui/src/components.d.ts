@@ -158,7 +158,7 @@ export namespace Components {
         /**
           * Text for rating reason title
          */
-        "tRatingReason": any;
+        "tRatingReason": string;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -248,7 +248,7 @@ export namespace Components {
         /**
           * Caption of the listing
          */
-        "tCaption": any;
+        "tCaption": string;
     }
     /**
      * Color Swatch component
@@ -377,8 +377,8 @@ export namespace Components {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
-        "tAll": any;
-        "tMore": any;
+        "tAll": string;
+        "tMore": string;
         /**
           * Converts the color filters to swatches
          */
@@ -517,7 +517,7 @@ export namespace Components {
         /**
           * Caption of the list
          */
-        "tCaption": any;
+        "tCaption": string;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -620,7 +620,7 @@ export namespace Components {
         /**
           * Text for load more button
          */
-        "tLoadMore": any;
+        "tLoadMore": string;
         /**
           * Overrides KMC setting to use ABtest for results
          */
@@ -1005,35 +1005,35 @@ export namespace Components {
         /**
           * Text of the button to open the popup
          */
-        "tButtonText": any;
+        "tButtonText": string;
         /**
           * Data protection notice when user registering is enabled
          */
-        "tDataProtectionNotice": any;
+        "tDataProtectionNotice": string;
         /**
           * Fine print of the popup under the title
          */
-        "tFinePrint": any;
+        "tFinePrint": string;
         /**
           * When loading takes a bit longer, show this text
          */
-        "tLoadingSorry": any;
+        "tLoadingSorry": string;
         /**
           * Title of the popup
          */
-        "tPopupTitle": any;
+        "tPopupTitle": string;
         /**
           * Description of the feedback section when closing the popup
          */
-        "tRateExperienceText": any;
+        "tRateExperienceText": string;
         /**
           * Title of the feedback section when closing the popup
          */
-        "tRateExperienceTitle": any;
+        "tRateExperienceTitle": string;
         /**
           * Placeholder of the textfield
          */
-        "tTextFieldPlaceholder": any;
+        "tTextFieldPlaceholder": string;
         /**
           * Variant of the textfield how does it look like
          */
@@ -1250,7 +1250,7 @@ export namespace Components {
         /**
           * Title of categories section
          */
-        "tCategoriesCaption": any;
+        "tCategoriesCaption": string;
         /**
           * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
@@ -1266,11 +1266,11 @@ export namespace Components {
         /**
           * Title of search results
          */
-        "tSearchResults": any;
+        "tSearchResults": string;
         /**
           * Title of button to start Moi session
          */
-        "tStartChat": any;
+        "tStartChat": string;
         /**
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
@@ -1395,11 +1395,11 @@ export namespace Components {
         /**
           * The placeholder text to display in the search field.
          */
-        "tPlaceholder": any;
+        "tPlaceholder": string;
         /**
           * Button text
          */
-        "tSearchText": any;
+        "tSearchText": string;
         "term": string;
         /**
           * Enable Klaviyo integration for search terms and clicks
@@ -1481,11 +1481,11 @@ export namespace Components {
         /**
           * Text of load more button
          */
-        "tLoadMore": any;
+        "tLoadMore": string;
         /**
           * The title of the page
          */
-        "tSearchTitle": any;
+        "tSearchTitle": string;
         /**
           * What term was used for search
          */
@@ -2569,7 +2569,7 @@ declare namespace LocalJSX {
         /**
           * Text for rating reason title
          */
-        "tRatingReason"?: any;
+        "tRatingReason"?: string;
     }
     /**
      * Component that wraps chat elements into a layout.
@@ -2677,7 +2677,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the listing
          */
-        "tCaption"?: any;
+        "tCaption"?: string;
     }
     /**
      * Color Swatch component
@@ -2816,8 +2816,8 @@ declare namespace LocalJSX {
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
-        "tAll"?: any;
-        "tMore"?: any;
+        "tAll"?: string;
+        "tMore"?: string;
         /**
           * Converts the color filters to swatches
          */
@@ -2955,7 +2955,7 @@ declare namespace LocalJSX {
         /**
           * Caption of the list
          */
-        "tCaption"?: any;
+        "tCaption"?: string;
     }
     /**
      * Generic layout used in merchansiding and search landing page
@@ -3056,7 +3056,7 @@ declare namespace LocalJSX {
         /**
           * Text for load more button
          */
-        "tLoadMore"?: any;
+        "tLoadMore"?: string;
         /**
           * Overrides KMC setting to use ABtest for results
          */
@@ -3450,35 +3450,35 @@ declare namespace LocalJSX {
         /**
           * Text of the button to open the popup
          */
-        "tButtonText"?: any;
+        "tButtonText"?: string;
         /**
           * Data protection notice when user registering is enabled
          */
-        "tDataProtectionNotice"?: any;
+        "tDataProtectionNotice"?: string;
         /**
           * Fine print of the popup under the title
          */
-        "tFinePrint"?: any;
+        "tFinePrint"?: string;
         /**
           * When loading takes a bit longer, show this text
          */
-        "tLoadingSorry"?: any;
+        "tLoadingSorry"?: string;
         /**
           * Title of the popup
          */
-        "tPopupTitle"?: any;
+        "tPopupTitle"?: string;
         /**
           * Description of the feedback section when closing the popup
          */
-        "tRateExperienceText"?: any;
+        "tRateExperienceText"?: string;
         /**
           * Title of the feedback section when closing the popup
          */
-        "tRateExperienceTitle"?: any;
+        "tRateExperienceTitle"?: string;
         /**
           * Placeholder of the textfield
          */
-        "tTextFieldPlaceholder"?: any;
+        "tTextFieldPlaceholder"?: string;
         /**
           * Variant of the textfield how does it look like
          */
@@ -3712,7 +3712,7 @@ declare namespace LocalJSX {
         /**
           * Title of categories section
          */
-        "tCategoriesCaption"?: any;
+        "tCategoriesCaption"?: string;
         /**
           * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
@@ -3728,11 +3728,11 @@ declare namespace LocalJSX {
         /**
           * Title of search results
          */
-        "tSearchResults"?: any;
+        "tSearchResults"?: string;
         /**
           * Title of button to start Moi session
          */
-        "tStartChat"?: any;
+        "tStartChat"?: string;
         /**
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
@@ -3856,11 +3856,11 @@ declare namespace LocalJSX {
         /**
           * The placeholder text to display in the search field.
          */
-        "tPlaceholder"?: any;
+        "tPlaceholder"?: string;
         /**
           * Button text
          */
-        "tSearchText"?: any;
+        "tSearchText"?: string;
         "term"?: string;
         /**
           * Enable Klaviyo integration for search terms and clicks
@@ -3943,11 +3943,11 @@ declare namespace LocalJSX {
         /**
           * Text of load more button
          */
-        "tLoadMore"?: any;
+        "tLoadMore"?: string;
         /**
           * The title of the page
          */
-        "tSearchTitle"?: any;
+        "tSearchTitle"?: string;
         /**
           * What term was used for search
          */

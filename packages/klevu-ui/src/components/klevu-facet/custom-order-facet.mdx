@@ -1,0 +1,16 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import * as Stories from "./klevu-facet.stories"
+
+<Meta title="Components/Facet/Examples/Facet with options in custom order" />
+
+By default all options in facet are in order of most common to least common. This can be changed by setting the customOrder property to an array of option keys in the order you want them to appear.
+
+Here is how to do this with @klevu/ui-react. Green and petrol will be at the top. Rest are in order of most common to least common.
+
+<Canvas sourceState="none" of={Stories.CustomOrder} />
+
+```jsx
+<klevu-facet label-override="Facet with custom order" manager={manager} option={manager.options[0]} custom-order={["green", "petrol"]} />
+<klevu-facet label-override="Facet with default order" manager={manager} option={manager.options[0]} />
+```
