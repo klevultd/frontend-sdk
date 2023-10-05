@@ -706,23 +706,26 @@ export class KlevuQuicksearch {
                   onClick={() => (this.activeTab = "trending")}
                 ></klevu-tab>
               )}
-              {!this.hideRecentlyViewedProducts && !isNoResultsPage && (
-                <klevu-tab
-                  exportparts={partsExports("klevu-tab")}
-                  caption={stringConcat(
-                    this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
-                    [`${this.lastClickedProducts?.length ?? 0}`]
-                  )}
-                  active={this.activeTab === "last"}
-                  onClick={() => {
-                    if (this.lastClickedProducts?.length === 0) {
-                      return
-                    }
-                    this.activeTab = "last"
-                  }}
-                  disabled={this.lastClickedProducts?.length === 0}
-                ></klevu-tab>
-              )}
+              {!this.hideRecentlyViewedProducts &&
+                !isNoResultsPage &&
+                this.lastClickedProducts &&
+                this.lastClickedProducts.length > 0 && (
+                  <klevu-tab
+                    exportparts={partsExports("klevu-tab")}
+                    caption={stringConcat(
+                      this.tLastClickedProductsCaption ?? getTranslation("quicksearch.tLastClickedProductsCaption"),
+                      [`${this.lastClickedProducts?.length ?? 0}`]
+                    )}
+                    active={this.activeTab === "last"}
+                    onClick={() => {
+                      if (this.lastClickedProducts?.length === 0) {
+                        return
+                      }
+                      this.activeTab = "last"
+                    }}
+                    disabled={this.lastClickedProducts?.length === 0}
+                  ></klevu-tab>
+                )}
             </div>
             {!this.hideTrendingProducts && this.activeTab === "trending" && (
               <Fragment>
@@ -740,19 +743,22 @@ export class KlevuQuicksearch {
                 </slot>
               </Fragment>
             )}
-            {!this.hideRecentlyViewedProducts && this.activeTab === "last" && (
-              <Fragment>
-                <slot name="last-clicked-products">
-                  {this.lastClickedProducts?.map((p) => (
-                    <klevu-product
-                      product={p}
-                      variant="line"
-                      exportparts={partsExports("klevu-product")}
-                    ></klevu-product>
-                  ))}
-                </slot>
-              </Fragment>
-            )}
+            {!this.hideRecentlyViewedProducts &&
+              this.activeTab === "last" &&
+              this.lastClickedProducts &&
+              this.lastClickedProducts.length > 0 && (
+                <Fragment>
+                  <slot name="last-clicked-products">
+                    {this.lastClickedProducts?.map((p) => (
+                      <klevu-product
+                        product={p}
+                        variant="line"
+                        exportparts={partsExports("klevu-product")}
+                      ></klevu-product>
+                    ))}
+                  </slot>
+                </Fragment>
+              )}
             {this.#renderBanners()}
           </slot>
         </section>

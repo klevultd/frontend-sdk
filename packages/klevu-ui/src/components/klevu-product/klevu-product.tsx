@@ -417,6 +417,9 @@ export class KlevuProduct {
   }
 
   #renderRatings() {
+    if (!this.showRatings || !this.product?.rating) {
+      return null
+    }
     return (
       this.showRatings && (
         <div class="ratings">
