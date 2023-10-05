@@ -14,6 +14,7 @@ import { partsExports } from "../../utils/partsExports"
 
 /**
  * Full recommendation banner solution
+ * @slot default - The content of the banner
  */
 @Component({
   tag: "klevu-recommendations",

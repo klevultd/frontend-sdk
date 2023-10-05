@@ -6,7 +6,7 @@ import { KlevuQuery } from "./klevu-query"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-query")
 
 const meta: Meta = {
-  title: "Non components/Query",
+  title: "Utils/Query",
   component: "klevu-query",
   argTypes,
   parameters,
