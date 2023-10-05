@@ -756,10 +756,6 @@ export namespace Components {
          */
         "originElement"?: HTMLElement;
         /**
-          * Set width of the popup content
-         */
-        "popupWidth"?: number;
-        /**
           * Initially show the popup
          */
         "startOpen"?: boolean;
@@ -927,10 +923,6 @@ export namespace Components {
          */
         "popupTitle": string;
         /**
-          * Set width of the popup content
-         */
-        "popupWidth"?: number;
-        /**
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
@@ -994,10 +986,6 @@ export namespace Components {
           * How many pixels to offset the popup from origin
          */
         "popupOffset"?: number;
-        /**
-          * Width of the popup
-         */
-        "popupWidth": number;
         /**
           * Instead of Klevu API-key use a widget id to start a session
          */
@@ -3205,10 +3193,6 @@ declare namespace LocalJSX {
          */
         "originElement"?: HTMLElement;
         /**
-          * Set width of the popup content
-         */
-        "popupWidth"?: number;
-        /**
           * Initially show the popup
          */
         "startOpen"?: boolean;
@@ -3380,10 +3364,6 @@ declare namespace LocalJSX {
          */
         "popupTitle"?: string;
         /**
-          * Set width of the popup content
-         */
-        "popupWidth"?: number;
-        /**
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
@@ -3447,10 +3427,6 @@ declare namespace LocalJSX {
           * How many pixels to offset the popup from origin
          */
         "popupOffset"?: number;
-        /**
-          * Width of the popup
-         */
-        "popupWidth"?: number;
         /**
           * Instead of Klevu API-key use a widget id to start a session
          */

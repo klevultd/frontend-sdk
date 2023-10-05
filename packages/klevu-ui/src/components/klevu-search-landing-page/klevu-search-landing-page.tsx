@@ -438,9 +438,9 @@ export class KlevuSearchLandingPage {
                       We found {this.#resultObject?.meta.totalResultsFound} matches to your uploaded photo
                     </klevu-typography>
                     <klevu-popup
+                      class="imagesearch"
                       exportparts={partsExports("klevu-popup")}
                       ref={(el) => (this.#imagePickerPopupRef = el)}
-                      popupWidth={400}
                       anchor="bottom-end"
                     >
                       <div class="image-picker" slot="content">

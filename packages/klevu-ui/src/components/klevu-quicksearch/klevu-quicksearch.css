@@ -103,3 +103,7 @@ klevu-moi {
 klevu-icon.photo-camera {
   cursor: pointer;
 }
+
+klevu-popup.imagesearch {
+  --klevu-popup-width: 400px;
+}

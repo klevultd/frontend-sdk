@@ -5,6 +5,7 @@
   display: block;
   text-align: left;
   --popup-height: var(--klevu-product-query-popup-height, 500px);
+  --popup-width: var(--klevu-product-query-popup-width, 520px);
 }
 
 .content {
@@ -96,4 +97,8 @@ klevu-typography.fineprint {
 .loading-sorry {
   display: block;
   --klevu-body-xs-size: 10px;
+}
+
+klevu-popup {
+  --klevu-popup-width: var(--popup-width);
 }

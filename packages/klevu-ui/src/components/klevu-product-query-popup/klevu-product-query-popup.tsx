@@ -118,11 +118,6 @@ export class KlevuProductQueryPopup {
   @Prop() popupOffset?: number
 
   /**
-   * Width of the popup
-   */
-  @Prop() popupWidth = 520
-
-  /**
    * Settings for requests to Klevu. Deeper modification on how the product query works.
    */
   @Prop() settings?: MoiRequest["klevuSettings"]
@@ -293,7 +288,6 @@ export class KlevuProductQueryPopup {
           offset={this.popupOffset}
           elevation={3}
           useBackground={this.useBackground}
-          popupWidth={this.popupWidth}
           originElement={this.originElement}
           closeAtOutsideClick={!this.disableCloseOutsideClick}
           fullscreenOnMobileSize

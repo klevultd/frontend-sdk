@@ -39,10 +39,6 @@ export class KlevuPopup {
   @Prop() closeAtOutsideClick = true
 
   /**
-   * Set width of the popup content
-   */
-  @Prop() popupWidth?: number
-  /**
    * Anchor popup to left or right of page
    */
   @Prop() anchor: Placement = "left-end"
@@ -124,7 +120,12 @@ export class KlevuPopup {
       return
     }
 
-    const smallScreen = (this.popupWidth ?? 390) > document.body.clientWidth
+    let popupWidth: number | undefined = parseInt(getComputedStyle(this.dialogRef).getPropertyValue("--width"))
+    if (isNaN(popupWidth)) {
+      popupWidth = undefined
+    }
+
+    const smallScreen = (popupWidth ?? 390) > document.body.clientWidth
     if (smallScreen && this.fullscreenOnMobileSize) {
       Object.assign(this.#contentElement.style, {
         left: "0px",
@@ -145,8 +146,8 @@ export class KlevuPopup {
           size({
             apply: ({ availableWidth, elements }) => {
               let maxWidth = availableWidth
-              if (this.popupWidth && this.popupWidth < availableWidth) {
-                maxWidth = this.popupWidth
+              if (popupWidth && popupWidth < availableWidth) {
+                maxWidth = popupWidth
               }
 
               Object.assign(elements.floating.style, {
@@ -278,11 +279,6 @@ export class KlevuPopup {
 
     popupClasses[`elevation-${this.elevation}`] = true
 
-    const styles: any = {}
-    if (this.popupWidth) {
-      styles.maxWidth = `${this.popupWidth}px`
-    }
-
     return (
       <Host>
         <div
@@ -294,13 +290,7 @@ export class KlevuPopup {
         >
           <slot name="origin" />
         </div>
-        <dialog
-          style={styles}
-          part="popup-content"
-          open={this.startOpen}
-          ref={(el) => (this.dialogRef = el)}
-          class={popupClasses}
-        >
+        <dialog part="popup-content" open={this.startOpen} ref={(el) => (this.dialogRef = el)} class={popupClasses}>
           <slot name="content" />
         </dialog>
       </Host>
