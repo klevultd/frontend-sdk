@@ -30,7 +30,7 @@ export const StyledModal: StoryObj<KlevuModal> = {
       Sample body
     </klevu-modal>
     <klevu-button onclick="document.getElementById('styledModal').openModal()">Open styled modal</klevu-button>
-    <style>
+    <style id="styled">
       #styledModal::part(modal-header) {
         font-weight: bold;
         color: blue;

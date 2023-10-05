@@ -8,7 +8,19 @@ export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta
 const meta: Meta = {
   title: "Atoms/Slider",
   component: "klevu-slider",
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    showTooltips: {
+      table: {
+        disable: true,
+      },
+    },
+    formatTooltip: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters,
   decorators,
 }

@@ -4,7 +4,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
  * Chip component that is used to display selected value in a listing. Gives also ability to remove the chip.
  *
  * Has selected and removable attributes that can be used to display the chip in selected state and also to remove the chip.
- *
+ * @slot default - Chip content
  * @csspart chip-base The container for the chip
  * @csspart chip-icon The icon for the close button
  * @csspart chip-content The content for the chip

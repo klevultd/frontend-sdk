@@ -28,12 +28,11 @@ export const Textfield: StoryObj<KlevuTextfield> = {
 }
 
 export const FormFields: StoryObj<KlevuTextfield> = {
-  render: (args) => html`<div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
-    <klevu-textfield disabled=${args.disabled}></klevu-textfield>
-    <klevu-checkbox disabled=${args.disabled}></klevu-checkbox>
-    <klevu-button disabled=${args.disabled}>A Button</klevu-button>
+  render: () => html`<div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
+    <klevu-textfield></klevu-textfield>
+    <klevu-checkbox></klevu-checkbox>
+    <klevu-button>A Button</klevu-button>
     <klevu-dropdown
-      disabled=${args.disabled}
       .options=${[
         {
           value: "1",
@@ -63,7 +62,7 @@ export const StyledTextfield: StoryObj<KlevuTextfield> = {
       icon=${ifDefined(args.icon)}
       clear-button=${ifDefined(args.clearButton)}
     ></klevu-textfield>
-    <style>
+    <style id="styled">
       #styledTextField::part(textfield-input) {
         background-color: aqua;
       }

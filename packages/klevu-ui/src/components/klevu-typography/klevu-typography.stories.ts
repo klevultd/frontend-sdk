@@ -27,6 +27,24 @@ export const Typography: StoryObj<KlevuTypography & { text?: string }> = {
       },
     },
   },
+  render: (args) => html`<style></style>
+    <klevu-typography variant=${args.variant} full-width=${ifDefined(args.fullWidth)}
+      >Configured: ${args.text}</klevu-typography
+    >`,
+}
+
+const Typography_old: StoryObj<KlevuTypography & { text?: string }> = {
+  args: {
+    text: "The quick brown fox jumps over the lazy dog",
+  },
+  argTypes: {
+    text: {
+      description: "Text to be displayed next to typography",
+      control: {
+        type: "text",
+      },
+    },
+  },
   render: (args) => html`<style>
       li {
         padding: 16px 0;

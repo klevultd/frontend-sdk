@@ -1,0 +1,16 @@
+import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import * as BadgeStories from "./klevu-badge.stories"
+
+<Meta title="Atoms/Badge/Examples/Styled Badge" />
+
+## Badge styled using parts
+
+<Canvas of={BadgeStories.StyledBadgeUsingParts} />
+
+Modify example above with following:
+
+<KlevuCSSEditor styleId="styled" />
+
+<KlevuAutoDocs of={BadgeStories} />

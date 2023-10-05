@@ -4,6 +4,7 @@ export type KlevuTextfieldVariant = "default" | "pill"
 
 /**
  * Branded text field component
+ * @slot end - Content to be shown at end of list before the clear button if shown
  * @csspart textfield-base The container for input box
  * @csspart textfield-icon The icon at beginning of input
  * @csspart textfield-input The input box

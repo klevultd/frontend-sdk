@@ -16,8 +16,7 @@ export const KlevuAccordion = /*@__PURE__*/ defineContainer<JSX.KlevuAccordion>(
 
 export const KlevuBadge = /*@__PURE__*/ defineContainer<JSX.KlevuBadge>('klevu-badge', undefined, [
   'accent',
-  'neutral',
-  'klevuBadgeClose'
+  'neutral'
 ]);
 
 
@@ -190,7 +189,9 @@ export const KlevuList = /*@__PURE__*/ defineContainer<JSX.KlevuList>('klevu-lis
   'image',
   'url',
   'condensed',
-  'noXPadding'
+  'noXPadding',
+  'primaryText',
+  'secondaryText'
 ]);
 
 

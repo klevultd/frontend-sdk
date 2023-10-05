@@ -5,7 +5,7 @@ export const parts = {
     exportedcomponents: {},
   },
   "klevu-badge": {
-    local: ["badge-content"],
+    local: ["badge-content", "badge-base"],
     exportedcomponents: {},
   },
   "klevu-button": {
@@ -90,6 +90,7 @@ export const parts = {
       "product-vatcaption",
       "product-ooscaption",
       "product-variants-count",
+      "product-addtocart",
     ],
     exportedcomponents: { "klevu-button": ["button-base"], "klevu-rating": ["rating-base", "rating-star"] },
   },
@@ -127,6 +128,7 @@ export const parts = {
         "product-vatcaption",
         "product-ooscaption",
         "product-variants-count",
+        "product-addtocart",
       ],
       "klevu-rating": ["rating-base", "rating-star"],
     },
@@ -156,6 +158,7 @@ export const parts = {
         "product-vatcaption",
         "product-ooscaption",
         "product-variants-count",
+        "product-addtocart",
       ],
       "klevu-rating": ["rating-base", "rating-star"],
     },

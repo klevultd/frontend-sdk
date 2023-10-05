@@ -1,4 +1,4 @@
-import { Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
 import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
 import * as Stories from "./klevu-rating.stories"
 
@@ -10,8 +10,6 @@ import * as Stories from "./klevu-rating.stories"
 
 <Canvas of={Stories.Rating} />
 
-## Styled Rating
-
-<Canvas of={Stories.StyledRating} />
+<Controls />
 
 <KlevuAutoDocs of={Stories} />

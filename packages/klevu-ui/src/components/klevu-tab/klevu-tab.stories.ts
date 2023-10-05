@@ -19,10 +19,7 @@ export const Tab: StoryObj<KlevuTab & { text?: string }> = {
   args: {
     caption: "Tab",
   },
-  render: (args) => html`<klevu-tab caption=${ifDefined(args.caption)}></klevu-tab
-    ><klevu-tab caption=${ifDefined(args.caption)} active></klevu-tab
-    ><klevu-tab caption=${ifDefined(args.caption)}></klevu-tab
-    ><klevu-tab caption=${ifDefined(args.caption)}></klevu-tab>`,
+  render: (args) => html`<klevu-tab caption=${ifDefined(args.caption)}></klevu-tab>`,
 }
 
 export const StyledTab: StoryObj<KlevuTab & { text?: string }> = {
@@ -30,8 +27,7 @@ export const StyledTab: StoryObj<KlevuTab & { text?: string }> = {
     caption: "Tab",
   },
   render: (args) => html` <klevu-tab id="styledTab" caption=${ifDefined(args.caption)}></klevu-tab>
-    <klevu-tab id="styledTab" caption=${ifDefined(args.caption)}></klevu-tab>
-    <style>
+    <style id="styled">
       #styledTab::part(tab-base) {
         border-bottom: 2px solid red;
       }

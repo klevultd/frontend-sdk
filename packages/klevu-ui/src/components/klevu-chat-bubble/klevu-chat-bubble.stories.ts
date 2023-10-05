@@ -54,7 +54,7 @@ export const StyledChatBubble: StoryObj<KlevuChatBubble> = {
         <klevu-chat-bubble> Hello world! This is a content for chat bubble! </klevu-chat-bubble>
       </div>
     </klevu-chat-layout>
-    <style>
+    <style id="styled">
       .styledChatBubble ::part(chat-bubble-positive-feedback) {
         background-color: orange;
         color: white;
@@ -62,7 +62,6 @@ export const StyledChatBubble: StoryObj<KlevuChatBubble> = {
 
       #styledChatBubble::part(chat-bubble-feedback-reasons) {
         --klevu-typography-color: blue;
-
         font-weight: bold;
       }
     </style>

@@ -14,13 +14,11 @@ import { Component, Host, h, Prop, Event, EventEmitter } from "@stencil/core"
   shadow: true,
 })
 export class KlevuBadge {
-  /** Setting a acceent color to badge   */
+  /** Setting a accent color to badge (1-4)  */
   @Prop() accent?: number
 
-  /** Setting a neutral color to badge   */
+  /** Setting a neutral color to badge (1-8)  */
   @Prop() neutral?: number
-
-  @Event({ composed: true }) klevuBadgeClose!: EventEmitter<void>
 
   render() {
     let style = {}
@@ -30,6 +28,8 @@ export class KlevuBadge {
         "--background": this.accent
           ? `var(--klevu-color-accent-${this.accent})`
           : `var(--klevu-color-neutral-${this.neutral})`,
+        "--klevu-typography-color":
+          this.neutral && this.neutral > 6 ? "var(--klevu-color-neutral-1)" : "var(--klevu-typography-color)",
       }
     }
 

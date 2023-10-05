@@ -12,23 +12,4 @@ import * as Stories from "./klevu-slider.stories"
 
 <Controls />
 
-## Slider with tooltips
-
-By setting the `formatTooltip` property, you can format the tooltip values.
-
-<Canvas of={Stories.SliderWithTooltips} />
-
-Here is the code for the above example in React (@klevu/ui-react):
-
-```jsx
-import React from "react"
-import { KlevuSlider } from "@klevu/ui-react"
-
-const MyComp = () => {
-  return (
-    <KlevuSlider formatTooltip={(value) => `$${value.toFixed(0)}`} end={90} max={100} min={0} start={10} showTooltips />
-  )
-}
-```
-
 <KlevuAutoDocs of={Stories} />

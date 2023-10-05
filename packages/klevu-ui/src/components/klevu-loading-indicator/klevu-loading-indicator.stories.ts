@@ -20,7 +20,7 @@ export const LoadingIndicator: StoryObj<KlevuLoadingIndicator> = {
 
 export const StyledLoadingIndicator: StoryObj<KlevuLoadingIndicator> = {
   render: () => html`<klevu-loading-indicator id="styledLoadingIndicator"></klevu-loading-indicator></div>
-    <style>
+    <style id="styled">
       #styledLoadingIndicator::part(loading-indicator-base)::before,
       #styledLoadingIndicator::part(loading-indicator-base),
       #styledLoadingIndicator::part(loading-indicator-base)::after {

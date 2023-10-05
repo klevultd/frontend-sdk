@@ -1,0 +1,12 @@
+import { Canvas, Meta, Markdown, Controls } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import * as BadgeStories from "./klevu-badge.stories"
+
+<Meta title="Atoms/Badge/Examples/Accent Colors" />
+
+## Accent colors
+
+Badges can be in accent colors. Colors are set in css properties and can be changed by overriding them.
+
+<Canvas of={BadgeStories.AccentBadges} />

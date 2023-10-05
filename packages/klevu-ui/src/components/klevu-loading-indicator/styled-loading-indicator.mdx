@@ -1,0 +1,16 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import { KlevuAutoDocs } from "../../../.storybook/blocks/KlevuAutoDocs"
+import { KlevuCSSEditor } from "../../../.storybook/blocks/KlevuCSSEditor"
+import * as Stories from "./klevu-loading-indicator.stories"
+
+<Meta title="Atoms/Loading Indicator/Examples/Styled Loading Indicator" />
+
+## Styled Loading indicator
+
+<Canvas of={Stories.StyledLoadingIndicator} />
+
+Modify example above with following:
+
+<KlevuCSSEditor styleId="styled" />
+
+<KlevuAutoDocs of={Stories} />

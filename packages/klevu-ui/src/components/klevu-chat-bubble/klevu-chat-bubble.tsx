@@ -9,7 +9,7 @@ export type KlevuMessageFeedbackReasonDetails = {
 
 /**
  * Container for chat items. Very simple component, just a wrapper.
- *
+ * @slot default - The content of the chat bubble
  * @csspart chat-bubble-base The container for the chat bubble
  * @csspart chat-bubble-positive-feedback The positive feedback section
  * @csspart chat-bubble-negative-feedback The negative feedback section

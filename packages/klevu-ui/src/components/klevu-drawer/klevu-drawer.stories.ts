@@ -86,7 +86,7 @@ export const StyledDrawer: StoryObj<KlevuDrawer> = {
       <klevu-button slot="origin">Open drawer</klevu-button>
       <div slot="content">Styled drawer</div>
     </klevu-drawer>
-    <style>
+    <style id="styled">
       #styledDrawer::part(drawer-origin) {
         background-color: aqua;
         padding: 10px;

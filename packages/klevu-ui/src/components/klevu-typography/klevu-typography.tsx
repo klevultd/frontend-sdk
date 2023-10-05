@@ -16,7 +16,7 @@ export type KlevuTypographyVariant =
 
 /**
  * Klevu typography component. This component is used in most places to set correct font in component pieces.
- *
+ * @slot default - Typography text
  *
  */
 @Component({

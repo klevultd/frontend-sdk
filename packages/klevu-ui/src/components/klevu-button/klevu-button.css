@@ -2,7 +2,6 @@
   /**
   * @prop --klevu-button-background-color var(--klevu-color-primary): Background color of button
   * @prop --klevu-button-text-color var(--klevu-color-neutral-1): Button text color
-  * @prop --klevu-button-padding var(--klevu-spacing-04): Padding on button
   * @prop --klevu-button-text-align center: Align text on button
   * @prop --klevu-button-padding calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)): Override buttom padding with custom value
   * @prop --klevu-button-font-size var(--klevu-body-s-size): Size of button text
@@ -35,17 +34,17 @@ button klevu-typography {
 }
 
 button.sizeSmall {
-  --padding: var(--padding, calc(var(--klevu-size-s) - (var(--klevu-body-s-size) / 2)));
+  --padding: var(--klevu-button-padding, calc(var(--klevu-size-s) - (var(--klevu-body-s-size) / 2)));
   height: calc(var(--klevu-size-s) * 2);
 }
 
 button.sizeLarge {
-  --padding: var(--padding, calc(var(--klevu-size-l) - (var(--klevu-body-s-size) / 2)));
+  --padding: var(--klevu-button-padding, calc(var(--klevu-size-l) - (var(--klevu-body-s-size) / 2)));
   height: calc(var(--klevu-size-l) * 2);
 }
 
 button.sizeTiny {
-  --padding: var(--padding, var(--klevu-spacing-02));
+  --padding: var(--klevu-button-padding, var(--klevu-spacing-02));
   height: calc(var(--klevu-size-xs) * 2);
   --font-size: var(--klevu-body-xs-size);
   border-radius: var(--klevu-border-radius-s);
