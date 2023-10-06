@@ -288,7 +288,6 @@ export class KlevuProductQueryPopup {
           offset={this.popupOffset}
           elevation={3}
           useBackground={this.useBackground}
-          popupWidth={520}
           originElement={this.originElement}
           closeAtOutsideClick={!this.disableCloseOutsideClick}
           fullscreenOnMobileSize

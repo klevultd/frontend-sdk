@@ -60,3 +60,7 @@
   width: max-content;
   gap: var(--klevu-spacing-02);
 }
+
+klevu-popup.imagesearch {
+  --klevu-popup-width: 400px;
+}

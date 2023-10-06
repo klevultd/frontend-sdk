@@ -538,8 +538,8 @@ export class KlevuQuicksearch {
             {this.enableImageSearch && (
               <div slot="end-of-input">
                 <klevu-popup
+                  class="imagesearch"
                   exportparts={partsExports("klevu-popup")}
-                  popupWidth={400}
                   anchor="bottom-end"
                   ref={(el) => (this.#imagePickerPopupRef = el)}
                 >

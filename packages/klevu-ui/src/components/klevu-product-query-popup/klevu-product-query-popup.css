@@ -1,6 +1,11 @@
 :host {
+  /*
+   * @prop --klevu-product-query-popup-height 500px: Height of the popup. Width is controlled with prop and height with CSS property.
+   */
   display: block;
   text-align: left;
+  --popup-height: var(--klevu-product-query-popup-height, 500px);
+  --popup-width: var(--klevu-product-query-popup-width, 520px);
 }
 
 .content {
@@ -12,7 +17,7 @@
 }
 
 klevu-chat-layout {
-  height: 500px;
+  height: var(--popup-height);
 }
 
 @media (max-width: 520px) {
@@ -92,4 +97,8 @@ klevu-typography.fineprint {
 .loading-sorry {
   display: block;
   --klevu-body-xs-size: 10px;
+}
+
+klevu-popup {
+  --klevu-popup-width: var(--popup-width);
 }

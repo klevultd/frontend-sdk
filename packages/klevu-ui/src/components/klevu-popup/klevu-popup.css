@@ -1,8 +1,10 @@
 :host {
   /**
    * @prop --klevu-popup-spacing 0: Spacing around popup
+   * @prop --klevu-popup-width unset: Width of popup
    */
   --spacing: var(--klevu-popup-spacing, 0);
+  --width: var(--klevu-popup-width, unset);
 }
 
 .originContainer {
@@ -17,6 +19,7 @@
   transition: opacity 0.4s, visibility 0.4s;
   z-index: 1000;
   background: white;
+  width: var(--width);
 }
 
 .elevation-1 {

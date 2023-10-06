@@ -12,4 +12,30 @@ import * as Stories from "./klevu-product-query.stories"
 
 <Controls of={Stories.Query} />
 
+## Styling product query application
+
+Due to the nature of the product query application, it is only possible to style the source button using `klevu-product-query` CSS selector.
+If you wish to style the popup container, you need to use `klevu-product-query-popup` CSS selector.
+
+```css
+klevu-product-query {
+  /* CSS properties set here will only target the button */
+}
+
+klevu-product-query-popup {
+  /* CSS properties set here will only target the popup container */
+}
+```
+
+### Setting the height of the popup container
+
+Use these two variables in popup element to set the height of the popup container.
+
+```css
+klevu-product-query-popup {
+  --klevu-product-query-popup-width: 500px;
+  --klevu-product-query-popup-height: 500px;
+}
+```
+
 <KlevuAutoDocs of={Stories} />

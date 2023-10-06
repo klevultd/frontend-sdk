@@ -756,10 +756,6 @@ export namespace Components {
          */
         "originElement"?: HTMLElement;
         /**
-          * Set width of the popup content
-         */
-        "popupWidth"?: number;
-        /**
           * Initially show the popup
          */
         "startOpen"?: boolean;
@@ -3196,10 +3192,6 @@ declare namespace LocalJSX {
           * Element to anchor popup to. If not set popup is anchored to origin slot
          */
         "originElement"?: HTMLElement;
-        /**
-          * Set width of the popup content
-         */
-        "popupWidth"?: number;
         /**
           * Initially show the popup
          */

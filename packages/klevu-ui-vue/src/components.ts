@@ -252,7 +252,6 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'toggle',
   'openAtFocus',
   'closeAtOutsideClick',
-  'popupWidth',
   'anchor',
   'elevation',
   'offset',
