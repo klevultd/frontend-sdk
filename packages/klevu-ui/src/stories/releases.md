@@ -1,0 +1,397 @@
+# {r.name}
+
+## What's Changed
+* UI: Providing a way to reset the radio button by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/435
+* UI: Fixes issue of external source popup not working by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/431
+* UI: Improved stories to have default values for quicksearch by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/436
+* UI: Update dependency versions by @rallu in https://github.com/klevultd/frontend-sdk/pull/437
+* UI: Give abitility to choose native scrollbars by @rallu in https://github.com/klevultd/frontend-sdk/pull/439
+* @klevu/ui release 0.9.0 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/440
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.8.0...@klevu/ui-0.9.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* UI: Infinite loading component by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/391
+* UI: Update klevu-query to have modifiers and other settings by @rallu in https://github.com/klevultd/frontend-sdk/pull/393
+* UI: Fix klevu-popup backdrop click not working by @rallu in https://github.com/klevultd/frontend-sdk/pull/392
+* UI & CORE: Include Rating component in product card by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/394
+* UI: KMC settings for product image hover and swatches by @rallu in https://github.com/klevultd/frontend-sdk/pull/395
+* UI & CORE: Add logic to show title set in KMC for recommendation by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/396
+* UI: Enable personalisation in search and merchandising with KMC by @rallu in https://github.com/klevultd/frontend-sdk/pull/397
+* UI: Prefix events with `klevu` wherever missing by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/399
+* UI: KMC vat caption option by @rallu in https://github.com/klevultd/frontend-sdk/pull/401
+* UI: Show No results message on Quick search and Search Results page by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/400
+* UI: update klevu core to 3.3.0 by @rallu in https://github.com/klevultd/frontend-sdk/pull/404
+* Added checks to show Trending/Recently viewed products in Quick Search by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/405
+* UI: set default offset for PQA popup to be smaller by @rallu in https://github.com/klevultd/frontend-sdk/pull/407
+* UI: Add support to provide trending products count by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/412
+* UI: Deprecate --klevu-color-border and improve drawer by @rallu in https://github.com/klevultd/frontend-sdk/pull/408
+* UI: Handle keyword redirection in Quick search by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/411
+* UI: Handle the general settings for search + some more settings by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/409
+* UI: Changes to use Price settings from KMC by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/413
+* UI: Changes to use Filter settings from KMC by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-s
+* UI & CORE: Add banners to Quicksearch, Search landing page and merchandising by @rallu in https://github.com/klevultd/frontend-sdk/pull/415
+* UI: Fix scrolling of recommendation products by @rallu in https://github.com/klevultd/frontend-sdk/pull/420
+* [UI] - Adding ab test support to merchandising component by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/425
+* [UI] Handle issue of event firing multiple times(HEAD-300) by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/423
+* UI: Stop outputting readme markdowns and delete current ones by @rallu in https://github.com/klevultd/frontend-sdk/pull/430
+* UI: Add Klaviyo setting to quicksearch and SRLP by @rallu in https://github.com/klevultd/frontend-sdk/pull/428
+* Fixes to give focus to input in quicksearch by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/427
+* [UI] Support for image search in web components by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/424
+* UI: Fix popup not correctly following on scroll by @rallu in https://github.com/klevultd/frontend-sdk/pull/429
+
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.7.0...@klevu/ui-0.8.0
+
+---
+
+# {r.name}
+
+## What's Changed
+
+* CORE: Added query function for image search by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/418
+* CORE : Refactored the functions for image upload by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/422
+* @klevu/core release 3.6.0 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/432
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.5.0...@klevu/core-3.6.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* CORE: Add helper for getting redirects and configurable cache length by @rallu in https://github.com/klevultd/frontend-sdk/pull/406
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.3.0...@klevu/core-3.4.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* CORE: Ability to fetch banners related to query by @rallu in https://github.com/klevultd/frontend-sdk/pull/402
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.1.0...@klevu/core-3.3.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* Add no image placeholder for the klevu-product by @rallu in https://github.com/klevultd/frontend-sdk/pull/372
+* Facet and facet-list event improvements by @rallu in https://github.com/klevultd/frontend-sdk/pull/373
+* Create possibility for fullwidth typography by @rallu in https://github.com/klevultd/frontend-sdk/pull/374
+* Update CDN url's in installation info by @rallu in https://github.com/klevultd/frontend-sdk/pull/375
+* More extensive klevu-ui-react example by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/376
+* Global translations system for components by @rallu in https://github.com/klevultd/frontend-sdk/pull/377
+* Rating-in-filters-component by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/378
+* New way to handle content in applications by @rallu in https://github.com/klevultd/frontend-sdk/pull/379
+* Make difference between chips and badges clear by @rallu in https://github.com/klevultd/frontend-sdk/pull/380
+* Fix klevu-popup sizing and z-index by @rallu in https://github.com/klevultd/frontend-sdk/pull/381
+* Start of KMC setting work by @rallu in https://github.com/klevultd/frontend-sdk/pull/382
+* Color-swatches-in-facets-component by @nikhil-narayana-klevu in https://github.com/klevultd/frontend-sdk/pull/383
+* Fix PQA mobile layouting problems by @rallu in https://github.com/klevultd/frontend-sdk/pull/384
+* Fix toggling of values in ui react example by @rallu in https://github.com/klevultd/frontend-sdk/pull/387
+* UI: KMC add to cart button to product by @rallu in https://github.com/klevultd/frontend-sdk/pull/386
+* UI: Move klevu-popup to fully use dialog instead of container by @rallu in https://github.com/klevultd/frontend-sdk/pull/388
+* UI: Fix popups inside popups by @rallu in https://github.com/klevultd/frontend-sdk/pull/389
+* @klevu/ui release 0.7.0 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/390
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.6.0...@klevu/ui-0.7.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* Improve query object to fetch query params more cleaner way by @rallu in https://github.com/klevultd/frontend-sdk/pull/371
+* Start of KMC setting work by @rallu in https://github.com/klevultd/frontend-sdk/pull/382
+* @klevu/core release 3.1.0 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/385
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.0.4...@klevu/core-3.1.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* Use `dialog` in klevu-popup instead of custom portal implementation by @rallu in https://github.com/klevultd/frontend-sdk/pull/369
+* @klevu/ui release 0.6.0 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/370
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.5.1...@klevu/ui-0.6.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* Update UI package versions and fix storybook warnings by @rallu in https://github.com/klevultd/frontend-sdk/pull/364
+* Add configuration for disabling outside click in product query by @rallu in https://github.com/klevultd/frontend-sdk/pull/366
+* @klevu/ui release 0.5.1 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/367
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.5.0...@klevu/ui-0.5.1
+
+---
+
+# {r.name}
+
+## What's Changed
+* Rename pqa button to pqa by @rallu in https://github.com/klevultd/frontend-sdk/pull/362
+* @klevu/ui release 0.5.0 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/365
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.4.3...@klevu/ui-0.5.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* PQA widget id wasn't passed on by @rallu in https://github.com/klevultd/frontend-sdk/pull/360
+* @klevu/ui release 0.4.3 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/361
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.4.2...@klevu/ui-0.4.3
+
+---
+
+# {r.name}
+
+## What's Changed
+* PQA popup improvements by @rallu in https://github.com/klevultd/frontend-sdk/pull/358
+* @klevu/ui release 0.4.2 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/359
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.4.1...@klevu/ui-0.4.2
+
+---
+
+# {r.name}
+
+## What's Changed
+* Save MOI session on init already by @rallu in https://github.com/klevultd/frontend-sdk/pull/355
+* @klevu/core release 3.0.4 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/356
+* @klevu/ui release 0.4.1 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/357
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.4.0...@klevu/ui-0.4.1
+
+---
+
+# {r.name}
+
+## What's Changed
+* Fix klevu-list showing secondary slot without content by @rallu in https://github.com/klevultd/frontend-sdk/pull/343
+* Chore/change pqa session by @rallu in https://github.com/klevultd/frontend-sdk/pull/352
+* @klevu/core release 3.0.3 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/353
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.3.3...@klevu/ui-0.4.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* Save MOI session on init already by @rallu in https://github.com/klevultd/frontend-sdk/pull/355
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.0.3...@klevu/core-3.0.4
+
+---
+
+# {r.name}
+
+## What's Changed
+* Chore/change pqa session by @rallu in https://github.com/klevultd/frontend-sdk/pull/352
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.0.2...@klevu/core-3.0.3
+
+---
+
+# {r.name}
+
+## What's Changed
+* Chore/pqa updates 8 by @rallu in https://github.com/klevultd/frontend-sdk/pull/346
+  * Use canonical url when available on site
+  * Use product id when available through Klevu page meta
+  * Added settings to PQA
+  * Hide MOI from storybook
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.3.2...@klevu/ui-0.3.3
+
+---
+
+# {r.name}
+
+## What's Changed
+* Add settings parameter to MoiRequest by @rallu in https://github.com/klevultd/frontend-sdk/pull/344
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.0.1...@klevu/core-3.0.2
+
+---
+
+# {r.name}
+
+## What's Changed
+* Fix popup bug that came from last bug fix by @rallu in https://github.com/klevultd/frontend-sdk/pull/335
+* Fix Moi and PQA responsive by @rallu in https://github.com/klevultd/frontend-sdk/pull/337
+* PQA checks that can be started by @rallu in https://github.com/klevultd/frontend-sdk/pull/338
+* Fix bug with PQA initialization with productId by @rallu in https://github.com/klevultd/frontend-sdk/pull/339
+* Revert scrollbar changes to CSS based solution by @rallu in https://github.com/klevultd/frontend-sdk/pull/341
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.3.0...@klevu/ui-0.3.2
+
+---
+
+# {r.name}
+
+## What's Changed
+* Fix bug with PQA initialization with productId by @rallu in https://github.com/klevultd/frontend-sdk/pull/339
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-3.0.0...@klevu/core-3.0.1
+
+---
+
+# {r.name}
+
+## What's Changed
+* Chore/update dependencies by @rallu in https://github.com/klevultd/frontend-sdk/pull/329
+* Update core to 3.0.0 in UI by @rallu in https://github.com/klevultd/frontend-sdk/pull/332
+* Fix bugs from Moi and PQA by @rallu in https://github.com/klevultd/frontend-sdk/pull/333
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.6...@klevu/ui-0.3.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* Change popup functionality to not change height of content by @rallu in https://github.com/klevultd/frontend-sdk/pull/327
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.5...@klevu/ui-0.2.6
+
+---
+
+# {r.name}
+
+## What's Changed
+* Popup fullscreen on mobile by @rallu in https://github.com/klevultd/frontend-sdk/pull/325
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.4...@klevu/ui-0.2.5
+
+---
+
+# {r.name}
+
+## What's Changed
+* Chore/update dependencies by @rallu in https://github.com/klevultd/frontend-sdk/pull/329
+* Klaviyo integration through modifier by @rallu in https://github.com/klevultd/frontend-sdk/pull/296
+
+## BREAKING CHANGE: Refactored result object to be more straight forward
+
+Instead of calling a analytical function to return function to call it can be used directly send a event.
+
+So previous one called analytical events like this:
+```ts
+const res = await KlevuFetch(categoryMerchandising("women"))
+const query = res.queriesById("categoryMerchandising")
+const eventHandler = query.getCategoryMerchandisingClickSendEvent()
+
+// somewhere in click handler
+eventHandler(product.id)
+```
+
+Is changed something like this:
+```ts
+const res = await KlevuFetch(categoryMerchandising("women"))
+const query = res.queriesById("categoryMerchandising")
+
+// somewhere in click handler
+query.categoryMerchandisingClickEvent({ productId: product.id })
+```
+
+Note that `queriesById` not returns `KlevuResponseQueryObject` instead of `KlevuFetchQueryResult`
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-2.0.13...@klevu/core-3.0.0
+
+---
+
+# {r.name}
+
+## What's Changed
+* UI klevu-icon by @rallu in https://github.com/klevultd/frontend-sdk/pull/321
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.3...@klevu/ui-0.2.4
+
+---
+
+# {r.name}
+
+## What's Changed
+* PQA updates by @rallu in https://github.com/klevultd/frontend-sdk/pull/319
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.2...@klevu/ui-0.2.3
+
+---
+
+# {r.name}
+
+## What's Changed
+* Add possibility to select a theme and create pqa theme by @rallu in https://github.com/klevultd/frontend-sdk/pull/315
+* @klevu/core release 2.0.13 by @github-actions in https://github.com/klevultd/frontend-sdk/pull/317
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.1...@klevu/ui-0.2.2
+
+---
+
+# {r.name}
+
+## What's Changed
+* Fix PQA initialization code
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-2.0.12...@klevu/core-2.0.13
+
+---
+
+# {r.name}
+
+## What's Changed
+* Fix missing export for alsoViewed by @rallu in https://github.com/klevultd/frontend-sdk/pull/312
+* Limit new arrival products to only product types by @rallu in https://github.com/klevultd/frontend-sdk/pull/313
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/core-2.0.11...@klevu/core-2.0.12
+
+---
+
+# {r.name}
+
+## What's Changed
+* Fix double thumbs problem
+
+
+**Full Changelog**: https://github.com/klevultd/frontend-sdk/compare/@klevu/ui-0.2.0...@klevu/ui-0.2.1
