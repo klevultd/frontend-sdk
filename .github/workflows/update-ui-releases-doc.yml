@@ -40,7 +40,7 @@ jobs:
 
             const markdown = header + releasesMarkdown
 
-            fs.writeFileSync("packages/klevu-ui/src/stories/releases.md", markdown)
+            fs.writeFileSync("packages/klevu-ui/src/stories/releases.mdx", markdown)
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
