@@ -34,7 +34,7 @@ jobs:
 
             `
 
-            const releasesMarkdown = releases.data.map(r => {
+            const releasesMarkdown = releases.data.filter(r => r.name.startsWith("@klevu/ui")).map(r => {
               return `# ${r.name}\n\n${r.body}`
             }).join("\n\n---\n\n")
 
