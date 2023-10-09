@@ -13,18 +13,19 @@ import {
   KlevuEventV1Search,
   KlevuEventV2,
   KlevuEventV2CheckedOutProducts,
-  KlevuEventV2Data,
+  KlevuRecommendationsEventV2Data,
+  KlevuEventV2DataStaticContent,
   KlevuV1CategoryProductsClick,
   KlevuV1CategoryProductsView,
   V1ProductTrackingEvent,
   V1SearchEvent,
   V2CheckedOutProductsEvent,
+  KlevuV1ImageBannerClick,
+  KlevuEventV1BannerClick,
 } from "./eventRequests.js"
 
-export type RecommendationViewEventMetaData = Pick<
-  KlevuKMCRecommendations["metadata"],
-  "recsKey" | "logic" | "title"
->
+export type RecommendationViewEventMetaData =
+  KlevuKMCRecommendations["metadata"]
 
 /**
  * @category KlevuEvents
@@ -99,7 +100,7 @@ export class KlevuEvents {
     override = {},
   }: {
     recommendationMetadata: RecommendationViewEventMetaData
-    products: Array<
+    products?: Array<
       Pick<KlevuRecord, "id"> &
         Partial<
           Pick<
@@ -108,30 +109,38 @@ export class KlevuEvents {
           >
         >
     >
-    override?: Partial<KlevuEventV2Data>
+    override?: Partial<KlevuRecommendationsEventV2Data>
   }) {
-    const data: KlevuEventV2Data = {
+    const data: KlevuRecommendationsEventV2Data = {
       event: "view_recs_list",
+      event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
-      event_list_id: recommendationMetadata.recsKey,
-      event_list_logic: recommendationMetadata.logic,
-      event_list_name: recommendationMetadata.title,
-      items: products.map((p, index) => {
-        if (!p.id) {
-          throw new Error("Cannot send event without product id")
-        }
-        return {
-          index: index + 1,
-          item_id: p.id,
-          item_group_id: p.itemGroupId || p.id,
-          item_name: p.name ?? "unknown",
-          item_variant_id: p.itemGroupId || p.id,
-          price: p.price ?? "0",
-          currency: p.currency,
-          item_brand: p.brand,
-          item_category: p.category,
-        }
-      }),
+      event_data: {
+        list_id: recommendationMetadata.recsKey,
+        list_logic: recommendationMetadata.logic,
+        list_name: recommendationMetadata.title,
+        action: recommendationMetadata.action,
+        spot_id: recommendationMetadata.spotKey,
+        spot_name: recommendationMetadata.spotName,
+        items:
+          products &&
+          products.map((p, index) => {
+            if (!p.id) {
+              throw new Error("Cannot send event without product id")
+            }
+            return {
+              index: index + 1,
+              item_id: p.id,
+              item_group_id: p.itemGroupId || p.id,
+              item_name: p.name ?? "unknown",
+              item_variant_id: p.itemGroupId || p.id,
+              price: p.price ?? "0",
+              currency: p.currency,
+              item_brand: p.brand,
+              item_category: p.category,
+            }
+          }),
+      },
     }
 
     KlevuEventV2([
@@ -146,6 +155,7 @@ export class KlevuEvents {
    * When product has been clicked in the recommendation banner
    *
    * @param recommendationMetadata Metadata of what recommendation is clicked
+   * @param bannerInfo Information about the static banner that is shown
    * @param product Which product is clicked in the list
    * @param productIndexInList What is the index of the product in the list. Starting from 1
    * @param override Ability to override any analytical keys in low level
@@ -153,12 +163,14 @@ export class KlevuEvents {
   static recommendationClick({
     recommendationMetadata,
     product,
+    bannerInfo,
     productIndexInList,
     variantId,
     override = {},
   }: {
     recommendationMetadata: RecommendationViewEventMetaData
-    product: Pick<KlevuRecord, "id"> &
+    bannerInfo?: KlevuEventV2DataStaticContent
+    product?: Pick<KlevuRecord, "id"> &
       Partial<
         Pick<
           KlevuRecord,
@@ -170,34 +182,39 @@ export class KlevuEvents {
           | "category"
         >
       >
-    productIndexInList: number
+    productIndexInList?: number
     variantId?: string
-    override?: Partial<KlevuEventV2Data>
+    override?: Partial<KlevuRecommendationsEventV2Data>
   }) {
-    if (!product.id) {
-      throw new Error("Cannot send event without product id")
+    if (product) {
+      KlevuLastClickedProducts.click(product.id, product)
     }
-
-    KlevuLastClickedProducts.click(product.id, product)
-    const data: KlevuEventV2Data = {
+    const data: KlevuRecommendationsEventV2Data = {
       event: "select_recs_list",
+      event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
-      event_list_id: recommendationMetadata.recsKey,
-      event_list_logic: recommendationMetadata.logic,
-      event_list_name: recommendationMetadata.title,
-      items: [
-        {
-          index: productIndexInList,
-          item_id: product.id,
-          item_group_id: product.itemGroupId || product.id,
-          item_name: product.name ?? "unknown",
-          item_variant_id: variantId || product.id,
-          price: product.salePrice ?? "0",
-          currency: product.currency,
-          item_brand: product.brand,
-          item_category: product.category,
-        },
-      ],
+      event_data: {
+        list_id: recommendationMetadata.recsKey,
+        list_logic: recommendationMetadata.logic,
+        list_name: recommendationMetadata.title,
+        action: recommendationMetadata.action,
+        spot_id: recommendationMetadata.spotKey,
+        spot_name: recommendationMetadata.spotName,
+        static_content: bannerInfo && [bannerInfo],
+        items: product && [
+          {
+            index: productIndexInList ?? 1,
+            item_id: product.id,
+            item_group_id: product.itemGroupId || product.id,
+            item_name: product.name ?? "unknown",
+            item_variant_id: variantId || product.id,
+            price: product.salePrice ?? "0",
+            currency: product.currency,
+            item_brand: product.brand,
+            item_category: product.category,
+          },
+        ],
+      },
     }
     KlevuEventV2([
       {
@@ -388,6 +405,56 @@ export class KlevuEvents {
     }
 
     KlevuEventV1CategoryProductClick({
+      ...data,
+      ...override,
+    })
+  }
+
+  /**
+   * When user clicks on the banner that is in quicksearch or on search landing page
+   */
+  static imageBannerClick({
+    term,
+    bannerId,
+    bannerName,
+    imageUrl,
+    targetUrl,
+    override = {},
+  }: {
+    /**
+     * Search term used to get the results
+     */
+    term: string
+    /**
+     * Id of the banner
+     */
+    bannerId: string
+    /**
+     * Name of the banner
+     */
+    bannerName: string
+    /**
+     * Url of the image
+     */
+    imageUrl: string
+    /**
+     * Url where the user is redirected
+     */
+    targetUrl: string
+    override: Partial<KlevuV1ImageBannerClick>
+  }) {
+    const data: KlevuV1ImageBannerClick = {
+      klevu_apiKey: KlevuConfig.getDefault().apiKey,
+      type: "banner",
+      klevu_request: "click",
+      klevu_term: term,
+      klevu_bannerId: bannerId,
+      klevu_bannerName: bannerName,
+      klevu_image: imageUrl,
+      klevu_target: targetUrl,
+    }
+
+    KlevuEventV1BannerClick({
       ...data,
       ...override,
     })

@@ -4,7 +4,8 @@ import {
   RecommendationViewEventMetaData,
 } from "../../events/index.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
-import { KlevuEventV2Data } from "../../events/eventRequests.js"
+import { KlevuRecommendationsEventV2Data } from "../../events/eventRequests.js"
+import { KlevuRecord } from "../../models/KlevuRecord.js"
 
 const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
   KlevuTypeOfRequest.AlsoBought,
@@ -24,7 +25,7 @@ const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
 export function sendRecommendationViewEvent(
   title?: string,
   eventData?: RecommendationViewEventMetaData,
-  override?: Partial<KlevuEventV2Data>
+  override?: Partial<KlevuRecommendationsEventV2Data>
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
@@ -35,13 +36,9 @@ export function sendRecommendationViewEvent(
           title = f.params?.kmcConfig?.metadata.title ?? ""
         }
 
-        const products = res.queriesById(f.queries?.[0].id ?? "")?.records
-
-        if (!products) {
-          console.warn(
-            "No result in recommendations. Can't send recommendationViewEvent"
-          )
-          return res
+        let products: KlevuRecord[] | undefined
+        if (res.queryExists(f.queries?.[0]?.id ?? "")) {
+          products = res.queriesById(f.queries?.[0].id ?? "")?.records
         }
 
         const kmcData = f.params?.kmcConfig
@@ -50,10 +47,6 @@ export function sendRecommendationViewEvent(
           console.warn(
             "Problem with kmcData fetching. Can't send recommendationViewEvent"
           )
-          return res
-        }
-
-        if (products.length === 0) {
           return res
         }
 

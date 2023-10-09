@@ -50,26 +50,39 @@ export async function KlevuFetch(
   }
 
   const cached = klevuFetchCache.check(payload)
-  let response: KlevuApiRawResponse
-  if (cached) {
-    response = cached
-  } else {
-    const res = await post<KlevuApiRawResponse>(
-      withOverride?.configOverride?.url ?? KlevuConfig.getDefault().url,
-      payload
-    )
+  let response: KlevuApiRawResponse | undefined
 
-    if (!res) {
-      throw new Error("Couldn't fetch data")
-    }
+  if (recordQueries.length > 0 || suggestionQueries.length > 0) {
+    if (cached) {
+      response = cached
+    } else {
+      const res = await post<KlevuApiRawResponse>(
+        withOverride?.configOverride?.url ?? KlevuConfig.getDefault().url,
+        payload
+      )
 
-    response = res
-    if (res.meta?.responseCode == 200) {
-      klevuFetchCache.cache(payload, response)
+      if (!res) {
+        throw new Error("Couldn't fetch data")
+      }
+
+      response = res
+      if (res.meta?.responseCode == 200) {
+        klevuFetchCache.cache(payload, response)
+      }
     }
   }
 
-  return new KlevuResponseObject(response, functions)
+  return new KlevuResponseObject(
+    response ?? {
+      meta: {
+        qTime: 0,
+        responseCode: 204,
+      },
+      queryResults: [],
+      suggestionResults: [],
+    },
+    functions
+  )
 }
 
 async function cleanAndProcessFunctions(

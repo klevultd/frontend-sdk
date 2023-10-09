@@ -57,19 +57,56 @@ export enum KMCRecommendationLogic {
   Custom = "CUSTOM_LOGIC",
 }
 
-type KlevuKMCRecommendationBase = {
+export type KlevuKMCRecommendations = {
   metadata: {
+    /**
+     * Title of the recommendation
+     */
     title: string
+    /**
+     * ID of the recommendation
+     */
     recsKey: string
+    /**
+     * Target page type of recommendation
+     */
     pageType: KMCRecommendationPagetype
+    /**
+     * Logic used in recommendation
+     */
     logic: KMCRecommendationLogic
+    /**
+     * Amount of products to fetch
+     */
     maxProducts: number
     productThreshold: number
     enabled: boolean
+    /**
+     * ID of the spot
+     */
+    spotKey: string
+    /**
+     * Spot name
+     */
+    spotName: string
+    /**
+     * User segment key
+     */
+    segmentKey: string | null
+    /**
+     * User segment name
+     */
+    segmentName: string | null
+
+    /**
+     * Special cases of recommendation
+     */
+    action: "STATIC_CONTENT" | "HIDE_RECOMMENDATION" | "FILTER" | null
   }
   search: {
     basePath: string
     payload: string
+    recsAction?: "STATIC_CONTENT" | "HIDE_RECOMMENDATION" | "FILTER"
   }
   templates: {
     base: string
@@ -80,61 +117,17 @@ type KlevuKMCRecommendationBase = {
   scripts: {
     recsObject?: unknown
   }
-}
-
-type KlevuKMCHomeRecommendation = KlevuKMCRecommendationBase & {
-  metadata: {
-    pageType: KMCRecommendationPagetype.Home
-    logic:
-      | KMCRecommendationLogic.Trending
-      | KMCRecommendationLogic.TrendingPersonalized
-      | KMCRecommendationLogic.NewestArrivals
-      | KMCRecommendationLogic.RecentlyViewed
-      | KMCRecommendationLogic.HandPicked
-      | KMCRecommendationLogic.Custom
+  staticContent?: {
+    targetUrl: string
+    contentType: "image"
+    image: Array<{
+      resolution: string
+      url: string
+      altTag: string
+      maxWidth: number
+    }>
   }
 }
-
-type KlevuKMCCategoryRecommendation = KlevuKMCRecommendationBase & {
-  metadata: {
-    pageType: KMCRecommendationPagetype.Category
-    logic:
-      | KMCRecommendationLogic.Trending
-      | KMCRecommendationLogic.TrendingPersonalized
-      | KMCRecommendationLogic.NewestArrivals
-      | KMCRecommendationLogic.HandPicked
-      | KMCRecommendationLogic.Custom
-  }
-}
-
-type KlevuKMCProductPageRecommendation = KlevuKMCRecommendationBase & {
-  metadata: {
-    pageType: KMCRecommendationPagetype.Product
-    logic:
-      | KMCRecommendationLogic.OtherAlsoViewed
-      | KMCRecommendationLogic.Similar
-      | KMCRecommendationLogic.HandPicked
-      | KMCRecommendationLogic.BoughtTogetherPDP
-      | KMCRecommendationLogic.VisuallySimilar
-      | KMCRecommendationLogic.Custom
-  }
-}
-
-type KlevuKMCCheckoutRecommendation = KlevuKMCRecommendationBase & {
-  metadata: {
-    pageType: KMCRecommendationPagetype.Checkout
-    logic:
-      | KMCRecommendationLogic.BoughtTogether
-      | KMCRecommendationLogic.HandPicked
-      | KMCRecommendationLogic.Custom
-  }
-}
-
-export type KlevuKMCRecommendations =
-  | KlevuKMCHomeRecommendation
-  | KlevuKMCCategoryRecommendation
-  | KlevuKMCProductPageRecommendation
-  | KlevuKMCCheckoutRecommendation
 
 /**
  * Fetches products based on KMC recommendation. Provide id created in KMC
@@ -188,6 +181,18 @@ export async function kmcRecommendation(
     apiKey: KlevuConfig.getDefault().apiKey,
     url: `https://${kmcConfig.search.basePath}`,
   })
+
+  if (
+    kmcConfig.metadata.action === "HIDE_RECOMMENDATION" ||
+    kmcConfig.metadata.action === "STATIC_CONTENT"
+  ) {
+    return {
+      klevuFunctionId: "kmcRecommendation",
+      params: {
+        kmcConfig,
+      },
+    }
+  }
 
   const payload = JSON.parse(kmcConfig.search.payload)
 
