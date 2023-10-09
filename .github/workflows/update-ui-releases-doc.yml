@@ -25,6 +25,8 @@ jobs:
               repo: 'frontend-sdk',
             })
 
+            console.log(releases.data)
+
             const header = `
             import { Meta } from "@storybook/addon-docs"
 
@@ -32,7 +34,7 @@ jobs:
 
             `
 
-            const releasesMarkdown = releases.map(r => {
+            const releasesMarkdown = releases.data.map(r => {
               return `# {r.name}\n\n${r.body}`
             }).join("\n\n---\n\n")
 
