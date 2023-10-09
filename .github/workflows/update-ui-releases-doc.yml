@@ -4,8 +4,8 @@ on:
   # allow to run whenever
   workflow_dispatch:
   # automatically run on release
-  #repository_dispatch:
-  #  types: [prereleased, released]
+  repository_dispatch:
+    types: [prereleased, released]
 
 jobs:
   update-ui-releases:
