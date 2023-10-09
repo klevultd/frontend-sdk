@@ -4,13 +4,17 @@ on:
   # allow to run whenever
   workflow_dispatch:
   # automatically run on release
-  repository_dispatch:
-    types: [prereleased, released]
+  #repository_dispatch:
+  #  types: [prereleased, released]
 
 jobs:
   update-ui-releases:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
       - uses: actions/github-script@v6
         with:
           script: |
