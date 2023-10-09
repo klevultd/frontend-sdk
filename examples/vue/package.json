@@ -9,20 +9,20 @@
   },
   "dependencies": {
     "@klevu/core": "file:../../packages/klevu-core",
-    "css.gg": "^2.0.0",
-    "daisyui": "^2.31.0",
+    "css.gg": "^2.1.1",
+    "daisyui": "^3.9.2",
     "lodash.debounce": "^4.0.8",
     "multi-range-slider-vue": "^1.1.4",
-    "pinia": "^2.0.23",
-    "vue": "^3.2.40",
-    "vue-router": "^4.1.5",
-    "vue3-carousel": "^0.2.0"
+    "pinia": "^2.1.6",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5",
+    "vue3-carousel": "^0.3.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.2",
-    "autoprefixer": "^10.4.12",
-    "postcss": "^8.4.17",
-    "tailwindcss": "^3.1.8",
-    "vite": "^3.2.7"
+    "@vitejs/plugin-vue": "^4.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.11"
   }
 }
