@@ -2,6 +2,8 @@ import { Component, Event, EventEmitter, Host, Prop, h } from "@stencil/core"
 
 /**
  * Component that displays a typical klevu banner
+ * @slot default The banner slot
+ * @csspart banner-image The image element
  */
 @Component({
   tag: "klevu-banner",

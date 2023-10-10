@@ -89,6 +89,7 @@ export namespace Components {
     }
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface KlevuBanner {
         /**
@@ -1868,6 +1869,7 @@ declare global {
     };
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface HTMLKlevuBannerElement extends Components.KlevuBanner, HTMLStencilElement {
     }
@@ -2491,6 +2493,7 @@ declare namespace LocalJSX {
     }
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface KlevuBanner {
         /**
@@ -4282,6 +4285,7 @@ declare module "@stencil/core" {
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
              * Component that displays a typical klevu banner
+             * @csspart banner-image The image element
              */
             "klevu-banner": LocalJSX.KlevuBanner & JSXBase.HTMLAttributes<HTMLKlevuBannerElement>;
             /**

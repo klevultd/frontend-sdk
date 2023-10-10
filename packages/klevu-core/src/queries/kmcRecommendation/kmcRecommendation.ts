@@ -56,6 +56,16 @@ export enum KMCRecommendationLogic {
   VisuallySimilar = "VISUALLY_SIMILAR",
   Custom = "CUSTOM_LOGIC",
 }
+type StaticContent = {
+  targetUrl: string
+  image: {
+    resolution: string
+    url: string
+    altTag: string
+    maxWidth: number
+  }[]
+  contentType: string
+}
 
 type KlevuKMCRecommendationBase = {
   metadata: {
@@ -67,9 +77,11 @@ type KlevuKMCRecommendationBase = {
     productThreshold: number
     enabled: boolean
   }
+  staticContent?: StaticContent[]
   search: {
     basePath: string
     payload: string
+    recsAction?: string
   }
   templates: {
     base: string
@@ -182,6 +194,19 @@ export async function kmcRecommendation(
 
   if (!kmcConfig) {
     throw new Error("Couldn't fetch KMC config")
+  }
+
+  if (
+    kmcConfig.search.recsAction &&
+    kmcConfig.search.recsAction === "STATIC_CONTENT"
+  ) {
+    return {
+      klevuFunctionId: "kmcRecommendation",
+      params: {
+        kmcConfig,
+      },
+      modifiers,
+    }
   }
 
   const configOverride = new KlevuConfig({

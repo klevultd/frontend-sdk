@@ -35,6 +35,16 @@ export function sendRecommendationViewEvent(
           title = f.params?.kmcConfig?.metadata.title ?? ""
         }
 
+        if (
+          f.params &&
+          f.params.kmcConfig?.search.recsAction &&
+          f.params.kmcConfig.search.recsAction === "STATIC_CONTENT"
+        ) {
+          console.log("Static image analytics")
+          // Add the code to perform static image analytics here.
+          return
+        }
+
         const products = res.queriesById(f.queries?.[0].id ?? "")?.records
 
         if (!products) {
