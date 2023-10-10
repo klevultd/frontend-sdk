@@ -11,16 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/core": "^2.0.1",
-    "@klevu/ui-react": "^0.1.6",
+    "@klevu/core": "^3.6.0",
+    "@klevu/ui-react": "^0.9.0",
     "lodash.groupby": "^4.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.9",
-    "vite": "^3.2.7"
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "vite": "^4.4.11"
   }
 }

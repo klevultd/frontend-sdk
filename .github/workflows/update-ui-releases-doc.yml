@@ -1,0 +1,52 @@
+name: "Update UI releases docs"
+
+on:
+  # allow to run whenever
+  workflow_dispatch:
+  # automatically run on release
+  repository_dispatch:
+    types: [prereleased, released]
+
+jobs:
+  update-ui-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            var fs = require("fs")
+
+            const releases = await github.rest.repos.listReleases({
+              owner: 'klevultd',
+              repo: 'frontend-sdk',
+            })
+
+            console.log(releases.data)
+
+            const header = `
+            import { Meta } from "@storybook/addon-docs"
+
+            <Meta title="Guides/Releases" />
+
+            `
+
+            const releasesMarkdown = releases.data.filter(r => r.name.startsWith("@klevu/ui")).map(r => {
+              return `# ${r.name}\n\n${r.body}`
+            }).join("\n\n---\n\n")
+
+            const markdown = header + releasesMarkdown
+
+            fs.writeFileSync("packages/klevu-ui/src/stories/releases.mdx", markdown)
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "Update UI releases docs"
+          branch: release/ui-releases
+          title: "@klevu/ui update releases docs"
+          body: |
+            Automated update of releases.md of @klevu/ui
