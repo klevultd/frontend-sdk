@@ -52,7 +52,9 @@ export async function KlevuFetch(
   const cached = klevuFetchCache.check(payload)
   let response: KlevuApiRawResponse | undefined
 
-  if (recordQueries.length > 0 || suggestionQueries.length > 0) {
+  const withoutSkip = recordQueries.filter((q) => q.typeOfRequest !== "SKIP")
+
+  if (withoutSkip.length > 0 || suggestionQueries.length > 0) {
     if (cached) {
       response = cached
     } else {
@@ -78,7 +80,11 @@ export async function KlevuFetch(
         qTime: 0,
         responseCode: 204,
       },
-      queryResults: [],
+      queryResults: recordQueries.map((r) => ({
+        id: r.id,
+        meta: {} as any,
+        records: [],
+      })),
       suggestionResults: [],
     },
     functions

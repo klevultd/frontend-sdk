@@ -1,3 +1,12 @@
 :host {
   display: block;
 }
+
+.staticImage klevu-banner::part(banner-image) {
+  max-width: 1100px;
+  max-height: 265px;
+}
+.staticImage.isMobile klevu-banner::part(banner-image) {
+  max-width: 375px;
+  max-height: 115px;
+}

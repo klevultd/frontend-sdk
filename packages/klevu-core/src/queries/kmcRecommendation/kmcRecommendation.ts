@@ -7,6 +7,7 @@ import { personalisation } from "../../modifiers/personalisation/personalisation
 import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { get } from "../../connection/fetch.js"
+import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
 
 export type KlevuKMCRecommendationOptions = {
   id: string
@@ -117,7 +118,7 @@ export type KlevuKMCRecommendations = {
   scripts: {
     recsObject?: unknown
   }
-  staticContent?: {
+  staticContent?: Array<{
     targetUrl: string
     contentType: "image"
     image: Array<{
@@ -126,7 +127,7 @@ export type KlevuKMCRecommendations = {
       altTag: string
       maxWidth: number
     }>
-  }
+  }>
 }
 
 /**
@@ -188,6 +189,12 @@ export async function kmcRecommendation(
   ) {
     return {
       klevuFunctionId: "kmcRecommendation",
+      queries: [
+        {
+          id: options?.id ?? "kmcRecommendation",
+          typeOfRequest: KlevuTypeOfRequest.Skip,
+        },
+      ],
       params: {
         kmcConfig,
       },

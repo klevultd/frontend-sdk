@@ -85,3 +85,17 @@ export const Styled: StoryObj<KlevuRecommendations> = {
       }
     </style> `,
 }
+
+export const ImageBannerRecommendations: StoryObj<KlevuRecommendations> = {
+  args: {
+    recommendationId: "k-031a546d-15b4-4577-ae13-296663460bd8",
+  },
+  render: (args) => html`<klevu-recommendations
+    .cartProductIds=${args.cartProductIds}
+    category-path=${ifDefined(args.categoryPath)}
+    current-product-id=${ifDefined(args.currentProductId)}
+    item-group-id=${ifDefined(args.itemGroupId)}
+    recommendation-id=${ifDefined(args.recommendationId)}
+    recommendation-title=${ifDefined(args.recommendationTitle)}
+  ></klevu-recommendations>`,
+}

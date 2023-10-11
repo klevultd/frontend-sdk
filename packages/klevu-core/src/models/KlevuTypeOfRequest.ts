@@ -9,4 +9,6 @@ export enum KlevuTypeOfRequest {
   AlsoBought = "RECS_ALSO_BOUGHT",
   VisuallySimilar = "RECS_SIMILAR_IMAGES",
   Custom = "RECS_CUSTOM",
+  // Special type where we skip request to Klevu services, but run everything else
+  Skip = "SKIP",
 }
