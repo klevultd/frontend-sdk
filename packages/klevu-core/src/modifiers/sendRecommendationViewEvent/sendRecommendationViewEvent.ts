@@ -23,8 +23,8 @@ const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
  * @returns
  */
 export function sendRecommendationViewEvent(
-  title?: string,
-  eventData?: RecommendationViewEventMetaData,
+  eventData?: Partial<RecommendationViewEventMetaData> &
+    Pick<RecommendationViewEventMetaData, "logic" | "recsKey" | "title">,
   override?: Partial<KlevuRecommendationsEventV2Data>
 ): KlevuFetchModifer {
   return {
@@ -32,10 +32,6 @@ export function sendRecommendationViewEvent(
     onResult: (res, f) => {
       // is used with kmcRecommendation query
       if (f.klevuFunctionId === "kmcRecommendation") {
-        if (!title) {
-          title = f.params?.kmcConfig?.metadata.title ?? ""
-        }
-
         let products: KlevuRecord[] | undefined
         if (res.queryExists(f.queries?.[0]?.id ?? "")) {
           products = res.queriesById(f.queries?.[0].id ?? "")?.records
@@ -53,7 +49,6 @@ export function sendRecommendationViewEvent(
         KlevuEvents.recommendationView({
           recommendationMetadata: {
             ...kmcData.metadata,
-            title,
           },
           products,
           override,
@@ -83,8 +78,6 @@ export function sendRecommendationViewEvent(
         )
         return res
       }
-
-      eventData.title = title ?? eventData.title
 
       KlevuEvents.recommendationView({
         recommendationMetadata: eventData,

@@ -101,7 +101,7 @@ export type KlevuKMCRecommendations = {
     /**
      * Special cases of recommendation
      */
-    action: "STATIC_CONTENT" | "HIDE_RECOMMENDATION" | "FILTER" | null
+    action?: "STATIC_CONTENT" | "HIDE_RECOMMENDATION" | "FILTER" | null
   }
   search: {
     basePath: string

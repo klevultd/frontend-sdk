@@ -99,7 +99,8 @@ export class KlevuEvents {
     products,
     override = {},
   }: {
-    recommendationMetadata: RecommendationViewEventMetaData
+    recommendationMetadata: Partial<RecommendationViewEventMetaData> &
+      Pick<RecommendationViewEventMetaData, "logic" | "recsKey" | "title">
     products?: Array<
       Pick<KlevuRecord, "id"> &
         Partial<
