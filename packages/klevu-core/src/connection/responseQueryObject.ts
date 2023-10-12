@@ -328,9 +328,14 @@ export class KlevuResponseQueryObject {
             break
           }
           this.recommendationBannerClickEvent = function ({ resolution }) {
-            const image = config.staticContent?.[0].image.find(
-              (image) => image.resolution === resolution
-            )
+            if (!config.staticContent || config.staticContent.length === 0) {
+              return
+            }
+
+            const image =
+              config.staticContent[0].image.find(
+                (image) => image.resolution === resolution
+              ) ?? config.staticContent[0].image[0]
 
             if (!image) {
               return

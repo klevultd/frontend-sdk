@@ -5,6 +5,7 @@ import {
   KlevuApiRawResponse,
   KlevuSuggestionQuery,
   KlevuQueryResult,
+  KlevuTypeOfRequest,
 } from "../models/index.js"
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
@@ -52,7 +53,9 @@ export async function KlevuFetch(
   const cached = klevuFetchCache.check(payload)
   let response: KlevuApiRawResponse | undefined
 
-  const withoutSkip = recordQueries.filter((q) => q.typeOfRequest !== "SKIP")
+  const withoutSkip = recordQueries.filter(
+    (q) => q.typeOfRequest !== KlevuTypeOfRequest.Skip
+  )
 
   if (withoutSkip.length > 0 || suggestionQueries.length > 0) {
     if (cached) {

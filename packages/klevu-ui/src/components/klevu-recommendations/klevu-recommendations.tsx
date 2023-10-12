@@ -159,7 +159,6 @@ export class KlevuRecommendations {
   }
 
   #staticBannerClick() {
-    console.log(this.#responseObject)
     this.#responseObject?.recommendationBannerClickEvent?.({
       resolution: this.#isMobile() ? "mobile" : "desktop",
     })
