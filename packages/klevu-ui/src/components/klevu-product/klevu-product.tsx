@@ -7,6 +7,7 @@ import { KlevuInit } from "../klevu-init/klevu-init"
 import { partsExports } from "../../utils/partsExports"
 
 export type KlevuProductOnProductClick = { product: Partial<KlevuRecord>; originalEvent: MouseEvent }
+export type KlevuProductAddToCart = { product: Partial<KlevuRecord> }
 export type KlevuProductVariant = "line" | "small" | "default"
 export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
 
@@ -165,6 +166,15 @@ export class KlevuProduct {
   })
   klevuProductClick!: EventEmitter<KlevuProductOnProductClick>
 
+  /**
+   * When the product add to cart is clicked
+   */
+  @Event({
+    composed: true,
+    cancelable: true,
+  })
+  klevuAddToCart!: EventEmitter<KlevuProductAddToCart>
+
   async connectedCallback() {
     await KlevuInit.ready()
     const settings = getKMCSettings()
@@ -247,12 +257,11 @@ export class KlevuProduct {
 
   #addToCart(event: Event) {
     event.stopPropagation()
-    const settings = getGlobalSettings()
-    if (!this.product || !settings?.addToCart) {
+    event.preventDefault()
+    if (!this.product) {
       return
     }
-
-    settings.addToCart(this.product, event)
+    this.klevuAddToCart.emit({ product: this.product })
   }
 
   render() {
