@@ -18,7 +18,7 @@ import { KlevuImageSelectedEvent } from "./components/klevu-image-picker/klevu-i
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { Placement } from "@floating-ui/dom";
-import { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+import { KlevuProductAddToCart, KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
@@ -42,7 +42,7 @@ export { KlevuImageSelectedEvent } from "./components/klevu-image-picker/klevu-i
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { Placement } from "@floating-ui/dom";
-export { KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
+export { KlevuProductAddToCart, KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
@@ -3275,6 +3275,10 @@ declare namespace LocalJSX {
           * What key to use for name value
          */
         "keyName"?: string;
+        /**
+          * When the product add to cart is clicked
+         */
+        "onKlevuAddToCart"?: (event: KlevuProductCustomEvent<KlevuProductAddToCart>) => void;
         /**
           * When products has been clicked
          */

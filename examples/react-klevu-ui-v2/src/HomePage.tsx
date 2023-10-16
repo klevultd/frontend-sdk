@@ -198,7 +198,10 @@ const HomePage = () => {
                       product={p}
                       key={p.id}
                       fixedWidth
+                      showAddToCart
+                      tAddToCart="Add to cart"
                       variant="small"
+                      onKlevuAddToCart={() => console.log("addtocart clicked")}
                     >
                       <div
                         slot="top"
@@ -206,27 +209,6 @@ const HomePage = () => {
                         style={{ marginBottom: "10px", textAlign: "right" }}
                       >
                         <KlevuBadge accent={3}>SALE</KlevuBadge>
-                      </div>
-                      <div slot="bottom" className="buttonParent">
-                        {cart.items.find((_p) => p.id === _p.id) ? (
-                          <KlevuButton
-                            onClick={() => {
-                              setRemoveProduct(p)
-                            }}
-                            fullWidth={true}
-                          >
-                            Remove
-                          </KlevuButton>
-                        ) : (
-                          <KlevuButton
-                            onClick={() => {
-                              cart.add(p)
-                            }}
-                            fullWidth={true}
-                          >
-                            Add to cart
-                          </KlevuButton>
-                        )}
                       </div>
                     </KlevuProduct>
                   ))}
