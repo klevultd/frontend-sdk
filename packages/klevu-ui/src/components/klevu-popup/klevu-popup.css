@@ -2,9 +2,11 @@
   /**
    * @prop --klevu-popup-spacing 0: Spacing around popup
    * @prop --klevu-popup-width unset: Width of popup
+   * @prop --klevu-popup-height unset: Height of popup
    */
   --spacing: var(--klevu-popup-spacing, 0);
   --width: var(--klevu-popup-width, unset);
+  --height: var(--klevu-popup-height, unset);
 }
 
 .originContainer {
@@ -12,14 +14,15 @@
 }
 
 .popup {
-  width: max-content;
   box-sizing: border-box;
   padding: var(--spacing);
   border-radius: var(--klevu-border-radius-s);
   transition: opacity 0.4s, visibility 0.4s;
   z-index: 1000;
   background: white;
-  width: var(--width);
+  width: var(--width, max-content);
+  height: var(--height);
+  overflow: auto;
 }
 
 .elevation-1 {

@@ -130,11 +130,7 @@ export interface KMCRootObject {
    */
   klevu_showBannerAds: boolean
 
-  /**
-   * @deprecated not in use, used to control if a item is single or multi
-   * select, control is done via BE atm in the returned filters list
-   */
-  klevu_multiSelectFilters: boolean //
+  klevu_multiSelectFilters: boolean
   /**
    * @deprecated not in use, controlled the domain of the analytics calls , not
    * in use as analytics live now under same doamin

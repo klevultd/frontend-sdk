@@ -19,6 +19,7 @@ import {
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import {
+  KlevuFacetMode,
   KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
   KlevuProductCustomEvent,
@@ -399,6 +400,12 @@ export class KlevuSearchLandingPage {
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
     const showInfiniteScroll = this.useInfiniteScroll && !this.infiniteScrollingPaused && this.results.length > 0
+
+    let facetMode: KlevuFacetMode = "checkbox"
+    if (this.useMultiSelectFilters === false) {
+      facetMode = "radio"
+    }
+
     return (
       <Host>
         <klevu-util-viewport
@@ -418,7 +425,7 @@ export class KlevuSearchLandingPage {
                   manager={this.manager}
                   useApplyButton={isMobile}
                   onKlevuApplyFilters={this.#applyFilters.bind(this)}
-                  mode={this.useMultiSelectFilters ? "checkbox" : "radio"}
+                  mode={facetMode}
                 ></klevu-facet-list>
               )}
             </div>

@@ -1,6 +1,6 @@
 :host {
   display: block;
-  /*container-type: inline-size;*/
+  --klevu-popup-height: 500px;
 }
 
 .content {
@@ -106,4 +106,12 @@ klevu-icon.photo-camera {
 
 klevu-popup.imagesearch {
   --klevu-popup-width: 400px;
+}
+
+.topbanners {
+  margin-bottom: var(--klevu-spacing-05);
+}
+
+.bottombanners {
+  margin-top: var(--klevu-spacing-05);
 }

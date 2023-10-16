@@ -40,6 +40,7 @@
     "test.watch": "stencil test --e2e --watchAll",
     "generate": "stencil generate",
     "generate:parts": "node generateParts.js && prettier -w src/utils/parts.ts",
+    "generate:icons": "node downloadIcons.js",
     "storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && storybook dev -p 6006",
     "build-storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && storybook build",
     "push-npm": "npm publish --access public"

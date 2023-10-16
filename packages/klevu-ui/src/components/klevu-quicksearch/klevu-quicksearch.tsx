@@ -119,11 +119,6 @@ export class KlevuQuicksearch {
   @Prop() fullResultCount: number = 9
 
   /**
-   * Enable Klevu MOI chat
-   */
-  @Prop() enableChat?: boolean
-
-  /**
    * Title of search results
    */
   @Prop() tSearchResults = getTranslation("quicksearch.tSearchResults")
@@ -595,9 +590,15 @@ export class KlevuQuicksearch {
                 ></klevu-sort>
               </div>
               <slot name="topbanners">
-                {this.searchResultTopBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-                ))}
+                <div class="topbanners">
+                  {this.searchResultTopBanners.map((b) => (
+                    <klevu-banner
+                      imageUrl={b.bannerImg}
+                      linkUrl={b.redirectUrl}
+                      altText={b.bannerAltTag}
+                    ></klevu-banner>
+                  ))}
+                </div>
               </slot>
               <klevu-product-grid itemsPerRow={isMobile ? undefined : 3}>
                 <slot name="search-products">
@@ -620,9 +621,15 @@ export class KlevuQuicksearch {
                 onKlevuPaginationChange={this.#searchPageChange.bind(this)}
               ></klevu-pagination>
               <slot name="bottombanners">
-                {this.searchResultBottomBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-                ))}
+                <div class="bottombanners">
+                  {this.searchResultBottomBanners.map((b) => (
+                    <klevu-banner
+                      imageUrl={b.bannerImg}
+                      linkUrl={b.redirectUrl}
+                      altText={b.bannerAltTag}
+                    ></klevu-banner>
+                  ))}
+                </div>
               </slot>
             </Fragment>
           )}
@@ -632,9 +639,15 @@ export class KlevuQuicksearch {
                 <klevu-typography variant="h3">{this.tSearchResults}</klevu-typography>
               </div>
               <slot name="topbanners">
-                {this.searchResultTopBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-                ))}
+                <div class="topbanners">
+                  {this.searchResultTopBanners.map((b) => (
+                    <klevu-banner
+                      imageUrl={b.bannerImg}
+                      linkUrl={b.redirectUrl}
+                      altText={b.bannerAltTag}
+                    ></klevu-banner>
+                  ))}
+                </div>
               </slot>
               <div class="lineproducts">
                 <slot name="search-products">
@@ -651,9 +664,15 @@ export class KlevuQuicksearch {
                 </slot>
               </div>
               <slot name="bottombanners">
-                {this.searchResultBottomBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
-                ))}
+                <div class="bottombanners">
+                  {this.searchResultBottomBanners.map((b) => (
+                    <klevu-banner
+                      imageUrl={b.bannerImg}
+                      linkUrl={b.redirectUrl}
+                      altText={b.bannerAltTag}
+                    ></klevu-banner>
+                  ))}
+                </div>
               </slot>
             </Fragment>
           )}
@@ -667,11 +686,6 @@ export class KlevuQuicksearch {
     return (
       <Fragment>
         <aside part="quicksearch-sidepanel">
-          {this.enableChat && (
-            <klevu-button exportparts={partsExports("klevu-button")} size="small" onClick={() => (this.chat = true)}>
-              {this.tStartChat}
-            </klevu-button>
-          )}
           {((!this.hidePopularSearches && !isNoResultsPage) ||
             (!this.hidePopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
             <klevu-popular-searches

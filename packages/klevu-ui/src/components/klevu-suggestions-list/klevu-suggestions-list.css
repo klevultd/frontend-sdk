@@ -3,6 +3,7 @@
 }
 
 klevu-typography.caption {
+  display: block;
   margin-bottom: var(--klevu-spacing-04);
 }
 

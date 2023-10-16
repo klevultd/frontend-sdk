@@ -29,7 +29,6 @@ export type Translation = typeof en
  *   rendering then this is the place. Has two attribute amount and currency of item.
  * Initializes components to fetch data from correct Klevu backend
  *
- * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
  *
  * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
  *

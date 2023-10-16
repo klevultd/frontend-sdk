@@ -470,7 +470,6 @@ export namespace Components {
      * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
      *   rendering then this is the place. Has two attribute amount and currency of item.
      * Initializes components to fetch data from correct Klevu backend
-     * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      */
     interface KlevuInit {
@@ -1155,10 +1154,6 @@ export namespace Components {
      * @csspart quicksearch-main-area - Main content area container
      */
     interface KlevuQuicksearch {
-        /**
-          * Enable Klevu MOI chat
-         */
-        "enableChat"?: boolean;
         /**
           * Enable image search feature
          */
@@ -2034,7 +2029,6 @@ declare global {
      * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
      *   rendering then this is the place. Has two attribute amount and currency of item.
      * Initializes components to fetch data from correct Klevu backend
-     * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      */
     interface HTMLKlevuInitElement extends Components.KlevuInit, HTMLStencilElement {
@@ -2909,7 +2903,6 @@ declare namespace LocalJSX {
      * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
      *   rendering then this is the place. Has two attribute amount and currency of item.
      * Initializes components to fetch data from correct Klevu backend
-     * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
      * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
      */
     interface KlevuInit {
@@ -3597,10 +3590,6 @@ declare namespace LocalJSX {
      * @csspart quicksearch-main-area - Main content area container
      */
     interface KlevuQuicksearch {
-        /**
-          * Enable Klevu MOI chat
-         */
-        "enableChat"?: boolean;
         /**
           * Enable image search feature
          */
@@ -4373,7 +4362,6 @@ declare module "@stencil/core" {
              * - **renderPrice:** generic function for price rendering. If you wish to have your own formatting for price
              *   rendering then this is the place. Has two attribute amount and currency of item.
              * Initializes components to fetch data from correct Klevu backend
-             * Klevu init also initializes Google Material Icon font. It automatically injects the font to the page.
              * **Note: All global CSS variables are documented in `klevu-init` even thought they are not defined in it.**
              */
             "klevu-init": LocalJSX.KlevuInit & JSXBase.HTMLAttributes<HTMLKlevuInitElement>;

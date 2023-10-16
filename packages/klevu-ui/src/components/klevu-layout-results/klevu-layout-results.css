@@ -20,6 +20,7 @@ main {
 .header {
   margin: var(--klevu-spacing-04) 0;
   display: flex;
+  align-items: center;
 }
 
 .header slot {
@@ -27,7 +28,7 @@ main {
 }
 
 .header klevu-button {
-  margin-left: auto;
+  margin-left: var(--klevu-spacing-04);
 }
 
 .footer {
