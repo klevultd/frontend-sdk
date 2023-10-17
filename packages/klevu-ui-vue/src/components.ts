@@ -381,7 +381,6 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'simpleResultCount',
   'popularProductsCount',
   'fullResultCount',
-  'enableChat',
   'tSearchResults',
   'tStartChat',
   'tCategoriesCaption',

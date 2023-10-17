@@ -33,6 +33,18 @@ Copy code
 </html>
 ```
 
+## Generating parts
+
+Special thing about Klevu UI components is that all parts of the subcomponents are exposed to main component in order to make things editable.
+
+To generate list of parts that can be modified for documentation and development purposes use `npm run generate:parts` command to generate them.
+
+## Icons
+
+Some of the icons are preloaded into the project in order to improve performance of the library. These files are manated in `preloaded-icons.json` file in klevu-icons component.
+
+After updating that file it is possible to run `npm run generate:icons` that will automatically download specified icons from Github.
+
 ## Contributing
 
 If you would like to contribute to @klevu/ui, please follow these steps:

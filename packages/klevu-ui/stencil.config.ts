@@ -36,6 +36,11 @@ export const config: Config = {
           keepDirStructure: true,
           warn: true,
         },
+        {
+          src: "components/klevu-icon/assets",
+          dest: "dist/klevu-ui/assets",
+          warn: true,
+        },
       ],
     },
     /*

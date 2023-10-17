@@ -1,4 +1,7 @@
-import { Component, Element, Host, Prop, State, h } from "@stencil/core"
+import { Component, Element, Host, Prop, State, getAssetPath, h } from "@stencil/core"
+import preloadedIcons from "./preloaded-icons.json"
+
+const cache = new Map<string, string>()
 
 /**
  * Klevu icon component. Uses Google Material Icons.
@@ -8,6 +11,7 @@ import { Component, Element, Host, Prop, State, h } from "@stencil/core"
   tag: "klevu-icon",
   styleUrl: "klevu-icon.css",
   shadow: true,
+  assetsDirs: ["assets"],
 })
 export class KlevuIcon {
   @Element() el!: HTMLElement
@@ -26,16 +30,10 @@ export class KlevuIcon {
   async connectedCallback() {
     const url = window["klevu_ui_settings"]?.icons?.[this.name]
     if (url?.endsWith(".svg")) {
-      try {
-        const data = await window.fetch(url)
-        this.iconURLSvg = await data.text()
-        const fontSize = getComputedStyle(this.el).fontSize
-        this.svgStyle = {
-          fill: getComputedStyle(this.el).color,
-          height: fontSize,
-          width: fontSize,
-        }
-      } catch (e) {}
+      await this.#downloadFile(url)
+    } else if (preloadedIcons.includes(this.name)) {
+      const url = getAssetPath("./assets/" + this.name + ".svg")
+      await this.#downloadFile(url)
     } else if (url) {
       this.iconURL = url
     }
@@ -52,6 +50,28 @@ export class KlevuIcon {
         element.setAttribute("href", fontCssUrl)
         document.head.appendChild(element)
       }
+    }
+  }
+
+  async #downloadFile(url: string) {
+    try {
+      if (cache.has(url)) {
+        this.iconURLSvg = cache.get(url)
+      } else {
+        const data = await window.fetch(url)
+        if (data.status == 200) {
+          this.iconURLSvg = await data.text()
+          cache.set(url, this.iconURLSvg)
+        }
+      }
+    } catch (e) {}
+    const fontSize = getComputedStyle(this.el).fontSize
+    this.svgStyle = {
+      fill: getComputedStyle(this.el).color,
+      /*
+      height: fontSize,
+      width: fontSize,
+      */
     }
   }
 

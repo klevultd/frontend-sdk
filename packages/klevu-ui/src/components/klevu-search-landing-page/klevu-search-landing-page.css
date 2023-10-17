@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: var(--klevu-spacing-04);
+  align-items: center;
 }
 
 .footer {

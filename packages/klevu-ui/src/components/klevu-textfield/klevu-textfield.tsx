@@ -122,7 +122,7 @@ export class KlevuTextfield {
         {this.clearButton && this.value?.length > 0 && (
           <klevu-icon
             part="textfield-clearbutton"
-            name="clear"
+            name="close"
             class="clear"
             onClick={() => {
               this.value = ""

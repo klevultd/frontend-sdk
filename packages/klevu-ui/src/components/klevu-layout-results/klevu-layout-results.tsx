@@ -53,15 +53,14 @@ export class KlevuLayoutResults {
           <slot name="header"></slot>
           {isMobile ? (
             <klevu-button
+              icon="menu"
               onClick={async (event) => {
                 await this.drawerElement?.openModal()
                 this.klevuDrawerOpened.emit()
                 event.stopPropagation()
                 return false
               }}
-            >
-              <klevu-icon name="menu" />
-            </klevu-button>
+            ></klevu-button>
           ) : null}
         </header>
         <div class="container">
