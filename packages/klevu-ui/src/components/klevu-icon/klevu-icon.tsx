@@ -45,6 +45,7 @@ export class KlevuIcon {
 
       // Only inject the element if it's not yet present
       if (!element) {
+        console.warn(`Icon ${this.name} not found. Loading font package`)
         element = document.createElement("link")
         element.setAttribute("rel", "stylesheet")
         element.setAttribute("href", fontCssUrl)
