@@ -23,6 +23,10 @@ export class KlevuIcon {
 
   @State() iconURL?: string
   @State() iconURLSvg?: string
+  /**
+   * Special kind of internal asset that has correct settings in the SVG itself
+   */
+  @State() iconAssetURL?: string
   @State() svgStyle?: {
     [key: string]: string
   }
@@ -32,8 +36,7 @@ export class KlevuIcon {
     if (url?.endsWith(".svg")) {
       await this.#downloadFile(url)
     } else if (preloadedIcons.includes(this.name)) {
-      const url = getAssetPath("./assets/" + this.name + ".svg")
-      await this.#downloadFile(url)
+      this.iconAssetURL = getAssetPath("./assets/" + this.name + ".svg")
     } else if (url) {
       this.iconURL = url
     }
@@ -68,10 +71,8 @@ export class KlevuIcon {
     const fontSize = getComputedStyle(this.el).fontSize
     this.svgStyle = {
       fill: getComputedStyle(this.el).color,
-      /*
       height: fontSize,
       width: fontSize,
-      */
     }
   }
 
@@ -80,6 +81,10 @@ export class KlevuIcon {
       <Host>
         {this.iconURLSvg ? (
           <div style={this.svgStyle} innerHTML={this.iconURLSvg}></div>
+        ) : this.iconAssetURL ? (
+          <svg width="20" height="20">
+            <use xlinkHref={`${this.iconAssetURL}#img`} href={`${this.iconAssetURL}#img`}></use>
+          </svg>
         ) : this.iconURL ? (
           <img src={this.iconURL} />
         ) : (
