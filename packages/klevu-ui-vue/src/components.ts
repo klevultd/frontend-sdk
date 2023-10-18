@@ -165,6 +165,8 @@ export const KlevuImagePicker = /*@__PURE__*/ defineContainer<JSX.KlevuImagePick
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url',
+  'eventsV1Url',
+  'eventsV2Url',
   'settings',
   'language',
   'translation',

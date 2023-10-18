@@ -479,6 +479,14 @@ export namespace Components {
          */
         "apiKey": string;
         /**
+          * Override the default events v1 URL
+         */
+        "eventsV1Url"?: string;
+        /**
+          * Override the default events v2 URL
+         */
+        "eventsV2Url"?: string;
+        /**
           * @returns KlevuConfig, but due to typescript problems it is any
          */
         "getConfig": () => Promise<any>;
@@ -2913,6 +2921,14 @@ declare namespace LocalJSX {
           * Read only API key to Klevu
          */
         "apiKey": string;
+        /**
+          * Override the default events v1 URL
+         */
+        "eventsV1Url"?: string;
+        /**
+          * Override the default events v2 URL
+         */
+        "eventsV2Url"?: string;
         "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load

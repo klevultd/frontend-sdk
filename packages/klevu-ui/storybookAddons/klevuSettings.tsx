@@ -38,6 +38,12 @@ export const Tool = memo(function KlevuSettings() {
 
   const [apiKey, setApiKey] = useState(localStorage.getItem("klevu-api-key") || "")
   const [url, setUrl] = useState(localStorage.getItem("klevu-url") || "")
+  const [eventsV1Url, setEventsV1Url] = useState<string | undefined>(
+    localStorage.getItem("klevu-events-url-1") || undefined
+  )
+  const [eventsV2Url, setEventsV2Url] = useState<string | undefined>(
+    localStorage.getItem("klevu-events-url-2") || undefined
+  )
   const [language, setLanguage] = useState(localStorage.getItem("klevu-language") || undefined)
   const [useKMC, setUseKMC] = useState<boolean>(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
 
@@ -46,6 +52,16 @@ export const Tool = memo(function KlevuSettings() {
     localStorage.setItem("klevu-url", url)
     localStorage.setItem("klevu-language", language ?? "")
     localStorage.setItem("klevu-use-kmc", useKMC.toString() ?? "true")
+    if (eventsV1Url) {
+      localStorage.setItem("klevu-events-url-1", eventsV1Url)
+    } else {
+      localStorage.removeItem("klevu-events-url-1")
+    }
+    if (eventsV2Url) {
+      localStorage.setItem("klevu-events-url-2", eventsV2Url)
+    } else {
+      localStorage.removeItem("klevu-events-url-2")
+    }
     window.location.reload()
   }
 
@@ -54,6 +70,8 @@ export const Tool = memo(function KlevuSettings() {
     setUrl(localStorage.getItem("klevu-url") || "")
     setLanguage(localStorage.getItem("klevu-language") || undefined)
     setUseKMC(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
+    setEventsV1Url(localStorage.getItem("klevu-events-url-1") || undefined)
+    setEventsV2Url(localStorage.getItem("klevu-events-url-2") || undefined)
     setIsOpen(false)
   }
 
@@ -101,6 +119,30 @@ export const Tool = memo(function KlevuSettings() {
                     setUrl(e.target.value)
                   }}
                   value={url}
+                />
+                Events API v1 URL
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    if (e.target.value === "") {
+                      setEventsV1Url(undefined)
+                    } else {
+                      setEventsV1Url(e.target.value)
+                    }
+                  }}
+                  value={eventsV1Url}
+                />
+                Events API v2 URL
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    if (e.target.value === "") {
+                      setEventsV2Url(undefined)
+                    } else {
+                      setEventsV2Url(e.target.value)
+                    }
+                  }}
+                  value={eventsV2Url}
                 />
                 Language
                 <select

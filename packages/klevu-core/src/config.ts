@@ -66,6 +66,12 @@ export class KlevuConfig {
     if (config.axios) {
       this.axios = config.axios.create()
     }
+    if (config.eventsApiV1Url) {
+      this.eventsApiV1Url = config.eventsApiV1Url
+    }
+    if (config.eventsApiV2Url) {
+      this.eventsApiV2Url = config.eventsApiV2Url
+    }
 
     this.disableClickTracking = config.disableClickTrackStoring ?? false
   }

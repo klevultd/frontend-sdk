@@ -186,31 +186,33 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
   const comp = data.components.find((c) => c.tag == tag)
 
   const klevuInitInject = (story: any) => {
-    const key = localStorage.getItem("klevu-api-key")
-    const url = localStorage.getItem("klevu-url")
+    let key = localStorage.getItem("klevu-api-key")
+    let url = localStorage.getItem("klevu-url")
+    const eventsUrl1 = localStorage.getItem("klevu-events-url-1") ?? ""
+    const eventsUrl2 = localStorage.getItem("klevu-events-url-2") ?? ""
     const language = localStorage.getItem("klevu-language")
     const useKMC = localStorage.getItem("klevu-use-kmc") === "false" ? false : true
 
-    if (key && url) {
-      return html`
-        <klevu-init
-          .settings=${settings}
-          api-key=${key}
-          url=${url}
-          language=${ifDefined(language === null ? undefined : language)}
-          kmc-load-defaults=${useKMC}
-        >
-          ${story()}
-        </klevu-init>
-      `
+    console.log({
+      eventsUrl1,
+      eventsUrl2,
+    })
+
+    if (!key || key === "") {
+      key = "klevu-164651914788114877"
+    }
+
+    if (!url || url === "") {
+      url = "https://eucs29v2.ksearchnet.com/cs/v2/search"
     }
 
     return html`
       <klevu-init
         .settings=${settings}
-        api-key="klevu-164651914788114877"
-        url="https://eucs29v2.ksearchnet.com/cs/v2/search"
-        kmc-load-defaults
+        api-key=${key}
+        .eventsV1Url=${eventsUrl1 === "" ? undefined : eventsUrl1}
+        .eventsV2Url=${eventsUrl2 === "" ? undefined : eventsUrl2}
+        url=${url}
         language=${ifDefined(language === null ? undefined : language)}
         kmc-load-defaults=${useKMC}
       >
