@@ -14,8 +14,9 @@ async function run() {
       console.warn(`\n###\nFailed to download: ${name}\n###\n`)
       continue
     }
-    const file = await result.blob()
-    fs.writeFileSync(`./src/components/klevu-icon/assets/${name}.svg`, Buffer.from(await file.arrayBuffer()))
+    const file = await result.text()
+    const modified = file.replace("<svg ", "<svg fill='currentColor' id='img' ")
+    fs.writeFileSync(`./src/components/klevu-icon/assets/${name}.svg`, modified)
   }
 }
 

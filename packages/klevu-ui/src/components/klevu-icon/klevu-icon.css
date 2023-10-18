@@ -6,3 +6,8 @@ span {
   font-family: "Material Symbols Rounded";
   font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 20;
 }
+
+div svg {
+  height: 100%;
+  width: 100%;
+}
