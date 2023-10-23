@@ -33,7 +33,7 @@ test("Fetch recently visited", async () => {
 
   query?.searchClickEvent?.({
     productId: product.id,
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
   })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(

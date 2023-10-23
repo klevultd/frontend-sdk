@@ -153,7 +153,7 @@ export class KlevuRecommendations {
     if (this.#responseObject?.recommendationClickEvent && event.detail.product.id) {
       this.#responseObject?.recommendationClickEvent({
         productId: event.detail.product.id,
-        variantId: event.detail.product.itemGroupId || event.detail.product.id,
+        variantId: event.detail.product.variantId || event.detail.product.id,
       })
     }
   }

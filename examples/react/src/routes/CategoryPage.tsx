@@ -258,7 +258,7 @@ export function CategoryPage() {
                   console.log(searchResponse.categoryMerchandisingClickEvent)
                   searchResponse.categoryMerchandisingClickEvent?.({
                     productId: p.id,
-                    variantId: p.itemGroupId,
+                    variantId: p.variantId || p.id,
                     categoryTitle: title,
                   })
                   navigate(`/products/${p.itemGroupId}/${p.id}`)

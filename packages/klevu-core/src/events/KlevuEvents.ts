@@ -106,7 +106,13 @@ export class KlevuEvents {
         Partial<
           Pick<
             KlevuRecord,
-            "itemGroupId" | "name" | "price" | "currency" | "brand" | "category"
+            | "itemGroupId"
+            | "variantId"
+            | "name"
+            | "price"
+            | "currency"
+            | "brand"
+            | "category"
           >
         >
     >
@@ -134,7 +140,7 @@ export class KlevuEvents {
               item_id: p.id,
               item_group_id: p.itemGroupId || p.id,
               item_name: p.name ?? "unknown",
-              item_variant_id: p.itemGroupId || p.id,
+              item_variant_id: p.variantId || p.id,
               price: p.price ?? "0",
               currency: p.currency,
               item_brand: p.brand,

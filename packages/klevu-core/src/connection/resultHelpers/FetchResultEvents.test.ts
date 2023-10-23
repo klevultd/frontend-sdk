@@ -38,7 +38,7 @@ test("Search click event should be defined", async () => {
 
   query?.searchClickEvent?.({
     productId: product.id,
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
   })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
@@ -59,7 +59,7 @@ test("Search click should send a search event on first time, but not on second t
 
   query?.searchClickEvent?.({
     productId: query.records[0].id,
-    variantId: query.records[0].itemGroupId,
+    variantId: query.records[0].variantId || query.records[0].id,
   })
 
   expect(getSpySuccess).toHaveBeenCalledWith(
@@ -76,7 +76,7 @@ test("Search click should send a search event on first time, but not on second t
 
   query?.searchClickEvent?.({
     productId: query.records[0].id,
-    variantId: query.records[0].itemGroupId,
+    variantId: query.records[0].variantId || query.records[0].id,
   })
 
   expect(getSpySuccess).toHaveBeenCalledTimes(3)
@@ -102,7 +102,7 @@ test("Category merchandising click event", async () => {
   query?.categoryMerchandisingClickEvent?.({
     categoryTitle: "Women",
     productId: product.id,
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
   })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
@@ -138,7 +138,7 @@ test.skip("Recommendation click event", async () => {
 
   query?.recommendationClickEvent?.({
     productId: product.id,
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
   })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(
@@ -163,7 +163,7 @@ test("Override user IP for request", async () => {
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -203,7 +203,7 @@ test("Merchandising call has correct filters set", async () => {
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -226,7 +226,7 @@ test("Filters should not be set if there are no filters", async () => {
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -261,7 +261,7 @@ test("Hooks should be called", (done) => {
 
     query?.searchClickEvent?.({
       productId: query.records[0].id,
-      variantId: query.records[0].itemGroupId,
+      variantId: query.records[0].variantId || query.records[0].id,
     })
   })
 })

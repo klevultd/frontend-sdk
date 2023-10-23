@@ -11,7 +11,7 @@ export function Product(props: {
     event.preventDefault()
     props.searchResults.searchClickEvent?.({
       productId: props.product.id,
-      variantId: props.product.itemGroupId,
+      variantId: props.product.variantId || props.product.id,
       autoSendViewEvent: false,
     })
     alert("Sent a analytical event for click")

@@ -223,7 +223,7 @@ In addition, the results of this search include a new function that we can use t
   onClick={() => {
     searchResponse.searchClickEvent?.({
       productId: p.id,
-      variantId: p.itemGroupId,
+      variantId: p.variantId || p.id,
     })
   }}
 />
@@ -328,7 +328,7 @@ Just like on the search results landing page example above, the results of this 
   onClick={() => {
     searchResponse.categoryMerchandisingClickEvent?.({
       productId: p.id,
-      variantId: p.itemGroupId,
+      variantId: p.variantId || p.id,
       categoryTitle: title,
     })
   }}

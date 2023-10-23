@@ -33,7 +33,7 @@ export function LastVisited() {
     <RecommendationBanner
       title="Last visited products"
       products={products as KlevuRecord[]}
-      productClick={(productId, variantId, product) => {
+      productClick={function (productId, variantId, product) {
         KlevuEvents.searchProductClick({ product, variantId })
       }}
     />

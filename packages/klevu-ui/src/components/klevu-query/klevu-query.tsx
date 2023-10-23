@@ -220,15 +220,18 @@ export class KlevuQuery {
           this.#lastResult.categoryMerchandisingClickEvent?.({
             productId: product.id,
             categoryTitle: this.categoryTitle,
-            variantId: product.itemGroupId,
+            variantId: product.variantId || product.id,
           })
         }
         break
       case "recommendation":
-        this.#lastResult.recommendationClickEvent?.({ productId: product.id, variantId: product.itemGroupId })
+        this.#lastResult.recommendationClickEvent?.({
+          productId: product.id,
+          variantId: product.variantId || product.id,
+        })
         break
       case "search":
-        this.#lastResult.searchClickEvent?.({ productId: product.id, variantId: product.itemGroupId })
+        this.#lastResult.searchClickEvent?.({ productId: product.id, variantId: product.variantId || product.id })
         break
       default:
         const e: never = this.type

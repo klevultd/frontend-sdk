@@ -123,6 +123,11 @@ export type KlevuRecord = {
   weight: string
 
   /**
+   * The identifier used at the platform level; which could be different from the unique Klevu ID, eg. the ID of the variant in the case of a configurable product.
+   */
+  variantId?: string
+
+  /**
    * If your indexed data includes variants with swatch information, this will be provided here as a nested object with the following elements
    */
   swatches?: Array<{
