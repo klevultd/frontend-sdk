@@ -45,3 +45,7 @@
   flex-direction: column;
   gap: var(--klevu-spacing-02);
 }
+
+a {
+  color: var(--klevu-chat-bubble-text-color-remote, var(--klevu-color-neutral-1));
+}
