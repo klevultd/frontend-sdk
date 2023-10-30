@@ -53,7 +53,6 @@ export class KlevuChatBubble {
           remote: Boolean(this.remote),
         }}
       >
-        {/* <div part="chat-bubble-base"> */}
         <klevu-typography variant="body-s">
           <slot></slot>
         </klevu-typography>

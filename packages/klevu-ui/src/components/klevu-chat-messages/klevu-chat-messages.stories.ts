@@ -31,6 +31,14 @@ export const ChatMessages: StoryObj<KlevuChatMessages & { remote: boolean }> = {
           message: "hello",
         },
       },
+      {
+        message: {
+          id: "2",
+          note: "",
+          type: "text",
+          value: "This is a markdown message with [link to Klevu](https://www.klevu.com)",
+        },
+      },
     ],
   },
   render: (args) => html` <klevu-chat-messages .messages=${args.messages}></klevu-chat-messages> `,
