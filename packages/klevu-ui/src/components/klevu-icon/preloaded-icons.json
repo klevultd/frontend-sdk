@@ -12,5 +12,7 @@
   "image_not_supported",
   "photo_camera",
   "upload",
-  "search"
+  "search",
+  "chevron_left",
+  "chevron_right"
 ]
