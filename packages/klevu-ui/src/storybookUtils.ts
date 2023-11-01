@@ -193,11 +193,6 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
     const language = localStorage.getItem("klevu-language")
     const useKMC = localStorage.getItem("klevu-use-kmc") === "false" ? false : true
 
-    console.log({
-      eventsUrl1,
-      eventsUrl2,
-    })
-
     if (!key || key === "") {
       key = "klevu-164651914788114877"
     }

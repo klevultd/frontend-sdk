@@ -269,7 +269,7 @@ export class KlevuMerchandising {
 
   @Listen("klevuProductClick")
   productClickHandler(event: KlevuProductCustomEvent<KlevuProductOnProductClick>) {
-    if (!event.detail.product.id || !event.detail.product.variantId) {
+    if (!event.detail.product.id) {
       return
     }
     if (this.#resultObject?.categoryMerchandisingClickEvent) {
