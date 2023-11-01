@@ -162,10 +162,10 @@ export async function kmcRecommendation(
         : ""
     }
 
+    const conf = KlevuConfig.getDefault()
+
     kmcConfig = await get<KlevuKMCRecommendations>(
-      `https://config-cdn.ksearchnet.com/recommendations/${
-        KlevuConfig.getDefault().apiKey
-      }/settings/${recommendationId}${advFilterParams}`
+      `${conf.recommendationsApiUrl}${conf.apiKey}/settings/${recommendationId}${advFilterParams}`
     )
   } catch (e) {
     console.warn("Failed to fetch given KMC recommendation")

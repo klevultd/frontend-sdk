@@ -2,7 +2,7 @@
  * This file includes utilities used by the storybook stories. Should not be included to the distributed code.
  */
 
-import { KlevuApiRawResponse, KlevuRecord } from "@klevu/core"
+import { KlevuApiRawResponse, KlevuConfig, KlevuRecord } from "@klevu/core"
 import { JsonDocs } from "@stencil/core/internal"
 import { ArgTypes, Meta } from "@storybook/web-components"
 // @ts-inore
@@ -188,8 +188,9 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
   const klevuInitInject = (story: any) => {
     let key = localStorage.getItem("klevu-api-key")
     let url = localStorage.getItem("klevu-url")
-    const eventsUrl1 = localStorage.getItem("klevu-events-url-1") ?? ""
-    const eventsUrl2 = localStorage.getItem("klevu-events-url-2") ?? ""
+    const eventsUrl1 = localStorage.getItem("klevu-events-url-1") ?? undefined
+    const eventsUrl2 = localStorage.getItem("klevu-events-url-2") ?? undefined
+    const recommendationApi = localStorage.getItem("klevu-recommendations-api-url") ?? undefined
     const language = localStorage.getItem("klevu-language")
     const useKMC = localStorage.getItem("klevu-use-kmc") === "false" ? false : true
 
@@ -207,6 +208,7 @@ export function MDXAutoFillMeta(tag: string, meta: Meta = {}, settings?: KlevuUI
         api-key=${key}
         .eventsV1Url=${eventsUrl1 === "" ? undefined : eventsUrl1}
         .eventsV2Url=${eventsUrl2 === "" ? undefined : eventsUrl2}
+        .recommendationsApiUrl=${recommendationApi === "" ? undefined : recommendationApi}
         url=${url}
         language=${ifDefined(language === null ? undefined : language)}
         kmc-load-defaults=${useKMC}

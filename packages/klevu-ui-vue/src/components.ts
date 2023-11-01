@@ -167,6 +167,7 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
   'url',
   'eventsV1Url',
   'eventsV2Url',
+  'recommendationsApiUrl',
   'settings',
   'language',
   'translation',

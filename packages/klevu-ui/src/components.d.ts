@@ -501,6 +501,10 @@ export namespace Components {
          */
         "language": Translations;
         /**
+          * Override the default recommendations API URL
+         */
+        "recommendationsApiUrl"?: string;
+        /**
           * Global settings
          */
         "settings"?: KlevuUIGlobalSettings;
@@ -2934,6 +2938,10 @@ declare namespace LocalJSX {
           * Which language to load
          */
         "language"?: Translations;
+        /**
+          * Override the default recommendations API URL
+         */
+        "recommendationsApiUrl"?: string;
         /**
           * Global settings
          */

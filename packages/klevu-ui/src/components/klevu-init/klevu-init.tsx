@@ -59,6 +59,11 @@ export class KlevuInit {
   @Prop() eventsV2Url?: string
 
   /**
+   * Override the default recommendations API URL
+   */
+  @Prop() recommendationsApiUrl?: string
+
+  /**
    * Global settings
    */
   @Prop() settings?: KlevuUIGlobalSettings
@@ -82,13 +87,12 @@ export class KlevuInit {
   @Prop() kmcLoadDefaults?: boolean
 
   async connectedCallback() {
-    console.log(this.eventsV1Url, this.eventsV2Url)
-
     KlevuConfig.init({
       apiKey: this.apiKey,
       url: this.url,
       eventsApiV1Url: this.eventsV1Url,
       eventsApiV2Url: this.eventsV2Url,
+      recommendationsApiUrl: this.recommendationsApiUrl,
     })
 
     if (this.translation) {

@@ -27,6 +27,11 @@ type KlevuConfiguration = {
   eventsApiV2Url?: string
 
   /**
+   * Recommendations API url
+   */
+  recommendationsApiUrl?: string
+
+  /**
    * MOI API url
    */
   moiApiUrl?: string
@@ -50,6 +55,7 @@ export class KlevuConfig {
   cacheMaxTTL = 600_000
   eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
+  recommendationsApiUrl = "https://config-cdn.ksearchnet.com/recommendations/"
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
   disableClickTracking = false
@@ -71,6 +77,9 @@ export class KlevuConfig {
     }
     if (config.eventsApiV2Url) {
       this.eventsApiV2Url = config.eventsApiV2Url
+    }
+    if (config.recommendationsApiUrl) {
+      this.recommendationsApiUrl = config.recommendationsApiUrl
     }
 
     this.disableClickTracking = config.disableClickTrackStoring ?? false
