@@ -47,6 +47,22 @@ export class KlevuInit {
    * Klevu Server URL
    */
   @Prop() url!: string
+
+  /**
+   * Override the default events v1 URL
+   */
+  @Prop() eventsV1Url?: string
+
+  /**
+   * Override the default events v2 URL
+   */
+  @Prop() eventsV2Url?: string
+
+  /**
+   * Override the default recommendations API URL
+   */
+  @Prop() recommendationsApiUrl?: string
+
   /**
    * Global settings
    */
@@ -74,6 +90,9 @@ export class KlevuInit {
     KlevuConfig.init({
       apiKey: this.apiKey,
       url: this.url,
+      eventsApiV1Url: this.eventsV1Url,
+      eventsApiV2Url: this.eventsV2Url,
+      recommendationsApiUrl: this.recommendationsApiUrl,
     })
 
     if (this.translation) {

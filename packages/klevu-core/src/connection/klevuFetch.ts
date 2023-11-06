@@ -5,6 +5,7 @@ import {
   KlevuApiRawResponse,
   KlevuSuggestionQuery,
   KlevuQueryResult,
+  KlevuTypeOfRequest,
 } from "../models/index.js"
 import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
@@ -50,26 +51,47 @@ export async function KlevuFetch(
   }
 
   const cached = klevuFetchCache.check(payload)
-  let response: KlevuApiRawResponse
-  if (cached) {
-    response = cached
-  } else {
-    const res = await post<KlevuApiRawResponse>(
-      withOverride?.configOverride?.url ?? KlevuConfig.getDefault().url,
-      payload
-    )
+  let response: KlevuApiRawResponse | undefined
 
-    if (!res) {
-      throw new Error("Couldn't fetch data")
-    }
+  const withoutSkip = recordQueries.filter(
+    (q) => q.typeOfRequest !== KlevuTypeOfRequest.Skip
+  )
 
-    response = res
-    if (res.meta?.responseCode == 200) {
-      klevuFetchCache.cache(payload, response)
+  if (withoutSkip.length > 0 || suggestionQueries.length > 0) {
+    if (cached) {
+      response = cached
+    } else {
+      const res = await post<KlevuApiRawResponse>(
+        withOverride?.configOverride?.url ?? KlevuConfig.getDefault().url,
+        payload
+      )
+
+      if (!res) {
+        throw new Error("Couldn't fetch data")
+      }
+
+      response = res
+      if (res.meta?.responseCode == 200) {
+        klevuFetchCache.cache(payload, response)
+      }
     }
   }
 
-  return new KlevuResponseObject(response, functions)
+  return new KlevuResponseObject(
+    response ?? {
+      meta: {
+        qTime: 0,
+        responseCode: 204,
+      },
+      queryResults: recordQueries.map((r) => ({
+        id: r.id,
+        meta: {} as any,
+        records: [],
+      })),
+      suggestionResults: [],
+    },
+    functions
+  )
 }
 
 async function cleanAndProcessFunctions(

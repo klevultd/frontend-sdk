@@ -32,7 +32,7 @@ test("Trending category products recommendation", async () => {
 
   query?.searchClickEvent?.({
     productId: product.id,
-    variantId: product.itemGroupId,
+    variantId: product.variantId,
   })
 
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst()[0]).toBe(

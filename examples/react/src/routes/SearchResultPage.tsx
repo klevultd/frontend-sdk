@@ -200,7 +200,7 @@ export function SearchResultPage(props: Props) {
                   navigate(`/products/${p.itemGroupId}/${p.id}`)
                   searchResponse.searchClickEvent?.({
                     productId: p.id,
-                    variantId: p.itemGroupId,
+                    variantId: p.variantId || p.id,
                   })
                   event.preventDefault()
                   return false

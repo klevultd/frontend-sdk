@@ -4,13 +4,13 @@ import {
   KlevuResponseQueryObject,
   kmcRecommendation,
   sendRecommendationViewEvent,
-  KlevuFetchFunctionReturnValue,
 } from "@klevu/core"
 import { Component, Event, EventEmitter, h, Host, Listen, Prop, State } from "@stencil/core"
 
-import { KlevuProductCustomEvent } from "../../components"
+import { KlevuProductCustomEvent, KlevuUtilViewportCustomEvent, ViewportSize } from "../../components"
 import { KlevuInit } from "../klevu-init/klevu-init"
 import { partsExports } from "../../utils/partsExports"
+import { KlevuKMCRecommendations } from "@klevu/core"
 
 /**
  * Full recommendation banner solution
@@ -65,7 +65,47 @@ export class KlevuRecommendations {
    */
   @State() products: Array<KlevuRecord> = [undefined, undefined, undefined, undefined, undefined, undefined] as any
 
+  @State() currentViewPortSize?: ViewportSize
+
+  /**
+   * For Static banner in recommendations
+   */
+  @State() imageDetails?: { url: string; altTag: string }
+
   #responseObject?: KlevuResponseQueryObject
+  #staticContent?: KlevuKMCRecommendations["staticContent"]
+
+  #sizeChange(event: KlevuUtilViewportCustomEvent<ViewportSize>) {
+    this.currentViewPortSize = event.detail
+    this.#setCurrentImageDetails()
+  }
+
+  #isMobile() {
+    return this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
+  }
+
+  #setCurrentImageDetails() {
+    if (!this.#staticContent || this.#staticContent.length === 0) {
+      return
+    }
+    let image
+    if (this.#isMobile()) {
+      image = this.#staticContent[0].image.find((i) => i.resolution === "mobile")
+      if (!image) {
+        image = this.#staticContent[0].image.find((i) => i.resolution === "desktop")
+      }
+    } else {
+      image = this.#staticContent[0].image.find((i) => i.resolution === "desktop")
+    }
+
+    if (!image) {
+      return
+    }
+    this.imageDetails = {
+      url: image.url,
+      altTag: image.altTag,
+    }
+  }
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -88,10 +128,15 @@ export class KlevuRecommendations {
       )
     )
 
-    this.#responseObject = res.queriesById("recommendation")
-    if (this.#responseObject) {
-      if (this.recommendationTitle === undefined) {
-        this.recommendationTitle = this.#responseObject.getQueryParameters()?.kmcConfig?.metadata.title
+    if (res.queryExists("recommendation")) {
+      this.#responseObject = res.queriesById("recommendation")
+      const kmcConfig = this.#responseObject.getQueryParameters()?.kmcConfig
+      if (kmcConfig) {
+        if (this.recommendationTitle === undefined) {
+          this.recommendationTitle = kmcConfig.metadata.title
+        }
+        this.#staticContent = kmcConfig.staticContent
+        this.#setCurrentImageDetails()
       }
       this.products = this.#responseObject.records
       this.klevuData.emit(this.#responseObject)
@@ -108,31 +153,51 @@ export class KlevuRecommendations {
     if (this.#responseObject?.recommendationClickEvent && event.detail.product.id) {
       this.#responseObject?.recommendationClickEvent({
         productId: event.detail.product.id,
-        variantId: event.detail.product.itemGroupId || event.detail.product.id,
+        variantId: event.detail.product.variantId || event.detail.product.id,
       })
     }
   }
 
+  #staticBannerClick() {
+    this.#responseObject?.recommendationBannerClickEvent?.({
+      resolution: this.#isMobile() ? "mobile" : "desktop",
+    })
+  }
+
   render() {
-    if (this.products.length === 0) {
+    if (!this.#staticContent && this.products.length === 0) {
       return null
     }
 
     return (
       <Host>
         <slot>
-          <klevu-slides exportparts={partsExports("klevu-slides")} heading={this.recommendationTitle}>
-            {this.products.map((product) => (
-              <klevu-product
-                exportparts={partsExports("klevu-product")}
-                fixedWidth
-                product={product}
-                style={{
-                  "--klevu-product-width": "300px",
-                }}
-              ></klevu-product>
-            ))}
-          </klevu-slides>
+          <klevu-util-viewport onKlevuSizeChanged={this.#sizeChange.bind(this)}></klevu-util-viewport>
+          {this.#staticContent && this.#staticContent.length > 0 && this.imageDetails ? (
+            <div class={{ staticImage: true, isMobile: this.#isMobile() }}>
+              <klevu-banner
+                exportparts={partsExports("klevu-banner")}
+                onKlevuBannerClick={this.#staticBannerClick.bind(this)}
+                altText={this.imageDetails.altTag}
+                imageUrl={this.imageDetails.url}
+                linkUrl={this.#staticContent[0].targetUrl}
+                target="_self"
+              />
+            </div>
+          ) : this.products ? (
+            <klevu-slides exportparts={partsExports("klevu-slides")} heading={this.recommendationTitle}>
+              {this.products.map((product) => (
+                <klevu-product
+                  exportparts={partsExports("klevu-product")}
+                  fixedWidth
+                  product={product}
+                  style={{
+                    "--klevu-product-width": "300px",
+                  }}
+                ></klevu-product>
+              ))}
+            </klevu-slides>
+          ) : null}
         </slot>
       </Host>
     )

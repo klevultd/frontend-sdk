@@ -328,7 +328,7 @@ export class KlevuSearchLandingPage {
     if (this.#resultObject?.searchClickEvent && event.detail.product.id) {
       this.#resultObject.searchClickEvent({
         productId: event.detail.product.id,
-        variantId: event.detail.product.itemGroupId || event.detail.product.id,
+        variantId: event.detail.product.variantId || event.detail.product.id,
       })
     }
   }

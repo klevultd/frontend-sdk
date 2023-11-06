@@ -89,6 +89,7 @@ export namespace Components {
     }
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface KlevuBanner {
         /**
@@ -478,6 +479,14 @@ export namespace Components {
          */
         "apiKey": string;
         /**
+          * Override the default events v1 URL
+         */
+        "eventsV1Url"?: string;
+        /**
+          * Override the default events v2 URL
+         */
+        "eventsV2Url"?: string;
+        /**
           * @returns KlevuConfig, but due to typescript problems it is any
          */
         "getConfig": () => Promise<any>;
@@ -491,6 +500,10 @@ export namespace Components {
           * Which language to load
          */
         "language": Translations;
+        /**
+          * Override the default recommendations API URL
+         */
+        "recommendationsApiUrl"?: string;
         /**
           * Global settings
          */
@@ -1863,6 +1876,7 @@ declare global {
     };
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface HTMLKlevuBannerElement extends Components.KlevuBanner, HTMLStencilElement {
     }
@@ -2485,6 +2499,7 @@ declare namespace LocalJSX {
     }
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface KlevuBanner {
         /**
@@ -2910,11 +2925,23 @@ declare namespace LocalJSX {
           * Read only API key to Klevu
          */
         "apiKey": string;
+        /**
+          * Override the default events v1 URL
+         */
+        "eventsV1Url"?: string;
+        /**
+          * Override the default events v2 URL
+         */
+        "eventsV2Url"?: string;
         "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load
          */
         "language"?: Translations;
+        /**
+          * Override the default recommendations API URL
+         */
+        "recommendationsApiUrl"?: string;
         /**
           * Global settings
          */
@@ -4275,6 +4302,7 @@ declare module "@stencil/core" {
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
              * Component that displays a typical klevu banner
+             * @csspart banner-image The image element
              */
             "klevu-banner": LocalJSX.KlevuBanner & JSXBase.HTMLAttributes<HTMLKlevuBannerElement>;
             /**

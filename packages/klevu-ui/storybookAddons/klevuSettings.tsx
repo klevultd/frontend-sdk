@@ -1,5 +1,6 @@
 import { IconButton, Icons } from "@storybook/components"
 import { useStorybookApi } from "@storybook/manager-api"
+import { KlevuConfig } from "@klevu/core"
 import React, { Fragment, memo, useState } from "react"
 import { TOOL_ID } from "./constants"
 import {
@@ -38,6 +39,15 @@ export const Tool = memo(function KlevuSettings() {
 
   const [apiKey, setApiKey] = useState(localStorage.getItem("klevu-api-key") || "")
   const [url, setUrl] = useState(localStorage.getItem("klevu-url") || "")
+  const [eventsV1Url, setEventsV1Url] = useState<string | undefined>(
+    localStorage.getItem("klevu-events-url-1") || "https://stats.ksearchnet.com/analytics/"
+  )
+  const [eventsV2Url, setEventsV2Url] = useState<string | undefined>(
+    localStorage.getItem("klevu-events-url-2") || "https://stats.ksearchnet.com/analytics/collect"
+  )
+  const [recommendationsApiUrl, setRecommendationsApiUrl] = useState<string | undefined>(
+    localStorage.getItem("klevu-recommendations-api-url") || "https://config-cdn.ksearchnet.com/recommendations/"
+  )
   const [language, setLanguage] = useState(localStorage.getItem("klevu-language") || undefined)
   const [useKMC, setUseKMC] = useState<boolean>(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
 
@@ -46,6 +56,21 @@ export const Tool = memo(function KlevuSettings() {
     localStorage.setItem("klevu-url", url)
     localStorage.setItem("klevu-language", language ?? "")
     localStorage.setItem("klevu-use-kmc", useKMC.toString() ?? "true")
+    if (eventsV1Url) {
+      localStorage.setItem("klevu-events-url-1", eventsV1Url)
+    } else {
+      localStorage.removeItem("klevu-events-url-1")
+    }
+    if (eventsV2Url) {
+      localStorage.setItem("klevu-events-url-2", eventsV2Url)
+    } else {
+      localStorage.removeItem("klevu-events-url-2")
+    }
+    if (recommendationsApiUrl) {
+      localStorage.setItem("klevu-recommendations-api-url", recommendationsApiUrl)
+    } else {
+      localStorage.removeItem("klevu-recommendations-api-url")
+    }
     window.location.reload()
   }
 
@@ -54,6 +79,9 @@ export const Tool = memo(function KlevuSettings() {
     setUrl(localStorage.getItem("klevu-url") || "")
     setLanguage(localStorage.getItem("klevu-language") || undefined)
     setUseKMC(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
+    setEventsV1Url(localStorage.getItem("klevu-events-url-1") || undefined)
+    setEventsV2Url(localStorage.getItem("klevu-events-url-2") || undefined)
+    setRecommendationsApiUrl(localStorage.getItem("klevu-recommendations-api-url") || undefined)
     setIsOpen(false)
   }
 
@@ -69,12 +97,12 @@ export const Tool = memo(function KlevuSettings() {
               <div
                 style={{
                   padding: 16,
-                  width: 300,
+                  width: 500,
                   gap: "6px",
                   display: "flex",
                   flexDirection: "column",
                   background: "white",
-                  border: "1px solid #eee",
+                  border: "3px solid #eee",
                   borderRadius: 4,
                 }}
               >
@@ -101,6 +129,42 @@ export const Tool = memo(function KlevuSettings() {
                     setUrl(e.target.value)
                   }}
                   value={url}
+                />
+                Events API v1 URL
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    if (e.target.value === "") {
+                      setEventsV1Url(undefined)
+                    } else {
+                      setEventsV1Url(e.target.value)
+                    }
+                  }}
+                  value={eventsV1Url}
+                />
+                Events API v2 URL
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    if (e.target.value === "") {
+                      setEventsV2Url(undefined)
+                    } else {
+                      setEventsV2Url(e.target.value)
+                    }
+                  }}
+                  value={eventsV2Url}
+                />
+                Recommendations API URL
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    if (e.target.value === "") {
+                      setRecommendationsApiUrl(undefined)
+                    } else {
+                      setRecommendationsApiUrl(e.target.value)
+                    }
+                  }}
+                  value={recommendationsApiUrl}
                 />
                 Language
                 <select
