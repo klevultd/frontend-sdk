@@ -4,51 +4,12 @@ import { Meta } from "@storybook/addon-docs"
 
 **Table of Contents**
 
-- [VanillaJS through CDN](#installing-with-cdn-url-vanillajs)
 - [NPM packages](#installing-with-npm-packages)
   - [@klevu/ui](#klevuui)
   - [@klevu/ui-react](#klevuui-react)
   - [@klevu/ui-vue](#klevuui-vue)
+- [VanillaJS through CDN](#installing-with-cdn-url-vanillajs)
 - [Klevu-init](#klevuinit-component)
-
-# Installing with CDN url (VanillaJS)
-
-Simplest way to get started is to use our CDN to get sources and import in the `head`
-of the document.
-
-```html
-<script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
-```
-
-And it's important to embed CSS styles too:
-
-```html
-<link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
-```
-
-**Warning:** These links will always load latest version of the library. Breaking changes will break your site.
-To lock the version one should use versioned URL's by adding version number by replacing `latest` with version number.
-For example `...klevu.com/0.6.0/klevu-ui/...`
-
-Full example with HTML file:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Klevu UI CDN example</title>
-    <meta charset="UTF-8" />
-    <script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
-    <link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
-  </head>
-
-  <body>
-    <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search">
-      <klevu-quicksearch></klevu-quicksearch>
-    </klevu-init>
-  </body>
-</html>
-```
 
 # Installing with NPM packages
 
@@ -181,6 +142,47 @@ Optional: To get code autocomplete in VSCode you can import the Klevu components
     },
   }
 </script>
+```
+
+# Installing with CDN url (VanillaJS)
+
+Simplest way to get started is to use our CDN to get sources and import in the `head`
+of the document. This way of integrating is not recommended for production use. It is best for testing the library.
+
+Best way to integrate is to use NPM installation and building the library to be part of your application.
+
+```html
+<script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+```
+
+And it's important to embed CSS styles too:
+
+```html
+<link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
+```
+
+**Warning:** These links will always load latest version of the library. Breaking changes will break your site.
+To lock the version one should use versioned URL's by adding version number by replacing `latest` with version number.
+For example `...klevu.com/0.6.0/klevu-ui/...`
+
+Full example with HTML file:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klevu UI CDN example</title>
+    <meta charset="UTF-8" />
+    <script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+    <link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search">
+      <klevu-quicksearch></klevu-quicksearch>
+    </klevu-init>
+  </body>
+</html>
 ```
 
 # KlevuInit component
