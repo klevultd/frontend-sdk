@@ -165,6 +165,9 @@ export class KlevuMerchandising {
         this.useABTest = settings.klevu_abTestActive
       }
     }
+  }
+
+  async componentWillLoad() {
     await this.#fetchData()
   }
 
