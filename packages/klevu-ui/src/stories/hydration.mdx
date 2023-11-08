@@ -1,0 +1,65 @@
+import { Meta } from "@storybook/addon-docs"
+
+<Meta title="Guides/Hydration" />
+
+# Hydration
+
+## Components and Hydration
+
+Klevu Web components are designed to seamlessly integrate into your e-commerce
+website, providing a range of interactive features and user interface elements.
+However, in addition to enhancing the user experience on the client side, Klevu
+Web components also support the process of hydration. Hydration is the process
+of taking an HTML string or a DOM element and allowing it to run on the server
+side, thus expanding the default HTML into a fully functional HTML that can be
+passed to the frontend.
+
+### Hydration with `renderToString()`
+
+Klevu Web components offer a convenient method called `renderToString()` for
+handling server-side rendering and hydration. This function takes an HTML string
+as input and transforms it into fully hydrated HTML that is ready for use on the
+client side. This is particularly useful when you want to generate dynamic
+content on the server and send it to the frontend for seamless integration.
+
+Here's a simple example of using `renderToString()`:
+
+```javascript import { renderToString } from '@klevu/ui/hydrate';
+const htmlString = "<klevu-product></klevu-product>"
+const hydratedResult = await renderToString(htmlString)
+
+// `hydratedResult.html` now contains the fully functional, hydrated HTML
+```
+
+### Hydration with `hydrateDocument()`
+
+In addition to handling HTML strings, Klevu Web components also provide a method
+called `hydrateDocument()`, which allows you to transform a DOM element into
+fully hydrated HTML. This is useful when you have existing HTML content on the
+server side and want to make it interactive on the client side.
+
+## Hydration of React components
+
+In order to hydrate React components you import `renderToString` from `react-dom/server` which will be used to render the React component to a string.
+
+Then you need to import `renderToString` from `@klevu/ui/hydrate` and rename it to something else like `klevuRenderToString` to avoid name collision.
+
+Then you can pass results of `renderToString` to `klevuRenderToString` to get the hydrated HTML.
+
+```javascript
+import { renderToString } from "react-dom/server"
+import { renderToString as klevuRenderToString } from "@klevu/ui/hydrate"
+import { KlevuProduct } from "@klevu/ui-react"
+
+const reactComponent = <KlevuProduct></KlevuProduct>
+const htmlString = renderToString(reactComponent)
+const hydratedResult = await klevuRenderToString(htmlString)
+
+// `hydratedResult.html` now contains the fully functional, hydrated HTML
+```
+
+## Read more about hydration of StencilJS components
+
+Klevu Components are built using StencilJS. You can read more about hydration of StencilJS components here:
+
+- [Hydrating StencilJS components](https://stenciljs.com/docs/hydrate-app)
