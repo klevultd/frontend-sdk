@@ -1,10 +1,10 @@
 # klevufilterresultslider
       
-Ƭ **KlevuFilterResultSlider**: `KlevuFilterResult` & { `end`: `string` ; `max`: `string` ; `min`: `string` ; `start`: `string` ; `type`: [`Slider`](enums/KlevuFilterType.md#slider)  }
+Ƭ **KlevuFilterResultSlider**: `KlevuFilterResult` & { `end`: `string` \| ``null`` ; `max`: `string` ; `min`: `string` ; `start`: `string` \| ``null`` ; `type`: [`Slider`](enums/KlevuFilterType.md#slider)  }
 
 Klevu slider filters
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:58](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L58)
+[models/KlevuApiRawResponse.ts:59](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L59)
 

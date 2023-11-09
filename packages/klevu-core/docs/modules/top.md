@@ -16,5 +16,5 @@ Add given ids as first items in results
 
 #### Defined in
 
-[modifiers/top/top.ts:10](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/top/top.ts#L10)
+[modifiers/top/top.ts:10](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/modifiers/top/top.ts#L10)
 

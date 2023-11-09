@@ -1,20 +1,18 @@
 # startmoi
       
-▸ **startMoi**(`__namedParameters?`): `Promise`<[`MoiSession`](moisession.md)\>
+▸ **startMoi**(`options?`): `Promise`<[`MoiSession`](classes/MoiSession.md)\>
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.apiKey?` | `string` |
-| `__namedParameters.onMessage?` | () => `void` |
+| `options` | [`MoiStartOptions`](moistartoptions.md) |
 
 #### Returns
 
-`Promise`<[`MoiSession`](moisession.md)\>
+`Promise`<[`MoiSession`](classes/MoiSession.md)\>
 
 #### Defined in
 
-[connection/moi/moi.ts:152](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/moi/moi.ts#L152)
+[connection/moi/moi.ts:235](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/connection/moi/moi.ts#L235)
 

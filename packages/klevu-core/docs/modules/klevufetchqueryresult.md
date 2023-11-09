@@ -6,5 +6,5 @@ Fetch query results
 
 #### Defined in
 
-[models/KlevuFetchResponse.ts:31](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuFetchResponse.ts#L31)
+[models/KlevuFetchResponse.ts:35](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuFetchResponse.ts#L35)
 

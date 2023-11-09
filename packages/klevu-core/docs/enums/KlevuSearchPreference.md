@@ -41,7 +41,7 @@ Production environment, as performance will be impacted.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:133](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L133)
+[models/KlevuSearchPreference.ts:133](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L133)
 
 ___
 
@@ -54,7 +54,7 @@ This flag can be used in conjunction with the typeOfSearch 'DEFAULT' to
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:39](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L39)
+[models/KlevuSearchPreference.ts:39](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L39)
 
 ___
 
@@ -67,7 +67,7 @@ This flag can be used in conjunction with the typeOfSearch 'DEFAULT' to
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:50](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L50)
+[models/KlevuSearchPreference.ts:50](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L50)
 
 ___
 
@@ -83,7 +83,7 @@ This can be used in conjunction with showOutOfStockProducts. If your store
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:17](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L17)
+[models/KlevuSearchPreference.ts:17](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L17)
 
 ___
 
@@ -97,7 +97,7 @@ This flag can be used in conjunction with the typeOfSearch 'DEFAULT' to
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:45](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L45)
+[models/KlevuSearchPreference.ts:45](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L45)
 
 ___
 
@@ -112,7 +112,7 @@ For a query longer than one word, all the possible bigrams and trigrams
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:78](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L78)
+[models/KlevuSearchPreference.ts:78](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L78)
 
 ___
 
@@ -127,7 +127,7 @@ By default, synonyms are treated equally to their query term. Should you
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:100](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L100)
+[models/KlevuSearchPreference.ts:100](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L100)
 
 ___
 
@@ -140,7 +140,7 @@ klevu_manual_boosting, klevu_bulk_boosting and klevu_selflearning_boosting.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:125](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L125)
+[models/KlevuSearchPreference.ts:125](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L125)
 
 ___
 
@@ -152,7 +152,7 @@ Use this flag to disable the searching of record IDs.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:27](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L27)
+[models/KlevuSearchPreference.ts:27](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L27)
 
 ___
 
@@ -167,7 +167,7 @@ Whether or not your store should include 'Out of Stock' products in search
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:9](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L9)
+[models/KlevuSearchPreference.ts:9](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L9)
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:138](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L138)
+[models/KlevuSearchPreference.ts:138](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L138)
 
 ___
 
@@ -194,7 +194,7 @@ filters even for CatNav requests.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:120](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L120)
+[models/KlevuSearchPreference.ts:120](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L120)
 
 ___
 
@@ -209,7 +209,7 @@ please include one of these flags.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:34](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L34)
+[models/KlevuSearchPreference.ts:34](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L34)
 
 ___
 
@@ -223,7 +223,7 @@ By default, functional words such as prepositions, pronouns, articles,
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:23](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L23)
+[models/KlevuSearchPreference.ts:23](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L23)
 
 ___
 
@@ -243,7 +243,7 @@ it contains a word which ends with 'glas'.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:63](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L63)
+[models/KlevuSearchPreference.ts:63](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L63)
 
 ___
 
@@ -258,7 +258,7 @@ Similar to partialMatch, but for all words rather than just the last. In
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:71](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L71)
+[models/KlevuSearchPreference.ts:71](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L71)
 
 ___
 
@@ -280,7 +280,7 @@ include this flag.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:92](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L92)
+[models/KlevuSearchPreference.ts:92](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L92)
 
 ___
 
@@ -295,7 +295,7 @@ the KMC.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:107](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L107)
+[models/KlevuSearchPreference.ts:107](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L107)
 
 ___
 
@@ -309,7 +309,7 @@ include all filters in the response.
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:113](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L113)
+[models/KlevuSearchPreference.ts:113](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L113)
 
 ___
 
@@ -319,4 +319,4 @@ ___
 
 #### Defined in
 
-[models/KlevuSearchPreference.ts:2](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuSearchPreference.ts#L2)
+[models/KlevuSearchPreference.ts:2](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuSearchPreference.ts#L2)

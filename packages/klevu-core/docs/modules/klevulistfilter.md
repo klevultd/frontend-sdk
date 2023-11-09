@@ -10,5 +10,5 @@
 
 #### Defined in
 
-[models/KlevuListFilter.ts:55](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuListFilter.ts#L55)
+[models/KlevuListFilter.ts:55](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuListFilter.ts#L55)
 

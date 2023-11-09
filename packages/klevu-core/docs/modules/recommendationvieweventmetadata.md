@@ -1,10 +1,10 @@
 # recommendationvieweventmetadata
       
-Ƭ **RecommendationViewEventMetaData**: `Pick`<[`KlevuKMCRecommendations`](klevukmcrecommendations.md)[``"metadata"``], ``"recsKey"`` \| ``"logic"`` \| ``"title"``\>
+Ƭ **RecommendationViewEventMetaData**: [`KlevuKMCRecommendations`](klevukmcrecommendations.md)[``"metadata"``]
 
 #### Defined in
 
-[events/KlevuEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L24)
+[events/KlevuEvents.ts:27](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L27)
 
 ## Variables
 
@@ -14,5 +14,5 @@
 
 #### Defined in
 
-[store/lastClickedProducts.ts:130](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/store/lastClickedProducts.ts#L130)
+[store/lastClickedProducts.ts:153](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/store/lastClickedProducts.ts#L153)
 

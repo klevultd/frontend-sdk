@@ -12,9 +12,10 @@
 | `category?` | `string` | Which category merchandising was called |
 | `id?` | `string` | Current id of function |
 | `kmcConfig?` | [`KlevuKMCRecommendations`](klevukmcrecommendations.md) | KMC recommendation information |
+| `searchSendEventSent?` | `boolean` | If true modifier has sent a search event already |
 | `term?` | `string` | term used in the search |
 
 #### Defined in
 
-[queries/index.ts:18](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/index.ts#L18)
+[queries/index.ts:18](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/index.ts#L18)
 

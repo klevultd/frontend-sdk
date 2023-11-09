@@ -1,6 +1,6 @@
 # sendmerchandisingviewevent
       
-▸ **sendMerchandisingViewEvent**(`title`): `KlevuFetchModifer`
+▸ **sendMerchandisingViewEvent**(`title`, `override?`): `KlevuFetchModifer`
 
 This modifier should be used with merchandising query. It sends
 automatically correct event data to Klevu
@@ -10,6 +10,7 @@ automatically correct event data to Klevu
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `title` | `string` | Title of the category page viewed |
+| `override?` | `Partial`<`KlevuV1CategoryProductsView`\> | - |
 
 #### Returns
 
@@ -17,5 +18,5 @@ automatically correct event data to Klevu
 
 #### Defined in
 
-[modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts:13](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts#L13)
+[modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts:14](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/modifiers/sendMerchandisingViewEvent/sendMerchandisingViewEvent.ts#L14)
 

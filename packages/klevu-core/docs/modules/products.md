@@ -1,6 +1,6 @@
 # products
       
-▸ **products**(`productIds`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
+▸ **products**(`productIds`, `...modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Fetches list of products. All fields are fetched.
 
@@ -17,5 +17,5 @@ Fetches list of products. All fields are fetched.
 
 #### Defined in
 
-[queries/products/products.ts:16](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/products/products.ts#L16)
+[queries/products/products.ts:16](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/products/products.ts#L16)
 

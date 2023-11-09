@@ -1,6 +1,6 @@
 # trendingcategoryproducts
       
-▸ **trendingCategoryProducts**(`categoryPath`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
+▸ **trendingCategoryProducts**(`categoryPath`, `options?`, `...modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Return trending recommendations
 
@@ -18,5 +18,5 @@ Return trending recommendations
 
 #### Defined in
 
-[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
+[queries/trendingCategoryProducts/trendingCategoryProducts.ts:39](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/trendingCategoryProducts/trendingCategoryProducts.ts#L39)
 

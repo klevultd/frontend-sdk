@@ -16,5 +16,5 @@ Force exclude product ids on result
 
 #### Defined in
 
-[modifiers/exclude/exclude.ts:10](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/modifiers/exclude/exclude.ts#L10)
+[modifiers/exclude/exclude.ts:10](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/modifiers/exclude/exclude.ts#L10)
 

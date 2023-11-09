@@ -17,5 +17,5 @@ Removes list filters from query
 
 #### Defined in
 
-[connection/klevuFetch.ts:189](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/klevuFetch.ts#L189)
+[connection/klevuFetch.ts:141](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/connection/klevuFetch.ts#L141)
 

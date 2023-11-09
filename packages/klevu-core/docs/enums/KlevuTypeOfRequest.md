@@ -9,9 +9,11 @@
 - [AlsoBought](KlevuTypeOfRequest.md#alsobought)
 - [AlsoViewed](KlevuTypeOfRequest.md#alsoviewed)
 - [CategoryNavigation](KlevuTypeOfRequest.md#categorynavigation)
+- [Custom](KlevuTypeOfRequest.md#custom)
 - [NewArrivals](KlevuTypeOfRequest.md#newarrivals)
 - [Search](KlevuTypeOfRequest.md#search)
 - [SimilarProducts](KlevuTypeOfRequest.md#similarproducts)
+- [Skip](KlevuTypeOfRequest.md#skip)
 - [Suggestion](KlevuTypeOfRequest.md#suggestion)
 - [Trending](KlevuTypeOfRequest.md#trending)
 - [VisuallySimilar](KlevuTypeOfRequest.md#visuallysimilar)
@@ -24,7 +26,7 @@
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:9](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L9)
+[models/KlevuTypeOfRequest.ts:9](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L9)
 
 ___
 
@@ -34,7 +36,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:8](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L8)
+[models/KlevuTypeOfRequest.ts:8](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L8)
 
 ___
 
@@ -44,7 +46,17 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:4](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L4)
+[models/KlevuTypeOfRequest.ts:4](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L4)
+
+___
+
+### Custom
+
+• **Custom** = ``"RECS_CUSTOM"``
+
+#### Defined in
+
+[models/KlevuTypeOfRequest.ts:11](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L11)
 
 ___
 
@@ -54,7 +66,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:5](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L5)
+[models/KlevuTypeOfRequest.ts:5](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L5)
 
 ___
 
@@ -64,7 +76,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:2](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L2)
+[models/KlevuTypeOfRequest.ts:2](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L2)
 
 ___
 
@@ -74,7 +86,17 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:6](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L6)
+[models/KlevuTypeOfRequest.ts:6](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L6)
+
+___
+
+### Skip
+
+• **Skip** = ``"SKIP"``
+
+#### Defined in
+
+[models/KlevuTypeOfRequest.ts:13](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L13)
 
 ___
 
@@ -84,7 +106,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:3](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L3)
+[models/KlevuTypeOfRequest.ts:3](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L3)
 
 ___
 
@@ -94,7 +116,7 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:7](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L7)
+[models/KlevuTypeOfRequest.ts:7](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L7)
 
 ___
 
@@ -104,4 +126,4 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRequest.ts:10](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L10)
+[models/KlevuTypeOfRequest.ts:10](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRequest.ts#L10)

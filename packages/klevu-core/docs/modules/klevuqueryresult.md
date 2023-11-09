@@ -8,12 +8,14 @@ Raw query object from api
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `filters?` | ([`KlevuFilterResultOptions`](klevufilterresultoptions.md) \| [`KlevuFilterResultSlider`](klevufilterresultslider.md))[] | Currently available filters |
+| `filters?` | ([`KlevuFilterResultOptions`](klevufilterresultoptions.md) \| [`KlevuFilterResultSlider`](klevufilterresultslider.md) \| [`KlevuFilterResultRating`](klevufilterresultrating.md))[] | Currently available filters |
 | `id` | `string` | Id used when defining query |
-| `meta` | { `apiKey`: `string` ; `debuggingInformation`: `unknown` ; `isPersonalised`: `boolean` ; `noOfResults`: `number` ; `notificationCode`: `number` ; `offset`: `number` ; `qTime`: `number` ; `searchedTerm`: `string` ; `totalResultsFound`: `number` ; `typeOfSearch`: [`KlevuTypeOfSearch`](enums/KlevuTypeOfSearch.md)  } | - |
+| `meta` | { `apiKey`: `string` ; `debuggingInformation`: `unknown` ; `isPersonalised`: `boolean` ; `klevuImageData?`: { `processed`: { `urls`: `string`[]  }[]  } ; `noOfResults`: `number` ; `notificationCode`: `number` ; `offset`: `number` ; `qTime`: `number` ; `searchedTerm`: `string` ; `totalResultsFound`: `number` ; `typeOfSearch`: [`KlevuTypeOfSearch`](enums/KlevuTypeOfSearch.md)  } | - |
 | `meta.apiKey` | `string` | Klevu API key |
 | `meta.debuggingInformation` | `unknown` | Information that can be useful for debugging the query. For example, the actual query that was fired by the Klevu Search engine, inclusive of any synonyms or de-compounded words taken into consideration. |
 | `meta.isPersonalised` | `boolean` | - |
+| `meta.klevuImageData?` | { `processed`: { `urls`: `string`[]  }[]  } | The urls processed in case of image search |
+| `meta.klevuImageData.processed` | { `urls`: `string`[]  }[] | - |
 | `meta.noOfResults` | `number` | The number of results requested to be returned for this query. |
 | `meta.notificationCode` | `number` | This may be populated with a code if any actions were taken on the record. Possible values are: 1: Nothing to report. 2: The price of the record is using the base currency. |
 | `meta.offset` | `number` | The index of the first result returned in this response. |
@@ -25,5 +27,5 @@ Raw query object from api
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:81](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L81)
+[models/KlevuApiRawResponse.ts:110](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L110)
 

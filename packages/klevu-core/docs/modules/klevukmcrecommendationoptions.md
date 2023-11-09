@@ -14,5 +14,5 @@
 
 #### Defined in
 
-[queries/kmcRecommendation/kmcRecommendation.ts:11](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L11)
+[queries/kmcRecommendation/kmcRecommendation.ts:12](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/kmcRecommendation/kmcRecommendation.ts#L12)
 

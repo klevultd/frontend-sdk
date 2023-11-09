@@ -1,6 +1,6 @@
 # klevufetch
       
-▸ **KlevuFetch**(...`functionPromises`): `Promise`<[`KlevuFetchResponse`](klevufetchresponse.md)\>
+▸ **KlevuFetch**(`...functionPromises`): `Promise`<[`KlevuResponseObject`](classes/KlevuResponseObject.md)\>
 
 Function that makes query to KlevuBackend. It can take amount of queries.
 
@@ -12,11 +12,11 @@ Function that makes query to KlevuBackend. It can take amount of queries.
 
 #### Returns
 
-`Promise`<[`KlevuFetchResponse`](klevufetchresponse.md)\>
+`Promise`<[`KlevuResponseObject`](classes/KlevuResponseObject.md)\>
 
 Tools to operate results and get next results [KlevuFetchResponse](klevufetchresponse.md)
 
 #### Defined in
 
-[connection/klevuFetch.ts:31](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/klevuFetch.ts#L31)
+[connection/klevuFetch.ts:28](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/connection/klevuFetch.ts#L28)
 

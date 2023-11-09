@@ -9,6 +9,7 @@ Filter types Klevu support
 ### Enumeration Members
 
 - [Options](KlevuFilterType.md#options)
+- [Rating](KlevuFilterType.md#rating)
 - [Slider](KlevuFilterType.md#slider)
 
 ## Enumeration Members
@@ -19,7 +20,17 @@ Filter types Klevu support
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
+[models/KlevuApiRawResponse.ts:8](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L8)
+
+___
+
+### Rating
+
+• **Rating** = ``"RATING"``
+
+#### Defined in
+
+[models/KlevuApiRawResponse.ts:10](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L10)
 
 ___
 
@@ -29,4 +40,4 @@ ___
 
 #### Defined in
 
-[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)
+[models/KlevuApiRawResponse.ts:9](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuApiRawResponse.ts#L9)
