@@ -221,6 +221,9 @@ export class KlevuSearchLandingPage {
         this.trendingProducts = resultObject.records
       }
     }
+  }
+
+  async componentWillLoad() {
     await this.#fetchData()
   }
 

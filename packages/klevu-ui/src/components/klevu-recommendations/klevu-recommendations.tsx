@@ -109,7 +109,9 @@ export class KlevuRecommendations {
 
   async connectedCallback() {
     await KlevuInit.ready()
+  }
 
+  async componentWillLoad() {
     if (!this.recommendationId) {
       throw new Error("recommendationId is required")
     }
