@@ -33,10 +33,17 @@ export class KlevuIcon {
 
   async connectedCallback() {
     const url = window["klevu_ui_settings"]?.icons?.[this.name]
+
     if (url?.endsWith(".svg")) {
       await this.#downloadFile(url)
     } else if (preloadedIcons.includes(this.name)) {
-      this.iconAssetURL = getAssetPath("./assets/" + this.name + ".svg")
+      const init = this.el.closest("klevu-init")
+      let path = window.location.origin
+      if (init) {
+        path = await init.getAssetsPath()
+      }
+      console.log("assets path", path)
+      this.iconAssetURL = `${path}/assets/${this.name}.svg`
     } else if (url) {
       this.iconURL = url
     }

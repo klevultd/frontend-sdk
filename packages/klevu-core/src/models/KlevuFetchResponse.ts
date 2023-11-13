@@ -1,9 +1,5 @@
 import type { FilterManager } from "../store/filterManager.js"
-import type { KlevuSuggestionResult } from "./KlevuSuggestionResult.js"
-import type {
-  KlevuApiRawResponse,
-  KlevuQueryResult,
-} from "./KlevuApiRawResponse.js"
+import type { KlevuQueryResult } from "./KlevuApiRawResponse.js"
 import type { KlevuResultEvent } from "./KlevuResultEvent.js"
 import type { KlevuFetchFunctionParams } from "../queries/index.js"
 import { KlevuResponseObject } from "../connection/responseObject.js"
@@ -74,21 +70,4 @@ export type KlevuAnnotations = {
   responseMessage?: string
   /**  Query time for error processing */
   qTime?: number
-}
-/**
- * Tools for operating results in easier way.
- */
-export type KlevuFetchResponse = {
-  /**
-   * Raw response from Klevu API
-   */
-  apiResponse: null | KlevuApiRawResponse
-  /**
-   * Get suggestion by Id
-   */
-  suggestionsById: (id: string) => KlevuSuggestionResult | undefined
-  /**
-   * Get query result by id
-   */
-  queriesById: (id: string) => KlevuFetchQueryResult | undefined
 }

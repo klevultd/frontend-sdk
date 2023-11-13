@@ -14,6 +14,7 @@ export function sendSearchEvent(
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendSearchEvent",
+    ssrOnResultFE: true,
     onResult: (res, f) => {
       if (!f.params) {
         return res

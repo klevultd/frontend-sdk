@@ -29,6 +29,7 @@ export function sendRecommendationViewEvent(
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
+    ssrOnResultFE: true,
     onResult: (res, f) => {
       // is used with kmcRecommendation query
       if (f.klevuFunctionId === "kmcRecommendation") {

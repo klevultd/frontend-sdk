@@ -7,7 +7,10 @@ import {
   KlevuQueryResult,
   KlevuTypeOfRequest,
 } from "../models/index.js"
-import { KlevuFetchQueries } from "../models/KlevuFetchQueries.js"
+import {
+  KlevuFetchQueries,
+  KlevuFetchQueriesWithOptions,
+} from "../models/KlevuFetchQueries.js"
 import { injectFilterResult } from "../modifiers/injectFilterResult/injectFilterResult.js"
 import { KlevuFetchCache } from "../store/klevuFetchCache.js"
 import { post } from "./fetch.js"
@@ -18,21 +21,38 @@ export const klevuFetchCache = new KlevuFetchCache<
   KlevuApiRawResponse
 >()
 
+export class KlevuFetchOption {
+  constructor(
+    public params: {
+      isSSR?: boolean
+      FEHydrate?: boolean
+    } = {}
+  ) {}
+}
+
 /**
  * Function that makes query to KlevuBackend. It can take amount of queries.
  *
  * @category KlevuFetch
  * @param functions list of functions to execute
- * @returns Tools to operate results and get next results {@link KlevuFetchResponse}
+ * @returns Tools to operate results
  */
 export async function KlevuFetch(
-  ...functionPromises: KlevuFetchQueries
+  ...functionPromises: KlevuFetchQueriesWithOptions
 ): Promise<KlevuResponseObject> {
   if (functionPromises.length < 1) {
     throw new Error("At least one fetch function should be provided to fetch.")
   }
 
-  const functions = await Promise.all(functionPromises)
+  const option = functionPromises.find((f) => f instanceof KlevuFetchOption) as
+    | KlevuFetchOption
+    | undefined
+
+  const functionPromisesWithoutOptions = functionPromises.filter(
+    (f) => !(f instanceof KlevuFetchOption)
+  ) as KlevuFetchQueries
+
+  const functions = await Promise.all(functionPromisesWithoutOptions)
 
   const { recordQueries, suggestionQueries } = await cleanAndProcessFunctions(
     functions
@@ -90,7 +110,8 @@ export async function KlevuFetch(
       })),
       suggestionResults: [],
     },
-    functions
+    functions,
+    option
   )
 }
 

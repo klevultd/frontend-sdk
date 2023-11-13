@@ -171,6 +171,7 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
   'settings',
   'language',
   'translation',
+  'assetsPath',
   'translationUrlPrefix',
   'kmcLoadDefaults'
 ]);
@@ -558,6 +559,13 @@ export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilSc
   'overflowX',
   'overflowY',
   'useNative'
+]);
+
+
+export const KlevuUtilSsrProvider = /*@__PURE__*/ defineContainer<JSX.KlevuUtilSsrProvider>('klevu-util-ssr-provider', undefined, [
+  'html',
+  'packed',
+  'identifier'
 ]);
 
 
