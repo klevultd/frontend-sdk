@@ -29,7 +29,6 @@ export class KlevuUtilSsrProvider {
    */
   @Method()
   async setPacked(packed: object) {
-    console.log("set packed", packed)
     this.packed = JSON.stringify(packed).replace(/"/g, "'")
   }
 
@@ -39,7 +38,6 @@ export class KlevuUtilSsrProvider {
    */
   @Method()
   async getPacked() {
-    console.log("get packed", this.packed)
     return JSON.parse(this.packed || "{}").replace(/'/g, '"')
   }
 

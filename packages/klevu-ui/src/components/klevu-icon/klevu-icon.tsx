@@ -42,7 +42,6 @@ export class KlevuIcon {
       if (init) {
         path = await init.getAssetsPath()
       }
-      console.log("assets path", path)
       this.iconAssetURL = `${path}/assets/${this.name}.svg`
     } else if (url) {
       this.iconURL = url

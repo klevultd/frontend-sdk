@@ -92,7 +92,6 @@ export class KlevuInit {
   @Prop() kmcLoadDefaults?: boolean
 
   async connectedCallback() {
-    console.log("PERSE!")
     KlevuConfig.init({
       apiKey: this.apiKey,
       url: this.url,
