@@ -10,6 +10,8 @@ import {
   KlevuRecord,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
+  KlevuSSRFetch,
+  KlevuSSRHydrate,
   listFilters,
   personalisation,
   sendMerchandisingViewEvent,
@@ -168,7 +170,16 @@ export class KlevuMerchandising {
   }
 
   async componentWillLoad() {
-    await this.#fetchData()
+    const SSR = this.el.closest("klevu-util-ssr-provider")
+
+    if (SSR && SSR.packed && SSR.identifier) {
+      const packed = await SSR.getPacked()
+      const res = await KlevuSSRHydrate(packed, this.#buildQuery(), SSR.identifier)
+      this.#resultObject = res.queriesById("categoryMerchandising")
+      await this.#buildAfterResults()
+    } else {
+      await this.#fetchData()
+    }
   }
 
   @Watch("category")
@@ -179,9 +190,7 @@ export class KlevuMerchandising {
     }
   }
 
-  async #fetchData() {
-    this.loading = true
-
+  #buildQuery() {
     const modifiers: KlevuFetchModifer[] = [
       sendMerchandisingViewEvent(this.categoryTitle),
       listFilters({
@@ -204,10 +213,32 @@ export class KlevuMerchandising {
       modifiers.push(abTest())
     }
 
-    const result = await KlevuFetch(
-      categoryMerchandising(this.category, { limit: this.limit, sort: this.sort, ...this.options }, ...modifiers)
-    )
-    this.#resultObject = result.queriesById("categoryMerchandising")
+    return [categoryMerchandising(this.category, { limit: this.limit, sort: this.sort, ...this.options }, ...modifiers)]
+  }
+
+  async #fetchData() {
+    this.loading = true
+    const SSR = this.el.closest("klevu-util-ssr-provider")
+
+    if (SSR) {
+      const { result, identifier, packed } = await KlevuSSRFetch(this.#buildQuery())
+      SSR.identifier = identifier
+      SSR.setPacked(packed)
+
+      this.#resultObject = result.queriesById("categoryMerchandising")
+    } else {
+      const result = await KlevuFetch(...this.#buildQuery())
+      this.#resultObject = result.queriesById("categoryMerchandising")
+    }
+    await this.#buildAfterResults()
+    this.loading = false
+  }
+
+  async #buildAfterResults() {
+    if (!this.#resultObject) {
+      return
+    }
+
     this.results = this.#resultObject?.records ?? []
 
     const allBanners = await this.#resultObject.getBanners()
@@ -215,7 +246,6 @@ export class KlevuMerchandising {
     this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
 
     this.#emitChanges()
-    this.loading = false
   }
 
   async #loadMore() {

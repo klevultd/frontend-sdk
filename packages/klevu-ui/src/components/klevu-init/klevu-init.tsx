@@ -79,6 +79,11 @@ export class KlevuInit {
   @Prop() translation?: Translation
 
   /**
+   * Override the default assets path. Will use format of `${assetsPath}/assets/${resource}`
+   */
+  @Prop() assetsPath?: string
+
+  /**
    * Override the default translation URL prefix. Will use format of
    * `${translationUrlPrefix}/translations/${lang}.json`
    */
@@ -166,6 +171,11 @@ export class KlevuInit {
   @Method()
   async getSettings(): Promise<KlevuUIGlobalSettings | undefined> {
     return this.settings
+  }
+
+  @Method()
+  async getAssetsPath(): Promise<string> {
+    return this.assetsPath ?? "/"
   }
 
   /**

@@ -1,8 +1,4 @@
-import type {
-  KlevuApiRawResponse,
-  KlevuFetchQueries,
-  KlevuFetchResponse,
-} from "../models/index.js"
+import type { KlevuApiRawResponse, KlevuFetchQueries } from "../models/index.js"
 import { KlevuResponseObject } from "./responseObject.js"
 
 /**
@@ -11,7 +7,7 @@ import { KlevuResponseObject } from "./responseObject.js"
  * @param response Response value of KlevuFetch
  * @returns JSON only raw response
  */
-export function KlevuPackFetchResult(response: KlevuFetchResponse) {
+export function KlevuPackFetchResult(response: KlevuResponseObject) {
   if (!response.apiResponse) {
     throw new Error("No result to pack")
   }

@@ -57,4 +57,5 @@ export const KlevuUtilDomEvents = /*@__PURE__*/createReactComponent<JSX.KlevuUti
 export const KlevuUtilInfiniteScroll = /*@__PURE__*/createReactComponent<JSX.KlevuUtilInfiniteScroll, HTMLKlevuUtilInfiniteScrollElement>('klevu-util-infinite-scroll');
 export const KlevuUtilPortal = /*@__PURE__*/createReactComponent<JSX.KlevuUtilPortal, HTMLKlevuUtilPortalElement>('klevu-util-portal');
 export const KlevuUtilScrollbars = /*@__PURE__*/createReactComponent<JSX.KlevuUtilScrollbars, HTMLKlevuUtilScrollbarsElement>('klevu-util-scrollbars');
+export const KlevuUtilSsrProvider = /*@__PURE__*/createReactComponent<JSX.KlevuUtilSsrProvider, HTMLKlevuUtilSsrProviderElement>('klevu-util-ssr-provider');
 export const KlevuUtilViewport = /*@__PURE__*/createReactComponent<JSX.KlevuUtilViewport, HTMLKlevuUtilViewportElement>('klevu-util-viewport');

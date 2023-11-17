@@ -36,6 +36,7 @@ export function klaviyo(
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "kleviyo",
+    ssrOnResultFE: true,
     onResult: (response, query) => {
       // make sure that Klaviyo array is available
       if (!globalThis._learnq) {
