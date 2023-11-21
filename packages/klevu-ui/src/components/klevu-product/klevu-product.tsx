@@ -312,24 +312,7 @@ export class KlevuProduct {
             {this.hideImage ? null : (
               <slot name="image">
                 {this.product?.image || this.hoverImage ? (
-                  <div
-                    class="image"
-                    part="product-image"
-                    style={{
-                      backgroundImage: `url(${this.hoverImage || this.product.image}), url(${
-                        this.fallbackProductImageUrl
-                      })`,
-                    }}
-                  >
-                    {this.hideHoverImage !== true && this.product.imageHover ? (
-                      <div
-                        class="hover"
-                        style={{
-                          backgroundImage: `url(${this.product.imageHover}), url(${this.fallbackProductImageUrl})`,
-                        }}
-                      ></div>
-                    ) : null}
-                  </div>
+                  this.#renderImage()
                 ) : (
                   <div class="image no-image" part="product-image">
                     <klevu-icon name="image_not_supported"></klevu-icon>
@@ -422,6 +405,38 @@ export class KlevuProduct {
           {this.variant === "line" && <slot name="ratings">{this.#renderRatings()}</slot>}
         </div>
       </Host>
+    )
+  }
+
+  #renderImage() {
+    let imageUrl = this.product?.image || this.hoverImage
+
+    if (!imageUrl) {
+      return null
+    }
+
+    let fallback = ""
+    if (this.fallbackProductImageUrl) {
+      fallback = `, url(${this.fallbackProductImageUrl})`
+    }
+
+    return (
+      <div
+        class="image"
+        part="product-image"
+        style={{
+          backgroundImage: `url(${imageUrl})${fallback}`,
+        }}
+      >
+        {this.hideHoverImage !== true && this.product?.imageHover ? (
+          <div
+            class="hover"
+            style={{
+              backgroundImage: `url(${this.product.imageHover})${fallback}`,
+            }}
+          ></div>
+        ) : null}
+      </div>
     )
   }
 
