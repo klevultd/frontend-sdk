@@ -4,34 +4,127 @@ import * as Stories from "./klevu-merchandising.stories"
 
 <Meta title="Apps/Merchandising/Examples/Customized" />
 
-# Customizing Klevu Merchandising Component
+# Customizing Klevu Merchandising Component - A Step-by-Step Guide
 
-The provided code example demonstrates how to customize the
-`klevu-merchandising` component using JavaScript, CSS, and HTML attributes. The
-customization involves dynamic population and styling of the merchandising
-display.
+In this educational guide, we will walk through a code example that demonstrates
+how to customize the Klevu Merchandising component to create a personalized
+shopping experience on your e-commerce website.
 
-1. **Component Configuration:** The HTML markup includes a `klevu-merchandising`
-   component with the class `customized`. Attributes like `category`,
-   `category-title`, and `limit` are configured for the component. A `content`
-   slot is designated for displaying the merchandising content.
+## Understanding the Code
 
-2. **JavaScript Customization:** The JavaScript code targets the
-   `klevu-merchandising.customized` element and the `content` slot within it. It
-   listens for the `"klevuData"` event on the merchandising component. Upon klevuData
-   reception, it clears the content of the `content` slot and populates it with
-   a `klevu-grid` element.
+Let's break down the code step by step:
 
-   - For each record in the event klevuData, a `klevu-product` element is created.
-     The `product` attribute of the element is set to the record, and it's
-     marked as a wrapper. The inner HTML of the element contains an image tag
-     displaying the product's image.
+```html
+<klevu-merchandising class="customized" category="women" category-title="Women's clothing">
+  <div slot="content"></div>
+  <div slot="facets">
+    <h3>Facets</h3>
+    <p>This is custom sidebar content for facets</p>
+    <klevu-facet-list></klevu-facet-list>
+  </div>
+</klevu-merchandising>
+```
 
-3. **Custom CSS Styling:** The provided custom CSS styles target
-   `klevu-merchandising.customized` elements and adjust the width of images
-   displayed within them.
+### 1. Setting up the Klevu Merchandising Component
 
-This example highlights how to achieve dynamic product rendering and layout
-customization within the `klevu-merchandising` component.
+- We start by creating a Klevu Merchandising component with the class
+  "customized."
+
+- We set various properties like `category`, `category-title`, `limit`,
+  `show-ratings`, and `show-ratings-count` using attributes.
+
+- Inside the `<klevu-merchandising>` element, we define two slots: "content" and
+  "facets." Slots allow us to specify where child elements should be placed
+  within the component.
+
+- In the "facets" slot, we include custom content, such as an `<h3>` heading and
+  a paragraph, to create a custom sidebar for facets.
+
+- We also include a `<klevu-facet-list>` element within the "facets" slot. This
+  element will be used to display facet-related information.
+
+### 2. JavaScript Logic
+
+```javascript
+<script>
+  const merch = document.querySelector("klevu-merchandising.customized")
+  const contentSlot = document.querySelector("klevu-merchandising.customized div[slot='content']")
+  const gridElement = document.createElement("klevu-grid")
+  contentSlot.appendChild(gridElement)
+
+  const facetListElement = document.querySelector("klevu-merchandising.customized klevu-facet-list")
+
+  merch.addEventListener("klevuData", (event) => {
+    facetListElement.manager = event.detail.manager
+    gridElement.innerHTML = ""
+    for (const record of event.detail.records) {
+      const p = document.createElement("klevu-product")
+      p.product = record
+      p.isWrapper = true
+      p.innerHTML = '<img src="' + record.imageUrl + '" />'
+
+      gridElement.appendChild(p)
+    }
+  })
+</script>
+```
+
+### 3. JavaScript Logic for Customization
+
+- In the JavaScript section, we begin by selecting the Klevu Merchandising
+  component with the class "customized" using `document.querySelector`. We store
+  this element in the `merch` variable.
+
+- We also select the "content" slot within the Klevu Merchandising component
+  using `document.querySelector` and store it in the `contentSlot` variable.
+
+- Next, we create a new `<klevu-grid>` element using `document.createElement`.
+  This grid will be used to display products and is appended to the "content"
+  slot.
+
+- We select the `<klevu-facet-list>` element within the "facets" slot and store
+  it in the `facetListElement` variable.
+
+- We add an event listener to the Klevu Merchandising component, listening for
+  the "klevuData" event. When this event is triggered, the event handler
+  function is executed.
+
+- Inside the event handler, we set the `facetListElement.manager` property to
+  the `event.detail.manager`. This step establishes a connection between the
+  facet list and the data manager provided by the event.
+
+- We clear the `gridElement` by setting its `innerHTML` to an empty string.
+
+- Using a loop, we iterate through the `event.detail.records`, which represent
+  product records. For each record, we create a new `<klevu-product>` element
+  (`p`) and customize it by setting its `product` property, `isWrapper`
+  property, and inner HTML to display an image.
+
+- Finally, we append the customized product element (`p`) to the `gridElement`.
+
+### 4. Custom CSS Styling
+
+```css
+<style>
+  klevu-merchandising.customized img {
+    width: 120px;
+  }
+</style>
+```
+
+### 5. Custom CSS Styling
+
+- In this section, we apply custom CSS styling to the `<klevu-merchandising>`
+  component. Specifically, we target `<img>` elements within the "customized"
+  instance of the Klevu Merchandising component and set their width to 120
+  pixels.
+
+## Conclusion
+
+By following the steps outlined in this code example, you can customize the
+Klevu Merchandising component to create a tailored shopping experience for your
+users. This includes setting up properties, creating custom content, handling
+data events, and applying CSS styling to achieve your desired look and
+functionality.
 
 <Canvas of={Stories.CustomizedMerchandising} />

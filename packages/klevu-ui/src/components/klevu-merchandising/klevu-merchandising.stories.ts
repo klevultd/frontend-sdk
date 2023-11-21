@@ -63,6 +63,11 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       show-ratings-count=${ifDefined(args.showRatingsCount)}
     >
       <div slot="content"></div>
+      <div slot="facets">
+        <h3>Facets</h3>
+        <p>This is a custom sidebar content for facets</p>
+        <klevu-facet-list></klevu-facet-list>
+      </div>
     </klevu-merchandising>
     <script>
       const merch = document.querySelector("klevu-merchandising.customized")
@@ -70,7 +75,10 @@ export const CustomizedMerchandising: StoryObj<KlevuMerchandising> = {
       const gridElement = document.createElement("klevu-grid")
       contentSlot.appendChild(gridElement)
 
+      const facetListElement = document.querySelector("klevu-merchandising.customized klevu-facet-list")
+
       merch.addEventListener("klevuData", (event) => {
+        facetListElement.manager = event.detail.manager
         gridElement.innerHTML = ""
         for (const record of event.detail.records) {
           const p = document.createElement("klevu-product")
