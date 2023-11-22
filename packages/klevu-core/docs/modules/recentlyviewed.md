@@ -1,6 +1,6 @@
 # recentlyviewed
       
-▸ **recentlyViewed**(`options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
+▸ **recentlyViewed**(`options?`, `...modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Recently viewed products
 
@@ -17,5 +17,5 @@ Recently viewed products
 
 #### Defined in
 
-[queries/recentlyViewedProducts/recentlyViewedProducts.ts:26](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/recentlyViewedProducts/recentlyViewedProducts.ts#L26)
+[queries/recentlyViewedProducts/recentlyViewedProducts.ts:26](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/recentlyViewedProducts/recentlyViewedProducts.ts#L26)
 

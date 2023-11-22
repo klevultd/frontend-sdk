@@ -4,5 +4,5 @@
 
 #### Defined in
 
-[models/KlevuFetchQueries.ts:3](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuFetchQueries.ts#L3)
+[models/KlevuFetchQueries.ts:3](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuFetchQueries.ts#L3)
 

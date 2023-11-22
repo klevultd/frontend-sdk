@@ -1,6 +1,6 @@
 # categorymerchandising
       
-▸ **categoryMerchandising**(`category`, `options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
+▸ **categoryMerchandising**(`category`, `options?`, `...modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Fetch products for a category listing page.
 Default result id is "categoryMerchandising".
@@ -19,5 +19,5 @@ Default result id is "categoryMerchandising".
 
 #### Defined in
 
-[queries/categoryMerchandising/categoryMerchandising.ts:30](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L30)
+[queries/categoryMerchandising/categoryMerchandising.ts:30](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/categoryMerchandising/categoryMerchandising.ts#L30)
 

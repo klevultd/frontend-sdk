@@ -8,6 +8,7 @@
 
 - [Category](KlevuTypeOfRecord.md#category)
 - [Cms](KlevuTypeOfRecord.md#cms)
+- [Image](KlevuTypeOfRecord.md#image)
 - [Product](KlevuTypeOfRecord.md#product)
 
 ## Enumeration Members
@@ -18,7 +19,7 @@
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:7](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L7)
+[models/KlevuTypeOfRecord.ts:7](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L7)
 
 ___
 
@@ -28,7 +29,17 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
+[models/KlevuTypeOfRecord.ts:6](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L6)
+
+___
+
+### Image
+
+• **Image** = ``"KLEVU_IMAGE"``
+
+#### Defined in
+
+[models/KlevuTypeOfRecord.ts:8](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L8)
 
 ___
 
@@ -38,4 +49,4 @@ ___
 
 #### Defined in
 
-[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)
+[models/KlevuTypeOfRecord.ts:5](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuTypeOfRecord.ts#L5)

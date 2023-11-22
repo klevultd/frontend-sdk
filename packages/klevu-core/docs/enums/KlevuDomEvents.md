@@ -21,7 +21,7 @@ When any click event has been fired on the page
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuDomEvents.ts#L24)
+[events/KlevuDomEvents.ts:24](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuDomEvents.ts#L24)
 
 ___
 
@@ -33,7 +33,7 @@ When filter manager selection has changed
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:14](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuDomEvents.ts#L14)
+[events/KlevuDomEvents.ts:14](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuDomEvents.ts#L14)
 
 ___
 
@@ -45,7 +45,7 @@ When filters have been applied from results
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:19](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuDomEvents.ts#L19)
+[events/KlevuDomEvents.ts:19](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuDomEvents.ts#L19)
 
 ___
 
@@ -57,4 +57,4 @@ When list of last searched terms update
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuDomEvents.ts#L9)
+[events/KlevuDomEvents.ts:9](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuDomEvents.ts#L9)

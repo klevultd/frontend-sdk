@@ -6,9 +6,9 @@
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`MoiResponseContext`, ...MoiResponseObjects[]] |
+| `data` | [[`MoiResponseContext`](moiresponsecontext.md), ...MoiResponseObjects[]] |
 
 #### Defined in
 
-[connection/moi/moi.ts:24](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/moi/moi.ts#L24)
+[connection/moi/moi.ts:40](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/connection/moi/moi.ts#L40)
 

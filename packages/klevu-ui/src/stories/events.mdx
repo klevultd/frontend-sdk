@@ -3,20 +3,20 @@ import { KlevuAllEvents } from "../../.storybook/blocks/KlevuAllEvents"
 
 <Meta title="Guides/Events" />
 
-# Listening to Klevu Web Component Events
+# Listening to Klevu Component Events
 
-Klevu Web components offer a rich set of events that you can listen to in order to respond to user interactions and
+Klevu Components offer a rich set of events that you can listen to in order to respond to user interactions and
 customize the behavior of your e-commerce website. This documentation page provides an overview of the standard way to
-listen to events emitted by Klevu Web components. Below is a listing of events from various components along with the
+listen to events emitted by Klevu Components. Below is a listing of events from various components along with the
 typings of the `CustomEvent` detail property.
 
 ## Event Listening
 
-To listen to events emitted by Klevu Web components, you can use the standard event listening approach in JavaScript.
+To listen to events emitted by Klevu Components, you can use the standard event listening approach in JavaScript.
 Here's how you can do it:
 
 ```javascript
-// Select the element that contains the Klevu Web component
+// Select the element that contains the Klevu Component
 const componentElement = document.querySelector("#your-component-id")
 
 // Add an event listener to the component element
@@ -29,11 +29,11 @@ componentElement.addEventListener("event-name", (event) => {
 
 ## Listening to Events with React
 
-If you are using React to build your e-commerce website and want to listen to events emitted by Klevu Web components, you can achieve this by using React component properties directly.
+If you are using React to build your e-commerce website and want to listen to events emitted by Klevu Components, you can achieve this by using React component properties directly.
 
 First, make sure you have imported the React components from `@klevu/ui-react`. These components follow PascalCase naming conventions.
 
-Here's an example of how to listen to a Klevu Web component event in a React component:
+Here's an example of how to listen to a Klevu component event in a React component:
 
 ```javascript
 import React from "react"

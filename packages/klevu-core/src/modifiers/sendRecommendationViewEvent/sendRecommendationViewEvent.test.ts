@@ -22,7 +22,7 @@ test("Sending recommendation view event", async () => {
       {
         id: "test",
       },
-      sendRecommendationViewEvent("Similar products test", {
+      sendRecommendationViewEvent({
         logic: KMCRecommendationLogic.Similar,
         recsKey: "similar_test",
         title: "Similar products test",
@@ -40,7 +40,11 @@ test("Recommendation view should fail", async () => {
         {
           id: "test",
         },
-        sendRecommendationViewEvent("Similar products test")
+        sendRecommendationViewEvent({
+          title: "Similar products test",
+          logic: KMCRecommendationLogic.Similar,
+          recsKey: "similar_test",
+        })
       )
     )
   } catch (e: any) {

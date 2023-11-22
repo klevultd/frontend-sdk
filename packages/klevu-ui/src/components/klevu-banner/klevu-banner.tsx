@@ -2,6 +2,8 @@ import { Component, Event, EventEmitter, Host, Prop, h } from "@stencil/core"
 
 /**
  * Component that displays a typical klevu banner
+ * @slot default The banner slot
+ * @csspart banner-image The image element
  */
 @Component({
   tag: "klevu-banner",
@@ -51,7 +53,7 @@ export class KlevuBanner {
     return (
       <Host>
         <slot>
-          <a href={this.linkUrl} target={this.target} onClick={this.#click}>
+          <a href={this.linkUrl} target={this.target} onClick={this.#click.bind(this)}>
             <img part="banner-image" src={this.imageUrl} alt={this.altText} />
           </a>
         </slot>

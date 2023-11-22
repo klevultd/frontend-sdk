@@ -13,9 +13,11 @@
 - [apiKey](KlevuConfig.md#apikey)
 - [axios](KlevuConfig.md#axios)
 - [cacheMaxTTL](KlevuConfig.md#cachemaxttl)
+- [disableClickTracking](KlevuConfig.md#disableclicktracking)
 - [eventsApiV1Url](KlevuConfig.md#eventsapiv1url)
 - [eventsApiV2Url](KlevuConfig.md#eventsapiv2url)
 - [moiApiUrl](KlevuConfig.md#moiapiurl)
+- [recommendationsApiUrl](KlevuConfig.md#recommendationsapiurl)
 - [url](KlevuConfig.md#url)
 - [default](KlevuConfig.md#default)
 
@@ -38,7 +40,7 @@
 
 #### Defined in
 
-[config.ts:51](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L51)
+[config.ts:63](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L63)
 
 ## Properties
 
@@ -48,7 +50,7 @@
 
 #### Defined in
 
-[config.ts:43](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L43)
+[config.ts:53](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L53)
 
 ___
 
@@ -58,7 +60,7 @@ ___
 
 #### Defined in
 
-[config.ts:48](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L48)
+[config.ts:59](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L59)
 
 ___
 
@@ -68,7 +70,17 @@ ___
 
 #### Defined in
 
-[config.ts:45](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L45)
+[config.ts:55](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L55)
+
+___
+
+### disableClickTracking
+
+• **disableClickTracking**: `boolean` = `false`
+
+#### Defined in
+
+[config.ts:61](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L61)
 
 ___
 
@@ -78,7 +90,7 @@ ___
 
 #### Defined in
 
-[config.ts:46](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L46)
+[config.ts:56](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L56)
 
 ___
 
@@ -88,7 +100,7 @@ ___
 
 #### Defined in
 
-[config.ts:47](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L47)
+[config.ts:57](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L57)
 
 ___
 
@@ -98,7 +110,17 @@ ___
 
 #### Defined in
 
-[config.ts:49](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L49)
+[config.ts:60](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L60)
+
+___
+
+### recommendationsApiUrl
+
+• **recommendationsApiUrl**: `string` = `"https://config-cdn.ksearchnet.com/recommendations/"`
+
+#### Defined in
+
+[config.ts:58](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L58)
 
 ___
 
@@ -108,7 +130,7 @@ ___
 
 #### Defined in
 
-[config.ts:44](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L44)
+[config.ts:54](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L54)
 
 ___
 
@@ -118,7 +140,7 @@ ___
 
 #### Defined in
 
-[config.ts:41](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L41)
+[config.ts:51](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L51)
 
 ## Methods
 
@@ -132,7 +154,7 @@ ___
 
 #### Defined in
 
-[config.ts:70](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L70)
+[config.ts:93](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L93)
 
 ___
 
@@ -152,4 +174,4 @@ ___
 
 #### Defined in
 
-[config.ts:65](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/config.ts#L65)
+[config.ts:88](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/config.ts#L88)

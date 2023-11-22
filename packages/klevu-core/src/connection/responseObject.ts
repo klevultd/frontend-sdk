@@ -1,5 +1,6 @@
 import { KlevuApiRawResponse } from "../models/KlevuApiRawResponse.js"
 import { KlevuFetchFunctionReturnValue } from "../queries/index.js"
+import { KlevuFetchOption } from "./klevuFetch.js"
 import { KlevuResponseQueryObject } from "./responseQueryObject.js"
 
 /**
@@ -13,15 +14,34 @@ export class KlevuResponseObject {
 
   constructor(
     response: KlevuApiRawResponse,
-    functions: KlevuFetchFunctionReturnValue[]
+    functions: KlevuFetchFunctionReturnValue[],
+    options?: KlevuFetchOption,
+    checkProcessedFunctions?: string
   ) {
     this.apiResponse = response
     this.#functions = functions
+
+    if (
+      checkProcessedFunctions &&
+      this.packProcessedFunctionsToString() !== checkProcessedFunctions
+    ) {
+      throw new Error("Processed functions are not the same as on the backend")
+    }
+
     this.#buildQueryObjects()
     for (const f of functions) {
       if (f.modifiers) {
         for (const modifier of f.modifiers) {
-          if (modifier.onResult) {
+          if (!modifier.onResult) {
+            continue
+          }
+
+          if (
+            !options?.params.isSSR ||
+            (options.params.isSSR && !modifier.ssrOnResultFE)
+          ) {
+            modifier.onResult(this, f)
+          } else if (options?.params.FEHydrate && modifier.ssrOnResultFE) {
             modifier.onResult(this, f)
           }
         }
@@ -70,5 +90,20 @@ export class KlevuResponseObject {
    */
   queryExists(id: string) {
     return !!this.#queryObjects[id]
+  }
+
+  /**
+   *
+   * @returns String that can be used to compare if the same functions were used to create this response
+   */
+  packProcessedFunctionsToString() {
+    return this.#functions
+      .map(
+        (f) =>
+          `${f.klevuFunctionId},${f.queries?.map(
+            (q) => q.id
+          )},${f.modifiers?.map((m) => m.klevuModifierId)}`
+      )
+      .join(";")
   }
 }

@@ -18,5 +18,5 @@ What functions passed to KlevuFetch should implement
 
 #### Defined in
 
-[queries/index.ts:51](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/index.ts#L51)
+[queries/index.ts:56](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/index.ts#L56)
 

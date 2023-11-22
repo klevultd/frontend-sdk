@@ -89,6 +89,7 @@ export namespace Components {
     }
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface KlevuBanner {
         /**
@@ -478,6 +479,19 @@ export namespace Components {
          */
         "apiKey": string;
         /**
+          * Override the default assets path. Will use format of `${assetsPath}/assets/${resource}`
+         */
+        "assetsPath"?: string;
+        /**
+          * Override the default events v1 URL
+         */
+        "eventsV1Url"?: string;
+        /**
+          * Override the default events v2 URL
+         */
+        "eventsV2Url"?: string;
+        "getAssetsPath": () => Promise<string>;
+        /**
           * @returns KlevuConfig, but due to typescript problems it is any
          */
         "getConfig": () => Promise<any>;
@@ -491,6 +505,10 @@ export namespace Components {
           * Which language to load
          */
         "language": Translations;
+        /**
+          * Override the default recommendations API URL
+         */
+        "recommendationsApiUrl"?: string;
         /**
           * Global settings
          */
@@ -1695,6 +1713,24 @@ export namespace Components {
          */
         "useNative"?: boolean;
     }
+    /**
+     * KlevuUtilSsrProvider component stores the Klevu SSR response as a string
+     * that can be hydrated in the client side.
+     */
+    interface KlevuUtilSsrProvider {
+        /**
+          * @returns packed parameter returned by KlevuSSRFetch function for KlevuSSRHydrate function
+         */
+        "getPacked": () => Promise<any>;
+        "html"?: string;
+        "identifier"?: string;
+        "packed"?: string;
+        /**
+          * packed parameter returned by KlevuSSRFetch function
+          * @param packed
+         */
+        "setPacked": (packed: object) => Promise<void>;
+    }
     interface KlevuUtilViewport {
         "getCurrentSize": () => Promise<ViewportSize | undefined>;
         /**
@@ -1863,6 +1899,7 @@ declare global {
     };
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface HTMLKlevuBannerElement extends Components.KlevuBanner, HTMLStencilElement {
     }
@@ -2390,6 +2427,16 @@ declare global {
         prototype: HTMLKlevuUtilScrollbarsElement;
         new (): HTMLKlevuUtilScrollbarsElement;
     };
+    /**
+     * KlevuUtilSsrProvider component stores the Klevu SSR response as a string
+     * that can be hydrated in the client side.
+     */
+    interface HTMLKlevuUtilSsrProviderElement extends Components.KlevuUtilSsrProvider, HTMLStencilElement {
+    }
+    var HTMLKlevuUtilSsrProviderElement: {
+        prototype: HTMLKlevuUtilSsrProviderElement;
+        new (): HTMLKlevuUtilSsrProviderElement;
+    };
     interface HTMLKlevuUtilViewportElement extends Components.KlevuUtilViewport, HTMLStencilElement {
     }
     var HTMLKlevuUtilViewportElement: {
@@ -2446,6 +2493,7 @@ declare global {
         "klevu-util-infinite-scroll": HTMLKlevuUtilInfiniteScrollElement;
         "klevu-util-portal": HTMLKlevuUtilPortalElement;
         "klevu-util-scrollbars": HTMLKlevuUtilScrollbarsElement;
+        "klevu-util-ssr-provider": HTMLKlevuUtilSsrProviderElement;
         "klevu-util-viewport": HTMLKlevuUtilViewportElement;
     }
 }
@@ -2485,6 +2533,7 @@ declare namespace LocalJSX {
     }
     /**
      * Component that displays a typical klevu banner
+     * @csspart banner-image The image element
      */
     interface KlevuBanner {
         /**
@@ -2910,11 +2959,27 @@ declare namespace LocalJSX {
           * Read only API key to Klevu
          */
         "apiKey": string;
+        /**
+          * Override the default assets path. Will use format of `${assetsPath}/assets/${resource}`
+         */
+        "assetsPath"?: string;
+        /**
+          * Override the default events v1 URL
+         */
+        "eventsV1Url"?: string;
+        /**
+          * Override the default events v2 URL
+         */
+        "eventsV2Url"?: string;
         "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load
          */
         "language"?: Translations;
+        /**
+          * Override the default recommendations API URL
+         */
+        "recommendationsApiUrl"?: string;
         /**
           * Global settings
          */
@@ -4194,6 +4259,15 @@ declare namespace LocalJSX {
          */
         "useNative"?: boolean;
     }
+    /**
+     * KlevuUtilSsrProvider component stores the Klevu SSR response as a string
+     * that can be hydrated in the client side.
+     */
+    interface KlevuUtilSsrProvider {
+        "html"?: string;
+        "identifier"?: string;
+        "packed"?: string;
+    }
     interface KlevuUtilViewport {
         "onKlevuSizeChanged"?: (event: KlevuUtilViewportCustomEvent<ViewportSize>) => void;
         /**
@@ -4251,6 +4325,7 @@ declare namespace LocalJSX {
         "klevu-util-infinite-scroll": KlevuUtilInfiniteScroll;
         "klevu-util-portal": KlevuUtilPortal;
         "klevu-util-scrollbars": KlevuUtilScrollbars;
+        "klevu-util-ssr-provider": KlevuUtilSsrProvider;
         "klevu-util-viewport": KlevuUtilViewport;
     }
 }
@@ -4275,6 +4350,7 @@ declare module "@stencil/core" {
             "klevu-badge": LocalJSX.KlevuBadge & JSXBase.HTMLAttributes<HTMLKlevuBadgeElement>;
             /**
              * Component that displays a typical klevu banner
+             * @csspart banner-image The image element
              */
             "klevu-banner": LocalJSX.KlevuBanner & JSXBase.HTMLAttributes<HTMLKlevuBannerElement>;
             /**
@@ -4567,6 +4643,11 @@ declare module "@stencil/core" {
              * Utility that replaces the default browser scrollbar with a custom one.
              */
             "klevu-util-scrollbars": LocalJSX.KlevuUtilScrollbars & JSXBase.HTMLAttributes<HTMLKlevuUtilScrollbarsElement>;
+            /**
+             * KlevuUtilSsrProvider component stores the Klevu SSR response as a string
+             * that can be hydrated in the client side.
+             */
+            "klevu-util-ssr-provider": LocalJSX.KlevuUtilSsrProvider & JSXBase.HTMLAttributes<HTMLKlevuUtilSsrProviderElement>;
             "klevu-util-viewport": LocalJSX.KlevuUtilViewport & JSXBase.HTMLAttributes<HTMLKlevuUtilViewportElement>;
         }
     }

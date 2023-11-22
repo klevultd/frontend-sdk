@@ -39,5 +39,5 @@ Function to stop listening
 
 #### Defined in
 
-[events/KlevuDomEvents.ts:47](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuDomEvents.ts#L47)
+[events/KlevuDomEvents.ts:47](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuDomEvents.ts#L47)
 

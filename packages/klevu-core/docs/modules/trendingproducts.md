@@ -1,6 +1,6 @@
 # trendingproducts
       
-▸ **trendingProducts**(`options?`, ...`modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
+▸ **trendingProducts**(`options?`, `...modifiers`): [`KlevuFetchFunctionReturnValue`](klevufetchfunctionreturnvalue.md)
 
 Create a trending products search query. Id for this query is `trendingProducts`
 
@@ -30,5 +30,5 @@ See KlevuFetchFunction
 
 #### Defined in
 
-[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
+[queries/trendingProducts/trendingProducts.ts:24](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/queries/trendingProducts/trendingProducts.ts#L24)
 

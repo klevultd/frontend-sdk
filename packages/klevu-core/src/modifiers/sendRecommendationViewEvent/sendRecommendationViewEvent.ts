@@ -4,7 +4,8 @@ import {
   RecommendationViewEventMetaData,
 } from "../../events/index.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
-import { KlevuEventV2Data } from "../../events/eventRequests.js"
+import { KlevuRecommendationsEventV2Data } from "../../events/eventRequests.js"
+import { KlevuRecord } from "../../models/KlevuRecord.js"
 
 const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
   KlevuTypeOfRequest.AlsoBought,
@@ -22,26 +23,19 @@ const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
  * @returns
  */
 export function sendRecommendationViewEvent(
-  title?: string,
-  eventData?: RecommendationViewEventMetaData,
-  override?: Partial<KlevuEventV2Data>
+  eventData?: Partial<RecommendationViewEventMetaData> &
+    Pick<RecommendationViewEventMetaData, "logic" | "recsKey" | "title">,
+  override?: Partial<KlevuRecommendationsEventV2Data>
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
+    ssrOnResultFE: true,
     onResult: (res, f) => {
       // is used with kmcRecommendation query
       if (f.klevuFunctionId === "kmcRecommendation") {
-        if (!title) {
-          title = f.params?.kmcConfig?.metadata.title ?? ""
-        }
-
-        const products = res.queriesById(f.queries?.[0].id ?? "")?.records
-
-        if (!products) {
-          console.warn(
-            "No result in recommendations. Can't send recommendationViewEvent"
-          )
-          return res
+        let products: KlevuRecord[] | undefined
+        if (res.queryExists(f.queries?.[0]?.id ?? "")) {
+          products = res.queriesById(f.queries?.[0].id ?? "")?.records
         }
 
         const kmcData = f.params?.kmcConfig
@@ -53,14 +47,9 @@ export function sendRecommendationViewEvent(
           return res
         }
 
-        if (products.length === 0) {
-          return res
-        }
-
         KlevuEvents.recommendationView({
           recommendationMetadata: {
             ...kmcData.metadata,
-            title,
           },
           products,
           override,
@@ -90,8 +79,6 @@ export function sendRecommendationViewEvent(
         )
         return res
       }
-
-      eventData.title = title ?? eventData.title
 
       KlevuEvents.recommendationView({
         recommendationMetadata: eventData,

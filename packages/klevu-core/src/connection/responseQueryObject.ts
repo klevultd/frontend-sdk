@@ -53,6 +53,11 @@ export class KlevuResponseQueryObject {
   recommendationClickEvent?: KlevuFetchQueryResult["recommendationClickEvent"]
 
   /**
+   * When there is a banner in the recommendation this is available. It is used to send recommendation banner click events
+   */
+  recommendationBannerClickEvent?: KlevuFetchQueryResult["recommendationBannerClickEvent"]
+
+  /**
    * Fetches redirects for this query. This is available only for search queries
    */
   getRedirects?: () => Promise<KlevuKeywordUrlMap[]>
@@ -308,6 +313,48 @@ export class KlevuResponseQueryObject {
       }
 
       case "kmcRecommendation": {
+        if (!this.func.params?.kmcConfig) {
+          break
+        }
+
+        const config = this.func.params?.kmcConfig
+
+        if (config.metadata.action === "HIDE_RECOMMENDATION") {
+          break
+        }
+
+        if (config.metadata.action === "STATIC_CONTENT") {
+          if (!config.staticContent) {
+            break
+          }
+          this.recommendationBannerClickEvent = function ({ resolution }) {
+            if (!config.staticContent || config.staticContent.length === 0) {
+              return
+            }
+
+            const image =
+              config.staticContent[0].image.find(
+                (image) => image.resolution === resolution
+              ) ?? config.staticContent[0].image[0]
+
+            if (!image) {
+              return
+            }
+
+            KlevuEvents.recommendationClick({
+              recommendationMetadata: config.metadata,
+              bannerInfo: {
+                resolution,
+                index: 1,
+                banner_alt_tag: image.altTag,
+                banner_image_url: image.url,
+                content_type: "image",
+              },
+            })
+          }
+          break
+        }
+
         this.recommendationClickEvent = function ({
           productId,
           variantId,
@@ -317,7 +364,6 @@ export class KlevuResponseQueryObject {
             return
           }
 
-          const config = this.func.params?.kmcConfig
           const record = [
             ...this.query.records,
             ...(this.func.previousResultRecords ?? []),

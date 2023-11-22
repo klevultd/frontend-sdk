@@ -12,8 +12,8 @@
 
 ### klevu\_keywordUrlMap
 
-• **klevu\_keywordUrlMap**: `KlevuKeywordUrlMap`[]
+• **klevu\_keywordUrlMap**: [`KlevuKeywordUrlMap`](KlevuKeywordUrlMap.md)[]
 
 #### Defined in
 
-[connection/kmcmodels/KMCMaps.ts:7](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/kmcmodels/KMCMaps.ts#L7)
+[models/KMCMaps.ts:7](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KMCMaps.ts#L7)

@@ -12,8 +12,8 @@
 
 ### klevu\_banner
 
-• **klevu\_banner**: `KlevuBanner`[]
+• **klevu\_banner**: [`KlevuBanner`](KlevuBanner.md)[]
 
 #### Defined in
 
-[connection/kmcmodels/KMCBanner.ts:21](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/kmcmodels/KMCBanner.ts#L21)
+[models/KMCBanner.ts:21](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KMCBanner.ts#L21)

@@ -22,6 +22,7 @@ select {
 .selectcontainer {
   position: relative;
   display: flex;
+  border: 1px solid transparent;
 }
 
 .selectcontainer.inline {

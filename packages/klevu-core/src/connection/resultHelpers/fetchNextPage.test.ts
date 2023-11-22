@@ -114,7 +114,7 @@ test("Next page analytics test", async () => {
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -133,7 +133,7 @@ test("Next page analytics test", async () => {
   query2?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -152,7 +152,7 @@ test("Next page analytics test", async () => {
   query3?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -167,7 +167,7 @@ test("Next page analytics test", async () => {
   query2?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },
@@ -177,7 +177,7 @@ test("Next page analytics test", async () => {
   query?.categoryMerchandisingClickEvent?.({
     productId: product.id,
     categoryTitle: "Women",
-    variantId: product.itemGroupId,
+    variantId: product.variantId || product.id,
     override: {
       klevu_shopperIP: "192.168.0.1",
     },

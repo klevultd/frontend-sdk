@@ -1,5 +1,5 @@
 import type {
-  KlevuEventV2Data,
+  KlevuRecommendationsEventV2Data,
   KlevuV1CategoryProductsView,
   V1SearchEvent,
 } from "../events/eventRequests.js"
@@ -29,7 +29,14 @@ export type KlevuResultEvent = {
   recommendationClickEvent?: (params: {
     productId: string
     variantId?: string
-    override?: Partial<KlevuEventV2Data>
+    override?: Partial<KlevuRecommendationsEventV2Data>
+  }) => void
+
+  /**
+   * Returns function to be called when recommendation banner is clicked.
+   */
+  recommendationBannerClickEvent?: (params: {
+    resolution: "desktop" | "mobile"
   }) => void
 
   hooks: KlevuResultEventOnResult[]

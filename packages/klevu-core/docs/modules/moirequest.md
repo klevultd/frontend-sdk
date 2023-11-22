@@ -6,11 +6,14 @@
 
 | Name | Type |
 | :------ | :------ |
-| `context` | { `klevuApiKey`: `string` ; `sessionId?`: `string`  } |
-| `context.klevuApiKey` | `string` |
-| `context.sessionId?` | `string` |
+| `context` | [`MoiContext`](moicontext.md) |
+| `feedback?` | { `messageId`: `string` ; `reason?`: `string` ; `thumbs?`: ``"UP"`` \| ``"DOWN"``  } |
+| `feedback.messageId` | `string` |
+| `feedback.reason?` | `string` |
+| `feedback.thumbs?` | ``"UP"`` \| ``"DOWN"`` |
 | `filter?` | { `value`: `string`  } |
 | `filter.value` | `string` |
+| `klevuSettings?` | `Omit`<[`KlevuBaseQuerySettings`](klevubasequerysettings.md), ``"query"``\> |
 | `message?` | `string` |
 | `product?` | { `context`: { `url`: `string`  } ; `id`: `string` ; `intent`: `string`  } |
 | `product.context` | { `url`: `string`  } |
@@ -20,5 +23,5 @@
 
 #### Defined in
 
-[connection/moi/moi.ts:6](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/connection/moi/moi.ts#L6)
+[connection/moi/moi.ts:19](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/connection/moi/moi.ts#L19)
 

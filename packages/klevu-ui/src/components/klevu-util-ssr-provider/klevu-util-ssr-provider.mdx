@@ -1,0 +1,12 @@
+import { Controls, Canvas, Meta, Markdown } from "@storybook/addon-docs"
+import * as Stories from "./klevu-util-ssr-provider.stories"
+
+<Meta of={Stories} />
+
+# Klevu-util-ssr-provider
+
+<Markdown>{Stories.description}</Markdown>
+
+SSR Provider example will transform components data to a string that set to attribute of the this utility component.
+
+When a client side reads this provider and finds the attribute, it will transform the string to a JSON object and pass it to the components.

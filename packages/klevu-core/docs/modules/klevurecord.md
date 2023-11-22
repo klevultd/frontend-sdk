@@ -46,9 +46,10 @@
 | `type` | `string` | - |
 | `typeOfRecord` | [`KlevuAnyTypeOfRecord`](klevuanytypeofrecord.md) | The type of record, e.g. KLEVU_PRODUCT, KLEVU_CMS, KLEVU_CATEGORY, etc. |
 | `url` | `string` | The fully qualified URL used to access the record in your store. |
+| `variantId?` | `string` | The identifier used at the platform level; which could be different from the unique Klevu ID, eg. the ID of the variant in the case of a configurable product. |
 | `weight` | `string` | - |
 
 #### Defined in
 
-[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/models/KlevuRecord.ts#L3)
+[models/KlevuRecord.ts:3](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/models/KlevuRecord.ts#L3)
 

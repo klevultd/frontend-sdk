@@ -58,13 +58,15 @@ export function personalisation(options?: {
           )
         }
 
-        q.settings.context = {
-          recentObjects: [
-            {
-              typeOfRecord: KlevuTypeOfRecord.Product,
-              records,
-            },
-          ],
+        if (records.length > 0) {
+          q.settings.context = {
+            recentObjects: [
+              {
+                typeOfRecord: KlevuTypeOfRecord.Product,
+                records,
+              },
+            ],
+          }
         }
       }
       return copy

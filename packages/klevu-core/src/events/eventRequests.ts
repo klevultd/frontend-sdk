@@ -1,4 +1,8 @@
-import { KlevuConfig, KlevuTypeOfSearch } from "../index.js"
+import {
+  KlevuConfig,
+  KlevuKMCRecommendations,
+  KlevuTypeOfSearch,
+} from "../index.js"
 import { get, post } from "../connection/fetch.js"
 import { isBrowser } from "../utils/isBrowser.js"
 
@@ -115,61 +119,14 @@ export async function KlevuEventV1ProductTracking(
   return res
 }
 
-/** @deprecated */
-export type V1CheckedOutProductsEvent = {
-  /**
-   * This is your Klevu JS API Key.
-   */
-  klevu_apiKey: string
-  /**
-   * Here, the value must be checkout.
-   */
-  klevu_type: "checkout"
-  /**
-   * This is the Klevu ID of the purchased product. eg. 54321-12345. Please note
-   * that the value of the klevu_productId must be the same in both the click
-   * and checkout calls.
-   */
-  klevu_productId: string
-  /**
-   * This is the parent ID of the purchased product. eg. 54321. For compound
-   * products with a parent and multiple child/variant products, this is the
-   * common ID which ties the products together. For simple products, please
-   * specify the same as klevu_productId.
-   */
-  klevu_productGroupId: string
-  /**
-   * This is the child/variant ID of the purchased product. eg. 12345. For
-   * compound products with a parent and multiple child/variant products, this
-   * is the ID of the specific variant. For simple products, please specify the
-   * same as klevu_productId.
-   */
-  klevu_productVariantId: string
-  /**
-   * This is the total quantity purchased. It must be an integer (e.g. 5).
-   */
-  klevu_unit: number
-  /**
-   * Product's sale price for one unit. This must be a double Value.
-   */
-  klevu_salePrice: number
-  /**
-   * e.g GBP, USD, EUR.
-   */
-  klevu_currency: string
-  /**
-   * IP address of the shopper who bought the product(s).
-   */
-  klevu_shopperIP?: string
-}
-
-export type V2CheckedOutProductsEvent = {
-  event: "order_purchase"
+export type V2EventBase = {
+  event: "order_purchase" | "view_recs_list" | "select_recs_list"
   event_version: "1.0.0"
   /**
    * Your Klevu JS Api Key, eg. klevu-12345.
    */
   event_apikey: string
+
   /**
    * The optional json object that holds the user related information such as ip_address, email.
    */
@@ -183,6 +140,10 @@ export type V2CheckedOutProductsEvent = {
      */
     email?: string
   }
+}
+
+export type V2CheckedOutProductsEvent = V2EventBase & {
+  event: "order_purchase"
   event_data: {
     /**
      * Depending on the number of orders, the item array accepts single or more orders.
@@ -226,21 +187,6 @@ export type V2CheckedOutProductsEvent = {
       units?: number
     }>
   }
-}
-
-/**
- * @deprecated Use KlevuEventV2CheckedOutProducts instead
- */
-export async function KlevuEventV1CheckedOutProducts(
-  event: V1CheckedOutProductsEvent
-) {
-  const url = `${KlevuConfig.getDefault().eventsApiV1Url}productTracking`
-  const id = addPendingRequest(url, event)
-  const res = await sendGenericPostEvent(url, event)
-  if (id) {
-    removePendingRequest(id)
-  }
-  return res
 }
 
 export async function KlevuEventV2CheckedOutProducts(
@@ -380,96 +326,162 @@ export async function KlevuEventV1CategoryProductClick(
   return res
 }
 
-export type KlevuEventV2Data = {
+export type KlevuV1ImageBannerClick = {
+  klevu_apiKey: string
+  klevu_term: string
+  klevu_bannerId: string
+  klevu_bannerName: string
+  klevu_image: string
+  klevu_target: string
+  klevu_request: "click"
+  type: "banner"
+}
+
+export async function KlevuEventV1BannerClick(event: KlevuV1ImageBannerClick) {
+  const url = `${KlevuConfig.getDefault().eventsApiV1Url}dataTracking`
+  const id = addPendingRequest(url, event)
+  const res = await sendGenericPostEvent(url, event)
+  if (id) {
+    removePendingRequest(id)
+  }
+  return res
+}
+
+export type KlevuEventV2DataStaticContent = {
+  /**
+   * The type of content. Currently only image is supported
+   */
+  content_type: "image"
+  /**
+   * Which resolution of the banner is used
+   */
+  resolution: "desktop" | "mobile"
+  /**
+   * URL of the banner
+   */
+  banner_image_url: string
+  /**
+   * Alt text of the banner
+   */
+  banner_alt_tag: string
+  /**
+   * The order of the product in the listing, starting from 1.
+   */
+  index: number
+}
+
+export type KlevuRecommendationsEventV2Data = V2EventBase & {
   /**
    * Please use the appropriate value for each event type, detailed within each
    * section below. eg. view_recs_list.
    */
   event: "view_recs_list" | "select_recs_list"
-  /**
-   * Your Klevu JS Api Key, eg. klevu-12345.
-   */
-  event_apikey: string
-  /**
-   * The unique identifier for your KMC Recommendations Banner, eg. 12345-abcde.
-   * This is available in the banner configuration metadata as recsKey. If you
-   * are not using banners configured within the KMC, please specify a unique
-   * identifier for the banner which will be used to distinguish one banner from
-   * another.
-   */
-  event_list_id: string
-  /**
-   * The name of the banner, eg. New Arrivals. This is available in the banner
-   * configuration metadata as title.
-   */
-  event_list_name: string
-  /**
-   * The logic type of the banner, eg. NEWEST_ARRIVALS. This is available in the
-   * banner configuration metadata as logic.
-   */
-  event_list_logic: string
-  /**
-   * This can be used to specify additional information about the event, which
-   * will eventually be made available within the KMC. We recommend you specify
-   * the type of page, eg. HOME. This is available in the banner configuration
-   * metadata as pageType.
-   */
-  event_tags?: string[]
-  /**
-   * Depending on the event type, you will either detail a single item or
-   * multiple items here.
-   */
-  items: Array<{
+
+  event_data?: {
     /**
-     * The full ID of the product. eg. 12345-54321. This will match the unique
-     * value used in your data sync process with Klevu. For compound products
-     * consisting of a child/variant and a parent, this is usually
-     * parentId-childId.
+     * The unique identifier for your KMC Recommendations Banner, eg. 12345-abcde.
+     * This is available in the banner configuration metadata as recsKey. If you
+     * are not using banners configured within the KMC, please specify a unique
+     * identifier for the banner which will be used to distinguish one banner from
+     * another.
      */
-    item_id: string
+    list_id: string
     /**
-     * The Parent ID of the product. eg. 12345. For compound products consisting
-     * of a child/variant and a parent, please specify the ID of the parent. For
-     * simple products, please re-use the same value as item_id.
+     * The name of the banner, eg. New Arrivals. This is available in the banner
+     * configuration metadata as title.
      */
-    item_group_id: string
+    list_name: string
     /**
-     * The Child ID of the product.eg. 54321. Please specify the ID of the
-     * child/variant product. For simple products, please re-use the same value
-     * as item_id.
+     * The logic type of the banner, eg. NEWEST_ARRIVALS. This is available in the
+     * banner configuration metadata as logic.
      */
-    item_variant_id: string
+    list_logic: string
     /**
-     * The name of the product.
+     * This can be used to specify additional information about the event, which
+     * will eventually be made available within the KMC. We recommend you specify
+     * the type of page, eg. HOME. This is available in the banner configuration
+     * metadata as pageType.
      */
-    item_name: string
+    tags?: string[]
+
     /**
-     * The final selling price of the product, for example 123.45.
+     * In case of banners metadata includes spot id.
      */
-    price: string
+    spot_id?: string
+
     /**
-     * The currency of the above price, eg. USD.
+     * In case of banners metadata includes spot name.
      */
-    currency?: string
+    spot_name?: string
+
     /**
-     * The brand of the product, for example "Nike" or "Acme".
+     * When segmentation is used
      */
-    item_brand?: string
+    segment_id?: string
+    segment_name?: string
+
     /**
-     * The category the item belongs to. For nested categories, use the ;
-     * character to separate the hierarchy, and for multiple categories use a
-     * double ;;. For example, for 'Mens > Shoes > Trainers' and 'Sale' you
-     * would specify: Mens;Shoes;Trainers;;Sale.
+     * When static banner is used this needs to be fined
      */
-    item_category?: string
+    action?: KlevuKMCRecommendations["metadata"]["action"]
+    static_content?: Array<KlevuEventV2DataStaticContent>
+
     /**
-     * he order of the product in the listing, starting from 1.
+     * Depending on the event type, you will either detail a single item or
+     * multiple items here.
      */
-    index: number
-  }>
+    items?: Array<{
+      /**
+       * The full ID of the product. eg. 12345-54321. This will match the unique
+       * value used in your data sync process with Klevu. For compound products
+       * consisting of a child/variant and a parent, this is usually
+       * parentId-childId.
+       */
+      item_id: string
+      /**
+       * The Parent ID of the product. eg. 12345. For compound products consisting
+       * of a child/variant and a parent, please specify the ID of the parent. For
+       * simple products, please re-use the same value as item_id.
+       */
+      item_group_id: string
+      /**
+       * The Child ID of the product.eg. 54321. Please specify the ID of the
+       * child/variant product. For simple products, please re-use the same value
+       * as item_id.
+       */
+      item_variant_id: string
+      /**
+       * The name of the product.
+       */
+      item_name: string
+      /**
+       * The final selling price of the product, for example 123.45.
+       */
+      price: string
+      /**
+       * The currency of the above price, eg. USD.
+       */
+      currency?: string
+      /**
+       * The brand of the product, for example "Nike" or "Acme".
+       */
+      item_brand?: string
+      /**
+       * The category the item belongs to. For nested categories, use the ;
+       * character to separate the hierarchy, and for multiple categories use a
+       * double ;;. For example, for 'Mens > Shoes > Trainers' and 'Sale' you
+       * would specify: Mens;Shoes;Trainers;;Sale.
+       */
+      item_category?: string
+      /**
+       * he order of the product in the listing, starting from 1.
+       */
+      index: number
+    }>
+  }
 }
 
-export async function KlevuEventV2(data: KlevuEventV2Data[]) {
+export async function KlevuEventV2(data: KlevuRecommendationsEventV2Data[]) {
   const url = KlevuConfig.getDefault().eventsApiV2Url
   const id = addPendingRequest(url, data)
   const res = await post(url, data, true)

@@ -13,6 +13,7 @@
 - [buy](KlevuEvents.md#buy)
 - [categoryMerchandisingProductClick](KlevuEvents.md#categorymerchandisingproductclick)
 - [categoryMerchandisingView](KlevuEvents.md#categorymerchandisingview)
+- [imageBannerClick](KlevuEvents.md#imagebannerclick)
 - [recommendationClick](KlevuEvents.md#recommendationclick)
 - [recommendationView](KlevuEvents.md#recommendationview)
 - [search](KlevuEvents.md#search)
@@ -32,28 +33,15 @@
 
 Tell Klevu what products where bought by the user
 
-**`Property`**
-
-count of bought products
-
-**`Property`**
-
-KlevuProduct that is being bought
-
-**`Property`**
-
-optional variantId that is being bought
-
-**`Property`**
-
-optional override any settings of sent data
-
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `items` | `Object` | Items user bought |
-| `items.items` | { `amount`: `number` ; `override`: `Partial`<`V1CheckedOutProductsEvent`\> ; `product`: `Partial`<[`KlevuRecord`](../modules.md#klevurecord)\> ; `variantId?`: `string`  }[] | - |
+| `items.items` | { `amount`: `number` ; `orderId?`: `string` ; `orderLineId?`: `string` ; `override?`: `Partial`<{ `currency`: `string` ; `item_group_id`: `string` ; `item_id`: `string` ; `item_name`: `string` ; `item_variant_id`: `string` ; `order_id?`: `string` ; `order_line_id?`: `string` ; `unit_price`: `number` ; `units?`: `number`  }\> ; `product`: `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\> & `Partial`<`Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"name"`` \| ``"currency"`` \| ``"itemGroupId"`` \| ``"salePrice"``\>\> ; `variantId?`: `string`  }[] | - |
+| `items.user?` | `Object` | - |
+| `items.user.email?` | `string` | - |
+| `items.user.ip_address?` | `string` | - |
 
 #### Returns
 
@@ -61,27 +49,28 @@ optional override any settings of sent data
 
 #### Defined in
 
-[events/KlevuEvents.ts:43](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L43)
+[events/KlevuEvents.ts:44](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L44)
 
 ___
 
 ### categoryMerchandisingProductClick
 
-▸ `Static` **categoryMerchandisingProductClick**(`product`, `categoryTitle`, `klevuCategory`, `variantId?`, `productPosition?`, `abTestId?`, `abTestVariantId?`, `activeFilters?`, `override?`): `void`
+▸ `Static` **categoryMerchandisingProductClick**(`«destructured»`): `void`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `product` | `Partial`<[`KlevuRecord`](../modules.md#klevurecord)\> | Product clicked |
-| `categoryTitle` | `string` | This is the name of the category being visited. For example, Stackable Rings. The name should not include parent categories. |
-| `klevuCategory` | `string` | This is the complete hierarchy of the category being visited. For example, Jewellery;Rings;Stackable Rings. Please note the use of a semicolon as the separator between a parent and a child category. |
-| `variantId?` | `string` | This is the child/variant ID of the clicked product. eg. 12345. For compound products with a parent and multiple child/variant products, this is the ID of the specific variant. |
-| `productPosition?` | `number` | Position of the product on the category page when it was clicked. For example, the value would be 0 if it is the first product on the first page. The value will be 30, if it is the first product on the 2nd page with 30 products being displayed per page. |
-| `abTestId?` | `string` | - |
-| `abTestVariantId?` | `string` | - |
-| `activeFilters?` | `string` | The string version of active filters applied to the query that got the products. |
-| `override` | `Partial`<`KlevuV1CategoryProductsClick`\> | Ability to override any analytical keys in low level |
+| Name | Type |
+| :------ | :------ |
+| `«destructured»` | `Object` |
+| › `abTestId?` | `string` |
+| › `abTestVariantId?` | `string` |
+| › `activeFilters?` | `string` |
+| › `categoryTitle` | `string` |
+| › `klevuCategory` | `string` |
+| › `override?` | `Partial`<`KlevuV1CategoryProductsClick`\> |
+| › `product` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\> & `Partial`<`Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"name"`` \| ``"itemGroupId"`` \| ``"salePrice"`` \| ``"sku"`` \| ``"url"``\>\> |
+| › `productPosition?` | `number` |
+| › `variantId?` | `string` |
 
 #### Returns
 
@@ -89,27 +78,27 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:313](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L313)
+[events/KlevuEvents.ts:368](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L368)
 
 ___
 
 ### categoryMerchandisingView
 
-▸ `Static` **categoryMerchandisingView**(`__namedParameters`): `void`
+▸ `Static` **categoryMerchandisingView**(`«destructured»`): `void`
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.abTestId?` | `string` |
-| `__namedParameters.abTestVariantId?` | `string` |
-| `__namedParameters.activeFilters?` | `string` |
-| `__namedParameters.categoryTitle` | `string` |
-| `__namedParameters.klevuCategory` | `string` |
-| `__namedParameters.override?` | `Partial`<`KlevuV1CategoryProductsView`\> |
-| `__namedParameters.pageStartsFrom?` | `number` |
-| `__namedParameters.products` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\>[] |
+| `«destructured»` | `Object` |
+| › `abTestId?` | `string` |
+| › `abTestVariantId?` | `string` |
+| › `activeFilters?` | `string` |
+| › `categoryTitle` | `string` |
+| › `klevuCategory` | `string` |
+| › `override?` | `Partial`<`KlevuV1CategoryProductsView`\> |
+| › `pageStartsFrom?` | `number` |
+| › `products` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\>[] |
 
 #### Returns
 
@@ -117,26 +106,67 @@ ___
 
 #### Defined in
 
-[events/KlevuEvents.ts:268](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L268)
+[events/KlevuEvents.ts:323](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L323)
+
+___
+
+### imageBannerClick
+
+▸ `Static` **imageBannerClick**(`«destructured»`): `void`
+
+When user clicks on the banner that is in quicksearch or on search landing page
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `«destructured»` | `Object` | - |
+| › `bannerId` | `string` | Id of the banner |
+| › `bannerName` | `string` | Name of the banner |
+| › `imageUrl` | `string` | Url of the image |
+| › `override` | `Partial`<`KlevuV1ImageBannerClick`\> | - |
+| › `targetUrl` | `string` | Url where the user is redirected |
+| › `term` | `string` | Search term used to get the results |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[events/KlevuEvents.ts:423](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L423)
 
 ___
 
 ### recommendationClick
 
-▸ `Static` **recommendationClick**(`__namedParameters`): `void`
+▸ `Static` **recommendationClick**(`«destructured»`): `void`
 
 When product has been clicked in the recommendation banner
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.override?` | `Partial`<`KlevuEventV2Data`\> |
-| `__namedParameters.product` | `Partial`<[`KlevuRecord`](../modules.md#klevurecord)\> |
-| `__namedParameters.productIndexInList` | `number` |
-| `__namedParameters.recommendationMetadata` | [`RecommendationViewEventMetaData`](../modules.md#recommendationvieweventmetadata) |
-| `__namedParameters.variantId?` | `string` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `«destructured»` | `Object` | - |
+| › `bannerInfo?` | `KlevuEventV2DataStaticContent` | - |
+| › `override?` | `Partial`<`KlevuRecommendationsEventV2Data`\> | - |
+| › `product?` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\> & `Partial`<`Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"name"`` \| ``"brand"`` \| ``"category"`` \| ``"currency"`` \| ``"itemGroupId"`` \| ``"salePrice"``\>\> | - |
+| › `productIndexInList?` | `number` | - |
+| › `recommendationMetadata` | `Object` | - |
+| › `recommendationMetadata.action?` | ``null`` \| ``"STATIC_CONTENT"`` \| ``"HIDE_RECOMMENDATION"`` \| ``"FILTER"`` | Special cases of recommendation |
+| › `recommendationMetadata.enabled` | `boolean` | - |
+| › `recommendationMetadata.logic` | [`KMCRecommendationLogic`](../enums/KMCRecommendationLogic.md) | Logic used in recommendation |
+| › `recommendationMetadata.maxProducts` | `number` | Amount of products to fetch |
+| › `recommendationMetadata.pageType` | `KMCRecommendationPagetype` | Target page type of recommendation |
+| › `recommendationMetadata.productThreshold` | `number` | - |
+| › `recommendationMetadata.recsKey` | `string` | ID of the recommendation |
+| › `recommendationMetadata.segmentKey` | ``null`` \| `string` | User segment key |
+| › `recommendationMetadata.segmentName` | ``null`` \| `string` | User segment name |
+| › `recommendationMetadata.spotKey` | `string` | ID of the spot |
+| › `recommendationMetadata.spotName` | `string` | Spot name |
+| › `recommendationMetadata.title` | `string` | Title of the recommendation |
+| › `variantId?` | `string` | - |
 
 #### Returns
 
@@ -144,13 +174,13 @@ When product has been clicked in the recommendation banner
 
 #### Defined in
 
-[events/KlevuEvents.ts:134](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L134)
+[events/KlevuEvents.ts:170](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L170)
 
 ___
 
 ### recommendationView
 
-▸ `Static` **recommendationView**(`__namedParameters`): `void`
+▸ `Static` **recommendationView**(`«destructured»`): `void`
 
 When recommendation banner is shown in the page
 
@@ -158,10 +188,10 @@ When recommendation banner is shown in the page
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.override?` | `Partial`<`KlevuEventV2Data`\> |
-| `__namedParameters.products` | `Partial`<[`KlevuRecord`](../modules.md#klevurecord)\>[] |
-| `__namedParameters.recommendationMetadata` | [`RecommendationViewEventMetaData`](../modules.md#recommendationvieweventmetadata) |
+| `«destructured»` | `Object` |
+| › `override?` | `Partial`<`KlevuRecommendationsEventV2Data`\> |
+| › `products?` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\> & `Partial`<`Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"name"`` \| ``"brand"`` \| ``"category"`` \| ``"currency"`` \| ``"itemGroupId"`` \| ``"price"`` \| ``"variantId"``\>\>[] |
+| › `recommendationMetadata` | `Partial`<{ `action?`: ``null`` \| ``"STATIC_CONTENT"`` \| ``"HIDE_RECOMMENDATION"`` \| ``"FILTER"`` ; `enabled`: `boolean` ; `logic`: [`KMCRecommendationLogic`](../enums/KMCRecommendationLogic.md) ; `maxProducts`: `number` ; `pageType`: `KMCRecommendationPagetype` ; `productThreshold`: `number` ; `recsKey`: `string` ; `segmentKey`: ``null`` \| `string` ; `segmentName`: ``null`` \| `string` ; `spotKey`: `string` ; `spotName`: `string` ; `title`: `string`  }\> & `Pick`<{ `action?`: ``null`` \| ``"STATIC_CONTENT"`` \| ``"HIDE_RECOMMENDATION"`` \| ``"FILTER"`` ; `enabled`: `boolean` ; `logic`: [`KMCRecommendationLogic`](../enums/KMCRecommendationLogic.md) ; `maxProducts`: `number` ; `pageType`: `KMCRecommendationPagetype` ; `productThreshold`: `number` ; `recsKey`: `string` ; `segmentKey`: ``null`` \| `string` ; `segmentName`: ``null`` \| `string` ; `spotKey`: `string` ; `spotName`: `string` ; `title`: `string`  }, ``"logic"`` \| ``"recsKey"`` \| ``"title"``\> |
 
 #### Returns
 
@@ -169,13 +199,13 @@ When recommendation banner is shown in the page
 
 #### Defined in
 
-[events/KlevuEvents.ts:85](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L85)
+[events/KlevuEvents.ts:97](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L97)
 
 ___
 
 ### search
 
-▸ `Static` **search**(`__namedParameters`): `void`
+▸ `Static` **search**(`«destructured»`): `void`
 
 What user has last searched. This is important for Klevu to function
 properly. Use `sendSearchEvent()` modifier with search query to send results
@@ -184,12 +214,12 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.activeFilters?` | `string` |
-| `__namedParameters.override?` | `Partial`<`V1SearchEvent`\> |
-| `__namedParameters.term` | `string` |
-| `__namedParameters.totalResults` | `number` |
-| `__namedParameters.typeOfSearch` | [`KlevuTypeOfSearch`](../enums/KlevuTypeOfSearch.md) |
+| `«destructured»` | `Object` |
+| › `activeFilters?` | `string` |
+| › `override?` | `Partial`<`V1SearchEvent`\> |
+| › `term` | `string` |
+| › `totalResults` | `number` |
+| › `typeOfSearch` | [`KlevuTypeOfSearch`](../enums/KlevuTypeOfSearch.md) |
 
 #### Returns
 
@@ -197,13 +227,13 @@ properly. Use `sendSearchEvent()` modifier with search query to send results
 
 #### Defined in
 
-[events/KlevuEvents.ts:229](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L229)
+[events/KlevuEvents.ts:284](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L284)
 
 ___
 
 ### searchProductClick
 
-▸ `Static` **searchProductClick**(`__namedParameters`): `void`
+▸ `Static` **searchProductClick**(`«destructured»`): `void`
 
 When product is clicked. Do not use this for recommendations
 
@@ -211,12 +241,12 @@ When product is clicked. Do not use this for recommendations
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.activeFilters?` | `string` |
-| `__namedParameters.override?` | `Partial`<`V1ProductTrackingEvent`\> |
-| `__namedParameters.product` | `Partial`<[`KlevuRecord`](../modules.md#klevurecord)\> |
-| `__namedParameters.searchTerm?` | `string` |
-| `__namedParameters.variantId?` | `string` |
+| `«destructured»` | `Object` |
+| › `activeFilters?` | `string` |
+| › `override?` | `Partial`<`V1ProductTrackingEvent`\> |
+| › `product` | `Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"id"``\> & `Partial`<`Pick`<[`KlevuRecord`](../modules.md#klevurecord), ``"name"`` \| ``"itemGroupId"`` \| ``"url"``\>\> |
+| › `searchTerm?` | `string` |
+| › `variantId?` | `string` |
 
 #### Returns
 
@@ -224,4 +254,4 @@ When product is clicked. Do not use this for recommendations
 
 #### Defined in
 
-[events/KlevuEvents.ts:186](https://github.com/klevultd/frontend-sdk/blob/f1babb6/packages/klevu-core/src/events/KlevuEvents.ts#L186)
+[events/KlevuEvents.ts:240](https://github.com/klevultd/frontend-sdk/blob/492d3760/packages/klevu-core/src/events/KlevuEvents.ts#L240)

@@ -358,7 +358,7 @@ export class KlevuQuicksearch {
     if (product.id) {
       this.#resultObject?.searchClickEvent?.({
         productId: product.id,
-        variantId: product.itemGroupId || product.id,
+        variantId: product.variantId || product.id,
       })
     }
   }

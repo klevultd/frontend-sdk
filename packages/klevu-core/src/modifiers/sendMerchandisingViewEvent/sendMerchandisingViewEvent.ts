@@ -17,6 +17,7 @@ export function sendMerchandisingViewEvent(
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
+    ssrOnResultFE: true,
     onResult: (res, f) => {
       if (!f.params) {
         return res

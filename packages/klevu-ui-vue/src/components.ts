@@ -165,9 +165,13 @@ export const KlevuImagePicker = /*@__PURE__*/ defineContainer<JSX.KlevuImagePick
 export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-init', undefined, [
   'apiKey',
   'url',
+  'eventsV1Url',
+  'eventsV2Url',
+  'recommendationsApiUrl',
   'settings',
   'language',
   'translation',
+  'assetsPath',
   'translationUrlPrefix',
   'kmcLoadDefaults'
 ]);
@@ -555,6 +559,13 @@ export const KlevuUtilScrollbars = /*@__PURE__*/ defineContainer<JSX.KlevuUtilSc
   'overflowX',
   'overflowY',
   'useNative'
+]);
+
+
+export const KlevuUtilSsrProvider = /*@__PURE__*/ defineContainer<JSX.KlevuUtilSsrProvider>('klevu-util-ssr-provider', undefined, [
+  'html',
+  'packed',
+  'identifier'
 ]);
 
 
