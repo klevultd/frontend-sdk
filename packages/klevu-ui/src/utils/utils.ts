@@ -1,21 +1,6 @@
 import { KlevuRecord } from "@klevu/core"
 
 /**
- * Render given price with browsers own currency format.
- *
- * @param amount
- * @param currency
- * @returns formatted price
- */
-export function renderPrice(amount: number | string, currency: string): string {
-  if (window?.["klevu_ui_settings"]?.renderPrice) {
-    return window["klevu_ui_settings"].renderPrice(amount, currency)
-  }
-  const price = typeof amount === "string" ? parseFloat(amount) : amount
-  return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(price)
-}
-
-/**
  * Run callback only if it hasn't been requested in last `delay` milliseconds.
  *
  * @param callback function to call
@@ -70,7 +55,7 @@ export type KlevuUIGlobalSettings = {
   /**
    * Generic way to render prices. By default browser currency renderer is used
    */
-  renderPrice?: typeof renderPrice
+  renderPrice?: (amount: number | string, currency: string) => string
 
   /**
    * Replace icons with custom image based ones
@@ -85,12 +70,16 @@ export type KlevuUIGlobalSettings = {
   useNativeScrollbars?: boolean
 }
 
-export function getGlobalSettings(): KlevuUIGlobalSettings | undefined {
-  if (window) {
-    return {
-      renderPrice,
-      ...window["klevu_ui_settings"],
+export function closestElement<T extends Element>(selector: string, base: Element) {
+  function __closestFrom(el: Element | Window | Document): T | null {
+    if (!el || el === document || el === window) {
+      return null
     }
+    if ((el as Slottable).assignedSlot) {
+      el = (el as Slottable).assignedSlot!
+    }
+    let found: T | null = (el as Element).closest(selector)
+    return found ? found : __closestFrom(((el as Element).getRootNode() as ShadowRoot).host)
   }
-  return undefined
+  return __closestFrom(base)
 }

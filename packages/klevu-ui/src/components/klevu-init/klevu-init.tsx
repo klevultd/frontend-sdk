@@ -1,5 +1,5 @@
 import { KMCRootObject, KlevuConfig, KlevuKMCSettings } from "@klevu/core"
-import { Component, h, Host, Method, Prop } from "@stencil/core"
+import { Component, h, Host, Method, Prop, Watch, State, Event, EventEmitter } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
 
@@ -66,7 +66,9 @@ export class KlevuInit {
   /**
    * Global settings
    */
-  @Prop() settings?: KlevuUIGlobalSettings
+  @Prop() settings: KlevuUIGlobalSettings = {
+    renderPrice,
+  }
 
   /**
    * Which language to load
@@ -91,6 +93,20 @@ export class KlevuInit {
 
   @Prop() kmcLoadDefaults?: boolean
 
+  @Event({
+    composed: true,
+  })
+  klevuInitSettingsUpdated!: EventEmitter<KlevuUIGlobalSettings>
+
+  @State()
+  updateTick = {}
+
+  @Watch("settings")
+  async settingsChanged(newValue: KlevuUIGlobalSettings, oldValue: KlevuUIGlobalSettings) {
+    await this.#defineSettings(newValue)
+    this.klevuInitSettingsUpdated.emit(this.settings)
+  }
+
   async connectedCallback() {
     KlevuConfig.init({
       apiKey: this.apiKey,
@@ -106,23 +122,32 @@ export class KlevuInit {
       window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
     }
 
+    this.#defineSettings(this.settings)
+  }
+
+  async #defineSettings(settings: KlevuUIGlobalSettings) {
+    this.settings = settings
     if (this.kmcLoadDefaults) {
       const data = await KlevuKMCSettings()
       window["klevu_ui_kmc_settings"] = data.root
-      if (this.settings?.renderPrice === undefined) {
-        const priceSettings: KMCRootObject["klevu_uc_userOptions"]["priceFormatter"] | undefined =
-          data.root?.klevu_uc_userOptions.priceFormatter
-        if (priceSettings) {
-          this.settings = {
-            ...(this.settings || {}),
-            renderPrice: (...params) => this.#renderPriceKMCSettings(...params, priceSettings),
-          }
-        }
+      if (data.root?.klevu_uc_userOptions.priceFormatter) {
+        this.settings.renderPrice = (...params) =>
+          this.#renderPriceKMCSettings(...params, data.root!.klevu_uc_userOptions.priceFormatter)
       }
     }
+  }
 
-    if (this.settings) {
-      window["klevu_ui_settings"] = this.settings
+  #setKMCPriceCalculationSetting(
+    settings: KlevuUIGlobalSettings,
+    priceSettings: KMCRootObject["klevu_uc_userOptions"]["priceFormatter"] | undefined
+  ) {
+    if (!priceSettings || settings.renderPrice) return settings
+
+    if (priceSettings) {
+      settings = {
+        ...(settings || {}),
+        renderPrice: (...params) => this.#renderPriceKMCSettings(...params, priceSettings),
+      }
     }
   }
 
@@ -221,10 +246,14 @@ async function fetchTranslation(lang: Translations, urlPrefix?: string): Promise
   })
 }
 
-// extends window type with klevu_ui_settings and other known Klevu variables
+function renderPrice(amount: number | string, currency: string): string {
+  const price = typeof amount === "string" ? parseFloat(amount) : amount
+  return new Intl.NumberFormat(undefined, { style: "currency", currency }).format(price)
+}
+
+// extends window type with known Klevu variables
 declare global {
   interface Window {
-    klevu_ui_settings?: KlevuUIGlobalSettings
     klevu_ui_translations?: typeof en
     klevu_page_meta?: {
       pageType?: string

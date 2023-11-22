@@ -33,7 +33,8 @@ export class KlevuUtilScrollbars {
   componentDidLoad() {
     this.#initCustomScrollbars()
 
-    if (this.useNative === undefined && window.klevu_ui_settings?.useNativeScrollbars === true) {
+    const init = this.el.closest("klevu-init")
+    if (this.useNative === undefined && init?.settings?.useNativeScrollbars) {
       this.useNative = true
     }
   }

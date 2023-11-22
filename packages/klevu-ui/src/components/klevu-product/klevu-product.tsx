@@ -1,6 +1,6 @@
 import { KlevuRecord } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host, Prop, State, Fragment } from "@stencil/core"
-import { getGlobalSettings, renderPrice } from "../../utils/utils"
+import { Component, Event, EventEmitter, h, Host, Prop, State, Fragment, Element } from "@stencil/core"
+import { KlevuUIGlobalSettings, closestElement } from "../../utils/utils"
 import { getKMCSettings } from "../../utils/getKMCSettings"
 import { getTranslation } from "../../utils/getTranslation"
 import { KlevuInit } from "../klevu-init/klevu-init"
@@ -42,6 +42,8 @@ export type KlevuProductSlots = "top" | "image" | "info" | "bottom"
   shadow: true,
 })
 export class KlevuProduct {
+  @Element() el!: HTMLElement
+
   /**
    * What variant of product to render
    */
@@ -175,35 +177,51 @@ export class KlevuProduct {
   })
   klevuAddToCart!: EventEmitter<KlevuProductAddToCart>
 
+  @State()
+  settings?: KlevuUIGlobalSettings
+
   async connectedCallback() {
     await KlevuInit.ready()
-    const settings = getKMCSettings()
-    if (settings) {
+    const init = closestElement<HTMLKlevuInitElement>("klevu-init", this.el)
+
+    if (!init) {
+      console.error("klevu-product needs to be wrapped inside klevu-init")
+      return
+    }
+
+    this.settings = init?.settings
+
+    init?.addEventListener("klevuInitSettingsUpdated", (e: any) => {
+      this.settings = e.detail
+    })
+
+    const kmcSettings = getKMCSettings()
+    if (kmcSettings) {
       if (this.tAddToCart === undefined) {
-        this.tAddToCart = settings.klevu_uc_userOptions.addToCartButton ?? getTranslation("product.tAddToCart")
+        this.tAddToCart = kmcSettings.klevu_uc_userOptions.addToCartButton ?? getTranslation("product.tAddToCart")
       }
       if (this.showAddToCart === undefined) {
-        this.showAddToCart = settings.klevu_addToCartEnabled
+        this.showAddToCart = kmcSettings.klevu_addToCartEnabled
       }
       if (this.hideHoverImage === undefined) {
-        this.hideHoverImage = !Boolean(settings.klevu_uc_userOptions.showRolloverImage)
+        this.hideHoverImage = !Boolean(kmcSettings.klevu_uc_userOptions.showRolloverImage)
       }
       if (this.hideSwatches === undefined) {
-        this.hideSwatches = !Boolean(settings.klevu_uc_userOptions.showProductSwatches)
+        this.hideSwatches = !Boolean(kmcSettings.klevu_uc_userOptions.showProductSwatches)
       }
 
       if (this.vatCaption === undefined) {
-        this.vatCaption = settings.klevu_uc_userOptions.vatCaption
+        this.vatCaption = kmcSettings.klevu_uc_userOptions.vatCaption
       }
 
       if (this.showProductCode === undefined) {
-        this.showProductCode = settings.klevu_showProductCode
+        this.showProductCode = kmcSettings.klevu_showProductCode
       }
       if (this.fallbackProductImageUrl === undefined) {
-        this.fallbackProductImageUrl = settings.klevu_uc_userOptions.noImageUrl
+        this.fallbackProductImageUrl = kmcSettings.klevu_uc_userOptions.noImageUrl
       }
       if (this.outOfStockCaption === undefined) {
-        this.outOfStockCaption = settings.klevu_uc_userOptions.outOfStockCaption
+        this.outOfStockCaption = kmcSettings.klevu_uc_userOptions.outOfStockCaption
       }
     }
   }
@@ -224,8 +242,6 @@ export class KlevuProduct {
   }
 
   #click(ev: MouseEvent) {
-    const settings = getGlobalSettings()
-
     if (!this.product) {
       return
     }
@@ -240,9 +256,9 @@ export class KlevuProduct {
       return false
     }
 
-    if (settings?.onItemClick) {
+    if (this.settings?.onItemClick) {
       try {
-        const result = settings.onItemClick(this.product, ev)
+        const result = this.settings.onItemClick(this.product, ev)
         if (result === false) {
           ev.preventDefault()
           return false
@@ -301,14 +317,13 @@ export class KlevuProduct {
       )
     }
 
-    const settings = getGlobalSettings()
     const isOnSale = this.product.price != this.product.salePrice
 
     return (
       <Host class={{ line: this.variant === "line" }}>
         <div part="product-base" class={containerClasses}>
           <slot name="top"></slot>
-          <a href={settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
+          <a href={this.settings?.generateProductUrl?.(this.product)} onClick={this.#click.bind(this)}>
             {this.hideImage ? null : (
               <slot name="image">
                 {this.product?.image || this.hoverImage ? (
@@ -351,7 +366,8 @@ export class KlevuProduct {
                       }}
                       part="product-price"
                     >
-                      {renderPrice(this.product.salePrice, this.product.currency)}
+                      {this.settings?.renderPrice?.(this.product.salePrice, this.product.currency) ??
+                        this.product.salePrice}
                     </klevu-typography>
                     {this.vatCaption && (
                       <klevu-typography class="vatcaption" variant="body-s" part="product-vatcaption">

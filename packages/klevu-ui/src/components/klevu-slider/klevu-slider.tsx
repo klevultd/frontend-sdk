@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, Element, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
 import noUiSlider, { API } from "nouislider"
 
 /**
@@ -133,6 +133,22 @@ export class KlevuSlider {
     composed: true,
   })
   klevuSliderChange!: EventEmitter<[number, number]>
+
+  @Watch("formatTooltip")
+  tooltipUpdated(newValue: any) {
+    this.sliderInstance?.updateOptions(
+      {
+        tooltips: this.showTooltips
+          ? this.formatTooltip
+            ? {
+                to: this.formatTooltip,
+              }
+            : true
+          : false,
+      },
+      true
+    )
+  }
 
   #initNoUISlider(el: HTMLDivElement | undefined) {
     if (!el) {

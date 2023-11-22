@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "vite --port 3007 --host"
+    "start": "vite --port 3007 --host",
+    "initialize": "cd ../../packages/klevu-ui && npm run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/core": "^2.0.1",
-    "@klevu/ui": "0.1.6"
+    "@klevu/core": "file:../../packages/klevu-core",
+    "@klevu/ui": "file:../../packages/klevu-ui"
   },
   "devDependencies": {
     "vite": "^4.1.5"
