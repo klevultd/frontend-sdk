@@ -1,0 +1,192 @@
+import { Meta, Story } from "@storybook/addon-docs"
+import { html } from "lit-html"
+
+<Meta title="Examples/Creating Search results page in VanillaJS" />
+
+# Creating Search results page in React
+
+### Installing the package
+
+Follow the instructions [here](http://localhost:6006/?path=/docs/guides-installation--docs)
+Add this to the `<head>` of your page
+
+```jsx
+<script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+<link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
+```
+
+### Adding klevu-init
+
+Add `klevu-init` as the parent for components.
+
+```html
+<html>
+  <head>
+    <title>Search Results VanillaJS Example</title>
+    <meta charset="UTF-8" />
+    <script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+    <link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <klevu-init api-key="YOUR_STORE_API_KEY" url="YOUR_STORE_SEARCH_URL">
+      <klevu-search-landing-page term=""></klevu-search-landing-page>
+    </klevu-init>
+  </body>
+  <script>
+    const searchParams = new URLSearchParams(window.location.search)
+    const term = searchParams.get("q")
+    const searchLandingPage = document.getElementsByTagName("klevu-search-landing-page")
+    if (searchLandingPage.length > 0) searchLandingPage[0].term = term
+  </script>
+</html>
+```
+
+Whats happening here
+
+1. Read the search term from the `q` query param. This can be the query param you use for passing your search term.
+2. Pass the term to the `<klevu-search-landing-page>` component from script.
+3. And thats it.
+
+This is what you get with this small snippet.
+
+<img src="/basic-search-results-vanillajs.png" />
+
+### Customizing Slots
+
+You could further customize this page to change the look and feel of the product card. To achieve this, you would need to pass your customized product card to the `content` slot of the component.
+
+Here is an example of doing that
+
+```html
+<html>
+  <head>
+    <title>Search Results VanillaJS Example</title>
+    <meta charset="UTF-8" />
+    <script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+    <link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <klevu-init api-key="YOUR_STORE_API_KEY" url="YOUR_STORE_SEARCH_URL">
+      <klevu-search-landing-page term="">
+        <div slot="content">
+          <klevu-product-grid id="productList"></klevu-product-grid>
+        </div>
+      </klevu-search-landing-page>
+    </klevu-init>
+  </body>
+  <script>
+    const searchParams = new URLSearchParams(window.location.search)
+    const term = searchParams.get("q")
+    const searchLandingPage = document.getElementsByTagName("klevu-search-landing-page")
+    if (searchLandingPage.length > 0) {
+      searchLandingPage[0].term = term
+      searchLandingPage[0].addEventListener("klevuData", (event) => {
+        const resultsEl = document.getElementById("productList")
+        resultsEl.innerHTML = ""
+        for (const product of event.detail.records) {
+          const productEl = document.createElement("klevu-product")
+          productEl.product = product
+          productEl.variant = "default"
+          const bottomSlot = document.createElement("klevu-button")
+          bottomSlot.slot = "bottom"
+          bottomSlot.innerHTML = "Buy Now"
+          const badge = document.createElement("klevu-badge")
+          badge.slot = "top"
+          badge.innerHTML = "SALE"
+          badge.accent = 3
+          productEl.append(badge)
+          productEl.append(bottomSlot)
+
+          resultsEl.append(productEl)
+        }
+      })
+    }
+  </script>
+</html>
+```
+
+The above example replaces the content slot with a grid of Product components which have attributes assigned to customize them.
+You can also note a Badge being applied to the Product components `top` slot as a further enhancement.
+
+<img src="/slot-customized-search-results-vanillajs.png" />
+
+### More customization
+
+Here is how you can include brand name from a different attribute in the response in the product card
+
+```html
+<html>
+  <head>
+    <title>Search Results VanillaJS Example</title>
+    <meta charset="UTF-8" />
+    <script type="module" src="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.esm.js"></script>
+    <link href="https://resources-webcomponents.klevu.com/latest/klevu-ui/klevu-ui.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <klevu-init api-key="YOUR_STORE_API_KEY" url="YOUR_STORE_SEARCH_URL">
+      <klevu-search-landing-page term="">
+        <div slot="content">
+          <klevu-product-grid id="productList"></klevu-product-grid>
+        </div>
+      </klevu-search-landing-page>
+    </klevu-init>
+  </body>
+  <script>
+    const searchParams = new URLSearchParams(window.location.search)
+    const term = searchParams.get("q")
+    const searchLandingPage = document.getElementsByTagName("klevu-search-landing-page")
+    if (searchLandingPage.length > 0) {
+      searchLandingPage[0].term = term
+      searchLandingPage[0].addEventListener("klevuData", (event) => {
+        const resultsEl = document.getElementById("productList")
+        resultsEl.innerHTML = ""
+        for (const product of event.detail.records) {
+          const productEl = document.createElement("klevu-product")
+          productEl.product = product
+          productEl.variant = "default"
+          productEl.setAttribute("key-brand", "designer") // Set the attribute in this way
+          const bottomSlot = document.createElement("klevu-button")
+          bottomSlot.slot = "bottom"
+          bottomSlot.innerHTML = "Buy Now"
+          const badge = document.createElement("klevu-badge")
+          badge.slot = "top"
+          badge.innerHTML = "SALE"
+          badge.accent = 3
+          productEl.append(badge)
+          productEl.append(bottomSlot)
+
+          resultsEl.append(productEl)
+        }
+      })
+    }
+  </script>
+</html>
+```
+
+<img src="/custom-brand-attribute-search-results-vanillajs.png" />
+
+### CSS styling
+
+CSS styling of the product card is possible by accessing the parts of the component. Add this to the css file of this component.
+
+Here is an example where we style the product card, add this to the `<styles>` in `<head>`
+
+```css
+/* Add a border to the image */
+klevu-product::part(product-image) {
+  border: 1px solid #ddd;
+}
+
+/* Change the font weight and color of the product name */
+klevu-product::part(product-name) {
+  --klevu-typography-font-weight: 600;
+  color: green;
+}
+```
+
+<img src="/css-styled-search-results-vanillajs.png" />
+
+Refer to the storybook docs of the relevant component to check out the list of parts which can be styled and the list of css variables that can be changed to make style modifications.

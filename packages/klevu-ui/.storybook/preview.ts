@@ -68,6 +68,7 @@ export const parameters = {
         "Welcome",
         "Guides",
         ["Installation", "Usage", "Events", "Styling components", "This documentation", "Icons", "I18n", "Typings"],
+        "Examples",
         "Non components",
         "Apps",
         "Components",
