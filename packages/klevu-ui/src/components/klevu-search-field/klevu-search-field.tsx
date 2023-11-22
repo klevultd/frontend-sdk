@@ -4,7 +4,6 @@ import {
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
   KlevuFetchModifer,
-  KlevuFetchQueryResult,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   KlevuTypeOfRecord,
@@ -28,7 +27,7 @@ export type SearchResultsEventData = {
 }
 
 export type SuggestionsEventData = string[]
-export type SearchFieldVariant = "default" | "pill"
+export type SearchFieldVariant = "default" | "pill" | "default-no-button"
 
 /**
  * Plain textfield that does the searching. It queries Klevu and returns the results
@@ -312,6 +311,17 @@ export class KlevuSearchField {
     this.klevuSearchClick.emit(this.term)
   }
 
+  #searchFieldVariantToTextFieldVariant() {
+    switch (this.variant) {
+      case "default":
+        return "default"
+      case "default-no-button":
+        return "default"
+      case "pill":
+        return "pill"
+    }
+  }
+
   render() {
     return (
       <Host>
@@ -322,12 +332,12 @@ export class KlevuSearchField {
           onKlevuTextChanged={this.#handleChange.bind(this)}
           onKlevuTextEnterPressed={this.#handleSearchClick.bind(this)}
           aria-role="search"
-          variant={this.variant}
+          variant={this.#searchFieldVariantToTextFieldVariant()}
           icon="search"
         >
           <slot name="end-of-input" slot="end"></slot>
         </klevu-textfield>
-        {this.variant !== "pill" && (
+        {this.variant === "default" && (
           <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.tSearchText}</klevu-button>
         )}
       </Host>

@@ -753,6 +753,10 @@ export namespace Components {
          */
         "elevation": number;
         /**
+          * Sets origin element to full width of the container
+         */
+        "fullWidthOrigin"?: boolean;
+        /**
           * Expand popup to full size of the screen when popup is smaller that requested width
          */
         "fullscreenOnMobileSize"?: boolean;
@@ -3229,6 +3233,10 @@ declare namespace LocalJSX {
           * Elevation of the popup. 0-3.
          */
         "elevation"?: number;
+        /**
+          * Sets origin element to full width of the container
+         */
+        "fullWidthOrigin"?: boolean;
         /**
           * Expand popup to full size of the screen when popup is smaller that requested width
          */
