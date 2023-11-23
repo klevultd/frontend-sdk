@@ -13,6 +13,10 @@
   display: inline-block;
 }
 
+.originContainer.fullWidthOrigin {
+  width: 100%;
+}
+
 .popup {
   box-sizing: border-box;
   padding: var(--spacing);

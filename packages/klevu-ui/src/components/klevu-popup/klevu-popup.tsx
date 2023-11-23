@@ -69,6 +69,11 @@ export class KlevuPopup {
   @Prop() fullscreenOnMobileSize?: boolean
 
   /**
+   * Sets origin element to full width of the container
+   */
+  @Prop() fullWidthOrigin?: boolean
+
+  /**
    * When popup is opened this event is emitted
    */
   @Event({
@@ -280,14 +285,19 @@ export class KlevuPopup {
 
     popupClasses[`elevation-${this.elevation}`] = true
 
+    const originClasses = {
+      originContainer: true,
+      fullWidthOrigin: Boolean(this.fullWidthOrigin),
+    }
+
     return (
       <Host>
         <div
           id="origin"
-          class="originContainer"
           part="popup-base"
           onClick={this.#childItemClicked.bind(this)}
           onFocus={this.#childItemFocussed.bind(this)}
+          class={originClasses}
         >
           <slot name="origin" />
         </div>

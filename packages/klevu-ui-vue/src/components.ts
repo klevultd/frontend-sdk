@@ -262,6 +262,7 @@ export const KlevuPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPopup>('klevu-p
   'useBackground',
   'originElement',
   'fullscreenOnMobileSize',
+  'fullWidthOrigin',
   'klevuPopupOpen',
   'klevuPopupClose'
 ]);

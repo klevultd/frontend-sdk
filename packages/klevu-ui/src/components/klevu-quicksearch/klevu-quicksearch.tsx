@@ -512,6 +512,7 @@ export class KlevuQuicksearch {
           onKlevuPopupOpen={this.#onPopupOpen.bind(this)}
           elevation={2}
           exportparts={partsExports("klevu-popup")}
+          fullWidthOrigin
         >
           <klevu-search-field
             term={this.term}
