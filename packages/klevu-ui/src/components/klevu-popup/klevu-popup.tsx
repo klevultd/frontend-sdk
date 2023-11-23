@@ -104,6 +104,7 @@ export class KlevuPopup {
   async #internalOpen() {
     if (this.toggle && this.dialogRef?.open) {
       this.closeModal()
+      return
     }
     if (this.useBackground) {
       this.dialogRef?.showModal()
