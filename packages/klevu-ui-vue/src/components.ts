@@ -173,7 +173,8 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
   'translation',
   'assetsPath',
   'translationUrlPrefix',
-  'kmcLoadDefaults'
+  'kmcLoadDefaults',
+  'klevuInitSettingsUpdated'
 ]);
 
 

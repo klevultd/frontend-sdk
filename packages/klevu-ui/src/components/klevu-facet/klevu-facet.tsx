@@ -12,11 +12,12 @@ import {
   Event,
   EventEmitter,
 } from "@stencil/core"
-import { getGlobalSettings } from "../../utils/utils"
 import { getTranslation } from "../../utils/getTranslation"
 import { KlevuOnSwatchClick, KlevuSwatch } from "../klevu-color-swatch/klevu-color-swatch"
 import { KlevuColorSwatchOverride } from "../klevu-facet-list/klevu-facet-list"
 import { partsExports } from "../../utils/partsExports"
+import { KlevuUIGlobalSettings, closestElement } from "../../utils/utils"
+import { KlevuInit } from "../klevu-init/klevu-init"
 
 export type KlevuFacetMode = "checkbox" | "radio"
 type OptionType = {
@@ -124,6 +125,8 @@ export class KlevuFacet {
    */
   @State() showAll = false
 
+  @State() settings?: KlevuUIGlobalSettings
+
   /**
    * When filter selection is updated
    */
@@ -140,6 +143,22 @@ export class KlevuFacet {
     this.klevuFilterSelectionUpdate.emit({
       manager: this.manager,
       filter: event.detail,
+    })
+  }
+
+  async connectedCallback() {
+    await KlevuInit.ready()
+    const init = closestElement<HTMLKlevuInitElement>("klevu-init", this.el)
+
+    if (!init) {
+      console.error("klevu-product needs to be wrapped inside klevu-init")
+      return
+    }
+
+    this.settings = init.settings
+
+    init.addEventListener("klevuInitSettingsUpdated", (e: any) => {
+      this.settings = e.detail
     })
   }
 
@@ -189,9 +208,12 @@ export class KlevuFacet {
           max={parseFloat(this.slider.max)}
           start={this.slider.start ? parseFloat(this.slider.start) : undefined}
           end={this.slider.end ? parseFloat(this.slider.end) : undefined}
-          formatTooltip={(value) =>
-            (getGlobalSettings()?.renderPrice?.(value.toFixed(2), "EUR") ?? value.toFixed(2)).toString()
-          }
+          formatTooltip={(value) => {
+            if (this.settings?.renderPrice) {
+              return this.settings.renderPrice(value.toFixed(2), "EUR")
+            }
+            return value.toFixed(2)
+          }}
           onKlevuSliderChange={(event) => {
             this.manager.updateSlide(this.slider!.key, event.detail[0], event.detail[1])
           }}

@@ -32,7 +32,8 @@ export class KlevuIcon {
   }
 
   async connectedCallback() {
-    const url = window["klevu_ui_settings"]?.icons?.[this.name]
+    const init = this.el.closest("klevu-init")
+    const url = init?.settings?.icons?.[this.name]
 
     if (url?.endsWith(".svg")) {
       await this.#downloadFile(url)

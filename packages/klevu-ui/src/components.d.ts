@@ -512,7 +512,7 @@ export namespace Components {
         /**
           * Global settings
          */
-        "settings"?: KlevuUIGlobalSettings;
+        "settings": KlevuUIGlobalSettings;
         /**
           * Provide your own translations
          */
@@ -1791,6 +1791,10 @@ export interface KlevuImagePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuImagePickerElement;
 }
+export interface KlevuInitCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuInitElement;
+}
 export interface KlevuLatestSearchesCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuLatestSearchesElement;
@@ -2980,6 +2984,7 @@ declare namespace LocalJSX {
           * Which language to load
          */
         "language"?: Translations;
+        "onKlevuInitSettingsUpdated"?: (event: KlevuInitCustomEvent<KlevuUIGlobalSettings>) => void;
         /**
           * Override the default recommendations API URL
          */
