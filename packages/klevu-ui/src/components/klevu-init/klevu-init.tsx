@@ -98,9 +98,6 @@ export class KlevuInit {
   })
   klevuInitSettingsUpdated!: EventEmitter<KlevuUIGlobalSettings>
 
-  @State()
-  updateTick = {}
-
   @Watch("settings")
   async settingsChanged(newValue: KlevuUIGlobalSettings, oldValue: KlevuUIGlobalSettings) {
     await this.#defineSettings(newValue)
