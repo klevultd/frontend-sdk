@@ -1,5 +1,6 @@
 import { Component, Element, Host, h, Prop, Method, Watch } from "@stencil/core"
 import { OverflowBehavior, OverlayScrollbars, PartialOptions } from "overlayscrollbars"
+import { closestElement } from "../../utils/utils"
 
 /**
  * Utility that replaces the default browser scrollbar with a custom one.
@@ -33,7 +34,7 @@ export class KlevuUtilScrollbars {
   componentDidLoad() {
     this.#initCustomScrollbars()
 
-    const init = this.el.closest("klevu-init")
+    const init = closestElement<HTMLKlevuInitElement>("klevu-init", this.el)
     if (this.useNative === undefined && init?.settings?.useNativeScrollbars) {
       this.useNative = true
     }

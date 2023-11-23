@@ -157,7 +157,7 @@ export class KlevuFacet {
 
     this.settings = init.settings
 
-    init?.addEventListener("klevuInitSettingsUpdated", (e: any) => {
+    init.addEventListener("klevuInitSettingsUpdated", (e: any) => {
       this.settings = e.detail
     })
   }
