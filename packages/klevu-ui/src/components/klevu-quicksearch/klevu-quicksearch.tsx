@@ -124,11 +124,6 @@ export class KlevuQuicksearch {
   @Prop() tSearchResults = getTranslation("quicksearch.tSearchResults")
 
   /**
-   * Title of button to start Moi session
-   */
-  @Prop() tStartChat = getTranslation("quicksearch.tStartChat")
-
-  /**
    * Title of categories section
    */
   @Prop() tCategoriesCaption = getTranslation("quicksearch.tCategoriesCaption")
@@ -224,7 +219,6 @@ export class KlevuQuicksearch {
   @State() searchSort?: KlevuSearchSorting
   @State() lastClickedProducts?: KlevuRecord[]
   @State() activeTab: "trending" | "last" | "" = "trending"
-  @State() chat = false
   @State() noResultsMessage: string = ""
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
@@ -361,11 +355,6 @@ export class KlevuQuicksearch {
         variantId: product.variantId || product.id,
       })
     }
-  }
-
-  @Listen("klevuChatLayoutClose")
-  onChatLayoutClose() {
-    this.chat = false
   }
 
   @Listen("klevuSearchClick")
@@ -530,6 +519,7 @@ export class KlevuQuicksearch {
             variant={this.searchFieldVariant}
             usePersonalisation={this.usePersonalisation}
             useKlaviyo={this.useKlaviyo}
+            exportparts={partsExports("klevu-search-field")}
           >
             {this.enableImageSearch && (
               <div slot="end-of-input">
@@ -554,7 +544,6 @@ export class KlevuQuicksearch {
             {(this.products ?? []).length > 0 ? this.#renderResultPage() : this.#renderNoResultsPage()}
           </div>
         </klevu-popup>
-        {this.chat && <klevu-moi></klevu-moi>}
       </Host>
     )
   }
@@ -588,6 +577,7 @@ export class KlevuQuicksearch {
                 <klevu-sort
                   variant="inline"
                   onKlevuSortChanged={(event) => (this.searchSort = event.detail)}
+                  exportparts={partsExports("klevu-sort")}
                 ></klevu-sort>
               </div>
               <slot name="topbanners">

@@ -25,6 +25,41 @@ export const parts = {
     ],
     exportedcomponents: { "klevu-button": ["button-base"] },
   },
+  "klevu-chat-layout": {
+    local: [],
+    exportedcomponents: {
+      "klevu-popup": ["popup-base", "popup-content"],
+      "klevu-button": ["button-base"],
+      "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+    },
+  },
+  "klevu-chat-messages": {
+    local: [],
+    exportedcomponents: {
+      "klevu-chat-bubble": [
+        "chat-bubble-base",
+        "chat-bubble-positive-feedback",
+        "chat-bubble-negative-feedback",
+        "chat-bubble-feedback-reasons",
+      ],
+      "klevu-button": ["button-base"],
+      "klevu-slides": ["slides-base", "slides-heading", "slides-previous-button", "slides-next-button"],
+      "klevu-product": [
+        "product-image",
+        "product-base",
+        "product-swatch",
+        "product-brandname",
+        "product-name",
+        "product-description",
+        "product-price",
+        "product-vatcaption",
+        "product-ooscaption",
+        "product-variants-count",
+        "product-addtocart",
+      ],
+      "klevu-rating": ["rating-base", "rating-star"],
+    },
+  },
   "klevu-checkbox": {
     local: ["checkbox-base", "checkbox-box", "checkbox-content"],
     exportedcomponents: {},
@@ -54,9 +89,33 @@ export const parts = {
       "klevu-button": ["button-base"],
     },
   },
+  "klevu-facet-list": {
+    local: [],
+    exportedcomponents: {
+      "klevu-facet": ["facet-heading", "facet-radio", "facet-more-button", "facet-option-count"],
+      "klevu-button": ["button-base"],
+      "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
+      "klevu-rating": ["rating-base", "rating-star"],
+      "klevu-checkbox": ["checkbox-base", "checkbox-box", "checkbox-content"],
+    },
+  },
+  "klevu-image-picker": {
+    local: [],
+    exportedcomponents: {
+      "klevu-loading-indicator": ["loading-indicator-base"],
+      "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
+    },
+  },
   "klevu-latest-searches": {
     local: ["latest-searches-caption"],
     exportedcomponents: { "klevu-list": ["list-base", "list-icon", "list-image", "list-content", "list-button"] },
+  },
+  "klevu-layout-results": {
+    local: [],
+    exportedcomponents: {
+      "klevu-button": ["button-base"],
+      "klevu-drawer": ["drawer-base", "drawer-origin", "drawer-content"],
+    },
   },
   "klevu-list": {
     local: ["list-base", "list-icon", "list-image", "list-content", "list-button"],
@@ -98,6 +157,37 @@ export const parts = {
   "klevu-modal": {
     local: ["modal-base", "modal-header", "modal-dialog", "modal-body"],
     exportedcomponents: {},
+  },
+  "klevu-moi": {
+    local: [],
+    exportedcomponents: {
+      "klevu-button": ["button-base"],
+      "klevu-loading-indicator": ["loading-indicator-base"],
+      "klevu-modal": ["modal-base", "modal-header", "modal-dialog", "modal-body"],
+      "klevu-product": [
+        "product-image",
+        "product-base",
+        "product-swatch",
+        "product-brandname",
+        "product-name",
+        "product-description",
+        "product-price",
+        "product-vatcaption",
+        "product-ooscaption",
+        "product-variants-count",
+        "product-addtocart",
+      ],
+      "klevu-popup": ["popup-base", "popup-content"],
+      "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+      "klevu-chat-bubble": [
+        "chat-bubble-base",
+        "chat-bubble-positive-feedback",
+        "chat-bubble-negative-feedback",
+        "chat-bubble-feedback-reasons",
+      ],
+      "klevu-slides": ["slides-base", "slides-heading", "slides-previous-button", "slides-next-button"],
+      "klevu-rating": ["rating-base", "rating-star"],
+    },
   },
   "klevu-pagination": {
     local: ["pagination-base", "pagination-navigation-previous", "pagination-navigation-next"],
@@ -218,11 +308,11 @@ export const parts = {
         "product-addtocart",
       ],
       "klevu-pagination": ["pagination-base", "pagination-navigation-previous", "pagination-navigation-next"],
-      "klevu-button": ["button-base"],
       "klevu-popular-searches": ["popular-searches-base", "popular-searches-caption", "popular-searches-list-item"],
       "klevu-latest-searches": ["latest-searches-caption"],
       "klevu-tab": ["tab-base", "tab-caption"],
       "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+      "klevu-button": ["button-base"],
       "klevu-loading-indicator": ["loading-indicator-base"],
       "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
       "klevu-modal": ["modal-base", "modal-header", "modal-dialog", "modal-body"],
@@ -241,6 +331,35 @@ export const parts = {
   "klevu-rating": {
     local: ["rating-base", "rating-star"],
     exportedcomponents: {},
+  },
+  "klevu-recommendations": {
+    local: [],
+    exportedcomponents: {
+      "klevu-banner": ["banner-image"],
+      "klevu-slides": ["slides-base", "slides-heading", "slides-previous-button", "slides-next-button"],
+      "klevu-product": [
+        "product-image",
+        "product-base",
+        "product-swatch",
+        "product-brandname",
+        "product-name",
+        "product-description",
+        "product-price",
+        "product-vatcaption",
+        "product-ooscaption",
+        "product-variants-count",
+        "product-addtocart",
+      ],
+      "klevu-button": ["button-base"],
+      "klevu-rating": ["rating-base", "rating-star"],
+    },
+  },
+  "klevu-search-field": {
+    local: [],
+    exportedcomponents: {
+      "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+      "klevu-button": ["button-base"],
+    },
   },
   "klevu-search-landing-page": {
     local: [
@@ -296,6 +415,10 @@ export const parts = {
   "klevu-slides": {
     local: ["slides-base", "slides-heading", "slides-previous-button", "slides-next-button"],
     exportedcomponents: { "klevu-button": ["button-base"] },
+  },
+  "klevu-sort": {
+    local: [],
+    exportedcomponents: { "klevu-dropdown": ["dropdown-base", "dropdown-select"] },
   },
   "klevu-suggestions-list": {
     local: ["suggestions-list-caption"],

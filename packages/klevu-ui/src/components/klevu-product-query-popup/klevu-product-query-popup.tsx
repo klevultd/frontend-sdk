@@ -303,7 +303,11 @@ export class KlevuProductQueryPopup {
   #renderChat() {
     return (
       <Fragment>
-        <klevu-chat-layout useNativeScrollbars={this.useNativeScrollbars} ref={(el) => (this.#layoutElement = el)}>
+        <klevu-chat-layout
+          exportparts={partsExports("klevu-chat-layout")}
+          useNativeScrollbars={this.useNativeScrollbars}
+          ref={(el) => (this.#layoutElement = el)}
+        >
           <div part="product-query-popup-header" slot="header">
             <div class="header">
               <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
@@ -316,6 +320,7 @@ export class KlevuProductQueryPopup {
             </klevu-typography>
           </div>
           <klevu-chat-messages
+            exportparts={partsExports("klevu-chat-messages")}
             messages={this.messages}
             feedbacks={this.feedbacks}
             enableMessageFeedback
