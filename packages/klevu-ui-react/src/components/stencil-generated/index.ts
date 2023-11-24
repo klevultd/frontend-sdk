@@ -24,7 +24,6 @@ export const KlevuDropdown = /*@__PURE__*/createReactComponent<JSX.KlevuDropdown
 export const KlevuFacet = /*@__PURE__*/createReactComponent<JSX.KlevuFacet, HTMLKlevuFacetElement>('klevu-facet');
 export const KlevuFacetList = /*@__PURE__*/createReactComponent<JSX.KlevuFacetList, HTMLKlevuFacetListElement>('klevu-facet-list');
 export const KlevuIcon = /*@__PURE__*/createReactComponent<JSX.KlevuIcon, HTMLKlevuIconElement>('klevu-icon');
-export const KlevuImagePicker = /*@__PURE__*/createReactComponent<JSX.KlevuImagePicker, HTMLKlevuImagePickerElement>('klevu-image-picker');
 export const KlevuInit = /*@__PURE__*/createReactComponent<JSX.KlevuInit, HTMLKlevuInitElement>('klevu-init');
 export const KlevuLatestSearches = /*@__PURE__*/createReactComponent<JSX.KlevuLatestSearches, HTMLKlevuLatestSearchesElement>('klevu-latest-searches');
 export const KlevuLayoutResults = /*@__PURE__*/createReactComponent<JSX.KlevuLayoutResults, HTMLKlevuLayoutResultsElement>('klevu-layout-results');

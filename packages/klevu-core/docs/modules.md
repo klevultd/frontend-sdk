@@ -5,6 +5,7 @@
 ## Table of contents
 
 ### KlevuEvents
+
 Global custom document events that @klevu/core sends Enumerations
 
 - [KlevuDomEvents](enums/KlevuDomEvents.md)
@@ -160,7 +161,6 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuHydratePackedFetchResult](modules/klevuhydratepackedfetchresult.md)
 - [KlevuPackFetchResult](modules/klevupackfetchresult.md)
 - [KlevuUploadImageForSearch](modules/klevuuploadimageforsearch.md)
-- [imageSearch](modules/imagesearch.md)
 - [klaviyo](modules/klaviyo.md)
 - [removeListFilters](modules/removelistfilters.md)
 - [startMoi](modules/startmoi.md)

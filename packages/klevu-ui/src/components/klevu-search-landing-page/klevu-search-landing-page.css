@@ -31,36 +31,3 @@
   max-width: 100%;
   margin-top: var(--klevu-spacing-04);
 }
-
-.imageSearchResults {
-  display: flex;
-  gap: var(--klevu-spacing-04);
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.imageSearchResults img {
-  height: auto;
-  width: auto;
-  max-width: 200px;
-  max-height: 200px;
-}
-
-.imageSearchResults label {
-  background-color: var(--klevu-color-neutral-7);
-  color: white;
-  font-size: var(--klevu-body-xs-size);
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  width: max-content;
-  gap: var(--klevu-spacing-02);
-}
-
-klevu-popup.imagesearch {
-  --klevu-popup-width: 400px;
-}

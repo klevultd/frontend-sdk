@@ -41,7 +41,6 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     show-price-as-slider=${ifDefined(args.showPriceAsSlider)}
     price-interval=${ifDefined(args.priceInterval)}
     hide-price=${ifDefined(args.hidePrice)}
-    image-url-for-search=${ifDefined(args.imageUrlForSearch)}
     show-variants-count=${ifDefined(args.showVariantsCount)}
   ></klevu-search-landing-page>`,
 }
@@ -49,14 +48,6 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
 export const WithInfiniteScroll: StoryObj<KlevuSearchLandingPage> = {
   args: {
     term: "red shoes",
-    useInfiniteScroll: true,
-  },
-  render: SearchLandingPage.render,
-}
-
-export const WithImageSearch: StoryObj<KlevuSearchLandingPage> = {
-  args: {
-    imageUrlForSearch: "https://picsum.photos/600/600",
     useInfiniteScroll: true,
   },
   render: SearchLandingPage.render,

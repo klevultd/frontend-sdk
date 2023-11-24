@@ -99,13 +99,6 @@ export const parts = {
       "klevu-checkbox": ["checkbox-base", "checkbox-box", "checkbox-content"],
     },
   },
-  "klevu-image-picker": {
-    local: [],
-    exportedcomponents: {
-      "klevu-loading-indicator": ["loading-indicator-base"],
-      "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
-    },
-  },
   "klevu-latest-searches": {
     local: ["latest-searches-caption"],
     exportedcomponents: { "klevu-list": ["list-base", "list-icon", "list-image", "list-content", "list-button"] },
@@ -313,19 +306,9 @@ export const parts = {
       "klevu-tab": ["tab-base", "tab-caption"],
       "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
       "klevu-button": ["button-base"],
-      "klevu-loading-indicator": ["loading-indicator-base"],
-      "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
-      "klevu-modal": ["modal-base", "modal-header", "modal-dialog", "modal-body"],
-      "klevu-chat-bubble": [
-        "chat-bubble-base",
-        "chat-bubble-positive-feedback",
-        "chat-bubble-negative-feedback",
-        "chat-bubble-feedback-reasons",
-      ],
-      "klevu-slides": ["slides-base", "slides-heading", "slides-previous-button", "slides-next-button"],
-      "klevu-rating": ["rating-base", "rating-star"],
       "klevu-list": ["list-base", "list-icon", "list-image", "list-content", "list-button"],
       "klevu-dropdown": ["dropdown-base", "dropdown-select"],
+      "klevu-rating": ["rating-base", "rating-star"],
     },
   },
   "klevu-rating": {
@@ -370,7 +353,6 @@ export const parts = {
     ],
     exportedcomponents: {
       "klevu-quicksearch": ["quicksearch-content", "quicksearch-sidepanel", "quicksearch-main-area"],
-      "klevu-popup": ["popup-base", "popup-content"],
       "klevu-banner": ["banner-image"],
       "klevu-product-grid": ["product-grid-base"],
       "klevu-product": [
@@ -395,19 +377,12 @@ export const parts = {
       "klevu-accordion": ["accordion-base", "accordion-header", "accordion-content", "accordion-icon"],
       "klevu-rating": ["rating-base", "rating-star"],
       "klevu-checkbox": ["checkbox-base", "checkbox-box", "checkbox-content"],
+      "klevu-popup": ["popup-base", "popup-content"],
       "klevu-suggestions-list": ["suggestions-list-caption"],
       "klevu-cms-list": ["cms-list-caption"],
       "klevu-latest-searches": ["latest-searches-caption"],
       "klevu-tab": ["tab-base", "tab-caption"],
       "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
-      "klevu-modal": ["modal-base", "modal-header", "modal-dialog", "modal-body"],
-      "klevu-chat-bubble": [
-        "chat-bubble-base",
-        "chat-bubble-positive-feedback",
-        "chat-bubble-negative-feedback",
-        "chat-bubble-feedback-reasons",
-      ],
-      "klevu-slides": ["slides-base", "slides-heading", "slides-previous-button", "slides-next-button"],
       "klevu-list": ["list-base", "list-icon", "list-image", "list-content", "list-button"],
       "klevu-dropdown": ["dropdown-base", "dropdown-select"],
     },

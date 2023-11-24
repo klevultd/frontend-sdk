@@ -100,14 +100,6 @@ klevu-moi {
   margin-top: var(--klevu-spacing-04);
 }
 
-klevu-icon.photo-camera {
-  cursor: pointer;
-}
-
-klevu-popup.imagesearch {
-  --klevu-popup-width: 400px;
-}
-
 .topbanners {
   margin-bottom: var(--klevu-spacing-05);
 }
