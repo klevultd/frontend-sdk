@@ -8,10 +8,12 @@ import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 
 type Options = {
   limit: number
+  lastClickedProductIds?: string[]
 }
 
 const defaultOptions: Options = {
   limit: 5,
+  lastClickedProductIds: [],
 }
 
 /**
@@ -29,7 +31,10 @@ export function alsoViewed(
     ...defaultOptions,
     ...options,
   }
-
+  const lastProducts =
+    params.lastClickedProductIds && params.lastClickedProductIds.length > 0
+      ? params.lastClickedProductIds
+      : KlevuLastClickedProducts.getLastClickedLatestsFirst()
   return {
     klevuFunctionId: "recommendation",
     modifiers,
@@ -43,12 +48,9 @@ export function alsoViewed(
             recentObjects: [
               {
                 typeOfRecord: KlevuTypeOfRecord.Product,
-                records:
-                  KlevuLastClickedProducts.getLastClickedLatestsFirst().map(
-                    (pId) => ({
-                      id: pId,
-                    })
-                  ),
+                records: lastProducts.map((id) => ({
+                  id,
+                })),
               },
             ],
           },
