@@ -1281,10 +1281,6 @@ export namespace Components {
          */
         "tSearchResults": string;
         /**
-          * Title of button to start Moi session
-         */
-        "tStartChat": string;
-        /**
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
         "tTrendingCaption"?: string;
@@ -3792,10 +3788,6 @@ declare namespace LocalJSX {
           * Title of search results
          */
         "tSearchResults"?: string;
-        /**
-          * Title of button to start Moi session
-         */
-        "tStartChat"?: string;
         /**
           * Trending tab caption Supports showing the count in place of %s in the value eg: `Trending (%s)` with count of 2 will lead to `Trending (2)`.
          */
