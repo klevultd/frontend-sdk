@@ -418,6 +418,7 @@ export class KlevuSearchLandingPage {
         <klevu-layout-results
           onKlevuDrawerOpened={this.#mobileDrawerOpened.bind(this)}
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+          exportparts={partsExports("klevu-layout-results")}
         >
           <slot name="facets" slot="sidebar">
             <div part="search-landing-page-sidebar">
@@ -429,6 +430,7 @@ export class KlevuSearchLandingPage {
                   useApplyButton={isMobile}
                   onKlevuApplyFilters={this.#applyFilters.bind(this)}
                   mode={facetMode}
+                  exportparts={partsExports("klevu-facet-list")}
                 ></klevu-facet-list>
               )}
             </div>
@@ -472,7 +474,11 @@ export class KlevuSearchLandingPage {
                 </klevu-typography>
               )}
               {this.results?.length > 0 && (
-                <klevu-sort variant="inline" onKlevuSortChanged={this.#sortChanged.bind(this)}></klevu-sort>
+                <klevu-sort
+                  variant="inline"
+                  onKlevuSortChanged={this.#sortChanged.bind(this)}
+                  exportparts={partsExports("klevu-sort")}
+                ></klevu-sort>
               )}
             </div>
           </div>

@@ -358,6 +358,7 @@ export class KlevuMerchandising {
         <klevu-layout-results
           onKlevuDrawerOpened={this.#mobileDrawerOpened.bind(this)}
           ref={(el) => (this.#layoutElement = el as HTMLKlevuLayoutResultsElement)}
+          exportparts={partsExports("klevu-layout-results")}
         >
           <slot name="facets" slot="sidebar">
             <div part="merchandising-sidebar">
@@ -368,6 +369,7 @@ export class KlevuMerchandising {
                 manager={this.manager}
                 useApplyButton={this.#isMobile()}
                 onKlevuApplyFilters={this.#applyFilters.bind(this)}
+                exportparts={partsExports("klevu-facet-list")}
               ></klevu-facet-list>
             </div>
           </slot>
@@ -377,6 +379,7 @@ export class KlevuMerchandising {
               variant="inline"
               onKlevuSortChanged={this.#sortChanged.bind(this)}
               options={this.sortOptions}
+              exportparts={partsExports("klevu-sort")}
             ></klevu-sort>
           </div>
           <slot name="content" slot="content">

@@ -222,6 +222,7 @@ export class KlevuMoi {
           {this.session && (
             <klevu-chat-layout
               slot="content"
+              exportparts={partsExports("klevu-chat-layout")}
               onKlevuChatLayoutMessageSent={(e) => this.#sendMessage(e.detail)}
               ref={(el) => {
                 this.#layoutRef = el
@@ -232,6 +233,7 @@ export class KlevuMoi {
                 <klevu-button onClick={() => this.close()} size="small" icon="close" isSecondary></klevu-button>
               </div>
               <klevu-chat-messages
+                exportparts={partsExports("klevu-chat-messages")}
                 onKlevuSelectFilter={(event) => {
                   this.#sendFilter(
                     event.detail.filter.value,
