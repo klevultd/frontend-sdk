@@ -8,18 +8,26 @@ import { KlevuFetchFunctionReturnValue } from "../index.js"
 type Options = {
   id: string
   amount?: number
+  lastClickedProductIds?: string[]
 }
 
 const defaultOptions: Options = {
   id: "recentlyViewedProducts",
+  /**
+   * The number of products to return
+   */
   amount: 10,
+  /**
+   * List of string ids for last clicked products
+   */
+  lastClickedProductIds: [],
 }
 
 /**
  * Recently viewed products
  *
  * @category RecommendationQuery
- * @param options
+ * @param {Options} options Allows to override amount of products to return or pass custom lastClickedProductIds
  * @param modifiers
  * @returns
  */
@@ -32,9 +40,10 @@ export function recentlyViewed(
     ...options,
   }
 
-  const lastProducts = KlevuLastClickedProducts.getLastClickedLatestsFirst(
-    opts.amount
-  )
+  const lastProducts =
+    opts.lastClickedProductIds && opts.lastClickedProductIds.length > 0
+      ? opts.lastClickedProductIds
+      : KlevuLastClickedProducts.getLastClickedLatestsFirst(opts.amount)
   const query: KlevuBaseQuery = {
     id: opts.id,
     typeOfRequest: KlevuTypeOfRequest.Search,
