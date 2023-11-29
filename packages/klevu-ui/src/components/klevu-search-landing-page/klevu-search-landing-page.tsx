@@ -13,14 +13,12 @@ import {
   KMCRootObject,
   trendingProducts,
   KlevuBanner,
-  imageSearch,
   KlevuUploadImageForSearch,
   klaviyo,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import {
   KlevuFacetMode,
-  KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
   KlevuProductCustomEvent,
   KlevuSortCustomEvent,
@@ -148,10 +146,6 @@ export class KlevuSearchLandingPage {
    */
   @Prop() hidePrice?: boolean
   /**
-   * Pass image url if performing image search
-   */
-  @Prop() imageUrlForSearch = ""
-  /**
    * Show variants count
    */
   @Prop() showVariantsCount = false
@@ -254,7 +248,7 @@ export class KlevuSearchLandingPage {
       applyFilterWithManager(this.manager),
     ]
 
-    if (this.usePersonalisation && !this.imageUrlForSearch) {
+    if (this.usePersonalisation) {
       modifiers.push(personalisation())
     }
 
@@ -262,11 +256,7 @@ export class KlevuSearchLandingPage {
       modifiers.push(klaviyo())
     }
 
-    const result = await KlevuFetch(
-      this.imageUrlForSearch
-        ? imageSearch(this.imageUrlForSearch, { limit: this.limit, sort: this.sort }, ...modifiers)
-        : search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers)
-    )
+    const result = await KlevuFetch(search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers))
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
@@ -391,15 +381,6 @@ export class KlevuSearchLandingPage {
     this.term = term
   }
 
-  async #handleImageSelection(event: CustomEvent<KlevuImageSelectedEvent>) {
-    this.isUploadingImage = true
-    const imageUrl = await KlevuUploadImageForSearch(event.detail.image)
-    this.imageUrlForSearch = imageUrl
-    this.#fetchData()
-    this.#imagePickerPopupRef?.closeModal()
-    this.isUploadingImage = false
-  }
-
   render() {
     const isMobile = this.currentViewPortSize?.name === "xs" || this.currentViewPortSize?.name === "sm"
     const showInfiniteScroll = this.useInfiniteScroll && !this.infiniteScrollingPaused && this.results.length > 0
@@ -440,39 +421,9 @@ export class KlevuSearchLandingPage {
               <klevu-quicksearch term={this.term} onKlevuSearch={(event) => this.#updateTerm(event.detail)} />
             )}
             <div class="info">
-              {this.imageUrlForSearch ? (
-                this.#resultObject && (
-                  <div class="imageSearchResults">
-                    <div class="image">
-                      <img src={this.imageUrlForSearch} alt="" />
-                    </div>
-                    <klevu-typography slot="header" variant="h1">
-                      We found {this.#resultObject?.meta.totalResultsFound} matches to your uploaded photo
-                    </klevu-typography>
-                    <klevu-popup
-                      class="imagesearch"
-                      exportparts={partsExports("klevu-popup")}
-                      ref={(el) => (this.#imagePickerPopupRef = el)}
-                      anchor="bottom-end"
-                    >
-                      <div class="image-picker" slot="content">
-                        <klevu-image-picker
-                          isLoading={this.isUploadingImage}
-                          onKlevuImageSelected={this.#handleImageSelection.bind(this)}
-                        />
-                      </div>
-                      <label slot="origin">
-                        <klevu-icon name="upload" />
-                        <span>Try another photo</span>
-                      </label>
-                    </klevu-popup>
-                  </div>
-                )
-              ) : (
-                <klevu-typography slot="header" variant="h1">
-                  {stringConcat(this.tSearchTitle, [this.term])}
-                </klevu-typography>
-              )}
+              <klevu-typography slot="header" variant="h1">
+                {stringConcat(this.tSearchTitle, [this.term])}
+              </klevu-typography>
               {this.results?.length > 0 && (
                 <klevu-sort
                   variant="inline"

@@ -46,7 +46,6 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
     .urlRedirects=${args.urlRedirects}
     popular-products-count=${ifDefined(args.popularProductsCount)}
-    enable-image-search=${ifDefined(args.enableImageSearch)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
     use-klaviyo=${ifDefined(args.useKlaviyo)}
     show-variants-count=${ifDefined(args.showVariantsCount)}
@@ -137,44 +136,6 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
       }
     </style>
   `,
-}
-
-export const QuicksearchOnImage: StoryObj<KlevuQuicksearch> = {
-  render: (args) => html`<klevu-quicksearch
-      fallback-term=${ifDefined(args.fallbackTerm)}
-      popup-anchor=${ifDefined(args.popupAnchor)}
-      search-categories=${ifDefined(args.searchCategories)}
-      search-cms-cages=${ifDefined(args.searchCmsPages)}
-      placeholder=${ifDefined(args.placeholder)}
-      search-field-variant=${ifDefined(args.searchFieldVariant)}
-      t-search-result=${ifDefined(args.tSearchResults)}
-      t-start-chat=${ifDefined(args.tStartChat)}
-      t-categories-caption=${ifDefined(args.tCategoriesCaption)}
-      show-ratings=${ifDefined(args.showRatings)}
-      show-ratings-count=${ifDefined(args.showRatingsCount)}
-      hide-popular-searches=${ifDefined(args.hidePopularSearches)}
-      hide-trending-products=${ifDefined(args.hideTrendingProducts)}
-      hide-recently-viewed-products=${ifDefined(args.hideRecentlyViewedProducts)}
-      hide-recent-searches=${ifDefined(args.hideRecentSearches)}
-      hide-popular-keywords-on-no-results-page=${ifDefined(args.hidePopularKeywordsOnNoResultsPage)}
-      hide-trending-products-on-no-results-page=${ifDefined(args.hideTrendingProductsOnNoResultsPage)}
-      t-last-clicked-products-caption=${ifDefined(args.tLastClickedProductsCaption)}
-      t-trending-caption=${ifDefined(args.tTrendingCaption)}
-      t-popular-products-title-on-no-results-page=${ifDefined(args.tPopularProductsTitleOnNoResultsPage)}
-      t-popular-products-title=${ifDefined(args.tPopularProductsTitle)}
-      .urlRedirects=${args.urlRedirects}
-      popular-products-count=${ifDefined(args.popularProductsCount)}
-      enable-image-search="true"
-    ></klevu-quicksearch>
-    <script>
-      const qs = document.querySelector("klevu-quicksearch")
-
-      // when ever the data changes inside the quicksearch component we will receive it
-      qs.addEventListener("klevuImageSearch", (event) => {
-        alert("klevuImageSearch event fired, check console for event payload details")
-        console.log(event.detail)
-      })
-    </script> `,
 }
 
 export const StyledQuickSearch: StoryObj<KlevuQuicksearch> = {

@@ -14,7 +14,6 @@ import {
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter, Watch } from "@stencil/core"
 import {
-  KlevuImageSelectedEvent,
   KlevuPaginationCustomEvent,
   KlevuSearchFieldCustomEvent,
   KlevuTextfieldCustomEvent,
@@ -202,10 +201,6 @@ export class KlevuQuicksearch {
    */
   @Prop() urlRedirects?: KMCMapsRootObject["klevu_keywordUrlMap"]
   /**
-   * Enable image search feature
-   */
-  @Prop() enableImageSearch = false
-  /**
    * Show variants count
    */
   @Prop() showVariantsCount = false
@@ -249,15 +244,6 @@ export class KlevuQuicksearch {
     composed: true,
   })
   klevuSearch!: EventEmitter<string>
-
-  /**
-   * This event is emitted once the image to be used for search is
-   * uploaded. The event contains the url to be passed to search api.
-   */
-  @Event({
-    composed: true,
-  })
-  klevuImageSearch!: EventEmitter<string>
 
   /**
    * Will be emitted when there is a url match for redirects.
@@ -480,14 +466,6 @@ export class KlevuQuicksearch {
     this.currentViewPortSize = event.detail
   }
 
-  async #handleImageSelection(event: CustomEvent<KlevuImageSelectedEvent>) {
-    this.isUploadingImage = true
-    const imageUrl = await KlevuUploadImageForSearch(event.detail.image)
-    this.klevuImageSearch.emit(imageUrl)
-    this.isUploadingImage = false
-    this.#imagePickerPopupRef?.closeModal()
-  }
-
   render() {
     return (
       <Host>
@@ -520,26 +498,7 @@ export class KlevuQuicksearch {
             usePersonalisation={this.usePersonalisation}
             useKlaviyo={this.useKlaviyo}
             exportparts={partsExports("klevu-search-field")}
-          >
-            {this.enableImageSearch && (
-              <div slot="end-of-input">
-                <klevu-popup
-                  class="imagesearch"
-                  exportparts={partsExports("klevu-popup")}
-                  anchor="bottom-end"
-                  ref={(el) => (this.#imagePickerPopupRef = el)}
-                >
-                  <div class="image-picker" slot="content">
-                    <klevu-image-picker
-                      isLoading={this.isUploadingImage}
-                      onKlevuImageSelected={this.#handleImageSelection.bind(this)}
-                    />
-                  </div>
-                  <klevu-icon slot="origin" name="photo_camera" class="photo-camera"></klevu-icon>
-                </klevu-popup>
-              </div>
-            )}
-          </klevu-search-field>
+          ></klevu-search-field>
           <div class="content" slot="content" part="quicksearch-content">
             {(this.products ?? []).length > 0 ? this.#renderResultPage() : this.#renderNoResultsPage()}
           </div>

@@ -14,7 +14,6 @@ import { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/k
 import { KlevuColorSwatchOverride } from "./components/klevu-facet-list/klevu-facet-list";
 import { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 import { KlevuColorSwatchOverride as KlevuColorSwatchOverride1, KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
-import { KlevuImageSelectedEvent } from "./components/klevu-image-picker/klevu-image-picker";
 import { KlevuUIGlobalSettings } from "./utils/utils";
 import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { Placement } from "@floating-ui/dom";
@@ -38,7 +37,6 @@ export { KlevuFacetMode, KlevuSelectionUpdatedEventDetail } from "./components/k
 export { KlevuColorSwatchOverride } from "./components/klevu-facet-list/klevu-facet-list";
 export { KlevuFacetMode as KlevuFacetMode1 } from "./components/klevu-facet/klevu-facet";
 export { KlevuColorSwatchOverride as KlevuColorSwatchOverride1, KlevuFiltersAppliedEventDetail } from "./components/klevu-facet-list/klevu-facet-list";
-export { KlevuImageSelectedEvent } from "./components/klevu-image-picker/klevu-image-picker";
 export { KlevuUIGlobalSettings } from "./utils/utils";
 export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { Placement } from "@floating-ui/dom";
@@ -444,19 +442,6 @@ export namespace Components {
           * Name of the icon. Please use tokens of material icons
          */
         "name": string;
-    }
-    /**
-     * This component allows you to select an image from the file system.
-     */
-    interface KlevuImagePicker {
-        /**
-          * To be used to display loading indicator
-         */
-        "isLoading": boolean;
-        /**
-          * Provide max file size in MBs
-         */
-        "maxFileSize": number;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -1177,10 +1162,6 @@ export namespace Components {
      */
     interface KlevuQuicksearch {
         /**
-          * Enable image search feature
-         */
-        "enableImageSearch": boolean;
-        /**
           * What term should be used if there isn't enough results
          */
         "fallbackTerm"?: string;
@@ -1447,10 +1428,6 @@ export namespace Components {
           * Hides price from search results
          */
         "hidePrice"?: boolean;
-        /**
-          * Pass image url if performing image search
-         */
-        "imageUrlForSearch": string;
         /**
           * How many results to display on a page
          */
@@ -1783,10 +1760,6 @@ export interface KlevuFacetListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuFacetListElement;
 }
-export interface KlevuImagePickerCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLKlevuImagePickerElement;
-}
 export interface KlevuInitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuInitElement;
@@ -2047,15 +2020,6 @@ declare global {
     var HTMLKlevuIconElement: {
         prototype: HTMLKlevuIconElement;
         new (): HTMLKlevuIconElement;
-    };
-    /**
-     * This component allows you to select an image from the file system.
-     */
-    interface HTMLKlevuImagePickerElement extends Components.KlevuImagePicker, HTMLStencilElement {
-    }
-    var HTMLKlevuImagePickerElement: {
-        prototype: HTMLKlevuImagePickerElement;
-        new (): HTMLKlevuImagePickerElement;
     };
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -2464,7 +2428,6 @@ declare global {
         "klevu-facet": HTMLKlevuFacetElement;
         "klevu-facet-list": HTMLKlevuFacetListElement;
         "klevu-icon": HTMLKlevuIconElement;
-        "klevu-image-picker": HTMLKlevuImagePickerElement;
         "klevu-init": HTMLKlevuInitElement;
         "klevu-latest-searches": HTMLKlevuLatestSearchesElement;
         "klevu-layout-results": HTMLKlevuLayoutResultsElement;
@@ -2925,23 +2888,6 @@ declare namespace LocalJSX {
           * Name of the icon. Please use tokens of material icons
          */
         "name": string;
-    }
-    /**
-     * This component allows you to select an image from the file system.
-     */
-    interface KlevuImagePicker {
-        /**
-          * To be used to display loading indicator
-         */
-        "isLoading"?: boolean;
-        /**
-          * Provide max file size in MBs
-         */
-        "maxFileSize"?: number;
-        /**
-          * This event is fired when an image is selected.
-         */
-        "onKlevuImageSelected"?: (event: KlevuImagePickerCustomEvent<KlevuImageSelectedEvent>) => void;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -3669,10 +3615,6 @@ declare namespace LocalJSX {
      */
     interface KlevuQuicksearch {
         /**
-          * Enable image search feature
-         */
-        "enableImageSearch"?: boolean;
-        /**
           * What term should be used if there isn't enough results
          */
         "fallbackTerm"?: string;
@@ -3708,10 +3650,6 @@ declare namespace LocalJSX {
           * When the data in the component changes. This event can be used to replace whole rendering of products when used with slots properly.
          */
         "onKlevuData"?: (event: KlevuQuicksearchCustomEvent<KlevuQuicksearchDataEvent>) => void;
-        /**
-          * This event is emitted once the image to be used for search is uploaded. The event contains the url to be passed to search api.
-         */
-        "onKlevuImageSearch"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
         /**
           * Will be emitted when there is a url match for redirects. You can override the default behaviour of redirects by preventing default of this event
          */
@@ -3954,10 +3892,6 @@ declare namespace LocalJSX {
           * Hides price from search results
          */
         "hidePrice"?: boolean;
-        /**
-          * Pass image url if performing image search
-         */
-        "imageUrlForSearch"?: string;
         /**
           * How many results to display on a page
          */
@@ -4297,7 +4231,6 @@ declare namespace LocalJSX {
         "klevu-facet": KlevuFacet;
         "klevu-facet-list": KlevuFacetList;
         "klevu-icon": KlevuIcon;
-        "klevu-image-picker": KlevuImagePicker;
         "klevu-init": KlevuInit;
         "klevu-latest-searches": KlevuLatestSearches;
         "klevu-layout-results": KlevuLayoutResults;
@@ -4430,10 +4363,6 @@ declare module "@stencil/core" {
              * Klevu icon component. Uses Google Material Icons.
              */
             "klevu-icon": LocalJSX.KlevuIcon & JSXBase.HTMLAttributes<HTMLKlevuIconElement>;
-            /**
-             * This component allows you to select an image from the file system.
-             */
-            "klevu-image-picker": LocalJSX.KlevuImagePicker & JSXBase.HTMLAttributes<HTMLKlevuImagePickerElement>;
             /**
              * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
              * one of the first ones in the `<body>` tag. Currently only one `klevu-init` per page is supported. It is used to define
