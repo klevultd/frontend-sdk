@@ -21,7 +21,7 @@ const defaultOptions: Options = {
  * Recently viewed products
  *
  * @category RecommendationQuery
- * @param options
+ * @param {Options} options Allows to override amount of products to return or pass custom lastClickedProductIds
  * @param modifiers
  * @returns
  */

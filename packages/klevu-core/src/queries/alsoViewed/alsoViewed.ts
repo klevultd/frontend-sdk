@@ -20,7 +20,7 @@ const defaultOptions: Options = {
  * Shows products that visitor should also see. Automatically applies products that user has already clicked.
  *
  * @category RecommendationQuery
- * @param options
+ * @param {Options} options Allows to override limit of products to return or pass custom lastClickedProductIds
  * @returns
  */
 export function alsoViewed(
