@@ -7,7 +7,13 @@ import {
 import { KlevuLastClickedProducts } from "../../store/lastClickedProducts.js"
 
 type Options = {
+  /**
+   * The number of products to return
+   */
   limit: number
+  /**
+   * List of string ids for last clicked products
+   */
   lastClickedProductIds?: string[]
 }
 

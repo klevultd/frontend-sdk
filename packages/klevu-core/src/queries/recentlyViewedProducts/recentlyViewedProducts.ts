@@ -13,7 +13,13 @@ type Options = {
 
 const defaultOptions: Options = {
   id: "recentlyViewedProducts",
+  /**
+   * The number of products to return
+   */
   amount: 10,
+  /**
+   * List of string ids for last clicked products
+   */
   lastClickedProductIds: [],
 }
 
