@@ -12,6 +12,6 @@
     "@klevu/core": "file:../../packages/klevu-core"
   },
   "devDependencies": {
-    "vite": "^4.4.11"
+    "vite": "^4.4.12"
   }
 }
