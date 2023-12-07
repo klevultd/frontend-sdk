@@ -36,7 +36,8 @@
     "tStartChat": "Aloita keskustelu",
     "tCategoriesCaption": "Kategoriat",
     "tTrendingCaption": "Suosituimmat",
-    "tLastClickedProductsCaption": "Viimeksi katsotut (%s)"
+    "tLastClickedProductsCaption": "Viimeksi katsotut (%s)",
+    "tNoResultsFound": "Ei tuloksia"
   },
   "searchField": {
     "tPlaceholder": "Etsi tuotteita",

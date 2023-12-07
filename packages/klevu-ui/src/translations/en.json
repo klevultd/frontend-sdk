@@ -37,7 +37,8 @@
     "tCategoriesCaption": "Categories",
     "tTrendingCaption": "Trending",
     "tPopularProductsTitle": "You may like",
-    "tLastClickedProductsCaption": "Recently viewed (%s)"
+    "tLastClickedProductsCaption": "Recently viewed (%s)",
+    "tNoResultsFound": "No results found"
   },
   "searchField": {
     "tPlaceholder": "Search for products",
