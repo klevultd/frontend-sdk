@@ -160,11 +160,9 @@ export class KlevuSearchLandingPage {
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
   @State() searchResultBottomBanners: KlevuBanner[] = []
-  @State() isUploadingImage = false
   #noResultsOptions?: NoResultsOptions
 
   #resultObject?: KlevuResponseQueryObject
-  #imagePickerPopupRef?: HTMLKlevuPopupElement
   #viewportUtil!: HTMLKlevuUtilViewportElement
   #layoutElement!: HTMLKlevuLayoutResultsElement
   #facetListElement!: HTMLKlevuFacetListElement

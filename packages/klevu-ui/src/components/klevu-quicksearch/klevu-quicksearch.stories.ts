@@ -18,7 +18,7 @@ export default meta
 export const Quicksearch: StoryObj<KlevuQuicksearch> = {
   args: {
     popupAnchor: "bottom-start",
-    fallbackTerm: "shoes",
+    fallbackTerm: "",
     searchCategories: true,
     searchCmsPages: true,
   },
@@ -30,7 +30,6 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     placeholder=${ifDefined(args.placeholder)}
     search-field-variant=${ifDefined(args.searchFieldVariant)}
     t-search-result=${ifDefined(args.tSearchResults)}
-    t-start-chat=${ifDefined(args.tStartChat)}
     t-categories-caption=${ifDefined(args.tCategoriesCaption)}
     show-ratings=${ifDefined(args.showRatings)}
     show-ratings-count=${ifDefined(args.showRatingsCount)}

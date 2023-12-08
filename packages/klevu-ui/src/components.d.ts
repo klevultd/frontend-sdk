@@ -1250,6 +1250,10 @@ export namespace Components {
          */
         "tLastClickedProductsCaption"?: string;
         /**
+          * Message to show when no results found
+         */
+        "tNoResultsMessage": string;
+        /**
           * Popular products section heading
          */
         "tPopularProductsTitle"?: string;
@@ -3714,6 +3718,10 @@ declare namespace LocalJSX {
           * Recently clicked tab caption Supports showing the count in place of %s in the value eg: `Recently Searched (%s)` with count of 2 will lead to `Recently Searched (2)`.
          */
         "tLastClickedProductsCaption"?: string;
+        /**
+          * Message to show when no results found
+         */
+        "tNoResultsMessage"?: string;
         /**
           * Popular products section heading
          */

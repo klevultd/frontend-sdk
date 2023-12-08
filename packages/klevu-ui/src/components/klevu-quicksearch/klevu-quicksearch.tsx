@@ -121,6 +121,10 @@ export class KlevuQuicksearch {
    * Title of search results
    */
   @Prop() tSearchResults = getTranslation("quicksearch.tSearchResults")
+  /**
+   * Message to show when no results found
+   */
+  @Prop() tNoResultsMessage = getTranslation("quicksearch.tNoResultsFound")
 
   /**
    * Title of categories section
@@ -218,13 +222,11 @@ export class KlevuQuicksearch {
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
   @State() searchResultBottomBanners: KlevuBanner[] = []
-  @State() isUploadingImage: boolean = false
   #searchField?: HTMLKlevuSearchFieldElement
 
   #resultObject?: KlevuResponseQueryObject
 
   popup?: HTMLKlevuPopupElement
-  #imagePickerPopupRef?: HTMLKlevuPopupElement
 
   #searchTerm: string = ""
   #noResultsOptions?: NoResultsOptions
@@ -655,7 +657,7 @@ export class KlevuQuicksearch {
           <slot name="noResults">
             {isNoResultsPage && this.noResultsMessage ? (
               <p class="noResultsMessage">
-                <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
+                <klevu-typography variant="body-s">{this.noResultsMessage || this.tNoResultsMessage}</klevu-typography>
               </p>
             ) : null}
             <div class="tabrow">
