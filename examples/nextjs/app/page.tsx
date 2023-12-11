@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Fragment } from "react"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -20,6 +21,10 @@ export default function Home() {
           />
         </div>
       </form>
+      <br />
+      <Link href="/category/men">
+        Category page with `@klevu/ui-react` here.
+      </Link>
     </div>
   )
 }
