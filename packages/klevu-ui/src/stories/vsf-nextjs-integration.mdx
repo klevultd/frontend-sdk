@@ -1,0 +1,309 @@
+import { Meta, Story } from "@storybook/addon-docs"
+
+<Meta title="Examples/VSF NextJS Integration" />
+
+# Adding Klevu Components to VSF NextJS Application
+
+### Why use Klevu Components
+
+Easy to implement and customize
+
+Klevu components automatically generate and send analytics events for optimizing the search.
+
+Personalization if enabled in KMC is also automatically handled when performing search queries.
+
+### Installing the package
+
+```jsx
+yarn workspace storefront-unified-nextjs add @klevu/ui-react
+```
+
+### Including icons
+
+Copy icon assets folder from `node_modules/@klevu/ui/dist/klevu-ui/assets` to `apps/storefront-unified-nextjs/public` folder.
+
+### Adding KlevuInit
+
+NOTE: Please take a backup before replacing the contents.
+
+Add imports
+
+```jsx
+import { slugify, maybe } from "@shared/utils"
+import { KlevuInit } from "@klevu/ui-react"
+import "@klevu/ui/dist/klevu-ui/klevu-ui.css" // To load default klevu component styles
+```
+
+Change the `apps/storefront-unified-nextjs/pages/_app.tsx`, wrap `<Component` with the KlevuInit component
+
+```jsx
+<KlevuInit
+  url={SEARCH_URL}
+  apiKey={STORE_API_KEY}
+  settings={{
+    // This function is needed to allow for product click redirection to Product page.
+    generateProductUrl: (product) => {
+      return `/product/${slugify(product.id ?? "", product?.name ?? "")}/${product.itemGroupId}?sku=${maybe(
+        product?.sku
+      )}`
+    },
+  }}
+  kmcLoadDefaults // add this if you want to use settings from KMC
+>
+  <Component {...pageProps} />
+</KlevuInit>
+```
+
+### Adding the quick search component
+
+Replace contents of the `apps/storefront-unified-nextjs/components/ui/Search/Search.tsx` file with following snippet
+
+NOTE: Please take a backup before replacing the contents.
+
+You can find the complete list of properties for quick search component [here](https://webcomponents.klevu.com/?path=/docs/apps-quicksearch--docs){:target="\_blank"}.
+
+Example:
+
+- useKlaviyo - to enable Klaviyo integration
+- usePersonalisation - to enable personalisation in search
+
+```jsx
+import { useRouter } from 'next/router';
+import { KlevuQuicksearch } from '@klevu/ui-react';
+import { appRoutes } from '~/config';
+
+export function Search() {
+  const router = useRouter();
+  const term = (router.query.search as string) || '';
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    await router.push({ pathname: appRoutes.search.compile(), query: { search: event.detail } });
+  };
+
+  return (
+    <KlevuQuicksearch
+      term={term}
+      onKlevuSearch={handleSubmit}
+      placeholder="Search"
+      searchFieldVariant="pill"
+      popupAnchor="bottom"
+      // Add additional properties as needed,
+    />
+  );
+}
+```
+
+### Adding the category page component
+
+Replace contents of the file at this path `apps/storefront-unified-nextjs/pages/category/[[...slug]].tsx` with following snippet
+
+NOTE: Please take a backup before replacing the contents.
+
+You can find the complete list of properties for category page component [here](https://webcomponents.klevu.com/?path=/docs/apps-merchandising--docs).
+Example:
+
+- limit={20} - Count of products for page
+- usePersonalisation - to enable personalisation in search
+
+```jsx
+import { useRouter } from 'next/router';
+import { KlevuMerchandising } from '@klevu/ui-react';
+import { dehydrate } from '@tanstack/react-query';
+import { createGetServerSideProps } from '~/helpers/ssr';
+import { useCategoryBreadcrumbs } from '~/hooks';
+import { DefaultLayout } from '~/layouts';
+
+const CATEGORIES = {
+  bath: 'Bath',
+  publications: 'Publications',
+  kitchen: 'Kitchen',
+}; // Add the id to label mapping for your list of categories. This is used to show proper name for the category.
+
+export const getServerSideProps = createGetServerSideProps({ i18nNamespaces: ['category'] }, async (context) => {
+  const { queryClient } = context;
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+});
+
+export function CategoryPage() {
+  const router = useRouter();
+  const categoryName = router.query.slug ? router.query.slug[0] : '';
+  const id = router.query.slug ? router.query.slug[1] : '';
+  const currentCategory = {
+    id: categoryName,
+    title: CATEGORIES[categoryName as keyof typeof CATEGORIES] || '',
+  };
+  const { breadcrumbs } = useCategoryBreadcrumbs([], {
+    id,
+    name: CATEGORIES[categoryName as keyof typeof CATEGORIES],
+    slug: categoryName,
+    subcategories: [],
+    productCount: null,
+  });
+  return (
+    <DefaultLayout breadcrumbs={breadcrumbs}>
+      <div className="mb-20 mx-4 md:px-0">
+        <KlevuMerchandising
+          category={currentCategory?.id || ''}
+          categoryTitle={currentCategory.title}
+          // Add additional properties as needed.
+        />
+      </div>
+    </DefaultLayout>
+  );
+}
+
+export default CategoryPage;
+```
+
+### Adding the search results page component
+
+Replace contents of the file at this path `apps/storefront-unified-nextjs/pages/search.tsx`
+
+NOTE: Please take a backup before replacing the contents.
+
+You can find the complete list of properties for search results component [here](https://webcomponents.klevu.com/?path=/docs/apps-search-landing-page--docs).
+Example:
+
+- useKlaviyo - to enable Klaviyo integration
+- usePersonalisation - to enable personlisation in search
+
+```jsx
+import { useRouter } from 'next/router';
+import { KlevuSearchLandingPage } from '@klevu/ui-react';
+import { dehydrate } from '@tanstack/react-query';
+import { createGetServerSideProps } from '~/helpers/ssr';
+import { DefaultLayout } from '~/layouts';
+
+export const getServerSideProps = createGetServerSideProps({ i18nNamespaces: ['category'] }, async (context) => {
+  const { queryClient } = context;
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+});
+
+export function SearchPage() {
+  const router = useRouter();
+  const term = (router.query.search as string) || '';
+  return (
+    <DefaultLayout>
+      <div className="mb-20 mx-4 md:px-0">
+        <KlevuSearchLandingPage
+          term={term}
+          // Add additional properties as needed.
+        />
+      </div>
+    </DefaultLayout>
+  );
+}
+
+export default SearchPage;
+```
+
+### Customizing components with CSS styles
+
+CSS styling of the product card is possible by accessing the parts of the component.
+Create a css file in the `apps/storefront-unified-nextjs/styles` folder. For example: `klevu.css`
+Import the file in the `apps/storefront-unified-nextjs/pages/_app.tsx`
+
+```jsx
+import "~/styles/klevu.css"
+```
+
+Klevu components documentation provides examples of styled components. We also have a realtime editor where you can make changes to the
+styles and preview in realtime and then copy those styles into your css file.
+
+Here are some examples on styling the different components.
+
+```css
+/* Styles for the Quick Search */
+
+klevu-quicksearch {
+  color: red;
+}
+
+klevu-quicksearch::part(quicksearch-content) {
+  color: green;
+  border: 1px solid pink;
+  --klevu-color-primary: red;
+  --klevu-color-primary-darker: #dd3333;
+}
+
+klevu-quicksearch::part(quicksearch-sidepanel) {
+  border: 1px solid fuchsia;
+}
+
+klevu-quicksearch::part(quicksearch-main-area) {
+  border: 1px solid hotpink;
+}
+
+klevu-quicksearch::part(product-base) {
+  margin: 10px 0;
+  border: 1px solid green;
+}
+
+klevu-quicksearch::part(product-price) {
+  color: red;
+  --klevu-typography-font-weight: 100;
+}
+
+klevu-quicksearch::part(button-base) {
+  background-color: black;
+}
+
+/* Styles for the Category Page */
+klevu-merchandising::part(merchandising-sidebar) {
+  border: 1px solid hotpink;
+}
+
+klevu-merchandising::part(merchandising-header) {
+  border: 1px solid green;
+  color: green;
+}
+
+klevu-merchandising::part(merchandising-footer) {
+  border: 1px solid black;
+  color: black;
+}
+
+klevu-merchandising::part(merchandising-content) {
+  border: 1px solid blue;
+}
+
+klevu-merchandising::part(product-price) {
+  color: red;
+  display: block;
+  text-align: right;
+}
+
+/* Styles for the Search Results Page */
+klevu-search-landing-page::part(search-landing-page-sidebar) {
+  border: 1px solid hotpink;
+}
+
+klevu-search-landing-page::part(search-landing-page-header) {
+  border: 1px solid green;
+  color: green;
+}
+
+klevu-search-landing-page::part(search-landing-page-footer) {
+  border: 1px solid black;
+  color: black;
+}
+
+klevu-search-landing-page::part(search-landing-page-content) {
+  border: 1px solid blue;
+}
+
+klevu-search-landing-page::part(product-price) {
+  color: red;
+  display: block;
+  text-align: right;
+}
+```
