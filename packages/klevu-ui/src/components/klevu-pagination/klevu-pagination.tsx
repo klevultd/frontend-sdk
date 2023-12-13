@@ -75,12 +75,13 @@ export class KlevuPagination {
   }
 
   componentDidLoad() {
-    if (this.shouldUpdateUrlForPage) {
-      const urlSearchParams = new URLSearchParams(window.location.search)
-      const page = urlSearchParams.get("klevu_page")
-      if (page && +page > 0) {
-        this.klevuPaginationChange.emit(+page)
-      }
+    if (!this.shouldUpdateUrlForPage) {
+      return
+    }
+    const urlSearchParams = new URLSearchParams(window.location.search)
+    const page = urlSearchParams.get("klevu_page")
+    if (page && +page > 0) {
+      this.klevuPaginationChange.emit(+page)
     }
   }
 

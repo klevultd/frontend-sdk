@@ -123,6 +123,9 @@ export class KlevuFacetList {
   }
 
   componentWillLoad() {
+    if (!this.shouldUpdateUrlForFacets) {
+      return
+    }
     const urlSearchParams = new URLSearchParams(window.location.search)
     this.manager.readFromURLParams(urlSearchParams)
     this.klevuApplyFilters.emit({
