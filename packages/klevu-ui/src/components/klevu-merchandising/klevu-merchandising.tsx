@@ -123,6 +123,18 @@ export class KlevuMerchandising {
   usePersonalisation?: boolean
 
   /**
+   * To set the facet selection value in the url
+   */
+  @Prop()
+  shouldUpdateUrlForFacets?: boolean
+
+  /**
+   * To set the page selection value in the url
+   */
+  @Prop()
+  shouldUpdateUrlForPage?: boolean
+
+  /**
    * Overrides KMC setting to use ABtest for results
    */
   @Prop()
@@ -178,7 +190,7 @@ export class KlevuMerchandising {
       this.#resultObject = res.queriesById("categoryMerchandising")
       await this.#buildAfterResults()
     } else {
-      await this.#fetchData()
+      if (!this.shouldUpdateUrlForFacets) await this.#fetchData()
     }
   }
 
@@ -370,6 +382,7 @@ export class KlevuMerchandising {
                 useApplyButton={this.#isMobile()}
                 onKlevuApplyFilters={this.#applyFilters.bind(this)}
                 exportparts={partsExports("klevu-facet-list")}
+                shouldUpdateUrlForFacets={this.shouldUpdateUrlForFacets}
               ></klevu-facet-list>
             </div>
           </slot>
@@ -421,6 +434,7 @@ export class KlevuMerchandising {
                 exportparts={partsExports("klevu-pagination")}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
+                shouldUpdateUrlForPage={this.shouldUpdateUrlForPage}
               ></klevu-pagination>
             ) : this.#resultObject?.hasNextPage() ? (
               <klevu-button onClick={this.#loadMore.bind(this)}>{this.tLoadMore}</klevu-button>

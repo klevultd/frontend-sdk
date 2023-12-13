@@ -121,6 +121,12 @@ export class KlevuFacet {
    */
   @Prop() colorSwatchOverrides?: KlevuColorSwatchOverride = {}
   /**
+   * To set the facet selection value in the url
+   */
+  @Prop()
+  shouldUpdateUrlForFacets?: boolean
+
+  /**
    * Show all options
    */
   @State() showAll = false
@@ -144,6 +150,18 @@ export class KlevuFacet {
       manager: this.manager,
       filter: event.detail,
     })
+    if (this.shouldUpdateUrlForFacets) {
+      this.#updateUrl()
+    }
+  }
+
+  #updateUrl = () => {
+    const filtersToParams = this.manager.toURLParams(window.location.search)
+    if (filtersToParams) {
+      if ("undefined" !== typeof window.history && "undefined" !== typeof window.history.replaceState) {
+        window.history.pushState({}, "", "?" + filtersToParams.toString())
+      }
+    }
   }
 
   async connectedCallback() {
@@ -161,7 +179,6 @@ export class KlevuFacet {
       this.settings = e.detail
     })
   }
-
   render() {
     return (
       <Host>

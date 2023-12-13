@@ -10,7 +10,6 @@ import {
   KMCRootObject,
   KMCMapsRootObject,
   KlevuBanner,
-  KlevuUploadImageForSearch,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter, Watch } from "@stencil/core"
 import {

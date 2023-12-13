@@ -129,13 +129,14 @@ export class FilterManager {
    *
    * @param key key of filter to select
    * @param value value of option to select
+   * @param fireEvent Should fire the FilterSelectionUpdate event
    * @returns
    */
-  selectOption(key: string, value: string) {
+  selectOption(key: string, value: string, fireEvent = true) {
     const suboption = this.getOptionByKeyCreateIfNotExists(key, value)
     suboption.selected = true
 
-    if (isBrowser()) {
+    if (isBrowser() && fireEvent) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
           detail: {
@@ -176,9 +177,10 @@ export class FilterManager {
    * Sets `selected` key of all options to false
    *
    * @param key Optional key to lmit clearing to one option
+   * @param fireEvent Should fire the FilterSelectionUpdate event
    * @returns
    */
-  clearOptionSelections(key?: string) {
+  clearOptionSelections(key?: string, fireEvent = true) {
     if (key) {
       const option = this.filters.find((o) => o.key === key)
       if (option && FilterManager.isKlevuFilterResultOptions(option)) {
@@ -193,7 +195,7 @@ export class FilterManager {
       }
     })
 
-    if (isBrowser()) {
+    if (isBrowser() && fireEvent) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate)
       )
@@ -208,8 +210,9 @@ export class FilterManager {
    * @param key Key of slide
    * @param min Min value of slide
    * @param max Max value of slide
+   * @param fireEvent Should fire the FilterSelectionUpdate event
    */
-  updateSlide(key: string, min: number, max: number) {
+  updateSlide(key: string, min: number, max: number, fireEvent = true) {
     const slideIndex = this.filters.findIndex((s) => s.key === key)
     let slider: KlevuFilterResultSlider
 
@@ -234,7 +237,7 @@ export class FilterManager {
       slider.end = max.toString()
     }
 
-    if (isBrowser()) {
+    if (isBrowser() && fireEvent) {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.FilterSelectionUpdate, {
           detail: {
@@ -322,11 +325,11 @@ export class FilterManager {
 
   /**
    * Changes current selection of filters to a URL param string
-   *
+   * @param searchParams Default value to initialize
    * @returns string of URL params
    */
-  toURLParams(): string {
-    const params = new URLSearchParams()
+  toURLParams(searchParams = ""): string {
+    const params = new URLSearchParams(searchParams)
     for (const filter of this.filters) {
       if (
         FilterManager.isKlevuFilterResultOptions(filter) ||
@@ -338,16 +341,48 @@ export class FilterManager {
         if (selected.length === 0) {
           continue
         }
-        params.append(`o_${filter.key}`, selected.map((s) => s.value).join(","))
+        params.set(`o_${filter.key}`, selected.map((s) => s.value).join(","))
       } else if (FilterManager.isKlevuFilterResultSlider(filter)) {
         if (!filter.start || !filter.end) {
           continue
         }
-        params.append(`s_${filter.key}`, `${filter.start}-${filter.end}`)
+        params.set(`s_${filter.key}`, `${filter.start}-${filter.end}`)
+      }
+    }
+    /**
+     * This code will convert the URLSearchParams to a string and also remove
+     * the options that are no longer selected.
+     */
+    let paramsAsString = ""
+    for (const [key, value] of params.entries()) {
+      let append = false
+      if (key.startsWith("o_")) {
+        const optionKey = key.substring(2)
+        const filter = this.filters.find((f) => f.key === optionKey)
+        if (filter) {
+          if (
+            FilterManager.isKlevuFilterResultOptions(filter) ||
+            FilterManager.isKlevuFilterResultRating(filter)
+          ) {
+            const option = filter.options.find((subOption) =>
+              value.split(",").find((v) => v === subOption.value)
+            )
+            if (option?.selected) {
+              append = true
+            }
+          }
+        }
+      } else {
+        append = true
+      }
+      if (append) {
+        paramsAsString += `${
+          paramsAsString ? "&" : ""
+        }${key}=${encodeURIComponent(value)}`
       }
     }
 
-    return params.toString()
+    return paramsAsString
   }
 
   /**
@@ -356,19 +391,29 @@ export class FilterManager {
    * @param params URLSearchParams to read from
    */
   readFromURLParams(params: URLSearchParams) {
-    this.clearOptionSelections()
+    this.clearOptionSelections(undefined, false)
     for (const [key, value] of params.entries()) {
       if (key.startsWith("o")) {
         const optionKey = key.substring(2)
-        value.split(",").forEach((v) => this.selectOption(optionKey, v))
+        value.split(",").forEach((v) => this.selectOption(optionKey, v, false))
       } else if (key.startsWith("s")) {
         const sliderKey = key.substring(2)
         this.updateSlide(
           sliderKey,
           parseFloat(value.split("-")[0]),
-          parseFloat(value.split("-")[1])
+          parseFloat(value.split("-")[1]),
+          false
         )
       }
+    }
+    if (isBrowser()) {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.FiltersApplied, {
+          detail: {
+            filters: this.filters,
+          },
+        })
+      )
     }
   }
 

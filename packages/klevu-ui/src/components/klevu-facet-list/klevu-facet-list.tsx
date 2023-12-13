@@ -93,6 +93,12 @@ export class KlevuFacetList {
   @Prop() defaultPriceLabel = "Price"
 
   /**
+   * To set the facet selection value in the url
+   */
+  @Prop()
+  shouldUpdateUrlForFacets?: boolean
+
+  /**
    * When filters are applied
    */
   @Event({ composed: true })
@@ -114,6 +120,14 @@ export class KlevuFacetList {
     } else {
       this.filters = this.manager.filters
     }
+  }
+
+  componentWillLoad() {
+    const urlSearchParams = new URLSearchParams(window.location.search)
+    this.manager.readFromURLParams(urlSearchParams)
+    this.klevuApplyFilters.emit({
+      manager: this.manager,
+    })
   }
 
   @Listen("klevu-filters-applied", { target: "document" })
@@ -178,6 +192,7 @@ export class KlevuFacetList {
                 useColorSwatch={this.colorSwatches && !!this.colorSwatches.includes(f.key)}
                 colorSwatchOverrides={this.colorSwatchOverrides && this.colorSwatchOverrides[f.key]}
                 mode={mode}
+                shouldUpdateUrlForFacets={this.shouldUpdateUrlForFacets}
               ></klevu-facet>
             )
           } else if (FilterManager.isKlevuFilterResultSlider(f)) {
@@ -188,6 +203,7 @@ export class KlevuFacetList {
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 slider={f}
                 labelOverride={f.label === "klevu_price" ? this.defaultPriceLabel : undefined}
+                shouldUpdateUrlForFacets={this.shouldUpdateUrlForFacets}
               ></klevu-facet>
             )
           }

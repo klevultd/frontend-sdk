@@ -1,5 +1,5 @@
 import { KlevuQueryResult } from "@klevu/core"
-import { Component, Event, EventEmitter, h, Host, Prop } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Host, Prop, Watch } from "@stencil/core"
 
 /**
  * Pagination component. Either provide numbers or query result to display the component.
@@ -30,6 +30,11 @@ export class KlevuPagination {
    * Query results used to build min, max and current
    */
   @Prop() queryResult?: KlevuQueryResult
+  /**
+   * To set the page selection value in the url
+   */
+  @Prop()
+  shouldUpdateUrlForPage?: boolean
 
   /**
    * Page that was changed into
@@ -38,6 +43,46 @@ export class KlevuPagination {
     composed: true,
   })
   klevuPaginationChange!: EventEmitter<number>
+
+  #handlePageChange(page: number) {
+    this.klevuPaginationChange.emit(page)
+    if (this.shouldUpdateUrlForPage) {
+      const urlSearchParams = new URLSearchParams(window.location.search)
+      urlSearchParams.set("klevu_page", `${page}`)
+      this.#updateUrl(urlSearchParams)
+    }
+  }
+
+  @Watch("queryResult")
+  async watchPropHandler(newQueryResult: KlevuQueryResult, oldQueryResult: KlevuQueryResult) {
+    if (newQueryResult.meta.offset !== oldQueryResult.meta.offset) {
+      if (this.shouldUpdateUrlForPage && (!newQueryResult.meta.offset || newQueryResult.meta.offset === 0)) {
+        const urlSearchParams = new URLSearchParams(window.location.search)
+        urlSearchParams.delete("klevu_page")
+        this.#updateUrl(urlSearchParams)
+      }
+    }
+  }
+
+  #updateUrl(urlSearchParams: URLSearchParams) {
+    let paramsAsString = ""
+    for (const [key, value] of urlSearchParams.entries()) {
+      paramsAsString += `${paramsAsString ? "&" : ""}${key}=${encodeURIComponent(value)}`
+    }
+    if ("undefined" !== typeof window.history && "undefined" !== typeof window.history.replaceState) {
+      window.history.pushState({}, "", "?" + paramsAsString)
+    }
+  }
+
+  componentDidLoad() {
+    if (this.shouldUpdateUrlForPage) {
+      const urlSearchParams = new URLSearchParams(window.location.search)
+      const page = urlSearchParams.get("klevu_page")
+      if (page && +page > 0) {
+        this.klevuPaginationChange.emit(+page)
+      }
+    }
+  }
 
   render() {
     let min: number, max: number, current: number
@@ -87,7 +132,6 @@ export class KlevuPagination {
         pages.push(i)
       }
     }
-
     return (
       <Host>
         <div part="pagination-base">
@@ -95,7 +139,7 @@ export class KlevuPagination {
             class={{
               disabled: current === min,
             }}
-            onClick={() => current !== min && this.klevuPaginationChange.emit(current - 1)}
+            onClick={() => current !== min && this.#handlePageChange(current - 1)}
             name="navigate_before"
             part="pagination-navigation-previous"
           />
@@ -109,7 +153,7 @@ export class KlevuPagination {
                 class={{
                   current: current === i,
                 }}
-                onClick={() => current !== i && this.klevuPaginationChange.emit(i)}
+                onClick={() => current !== i && this.#handlePageChange(i)}
                 part="pagination-page-number"
               >
                 {i}
@@ -120,7 +164,7 @@ export class KlevuPagination {
             class={{
               disabled: current === max,
             }}
-            onClick={() => current !== max && this.klevuPaginationChange.emit(current + 1)}
+            onClick={() => current !== max && this.#handlePageChange(current + 1)}
             name="navigate_next"
             part="pagination-navigation-next"
           />

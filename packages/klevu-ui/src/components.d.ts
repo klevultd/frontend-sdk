@@ -373,6 +373,10 @@ export namespace Components {
          */
         "option"?: KlevuFilterResultOptions;
         /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
@@ -425,6 +429,10 @@ export namespace Components {
           * Set mode for facets or if object is passed then define per key
          */
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+        /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
         /**
           * When using `useApplyButton` then this method can be used to update current state filterManager into to local state of that is displayed in the UI
          */
@@ -604,6 +612,14 @@ export namespace Components {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -702,6 +718,10 @@ export namespace Components {
           * Query results used to build min, max and current
          */
         "queryResult"?: KlevuQueryResult;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
@@ -1444,6 +1464,14 @@ export namespace Components {
           * The factor to use to generate the ranges
          */
         "priceInterval": number;
+        /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
         /**
           * Show price as options
          */
@@ -2823,6 +2851,10 @@ declare namespace LocalJSX {
          */
         "option"?: KlevuFilterResultOptions;
         /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
@@ -2879,6 +2911,10 @@ declare namespace LocalJSX {
           * When filters are applied
          */
         "onKlevuApplyFilters"?: (event: KlevuFacetListCustomEvent<KlevuFiltersAppliedEventDetail>) => void;
+        /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
         /**
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
@@ -3047,6 +3083,14 @@ declare namespace LocalJSX {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3149,6 +3193,10 @@ declare namespace LocalJSX {
           * Query results used to build min, max and current
          */
         "queryResult"?: KlevuQueryResult;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
@@ -3913,6 +3961,14 @@ declare namespace LocalJSX {
           * The factor to use to generate the ranges
          */
         "priceInterval"?: number;
+        /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
         /**
           * Show price as options
          */
