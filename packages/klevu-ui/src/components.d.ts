@@ -1429,6 +1429,10 @@ export namespace Components {
      */
     interface KlevuSearchLandingPage {
         /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
+        /**
           * How many products to display in filters
          */
         "filterCount"?: number;
@@ -1456,14 +1460,6 @@ export namespace Components {
           * The factor to use to generate the ranges
          */
         "priceInterval": number;
-        /**
-          * To set the facet selection value in the url
-         */
-        "shouldUpdateUrlForFacets"?: boolean;
-        /**
-          * To set the page selection value in the url
-         */
-        "shouldUpdateUrlForPage"?: boolean;
         /**
           * Show price as options
          */
@@ -3917,6 +3913,10 @@ declare namespace LocalJSX {
      */
     interface KlevuSearchLandingPage {
         /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
+        /**
           * How many products to display in filters
          */
         "filterCount"?: number;
@@ -3945,14 +3945,6 @@ declare namespace LocalJSX {
           * The factor to use to generate the ranges
          */
         "priceInterval"?: number;
-        /**
-          * To set the facet selection value in the url
-         */
-        "shouldUpdateUrlForFacets"?: boolean;
-        /**
-          * To set the page selection value in the url
-         */
-        "shouldUpdateUrlForPage"?: boolean;
         /**
           * Show price as options
          */

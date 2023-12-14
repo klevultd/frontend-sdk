@@ -468,8 +468,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'priceInterval',
   'hidePrice',
   'showVariantsCount',
-  'shouldUpdateUrlForFacets',
-  'shouldUpdateUrlForPage',
+  'autoUpdateUrl',
   'klevuData'
 ]);
 
