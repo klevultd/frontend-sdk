@@ -373,10 +373,6 @@ export namespace Components {
          */
         "option"?: KlevuFilterResultOptions;
         /**
-          * To set the facet selection value in the url
-         */
-        "shouldUpdateUrlForFacets"?: boolean;
-        /**
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
@@ -588,6 +584,10 @@ export namespace Components {
      */
     interface KlevuMerchandising {
         /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
+        /**
           * Which category products
          */
         "category": string;
@@ -611,14 +611,6 @@ export namespace Components {
           * Object to override and settings on search options
          */
         "options"?: KlevuMerchandisingOptions;
-        /**
-          * To set the facet selection value in the url
-         */
-        "shouldUpdateUrlForFacets"?: boolean;
-        /**
-          * To set the page selection value in the url
-         */
-        "shouldUpdateUrlForPage"?: boolean;
         /**
           * Show ratings
          */
@@ -2851,10 +2843,6 @@ declare namespace LocalJSX {
          */
         "option"?: KlevuFilterResultOptions;
         /**
-          * To set the facet selection value in the url
-         */
-        "shouldUpdateUrlForFacets"?: boolean;
-        /**
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
@@ -3058,6 +3046,10 @@ declare namespace LocalJSX {
      */
     interface KlevuMerchandising {
         /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
+        /**
           * Which category products
          */
         "category": string;
@@ -3082,14 +3074,6 @@ declare namespace LocalJSX {
           * Object to override and settings on search options
          */
         "options"?: KlevuMerchandisingOptions;
-        /**
-          * To set the facet selection value in the url
-         */
-        "shouldUpdateUrlForFacets"?: boolean;
-        /**
-          * To set the page selection value in the url
-         */
-        "shouldUpdateUrlForPage"?: boolean;
         /**
           * Show ratings
          */

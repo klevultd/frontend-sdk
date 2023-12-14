@@ -126,8 +126,7 @@ export class KlevuFacetList {
     if (!this.shouldUpdateUrlForFacets) {
       return
     }
-    const urlSearchParams = new URLSearchParams(window.location.search)
-    this.manager.readFromURLParams(urlSearchParams)
+    this.manager.readFromURLParams(new URL(document.URL).searchParams)
     this.klevuApplyFilters.emit({
       manager: this.manager,
     })
@@ -138,6 +137,10 @@ export class KlevuFacetList {
     this.#applyManager.setState(this.manager.getCurrentState())
     if (!this.useApplyButton) {
       this.filters = this.manager.filters
+    }
+    if (this.shouldUpdateUrlForFacets) {
+      const searchParams = this.manager.toURLParams(new URL(document.URL).searchParams)
+      window.history.replaceState({}, "", `${window.location.pathname}?${searchParams}`)
     }
   }
 
@@ -195,7 +198,6 @@ export class KlevuFacetList {
                 useColorSwatch={this.colorSwatches && !!this.colorSwatches.includes(f.key)}
                 colorSwatchOverrides={this.colorSwatchOverrides && this.colorSwatchOverrides[f.key]}
                 mode={mode}
-                shouldUpdateUrlForFacets={this.shouldUpdateUrlForFacets}
               ></klevu-facet>
             )
           } else if (FilterManager.isKlevuFilterResultSlider(f)) {
@@ -206,7 +208,6 @@ export class KlevuFacetList {
                 manager={this.useApplyButton ? this.#applyManager : this.manager}
                 slider={f}
                 labelOverride={f.label === "klevu_price" ? this.defaultPriceLabel : undefined}
-                shouldUpdateUrlForFacets={this.shouldUpdateUrlForFacets}
               ></klevu-facet>
             )
           }
