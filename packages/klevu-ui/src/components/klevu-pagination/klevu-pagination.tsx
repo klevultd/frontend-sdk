@@ -65,13 +65,7 @@ export class KlevuPagination {
   }
 
   #updateUrl(urlSearchParams: URLSearchParams) {
-    let paramsAsString = ""
-    for (const [key, value] of urlSearchParams.entries()) {
-      paramsAsString += `${paramsAsString ? "&" : ""}${key}=${encodeURIComponent(value)}`
-    }
-    if ("undefined" !== typeof window.history && "undefined" !== typeof window.history.replaceState) {
-      window.history.pushState({}, "", "?" + paramsAsString)
-    }
+    window.history.pushState({}, "", "?" + urlSearchParams.toString())
   }
 
   componentDidLoad() {

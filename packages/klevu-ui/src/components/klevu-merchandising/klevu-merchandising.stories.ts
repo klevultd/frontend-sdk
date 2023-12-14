@@ -34,6 +34,7 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     show-ratings-count=${ifDefined(args.showRatingsCount)}
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
+    auto-update-url=${ifDefined(args.autoUpdateUrl)}
   ></klevu-merchandising>`,
 }
 

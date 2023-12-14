@@ -131,7 +131,6 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'tAll',
   'useColorSwatch',
   'colorSwatchOverrides',
-  'shouldUpdateUrlForFacets',
   'klevuFilterSelectionUpdate'
 ]);
 
@@ -213,8 +212,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'showRatings',
   'showRatingsCount',
   'usePersonalisation',
-  'shouldUpdateUrlForFacets',
-  'shouldUpdateUrlForPage',
+  'autoUpdateUrl',
   'useABTest',
   'klevuData'
 ]);
@@ -470,8 +468,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'priceInterval',
   'hidePrice',
   'showVariantsCount',
-  'shouldUpdateUrlForFacets',
-  'shouldUpdateUrlForPage',
+  'autoUpdateUrl',
   'klevuData'
 ]);
 

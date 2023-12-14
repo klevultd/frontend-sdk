@@ -150,16 +150,10 @@ export class KlevuSearchLandingPage {
   @Prop() showVariantsCount = false
 
   /**
-   * To set the facet selection value in the url
+   * To update the pagination and filters to the url automatically
    */
   @Prop()
-  shouldUpdateUrlForFacets?: boolean
-
-  /**
-   * To set the page selection value in the url
-   */
-  @Prop()
-  shouldUpdateUrlForPage?: boolean
+  autoUpdateUrl?: boolean
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -227,7 +221,7 @@ export class KlevuSearchLandingPage {
   }
 
   async componentWillLoad() {
-    if (!this.shouldUpdateUrlForFacets) await this.#fetchData()
+    if (!this.autoUpdateUrl) await this.#fetchData()
   }
 
   @Watch("term")
@@ -421,7 +415,7 @@ export class KlevuSearchLandingPage {
                   onKlevuApplyFilters={this.#applyFilters.bind(this)}
                   mode={facetMode}
                   exportparts={partsExports("klevu-facet-list")}
-                  shouldUpdateUrlForFacets={this.shouldUpdateUrlForFacets}
+                  shouldUpdateUrlForFacets={this.autoUpdateUrl}
                 ></klevu-facet-list>
               )}
             </div>
@@ -526,7 +520,7 @@ export class KlevuSearchLandingPage {
               ></klevu-util-infinite-scroll>
             ) : this.usePagination && this.#resultObject && this.results.length > 0 ? (
               <klevu-pagination
-                shouldUpdateUrlForPage={this.shouldUpdateUrlForPage}
+                shouldUpdateUrlForPage={this.autoUpdateUrl}
                 exportparts={partsExports("klevu-pagination")}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.paginationChange.bind(this)}

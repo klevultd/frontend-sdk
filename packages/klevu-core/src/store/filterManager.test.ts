@@ -34,6 +34,12 @@ const mockFilterData = (): Array<
         selected: false,
         value: "blue",
       },
+      {
+        count: 3,
+        name: "Filter with space",
+        selected: false,
+        value: "filter with space",
+      },
     ],
   },
   {
@@ -67,7 +73,7 @@ test("Init from data", () => {
 
   expect(manager.filters.length).toBe(2)
   expect((manager.filters[0] as KlevuFilterResultOptions).options.length).toBe(
-    2
+    3
   )
 })
 
@@ -191,6 +197,49 @@ test("Test URL param settings", () => {
   expect(manager.toURLParams()).toBe("o_test=red%2Cblue&s_price=6-9")
 })
 
+test("Test URL param settings with existing data", () => {
+  const manager = new FilterManager()
+  manager.initFromListFilters(mockFilterData())
+  manager.selectOption("test", "red")
+  manager.selectOption("test", "filter with space")
+  manager.updateSlide("price", 3, 7)
+
+  const output = manager.toURLParams(
+    new URLSearchParams(
+      "?o_test=blue&foo=bar&o_doestnexist=foobar&s_doesntsxist=0-10"
+    )
+  )
+  expect(output).toContain("o_test=red%2Cfilter+with+space")
+  expect(output).toContain("s_price=3-7")
+  expect(output).not.toContain("o_doesntexist")
+  expect(output).not.toContain("s_doesntexist")
+
+  manager.readFromURLParams(
+    new URLSearchParams("o_test=red%2Cblue%2Cfilter+with+space&s_price=6-9")
+  )
+
+  const slider = manager.filters.find(
+    (f) => f.type === KlevuFilterType.Slider
+  ) as KlevuFilterResultSlider
+
+  expect(slider).toMatchObject({
+    start: "6",
+    end: "9",
+  })
+
+  const option = manager.filters.find(
+    (f) => f.type === KlevuFilterType.Options
+  ) as KlevuFilterResultOptions
+
+  expect(option.options[0].selected).toBe(true)
+  expect(option.options[1].selected).toBe(true)
+  expect(option.options[2].selected).toBe(true)
+
+  expect(manager.toURLParams()).toBe(
+    "o_test=red%2Cblue%2Cfilter+with+space&s_price=6-9"
+  )
+})
+
 test("Test URL param reading when there is not initialized", () => {
   const manager = new FilterManager()
   manager.readFromURLParams(new URLSearchParams("o_test=red&s_price=6-9"))
@@ -245,7 +294,7 @@ test("Deprecated properties still work", () => {
   manager.initFromListFilters(mockFilterData())
 
   expect(manager.options.length).toBe(1)
-  expect(manager.options[0].options.length).toBe(2)
+  expect(manager.options[0].options.length).toBe(3)
 
   expect(manager.sliders.length).toBe(1)
 })

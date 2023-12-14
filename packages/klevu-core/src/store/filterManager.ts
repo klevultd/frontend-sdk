@@ -328,8 +328,8 @@ export class FilterManager {
    * @param searchParams Default value to initialize
    * @returns string of URL params
    */
-  toURLParams(searchParams = ""): string {
-    const params = new URLSearchParams(searchParams)
+  toURLParams(searchParams?: URLSearchParams): string {
+    const params = searchParams || new URLSearchParams()
     for (const filter of this.filters) {
       if (
         FilterManager.isKlevuFilterResultOptions(filter) ||
@@ -339,50 +339,31 @@ export class FilterManager {
           (subOption) => subOption.selected === true
         )
         if (selected.length === 0) {
+          params.delete(`o_${filter.key}`)
           continue
         }
         params.set(`o_${filter.key}`, selected.map((s) => s.value).join(","))
       } else if (FilterManager.isKlevuFilterResultSlider(filter)) {
         if (!filter.start || !filter.end) {
+          params.delete(`s_${filter.key}`)
           continue
         }
         params.set(`s_${filter.key}`, `${filter.start}-${filter.end}`)
       }
     }
-    /**
-     * This code will convert the URLSearchParams to a string and also remove
-     * the options that are no longer selected.
-     */
-    let paramsAsString = ""
-    for (const [key, value] of params.entries()) {
-      let append = false
-      if (key.startsWith("o_")) {
-        const optionKey = key.substring(2)
-        const filter = this.filters.find((f) => f.key === optionKey)
-        if (filter) {
-          if (
-            FilterManager.isKlevuFilterResultOptions(filter) ||
-            FilterManager.isKlevuFilterResultRating(filter)
-          ) {
-            const option = filter.options.find((subOption) =>
-              value.split(",").find((v) => v === subOption.value)
-            )
-            if (option?.selected) {
-              append = true
-            }
-          }
+
+    // delete the ones that are not in the filters
+    for (const [key] of params.entries()) {
+      if (key.startsWith("o_") || key.startsWith("s_")) {
+        const filterKey = key.substring(2)
+        const filter = this.filters.find((f) => f.key === filterKey)
+        if (!filter) {
+          params.delete(key)
         }
-      } else {
-        append = true
-      }
-      if (append) {
-        paramsAsString += `${
-          paramsAsString ? "&" : ""
-        }${key}=${encodeURIComponent(value)}`
       }
     }
 
-    return paramsAsString
+    return params.toString()
   }
 
   /**
