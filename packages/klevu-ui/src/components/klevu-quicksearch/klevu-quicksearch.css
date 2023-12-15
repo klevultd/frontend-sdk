@@ -107,3 +107,7 @@ klevu-moi {
 .bottombanners {
   margin-top: var(--klevu-spacing-05);
 }
+
+.sidePanel:empty {
+  display: none;
+}
