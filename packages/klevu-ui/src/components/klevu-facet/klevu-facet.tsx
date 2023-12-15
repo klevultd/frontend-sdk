@@ -120,6 +120,7 @@ export class KlevuFacet {
    * ImageUrl takes precedence over color when both are specified.
    */
   @Prop() colorSwatchOverrides?: KlevuColorSwatchOverride = {}
+
   /**
    * Show all options
    */

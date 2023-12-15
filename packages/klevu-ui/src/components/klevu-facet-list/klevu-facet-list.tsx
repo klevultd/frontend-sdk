@@ -93,6 +93,12 @@ export class KlevuFacetList {
   @Prop() defaultPriceLabel = "Price"
 
   /**
+   * To set the facet selection value in the url
+   */
+  @Prop()
+  shouldUpdateUrlForFacets?: boolean
+
+  /**
    * When filters are applied
    */
   @Event({ composed: true })
@@ -116,11 +122,25 @@ export class KlevuFacetList {
     }
   }
 
+  componentWillLoad() {
+    if (!this.shouldUpdateUrlForFacets) {
+      return
+    }
+    this.manager.readFromURLParams(new URL(document.URL).searchParams)
+    this.klevuApplyFilters.emit({
+      manager: this.manager,
+    })
+  }
+
   @Listen("klevu-filters-applied", { target: "document" })
   filterManagerAppliedFilters() {
     this.#applyManager.setState(this.manager.getCurrentState())
     if (!this.useApplyButton) {
       this.filters = this.manager.filters
+    }
+    if (this.shouldUpdateUrlForFacets) {
+      const searchParams = this.manager.toURLParams(new URL(document.URL).searchParams)
+      window.history.replaceState({}, "", `${window.location.pathname}?${searchParams}`)
     }
   }
 

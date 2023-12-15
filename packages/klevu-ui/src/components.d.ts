@@ -426,6 +426,10 @@ export namespace Components {
          */
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
         /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
           * When using `useApplyButton` then this method can be used to update current state filterManager into to local state of that is displayed in the UI
          */
         "updateApplyFilterState": () => Promise<void>;
@@ -580,6 +584,10 @@ export namespace Components {
      */
     interface KlevuMerchandising {
         /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
+        /**
           * Which category products
          */
         "category": string;
@@ -702,6 +710,10 @@ export namespace Components {
           * Query results used to build min, max and current
          */
         "queryResult"?: KlevuQueryResult;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
@@ -1416,6 +1428,10 @@ export namespace Components {
      * @csspart search-landing-page-footer The footer container
      */
     interface KlevuSearchLandingPage {
+        /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
         /**
           * How many products to display in filters
          */
@@ -2880,6 +2896,10 @@ declare namespace LocalJSX {
          */
         "onKlevuApplyFilters"?: (event: KlevuFacetListCustomEvent<KlevuFiltersAppliedEventDetail>) => void;
         /**
+          * To set the facet selection value in the url
+         */
+        "shouldUpdateUrlForFacets"?: boolean;
+        /**
           * Display "apply filters" button in the end. And do not apply filters until this button is pressed
          */
         "useApplyButton"?: boolean;
@@ -3022,6 +3042,10 @@ declare namespace LocalJSX {
      */
     interface KlevuMerchandising {
         /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
+        /**
           * Which category products
          */
         "category": string;
@@ -3149,6 +3173,10 @@ declare namespace LocalJSX {
           * Query results used to build min, max and current
          */
         "queryResult"?: KlevuQueryResult;
+        /**
+          * To set the page selection value in the url
+         */
+        "shouldUpdateUrlForPage"?: boolean;
     }
     /**
      * Fetches and displays most popular searches from Klevu Merchant center
@@ -3884,6 +3912,10 @@ declare namespace LocalJSX {
      * @csspart search-landing-page-footer The footer container
      */
     interface KlevuSearchLandingPage {
+        /**
+          * To update the pagination and filters to the url automatically
+         */
+        "autoUpdateUrl"?: boolean;
         /**
           * How many products to display in filters
          */

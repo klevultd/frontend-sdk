@@ -123,6 +123,12 @@ export class KlevuMerchandising {
   usePersonalisation?: boolean
 
   /**
+   * To update the pagination and filters to the url automatically
+   */
+  @Prop()
+  autoUpdateUrl?: boolean
+
+  /**
    * Overrides KMC setting to use ABtest for results
    */
   @Prop()
@@ -370,6 +376,7 @@ export class KlevuMerchandising {
                 useApplyButton={this.#isMobile()}
                 onKlevuApplyFilters={this.#applyFilters.bind(this)}
                 exportparts={partsExports("klevu-facet-list")}
+                shouldUpdateUrlForFacets={this.autoUpdateUrl}
               ></klevu-facet-list>
             </div>
           </slot>
@@ -421,6 +428,7 @@ export class KlevuMerchandising {
                 exportparts={partsExports("klevu-pagination")}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.#paginationChange.bind(this)}
+                shouldUpdateUrlForPage={this.autoUpdateUrl}
               ></klevu-pagination>
             ) : this.#resultObject?.hasNextPage() ? (
               <klevu-button onClick={this.#loadMore.bind(this)}>{this.tLoadMore}</klevu-button>

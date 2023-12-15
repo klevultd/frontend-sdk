@@ -13,7 +13,6 @@ import {
   KMCRootObject,
   trendingProducts,
   KlevuBanner,
-  KlevuUploadImageForSearch,
   klaviyo,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
@@ -150,6 +149,12 @@ export class KlevuSearchLandingPage {
    */
   @Prop() showVariantsCount = false
 
+  /**
+   * To update the pagination and filters to the url automatically
+   */
+  @Prop()
+  autoUpdateUrl?: boolean
+
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
   @State() currentViewPortSize?: ViewportSize
@@ -216,7 +221,7 @@ export class KlevuSearchLandingPage {
   }
 
   async componentWillLoad() {
-    await this.#fetchData()
+    if (!this.autoUpdateUrl) await this.#fetchData()
   }
 
   @Watch("term")
@@ -410,6 +415,7 @@ export class KlevuSearchLandingPage {
                   onKlevuApplyFilters={this.#applyFilters.bind(this)}
                   mode={facetMode}
                   exportparts={partsExports("klevu-facet-list")}
+                  shouldUpdateUrlForFacets={this.autoUpdateUrl}
                 ></klevu-facet-list>
               )}
             </div>
@@ -458,7 +464,9 @@ export class KlevuSearchLandingPage {
                     <p class="noResultsMessage">
                       <klevu-typography variant="body-s">{this.noResultsMessage}</klevu-typography>
                     </p>
-                  ) : null}
+                  ) : (
+                    !this.loading && getTranslation("searchLandingPage.tNoResultsFound")
+                  )}
                   <Fragment>
                     <slot name="trending-products">
                       {this.trendingProducts.length > 0 && (
@@ -510,8 +518,9 @@ export class KlevuSearchLandingPage {
                 infiniteScrollPauseThreshold={3}
                 enabled={!!this.#resultObject?.hasNextPage() && !this.loading}
               ></klevu-util-infinite-scroll>
-            ) : this.usePagination && this.#resultObject ? (
+            ) : this.usePagination && this.#resultObject && this.results.length > 0 ? (
               <klevu-pagination
+                shouldUpdateUrlForPage={this.autoUpdateUrl}
                 exportparts={partsExports("klevu-pagination")}
                 queryResult={this.#resultObject}
                 onKlevuPaginationChange={this.paginationChange.bind(this)}

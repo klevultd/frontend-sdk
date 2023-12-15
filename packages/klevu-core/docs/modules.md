@@ -160,7 +160,6 @@ Global custom document events that @klevu/core sends Enumerations
 - [KlevuGetBannersByType](modules/klevugetbannersbytype.md)
 - [KlevuHydratePackedFetchResult](modules/klevuhydratepackedfetchresult.md)
 - [KlevuPackFetchResult](modules/klevupackfetchresult.md)
-- [KlevuUploadImageForSearch](modules/klevuuploadimageforsearch.md)
 - [klaviyo](modules/klaviyo.md)
 - [removeListFilters](modules/removelistfilters.md)
 - [startMoi](modules/startmoi.md)
