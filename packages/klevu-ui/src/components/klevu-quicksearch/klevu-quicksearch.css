@@ -10,7 +10,7 @@
 }
 
 .content aside {
-  width: 180px;
+  max-width: 180px;
   flex-shrink: 0;
   padding-right: var(--klevu-spacing-04);
   border-right: 1px solid var(--klevu-color-neutral-4);
