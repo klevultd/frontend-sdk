@@ -10,6 +10,7 @@ import {
   KMCRootObject,
   KMCMapsRootObject,
   KlevuBanner,
+  KlevuSearchOptions,
 } from "@klevu/core"
 import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter, Watch } from "@stencil/core"
 import {
@@ -207,6 +208,10 @@ export class KlevuQuicksearch {
    * Show variants count
    */
   @Prop() showVariantsCount = false
+  /**
+   * Object to override and settings on search options
+   */
+  @Prop() options?: KlevuSearchOptions
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -483,6 +488,7 @@ export class KlevuQuicksearch {
           fullWidthOrigin
         >
           <klevu-search-field
+            options={this.options}
             term={this.term}
             ref={(el) => (this.#searchField = el)}
             limit={this.resultVariant === "simple" ? this.simpleResultCount : this.fullResultCount}

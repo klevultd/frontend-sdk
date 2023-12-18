@@ -49,12 +49,13 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     use-klaviyo=${ifDefined(args.useKlaviyo)}
     show-variants-count=${ifDefined(args.showVariantsCount)}
     term=${ifDefined(args.term)}
+    .options=${args.options}
   ></klevu-quicksearch>`,
 }
 
 export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
   render: (args) => html`
-    <klevu-quicksearch class="customized">
+    <klevu-quicksearch .options=${args.options} class="customized">
       <div slot="search-products">This will be replaced by script below</div>
       <div slot="trending-products">This will be replaced by script below</div>
       <div slot="last-clicked-products">This will be replace by script below</div>
@@ -138,7 +139,11 @@ export const CustomizedQuicksearch: StoryObj<KlevuQuicksearch> = {
 }
 
 export const StyledQuickSearch: StoryObj<KlevuQuicksearch> = {
-  render: (args) => html` <klevu-quicksearch full-result-count="4" class="stylished"></klevu-quicksearch>
+  render: (args) => html` <klevu-quicksearch
+      .options=${args.options}
+      full-result-count="4"
+      class="stylished"
+    ></klevu-quicksearch>
     <style id="stylished">
       klevu-quicksearch.stylished {
         color: red;

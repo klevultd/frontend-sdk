@@ -4,6 +4,7 @@ import {
   KlevuFetch,
   KlevuFetchFunctionReturnValue,
   KlevuFetchModifer,
+  KlevuSearchOptions,
   KlevuResponseQueryObject,
   KlevuSearchSorting,
   KlevuTypeOfRecord,
@@ -105,7 +106,10 @@ export class KlevuSearchField {
    * Enable Klaviyo integration for search terms and clicks
    */
   @Prop() useKlaviyo?: boolean
-
+  /**
+   * Object to override and settings on search options
+   */
+  @Prop() options?: KlevuSearchOptions
   /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
@@ -187,7 +191,7 @@ export class KlevuSearchField {
       allSearchQueries.push(
         search(
           term,
-          { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product], sort: this.sort },
+          { limit: this.limit, typeOfRecords: [KlevuTypeOfRecord.Product], sort: this.sort, ...this.options },
           ...searchModifiers
         )
       )

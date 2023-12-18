@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -1206,6 +1206,10 @@ export namespace Components {
          */
         "hideTrendingProductsOnNoResultsPage"?: boolean;
         /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -1336,6 +1340,10 @@ export namespace Components {
          */
         "itemGroupId"?: string;
         /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
+        /**
           * The ID of the recommendation
          */
         "recommendationId": string;
@@ -1374,6 +1382,10 @@ export namespace Components {
           * @param term What to search
          */
         "makeSearch": (term: string) => Promise<void>;
+        /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
         /**
           * Should try to find categories as well
          */
@@ -1453,6 +1465,10 @@ export namespace Components {
          */
         "limit": number;
         /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
+        /**
           * How many products to show in popular products
          */
         "popularProductsResultCount": number;
@@ -1484,6 +1500,10 @@ export namespace Components {
           * In which order to set the products
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Pass custom options for the sort dropdown
+         */
+        "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
           * Text of load more button
          */
@@ -3691,6 +3711,10 @@ declare namespace LocalJSX {
          */
         "onKlevuSearch"?: (event: KlevuQuicksearchCustomEvent<string>) => void;
         /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
+        /**
           * Placeholder for input text
          */
         "placeholder"?: string;
@@ -3825,6 +3849,10 @@ declare namespace LocalJSX {
          */
         "onKlevuData"?: (event: KlevuRecommendationsCustomEvent<KlevuResponseQueryObject>) => void;
         /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
+        /**
           * The ID of the recommendation
          */
         "recommendationId": string;
@@ -3858,6 +3886,10 @@ declare namespace LocalJSX {
           * When searchfield gives some suggestions
          */
         "onKlevuSearchSuggestions"?: (event: KlevuSearchFieldCustomEvent<SuggestionsEventData>) => void;
+        /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
         /**
           * Should try to find categories as well
          */
@@ -3938,6 +3970,10 @@ declare namespace LocalJSX {
         "limit"?: number;
         "onKlevuData"?: (event: KlevuSearchLandingPageCustomEvent<{ resultObject: KlevuResponseQueryObject; records: KlevuRecord[]; manager: FilterManager }>) => void;
         /**
+          * Object to override and settings on search options
+         */
+        "options"?: KlevuSearchOptions;
+        /**
           * How many products to show in popular products
          */
         "popularProductsResultCount"?: number;
@@ -3969,6 +4005,10 @@ declare namespace LocalJSX {
           * In which order to set the products
          */
         "sort"?: KlevuSearchSorting;
+        /**
+          * Pass custom options for the sort dropdown
+         */
+        "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
         /**
           * Text of load more button
          */
