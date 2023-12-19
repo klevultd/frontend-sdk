@@ -1,5 +1,6 @@
 import {
   KlevuFetch,
+  KlevuSearchOptions,
   KlevuRecord,
   KlevuResponseQueryObject,
   kmcRecommendation,
@@ -59,6 +60,11 @@ export class KlevuRecommendations {
    * For similiar products recommendation you need to provide productId and itemGroupId
    */
   @Prop() itemGroupId?: string
+
+  /**
+   * Object to override and settings on search options
+   */
+  @Prop() options?: KlevuSearchOptions
 
   /**
    * The products to display
@@ -125,6 +131,7 @@ export class KlevuRecommendations {
           categoryPath: this.categoryPath,
           currentProductId: this.currentProductId,
           itemGroupId: this.itemGroupId,
+          ...this.options,
         },
         sendRecommendationViewEvent()
       )

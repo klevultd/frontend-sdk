@@ -26,6 +26,7 @@ export const Recommendations: StoryObj<KlevuRecommendations> = {
     item-group-id=${ifDefined(args.itemGroupId)}
     recommendation-id=${ifDefined(args.recommendationId)}
     recommendation-title=${ifDefined(args.recommendationTitle)}
+    .options=${args.options}
   ></klevu-recommendations>`,
 }
 
@@ -37,6 +38,7 @@ export const Customized: StoryObj<KlevuRecommendations> = {
       id="customized"
       recommendation-id=${ifDefined(args.recommendationId)}
       recommendation-title="A custom recommendation"
+      .options=${args.options}
     >
       <klevu-slides heading="A custom recommendation"></klevu-slides>
     </klevu-recommendations>
@@ -69,6 +71,7 @@ export const Styled: StoryObj<KlevuRecommendations> = {
       class="stylished"
       recommendation-id=${ifDefined(args.recommendationId)}
       recommendation-title="A stylished recommendation"
+      .options=${args.options}
     ></klevu-recommendations>
     <style id="stylished">
       klevu-recommendations.stylished::part(slides-heading) {
@@ -97,5 +100,6 @@ export const ImageBannerRecommendations: StoryObj<KlevuRecommendations> = {
     item-group-id=${ifDefined(args.itemGroupId)}
     recommendation-id=${ifDefined(args.recommendationId)}
     recommendation-title=${ifDefined(args.recommendationTitle)}
+    .options=${args.options}
   ></klevu-recommendations>`,
 }

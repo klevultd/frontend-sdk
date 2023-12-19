@@ -14,6 +14,7 @@ import {
   trendingProducts,
   KlevuBanner,
   klaviyo,
+  KlevuSearchOptions,
 } from "@klevu/core"
 import { Component, h, Host, Listen, Prop, State, Watch, Event, EventEmitter, Fragment } from "@stencil/core"
 import {
@@ -154,6 +155,15 @@ export class KlevuSearchLandingPage {
    */
   @Prop()
   autoUpdateUrl?: boolean
+  /**
+   * Object to override and settings on search options
+   */
+  @Prop() options?: KlevuSearchOptions
+  /**
+   * Pass custom options for the sort dropdown
+   */
+  @Prop()
+  sortOptions?: Array<{ value: KlevuSearchSorting; text: string }>
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -259,7 +269,9 @@ export class KlevuSearchLandingPage {
       modifiers.push(klaviyo())
     }
 
-    const result = await KlevuFetch(search(this.term, { limit: this.limit, sort: this.sort }, ...modifiers))
+    const result = await KlevuFetch(
+      search(this.term, { limit: this.limit, sort: this.sort, ...this.options }, ...modifiers)
+    )
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
     this.#emitChanges()
@@ -433,6 +445,7 @@ export class KlevuSearchLandingPage {
                   variant="inline"
                   onKlevuSortChanged={this.#sortChanged.bind(this)}
                   exportparts={partsExports("klevu-sort")}
+                  options={this.sortOptions}
                 ></klevu-sort>
               )}
             </div>

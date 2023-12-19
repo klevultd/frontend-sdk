@@ -1,4 +1,4 @@
-import { KlevuFetchFunctionReturnValue } from "../index.js"
+import { KlevuFetchFunctionReturnValue, KlevuSearchOptions } from "../index.js"
 import { KlevuConfig } from "../../config.js"
 import { KlevuFetchModifer } from "../../modifiers/index.js"
 import { KlevuAllRecordQueries } from "../../models/KlevuAllRecordQueries.js"
@@ -139,7 +139,8 @@ export type KlevuKMCRecommendations = {
  */
 export async function kmcRecommendation(
   recommendationId: string,
-  options?: Partial<KlevuKMCRecommendationOptions>,
+  options?: Partial<KlevuKMCRecommendationOptions> &
+    Partial<KlevuSearchOptions>,
   ...modifiers: KlevuFetchModifer[]
 ): Promise<KlevuFetchFunctionReturnValue> {
   let kmcConfig: KlevuKMCRecommendations | undefined
@@ -414,7 +415,7 @@ export async function kmcRecommendation(
       q.settings.context!.recentObjects = [
         {
           typeOfRecord: KlevuTypeOfRecord.Product,
-          records: options.cartProductIds.map((id) => ({ id })),
+          records: options.cartProductIds.map((id: string) => ({ id })),
         },
       ]
     }
@@ -434,6 +435,16 @@ export async function kmcRecommendation(
         return response
       },
     })
+  }
+
+  for (const q of queries) {
+    if (!q.settings) {
+      q.settings = {}
+    }
+    q.settings = {
+      ...q.settings,
+      ...options,
+    }
   }
 
   return {

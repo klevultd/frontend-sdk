@@ -402,6 +402,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'hideTrendingProductsOnNoResultsPage',
   'urlRedirects',
   'showVariantsCount',
+  'options',
   'klevuData',
   'klevuSearch',
   'klevuRedirect'
@@ -421,6 +422,7 @@ export const KlevuRecommendations = /*@__PURE__*/ defineContainer<JSX.KlevuRecom
   'categoryPath',
   'currentProductId',
   'itemGroupId',
+  'options',
   'klevuData'
 ]);
 
@@ -440,6 +442,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'variant',
   'usePersonalisation',
   'useKlaviyo',
+  'options',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'
@@ -469,6 +472,8 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'hidePrice',
   'showVariantsCount',
   'autoUpdateUrl',
+  'options',
+  'sortOptions',
   'klevuData'
 ]);
 
