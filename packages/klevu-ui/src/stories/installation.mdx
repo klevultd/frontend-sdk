@@ -8,6 +8,7 @@ import { Meta } from "@storybook/addon-docs"
   - [@klevu/ui](#klevuui)
   - [@klevu/ui-react](#klevuui-react)
   - [@klevu/ui-vue](#klevuui-vue)
+- [VanillaJS with build files](#installing-with-build-vanillajs)
 - [VanillaJS through CDN](#installing-with-cdn-url-vanillajs)
 - [Klevu-init](#klevuinit-component)
 
@@ -144,10 +145,40 @@ Optional: To get code autocomplete in VSCode you can import the Klevu components
 </script>
 ```
 
+# Installing with build (VanillaJS)
+
+You can get the particular version build from the [Releases](?path=/docs/guides-releases--docs) section of this documentation.
+
+Please download the zip or tar.gz file for the release.
+
+Extract the file into a folder and specify the paths to the files as mentioned in the example below.
+
+Basic example with HTML file:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Klevu UI Build example</title>
+    <meta charset="UTF-8" />
+    <script type="module" src="{PATH TO klevu-ui.esm.js}"></script>
+    <link href="{PATH TO klevu-ui.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <klevu-init api-key="{API_KEY}" url="{STORE_URL}">
+      <klevu-quicksearch></klevu-quicksearch>
+    </klevu-init>
+  </body>
+</html>
+```
+
 # Installing with CDN url (VanillaJS)
 
-Simplest way to get started is to use our CDN to get sources and import in the `head`
-of the document. This way of integrating is not recommended for production use. It is best for testing the library.
+Another way to get started is to use our CDN to get sources and import in the `head`
+of the document.
+
+NOTE: This way of integrating is **not recommended** for production use. It is best for testing the library.
 
 Best way to integrate is to use NPM installation and building the library to be part of your application.
 

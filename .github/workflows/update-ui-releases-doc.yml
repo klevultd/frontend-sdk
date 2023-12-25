@@ -35,7 +35,7 @@ jobs:
             `
 
             const releasesMarkdown = releases.data.filter(r => r.name.startsWith("@klevu/ui")).map(r => {
-              return `# ${r.name}\n\n${r.body}`
+              return `# ${r.name} <span style={{fontSize:'24px'}}>([.zip](https://github.com/klevultd/frontend-sdk/archive/refs/tags/${r.name}/dist.zip) / [.tar.gz](https://github.com/klevultd/frontend-sdk/archive/refs/tags/${r.name}/dist.tar.gz))</span>\n\n${r.body}`
             }).join("\n\n---\n\n")
 
             const markdown = header + releasesMarkdown
