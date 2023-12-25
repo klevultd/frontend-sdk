@@ -36,7 +36,7 @@ jobs:
           node ./update-klevu-ui.js --type ${{ inputs.type }} --no-otp
 
       - name: Push artifacts to GitHub Releases
-      - uses: xresloader/upload-to-github-release@v1
+        uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
