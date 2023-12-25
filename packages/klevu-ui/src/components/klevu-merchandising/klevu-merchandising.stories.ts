@@ -35,6 +35,7 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     use-infinite-scroll=${ifDefined(args.useInfiniteScroll)}
     use-personalisation=${ifDefined(args.usePersonalisation)}
     auto-update-url=${ifDefined(args.autoUpdateUrl)}
+    use-loading-indicator=${ifDefined(args.useLoadingIndicator)}
   ></klevu-merchandising>`,
 }
 

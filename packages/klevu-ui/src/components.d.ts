@@ -640,6 +640,10 @@ export namespace Components {
          */
         "useInfiniteScroll"?: boolean;
         /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator": boolean;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -1298,6 +1302,10 @@ export namespace Components {
          */
         "useKlaviyo"?: boolean;
         /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator": boolean;
+        /**
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
@@ -1424,6 +1432,10 @@ export namespace Components {
          */
         "useKlaviyo"?: boolean;
         /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator": boolean;
+        /**
           * Enable personalisation on the query
          */
         "usePersonalisation"?: boolean;
@@ -1524,6 +1536,10 @@ export namespace Components {
           * Enable Klaviyo integration
          */
         "useKlaviyo"?: boolean;
+        /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator": boolean;
         /**
           * Specify whether to show checkboxes or radio buttons for filters
          */
@@ -3119,6 +3135,10 @@ declare namespace LocalJSX {
          */
         "useInfiniteScroll"?: boolean;
         /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator"?: boolean;
+        /**
           * Should display pagination instead of load next
          */
         "usePagination"?: boolean;
@@ -3803,6 +3823,10 @@ declare namespace LocalJSX {
          */
         "useKlaviyo"?: boolean;
         /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator"?: boolean;
+        /**
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
@@ -3928,6 +3952,10 @@ declare namespace LocalJSX {
          */
         "useKlaviyo"?: boolean;
         /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator"?: boolean;
+        /**
           * Enable personalisation on the query
          */
         "usePersonalisation"?: boolean;
@@ -4029,6 +4057,10 @@ declare namespace LocalJSX {
           * Enable Klaviyo integration
          */
         "useKlaviyo"?: boolean;
+        /**
+          * Can be used to disable loading indicator
+         */
+        "useLoadingIndicator"?: boolean;
         /**
           * Specify whether to show checkboxes or radio buttons for filters
          */

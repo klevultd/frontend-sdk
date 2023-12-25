@@ -164,6 +164,10 @@ export class KlevuSearchLandingPage {
    */
   @Prop()
   sortOptions?: Array<{ value: KlevuSearchSorting; text: string }>
+  /**
+   * Can be used to disable loading indicator
+   */
+  @Prop() useLoadingIndicator = true
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -509,7 +513,7 @@ export class KlevuSearchLandingPage {
                 </slot>
               )}
 
-              {this.loading && !this.infiniteScrollingPaused && (
+              {this.useLoadingIndicator && this.loading && !this.infiniteScrollingPaused && (
                 <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
               )}
               <slot name="bottombanners">
