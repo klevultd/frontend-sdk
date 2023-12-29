@@ -1,9 +1,9 @@
 import { Meta, Story } from "@storybook/addon-docs"
 import { html } from "lit-html"
 
-<Meta title="Examples/ReactJS/Search results page" />
+<Meta title="Examples/ReactJS/Category page" />
 
-# Creating Search results page in React
+# Creating Category page in ReactJS
 
 ### Installing the package
 
@@ -26,7 +26,6 @@ Wrap your top-level component, usually App.js with KlevuInit, here is an example
         <Route path="products" element={<ProductsPage />}>
           <Route path=":groupId/:id" element={<ProductPage />} />
         </Route>
-        <Route path="search" element={<SearchResultPage />} />
         <Route path="category" element={<CategoryPage />} />
         <Route path="cart" element={<CheckoutPage />} />
       </Route>
@@ -37,37 +36,31 @@ Wrap your top-level component, usually App.js with KlevuInit, here is an example
 
 ### Creating the component
 
-Assuming you have a React project in place, create file for the Search results component.
+Assuming you have a React project in place, create file for the Category component.
 
 Add the following to the file
 
 ```jsx
-import { KlevuSearchLandingPage } from "@klevu/ui-react"
+import { KlevuMerchandising } from "@klevu/ui-react"
 import React from "react"
-import { useLocation } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-function useQuery() {
-  const { search } = useLocation()
-
-  return React.useMemo(() => new URLSearchParams(search), [search])
-}
-
-export function SearchResultPage() {
-  const query = useQuery()
-  return <KlevuSearchLandingPage term={query.get("q")}></KlevuSearchLandingPage>
+export function CategoryPage() {
+  const params = useParams()
+  return <KlevuMerchandising categoryTitle="Mens" category={params.id}></KlevuMerchandising>
 }
 ```
 
 Whats happening here
 
-1. We import the KlevuSearchLandingPage from "@klevu/ui-react" package. This component comes with builtin functionality for rendering the Search results page.
-2. Read the search term from the `q` query param. This can be the query param you use for passing your search term.
-3. Pass the term to the KlevuSearchLandingPage component.
+1. We import the KlevuMerchandising from "@klevu/ui-react" package. This component comes with builtin functionality for rendering the Category page.
+2. Read the `category` attribute from the path. This can also be from query param.
+3. Pass the category to the KlevuMerchandising component.
 4. And thats it.
 
 This is what you get with this small snippet.
 
-<img src="/basic-search-results.png" />
+<img src="/basic-category-page.png" />
 
 ### Customizing Slots
 
@@ -76,21 +69,15 @@ You could further customize this page to change the look and feel of the product
 Here is an example of doing that
 
 ```jsx
-import { KlevuBadge, KlevuProduct, KlevuProductGrid, KlevuSearchLandingPage } from "@klevu/ui-react"
+import { KlevuBadge, KlevuProduct, KlevuProductGrid, KlevuMerchandising } from "@klevu/ui-react"
 import React, { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-function useQuery() {
-  const { search } = useLocation()
-
-  return React.useMemo(() => new URLSearchParams(search), [search])
-}
-
-export function SearchResultPage() {
-  const query = useQuery()
+export function CategoryPage() {
+  const params = useParams()
   const [records, setRecords] = useState([])
   return (
-    <KlevuSearchLandingPage term={query.get("q")} onKlevuData={(e) => setRecords(e.detail.records)}>
+    <KlevuMerchandising categoryTitle="Mens" category={params.id} onKlevuData={(e) => setRecords(e.detail.records)}>
       <div slot="content">
         <KlevuProductGrid>
           {records.map((p) => (
@@ -110,7 +97,7 @@ export function SearchResultPage() {
           ))}
         </KlevuProductGrid>
       </div>
-    </KlevuSearchLandingPage>
+    </KlevuMerchandising>
   )
 }
 ```
@@ -118,28 +105,22 @@ export function SearchResultPage() {
 The above example replaces the content slot with a grid of Product components which have attributes assigned to customize them.
 You can also note a Badge being applied to the Product components `top` slot as a further enhancement.
 
-<img src="/slot-customized-search-results.png" />
+<img src="/slot-customized-category-page.png" />
 
 ### More customization
 
 Here is how you can include brand name from a different attribute in the response in the product card
 
 ```jsx
-import { KlevuBadge, KlevuProduct, KlevuProductGrid, KlevuSearchLandingPage } from "@klevu/ui-react"
+import { KlevuBadge, KlevuProduct, KlevuProductGrid, KlevuMerchandising } from "@klevu/ui-react"
 import React, { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
-function useQuery() {
-  const { search } = useLocation()
-
-  return React.useMemo(() => new URLSearchParams(search), [search])
-}
-
-export function SearchResultPage() {
-  const query = useQuery()
+export function CategoryPage() {
+  const params = useParams()
   const [records, setRecords] = useState([])
   return (
-    <KlevuSearchLandingPage term={query.get("q")} onKlevuData={(e) => setRecords(e.detail.records)}>
+    <KlevuMerchandising categoryTitle="Mens" category={params.id} onKlevuData={(e) => setRecords(e.detail.records)}>
       <div slot="content">
         <KlevuProductGrid>
           {records.map((p) => (
@@ -160,12 +141,12 @@ export function SearchResultPage() {
           ))}
         </KlevuProductGrid>
       </div>
-    </KlevuSearchLandingPage>
+    </KlevuMerchandising>
   )
 }
 ```
 
-<img src="/custom-brand-attribute-search-results.png" />
+<img src="/custom-brand-attribute-category-page.png" />
 
 ### CSS styling
 
@@ -175,22 +156,17 @@ Here is an example where we style the product card
 
 ```css
 /* Add a border to the image */
-klevu-product::part(product-image) {
+klevu-merchandising::part(product-image) {
   border: 1px solid #ddd;
 }
 
 /* Change the font weight and color of the product name */
-klevu-product::part(product-name) {
+klevu-merchandising::part(product-name) {
   --klevu-typography-font-weight: 600;
   color: green;
 }
-
-/* Change the background color of the Add to cart button */
-klevu-product::part(product-addtocart) {
-  --klevu-button-background-color: rosybrown;
-}
 ```
 
-<img src="/css-styled-search-results.png" />
+<img src="/css-styled-category-page.png" />
 
 Refer to the storybook docs of the relevant component to check out the list of parts which can be styled and the list of css variables that can be changed to make style modifications.
