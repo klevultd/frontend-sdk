@@ -34,7 +34,7 @@
   "scripts": {
     "build": "stencil build",
     "build:watch": "stencil build --watch",
-    "build:all": "npm run build && cd ../klevu-ui-react && npm run build && cd ../klevu-ui-vue && npm run build && cd ../klevu-ui && tar -czvf dist.tar.gz ./dist/klevu-ui/klevu-ui.css ./dist/klevu-ui/klevu-ui.esm.js && zip dist.zip ./dist/klevu-ui/klevu-ui.css ./dist/klevu-ui/klevu-ui.esm.js",
+    "build:all": "npm run build && cd ../klevu-ui-react && npm run build && cd ../klevu-ui-vue && npm run build && cd ../klevu-ui && tar -czvf dist.tar.gz ./dist/klevu-ui && zip -r dist.zip ./dist/klevu-ui",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --e2e",
     "test:spec": "NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 stencil test --spec",
