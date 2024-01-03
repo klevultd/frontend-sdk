@@ -22,7 +22,7 @@ export function CheckoutPage() {
         override: {},
       }
     })
-    KlevuEvents.buy({items} )
+    KlevuEvents.buy({ items })
 
     cart.clear()
   }
@@ -58,7 +58,7 @@ export function CheckoutPage() {
       <KlevuRecommendations
         recommendationTitle="Customers also bought..."
         recommendationId="k-ad471ddc-d8d0-4a5e-9fdf-702baf63b6b6"
-        cartProductIds={cart.items.map((i) => i.id)}
+        cartProductIds={cart.items.map((i) => ({ id: i.id }))}
       />
     </Fragment>
   )

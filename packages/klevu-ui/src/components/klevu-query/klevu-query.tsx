@@ -118,7 +118,7 @@ export class KlevuQuery {
   /**
    * Which products are in cart. Required for some recommendation types
    */
-  @Prop() recommendationCartProductIds?: string[]
+  @Prop() recommendationCartProductIds?: { id: string; itemGroupId?: string }[]
 
   /**
    * Which product is currently being viewed. Required for some recommendation types

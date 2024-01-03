@@ -442,7 +442,7 @@ Our final recommendations example is found in the [CheckoutPage.tsx view](./src/
 const result = await KlevuFetch(
   kmcRecommendation("k-95d0920b-be19-4528-a5b9-6ff80ccedc69", {
     id: "alsobought",
-    cartProductIds: cart.items.map((p) => p.id),
+    cartProductIds: cart.items.map((p) => ({ id: p.id })),
   })
 )
 ```

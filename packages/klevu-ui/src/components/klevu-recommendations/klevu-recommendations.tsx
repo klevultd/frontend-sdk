@@ -44,7 +44,7 @@ export class KlevuRecommendations {
   /**
    * For cart recommendation you need to provide product id's in cart
    */
-  @Prop() cartProductIds?: string[]
+  @Prop() cartProductIds?: { id: string; itemGroupId?: string }[]
 
   /**
    * For category product recommendation you need to provide categery path

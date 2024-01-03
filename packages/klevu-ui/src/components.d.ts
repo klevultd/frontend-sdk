@@ -5,7 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +27,6 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -1124,7 +1122,7 @@ export namespace Components {
         /**
           * Which products are in cart. Required for some recommendation types
          */
-        "recommendationCartProductIds"?: string[];
+        "recommendationCartProductIds"?: { id: string; itemGroupId?: string }[];
         /**
           * Which category path to use for recommendation. Required for some recommendation types
          */
@@ -1326,7 +1324,7 @@ export namespace Components {
         /**
           * For cart recommendation you need to provide product id's in cart
          */
-        "cartProductIds"?: string[];
+        "cartProductIds"?: { id: string; itemGroupId?: string }[];
         /**
           * For category product recommendation you need to provide categery path
          */
@@ -1372,7 +1370,7 @@ export namespace Components {
           * @param type type of query result
           * @returns
          */
-        "getQueryResult": (type: "search" | "category" | "cms") => Promise<KlevuResponseQueryObject | undefined>;
+        "getQueryResult": (type: "search" | "category" | "cms") => Promise<any>;
         /**
           * Maximum amount of results
          */
@@ -3617,7 +3615,7 @@ declare namespace LocalJSX {
         /**
           * Which products are in cart. Required for some recommendation types
          */
-        "recommendationCartProductIds"?: string[];
+        "recommendationCartProductIds"?: { id: string; itemGroupId?: string }[];
         /**
           * Which category path to use for recommendation. Required for some recommendation types
          */
@@ -3831,7 +3829,7 @@ declare namespace LocalJSX {
         /**
           * For cart recommendation you need to provide product id's in cart
          */
-        "cartProductIds"?: string[];
+        "cartProductIds"?: { id: string; itemGroupId?: string }[];
         /**
           * For category product recommendation you need to provide categery path
          */

@@ -34,7 +34,9 @@ export function CheckoutPage() {
         config.checkoutPageRecommendationId,
         {
           id: "alsobought",
-          cartProductIds: cart.items.map((p) => p.id),
+          cartProductIds: cart.items.map((p) => ({
+            id: p.id,
+          })),
         },
         sendRecommendationViewEvent("Also bought together KMC recommendation")
       )

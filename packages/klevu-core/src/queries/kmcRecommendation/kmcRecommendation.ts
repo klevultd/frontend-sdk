@@ -34,7 +34,7 @@ export type KlevuKMCRecommendationOptions = {
    * If KMC recommendation is Checkout page based then its required to provide
    * productIds that are currently in the cart
    */
-  cartProductIds?: string[]
+  cartProductIds?: { id: string; itemGroupId?: string }[]
 }
 
 enum KMCRecommendationPagetype {
@@ -415,7 +415,10 @@ export async function kmcRecommendation(
       q.settings.context!.recentObjects = [
         {
           typeOfRecord: KlevuTypeOfRecord.Product,
-          records: options.cartProductIds.map((id: string) => ({ id })),
+          records: options.cartProductIds.map(({ id, itemGroupId }) => {
+            if (itemGroupId) return { id, itemGroupId }
+            return { id }
+          }),
         },
       ]
     }
