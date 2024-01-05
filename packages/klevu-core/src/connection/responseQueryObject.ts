@@ -297,7 +297,7 @@ export class KlevuResponseQueryObject {
             categoryTitle,
             klevuCategory: q?.settings?.query?.categoryPath ?? "unknown",
             variantId,
-            productPosition: index + 1,
+            productPosition: (this.query.meta.offset || 0) + index + 1,
             abTestId,
             abTestVariantId,
             activeFilters: extractActiveFilters(this.query),
