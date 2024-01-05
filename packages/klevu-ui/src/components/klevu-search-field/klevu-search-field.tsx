@@ -111,9 +111,9 @@ export class KlevuSearchField {
    */
   @Prop() options?: KlevuSearchOptions
   /**
-   * Can be used to disable loading indicator
+   * Used to enable loading indicator
    */
-  @Prop() useLoadingIndicator = true
+  @Prop() useLoadingIndicator = false
   /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */

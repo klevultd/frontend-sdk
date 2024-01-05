@@ -165,9 +165,9 @@ export class KlevuSearchLandingPage {
   @Prop()
   sortOptions?: Array<{ value: KlevuSearchSorting; text: string }>
   /**
-   * Can be used to disable loading indicator
+   * Used to enable loading indicator
    */
-  @Prop() useLoadingIndicator = true
+  @Prop() useLoadingIndicator = false
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()

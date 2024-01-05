@@ -213,9 +213,9 @@ export class KlevuQuicksearch {
    */
   @Prop() options?: KlevuSearchOptions
   /**
-   * Can be used to disable loading indicator
+   * Used to enable loading indicator
    */
-  @Prop() useLoadingIndicator = true
+  @Prop() useLoadingIndicator = false
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []

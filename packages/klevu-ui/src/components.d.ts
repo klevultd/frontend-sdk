@@ -640,7 +640,7 @@ export namespace Components {
          */
         "useInfiniteScroll"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator": boolean;
         /**
@@ -1302,7 +1302,7 @@ export namespace Components {
          */
         "useKlaviyo"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator": boolean;
         /**
@@ -1432,7 +1432,7 @@ export namespace Components {
          */
         "useKlaviyo"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator": boolean;
         /**
@@ -1537,7 +1537,7 @@ export namespace Components {
          */
         "useKlaviyo"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator": boolean;
         /**
@@ -3135,7 +3135,7 @@ declare namespace LocalJSX {
          */
         "useInfiniteScroll"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator"?: boolean;
         /**
@@ -3823,7 +3823,7 @@ declare namespace LocalJSX {
          */
         "useKlaviyo"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator"?: boolean;
         /**
@@ -3952,7 +3952,7 @@ declare namespace LocalJSX {
          */
         "useKlaviyo"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator"?: boolean;
         /**
@@ -4058,7 +4058,7 @@ declare namespace LocalJSX {
          */
         "useKlaviyo"?: boolean;
         /**
-          * Can be used to disable loading indicator
+          * Used to enable loading indicator
          */
         "useLoadingIndicator"?: boolean;
         /**

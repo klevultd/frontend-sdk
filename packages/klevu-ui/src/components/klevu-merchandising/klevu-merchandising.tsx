@@ -135,9 +135,9 @@ export class KlevuMerchandising {
   useABTest?: boolean
 
   /**
-   * Can be used to disable loading indicator
+   * Used to enable loading indicator
    */
-  @Prop() useLoadingIndicator = true
+  @Prop() useLoadingIndicator = false
 
   @State() currentViewPortSize?: ViewportSize
 
