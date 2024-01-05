@@ -69,6 +69,9 @@ klevu-icon.icon {
   top: 50%;
   left: var(--klevu-spacing-04);
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /** clear button */
