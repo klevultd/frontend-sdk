@@ -184,6 +184,9 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+  }
+
+  async componentWillLoad() {
     const settings = getKMCSettings()
     if (settings) {
       this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
