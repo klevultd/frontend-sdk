@@ -158,6 +158,9 @@ export class KlevuMerchandising {
 
   async connectedCallback() {
     await KlevuInit.ready()
+  }
+
+  async componentWillLoad() {
     const settings = getKMCSettings()
     if (settings) {
       if (this.showRatings === undefined) {
@@ -173,9 +176,6 @@ export class KlevuMerchandising {
         this.useABTest = settings.klevu_abTestActive
       }
     }
-  }
-
-  async componentWillLoad() {
     const SSR = this.el.closest("klevu-util-ssr-provider")
 
     if (SSR && SSR.packed && SSR.identifier) {

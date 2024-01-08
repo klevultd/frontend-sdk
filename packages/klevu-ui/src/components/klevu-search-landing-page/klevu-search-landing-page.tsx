@@ -184,6 +184,9 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+  }
+
+  async componentWillLoad() {
     const settings = getKMCSettings()
     if (settings) {
       this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
@@ -228,9 +231,6 @@ export class KlevuSearchLandingPage {
         this.trendingProducts = resultObject.records
       }
     }
-  }
-
-  async componentWillLoad() {
     if (!this.autoUpdateUrl) await this.#fetchData()
   }
 
