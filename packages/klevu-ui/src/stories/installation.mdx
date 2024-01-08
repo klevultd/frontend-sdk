@@ -149,9 +149,8 @@ Optional: To get code autocomplete in VSCode you can import the Klevu components
 
 You can get the particular version build from the [Releases](?path=/docs/guides-releases--docs) section of this documentation.
 
-Please download the zip or tar.gz file for the release.
-
-Extract the file into a folder and specify the paths to the files as mentioned in the example below.
+Please download the zip file for the release and extract the file into a folder and
+specify the paths to the files as mentioned in the example below.
 
 Basic example with HTML file:
 
@@ -161,8 +160,8 @@ Basic example with HTML file:
   <head>
     <title>Klevu UI Build example</title>
     <meta charset="UTF-8" />
-    <script type="module" src="{PATH TO klevu-ui.esm.js}"></script>
-    <link href="{PATH TO klevu-ui.css}" rel="stylesheet" />
+    <script type="module" src="{EXTRACTED_FOLDER}/package/dist/klevu-ui/klevu-ui.esm.js"></script>
+    <link href="{EXTRACTED_FOLDER}/package/dist/klevu-ui/klevu-ui.css" rel="stylesheet" />
   </head>
 
   <body>

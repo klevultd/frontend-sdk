@@ -35,13 +35,6 @@ jobs:
           npm install --force
           node ./update-klevu-ui.js --type ${{ inputs.type }} --no-otp
 
-      - name: Push artifacts to GitHub Releases
-        uses: xresloader/upload-to-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          file: "./packages/klevu-ui/dist.tar.gz;./packages/klevu-ui/dist.zip"
-
       - name: Print
         run: echo ${{steps.release.outputs.version}}
 
