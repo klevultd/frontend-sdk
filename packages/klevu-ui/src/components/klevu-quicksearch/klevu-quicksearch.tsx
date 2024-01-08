@@ -212,6 +212,10 @@ export class KlevuQuicksearch {
    * Object to override and settings on search options
    */
   @Prop() options?: KlevuSearchOptions
+  /**
+   * Used to enable loading indicator
+   */
+  @Prop() useLoadingIndicator = false
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -488,6 +492,7 @@ export class KlevuQuicksearch {
           fullWidthOrigin
         >
           <klevu-search-field
+            useLoadingIndicator={this.useLoadingIndicator}
             options={this.options}
             term={this.term}
             ref={(el) => (this.#searchField = el)}
@@ -642,22 +647,24 @@ export class KlevuQuicksearch {
     const isNoResultsPage = !!this.#searchTerm
     return (
       <Fragment>
-        <aside part="quicksearch-sidepanel">
-          {((!this.hidePopularSearches && !isNoResultsPage) ||
-            (!this.hidePopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
-            <klevu-popular-searches
-              exportparts={partsExports("klevu-popular-searches")}
-              onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
-            ></klevu-popular-searches>
-          )}
+        {!this.#searchTerm && (
+          <aside part="quicksearch-sidepanel">
+            {((!this.hidePopularSearches && !isNoResultsPage) ||
+              (!this.hidePopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
+              <klevu-popular-searches
+                exportparts={partsExports("klevu-popular-searches")}
+                onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
+              ></klevu-popular-searches>
+            )}
 
-          {!this.hideRecentSearches && !isNoResultsPage && (
-            <klevu-latest-searches
-              exportparts={partsExports("klevu-latest-searches")}
-              onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
-            ></klevu-latest-searches>
-          )}
-        </aside>
+            {!this.hideRecentSearches && !isNoResultsPage && (
+              <klevu-latest-searches
+                exportparts={partsExports("klevu-latest-searches")}
+                onKlevuLastSearchClicked={(event) => this.#startSearch(event.detail)}
+              ></klevu-latest-searches>
+            )}
+          </aside>
+        )}
         <section part="quicksearch-main-area">
           <slot name="noResults">
             {isNoResultsPage && this.noResultsMessage ? (
@@ -732,6 +739,17 @@ export class KlevuQuicksearch {
               )}
             {this.#renderBanners()}
           </slot>
+          {this.#searchTerm && (
+            <Fragment>
+              {((!this.hidePopularSearches && !isNoResultsPage) ||
+                (!this.hidePopularKeywordsOnNoResultsPage && isNoResultsPage)) && (
+                <klevu-popular-searches
+                  exportparts={partsExports("klevu-popular-searches")}
+                  onKlevuPopularSearchClicked={(event) => this.#startSearch(event.detail)}
+                ></klevu-popular-searches>
+              )}
+            </Fragment>
+          )}
         </section>
       </Fragment>
     )

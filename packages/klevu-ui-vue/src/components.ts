@@ -214,6 +214,7 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'usePersonalisation',
   'autoUpdateUrl',
   'useABTest',
+  'useLoadingIndicator',
   'klevuData'
 ]);
 
@@ -403,6 +404,7 @@ export const KlevuQuicksearch = /*@__PURE__*/ defineContainer<JSX.KlevuQuicksear
   'urlRedirects',
   'showVariantsCount',
   'options',
+  'useLoadingIndicator',
   'klevuData',
   'klevuSearch',
   'klevuRedirect'
@@ -443,6 +445,7 @@ export const KlevuSearchField = /*@__PURE__*/ defineContainer<JSX.KlevuSearchFie
   'usePersonalisation',
   'useKlaviyo',
   'options',
+  'useLoadingIndicator',
   'klevuSearchResults',
   'klevuSearchSuggestions',
   'klevuSearchClick'
@@ -474,6 +477,7 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'autoUpdateUrl',
   'options',
   'sortOptions',
+  'useLoadingIndicator',
   'klevuData'
 ]);
 

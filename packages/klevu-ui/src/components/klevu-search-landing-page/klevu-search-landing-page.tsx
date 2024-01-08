@@ -164,6 +164,10 @@ export class KlevuSearchLandingPage {
    */
   @Prop()
   sortOptions?: Array<{ value: KlevuSearchSorting; text: string }>
+  /**
+   * Used to enable loading indicator
+   */
+  @Prop() useLoadingIndicator = false
 
   @State() results: Array<KlevuRecord> = []
   @State() manager = new FilterManager()
@@ -184,6 +188,9 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+  }
+
+  async componentWillLoad() {
     const settings = getKMCSettings()
     if (settings) {
       this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
@@ -228,9 +235,6 @@ export class KlevuSearchLandingPage {
         this.trendingProducts = resultObject.records
       }
     }
-  }
-
-  async componentWillLoad() {
     if (!this.autoUpdateUrl) await this.#fetchData()
   }
 
@@ -509,7 +513,7 @@ export class KlevuSearchLandingPage {
                 </slot>
               )}
 
-              {this.loading && !this.infiniteScrollingPaused && (
+              {this.useLoadingIndicator && this.loading && !this.infiniteScrollingPaused && (
                 <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
               )}
               <slot name="bottombanners">

@@ -50,6 +50,7 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     show-variants-count=${ifDefined(args.showVariantsCount)}
     term=${ifDefined(args.term)}
     .options=${args.options}
+    use-loading-indicator=${ifDefined(args.useLoadingIndicator)}
   ></klevu-quicksearch>`,
 }
 
