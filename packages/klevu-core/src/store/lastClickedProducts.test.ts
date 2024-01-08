@@ -70,3 +70,27 @@ test("Disabled click tracking should return empty array", () => {
   expect(KlevuLastClickedProducts.getProducts(1).length).toBe(0)
   expect(KlevuLastClickedProducts.getLastClickedLatestsFirst(1).length).toBe(0)
 })
+
+test("Duplicates are filtered", () => {
+  KlevuConfig.getDefault().disableClickTracking = false
+
+  KlevuLastClickedProducts.click("5", {
+    id: "5",
+    name: "product 5",
+  } as KlevuRecord)
+
+  KlevuLastClickedProducts.click("5", {
+    id: "5",
+    name: "product 5",
+  } as KlevuRecord)
+
+  KlevuLastClickedProducts.click("5", {
+    id: "5",
+    name: "product 5",
+  } as KlevuRecord)
+
+  const lastClickedProducts =
+    KlevuLastClickedProducts.getLastClickedLatestsFirst(20, true)
+
+  expect(lastClickedProducts.filter((item) => item === "5").length).toBe(1)
+})
