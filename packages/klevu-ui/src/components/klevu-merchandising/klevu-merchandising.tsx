@@ -134,6 +134,11 @@ export class KlevuMerchandising {
   @Prop()
   useABTest?: boolean
 
+  /**
+   * Used to enable loading indicator
+   */
+  @Prop() useLoadingIndicator = false
+
   @State() currentViewPortSize?: ViewportSize
 
   #viewportUtil!: HTMLKlevuUtilViewportElement
@@ -407,7 +412,7 @@ export class KlevuMerchandising {
                   ></klevu-product>
                 ))}
               </klevu-product-grid>
-              {this.loading && !this.infiniteScrollingPaused && (
+              {this.useLoadingIndicator && this.loading && !this.infiniteScrollingPaused && (
                 <klevu-loading-indicator exportparts={partsExports("klevu-loading-indicator")} />
               )}
               <slot name="bottombanners">

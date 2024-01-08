@@ -37,6 +37,7 @@ export const SearchField: StoryObj<KlevuSearchField> = {
     send-analytics=${ifDefined(args.sendAnalytics)}
     variant=${ifDefined(args.variant)}
     term=${ifDefined(args.term)}
+    use-loading-indicator=${ifDefined(args.useLoadingIndicator)}
   >
   </klevu-search-field>`,
 }

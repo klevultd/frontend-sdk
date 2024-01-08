@@ -44,6 +44,7 @@ export const SearchLandingPage: StoryObj<KlevuSearchLandingPage> = {
     show-variants-count=${ifDefined(args.showVariantsCount)}
     .options=${args.options}
     .sortOptions=${args.sortOptions}
+    use-loading-indicator=${ifDefined(args.useLoadingIndicator)}
   ></klevu-search-landing-page>`,
 }
 

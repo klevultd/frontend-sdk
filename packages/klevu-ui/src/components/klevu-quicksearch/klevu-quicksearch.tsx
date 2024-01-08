@@ -212,6 +212,10 @@ export class KlevuQuicksearch {
    * Object to override and settings on search options
    */
   @Prop() options?: KlevuSearchOptions
+  /**
+   * Used to enable loading indicator
+   */
+  @Prop() useLoadingIndicator = false
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -488,6 +492,7 @@ export class KlevuQuicksearch {
           fullWidthOrigin
         >
           <klevu-search-field
+            useLoadingIndicator={this.useLoadingIndicator}
             options={this.options}
             term={this.term}
             ref={(el) => (this.#searchField = el)}

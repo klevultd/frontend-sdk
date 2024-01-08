@@ -111,6 +111,10 @@ export class KlevuSearchField {
    */
   @Prop() options?: KlevuSearchOptions
   /**
+   * Used to enable loading indicator
+   */
+  @Prop() useLoadingIndicator = false
+  /**
    * When results come from after typing in the search field. This is debounced to avoid excessive requests.
    */
   @Event({
@@ -131,6 +135,8 @@ export class KlevuSearchField {
     composed: true,
   })
   klevuSearchClick!: EventEmitter<string>
+
+  @State() isLoading = false
 
   #lastQueryResult?: SearchResultsEventData
 
@@ -218,9 +224,9 @@ export class KlevuSearchField {
     if (allSearchQueries.length === 0) {
       throw new Error("You need specify at least one thing to search")
     }
-
+    this.isLoading = true
     const result = await KlevuFetch(...allSearchQueries)
-
+    this.isLoading = false
     this.#lastQueryResult = {
       fallback: result.queryExists("search-fallback") ? result.queriesById("search-fallback") : undefined,
       search: result.queryExists("search") ? result.queriesById("search") : undefined,
@@ -339,7 +345,9 @@ export class KlevuSearchField {
           variant={this.#searchFieldVariantToTextFieldVariant()}
           icon="search"
         >
-          <slot name="end-of-input" slot="end"></slot>
+          <slot name="end-of-input" slot="end">
+            {this.useLoadingIndicator && this.isLoading ? <klevu-loading-indicator /> : ""}
+          </slot>
         </klevu-textfield>
         {this.variant === "default" && (
           <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.tSearchText}</klevu-button>
