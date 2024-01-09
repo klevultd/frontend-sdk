@@ -82,15 +82,21 @@ class LastClickedProducts {
    * @param n
    * @returns
    */
-  getLastClickedLatestsFirst(n = 10): string[] {
+  getLastClickedLatestsFirst(n = 10, filterDuplicates = false): string[] {
     if (KlevuConfig.getDefault().disableClickTracking) {
       console.warn("Click tracking is disabled. Returning empty array.")
       return []
     }
 
-    return Array.from(this.clicks.map((i) => i.id))
-      .reverse()
-      .slice(0, n)
+    let clicks = Array.from(this.clicks.map((i) => i.id)).reverse()
+
+    if (filterDuplicates) {
+      clicks = clicks.filter(
+        (item, index, self) => index === self.findIndex((t) => t === item)
+      )
+    }
+
+    return clicks.slice(0, n)
   }
 
   /**
@@ -139,6 +145,9 @@ class LastClickedProducts {
     const itemsToTake = Math.floor(currentClicks.length / 3) * 3
     const ids = Array.from(currentClicks)
       .reverse()
+      .filter(
+        (item, index, self) => index === self.findIndex((t) => t.id === item.id)
+      )
       .slice(0, itemsToTake)
       .map((i) => i.id)
     this.categoryCache[categoryPath] = {

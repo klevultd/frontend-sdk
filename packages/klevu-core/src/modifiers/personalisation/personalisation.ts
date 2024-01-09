@@ -53,9 +53,10 @@ export function personalisation(options?: {
             category
           ).map((id) => ({ id }))
         } else {
-          records = KlevuLastClickedProducts.getLastClickedLatestsFirst().map(
-            (id) => ({ id })
-          )
+          records = KlevuLastClickedProducts.getLastClickedLatestsFirst(
+            10,
+            true
+          ).map((id) => ({ id }))
         }
 
         if (records.length > 0) {
