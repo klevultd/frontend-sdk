@@ -22,8 +22,18 @@ export function personalisation(options?: {
    * should be the latest product clicked. By default @klevu/core uses internal
    * store to keep track of last clicked products. It is important use
    * KlevuEvent class to store all interactions.
+   *
+   * @deprecated use lastClickedItemIds instead
    */
   lastClickedProductIds?: string[]
+
+  /**
+   * Override last clicked id's with your own selection. First item
+   * should be the latest product clicked. By default @klevu/core uses internal
+   * store to keep track of last clicked items. It is important use
+   * KlevuEvent class to store all interactions.
+   */
+  lastClickedItemIds?: string[]
 }): KlevuFetchModifer {
   return {
     klevuModifierId: "personalisation",
@@ -39,8 +49,10 @@ export function personalisation(options?: {
         }
 
         let records: Array<{ id: string }> = []
-        if (options?.lastClickedProductIds) {
-          records = options.lastClickedProductIds.map((pId) => ({
+        if (options?.lastClickedProductIds || options?.lastClickedItemIds) {
+          const ids =
+            (options.lastClickedItemIds || options.lastClickedProductIds) ?? []
+          records = ids.map((pId) => ({
             id: pId,
           }))
         } else if (
