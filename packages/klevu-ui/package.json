@@ -32,7 +32,7 @@
     "hydrate/"
   ],
   "scripts": {
-    "build": "stencil build",
+    "build": "npm run generate:version && stencil build",
     "build:watch": "stencil build --watch",
     "build:all": "npm run build && cd ../klevu-ui-react && npm run build && cd ../klevu-ui-vue && npm run build && cd ../klevu-ui",
     "start": "stencil build --dev --watch --serve",
@@ -44,7 +44,8 @@
     "generate:icons": "node downloadIcons.js",
     "storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && storybook dev -p 6006",
     "build-storybook": "export SET NODE_OPTIONS=--openssl-legacy-provider && storybook build",
-    "push-npm": "npm publish --access public"
+    "push-npm": "npm publish --access public",
+    "generate:version": "node version.js"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.5.3",

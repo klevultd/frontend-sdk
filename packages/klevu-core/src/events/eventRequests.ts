@@ -140,6 +140,8 @@ export type V2EventBase = {
      */
     email?: string
   }
+
+  sender_version?: string
 }
 
 export type V2CheckedOutProductsEvent = V2EventBase & {

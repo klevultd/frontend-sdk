@@ -2,6 +2,7 @@ import { KMCRootObject, KlevuConfig, KlevuKMCSettings } from "@klevu/core"
 import { Component, h, Host, Method, Prop, Watch, State, Event, EventEmitter } from "@stencil/core"
 import { KlevuUIGlobalSettings } from "../../utils/utils"
 import en from "../../translations/en.json"
+import version from "../../version"
 
 /**
  * List of available translations
@@ -111,6 +112,7 @@ export class KlevuInit {
       eventsApiV1Url: this.eventsV1Url,
       eventsApiV2Url: this.eventsV2Url,
       recommendationsApiUrl: this.recommendationsApiUrl,
+      version: version,
     })
 
     if (this.translation) {

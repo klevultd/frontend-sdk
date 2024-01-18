@@ -68,6 +68,7 @@ export class KlevuEvents {
       event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
       user_profile: user,
+      sender_version: KlevuConfig.getDefault().version,
       event_data: {
         items: items.map((i) => ({
           currency: i.product.currency ?? "USD",
@@ -122,6 +123,7 @@ export class KlevuEvents {
       event: "view_recs_list",
       event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
+      sender_version: KlevuConfig.getDefault().version,
       event_data: {
         list_id: recommendationMetadata.recsKey,
         list_logic: recommendationMetadata.logic,
@@ -200,6 +202,7 @@ export class KlevuEvents {
       event: "select_recs_list",
       event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
+      sender_version: KlevuConfig.getDefault().version,
       event_data: {
         list_id: recommendationMetadata.recsKey,
         list_logic: recommendationMetadata.logic,

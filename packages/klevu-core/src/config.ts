@@ -1,6 +1,7 @@
 import type { AxiosInstance, AxiosStatic } from "axios"
 import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
+import version from "./version.js"
 
 type KlevuConfiguration = {
   /**
@@ -45,6 +46,11 @@ type KlevuConfiguration = {
    * Prevent clicks being tracked in memory or stored in local storage. This will break personalisation and recommendations.
    */
   disableClickTrackStoring?: boolean
+
+  /**
+   * Version metadata. This will be appended to SDK version in analytics requests.
+   */
+  version?: string
 }
 
 export class KlevuConfig {
@@ -59,6 +65,7 @@ export class KlevuConfig {
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
   disableClickTracking = false
+  version = version
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -80,6 +87,9 @@ export class KlevuConfig {
     }
     if (config.recommendationsApiUrl) {
       this.recommendationsApiUrl = config.recommendationsApiUrl
+    }
+    if (config.version) {
+      this.version = `${this.version} - ${config.version}`
     }
 
     this.disableClickTracking = config.disableClickTrackStoring ?? false
