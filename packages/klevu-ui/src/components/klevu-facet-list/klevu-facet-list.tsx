@@ -214,10 +214,15 @@ export class KlevuFacetList {
         })}
         {this.useApplyButton ? (
           <div class="applybar">
-            <klevu-button isSecondary onClick={() => this.#clear()}>
+            <klevu-button exportparts={partsExports("klevu-button")} isSecondary onClick={() => this.#clear()}>
               {this.clearButtonText}
             </klevu-button>
-            <klevu-button fullWidth class="apply" onClick={() => this.#applySettings()}>
+            <klevu-button
+              exportparts={partsExports("klevu-button")}
+              fullWidth
+              class="apply"
+              onClick={() => this.#applySettings()}
+            >
               {this.applyButtonText}
             </klevu-button>
           </div>

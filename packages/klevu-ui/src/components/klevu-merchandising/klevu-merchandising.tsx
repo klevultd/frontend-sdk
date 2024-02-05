@@ -398,7 +398,12 @@ export class KlevuMerchandising {
             <div part="merchandising-content">
               <slot name="topbanners">
                 {this.searchResultTopBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                  <klevu-banner
+                    exportparts={partsExports("klevu-banner")}
+                    imageUrl={b.bannerImg}
+                    linkUrl={b.redirectUrl}
+                    altText={b.bannerAltTag}
+                  ></klevu-banner>
                 ))}
               </slot>
               <klevu-product-grid>
@@ -417,7 +422,12 @@ export class KlevuMerchandising {
               )}
               <slot name="bottombanners">
                 {this.searchResultBottomBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                  <klevu-banner
+                    exportparts={partsExports("klevu-banner")}
+                    imageUrl={b.bannerImg}
+                    linkUrl={b.redirectUrl}
+                    altText={b.bannerAltTag}
+                  ></klevu-banner>
                 ))}
               </slot>
             </div>
@@ -436,7 +446,9 @@ export class KlevuMerchandising {
                 shouldUpdateUrlForPage={this.autoUpdateUrl}
               ></klevu-pagination>
             ) : this.#resultObject?.hasNextPage() ? (
-              <klevu-button onClick={this.#loadMore.bind(this)}>{this.tLoadMore}</klevu-button>
+              <klevu-button exportparts={partsExports("klevu-button")} onClick={this.#loadMore.bind(this)}>
+                {this.tLoadMore}
+              </klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

@@ -53,6 +53,7 @@ export class KlevuLayoutResults {
           <slot name="header"></slot>
           {isMobile ? (
             <klevu-button
+              exportparts={partsExports("klevu-button")}
               icon="menu"
               onClick={async (event) => {
                 await this.drawerElement?.openModal()

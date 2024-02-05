@@ -305,6 +305,7 @@ export const parts = {
       "klevu-latest-searches": ["latest-searches-caption"],
       "klevu-tab": ["tab-base", "tab-caption"],
       "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+      "klevu-loading-indicator": ["loading-indicator-base"],
       "klevu-button": ["button-base"],
       "klevu-list": ["list-base", "list-icon", "list-image", "list-content", "list-button"],
       "klevu-dropdown": ["dropdown-base", "dropdown-select"],
@@ -341,6 +342,7 @@ export const parts = {
     local: [],
     exportedcomponents: {
       "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
+      "klevu-loading-indicator": ["loading-indicator-base"],
       "klevu-button": ["button-base"],
     },
   },

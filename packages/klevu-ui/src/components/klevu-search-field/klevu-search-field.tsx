@@ -350,7 +350,9 @@ export class KlevuSearchField {
           </slot>
         </klevu-textfield>
         {this.variant === "default" && (
-          <klevu-button onClick={this.#handleSearchClick.bind(this)}>{this.tSearchText}</klevu-button>
+          <klevu-button exportparts={partsExports("klevu-button")} onClick={this.#handleSearchClick.bind(this)}>
+            {this.tSearchText}
+          </klevu-button>
         )}
       </Host>
     )

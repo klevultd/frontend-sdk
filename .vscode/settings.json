@@ -3,6 +3,6 @@
   "editor.formatOnSave": true,
   "html.customData": ["./packages/klevu-ui/dist/docs/vscode-data.json"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   }
 }

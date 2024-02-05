@@ -230,7 +230,13 @@ export class KlevuMoi {
             >
               <div slot="header">
                 <klevu-typography variant="body-m-bold">MOI</klevu-typography>
-                <klevu-button onClick={() => this.close()} size="small" icon="close" isSecondary></klevu-button>
+                <klevu-button
+                  exportparts={partsExports("klevu-button")}
+                  onClick={() => this.close()}
+                  size="small"
+                  icon="close"
+                  isSecondary
+                ></klevu-button>
               </div>
               <klevu-chat-messages
                 exportparts={partsExports("klevu-chat-messages")}
@@ -272,6 +278,7 @@ export class KlevuMoi {
               <div slot="actions" class="genericactions">
                 {this.session?.genericOptions?.options.map((item) => (
                   <klevu-button
+                    exportparts={partsExports("klevu-button")}
                     size="small"
                     isSecondary
                     onClick={() => {
@@ -291,6 +298,7 @@ export class KlevuMoi {
                   .filter((i) => i.type === "message")
                   .map((item) => (
                     <klevu-button
+                      exportparts={partsExports("klevu-button")}
                       onClick={() => {
                         if (item.type === "message") {
                           this.#sendMessage(item.chat)
@@ -308,7 +316,7 @@ export class KlevuMoi {
           )}
         </div>
 
-        <klevu-modal ref={(el) => (this.#modalRef = el)}>
+        <klevu-modal exportparts={partsExports("klevu-modal")} ref={(el) => (this.#modalRef = el)}>
           <klevu-product exportparts={partsExports("klevu-product")} product={this.currentProduct}></klevu-product>
         </klevu-modal>
       </Host>
