@@ -1,6 +1,7 @@
 import { MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Host, Prop, h } from "@stencil/core"
 import { getTranslation } from "../../utils/getTranslation"
+import { partsExports } from "../../utils/partsExports"
 
 export type KlevuMessageFeedbackReasonDetails = {
   reason: string
@@ -69,6 +70,7 @@ export class KlevuChatBubble {
             <span>{this.tRatingReason}</span>
             {this.feedbackReasons.map((reason) => (
               <klevu-button
+                exportparts={partsExports("klevu-button")}
                 size="tiny"
                 isSecondary
                 onClick={() => {
