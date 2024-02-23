@@ -18,7 +18,8 @@ import { partsExports } from "../../utils/partsExports"
 export class KlevuChatLayout {
   @Element() el!: HTMLElement
 
-  /** To be set to portal trigger element
+  /**
+   * To be set to portal trigger element
    * when component is being used in a portal
    */
   @Prop() originElement?: HTMLElement

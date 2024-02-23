@@ -16,7 +16,8 @@ export class KlevuButton {
   @Prop({ reflect: true })
   disabled?: boolean
 
-  /** To be set to portal trigger element
+  /**
+   * To be set to portal trigger element
    * when component is being used in a portal
    */
   @Prop() originElement?: HTMLElement

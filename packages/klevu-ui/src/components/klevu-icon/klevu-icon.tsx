@@ -21,7 +21,8 @@ export class KlevuIcon {
    * Name of the icon. Please use tokens of material icons
    */
   @Prop() name!: string
-  /** To be set to portal trigger element
+  /**
+   * To be set to portal trigger element
    * when component is being used in a portal
    */
   @Prop() originElement?: HTMLElement
