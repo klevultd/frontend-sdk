@@ -555,6 +555,7 @@ export class KlevuQuicksearch {
                 <div class="topbanners">
                   {this.searchResultTopBanners.map((b) => (
                     <klevu-banner
+                      exportparts={partsExports("klevu-banner")}
                       imageUrl={b.bannerImg}
                       linkUrl={b.redirectUrl}
                       altText={b.bannerAltTag}
@@ -586,6 +587,7 @@ export class KlevuQuicksearch {
                 <div class="bottombanners">
                   {this.searchResultBottomBanners.map((b) => (
                     <klevu-banner
+                      exportparts={partsExports("klevu-banner")}
                       imageUrl={b.bannerImg}
                       linkUrl={b.redirectUrl}
                       altText={b.bannerAltTag}
@@ -604,6 +606,7 @@ export class KlevuQuicksearch {
                 <div class="topbanners">
                   {this.searchResultTopBanners.map((b) => (
                     <klevu-banner
+                      exportparts={partsExports("klevu-banner")}
                       imageUrl={b.bannerImg}
                       linkUrl={b.redirectUrl}
                       altText={b.bannerAltTag}
@@ -629,6 +632,7 @@ export class KlevuQuicksearch {
                 <div class="bottombanners">
                   {this.searchResultBottomBanners.map((b) => (
                     <klevu-banner
+                      exportparts={partsExports("klevu-banner")}
                       imageUrl={b.bannerImg}
                       linkUrl={b.redirectUrl}
                       altText={b.bannerAltTag}

@@ -367,6 +367,7 @@ export class KlevuFacet {
           )}
           {showAllButton ? (
             <klevu-button
+              exportparts={partsExports("klevu-button")}
               part="facet-more-button"
               style={{ "--klevu-button-text-align": "left" }}
               isTertiary
