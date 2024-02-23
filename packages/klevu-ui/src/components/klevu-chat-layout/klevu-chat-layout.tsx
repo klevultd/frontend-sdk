@@ -18,6 +18,11 @@ import { partsExports } from "../../utils/partsExports"
 export class KlevuChatLayout {
   @Element() el!: HTMLElement
 
+  /** To be set to portal trigger element
+   * when component is being used in a portal
+   */
+  @Prop() originElement?: HTMLElement
+
   #scrollElement?: HTMLKlevuUtilScrollbarsElement
   #popupElement?: HTMLKlevuPopupElement
 
@@ -147,6 +152,7 @@ export class KlevuChatLayout {
                 onKlevuTextEnterPressed={() => this.#sendMessage()}
               ></klevu-textfield>
               <klevu-button
+                originElement={this.originElement}
                 exportparts={partsExports("klevu-button")}
                 icon="send"
                 onClick={() => this.#sendMessage()}

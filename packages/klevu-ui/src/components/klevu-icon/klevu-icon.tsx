@@ -1,5 +1,6 @@
 import { Component, Element, Host, Prop, State, getAssetPath, h } from "@stencil/core"
 import preloadedIcons from "./preloaded-icons.json"
+import { closestElement } from "../../utils/utils"
 
 const cache = new Map<string, string>()
 
@@ -20,30 +21,37 @@ export class KlevuIcon {
    * Name of the icon. Please use tokens of material icons
    */
   @Prop() name!: string
+  /** To be set to portal trigger element
+   * when component is being used in a portal
+   */
+  @Prop() originElement?: HTMLElement
 
   @State() iconURL?: string
   @State() iconURLSvg?: string
-  /**
-   * Special kind of internal asset that has correct settings in the SVG itself
-   */
-  @State() iconAssetURL?: string
+
   @State() svgStyle?: {
     [key: string]: string
   }
 
   async connectedCallback() {
-    const init = this.el.closest("klevu-init")
+    let init = closestElement("klevu-init", this.originElement || this.el) as HTMLKlevuInitElement
+    if (!init) {
+      console.warn("could not find closest init for ", this.name)
+      const initFields = document.getElementsByTagName("klevu-init")
+      if (initFields.length > 0) {
+        init = initFields[0]
+      }
+    }
     const url = init?.settings?.icons?.[this.name]
-
     if (url?.endsWith(".svg")) {
-      await this.#downloadFile(url)
+      await this.#setIcon(url)
     } else if (preloadedIcons.includes(this.name)) {
-      const init = this.el.closest("klevu-init")
       let path = window.location.origin
       if (init) {
         path = await init.getAssetsPath()
       }
-      this.iconAssetURL = `${path}/assets/${this.name}.svg`
+      const url = `${path}/assets/${this.name}.svg`
+      await this.#setIcon(url, false)
     } else if (url) {
       this.iconURL = url
     }
@@ -63,7 +71,7 @@ export class KlevuIcon {
     }
   }
 
-  async #downloadFile(url: string) {
+  async #setIcon(url: string, shouldAddStyles = true) {
     try {
       if (cache.has(url)) {
         this.iconURLSvg = cache.get(url)
@@ -75,11 +83,13 @@ export class KlevuIcon {
         }
       }
     } catch (e) {}
-    const fontSize = getComputedStyle(this.el).fontSize
-    this.svgStyle = {
-      fill: getComputedStyle(this.el).color,
-      height: fontSize,
-      width: fontSize,
+    if (shouldAddStyles) {
+      const fontSize = getComputedStyle(this.el).fontSize
+      this.svgStyle = {
+        fill: getComputedStyle(this.el).color,
+        height: fontSize,
+        width: fontSize,
+      }
     }
   }
 
@@ -88,10 +98,6 @@ export class KlevuIcon {
       <Host>
         {this.iconURLSvg ? (
           <div style={this.svgStyle} innerHTML={this.iconURLSvg}></div>
-        ) : this.iconAssetURL ? (
-          <svg width="20" height="20">
-            <use xlinkHref={`${this.iconAssetURL}#img`} href={`${this.iconAssetURL}#img`}></use>
-          </svg>
         ) : this.iconURL ? (
           <img src={this.iconURL} />
         ) : (

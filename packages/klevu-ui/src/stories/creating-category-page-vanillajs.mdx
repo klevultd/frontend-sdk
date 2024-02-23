@@ -29,7 +29,11 @@ Add `klevu-init` as the parent for components.
   </head>
 
   <body>
-    <klevu-init api-key="YOUR_STORE_API_KEY" url="YOUR_STORE_SEARCH_URL">
+    <klevu-init
+      api-key="YOUR_STORE_API_KEY"
+      url="YOUR_STORE_SEARCH_URL"
+      assets-path="https://resources-webcomponents.klevu.com/latest/klevu-ui"
+    >
       <klevu-merchandising category=""></klevu-merchandising>
     </klevu-init>
   </body>
@@ -68,7 +72,11 @@ Here is an example of doing that
   </head>
 
   <body>
-    <klevu-init api-key="YOUR_STORE_API_KEY" url="YOUR_STORE_SEARCH_URL">
+    <klevu-init
+      api-key="YOUR_STORE_API_KEY"
+      url="YOUR_STORE_SEARCH_URL"
+      assets-path="https://resources-webcomponents.klevu.com/latest/klevu-ui"
+    >
       <klevu-merchandising category="">
         <div slot="content">
           <klevu-product-grid id="productList"></klevu-product-grid>
@@ -126,7 +134,11 @@ Here is how you can include brand name from a different attribute in the respons
   </head>
 
   <body>
-    <klevu-init api-key="YOUR_STORE_API_KEY" url="YOUR_STORE_SEARCH_URL">
+    <klevu-init
+      api-key="YOUR_STORE_API_KEY"
+      url="YOUR_STORE_SEARCH_URL"
+      assets-path="https://resources-webcomponents.klevu.com/latest/klevu-ui"
+    >
       <klevu-merchandising category="">
         <div slot="content">
           <klevu-product-grid id="productList"></klevu-product-grid>

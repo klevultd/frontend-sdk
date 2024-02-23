@@ -132,6 +132,10 @@ export namespace Components {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+        /**
+          * To be set to portal trigger element when component is being used in a portal
+         */
+        "originElement"?: HTMLElement;
         "size": "tiny" | "small" | "normal" | "large";
     }
     /**
@@ -167,6 +171,10 @@ export namespace Components {
           * Close the popup menu
          */
         "closePopup": () => Promise<void>;
+        /**
+          * To be set to portal trigger element when component is being used in a portal
+         */
+        "originElement"?: HTMLElement;
         /**
           * Scroll current chat to bottom of page
          */
@@ -446,6 +454,10 @@ export namespace Components {
           * Name of the icon. Please use tokens of material icons
          */
         "name": string;
+        /**
+          * To be set to portal trigger element when component is being used in a portal
+         */
+        "originElement"?: HTMLElement;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be
@@ -2605,6 +2617,10 @@ declare namespace LocalJSX {
           * Toned down tertiary button
          */
         "isTertiary"?: boolean;
+        /**
+          * To be set to portal trigger element when component is being used in a portal
+         */
+        "originElement"?: HTMLElement;
         "size"?: "tiny" | "small" | "normal" | "large";
     }
     /**
@@ -2641,6 +2657,10 @@ declare namespace LocalJSX {
           * Event emitted when user sends a message
          */
         "onKlevuChatLayoutMessageSent"?: (event: KlevuChatLayoutCustomEvent<string>) => void;
+        /**
+          * To be set to portal trigger element when component is being used in a portal
+         */
+        "originElement"?: HTMLElement;
         /**
           * Use native scrollbars instead of custom ones in content
          */
@@ -2948,6 +2968,10 @@ declare namespace LocalJSX {
           * Name of the icon. Please use tokens of material icons
          */
         "name": string;
+        /**
+          * To be set to portal trigger element when component is being used in a portal
+         */
+        "originElement"?: HTMLElement;
     }
     /**
      * `klevu-init` is the most important component of the whole library. Place one in your document. It should be

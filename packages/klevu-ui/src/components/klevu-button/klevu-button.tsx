@@ -16,6 +16,11 @@ export class KlevuButton {
   @Prop({ reflect: true })
   disabled?: boolean
 
+  /** To be set to portal trigger element
+   * when component is being used in a portal
+   */
+  @Prop() originElement?: HTMLElement
+
   /** Toned down secondary button */
   @Prop()
   isSecondary?: boolean
@@ -53,7 +58,7 @@ export class KlevuButton {
         }}
       >
         {this.icon ? (
-          <klevu-icon name={this.icon}></klevu-icon>
+          <klevu-icon originElement={this.originElement} name={this.icon}></klevu-icon>
         ) : (
           <klevu-typography variant={this.isTertiary || this.size === "tiny" ? "body-s" : "body-s-bold"}>
             <slot />
