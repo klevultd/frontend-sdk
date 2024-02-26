@@ -53,6 +53,7 @@ export const Query: StoryObj<KlevuProductQuery> = {
         at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
         ligula nec orci. Nam sed porttitor dolor.
         <klevu-init
+          assets-path="https://resources-webcomponents.klevu.com/1.0.0/klevu-ui"
           .settings=${{
             icons: {
               thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",

@@ -19,7 +19,11 @@ Wrap your top-level component, usually App.js with KlevuInit, here is an example
 
 ```jsx
 <BrowserRouter>
-  <KlevuInit url={`https://${YOUR_STORE_SEARCH_URL}/cs/v2/search`} apiKey={YOUR_STORE_API_KEY}>
+  <KlevuInit
+    url={`https://${YOUR_STORE_SEARCH_URL}/cs/v2/search`}
+    apiKey={YOUR_STORE_API_KEY}
+    assetsPath="https://resources-webcomponents.klevu.com/latest/klevu-ui"
+  >
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />

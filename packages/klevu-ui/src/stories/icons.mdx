@@ -48,3 +48,14 @@ When using SVG `font-size` and `color` attributes will be assigned as size and f
   }
 </script>
 ```
+
+## Use icons from Components CDN
+
+To use icons from the components CDN, add the `assets-path` attribute to the `<klevu-init>` component
+Example:
+
+```html
+<klevu-init assets-path="https://resources-webcomponents.klevu.com/latest/klevu-ui"> {...components} </klevu-init>
+```
+
+You can replace `latest` in the above url to a particular version to lock the version.
