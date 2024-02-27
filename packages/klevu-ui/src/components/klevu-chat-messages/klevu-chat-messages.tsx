@@ -1,14 +1,12 @@
 import { MoiMessages, MoiProduct, MoiResponseFilter, MoiResponseText, MoiSavedFeedback } from "@klevu/core"
 import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stencil/core"
-import markdown from "markdown-it"
 import { partsExports } from "../../utils/partsExports"
+import { markdown } from "../../utils/utils"
 
 export type onKlevuMessageFeedbackDetails = {
   message: MoiResponseText["message"]
   feedback: "up" | "down"
 }
-
-const md = markdown()
 
 /**
  * @slot chat-messages-after - Things to place in the after all messages
@@ -82,7 +80,7 @@ export class KlevuChatMessages {
             const isLastMessage = this.messages.length - 1 === index
             const showFeedback = this.showFeedbackFor === message.message.id && !Boolean(givenFeedback?.reason)
 
-            const htmlMessage = md.renderInline(message.message.value)
+            const htmlMessage = markdown(message.message.value)
 
             return (
               <Fragment>
