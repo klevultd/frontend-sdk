@@ -438,7 +438,11 @@ export class KlevuSearchLandingPage {
           </slot>
           <div slot="header" class="header" part="search-landing-page-header">
             {this.showSearch && (
-              <klevu-quicksearch term={this.term} onKlevuSearch={(event) => this.#updateTerm(event.detail)} />
+              <klevu-quicksearch
+                exportparts={partsExports("klevu-quicksearch")}
+                term={this.term}
+                onKlevuSearch={(event) => this.#updateTerm(event.detail)}
+              />
             )}
             <div class="info">
               <klevu-typography slot="header" variant="h1">
@@ -458,7 +462,12 @@ export class KlevuSearchLandingPage {
             <div part="search-landing-page-content">
               <slot name="topbanners">
                 {this.searchResultTopBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                  <klevu-banner
+                    exportparts={partsExports("klevu-banner")}
+                    imageUrl={b.bannerImg}
+                    linkUrl={b.redirectUrl}
+                    altText={b.bannerAltTag}
+                  ></klevu-banner>
                 ))}
               </slot>
               {this.results?.length > 0 ? (
@@ -518,7 +527,12 @@ export class KlevuSearchLandingPage {
               )}
               <slot name="bottombanners">
                 {this.searchResultBottomBanners.map((b) => (
-                  <klevu-banner imageUrl={b.bannerImg} linkUrl={b.redirectUrl} altText={b.bannerAltTag}></klevu-banner>
+                  <klevu-banner
+                    exportparts={partsExports("klevu-banner")}
+                    imageUrl={b.bannerImg}
+                    linkUrl={b.redirectUrl}
+                    altText={b.bannerAltTag}
+                  ></klevu-banner>
                 ))}
               </slot>
             </div>
@@ -543,7 +557,9 @@ export class KlevuSearchLandingPage {
                 onKlevuPaginationChange={this.paginationChange.bind(this)}
               ></klevu-pagination>
             ) : this.#resultObject?.hasNextPage() ? (
-              <klevu-button onClick={this.loadMore.bind(this)}>{this.tLoadMore}</klevu-button>
+              <klevu-button exportparts={partsExports("klevu-button")} onClick={this.loadMore.bind(this)}>
+                {this.tLoadMore}
+              </klevu-button>
             ) : null}
           </div>
         </klevu-layout-results>

@@ -304,6 +304,7 @@ export class KlevuProductQueryPopup {
     return (
       <Fragment>
         <klevu-chat-layout
+          originElement={this.originElement}
           exportparts={partsExports("klevu-chat-layout")}
           useNativeScrollbars={this.useNativeScrollbars}
           ref={(el) => (this.#layoutElement = el)}
@@ -311,7 +312,7 @@ export class KlevuProductQueryPopup {
           <div part="product-query-popup-header" slot="header">
             <div class="header">
               <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
-              <klevu-icon name="close" onClick={() => this.#popup?.closeModal()} />
+              <klevu-icon originElement={this.originElement} name="close" onClick={() => this.#popup?.closeModal()} />
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">
@@ -360,7 +361,12 @@ export class KlevuProductQueryPopup {
                       this.email = e.detail
                     }}
                   ></klevu-textfield>
-                  <klevu-button icon="send" onClick={() => this.#register()}></klevu-button>
+                  <klevu-button
+                    originElement={this.originElement}
+                    exportparts={partsExports("klevu-button")}
+                    icon="send"
+                    onClick={() => this.#register()}
+                  ></klevu-button>
                 </div>
                 <klevu-typography variant="body-xs">{this.tDataProtectionNotice}</klevu-typography>
               </Fragment>
@@ -375,9 +381,16 @@ export class KlevuProductQueryPopup {
                   onKlevuTextChanged={(e) => (this.text = e.detail)}
                 ></klevu-textfield>
                 {this.askButtonText ? (
-                  <klevu-button onClick={() => this.#sendMessage()}>{this.askButtonText}</klevu-button>
+                  <klevu-button exportparts={partsExports("klevu-button")} onClick={() => this.#sendMessage()}>
+                    {this.askButtonText}
+                  </klevu-button>
                 ) : (
-                  <klevu-button icon="chevron_right" onClick={() => this.#sendMessage()}></klevu-button>
+                  <klevu-button
+                    originElement={this.originElement}
+                    exportparts={partsExports("klevu-button")}
+                    icon="chevron_right"
+                    onClick={() => this.#sendMessage()}
+                  ></klevu-button>
                 )}
               </div>
             )}
@@ -393,8 +406,8 @@ export class KlevuProductQueryPopup {
         <klevu-typography variant="body-l-bold">{this.tRateExperienceTitle}</klevu-typography>
         <klevu-typography variant="body-m">{this.tRateExperienceText}</klevu-typography>
         <div>
-          <klevu-icon onClick={() => this.#pqafeedback("up")} name="thumb_up" />
-          <klevu-icon onClick={() => this.#pqafeedback("down")} name="thumb_down" />
+          <klevu-icon originElement={this.originElement} onClick={() => this.#pqafeedback("up")} name="thumb_up" />
+          <klevu-icon originElement={this.originElement} onClick={() => this.#pqafeedback("down")} name="thumb_down" />
         </div>
       </div>
     )

@@ -24,7 +24,11 @@ Here is a example how to create `klevu-init` component in HTML. And then getting
 some properties on it.
 
 ```html
-<klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"></klevu-init>
+<klevu-init
+  assets-path="https://resources-webcomponents.klevu.com/latest/klevu-ui" /* optional */
+  api-key="klevu-165829460115715456"
+  url="https://eucs30v2.ksearchnet.com/cs/v2/search"
+></klevu-init>
 ```
 
 And in your Javascript file:
@@ -70,6 +74,7 @@ const App = () => {
           return amount + " " + currency
         },
       }}
+      assetsPath="https://resources-webcomponents.klevu.com/latest/klevu-ui" //optional
     />
   )
 }

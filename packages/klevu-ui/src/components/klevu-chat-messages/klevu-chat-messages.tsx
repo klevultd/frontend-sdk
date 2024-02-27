@@ -128,6 +128,7 @@ export class KlevuChatMessages {
                   {message.filter.options.map((o) => (
                     <klevu-button
                       isSecondary
+                      exportparts={partsExports("klevu-button")}
                       disabled={this.messages.length - 1 !== index}
                       onClick={() => {
                         if (this.messages.length - 1 === index) {
@@ -176,10 +177,12 @@ export class KlevuChatMessages {
                         })
                         return false
                       }}
+                      exportparts={partsExports("klevu-product")}
                     >
                       <div slot="bottom" class="productactions">
                         {product.options.map((option) => (
                           <klevu-button
+                            exportparts={partsExports("klevu-button")}
                             fullWidth
                             isSecondary
                             onClick={() => {

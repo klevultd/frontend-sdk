@@ -31,6 +31,7 @@ export const KlevuBanner = /*@__PURE__*/ defineContainer<JSX.KlevuBanner>('klevu
 
 export const KlevuButton = /*@__PURE__*/ defineContainer<JSX.KlevuButton>('klevu-button', undefined, [
   'disabled',
+  'originElement',
   'isSecondary',
   'isTertiary',
   'fullWidth',
@@ -49,6 +50,7 @@ export const KlevuChatBubble = /*@__PURE__*/ defineContainer<JSX.KlevuChatBubble
 
 
 export const KlevuChatLayout = /*@__PURE__*/ defineContainer<JSX.KlevuChatLayout>('klevu-chat-layout', undefined, [
+  'originElement',
   'useNativeScrollbars',
   'klevuChatLayoutMessageSent'
 ]);
@@ -152,7 +154,8 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
 
 
 export const KlevuIcon = /*@__PURE__*/ defineContainer<JSX.KlevuIcon>('klevu-icon', undefined, [
-  'name'
+  'name',
+  'originElement'
 ]);
 
 
