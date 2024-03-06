@@ -6,7 +6,7 @@ export enum StorageType {
   LOCAL = "local",
 }
 
-const dataProtectedKeys = [LAST_CLICKED_STORAGE_KEY]
+const dataProtectedKeys = [""]
 
 const isSessionStorage = (storageType: StorageType) => {
   return storageType === StorageType.SESSION && window.sessionStorage
@@ -37,11 +37,6 @@ export class KlevuStorage {
     value: string,
     storageType = StorageType.LOCAL
   ) => {
-    console.log(
-      dataProtectedKeys.find((k) => k.includes(key)),
-      KlevuConfig.getDefault().isConsentDisallowed(),
-      isLocalStorage(storageType)
-    )
     if (
       dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
       KlevuConfig.getDefault().isConsentDisallowed()
