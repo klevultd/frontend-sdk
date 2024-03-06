@@ -6,7 +6,7 @@ export enum StorageType {
   LOCAL = "local",
 }
 
-const dataProtectedKeys = [""]
+const dataProtectedKeys = ["test_key"]
 
 const isSessionStorage = (storageType: StorageType) => {
   return storageType === StorageType.SESSION && window.sessionStorage
