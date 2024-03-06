@@ -1,6 +1,7 @@
 import type { AxiosInstance, AxiosStatic } from "axios"
 import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
+import { KlevuDomEvents } from "./events/KlevuDomEvents.js"
 
 type KlevuConfiguration = {
   /**
@@ -45,6 +46,14 @@ type KlevuConfiguration = {
    * Prevent clicks being tracked in memory or stored in local storage. This will break personalisation and recommendations.
    */
   disableClickTrackStoring?: boolean
+  /**
+   * Enable data protection, pass true if data protection should be enabled
+   */
+  useConsent?: boolean
+  /**
+   * True when user provides consent for reading protected data
+   */
+  consentGiven?: boolean
 }
 
 export class KlevuConfig {
@@ -59,6 +68,8 @@ export class KlevuConfig {
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
   disableClickTracking = false
+  useConsent = false
+  consentGiven = false
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -83,6 +94,9 @@ export class KlevuConfig {
     }
 
     this.disableClickTracking = config.disableClickTrackStoring ?? false
+
+    this.useConsent = config.useConsent || false
+    this.consentGiven = config.consentGiven || false
   }
 
   static init(config: KlevuConfiguration) {
@@ -95,6 +109,36 @@ export class KlevuConfig {
       throw new Error("Configuration missing")
     }
     return KlevuConfig.default
+  }
+
+  isConsentDisallowed() {
+    return this.useConsent && !this.consentGiven
+  }
+
+  setUseConsent(useConsent: boolean) {
+    this.useConsent = useConsent
+    if (typeof document !== "undefined") {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.UseConsentChanged, {
+          detail: {
+            useConsent,
+          },
+        })
+      )
+    }
+  }
+
+  setConsentGiven(userConsent: boolean) {
+    this.consentGiven = userConsent
+    if (typeof document !== "undefined") {
+      document.dispatchEvent(
+        new CustomEvent(KlevuDomEvents.UserConsentGivenChanged, {
+          detail: {
+            userConsent,
+          },
+        })
+      )
+    }
   }
 }
 

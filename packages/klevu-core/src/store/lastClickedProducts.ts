@@ -5,7 +5,7 @@ import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
 import { KlevuConfig } from "../config.js"
 
 const ONE_HOUR = 36000000
-const STORAGE_KEY = "klevu-last-clicks"
+export const LAST_CLICKED_STORAGE_KEY = "klevu-last-clicks"
 
 /**
  * Keeps track of last clicked products in store
@@ -29,13 +29,16 @@ class LastClickedProducts {
       return
     }
     if (isBrowser() && window.localStorage) {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.clicks))
+      window.localStorage.setItem(
+        LAST_CLICKED_STORAGE_KEY,
+        JSON.stringify(this.clicks)
+      )
     }
   }
 
   private restore() {
     if (isBrowser() && window.localStorage) {
-      const res = window.localStorage.getItem(STORAGE_KEY)
+      const res = window.localStorage.getItem(LAST_CLICKED_STORAGE_KEY)
       if (res) {
         this.clicks = JSON.parse(res)
       }
