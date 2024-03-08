@@ -3,6 +3,7 @@ import {
   KlevuConfig,
   KlevuTypeOfSearch,
 } from "../../index.js"
+import { KlevuStorage } from "../../utils/storage.js"
 import { post } from "../fetch.js"
 
 const STORAGE_KEY = "klevu-moi-session"
@@ -476,7 +477,7 @@ export class MoiSession {
 }
 
 function getStoredSession(): MoiSavedSession | undefined {
-  const storedSession = localStorage.getItem(STORAGE_KEY)
+  const storedSession = KlevuStorage.getItem(STORAGE_KEY)
   if (!storedSession) {
     return undefined
   }
@@ -485,7 +486,7 @@ function getStoredSession(): MoiSavedSession | undefined {
 }
 
 function saveSession(session: MoiSavedSession) {
-  const saved = localStorage.getItem(STORAGE_KEY)
+  const saved = KlevuStorage.getItem(STORAGE_KEY)
   let parsed: Partial<MoiSavedSession> = {}
   if (saved) {
     parsed = JSON.parse(saved) as MoiSavedSession
@@ -512,7 +513,7 @@ function saveSession(session: MoiSavedSession) {
       break
   }
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed))
+  KlevuStorage.setItem(STORAGE_KEY, JSON.stringify(parsed))
 }
 
 type MoiAPITarget = "send" | "feedback"

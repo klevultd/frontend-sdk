@@ -4,10 +4,11 @@ import { KMCBannerRootObject } from "../models/KMCBanner.js"
 import { KMCMapsRootObject } from "../models/KMCMaps.js"
 import { KMCRootObject } from "../models/KMCRoot.js"
 import { get } from "./fetch.js"
+import { KlevuStorage } from "../utils/storage.js"
 
 const url = "https://js.klevu.com/klevu-js-v1/klevu-js-api/"
-const STORAGE_KEY = "klevu-kmc-data"
-const STORAGE_TS_KEY = "klevu-kmc-data-ts"
+export const STORAGE_KEY = "klevu-kmc-data"
+export const STORAGE_TS_KEY = "klevu-kmc-data-ts"
 const ONE_DAY = 86_400_000
 
 /**
@@ -27,8 +28,8 @@ export async function KlevuKMCSettings(
   maps?: KMCMapsRootObject
 }> {
   if (isBrowser() && window.localStorage && ignoreCache !== true) {
-    const ts = window.localStorage.getItem(STORAGE_TS_KEY)
-    const res = window.localStorage.getItem(STORAGE_KEY)
+    const ts = KlevuStorage.getItem(STORAGE_TS_KEY)
+    const res = KlevuStorage.getItem(STORAGE_KEY)
     if (res && ts && new Date().getTime() - parseInt(ts, 10) < cacheLength) {
       return JSON.parse(res)
     }
@@ -48,8 +49,8 @@ export async function KlevuKMCSettings(
   }
 
   if (isBrowser() && window.localStorage) {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-    window.localStorage.setItem(STORAGE_TS_KEY, new Date().getTime().toString())
+    KlevuStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    KlevuStorage.setItem(STORAGE_TS_KEY, new Date().getTime().toString())
   }
 
   return data

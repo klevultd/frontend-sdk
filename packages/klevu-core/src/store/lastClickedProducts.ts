@@ -3,6 +3,7 @@ import { KlevuRecord } from "../models/KlevuRecord.js"
 import { isBrowser } from "../utils/isBrowser.js"
 import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
 import { KlevuConfig } from "../config.js"
+import { KlevuStorage } from "../utils/storage.js"
 
 const ONE_HOUR = 36000000
 export const LAST_CLICKED_STORAGE_KEY = "klevu-last-clicks"
@@ -29,7 +30,7 @@ class LastClickedProducts {
       return
     }
     if (isBrowser() && window.localStorage) {
-      window.localStorage.setItem(
+      KlevuStorage.setItem(
         LAST_CLICKED_STORAGE_KEY,
         JSON.stringify(this.clicks)
       )
@@ -38,7 +39,7 @@ class LastClickedProducts {
 
   private restore() {
     if (isBrowser() && window.localStorage) {
-      const res = window.localStorage.getItem(LAST_CLICKED_STORAGE_KEY)
+      const res = KlevuStorage.getItem(LAST_CLICKED_STORAGE_KEY)
       if (res) {
         this.clicks = JSON.parse(res)
       }
@@ -55,6 +56,7 @@ class LastClickedProducts {
    * @param productId
    */
   click(productId: string, product?: Partial<KlevuRecord>) {
+    KlevuStorage.addKey(LAST_CLICKED_STORAGE_KEY)
     if (KlevuConfig.getDefault().disableClickTracking) {
       return
     }

@@ -6,8 +6,6 @@ export enum StorageType {
   LOCAL = "local",
 }
 
-const dataProtectedKeys = ["test_key"]
-
 const isSessionStorage = (storageType: StorageType) => {
   return storageType === StorageType.SESSION && window.sessionStorage
 }
@@ -17,9 +15,27 @@ const isLocalStorage = (storageType: StorageType) => {
 }
 
 export class KlevuStorage {
+  static dataProtectedKeys: string[] = []
+
+  static addKey = (key: string) => {
+    if (!this.dataProtectedKeys.find((k) => k === key))
+      this.dataProtectedKeys.push(key)
+  }
+
+  static removeKey = (key: string) => {
+    const keyIndex = this.dataProtectedKeys.indexOf(key)
+    if (keyIndex !== -1) {
+      this.dataProtectedKeys.splice(keyIndex, 1)
+    }
+  }
+
+  static listKeys() {
+    return this.dataProtectedKeys
+  }
+
   static getItem = (key: string, storageType = StorageType.LOCAL) => {
     if (
-      dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
+      this.dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
       KlevuConfig.getDefault().isConsentDisallowed()
     ) {
       return undefined
@@ -38,7 +54,7 @@ export class KlevuStorage {
     storageType = StorageType.LOCAL
   ) => {
     if (
-      dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
+      this.dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
       KlevuConfig.getDefault().isConsentDisallowed()
     ) {
       return
@@ -53,7 +69,7 @@ export class KlevuStorage {
 
   static removeItem = (key: string, storageType = StorageType.LOCAL) => {
     if (
-      dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
+      this.dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
       KlevuConfig.getDefault().isConsentDisallowed()
     ) {
       return

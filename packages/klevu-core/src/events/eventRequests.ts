@@ -5,6 +5,7 @@ import {
 } from "../index.js"
 import { get, post } from "../connection/fetch.js"
 import { isBrowser } from "../utils/isBrowser.js"
+import { KlevuStorage, StorageType } from "../utils/storage.js"
 
 const KEY_PENDING_REQUESTS = "klevu-pending-analytics"
 
@@ -519,17 +520,21 @@ function addPendingRequest(url: string, data?: object): string | void {
   }
 
   let requests: PendingRequest[] = []
-  const old = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
+  const old = KlevuStorage.getItem(KEY_PENDING_REQUESTS, StorageType.SESSION)
   if (old) {
     try {
       requests = JSON.parse(old)
     } catch {
-      window.sessionStorage.removeItem(KEY_PENDING_REQUESTS)
+      KlevuStorage.removeItem(KEY_PENDING_REQUESTS, StorageType.SESSION)
     }
   }
   const id = generateUID()
   requests.push({ id, url, data })
-  window.sessionStorage.setItem(KEY_PENDING_REQUESTS, JSON.stringify(requests))
+  KlevuStorage.setItem(
+    KEY_PENDING_REQUESTS,
+    JSON.stringify(requests),
+    StorageType.SESSION
+  )
   return id
 }
 
@@ -538,7 +543,7 @@ function removePendingRequest(id: string) {
     return
   }
 
-  const data = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
+  const data = KlevuStorage.getItem(KEY_PENDING_REQUESTS, StorageType.SESSION)
   if (!data) {
     console.error("No pending requests!")
     return
@@ -549,9 +554,10 @@ function removePendingRequest(id: string) {
       requests.findIndex((r) => r.id === id),
       1
     )
-    window.sessionStorage.setItem(
+    KlevuStorage.setItem(
       KEY_PENDING_REQUESTS,
-      JSON.stringify(requests)
+      JSON.stringify(requests),
+      StorageType.SESSION
     )
   } catch (e) {
     console.error("Failed to save pending request")
@@ -563,7 +569,7 @@ export async function runPendingAnalyticalRequests() {
     return
   }
 
-  const data = window.sessionStorage.getItem(KEY_PENDING_REQUESTS)
+  const data = KlevuStorage.getItem(KEY_PENDING_REQUESTS, StorageType.SESSION)
   if (!data) {
     return
   }
