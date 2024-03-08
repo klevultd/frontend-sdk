@@ -1,5 +1,4 @@
-import { KlevuConfig, LAST_CLICKED_STORAGE_KEY } from ".."
-import { isBrowser } from "../utils/isBrowser.js"
+import { KlevuConfig } from ".."
 
 export enum StorageType {
   SESSION = "session",

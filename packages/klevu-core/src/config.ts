@@ -1,8 +1,7 @@
 import type { AxiosInstance, AxiosStatic } from "axios"
 import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
-import { KlevuStorage, isBrowser } from "./utils/index.js"
+import { isBrowser } from "./utils/index.js"
 import { KlevuDomEvents } from "./events/KlevuDomEvents.js"
-import { STORAGE_KEY, STORAGE_TS_KEY } from "./connection/kmc.js"
 
 type KlevuConfiguration = {
   /**
