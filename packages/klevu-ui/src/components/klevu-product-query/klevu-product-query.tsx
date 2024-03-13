@@ -29,6 +29,7 @@ export class KlevuProductQuery {
    * Url of the page where the product is
    */
   @Prop() url: string = ""
+  @Prop() additionaldata: string = ""
 
   /**
    * Alternative to url, productId can be used to start a session
@@ -134,6 +135,7 @@ export class KlevuProductQuery {
         {this.origin && (
           <klevu-util-portal>
             <klevu-product-query-popup
+              additionaldata={this.additionaldata || ""}
               url={this.url}
               productId={this.productId}
               pqaWidgetId={this.pqaWidgetId}

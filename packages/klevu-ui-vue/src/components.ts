@@ -305,6 +305,7 @@ export const KlevuProductGrid = /*@__PURE__*/ defineContainer<JSX.KlevuProductGr
 
 export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQuery>('klevu-product-query', undefined, [
   'url',
+  'additionaldata',
   'productId',
   'pqaWidgetId',
   'textFieldVariant',
@@ -343,7 +344,8 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'originElement',
   'disableCloseOutsideClick',
   'config',
-  'useNativeScrollbars'
+  'useNativeScrollbars',
+  'additionaldata'
 ]);
 
 
