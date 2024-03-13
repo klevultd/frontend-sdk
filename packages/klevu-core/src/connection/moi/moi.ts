@@ -14,6 +14,7 @@ export type MoiContext = {
   url?: string
   productId?: string
   pqaWidgetId?: string
+  additionalData?: string
 }
 
 export type MoiRequest = {
@@ -218,7 +219,10 @@ export type MoiStartOptions = {
    * PQA widgetId for the PQA application
    */
   pqaWidgetId?: string
-
+  /**
+   * To pass additional information to the api as string
+   */
+  additionalData?: string
   settings?: {
     /**
      * Override the config
@@ -245,6 +249,7 @@ export async function startMoi(
     url: options.url,
     productId: options.productId,
     pqaWidgetId: options.pqaWidgetId,
+    additionalData: options.additionalData,
   }
   const storedSession = await getStoredSession()
 
