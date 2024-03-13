@@ -19,6 +19,7 @@ import { useSnackbar } from "notistack"
 import { LoadingIndicator } from "../components/loadingIndicator"
 import { config } from "../config"
 import { InspireMe } from "../components/inspireMe"
+import { useGlobalVariables } from "../globalVariablesContext"
 
 export function ProductPage() {
   const [product, setProduct] = useState<KlevuRecord>()
@@ -30,25 +31,42 @@ export function ProductPage() {
   const params = useParams()
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
+  const { debugMode } = useGlobalVariables()
 
   const fetchProduct = useCallback(async () => {
+    const alsoViewedId = "alsoviewed" + new Date().getTime()
+    const similarId = "similar" + new Date().getTime()
     const res = await KlevuFetch(
       products([params.id]),
-      similarProducts([params.id], {}, exclude([params.groupId])),
+      similarProducts(
+        [params.id],
+        {
+          id: similarId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
+        },
+        exclude([params.groupId])
+      ),
       kmcRecommendation(
         config.productPageRecommendationId,
         {
-          id: "alsoviewed",
+          id: alsoViewedId,
           currentProductId: params.id,
           itemGroupId: params.groupId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        sendRecommendationViewEvent("Also viewed KMC recommendation")
+        sendRecommendationViewEvent({
+          logic: KMCRecommendationLogic.OtherAlsoViewed,
+          recsKey: "also-viewed-demo",
+          title: "Also viewed KMC recommendation",
+        })
       )
     )
 
     const product = res.queriesById("products")?.records?.[0]
-    const sim = res.queriesById("similar")
-    const also = res.queriesById("alsoviewed")
+    const sim = res.queriesById(similarId)
+    const also = res.queriesById(alsoViewedId)
     setProduct(product)
     setSimilar(sim?.records)
     setAlsoBoought(also?.records)
@@ -154,6 +172,14 @@ export function ProductPage() {
                 recsKey: "product-similar",
                 logic: KMCRecommendationLogic.Similar,
                 title: "Similar products",
+                maxProducts: 1,
+                productThreshold: 0,
+                spotKey: "product-similar",
+                spotName: "product-similar",
+                segmentKey: null,
+                segmentName: null,
+                pageType: null,
+                enabled: true,
               },
               variantId,
             })
