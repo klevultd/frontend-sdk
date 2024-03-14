@@ -928,6 +928,7 @@ export namespace Components {
      * @csspart product-query-open-button Button that opens the popup
      */
     interface KlevuProductQuery {
+        "additionaldata": string;
         /**
           * Text of the button for asking a question
          */
@@ -996,6 +997,7 @@ export namespace Components {
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
      */
     interface KlevuProductQueryPopup {
+        "additionaldata"?: string;
         /**
           * Text of the button for asking a question
          */
@@ -3448,6 +3450,7 @@ declare namespace LocalJSX {
      * @csspart product-query-open-button Button that opens the popup
      */
     interface KlevuProductQuery {
+        "additionaldata"?: string;
         /**
           * Text of the button for asking a question
          */
@@ -3516,6 +3519,7 @@ declare namespace LocalJSX {
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
      */
     interface KlevuProductQueryPopup {
+        "additionaldata"?: string;
         /**
           * Text of the button for asking a question
          */

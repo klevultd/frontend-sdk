@@ -1,4 +1,5 @@
 import {
+  KMCRecommendationLogic,
   KlevuEvents,
   KlevuFetch,
   KlevuRecord,
@@ -15,6 +16,7 @@ import { useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { config } from "../config"
 import { useNavigate } from "react-router-dom"
+import { useGlobalVariables } from "../globalVariablesContext"
 
 export function CheckoutPage() {
   const [alsoBoughtProducts, setAlsoBoughtProducts] = useState<KlevuRecord[]>(
@@ -27,21 +29,29 @@ export function CheckoutPage() {
   const cart = useCart()
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
+  const { debugMode } = useGlobalVariables()
 
   const fetchData = async () => {
+    const alsoBoughtId = "alsobought" + new Date().getTime()
     const result = await KlevuFetch(
       kmcRecommendation(
         config.checkoutPageRecommendationId,
         {
-          id: "alsobought",
+          id: alsoBoughtId,
           cartProductIds: cart.items.map((p) => p.id),
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        sendRecommendationViewEvent("Also bought together KMC recommendation")
+        sendRecommendationViewEvent({
+          logic: KMCRecommendationLogic.BoughtTogether,
+          recsKey: "also-bought-together-demo",
+          title: "Also bought together KMC recommendation",
+        })
       )
     )
 
-    setAlsoBoughtResult(result.queriesById("alsobought"))
-    setAlsoBoughtProducts(result.queriesById("alsobought").records)
+    setAlsoBoughtResult(result.queriesById(alsoBoughtId))
+    setAlsoBoughtProducts(result.queriesById(alsoBoughtId).records)
   }
 
   useEffect(() => {

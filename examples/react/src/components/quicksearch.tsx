@@ -30,8 +30,9 @@ import React, { useEffect, useMemo, useState } from "react"
 import { Product } from "./product"
 import SearchIcon from "@mui/icons-material/Search"
 import { LoadingIndicator } from "./loadingIndicator"
+import { useGlobalVariables } from "../globalVariablesContext"
 
-let clickManager: ReturnType<KlevuResultEvent["getSearchClickSendEvent"]>
+let clickManager: KlevuResultEvent["searchClickEvent"]
 
 type Props = {
   label: string
@@ -64,6 +65,7 @@ export function QuickSearch(props: Props) {
   })
 
   const [kmcSettings, setKmcSettings] = useState<KMCRootObject>()
+  const { debugMode } = useGlobalVariables()
 
   React.useEffect(() => {
     popupState.close()
@@ -79,50 +81,74 @@ export function QuickSearch(props: Props) {
       return
     }
 
+    const searchId = "search" + new Date().getTime()
+    const suggestionsId = "suggestions" + new Date().getTime()
+    const categoriesId = "categoriesId" + new Date().getTime()
+
     const result = await KlevuFetch(
       search(
         term,
         {
           limit: 6,
           typeOfRecords: [KlevuTypeOfRecord.Product],
+          id: searchId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
         ...searchModifiers
       ),
       search(term, {
-        id: "categories",
+        id: categoriesId,
         limit: 5,
         typeOfRecords: [KlevuTypeOfRecord.Category],
         groupBy: "name",
+        mode: "demo",
+        searchPrefs: debugMode ? ["debugQuery"] : undefined,
       }),
-      suggestions(term)
+      suggestions(term, {
+        id: suggestionsId,
+        mode: "demo",
+        searchPrefs: debugMode ? ["debugQuery"] : undefined,
+      })
     )
 
-    const searchResult = result.queriesById("search")
-    clickManager = searchResult.getSearchClickSendEvent()
+    const searchResult = result.queriesById(searchId)
+    clickManager = searchResult.searchClickEvent
 
     setProducts(searchResult?.records ?? [])
     setSuggestions(
       result
-        .suggestionsById("suggestions")
+        .suggestionsById(suggestionsId)
         ?.suggestions.map((i) => i.suggest) ?? []
     )
     setCategories(
-      result.queriesById("categories")?.records.map((r) => r.name) ?? []
+      result.queriesById(categoriesId)?.records.map((r) => r.name) ?? []
     )
+  }
+
+  const handleOnFocus = () => {
+    if (searchValue) {
+      debouncedChangeHandler(searchValue)
+    } else {
+      fetchEmptySuggestions()
+    }
   }
 
   const fetchEmptySuggestions = async () => {
     handleLastSearchesUpdate()
-
+    const trendingId = "trending" + new Date().getTime()
     const res = await KlevuFetch(
       trendingProducts(
         {
           limit: 3,
+          id: trendingId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
         ...searchModifiers
       )
     )
-    setTrendingProducts(res.queriesById("trendingProducts")?.records ?? [])
+    setTrendingProducts(res.queriesById(trendingId)?.records ?? [])
   }
 
   const onKeydown: React.KeyboardEventHandler<HTMLDivElement> = (event) => {
@@ -176,7 +202,7 @@ export function QuickSearch(props: Props) {
     ...focusParams,
     onFocus: (event) => {
       focusParams.onFocus(event)
-      fetchEmptySuggestions()
+      handleOnFocus()
     },
   }
 
@@ -192,7 +218,7 @@ export function QuickSearch(props: Props) {
         size="small"
         onKeyDown={onKeydown}
         onChange={onSearchChange}
-        onFocus={fetchEmptySuggestions}
+        onFocus={handleOnFocus}
         placeholder="Search for products"
         inputProps={{
           autoComplete: "off",
@@ -221,8 +247,8 @@ export function QuickSearch(props: Props) {
         <Paper
           elevation={8}
           style={{
-            padding: "12px",
-            width: "792px",
+            padding: "10px",
+            width: "820px",
             display: "flex",
             position: "relative",
             marginTop: "16px",
@@ -235,6 +261,7 @@ export function QuickSearch(props: Props) {
               borderRight: "1px solid #d1d1d1",
               paddingRight: "8px",
               marginRight: "8px",
+              margin: "10px",
             }}
           >
             {sugs.length > 0 ? (
@@ -296,15 +323,23 @@ export function QuickSearch(props: Props) {
                   style={{ margin: 0, listStyleType: "none", padding: "12px" }}
                 >
                   {categories.map((s, i) => (
-                    <li key={i} style={{ padding: 0 }}>
-                      {s}
-                    </li>
+                    <li
+                      key={i}
+                      style={{ padding: 0 }}
+                      dangerouslySetInnerHTML={{ __html: s }}
+                    ></li>
                   ))}
                 </ul>
               </React.Fragment>
             ) : null}
           </div>
-          <div style={{ width: "100%" }}>
+          <div
+            style={{
+              width: "100%",
+              overflow: "auto",
+              maxHeight: "90vh",
+            }}
+          >
             {products.length > 0 ? (
               <React.Fragment>
                 <Typography variant="h6">Search results</Typography>
@@ -315,7 +350,7 @@ export function QuickSearch(props: Props) {
                         hideAddToCart
                         product={p}
                         onClick={(event) => {
-                          clickManager(p.id, p.itemGroupId)
+                          clickManager({ productId: p.id })
                           props.onProductClick?.(p)
                           event.preventDefault()
                           return false

@@ -142,6 +142,8 @@ export class KlevuProductQueryPopup {
    */
   @Prop() useNativeScrollbars?: boolean
 
+  @Prop() additionaldata?: string = ""
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -241,6 +243,7 @@ export class KlevuProductQueryPopup {
       mode: "PQA",
       onAction: this.#onAction.bind(this),
       pqaWidgetId: this.pqaWidgetId,
+      additionalData: this.additionaldata,
       settings: {
         configOverride: useConfig ? this.config : undefined,
       },

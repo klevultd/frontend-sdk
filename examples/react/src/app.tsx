@@ -10,6 +10,7 @@ import { Footer } from "./components/footer"
 import { LastVisited } from "./components/lastVisited"
 import { Container } from "@mui/material"
 import ScrollToTop from "./scrollTop"
+import { GlobalVariablesContextProvider } from "./globalVariablesContext"
 
 const primary = "#97C73E"
 const secondary = "#2b556e"
@@ -72,23 +73,25 @@ export function App() {
     >
       <ScrollToTop />
       <CartContextProvider>
-        <ThemeProvider theme={theme}>
-          <ResponsiveAppBar />
-          <Box p={2} style={{ marginTop: "80px" }}>
-            <Outlet />
-          </Box>
-          <Box
-            style={{
-              marginTop: "4rem",
-              borderTop: `2px solid ${secondary}`,
-            }}
-          >
-            <Container maxWidth="lg">
-              <LastVisited />
-            </Container>
-          </Box>
-          <Footer />
-        </ThemeProvider>
+        <GlobalVariablesContextProvider>
+          <ThemeProvider theme={theme}>
+            <ResponsiveAppBar />
+            <Box p={2} style={{ marginTop: "80px" }}>
+              <Outlet />
+            </Box>
+            <Box
+              style={{
+                marginTop: "4rem",
+                borderTop: `2px solid ${secondary}`,
+              }}
+            >
+              <Container maxWidth="lg">
+                <LastVisited />
+              </Container>
+            </Box>
+            <Footer />
+          </ThemeProvider>
+        </GlobalVariablesContextProvider>
       </CartContextProvider>
     </SnackbarProvider>
   )
