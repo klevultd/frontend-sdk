@@ -1,7 +1,11 @@
 import { KlevuRecord } from "@klevu/core"
 import React, { useContext, useState } from "react"
 
-export type CartItem = KlevuRecord
+export type CartItem = KlevuRecord & {
+  klevu_product_boosting: number
+  klevu_applied_filter_boosts: string
+  klevu_applied_keyword_boosts: string
+}
 
 type Context = {
   items: CartItem[]

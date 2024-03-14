@@ -1,4 +1,5 @@
 import {
+  KMCRecommendationLogic,
   KlevuFetch,
   KlevuRecord,
   KlevuResponseQueryObject,
@@ -9,6 +10,7 @@ import { Container, Typography } from "@mui/material"
 import { Fragment, useEffect, useState } from "react"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { config } from "../config"
+import { useGlobalVariables } from "../globalVariablesContext"
 
 export function HomePage() {
   const [trendingRecs, setTrendingRecs] = useState<KlevuRecord[]>([])
@@ -19,37 +21,49 @@ export function HomePage() {
   >()
   const [trendingResultNoPersonalisation, setTrendingResultNoPersonalisation] =
     useState<KlevuResponseQueryObject | undefined>()
+  const { debugMode } = useGlobalVariables()
 
   const fetchData = async () => {
+    const trendingRecsId = "trendingrecs" + new Date().getTime()
+    const trendingRecsNonPersonalizedId =
+      "trendingrecs-nopersonalisation" + new Date().getTime()
     const result = await KlevuFetch(
       kmcRecommendation(
         config.homePageRecommendationId1,
         {
-          id: "trendingrecs",
+          id: trendingRecsId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        sendRecommendationViewEvent(
-          "Trending recommendations using KMC builder personalised"
-        )
+        sendRecommendationViewEvent({
+          logic: KMCRecommendationLogic.Trending,
+          recsKey: "trending-recs-personalised-demo",
+          title: "Trending recommendations using KMC builder personalised",
+        })
       ),
       kmcRecommendation(
         config.homePageRecommendationId2,
         {
-          id: "trendingrecs-nopersonalisation",
+          id: trendingRecsNonPersonalizedId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        sendRecommendationViewEvent(
-          "Trending recommendations using KMC builder"
-        )
+        sendRecommendationViewEvent({
+          logic: KMCRecommendationLogic.Trending,
+          recsKey: "trending-recs-demo",
+          title: "Trending recommendations using KMC builder",
+        })
       )
     )
 
-    setTrendingResult(result.queriesById("trendingrecs"))
+    setTrendingResult(result.queriesById(trendingRecsId))
     setTrendingResultNoPersonalisation(
-      result.queriesById("trendingrecs-nopersonalisation")
+      result.queriesById(trendingRecsNonPersonalizedId)
     )
 
-    setTrendingRecs(result.queriesById("trendingrecs")?.records)
+    setTrendingRecs(result.queriesById(trendingRecsId)?.records)
     setTrendingRecsNoPersonlisation(
-      result.queriesById("trendingrecs-nopersonalisation")?.records
+      result.queriesById(trendingRecsNonPersonalizedId)?.records
     )
   }
 
