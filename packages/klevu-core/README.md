@@ -182,10 +182,7 @@ const handleFilterUpdate = () => {
 }
 
 // Attach event listener
-const stop = KlevuListenDomEvent(
-  KlevuDomEvents.FilterSelectionUpdate,
-  handleFilterUpdate
-)
+const stop = KlevuListenDomEvent(KlevuDomEvents.FilterSelectionUpdate, handleFilterUpdate)
 
 // Don't forget remove event listener in your component destructor
 stop()
@@ -278,9 +275,7 @@ const dataToTransferFrontend = KlevuPackFetchResult(result)
 And then you can hydrate it in frontend with `KlevuHydratePackedFetchResult()` function.
 
 ```ts
-const resultObject = KlevuHydratePackedFetchResult(dataToTransferFrontend, [
-  search("hello world"),
-])
+const resultObject = KlevuHydratePackedFetchResult(dataToTransferFrontend, [search("hello world")])
 ```
 
 It's important to note that the second parameter of `KlevuHydratePackedFetchResult()` has to be the same as in backend call. You can create query functions in a separate file that can be called both in frontend and backend. For example:
@@ -289,16 +284,7 @@ It's important to note that the second parameter of `KlevuHydratePackedFetchResu
 // file: myquery.ts
 // a bit more compilicated query. Search term can be read in backend
 // from request parameters and in frontend it could be in url parameters
-const myQuery = (searchTerm: string, manager: FilterManager) => [
-  search(
-    searchTerm,
-    {},
-    listFilters(),
-    applyFilterwithManager(manager),
-    boostWithKeyword({ keyword: "foobar", weight: 1.2 })
-  ),
-  suggestions(searchTerm),
-]
+const myQuery = (searchTerm: string, manager: FilterManager) => [search(searchTerm, {}, listFilters(), applyFilterwithManager(manager), boostWithKeyword({ keyword: "foobar", weight: 1.2 })), suggestions(searchTerm)]
 
 // file: backend.ts
 // in backend manager is not used to set anything so it can be just instanciated as param
@@ -308,12 +294,28 @@ const dataToTransferFrontend = KlevuPackFetchResult(result)
 // file: frontend.ts
 // in frontend we usually want to change and set filters with manager so it's used as separate variable
 const manager = new FilterManager()
-const resultObject = KlevuHydratePackedFetchResult(
-  dataToTransferFrontend,
-  myQuery("hello world", manager)
-)
+const resultObject = KlevuHydratePackedFetchResult(dataToTransferFrontend, myQuery("hello world", manager))
 console.log(manager.options)
 ```
+
+## Data Protection
+
+For customers who need to comply with data protection rules, you can enable data protection in the SDK by setting the `useConsent` to `true` and then setting the `consentGiven` value to `true` when you receive the consent from the user.
+By default, the data protection is turned off. You can use the following code snippet as an example to set it up
+
+```ts
+KlevuConfig.init({
+  url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+  apiKey: "klevu-160320037354512854",
+  useConsent: true, //Either set it to true during initialization
+  consentGiven: true, //Either set it to true during initialization
+})
+// or
+KlevuConfig.getDefault().setUseConsent(true)
+KlevuConfig.getDefault().setConsentGiven(true) // When you receive the user consent
+```
+
+If `useConsent` is enabled, then no user data will be used by Klevu till the `consentGiven` is enabled.
 
 [npm-src]: https://badgen.net/npm/v/@klevu/core
 [npm-href]: https://www.npmjs.com/package/@klevu/core
