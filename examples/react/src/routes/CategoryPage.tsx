@@ -1,7 +1,8 @@
-import type {
+import {
   KlevuRecord,
   KlevuResponseQueryObject,
   FilterManagerFilters,
+  KMCRecommendationLogic,
 } from "@klevu/core"
 import {
   abTest,
@@ -29,7 +30,7 @@ import {
   Select,
   Typography,
 } from "@mui/material"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useNavigate, useParams, useLocation } from "react-router-dom"
 import { Product } from "../components/product"
 
@@ -38,6 +39,7 @@ import { links, pages } from "../components/appbar"
 import { FilterDrawer } from "../components/filterdrawer"
 import { RecommendationBanner } from "../components/recommendationBanner"
 import { config } from "../config"
+import { useGlobalVariables } from "../globalVariablesContext"
 
 const manager = new FilterManager()
 
@@ -60,6 +62,7 @@ export function CategoryPage() {
   const [recommendationProducts, setRecommendationProducts] = useState<
     KlevuRecord[]
   >([])
+  const searchId = useRef("")
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
   const [itemsOnPage, setItemsOnPage] = useState(36)
@@ -69,20 +72,25 @@ export function CategoryPage() {
   const [recommendationResponse, setRecommendationResponse] = useState<
     KlevuResponseQueryObject | undefined
   >(undefined)
+  const { debugMode } = useGlobalVariables()
 
   const handleDrawerOpen = () => {
     setOpen(true)
   }
 
   const initialFetch = useCallback(async () => {
+    searchId.current = "search" + new Date().getTime()
+    const recommendationId = "recommendation" + new Date().getTime()
     const res = await KlevuFetch(
       categoryMerchandising(
         params.id,
         {
-          id: "search",
+          id: searchId.current,
           limit: itemsOnPage,
           sort: sorting,
           campaignForCatNav: query.get("campaignId"),
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
         listFilters({
           include: ["color", "", "size", "designer"],
@@ -102,13 +110,19 @@ export function CategoryPage() {
         config.categoryPageRecommendationId,
         {
           categoryPath: params.id,
-          id: "recommendation",
+          id: recommendationId,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        sendRecommendationViewEvent("Category product recommendations")
+        sendRecommendationViewEvent({
+          logic: KMCRecommendationLogic.Similar,
+          recsKey: "category-product-recs-demo",
+          title: "Category product recommendations",
+        })
       )
     )
-    const searchResult = res.queriesById("search")
-    const recommendationResult = res.queriesById("recommendation")
+    const searchResult = res.queriesById(searchId.current)
+    const recommendationResult = res.queriesById(recommendationId)
 
     if (!searchResult) {
       return
@@ -128,7 +142,7 @@ export function CategoryPage() {
       filterManager: manager,
     })
 
-    const nextSearchResult = nextResponse.queriesById("search")
+    const nextSearchResult = nextResponse.queriesById(searchId.current)
 
     setProducts([...products, ...(nextSearchResult?.records ?? [])])
     setSearchResponse(nextSearchResult)

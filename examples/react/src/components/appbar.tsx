@@ -7,8 +7,9 @@ import React from "react"
 import { QuickSearch } from "./quicksearch"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { CartButton } from "./cartbutton"
-import { Divider } from "@mui/material"
+import { Divider, FormControlLabel, Switch } from "@mui/material"
 import { config } from "../config"
+import { useGlobalVariables } from "../globalVariablesContext"
 
 export const pages = config.nav.map((n) => n.label)
 export const links = config.nav.map((n) => n.key)
@@ -17,10 +18,11 @@ const emojis = config.nav.reduce((a, v) => ({ ...a, [v.label]: v.emoji }), {})
 const ResponsiveAppBar = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { debugMode, toggleDebugMode } = useGlobalVariables()
 
   return (
     <AppBar position="fixed" color="inherit">
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/">
             <img
@@ -93,6 +95,22 @@ const ResponsiveAppBar = () => {
             style={{ margin: "0 8px" }}
           />
           <CartButton />
+          <Divider
+            flexItem
+            orientation="vertical"
+            style={{ margin: "0 8px" }}
+          />
+          <FormControlLabel
+            style={{ margin: "0 8px", whiteSpace: "nowrap" }}
+            control={
+              <Switch
+                color="error"
+                checked={debugMode}
+                onChange={(e) => toggleDebugMode(e.target.checked)}
+              />
+            }
+            label="Debug Mode"
+          />
         </Toolbar>
       </Container>
     </AppBar>

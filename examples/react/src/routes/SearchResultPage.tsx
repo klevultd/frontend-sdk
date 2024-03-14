@@ -26,11 +26,12 @@ import {
   Container,
 } from "@mui/material"
 import { useLocation, useNavigate } from "react-router-dom"
-import React, { useState, useCallback, useEffect } from "react"
+import React, { useState, useCallback, useEffect, useRef } from "react"
 import { Product } from "../components/product"
 import { FilterAlt } from "@mui/icons-material"
 import { FilterDrawer } from "../components/filterdrawer"
 import { useSnackbar } from "notistack"
+import { useGlobalVariables } from "../globalVariablesContext"
 
 const manager = new FilterManager()
 
@@ -58,6 +59,8 @@ export function SearchResultPage(props: Props) {
   const [products, setProducts] = useState<KlevuRecord[]>([])
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
+  const searchId = useRef("")
+  const { debugMode } = useGlobalVariables()
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -82,21 +85,23 @@ export function SearchResultPage(props: Props) {
     if (props.personlisationEnabled) {
       modifiers.push(personalisation())
     }
-
+    searchId.current = "search" + new Date().getTime()
     const functions = [
       search(
         query.get("q"),
         {
-          id: "search",
+          id: searchId.current,
           limit: 36,
           sort: sorting,
+          mode: "demo",
+          searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
         ...modifiers
       ),
     ]
     const res = await KlevuFetch(...functions)
 
-    const searchResult = res.queriesById("search")
+    const searchResult = res.queriesById(searchId.current)
     if (!searchResult) {
       return
     }
@@ -112,7 +117,7 @@ export function SearchResultPage(props: Props) {
       filterManager: manager,
     })
 
-    const nextSearchResult = nextResponse.queriesById("search")
+    const nextSearchResult = nextResponse.queriesById(searchId.current)
 
     setProducts([...products, ...(nextSearchResult?.records ?? [])])
     setSearchResponse(nextSearchResult)
