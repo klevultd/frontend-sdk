@@ -16,6 +16,7 @@ import { config } from "./config"
 KlevuConfig.init({
   ...config,
   axios,
+  enableKlaviyoConnector: true,
 })
 
 KlevuKMCSettings()

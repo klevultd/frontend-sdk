@@ -1,6 +1,8 @@
 import type { AxiosInstance, AxiosStatic } from "axios"
 import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
+import { KlevuUserSession } from "./usersession.js"
+import { Klaviyo } from "./connectors/klaviyo.js"
 
 type KlevuConfiguration = {
   /**
@@ -45,6 +47,10 @@ type KlevuConfiguration = {
    * Prevent clicks being tracked in memory or stored in local storage. This will break personalisation and recommendations.
    */
   disableClickTrackStoring?: boolean
+  /**
+   * Set true if using klaviyo connector
+   */
+  enableKlaviyoConnector?: boolean
 }
 
 export class KlevuConfig {
@@ -59,6 +65,7 @@ export class KlevuConfig {
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
   disableClickTracking = false
+  enableKlaviyoConnector = false
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -81,13 +88,19 @@ export class KlevuConfig {
     if (config.recommendationsApiUrl) {
       this.recommendationsApiUrl = config.recommendationsApiUrl
     }
-
     this.disableClickTracking = config.disableClickTrackStoring ?? false
   }
 
   static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
+    if (KlevuUserSession.hasSessionExpired()) {
+      KlevuUserSession.generateSession()
+    }
+    if (config.enableKlaviyoConnector) {
+      this.getDefault().enableKlaviyoConnector = config.enableKlaviyoConnector
+      Klaviyo.init()
+    }
   }
 
   static getDefault(): KlevuConfig {
