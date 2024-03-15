@@ -2,6 +2,7 @@ import { KlevuConfig } from "../../config.js"
 import { post } from "../../connection/fetch.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
 import { isBrowser } from "../../utils/isBrowser.js"
+import { KlevuStorage } from "../../utils/storage.js"
 import { KlevuFetchModifer } from "../index.js"
 
 const STORAGE_TS_KEY = "abtest-data-ts"
@@ -28,7 +29,7 @@ export function abTest(): KlevuFetchModifer {
 
       const data = await fetchAbTestInfo()
       const permanent: KlevuABDataModel["assigned"] = JSON.parse(
-        window.localStorage.getItem(STORAGE_PERMANENT_KEY) ?? "[]"
+        KlevuStorage.getItem(STORAGE_PERMANENT_KEY) ?? "[]"
       )
 
       if (!data) {
@@ -102,10 +103,7 @@ export function abTest(): KlevuFetchModifer {
         func.params.abtest = test
       }
 
-      window.localStorage.setItem(
-        STORAGE_PERMANENT_KEY,
-        JSON.stringify(newpermanent)
-      )
+      KlevuStorage.setItem(STORAGE_PERMANENT_KEY, JSON.stringify(newpermanent))
 
       return copy
     },
@@ -118,8 +116,8 @@ export function abTest(): KlevuFetchModifer {
  * @returns
  */
 async function fetchAbTestInfo(): Promise<KlevuABDataModel | undefined> {
-  const ts = window.localStorage.getItem(STORAGE_TS_KEY)
-  const res = window.localStorage.getItem(STORAGE_KEY)
+  const ts = KlevuStorage.getItem(STORAGE_TS_KEY)
+  const res = KlevuStorage.getItem(STORAGE_KEY)
 
   const fetch = async () => {
     const data = await post<KlevuABDataModel>(
@@ -129,8 +127,8 @@ async function fetchAbTestInfo(): Promise<KlevuABDataModel | undefined> {
       {}
     )
 
-    window.localStorage.setItem(STORAGE_TS_KEY, new Date().getTime().toString())
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    KlevuStorage.setItem(STORAGE_TS_KEY, new Date().getTime().toString())
+    KlevuStorage.setItem(STORAGE_KEY, JSON.stringify(data))
     return data
   }
 
