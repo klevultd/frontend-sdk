@@ -22,6 +22,14 @@ export enum KlevuDomEvents {
    * When any click event has been fired on the page
    */
   ClickEventSent = "klevu-click-event-sent",
+  /**
+   * User consent given changed
+   */
+  UserConsentGivenChanged = "klevu-user-consent-given-changed",
+  /**
+   * Use consent value changed
+   */
+  UseConsentChanged = "klevu-use-consent-changed",
 }
 
 /**
