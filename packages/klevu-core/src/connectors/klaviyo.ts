@@ -42,7 +42,7 @@ export class Klaviyo {
     return Klaviyo.default
   }
 
-  static getExchangeId() {
+  getExchangeId() {
     return Klaviyo.getDefault().exchangeId
   }
 }
