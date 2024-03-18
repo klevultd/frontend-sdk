@@ -1,6 +1,7 @@
 import { KlevuConfig } from "."
 import { post } from "./connection/fetch.js"
 import { Klaviyo } from "./connectors/klaviyo.js"
+import { KlevuStorage } from "./utils/index.js"
 
 //"body": "{\"apiKey\":\"klevu-164270249063714699\",\"sessionId\":\"615e65c3-bc3b-4bec-9259-d368115b07ad\",
 //"sessionInfo\":{\"connectorInfo\":[{\"connectorType\":\"klaviyo\",\"exchangeId\":
@@ -31,7 +32,7 @@ const USER_SESSION_INFO_STORAGE_KEY = "klevu-user-sessionInfo"
 
 const getSessionId = async (ignoreLocalStorage: boolean) => {
   const apiKey = KlevuConfig.getDefault().apiKey
-  const sessionInfoFromStorage = localStorage.getItem(
+  const sessionInfoFromStorage = KlevuStorage.getItem(
     USER_SESSION_INFO_STORAGE_KEY
   )
   let sessionInfo: SessionInfoType | undefined = undefined
@@ -54,7 +55,7 @@ const getSessionId = async (ignoreLocalStorage: boolean) => {
   }
   const payload: UserApiPayload = {
     apiKey,
-    sessionId: localStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
+    sessionId: KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
     sessionInfo,
   }
 
@@ -70,8 +71,8 @@ export class KlevuUserSession {
   static timer: null | ReturnType<typeof setTimeout> = null
 
   static hasSessionExpired() {
-    const expiry = localStorage.getItem(USER_SESSION_EXPIRY_STORAGE_KEY)
-    const sessionId = localStorage.getItem(USER_SESSION_ID_STORAGE_KEY)
+    const expiry = KlevuStorage.getItem(USER_SESSION_EXPIRY_STORAGE_KEY)
+    const sessionId = KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY)
     if (!sessionId || !expiry) return true
     return Date.now() > +expiry
   }
@@ -80,14 +81,14 @@ export class KlevuUserSession {
     const sessionInfo = await getSessionId(ignoreLocalStorage)
     console.log({ sessionInfo })
     if (sessionInfo) {
-      localStorage.setItem(USER_SESSION_ID_STORAGE_KEY, sessionInfo.sessionId)
+      KlevuStorage.setItem(USER_SESSION_ID_STORAGE_KEY, sessionInfo.sessionId)
       if (sessionInfo.segmentInfo) {
-        localStorage.setItem(
+        KlevuStorage.setItem(
           USER_SESSION_INFO_STORAGE_KEY,
           JSON.stringify(sessionInfo.segmentInfo)
         )
         const expiry = Date.now() + sessionInfo.segmentInfo.ttl || 0
-        localStorage.setItem(USER_SESSION_EXPIRY_STORAGE_KEY, expiry.toString())
+        KlevuStorage.setItem(USER_SESSION_EXPIRY_STORAGE_KEY, expiry.toString())
         /**
          * Regenerate session on expiry
          */
