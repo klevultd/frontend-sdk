@@ -106,12 +106,12 @@ export class KlevuConfig {
     this.enableKlaviyoConnector = config.enableKlaviyoConnector || false
   }
 
-  static init(config: KlevuConfiguration) {
+  static async init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
 
     if (KlevuUserSession.hasSessionExpired()) {
-      KlevuUserSession.generateSession()
+      await KlevuUserSession.generateSession()
     } else {
       KlevuUserSession.setExpiryTimer()
     }
