@@ -4,7 +4,7 @@
   "description": "",
   "main": "./libdist/exports.js",
   "scripts": {
-    "start": "vite --port 3001 --host --force",
+    "start": "vite --port 3001 --host",
     "build": "vite build",
     "build:lib": "tsc -p ./tsconfig.lib.json",
     "serve": "vite preview --port 3001 --host",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@klevu/core": "file:../../packages/klevu-core",
+    "@klevu/core": "^5.1.0",
     "@mui/icons-material": "^5.14.12",
     "@mui/material": "^5.14.12",
     "axios": "^1.5.1",
