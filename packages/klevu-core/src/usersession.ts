@@ -92,7 +92,9 @@ export class KlevuUserSession {
     if (sessionInfoFromStorage && !forceReinit) {
       sessionInfo = JSON.parse(sessionInfoFromStorage)
     } else {
-      const exchangeId = Klaviyo.getDefault().getExchangeId()
+      const exchangeId = KlevuConfig.getDefault().enableKlaviyoConnector
+        ? Klaviyo.getDefault().getExchangeId()
+        : undefined
       console.log("in service", { exchangeId })
       if (exchangeId) {
         sessionInfo = {

@@ -43,6 +43,6 @@ export class Klaviyo {
   }
 
   getExchangeId() {
-    return Klaviyo.getDefault().exchangeId
+    return this.exchangeId
   }
 }
