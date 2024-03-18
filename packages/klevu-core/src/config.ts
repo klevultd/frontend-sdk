@@ -103,16 +103,20 @@ export class KlevuConfig {
 
     this.useConsent = config.useConsent || false
     this.consentGiven = config.consentGiven || false
+    this.enableKlaviyoConnector = config.enableKlaviyoConnector || false
   }
 
   static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
+
     if (KlevuUserSession.hasSessionExpired()) {
       KlevuUserSession.generateSession()
+    } else {
+      KlevuUserSession.setExpiryTimer()
     }
-    if (config.enableKlaviyoConnector) {
-      this.getDefault().enableKlaviyoConnector = config.enableKlaviyoConnector
+
+    if (this.getDefault().enableKlaviyoConnector) {
       Klaviyo.init()
     }
   }

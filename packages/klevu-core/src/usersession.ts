@@ -30,14 +30,15 @@ const USER_SESSION_ID_STORAGE_KEY = "klevu-user-sessionId"
 const USER_SESSION_EXPIRY_STORAGE_KEY = "klevu-user-session_expiry"
 const USER_SESSION_INFO_STORAGE_KEY = "klevu-user-sessionInfo"
 
-const getSessionId = async (ignoreLocalStorage: boolean) => {
+const getSessionId = async (forceReinit: boolean) => {
   const apiKey = KlevuConfig.getDefault().apiKey
   const sessionInfoFromStorage = KlevuStorage.getItem(
     USER_SESSION_INFO_STORAGE_KEY
   )
   let sessionInfo: SessionInfoType | undefined = undefined
-  console.log({ sessionInfoFromStorage, ignoreLocalStorage })
-  if (sessionInfoFromStorage && !ignoreLocalStorage) {
+  console.log({ sessionInfoFromStorage, forceReinit })
+
+  if (sessionInfoFromStorage && !forceReinit) {
     sessionInfo = JSON.parse(sessionInfoFromStorage)
   } else {
     const exchangeId = Klaviyo.getExchangeId()
@@ -77,9 +78,10 @@ export class KlevuUserSession {
     return Date.now() > +expiry
   }
 
-  static async generateSession(ignoreLocalStorage = false) {
-    const sessionInfo = await getSessionId(ignoreLocalStorage)
+  static async generateSession(forceReinit = false) {
+    const sessionInfo = await getSessionId(forceReinit)
     console.log({ sessionInfo })
+
     if (sessionInfo) {
       KlevuStorage.setItem(USER_SESSION_ID_STORAGE_KEY, sessionInfo.sessionId)
       if (sessionInfo.segmentInfo) {
@@ -103,5 +105,20 @@ export class KlevuUserSession {
     } else {
       console.warn("Failed to generate user session")
     }
+  }
+
+  static setExpiryTimer() {
+    const expiryFromStorage = KlevuStorage.getItem(
+      USER_SESSION_EXPIRY_STORAGE_KEY
+    )
+    const currentTime = Date.now()
+    const expiry = +(expiryFromStorage || currentTime) - currentTime
+    if (this.timer) {
+      // To ensure only one timer is active
+      clearTimeout(this.timer)
+    }
+    this.timer = setTimeout(() => {
+      this.generateSession()
+    }, expiry)
   }
 }

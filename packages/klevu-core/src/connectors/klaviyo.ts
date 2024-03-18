@@ -11,11 +11,6 @@ export class Klaviyo {
 
     if (!globalThis._learnq) {
       if (!this.timer) {
-        setTimeout(() => {
-          console.log("will set learnq")
-          globalThis._learnq = []
-        }, 5000)
-
         this.timer = setInterval(() => {
           this.setExchangeId()
         }, 300)
@@ -42,7 +37,7 @@ export class Klaviyo {
 
   static getDefault(): Klaviyo {
     if (!Klaviyo.default) {
-      throw new Error("Klaviyo missing")
+      throw new Error("Klaviyo not initialized.")
     }
     return Klaviyo.default
   }
