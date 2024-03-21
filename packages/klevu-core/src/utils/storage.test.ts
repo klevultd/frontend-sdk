@@ -2,6 +2,12 @@
 import { KlevuConfig } from "../config.js"
 import { KlevuStorage, StorageType } from "./storage.js"
 
+const defaultKeys = [
+  "klevu-user-sessionId",
+  "klevu-user-session_expiry",
+  "klevu-user-segmentInfo",
+]
+
 const storageMock = (function () {
   let store: { [key: string]: string } = {}
   return {
@@ -34,9 +40,7 @@ test("Test storage when consent is required and consent is given", async () => {
 
   KlevuStorage.addKey(dataProtectedKey)
   expect(KlevuStorage.listKeys()).toStrictEqual([
-    "klevu-user-sessionId",
-    "klevu-user-session_expiry",
-    "klevu-user-segmentInfo",
+    ...defaultKeys,
     dataProtectedKey,
   ])
 
@@ -48,7 +52,7 @@ test("Test storage when consent is required and consent is given", async () => {
   expect(KlevuStorage.getItem(dataProtectedKey)).toBe(undefined)
 
   KlevuStorage.removeKey(dataProtectedKey)
-  expect(KlevuStorage.listKeys()).toStrictEqual([])
+  expect(KlevuStorage.listKeys()).toStrictEqual([...defaultKeys])
   KlevuStorage.setItem(dataProtectedKey, mockValue)
   expect(KlevuStorage.getItem(dataProtectedKey)).toBe(mockValue)
 
@@ -89,26 +93,22 @@ test("Test storage when consent is required and consent is not given", async () 
 
   KlevuStorage.addKey(dataProtectedKey)
   expect(KlevuStorage.listKeys()).toStrictEqual([
-    "klevu-user-sessionId",
-    "klevu-user-session_expiry",
-    "klevu-user-segmentInfo",
+    ...defaultKeys,
     dataProtectedKey,
   ])
 
   // Test data protected keys
   //local storage
   KlevuStorage.setItem(dataProtectedKey, mockValue)
-  expect(KlevuStorage.getItem(dataProtectedKey)).toBe(undefined)
+  expect(KlevuStorage.getItem(dataProtectedKey)).toBe(null)
   KlevuStorage.removeItem(dataProtectedKey)
-  expect(KlevuStorage.getItem(dataProtectedKey)).toBe(undefined)
+  expect(KlevuStorage.getItem(dataProtectedKey)).toBe(null)
 
   //session storage
   KlevuStorage.setItem(dataProtectedKey, mockValue, StorageType.SESSION)
-  expect(KlevuStorage.getItem(dataProtectedKey, StorageType.SESSION)).toBe(
-    undefined
-  )
+  expect(KlevuStorage.getItem(dataProtectedKey, StorageType.SESSION)).toBe(null)
   KlevuStorage.removeItem(dataProtectedKey, StorageType.SESSION)
-  expect(KlevuStorage.getItem(dataProtectedKey)).toBe(undefined)
+  expect(KlevuStorage.getItem(dataProtectedKey)).toBe(null)
 
   // Test non-data protected keys
   //local storage
@@ -138,9 +138,7 @@ test("Test storage when consent is required and consent is not needed", async ()
 
   KlevuStorage.addKey(dataProtectedKey)
   expect(KlevuStorage.listKeys()).toStrictEqual([
-    "klevu-user-sessionId",
-    "klevu-user-session_expiry",
-    "klevu-user-segmentInfo",
+    ...defaultKeys,
     dataProtectedKey,
   ])
 
