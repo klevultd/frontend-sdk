@@ -33,7 +33,12 @@ test("Test storage when consent is required and consent is given", async () => {
   const dataProtectedKey = "dataProtectedKey"
 
   KlevuStorage.addKey(dataProtectedKey)
-  expect(KlevuStorage.listKeys()).toStrictEqual([dataProtectedKey])
+  expect(KlevuStorage.listKeys()).toStrictEqual([
+    "klevu-user-sessionId",
+    "klevu-user-session_expiry",
+    "klevu-user-segmentInfo",
+    dataProtectedKey,
+  ])
 
   // Test data protected keys
   //local storage
@@ -83,7 +88,12 @@ test("Test storage when consent is required and consent is not given", async () 
   const dataProtectedKey = "dataProtectedKey"
 
   KlevuStorage.addKey(dataProtectedKey)
-  expect(KlevuStorage.listKeys()).toStrictEqual([dataProtectedKey])
+  expect(KlevuStorage.listKeys()).toStrictEqual([
+    "klevu-user-sessionId",
+    "klevu-user-session_expiry",
+    "klevu-user-segmentInfo",
+    dataProtectedKey,
+  ])
 
   // Test data protected keys
   //local storage
@@ -127,7 +137,12 @@ test("Test storage when consent is required and consent is not needed", async ()
   const dataProtectedKey = "dataProtectedKey"
 
   KlevuStorage.addKey(dataProtectedKey)
-  expect(KlevuStorage.listKeys()).toStrictEqual([dataProtectedKey])
+  expect(KlevuStorage.listKeys()).toStrictEqual([
+    "klevu-user-sessionId",
+    "klevu-user-session_expiry",
+    "klevu-user-segmentInfo",
+    dataProtectedKey,
+  ])
 
   // Test data protected keys
   //local storage
