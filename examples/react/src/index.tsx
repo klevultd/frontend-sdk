@@ -17,6 +17,7 @@ KlevuConfig.init({
   ...config,
   axios,
   enableKlaviyoConnector: true,
+  useConsent: !!localStorage.getItem("klevu-use-consent") || false,
 })
 
 KlevuKMCSettings()
