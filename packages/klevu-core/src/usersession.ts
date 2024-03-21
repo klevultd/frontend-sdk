@@ -3,53 +3,95 @@ import { post } from "./connection/fetch.js"
 import { Klaviyo } from "./connectors/klaviyo.js"
 import { KlevuStorage } from "./utils/index.js"
 
+type ConnectorInfo = {
+  connectorType: string
+  exchangeId: string
+}
 type SessionInfoType = {
-  connectorInfo: {
-    connectorType: string
-    exchangeId: number
-  }[]
+  connectorInfo: (ConnectorInfo | undefined)[]
 }
 type UserApiPayload = {
   apiKey: string
   sessionId?: string
   sessionInfo?: SessionInfoType
 }
+type SegmentInfo = {
+  segments: string[]
+  ttl: number
+}
 type SessionApiResponse = {
   apikey: string
   sessionId: string
-  segmentInfo: {
-    segments: string[]
-    ttl: number
-  }
+  segmentInfo: SegmentInfo
+}
+type UserSessionConnector = {
+  generatePayload: () => ConnectorInfo | undefined
 }
 
 const USER_SESSION_ID_STORAGE_KEY = "klevu-user-sessionId"
 const USER_SESSION_EXPIRY_STORAGE_KEY = "klevu-user-session_expiry"
-const USER_SESSION_INFO_STORAGE_KEY = "klevu-user-sessionInfo"
+const USER_SEGMENT_INFO_STORAGE_KEY = "klevu-user-segmentInfo"
+
+const connectors: { name: string; connector: UserSessionConnector }[] = [
+  { name: "klaviyo", connector: Klaviyo },
+]
 
 export class KlevuUserSession {
-  static timer: null | ReturnType<typeof setTimeout> = null
+  timer: null | ReturnType<typeof setTimeout> = null
+  static default: KlevuUserSession | undefined
 
-  static hasSessionExpired() {
-    const expiry = KlevuStorage.getItem(USER_SESSION_EXPIRY_STORAGE_KEY)
-    const sessionId = KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY)
-    if (!sessionId || !expiry) return true
-    return Date.now() > +expiry
+  expiry?: string | null
+  segmentInfo?: SegmentInfo | null
+  sessionId?: string | null
+
+  constructor() {
+    KlevuStorage.addKey(USER_SESSION_ID_STORAGE_KEY)
+    KlevuStorage.addKey(USER_SESSION_EXPIRY_STORAGE_KEY)
+    KlevuStorage.addKey(USER_SEGMENT_INFO_STORAGE_KEY)
+
+    this.expiry = KlevuStorage.getItem(USER_SESSION_EXPIRY_STORAGE_KEY)
+    const segmentInfo = KlevuStorage.getItem(USER_SEGMENT_INFO_STORAGE_KEY)
+    this.segmentInfo = segmentInfo ? JSON.parse(segmentInfo) : null
+    this.sessionId = KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY)
   }
 
-  static async generateSession(forceReinit = false) {
-    const sessionInfo = await this.getSessionId(forceReinit)
+  static init() {
+    KlevuUserSession.default = new KlevuUserSession()
+  }
+
+  static getDefault(): KlevuUserSession {
+    if (!KlevuUserSession.default) {
+      throw new Error("KlevuUserSession not initialized.")
+    }
+    return KlevuUserSession.default
+  }
+
+  hasSessionExpired() {
+    if (!this.sessionId || !this.expiry) return true
+    return Date.now() > +this.expiry
+  }
+
+  async generateSession() {
+    const sessionInfo = await this.getSessionId()
     console.log({ sessionInfo })
 
     if (sessionInfo) {
       KlevuStorage.setItem(USER_SESSION_ID_STORAGE_KEY, sessionInfo.sessionId)
+      this.sessionId = sessionInfo.sessionId
+
       if (sessionInfo.segmentInfo) {
         KlevuStorage.setItem(
-          USER_SESSION_INFO_STORAGE_KEY,
+          USER_SEGMENT_INFO_STORAGE_KEY,
           JSON.stringify(sessionInfo.segmentInfo)
         )
-        const expiry = Date.now() + sessionInfo.segmentInfo.ttl || 0
+        this.segmentInfo = sessionInfo.segmentInfo
+
+        const expiry =
+          Date.now() +
+          (sessionInfo.segmentInfo.ttl ? sessionInfo.segmentInfo.ttl * 1000 : 0)
         KlevuStorage.setItem(USER_SESSION_EXPIRY_STORAGE_KEY, expiry.toString())
+        this.expiry = expiry.toString()
+
         /**
          * Regenerate session on expiry
          */
@@ -66,12 +108,9 @@ export class KlevuUserSession {
     }
   }
 
-  static setExpiryTimer() {
-    const expiryFromStorage = KlevuStorage.getItem(
-      USER_SESSION_EXPIRY_STORAGE_KEY
-    )
+  setExpiryTimer() {
     const currentTime = Date.now()
-    const expiry = +(expiryFromStorage || currentTime) - currentTime
+    const expiry = +(this.expiry || currentTime) - currentTime
     if (this.timer) {
       // To ensure only one timer is active
       clearTimeout(this.timer)
@@ -81,35 +120,28 @@ export class KlevuUserSession {
     }, expiry)
   }
 
-  static getSessionId = async (forceReinit: boolean) => {
+  getSessionId = async () => {
     const apiKey = KlevuConfig.getDefault().apiKey
-    const sessionInfoFromStorage = KlevuStorage.getItem(
-      USER_SESSION_INFO_STORAGE_KEY
-    )
-    let sessionInfo: SessionInfoType | undefined = undefined
-    console.log({ sessionInfoFromStorage, forceReinit })
 
-    if (sessionInfoFromStorage && !forceReinit) {
-      sessionInfo = JSON.parse(sessionInfoFromStorage)
-    } else {
-      const exchangeId = KlevuConfig.getDefault().enableKlaviyoConnector
-        ? Klaviyo.getDefault().getExchangeId()
-        : undefined
-      console.log("in service", { exchangeId })
-      if (exchangeId) {
-        sessionInfo = {
-          connectorInfo: [
-            {
-              connectorType: "klaviyo",
-              exchangeId,
-            },
-          ],
-        }
-      }
+    console.log("in service", {
+      connectorInfo: connectors.map(({ connector }) =>
+        connector.generatePayload()
+      ),
+    })
+    const sessionInfo = {
+      connectorInfo: connectors
+        .map(({ connector }) => {
+          try {
+            return connector.generatePayload()
+          } catch {
+            return undefined
+          }
+        })
+        .filter((connector) => connector),
     }
     const payload: UserApiPayload = {
       apiKey,
-      sessionId: KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
+      sessionId: this.sessionId || undefined,
       sessionInfo,
     }
 
@@ -119,5 +151,9 @@ export class KlevuUserSession {
       `https://visitor.service.ksearchnet.com/public/1.0/${apiKey}/session`,
       payload
     )
+  }
+
+  getSegments() {
+    return this.segmentInfo?.segments || []
   }
 }

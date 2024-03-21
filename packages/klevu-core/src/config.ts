@@ -110,10 +110,12 @@ export class KlevuConfig {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
 
-    if (KlevuUserSession.hasSessionExpired()) {
-      await KlevuUserSession.generateSession()
+    KlevuUserSession.init()
+
+    if (KlevuUserSession.getDefault().hasSessionExpired()) {
+      await KlevuUserSession.getDefault().generateSession()
     } else {
-      KlevuUserSession.setExpiryTimer()
+      KlevuUserSession.getDefault().setExpiryTimer()
     }
 
     if (this.getDefault().enableKlaviyoConnector) {
@@ -145,8 +147,10 @@ export class KlevuConfig {
     }
   }
 
-  setConsentGiven(userConsent: boolean) {
+  async setConsentGiven(userConsent: boolean) {
     this.consentGiven = userConsent
+    if (userConsent) await KlevuUserSession.getDefault().generateSession()
+
     if (typeof document !== "undefined") {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.UserConsentGivenChanged, {

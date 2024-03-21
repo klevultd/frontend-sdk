@@ -37,7 +37,7 @@ export class KlevuStorage {
       this.dataProtectedKeys.find((k) => k.includes(key)) !== undefined &&
       KlevuConfig.getDefault().isConsentDisallowed()
     ) {
-      return undefined
+      return null
     }
     if (isLocalStorage(storageType)) {
       return window.localStorage.getItem(key)
@@ -45,6 +45,7 @@ export class KlevuStorage {
     if (isSessionStorage(storageType)) {
       return window.sessionStorage.getItem(key)
     }
+    return null
   }
 
   static setItem = (
