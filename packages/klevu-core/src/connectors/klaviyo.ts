@@ -31,12 +31,18 @@ export class Klaviyo {
       _getIdentifiersResponse as { $exchange_id: string }
     ).$exchange_id
 
-    console.log("this.exchangeId", this.exchangeId)
+    console.log("this.exchangeId", {
+      _getIdentifiersResponse,
+      exchangeId: this.exchangeId,
+      timer: this.timer,
+    })
 
     if (!this.exchangeId) {
+      console.log("returning this.timer", this.timer)
       return
     }
     if (this.timer) {
+      console.log("clearing timer ", this.timer)
       clearInterval(this.timer)
     }
     console.log("Klaviyo", {
