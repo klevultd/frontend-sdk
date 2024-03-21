@@ -39,6 +39,11 @@ export class Klaviyo {
 
     if (!this.exchangeId) {
       console.log("returning this.timer", this.timer)
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          this.setExchangeId()
+        }, 300)
+      }
       return
     }
     if (this.timer) {
