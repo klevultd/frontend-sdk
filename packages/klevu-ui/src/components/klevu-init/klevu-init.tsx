@@ -88,7 +88,7 @@ export class KlevuInit {
   /**
    * Enable Data Protection
    */
-  @Prop() useContent?: boolean = false
+  @Prop() useConsent?: boolean = false
 
   /**
    * Data read consent given
@@ -127,7 +127,7 @@ export class KlevuInit {
       eventsApiV2Url: this.eventsV2Url,
       recommendationsApiUrl: this.recommendationsApiUrl,
       enableKlaviyoConnector: this.enableKlaviyoConnector,
-      useConsent: this.useContent,
+      useConsent: this.useConsent,
       consentGiven: this.consentGiven,
     })
 
@@ -222,11 +222,13 @@ export class KlevuInit {
 
   @Method()
   async setConsentGiven(val: boolean) {
+    this.consentGiven = val
     KlevuConfig.getDefault().setConsentGiven(val)
   }
 
   @Method()
   async setUseConsent(val: boolean) {
+    this.useConsent = val
     KlevuConfig.getDefault().setUseConsent(val)
   }
 

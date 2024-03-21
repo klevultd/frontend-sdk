@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { KlevuConfig } from "../config.js"
+import {
+  USER_SEGMENT_INFO_STORAGE_KEY,
+  USER_SESSION_EXPIRY_STORAGE_KEY,
+  USER_SESSION_ID_STORAGE_KEY,
+} from "../usersession.js"
 import { KlevuStorage, StorageType } from "./storage.js"
 
 const defaultKeys = [
-  "klevu-user-sessionId",
-  "klevu-user-session_expiry",
-  "klevu-user-segmentInfo",
+  USER_SESSION_ID_STORAGE_KEY,
+  USER_SESSION_EXPIRY_STORAGE_KEY,
+  USER_SEGMENT_INFO_STORAGE_KEY,
 ]
 
 const storageMock = (function () {

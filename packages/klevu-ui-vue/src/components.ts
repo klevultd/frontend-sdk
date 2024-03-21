@@ -169,7 +169,7 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
   'language',
   'translation',
   'enableKlaviyoConnector',
-  'useContent',
+  'useConsent',
   'consentGiven',
   'assetsPath',
   'translationUrlPrefix',

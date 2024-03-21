@@ -28,9 +28,9 @@ type UserSessionConnector = {
   generatePayload: () => ConnectorInfo | undefined
 }
 
-const USER_SESSION_ID_STORAGE_KEY = "klevu-user-sessionId"
-const USER_SESSION_EXPIRY_STORAGE_KEY = "klevu-user-session_expiry"
-const USER_SEGMENT_INFO_STORAGE_KEY = "klevu-user-segmentInfo"
+export const USER_SESSION_ID_STORAGE_KEY = "klevu-user-sessionId"
+export const USER_SESSION_EXPIRY_STORAGE_KEY = "klevu-user-session_expiry"
+export const USER_SEGMENT_INFO_STORAGE_KEY = "klevu-user-segmentInfo"
 
 const connectors: { name: string; connector: UserSessionConnector }[] = [
   { name: "klaviyo", connector: Klaviyo },

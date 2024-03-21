@@ -539,7 +539,7 @@ export namespace Components {
         /**
           * Enable Data Protection
          */
-        "useContent"?: boolean;
+        "useConsent"?: boolean;
     }
     /**
      * Lists latest searches user has made on the site
@@ -3058,7 +3058,7 @@ declare namespace LocalJSX {
         /**
           * Enable Data Protection
          */
-        "useContent"?: boolean;
+        "useConsent"?: boolean;
     }
     /**
      * Lists latest searches user has made on the site
