@@ -106,20 +106,25 @@ export class KlevuConfig {
     this.enableKlaviyoConnector = config.enableKlaviyoConnector || false
   }
 
-  static async init(config: KlevuConfiguration) {
+  static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
 
     KlevuUserSession.init()
 
     if (KlevuUserSession.getDefault().hasSessionExpired()) {
-      await KlevuUserSession.getDefault().generateSession()
+      KlevuUserSession.getDefault()
+        .generateSession()
+        .then(() => {
+          if (this.getDefault().enableKlaviyoConnector) {
+            Klaviyo.init()
+          }
+        })
     } else {
       KlevuUserSession.getDefault().setExpiryTimer()
-    }
-
-    if (this.getDefault().enableKlaviyoConnector) {
-      Klaviyo.init()
+      if (this.getDefault().enableKlaviyoConnector) {
+        Klaviyo.init()
+      }
     }
   }
 
@@ -154,9 +159,9 @@ export class KlevuConfig {
     }
   }
 
-  async setConsentGiven(userConsent: boolean) {
+  setConsentGiven(userConsent: boolean) {
     this.consentGiven = userConsent
-    if (userConsent) await KlevuUserSession.getDefault().generateSession()
+    if (userConsent) KlevuUserSession.getDefault().generateSession()
 
     if (typeof document !== "undefined") {
       document.dispatchEvent(
