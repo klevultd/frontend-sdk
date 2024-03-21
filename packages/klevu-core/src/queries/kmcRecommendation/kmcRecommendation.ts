@@ -165,7 +165,11 @@ export async function kmcRecommendation(
     }
     const userSegments = KlevuUserSession.getDefault().getSegments()
     advFilterParams +=
-      userSegments.length > 0 ? `&sids=${userSegments.join(",")}` : ""
+      userSegments.length > 0
+        ? `${advFilterParams.length > 0 ? "&" : "?"}sids=${userSegments.join(
+            ","
+          )}`
+        : ""
 
     const conf = KlevuConfig.getDefault()
 
