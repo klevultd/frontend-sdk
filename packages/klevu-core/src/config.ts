@@ -147,6 +147,13 @@ export class KlevuConfig {
     }
   }
 
+  setEnableKlaviyoConnector(val: boolean) {
+    this.enableKlaviyoConnector = val
+    if (val) {
+      Klaviyo.init()
+    }
+  }
+
   async setConsentGiven(userConsent: boolean) {
     this.consentGiven = userConsent
     if (userConsent) await KlevuUserSession.getDefault().generateSession()

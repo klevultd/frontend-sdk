@@ -81,6 +81,21 @@ export class KlevuInit {
   @Prop() translation?: Translation
 
   /**
+   * Enable Klaviyo integration
+   */
+  @Prop() enableKlaviyoConnector?: boolean = false
+
+  /**
+   * Enable Data Protection
+   */
+  @Prop() useContent?: boolean = false
+
+  /**
+   * Data read consent given
+   */
+  @Prop() consentGiven?: boolean = false
+
+  /**
    * Override the default assets path. Will use format of `${assetsPath}/assets/${resource}`
    */
   @Prop() assetsPath?: string
@@ -111,6 +126,9 @@ export class KlevuInit {
       eventsApiV1Url: this.eventsV1Url,
       eventsApiV2Url: this.eventsV2Url,
       recommendationsApiUrl: this.recommendationsApiUrl,
+      enableKlaviyoConnector: this.enableKlaviyoConnector,
+      useConsent: this.useContent,
+      consentGiven: this.consentGiven,
     })
 
     if (this.translation) {
@@ -131,6 +149,8 @@ export class KlevuInit {
         this.settings.renderPrice = (...params) =>
           this.#renderPriceKMCSettings(...params, data.root!.klevu_uc_userOptions.priceFormatter)
       }
+      this.enableKlaviyoConnector = data.root?.klevu_connectors?.klaviyo?.segmentEnabled || false
+      KlevuConfig.getDefault().setEnableKlaviyoConnector(this.enableKlaviyoConnector)
     }
   }
 
@@ -198,6 +218,16 @@ export class KlevuInit {
   @Method()
   async getAssetsPath(): Promise<string> {
     return this.assetsPath ?? "/"
+  }
+
+  @Method()
+  async setConsentGiven(val: boolean) {
+    KlevuConfig.getDefault().setConsentGiven(val)
+  }
+
+  @Method()
+  async setUseConsent(val: boolean) {
+    KlevuConfig.getDefault().setUseConsent(val)
   }
 
   /**

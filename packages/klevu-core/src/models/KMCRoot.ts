@@ -85,6 +85,16 @@ export interface KMCRootObject {
    */
   klevu_filtersEnabled: boolean
   /**
+   * To provide status of Klaviyo connector
+   */
+  klevu_connectors: {
+    klaviyo: {
+      segmentEnabled: boolean
+      directSend: boolean
+      enabled: boolean
+    }
+  }
+  /**
    * @deprecated not in use , used by jsv1 to load extra files
    */
   klevu_isSearchActive: boolean //
