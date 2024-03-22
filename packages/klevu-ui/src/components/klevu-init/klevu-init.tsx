@@ -83,7 +83,7 @@ export class KlevuInit {
   /**
    * Enable Klaviyo integration
    */
-  @Prop() enableKlaviyoConnector?: boolean = false
+  @Prop() enableKlaviyoConnector?: boolean
 
   /**
    * Enable Data Protection
@@ -126,9 +126,9 @@ export class KlevuInit {
       eventsApiV1Url: this.eventsV1Url,
       eventsApiV2Url: this.eventsV2Url,
       recommendationsApiUrl: this.recommendationsApiUrl,
-      enableKlaviyoConnector: this.enableKlaviyoConnector,
-      useConsent: this.useConsent,
-      consentGiven: this.consentGiven,
+      enableKlaviyoConnector: this.enableKlaviyoConnector || false,
+      useConsent: this.useConsent || false,
+      consentGiven: this.consentGiven || false,
     })
 
     if (this.translation) {
@@ -149,7 +149,9 @@ export class KlevuInit {
         this.settings.renderPrice = (...params) =>
           this.#renderPriceKMCSettings(...params, data.root!.klevu_uc_userOptions.priceFormatter)
       }
-      this.enableKlaviyoConnector = data.root?.klevu_connectors?.klaviyo?.segmentEnabled || false
+      if (this.enableKlaviyoConnector === undefined) {
+        this.enableKlaviyoConnector = data.root?.klevu_connectors?.klaviyo?.segmentEnabled || false
+      }
       KlevuConfig.getDefault().setEnableKlaviyoConnector(this.enableKlaviyoConnector)
     }
   }
