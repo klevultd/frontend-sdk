@@ -25,6 +25,7 @@ const style = {
 
 export function Footer() {
   const [open, setOpen] = useState(false)
+
   const [inputConfig, setInputConfig] = useState(
     JSON.stringify(config, undefined, 2)
   )
@@ -76,13 +77,18 @@ export function Footer() {
           >
             &copy; Klevu 2022
           </Typography>
-          <Button onClick={() => setOpen(true)}>Change configuration</Button>
+
+          {/*
+           <Button onClick={() => setOpen(true)}>Change configuration</Button>
           <Modal
             open={open}
             onClose={() => setOpen(false)}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
+
+
+
             <Box sx={style}>
               <TextField
                 inputProps={{
@@ -101,6 +107,10 @@ export function Footer() {
               </Button>
             </Box>
           </Modal>
+
+
+           */}
+
         </Box>
       </Container>
     </div>

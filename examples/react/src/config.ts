@@ -10,6 +10,7 @@ type Config = {
   homePageRecommendationId1: string
   homePageRecommendationId2: string
   productPageRecommendationId: string
+  recommendationsApiUrl:string
   nav: Array<{
     key: string
     label: string
@@ -33,6 +34,7 @@ export const config: Config = {
   homePageRecommendationId1: "k-b1c018f7-ee85-45c0-b65f-b9556f7dc15d",
   homePageRecommendationId2: "k-97cece7f-34de-4b3a-b0bc-8e3bfec86e72",
   productPageRecommendationId: "k-efd5337c-051e-44a2-810c-e23de2be513f",
+  recommendationsApiUrl: "https://config-cdn.ksearchnet.com/recommendations/",
   nav: [
     {
       key: "men",
@@ -56,5 +58,10 @@ export const config: Config = {
 export const saveConfig = (c: Config) => {
   if (window.localStorage) {
     window.localStorage.setItem("demo-config", JSON.stringify(c))
+  }
+}
+export const resetConfig = () => {
+  if (window.localStorage) {
+    window.localStorage.removeItem("demo-config")
   }
 }
