@@ -47,7 +47,7 @@ const ScoreCard = ({
 }: {
   tooltip?: boolean
   label: string
-  value: string | number
+  value: string | number | JSX.Element
 }) => {
   return (
     <div
@@ -55,6 +55,7 @@ const ScoreCard = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-start",
+        gap: "10px",
       }}
     >
       <Typography
@@ -62,7 +63,10 @@ const ScoreCard = ({
           padding: "3px 0 0 0",
           fontWeight: "bold",
           color: tooltip ? "white" : "#2b556e",
+          textAlign: tooltip ? "start" : "end",
+          // border: "1px solid red",
           flex: 1,
+          maxWidth: tooltip ? "30%" : "100%",
         }}
         variant="caption"
       >
@@ -71,7 +75,9 @@ const ScoreCard = ({
       <Typography
         style={{
           padding: "3px 0 0 0",
+          textAlign: "start",
           flex: 1,
+          // border: "1px solid red",
         }}
         variant="caption"
       >
@@ -121,26 +127,50 @@ const ProductCard = (props: {
 
       {props.debugMode && (
         <Table>
-          {!isUndefined(p.score) && <ScoreCard label="Score" value={p.score} />}
+          {!isUndefined(p.score) && (
+            <ScoreCard
+              label="Score"
+              value={p.score ? (+p.score).toFixed(5) : p.score}
+            />
+          )}
           {!isUndefined(p.klevu_product_boosting) && (
             <ScoreCard
               label="Product Boosting"
-              value={p.klevu_product_boosting}
+              value={
+                p.klevu_product_boosting
+                  ? (+p.klevu_product_boosting).toFixed(5)
+                  : p.klevu_product_boosting
+              }
             />
           )}
           {!isUndefined(p.klevu_bulk_boosting) && (
-            <ScoreCard label="Bulk Boosting" value={p.klevu_bulk_boosting} />
+            <ScoreCard
+              label="Rule-Based"
+              value={
+                p.klevu_bulk_boosting
+                  ? (+p.klevu_bulk_boosting).toFixed(5)
+                  : p.klevu_bulk_boosting
+              }
+            />
           )}
           {!isUndefined(p.klevu_selflearning_boosting) && (
             <ScoreCard
-              label="SelfLearning Boosting"
-              value={p.klevu_selflearning_boosting}
+              label="SelfLearning"
+              value={
+                p.klevu_selflearning_boosting
+                  ? (+p.klevu_selflearning_boosting).toFixed(5)
+                  : p.klevu_selflearning_boosting
+              }
             />
           )}
           {!isUndefined(p.klevu_manual_boosting) && (
             <ScoreCard
-              label="Manual Boosting"
-              value={p.klevu_manual_boosting}
+              label="Manual"
+              value={
+                p.klevu_manual_boosting
+                  ? (+p.klevu_manual_boosting).toFixed(5)
+                  : p.klevu_manual_boosting
+              }
             />
           )}
         </Table>
@@ -158,23 +188,52 @@ const TooltipContent = (props: {
   klevu_applied_filter_boosts: string
   klevu_applied_keyword_boosts: string
 }) => {
+  console.log({ props })
   return (
-    <Table>
+    <div>
       {!isUndefined(props.klevu_applied_filter_boosts) && (
         <ScoreCard
           label="Filter Boosts"
-          value={props.klevu_applied_filter_boosts}
+          value={
+            <ul style={{ padding: 0 }}>
+              {props.klevu_applied_filter_boosts
+                .split(";;")
+                .filter((s) => s)
+                .map((s) => {
+                  const [one, two] = s.split("^")
+                  return (
+                    <li style={{ padding: 0 }}>
+                      {one}(<span style={{ fontWeight: "bold" }}>{two}</span>)
+                    </li>
+                  )
+                })}
+            </ul>
+          }
           tooltip
         />
       )}
       {!isUndefined(props.klevu_applied_keyword_boosts) && (
         <ScoreCard
           label="Keyword Boosts"
-          value={props.klevu_applied_keyword_boosts}
+          value={
+            <ul style={{ padding: 0 }}>
+              {props.klevu_applied_keyword_boosts
+                .split(";;")
+                .filter((s) => s)
+                .map((s) => {
+                  const [one, two] = s.split("^")
+                  return (
+                    <li style={{ padding: 0 }}>
+                      {one}(<span style={{ fontWeight: "bold" }}>{two}</span>)
+                    </li>
+                  )
+                })}
+            </ul>
+          }
           tooltip
         />
       )}
-    </Table>
+    </div>
   )
 }
 
