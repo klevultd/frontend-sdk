@@ -73,7 +73,6 @@ export class KlevuUserSession {
 
   async generateSession() {
     const sessionInfo = await this.getSessionId()
-    console.log({ sessionInfo })
 
     if (sessionInfo) {
       KlevuStorage.setItem(USER_SESSION_ID_STORAGE_KEY, sessionInfo.sessionId)
@@ -123,11 +122,6 @@ export class KlevuUserSession {
   getSessionId = async () => {
     const apiKey = KlevuConfig.getDefault().apiKey
 
-    console.log("in service", {
-      connectorInfo: connectors.map(({ connector }) =>
-        connector.generatePayload()
-      ),
-    })
     const sessionInfo = {
       connectorInfo: connectors
         .map(({ connector }) => {
@@ -144,8 +138,6 @@ export class KlevuUserSession {
       sessionId: this.sessionId || undefined,
       sessionInfo,
     }
-
-    console.log({ payload })
 
     return post<SessionApiResponse>(
       `https://visitor.service.ksearchnet.com/public/1.0/${apiKey}/session`,

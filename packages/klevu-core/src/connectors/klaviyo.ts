@@ -8,8 +8,6 @@ export class Klaviyo {
   exchangeId?: string
 
   setExchangeId() {
-    console.log("setExchangeId called", globalThis._learnq)
-
     if (!globalThis._learnq) {
       if (!this.timer) {
         this.timer = setInterval(() => {
@@ -18,8 +16,6 @@ export class Klaviyo {
       }
       return
     }
-
-    console.log("will call to geenrate identifiers")
 
     const _getIdentifiersResponse = globalThis._learnq?.push([
       "_getIdentifiers",
@@ -31,14 +27,7 @@ export class Klaviyo {
       _getIdentifiersResponse as { $exchange_id: string }
     ).$exchange_id
 
-    console.log("this.exchangeId", {
-      _getIdentifiersResponse,
-      exchangeId: this.exchangeId,
-      timer: this.timer,
-    })
-
     if (!this.exchangeId) {
-      console.log("returning this.timer", this.timer)
       if (!this.timer) {
         this.timer = setInterval(() => {
           this.setExchangeId()
@@ -47,13 +36,8 @@ export class Klaviyo {
       return
     }
     if (this.timer) {
-      console.log("clearing timer ", this.timer)
       clearInterval(this.timer)
     }
-    console.log("Klaviyo", {
-      exchangeId: this.exchangeId,
-      _learnq: globalThis._learnq,
-    })
     KlevuUserSession.getDefault().generateSession()
   }
 
@@ -74,10 +58,6 @@ export class Klaviyo {
   }
 
   static generatePayload() {
-    console.log("generating payload for klaviyo", {
-      enabled: KlevuConfig.getDefault().enableKlaviyoConnector,
-      exchangeId: this.default ? this.getDefault().exchangeId : "NOT_FOUND",
-    })
     if (
       !KlevuConfig.getDefault().enableKlaviyoConnector ||
       !this.default ||
@@ -85,10 +65,6 @@ export class Klaviyo {
     ) {
       return undefined
     }
-    console.log("returning payload for klaviyo", {
-      connectorType: "klaviyo",
-      exchangeId: this.getDefault().exchangeId || "",
-    })
     return {
       connectorType: "klaviyo",
       exchangeId: this.getDefault().exchangeId || "",

@@ -136,10 +136,6 @@ export class KlevuConfig {
   }
 
   isConsentDisallowed() {
-    console.log("isConsentDisallowed", {
-      useConsent: this.useConsent,
-      consentGiven: this.consentGiven,
-    })
     return this.useConsent && !this.consentGiven
   }
 
