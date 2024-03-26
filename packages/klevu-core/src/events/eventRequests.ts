@@ -480,6 +480,7 @@ export type KlevuRecommendationsEventV2Data = V2EventBase & {
       index: number
     }>
   }
+  user_profile: { sessionId?: string }
 }
 
 export async function KlevuEventV2(data: KlevuRecommendationsEventV2Data[]) {

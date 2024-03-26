@@ -8,6 +8,7 @@ import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { get } from "../../connection/fetch.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
+import { KlevuUserSession } from "../../usersession.js"
 
 export type KlevuKMCRecommendationOptions = {
   id: string
@@ -162,6 +163,13 @@ export async function kmcRecommendation(
         ? `&gpid=${options.itemGroupId}`
         : ""
     }
+    const userSegments = KlevuUserSession.getDefault().getSegments()
+    advFilterParams +=
+      userSegments.length > 0
+        ? `${advFilterParams.length > 0 ? "&" : "?"}sids=${userSegments.join(
+            ","
+          )}`
+        : ""
 
     const conf = KlevuConfig.getDefault()
 

@@ -146,6 +146,9 @@ export class KlevuSearchField {
     if (this.usePersonalisation === undefined && settings?.klevu_uc_userOptions.enablePersonalisationInSearch) {
       this.usePersonalisation = true
     }
+    if (this.useKlaviyo === undefined && settings?.klevu_connectors?.klaviyo?.enabled) {
+      this.useKlaviyo = true
+    }
     if (this.term !== undefined) {
       await this.#doSearch(this.term)
     }
@@ -188,7 +191,6 @@ export class KlevuSearchField {
     }
 
     if (this.useKlaviyo) {
-      console.log("pushing klaviyo")
       searchModifiers.push(klaviyo())
     }
 

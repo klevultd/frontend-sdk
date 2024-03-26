@@ -1,6 +1,8 @@
 import type { AxiosInstance, AxiosStatic } from "axios"
 import { runPendingAnalyticalRequests } from "./events/eventRequests.js"
 import { isBrowser } from "./utils/index.js"
+import { KlevuUserSession } from "./usersession.js"
+import { Klaviyo } from "./connectors/klaviyo.js"
 import { KlevuDomEvents } from "./events/KlevuDomEvents.js"
 
 type KlevuConfiguration = {
@@ -47,6 +49,10 @@ type KlevuConfiguration = {
    */
   disableClickTrackStoring?: boolean
   /**
+   * Set true if using klaviyo connector
+   */
+  enableKlaviyoConnector?: boolean
+  /**
    * Enable data protection, pass true if data protection should be enabled
    */
   useConsent?: boolean
@@ -68,6 +74,7 @@ export class KlevuConfig {
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
   disableClickTracking = false
+  enableKlaviyoConnector = false
   useConsent = false
   consentGiven = false
 
@@ -92,16 +99,33 @@ export class KlevuConfig {
     if (config.recommendationsApiUrl) {
       this.recommendationsApiUrl = config.recommendationsApiUrl
     }
-
     this.disableClickTracking = config.disableClickTrackStoring ?? false
 
     this.useConsent = config.useConsent || false
     this.consentGiven = config.consentGiven || false
+    this.enableKlaviyoConnector = config.enableKlaviyoConnector || false
   }
 
   static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
+
+    KlevuUserSession.init()
+
+    if (KlevuUserSession.getDefault().hasSessionExpired()) {
+      KlevuUserSession.getDefault()
+        .generateSession()
+        .then(() => {
+          if (this.getDefault().enableKlaviyoConnector) {
+            Klaviyo.init()
+          }
+        })
+    } else {
+      KlevuUserSession.getDefault().setExpiryTimer()
+      if (this.getDefault().enableKlaviyoConnector) {
+        Klaviyo.init()
+      }
+    }
   }
 
   static getDefault(): KlevuConfig {
@@ -128,8 +152,17 @@ export class KlevuConfig {
     }
   }
 
+  setEnableKlaviyoConnector(val: boolean) {
+    this.enableKlaviyoConnector = val
+    if (val) {
+      Klaviyo.init()
+    }
+  }
+
   setConsentGiven(userConsent: boolean) {
     this.consentGiven = userConsent
+    if (userConsent) KlevuUserSession.getDefault().generateSession()
+
     if (typeof document !== "undefined") {
       document.dispatchEvent(
         new CustomEvent(KlevuDomEvents.UserConsentGivenChanged, {
