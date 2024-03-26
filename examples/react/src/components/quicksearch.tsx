@@ -113,7 +113,7 @@ export function QuickSearch(props: Props) {
     )
 
     const searchResult = result.queriesById(searchId)
-    clickManager = searchResult.searchClickEvent
+    clickManager = searchResult.searchClickEvent.bind(searchResult)
 
     setProducts(searchResult?.records ?? [])
     setSuggestions(
