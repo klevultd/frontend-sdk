@@ -18,7 +18,7 @@ WORKDIR /app/examples/react-klevu-ui
 RUN npm install
 RUN npm run build
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/app/entrypoint.sh"]
 
 EXPOSE 3002
 CMD ["npm", "run", "serve"]
