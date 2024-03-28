@@ -137,8 +137,8 @@ export const ConfigDrawer = () => {
                 fullWidth
                 id="url"
                 type="text"
-                defaultValue={config.url}
-                onChange={(e)=>onChangeValue(e.target.id,e.target.value)}
+                defaultValue={config.url.replace("/cs/v2/search", '').replace("https://", '')}
+                onChange={(e)=>onChangeValue(e.target.id,"https://"+e.target.value+"/cs/v2/search")}
               />
             </Grid>
 
@@ -160,7 +160,7 @@ export const ConfigDrawer = () => {
               <Typography variant="body2" component="div">Recommandation url</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="recommendationsApiUrl" type="text" defaultValue={config.recommendationsApiUrl} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth id="recommendationsApiUrl" type="text" defaultValue={config.recommendationsApiUrl.replace("/recommendations/", '').replace("https://", '')} onChange={(e)=>onChangeValue(e.target.id,"https://"+e.target.value+"/recommendations/")} />
             </Grid>
 
 
