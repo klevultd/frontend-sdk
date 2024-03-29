@@ -120,6 +120,11 @@ export class KlevuInit {
   }
 
   async connectedCallback() {
+    console.log({
+      enableKlaviyoConnector: this.enableKlaviyoConnector,
+      useConsent: this.useConsent,
+      consentGiven: this.consentGiven,
+    })
     KlevuConfig.init({
       apiKey: this.apiKey,
       url: this.url,

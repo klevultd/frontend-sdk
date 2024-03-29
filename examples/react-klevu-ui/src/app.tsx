@@ -52,6 +52,9 @@ export function App() {
           return `/products/${product.itemGroupId}/${product.id}`
         },
       }}
+      enableKlaviyoConnector
+      useConsent={!!localStorage.getItem("klevu-use-consent") || false}
+      consentGiven={!!localStorage.getItem("klevu-consent-given") || false}
     >
       <div>
         <header>
