@@ -6,6 +6,7 @@
   "scripts": {
     "start": "vite --port 3007 --host",
     "build": "vite build",
+    "serve": "vite preview --port 3002 --host",
     "preview": "vite preview"
   },
   "author": "",
