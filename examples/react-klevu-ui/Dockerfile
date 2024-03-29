@@ -20,6 +20,10 @@ WORKDIR /app/packages/klevu-ui
 RUN npm install
 RUN npm run build
 
+WORKDIR /app/packages/klevu-ui-react
+RUN npm install
+RUN npm run build
+
 WORKDIR /app/examples/react-klevu-ui
 RUN npm install
 RUN npm run build
