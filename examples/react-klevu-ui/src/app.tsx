@@ -55,6 +55,7 @@ export function App() {
       enableKlaviyoConnector
       useConsent={!!localStorage.getItem("klevu-use-consent") || false}
       consentGiven={!!localStorage.getItem("klevu-consent-given") || false}
+      assetsPath="https://resources-webcomponents.klevu.com/latest/klevu-ui"
     >
       <div>
         <header>
