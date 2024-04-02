@@ -43,7 +43,7 @@ export function ProductPage() {
           style={{ maxWidth: "100%", width: "100%" }}
         />
         <div>
-          {product.shortDesc.length > 0 ? (
+          {product.shortDesc?.length > 0 ? (
             <p>{product.shortDesc}</p>
           ) : (
             <Fragment>
