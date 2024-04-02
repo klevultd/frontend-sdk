@@ -22,6 +22,15 @@ KlevuConfig.init({
     !!localStorage.getItem("klevu-enable-klaviyo") || false,
   useConsent: !!localStorage.getItem("klevu-use-consent") || false,
   consentGiven: !!localStorage.getItem("klevu-consent-given") || false,
+  eventsApiV1Url: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.eventsApiV1Url
+    : "",
+  eventsApiV2Url: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.eventsApiV2Url
+    : "",
+  recommendationsApiUrl: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.recommendationsApiUrl
+    : "",
 })
 
 export const nav = [
@@ -48,8 +57,37 @@ export function App() {
 
   return (
     <KlevuInit
-      url="https://eucs29v2.ksearchnet.com/cs/v2/search"
-      apiKey="klevu-164651914788114877"
+      url={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.url
+          : "https://eucs29v2.ksearchnet.com/cs/v2/search"
+      }
+      eventsApiV1Url={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.eventsApiV1Url
+          : ""
+      }
+      eventsApiV2Url={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.eventsApiV2Url
+          : ""
+      }
+      recommendationsApiUrl={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))
+              ?.recommendationsApiUrl
+          : ""
+      }
+      apiKey={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.apiKey
+          : "klevu-164651914788114877"
+      }
+      enableKlaviyoConnector={
+        !!localStorage.getItem("klevu-enable-klaviyo") || false
+      }
+      useConsent={!!localStorage.getItem("klevu-use-consent") || false}
+      consentGiven={!!localStorage.getItem("klevu-consent-given") || false}
       settings={{
         onItemClick(product, event) {
           navigate(`/products/${product.itemGroupId}/${product.id}`)
@@ -60,9 +98,6 @@ export function App() {
           return `/products/${product.itemGroupId}/${product.id}`
         },
       }}
-      enableKlaviyoConnector
-      useConsent={!!localStorage.getItem("klevu-use-consent") || false}
-      consentGiven={!!localStorage.getItem("klevu-consent-given") || false}
       assetsPath="https://resources-webcomponents.klevu.com/latest/klevu-ui"
     >
       <div>
