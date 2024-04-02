@@ -1,7 +1,11 @@
 import React, { Fragment, useCallback } from "react"
 import { createRoot } from "react-dom/client"
 import { useParams } from "react-router-dom"
-import { KlevuButton, KlevuMerchandising } from "@klevu/ui-react"
+import {
+  KlevuButton,
+  KlevuMerchandising,
+  KlevuRecommendations,
+} from "@klevu/ui-react"
 import { nav } from "../app"
 import { KlevuRecord } from "@klevu/core"
 import { useCart } from "../cartContext"
@@ -17,6 +21,18 @@ export function CategoryPage() {
         category={params.id}
         categoryTitle={navItem.label}
       ></KlevuMerchandising>
+      <KlevuRecommendations
+        recommendationTitle="Category Page"
+        recommendationId={
+          localStorage.getItem("demo-config")
+            ? JSON.parse(localStorage.getItem("demo-config"))
+                ?.categoryPageRecommendationId
+            : ""
+        }
+        currentProductId={params.id}
+        itemGroupId={params.groupId}
+        categoryPath={params.id}
+      ></KlevuRecommendations>
     </Fragment>
   )
 }

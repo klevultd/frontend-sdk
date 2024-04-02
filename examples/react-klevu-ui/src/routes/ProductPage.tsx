@@ -88,7 +88,12 @@ export function ProductPage() {
 
       <KlevuRecommendations
         recommendationTitle="Also viewed KMC recommendation"
-        recommendationId="k-efd5337c-051e-44a2-810c-e23de2be513f"
+        recommendationId={
+          localStorage.getItem("demo-config")
+            ? JSON.parse(localStorage.getItem("demo-config"))
+                ?.productPageRecommendationId
+            : "k-efd5337c-051e-44a2-810c-e23de2be513f"
+        }
         currentProductId={params.id}
         itemGroupId={params.groupId}
       ></KlevuRecommendations>

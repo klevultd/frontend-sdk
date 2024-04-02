@@ -12,8 +12,16 @@ import { useCart } from "./cartContext"
 
 // This is only for product page data fetching and custom page example
 KlevuConfig.init({
-  url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
-  apiKey: "klevu-164651914788114877",
+  url: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.url
+    : "https://eucs29v2.ksearchnet.com/cs/v2/search",
+  apiKey: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.apiKey
+    : "klevu-164651914788114877",
+  enableKlaviyoConnector:
+    !!localStorage.getItem("klevu-enable-klaviyo") || false,
+  useConsent: !!localStorage.getItem("klevu-use-consent") || false,
+  consentGiven: !!localStorage.getItem("klevu-consent-given") || false,
 })
 
 export const nav = [
