@@ -31,6 +31,9 @@ KlevuConfig.init({
   recommendationsApiUrl: localStorage.getItem("demo-config")
     ? JSON.parse(localStorage.getItem("demo-config"))?.recommendationsApiUrl
     : "",
+  visitorServiceUrl: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.visitorServiceUrl
+    : "",
 })
 
 export const nav = [
@@ -76,6 +79,11 @@ export function App() {
         localStorage.getItem("demo-config")
           ? JSON.parse(localStorage.getItem("demo-config"))
               ?.recommendationsApiUrl
+          : ""
+      }
+      visitorServiceUrl={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.visitorServiceUrl
           : ""
       }
       apiKey={

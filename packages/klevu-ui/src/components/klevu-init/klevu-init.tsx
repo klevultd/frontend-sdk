@@ -64,6 +64,10 @@ export class KlevuInit {
   @Prop() recommendationsApiUrl?: string
 
   /**
+   * Override the default session API URL
+   */
+  @Prop() visitorServiceUrl?: string
+  /**
    * Global settings
    */
   @Prop() settings: KlevuUIGlobalSettings = {
@@ -131,6 +135,7 @@ export class KlevuInit {
       eventsApiV1Url: this.eventsV1Url,
       eventsApiV2Url: this.eventsV2Url,
       recommendationsApiUrl: this.recommendationsApiUrl,
+      visitorServiceUrl: this.visitorServiceUrl,
       enableKlaviyoConnector: this.enableKlaviyoConnector || false,
       useConsent: this.useConsent || false,
       consentGiven: this.consentGiven || false,

@@ -38,7 +38,10 @@ type KlevuConfiguration = {
    * MOI API url
    */
   moiApiUrl?: string
-
+  /**
+   * VisitorServiceUrl for session creation
+   */
+  visitorServiceUrl?: string
   /**
    *
    */
@@ -71,6 +74,7 @@ export class KlevuConfig {
   eventsApiV1Url = "https://stats.ksearchnet.com/analytics/"
   eventsApiV2Url = "https://stats.ksearchnet.com/analytics/collect"
   recommendationsApiUrl = "https://config-cdn.ksearchnet.com/recommendations/"
+  visitorServiceUrl = "https://visitor.service.ksearchnet.com/public/1.0"
   axios?: AxiosInstance
   moiApiUrl = "https://moi-ai.ksearchnet.com/"
   disableClickTracking = false
@@ -95,6 +99,9 @@ export class KlevuConfig {
     }
     if (config.eventsApiV2Url) {
       this.eventsApiV2Url = config.eventsApiV2Url
+    }
+    if (config.visitorServiceUrl) {
+      this.visitorServiceUrl = config.visitorServiceUrl
     }
     if (config.recommendationsApiUrl) {
       this.recommendationsApiUrl = config.recommendationsApiUrl

@@ -540,6 +540,10 @@ export namespace Components {
           * Enable Data Protection
          */
         "useConsent"?: boolean;
+        /**
+          * Override the default session API URL
+         */
+        "visitorServiceUrl"?: string;
     }
     /**
      * Lists latest searches user has made on the site
@@ -3059,6 +3063,10 @@ declare namespace LocalJSX {
           * Enable Data Protection
          */
         "useConsent"?: boolean;
+        /**
+          * Override the default session API URL
+         */
+        "visitorServiceUrl"?: string;
     }
     /**
      * Lists latest searches user has made on the site

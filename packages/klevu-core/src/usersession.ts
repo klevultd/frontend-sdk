@@ -140,7 +140,7 @@ export class KlevuUserSession {
     }
 
     return post<SessionApiResponse>(
-      `https://visitor.service.ksearchnet.com/public/1.0/${apiKey}/session`,
+      `${KlevuConfig.getDefault().visitorServiceUrl}/${apiKey}/session`,
       payload
     )
   }
