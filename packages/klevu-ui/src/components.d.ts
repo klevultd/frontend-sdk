@@ -484,6 +484,14 @@ export namespace Components {
          */
         "assetsPath"?: string;
         /**
+          * Data read consent given
+         */
+        "consentGiven"?: boolean;
+        /**
+          * Enable Klaviyo integration
+         */
+        "enableKlaviyoConnector"?: boolean;
+        /**
           * Override the default events v1 URL
          */
         "eventsV1Url"?: string;
@@ -510,6 +518,8 @@ export namespace Components {
           * Override the default recommendations API URL
          */
         "recommendationsApiUrl"?: string;
+        "setConsentGiven": (val: boolean) => Promise<void>;
+        "setUseConsent": (val: boolean) => Promise<void>;
         /**
           * Global settings
          */
@@ -526,6 +536,14 @@ export namespace Components {
           * Klevu Server URL
          */
         "url": string;
+        /**
+          * Enable Data Protection
+         */
+        "useConsent"?: boolean;
+        /**
+          * Override the default session API URL
+         */
+        "visitorServiceUrl"?: string;
     }
     /**
      * Lists latest searches user has made on the site
@@ -3000,6 +3018,14 @@ declare namespace LocalJSX {
          */
         "assetsPath"?: string;
         /**
+          * Data read consent given
+         */
+        "consentGiven"?: boolean;
+        /**
+          * Enable Klaviyo integration
+         */
+        "enableKlaviyoConnector"?: boolean;
+        /**
           * Override the default events v1 URL
          */
         "eventsV1Url"?: string;
@@ -3033,6 +3059,14 @@ declare namespace LocalJSX {
           * Klevu Server URL
          */
         "url": string;
+        /**
+          * Enable Data Protection
+         */
+        "useConsent"?: boolean;
+        /**
+          * Override the default session API URL
+         */
+        "visitorServiceUrl"?: string;
     }
     /**
      * Lists latest searches user has made on the site

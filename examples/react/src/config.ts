@@ -15,6 +15,10 @@ type Config = {
     label: string
     emoji: string
   }>
+  recommendationsApiUrl: string
+  eventsApiV2Url: string
+  eventsApiV1Url: string
+  visitorServiceUrl: string
 }
 
 let loadedConfig: Config | undefined
@@ -50,6 +54,10 @@ export const config: Config = {
       emoji: "👞",
     },
   ],
+  eventsApiV1Url: "https://stats.ksearchnet.com/analytics/",
+  eventsApiV2Url: "https://stats.ksearchnet.com/analytics/collect",
+  recommendationsApiUrl: "https://config-cdn.ksearchnet.com/recommendations/",
+  visitorServiceUrl: "https://visitor.service.ksearchnet.com/public/1.0",
   ...(loadedConfig ?? {}),
 }
 
