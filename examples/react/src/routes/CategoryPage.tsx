@@ -242,7 +242,6 @@ export function CategoryPage() {
             value={itemsOnPage}
             style={{ margin: "12px" }}
             onChange={(event) => {
-              console.log(event.target.value)
               setItemsOnPage(event.target.value as number)
             }}
           >
@@ -269,7 +268,6 @@ export function CategoryPage() {
                 }}
                 product={p}
                 onClick={(event) => {
-                  console.log(searchResponse.categoryMerchandisingClickEvent)
                   searchResponse.categoryMerchandisingClickEvent?.({
                     productId: p.id,
                     variantId: p.variantId || p.id,
