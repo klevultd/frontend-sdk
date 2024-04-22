@@ -94,11 +94,13 @@ export class KlevuEvents {
    *
    * @param recommendation Metadata of what recommendation is shown
    * @param products List of all products that are shown
+   * @param bannerInfo Information about the static banner that is shown
    * @param override Ability to override any analytical keys in low level
    */
   static recommendationView({
     recommendationMetadata,
     products,
+    bannerInfo,
     override = {},
   }: {
     recommendationMetadata: Partial<RecommendationViewEventMetaData> &
@@ -118,6 +120,7 @@ export class KlevuEvents {
           >
         >
     >
+    bannerInfo?: KlevuEventV2DataStaticContent
     override?: Partial<KlevuRecommendationsEventV2Data>
   }) {
     const data: KlevuRecommendationsEventV2Data = {
@@ -137,6 +140,7 @@ export class KlevuEvents {
         spot_name: recommendationMetadata.spotName,
         segment_name: recommendationMetadata.segmentName || undefined,
         segment_id: recommendationMetadata.segmentKey || undefined,
+        static_content: bannerInfo && [bannerInfo],
         items:
           products &&
           products.map((p, index) => {

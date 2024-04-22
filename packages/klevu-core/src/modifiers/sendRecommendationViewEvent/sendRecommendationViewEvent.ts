@@ -25,7 +25,8 @@ const recommendationTypeOfRequests: KlevuTypeOfRequest[] = [
 export function sendRecommendationViewEvent(
   eventData?: Partial<RecommendationViewEventMetaData> &
     Pick<RecommendationViewEventMetaData, "logic" | "recsKey" | "title">,
-  override?: Partial<KlevuRecommendationsEventV2Data>
+  override?: Partial<KlevuRecommendationsEventV2Data>,
+  isMobile?:boolean,
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
@@ -47,13 +48,42 @@ export function sendRecommendationViewEvent(
           return res
         }
 
-        KlevuEvents.recommendationView({
-          recommendationMetadata: {
-            ...kmcData.metadata,
-          },
-          products,
-          override,
-        })
+
+        if(kmcData.staticContent && kmcData.staticContent.length !== 0){
+          const resolution = isMobile?"mobile":"desktop";
+          const image =
+            kmcData.staticContent[0].image.find(
+              (image) => image.resolution === resolution
+            ) ?? kmcData.staticContent[0].image[0]
+          const bannerInfo = {
+            resolution,
+            index: 1,
+            banner_alt_tag: image.altTag,
+            banner_image_url: image.url,
+            content_type: "image",
+          }
+
+
+          KlevuEvents.recommendationView({
+            recommendationMetadata: {
+              ...kmcData.metadata,
+            },
+            bannerInfo,
+          })
+        } else {
+          KlevuEvents.recommendationView({
+            recommendationMetadata: {
+              ...kmcData.metadata,
+            },
+            products,
+            override,
+          })
+        }
+
+
+
+
+
         return res
       }
 
