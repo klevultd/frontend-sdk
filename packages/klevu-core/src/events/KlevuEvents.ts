@@ -6,6 +6,8 @@ import {
 } from "../index.js"
 import { KlevuLastClickedProducts } from "../store/lastClickedProducts.js"
 import { KlevuLastSearches } from "../store/lastSearches.js"
+import { USER_SESSION_ID_STORAGE_KEY } from "../usersession.js"
+import { KlevuStorage } from "../utils/storage.js"
 import {
   KlevuEventV1CategoryProductClick,
   KlevuEventV1CategoryView,
@@ -122,6 +124,10 @@ export class KlevuEvents {
       event: "view_recs_list",
       event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
+      user_profile: {
+        sessionId:
+          KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
+      },
       event_data: {
         list_id: recommendationMetadata.recsKey,
         list_logic: recommendationMetadata.logic,
@@ -129,6 +135,8 @@ export class KlevuEvents {
         action: recommendationMetadata.action,
         spot_id: recommendationMetadata.spotKey,
         spot_name: recommendationMetadata.spotName,
+        segment_name: recommendationMetadata.segmentName || undefined,
+        segment_id: recommendationMetadata.segmentKey || undefined,
         items:
           products &&
           products.map((p, index) => {
@@ -200,6 +208,10 @@ export class KlevuEvents {
       event: "select_recs_list",
       event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
+      user_profile: {
+        sessionId:
+          KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
+      },
       event_data: {
         list_id: recommendationMetadata.recsKey,
         list_logic: recommendationMetadata.logic,
@@ -208,6 +220,8 @@ export class KlevuEvents {
         spot_id: recommendationMetadata.spotKey,
         spot_name: recommendationMetadata.spotName,
         static_content: bannerInfo && [bannerInfo],
+        segment_name: recommendationMetadata.segmentName || undefined,
+        segment_id: recommendationMetadata.segmentKey || undefined,
         items: product && [
           {
             index: productIndexInList ?? 1,

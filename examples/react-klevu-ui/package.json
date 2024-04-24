@@ -6,13 +6,14 @@
   "scripts": {
     "start": "vite --port 3007 --host",
     "build": "vite build",
+    "serve": "vite preview --port 3002 --host",
     "preview": "vite preview"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/core": "^3.6.0",
-    "@klevu/ui-react": "^0.9.0",
+    "@klevu/core": "^5.2.0",
+    "@klevu/ui-react": "^2.2.0",
     "lodash.groupby": "^4.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

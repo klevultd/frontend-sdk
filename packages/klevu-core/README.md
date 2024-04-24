@@ -317,6 +317,25 @@ KlevuConfig.getDefault().setConsentGiven(true) // When you receive the user cons
 
 If `useConsent` is enabled, then no user data will be used by Klevu till the `consentGiven` is enabled.
 
+## Using Klaviyo for segmentation
+
+To enable Klaviyo integration for segemntation in Recommendations, set `enableKlaviyoConnector` to true.
+
+```ts
+KlevuConfig.init({
+  url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
+  apiKey: "klevu-160320037354512854",
+  enableKlaviyoConnector: true, //To enable Klaviyo integration for segmentation in Recommendations
+})
+```
+
+Setitng `enableKlaviyoConnector` to true will make all the necessary internal configuration changes for Klevu Recommendations to work with Klaviyo segments.
+
+You should consider using this feature with Data protection settings if there is a need to meet any legal requirements.
+If Data Protection is enabled, then no user data will be stored unless the consent is given.
+
+Check above for more information.
+
 [npm-src]: https://badgen.net/npm/v/@klevu/core
 [npm-href]: https://www.npmjs.com/package/@klevu/core
 [bundlephobia-src]: https://badgen.net/bundlephobia/minzip/@klevu/core

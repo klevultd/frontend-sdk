@@ -115,7 +115,7 @@ export function ProductPage() {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            {product.shortDesc.length > 0 ? (
+            {product.shortDesc?.length > 0 ? (
               <p>{product.shortDesc}</p>
             ) : (
               <Fragment>

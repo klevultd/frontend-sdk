@@ -16,6 +16,10 @@ import { config } from "./config"
 KlevuConfig.init({
   ...config,
   axios,
+  enableKlaviyoConnector:
+    !!localStorage.getItem("klevu-enable-klaviyo") || false,
+  useConsent: !!localStorage.getItem("klevu-use-consent") || false,
+  consentGiven: !!localStorage.getItem("klevu-consent-given") || false,
 })
 
 KlevuKMCSettings()

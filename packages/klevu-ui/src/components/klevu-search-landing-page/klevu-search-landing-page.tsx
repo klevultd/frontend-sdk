@@ -222,6 +222,9 @@ export class KlevuSearchLandingPage {
       if (this.hidePrice === undefined) {
         this.hidePrice = !settings.klevu_showPrices
       }
+      if (this.useKlaviyo === undefined && settings?.klevu_connectors?.klaviyo?.enabled) {
+        this.useKlaviyo = true
+      }
     }
     const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
     if (showPopularProducts) {

@@ -188,7 +188,6 @@ const TooltipContent = (props: {
   klevu_applied_filter_boosts: string
   klevu_applied_keyword_boosts: string
 }) => {
-  console.log({ props })
   return (
     <div>
       {!isUndefined(props.klevu_applied_filter_boosts) && (
