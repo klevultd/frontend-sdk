@@ -138,7 +138,7 @@ export const ConfigDrawer = () => {
                 id="url"
                 type="text"
                 defaultValue={config.url.replace("/cs/v2/search", '').replace("https://", '')}
-                onChange={(e)=>onChangeValue(e.target.id,"https://"+e.target.value+"/cs/v2/search")}
+                onChange={(e)=>onChangeValue(e.target.id,"https://"+e.target.value.trim()+"/cs/v2/search")}
               />
             </Grid>
 
@@ -146,7 +146,7 @@ export const ConfigDrawer = () => {
               <Typography variant="body2" component="div">Api Key</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="apiKey" type="text" defaultValue={config.apiKey} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth id="apiKey" type="text" defaultValue={config.apiKey} onChange={(e)=>onChangeValue(e.target.id,e.target.value.trim())} />
             </Grid>
           </Grid>
           <Divider />
@@ -160,7 +160,7 @@ export const ConfigDrawer = () => {
               <Typography variant="body2" component="div">Recommandation url</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="recommendationsApiUrl" type="text" defaultValue={config.recommendationsApiUrl.replace("/recommendations/", '').replace("https://", '')} onChange={(e)=>onChangeValue(e.target.id,"https://"+e.target.value+"/recommendations/")} />
+              <TextField fullWidth id="recommendationsApiUrl" type="text" defaultValue={config.recommendationsApiUrl.replace("/recommendations/", '').replace("https://", '')} onChange={(e)=>onChangeValue(e.target.id,"https://"+e.target.value.trim()+"/recommendations/")} />
             </Grid>
 
 
@@ -168,34 +168,34 @@ export const ConfigDrawer = () => {
               <Typography variant="body2" component="div">Category Recommandation Id</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="categoryPageRecommendationId" type="text" defaultValue={config.categoryPageRecommendationId} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth id="categoryPageRecommendationId" type="text" defaultValue={config.categoryPageRecommendationId} onChange={(e)=>onChangeValue(e.target.id,e.target.value.trim())} />
             </Grid>
 
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">Checkout Recommandation Id</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth  id="checkoutPageRecommendationId" type="text" defaultValue={config.checkoutPageRecommendationId} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth  id="checkoutPageRecommendationId" type="text" defaultValue={config.checkoutPageRecommendationId} onChange={(e)=>onChangeValue(e.target.id,e.target.value.trim())} />
             </Grid>
 
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">Home Recommandation Id first</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="homePageRecommendationId1" type="text" defaultValue={config.homePageRecommendationId1} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth id="homePageRecommendationId1" type="text" defaultValue={config.homePageRecommendationId1} onChange={(e)=>onChangeValue(e.target.id,e.target.value.trim())} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">Home Recommandation Id second</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="homePageRecommendationId2" type="text" defaultValue={config.homePageRecommendationId2} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth id="homePageRecommendationId2" type="text" defaultValue={config.homePageRecommendationId2} onChange={(e)=>onChangeValue(e.target.id,e.target.value.trim())} />
             </Grid>
 
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">Product page Recommandation Id</Typography>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <TextField fullWidth id="productPageRecommendationId" type="text" defaultValue={config.productPageRecommendationId} onChange={(e)=>onChangeValue(e.target.id,e.target.value)} />
+              <TextField fullWidth id="productPageRecommendationId" type="text" defaultValue={config.productPageRecommendationId} onChange={(e)=>onChangeValue(e.target.id,e.target.value.trim())} />
             </Grid>
 
           </Grid>
@@ -224,13 +224,13 @@ export const ConfigDrawer = () => {
                     <ListItem key={item.key}>
                       <Grid container spacing={2}>
                         <Grid item xs={5}>
-                          <TextField fullWidth id={"key-"+key} type="text" defaultValue={item.key} onChange={(e)=>onChangeValueNav(e.target.id,e.target.value)} />
+                          <TextField fullWidth id={"key-"+key} type="text" defaultValue={item.key} onChange={(e)=>onChangeValueNav(e.target.id,e.target.value.trim())} />
                         </Grid>
                         <Grid item xs={5}>
-                          <TextField fullWidth id={"label-"+key} type="text" defaultValue={item.label} onChange={(e)=>onChangeValueNav(e.target.id,e.target.value)} />
+                          <TextField fullWidth id={"label-"+key} type="text" defaultValue={item.label} onChange={(e)=>onChangeValueNav(e.target.id,e.target.value.trim())} />
                         </Grid>
                         <Grid item xs={2}>
-                          <TextField fullWidth id={"emoji-"+key} type="text" defaultValue={item.emoji} onChange={(e)=>onChangeValueNav(e.target.id,e.target.value)} />
+                          <TextField fullWidth id={"emoji-"+key} type="text" defaultValue={item.emoji} onChange={(e)=>onChangeValueNav(e.target.id,e.target.value.trim())} />
                         </Grid>
                       </Grid>
                     </ListItem>
