@@ -10,6 +10,7 @@ import { CartButton } from "./cartbutton"
 import { Divider, FormControlLabel, Switch } from "@mui/material"
 import { config } from "../config"
 import { useGlobalVariables } from "../globalVariablesContext"
+import { ConfigDrawer } from "./configdrawer";
 
 export const pages = config.nav.map((n) => n.label)
 export const links = config.nav.map((n) => n.key)
@@ -111,6 +112,7 @@ const ResponsiveAppBar = () => {
             }
             label="Debug Mode"
           />
+          <ConfigDrawer />
         </Toolbar>
       </Container>
     </AppBar>

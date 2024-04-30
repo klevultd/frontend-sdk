@@ -25,6 +25,7 @@ const style = {
 
 export function Footer() {
   const [open, setOpen] = useState(false)
+
   const [inputConfig, setInputConfig] = useState(
     JSON.stringify(config, undefined, 2)
   )
@@ -76,6 +77,7 @@ export function Footer() {
           >
             &copy; Klevu 2022
           </Typography>
+
           <Button onClick={() => setOpen(true)}>Change configuration</Button>
           <Modal
             open={open}
