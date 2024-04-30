@@ -26,7 +26,7 @@ export function sendRecommendationViewEvent(
   eventData?: Partial<RecommendationViewEventMetaData> &
     Pick<RecommendationViewEventMetaData, "logic" | "recsKey" | "title">,
   override?: Partial<KlevuRecommendationsEventV2Data>,
-  isMobile?:boolean,
+  isMobile?: boolean
 ): KlevuFetchModifer {
   return {
     klevuModifierId: "sendMerchandisingViewEvent",
@@ -48,21 +48,19 @@ export function sendRecommendationViewEvent(
           return res
         }
 
-
-        if(kmcData.staticContent && kmcData.staticContent.length !== 0){
-          const resolution = isMobile?"mobile":"desktop";
+        if (kmcData.staticContent && kmcData.staticContent.length !== 0) {
+          const resolution = isMobile ? "mobile" : "desktop"
           const image =
             kmcData.staticContent[0].image.find(
               (image) => image.resolution === resolution
             ) ?? kmcData.staticContent[0].image[0]
           const bannerInfo = {
-            resolution,
+            resolution: resolution as "mobile" | "desktop",
             index: 1,
             banner_alt_tag: image.altTag,
             banner_image_url: image.url,
-            content_type: "image",
+            content_type: "image" as const,
           }
-
 
           KlevuEvents.recommendationView({
             recommendationMetadata: {
@@ -80,16 +78,12 @@ export function sendRecommendationViewEvent(
           })
         }
 
-
-
-
-
         return res
       }
 
       if (!eventData) {
         throw new Error(
-          "Need to provider eventData parameter for custom view events"
+          "Need to provide eventData parameter for custom view events"
         )
       }
 

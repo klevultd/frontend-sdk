@@ -133,7 +133,7 @@ export class KlevuRecommendations {
           itemGroupId: this.itemGroupId,
           ...this.options,
         },
-        sendRecommendationViewEvent({isMobile: this.#isMobile()})
+        sendRecommendationViewEvent(undefined, undefined, this.#isMobile())
       )
     )
 
