@@ -207,6 +207,8 @@ export async function kmcRecommendation(
       params: {
         kmcConfig,
       },
+      modifiers:
+        kmcConfig.metadata.action === "STATIC_CONTENT" ? modifiers : undefined,
     }
   }
 
