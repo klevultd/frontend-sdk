@@ -18,5 +18,8 @@ module.exports = {
   },
   globals: {
     window: {},
+    document: {
+      dispatchEvent: () => "",
+    },
   },
 }
