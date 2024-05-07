@@ -1,4 +1,4 @@
-import { KlevuConfig } from "."
+import { KlevuConfig } from "./index.js"
 import { post } from "./connection/fetch.js"
 import { Klaviyo } from "./connectors/klaviyo.js"
 import { KlevuStorage } from "./utils/index.js"
