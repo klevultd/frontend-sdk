@@ -21,5 +21,8 @@ module.exports = {
     document: {
       dispatchEvent: () => "",
     },
+    CustomEvent: function (name, params) {
+      return params
+    },
   },
 }
