@@ -1,5 +1,4 @@
 import { KlevuConfig } from "../index.js"
-import { isBrowser } from "./isBrowser.js"
 
 export enum StorageType {
   SESSION = "session",
@@ -8,12 +7,18 @@ export enum StorageType {
 
 const isSessionStorage = (storageType: StorageType) => {
   return (
-    storageType === StorageType.SESSION && isBrowser() && window.sessionStorage
+    storageType === StorageType.SESSION &&
+    typeof window !== "undefined" &&
+    window.sessionStorage
   )
 }
 
 const isLocalStorage = (storageType: StorageType) => {
-  return storageType === StorageType.LOCAL && isBrowser() && window.localStorage
+  return (
+    storageType === StorageType.LOCAL &&
+    typeof window !== "undefined" &&
+    window.localStorage
+  )
 }
 
 export class KlevuStorage {
