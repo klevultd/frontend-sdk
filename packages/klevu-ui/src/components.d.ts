@@ -515,6 +515,10 @@ export namespace Components {
          */
         "language": Translations;
         /**
+          * Override the default moi API URL
+         */
+        "moiApiUrl"?: string;
+        /**
           * Override the default recommendations API URL
          */
         "recommendationsApiUrl"?: string;
@@ -3038,6 +3042,10 @@ declare namespace LocalJSX {
           * Which language to load
          */
         "language"?: Translations;
+        /**
+          * Override the default moi API URL
+         */
+        "moiApiUrl"?: string;
         "onKlevuInitSettingsUpdated"?: (event: KlevuInitCustomEvent<KlevuUIGlobalSettings>) => void;
         /**
           * Override the default recommendations API URL

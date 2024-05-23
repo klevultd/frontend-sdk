@@ -68,6 +68,10 @@ export class KlevuInit {
    */
   @Prop() visitorServiceUrl?: string
   /**
+   * Override the default moi API URL
+   */
+  @Prop() moiApiUrl?: string
+  /**
    * Global settings
    */
   @Prop() settings: KlevuUIGlobalSettings = {
@@ -134,6 +138,7 @@ export class KlevuInit {
       enableKlaviyoConnector: this.enableKlaviyoConnector || false,
       useConsent: this.useConsent || false,
       consentGiven: this.consentGiven || false,
+      moiApiUrl: this.moiApiUrl || "",
     })
 
     if (this.translation) {
