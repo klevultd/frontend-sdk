@@ -69,6 +69,13 @@ export const ConfigDrawer = () => {
       window.location.reload()
     }, 100)
   }
+  const onResetPersonalisation = () => {
+    localStorage.removeItem("klevu-last-searches");
+    localStorage.removeItem("klevu-last-clicks");
+    setTimeout(() => {
+      window.location.reload()
+    }, 100)
+  }
   return (
     <>
       <IconButton onClick={() => setIsDrawerOpen(true)}>
@@ -122,6 +129,20 @@ export const ConfigDrawer = () => {
               <Typography variant="body1" component="div">
                 General
               </Typography>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" component="div">
+                Reset Personalisation Data
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <Button
+                onClick={onResetPersonalisation}
+                variant="outlined"
+                color="primary"
+              >
+                Reset & Refresh
+              </Button>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">
