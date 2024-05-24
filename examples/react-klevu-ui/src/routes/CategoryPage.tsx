@@ -27,7 +27,7 @@ export function CategoryPage() {
           localStorage.getItem("demo-config")
             ? JSON.parse(localStorage.getItem("demo-config"))
                 ?.categoryPageRecommendationId
-            : ""
+            : "k-c0013603-1783-4293-bf80-7b3002587dcb"
         }
         currentProductId={params.id}
         itemGroupId={params.groupId}
