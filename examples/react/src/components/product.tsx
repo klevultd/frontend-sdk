@@ -28,9 +28,12 @@ const containerCss = css`
   }
 
   .title {
-    padding: 12px;
-    height: 16px;
     font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 1rem;
   }
 
   .price {
@@ -113,11 +116,13 @@ const ProductCard = (props: {
           backgroundImage: `url(${p.imageUrl})`,
         }}
       ></div>
-      <Typography
-        variant="body2"
-        className="title"
-        dangerouslySetInnerHTML={{ __html: p.name }}
-      ></Typography>
+      <Tooltip placement="bottom" title={p.name}>
+        <Typography
+          variant="body2"
+          className="title"
+          dangerouslySetInnerHTML={{ __html: p.name }}
+        ></Typography>
+      </Tooltip>
       <Typography variant="h6" className="price">
         {new Intl.NumberFormat(undefined, {
           style: "currency",
