@@ -36,6 +36,28 @@ export function ProductPage() {
   const fetchProduct = useCallback(async () => {
     const alsoViewedId = "alsoviewed" + new Date().getTime()
     const similarId = "similar" + new Date().getTime()
+    let recsPayload
+    try {
+      if (config.productPageRecommendationId) {
+        recsPayload = await kmcRecommendation(
+          config.productPageRecommendationId,
+          {
+            id: alsoViewedId,
+            currentProductId: params.id,
+            itemGroupId: params.groupId,
+            mode: "demo",
+            searchPrefs: debugMode ? ["debugQuery"] : undefined,
+          },
+          sendRecommendationViewEvent({
+            logic: KMCRecommendationLogic.OtherAlsoViewed,
+            recsKey: "also-viewed-demo",
+            title: "Also viewed KMC recommendation",
+          })
+        )
+      }
+    } catch (e) {
+      console.error("Failed to load product page", e)
+    }
     const res = await KlevuFetch(
       products([params.id]),
       similarProducts(
@@ -47,30 +69,18 @@ export function ProductPage() {
         },
         exclude([params.groupId])
       ),
-      kmcRecommendation(
-        config.productPageRecommendationId,
-        {
-          id: alsoViewedId,
-          currentProductId: params.id,
-          itemGroupId: params.groupId,
-          mode: "demo",
-          searchPrefs: debugMode ? ["debugQuery"] : undefined,
-        },
-        sendRecommendationViewEvent({
-          logic: KMCRecommendationLogic.OtherAlsoViewed,
-          recsKey: "also-viewed-demo",
-          title: "Also viewed KMC recommendation",
-        })
-      )
+      recsPayload || {}
     )
 
     const product = res.queriesById("products")?.records?.[0]
     const sim = res.queriesById(similarId)
-    const also = res.queriesById(alsoViewedId)
     setProduct(product)
     setSimilar(sim?.records)
-    setAlsoBoought(also?.records)
-    setAlsoResult(also)
+    if (recsPayload?.queries?.length > 0) {
+      const also = res.queriesById(alsoViewedId)
+      setAlsoBoought(also?.records)
+      setAlsoResult(also)
+    }
   }, [params.id])
 
   useEffect(() => {
@@ -186,16 +196,18 @@ export function ProductPage() {
           }}
         />
 
-        <RecommendationBanner
-          products={alsoviewed}
-          title="Also viewed KMC recommendation"
-          productClick={(productId, variantId, product, index) => {
-            alsoResult.recommendationClickEvent?.({
-              productId,
-              variantId,
-            })
-          }}
-        />
+        {alsoviewed.length > 0 && (
+          <RecommendationBanner
+            products={alsoviewed}
+            title="Also viewed KMC recommendation"
+            productClick={(productId, variantId, product, index) => {
+              alsoResult.recommendationClickEvent?.({
+                productId,
+                variantId,
+              })
+            }}
+          />
+        )}
       </div>
     </Container>
   )

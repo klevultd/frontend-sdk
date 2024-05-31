@@ -24,47 +24,59 @@ export function HomePage() {
   const { debugMode } = useGlobalVariables()
 
   const fetchData = async () => {
+    if (!config.homePageRecommendationId1 && !config.homePageRecommendationId2)
+      return
+    let recsPayload1, recsPayload2
     const trendingRecsId = "trendingrecs" + new Date().getTime()
     const trendingRecsNonPersonalizedId =
       "trendingrecs-nopersonalisation" + new Date().getTime()
-    const result = await KlevuFetch(
-      kmcRecommendation(
-        config.homePageRecommendationId1,
-        {
-          id: trendingRecsId,
-          mode: "demo",
-          searchPrefs: debugMode ? ["debugQuery"] : undefined,
-        },
-        sendRecommendationViewEvent({
-          logic: KMCRecommendationLogic.Trending,
-          recsKey: "trending-recs-personalised-demo",
-          title: "Trending recommendations using KMC builder personalised",
-        })
-      ),
-      kmcRecommendation(
-        config.homePageRecommendationId2,
-        {
-          id: trendingRecsNonPersonalizedId,
-          mode: "demo",
-          searchPrefs: debugMode ? ["debugQuery"] : undefined,
-        },
-        sendRecommendationViewEvent({
-          logic: KMCRecommendationLogic.Trending,
-          recsKey: "trending-recs-demo",
-          title: "Trending recommendations using KMC builder",
-        })
+    try {
+      if (config.homePageRecommendationId1) {
+        recsPayload1 = await kmcRecommendation(
+          config.homePageRecommendationId1,
+          {
+            id: trendingRecsId,
+            mode: "demo",
+            searchPrefs: debugMode ? ["debugQuery"] : undefined,
+          },
+          sendRecommendationViewEvent({
+            logic: KMCRecommendationLogic.Trending,
+            recsKey: "trending-recs-personalised-demo",
+            title: "Trending recommendations using KMC builder personalised",
+          })
+        )
+      }
+      if (config.homePageRecommendationId2) {
+        recsPayload2 = await kmcRecommendation(
+          config.homePageRecommendationId2,
+          {
+            id: trendingRecsNonPersonalizedId,
+            mode: "demo",
+            searchPrefs: debugMode ? ["debugQuery"] : undefined,
+          },
+          sendRecommendationViewEvent({
+            logic: KMCRecommendationLogic.Trending,
+            recsKey: "trending-recs-demo",
+            title: "Trending recommendations using KMC builder",
+          })
+        )
+      }
+    } catch (error) {
+      console.error("Failed to load recs on home page", error)
+    }
+    const result = await KlevuFetch(recsPayload1 || {}, recsPayload2 || {})
+    if (recsPayload1?.queries?.length > 0) {
+      setTrendingResult(result.queriesById(trendingRecsId))
+      setTrendingRecs(result.queriesById(trendingRecsId)?.records)
+    }
+    if (recsPayload2?.queries?.length > 0) {
+      setTrendingResultNoPersonalisation(
+        result.queriesById(trendingRecsNonPersonalizedId)
       )
-    )
-
-    setTrendingResult(result.queriesById(trendingRecsId))
-    setTrendingResultNoPersonalisation(
-      result.queriesById(trendingRecsNonPersonalizedId)
-    )
-
-    setTrendingRecs(result.queriesById(trendingRecsId)?.records)
-    setTrendingRecsNoPersonlisation(
-      result.queriesById(trendingRecsNonPersonalizedId)?.records
-    )
+      setTrendingRecsNoPersonlisation(
+        result.queriesById(trendingRecsNonPersonalizedId)?.records
+      )
+    }
   }
 
   useEffect(() => {
@@ -89,27 +101,31 @@ export function HomePage() {
           implement everything as a example.
         </Typography>
 
-        <RecommendationBanner
-          products={trendingRecs}
-          title="Trending recommendations using KMC builder personalised"
-          productClick={(productId, variantId) => {
-            trendingResult.recommendationClickEvent?.({
-              productId,
-              variantId,
-            })
-          }}
-        />
+        {trendingRecs.length > 0 && (
+          <RecommendationBanner
+            products={trendingRecs}
+            title="Trending recommendations using KMC builder personalised"
+            productClick={(productId, variantId) => {
+              trendingResult.recommendationClickEvent?.({
+                productId,
+                variantId,
+              })
+            }}
+          />
+        )}
 
-        <RecommendationBanner
-          products={trendingRecsNoPersonlisation}
-          title="Trending recommendations using KMC builder"
-          productClick={(productId, variantId) => {
-            trendingResultNoPersonalisation.recommendationClickEvent?.({
-              productId,
-              variantId,
-            })
-          }}
-        />
+        {trendingRecsNoPersonlisation.length > 0 && (
+          <RecommendationBanner
+            products={trendingRecsNoPersonlisation}
+            title="Trending recommendations using KMC builder"
+            productClick={(productId, variantId) => {
+              trendingResultNoPersonalisation.recommendationClickEvent?.({
+                productId,
+                variantId,
+              })
+            }}
+          />
+        )}
       </Container>
     </Fragment>
   )

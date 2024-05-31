@@ -11,17 +11,21 @@ import {
   ListItem,
   Button,
   Divider,
+  Snackbar,
+  Menu,
+  MenuItem,
 } from "@mui/material"
 import SettingsIcon from "@mui/icons-material/Settings"
 import { config, saveConfig, resetConfig } from "../config"
+import useCopyToClipboard from "../useCopyToClipboard"
 
 const stylesDrawer = {
-  maxWidth: 900,
+  maxWidth: 700,
   minWidth: 600,
   width: "75%",
   flexShrink: 0,
   "& .MuiDrawer-paper": {
-    maxWidth: 900,
+    maxWidth: 700,
     minWidth: 600,
     width: "75%",
     boxSizing: "border-box",
@@ -46,19 +50,27 @@ const stylesDrawer = {
 
 export const ConfigDrawer = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
-  const inputConfig = useRef(config)
+  const [inputConfig, setInputConfig] = useState(config)
+  const copy = useCopyToClipboard()
+  const [showCopied, setShowCopied] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const onChangeValue = (id, value) => {
-    inputConfig.current[id] = value
+    setInputConfig((c) => {
+      c[id] = value
+      return c
+    })
   }
   const onChangeValueNav = (id, value) => {
     let [name, key] = id.split("-")
-    inputConfig.current.nav[key][name] = value
+    setInputConfig((c) => {
+      c.nav[key][name] = value
+      return c
+    })
   }
 
   const onSave = () => {
-    saveConfig(inputConfig.current)
+    saveConfig(inputConfig)
     setTimeout(() => {
       window.location.reload()
     }, 100)
@@ -69,13 +81,64 @@ export const ConfigDrawer = () => {
       window.location.reload()
     }, 100)
   }
+
+  const onResetForm = () => {
+    const inputBoxes = document.querySelectorAll<HTMLInputElement>(
+      '.configurationsDrawer input[type="text"]'
+    )
+    inputBoxes.forEach((inputBox) => {
+      inputBox.value = ""
+      if (typeof inputConfig[inputBox.id] === "string") {
+        inputConfig[inputBox.id] = ""
+      }
+    })
+    inputConfig.nav = [
+      {
+        key: "",
+        label: "",
+        emoji: "",
+      },
+      {
+        key: "",
+        label: "",
+        emoji: "",
+      },
+      {
+        key: "",
+        label: "",
+        emoji: "",
+      },
+    ]
+    setInputConfig(inputConfig)
+    handleClose()
+  }
+
   const onResetPersonalisation = () => {
-    localStorage.removeItem("klevu-last-searches");
-    localStorage.removeItem("klevu-last-clicks");
+    localStorage.removeItem("klevu-last-searches")
+    localStorage.removeItem("klevu-last-clicks")
     setTimeout(() => {
       window.location.reload()
     }, 100)
+    handleClose()
   }
+
+  const onCopyUrl = (config) => {
+    const url =
+      window.location.href +
+      "?demo-config=" +
+      encodeURIComponent(JSON.stringify(config))
+    copy(url)
+    setShowCopied(true)
+    handleClose()
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  const open = Boolean(anchorEl)
   return (
     <>
       <IconButton onClick={() => setIsDrawerOpen(true)}>
@@ -90,8 +153,15 @@ export const ConfigDrawer = () => {
         onClose={() => setIsDrawerOpen(false)}
         className="configurationsDrawer"
       >
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={showCopied}
+          autoHideDuration={5000}
+          onClose={() => setShowCopied(false)}
+          message="Shareable URL copied successfully."
+        />
         <Box p={1} textAlign="center" role="configurations">
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems={"center"}>
             <Grid item xs={1}>
               <IconButton onClick={() => setIsDrawerOpen(false)}>
                 <ChevronLeft />
@@ -102,9 +172,49 @@ export const ConfigDrawer = () => {
                 Configurations
               </Typography>
             </Grid>
-            <Grid item xs={3}>
-              <Grid container spacing={1}>
-                <Grid item xs={6}>
+            <Grid item xs={3} alignItems={"end"}>
+              <Button
+                id="actions"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                size="large"
+                variant="outlined"
+                color="secondary"
+                onClick={handleClick}
+              >
+                Actions
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={onSave}>Save</MenuItem>
+                <MenuItem onClick={onReset}>Reset to Default & Save</MenuItem>
+                <MenuItem onClick={onResetForm}>Reset Form</MenuItem>
+                <MenuItem onClick={onResetPersonalisation}>
+                  Reset Personalization Data
+                </MenuItem>
+                <MenuItem onClick={() => onCopyUrl(inputConfig)}>
+                  Copy as Url
+                </MenuItem>
+              </Menu>
+              {/* <Grid container spacing={1}>
+                <Grid item xs={3}>
+                  <Button
+                    onClick={onResetForm}
+                    variant="outlined"
+                    color="secondary"
+                  >
+                    Reset Form
+                  </Button>
+                </Grid>
+                <Grid item xs={3}>
                   <Button
                     onClick={onReset}
                     variant="outlined"
@@ -113,12 +223,21 @@ export const ConfigDrawer = () => {
                     Reset
                   </Button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={3}>
                   <Button onClick={onSave} variant="outlined" color="primary">
                     Save
                   </Button>
                 </Grid>
-              </Grid>
+                <Grid item xs={3}>
+                  <Button
+                    onClick={onCopyUrl}
+                    variant="outlined"
+                    color="primary"
+                  >
+                    Copy Url
+                  </Button>
+                </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </Box>
@@ -130,7 +249,7 @@ export const ConfigDrawer = () => {
                 General
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            {/* <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">
                 Reset Personalisation Data
               </Typography>
@@ -143,7 +262,7 @@ export const ConfigDrawer = () => {
               >
                 Reset & Refresh
               </Button>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">
                 Search url
@@ -390,54 +509,56 @@ export const ConfigDrawer = () => {
                       </Grid>
                     </Grid>
                   </ListItem>
-                  {config.nav.map((item, key) => (
-                    <ListItem key={item.key}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={5}>
-                          <TextField
-                            fullWidth
-                            id={"key-" + key}
-                            type="text"
-                            defaultValue={item.key}
-                            onChange={(e) =>
-                              onChangeValueNav(
-                                e.target.id,
-                                e.target.value.trim()
-                              )
-                            }
-                          />
+                  {config.nav.map((item, key) => {
+                    return (
+                      <ListItem key={key.toString()}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={5}>
+                            <TextField
+                              fullWidth
+                              id={"key-" + key}
+                              type="text"
+                              defaultValue={item.key}
+                              onChange={(e) =>
+                                onChangeValueNav(
+                                  e.target.id,
+                                  e.target.value.trim()
+                                )
+                              }
+                            />
+                          </Grid>
+                          <Grid item xs={5}>
+                            <TextField
+                              fullWidth
+                              id={"label-" + key}
+                              type="text"
+                              defaultValue={item.label}
+                              onChange={(e) =>
+                                onChangeValueNav(
+                                  e.target.id,
+                                  e.target.value.trim()
+                                )
+                              }
+                            />
+                          </Grid>
+                          <Grid item xs={2}>
+                            <TextField
+                              fullWidth
+                              id={"emoji-" + key}
+                              type="text"
+                              defaultValue={item.emoji}
+                              onChange={(e) =>
+                                onChangeValueNav(
+                                  e.target.id,
+                                  e.target.value.trim()
+                                )
+                              }
+                            />
+                          </Grid>
                         </Grid>
-                        <Grid item xs={5}>
-                          <TextField
-                            fullWidth
-                            id={"label-" + key}
-                            type="text"
-                            defaultValue={item.label}
-                            onChange={(e) =>
-                              onChangeValueNav(
-                                e.target.id,
-                                e.target.value.trim()
-                              )
-                            }
-                          />
-                        </Grid>
-                        <Grid item xs={2}>
-                          <TextField
-                            fullWidth
-                            id={"emoji-" + key}
-                            type="text"
-                            defaultValue={item.emoji}
-                            onChange={(e) =>
-                              onChangeValueNav(
-                                e.target.id,
-                                e.target.value.trim()
-                              )
-                            }
-                          />
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                  ))}
+                      </ListItem>
+                    )
+                  })}
                 </List>
               </Box>
             </Grid>

@@ -32,9 +32,14 @@ export function CheckoutPage() {
   const { debugMode } = useGlobalVariables()
 
   const fetchData = async () => {
+    if (!config.checkoutPageRecommendationId) {
+      return
+    }
     const alsoBoughtId = "alsobought" + new Date().getTime()
-    const result = await KlevuFetch(
-      kmcRecommendation(
+
+    let recsPayload
+    try {
+      recsPayload = await kmcRecommendation(
         config.checkoutPageRecommendationId,
         {
           id: alsoBoughtId,
@@ -48,10 +53,15 @@ export function CheckoutPage() {
           title: "Also bought together KMC recommendation",
         })
       )
-    )
+    } catch (err) {
+      console.error("Failed to render checkout recs", err)
+    }
 
-    setAlsoBoughtResult(result.queriesById(alsoBoughtId))
-    setAlsoBoughtProducts(result.queriesById(alsoBoughtId).records)
+    const result = await KlevuFetch(recsPayload || {})
+    if (recsPayload?.queries?.length > 0) {
+      setAlsoBoughtResult(result.queriesById(alsoBoughtId))
+      setAlsoBoughtProducts(result.queriesById(alsoBoughtId).records)
+    }
   }
 
   useEffect(() => {
@@ -124,16 +134,18 @@ export function CheckoutPage() {
         </Button>
       </div>
 
-      <RecommendationBanner
-        products={alsoBoughtProducts}
-        title="Also bought together KMC recommendation"
-        productClick={(productId, variantId) => {
-          alsoBoughtResult.recommendationClickEvent?.({
-            productId,
-            variantId,
-          })
-        }}
-      />
+      {alsoBoughtProducts.length > 0 && (
+        <RecommendationBanner
+          products={alsoBoughtProducts}
+          title="Also bought together KMC recommendation"
+          productClick={(productId, variantId) => {
+            alsoBoughtResult.recommendationClickEvent?.({
+              productId,
+              variantId,
+            })
+          }}
+        />
+      )}
     </Container>
   )
 }

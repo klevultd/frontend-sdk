@@ -8,8 +8,10 @@ import isUndefined from "lodash.isundefined"
 const containerCss = css`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   width: 180px;
+  min-height: 300px;
+  height: 300px;
   text-align: center;
   vertical-align: top;
   cursor: pointer;
