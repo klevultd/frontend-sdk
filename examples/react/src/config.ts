@@ -26,7 +26,21 @@ let loadedConfig: Config | undefined
 if (window.localStorage) {
   try {
     loadedConfig = JSON.parse(window.localStorage.getItem("demo-config"))
-  } catch (e) {}
+  } catch (e) {
+    console.error(
+      "Error getting from storage config",
+      window.localStorage.getItem("demo-config")
+    )
+  }
+}
+const urlConfig = new URLSearchParams(window.location.search).get("demo-config")
+
+if (urlConfig) {
+  try {
+    loadedConfig = JSON.parse(urlConfig)
+  } catch (e) {
+    console.error("Error getting from url config", urlConfig)
+  }
 }
 
 export const config: Config = {

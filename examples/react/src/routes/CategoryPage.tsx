@@ -81,6 +81,28 @@ export function CategoryPage() {
   const initialFetch = useCallback(async () => {
     searchId.current = "search" + new Date().getTime()
     const recommendationId = "recommendation" + new Date().getTime()
+    let recsPayload
+
+    try {
+      if (config.categoryPageRecommendationId) {
+        recsPayload = await kmcRecommendation(
+          config.categoryPageRecommendationId,
+          {
+            categoryPath: params.id,
+            id: recommendationId,
+            mode: "demo",
+            searchPrefs: debugMode ? ["debugQuery"] : undefined,
+          },
+          sendRecommendationViewEvent({
+            logic: KMCRecommendationLogic.Similar,
+            recsKey: "category-product-recs-demo",
+            title: "Category product recommendations",
+          })
+        )
+      }
+    } catch (e) {
+      console.error("Failed to get recs data", e)
+    }
     const res = await KlevuFetch(
       categoryMerchandising(
         params.id,
@@ -106,35 +128,26 @@ export function CategoryPage() {
         sendMerchandisingViewEvent(params.id),
         abTest()
       ),
-      kmcRecommendation(
-        config.categoryPageRecommendationId,
-        {
-          categoryPath: params.id,
-          id: recommendationId,
-          mode: "demo",
-          searchPrefs: debugMode ? ["debugQuery"] : undefined,
-        },
-        sendRecommendationViewEvent({
-          logic: KMCRecommendationLogic.Similar,
-          recsKey: "category-product-recs-demo",
-          title: "Category product recommendations",
-        })
-      )
+      recsPayload || {}
     )
+
     const searchResult = res.queriesById(searchId.current)
-    const recommendationResult = res.queriesById(recommendationId)
 
     if (!searchResult) {
       return
     }
 
+    if (recsPayload?.queries?.length > 0) {
+      const recommendationResult = res.queriesById(recommendationId)
+      setRecommendationResponse(recommendationResult)
+      setRecommendationProducts(recommendationResult?.records ?? [])
+    }
+
     setSearchResponse(searchResult)
-    setRecommendationResponse(recommendationResult)
 
     setShowMore(searchResult.hasNextPage())
     setFilters(manager.filters)
     setProducts(searchResult.records ?? [])
-    setRecommendationProducts(recommendationResult?.records ?? [])
   }, [sorting, params.id, itemsOnPage])
 
   const fetchMore = async () => {
@@ -186,16 +199,18 @@ export function CategoryPage() {
         filters={filters}
       />
 
-      <RecommendationBanner
-        products={recommendationProducts}
-        title="Category product recommendations"
-        productClick={(productId, variantId, product, index) => {
-          recommendationResponse.recommendationClickEvent?.({
-            productId,
-            variantId,
-          })
-        }}
-      />
+      {recommendationProducts.length > 0 && (
+        <RecommendationBanner
+          products={recommendationProducts}
+          title="Category product recommendations"
+          productClick={(productId, variantId, product, index) => {
+            recommendationResponse.recommendationClickEvent?.({
+              productId,
+              variantId,
+            })
+          }}
+        />
+      )}
 
       <div id="main">
         <Typography variant="h4" style={{ margin: "3rem 0" }}>

@@ -10,9 +10,9 @@ import { CartButton } from "./cartbutton"
 import { Divider, FormControlLabel, Switch } from "@mui/material"
 import { config } from "../config"
 import { useGlobalVariables } from "../globalVariablesContext"
-import { ConfigDrawer } from "./configdrawer";
+import { ConfigDrawer } from "./configdrawer"
 
-export const pages = config.nav.map((n) => n.label)
+export const pages = config.nav.filter((n) => n.label).map((n) => n.label)
 export const links = config.nav.map((n) => n.key)
 const emojis = config.nav.reduce((a, v) => ({ ...a, [v.label]: v.emoji }), {})
 
