@@ -167,12 +167,12 @@ export const ConfigDrawer = () => {
                 <ChevronLeft />
               </IconButton>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <Typography variant="h6" component="div">
                 Configurations
               </Typography>
             </Grid>
-            <Grid item xs={3} alignItems={"end"}>
+            <Grid item xs={2} alignItems={"end"}>
               <Button
                 id="actions"
                 aria-controls={open ? "basic-menu" : undefined}
@@ -182,6 +182,7 @@ export const ConfigDrawer = () => {
                 variant="outlined"
                 color="secondary"
                 onClick={handleClick}
+                style={{ display: "inline" }}
               >
                 Actions
               </Button>
@@ -194,9 +195,8 @@ export const ConfigDrawer = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={onSave}>Save</MenuItem>
                 <MenuItem onClick={onReset}>Reset to Default & Save</MenuItem>
-                <MenuItem onClick={onResetForm}>Reset Form</MenuItem>
+                <MenuItem onClick={onResetForm}>Reset Fields</MenuItem>
                 <MenuItem onClick={onResetPersonalisation}>
                   Reset Personalization Data
                 </MenuItem>
@@ -204,6 +204,17 @@ export const ConfigDrawer = () => {
                   Copy as Url
                 </MenuItem>
               </Menu>
+            </Grid>
+            <Grid item xs={2} alignItems={"end"}>
+              <Button
+                onClick={onSave}
+                variant="outlined"
+                color="primary"
+                size="large"
+                style={{ display: "inline" }}
+              >
+                Save
+              </Button>
               {/* <Grid container spacing={1}>
                 <Grid item xs={3}>
                   <Button
