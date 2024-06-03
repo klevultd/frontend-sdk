@@ -69,14 +69,23 @@ export const ConfigDrawer = () => {
     })
   }
 
+  const removeUrlParam = () => {
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.delete("demo-config")
+    window.location.href =
+      window.location.href.split("?")[0] + "?" + searchParams.toString()
+  }
+
   const onSave = () => {
     saveConfig(inputConfig)
+    removeUrlParam()
     setTimeout(() => {
       window.location.reload()
     }, 100)
   }
   const onReset = () => {
     resetConfig()
+    removeUrlParam()
     setTimeout(() => {
       window.location.reload()
     }, 100)
@@ -123,10 +132,10 @@ export const ConfigDrawer = () => {
   }
 
   const onCopyUrl = (config) => {
+    const searchParams = new URLSearchParams(window.location.search)
+    searchParams.append("demo-config", JSON.stringify(config))
     const url =
-      window.location.href +
-      "?demo-config=" +
-      encodeURIComponent(JSON.stringify(config))
+      window.location.href.split("?")[0] + "?" + searchParams.toString()
     copy(url)
     setShowCopied(true)
     handleClose()

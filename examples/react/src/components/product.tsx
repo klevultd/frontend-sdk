@@ -115,7 +115,10 @@ const ProductCard = (props: {
       <div
         className="image"
         style={{
-          backgroundImage: `url(${p.imageUrl})`,
+          backgroundImage: `url(${p.imageUrl}), url(${p.imageUrl.replace(
+            "needtochange/",
+            ""
+          )}), url(${p.imageUrl.replace("needtochange/", "pub/")})`,
         }}
       ></div>
       <Tooltip placement="bottom" title={p.name}>
