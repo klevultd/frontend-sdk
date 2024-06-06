@@ -441,7 +441,10 @@ export class KlevuProduct {
         class="image"
         part="product-image"
         style={{
-          backgroundImage: `url(${imageUrl})${fallback}`,
+          backgroundImage: `url(${imageUrl}), url(${imageUrl.replace("needtochange/", "")}), url(${imageUrl.replace(
+            "needtochange/",
+            "pub/"
+          )})${fallback}`,
         }}
       >
         {this.hideHoverImage !== true && this.product?.imageHover ? (
