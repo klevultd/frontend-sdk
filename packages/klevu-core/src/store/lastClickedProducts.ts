@@ -7,7 +7,8 @@ import { KlevuStorage } from "../utils/storage.js"
 
 const ONE_HOUR = 36000000
 export const LAST_CLICKED_STORAGE_KEY = "klevu-last-clicks"
-
+export const LAST_CLICKED_CATEGORY_STORAGE_KEY = "klevu-last-clicks-cat"
+const MAX_COUNT = 20
 /**
  * Keeps track of last clicked products in store
  */
@@ -36,12 +37,27 @@ class LastClickedProducts {
       )
     }
   }
+  private saveCat(){
+    if (KlevuConfig.getDefault().disableClickTracking) {
+      return
+    }
+    if (isBrowser() && window.localStorage) {
+      KlevuStorage.setItem(
+        LAST_CLICKED_CATEGORY_STORAGE_KEY,
+        JSON.stringify(this.categoryCache)
+      )
+    }
+  }
 
   private restore() {
     if (isBrowser() && window.localStorage) {
       const res = KlevuStorage.getItem(LAST_CLICKED_STORAGE_KEY)
       if (res) {
         this.clicks = JSON.parse(res)
+      }
+      const resCat = KlevuStorage.getItem(LAST_CLICKED_CATEGORY_STORAGE_KEY)
+      if (resCat) {
+        this.categoryCache = JSON.parse(resCat)
       }
     }
   }
@@ -60,13 +76,19 @@ class LastClickedProducts {
     if (KlevuConfig.getDefault().disableClickTracking) {
       return
     }
+    const lastIndex = this.clicks.findIndex((ls) => ls.id === productId)
 
+    if (lastIndex > -1) {
+      this.clicks.splice(lastIndex, 1)
+    }
     this.clicks.push({
       ts: new Date(),
       id: productId,
       product,
     })
-
+    if (this.clicks.length > MAX_COUNT) {
+      this.clicks = this.clicks.slice(MAX_COUNT * -1)
+    }
     this.save()
 
     if (isBrowser()) {
@@ -148,7 +170,6 @@ class LastClickedProducts {
     }
 
     let itemsToTake = Math.floor(currentClicks.length / 3) * 3;
-    if(itemsToTake>18) itemsToTake = 18;
     const ids = Array.from(currentClicks)
       .reverse()
       .filter(
@@ -160,7 +181,7 @@ class LastClickedProducts {
       cached: new Date(),
       ids,
     }
-
+    this.saveCat();
     return ids
   }
 }
