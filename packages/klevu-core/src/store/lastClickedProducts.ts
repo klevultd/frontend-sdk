@@ -172,7 +172,7 @@ class LastClickedProducts {
       }
     }
 
-    let itemsToTake = Math.floor(currentClicks.length / 3) * 3;
+    const itemsToTake = Math.floor(currentClicks.length / 3) * 3;
     const ids = Array.from(currentClicks)
       .reverse()
       .filter(
