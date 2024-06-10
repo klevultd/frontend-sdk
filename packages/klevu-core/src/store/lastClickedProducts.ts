@@ -3,7 +3,7 @@ import { KlevuRecord } from "../models/KlevuRecord.js"
 import { isBrowser } from "../utils/isBrowser.js"
 import { KlevuDomEvents } from "../events/KlevuDomEvents.js"
 import { KlevuConfig } from "../config.js"
-import { KlevuStorage } from "../utils/storage.js"
+import { KlevuStorage , StorageType } from "../utils/storage.js"
 
 const ONE_HOUR = 36000000
 export const LAST_CLICKED_STORAGE_KEY = "klevu-last-clicks"
@@ -41,10 +41,11 @@ class LastClickedProducts {
     if (KlevuConfig.getDefault().disableClickTracking) {
       return
     }
-    if (isBrowser() && window.localStorage) {
+    if (isBrowser() && window.sessionStorage) {
       KlevuStorage.setItem(
         LAST_CLICKED_CATEGORY_STORAGE_KEY,
-        JSON.stringify(this.categoryCache)
+        JSON.stringify(this.categoryCache),
+        StorageType.SESSION
       )
     }
   }
@@ -55,7 +56,9 @@ class LastClickedProducts {
       if (res) {
         this.clicks = JSON.parse(res)
       }
-      const resCat = KlevuStorage.getItem(LAST_CLICKED_CATEGORY_STORAGE_KEY)
+    }
+    if (isBrowser() && window.sessionStorage) {
+      const resCat = KlevuStorage.getItem(LAST_CLICKED_CATEGORY_STORAGE_KEY,StorageType.SESSION)
       if (resCat) {
         this.categoryCache = JSON.parse(resCat)
       }
@@ -181,6 +184,8 @@ class LastClickedProducts {
       cached: new Date(),
       ids,
     }
+    KlevuStorage.addKey(LAST_CLICKED_CATEGORY_STORAGE_KEY);
+
     this.saveCat();
     return ids
   }
