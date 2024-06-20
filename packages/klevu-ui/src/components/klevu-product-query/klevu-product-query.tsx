@@ -49,7 +49,7 @@ export class KlevuProductQuery {
   /**
    * Placeholder of the textfield
    */
-  @Prop() textFieldPlaceholder: string = "Ask a questions"
+  @Prop() textFieldPlaceholder: string = "Enter your question here..."
 
   /**
    * Title of the popup
@@ -59,7 +59,7 @@ export class KlevuProductQuery {
   /**
    * Text of the button to open the popup
    */
-  @Prop() buttonText = "Ask a Question"
+  @Prop() buttonText = "Ask Product AI"
 
   /**
    * Fine print of the popup under the title
