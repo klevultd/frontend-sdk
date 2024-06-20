@@ -22,9 +22,9 @@
     "tAddToCart": "Lisää koriin"
   },
   "productQueryPopup": {
-    "tTextFieldPlaceholder": "Kysy kysymys",
-    "tPopuptitle": "Kysy kysymys",
-    "tButtonText": "Kysy kysymys",
+    "tTextFieldPlaceholder": "Kirjoita kysymyksesi tähän...",
+    "tPopuptitle": "Ask a Question",
+    "tButtonText": "Kysy Product AI",
     "tFinePrint": "Olen tekoälymalli. Saatan joskus tehdä virheitä. Varmista vastaukset tuotesivulta.",
     "tLoadingSorry": "Saatan käyttää muutaman ylimääräisen sekunnin ensimmäisen kysymyksen kanssa, jos minun tarvitsee hakea koko verkkosivu.",
     "tRateExperienceTitle": "Arvioi kokemuksesi",
