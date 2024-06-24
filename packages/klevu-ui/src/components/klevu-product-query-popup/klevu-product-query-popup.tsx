@@ -9,6 +9,7 @@ import {
   MoiActionsMessage,
   KlevuConfig,
   MoiRequest,
+  MoiQuestion,
 } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
@@ -158,6 +159,7 @@ export class KlevuProductQueryPopup {
   el!: HTMLKlevuProductElement
 
   @State() messages: MoiMessages = []
+  @State() questions: MoiQuestion[] = []
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -181,8 +183,8 @@ export class KlevuProductQueryPopup {
     this.#layoutElement?.scrollMainToBottom()
   }
 
-  async #sendMessage() {
-    const message = this.text.trim()
+  async #sendMessage(overrideMessageValue?: string) {
+    const message = overrideMessageValue || this.text.trim()
 
     if (message == "") {
       return
@@ -249,6 +251,7 @@ export class KlevuProductQueryPopup {
       },
     })
     this.messages = this.session.messages
+    this.questions = this.session.questions
     this.feedbacks = this.session.feedbacks
 
     await this.#layoutElement?.scrollMainToBottom("instant")
@@ -263,6 +266,10 @@ export class KlevuProductQueryPopup {
     }
 
     this.showMessageFeedbackFor = action.context.messageId
+  }
+
+  #onQuestionClick(question: string) {
+    this.#sendMessage(question)
   }
 
   async #onFeedback(e: CustomEvent<onKlevuMessageFeedbackDetails>) {
@@ -342,6 +349,9 @@ export class KlevuProductQueryPopup {
               ) : null}
             </div>
           </klevu-chat-messages>
+          {this.questions.map((question) => (
+            <klevu-button onClick={() => this.#onQuestionClick(question)}>question</klevu-button>
+          ))}
           <div part="product-query-popup-footer" slot="footer">
             {!this.registered ? (
               <Fragment>

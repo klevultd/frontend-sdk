@@ -100,6 +100,12 @@ export type MoiMenuOptions = {
   }
 }
 
+export type MoiQuestionsResponse = {
+  questions: {
+    options: MoiQuestion[]
+  }
+}
+
 export type MoiProducts = {
   productData: {
     note: string | null
@@ -154,6 +160,9 @@ export type MoiResponseObjects =
   | MoiMenuOptions
   | MoiProducts
   | MoiActionsMessage
+  | MoiQuestionsResponse
+
+export type MoiQuestion = string
 
 export type MoiMessages = Array<
   MoiResponseText | MoiResponseFilter | MoiProducts | MoiLocalMessage
@@ -242,6 +251,7 @@ export async function startMoi(
 ): Promise<MoiSession> {
   const config = options.settings?.configOverride || KlevuConfig.getDefault()
   let startingMessages: MoiMessages = []
+  let questions: MoiQuestion[] = []
 
   let ctx: MoiContext = {
     klevuApiKey: config.apiKey,
@@ -288,8 +298,6 @@ export async function startMoi(
           }
         }
     }
-  } else {
-    shouldSendMessage = true
   }
 
   if (shouldSendMessage) {
@@ -309,12 +317,14 @@ export async function startMoi(
     startingMessages = parsed.messages
     menu = parsed.menu
     genericOptions = parsed.genericOptions
+    questions = parsed.questions || []
   }
 
   return new MoiSession(
     {
       feedbacks,
       messages: startingMessages,
+      questions,
       menu,
       genericOptions,
     },
@@ -327,6 +337,7 @@ export async function startMoi(
 export class MoiSession {
   constructor(
     state: {
+      questions: MoiQuestion[]
       messages: MoiMessages
       menu: MoiMenuOptions["menuOptions"]
       genericOptions: MoiResponseGenericOptions["genericOptions"]
@@ -337,6 +348,7 @@ export class MoiSession {
     config: KlevuConfig
   ) {
     this.messages = state.messages
+    this.questions = state.questions
     this.menu = state.menu
     this.genericOptions = state.genericOptions
     this.feedbacks = state.feedbacks ?? []
@@ -352,6 +364,7 @@ export class MoiSession {
   }
 
   messages: MoiMessages
+  questions: MoiQuestion[]
   menu: MoiMenuOptions["menuOptions"]
   genericOptions?: MoiResponseGenericOptions["genericOptions"]
   feedbacks: MoiSavedFeedback[]
@@ -533,6 +546,7 @@ async function queryMoi(
 
 function parseResponse(response: MoiResponse) {
   const messages: MoiMessages = []
+  const questions: MoiQuestion[] = []
   let genericOptions: MoiResponseGenericOptions["genericOptions"] | undefined =
     undefined
   let menu: MoiMenuOptions["menuOptions"] | undefined = undefined
@@ -542,6 +556,7 @@ function parseResponse(response: MoiResponse) {
     "message" in d && messages.push(d)
     "filter" in d && messages.push(d)
     "productData" in d && messages.push(d)
+    "questions" in d && questions.push(...(d.questions?.options || []))
 
     if ("genericOptions" in d) {
       genericOptions = d.genericOptions
@@ -556,5 +571,6 @@ function parseResponse(response: MoiResponse) {
     messages,
     menu,
     genericOptions,
+    questions,
   }
 }
