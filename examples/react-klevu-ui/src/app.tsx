@@ -34,6 +34,12 @@ KlevuConfig.init({
   visitorServiceUrl: localStorage.getItem("demo-config")
     ? JSON.parse(localStorage.getItem("demo-config"))?.visitorServiceUrl
     : "",
+  ipv6ServiceUrl: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.ipv6ServiceUrl
+    : "",
+  ipv4ServiceUrl: localStorage.getItem("demo-config")
+    ? JSON.parse(localStorage.getItem("demo-config"))?.ipv4ServiceUrl
+    : "",
 })
 
 export const nav = [
@@ -84,6 +90,16 @@ export function App() {
       visitorServiceUrl={
         localStorage.getItem("demo-config")
           ? JSON.parse(localStorage.getItem("demo-config"))?.visitorServiceUrl
+          : ""
+      }
+      ipv6ServiceUrl={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.ipv6ServiceUrl
+          : ""
+      }
+      ipv4ServiceUrl={
+        localStorage.getItem("demo-config")
+          ? JSON.parse(localStorage.getItem("demo-config"))?.ipv4ServiceUrl
           : ""
       }
       apiKey={
