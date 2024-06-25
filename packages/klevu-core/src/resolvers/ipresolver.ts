@@ -43,7 +43,8 @@ export class KlevuIpResolver {
   }
 
   static init() {
-    KlevuIpResolver.default = new KlevuIpResolver()
+    if (!KlevuIpResolver.default)
+      KlevuIpResolver.default = new KlevuIpResolver()
   }
 
   static getDefault(): KlevuIpResolver {

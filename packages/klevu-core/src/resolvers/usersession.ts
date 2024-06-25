@@ -56,7 +56,8 @@ export class KlevuUserSession {
   }
 
   static init() {
-    KlevuUserSession.default = new KlevuUserSession()
+    if (!KlevuUserSession.default)
+      KlevuUserSession.default = new KlevuUserSession()
   }
 
   static getDefault(): KlevuUserSession {
