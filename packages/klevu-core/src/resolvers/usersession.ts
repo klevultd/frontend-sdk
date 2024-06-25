@@ -1,7 +1,7 @@
-import { KlevuConfig } from "./index.js"
-import { post } from "./connection/fetch.js"
-import { Klaviyo } from "./connectors/klaviyo.js"
-import { KlevuStorage } from "./utils/index.js"
+import { KlevuConfig } from "../index.js"
+import { post } from "../connection/fetch.js"
+import { Klaviyo } from "../connectors/klaviyo.js"
+import { KlevuStorage } from "../utils/index.js"
 
 type ConnectorInfo = {
   connectorType: string
@@ -56,7 +56,8 @@ export class KlevuUserSession {
   }
 
   static init() {
-    KlevuUserSession.default = new KlevuUserSession()
+    if (!KlevuUserSession.default)
+      KlevuUserSession.default = new KlevuUserSession()
   }
 
   static getDefault(): KlevuUserSession {

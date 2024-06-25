@@ -6,7 +6,7 @@ import {
 } from "../index.js"
 import { KlevuLastClickedProducts } from "../store/lastClickedProducts.js"
 import { KlevuLastSearches } from "../store/lastSearches.js"
-import { USER_SESSION_ID_STORAGE_KEY } from "../usersession.js"
+import { USER_SESSION_ID_STORAGE_KEY } from "../resolvers/usersession.js"
 import { KlevuStorage } from "../utils/storage.js"
 import {
   KlevuEventV1CategoryProductClick,
@@ -25,6 +25,7 @@ import {
   KlevuV1ImageBannerClick,
   KlevuEventV1BannerClick,
 } from "./eventRequests.js"
+import { KlevuIpResolver } from "../resolvers/ipresolver.js"
 
 export type RecommendationViewEventMetaData =
   KlevuKMCRecommendations["metadata"]
@@ -65,11 +66,18 @@ export class KlevuEvents {
       >
     }>
   }) {
+    const userData = KlevuIpResolver.getDefault().getUserData()
     const data: V2CheckedOutProductsEvent = {
       event: "order_purchase",
       event_version: "1.0.0",
       event_apikey: KlevuConfig.getDefault().apiKey,
-      user_profile: user,
+      user_profile: {
+        ...user,
+        ip_address_v4: userData.ipv4,
+        ip_address_v6: userData.ipv6,
+        data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+        klevu_uuid: userData.uuid,
+      },
       event_data: {
         items: items.map((i) => ({
           currency: i.product.currency ?? "USD",
@@ -123,6 +131,7 @@ export class KlevuEvents {
     bannerInfo?: KlevuEventV2DataStaticContent
     override?: Partial<KlevuRecommendationsEventV2Data>
   }) {
+    const userData = KlevuIpResolver.getDefault().getUserData()
     const data: KlevuRecommendationsEventV2Data = {
       event: "view_recs_list",
       event_version: "1.0.0",
@@ -130,6 +139,10 @@ export class KlevuEvents {
       user_profile: {
         sessionId:
           KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
+        ip_address_v4: userData.ipv4,
+        ip_address_v6: userData.ipv6,
+        data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+        klevu_uuid: userData.uuid,
       },
       event_data: {
         list_id: recommendationMetadata.recsKey,
@@ -208,6 +221,7 @@ export class KlevuEvents {
     if (product) {
       KlevuLastClickedProducts.click(product.id, product)
     }
+    const userData = KlevuIpResolver.getDefault().getUserData()
     const data: KlevuRecommendationsEventV2Data = {
       event: "select_recs_list",
       event_version: "1.0.0",
@@ -215,6 +229,10 @@ export class KlevuEvents {
       user_profile: {
         sessionId:
           KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
+        ip_address_v4: userData.ipv4,
+        ip_address_v6: userData.ipv6,
+        data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+        klevu_uuid: userData.uuid,
       },
       event_data: {
         list_id: recommendationMetadata.recsKey,
@@ -273,6 +291,7 @@ export class KlevuEvents {
       throw new Error("Cannot send event without product id")
     }
     KlevuLastClickedProducts.click(product.id, product)
+    const userData = KlevuIpResolver.getDefault().getUserData()
     const data: V1ProductTrackingEvent = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_type: "clicked",
@@ -283,6 +302,10 @@ export class KlevuEvents {
       klevu_productUrl: product.url ?? "",
       klevu_productVariantId: variantId || product.id,
       klevu_activeFilters: activeFilters,
+      klevu_shopperIP_v4: userData.ipv4,
+      klevu_shopperIP_v6: userData.ipv6,
+      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      klevu_uuid: userData.uuid,
     }
     KlevuEventV1ProductTracking({
       ...data,
@@ -313,12 +336,18 @@ export class KlevuEvents {
     override?: Partial<V1SearchEvent>
   }) {
     KlevuLastSearches.save(term)
+    const userData = KlevuIpResolver.getDefault().getUserData()
+
     const data: V1SearchEvent = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_term: term,
       klevu_totalResults: totalResults,
       klevu_typeOfQuery: typeOfSearch,
       klevu_activeFilters: activeFilters,
+      klevu_shopperIP_v4: userData.ipv4,
+      klevu_shopperIP_v6: userData.ipv6,
+      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      klevu_uuid: userData.uuid,
     }
 
     KlevuEventV1Search({
@@ -357,6 +386,8 @@ export class KlevuEvents {
     activeFilters?: string
     override?: Partial<KlevuV1CategoryProductsView>
   }) {
+    const userData = KlevuIpResolver.getDefault().getUserData()
+
     const data: KlevuV1CategoryProductsView = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
@@ -366,6 +397,10 @@ export class KlevuEvents {
       klevu_activeFilters: activeFilters,
       klevu_abTestId: abTestId,
       klevu_abTestVariantId: abTestVariantId,
+      klevu_shopperIP_v4: userData.ipv4,
+      klevu_shopperIP_v6: userData.ipv6,
+      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      klevu_uuid: userData.uuid,
     }
     KlevuEventV1CategoryView({
       ...data,
@@ -412,6 +447,8 @@ export class KlevuEvents {
     }
 
     KlevuLastClickedProducts.click(product.id, product)
+    const userData = KlevuIpResolver.getDefault().getUserData()
+
     const data: KlevuV1CategoryProductsClick = {
       klevu_apiKey: KlevuConfig.getDefault().apiKey,
       klevu_categoryName: categoryTitle,
@@ -427,6 +464,10 @@ export class KlevuEvents {
       klevu_abTestId: abTestId,
       klevu_abTestVariantId: abTestVariantId,
       klevu_activeFilters: activeFilters,
+      klevu_shopperIP_v4: userData.ipv4,
+      klevu_shopperIP_v6: userData.ipv6,
+      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      klevu_uuid: userData.uuid,
     }
 
     KlevuEventV1CategoryProductClick({

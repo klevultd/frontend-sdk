@@ -385,6 +385,38 @@ export const ConfigDrawer = () => {
                 }
               />
             </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" component="div">
+                IPV6 Service URL
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                fullWidth
+                id="ipv6ServiceUrl"
+                type="text"
+                defaultValue={config.ipv6ServiceUrl}
+                onChange={(e) =>
+                  onChangeValue(e.target.id, e.target.value.trim())
+                }
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" component="div">
+                IPV4 Service URL
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                fullWidth
+                id="ipv4ServiceUrl"
+                type="text"
+                defaultValue={config.ipv4ServiceUrl}
+                onChange={(e) =>
+                  onChangeValue(e.target.id, e.target.value.trim())
+                }
+              />
+            </Grid>
           </Grid>
           <Divider />
           <Grid container spacing={2}>

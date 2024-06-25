@@ -19,6 +19,8 @@ type Config = {
   eventsApiV2Url: string
   eventsApiV1Url: string
   visitorServiceUrl: string
+  ipv6ServiceUrl: string
+  ipv4ServiceUrl: string
 }
 
 let loadedConfig: Config | undefined
@@ -72,6 +74,8 @@ export const config: Config = {
   eventsApiV1Url: "https://stats.ksearchnet.com/analytics/",
   eventsApiV2Url: "https://stats.ksearchnet.com/analytics/collect",
   visitorServiceUrl: "https://visitor.service.ksearchnet.com/public/1.0",
+  ipv6ServiceUrl: "https://ipv6check.ksearchnet.com",
+  ipv4ServiceUrl: "https://ipv4check.ksearchnet.com",
   ...(loadedConfig ?? {}),
 }
 
