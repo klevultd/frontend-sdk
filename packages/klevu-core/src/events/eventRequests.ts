@@ -29,6 +29,14 @@ export type V1SearchEvent = {
    */
   klevu_shopperIP?: string
   /**
+   * Country of the shopper who bought the product(s).
+   */
+  klevu_country?: string
+  /**
+   * city of the shopper who bought the product(s).
+   */
+  klevu_city?: string
+  /**
    * When you receive a response for a search query, look at the value of the
    * typeOfQuery element under the metaData section (e.g. WILDCARD_AND,
    * FUZZY_AND). You need to pass this value to this parameter.
@@ -37,6 +45,11 @@ export type V1SearchEvent = {
 
   /** Currently active filters in the last request */
   klevu_activeFilters?: string
+  /* Internally generated values, respects data protection */
+  klevu_shopperIP_v4?: string
+  klevu_shopperIP_v6?: string
+  data_protection?: boolean
+  klevu_uuid?: string
 }
 
 export async function KlevuEventV1Search(event: V1SearchEvent) {
@@ -93,7 +106,14 @@ export type V1ProductTrackingEvent = {
    * 	javascript (i.e. an ajax call), this is an optional parameter.
    */
   klevu_shopperIP?: string
-
+  /**
+   * Country of the shopper who bought the product(s).
+   */
+  klevu_country?: string
+  /**
+   * city of the shopper who bought the product(s).
+   */
+  klevu_city?: string
   /**
    * The unique identifier of the A/B Test.
    */
@@ -106,6 +126,11 @@ export type V1ProductTrackingEvent = {
 
   /** Currently active filters in the last request */
   klevu_activeFilters?: string
+  /* Internally generated values, respects data protection */
+  klevu_shopperIP_v4?: string
+  klevu_shopperIP_v6?: string
+  data_protection?: boolean
+  klevu_uuid?: string
 }
 
 export async function KlevuEventV1ProductTracking(
@@ -140,6 +165,12 @@ export type V2EventBase = {
      * Email id of the shopper who purchased the product.
      */
     email?: string
+
+    /* Internally generated values, respects data protection */
+    ip_address_v4?: string
+    ip_address_v6?: string
+    data_protection?: boolean
+    klevu_uuid?: string
   }
 }
 
@@ -233,12 +264,25 @@ export type KlevuV1CategoryProductsView = {
    * IP address of the shopper who bought the product(s).
    */
   klevu_shopperIP?: string
+  /**
+   * Country of the shopper who bought the product(s).
+   */
+  klevu_country?: string
+  /**
+   * city of the shopper who bought the product(s).
+   */
+  klevu_city?: string
   /** The unique identifier of the A/B Test. */
   klevu_abTestId?: string
   /** The unique identifier of the A/B Test Variant. */
   klevu_abTestVariantId?: string
   /** The active filters */
   klevu_activeFilters?: string
+  /* Internally generated values, respects data protection */
+  klevu_shopperIP_v4?: string
+  klevu_shopperIP_v6?: string
+  data_protection?: boolean
+  klevu_uuid?: string
 }
 
 export async function KlevuEventV1CategoryView(
@@ -305,12 +349,25 @@ export type KlevuV1CategoryProductsClick = {
   klevu_productPosition?: number
   /** IP address of the shopper who clicked the product(s). */
   klevu_shopperIP?: string
+  /**
+   * Country of the shopper who bought the product(s).
+   */
+  klevu_country?: string
+  /**
+   * city of the shopper who bought the product(s).
+   */
+  klevu_city?: string
   /** The unique identifier of the A/B Test. */
   klevu_abTestId?: string
   /** The unique identifier of the A/B Test Variant. */
   klevu_abTestVariantId?: string
   /** The active filters */
   klevu_activeFilters?: string
+  /* Internally generated values, respects data protection */
+  klevu_shopperIP_v4?: string
+  klevu_shopperIP_v6?: string
+  data_protection?: boolean
+  klevu_uuid?: string
 }
 
 export async function KlevuEventV1CategoryProductClick(

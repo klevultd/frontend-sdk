@@ -4,7 +4,7 @@ import {
   USER_SEGMENT_INFO_STORAGE_KEY,
   USER_SESSION_EXPIRY_STORAGE_KEY,
   USER_SESSION_ID_STORAGE_KEY,
-} from "../usersession.js"
+} from "../resolvers/usersession.js"
 import { KlevuStorage, StorageType } from "./storage.js"
 
 const defaultKeys = [
