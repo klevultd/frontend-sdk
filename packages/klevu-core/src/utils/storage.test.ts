@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { KlevuConfig } from "../config.js"
 import {
+  USER_IPV4_STORAGE_KEY,
+  USER_IPV6_STORAGE_KEY,
+  USER_IP_EXPIRY_STORAGE_KEY,
+  USER_UUID_STORAGE_KEY,
+} from "../resolvers/ipresolver.js"
+import {
   USER_SEGMENT_INFO_STORAGE_KEY,
   USER_SESSION_EXPIRY_STORAGE_KEY,
   USER_SESSION_ID_STORAGE_KEY,
@@ -11,6 +17,10 @@ const defaultKeys = [
   USER_SESSION_ID_STORAGE_KEY,
   USER_SESSION_EXPIRY_STORAGE_KEY,
   USER_SEGMENT_INFO_STORAGE_KEY,
+  USER_IPV4_STORAGE_KEY,
+  USER_IPV6_STORAGE_KEY,
+  USER_IP_EXPIRY_STORAGE_KEY,
+  USER_UUID_STORAGE_KEY,
 ]
 
 const storageMock = (function () {
