@@ -12,8 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/core": "^5.2.0",
-    "@klevu/ui-react": "^2.2.0",
+    "@klevu/core": "file:../../packages/klevu-core",
+    "@klevu/ui-react": "file:../../packages/klevu-ui-react",
     "lodash.groupby": "^4.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
