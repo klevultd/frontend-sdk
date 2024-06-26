@@ -71,7 +71,7 @@ Here is the most minimal example where we are making a "hoodies" search from the
 import { KlevuFetch, search } from "@klevu/core"
 
 const result = await KlevuFetch(search("hoodies"))
-console.log(result.getQueriesById("search")?.records)
+console.log(result.queriesById("search")?.records)
 ```
 
 ### Typical example
@@ -101,14 +101,14 @@ const result = await KlevuFetch(
 )
 
 // Prints records that are found from the search
-console.log(result.getQueriesById("search")?.records)
+console.log(result.queriesById("search")?.records)
 ```
 
 ### Result object
 
-`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `getSuggestionsById()` to fetch suggestions results and `getQueriesById()` for search results.
+`KlevuFetch()` result object contains raw API response and handy helpers to get results. Use `suggestionsById()` to fetch suggestions results and `queriesById()` for search results.
 
-`getQueriesById()` result contains metadata for query, the result records and possible event functions for providing click events to search, category merchandising and recommendations. It also includes `next()` function. It is a nice helper to fetch the next results set with the same query and modifiers. `next()` is defined only if there are more results available.
+`queriesById()` result contains metadata for query, the result records and possible event functions for providing click events to search, category merchandising and recommendations. It also includes `next()` function. It is a nice helper to fetch the next results set with the same query and modifiers. `next()` is defined only if there are more results available.
 
 Calling event functions returns a function to use to send events to Klevu. [See definition these functions from here](./src/models/KlevuResultEvent.ts)
 
