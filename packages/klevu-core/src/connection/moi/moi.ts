@@ -187,7 +187,9 @@ type MoiSavedSession = {
   context: MoiContext
   MOI?: MoiSavedSessionState
   PQA?: {
-    [urlOrProductId: string]: MoiSavedSessionState
+    [urlOrProductId: string]: MoiSavedSessionState & {
+      questions: MoiQuestion[]
+    }
   }
 }
 
@@ -292,6 +294,7 @@ export async function startMoi(
           menu = storedSession.PQA[PQAKey].menu
           genericOptions = storedSession.PQA[PQAKey].genericOptions
           feedbacks = storedSession.PQA[PQAKey].feedbacks
+          questions = storedSession.PQA[PQAKey].questions || []
 
           if (options.settings?.alwaysStartConversation) {
             shouldSendMessage = storedSession.PQA[PQAKey].messages.length === 0
@@ -422,8 +425,10 @@ export class MoiSession {
       }
     }
 
-    const { messages, genericOptions, menu, context } = parseResponse(res)
+    const { messages, genericOptions, menu, context, questions } =
+      parseResponse(res)
     this.messages = [...this.messages, ...messages]
+    this.questions = [...questions]
     this.options.onMessage?.()
     this.genericOptions = genericOptions
     this.menu = menu
@@ -467,6 +472,7 @@ export class MoiSession {
               genericOptions: this.genericOptions,
               messages: this.messages,
               feedbacks: this.feedbacks,
+              questions: this.questions || [],
             },
           },
         })

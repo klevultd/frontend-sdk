@@ -41,7 +41,7 @@ const chatRender = (args: KlevuProductQuery) => {
 
 export const Query: StoryObj<KlevuProductQuery> = {
   args: {
-    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
+    pqaWidgetId: "pqa-98a5afad-b242-4e0b-830f-78c4277e76b3",
     url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
   },
   render: (args) =>
@@ -53,6 +53,7 @@ export const Query: StoryObj<KlevuProductQuery> = {
         at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
         ligula nec orci. Nam sed porttitor dolor.
         <klevu-init
+          moi-api-url="https://moi-ai-qa.ksearchnet.com/"
           assets-path="https://resources-webcomponents.klevu.com/1.0.0/klevu-ui"
           .settings=${{
             icons: {
@@ -82,8 +83,8 @@ export const Query: StoryObj<KlevuProductQuery> = {
 
 export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
   args: {
-    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
-    productId: "40912128737373",
+    pqaWidgetId: "pqa-98a5afad-b242-4e0b-830f-78c4277e76b3",
+    productId: "45694656971065",
   },
   render: Query.render,
 }

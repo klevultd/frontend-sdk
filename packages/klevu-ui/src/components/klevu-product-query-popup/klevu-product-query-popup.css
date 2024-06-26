@@ -102,3 +102,39 @@ klevu-typography.fineprint {
 klevu-popup {
   --klevu-popup-width: var(--popup-width);
 }
+
+.questionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: var(--klevu-spacing-01);
+}
+.questionsContainer svg {
+  margin-right: var(--klevu-spacing-03);
+}
+.questionsContainer klevu-button {
+  --klevu-button-background-color: #f6f6f6;
+  --klevu-button-text-color: #000;
+  animation: 0.4s fadeIn;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.questionsContainer klevu-button::part(button-base) {
+  border-bottom-left-radius: 0px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.questionsContainer klevu-button:hover {
+  --klevu-button-background-hover: #d8edfd;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
