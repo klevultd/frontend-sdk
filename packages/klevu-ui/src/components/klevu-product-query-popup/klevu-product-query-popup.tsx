@@ -234,6 +234,7 @@ export class KlevuProductQueryPopup {
   }
 
   async #start() {
+    this.showLoading = true
     this.showFeedback = false
     const useConfig = this.config?.apiKey && this.config?.apiKey !== ""
 
@@ -257,7 +258,7 @@ export class KlevuProductQueryPopup {
     this.feedbacks = this.session.feedbacks
 
     await this.#layoutElement?.scrollMainToBottom("instant")
-
+    this.showLoading = false
     // add this when registering works
     //this.registered = this.messages.length > 1
   }
