@@ -7,10 +7,12 @@ import { KlevuStorage } from "../../utils/storage.js"
 import { post } from "../fetch.js"
 
 const STORAGE_KEY = "klevu-moi-session"
+const MAX_MESSAGES = 10
 
 export type MoiContext = {
   klevuApiKey: string
   sessionId?: string
+  visitorId?: string
   mode?: MoiChatModes
   url?: string
   productId?: string
@@ -258,6 +260,7 @@ export async function startMoi(
   let ctx: MoiContext = {
     klevuApiKey: config.apiKey,
     sessionId: "",
+    visitorId: "",
     mode: options.mode,
     url: options.url,
     productId: options.productId,
@@ -269,13 +272,14 @@ export async function startMoi(
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
   let feedbacks: MoiSavedFeedback[] = []
-  let shouldSendMessage = false
+  let shouldSendMessage = options.settings?.alwaysStartConversation
   const PQAKey = options.productId || options.url
 
   if (storedSession && storedSession.context) {
     switch (options.mode) {
       case undefined:
         ctx.sessionId = storedSession.context.sessionId
+        ctx.visitorId = storedSession.context.visitorId
         if (storedSession.MOI) {
           startingMessages = storedSession.MOI.messages
           menu = storedSession.MOI.menu
@@ -289,6 +293,7 @@ export async function startMoi(
         break
       case "PQA":
         ctx.sessionId = storedSession.context.sessionId
+        ctx.visitorId = storedSession.context.visitorId
         if (PQAKey && storedSession.PQA && storedSession.PQA[PQAKey]) {
           startingMessages = storedSession.PQA[PQAKey].messages
           menu = storedSession.PQA[PQAKey].menu
@@ -428,6 +433,9 @@ export class MoiSession {
     const { messages, genericOptions, menu, context, questions } =
       parseResponse(res)
     this.messages = [...this.messages, ...messages]
+    if (this.messages.length > MAX_MESSAGES) {
+      this.messages.shift()
+    }
     this.questions = [...questions]
     this.options.onMessage?.()
     this.genericOptions = genericOptions
