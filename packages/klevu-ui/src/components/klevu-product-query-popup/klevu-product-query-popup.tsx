@@ -10,6 +10,7 @@ import {
   KlevuConfig,
   MoiRequest,
   MoiQuestion,
+  ProductInfo,
 } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
@@ -37,6 +38,7 @@ export class KlevuProductQueryPopup {
   #popup?: HTMLKlevuPopupElement
   #layoutElement?: HTMLKlevuChatLayoutElement
   #contentDiv?: HTMLDivElement
+  poweredByMessage = "Powered by ASKLO"
 
   /**
    * Url of the page where the product is
@@ -143,7 +145,39 @@ export class KlevuProductQueryPopup {
    */
   @Prop() useNativeScrollbars?: boolean
 
+  /**
+   * Pass any additional data you would want the AI to use for context
+   */
   @Prop() additionaldata?: string = ""
+
+  /**
+   * Pass function to call that will return the product info
+   * eg: pass function call as string - "getProductInfo()" or function
+   * @returns ProductInfo object
+   */
+  @Prop() productInfoGenerator?: string | (() => ProductInfo)
+  /**
+   * Product Id to be used in analytics
+   */
+  @Prop() itemId?: string
+  /**
+   * Product Group Id to be used in analytics, in case of multiple variants
+   */
+  @Prop() itemGroupId?: string
+  /**
+   * Optional Product Variant Id to be used in analytics
+   */
+  @Prop() itemVariantId?: string
+  /**
+   * Channel Id to be used in analytics
+   * eg: Shopify, Bigcommerce
+   */
+  @Prop() channelId?: string
+  /**
+   * Locale to be used in analytics
+   * eg: en_US
+   */
+  @Prop() locale?: string
 
   @State() text = ""
   @State() name = ""
@@ -197,10 +231,13 @@ export class KlevuProductQueryPopup {
     const timeout = setTimeout(() => {
       this.showLoadingSorry = true
     }, 4000)
-    await this.session?.query({
-      message: message,
-      klevuSettings: this.settings,
-    })
+    await this.session?.query(
+      {
+        message: message,
+        klevuSettings: this.settings,
+      },
+      "send"
+    )
     clearTimeout(timeout)
     this.showLoadingSorry = false
     this.showLoading = false
@@ -237,17 +274,28 @@ export class KlevuProductQueryPopup {
     this.showLoading = true
     this.showFeedback = false
     const useConfig = this.config?.apiKey && this.config?.apiKey !== ""
+    const productInfo = this.productInfoGenerator
+      ? typeof this.productInfoGenerator === "string"
+        ? eval(this.productInfoGenerator)
+        : this.productInfoGenerator?.()
+      : undefined
 
     this.session = await startMoi({
       onMessage: this.onMessage.bind(this),
       // Do nothing on redirect as we have our own system
       onRedirect: () => {},
       url: this.url === "" ? undefined : this.url,
-      productId: this.productId,
+      productId: this.productId || this.itemId,
       mode: "PQA",
       onAction: this.#onAction.bind(this),
       pqaWidgetId: this.pqaWidgetId,
       additionalData: this.additionaldata,
+      itemId: this.itemId,
+      itemGroupId: this.itemGroupId,
+      itemVariantId: this.itemVariantId,
+      channelId: this.channelId,
+      locale: this.locale,
+      productInfo,
       settings: {
         configOverride: useConfig ? this.config : undefined,
         alwaysStartConversation: true,
@@ -354,7 +402,7 @@ export class KlevuProductQueryPopup {
               </div>
             </klevu-chat-messages>
             {this.showLoading ? null : (
-              <div class="questionsContainer">
+              <div class="questions-container">
                 {this.questions.map((question, index) => (
                   <div
                     role="button"
@@ -429,6 +477,9 @@ export class KlevuProductQueryPopup {
                 )}
               </div>
             )}
+            <a target="_blank" href="https://asklo.ai/" class="powered-by-message">
+              {this.poweredByMessage}
+            </a>
           </div>
         </klevu-chat-layout>
       </Fragment>

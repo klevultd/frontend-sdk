@@ -18,6 +18,11 @@ export type MoiContext = {
   productId?: string
   pqaWidgetId?: string
   additionalData?: string
+  itemId?: string
+  itemGroupId?: string
+  itemVariantId?: string
+  channelId?: string
+  locale?: string
 }
 
 export type MoiRequest = {
@@ -237,6 +242,30 @@ export type MoiStartOptions = {
    * To pass additional information to the api as string
    */
   additionalData?: string
+  /**
+   * Product Id to be used in analytics
+   */
+  itemId?: string
+  /**
+   * Product Group Id to be used in analytics, in case of multiple variants
+   */
+  itemGroupId?: string
+  /**
+   * Optional Product Variant Id to be used in analytics
+   */
+  itemVariantId?: string
+  /**
+   * Channel Id to be used in analytics
+   */
+  channelId?: string
+  /**
+   * Locale to be used in analytics
+   */
+  locale?: string
+  /**
+   * Product details to be sent for analytics
+   */
+  productInfo?: ProductInfo
   settings?: {
     /**
      * Override the config
@@ -248,6 +277,42 @@ export type MoiStartOptions = {
      */
     alwaysStartConversation?: boolean
   }
+}
+
+export type ProductInfo = {
+  itemId: string
+  itemGroupId: string
+  itemVariantId?: string
+  locale: string
+  channelId?: string
+  title: string
+  url: string
+  description: string
+  vendor: string
+  priceMax: string
+  priceMin: string
+  tags?: string[]
+  options?: {
+    name: string
+    values: string[]
+  }[]
+  images: string[]
+  variants?: {
+    itemVariantId: string
+    title: string
+    sku: string
+    url: string
+    image: string
+    price: string
+    weight: string
+  }[]
+}
+
+const saveProductInfo = async (
+  config: KlevuConfig,
+  productInfo: ProductInfo
+) => {
+  return await post(`${config.moiApiUrl}chat/productInfo`, productInfo)
 }
 
 export async function startMoi(
@@ -266,6 +331,11 @@ export async function startMoi(
     productId: options.productId,
     pqaWidgetId: options.pqaWidgetId,
     additionalData: options.additionalData,
+    ...(options.itemId && { itemId: options.itemId }),
+    ...(options.itemGroupId && { itemGroupId: options.itemGroupId }),
+    ...(options.itemVariantId && { itemVariantId: options.itemVariantId }),
+    ...(options.channelId && { channelId: options.channelId }),
+    ...(options.locale && { locale: options.locale }),
   }
   const storedSession = await getStoredSession()
 
@@ -309,6 +379,12 @@ export async function startMoi(
   }
 
   if (shouldSendMessage) {
+    try {
+      if (options.productInfo)
+        await saveProductInfo(config, options.productInfo)
+    } catch (err) {
+      console.warn("Failed to save product Info", err)
+    }
     const result = await queryMoi(
       {
         context: ctx,
@@ -321,7 +397,10 @@ export async function startMoi(
     }
 
     const parsed = parseResponse(result)
-    ctx = parsed.context
+    ctx = {
+      ...ctx,
+      ...parsed.context,
+    }
     startingMessages = parsed.messages
     menu = parsed.menu
     genericOptions = parsed.genericOptions
@@ -436,11 +515,16 @@ export class MoiSession {
     if (this.messages.length > MAX_MESSAGES) {
       this.messages.shift()
     }
-    this.questions = [...questions]
+    if (target === "send") {
+      this.questions = [...questions]
+    }
     this.options.onMessage?.()
     this.genericOptions = genericOptions
     this.menu = menu
-    this.context = context
+    this.context = {
+      ...this.context,
+      ...context,
+    }
 
     this.save()
 
