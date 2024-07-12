@@ -197,11 +197,12 @@ export class KlevuProductQueryPopup {
 
   async connectedCallback() {
     await KlevuInit.ready()
-
-    if (window.klevu_page_meta?.itemId) {
+    if (!this.productId) {
+      this.productId = this.itemId
+    }
+    if (!this.productId && window.klevu_page_meta?.itemId) {
       this.productId = window.klevu_page_meta.itemId
     }
-
     if (!this.productId && this.url == "") {
       const canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null
       this.url = canonical?.href ?? window.location.href
@@ -285,7 +286,7 @@ export class KlevuProductQueryPopup {
       // Do nothing on redirect as we have our own system
       onRedirect: () => {},
       url: this.url === "" ? undefined : this.url,
-      productId: this.productId || this.itemId,
+      productId: this.productId,
       mode: "PQA",
       onAction: this.#onAction.bind(this),
       pqaWidgetId: this.pqaWidgetId,

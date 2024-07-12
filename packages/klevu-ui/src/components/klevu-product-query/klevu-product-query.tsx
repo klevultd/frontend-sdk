@@ -166,7 +166,7 @@ export class KlevuProductQuery {
             <klevu-product-query-popup
               additionaldata={this.additionaldata || ""}
               url={this.url}
-              productId={this.productId}
+              productId={this.productId || this.itemId}
               pqaWidgetId={this.pqaWidgetId}
               tFinePrint={this.finePrint}
               tPopupTitle={this.popupTitle}
