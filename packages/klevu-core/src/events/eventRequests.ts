@@ -226,7 +226,7 @@ export async function KlevuEventV2CheckedOutProducts(
 ) {
   const url = `${KlevuConfig.getDefault().eventsApiV2Url}`
   const id = addPendingRequest(url, event)
-  const res = await sendGenericPostEvent(url, event)
+  const res = await post(url, [event], true)
   if (id) {
     removePendingRequest(id)
   }
