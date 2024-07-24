@@ -114,10 +114,13 @@ export class KlevuIpResolver {
     const ipV6Payload: IpApiPayload = {
       klevu_uuid: ipV4Response?.klevu_uuid || "",
     }
-    const ipV6Response = await post<IpApiResponse>(
-      KlevuConfig.getDefault().ipv6ServiceUrl,
-      ipV6Payload
-    )
+    let ipV6Response: IpApiResponse | undefined = undefined
+    try {
+      ipV6Response = await post<IpApiResponse>(
+        KlevuConfig.getDefault().ipv6ServiceUrl,
+        ipV6Payload
+      )
+    } catch (err) {}
     return {
       uuid: ipV4Response?.klevu_uuid || ipV6Response?.klevu_uuid || "",
       ipv4: ipV4Response?.ip_address || "",
