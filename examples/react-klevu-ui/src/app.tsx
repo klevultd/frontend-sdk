@@ -71,12 +71,12 @@ export function App() {
           ? JSON.parse(localStorage.getItem("demo-config"))?.url
           : "https://eucs29v2.ksearchnet.com/cs/v2/search"
       }
-      eventsApiV1Url={
+      eventsV1Url={
         localStorage.getItem("demo-config")
           ? JSON.parse(localStorage.getItem("demo-config"))?.eventsApiV1Url
           : ""
       }
-      eventsApiV2Url={
+      eventsV2Url={
         localStorage.getItem("demo-config")
           ? JSON.parse(localStorage.getItem("demo-config"))?.eventsApiV2Url
           : ""
