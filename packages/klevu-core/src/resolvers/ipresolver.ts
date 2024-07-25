@@ -104,18 +104,22 @@ export class KlevuIpResolver {
   }
 
   getIPData = async () => {
-    const ipV4Payload: IpApiPayload = {
-      klevu_uuid: this.uuid || "",
-    }
-    const ipV4Response = await post<IpApiResponse>(
-      KlevuConfig.getDefault().ipv4ServiceUrl,
-      ipV4Payload
-    )
-    const ipV6Payload: IpApiPayload = {
-      klevu_uuid: ipV4Response?.klevu_uuid || "",
-    }
+    let ipV4Response: IpApiResponse | undefined = undefined
     let ipV6Response: IpApiResponse | undefined = undefined
+
     try {
+      const ipV4Payload: IpApiPayload = {
+        klevu_uuid: this.uuid || "",
+      }
+      ipV4Response = await post<IpApiResponse>(
+        KlevuConfig.getDefault().ipv4ServiceUrl,
+        ipV4Payload
+      )
+    } catch (err) {}
+    try {
+      const ipV6Payload: IpApiPayload = {
+        klevu_uuid: ipV4Response?.klevu_uuid || "",
+      }
       ipV6Response = await post<IpApiResponse>(
         KlevuConfig.getDefault().ipv6ServiceUrl,
         ipV6Payload
@@ -129,6 +133,9 @@ export class KlevuIpResolver {
   }
 
   getUserData() {
+    if (KlevuConfig.getDefault().isConsentDisallowed()) {
+      return {}
+    }
     return {
       ipv6: this.ipv6 || "",
       ipv4: this.ipv4 || "",
