@@ -270,6 +270,14 @@ export class KlevuProductQueryPopup {
     }
     */
   }
+  #fireProductInfoGenerator() {
+    try {
+      if (this.productInfoGenerator) return eval(this.productInfoGenerator as string)
+    } catch (err) {
+      console.error("Failed to generate product info, check function passed", err)
+    }
+    return undefined
+  }
 
   async #start() {
     this.showLoading = true
@@ -277,8 +285,8 @@ export class KlevuProductQueryPopup {
     const useConfig = this.config?.apiKey && this.config?.apiKey !== ""
     const productInfo = this.productInfoGenerator
       ? typeof this.productInfoGenerator === "string"
-        ? eval(this.productInfoGenerator)
-        : this.productInfoGenerator?.()
+        ? this.#fireProductInfoGenerator()
+        : this.productInfoGenerator()
       : undefined
 
     this.session = await startMoi({
