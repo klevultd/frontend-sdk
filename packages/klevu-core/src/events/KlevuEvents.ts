@@ -75,7 +75,9 @@ export class KlevuEvents {
         ...user,
         ip_address_v4: userData.ipv4,
         ip_address_v6: userData.ipv6,
-        data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+        data_protection:
+          KlevuConfig.getDefault().useConsent &&
+          KlevuConfig.getDefault().consentGiven,
         klevu_uuid: userData.uuid,
       },
       event_data: {
@@ -141,7 +143,9 @@ export class KlevuEvents {
           KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
         ip_address_v4: userData.ipv4,
         ip_address_v6: userData.ipv6,
-        data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+        data_protection:
+          KlevuConfig.getDefault().useConsent &&
+          KlevuConfig.getDefault().consentGiven,
         klevu_uuid: userData.uuid,
       },
       event_data: {
@@ -231,7 +235,9 @@ export class KlevuEvents {
           KlevuStorage.getItem(USER_SESSION_ID_STORAGE_KEY) || undefined,
         ip_address_v4: userData.ipv4,
         ip_address_v6: userData.ipv6,
-        data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+        data_protection:
+          KlevuConfig.getDefault().useConsent &&
+          KlevuConfig.getDefault().consentGiven,
         klevu_uuid: userData.uuid,
       },
       event_data: {
@@ -304,7 +310,9 @@ export class KlevuEvents {
       klevu_activeFilters: activeFilters,
       klevu_shopperIP_v4: userData.ipv4,
       klevu_shopperIP_v6: userData.ipv6,
-      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      data_protection:
+        KlevuConfig.getDefault().useConsent &&
+        KlevuConfig.getDefault().consentGiven,
       klevu_uuid: userData.uuid,
     }
     KlevuEventV1ProductTracking({
@@ -346,7 +354,9 @@ export class KlevuEvents {
       klevu_activeFilters: activeFilters,
       klevu_shopperIP_v4: userData.ipv4,
       klevu_shopperIP_v6: userData.ipv6,
-      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      data_protection:
+        KlevuConfig.getDefault().useConsent &&
+        KlevuConfig.getDefault().consentGiven,
       klevu_uuid: userData.uuid,
     }
 
@@ -399,7 +409,9 @@ export class KlevuEvents {
       klevu_abTestVariantId: abTestVariantId,
       klevu_shopperIP_v4: userData.ipv4,
       klevu_shopperIP_v6: userData.ipv6,
-      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      data_protection:
+        KlevuConfig.getDefault().useConsent &&
+        KlevuConfig.getDefault().consentGiven,
       klevu_uuid: userData.uuid,
     }
     KlevuEventV1CategoryView({
@@ -466,7 +478,9 @@ export class KlevuEvents {
       klevu_activeFilters: activeFilters,
       klevu_shopperIP_v4: userData.ipv4,
       klevu_shopperIP_v6: userData.ipv6,
-      data_protection: KlevuConfig.getDefault().isConsentDisallowed(),
+      data_protection:
+        KlevuConfig.getDefault().useConsent &&
+        KlevuConfig.getDefault().consentGiven,
       klevu_uuid: userData.uuid,
     }
 
