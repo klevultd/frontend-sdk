@@ -187,6 +187,7 @@ export class KlevuProductQuery {
               channelId={this.channelId}
               locale={this.locale}
               productInfoGenerator={this.productInfoGenerator}
+              textFieldVariant={this.textFieldVariant}
             >
               <slot name="after-fineprint" slot="after-fineprint"></slot>
             </klevu-product-query-popup>
