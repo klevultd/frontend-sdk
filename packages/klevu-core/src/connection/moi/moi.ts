@@ -380,7 +380,7 @@ export async function startMoi(
 
   if (shouldSendMessage) {
     try {
-      if (options.productInfo)
+      if (options.productInfo && options.mode === "PQA")
         await saveProductInfo(config, options.productInfo)
     } catch (err) {
       console.warn("Failed to save product Info", err)
