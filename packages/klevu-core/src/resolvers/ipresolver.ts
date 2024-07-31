@@ -137,9 +137,9 @@ export class KlevuIpResolver {
       return {}
     }
     return {
-      ipv6: this.ipv6 || "",
-      ipv4: this.ipv4 || "",
-      uuid: this.uuid || "",
+      ipv4: KlevuStorage.getItem(USER_IPV4_STORAGE_KEY) || "",
+      ipv6: KlevuStorage.getItem(USER_IPV6_STORAGE_KEY) || "",
+      uuid: KlevuStorage.getItem(USER_UUID_STORAGE_KEY) || "",
     }
   }
 }
