@@ -149,7 +149,7 @@ Some of the functions can be modified with modifier functions. Any number of the
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `listFilters()`                 | List all filters that given search result has                                                        |
 | `applyFilters()`                | Applies selected filters to query                                                                    |
-| `applyFiltersWithManager()`     | Applies filters that's state is managed by `FilterManager`                                           |
+| `applyFilterWithManager()`      | Applies filters that's state is managed by `FilterManager`                                           |
 | `fallback()`                    | When query returns less results than fallback treshold then additional fallback query is sent        |
 | `boostWithKeywords()`           | Boost or deboost results with keywords                                                               |
 | `boostWithRecords()`            | Boost or deboost certain products in the result by id                                                |
@@ -167,7 +167,7 @@ Some of the functions can be modified with modifier functions. Any number of the
 
 ## Filter Manager
 
-Filter Manager is a helper class that takes care of the state of filters. What filters are currently selected and what should be sent. It can be passed to `listFilters()` and then the result is automatically applied to the state. Modifier `applyFiltersWithManager()` can base used to apply the current state of filters to query.
+Filter Manager is a helper class that takes care of the state of filters. What filters are currently selected and what should be sent. It can be passed to `listFilters()` and then the result is automatically applied to the state. Modifier `applyFilterWithManager()` can base used to apply the current state of filters to query.
 
 ## Internal DOM events
 
