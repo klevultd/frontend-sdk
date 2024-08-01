@@ -1017,6 +1017,10 @@ export namespace Components {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * Set to false if you want to show the popup in place instead of dialog box
+         */
+        "showAsPopup": boolean;
+        /**
           * Placeholder of the textfield
          */
         "textFieldPlaceholder": string;
@@ -1109,6 +1113,10 @@ export namespace Components {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
+        /**
+          * Set to false if you want to show this in place instead of dialog box
+         */
+        "showAsPopup": boolean;
         /**
           * Text of the button to open the popup
          */
@@ -3612,6 +3620,10 @@ declare namespace LocalJSX {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * Set to false if you want to show the popup in place instead of dialog box
+         */
+        "showAsPopup"?: boolean;
+        /**
           * Placeholder of the textfield
          */
         "textFieldPlaceholder"?: string;
@@ -3704,6 +3716,10 @@ declare namespace LocalJSX {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
+        /**
+          * Set to false if you want to show this in place instead of dialog box
+         */
+        "showAsPopup"?: boolean;
         /**
           * Text of the button to open the popup
          */

@@ -130,6 +130,11 @@ export class KlevuProductQuery {
    */
   @Prop() locale?: string
 
+  /**
+   * Set to false if you want to show the popup in place instead of dialog box
+   */
+  @Prop() showAsPopup = true
+
   async connectedCallback() {
     this.config = await this.el.closest("klevu-init")?.getConfig()
     this.#checkIsPQAEnabled()
@@ -152,48 +157,53 @@ export class KlevuProductQuery {
 
     return (
       <Host>
-        <klevu-button
-          ref={(el) => (this.origin = el)}
-          part="klevu-query-open-button"
-          exportparts={partsExports("klevu-button")}
-        >
-          <slot name="before-button-text"></slot>
-          {this.buttonText}
-          <slot name="after-button-text"></slot>
-        </klevu-button>
-        {this.origin && (
-          <klevu-util-portal>
-            <klevu-product-query-popup
-              additionaldata={this.additionaldata || ""}
-              url={this.url}
-              productId={this.productId || this.itemId}
-              pqaWidgetId={this.pqaWidgetId}
-              tFinePrint={this.finePrint}
-              tPopupTitle={this.popupTitle}
-              tTextFieldPlaceholder={this.textFieldPlaceholder}
-              askButtonText={this.askButtonText}
-              settings={this.settings}
-              popupAnchor={this.popupAnchor}
-              popupOffset={this.popupOffset}
-              exportparts={partsExports("klevu-product-query-popup")}
-              useBackground={this.useBackground}
-              originElement={this.origin}
-              disableCloseOutsideClick={this.disableCloseOutsideClick}
-              config={this.config}
-              useNativeScrollbars={this.useNativeScrollbars}
-              itemId={this.itemId}
-              itemVariantId={this.itemVariantId}
-              itemGroupId={this.itemGroupId}
-              channelId={this.channelId}
-              locale={this.locale}
-              productInfoGenerator={this.productInfoGenerator}
-              textFieldVariant={this.textFieldVariant}
-            >
-              <slot name="after-fineprint" slot="after-fineprint"></slot>
-            </klevu-product-query-popup>
-          </klevu-util-portal>
+        {this.showAsPopup && (
+          <klevu-button
+            ref={(el) => (this.origin = el)}
+            part="klevu-query-open-button"
+            exportparts={partsExports("klevu-button")}
+          >
+            <slot name="before-button-text"></slot>
+            {this.buttonText}
+            <slot name="after-button-text"></slot>
+          </klevu-button>
         )}
+        {this.origin ? <klevu-util-portal>{this.#renderChatWindow()}</klevu-util-portal> : this.#renderChatWindow()}
       </Host>
+    )
+  }
+
+  #renderChatWindow() {
+    return (
+      <klevu-product-query-popup
+        additionaldata={this.additionaldata || ""}
+        url={this.url}
+        productId={this.productId || this.itemId}
+        pqaWidgetId={this.pqaWidgetId}
+        tFinePrint={this.finePrint}
+        tPopupTitle={this.popupTitle}
+        tTextFieldPlaceholder={this.textFieldPlaceholder}
+        askButtonText={this.askButtonText}
+        settings={this.settings}
+        popupAnchor={this.popupAnchor}
+        popupOffset={this.popupOffset}
+        exportparts={partsExports("klevu-product-query-popup")}
+        useBackground={this.useBackground}
+        originElement={this.origin}
+        disableCloseOutsideClick={this.disableCloseOutsideClick}
+        config={this.config}
+        useNativeScrollbars={this.useNativeScrollbars}
+        itemId={this.itemId}
+        itemVariantId={this.itemVariantId}
+        itemGroupId={this.itemGroupId}
+        channelId={this.channelId}
+        locale={this.locale}
+        productInfoGenerator={this.productInfoGenerator}
+        textFieldVariant={this.textFieldVariant}
+        showAsPopup={this.showAsPopup}
+      >
+        <slot name="after-fineprint" slot="after-fineprint"></slot>
+      </klevu-product-query-popup>
     )
   }
 }

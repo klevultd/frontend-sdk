@@ -8,6 +8,10 @@
   --popup-width: var(--klevu-product-query-popup-width, 520px);
 }
 
+.container {
+  width: var(--popup-width);
+  height: var(--popup-height);
+}
 .content {
   padding: var(--klevu-spacing-04);
   box-sizing: border-box;

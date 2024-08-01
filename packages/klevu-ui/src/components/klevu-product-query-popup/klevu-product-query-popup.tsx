@@ -179,6 +179,11 @@ export class KlevuProductQueryPopup {
    */
   @Prop() locale?: string
 
+  /**
+   * Set to false if you want to show this in place instead of dialog box
+   */
+  @Prop() showAsPopup = true
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -206,6 +211,9 @@ export class KlevuProductQueryPopup {
     if (!this.productId && this.url == "") {
       const canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null
       this.url = canonical?.href ?? window.location.href
+    }
+    if (!this.showAsPopup) {
+      this.#start()
     }
   }
 
@@ -345,7 +353,7 @@ export class KlevuProductQueryPopup {
   }
 
   render() {
-    return (
+    return this.showAsPopup ? (
       <Host>
         <klevu-popup
           ref={(el) => (this.#popup = el)}
@@ -367,6 +375,12 @@ export class KlevuProductQueryPopup {
           </div>
         </klevu-popup>
       </Host>
+    ) : (
+      <div class="container">
+        <div class="content" slot="content" ref={(el) => (this.#contentDiv = el)}>
+          {this.showFeedback ? this.#renderFeedback() : this.#renderChat()}
+        </div>
+      </div>
     )
   }
 

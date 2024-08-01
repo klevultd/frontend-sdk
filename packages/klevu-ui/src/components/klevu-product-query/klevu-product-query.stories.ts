@@ -41,6 +41,7 @@ const chatRender = (args: KlevuProductQuery) => {
       channel-id=${ifDefined(args.channelId)}
       locale=${ifDefined(args.locale)}
       product-info-generator=${ifDefined(args.productInfoGenerator)}
+      show-as-popup=${ifDefined(args.showAsPopup)}
     ></klevu-product-query>
   `
 }

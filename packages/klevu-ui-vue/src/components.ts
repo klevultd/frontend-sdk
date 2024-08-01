@@ -330,7 +330,8 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'itemGroupId',
   'itemVariantId',
   'channelId',
-  'locale'
+  'locale',
+  'showAsPopup'
 ]);
 
 
@@ -362,7 +363,8 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'itemGroupId',
   'itemVariantId',
   'channelId',
-  'locale'
+  'locale',
+  'showAsPopup'
 ]);
 
 
