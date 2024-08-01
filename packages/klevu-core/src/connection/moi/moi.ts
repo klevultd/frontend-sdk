@@ -7,15 +7,22 @@ import { KlevuStorage } from "../../utils/storage.js"
 import { post } from "../fetch.js"
 
 const STORAGE_KEY = "klevu-moi-session"
+const MAX_MESSAGES = 10
 
 export type MoiContext = {
   klevuApiKey: string
   sessionId?: string
+  visitorId?: string
   mode?: MoiChatModes
   url?: string
   productId?: string
   pqaWidgetId?: string
   additionalData?: string
+  itemId?: string
+  itemGroupId?: string
+  itemVariantId?: string
+  channelId?: string
+  locale?: string
 }
 
 export type MoiRequest = {
@@ -100,6 +107,12 @@ export type MoiMenuOptions = {
   }
 }
 
+export type MoiQuestionsResponse = {
+  questions: {
+    options: MoiQuestion[]
+  }
+}
+
 export type MoiProducts = {
   productData: {
     note: string | null
@@ -154,6 +167,9 @@ export type MoiResponseObjects =
   | MoiMenuOptions
   | MoiProducts
   | MoiActionsMessage
+  | MoiQuestionsResponse
+
+export type MoiQuestion = string
 
 export type MoiMessages = Array<
   MoiResponseText | MoiResponseFilter | MoiProducts | MoiLocalMessage
@@ -178,7 +194,9 @@ type MoiSavedSession = {
   context: MoiContext
   MOI?: MoiSavedSessionState
   PQA?: {
-    [urlOrProductId: string]: MoiSavedSessionState
+    [urlOrProductId: string]: MoiSavedSessionState & {
+      questions: MoiQuestion[]
+    }
   }
 }
 
@@ -224,6 +242,30 @@ export type MoiStartOptions = {
    * To pass additional information to the api as string
    */
   additionalData?: string
+  /**
+   * Product Id to be used in analytics
+   */
+  itemId?: string
+  /**
+   * Product Group Id to be used in analytics, in case of multiple variants
+   */
+  itemGroupId?: string
+  /**
+   * Optional Product Variant Id to be used in analytics
+   */
+  itemVariantId?: string
+  /**
+   * Channel Id to be used in analytics
+   */
+  channelId?: string
+  /**
+   * Locale to be used in analytics
+   */
+  locale?: string
+  /**
+   * Product details to be sent for analytics
+   */
+  productInfo?: ProductInfo
   settings?: {
     /**
      * Override the config
@@ -237,33 +279,77 @@ export type MoiStartOptions = {
   }
 }
 
+export type ProductInfo = {
+  itemId: string
+  itemGroupId: string
+  itemVariantId?: string
+  locale: string
+  channelId?: string
+  title: string
+  url: string
+  description: string
+  vendor: string
+  priceMax: string
+  priceMin: string
+  tags?: string[]
+  options?: {
+    name: string
+    values: string[]
+  }[]
+  images: string[]
+  variants?: {
+    itemVariantId: string
+    title: string
+    sku: string
+    url: string
+    image: string
+    price: string
+    weight: string
+  }[]
+}
+
+const saveProductInfo = async (
+  config: KlevuConfig,
+  productInfo: ProductInfo
+) => {
+  return await post(`${config.moiApiUrl}chat/productInfo`, productInfo)
+}
+
 export async function startMoi(
   options: MoiStartOptions = {}
 ): Promise<MoiSession> {
   const config = options.settings?.configOverride || KlevuConfig.getDefault()
   let startingMessages: MoiMessages = []
+  let questions: MoiQuestion[] = []
 
   let ctx: MoiContext = {
     klevuApiKey: config.apiKey,
     sessionId: "",
+    visitorId: "",
     mode: options.mode,
     url: options.url,
     productId: options.productId,
     pqaWidgetId: options.pqaWidgetId,
     additionalData: options.additionalData,
+    ...(options.itemId && { itemId: options.itemId }),
+    ...(options.itemGroupId && { itemGroupId: options.itemGroupId }),
+    ...(options.itemVariantId && { itemVariantId: options.itemVariantId }),
+    ...(options.channelId && { channelId: options.channelId }),
+    ...(options.locale && { locale: options.locale }),
   }
   const storedSession = await getStoredSession()
 
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
   let feedbacks: MoiSavedFeedback[] = []
-  let shouldSendMessage = false
+  let shouldSendMessage = options.settings?.alwaysStartConversation
   const PQAKey = options.productId || options.url
 
   if (storedSession && storedSession.context) {
     switch (options.mode) {
       case undefined:
         ctx.sessionId = storedSession.context.sessionId
+        ctx.visitorId = storedSession.context.visitorId
         if (storedSession.MOI) {
           startingMessages = storedSession.MOI.messages
           menu = storedSession.MOI.menu
@@ -277,22 +363,28 @@ export async function startMoi(
         break
       case "PQA":
         ctx.sessionId = storedSession.context.sessionId
+        ctx.visitorId = storedSession.context.visitorId
         if (PQAKey && storedSession.PQA && storedSession.PQA[PQAKey]) {
           startingMessages = storedSession.PQA[PQAKey].messages
           menu = storedSession.PQA[PQAKey].menu
           genericOptions = storedSession.PQA[PQAKey].genericOptions
           feedbacks = storedSession.PQA[PQAKey].feedbacks
+          questions = storedSession.PQA[PQAKey].questions || []
 
           if (options.settings?.alwaysStartConversation) {
             shouldSendMessage = storedSession.PQA[PQAKey].messages.length === 0
           }
         }
     }
-  } else {
-    shouldSendMessage = true
   }
 
   if (shouldSendMessage) {
+    try {
+      if (options.productInfo && options.mode === "PQA")
+        await saveProductInfo(config, options.productInfo)
+    } catch (err) {
+      console.warn("Failed to save product Info", err)
+    }
     const result = await queryMoi(
       {
         context: ctx,
@@ -305,16 +397,21 @@ export async function startMoi(
     }
 
     const parsed = parseResponse(result)
-    ctx = parsed.context
+    ctx = {
+      ...ctx,
+      ...parsed.context,
+    }
     startingMessages = parsed.messages
     menu = parsed.menu
     genericOptions = parsed.genericOptions
+    questions = parsed.questions || []
   }
 
   return new MoiSession(
     {
       feedbacks,
       messages: startingMessages,
+      questions,
       menu,
       genericOptions,
     },
@@ -327,6 +424,7 @@ export async function startMoi(
 export class MoiSession {
   constructor(
     state: {
+      questions: MoiQuestion[]
       messages: MoiMessages
       menu: MoiMenuOptions["menuOptions"]
       genericOptions: MoiResponseGenericOptions["genericOptions"]
@@ -337,6 +435,7 @@ export class MoiSession {
     config: KlevuConfig
   ) {
     this.messages = state.messages
+    this.questions = state.questions
     this.menu = state.menu
     this.genericOptions = state.genericOptions
     this.feedbacks = state.feedbacks ?? []
@@ -352,6 +451,7 @@ export class MoiSession {
   }
 
   messages: MoiMessages
+  questions: MoiQuestion[]
   menu: MoiMenuOptions["menuOptions"]
   genericOptions?: MoiResponseGenericOptions["genericOptions"]
   feedbacks: MoiSavedFeedback[]
@@ -409,12 +509,22 @@ export class MoiSession {
       }
     }
 
-    const { messages, genericOptions, menu, context } = parseResponse(res)
+    const { messages, genericOptions, menu, context, questions } =
+      parseResponse(res)
     this.messages = [...this.messages, ...messages]
+    if (this.messages.length > MAX_MESSAGES) {
+      this.messages.shift()
+    }
+    if (target === "send") {
+      this.questions = [...questions]
+    }
     this.options.onMessage?.()
     this.genericOptions = genericOptions
     this.menu = menu
-    this.context = context
+    this.context = {
+      ...this.context,
+      ...context,
+    }
 
     this.save()
 
@@ -454,6 +564,7 @@ export class MoiSession {
               genericOptions: this.genericOptions,
               messages: this.messages,
               feedbacks: this.feedbacks,
+              questions: this.questions || [],
             },
           },
         })
@@ -533,6 +644,7 @@ async function queryMoi(
 
 function parseResponse(response: MoiResponse) {
   const messages: MoiMessages = []
+  const questions: MoiQuestion[] = []
   let genericOptions: MoiResponseGenericOptions["genericOptions"] | undefined =
     undefined
   let menu: MoiMenuOptions["menuOptions"] | undefined = undefined
@@ -542,6 +654,7 @@ function parseResponse(response: MoiResponse) {
     "message" in d && messages.push(d)
     "filter" in d && messages.push(d)
     "productData" in d && messages.push(d)
+    "questions" in d && questions.push(...(d.questions?.options || []))
 
     if ("genericOptions" in d) {
       genericOptions = d.genericOptions
@@ -556,5 +669,6 @@ function parseResponse(response: MoiResponse) {
     messages,
     menu,
     genericOptions,
+    questions,
   }
 }
