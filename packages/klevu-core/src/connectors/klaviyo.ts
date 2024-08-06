@@ -1,5 +1,5 @@
 import { KlevuConfig } from "../index.js"
-import { KlevuUserSession } from "../usersession.js"
+import { KlevuUserSession } from "../resolvers/usersession.js"
 
 export class Klaviyo {
   static default: Klaviyo | undefined

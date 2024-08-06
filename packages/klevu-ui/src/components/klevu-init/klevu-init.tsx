@@ -68,6 +68,14 @@ export class KlevuInit {
    */
   @Prop() visitorServiceUrl?: string
   /**
+   * Ipv6 ServiceUrl for ipv6 retrieval used in analytics
+   */
+  @Prop() ipv6ServiceUrl?: string
+  /**
+   * Ipv4 ServiceUrl for ipv4 retrieval used in analytics
+   */
+  @Prop() ipv4ServiceUrl?: string
+  /**
    * Override the default moi API URL
    */
   @Prop() moiApiUrl?: string
@@ -135,6 +143,8 @@ export class KlevuInit {
       eventsApiV2Url: this.eventsV2Url,
       recommendationsApiUrl: this.recommendationsApiUrl,
       visitorServiceUrl: this.visitorServiceUrl,
+      ipv6ServiceUrl: this.ipv6ServiceUrl,
+      ipv4ServiceUrl: this.ipv4ServiceUrl,
       enableKlaviyoConnector: this.enableKlaviyoConnector || false,
       useConsent: this.useConsent || false,
       consentGiven: this.consentGiven || false,

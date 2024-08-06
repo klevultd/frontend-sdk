@@ -8,7 +8,7 @@ import { KlevuTypeOfRecord } from "../../models/KlevuTypeOfRecord.js"
 import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { get } from "../../connection/fetch.js"
 import { KlevuTypeOfRequest } from "../../models/KlevuTypeOfRequest.js"
-import { KlevuUserSession } from "../../usersession.js"
+import { KlevuUserSession } from "../../resolvers/usersession.js"
 
 export type KlevuKMCRecommendationOptions = {
   id: string
