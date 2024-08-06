@@ -115,7 +115,9 @@ export class KlevuIpResolver {
         KlevuConfig.getDefault().ipv4ServiceUrl,
         ipV4Payload
       )
-    } catch (err) {}
+    } catch (err) {
+      console.info(err)
+    }
     try {
       const ipV6Payload: IpApiPayload = {
         klevu_uuid: ipV4Response?.klevu_uuid || "",
@@ -124,7 +126,9 @@ export class KlevuIpResolver {
         KlevuConfig.getDefault().ipv6ServiceUrl,
         ipV6Payload
       )
-    } catch (err) {}
+    } catch (err) {
+      console.info(err)
+    }
     return {
       uuid: ipV4Response?.klevu_uuid || ipV6Response?.klevu_uuid || "",
       ipv4: ipV4Response?.ip_address || "",

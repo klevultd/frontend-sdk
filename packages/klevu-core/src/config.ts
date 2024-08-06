@@ -139,7 +139,6 @@ export class KlevuConfig {
 
   static initializeIPResolver() {
     KlevuIpResolver.init()
-
     if (KlevuIpResolver.getDefault().hasIPInfoExpired()) {
       KlevuIpResolver.getDefault().generateIPData()
     } else {
