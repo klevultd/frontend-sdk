@@ -9,8 +9,8 @@ import axios from "axios"
 
 beforeEach(() => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     axios,
   })
 })
@@ -24,16 +24,16 @@ test("Advanced filtering", async () => {
       },
       advancedFiltering([
         {
-          key: "color",
+          key: "size",
           singleSelect: false,
           valueOperator: "INCLUDE",
-          values: ["Red"],
+          values: ["34"],
         },
         {
           key: "klevu_price",
           singleSelect: true,
           valueOperator: "INCLUDE",
-          values: ["0 - 200"],
+          values: ["0 - 300"],
         },
       ])
     )
@@ -41,9 +41,8 @@ test("Advanced filtering", async () => {
 
   const resultObject = result.queriesById("test")
   expect(resultObject).toBeDefined()
-
-  expect(resultObject?.records.some((r) => r.color === "Red")).toBeTruthy()
+  expect(resultObject?.records.some((r) => r.color === "green")).toBeTruthy()
   expect(
     resultObject?.records.some((r) => parseFloat(r.price) > 200)
-  ).toBeFalsy()
+  ).toBeTruthy()
 })

@@ -4,8 +4,8 @@ import { KlevuLastClickedProducts } from "./lastClickedProducts.js"
 
 beforeEach(() => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     disableClickTrackStoring: false,
   })
 })

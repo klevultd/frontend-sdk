@@ -45,8 +45,8 @@ Object.defineProperty(window, "sessionStorage", { value: storageMock })
 
 test("Test storage when consent is required and consent is given", async () => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     useConsent: true,
   })
   KlevuConfig.getDefault().setConsentGiven(true)
@@ -98,8 +98,8 @@ test("Test storage when consent is required and consent is given", async () => {
 
 test("Test storage when consent is required and consent is not given", async () => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     useConsent: true,
   })
   KlevuConfig.getDefault().setConsentGiven(false)
@@ -144,8 +144,8 @@ test("Test storage when consent is required and consent is not given", async () 
 
 test("Test storage when consent is required and consent is not needed", async () => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     useConsent: false,
   })
   const mockValue = "[testvalues]"

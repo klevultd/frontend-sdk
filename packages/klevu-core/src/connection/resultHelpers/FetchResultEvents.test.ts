@@ -14,8 +14,8 @@ import { jest } from "@jest/globals"
 
 beforeEach(() => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     axios,
   })
 })
@@ -188,7 +188,7 @@ test("Merchandising call has correct filters set", async () => {
       applyFilters([
         {
           key: "color",
-          values: ["Agate", "Amber"],
+          values: ["green", "black"],
         },
       ])
     )
@@ -212,7 +212,7 @@ test("Merchandising call has correct filters set", async () => {
   expect(getSpySuccess).toHaveBeenCalledTimes(1)
   expect(
     (getSpySuccess.mock.calls[0][1] as any).get("klevu_activeFilters")
-  ).toEqual("color:Agate;;color:Amber")
+  ).toEqual("color:black;;color:green")
 })
 
 test("Filters should not be set if there are no filters", async () => {
