@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+import { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback, ProductInfo } from "@klevu/core";
 import { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 import { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 import { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -28,7 +28,7 @@ import { KlevuTextfieldVariant as KlevuTextfieldVariant1 } from "./components/kl
 import { KlevuTypographyVariant } from "./components/klevu-typography/klevu-typography";
 import { OverflowBehavior, OverlayScrollbars } from "overlayscrollbars";
 import { ViewportSize } from "./components/klevu-util-viewport/klevu-util-viewport";
-export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback } from "@klevu/core";
+export { FilterManager, FilterManagerFilters, KlevuConfig, KlevuFetchModifer, KlevuFilterResultOptions, KlevuFilterResultSlider, KlevuMerchandisingOptions, KlevuQueryResult, KlevuRecord, KlevuResponseQueryObject, KlevuSearchOptions, KlevuSearchSorting, KlevuSuggestionResult, KMCMapsRootObject, MoiMessages, MoiProduct, MoiRequest, MoiResponseFilter, MoiSavedFeedback, ProductInfo } from "@klevu/core";
 export { KlevuMessageFeedbackReasonDetails } from "./components/klevu-chat-bubble/klevu-chat-bubble";
 export { onKlevuMessageFeedbackDetails } from "./components/klevu-chat-messages/klevu-chat-messages";
 export { KlevuOnSwatchClick } from "./components/klevu-color-swatch/klevu-color-swatch";
@@ -968,6 +968,10 @@ export namespace Components {
          */
         "buttonText": string;
         /**
+          * Channel Id to be used in analytics eg: Shopify, BigCommerce
+         */
+        "channelId"?: string;
+        /**
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
@@ -975,6 +979,22 @@ export namespace Components {
           * Fine print of the popup under the title
          */
         "finePrint": string;
+        /**
+          * Product Group Id to be used in analytics, in case of multiple variants
+         */
+        "itemGroupId"?: string;
+        /**
+          * Product Id to be used in analytics
+         */
+        "itemId"?: string;
+        /**
+          * Optional Product Variant Id to be used in analytics
+         */
+        "itemVariantId"?: string;
+        /**
+          * Locale to be used in analytics eg: en_US
+         */
+        "locale"?: string;
         /**
           * Anchor popup to which side of the origin
          */
@@ -995,6 +1015,11 @@ export namespace Components {
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
+        /**
+          * Pass function to call that will return the product info eg: pass function call as string - "getProductInfo()" or function itself
+          * @returns ProductInfo object
+         */
+        "productInfoGenerator"?: string | (() => ProductInfo);
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
@@ -1027,11 +1052,18 @@ export namespace Components {
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
      */
     interface KlevuProductQueryPopup {
+        /**
+          * Pass any additional data you would want the AI to use for context
+         */
         "additionaldata"?: string;
         /**
           * Text of the button for asking a question
          */
         "askButtonText"?: string;
+        /**
+          * Channel Id to be used in analytics eg: Shopify, Bigcommerce
+         */
+        "channelId"?: string;
         /**
           * Config for Klevu
          */
@@ -1040,6 +1072,22 @@ export namespace Components {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
+        /**
+          * Product Group Id to be used in analytics, in case of multiple variants
+         */
+        "itemGroupId"?: string;
+        /**
+          * Product Id to be used in analytics
+         */
+        "itemId"?: string;
+        /**
+          * Optional Product Variant Id to be used in analytics
+         */
+        "itemVariantId"?: string;
+        /**
+          * Locale to be used in analytics eg: en_US
+         */
+        "locale"?: string;
         /**
           * Element to anchor the product query popup to
          */
@@ -1060,6 +1108,11 @@ export namespace Components {
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
+        /**
+          * Pass function to call that will return the product info eg: pass function call as string - "getProductInfo()" or function
+          * @returns ProductInfo object
+         */
+        "productInfoGenerator"?: string | (() => ProductInfo);
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
@@ -3518,6 +3571,10 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
+          * Channel Id to be used in analytics eg: Shopify, BigCommerce
+         */
+        "channelId"?: string;
+        /**
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
@@ -3525,6 +3582,22 @@ declare namespace LocalJSX {
           * Fine print of the popup under the title
          */
         "finePrint"?: string;
+        /**
+          * Product Group Id to be used in analytics, in case of multiple variants
+         */
+        "itemGroupId"?: string;
+        /**
+          * Product Id to be used in analytics
+         */
+        "itemId"?: string;
+        /**
+          * Optional Product Variant Id to be used in analytics
+         */
+        "itemVariantId"?: string;
+        /**
+          * Locale to be used in analytics eg: en_US
+         */
+        "locale"?: string;
         /**
           * Anchor popup to which side of the origin
          */
@@ -3545,6 +3618,11 @@ declare namespace LocalJSX {
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
+        /**
+          * Pass function to call that will return the product info eg: pass function call as string - "getProductInfo()" or function itself
+          * @returns ProductInfo object
+         */
+        "productInfoGenerator"?: string | (() => ProductInfo);
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
@@ -3577,11 +3655,18 @@ declare namespace LocalJSX {
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
      */
     interface KlevuProductQueryPopup {
+        /**
+          * Pass any additional data you would want the AI to use for context
+         */
         "additionaldata"?: string;
         /**
           * Text of the button for asking a question
          */
         "askButtonText"?: string;
+        /**
+          * Channel Id to be used in analytics eg: Shopify, Bigcommerce
+         */
+        "channelId"?: string;
         /**
           * Config for Klevu
          */
@@ -3590,6 +3675,22 @@ declare namespace LocalJSX {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
+        /**
+          * Product Group Id to be used in analytics, in case of multiple variants
+         */
+        "itemGroupId"?: string;
+        /**
+          * Product Id to be used in analytics
+         */
+        "itemId"?: string;
+        /**
+          * Optional Product Variant Id to be used in analytics
+         */
+        "itemVariantId"?: string;
+        /**
+          * Locale to be used in analytics eg: en_US
+         */
+        "locale"?: string;
         /**
           * Element to anchor the product query popup to
          */
@@ -3610,6 +3711,11 @@ declare namespace LocalJSX {
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
+        /**
+          * Pass function to call that will return the product info eg: pass function call as string - "getProductInfo()" or function
+          * @returns ProductInfo object
+         */
+        "productInfoGenerator"?: string | (() => ProductInfo);
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */

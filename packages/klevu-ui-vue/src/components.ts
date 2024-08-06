@@ -326,7 +326,13 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'popupOffset',
   'disableCloseOutsideClick',
   'settings',
-  'useNativeScrollbars'
+  'useNativeScrollbars',
+  'productInfoGenerator',
+  'itemId',
+  'itemGroupId',
+  'itemVariantId',
+  'channelId',
+  'locale'
 ]);
 
 
@@ -352,7 +358,13 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'disableCloseOutsideClick',
   'config',
   'useNativeScrollbars',
-  'additionaldata'
+  'additionaldata',
+  'productInfoGenerator',
+  'itemId',
+  'itemGroupId',
+  'itemVariantId',
+  'channelId',
+  'locale'
 ]);
 
 

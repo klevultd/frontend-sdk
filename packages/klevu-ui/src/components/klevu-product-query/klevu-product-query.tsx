@@ -1,5 +1,5 @@
 import { Placement } from "@floating-ui/dom"
-import { KlevuConfig, MoiRequest } from "@klevu/core"
+import { KlevuConfig, MoiRequest, ProductInfo } from "@klevu/core"
 import { Component, Element, Fragment, Host, Prop, State, h } from "@stencil/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { partsExports } from "../../utils/partsExports"
@@ -101,6 +101,35 @@ export class KlevuProductQuery {
    */
   @Prop() useNativeScrollbars?: boolean
 
+  /**
+   * Pass function to call that will return the product info
+   * eg: pass function call as string - "getProductInfo()" or function itself
+   * @returns ProductInfo object
+   */
+  @Prop() productInfoGenerator?: string | (() => ProductInfo)
+  /**
+   * Product Id to be used in analytics
+   */
+  @Prop() itemId?: string
+  /**
+   * Product Group Id to be used in analytics, in case of multiple variants
+   */
+  @Prop() itemGroupId?: string
+  /**
+   * Optional Product Variant Id to be used in analytics
+   */
+  @Prop() itemVariantId?: string
+  /**
+   * Channel Id to be used in analytics
+   * eg: Shopify, BigCommerce
+   */
+  @Prop() channelId?: string
+  /**
+   * Locale to be used in analytics
+   * eg: en_US
+   */
+  @Prop() locale?: string
+
   async connectedCallback() {
     this.config = await this.el.closest("klevu-init")?.getConfig()
     this.#checkIsPQAEnabled()
@@ -137,7 +166,7 @@ export class KlevuProductQuery {
             <klevu-product-query-popup
               additionaldata={this.additionaldata || ""}
               url={this.url}
-              productId={this.productId}
+              productId={this.productId || this.itemId}
               pqaWidgetId={this.pqaWidgetId}
               tFinePrint={this.finePrint}
               tPopupTitle={this.popupTitle}
@@ -152,6 +181,13 @@ export class KlevuProductQuery {
               disableCloseOutsideClick={this.disableCloseOutsideClick}
               config={this.config}
               useNativeScrollbars={this.useNativeScrollbars}
+              itemId={this.itemId}
+              itemVariantId={this.itemVariantId}
+              itemGroupId={this.itemGroupId}
+              channelId={this.channelId}
+              locale={this.locale}
+              productInfoGenerator={this.productInfoGenerator}
+              textFieldVariant={this.textFieldVariant}
             >
               <slot name="after-fineprint" slot="after-fineprint"></slot>
             </klevu-product-query-popup>
