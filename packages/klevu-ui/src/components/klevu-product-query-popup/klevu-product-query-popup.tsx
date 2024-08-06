@@ -396,7 +396,9 @@ export class KlevuProductQueryPopup {
           <div part="product-query-popup-header" slot="header">
             <div class="header">
               <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
-              <klevu-icon originElement={this.originElement} name="close" onClick={() => this.#popup?.closeModal()} />
+              {this.showAsPopup && (
+                <klevu-icon originElement={this.originElement} name="close" onClick={() => this.#popup?.closeModal()} />
+              )}
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">
