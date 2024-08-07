@@ -509,6 +509,14 @@ export namespace Components {
           * @returns
          */
         "getSettings": () => Promise<KlevuUIGlobalSettings | undefined>;
+        /**
+          * Ipv4 ServiceUrl for ipv4 retrieval used in analytics
+         */
+        "ipv4ServiceUrl"?: string;
+        /**
+          * Ipv6 ServiceUrl for ipv6 retrieval used in analytics
+         */
+        "ipv6ServiceUrl"?: string;
         "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load
@@ -3098,6 +3106,14 @@ declare namespace LocalJSX {
           * Override the default events v2 URL
          */
         "eventsV2Url"?: string;
+        /**
+          * Ipv4 ServiceUrl for ipv4 retrieval used in analytics
+         */
+        "ipv4ServiceUrl"?: string;
+        /**
+          * Ipv6 ServiceUrl for ipv6 retrieval used in analytics
+         */
+        "ipv6ServiceUrl"?: string;
         "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load

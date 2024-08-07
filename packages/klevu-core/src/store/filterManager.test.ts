@@ -55,8 +55,8 @@ const mockFilterData = (): Array<
 
 beforeEach(() => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     axios,
   })
 })
@@ -262,7 +262,7 @@ test("Test URL param reading when there is not initialized", () => {
 
 test("Test URL params with request", async () => {
   const manager = new FilterManager()
-  manager.readFromURLParams(new URLSearchParams("o_color=Anthracite"))
+  manager.readFromURLParams(new URLSearchParams("o_color=grey"))
   const result = await KlevuFetch(
     search(
       "hoodies",
@@ -277,13 +277,13 @@ test("Test URL params with request", async () => {
       result
         .queriesById("search")
         ?.filters?.find((f) => f.key == "color") as KlevuFilterResultOptions
-    ).options.find((o) => o.value == "Anthracite")?.selected
+    ).options.find((o) => o.value == "grey")?.selected
   ).toBe(true)
 
   expect(
     (
       manager.filters.find((f) => f.key === "color") as KlevuFilterResultOptions
-    ).options.find((o) => o.value === "Anthracite")?.selected
+    ).options.find((o) => o.value === "grey")?.selected
   ).toBe(true)
 
   expect(manager.filters.length).toBeGreaterThan(1)

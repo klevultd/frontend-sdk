@@ -1,7 +1,7 @@
 {
   "name": "@klevu/core",
   "sideEffects": false,
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "Typescript SDK that simplifies development on Klevu backend. Klevu provides advanced AI-powered search and discovery solutions for online retailers.",
   "keywords": [
     "klevu",

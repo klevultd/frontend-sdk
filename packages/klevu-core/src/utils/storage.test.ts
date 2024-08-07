@@ -1,16 +1,26 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { KlevuConfig } from "../config.js"
 import {
+  USER_IPV4_STORAGE_KEY,
+  USER_IPV6_STORAGE_KEY,
+  USER_IP_EXPIRY_STORAGE_KEY,
+  USER_UUID_STORAGE_KEY,
+} from "../resolvers/ipresolver.js"
+import {
   USER_SEGMENT_INFO_STORAGE_KEY,
   USER_SESSION_EXPIRY_STORAGE_KEY,
   USER_SESSION_ID_STORAGE_KEY,
-} from "../usersession.js"
+} from "../resolvers/usersession.js"
 import { KlevuStorage, StorageType } from "./storage.js"
 
 const defaultKeys = [
   USER_SESSION_ID_STORAGE_KEY,
   USER_SESSION_EXPIRY_STORAGE_KEY,
   USER_SEGMENT_INFO_STORAGE_KEY,
+  USER_IPV4_STORAGE_KEY,
+  USER_IPV6_STORAGE_KEY,
+  USER_IP_EXPIRY_STORAGE_KEY,
+  USER_UUID_STORAGE_KEY,
 ]
 
 const storageMock = (function () {
@@ -35,8 +45,8 @@ Object.defineProperty(window, "sessionStorage", { value: storageMock })
 
 test("Test storage when consent is required and consent is given", async () => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     useConsent: true,
   })
   KlevuConfig.getDefault().setConsentGiven(true)
@@ -88,8 +98,8 @@ test("Test storage when consent is required and consent is given", async () => {
 
 test("Test storage when consent is required and consent is not given", async () => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     useConsent: true,
   })
   KlevuConfig.getDefault().setConsentGiven(false)
@@ -134,8 +144,8 @@ test("Test storage when consent is required and consent is not given", async () 
 
 test("Test storage when consent is required and consent is not needed", async () => {
   KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-164651914788114877",
     useConsent: false,
   })
   const mockValue = "[testvalues]"
