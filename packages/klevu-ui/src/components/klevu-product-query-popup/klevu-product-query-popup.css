@@ -6,12 +6,13 @@
   text-align: left;
   --popup-height: var(--klevu-product-query-popup-height, 500px);
   --popup-width: var(--klevu-product-query-popup-width, 520px);
+  --embedded-height: var(--klevu-product-query-embedded-height, 100%);
+  --embedded-width: var(--klevu-product-query-embedded-width, 100%);
+  --embedded-header-background: var(--klevu-product-query-embedded-header-background, #5589c5);
+  --embedded-border-color: var(--klevu-product-query-embedded-border-color, #5589c5);
+  --embedded-border-radius: var(--klevu-product-query-embedded-border-radius, var(--klevu-border-radius-m));
 }
 
-.container {
-  width: var(--popup-width);
-  height: var(--popup-height);
-}
 .content {
   padding: var(--klevu-spacing-04);
   box-sizing: border-box;
@@ -160,4 +161,47 @@ klevu-popup {
   display: block;
   text-decoration: none;
   color: #666;
+}
+
+.embedded div[part="product-query-popup-header"] {
+  background: var(--embedded-header-background);
+  padding-inline: var(--klevu-spacing-02);
+  border-top-left-radius: var(--embedded-border-radius);
+  border-top-right-radius: var(--embedded-border-radius);
+}
+
+.embedded .sendmessage {
+  --klevu-body-m-size: var(--klevu-body-xs-size);
+}
+.embedded div[part="product-query-popup-footer"] {
+  --klevu-button-font-size: var(--klevu-body-xs-size);
+  padding-inline: var(--klevu-spacing-02);
+}
+
+.embedded {
+  width: var(--embedded-width);
+  height: var(--embedded-height);
+  border: 1px solid var(--embedded-border-color);
+  border-radius: var(--embedded-border-radius);
+}
+.embedded .content {
+  padding: 0;
+}
+.embedded klevu-chat-messages {
+  margin-block: var(--klevu-spacing-02);
+  padding: var(--klevu-spacing-02);
+}
+.embedded klevu-chat-layout {
+  height: calc(var(--embedded-height) - 15px);
+  max-height: calc(var(--embedded-height) - 15px);
+  overflow: hidden;
+}
+
+.embedded div[part="product-query-popup-header"] #closeDialog,
+.embedded div[part="product-query-popup-header"] .fineprint {
+  display: none;
+}
+
+.embedded klevu-chat-messages {
+  --klevu-spacing-04: var(--klevu-spacing-02);
 }

@@ -376,7 +376,7 @@ export class KlevuProductQueryPopup {
         </klevu-popup>
       </Host>
     ) : (
-      <div class="container">
+      <div class="embedded">
         <div class="content" slot="content" ref={(el) => (this.#contentDiv = el)}>
           {this.showFeedback ? this.#renderFeedback() : this.#renderChat()}
         </div>
@@ -396,9 +396,12 @@ export class KlevuProductQueryPopup {
           <div part="product-query-popup-header" slot="header">
             <div class="header">
               <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
-              {this.showAsPopup && (
-                <klevu-icon originElement={this.originElement} name="close" onClick={() => this.#popup?.closeModal()} />
-              )}
+              <klevu-icon
+                originElement={this.originElement}
+                name="close"
+                id="closeDialog"
+                onClick={() => this.#popup?.closeModal()}
+              />
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">
