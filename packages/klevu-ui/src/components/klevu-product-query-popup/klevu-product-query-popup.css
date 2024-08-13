@@ -4,32 +4,34 @@
    */
   display: block;
   text-align: left;
-  --cornflower-blue: #5589c5;
+  --cornflower-blue: #428ACA;
   --popup-height: var(--klevu-product-query-popup-height, 500px);
   --popup-width: var(--klevu-product-query-popup-width, 520px);
   --embedded-height: var(--klevu-product-query-embedded-height, 100%);
   --embedded-width: var(--klevu-product-query-embedded-width, 100%);
-  --embedded-header-background: var(--klevu-product-query-embedded-header-background, #2b4af7);
+  --embedded-header-background: var(--klevu-product-query-embedded-header-background, var(--cornflower-blue));
   --embedded-border-color: var(--klevu-product-query-embedded-border-color, var(--cornflower-blue));
   --embedded-border-radius: var(--klevu-product-query-embedded-border-radius, var(--klevu-border-radius-s));
   --embedded-display-none: var(--klevu-product-query-embedded-display-none, block);
 }
 
 :host([embedded]) {
-  /* --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, #F5F5F5);
+  /* 
   --klevu-chat-bubble-background: var(--klevu-chat-bubble-embedded-background, #D8EDFD);
   --klevu-typography-font-size: var(--klevu-typography-embedded-font-size, 11px);
   --embedded-question-bg: var(--klevu-product-query-embedded-question-bg, #fff);
   --klevu-chat-bubble-text-color: var(--klevu-chat-bubble-embedded-text-color, #000);
   --klevu-chat-bubble-text-color-remote: var(--klevu-chat-bubble-embedded-text-color-remote, #000);
   --klevu-chat-bubble-border-radius-general: var(--klevu-chat-bubble-embedded-border-radius-general, var(--klevu-border-radius-s));
-  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, var(--cornflower-blue));
   --embedded-icon-size: var(--custom-embedded-icon-size, 20px);
   --embedded-icon-rotation: var(--custom-embedded-icon-rotation, -45deg);*/
+  --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, var(--cornflower-blue));
+  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, var(--cornflower-blue));
   --klevu-product-query-popup-width: 100%; 
   --embedded-chat-height: var(--custom-embedded-chat-height, 100%);
   --embedded-chat-max-height: var(--custom-embedded-chat-max-height, 100%);
   --embedded-icon-color: var(--custom-embedded-icon-color, #fff);
+  --klevu-button-background-color: var(--cornflower-blue);
 }
 
 .content {

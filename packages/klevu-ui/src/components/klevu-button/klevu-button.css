@@ -13,7 +13,7 @@
   --font-size: var(--klevu-button-font-size, var(--klevu-body-s-size));
   --text-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
   --icon-size: var(--embedded-icon-size, 1.5em);
-  --icon-color: var(--embedded-icon-color, --text-color);
+  --icon-color: var(--embedded-icon-color, var(--text-color));
   --icon-rotation: var(--embedded-icon-rotation, 0deg);
 }
 
