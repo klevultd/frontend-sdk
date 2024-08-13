@@ -87,7 +87,7 @@ button:focus:after {
   left: -3px;
   width: calc(100% + 2px);
   height: calc(100% + 2px);
-  border: 2px solid var(--klevu-color-primary);
+  border: 2px solid var(--background-color);
   border-radius: calc(var(--klevu-border-radius-m) + 2px);
 }
 
