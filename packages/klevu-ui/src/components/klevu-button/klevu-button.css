@@ -12,9 +12,9 @@
   --padding: var(--klevu-button-padding, calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)));
   --font-size: var(--klevu-button-font-size, var(--klevu-body-s-size));
   --text-color: var(--klevu-button-text-color, var(--klevu-color-neutral-1));
-  --icon-size: var(--embedded-icon-size, 1.5em);
-  --icon-color: var(--embedded-icon-color, var(--text-color));
-  --icon-rotation: var(--embedded-icon-rotation, 0deg);
+  --icon-size: var(--klevu-icon-size, 1.5em);
+  --icon-color: var(--klevu-icon-color, var(--text-color));
+  --icon-rotation: var(--klevu-icon-rotation, 0deg);
 }
 
 button {

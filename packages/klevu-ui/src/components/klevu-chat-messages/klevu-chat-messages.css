@@ -32,7 +32,7 @@
 .end-spacer {
   height: var(--klevu-spacing-04);
   width: 100%;
-  display: var(--embedded-display-none);
+  display: var(--end-spacer-display);
 }
 
 .filteractions {
