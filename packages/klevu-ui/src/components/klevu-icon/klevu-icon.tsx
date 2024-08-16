@@ -51,8 +51,10 @@ export class KlevuIcon {
       if (init) {
         path = await init.getAssetsPath()
       }
-      const url = `${path}/assets/${this.name}.svg`
-      await this.#setIcon(url, false)
+      if (path) {
+        const url = `${path}/assets/${this.name}.svg`
+        await this.#setIcon(url, false)
+      }
     } else if (url) {
       this.iconURL = url
     }
