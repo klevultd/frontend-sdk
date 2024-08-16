@@ -239,7 +239,7 @@ export class KlevuInit {
 
   @Method()
   async getAssetsPath(): Promise<string> {
-    return this.assetsPath ?? "/"
+    return this.assetsPath ?? ""
   }
 
   @Method()
