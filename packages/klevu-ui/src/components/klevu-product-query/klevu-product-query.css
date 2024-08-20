@@ -1,5 +1,9 @@
 :host {
   display: inline-block;
-  width: var(--klevu-product-query-popup-width, 100%);
+  /* width: var(--klevu-product-query-popup-width, 100%); */
 }
+
+/* :host([showAsPopup]) {
+  width: auto;
+} */
 

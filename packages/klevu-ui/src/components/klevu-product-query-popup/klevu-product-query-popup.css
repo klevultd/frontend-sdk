@@ -16,13 +16,6 @@
 }
 
 :host([embedded]) {
-  /* 
-  --klevu-typography-font-size: var(--klevu-typography-embedded-font-size, 11px);
-  --klevu-question-bg: var(--klevu-product-query-question-bg, #fff);
-  --klevu-chat-bubble-text-color: var(--klevu-chat-bubble-embedded-text-color, #000);
-  --klevu-chat-bubble-border-radius-general: var(--klevu-chat-bubble-embedded-border-radius-general, var(--klevu-border-radius-s));
-  --klevu-button-icon-size: var(--klevu-product-query-icon-size, 20px);
-  --klevu-button-icon-rotation: var(--klevu-product-query-icon-rotation, -45deg);*/
   --klevu-chat-bubble-text-color-remote: var(--klevu-product-query-bubble-text-color-remote, #000);
   --klevu-chat-bubble-background: var(--klevu-product-query-bubble-background, #D8EDFD);
   --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, #f6f6f6);
@@ -33,6 +26,8 @@
   --klevu-product-query-popup-width: 100%; 
   --klevu-button-background-color: #d8edfd;
   --klevu-button-background-hover: #b6ccdc;
+  --klevu-chat-bubble-border-radius: var(--klevu-product-query-chat-bubble-border-radius, var(--klevu-border-radius-s));
+  --klevu-chat-bubble-border-radius-remote: var(--klevu-product-query-chat-bubble-border-radius-remote, var(--klevu-border-radius-s));
 }
 
 .content {
@@ -199,8 +194,6 @@ klevu-popup {
 
 .embedded div[part="product-query-popup-header"] {
   background: var(--embedded-header-background);
-  border-top-left-radius: var(--embedded-border-radius);
-  border-top-right-radius: var(--embedded-border-radius);
 }
 
 .embedded div[part="product-query-popup-footer"] {
@@ -217,6 +210,7 @@ klevu-popup {
   border-radius: var(--embedded-border-radius);
   --end-spacer-display: none;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .embedded .header {
