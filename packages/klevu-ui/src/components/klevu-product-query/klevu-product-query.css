@@ -1,9 +1,8 @@
 :host {
   display: inline-block;
-  /* width: var(--klevu-product-query-popup-width, 100%); */
 }
 
-/* :host([showAsPopup]) {
-  width: auto;
-} */
+:host([embedded]) {
+  width: var(--klevu-product-query-popup-width, 100%);
+}
 

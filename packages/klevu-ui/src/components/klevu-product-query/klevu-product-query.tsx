@@ -156,8 +156,8 @@ export class KlevuProductQuery {
     }
 
     return (
-      <Host>
-        {this.showAsPopup && (
+      this.showAsPopup ? (
+        <Host>
           <klevu-button
             ref={(el) => (this.origin = el)}
             part="klevu-query-open-button"
@@ -167,10 +167,14 @@ export class KlevuProductQuery {
             {this.buttonText}
             <slot name="after-button-text"></slot>
           </klevu-button>
-        )}
-        {this.origin ? <klevu-util-portal>{this.#renderChatWindow()}</klevu-util-portal> : this.#renderChatWindow()}
-      </Host>
-    )
+          <klevu-util-portal>{this.#renderChatWindow()}</klevu-util-portal>
+        </Host>
+        ) : (
+        <Host embedded>
+          {this.#renderChatWindow()}
+        </Host>
+        )
+      );
   }
 
   #renderChatWindow() {
