@@ -19,6 +19,8 @@ import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductAddToCart, KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
+import { WidgetLayout } from "./components/klevu-product-query/klevu-product-query";
+import { WidgetLayout as WidgetLayout1 } from "./components/klevu-product-query/klevu-product-query";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuQuicksearchDataEvent, KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
@@ -42,6 +44,8 @@ export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductAddToCart, KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
+export { WidgetLayout } from "./components/klevu-product-query/klevu-product-query";
+export { WidgetLayout as WidgetLayout1 } from "./components/klevu-product-query/klevu-product-query";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuQuicksearchDataEvent, KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
@@ -1012,6 +1016,10 @@ export namespace Components {
          */
         "pqaWidgetId"?: string;
         /**
+          * Set to false if you want to show the popup in place instead of dialog box
+         */
+        "pqaWidgetLayout": WidgetLayout;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -1024,10 +1032,6 @@ export namespace Components {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
-        /**
-          * Set to false if you want to show the popup in place instead of dialog box
-         */
-        "showAsPopup": boolean;
         /**
           * Placeholder of the textfield
          */
@@ -1109,6 +1113,10 @@ export namespace Components {
          */
         "pqaWidgetId"?: string;
         /**
+          * Set to false if you want to show this in place instead of dialog box
+         */
+        "pqaWidgetLayout": WidgetLayout1;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -1121,10 +1129,6 @@ export namespace Components {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
-        /**
-          * Set to false if you want to show this in place instead of dialog box
-         */
-        "showAsPopup": boolean;
         /**
           * Text of the button to open the popup
          */
@@ -3623,6 +3627,10 @@ declare namespace LocalJSX {
          */
         "pqaWidgetId"?: string;
         /**
+          * Set to false if you want to show the popup in place instead of dialog box
+         */
+        "pqaWidgetLayout"?: WidgetLayout;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -3635,10 +3643,6 @@ declare namespace LocalJSX {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
-        /**
-          * Set to false if you want to show the popup in place instead of dialog box
-         */
-        "showAsPopup"?: boolean;
         /**
           * Placeholder of the textfield
          */
@@ -3720,6 +3724,10 @@ declare namespace LocalJSX {
          */
         "pqaWidgetId"?: string;
         /**
+          * Set to false if you want to show this in place instead of dialog box
+         */
+        "pqaWidgetLayout"?: WidgetLayout1;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -3732,10 +3740,6 @@ declare namespace LocalJSX {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
-        /**
-          * Set to false if you want to show this in place instead of dialog box
-         */
-        "showAsPopup"?: boolean;
         /**
           * Text of the button to open the popup
          */

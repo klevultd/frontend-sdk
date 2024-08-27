@@ -41,7 +41,7 @@ const chatRender = (args: KlevuProductQuery) => {
       channel-id=${ifDefined(args.channelId)}
       locale=${ifDefined(args.locale)}
       product-info-generator=${ifDefined(args.productInfoGenerator)}
-      show-as-popup=${ifDefined(args.showAsPopup)}
+      pqa-widget-layout=${ifDefined(args.pqaWidgetLayout)}
     ></klevu-product-query>
   `
 }
@@ -304,7 +304,7 @@ export const EmbeddedView: StoryObj<KlevuProductQuery> = {
     itemVariantId: "",
     channelId: "21678260406",
     locale: "en_US",
-    showAsPopup: false,
+    pqaWidgetLayout: "embedded",
   },
   render: (args) =>
     html`

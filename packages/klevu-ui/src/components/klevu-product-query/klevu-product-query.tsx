@@ -4,6 +4,8 @@ import { Component, Element, Fragment, Host, Prop, State, h } from "@stencil/cor
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { partsExports } from "../../utils/partsExports"
 
+export type WidgetLayout = "embedded" | "popup"
+
 /**
  * Button that is placed on the site to start a product query session
  *
@@ -133,7 +135,7 @@ export class KlevuProductQuery {
   /**
    * Set to false if you want to show the popup in place instead of dialog box
    */
-  @Prop() showAsPopup = true
+  @Prop() pqaWidgetLayout: WidgetLayout = "popup"
 
   async connectedCallback() {
     this.config = await this.el.closest("klevu-init")?.getConfig()
@@ -155,26 +157,22 @@ export class KlevuProductQuery {
       return null
     }
 
-    return (
-      this.showAsPopup ? (
-        <Host>
-          <klevu-button
-            ref={(el) => (this.origin = el)}
-            part="klevu-query-open-button"
-            exportparts={partsExports("klevu-button")}
-          >
-            <slot name="before-button-text"></slot>
-            {this.buttonText}
-            <slot name="after-button-text"></slot>
-          </klevu-button>
-          <klevu-util-portal>{this.#renderChatWindow()}</klevu-util-portal>
-        </Host>
-        ) : (
-        <Host embedded>
-          {this.#renderChatWindow()}
-        </Host>
-        )
-      );
+    return this.pqaWidgetLayout === "popup" ? (
+      <Host>
+        <klevu-button
+          ref={(el) => (this.origin = el)}
+          part="klevu-query-open-button"
+          exportparts={partsExports("klevu-button")}
+        >
+          <slot name="before-button-text"></slot>
+          {this.buttonText}
+          <slot name="after-button-text"></slot>
+        </klevu-button>
+        <klevu-util-portal>{this.#renderChatWindow()}</klevu-util-portal>
+      </Host>
+    ) : (
+      <Host embedded>{this.#renderChatWindow()}</Host>
+    )
   }
 
   #renderChatWindow() {
@@ -204,7 +202,7 @@ export class KlevuProductQuery {
         locale={this.locale}
         productInfoGenerator={this.productInfoGenerator}
         textFieldVariant={this.textFieldVariant}
-        showAsPopup={this.showAsPopup}
+        pqaWidgetLayout={this.pqaWidgetLayout}
       >
         <slot name="after-fineprint" slot="after-fineprint"></slot>
       </klevu-product-query-popup>

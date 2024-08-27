@@ -333,7 +333,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'itemVariantId',
   'channelId',
   'locale',
-  'showAsPopup'
+  'pqaWidgetLayout'
 ]);
 
 
@@ -366,7 +366,7 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'itemVariantId',
   'channelId',
   'locale',
-  'showAsPopup'
+  'pqaWidgetLayout'
 ]);
 
 
