@@ -82,10 +82,10 @@ export class KlevuChatMessages {
 
   @State() lastMessageDisplayedText: string = '';
   @State() typeWriterEnds: boolean = true;
-  
+
   @Watch('messages')
   watchPropHandler(newValue: any, oldValue: MoiMessages) {
-    const lastItem = newValue.at(-1) || null;
+    const lastItem = newValue[newValue.length - 1] || null;
     this.lastMessageDisplayedText = '';
     if (lastItem?.message && this.speed > 0) {
       this.typeWriterEnds = false;
@@ -118,7 +118,7 @@ export class KlevuChatMessages {
             const isLastMessage = this.messages.length - 1 === index
             const showFeedback = this.showFeedbackFor === message.message.id && !Boolean(givenFeedback?.reason)
             let htmlMessage = ""
-            if(index === this.messages.length - 1 && this.lastMessageDisplayedText) {
+            if (index === this.messages.length - 1 && this.lastMessageDisplayedText) {
               htmlMessage = this.lastMessageDisplayedText;
             } else {
               htmlMessage = markdown(message.message.value)
