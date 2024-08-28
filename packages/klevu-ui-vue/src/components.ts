@@ -366,7 +366,8 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'itemVariantId',
   'channelId',
   'locale',
-  'pqaWidgetLayout'
+  'pqaWidgetLayout',
+  'removeAskloBranding'
 ]);
 
 

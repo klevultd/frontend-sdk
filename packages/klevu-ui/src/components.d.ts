@@ -1126,6 +1126,10 @@ export namespace Components {
          */
         "productInfoGenerator"?: string | (() => ProductInfo);
         /**
+          * Set to true if you want to remove the powered by ribbon
+         */
+        "removeAskloBranding": boolean;
+        /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
@@ -3736,6 +3740,10 @@ declare namespace LocalJSX {
           * @returns ProductInfo object
          */
         "productInfoGenerator"?: string | (() => ProductInfo);
+        /**
+          * Set to true if you want to remove the powered by ribbon
+         */
+        "removeAskloBranding"?: boolean;
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */

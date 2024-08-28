@@ -185,6 +185,11 @@ export class KlevuProductQueryPopup {
    */
   @Prop() pqaWidgetLayout: WidgetLayout = "popup"
 
+  /**
+   * Set to true if you want to remove the powered by ribbon
+   */
+  @Prop() removeAskloBranding = false
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -505,9 +510,11 @@ export class KlevuProductQueryPopup {
                 )}
               </div>
             )}
-            <a target="_blank" href="https://asklo.ai/" class="powered-by-message">
-              {this.poweredByMessage}
-            </a>
+            {!this.removeAskloBranding && (
+              <a target="_blank" href="https://asklo.ai/" class="powered-by-message">
+                {this.poweredByMessage}
+              </a>
+            )}
           </div>
         </klevu-chat-layout>
       </Fragment>

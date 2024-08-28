@@ -25,6 +25,7 @@ export class KlevuProductQuery {
 
   @State() origin?: HTMLKlevuButtonElement
   @State() isEnabled = false
+  @State() removeAskloBranding = false
   @State() config?: KlevuConfig
 
   /**
@@ -148,8 +149,9 @@ export class KlevuProductQuery {
       return
     }
     const res = await window.fetch(`${this.config?.moiApiUrl}chat/status?pqaWidgetId=${this.pqaWidgetId}`)
-    const statusJSON = await res.json()
-    this.isEnabled = statusJSON.status === "UNKNOWN" || statusJSON.status === "ENABLED"
+    const configJSON = await res.json()
+    this.isEnabled = configJSON.status === "UNKNOWN" || configJSON.status === "ENABLED"
+    this.removeAskloBranding = configJSON.removeAskloBranding
   }
 
   render() {
@@ -203,6 +205,7 @@ export class KlevuProductQuery {
         productInfoGenerator={this.productInfoGenerator}
         textFieldVariant={this.textFieldVariant}
         pqaWidgetLayout={this.pqaWidgetLayout}
+        removeAskloBranding={this.removeAskloBranding}
       >
         <slot name="after-fineprint" slot="after-fineprint"></slot>
       </klevu-product-query-popup>
