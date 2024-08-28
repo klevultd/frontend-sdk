@@ -1,5 +1,5 @@
 import { MoiMessages, MoiProduct, MoiResponseFilter, MoiResponseText, MoiSavedFeedback } from "@klevu/core"
-import { Component, Event, EventEmitter, Fragment, Host, Prop, h } from "@stencil/core"
+import { Component, Event, EventEmitter, Fragment, Host, Prop, State, Watch, h } from "@stencil/core"
 import { partsExports } from "../../utils/partsExports"
 import { markdown } from "../../utils/utils"
 
@@ -38,6 +38,15 @@ export class KlevuChatMessages {
   @Prop() showFeedbackFor?: string
 
   /**
+   * show questions block
+   */
+  @Prop() onTypeWriterEffectEnds?: (showQuestions: boolean) => void;
+
+  /**
+   * type animation speed, if 0, no animation
+   */
+  @Prop() speed: number = 10;
+  /**
    * When product is clicked
    */
   @Event({
@@ -71,6 +80,35 @@ export class KlevuChatMessages {
 
   feedbackReasons = ["Irrelevant", "Incorrect", "Offensive", "Other"]
 
+  @State() lastMessageDisplayedText: string = '';
+  @State() typeWriterEnds: boolean = true;
+
+  @Watch('messages')
+  watchPropHandler(newValue: any, oldValue: MoiMessages) {
+    const lastItem = newValue[newValue.length - 1] || null;
+    this.lastMessageDisplayedText = '';
+    if (lastItem?.message && this.speed > 0) {
+      this.typeWriterEnds = false;
+      this.onTypeWriterEffectEnds?.(true);
+      this.startTyping(lastItem.message.value);
+    }
+  }
+
+  startTyping(text: string) {
+    let index = 0;
+    const type = () => {
+      if (index < text.length) {
+        this.lastMessageDisplayedText += text.charAt(index);
+        index++;
+        setTimeout(type, this.speed);
+      } else {
+        this.typeWriterEnds = true;
+        this.onTypeWriterEffectEnds?.(false);
+      }
+    };
+    type();
+  }
+
   render() {
     return (
       <Host>
@@ -79,8 +117,12 @@ export class KlevuChatMessages {
             const givenFeedback = this.feedbacks?.find((f) => f.id === message.message.id)
             const isLastMessage = this.messages.length - 1 === index
             const showFeedback = this.showFeedbackFor === message.message.id && !Boolean(givenFeedback?.reason)
-
-            const htmlMessage = markdown(message.message.value)
+            let htmlMessage = ""
+            if (index === this.messages.length - 1 && this.lastMessageDisplayedText) {
+              htmlMessage = this.lastMessageDisplayedText;
+            } else {
+              htmlMessage = markdown(message.message.value)
+            }
 
             return (
               <Fragment>
@@ -93,7 +135,7 @@ export class KlevuChatMessages {
                     innerHTML={htmlMessage}
                   ></klevu-chat-bubble>
                   {this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
-                    <div class="feedback">
+                    <div class={`feedback ${!this.typeWriterEnds ? 'feedback-hide' : ''}`}>
                       <klevu-icon
                         name="thumb_up"
                         onClick={() => this.klevuMessageFeedback.emit({ feedback: "up", message: message.message })}
