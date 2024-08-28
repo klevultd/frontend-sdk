@@ -38,6 +38,11 @@ export class KlevuChatMessages {
   @Prop() showFeedbackFor?: string
 
   /**
+   * show questions block
+   */
+  @Prop() onTypeWriterEffectEnds?: (showQuestions: boolean) => void;
+
+  /**
    * type animation speed, if 0, no animation
    */
   @Prop() speed: number = 10;
@@ -76,8 +81,7 @@ export class KlevuChatMessages {
   feedbackReasons = ["Irrelevant", "Incorrect", "Offensive", "Other"]
 
   @State() lastMessageDisplayedText: string = '';
-
-  private typeWriterEnds: boolean = true;
+  @State() typeWriterEnds: boolean = true;
   
   @Watch('messages')
 
@@ -86,6 +90,7 @@ export class KlevuChatMessages {
     this.lastMessageDisplayedText = '';
     if (lastItem?.message && this.speed > 0) {
       this.typeWriterEnds = false;
+      this.onTypeWriterEffectEnds?.(true);
       this.startTyping(lastItem.message.value);
     }
   }
@@ -99,6 +104,7 @@ export class KlevuChatMessages {
         setTimeout(type, this.speed);
       } else {
         this.typeWriterEnds = true;
+        this.onTypeWriterEffectEnds?.(false);
       }
     };
     type();
@@ -129,8 +135,8 @@ export class KlevuChatMessages {
                     remote
                     innerHTML={htmlMessage}
                   ></klevu-chat-bubble>
-                  {this.typeWriterEnds && this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
-                    <div class="feedback">
+                  {this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
+                    <div class={`feedback ${!this.typeWriterEnds ? 'feedback-hide' : ''}`}>
                       <klevu-icon
                         name="thumb_up"
                         onClick={() => this.klevuMessageFeedback.emit({ feedback: "up", message: message.message })}
