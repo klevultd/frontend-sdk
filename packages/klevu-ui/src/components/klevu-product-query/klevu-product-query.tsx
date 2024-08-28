@@ -151,7 +151,7 @@ export class KlevuProductQuery {
     const res = await window.fetch(`${this.config?.moiApiUrl}chat/status?pqaWidgetId=${this.pqaWidgetId}`)
     const configJSON = await res.json()
     this.isEnabled = configJSON.status === "UNKNOWN" || configJSON.status === "ENABLED"
-    this.removeAskloBranding = configJSON.removeAskloBranding
+    this.removeAskloBranding = configJSON.removeAskloBranding || false
   }
 
   render() {
