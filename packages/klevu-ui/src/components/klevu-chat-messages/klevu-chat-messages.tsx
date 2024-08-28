@@ -84,9 +84,8 @@ export class KlevuChatMessages {
   @State() typeWriterEnds: boolean = true;
   
   @Watch('messages')
-
   watchPropHandler(newValue: any, oldValue: MoiMessages) {
-    const lastItem = [...newValue].pop() || null; ;
+    const lastItem = newValue.at(-1) || null;
     this.lastMessageDisplayedText = '';
     if (lastItem?.message && this.speed > 0) {
       this.typeWriterEnds = false;
