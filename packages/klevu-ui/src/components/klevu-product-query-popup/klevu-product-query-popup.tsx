@@ -205,6 +205,7 @@ export class KlevuProductQueryPopup {
 
   @State() messages: MoiMessages = []
   @State() questions: MoiQuestion[] = []
+  @State() hideQuestions = false
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -358,6 +359,14 @@ export class KlevuProductQueryPopup {
     this.messages = this.session?.messages || []
   }
 
+  #onTypeWriterEffectEnds(hideQuestions: boolean) {
+    this.hideQuestions = hideQuestions
+    if(!hideQuestions) {
+      this.#layoutElement?.scrollMainToBottom()
+    }
+  }
+  
+
   render() {
     return this.pqaWidgetLayout === "popup" ? (
       <Host>
@@ -425,6 +434,7 @@ export class KlevuProductQueryPopup {
               enableMessageFeedback
               onKlevuMessageFeedback={this.#onFeedback.bind(this)}
               showFeedbackFor={this.showMessageFeedbackFor}
+              onTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
@@ -437,7 +447,7 @@ export class KlevuProductQueryPopup {
                 ) : null}
               </div>
             </klevu-chat-messages>
-            {this.showLoading ? null : (
+            {this.showLoading || this.hideQuestions ? null : (
               <div class="questions-container">
                 {this.questions.map((question, index) => (
                   <div
