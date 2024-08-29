@@ -202,9 +202,17 @@ export namespace Components {
          */
         "messages": MoiMessages;
         /**
+          * show questions block
+         */
+        "onTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
           * What message should we
          */
         "showFeedbackFor"?: string;
+        /**
+          * type animation speed, if 0, no animation
+         */
+        "speed": number;
     }
     /**
      * Checkbox component
@@ -2797,9 +2805,17 @@ declare namespace LocalJSX {
          */
         "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
         /**
+          * show questions block
+         */
+        "onTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
           * What message should we
          */
         "showFeedbackFor"?: string;
+        /**
+          * type animation speed, if 0, no animation
+         */
+        "speed"?: number;
     }
     /**
      * Checkbox component
