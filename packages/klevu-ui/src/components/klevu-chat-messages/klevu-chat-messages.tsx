@@ -84,10 +84,11 @@ export class KlevuChatMessages {
   @State() typeWriterEnds: boolean = true;
 
   @Watch('messages')
-  watchPropHandler(newValue: any, oldValue: MoiMessages) {
+  watchPropHandler(newValue: MoiResponseText[], oldValue: MoiResponseText[]) {
     const lastItem = newValue[newValue.length - 1] || null;
+    const lastItemOld = oldValue[oldValue.length - 1] || null;
     this.lastMessageDisplayedText = '';
-    if (lastItem?.message && this.speed > 0) {
+    if (this.speed > 0 && lastItem?.message && (lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value)) {
       this.typeWriterEnds = false;
       this.onTypeWriterEffectEnds?.(true);
       this.startTyping(lastItem.message.value);
