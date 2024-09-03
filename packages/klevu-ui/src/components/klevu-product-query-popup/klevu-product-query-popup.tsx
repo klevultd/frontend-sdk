@@ -435,6 +435,7 @@ export class KlevuProductQueryPopup {
               onKlevuMessageFeedback={this.#onFeedback.bind(this)}
               showFeedbackFor={this.showMessageFeedbackFor}
               onTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
+              scrollBottom={this.#layoutElement?.scrollMainToBottom.bind(this.#layoutElement)}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
