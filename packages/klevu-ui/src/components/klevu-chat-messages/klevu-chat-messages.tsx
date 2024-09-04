@@ -46,6 +46,11 @@ export class KlevuChatMessages {
    * type animation speed, if 0, no animation
    */
   @Prop() speed: number = 10;
+
+  /**
+   * Scroll to bottom of the chat
+   */
+  @Prop() scrollBottom?: () => void;
   /**
    * When product is clicked
    */
@@ -99,6 +104,7 @@ export class KlevuChatMessages {
     let index = 0;
     const type = () => {
       if (index < text.length) {
+        this.scrollBottom?.();
         this.lastMessageDisplayedText += text.charAt(index);
         index++;
         setTimeout(type, this.speed);
