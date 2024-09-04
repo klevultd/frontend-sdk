@@ -206,6 +206,10 @@ export namespace Components {
          */
         "onTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
         /**
+          * Scroll to bottom of the chat
+         */
+        "scrollBottom"?: () => void;
+        /**
           * What message should we
          */
         "showFeedbackFor"?: string;
@@ -2808,6 +2812,10 @@ declare namespace LocalJSX {
           * show questions block
          */
         "onTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
+          * Scroll to bottom of the chat
+         */
+        "scrollBottom"?: () => void;
         /**
           * What message should we
          */
