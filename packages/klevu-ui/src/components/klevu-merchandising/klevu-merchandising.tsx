@@ -155,6 +155,7 @@ export class KlevuMerchandising {
   @Element() el!: HTMLElement
 
   #resultObject?: KlevuResponseQueryObject
+  #currency: string = ""
 
   @Event({
     composed: true,
@@ -180,6 +181,7 @@ export class KlevuMerchandising {
       if (this.useABTest === undefined) {
         this.useABTest = settings.klevu_abTestActive
       }
+      this.#currency = settings.klevu_uc_userOptions.priceFormatter.currencySymbol || ""
     }
     const SSR = this.el.closest("klevu-util-ssr-provider")
 
@@ -251,7 +253,9 @@ export class KlevuMerchandising {
     }
 
     this.results = this.#resultObject?.records ?? []
-
+    if (this.results.length > 0) {
+      this.#currency = this.results[0].currency
+    }
     const allBanners = await this.#resultObject.getBanners()
     this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
     this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
@@ -374,6 +378,7 @@ export class KlevuMerchandising {
           <slot name="facets" slot="sidebar">
             <div part="merchandising-sidebar">
               <klevu-facet-list
+                priceSliderCurrency={this.#currency}
                 ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
                 accordion
                 customOrder={this.filterCustomOrder}

@@ -185,6 +185,7 @@ export class KlevuSearchLandingPage {
   #viewportUtil!: HTMLKlevuUtilViewportElement
   #layoutElement!: HTMLKlevuLayoutResultsElement
   #facetListElement!: HTMLKlevuFacetListElement
+  #currency: string = ""
 
   async connectedCallback() {
     await KlevuInit.ready()
@@ -225,6 +226,7 @@ export class KlevuSearchLandingPage {
       if (this.useKlaviyo === undefined && settings?.klevu_connectors?.klaviyo?.enabled) {
         this.useKlaviyo = true
       }
+      this.#currency = settings.klevu_uc_userOptions.priceFormatter.currencySymbol || ""
     }
     const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
     if (showPopularProducts) {
@@ -281,6 +283,9 @@ export class KlevuSearchLandingPage {
     )
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
+    if (this.results.length > 0) {
+      this.#currency = this.results[0].currency
+    }
     this.#emitChanges()
     this.loading = false
 
@@ -427,6 +432,7 @@ export class KlevuSearchLandingPage {
             <div part="search-landing-page-sidebar">
               {!this.hideFilters && (
                 <klevu-facet-list
+                  priceSliderCurrency={this.#currency}
                   ref={(el) => (this.#facetListElement = el as HTMLKlevuFacetListElement)}
                   customOrder={this.filterCustomOrder}
                   manager={this.manager}

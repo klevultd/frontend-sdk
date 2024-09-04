@@ -211,9 +211,9 @@ export class KlevuInit {
     }
 
     if (priceSettings.appendCurrencyAtLast) {
-      formattedAmount = `${formattedAmount} ${priceSettings.currencySymbol}`
+      formattedAmount = `${formattedAmount} ${priceSettings.currencySymbol || currency}`
     } else {
-      formattedAmount = `${priceSettings.currencySymbol} ${formattedAmount}`
+      formattedAmount = `${priceSettings.currencySymbol || currency} ${formattedAmount}`
     }
     return formattedAmount
   }
