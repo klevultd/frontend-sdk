@@ -93,24 +93,30 @@ export class KlevuChatMessages {
     const lastItem = newValue[newValue.length - 1] || null;
     const lastItemOld = oldValue[oldValue.length - 1] || null;
     this.lastMessageDisplayedText = '';
-    if (this.speed > 0 && lastItem?.message && (lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value)) {
+    this.typeWriterEnds = true;
+    if (this.speed > 0 && lastItem?.message && (lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value)) { 
       this.typeWriterEnds = false;
       this.onTypeWriterEffectEnds?.(true);
-      this.startTyping(lastItem.message.value);
+      this.startTyping(markdown(lastItem.message.value));
     }
   }
 
   startTyping(text: string) {
     let index = 0;
+    if (text.length > 500) {
+      this.speed = 5;
+    }
     const type = () => {
-      if (index < text.length) {
+      if (index < text.length && !this.typeWriterEnds) {
         this.scrollBottom?.();
         this.lastMessageDisplayedText += text.charAt(index);
         index++;
         setTimeout(type, this.speed);
+        
       } else {
         this.typeWriterEnds = true;
         this.onTypeWriterEffectEnds?.(false);
+        this.lastMessageDisplayedText = text;
       }
     };
     type();
