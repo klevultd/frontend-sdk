@@ -8,6 +8,7 @@
   max-height: 100vh;
   --chat-height: var( --klevu-chat-layout-height, 200px);
   --chat-max-height: var(--klevu-chat-layout-max-height, 100vh);
+  --footer-border-top: var(--klevu-footer-border-top, 1px solid var(--klevu-color-neutral-3));
 }
 
 main {
@@ -21,7 +22,7 @@ footer {
   flex-shrink: 0;
   margin-top: auto;
   padding-top: var(--klevu-spacing-04);
-  border-top: 1px solid var(--klevu-color-neutral-3);
+  border-top: var(--footer-border-top);
 }
 
 footer .inputs {

@@ -94,7 +94,7 @@ export class KlevuChatMessages {
     const lastItemOld = oldValue[oldValue.length - 1] || null;
     this.lastMessageDisplayedText = '';
     this.typeWriterEnds = true;
-    if (this.speed > 0 && lastItem?.message && (lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value)) { 
+    if (this.speed > 0 && lastItem?.message && (lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value)) {
       this.typeWriterEnds = false;
       this.onTypeWriterEffectEnds?.(true);
       this.startTyping(markdown(lastItem.message.value));
@@ -112,7 +112,6 @@ export class KlevuChatMessages {
         this.lastMessageDisplayedText += text.charAt(index);
         index++;
         setTimeout(type, this.speed);
-        
       } else {
         this.typeWriterEnds = true;
         this.onTypeWriterEffectEnds?.(false);

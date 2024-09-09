@@ -190,6 +190,11 @@ export class KlevuProductQueryPopup {
    */
   @Prop() removeAskloBranding = false
 
+  /**
+  * Set to true if you want to hide the embedded title
+  */
+  @Prop() hideEmbeddedTitle?: boolean = false
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -307,7 +312,7 @@ export class KlevuProductQueryPopup {
     this.session = await startMoi({
       onMessage: this.onMessage.bind(this),
       // Do nothing on redirect as we have our own system
-      onRedirect: () => {},
+      onRedirect: () => { },
       url: this.url === "" ? undefined : this.url,
       productId: this.productId,
       mode: "PQA",
@@ -361,11 +366,11 @@ export class KlevuProductQueryPopup {
 
   #onTypeWriterEffectEnds(hideQuestions: boolean) {
     this.hideQuestions = hideQuestions
-    if(!hideQuestions) {
+    if (!hideQuestions) {
       this.#layoutElement?.scrollMainToBottom()
     }
   }
-  
+
 
   render() {
     return this.pqaWidgetLayout === "popup" ? (
@@ -412,13 +417,15 @@ export class KlevuProductQueryPopup {
         >
           <div part="product-query-popup-header" slot="header">
             <div class="header">
-              <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
-              <klevu-icon
+              {(popupMode || !this.hideEmbeddedTitle) && (
+                <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
+              )}
+              {popupMode && <klevu-icon
                 originElement={this.originElement}
                 name="close"
                 id="closeDialog"
                 onClick={() => this.#popup?.closeModal()}
-              />
+              />}
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">
@@ -435,7 +442,7 @@ export class KlevuProductQueryPopup {
               onKlevuMessageFeedback={this.#onFeedback.bind(this)}
               showFeedbackFor={this.showMessageFeedbackFor}
               onTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
-              scrollBottom={()=>this.#layoutElement?.scrollMainToBottom('instant')}
+              scrollBottom={() => this.#layoutElement?.scrollMainToBottom('instant')}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
