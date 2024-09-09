@@ -198,13 +198,13 @@ export namespace Components {
          */
         "feedbacks"?: MoiSavedFeedback[];
         /**
+          * Optional action to perform when type writer effect completes
+         */
+        "handleTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
           * Messages received from Moi backend
          */
         "messages": MoiMessages;
-        /**
-          * show questions block
-         */
-        "onTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
         /**
           * Scroll to bottom of the chat
          */
@@ -2789,6 +2789,10 @@ declare namespace LocalJSX {
          */
         "feedbacks"?: MoiSavedFeedback[];
         /**
+          * Optional action to perform when type writer effect completes
+         */
+        "handleTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
           * Messages received from Moi backend
          */
         "messages"?: MoiMessages;
@@ -2808,10 +2812,6 @@ declare namespace LocalJSX {
           * When product option is clicked
          */
         "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
-        /**
-          * show questions block
-         */
-        "onTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
         /**
           * Scroll to bottom of the chat
          */

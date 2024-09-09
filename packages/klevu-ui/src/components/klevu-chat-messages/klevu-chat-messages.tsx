@@ -38,19 +38,19 @@ export class KlevuChatMessages {
   @Prop() showFeedbackFor?: string
 
   /**
-   * show questions block
+   * Optional action to perform when type writer effect completes
    */
-  @Prop() onTypeWriterEffectEnds?: (showQuestions: boolean) => void;
+  @Prop() handleTypeWriterEffectEnds?: (showQuestions: boolean) => void
 
   /**
    * type animation speed, if 0, no animation
    */
-  @Prop() speed: number = 10;
+  @Prop() speed: number = 10
 
   /**
    * Scroll to bottom of the chat
    */
-  @Prop() scrollBottom?: () => void;
+  @Prop() scrollBottom?: () => void
   /**
    * When product is clicked
    */
@@ -85,41 +85,40 @@ export class KlevuChatMessages {
 
   feedbackReasons = ["Irrelevant", "Incorrect", "Offensive", "Other"]
 
-  @State() lastMessageDisplayedText: string = '';
-  @State() typeWriterEnds: boolean = true;
+  @State() lastMessageDisplayedText: string = ""
+  @State() typeWriterEnds: boolean = true
 
-  @Watch('messages')
+  @Watch("messages")
   watchPropHandler(newValue: MoiResponseText[], oldValue: MoiResponseText[]) {
-    const lastItem = newValue[newValue.length - 1] || null;
-    const lastItemOld = oldValue[oldValue.length - 1] || null;
-    this.lastMessageDisplayedText = '';
-    this.typeWriterEnds = true;
-    if (this.speed > 0 && lastItem?.message && (lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value)) { 
-      this.typeWriterEnds = false;
-      this.onTypeWriterEffectEnds?.(true);
-      this.startTyping(markdown(lastItem.message.value));
+    const lastItem = newValue[newValue.length - 1] || null
+    const lastItemOld = oldValue[oldValue.length - 1] || null
+    this.lastMessageDisplayedText = ""
+    this.typeWriterEnds = true
+    if (this.speed > 0 && lastItem?.message && lastItemOld && lastItemOld?.message?.value !== lastItem.message?.value) {
+      this.typeWriterEnds = false
+      this.handleTypeWriterEffectEnds?.(true)
+      this.startTyping(markdown(lastItem.message.value))
     }
   }
 
   startTyping(text: string) {
-    let index = 0;
+    let index = 0
     if (text.length > 500) {
-      this.speed = 5;
+      this.speed = 5
     }
     const type = () => {
       if (index < text.length && !this.typeWriterEnds) {
-        this.scrollBottom?.();
-        this.lastMessageDisplayedText += text.charAt(index);
-        index++;
-        setTimeout(type, this.speed);
-        
+        this.scrollBottom?.()
+        this.lastMessageDisplayedText += text.charAt(index)
+        index++
+        setTimeout(type, this.speed)
       } else {
-        this.typeWriterEnds = true;
-        this.onTypeWriterEffectEnds?.(false);
-        this.lastMessageDisplayedText = text;
+        this.typeWriterEnds = true
+        this.handleTypeWriterEffectEnds?.(false)
+        this.lastMessageDisplayedText = text
       }
-    };
-    type();
+    }
+    type()
   }
 
   render() {
@@ -132,7 +131,7 @@ export class KlevuChatMessages {
             const showFeedback = this.showFeedbackFor === message.message.id && !Boolean(givenFeedback?.reason)
             let htmlMessage = ""
             if (index === this.messages.length - 1 && this.lastMessageDisplayedText) {
-              htmlMessage = this.lastMessageDisplayedText;
+              htmlMessage = this.lastMessageDisplayedText
             } else {
               htmlMessage = markdown(message.message.value)
             }
@@ -148,7 +147,7 @@ export class KlevuChatMessages {
                     innerHTML={htmlMessage}
                   ></klevu-chat-bubble>
                   {this.enableMessageFeedback && message.message.collectFeedback && !givenFeedback && isLastMessage && (
-                    <div class={`feedback ${!this.typeWriterEnds ? 'feedback-hide' : ''}`}>
+                    <div class={`feedback ${!this.typeWriterEnds ? "feedback-hide" : ""}`}>
                       <klevu-icon
                         name="thumb_up"
                         onClick={() => this.klevuMessageFeedback.emit({ feedback: "up", message: message.message })}

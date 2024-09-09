@@ -361,11 +361,10 @@ export class KlevuProductQueryPopup {
 
   #onTypeWriterEffectEnds(hideQuestions: boolean) {
     this.hideQuestions = hideQuestions
-    if(!hideQuestions) {
+    if (!hideQuestions) {
       this.#layoutElement?.scrollMainToBottom()
     }
   }
-  
 
   render() {
     return this.pqaWidgetLayout === "popup" ? (
@@ -434,8 +433,8 @@ export class KlevuProductQueryPopup {
               enableMessageFeedback
               onKlevuMessageFeedback={this.#onFeedback.bind(this)}
               showFeedbackFor={this.showMessageFeedbackFor}
-              onTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
-              scrollBottom={()=>this.#layoutElement?.scrollMainToBottom('instant')}
+              handleTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
+              scrollBottom={() => this.#layoutElement?.scrollMainToBottom("instant")}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
