@@ -61,7 +61,7 @@ export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMess
   'feedbacks',
   'enableMessageFeedback',
   'showFeedbackFor',
-  'onTypeWriterEffectEnds',
+  'handleTypeWriterEffectEnds',
   'speed',
   'scrollBottom',
   'klevuChatProductClick',

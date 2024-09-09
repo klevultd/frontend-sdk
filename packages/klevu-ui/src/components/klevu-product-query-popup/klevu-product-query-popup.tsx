@@ -191,8 +191,8 @@ export class KlevuProductQueryPopup {
   @Prop() removeAskloBranding = false
 
   /**
-  * Set to true if you want to hide the embedded title
-  */
+   * Set to true if you want to hide the embedded title
+   */
   @Prop() hideEmbeddedTitle?: boolean = false
 
   @State() text = ""
@@ -312,7 +312,7 @@ export class KlevuProductQueryPopup {
     this.session = await startMoi({
       onMessage: this.onMessage.bind(this),
       // Do nothing on redirect as we have our own system
-      onRedirect: () => { },
+      onRedirect: () => {},
       url: this.url === "" ? undefined : this.url,
       productId: this.productId,
       mode: "PQA",
@@ -371,7 +371,6 @@ export class KlevuProductQueryPopup {
     }
   }
 
-
   render() {
     return this.pqaWidgetLayout === "popup" ? (
       <Host>
@@ -420,12 +419,14 @@ export class KlevuProductQueryPopup {
               {(popupMode || !this.hideEmbeddedTitle) && (
                 <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
               )}
-              {popupMode && <klevu-icon
-                originElement={this.originElement}
-                name="close"
-                id="closeDialog"
-                onClick={() => this.#popup?.closeModal()}
-              />}
+              {popupMode && (
+                <klevu-icon
+                  originElement={this.originElement}
+                  name="close"
+                  id="closeDialog"
+                  onClick={() => this.#popup?.closeModal()}
+                />
+              )}
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">
@@ -441,8 +442,8 @@ export class KlevuProductQueryPopup {
               enableMessageFeedback
               onKlevuMessageFeedback={this.#onFeedback.bind(this)}
               showFeedbackFor={this.showMessageFeedbackFor}
-              onTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
-              scrollBottom={() => this.#layoutElement?.scrollMainToBottom('instant')}
+              handleTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
+              scrollBottom={() => this.#layoutElement?.scrollMainToBottom("instant")}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
