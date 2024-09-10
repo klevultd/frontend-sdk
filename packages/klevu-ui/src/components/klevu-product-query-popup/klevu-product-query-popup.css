@@ -19,13 +19,13 @@
   --klevu-chat-bubble-text-color-remote: var(--klevu-product-query-bubble-text-color-remote, #000);
   --klevu-chat-bubble-background: var(--klevu-product-query-bubble-background, #6C757D66);
   --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, #6C757D33);
-  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, var(--cornflower-blue));
+  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, #6C757D33);
   --klevu-chat-layout-height: var(--klevu-product-query-chat-height, 100%);
   --klevu-chat-layout-max-height: var(--klevu-product-query-chat-max-height, 100%);
   --klevu-button-icon-color: var(--klevu-product-query-icon-color, #fff);
   --klevu-product-query-popup-width: 100%;
   --klevu-button-background-color: #6C757D66;
-  --klevu-button-background-hover: #b6ccdc;
+  --klevu-button-background-hover: #6C757D33;
   --klevu-chat-bubble-border-radius: var(--klevu-product-query-chat-bubble-border-radius, var(--klevu-border-radius-s));
   --klevu-chat-bubble-border-radius-remote: var(--klevu-product-query-chat-bubble-border-radius-remote, var(--klevu-border-radius-s));
   --klevu-footer-border-top: none;
@@ -274,4 +274,8 @@ klevu-popup {
 .embedded .questions-container {
   gap: 12px;
   padding: var(--klevu-spacing-04);
+}
+
+.embedded .questions-container .klevu-question:hover {
+  background-color: #6C757D33;
 }
