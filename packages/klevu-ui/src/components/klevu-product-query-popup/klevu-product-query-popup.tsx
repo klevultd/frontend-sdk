@@ -190,6 +190,11 @@ export class KlevuProductQueryPopup {
    */
   @Prop() removeAskloBranding = false
 
+  /**
+   * Set to true if you want to hide the embedded title
+   */
+  @Prop() hideEmbeddedTitle?: boolean = false
+
   @State() text = ""
   @State() name = ""
   @State() email = ""
@@ -411,13 +416,17 @@ export class KlevuProductQueryPopup {
         >
           <div part="product-query-popup-header" slot="header">
             <div class="header">
-              <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
-              <klevu-icon
-                originElement={this.originElement}
-                name="close"
-                id="closeDialog"
-                onClick={() => this.#popup?.closeModal()}
-              />
+              {(popupMode || !this.hideEmbeddedTitle) && (
+                <klevu-typography variant="body-m-bold">{this.tPopupTitle}</klevu-typography>
+              )}
+              {popupMode && (
+                <klevu-icon
+                  originElement={this.originElement}
+                  name="close"
+                  id="closeDialog"
+                  onClick={() => this.#popup?.closeModal()}
+                />
+              )}
             </div>
 
             <klevu-typography variant="body-xs" class="fineprint">

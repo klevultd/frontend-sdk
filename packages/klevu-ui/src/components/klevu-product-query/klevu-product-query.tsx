@@ -55,9 +55,14 @@ export class KlevuProductQuery {
   @Prop() textFieldPlaceholder: string = "Enter your question here..."
 
   /**
+   * Set to false if you want to show the popup in place instead of dialog box
+   */
+  @Prop() pqaWidgetLayout: WidgetLayout = "popup"
+
+  /**
    * Title of the popup
    */
-  @Prop() popupTitle = "Ask a Question"
+  @Prop() popupTitle = this.pqaWidgetLayout === 'popup' ? "Ask a Question" : "Live FAQs"
 
   /**
    * Text of the button to open the popup
@@ -134,9 +139,9 @@ export class KlevuProductQuery {
   @Prop() locale?: string
 
   /**
-   * Set to false if you want to show the popup in place instead of dialog box
-   */
-  @Prop() pqaWidgetLayout: WidgetLayout = "popup"
+ * Set to true if you want to hide the embedded title
+ */
+  @Prop() hideEmbeddedTitle?: boolean = false
 
   async connectedCallback() {
     this.config = await this.el.closest("klevu-init")?.getConfig()
@@ -206,6 +211,7 @@ export class KlevuProductQuery {
         textFieldVariant={this.textFieldVariant}
         pqaWidgetLayout={this.pqaWidgetLayout}
         removeAskloBranding={this.removeAskloBranding}
+        hideEmbeddedTitle={this.hideEmbeddedTitle}
       >
         <slot name="after-fineprint" slot="after-fineprint"></slot>
       </klevu-product-query-popup>
