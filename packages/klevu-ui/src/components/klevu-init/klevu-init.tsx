@@ -124,6 +124,11 @@ export class KlevuInit {
 
   @Prop() kmcLoadDefaults?: boolean
 
+  /**
+   * disableUserSession and stop making calls to visitor service when this is true, defaults to false.
+   */
+  @Prop() disableUserSession?: boolean = false
+
   @Event({
     composed: true,
   })
@@ -149,6 +154,7 @@ export class KlevuInit {
       useConsent: this.useConsent || false,
       consentGiven: this.consentGiven || false,
       moiApiUrl: this.moiApiUrl || "",
+      disableUserSession: this.disableUserSession || false,
     })
 
     if (this.translation) {
