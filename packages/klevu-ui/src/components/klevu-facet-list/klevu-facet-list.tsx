@@ -99,6 +99,11 @@ export class KlevuFacetList {
   shouldUpdateUrlForFacets?: boolean
 
   /**
+   * The currency to show in the price slider
+   */
+  @Prop() priceSliderCurrency = "EUR"
+
+  /**
    * When filters are applied
    */
   @Event({ composed: true })
@@ -189,6 +194,7 @@ export class KlevuFacetList {
 
             return (
               <klevu-facet
+                priceSliderCurrency={this.priceSliderCurrency}
                 exportparts={partsExports("klevu-facet")}
                 accordion={this.accordion}
                 accordionStartOpen={index === 0}
@@ -203,6 +209,7 @@ export class KlevuFacetList {
           } else if (FilterManager.isKlevuFilterResultSlider(f)) {
             return (
               <klevu-facet
+                priceSliderCurrency={this.priceSliderCurrency}
                 exportparts={partsExports("klevu-facet")}
                 accordion={this.accordion}
                 manager={this.useApplyButton ? this.#applyManager : this.manager}

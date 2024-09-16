@@ -111,6 +111,11 @@ export class KlevuFacet {
   @Prop() tAll = getTranslation("facet.tAll")
 
   /**
+   * The currency to show in the price slider
+   */
+  @Prop() priceSliderCurrency = "EUR"
+
+  /**
    * Converts the color filters to swatches
    */
   @Prop() useColorSwatch?: boolean = false
@@ -211,7 +216,7 @@ export class KlevuFacet {
           end={this.slider.end ? parseFloat(this.slider.end) : undefined}
           formatTooltip={(value) => {
             if (this.settings?.renderPrice) {
-              return this.settings.renderPrice(value.toFixed(2), "EUR")
+              return this.settings.renderPrice(value.toFixed(2), this.priceSliderCurrency)
             }
             return value.toFixed(2)
           }}
