@@ -283,7 +283,7 @@ export class KlevuSearchLandingPage {
     )
     this.#resultObject = result.queriesById("search")
     this.results = this.#resultObject?.records ?? []
-    if (this.results.length > 0) {
+    if (this.results.length > 0 && !this.#currency) {
       this.#currency = this.results[0].currency
     }
     this.#emitChanges()

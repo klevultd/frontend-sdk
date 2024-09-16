@@ -253,7 +253,7 @@ export class KlevuMerchandising {
     }
 
     this.results = this.#resultObject?.records ?? []
-    if (this.results.length > 0) {
+    if (this.results.length > 0 && !this.#currency) {
       this.#currency = this.results[0].currency
     }
     const allBanners = await this.#resultObject.getBanners()
