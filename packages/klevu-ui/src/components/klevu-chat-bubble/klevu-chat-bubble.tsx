@@ -54,35 +54,36 @@ export class KlevuChatBubble {
           remote: Boolean(this.remote),
         }}
       >
-        <klevu-typography variant="body-s">
-          <slot></slot>
-        </klevu-typography>
-        {this.feedback?.thumbs === "up" && (
-          <div>
-            <klevu-icon part="chat-bubble-positive-feedback" class="positive_feedback" name="thumb_up" />
-          </div>
-        )}
-        {this.feedback?.thumbs === "down" && (
-          <klevu-icon part="chat-bubble-negative-feedback" class="negative_feedback" name="thumb_down" />
-        )}
-        {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
-          <div class="feedback_reasons" part="chat-bubble-feedback-reasons">
-            <span>{this.tRatingReason}</span>
-            {this.feedbackReasons.map((reason) => (
-              <klevu-button
-                exportparts={partsExports("klevu-button")}
-                size="tiny"
-                isSecondary
-                onClick={() => {
-                  this.klevuMessageFeedbackReason.emit({ reason, feedback: this.feedback! })
-                }}
-              >
-                {reason}
-              </klevu-button>
-            ))}
-          </div>
-        )}
-        {/* </div> */}
+        <div part="chat-bubble-base">
+          <klevu-typography variant="body-s">
+            <slot></slot>
+          </klevu-typography>
+          {this.feedback?.thumbs === "up" && (
+            <div>
+              <klevu-icon part="chat-bubble-positive-feedback" class="positive_feedback" name="thumb_up" />
+            </div>
+          )}
+          {this.feedback?.thumbs === "down" && (
+            <klevu-icon part="chat-bubble-negative-feedback" class="negative_feedback" name="thumb_down" />
+          )}
+          {!Boolean(this.feedback?.reason) && this.feedbackReasons && (
+            <div class="feedback_reasons" part="chat-bubble-feedback-reasons">
+              <span>{this.tRatingReason}</span>
+              {this.feedbackReasons.map((reason) => (
+                <klevu-button
+                  exportparts={partsExports("klevu-button")}
+                  size="tiny"
+                  isSecondary
+                  onClick={() => {
+                    this.klevuMessageFeedbackReason.emit({ reason, feedback: this.feedback! })
+                  }}
+                >
+                  {reason}
+                </klevu-button>
+              ))}
+            </div>
+          )}
+        </div>
       </Host>
     )
   }

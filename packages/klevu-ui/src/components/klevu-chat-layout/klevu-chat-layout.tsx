@@ -69,7 +69,9 @@ export class KlevuChatLayout {
   async scrollMainToBottom(behavior: "smooth" | "instant" = "smooth") {
     const instance = await this.#scrollElement?.getInstance()
     if (instance?.customInstance) {
-      instance.customInstance.update(true)
+      setTimeout(() => {
+        instance?.customInstance?.update(true)
+      }, 20)
       setTimeout(() => {
         instance.customInstance?.elements().viewport.scrollTo({
           top: instance.customInstance?.elements().viewport.scrollHeight,

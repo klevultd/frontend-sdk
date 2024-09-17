@@ -61,6 +61,9 @@ export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMess
   'feedbacks',
   'enableMessageFeedback',
   'showFeedbackFor',
+  'handleTypeWriterEffectEnds',
+  'speed',
+  'scrollBottom',
   'klevuChatProductClick',
   'klevuSelectFilter',
   'klevuSelectProductOption',
@@ -320,6 +323,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'pqaWidgetId',
   'textFieldVariant',
   'textFieldPlaceholder',
+  'pqaWidgetLayout',
   'popupTitle',
   'buttonText',
   'finePrint',
@@ -335,7 +339,8 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'itemGroupId',
   'itemVariantId',
   'channelId',
-  'locale'
+  'locale',
+  'hideEmbeddedTitle'
 ]);
 
 
@@ -367,7 +372,10 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'itemGroupId',
   'itemVariantId',
   'channelId',
-  'locale'
+  'locale',
+  'pqaWidgetLayout',
+  'removeAskloBranding',
+  'hideEmbeddedTitle'
 ]);
 
 
