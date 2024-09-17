@@ -512,6 +512,10 @@ export namespace Components {
          */
         "consentGiven"?: boolean;
         /**
+          * disableUserSession and stop making calls to visitor service when this is true, defaults to false.
+         */
+        "disableUserSession"?: boolean;
+        /**
           * Enable Klaviyo integration
          */
         "enableKlaviyoConnector"?: boolean;
@@ -3151,6 +3155,10 @@ declare namespace LocalJSX {
           * Data read consent given
          */
         "consentGiven"?: boolean;
+        /**
+          * disableUserSession and stop making calls to visitor service when this is true, defaults to false.
+         */
+        "disableUserSession"?: boolean;
         /**
           * Enable Klaviyo integration
          */
