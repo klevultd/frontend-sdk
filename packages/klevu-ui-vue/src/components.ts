@@ -134,6 +134,7 @@ export const KlevuFacet = /*@__PURE__*/ defineContainer<JSX.KlevuFacet>('klevu-f
   'labelOverride',
   'tMore',
   'tAll',
+  'priceSliderCurrency',
   'useColorSwatch',
   'colorSwatchOverrides',
   'klevuFilterSelectionUpdate'
@@ -152,6 +153,7 @@ export const KlevuFacetList = /*@__PURE__*/ defineContainer<JSX.KlevuFacetList>(
   'clearButtonText',
   'defaultPriceLabel',
   'shouldUpdateUrlForFacets',
+  'priceSliderCurrency',
   'klevuApplyFilters'
 ]);
 

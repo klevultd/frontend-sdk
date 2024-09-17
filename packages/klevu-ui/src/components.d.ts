@@ -397,6 +397,10 @@ export namespace Components {
          */
         "option"?: KlevuFilterResultOptions;
         /**
+          * The currency to show in the price slider
+         */
+        "priceSliderCurrency": string;
+        /**
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
@@ -449,6 +453,10 @@ export namespace Components {
           * Set mode for facets or if object is passed then define per key
          */
         "mode"?: KlevuFacetMode1 | { [key: string]: KlevuFacetMode1 };
+        /**
+          * The currency to show in the price slider
+         */
+        "priceSliderCurrency": string;
         /**
           * To set the facet selection value in the url
          */
@@ -3028,6 +3036,10 @@ declare namespace LocalJSX {
          */
         "option"?: KlevuFilterResultOptions;
         /**
+          * The currency to show in the price slider
+         */
+        "priceSliderCurrency"?: string;
+        /**
           * From which slider to build facet.
          */
         "slider"?: KlevuFilterResultSlider;
@@ -3084,6 +3096,10 @@ declare namespace LocalJSX {
           * When filters are applied
          */
         "onKlevuApplyFilters"?: (event: KlevuFacetListCustomEvent<KlevuFiltersAppliedEventDetail>) => void;
+        /**
+          * The currency to show in the price slider
+         */
+        "priceSliderCurrency"?: string;
         /**
           * To set the facet selection value in the url
          */
