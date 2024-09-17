@@ -1,7 +1,7 @@
 {
   "name": "@klevu/ui-react",
   "sideEffects": false,
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Klevu UI components for React",
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@klevu/ui": "2.4.2"
+    "@klevu/ui": "2.5.0"
   },
   "jest": {
     "preset": "ts-jest",
