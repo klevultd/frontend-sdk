@@ -21,7 +21,8 @@ const ONE_DAY = 86_400_000
  */
 export async function KlevuKMCSettings(
   ignoreCache?: boolean,
-  cacheLength = ONE_DAY
+  cacheLength = ONE_DAY,
+  overrideUrl = ""
 ): Promise<{
   root?: KMCRootObject
   banner?: KMCBannerRootObject
@@ -35,7 +36,7 @@ export async function KlevuKMCSettings(
     }
   }
 
-  const start = `${url}${KlevuConfig.getDefault().apiKey}`
+  const start = `${overrideUrl || url}${KlevuConfig.getDefault().apiKey}`
   const res = await Promise.all([
     get<KMCRootObject>(`${start}.json`),
     get<KMCBannerRootObject>(`${start}-banner.json`),

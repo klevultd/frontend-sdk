@@ -544,6 +544,7 @@ export namespace Components {
           * Global settings
          */
         "settings": KlevuUIGlobalSettings;
+        "settingsUrl"?: string;
         /**
           * Provide your own translations
          */
@@ -3140,6 +3141,7 @@ declare namespace LocalJSX {
           * Global settings
          */
         "settings"?: KlevuUIGlobalSettings;
+        "settingsUrl"?: string;
         /**
           * Provide your own translations
          */

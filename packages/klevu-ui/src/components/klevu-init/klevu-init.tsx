@@ -116,6 +116,8 @@ export class KlevuInit {
    */
   @Prop() assetsPath?: string
 
+  @Prop() settingsUrl?: string
+
   /**
    * Override the default translation URL prefix. Will use format of
    * `${translationUrlPrefix}/translations/${lang}.json`
@@ -163,7 +165,7 @@ export class KlevuInit {
   async #defineSettings(settings: KlevuUIGlobalSettings) {
     this.settings = settings
     if (this.kmcLoadDefaults) {
-      const data = await KlevuKMCSettings()
+      const data = await KlevuKMCSettings(false, undefined, this.settingsUrl)
       window["klevu_ui_kmc_settings"] = data.root
       if (data.root?.klevu_uc_userOptions.priceFormatter) {
         this.settings.renderPrice = (...params) =>
