@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--klevu-spacing-04);
+  word-break: break-word;
 }
 
 .message-container {
@@ -29,9 +30,14 @@
   color: var(--klevu-color-negative);
 }
 
+.feedback-hide {
+  opacity: 0;
+}
+
 .end-spacer {
   height: var(--klevu-spacing-04);
   width: 100%;
+  display: var(--end-spacer-display);
 }
 
 .filteractions {

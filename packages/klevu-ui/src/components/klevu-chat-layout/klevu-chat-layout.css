@@ -6,10 +6,15 @@
   display: flex !important;
   flex-direction: column;
   max-height: 100vh;
+  --chat-height: var( --klevu-chat-layout-height, 200px);
+  --chat-max-height: var(--klevu-chat-layout-max-height, 100vh);
+  --footer-border-top: var(--klevu-footer-border-top, 1px solid var(--klevu-color-neutral-3));
 }
 
 main {
-  height: 200px;
+  height: var(--chat-height);
+  min-height: 200px;
+  max-height: var(--chat-max-height);
   flex-grow: 1;
 }
 
@@ -17,7 +22,7 @@ footer {
   flex-shrink: 0;
   margin-top: auto;
   padding-top: var(--klevu-spacing-04);
-  border-top: 1px solid var(--klevu-color-neutral-3);
+  border-top: var(--footer-border-top);
 }
 
 footer .inputs {

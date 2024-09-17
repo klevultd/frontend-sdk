@@ -4,6 +4,8 @@ import { Component, Element, Fragment, Host, Prop, State, h } from "@stencil/cor
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { partsExports } from "../../utils/partsExports"
 
+export type WidgetLayout = "embedded" | "popup"
+
 /**
  * Button that is placed on the site to start a product query session
  *
@@ -23,6 +25,7 @@ export class KlevuProductQuery {
 
   @State() origin?: HTMLKlevuButtonElement
   @State() isEnabled = false
+  @State() removeAskloBranding = false
   @State() config?: KlevuConfig
 
   /**
@@ -52,9 +55,14 @@ export class KlevuProductQuery {
   @Prop() textFieldPlaceholder: string = "Enter your question here..."
 
   /**
+   * Set to false if you want to show the popup in place instead of dialog box
+   */
+  @Prop() pqaWidgetLayout: WidgetLayout = "popup"
+
+  /**
    * Title of the popup
    */
-  @Prop() popupTitle = "Ask a Question"
+  @Prop() popupTitle = this.pqaWidgetLayout === 'popup' ? "Ask a Question" : "Live FAQs"
 
   /**
    * Text of the button to open the popup
@@ -130,6 +138,11 @@ export class KlevuProductQuery {
    */
   @Prop() locale?: string
 
+  /**
+ * Set to true if you want to hide the embedded title
+ */
+  @Prop() hideEmbeddedTitle?: boolean = false
+
   async connectedCallback() {
     this.config = await this.el.closest("klevu-init")?.getConfig()
     this.#checkIsPQAEnabled()
@@ -141,8 +154,9 @@ export class KlevuProductQuery {
       return
     }
     const res = await window.fetch(`${this.config?.moiApiUrl}chat/status?pqaWidgetId=${this.pqaWidgetId}`)
-    const statusJSON = await res.json()
-    this.isEnabled = statusJSON.status === "UNKNOWN" || statusJSON.status === "ENABLED"
+    const configJSON = await res.json()
+    this.isEnabled = configJSON.status === "UNKNOWN" || configJSON.status === "ENABLED"
+    this.removeAskloBranding = configJSON.removeAskloBranding || false
   }
 
   render() {
@@ -150,7 +164,7 @@ export class KlevuProductQuery {
       return null
     }
 
-    return (
+    return this.pqaWidgetLayout === "popup" ? (
       <Host>
         <klevu-button
           ref={(el) => (this.origin = el)}
@@ -161,39 +175,46 @@ export class KlevuProductQuery {
           {this.buttonText}
           <slot name="after-button-text"></slot>
         </klevu-button>
-        {this.origin && (
-          <klevu-util-portal>
-            <klevu-product-query-popup
-              additionaldata={this.additionaldata || ""}
-              url={this.url}
-              productId={this.productId || this.itemId}
-              pqaWidgetId={this.pqaWidgetId}
-              tFinePrint={this.finePrint}
-              tPopupTitle={this.popupTitle}
-              tTextFieldPlaceholder={this.textFieldPlaceholder}
-              askButtonText={this.askButtonText}
-              settings={this.settings}
-              popupAnchor={this.popupAnchor}
-              popupOffset={this.popupOffset}
-              exportparts={partsExports("klevu-product-query-popup")}
-              useBackground={this.useBackground}
-              originElement={this.origin}
-              disableCloseOutsideClick={this.disableCloseOutsideClick}
-              config={this.config}
-              useNativeScrollbars={this.useNativeScrollbars}
-              itemId={this.itemId}
-              itemVariantId={this.itemVariantId}
-              itemGroupId={this.itemGroupId}
-              channelId={this.channelId}
-              locale={this.locale}
-              productInfoGenerator={this.productInfoGenerator}
-              textFieldVariant={this.textFieldVariant}
-            >
-              <slot name="after-fineprint" slot="after-fineprint"></slot>
-            </klevu-product-query-popup>
-          </klevu-util-portal>
-        )}
+        <klevu-util-portal>{this.#renderChatWindow()}</klevu-util-portal>
       </Host>
+    ) : (
+      <Host embedded>{this.#renderChatWindow()}</Host>
+    )
+  }
+
+  #renderChatWindow() {
+    return (
+      <klevu-product-query-popup
+        additionaldata={this.additionaldata || ""}
+        url={this.url}
+        productId={this.productId || this.itemId}
+        pqaWidgetId={this.pqaWidgetId}
+        tFinePrint={this.finePrint}
+        tPopupTitle={this.popupTitle}
+        tTextFieldPlaceholder={this.textFieldPlaceholder}
+        askButtonText={this.askButtonText}
+        settings={this.settings}
+        popupAnchor={this.popupAnchor}
+        popupOffset={this.popupOffset}
+        exportparts={partsExports("klevu-product-query-popup")}
+        useBackground={this.useBackground}
+        originElement={this.origin}
+        disableCloseOutsideClick={this.disableCloseOutsideClick}
+        config={this.config}
+        useNativeScrollbars={this.useNativeScrollbars}
+        itemId={this.itemId}
+        itemVariantId={this.itemVariantId}
+        itemGroupId={this.itemGroupId}
+        channelId={this.channelId}
+        locale={this.locale}
+        productInfoGenerator={this.productInfoGenerator}
+        textFieldVariant={this.textFieldVariant}
+        pqaWidgetLayout={this.pqaWidgetLayout}
+        removeAskloBranding={this.removeAskloBranding}
+        hideEmbeddedTitle={this.hideEmbeddedTitle}
+      >
+        <slot name="after-fineprint" slot="after-fineprint"></slot>
+      </klevu-product-query-popup>
     )
   }
 }
