@@ -320,6 +320,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'pqaWidgetId',
   'textFieldVariant',
   'textFieldPlaceholder',
+  'pqaWidgetLayout',
   'popupTitle',
   'buttonText',
   'finePrint',
@@ -336,7 +337,7 @@ export const KlevuProductQuery = /*@__PURE__*/ defineContainer<JSX.KlevuProductQ
   'itemVariantId',
   'channelId',
   'locale',
-  'pqaWidgetLayout'
+  'hideEmbeddedTitle'
 ]);
 
 
@@ -370,7 +371,8 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'channelId',
   'locale',
   'pqaWidgetLayout',
-  'removeAskloBranding'
+  'removeAskloBranding',
+  'hideEmbeddedTitle'
 ]);
 
 

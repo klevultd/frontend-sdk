@@ -996,6 +996,10 @@ export namespace Components {
          */
         "finePrint": string;
         /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
+        /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
         "itemGroupId"?: string;
@@ -1092,6 +1096,10 @@ export namespace Components {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
+        /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
         /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
@@ -3623,6 +3631,10 @@ declare namespace LocalJSX {
          */
         "finePrint"?: string;
         /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
+        /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
         "itemGroupId"?: string;
@@ -3719,6 +3731,10 @@ declare namespace LocalJSX {
           * Disable closing the popup when clicking outside of it
          */
         "disableCloseOutsideClick"?: boolean;
+        /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
         /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
