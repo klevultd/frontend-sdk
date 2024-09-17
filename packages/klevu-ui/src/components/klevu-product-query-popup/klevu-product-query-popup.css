@@ -4,8 +4,31 @@
    */
   display: block;
   text-align: left;
+  --cornflower-blue: #428ACA;
   --popup-height: var(--klevu-product-query-popup-height, 500px);
   --popup-width: var(--klevu-product-query-popup-width, 520px);
+  --embedded-height: var(--klevu-product-query-popup-height, 100%);
+  --embedded-width: var(--klevu-product-query-popup-width, 100%);
+  --embedded-header-background: var(--klevu-product-query-popup-header-background, #6C757D1A);
+  --embedded-border-color: var(--klevu-product-query-popup-border-color, #6C757D1A);
+  --embedded-border-radius: var(--klevu-product-query-popup-border-radius, var(--klevu-border-radius-m));
+  --end-spacer-display: var(--klevu-product-query-popup-spacer-display, block);
+}
+
+:host([embedded]) {
+  --klevu-chat-bubble-text-color-remote: var(--klevu-product-query-bubble-text-color-remote, #000);
+  --klevu-chat-bubble-background: var(--klevu-product-query-bubble-background, #6C757D66);
+  --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, #6C757D33);
+  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, #6C757D33);
+  --klevu-chat-layout-height: var(--klevu-product-query-chat-height, 100%);
+  --klevu-chat-layout-max-height: var(--klevu-product-query-chat-max-height, 100%);
+  --klevu-button-icon-color: var(--klevu-product-query-icon-color, #fff);
+  --klevu-product-query-popup-width: 100%;
+  --klevu-button-background-color: #6C757D66;
+  --klevu-button-background-hover: #6C757D33;
+  --klevu-chat-bubble-border-radius: var(--klevu-product-query-chat-bubble-border-radius, var(--klevu-border-radius-s));
+  --klevu-chat-bubble-border-radius-remote: var(--klevu-product-query-chat-bubble-border-radius-remote, var(--klevu-border-radius-s));
+  --klevu-footer-border-top: none;
 }
 
 .content {
@@ -29,8 +52,13 @@ klevu-chat-layout {
 klevu-chat-messages {
   padding-right: var(--klevu-spacing-04);
 }
+
 .chat-messages {
   height: 100%;
+}
+
+.embedded .chat-messages {
+  max-height: 550px;
 }
 
 .header {
@@ -65,7 +93,7 @@ div[part="product-query-popup-footer"] .sendmessage klevu-textfield {
   text-align: center;
 }
 
-.pqa_feedback > * {
+.pqa_feedback>* {
   padding-bottom: var(--klevu-spacing-04);
 }
 
@@ -112,13 +140,18 @@ klevu-popup {
   padding: var(--klevu-spacing-01);
   padding-bottom: var(--klevu-spacing-04);
 }
+
 .questions-container svg {
   margin-right: var(--klevu-spacing-03);
+  fill: black;
 }
+
 .questions-container .klevu-question {
   background-color: #f6f6f6;
   color: #000;
+  -webkit-animation: 0.4s fadeIn;
   animation: 0.4s fadeIn;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   opacity: 0;
 }
@@ -137,10 +170,21 @@ klevu-popup {
   outline: 0;
 }
 
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -156,4 +200,82 @@ klevu-popup {
   display: block;
   text-decoration: none;
   color: #666;
+}
+
+.embedded div[part="product-query-popup-header"] {
+  background: var(--embedded-header-background);
+}
+
+.embedded div[part="product-query-popup-footer"] {
+  --klevu-button-font-size: var(--klevu-body-xs-size);
+  padding: var(--klevu-spacing-05);
+  padding-top: var(--klevu-spacing-02);
+}
+
+.embedded {
+  width: var(--embedded-width);
+  max-width: var(--embedded-width);
+  height: var(--embedded-height);
+  border: 1px solid var(--embedded-border-color);
+  border-radius: var(--embedded-border-radius);
+  --end-spacer-display: none;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.embedded footer {
+  border-top: none;
+}
+
+.embedded .header {
+  width: 100%;
+  padding-block: var(--klevu-spacing-03);
+  padding-left: var(--klevu-spacing-05);
+}
+
+.embedded .header:empty {
+  padding-block: 0;
+}
+
+.embedded .header klevu-typography {
+  line-height: 11px;
+}
+
+.embedded .header klevu-typography span {
+  color: #000;
+  font-size: var(--klevu-typography-font-size);
+}
+
+.embedded .content {
+  padding: 0;
+}
+
+.embedded klevu-chat-messages {
+  padding: var(--klevu-spacing-05);
+  padding-bottom: 0;
+  gap: var(--klevu-spacing-04)
+}
+
+.embedded klevu-chat-messages .end-spacer {
+  display: none;
+}
+
+.embedded klevu-chat-layout {
+  height: var(--embedded-height);
+  max-height: var(--embedded-height);
+  overflow: hidden;
+}
+
+.embedded div[part="product-query-popup-header"] #closeDialog,
+.embedded div[part="product-query-popup-header"] .fineprint {
+  display: none;
+}
+
+.embedded .questions-container {
+  gap: 12px;
+  padding: var(--klevu-spacing-04);
+}
+
+.embedded .questions-container .klevu-question:hover {
+  background-color: #6C757D33;
 }

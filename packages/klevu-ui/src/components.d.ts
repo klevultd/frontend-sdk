@@ -19,6 +19,8 @@ import { Translation, Translations } from "./components/klevu-init/klevu-init";
 import { Placement } from "@floating-ui/dom";
 import { KlevuProductAddToCart, KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 import { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
+import { WidgetLayout } from "./components/klevu-product-query/klevu-product-query";
+import { WidgetLayout as WidgetLayout1 } from "./components/klevu-product-query/klevu-product-query";
 import { AllQueryOptions } from "./components/klevu-query/klevu-query";
 import { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
 import { KlevuQuicksearchDataEvent, KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
@@ -42,6 +44,8 @@ export { Translation, Translations } from "./components/klevu-init/klevu-init";
 export { Placement } from "@floating-ui/dom";
 export { KlevuProductAddToCart, KlevuProductOnProductClick, KlevuProductVariant } from "./components/klevu-product/klevu-product";
 export { KlevuTextfieldVariant } from "./components/klevu-textfield/klevu-textfield";
+export { WidgetLayout } from "./components/klevu-product-query/klevu-product-query";
+export { WidgetLayout as WidgetLayout1 } from "./components/klevu-product-query/klevu-product-query";
 export { AllQueryOptions } from "./components/klevu-query/klevu-query";
 export { SearchFieldVariant } from "./components/klevu-search-field/klevu-search-field";
 export { KlevuQuicksearchDataEvent, KlevuQuicksearchResultVarint } from "./components/klevu-quicksearch/klevu-quicksearch";
@@ -194,13 +198,25 @@ export namespace Components {
          */
         "feedbacks"?: MoiSavedFeedback[];
         /**
+          * Optional action to perform when type writer effect completes
+         */
+        "handleTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
           * Messages received from Moi backend
          */
         "messages": MoiMessages;
         /**
+          * Scroll to bottom of the chat
+         */
+        "scrollBottom"?: () => void;
+        /**
           * What message should we
          */
         "showFeedbackFor"?: string;
+        /**
+          * type animation speed, if 0, no animation
+         */
+        "speed": number;
     }
     /**
      * Checkbox component
@@ -988,6 +1004,10 @@ export namespace Components {
          */
         "finePrint": string;
         /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
+        /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
         "itemGroupId"?: string;
@@ -1019,6 +1039,10 @@ export namespace Components {
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
+        /**
+          * Set to false if you want to show the popup in place instead of dialog box
+         */
+        "pqaWidgetLayout": WidgetLayout;
         /**
           * Alternative to url, productId can be used to start a session
          */
@@ -1081,6 +1105,10 @@ export namespace Components {
          */
         "disableCloseOutsideClick"?: boolean;
         /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
+        /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
         "itemGroupId"?: string;
@@ -1113,6 +1141,10 @@ export namespace Components {
          */
         "pqaWidgetId"?: string;
         /**
+          * Set to false if you want to show this in place instead of dialog box
+         */
+        "pqaWidgetLayout": WidgetLayout1;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -1121,6 +1153,10 @@ export namespace Components {
           * @returns ProductInfo object
          */
         "productInfoGenerator"?: string | (() => ProductInfo);
+        /**
+          * Set to true if you want to remove the powered by ribbon
+         */
+        "removeAskloBranding": boolean;
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
@@ -2769,6 +2805,10 @@ declare namespace LocalJSX {
          */
         "feedbacks"?: MoiSavedFeedback[];
         /**
+          * Optional action to perform when type writer effect completes
+         */
+        "handleTypeWriterEffectEnds"?: (showQuestions: boolean) => void;
+        /**
           * Messages received from Moi backend
          */
         "messages"?: MoiMessages;
@@ -2789,9 +2829,17 @@ declare namespace LocalJSX {
          */
         "onKlevuSelectProductOption"?: (event: KlevuChatMessagesCustomEvent<{ product: MoiProduct; option: MoiProduct["options"][0] }>) => void;
         /**
+          * Scroll to bottom of the chat
+         */
+        "scrollBottom"?: () => void;
+        /**
           * What message should we
          */
         "showFeedbackFor"?: string;
+        /**
+          * type animation speed, if 0, no animation
+         */
+        "speed"?: number;
     }
     /**
      * Checkbox component
@@ -3599,6 +3647,10 @@ declare namespace LocalJSX {
          */
         "finePrint"?: string;
         /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
+        /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
         "itemGroupId"?: string;
@@ -3630,6 +3682,10 @@ declare namespace LocalJSX {
           * Instead of Klevu API-key use a widget id to start a session
          */
         "pqaWidgetId"?: string;
+        /**
+          * Set to false if you want to show the popup in place instead of dialog box
+         */
+        "pqaWidgetLayout"?: WidgetLayout;
         /**
           * Alternative to url, productId can be used to start a session
          */
@@ -3692,6 +3748,10 @@ declare namespace LocalJSX {
          */
         "disableCloseOutsideClick"?: boolean;
         /**
+          * Set to true if you want to hide the embedded title
+         */
+        "hideEmbeddedTitle"?: boolean;
+        /**
           * Product Group Id to be used in analytics, in case of multiple variants
          */
         "itemGroupId"?: string;
@@ -3724,6 +3784,10 @@ declare namespace LocalJSX {
          */
         "pqaWidgetId"?: string;
         /**
+          * Set to false if you want to show this in place instead of dialog box
+         */
+        "pqaWidgetLayout"?: WidgetLayout1;
+        /**
           * Alternative to url, productId can be used to start a session
          */
         "productId"?: string;
@@ -3732,6 +3796,10 @@ declare namespace LocalJSX {
           * @returns ProductInfo object
          */
         "productInfoGenerator"?: string | (() => ProductInfo);
+        /**
+          * Set to true if you want to remove the powered by ribbon
+         */
+        "removeAskloBranding"?: boolean;
         /**
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */

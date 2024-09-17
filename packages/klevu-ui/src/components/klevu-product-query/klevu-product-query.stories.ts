@@ -41,6 +41,7 @@ const chatRender = (args: KlevuProductQuery) => {
       channel-id=${ifDefined(args.channelId)}
       locale=${ifDefined(args.locale)}
       product-info-generator=${ifDefined(args.productInfoGenerator)}
+      pqa-widget-layout=${ifDefined(args.pqaWidgetLayout)}
     ></klevu-product-query>
   `
 }
@@ -231,6 +232,79 @@ export const WithProductInfoAndItemId: StoryObj<KlevuProductQuery> = {
     itemVariantId: "",
     channelId: "21678260406",
     locale: "en_US",
+  },
+  render: (args) =>
+    html`
+      <div style="transform: translateY(-1px)">
+        <p>
+          <klevu-init
+            assets-path="https://resources-webcomponents.klevu.com/1.0.0/klevu-ui"
+            .settings=${{
+              icons: {
+                thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
+                thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
+              },
+            }}
+            moi-api-url="https://moi-ai-qa2.ksearchnet.com/"
+            >${chatRender(args)}</klevu-init
+          >
+        </p>
+      </div>
+      <script type="text/javascript">
+        function getProductInfo() {
+          return {
+            itemId: "8473483804846",
+            itemGroupId: "8473483804846",
+            itemVariantId: "45367708582062",
+            locale: "en_US",
+            channelId: "12365153151",
+            title: "Adidas London - Preloved Ink / Core Black / Gum",
+            url: "https://parth-asklo-store.myshopify.com/products/adidas-london-shoes-preloved-ink-core-black-gum",
+            description:
+              "LOW-PROFILE SHOES ' WITH A COMFORTABLE BUILD AND SLEEK SILHOUETTE.No matter where your path takes you, these Adidas shoes are made to wander. A premium suede upper in an archive model evokes a retro style perfect for casual days and laid-back weekends. Blocks of colour and contrast accents give a stylistic nod to the energetic spirit of life on the go. Underneath, a rubber outsole provides durable traction so you can follow wherever curiosity leads.Regular fitLace closureSuede upperSynthetic liningRubber outsole",
+            vendor: "Adidas Originals",
+            priceMax: "$85.00 USD",
+            priceMin: "$85.00 USD",
+
+            tags: ["Brand - Adidas Originals"],
+            options: [
+              {
+                name: "Shoe Size",
+                values: ["UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
+              },
+            ],
+            images: [
+              "https://parth-asklo-store.myshopify.com/cdn/shop/files/IE0825_12_FOOTWEAR_Photography_LeftSideCenterLateralView_grey.jpg?v=1718263596",
+            ],
+            variants: [
+              {
+                itemVariantId: "45367708450990",
+                title: "UK 7",
+                sku: "IE08257",
+                url: "https://parth-asklo-store.myshopify.com/products/adidas-london-shoes-preloved-ink-core-black-gum?variant=45367708450990",
+                image:
+                  "https://parth-asklo-store.myshopify.com/cdn/shop/files/IE0825_12_FOOTWEAR_Photography_LeftSideCenterLateralView_grey.jpg?v=1718263596", // nullable
+                price: "$85.00 USD",
+                weight: "350.0 g",
+              },
+            ],
+          }
+        }
+      </script>
+    `,
+}
+
+export const EmbeddedView: StoryObj<KlevuProductQuery> = {
+  args: {
+    productId: "7585342095542",
+    pqaWidgetId: "pqa-6d4a4513-2d81-4ed7-84a5-59f40f7b7b95",
+    productInfoGenerator: "getProductInfo()",
+    itemId: "7585342095542",
+    itemGroupId: "7585342095542",
+    itemVariantId: "",
+    channelId: "21678260406",
+    locale: "en_US",
+    pqaWidgetLayout: "embedded",
   },
   render: (args) =>
     html`
