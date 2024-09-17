@@ -12,7 +12,7 @@ import {
   KlevuBanner,
   KlevuSearchOptions,
 } from "@klevu/core"
-import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter, Watch } from "@stencil/core"
+import { Component, Fragment, h, Host, Listen, Prop, State, Event, EventEmitter, Watch, Element } from "@stencil/core"
 import {
   KlevuPaginationCustomEvent,
   KlevuSearchFieldCustomEvent,
@@ -230,6 +230,8 @@ export class KlevuQuicksearch {
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
   @State() searchResultBottomBanners: KlevuBanner[] = []
+  @Element() el!: HTMLElement
+
   #searchField?: HTMLKlevuSearchFieldElement
 
   #resultObject?: KlevuResponseQueryObject
@@ -359,6 +361,11 @@ export class KlevuQuicksearch {
   }
 
   async #handleUrlRedirects(term: string) {
+    const INIT = this.el.closest("klevu-init")
+
+    if (!INIT?.kmcLoadDefaults) {
+      return
+    }
     let redirect: KMCMapsRootObject["klevu_keywordUrlMap"][0] | undefined
     if (this.urlRedirects === undefined && this.#resultObject?.getRedirects) {
       const redirects = await this.#resultObject.getRedirects()

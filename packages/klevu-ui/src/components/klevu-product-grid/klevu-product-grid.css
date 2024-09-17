@@ -3,7 +3,7 @@
   * @prop --klevu-product-grid-spacing var(--klevu-spacing-05): spacing between grid items
   * @prop --klevu-product-grid-product-width 250px: width of each product
   */
-  --spacing: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
+  --grid-spacing: var(--klevu-product-grid-spacing, var(--klevu-spacing-05));
   --product-width: var(--klevu-product-grid-product-width, 250px);
 }
 
