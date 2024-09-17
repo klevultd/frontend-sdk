@@ -41,7 +41,7 @@ test("Advanced filtering", async () => {
 
   const resultObject = result.queriesById("test")
   expect(resultObject).toBeDefined()
-  expect(resultObject?.records.some((r) => r.color === "green")).toBeTruthy()
+  expect(resultObject?.records.some((r) => r.size === "34")).toBeTruthy()
   expect(
     resultObject?.records.some((r) => parseFloat(r.price) > 200)
   ).toBeTruthy()
