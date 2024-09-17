@@ -230,7 +230,6 @@ export class KlevuQuicksearch {
   @State() noResultsBannerDetails: Banner[] = []
   @State() searchResultTopBanners: KlevuBanner[] = []
   @State() searchResultBottomBanners: KlevuBanner[] = []
-
   #searchField?: HTMLKlevuSearchFieldElement
 
   #resultObject?: KlevuResponseQueryObject
