@@ -181,6 +181,7 @@ export const KlevuInit = /*@__PURE__*/ defineContainer<JSX.KlevuInit>('klevu-ini
   'useConsent',
   'consentGiven',
   'assetsPath',
+  'settingsUrl',
   'translationUrlPrefix',
   'kmcLoadDefaults',
   'klevuInitSettingsUpdated'
