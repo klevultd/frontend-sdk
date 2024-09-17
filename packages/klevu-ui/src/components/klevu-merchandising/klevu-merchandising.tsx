@@ -256,10 +256,13 @@ export class KlevuMerchandising {
     if (this.results.length > 0 && !this.#currency) {
       this.#currency = this.results[0].currency
     }
-    const allBanners = await this.#resultObject.getBanners()
-    this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
-    this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
+    const INIT = this.el.closest("klevu-init")
 
+    if (INIT?.kmcLoadDefaults) {
+      const allBanners = await this.#resultObject.getBanners()
+      this.searchResultTopBanners = allBanners.filter((b) => b.position === "top")
+      this.searchResultBottomBanners = allBanners.filter((b) => b.position === "bottom")
+    }
     this.#emitChanges()
   }
 
