@@ -72,6 +72,11 @@ type KlevuConfiguration = {
    * True when user provides consent for reading protected data
    */
   consentGiven?: boolean
+
+  /**
+   * Set to true to disable user session generation.
+   */
+  disableUserSession?: boolean
 }
 
 export class KlevuConfig {
@@ -92,6 +97,7 @@ export class KlevuConfig {
   enableKlaviyoConnector = false
   useConsent = false
   consentGiven = false
+  disableUserSession = false
 
   constructor(config: KlevuConfiguration) {
     this.apiKey = config.apiKey
@@ -128,12 +134,15 @@ export class KlevuConfig {
     this.useConsent = config.useConsent || false
     this.consentGiven = config.consentGiven || false
     this.enableKlaviyoConnector = config.enableKlaviyoConnector || false
+    this.disableUserSession = config.disableUserSession || false
   }
 
   static init(config: KlevuConfiguration) {
     KlevuConfig.default = new KlevuConfig(config)
     runPendingAnalyticalRequests()
-    this.initializeUserSession()
+    if (!config.disableUserSession) {
+      this.initializeUserSession()
+    }
     this.initializeIPResolver()
   }
 
