@@ -612,6 +612,7 @@ async function saveSession(
   settings?: { config: KlevuConfig; options: MoiStartOptions }
 ) {
   const saved = KlevuStorage.getItem(STORAGE_KEY)
+  let shouldResendProductInfo = false
   let parsed: Partial<MoiSavedSession> = {}
   if (saved) {
     parsed = JSON.parse(saved) as MoiSavedSession
@@ -625,7 +626,7 @@ async function saveSession(
       parsed.MOI = session.MOI
       break
     case "PQA":
-      let shouldResendProductInfo =
+      shouldResendProductInfo =
         parsed.context?.sessionId !== session.context.sessionId
       parsed.context = session.context
 
