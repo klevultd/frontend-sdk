@@ -40,6 +40,7 @@
   --klevu-input-border: var(--klevu-product-query-input-border, 1px solid var(--klevu-color-neutral-2));
   --embedded-chat-background-color: var(--klevu-product-query-embedded-chat-background-color, #fff);
   --klevu-input-border-radius: var(--klevu-product-query-input-border-radius, 1000px);
+  --klevu-input-placeholder-color: var(--klevu-product-query-input-placeholder-color, var(--klevu-color-neutral-5));
 }
 
 .content {
