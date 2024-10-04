@@ -297,7 +297,7 @@ export const WithProductInfoAndItemId: StoryObj<KlevuProductQuery> = {
 export const EmbeddedView: StoryObj<KlevuProductQuery> = {
   args: {
     productId: "7585342095542",
-    pqaWidgetId: "pqa-6d4a4513-2d81-4ed7-84a5-59f40f7b7b95",
+    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
     productInfoGenerator: "getProductInfo()",
     itemId: "7585342095542",
     itemGroupId: "7585342095542",
