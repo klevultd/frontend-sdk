@@ -221,6 +221,8 @@ klevu-popup {
 .error-icon {
   font-size: 14px;
   margin-right: 5px;
+  position: relative;
+  top: 2px;
 }
 
 .embedded div[part="product-query-popup-header"] {
