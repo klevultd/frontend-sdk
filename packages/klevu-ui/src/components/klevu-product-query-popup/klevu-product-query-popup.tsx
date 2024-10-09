@@ -465,7 +465,8 @@ export class KlevuProductQueryPopup {
                   </klevu-typography>
                 ) : null}
                 {this.sendMessageError ? (
-                  <klevu-typography class="loading-sorry" variant="body-xs">
+                  <klevu-typography class="error-text" variant="body-xs">
+                    <klevu-icon name="error" class="error-icon"></klevu-icon>
                     {this.tAnswerError}
                   </klevu-typography>
                 ) : null}
