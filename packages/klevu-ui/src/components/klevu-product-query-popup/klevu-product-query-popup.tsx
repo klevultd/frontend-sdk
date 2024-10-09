@@ -243,6 +243,7 @@ export class KlevuProductQueryPopup {
     this.feedbacks = this.session.feedbacks
     this.questions = this.session.questions
     this.#layoutElement?.scrollMainToBottom()
+    this.sendMessageError = false
   }
 
   async #sendMessage(overrideMessageValue?: string) {
