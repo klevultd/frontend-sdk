@@ -214,6 +214,15 @@ klevu-popup {
   color: #666;
 }
 
+.error-text {
+  color: var(--klevu-color-negative);
+}
+
+.error-icon {
+  font-size: 14px;
+  margin-right: 5px;
+}
+
 .embedded div[part="product-query-popup-header"] {
   background: var(--embedded-header-background);
 }

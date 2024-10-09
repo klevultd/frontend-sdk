@@ -23,6 +23,7 @@
   },
   "productQueryPopup": {
     "tTextFieldPlaceholder": "Enter your question here...",
+    "tAnswerError": "Uh O. There was a problem generating an answer. Please try again after some time.",
     "tPopuptitle": "Ask a Question",
     "tButtonText": "Ask Product AI",
     "tFinePrint": "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page.",
