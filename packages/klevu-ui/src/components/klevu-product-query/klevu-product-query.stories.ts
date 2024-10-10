@@ -225,7 +225,7 @@ export const WithAdditionalData: StoryObj<KlevuProductQuery> = {
 export const WithProductInfoAndItemId: StoryObj<KlevuProductQuery> = {
   args: {
     productId: "7585342095542",
-    pqaWidgetId: "pqa-6d4a4513-2d81-4ed7-84a5-59f40f7b7b95",
+    pqaWidgetId: "pqa-bf93b743-f148-42aa-b8b5-d1cf0504ab4b",
     productInfoGenerator: "getProductInfo()",
     itemId: "7585342095542",
     itemGroupId: "7585342095542",
@@ -297,7 +297,7 @@ export const WithProductInfoAndItemId: StoryObj<KlevuProductQuery> = {
 export const EmbeddedView: StoryObj<KlevuProductQuery> = {
   args: {
     productId: "7585342095542",
-    pqaWidgetId: "pqa-6d4a4513-2d81-4ed7-84a5-59f40f7b7b95",
+    pqaWidgetId: "pqa-bf93b743-f148-42aa-b8b5-d1cf0504ab4b",
     productInfoGenerator: "getProductInfo()",
     itemId: "7585342095542",
     itemGroupId: "7585342095542",

@@ -337,7 +337,7 @@ export async function startMoi(
     ...(options.channelId && { channelId: options.channelId }),
     ...(options.locale && { locale: options.locale }),
   }
-  const storedSession = await getStoredSession()
+  const storedSession = getStoredSession()
 
   let menu: MoiMenuOptions["menuOptions"]
   let genericOptions: MoiResponseGenericOptions["genericOptions"]
@@ -374,6 +374,9 @@ export async function startMoi(
           if (options.settings?.alwaysStartConversation) {
             shouldSendMessage = storedSession.PQA[PQAKey].messages.length === 0
           }
+        }
+        if (storedSession.context.locale !== ctx.locale) {
+          shouldSendMessage = true
         }
     }
   }
@@ -556,18 +559,21 @@ export class MoiSession {
           throw new Error("Cannot save PQA session without url or productId")
         }
 
-        saveSession({
-          context: this.context,
-          PQA: {
-            [PQAkey]: {
-              menu: this.menu,
-              genericOptions: this.genericOptions,
-              messages: this.messages,
-              feedbacks: this.feedbacks,
-              questions: this.questions || [],
+        saveSession(
+          {
+            context: this.context,
+            PQA: {
+              [PQAkey]: {
+                menu: this.menu,
+                genericOptions: this.genericOptions,
+                messages: this.messages,
+                feedbacks: this.feedbacks,
+                questions: this.questions || [],
+              },
             },
           },
-        })
+          { config: this.config, options: this.options }
+        )
     }
   }
   async addFeedback(messageId: string, thumbs: "up" | "down", reason?: string) {
@@ -601,8 +607,12 @@ function getStoredSession(): MoiSavedSession | undefined {
   return JSON.parse(storedSession) as MoiSavedSession
 }
 
-function saveSession(session: MoiSavedSession) {
+async function saveSession(
+  session: MoiSavedSession,
+  settings?: { config: KlevuConfig; options: MoiStartOptions }
+) {
   const saved = KlevuStorage.getItem(STORAGE_KEY)
+  let shouldResendProductInfo = false
   let parsed: Partial<MoiSavedSession> = {}
   if (saved) {
     parsed = JSON.parse(saved) as MoiSavedSession
@@ -616,10 +626,24 @@ function saveSession(session: MoiSavedSession) {
       parsed.MOI = session.MOI
       break
     case "PQA":
+      shouldResendProductInfo = !!(
+        parsed.context?.sessionId &&
+        parsed.context?.sessionId !== session.context.sessionId
+      )
       parsed.context = session.context
 
       if (!parsed.PQA) {
         parsed.PQA = {}
+      }
+      if (settings && shouldResendProductInfo) {
+        try {
+          const productInfo = settings.options?.productInfo
+          if (productInfo) {
+            await saveProductInfo(settings.config, productInfo)
+          }
+        } catch (err) {
+          console.warn("Failed to save regenerated product Info", err)
+        }
       }
 
       if (!key || !session.PQA) {
