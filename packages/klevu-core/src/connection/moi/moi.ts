@@ -626,8 +626,10 @@ async function saveSession(
       parsed.MOI = session.MOI
       break
     case "PQA":
-      shouldResendProductInfo =
+      shouldResendProductInfo = !!(
+        parsed.context?.sessionId &&
         parsed.context?.sessionId !== session.context.sessionId
+      )
       parsed.context = session.context
 
       if (!parsed.PQA) {
