@@ -36,7 +36,7 @@ And in your Javascript file:
 ```js
 const myComponent = document.querySelector("klevu-init")
 myComponent.settings = {
-  onProductClick: function onProductClick(product, event) {
+  onItemClick: function onProductClick(product, event) {
     alert("Product clicked!")
   },
   generateProductUrl: function generateProductUrl(product) {
@@ -64,7 +64,7 @@ const App = () => {
       apiKey="klevu-165829460115715456"
       url="https://eucs30v2.ksearchnet.com/cs/v2/search"
       settings={{
-        onProductClick: function onProductClick(product, event) {
+        onItemClick: function onProductClick(product, event) {
           alert("Product clicked!")
         },
         generateProductUrl: function generateProductUrl(product) {

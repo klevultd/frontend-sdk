@@ -121,7 +121,7 @@ Then just use the components in your components:
     url="https://eucs29v2.ksearchnet.com/cs/v2/search"
     api-key="klevu-164651914788114877"
     :settings.prop="{
-      onProductClick(product: any, event: any) {
+      onItemClick(product: any, event: any) {
         console.log("clicked", product)
         return false;
       },
@@ -232,7 +232,7 @@ For simple initialization of Klevu components place following code in your HTML 
 <klevu-init api-key="klevu-165829460115715456" url="https://eucs30v2.ksearchnet.com/cs/v2/search"></klevu-init>
 <script>
   document.querySelector("klevu-init").settings = {
-    onProductClick: (product, event) => {
+    onItemClick: (product, event) => {
       // if you wish to prevent default url redirection you can use event.preventDefault() and redirect to your own url
     },
     generateProductUrl: (product) => {
@@ -259,7 +259,7 @@ export function App() {
         apiKey="klevu-165829460115715456"
         url="https://eucs30v2.ksearchnet.com/cs/v2/search"
         settings={{
-          onProductClick: (product, event) => {
+          onItemClick: (product, event) => {
             // here you could use react router to do the redirection
           },
           generateProductUrl: (product) => {
