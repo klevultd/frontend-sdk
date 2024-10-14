@@ -41,6 +41,13 @@
   --embedded-chat-background-color: var(--klevu-product-query-embedded-chat-background-color, #fff);
   --klevu-input-border-radius: var(--klevu-product-query-input-border-radius, 1000px);
   --klevu-input-placeholder-color: var(--klevu-product-query-input-placeholder-color, var(--klevu-color-neutral-5));
+  --klevu-prepopulated-questions-color: var(--klevu-product-query-prepopulated-questions-color, #000);
+  --klevu-prepopulated-questions-background: var(--klevu-product-query-prepopulated-questions-background, #f6f6f6);
+  --klevu-prepopulated-questions-hover-background: var(
+    --klevu-product-query-prepopulated-questions-hover-background,
+    #6c757d33
+  );
+  --klevu-prepopulated-questions-hover-color: var(--klevu-product-query-prepopulated-questions-hover-color, #000);
 }
 
 .content {
@@ -159,8 +166,8 @@ klevu-popup {
 }
 
 .questions-container .klevu-question {
-  background-color: #f6f6f6;
-  color: #000;
+  background-color: var(--klevu-prepopulated-questions-background);
+  color: var(--klevu-prepopulated-questions-color);
   -webkit-animation: 0.4s fadeIn;
   animation: 0.4s fadeIn;
   -webkit-animation-fill-mode: forwards;
@@ -301,5 +308,6 @@ klevu-popup {
 }
 
 .embedded .questions-container .klevu-question:hover {
-  background-color: #6c757d33;
+  background-color: var(--klevu-prepopulated-questions-hover-background);
+  color: var(--klevu-prepopulated-questions-hover-color);
 }
