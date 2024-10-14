@@ -15,6 +15,7 @@
   --icon-size: var(--klevu-button-icon-size, 1.5em);
   --icon-color: var(--klevu-button-icon-color, var(--text-color));
   --icon-rotation: var(--klevu-button-icon-rotation, 0deg);
+  --border-radius: var(--klevu-button-border-radius, 10000000px);
 }
 
 button {
@@ -57,9 +58,9 @@ button klevu-typography {
   --klevu-typography-color: var(--text-color);
   color: var(--text-color);
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 button klevu-icon {
@@ -67,9 +68,9 @@ button klevu-icon {
   color: var(--icon-color);
   transform: rotate(var(--icon-rotation));
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 button:hover {
@@ -122,7 +123,7 @@ button.icon {
   padding: 0;
   height: calc(var(--klevu-size-m) * 2);
   width: calc(var(--klevu-size-m) * 2);
-  border-radius: 10000000px;
+  border-radius: var(--border-radius);
   font-size: var(--icon-size);
   font-weight: normal;
   line-height: 1.8;

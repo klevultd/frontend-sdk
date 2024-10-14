@@ -4,31 +4,50 @@
    */
   display: block;
   text-align: left;
-  --cornflower-blue: #428ACA;
+  --cornflower-blue: #428aca;
   --popup-height: var(--klevu-product-query-popup-height, 500px);
   --popup-width: var(--klevu-product-query-popup-width, 520px);
   --embedded-height: var(--klevu-product-query-popup-height, 100%);
   --embedded-width: var(--klevu-product-query-popup-width, 100%);
-  --embedded-header-background: var(--klevu-product-query-popup-header-background, #6C757D1A);
-  --embedded-border-color: var(--klevu-product-query-popup-border-color, #6C757D1A);
+  --embedded-header-background: var(--klevu-product-query-popup-header-background, #6c757d1a);
+  --embedded-border-color: var(--klevu-product-query-popup-border-color, #6c757d1a);
   --embedded-border-radius: var(--klevu-product-query-popup-border-radius, var(--klevu-border-radius-m));
   --end-spacer-display: var(--klevu-product-query-popup-spacer-display, block);
 }
 
 :host([embedded]) {
   --klevu-chat-bubble-text-color-remote: var(--klevu-product-query-bubble-text-color-remote, #000);
-  --klevu-chat-bubble-background: var(--klevu-product-query-bubble-background, #6C757D66);
-  --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, #6C757D33);
-  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, #6C757D33);
+  --klevu-chat-bubble-text-color: var(--klevu-product-query-bubble-text-color, #000);
+  --klevu-chat-bubble-background: var(--klevu-product-query-bubble-background, #6c757d66);
+  --klevu-chat-bubble-background-remote: var(--klevu-product-query-embedded-response-bg, #6c757d33);
+  --klevu-loading-indicator-color: var(--klevu-loading-embedded-indicator-color, #6c757d33);
   --klevu-chat-layout-height: var(--klevu-product-query-chat-height, 100%);
   --klevu-chat-layout-max-height: var(--klevu-product-query-chat-max-height, 100%);
   --klevu-button-icon-color: var(--klevu-product-query-icon-color, #fff);
   --klevu-product-query-popup-width: 100%;
-  --klevu-button-background-color: #6C757D66;
-  --klevu-button-background-hover: #6C757D33;
+  --klevu-button-background-color: var(--klevu-product-query-submit-button-background-color, #6c757d66);
+  --klevu-button-background-hover: var(--klevu-product-query-submit-button-background-hover, #6c757d33);
   --klevu-chat-bubble-border-radius: var(--klevu-product-query-chat-bubble-border-radius, var(--klevu-border-radius-s));
-  --klevu-chat-bubble-border-radius-remote: var(--klevu-product-query-chat-bubble-border-radius-remote, var(--klevu-border-radius-s));
+  --klevu-chat-bubble-border-radius-remote: var(
+    --klevu-product-query-chat-bubble-border-radius-remote,
+    var(--klevu-border-radius-s)
+  );
   --klevu-footer-border-top: none;
+  --klevu-chat-title-color: var(--klevu-product-query-title-color, #000);
+  --klevu-button-border-radius: var(--klevu-product-query-submit-button-border-radius, 50%);
+  --klevu-input-background-color: var(--klevu-product-query-input-background-color, var(--klevu-color-neutral-1));
+  --klevu-input-color: var(--klevu-product-query-input-color, #000);
+  --klevu-input-border: var(--klevu-product-query-input-border, 1px solid var(--klevu-color-neutral-2));
+  --embedded-chat-background-color: var(--klevu-product-query-embedded-chat-background-color, #fff);
+  --klevu-input-border-radius: var(--klevu-product-query-input-border-radius, 1000px);
+  --klevu-input-placeholder-color: var(--klevu-product-query-input-placeholder-color, var(--klevu-color-neutral-5));
+  --klevu-prepopulated-questions-color: var(--klevu-product-query-prepopulated-questions-color, #000);
+  --klevu-prepopulated-questions-background: var(--klevu-product-query-prepopulated-questions-background, #f6f6f6);
+  --klevu-prepopulated-questions-hover-background: var(
+    --klevu-product-query-prepopulated-questions-hover-background,
+    #6c757d33
+  );
+  --klevu-prepopulated-questions-hover-color: var(--klevu-product-query-prepopulated-questions-hover-color, #000);
 }
 
 .content {
@@ -93,7 +112,7 @@ div[part="product-query-popup-footer"] .sendmessage klevu-textfield {
   text-align: center;
 }
 
-.pqa_feedback>* {
+.pqa_feedback > * {
   padding-bottom: var(--klevu-spacing-04);
 }
 
@@ -147,8 +166,8 @@ klevu-popup {
 }
 
 .questions-container .klevu-question {
-  background-color: #f6f6f6;
-  color: #000;
+  background-color: var(--klevu-prepopulated-questions-background);
+  color: var(--klevu-prepopulated-questions-color);
   -webkit-animation: 0.4s fadeIn;
   animation: 0.4s fadeIn;
   -webkit-animation-fill-mode: forwards;
@@ -202,6 +221,17 @@ klevu-popup {
   color: #666;
 }
 
+.error-text {
+  color: var(--klevu-color-negative);
+}
+
+.error-icon {
+  font-size: 14px;
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+
 .embedded div[part="product-query-popup-header"] {
   background: var(--embedded-header-background);
 }
@@ -242,7 +272,7 @@ klevu-popup {
 }
 
 .embedded .header klevu-typography span {
-  color: #000;
+  color: var(--klevu-chat-title-color);
   font-size: var(--klevu-typography-font-size);
 }
 
@@ -253,7 +283,7 @@ klevu-popup {
 .embedded klevu-chat-messages {
   padding: var(--klevu-spacing-05);
   padding-bottom: 0;
-  gap: var(--klevu-spacing-04)
+  gap: var(--klevu-spacing-04);
 }
 
 .embedded klevu-chat-messages .end-spacer {
@@ -264,6 +294,7 @@ klevu-popup {
   height: var(--embedded-height);
   max-height: var(--embedded-height);
   overflow: hidden;
+  background-color: var(--embedded-chat-background-color);
 }
 
 .embedded div[part="product-query-popup-header"] #closeDialog,
@@ -277,5 +308,6 @@ klevu-popup {
 }
 
 .embedded .questions-container .klevu-question:hover {
-  background-color: #6C757D33;
+  background-color: var(--klevu-prepopulated-questions-hover-background);
+  color: var(--klevu-prepopulated-questions-hover-color);
 }

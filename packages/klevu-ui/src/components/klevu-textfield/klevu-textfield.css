@@ -1,5 +1,10 @@
 :host {
   display: block;
+  --input-background-color: var(--klevu-input-background-color, var(--klevu-color-neutral-1));
+  --input-color: var(--klevu-input-color, #000);
+  --input-border: var(--klevu-input-border, 1px solid var(--klevu-color-neutral-2));
+  --input-border-radius: var(--klevu-input-border-radius, 1000px);
+  --input-placeholder-color: var(--klevu-input-placeholder-color, var(--klevu-color-neutral-5));
 }
 
 div {
@@ -12,6 +17,8 @@ input {
   display: block;
   width: 100%;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   border: 0;
   height: calc(var(--klevu-size-m) * 2);
@@ -52,10 +59,31 @@ input.default.error {
 /** Pill input */
 
 input.pill {
-  border: 1px solid var(--klevu-color-neutral-2);
+  border: var(--input-border);
   margin: 1px;
-  background-color: var(--klevu-color-neutral-2);
-  border-radius: 1000px;
+  background-color: var(--input-background-color);
+  border-radius: var(--input-border-radius);
+  color: var(--input-color);
+}
+
+input.pill::-webkit-input-placeholder {
+  color: var(--input-placeholder-color);
+}
+
+input.pill::-moz-placeholder {
+  color: var(--input-placeholder-color);
+}
+
+input.pill:-ms-input-placeholder {
+  color: var(--input-placeholder-color);
+}
+
+input.pill::-ms-input-placeholder {
+  color: var(--input-placeholder-color);
+}
+
+input.pill::placeholder {
+  color: var(--input-placeholder-color);
 }
 
 /** icon */
