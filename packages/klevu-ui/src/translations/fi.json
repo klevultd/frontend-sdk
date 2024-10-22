@@ -23,6 +23,7 @@
   },
   "productQueryPopup": {
     "tTextFieldPlaceholder": "Kirjoita kysymyksesi tähän...",
+    "tAnswerError": "Voi ei. Vastauksen luomisessa oli ongelma. Yritä uudelleen jonkin ajan kuluttua.",
     "tPopuptitle": "Kysy kysymys",
     "tButtonText": "Kysy Product AI",
     "tFinePrint": "Olen tekoälymalli. Saatan joskus tehdä virheitä. Varmista vastaukset tuotesivulta.",

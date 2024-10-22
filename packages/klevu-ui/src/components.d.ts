@@ -1167,6 +1167,10 @@ export namespace Components {
          */
         "settings"?: MoiRequest["klevuSettings"];
         /**
+          * When sending a message fails, show this text
+         */
+        "tAnswerError": string;
+        /**
           * Text of the button to open the popup
          */
         "tButtonText": string;
@@ -3814,6 +3818,10 @@ declare namespace LocalJSX {
           * Settings for requests to Klevu. Deeper modification on how the product query works.
          */
         "settings"?: MoiRequest["klevuSettings"];
+        /**
+          * When sending a message fails, show this text
+         */
+        "tAnswerError"?: string;
         /**
           * Text of the button to open the popup
          */

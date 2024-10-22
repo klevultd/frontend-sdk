@@ -87,6 +87,11 @@ export class KlevuProductQueryPopup {
   @Prop() tLoadingSorry = getTranslation("productQueryPopup.tLoadingSorry")
 
   /**
+   * When sending a message fails, show this text
+   */
+  @Prop() tAnswerError = getTranslation("productQueryPopup.tAnswerError")
+
+  /**
    * Title of the feedback section when closing the popup
    */
   @Prop() tRateExperienceTitle = getTranslation("productQueryPopup.tRateExperienceTitle")
@@ -202,6 +207,7 @@ export class KlevuProductQueryPopup {
   @State() showFeedback = false
   @State() showLoading = false
   @State() showLoadingSorry = false
+  @State() sendMessageError = false
   @State() feedbacks: MoiSavedFeedback[] = []
   @State() showMessageFeedbackFor?: string
 
@@ -237,6 +243,7 @@ export class KlevuProductQueryPopup {
     this.feedbacks = this.session.feedbacks
     this.questions = this.session.questions
     this.#layoutElement?.scrollMainToBottom()
+    this.sendMessageError = false
   }
 
   async #sendMessage(overrideMessageValue?: string) {
@@ -252,13 +259,17 @@ export class KlevuProductQueryPopup {
     const timeout = setTimeout(() => {
       this.showLoadingSorry = true
     }, 4000)
-    await this.session?.query(
-      {
-        message: message,
-        klevuSettings: this.settings,
-      },
-      "send"
-    )
+    await this.session
+      ?.query(
+        {
+          message: message,
+          klevuSettings: this.settings,
+        },
+        "send"
+      )
+      .catch((err) => {
+        this.sendMessageError = true
+      })
     clearTimeout(timeout)
     this.showLoadingSorry = false
     this.showLoading = false
@@ -452,6 +463,12 @@ export class KlevuProductQueryPopup {
                 {this.showLoadingSorry ? (
                   <klevu-typography class="loading-sorry" variant="body-xs">
                     {this.tLoadingSorry}
+                  </klevu-typography>
+                ) : null}
+                {this.sendMessageError ? (
+                  <klevu-typography class="error-text" variant="body-xs">
+                    <klevu-icon name="error" class="error-icon"></klevu-icon>
+                    {this.tAnswerError}
                   </klevu-typography>
                 ) : null}
               </div>
