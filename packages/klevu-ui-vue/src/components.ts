@@ -355,6 +355,7 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'tButtonText',
   'tFinePrint',
   'tLoadingSorry',
+  'tAnswerError',
   'tRateExperienceTitle',
   'tRateExperienceText',
   'tDataProtectionNotice',
