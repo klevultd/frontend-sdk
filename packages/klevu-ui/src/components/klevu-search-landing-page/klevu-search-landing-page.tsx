@@ -217,7 +217,7 @@ export class KlevuSearchLandingPage {
       if (this.showPriceAsSlider === undefined) {
         this.showPriceAsSlider = settings.klevu_showPriceSlider
       }
-      if (this.priceInterval === undefined) {
+      if (this.priceInterval === undefined && typeof settings.klevu_uc_userOptions.priceInterval !== "undefined") {
         this.priceInterval = parseInt(settings.klevu_uc_userOptions.priceInterval, 10)
       }
       if (this.hidePrice === undefined) {
@@ -226,9 +226,9 @@ export class KlevuSearchLandingPage {
       if (this.useKlaviyo === undefined && settings?.klevu_connectors?.klaviyo?.enabled) {
         this.useKlaviyo = true
       }
-      this.#currency = settings.klevu_uc_userOptions.priceFormatter.currencySymbol || ""
+      this.#currency = settings.klevu_uc_userOptions.priceFormatter?.currencySymbol || ""
     }
-    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions.showPopularProducts
+    const showPopularProducts = settings?.klevu_uc_userOptions?.noResultsOptions?.showPopularProducts
     if (showPopularProducts) {
       const trendingProductsQuery = await KlevuFetch(
         trendingProducts({
