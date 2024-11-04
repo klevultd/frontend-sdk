@@ -427,14 +427,14 @@ export class KlevuQuicksearch {
       // No results page settings
       if (this.tPopularProductsTitleOnNoResultsPage === undefined) {
         this.tPopularProductsTitleOnNoResultsPage =
-          settings?.klevu_uc_userOptions.noResultsOptions.productsHeading ??
+          settings?.klevu_uc_userOptions.noResultsOptions?.productsHeading ??
           getTranslation("quicksearch.tPopularProductsTitle")
       }
       if (this.hideTrendingProductsOnNoResultsPage === undefined) {
-        this.hideTrendingProductsOnNoResultsPage = !settings?.klevu_uc_userOptions.noResultsOptions.showPopularProducts
+        this.hideTrendingProductsOnNoResultsPage = !settings?.klevu_uc_userOptions.noResultsOptions?.showPopularProducts
       }
       if (this.hidePopularKeywordsOnNoResultsPage === undefined) {
-        this.hidePopularKeywordsOnNoResultsPage = !settings?.klevu_uc_userOptions.noResultsOptions.showPopularKeywords
+        this.hidePopularKeywordsOnNoResultsPage = !settings?.klevu_uc_userOptions.noResultsOptions?.showPopularKeywords
       }
     }
     if (this.hideTrendingProducts) {

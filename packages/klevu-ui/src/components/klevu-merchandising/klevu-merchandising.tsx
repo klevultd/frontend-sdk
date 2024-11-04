@@ -181,7 +181,7 @@ export class KlevuMerchandising {
       if (this.useABTest === undefined) {
         this.useABTest = settings.klevu_abTestActive
       }
-      this.#currency = settings.klevu_uc_userOptions.priceFormatter.currencySymbol || ""
+      this.#currency = settings.klevu_uc_userOptions.priceFormatter?.currencySymbol || ""
     }
     const SSR = this.el.closest("klevu-util-ssr-provider")
 
