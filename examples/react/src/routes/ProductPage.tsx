@@ -67,7 +67,7 @@ export function ProductPage() {
           mode: "demo",
           searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        exclude([params.groupId])
+        params.groupId ? exclude([params.groupId]) : null
       ),
       recsPayload || {}
     )
@@ -119,10 +119,12 @@ export function ProductPage() {
               alt={product.name}
               style={{ maxWidth: "100%", width: "100%" }}
             />
-            <InspireMe
-              id={params.groupId}
-              style={{ position: "absolute", top: "0", right: "0" }}
-            />
+            {params.groupId && (
+              <InspireMe
+                id={params.groupId}
+                style={{ position: "absolute", top: "0", right: "0" }}
+              />
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             {product.shortDesc?.length > 0 ? (
