@@ -100,7 +100,6 @@ export function ProductPage() {
   if (!product) {
     return <LoadingIndicator />
   }
-
   return (
     <Container maxWidth="lg">
       <div>
@@ -115,7 +114,10 @@ export function ProductPage() {
             style={{ textAlign: "center", position: "relative" }}
           >
             <img
-              src={product.image}
+              srcSet={`${product.image.replace(
+                "needtochange/",
+                ""
+              )}, ${product.image.replace("needtochange/", "pub/")}`}
               alt={product.name}
               style={{ maxWidth: "100%", width: "100%" }}
             />
