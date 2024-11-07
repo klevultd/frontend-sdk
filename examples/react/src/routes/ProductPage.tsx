@@ -67,7 +67,7 @@ export function ProductPage() {
           mode: "demo",
           searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        params.groupId ? exclude([params.groupId]) : null
+        exclude([params.groupId || ""])
       ),
       recsPayload || {}
     )
