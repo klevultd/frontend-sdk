@@ -300,7 +300,12 @@ export function Product(props: {
       props.product.klevu_applied_keyword_boosts) ? (
     <Tooltip placement="bottom" title={<TooltipContent {...props.product} />}>
       <div>
-        <ProductCard {...props} debugMode={debugMode} addToCart={addToCart} />
+        <ProductCard
+          debugModeShowOnly={defaultDebugModeShowFields}
+          {...props}
+          debugMode={debugMode}
+          addToCart={addToCart}
+        />
       </div>
     </Tooltip>
   ) : (
