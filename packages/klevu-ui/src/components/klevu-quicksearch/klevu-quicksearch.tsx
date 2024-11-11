@@ -216,54 +216,6 @@ export class KlevuQuicksearch {
    * Used to enable loading indicator
    */
   @Prop() useLoadingIndicator = false
-  /**
-   * Hides price from search results
-   */
-  @Prop() hidePrice?: boolean
-  /**
-   * Hides brand from search results
-   */
-  @Prop() hideBrand?: boolean
-  /**
-   * Hides description from search results
-   */
-  @Prop() hideDescription?: boolean
-  /**
-   * Hides hover image from search results
-   */
-  @Prop() hideHoverImage?: boolean
-  /**
-   * Hides image from search results
-   */
-  @Prop() hideImage?: boolean
-  /**
-   * Hides name from search results
-   */
-  @Prop() hideName?: boolean
-  /**
-   * Do not show swatches in products in search results
-   */
-  @Prop() hideSwatches?: boolean
-  /**
-   * Caption to show if product is out of stock in products in search results
-   */
-  @Prop() outOfStockCaption?: string
-  /**
-   * Show add to cart button in products in search results
-   */
-  @Prop() showAddToCart?: boolean
-  /**
-   * To show the product code next to product name in search results
-   */
-  @Prop() showProductCode?: boolean
-  /**
-   * Text for add to cart button in search results
-   */
-  @Prop() tAddToCart?: string
-  /**
-   * Text to be added after the price. Usually used to indicate that does the price include VAT or not in search results.
-   */
-  @Prop() vatCaption?: string
 
   @State() products?: KlevuRecord[] = []
   @State() trendingProducts: KlevuRecord[] = []
@@ -622,18 +574,6 @@ export class KlevuQuicksearch {
                       exportparts={partsExports("klevu-product")}
                       showRatings={this.showRatings}
                       showRatingsCount={this.showRatingsCount}
-                      hidePrice={this.hidePrice}
-                      hideBrand={this.hideBrand}
-                      hideDescription={this.hideDescription}
-                      hideHoverImage={this.hideHoverImage}
-                      hideImage={this.hideImage}
-                      hideName={this.hideName}
-                      hideSwatches={this.hideSwatches}
-                      outOfStockCaption={this.outOfStockCaption}
-                      showAddToCart={this.showAddToCart}
-                      showProductCode={this.showProductCode}
-                      tAddToCart={this.tAddToCart}
-                      vatCaption={this.vatCaption}
                     ></klevu-product>
                   ))}
                 </slot>
@@ -684,18 +624,6 @@ export class KlevuQuicksearch {
                       exportparts={partsExports("klevu-product")}
                       showRatings={this.showRatings}
                       showRatingsCount={this.showRatingsCount}
-                      hidePrice={this.hidePrice}
-                      hideBrand={this.hideBrand}
-                      hideDescription={this.hideDescription}
-                      hideHoverImage={this.hideHoverImage}
-                      hideImage={this.hideImage}
-                      hideName={this.hideName}
-                      hideSwatches={this.hideSwatches}
-                      outOfStockCaption={this.outOfStockCaption}
-                      showAddToCart={this.showAddToCart}
-                      showProductCode={this.showProductCode}
-                      tAddToCart={this.tAddToCart}
-                      vatCaption={this.vatCaption}
                     ></klevu-product>
                   ))}
                 </slot>
@@ -795,18 +723,6 @@ export class KlevuQuicksearch {
                       showVariantsCount={this.showVariantsCount}
                       showRatings={this.showRatings}
                       showRatingsCount={this.showRatingsCount}
-                      hidePrice={this.hidePrice}
-                      hideBrand={this.hideBrand}
-                      hideDescription={this.hideDescription}
-                      hideHoverImage={this.hideHoverImage}
-                      hideImage={this.hideImage}
-                      hideName={this.hideName}
-                      hideSwatches={this.hideSwatches}
-                      outOfStockCaption={this.outOfStockCaption}
-                      showAddToCart={this.showAddToCart}
-                      showProductCode={this.showProductCode}
-                      tAddToCart={this.tAddToCart}
-                      vatCaption={this.vatCaption}
                     ></klevu-product>
                   ))}
                 </slot>
@@ -826,18 +742,6 @@ export class KlevuQuicksearch {
                         showVariantsCount={this.showVariantsCount}
                         showRatings={this.showRatings}
                         showRatingsCount={this.showRatingsCount}
-                        hidePrice={this.hidePrice}
-                        hideBrand={this.hideBrand}
-                        hideDescription={this.hideDescription}
-                        hideHoverImage={this.hideHoverImage}
-                        hideImage={this.hideImage}
-                        hideName={this.hideName}
-                        hideSwatches={this.hideSwatches}
-                        outOfStockCaption={this.outOfStockCaption}
-                        showAddToCart={this.showAddToCart}
-                        showProductCode={this.showProductCode}
-                        tAddToCart={this.tAddToCart}
-                        vatCaption={this.vatCaption}
                       ></klevu-product>
                     ))}
                   </slot>
