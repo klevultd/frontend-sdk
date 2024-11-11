@@ -51,18 +51,6 @@ export const Quicksearch: StoryObj<KlevuQuicksearch> = {
     term=${ifDefined(args.term)}
     .options=${args.options}
     use-loading-indicator=${ifDefined(args.useLoadingIndicator)}
-    hide-price=${ifDefined(args.hidePrice)}
-    hide-brand=${ifDefined(args.hideBrand)}
-    hide-description=${ifDefined(args.hideDescription)}
-    hide-hover-image=${ifDefined(args.hideHoverImage)}
-    hide-image=${ifDefined(args.hideImage)}
-    hide-name=${ifDefined(args.hideName)}
-    hide-swatches=${ifDefined(args.hideSwatches)}
-    out-of-stock-caption=${ifDefined(args.outOfStockCaption)}
-    show-add-to-cart=${ifDefined(args.showAddToCart)}
-    show-product-code=${ifDefined(args.showProductCode)}
-    t-add-to-cart=${ifDefined(args.tAddToCart)}
-    vat-caption=${ifDefined(args.vatCaption)}
   ></klevu-quicksearch>`,
 }
 

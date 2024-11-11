@@ -720,9 +720,6 @@ export class KlevuQuicksearch {
                       product={p}
                       variant="line"
                       exportparts={partsExports("klevu-product")}
-                      showVariantsCount={this.showVariantsCount}
-                      showRatings={this.showRatings}
-                      showRatingsCount={this.showRatingsCount}
                     ></klevu-product>
                   ))}
                 </slot>
@@ -739,9 +736,6 @@ export class KlevuQuicksearch {
                         product={p}
                         variant="line"
                         exportparts={partsExports("klevu-product")}
-                        showVariantsCount={this.showVariantsCount}
-                        showRatings={this.showRatings}
-                        showRatingsCount={this.showRatingsCount}
                       ></klevu-product>
                     ))}
                   </slot>
