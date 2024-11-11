@@ -675,6 +675,34 @@ export namespace Components {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hides brand from merchandising
+         */
+        "hideBrand"?: boolean;
+        /**
+          * Hides description from merchandising
+         */
+        "hideDescription"?: boolean;
+        /**
+          * Hides hover image from merchandising
+         */
+        "hideHoverImage"?: boolean;
+        /**
+          * Hides image from merchandising
+         */
+        "hideImage"?: boolean;
+        /**
+          * Hides name from merchandising
+         */
+        "hideName"?: boolean;
+        /**
+          * Hides price from merchandising
+         */
+        "hidePrice"?: boolean;
+        /**
+          * Do not show swatches in products in merchandising
+         */
+        "hideSwatches"?: boolean;
+        /**
           * Count of products for page
          */
         "limit": number;
@@ -682,6 +710,18 @@ export namespace Components {
           * Object to override and settings on search options
          */
         "options"?: KlevuMerchandisingOptions;
+        /**
+          * Caption to show if product is out of stock in products in merchandising
+         */
+        "outOfStockCaption"?: string;
+        /**
+          * Show add to cart button in products in merchandising
+         */
+        "showAddToCart"?: boolean;
+        /**
+          * To show the product code next to product name in merchandising
+         */
+        "showProductCode"?: boolean;
         /**
           * Show ratings
          */
@@ -691,6 +731,10 @@ export namespace Components {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show variants count in merchandising
+         */
+        "showVariantsCount": boolean;
+        /**
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
@@ -698,6 +742,10 @@ export namespace Components {
           * Pass custom options for the sort dropdown
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
+        /**
+          * Text for add to cart button in merchandising
+         */
+        "tAddToCart"?: string;
         /**
           * Text for load more button
          */
@@ -722,6 +770,10 @@ export namespace Components {
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not in merchandising.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Stylized modal dialog.
@@ -1336,6 +1388,26 @@ export namespace Components {
          */
         "fullResultCount": number;
         /**
+          * Hides brand from search results
+         */
+        "hideBrand"?: boolean;
+        /**
+          * Hides description from search results
+         */
+        "hideDescription"?: boolean;
+        /**
+          * Hides hover image from search results
+         */
+        "hideHoverImage"?: boolean;
+        /**
+          * Hides image from search results
+         */
+        "hideImage"?: boolean;
+        /**
+          * Hides name from search results
+         */
+        "hideName"?: boolean;
+        /**
           * Hide popular keywords on no results page
          */
         "hidePopularKeywordsOnNoResultsPage"?: boolean;
@@ -1344,6 +1416,10 @@ export namespace Components {
          */
         "hidePopularSearches"?: boolean;
         /**
+          * Hides price from search results
+         */
+        "hidePrice"?: boolean;
+        /**
           * Hide recent searches
          */
         "hideRecentSearches"?: boolean;
@@ -1351,6 +1427,10 @@ export namespace Components {
           * Hide recently viewed products
          */
         "hideRecentlyViewedProducts"?: boolean;
+        /**
+          * Do not show swatches in products in search results
+         */
+        "hideSwatches"?: boolean;
         /**
           * Hide trending products
          */
@@ -1363,6 +1443,10 @@ export namespace Components {
           * Object to override and settings on search options
          */
         "options"?: KlevuSearchOptions;
+        /**
+          * Caption to show if product is out of stock in products in search results
+         */
+        "outOfStockCaption"?: string;
         /**
           * Placeholder for input text
          */
@@ -1396,6 +1480,14 @@ export namespace Components {
          */
         "searchText"?: string;
         /**
+          * Show add to cart button in products in search results
+         */
+        "showAddToCart"?: boolean;
+        /**
+          * To show the product code next to product name in search results
+         */
+        "showProductCode"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -1411,6 +1503,10 @@ export namespace Components {
           * How many products to show in simple variant
          */
         "simpleResultCount": number;
+        /**
+          * Text for add to cart button in search results
+         */
+        "tAddToCart"?: string;
         /**
           * Title of categories section
          */
@@ -1459,6 +1555,10 @@ export namespace Components {
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not in search results.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Klevu ratings component
@@ -1615,13 +1715,37 @@ export namespace Components {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hides brand from search results
+         */
+        "hideBrand"?: boolean;
+        /**
+          * Hides description from search results
+         */
+        "hideDescription"?: boolean;
+        /**
           * Hide filters on results page
          */
         "hideFilters"?: boolean;
         /**
+          * Hides hover image from search results
+         */
+        "hideHoverImage"?: boolean;
+        /**
+          * Hides image from search results
+         */
+        "hideImage"?: boolean;
+        /**
+          * Hides name from search results
+         */
+        "hideName"?: boolean;
+        /**
           * Hides price from search results
          */
         "hidePrice"?: boolean;
+        /**
+          * Do not show swatches in products in search results
+         */
+        "hideSwatches"?: boolean;
         /**
           * How many results to display on a page
          */
@@ -1631,6 +1755,10 @@ export namespace Components {
          */
         "options"?: KlevuSearchOptions;
         /**
+          * Caption to show if product is out of stock in products in search results
+         */
+        "outOfStockCaption"?: string;
+        /**
           * How many products to show in popular products
          */
         "popularProductsResultCount": number;
@@ -1639,9 +1767,17 @@ export namespace Components {
          */
         "priceInterval": number;
         /**
+          * Show add to cart button in products in search results
+         */
+        "showAddToCart"?: boolean;
+        /**
           * Show price as options
          */
         "showPriceAsSlider"?: boolean;
+        /**
+          * To show the product code next to product name in search results
+         */
+        "showProductCode"?: boolean;
         /**
           * Show ratings
          */
@@ -1666,6 +1802,10 @@ export namespace Components {
           * Pass custom options for the sort dropdown
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
+        /**
+          * Text for add to cart button in search results
+         */
+        "tAddToCart"?: string;
         /**
           * Text of load more button
          */
@@ -1702,6 +1842,10 @@ export namespace Components {
           * Enable personalization
          */
         "usePersonalisation"?: boolean;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not in search results.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Horizontal slider component. By default used for price range in this package. But can
@@ -3313,6 +3457,34 @@ declare namespace LocalJSX {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hides brand from merchandising
+         */
+        "hideBrand"?: boolean;
+        /**
+          * Hides description from merchandising
+         */
+        "hideDescription"?: boolean;
+        /**
+          * Hides hover image from merchandising
+         */
+        "hideHoverImage"?: boolean;
+        /**
+          * Hides image from merchandising
+         */
+        "hideImage"?: boolean;
+        /**
+          * Hides name from merchandising
+         */
+        "hideName"?: boolean;
+        /**
+          * Hides price from merchandising
+         */
+        "hidePrice"?: boolean;
+        /**
+          * Do not show swatches in products in merchandising
+         */
+        "hideSwatches"?: boolean;
+        /**
           * Count of products for page
          */
         "limit"?: number;
@@ -3322,6 +3494,18 @@ declare namespace LocalJSX {
          */
         "options"?: KlevuMerchandisingOptions;
         /**
+          * Caption to show if product is out of stock in products in merchandising
+         */
+        "outOfStockCaption"?: string;
+        /**
+          * Show add to cart button in products in merchandising
+         */
+        "showAddToCart"?: boolean;
+        /**
+          * To show the product code next to product name in merchandising
+         */
+        "showProductCode"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -3330,6 +3514,10 @@ declare namespace LocalJSX {
          */
         "showRatingsCount"?: boolean;
         /**
+          * Show variants count in merchandising
+         */
+        "showVariantsCount"?: boolean;
+        /**
           * Order of results
          */
         "sort"?: KlevuSearchSorting;
@@ -3337,6 +3525,10 @@ declare namespace LocalJSX {
           * Pass custom options for the sort dropdown
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
+        /**
+          * Text for add to cart button in merchandising
+         */
+        "tAddToCart"?: string;
         /**
           * Text for load more button
          */
@@ -3361,6 +3553,10 @@ declare namespace LocalJSX {
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not in merchandising.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Stylized modal dialog.
@@ -3989,6 +4185,26 @@ declare namespace LocalJSX {
          */
         "fullResultCount"?: number;
         /**
+          * Hides brand from search results
+         */
+        "hideBrand"?: boolean;
+        /**
+          * Hides description from search results
+         */
+        "hideDescription"?: boolean;
+        /**
+          * Hides hover image from search results
+         */
+        "hideHoverImage"?: boolean;
+        /**
+          * Hides image from search results
+         */
+        "hideImage"?: boolean;
+        /**
+          * Hides name from search results
+         */
+        "hideName"?: boolean;
+        /**
           * Hide popular keywords on no results page
          */
         "hidePopularKeywordsOnNoResultsPage"?: boolean;
@@ -3997,6 +4213,10 @@ declare namespace LocalJSX {
          */
         "hidePopularSearches"?: boolean;
         /**
+          * Hides price from search results
+         */
+        "hidePrice"?: boolean;
+        /**
           * Hide recent searches
          */
         "hideRecentSearches"?: boolean;
@@ -4004,6 +4224,10 @@ declare namespace LocalJSX {
           * Hide recently viewed products
          */
         "hideRecentlyViewedProducts"?: boolean;
+        /**
+          * Do not show swatches in products in search results
+         */
+        "hideSwatches"?: boolean;
         /**
           * Hide trending products
          */
@@ -4028,6 +4252,10 @@ declare namespace LocalJSX {
           * Object to override and settings on search options
          */
         "options"?: KlevuSearchOptions;
+        /**
+          * Caption to show if product is out of stock in products in search results
+         */
+        "outOfStockCaption"?: string;
         /**
           * Placeholder for input text
          */
@@ -4061,6 +4289,14 @@ declare namespace LocalJSX {
          */
         "searchText"?: string;
         /**
+          * Show add to cart button in products in search results
+         */
+        "showAddToCart"?: boolean;
+        /**
+          * To show the product code next to product name in search results
+         */
+        "showProductCode"?: boolean;
+        /**
           * Show ratings
          */
         "showRatings"?: boolean;
@@ -4076,6 +4312,10 @@ declare namespace LocalJSX {
           * How many products to show in simple variant
          */
         "simpleResultCount"?: number;
+        /**
+          * Text for add to cart button in search results
+         */
+        "tAddToCart"?: string;
         /**
           * Title of categories section
          */
@@ -4124,6 +4364,10 @@ declare namespace LocalJSX {
           * Enable personalisation
          */
         "usePersonalisation"?: boolean;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not in search results.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Klevu ratings component
@@ -4279,13 +4523,37 @@ declare namespace LocalJSX {
          */
         "filterCustomOrder"?: { [key: string]: string[] };
         /**
+          * Hides brand from search results
+         */
+        "hideBrand"?: boolean;
+        /**
+          * Hides description from search results
+         */
+        "hideDescription"?: boolean;
+        /**
           * Hide filters on results page
          */
         "hideFilters"?: boolean;
         /**
+          * Hides hover image from search results
+         */
+        "hideHoverImage"?: boolean;
+        /**
+          * Hides image from search results
+         */
+        "hideImage"?: boolean;
+        /**
+          * Hides name from search results
+         */
+        "hideName"?: boolean;
+        /**
           * Hides price from search results
          */
         "hidePrice"?: boolean;
+        /**
+          * Do not show swatches in products in search results
+         */
+        "hideSwatches"?: boolean;
         /**
           * How many results to display on a page
          */
@@ -4296,6 +4564,10 @@ declare namespace LocalJSX {
          */
         "options"?: KlevuSearchOptions;
         /**
+          * Caption to show if product is out of stock in products in search results
+         */
+        "outOfStockCaption"?: string;
+        /**
           * How many products to show in popular products
          */
         "popularProductsResultCount"?: number;
@@ -4304,9 +4576,17 @@ declare namespace LocalJSX {
          */
         "priceInterval"?: number;
         /**
+          * Show add to cart button in products in search results
+         */
+        "showAddToCart"?: boolean;
+        /**
           * Show price as options
          */
         "showPriceAsSlider"?: boolean;
+        /**
+          * To show the product code next to product name in search results
+         */
+        "showProductCode"?: boolean;
         /**
           * Show ratings
          */
@@ -4331,6 +4611,10 @@ declare namespace LocalJSX {
           * Pass custom options for the sort dropdown
          */
         "sortOptions"?: Array<{ value: KlevuSearchSorting; text: string }>;
+        /**
+          * Text for add to cart button in search results
+         */
+        "tAddToCart"?: string;
         /**
           * Text of load more button
          */
@@ -4367,6 +4651,10 @@ declare namespace LocalJSX {
           * Enable personalization
          */
         "usePersonalisation"?: boolean;
+        /**
+          * Text to be added after the price. Usually used to indicate that does the price include VAT or not in search results.
+         */
+        "vatCaption"?: string;
     }
     /**
      * Horizontal slider component. By default used for price range in this package. But can

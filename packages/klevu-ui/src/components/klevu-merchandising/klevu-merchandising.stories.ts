@@ -36,6 +36,19 @@ export const Merchandising: StoryObj<KlevuMerchandising> = {
     use-personalisation=${ifDefined(args.usePersonalisation)}
     auto-update-url=${ifDefined(args.autoUpdateUrl)}
     use-loading-indicator=${ifDefined(args.useLoadingIndicator)}
+    hide-price=${ifDefined(args.hidePrice)}
+    hide-brand=${ifDefined(args.hideBrand)}
+    hide-description=${ifDefined(args.hideDescription)}
+    hide-hover-image=${ifDefined(args.hideHoverImage)}
+    hide-image=${ifDefined(args.hideImage)}
+    hide-name=${ifDefined(args.hideName)}
+    hide-swatches=${ifDefined(args.hideSwatches)}
+    show-variants-count=${ifDefined(args.showVariantsCount)}
+    out-of-stock-caption=${ifDefined(args.outOfStockCaption)}
+    show-add-to-cart=${ifDefined(args.showAddToCart)}
+    show-product-code=${ifDefined(args.showProductCode)}
+    t-add-to-cart=${ifDefined(args.tAddToCart)}
+    vat-caption=${ifDefined(args.vatCaption)}
   ></klevu-merchandising>`,
 }
 
