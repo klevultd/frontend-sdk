@@ -138,6 +138,58 @@ export class KlevuMerchandising {
    * Used to enable loading indicator
    */
   @Prop() useLoadingIndicator = false
+  /**
+   * Hides price from merchandising
+   */
+  @Prop() hidePrice?: boolean
+  /**
+   * Show variants count in merchandising
+   */
+  @Prop() showVariantsCount = false
+  /**
+   * Hides brand from merchandising
+   */
+  @Prop() hideBrand?: boolean
+  /**
+   * Hides description from merchandising
+   */
+  @Prop() hideDescription?: boolean
+  /**
+   * Hides hover image from merchandising
+   */
+  @Prop() hideHoverImage?: boolean
+  /**
+   * Hides image from merchandising
+   */
+  @Prop() hideImage?: boolean
+  /**
+   * Hides name from merchandising
+   */
+  @Prop() hideName?: boolean
+  /**
+   * Do not show swatches in products in merchandising
+   */
+  @Prop() hideSwatches?: boolean
+  /**
+   * Caption to show if product is out of stock in products in merchandising
+   */
+  @Prop() outOfStockCaption?: string
+  /**
+   * Show add to cart button in products in merchandising
+   */
+  @Prop() showAddToCart?: boolean
+  /**
+   * To show the product code next to product name in merchandising
+   */
+  @Prop() showProductCode?: boolean
+  /**
+   * Text for add to cart button in merchandising
+   */
+  @Prop() tAddToCart?: string
+  /**
+   * Text to be added after the price. Usually used to indicate that does the price include VAT or not in merchandising.
+   */
+  @Prop() vatCaption?: string
 
   @State() currentViewPortSize?: ViewportSize
 
@@ -422,6 +474,19 @@ export class KlevuMerchandising {
                     exportparts={partsExports("klevu-product")}
                     showRatings={this.showRatings}
                     showRatingsCount={this.showRatingsCount}
+                    hidePrice={this.hidePrice}
+                    showVariantsCount={this.showVariantsCount}
+                    hideBrand={this.hideBrand}
+                    hideDescription={this.hideDescription}
+                    hideHoverImage={this.hideHoverImage}
+                    hideImage={this.hideImage}
+                    hideName={this.hideName}
+                    hideSwatches={this.hideSwatches}
+                    outOfStockCaption={this.outOfStockCaption}
+                    showAddToCart={this.showAddToCart}
+                    showProductCode={this.showProductCode}
+                    tAddToCart={this.tAddToCart}
+                    vatCaption={this.vatCaption}
                   ></klevu-product>
                 ))}
               </klevu-product-grid>
