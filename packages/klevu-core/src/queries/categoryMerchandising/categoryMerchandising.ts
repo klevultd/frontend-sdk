@@ -4,6 +4,7 @@ import { KlevuBaseQuery } from "../../models/KlevuBaseQuery.js"
 import { KlevuBaseQuerySettingsQuery } from "../../models/KlevuBaseQuerySettingsQuery.js"
 import {
   KlevuBaseQuerySettings,
+  KlevuTypeOfRecord,
   KlevuTypeOfRequest,
 } from "../../models/index.js"
 
@@ -15,6 +16,7 @@ export type KlevuMerchandisingOptions = {
 const defaults: KlevuMerchandisingOptions = {
   id: "categoryMerchandising",
   searchTerm: "*",
+  typeOfRecords: [KlevuTypeOfRecord.Product],
   limit: 24,
 }
 
