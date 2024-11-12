@@ -232,6 +232,19 @@ export const KlevuMerchandising = /*@__PURE__*/ defineContainer<JSX.KlevuMerchan
   'autoUpdateUrl',
   'useABTest',
   'useLoadingIndicator',
+  'hidePrice',
+  'showVariantsCount',
+  'hideBrand',
+  'hideDescription',
+  'hideHoverImage',
+  'hideImage',
+  'hideName',
+  'hideSwatches',
+  'outOfStockCaption',
+  'showAddToCart',
+  'showProductCode',
+  'tAddToCart',
+  'vatCaption',
   'klevuData'
 ]);
 
@@ -515,6 +528,17 @@ export const KlevuSearchLandingPage = /*@__PURE__*/ defineContainer<JSX.KlevuSea
   'options',
   'sortOptions',
   'useLoadingIndicator',
+  'hideBrand',
+  'hideDescription',
+  'hideHoverImage',
+  'hideImage',
+  'hideName',
+  'hideSwatches',
+  'outOfStockCaption',
+  'showAddToCart',
+  'showProductCode',
+  'tAddToCart',
+  'vatCaption',
   'klevuData'
 ]);
 
