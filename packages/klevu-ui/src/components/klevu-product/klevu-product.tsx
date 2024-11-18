@@ -196,6 +196,7 @@ export class KlevuProduct {
     })
 
     const kmcSettings = getKMCSettings()
+    console.log("product", { kmcSettings })
     if (kmcSettings) {
       if (this.tAddToCart === undefined) {
         this.tAddToCart = kmcSettings.klevu_uc_userOptions.addToCartButton ?? getTranslation("product.tAddToCart")

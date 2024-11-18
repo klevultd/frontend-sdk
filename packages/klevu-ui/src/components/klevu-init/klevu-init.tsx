@@ -136,6 +136,8 @@ export class KlevuInit {
   })
   klevuInitSettingsUpdated!: EventEmitter<KlevuUIGlobalSettings>
 
+  #settingsDefined: boolean = false
+
   @Watch("settings")
   async settingsChanged(newValue: KlevuUIGlobalSettings, oldValue: KlevuUIGlobalSettings) {
     await this.#defineSettings(newValue)
@@ -164,24 +166,32 @@ export class KlevuInit {
     } else if (this.language && this.language != "en") {
       window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
     }
-
-    this.#defineSettings(this.settings)
+    console.log("before define settings")
+    await this.#defineSettings(this.settings)
+    console.log("after define settings")
   }
 
   async #defineSettings(settings: KlevuUIGlobalSettings) {
     this.settings = settings
+
     if (this.kmcLoadDefaults) {
-      const data = await KlevuKMCSettings(false, undefined, this.settingsUrl)
-      window["klevu_ui_kmc_settings"] = data.root
-      if (data.root?.klevu_uc_userOptions.priceFormatter) {
-        this.settings.renderPrice = (...params) =>
-          this.#renderPriceKMCSettings(...params, data.root!.klevu_uc_userOptions.priceFormatter)
+      try {
+        const data = await KlevuKMCSettings(false, undefined, this.settingsUrl)
+        console.log("settings", { data })
+        window["klevu_ui_kmc_settings"] = data.root
+        if (data.root?.klevu_uc_userOptions.priceFormatter) {
+          this.settings.renderPrice = (...params) =>
+            this.#renderPriceKMCSettings(...params, data.root!.klevu_uc_userOptions.priceFormatter)
+        }
+        if (this.enableKlaviyoConnector === undefined) {
+          this.enableKlaviyoConnector = data.root?.klevu_connectors?.klaviyo?.segmentEnabled || false
+        }
+        KlevuConfig.getDefault().setEnableKlaviyoConnector(this.enableKlaviyoConnector)
+      } catch (err) {
+        console.error("Failed to load settings")
       }
-      if (this.enableKlaviyoConnector === undefined) {
-        this.enableKlaviyoConnector = data.root?.klevu_connectors?.klaviyo?.segmentEnabled || false
-      }
-      KlevuConfig.getDefault().setEnableKlaviyoConnector(this.enableKlaviyoConnector)
     }
+    this.#settingsDefined = true
   }
 
   #setKMCPriceCalculationSetting(
@@ -245,6 +255,16 @@ export class KlevuInit {
     return this.settings
   }
 
+  /**
+   * Get settings defined in klevu-init
+   *
+   * @returns
+   */
+  @Method()
+  async isSettingsDefined(): Promise<boolean> {
+    return this.#settingsDefined
+  }
+
   @Method()
   async getAssetsPath(): Promise<string> {
     return this.assetsPath ?? ""
@@ -274,8 +294,23 @@ export class KlevuInit {
    *
    * @returns Promise when klevu-init is loaded
    */
-  static ready() {
-    return document.querySelector("klevu-init")?.componentOnReady()
+  static async ready() {
+    const klevuInit = await document.querySelector("klevu-init")?.componentOnReady()
+    const klevuInitObj = await klevuInit?.getConfig()
+    console.log("klevuInit=", {
+      klevuInitObj,
+      klevuInit,
+      method: klevuInit?.isSettingsDefined,
+    })
+    return new Promise(async (resolve, reject) => {
+      async function checkIsSettingsDefined() {
+        const settingsDefined = await klevuInit?.isSettingsDefined()
+        console.log("checking if settings is defined", settingsDefined)
+        if (settingsDefined) return resolve(true)
+        setTimeout(checkIsSettingsDefined, 200)
+      }
+      return checkIsSettingsDefined()
+    })
   }
 
   render() {
