@@ -136,6 +136,7 @@ div[part="product-query-popup-footer"] .sendmessage klevu-textfield {
 }
 
 .fineprintContainer {
+  padding-bottom: var(--klevu-spacing-02);
   border-bottom: 1px solid var(--klevu-color-neutral-4);
   margin-bottom: var(--klevu-spacing-04);
 }
