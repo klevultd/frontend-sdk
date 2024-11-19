@@ -284,6 +284,7 @@ export class KlevuEvents {
     searchTerm,
     variantId,
     activeFilters,
+    tags,
     override = {},
   }: {
     product: Pick<KlevuRecord, "id"> &
@@ -292,6 +293,7 @@ export class KlevuEvents {
     variantId?: string
     activeFilters?: string
     override?: Partial<V1ProductTrackingEvent>
+    tags?: string[]
   }) {
     if (!product.id) {
       throw new Error("Cannot send event without product id")
@@ -308,6 +310,7 @@ export class KlevuEvents {
       klevu_productUrl: product.url ?? "",
       klevu_productVariantId: variantId || product.id,
       klevu_activeFilters: activeFilters,
+      tags: tags || [],
       klevu_shopperIP_v4: userData.ipv4,
       klevu_shopperIP_v6: userData.ipv6,
       data_protection:
@@ -335,6 +338,7 @@ export class KlevuEvents {
     totalResults,
     typeOfSearch,
     activeFilters,
+    tags,
     override = {},
   }: {
     term: string
@@ -342,6 +346,7 @@ export class KlevuEvents {
     typeOfSearch: KlevuTypeOfSearch
     activeFilters?: string
     override?: Partial<V1SearchEvent>
+    tags?: string[]
   }) {
     KlevuLastSearches.save(term)
     const userData = KlevuIpResolver.getDefault().getUserData()
@@ -354,6 +359,7 @@ export class KlevuEvents {
       klevu_activeFilters: activeFilters,
       klevu_shopperIP_v4: userData.ipv4,
       klevu_shopperIP_v6: userData.ipv6,
+      tags: tags || [],
       data_protection:
         KlevuConfig.getDefault().useConsent &&
         KlevuConfig.getDefault().consentGiven,
