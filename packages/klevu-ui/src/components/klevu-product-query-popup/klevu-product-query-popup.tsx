@@ -555,9 +555,7 @@ export class KlevuProductQueryPopup {
                   {this.poweredByMessage}
                 </a>
               )}
-              <klevu-typography variant="body-xs" class="disclaimer">
-                {this.#disclaimer}
-              </klevu-typography>
+              <span class="disclaimer">{this.#disclaimer}</span>
             </div>
           </div>
         </klevu-chat-layout>
