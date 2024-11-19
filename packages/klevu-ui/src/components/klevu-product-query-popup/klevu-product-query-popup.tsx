@@ -439,13 +439,14 @@ export class KlevuProductQueryPopup {
                 />
               )}
             </div>
-            <div class="fineprintContainer">
-              {this.tFinePrint && (
-                <klevu-typography variant="body-xs" class="fineprint">
-                  {this.tFinePrint}
-                  <slot name="after-fineprint"></slot>
-                </klevu-typography>
-              )}
+            <div
+              class="fineprintContainer"
+              style={{ paddingBottom: this.tFinePrint ? "var(--klevu-spacing-02)" : "0" }}
+            >
+              <klevu-typography variant="body-xs" class="fineprint">
+                {this.tFinePrint}
+                <slot name="after-fineprint"></slot>
+              </klevu-typography>
             </div>
           </div>
           <div class="chat-messages">
