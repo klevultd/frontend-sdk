@@ -1,7 +1,7 @@
 {
   "name": "@klevu/ui-vue",
   "sideEffects": false,
-  "version": "2.5.3",
+  "version": "2.5.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.esm.js",
@@ -27,7 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@klevu/ui": "2.5.3"
+    "@klevu/ui": "2.5.4"
   },
   "devDependencies": {
     "@babel/types": "^7.19.4",
