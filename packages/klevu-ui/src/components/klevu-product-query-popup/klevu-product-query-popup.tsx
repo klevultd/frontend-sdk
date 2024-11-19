@@ -27,7 +27,6 @@ import { WidgetLayout } from "../klevu-product-query/klevu-product-query"
  * @csspart product-query-popup-footer Footer of the popup where input is
  * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
  *
- * @slot fineprint - Fine print of the popup
  */
 @Component({
   tag: "klevu-product-query-popup",
@@ -39,7 +38,7 @@ export class KlevuProductQueryPopup {
   #popup?: HTMLKlevuPopupElement
   #layoutElement?: HTMLKlevuChatLayoutElement
   #contentDiv?: HTMLDivElement
-  poweredByMessage = "Powered by ASKLO"
+  poweredByMessage = "Powered by ASKLO."
 
   /**
    * Url of the page where the product is
@@ -79,7 +78,7 @@ export class KlevuProductQueryPopup {
   /**
    * Fine print of the popup under the title
    */
-  @Prop() tFinePrint = getTranslation("productQueryPopup.tFinePrint")
+  @Prop() tFinePrint = ""
 
   /**
    * When loading takes a bit longer, show this text
@@ -106,6 +105,7 @@ export class KlevuProductQueryPopup {
    */
   @Prop() tDataProtectionNotice = getTranslation("productQueryPopup.tDataProtectionNotice")
 
+  #disclaimer = getTranslation("productQueryPopup.disclaimer")
   /**
    * Text of the button for asking a question
    */
@@ -439,11 +439,14 @@ export class KlevuProductQueryPopup {
                 />
               )}
             </div>
-
-            <klevu-typography variant="body-xs" class="fineprint">
-              {this.tFinePrint}
+            <div class="fineprintContainer">
+              {this.tFinePrint && (
+                <klevu-typography variant="body-xs" class="fineprint">
+                  {this.tFinePrint}
+                </klevu-typography>
+              )}
               <slot name="after-fineprint"></slot>
-            </klevu-typography>
+            </div>
           </div>
           <div class="chat-messages">
             <klevu-chat-messages
@@ -546,11 +549,16 @@ export class KlevuProductQueryPopup {
                 )}
               </div>
             )}
-            {!this.removeAskloBranding && (
-              <a target="_blank" href="https://asklo.ai/" class="powered-by-message">
-                {this.poweredByMessage}
-              </a>
-            )}
+            <div style={{ textAlign: "center" }}>
+              {!this.removeAskloBranding && (
+                <a target="_blank" href="https://asklo.ai/" class="powered-by-message">
+                  {this.poweredByMessage}
+                </a>
+              )}
+              <klevu-typography variant="body-xs" class="disclaimer">
+                {this.#disclaimer}
+              </klevu-typography>
+            </div>
           </div>
         </klevu-chat-layout>
       </Fragment>
