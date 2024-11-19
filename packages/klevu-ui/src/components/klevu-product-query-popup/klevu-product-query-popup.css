@@ -146,9 +146,9 @@ klevu-typography.fineprint {
   --klevu-body-xs-size: 10px;
 }
 
-klevu-typography.disclaimer {
+.disclaimer {
   display: inline;
-  --klevu-body-xs-size: 8px;
+  font-size: 8px;
   color: #666;
   margin-left: 1px;
 }
