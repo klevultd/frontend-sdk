@@ -1,6 +1,6 @@
 {
   "name": "@klevu/ui",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "Klevu UI web components. Klevu provides advanced AI-powered search and discovery solutions for online retailers.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
