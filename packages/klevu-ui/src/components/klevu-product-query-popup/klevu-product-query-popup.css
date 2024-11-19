@@ -135,12 +135,22 @@ div[part="product-query-popup-footer"] .sendmessage klevu-textfield {
   color: var(--klevu-color-accent-3);
 }
 
+.fineprintContainer {
+  padding-bottom: var(--klevu-spacing-02);
+  border-bottom: 1px solid var(--klevu-color-neutral-4);
+  margin-bottom: var(--klevu-spacing-04);
+}
+
 klevu-typography.fineprint {
   display: block;
   --klevu-body-xs-size: 10px;
-  padding-bottom: var(--klevu-spacing-04);
-  margin-bottom: var(--klevu-spacing-04);
-  border-bottom: 1px solid var(--klevu-color-neutral-4);
+}
+
+klevu-typography.disclaimer {
+  display: inline;
+  --klevu-body-xs-size: 8px;
+  color: #666;
+  margin-left: 1px;
 }
 
 .loading-sorry {
@@ -214,9 +224,8 @@ klevu-popup {
 .powered-by-message:active,
 .powered-by-message:hover {
   font-size: 8px;
-  text-align: center;
   margin-top: 8px;
-  display: block;
+  display: inline;
   text-decoration: none;
   color: #666;
 }

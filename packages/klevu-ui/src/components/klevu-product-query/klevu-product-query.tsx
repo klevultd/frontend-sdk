@@ -62,7 +62,7 @@ export class KlevuProductQuery {
   /**
    * Title of the popup
    */
-  @Prop() popupTitle = this.pqaWidgetLayout === 'popup' ? "Ask a Question" : "Live FAQs"
+  @Prop() popupTitle = this.pqaWidgetLayout === "popup" ? "Ask a Question" : "Live FAQs"
 
   /**
    * Text of the button to open the popup
@@ -72,7 +72,7 @@ export class KlevuProductQuery {
   /**
    * Fine print of the popup under the title
    */
-  @Prop() finePrint = "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page."
+  @Prop() finePrint = ""
 
   /**
    * Text of the button for asking a question
@@ -139,8 +139,8 @@ export class KlevuProductQuery {
   @Prop() locale?: string
 
   /**
- * Set to true if you want to hide the embedded title
- */
+   * Set to true if you want to hide the embedded title
+   */
   @Prop() hideEmbeddedTitle?: boolean = false
 
   async connectedCallback() {

@@ -27,6 +27,7 @@
     "tPopuptitle": "Kysy kysymys",
     "tButtonText": "Kysy Product AI",
     "tFinePrint": "Olen tekoälymalli. Saatan joskus tehdä virheitä. Varmista vastaukset tuotesivulta.",
+    "disclaimer": "Tämä on AI-malli. Se voi tehdä virheitä.",
     "tLoadingSorry": "Saatan käyttää muutaman ylimääräisen sekunnin ensimmäisen kysymyksen kanssa, jos minun tarvitsee hakea koko verkkosivu.",
     "tRateExperienceTitle": "Arvioi kokemuksesi",
     "tRateExperienceText": "Miten koit tämän kysymys-vastaus-työkalun käytön?",
