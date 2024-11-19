@@ -27,6 +27,7 @@
     "tPopuptitle": "Ask a Question",
     "tButtonText": "Ask Product AI",
     "tFinePrint": "I'm an AI model. Sometimes, I may make mistakes. Please verify answers on the product page.",
+    "disclaimer": "This is an AI model. It can make mistakes.",
     "tLoadingSorry": "I take a few extra seconds when answering the first question sometimes if I need to scan whole page.",
     "tRateExperienceTitle": "Rate your experience",
     "tRateExperienceText": "How was your experience using this Q&A tool?",
