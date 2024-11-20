@@ -11,8 +11,8 @@ const containerCss = css`
   flex-direction: column;
   justify-content: space-between;
   width: 180px;
-  min-height: 300px;
-  height: 300px;
+  min-height: 370px;
+  height: 370px;
   text-align: center;
   vertical-align: top;
   cursor: pointer;
