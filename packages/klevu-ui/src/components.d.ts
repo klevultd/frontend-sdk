@@ -1838,6 +1838,10 @@ export namespace Components {
      */
     interface KlevuSlides {
         /**
+          * center position next and previous buttons
+         */
+        "centerNextPrev"?: boolean;
+        /**
           * Heading for the slides component
          */
         "heading"?: string;
@@ -2101,6 +2105,10 @@ export interface KlevuPopupCustomEvent<T> extends CustomEvent<T> {
 export interface KlevuProductCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKlevuProductElement;
+}
+export interface KlevuProductQueryPopupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKlevuProductQueryPopupElement;
 }
 export interface KlevuQueryCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3929,6 +3937,7 @@ declare namespace LocalJSX {
           * Locale to be used in analytics eg: en_US
          */
         "locale"?: string;
+        "onKlevuMoiProductClick"?: (event: KlevuProductQueryPopupCustomEvent<MoiProduct>) => void;
         /**
           * Element to anchor the product query popup to
          */
@@ -4602,6 +4611,10 @@ declare namespace LocalJSX {
      * @csspart slides-next-button The next button
      */
     interface KlevuSlides {
+        /**
+          * center position next and previous buttons
+         */
+        "centerNextPrev"?: boolean;
         /**
           * Heading for the slides component
          */

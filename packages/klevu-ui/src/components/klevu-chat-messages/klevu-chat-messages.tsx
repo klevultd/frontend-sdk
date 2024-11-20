@@ -214,15 +214,20 @@ export class KlevuChatMessages {
             return (
               <div>
                 <klevu-slides
+                  center-next-prev={true}
                   exportparts={partsExports("klevu-slides")}
                   style={{
-                    "--klevu-slides-item-width": "200px;",
+                    "--klevu-slides-item-width": "188px",
+                    "--klevu-product-grid-spacing":"var(--klevu-spacing-04)",
                   }}
                 >
                   {message.productData.products.map((product) => (
                     <klevu-product
                       product={product}
                       hideSwatches
+                      hideDescription
+                      showAddToCart={false}
+                      showRatings={false}
                       onKlevuProductClick={(event) => {
                         event.preventDefault()
                         event.stopPropagation()
@@ -231,6 +236,11 @@ export class KlevuChatMessages {
                         })
                         return false
                       }}
+                    style={{
+                      "--klevu-product-width": "188px",
+                      "box-shadow":"inset 0px 0px 4px 1px #00000026",
+                      "text-align":"center"
+                    }}
                       exportparts={partsExports("klevu-product")}
                     >
                       <div slot="bottom" class="productactions">

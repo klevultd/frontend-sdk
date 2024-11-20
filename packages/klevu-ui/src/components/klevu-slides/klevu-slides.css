@@ -26,3 +26,25 @@ header {
 header div klevu-button {
   margin-left: var(--klevu-spacing-04);
 }
+
+.gridButtons {
+  display:flex;
+  flex-direction: row !important;
+  gap: var(--klevu-spacing-05);
+  align-items: center;
+  width: 100%;
+}
+.gridButtons klevu-util-scrollbars{
+  width: 100%;
+  overflow: hidden;
+}
+
+.gridButtons .left,.gridButtons .right {
+  width: 60px;
+}
+
+.gridButtons {
+  --klevu-button-background-color: var(--klevu-product-query-submit-button-background-color, #FFFFFF);
+  --klevu-button-background-hover: var(--klevu-product-query-submit-button-background-hover, #FFFFFF);
+  --klevu-button-icon-color: var(--klevu-product-query-icon-color, #5F636866);
+}

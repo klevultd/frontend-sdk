@@ -32,6 +32,12 @@ export class KlevuSlides {
   @Prop()
   hideNextPrev?: boolean
 
+  /**
+   * center position next and previous buttons
+   */
+  @Prop()
+  centerNextPrev?: boolean
+
   #gap = 0
   #slotElement?: HTMLSlotElement
   #scrollElement?: HTMLKlevuUtilScrollbarsElement
@@ -92,7 +98,42 @@ export class KlevuSlides {
   render() {
     return (
       <Host>
-        <div part="slides-base">
+        {this.centerNextPrev ? (
+          <div part="slides-base">
+            {this.heading === undefined || !this.hideNextPrev ? (<header>
+                <klevu-typography variant="h2" part="slides-heading">
+                  {this.heading}
+                </klevu-typography>
+
+              </header>) : null}
+            <div class={"gridButtons"}>
+              {this.hideNextPrev ? null : (<div class={"left"}>
+                <klevu-button
+                  exportparts={partsExports("klevu-button")}
+                  part="slides-previous-button"
+                  class="prev"
+                  icon="chevron_left"
+                  onClick={this.#prev.bind(this)}
+                ></klevu-button>
+              </div>)}
+              <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+                <div class={{slides: true}}>
+                  <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
+                </div>
+              </klevu-util-scrollbars>
+              {this.hideNextPrev ? null : (<div class={"right"}>
+                <klevu-button
+                  exportparts={partsExports("klevu-button")}
+                  part="slides-next-button"
+                  class="next"
+                  icon="chevron_right"
+                  onClick={this.#next.bind(this)}
+                ></klevu-button>
+              </div>)}
+            </div>
+          </div>
+          ):(
+         <div part="slides-base">
           {this.heading === undefined || !this.hideNextPrev ? (
             <header>
               <klevu-typography variant="h2" part="slides-heading">
@@ -124,6 +165,7 @@ export class KlevuSlides {
             </div>
           </klevu-util-scrollbars>
         </div>
+          )}
       </Host>
     )
   }

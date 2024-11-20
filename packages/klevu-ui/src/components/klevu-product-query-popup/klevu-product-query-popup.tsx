@@ -1,4 +1,4 @@
-import { Component, Fragment, Host, State, h, Element, Prop, Listen } from "@stencil/core"
+import { Component, Fragment, Host, State, h, Element, Prop, Listen, Event, EventEmitter } from "@stencil/core"
 
 import { KlevuInit } from "../klevu-init/klevu-init"
 import {
@@ -10,7 +10,7 @@ import {
   KlevuConfig,
   MoiRequest,
   MoiQuestion,
-  ProductInfo,
+  ProductInfo, MoiProduct,
 } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"
@@ -375,11 +375,40 @@ export class KlevuProductQueryPopup {
     this.messages = this.session?.messages || []
   }
 
+  @Event({ composed: true, cancelable: true })
+  klevuMoiProductClick!: EventEmitter<MoiProduct>
+
+  /** By default redirect the page if product click is not cancelled */
+  @Listen("klevuMoiProductClick")
+  onKlevuMoiProductClick(event: CustomEvent<MoiProduct>) {
+    setTimeout(() => {
+      if (!event.defaultPrevented) {
+        window.open(event.detail.url, '_blank')
+      }
+    }, 1)
+  }
+
   #onTypeWriterEffectEnds(hideQuestions: boolean) {
     this.hideQuestions = hideQuestions
     if (!hideQuestions) {
       this.#layoutElement?.scrollMainToBottom()
     }
+  }
+
+  async #productClick(product: MoiProduct) {
+    if (!this.session || !product.id || !product.url) {
+      return
+    }
+    await this.session.query({
+      product: {
+        id: product.id,
+        context: {
+          url: product.url,
+        },
+        intent: "redirect",
+      },
+    })
+    this.klevuMoiProductClick.emit(product)
   }
 
   render() {
@@ -455,6 +484,12 @@ export class KlevuProductQueryPopup {
               showFeedbackFor={this.showMessageFeedbackFor}
               handleTypeWriterEffectEnds={this.#onTypeWriterEffectEnds.bind(this)}
               scrollBottom={() => this.#layoutElement?.scrollMainToBottom("instant")}
+              onKlevuChatProductClick={(event) => {
+                event.preventDefault()
+                event.stopPropagation()
+                this.#productClick(event.detail.product)
+                return false
+              }}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
