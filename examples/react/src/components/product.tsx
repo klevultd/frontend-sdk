@@ -142,10 +142,12 @@ const ProductCard = (props: {
         ></Typography>
       </Tooltip>
       <Typography variant="h6" className="price">
-        {new Intl.NumberFormat(undefined, {
-          style: "currency",
-          currency: p.currency,
-        }).format(parseFloat(p.salePrice))}
+        {p.currency
+          ? new Intl.NumberFormat(undefined, {
+              style: "currency",
+              currency: p.currency,
+            }).format(parseFloat(p.salePrice))
+          : p.currency}
       </Typography>
 
       {props.debugMode && (
