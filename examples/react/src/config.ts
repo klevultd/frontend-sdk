@@ -89,3 +89,5 @@ export const resetConfig = () => {
     window.localStorage.removeItem("demo-config")
   }
 }
+
+saveConfig(config)

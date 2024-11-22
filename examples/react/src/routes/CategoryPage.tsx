@@ -1,10 +1,13 @@
 import { FormControlLabel, Switch, Typography } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Category } from "../components/category"
 
 export function CategoryPage() {
-  const [showPersonalisation, setShowPersonalisation] = useState(false)
+  const [showPersonalisation, setShowPersonalisation] = useState(
+    !!localStorage.getItem("klevu-react-app-show-personalisation") || false
+  )
+  const reloadCalledRef = useRef(false)
   const handlePersonalisationToggle = (val: boolean) => {
     if (val) {
       const lastClicks = localStorage.getItem("klevu-last-clicks")
@@ -36,9 +39,20 @@ export function CategoryPage() {
           JSON.stringify(parsedCatClicks)
         )
       }
+      localStorage.setItem("klevu-react-app-show-personalisation", "true")
+      reloadCalledRef.current = true
+      window.location.reload()
+    } else {
+      localStorage.removeItem("klevu-react-app-show-personalisation")
+      setShowPersonalisation(false)
     }
-    setShowPersonalisation(val)
   }
+  useEffect(() => {
+    return () => {
+      if (!reloadCalledRef.current)
+        localStorage.removeItem("klevu-react-app-show-personalisation")
+    }
+  }, [])
   return (
     <div>
       <FormControlLabel
@@ -49,7 +63,7 @@ export function CategoryPage() {
             onChange={(e) => handlePersonalisationToggle(e.target.checked)}
           />
         }
-        label="Show Personalised Section"
+        label="Show Personalised Section (will reload page)"
       />
       <div
         style={{
