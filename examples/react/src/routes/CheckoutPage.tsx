@@ -111,7 +111,11 @@ export function CheckoutPage() {
               product={p}
               hideAddToCart
               onClick={(event) => {
-                navigate(`/products/${p.itemGroupId}/${p.id}`)
+                navigate(
+                  p.itemGroupId
+                    ? `/products/${p.itemGroupId}/${p.id}`
+                    : `/products/${p.id}`
+                )
                 event.preventDefault()
                 return false
               }}

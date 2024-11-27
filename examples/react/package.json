@@ -4,7 +4,7 @@
   "description": "",
   "main": "./libdist/exports.js",
   "scripts": {
-    "start": "vite --port 3001 --host --force",
+    "start": "npm cache clean --force && vite --port 3001 --host --force",
     "build": "vite build",
     "build:lib": "tsc -p ./tsconfig.lib.json",
     "serve": "vite preview --port 3001 --host",
