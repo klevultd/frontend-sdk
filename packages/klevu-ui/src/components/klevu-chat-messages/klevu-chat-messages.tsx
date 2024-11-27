@@ -220,7 +220,7 @@ export class KlevuChatMessages {
             return (
               <div>
                 <klevu-slides
-                  center-next-prev={this.centerNextPrev}
+                  centerNextPrev={this.centerNextPrev}
                   exportparts={partsExports("klevu-slides")}
                   style={{
                     "--klevu-slides-item-width": "188px",
