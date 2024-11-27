@@ -130,8 +130,8 @@ export class KlevuSlides {
                 </klevu-typography>
 
               </header>) : null}
-            <div class={"gridButtons"}>
-              {this.hideNextPrev ? null : (<div class={"left"}>
+            <div class="gridButtons">
+              {this.hideNextPrev ? null : (<div class="left">
                 <klevu-button
                   exportparts={partsExports("klevu-button")}
                   part="slides-previous-button"
@@ -146,7 +146,7 @@ export class KlevuSlides {
                   <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
                 </div>
               </klevu-util-scrollbars>
-              {this.hideNextPrev ? null : (<div class={"right"}>
+              {this.hideNextPrev ? null : (<div class="right">
                 <klevu-button
                   exportparts={partsExports("klevu-button")}
                   part="slides-next-button"

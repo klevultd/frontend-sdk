@@ -5,6 +5,7 @@
   * @prop --klevu-product-image-aspect-ratio 1: On what aspect the background image will be
   * @prop --klevu-product-image-fill cover: How to fill image to it's space.
   * @prop --klevu-product-border none: Border style of the product
+  * @prop --klevu-product-details-spacing: gap of the flex grid for product details
   */
   display: inline-block;
   --loading-animation-time: 5s;
@@ -13,6 +14,7 @@
   --image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
   --image-fill: var(--klevu-product-image-fill, cover);
   --border: var(--klevu-product-border, none);
+  --gap-for-flex : var(--klevu-product-details-spacing,--klevu-spacing-06);
 }
 
 :host(.line) {
@@ -40,7 +42,7 @@
   display: flex;
   flex-direction: column;
   max-width: var(--width);
-  gap: var(--klevu-product-details-spacing,--klevu-spacing-06);
+  gap: var(--gap-for-flex);
 }
 .container.default a,
 .container.small a {
@@ -48,7 +50,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: var(--width);
-  gap: var(--klevu-product-details-spacing,--klevu-spacing-06);
+  gap: var(--gap-for-flex);
 }
 
 .container.default.fixedWidth {

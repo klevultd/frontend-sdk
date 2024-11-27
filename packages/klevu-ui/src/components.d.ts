@@ -190,6 +190,10 @@ export namespace Components {
     }
     interface KlevuChatMessages {
         /**
+          * Should display the product slider navigation buttons centered in relating to product list
+         */
+        "centerNextPrev": boolean;
+        /**
           * Should display a feedback button after each message
          */
         "enableMessageFeedback"?: boolean;
@@ -2909,6 +2913,10 @@ declare namespace LocalJSX {
         "useNativeScrollbars"?: boolean;
     }
     interface KlevuChatMessages {
+        /**
+          * Should display the product slider navigation buttons centered in relating to product list
+         */
+        "centerNextPrev"?: boolean;
         /**
           * Should display a feedback button after each message
          */

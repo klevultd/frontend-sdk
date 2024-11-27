@@ -64,6 +64,7 @@ export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMess
   'handleTypeWriterEffectEnds',
   'speed',
   'scrollBottom',
+  'centerNextPrev',
   'klevuChatProductClick',
   'klevuSelectFilter',
   'klevuSelectProductOption',
