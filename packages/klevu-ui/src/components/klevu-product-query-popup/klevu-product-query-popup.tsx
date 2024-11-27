@@ -383,7 +383,7 @@ export class KlevuProductQueryPopup {
   onKlevuMoiProductClick(event: CustomEvent<MoiProduct>) {
     setTimeout(() => {
       if (!event.defaultPrevented) {
-        window.open(event.detail.url, '_blank')
+        window.location.href = event.detail.url
       }
     }, 1)
   }

@@ -41,7 +41,25 @@ export class KlevuSlides {
   #gap = 0
   #slotElement?: HTMLSlotElement
   #scrollElement?: HTMLKlevuUtilScrollbarsElement
-
+  #previousButton?: HTMLKlevuButtonElement
+  #nextButton?: HTMLKlevuButtonElement
+  #validateNavigation = async () => {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance?.customInstance) {
+      const elements = instance.customInstance.elements()
+      const hideNext = (elements.viewport.scrollLeft + elements.viewport.clientWidth + await this.#calcAmountToSlide() > elements.viewport.scrollWidth -10)
+      if(hideNext){
+        this.#nextButton?.classList.add("hidden")
+      } else {
+        this.#nextButton?.classList.remove("hidden")
+      }
+      if(elements.viewport.scrollLeft === 0){
+        this.#previousButton?.classList.add("hidden")
+      } else {
+        this.#previousButton?.classList.remove("hidden")
+      }
+    }
+  }
   #prev = async () => {
     const instance = await this.#scrollElement?.getInstance()
     if (instance?.customInstance) {
@@ -56,13 +74,14 @@ export class KlevuSlides {
         behavior: "smooth",
       })
     }
+    await this.#validateNavigation()
   }
 
   #next = async () => {
     const instance = await this.#scrollElement?.getInstance()
     if (instance?.customInstance) {
       const elements = instance.customInstance.elements()
-      elements.viewport.scrollTo({
+      await elements.viewport.scrollTo({
         left: elements.viewport.scrollLeft + (await this.#calcAmountToSlide()),
         behavior: "smooth",
       })
@@ -72,6 +91,7 @@ export class KlevuSlides {
         behavior: "smooth",
       })
     }
+    await this.#validateNavigation()
   }
 
   async #calcAmountToSlide(): Promise<number> {
@@ -95,6 +115,10 @@ export class KlevuSlides {
     }
   }
 
+  componentDidLoad(){
+    this.#validateNavigation()
+  }
+
   render() {
     return (
       <Host>
@@ -114,6 +138,7 @@ export class KlevuSlides {
                   class="prev"
                   icon="chevron_left"
                   onClick={this.#prev.bind(this)}
+                  ref={(el) => (this.#previousButton = el as HTMLKlevuButtonElement)}
                 ></klevu-button>
               </div>)}
               <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
@@ -128,6 +153,7 @@ export class KlevuSlides {
                   class="next"
                   icon="chevron_right"
                   onClick={this.#next.bind(this)}
+                  ref={(el) => (this.#nextButton = el as HTMLKlevuButtonElement)}
                 ></klevu-button>
               </div>)}
             </div>
@@ -147,6 +173,7 @@ export class KlevuSlides {
                     class="prev"
                     icon="chevron_left"
                     onClick={this.#prev.bind(this)}
+                    ref={(el) => (this.#previousButton = el as HTMLKlevuButtonElement)}
                   ></klevu-button>
                   <klevu-button
                     exportparts={partsExports("klevu-button")}
@@ -154,6 +181,7 @@ export class KlevuSlides {
                     class="next"
                     icon="chevron_right"
                     onClick={this.#next.bind(this)}
+                    ref={(el) => (this.#nextButton = el as HTMLKlevuButtonElement)}
                   ></klevu-button>
                 </div>
               )}

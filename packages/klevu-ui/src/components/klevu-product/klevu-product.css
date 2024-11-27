@@ -40,7 +40,7 @@
   display: flex;
   flex-direction: column;
   max-width: var(--width);
-  gap: var(--klevu-spacing-06);
+  gap: var(--klevu-product-details-spacing,--klevu-spacing-06);
 }
 .container.default a,
 .container.small a {
@@ -48,7 +48,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: var(--width);
-  gap: var(--klevu-spacing-06);
+  gap: var(--klevu-product-details-spacing,--klevu-spacing-06);
 }
 
 .container.default.fixedWidth {

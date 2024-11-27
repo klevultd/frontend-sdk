@@ -28,10 +28,8 @@ header div klevu-button {
 }
 
 .gridButtons {
-  display:flex;
-  flex-direction: row !important;
-  gap: var(--klevu-spacing-05);
-  align-items: center;
+  display:block;
+  position: relative;
   width: 100%;
 }
 .gridButtons klevu-util-scrollbars{
@@ -39,12 +37,38 @@ header div klevu-button {
   overflow: hidden;
 }
 
-.gridButtons .left,.gridButtons .right {
-  width: 60px;
+.gridButtons .left klevu-button,.gridButtons .right klevu-button{
+  position: absolute;
+  top: 55px;
+  background-color: #fff;
+  height: 100px;
+  line-height: 100px;
+  width: 45px;
+  text-align: center;
+  box-shadow: 0 1px 3px #888;
+  z-index: 1000;
+}
+.gridButtons .right klevu-button{
+  right:0px;
 }
 
+.gridButtons .left {
+  float: left;
+}
+.gridButtons .right {
+  float: right;
+}
 .gridButtons {
   --klevu-button-background-color: var(--klevu-product-query-submit-button-background-color, #FFFFFF);
   --klevu-button-background-hover: var(--klevu-product-query-submit-button-background-hover, #FFFFFF);
   --klevu-button-icon-color: var(--klevu-product-query-icon-color, #5F636866);
+}
+
+.gridButtons klevu-button.hidden {
+  display:none;
+}
+@media (max-width: 600px) {
+  .gridButtons klevu-button{
+    display:none;
+  }
 }

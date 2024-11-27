@@ -226,6 +226,7 @@ export class KlevuChatMessages {
                       product={product}
                       hideSwatches
                       hideDescription
+                      hidePrice
                       showAddToCart={false}
                       showRatings={false}
                       onKlevuProductClick={(event) => {
