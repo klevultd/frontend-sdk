@@ -179,7 +179,7 @@ export class KlevuInit {
         const data = await KlevuKMCSettings(false, undefined, this.settingsUrl)
         console.log("settings", { data })
         window["klevu_ui_kmc_settings"] = data.root
-        if (data.root?.klevu_uc_userOptions.priceFormatter) {
+        if (data.root?.klevu_uc_userOptions.priceFormatter && !this.settings.renderPrice) {
           this.settings.renderPrice = (...params) =>
             this.#renderPriceKMCSettings(...params, data.root!.klevu_uc_userOptions.priceFormatter)
         }
