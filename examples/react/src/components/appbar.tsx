@@ -66,7 +66,11 @@ const ResponsiveAppBar = () => {
             label="Quick Search"
             currentUrl={location.pathname}
             onProductClick={(p) => {
-              navigate(`/products/${p.itemGroupId}/${p.id}`)
+              navigate(
+                p.itemGroupId
+                  ? `/products/${p.itemGroupId}/${p.id}`
+                  : `/products/${p.id}`
+              )
             }}
             onSearchClick={(q) => {
               navigate(`/searchnopersonalisation?q=${encodeURIComponent(q)}`)
@@ -82,7 +86,11 @@ const ResponsiveAppBar = () => {
             enablePersonalisation
             currentUrl={location.pathname}
             onProductClick={(p) => {
-              navigate(`/products/${p.itemGroupId}/${p.id}`)
+              navigate(
+                p.itemGroupId
+                  ? `/products/${p.itemGroupId}/${p.id}`
+                  : `/products/${p.id}`
+              )
               // comment line above and uncomment this to test full page reload. For testing analytical events caching
               // window.location.href = `http://localhost:3001/products/${p.itemGroupId}/${p.id}`
             }}
