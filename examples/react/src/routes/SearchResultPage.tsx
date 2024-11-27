@@ -202,7 +202,11 @@ export function SearchResultPage(props: Props) {
               <Product
                 product={p}
                 onClick={(event) => {
-                  navigate(`/products/${p.itemGroupId}/${p.id}`)
+                  navigate(
+                    p.itemGroupId
+                      ? `/products/${p.itemGroupId}/${p.id}`
+                      : `/products/${p.id}`
+                  )
                   searchResponse.searchClickEvent?.({
                     productId: p.id,
                     variantId: p.variantId || p.id,

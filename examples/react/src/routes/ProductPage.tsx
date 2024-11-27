@@ -67,7 +67,7 @@ export function ProductPage() {
           mode: "demo",
           searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        exclude([params.groupId])
+        exclude([params.groupId || ""])
       ),
       recsPayload || {}
     )
@@ -100,7 +100,6 @@ export function ProductPage() {
   if (!product) {
     return <LoadingIndicator />
   }
-
   return (
     <Container maxWidth="lg">
       <div>
@@ -115,14 +114,19 @@ export function ProductPage() {
             style={{ textAlign: "center", position: "relative" }}
           >
             <img
-              src={product.image}
+              srcSet={`${product.image.replace(
+                "needtochange/",
+                ""
+              )}, ${product.image.replace("needtochange/", "pub/")}`}
               alt={product.name}
               style={{ maxWidth: "100%", width: "100%" }}
             />
-            <InspireMe
-              id={params.groupId}
-              style={{ position: "absolute", top: "0", right: "0" }}
-            />
+            {params.groupId && (
+              <InspireMe
+                id={params.groupId}
+                style={{ position: "absolute", top: "0", right: "0" }}
+              />
+            )}
           </Grid>
           <Grid item xs={12} sm={6}>
             {product.shortDesc?.length > 0 ? (

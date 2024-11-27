@@ -125,6 +125,9 @@ export const ConfigDrawer = () => {
   const onResetPersonalisation = () => {
     localStorage.removeItem("klevu-last-searches")
     localStorage.removeItem("klevu-last-clicks")
+    localStorage.removeItem("klevu-last-clicks-cat")
+    localStorage.removeItem("klevu-react-app-show-personalisation")
+
     setTimeout(() => {
       window.location.reload()
     }, 100)
@@ -176,12 +179,12 @@ export const ConfigDrawer = () => {
                 <ChevronLeft />
               </IconButton>
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={6}>
               <Typography variant="h6" component="div">
                 Configurations
               </Typography>
             </Grid>
-            <Grid item xs={2} alignItems={"end"}>
+            <Grid item xs={3} alignItems={"end"}>
               <Button
                 id="actions"
                 aria-controls={open ? "basic-menu" : undefined}
@@ -191,9 +194,9 @@ export const ConfigDrawer = () => {
                 variant="outlined"
                 color="secondary"
                 onClick={handleClick}
-                style={{ display: "inline" }}
               >
-                Actions
+                <span>Actions</span>{" "}
+                <span style={{ marginLeft: "10px" }}>&#9660;</span>
               </Button>
               <Menu
                 id="basic-menu"
