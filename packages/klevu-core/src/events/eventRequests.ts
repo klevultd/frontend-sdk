@@ -50,6 +50,7 @@ export type V1SearchEvent = {
   klevu_shopperIP_v6?: string
   data_protection?: boolean
   klevu_uuid?: string
+  tags: string[]
 }
 
 export async function KlevuEventV1Search(event: V1SearchEvent) {
@@ -131,6 +132,7 @@ export type V1ProductTrackingEvent = {
   klevu_shopperIP_v6?: string
   data_protection?: boolean
   klevu_uuid?: string
+  tags: string[]
 }
 
 export async function KlevuEventV1ProductTracking(
@@ -555,7 +557,13 @@ async function sendGenericPostEvent(url: string, data: { [key: string]: any }) {
   const formData = new FormData()
   for (const key in data) {
     if (data[key] !== undefined) {
-      formData.append(key, data[key])
+      if (Array.isArray(data[key])) {
+        data[key].forEach((d: any) => {
+          formData.append(key, d)
+        })
+      } else {
+        formData.append(key, data[key])
+      }
     }
   }
   if (isBrowser() && navigator.sendBeacon) {

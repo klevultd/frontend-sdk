@@ -223,6 +223,7 @@ export class KlevuResponseQueryObject {
               typeOfSearch: this.query.meta.typeOfSearch,
               activeFilters: extractActiveFilters(this.query),
               override,
+              tags: this.query.meta.tags,
             })
             if (!this.func.params) {
               this.func.params = {}
@@ -244,6 +245,7 @@ export class KlevuResponseQueryObject {
             product: record,
             searchTerm: this.query.meta.searchedTerm,
             variantId,
+            tags: this.query.meta.tags,
           })
 
           for (const hook of this.hooks ?? []) {

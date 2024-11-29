@@ -36,6 +36,7 @@ export function sendSearchEvent(
         totalResults: meta.totalResultsFound,
         typeOfSearch: meta.typeOfSearch,
         override,
+        tags: meta.tags,
       })
 
       if (!f.params) {
