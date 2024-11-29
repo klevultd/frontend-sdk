@@ -232,15 +232,12 @@ export class KlevuSearchLandingPage {
   #currency: string = ""
 
   async connectedCallback() {
-    console.log("before Ready")
     await KlevuInit.ready()
-    console.log("after Ready")
     await this.init()
   }
 
   async init() {
     const settings = getKMCSettings()
-    console.log("search", { settings })
     if (settings) {
       this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
       if (this.showRatings === undefined) {
@@ -325,7 +322,6 @@ export class KlevuSearchLandingPage {
     if (this.useKlaviyo) {
       modifiers.push(klaviyo())
     }
-    console.log("will search")
     const result = await KlevuFetch(
       search(this.term, { limit: this.limit, sort: this.sort, ...this.options }, ...modifiers)
     )

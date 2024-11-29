@@ -166,9 +166,7 @@ export class KlevuInit {
     } else if (this.language && this.language != "en") {
       window["klevu_ui_translations"] = await fetchTranslation(this.language, this.translationUrlPrefix)
     }
-    console.log("before define settings")
     await this.#defineSettings(this.settings)
-    console.log("after define settings")
   }
 
   async #defineSettings(settings: KlevuUIGlobalSettings) {
@@ -177,7 +175,6 @@ export class KlevuInit {
     if (this.kmcLoadDefaults) {
       try {
         const data = await KlevuKMCSettings(false, undefined, this.settingsUrl)
-        console.log("settings", { data })
         window["klevu_ui_kmc_settings"] = data.root
         if (data.root?.klevu_uc_userOptions.priceFormatter && !this.settings.renderPrice) {
           this.settings.renderPrice = (...params) =>
@@ -297,15 +294,9 @@ export class KlevuInit {
   static async ready() {
     const klevuInit = await document.querySelector("klevu-init")?.componentOnReady()
     const klevuInitObj = await klevuInit?.getConfig()
-    console.log("klevuInit=", {
-      klevuInitObj,
-      klevuInit,
-      method: klevuInit?.isSettingsDefined,
-    })
     return new Promise(async (resolve, reject) => {
       async function checkIsSettingsDefined() {
         const settingsDefined = await klevuInit?.isSettingsDefined()
-        console.log("checking if settings is defined", settingsDefined)
         if (settingsDefined) return resolve(true)
         setTimeout(checkIsSettingsDefined, 200)
       }
