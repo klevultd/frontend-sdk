@@ -1,21 +1,22 @@
 import React from "react"
-import { Button, Table, Tooltip, Typography } from "@mui/material"
+import { Button, IconButton, Table, Tooltip, Typography } from "@mui/material"
 import { css } from "@emotion/react"
 import { CartItem, useCart } from "../cartContext"
 import { useGlobalVariables } from "../globalVariablesContext"
 import isUndefined from "lodash.isundefined"
+import { PushPin } from "@mui/icons-material"
 
 const containerCss = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 180px;
-  min-height: 300px;
-  height: 300px;
+  min-height: 370px;
+  height: 370px;
   text-align: center;
   vertical-align: top;
   cursor: pointer;
-  border: 1px solid transparent;
+  border: 1px solid #eee;
   padding: 6px;
 
   &:hover {
@@ -32,7 +33,7 @@ const containerCss = css`
   .title {
     font-size: 12px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 1rem;
@@ -99,12 +100,17 @@ const ProductCard = (props: {
   onAddToCart?: (product: CartItem) => void
   hideAddToCart?: boolean
   debugMode: boolean
+  debugModeShowOnly: string[]
 }) => {
   const p = props.product
-
+  const d = props.debugModeShowOnly
   return (
     <a
-      href={`/products/${p.itemGroupId}/${p.id}`}
+      href={
+        p.itemGroupId
+          ? `/products/${p.itemGroupId}/${p.id}`
+          : `/products/${p.id}`
+      }
       onClick={(event) => {
         if (props.onClick) {
           props.onClick(event)
@@ -112,6 +118,13 @@ const ProductCard = (props: {
       }}
       css={containerCss}
     >
+      <div style={{ textAlign: "left" }}>
+        {p.klevu_pinned ? (
+          <IconButton size="small">
+            <PushPin />
+          </IconButton>
+        ) : null}
+      </div>
       <div
         className="image"
         style={{
@@ -129,60 +142,66 @@ const ProductCard = (props: {
         ></Typography>
       </Tooltip>
       <Typography variant="h6" className="price">
-        {new Intl.NumberFormat(undefined, {
-          style: "currency",
-          currency: p.currency,
-        }).format(parseFloat(p.salePrice))}
+        {p.currency
+          ? new Intl.NumberFormat(undefined, {
+              style: "currency",
+              currency: p.currency,
+            }).format(parseFloat(p.salePrice))
+          : p.currency}
       </Typography>
 
       {props.debugMode && (
         <Table>
-          {!isUndefined(p.score) && (
+          {!isUndefined(p.score) && d.includes("score") && (
             <ScoreCard
               label="Score"
               value={p.score ? (+p.score).toFixed(5) : p.score}
             />
           )}
-          {!isUndefined(p.klevu_product_boosting) && (
-            <ScoreCard
-              label="Product Boosting"
-              value={
-                p.klevu_product_boosting
-                  ? (+p.klevu_product_boosting).toFixed(5)
-                  : p.klevu_product_boosting
-              }
-            />
-          )}
-          {!isUndefined(p.klevu_bulk_boosting) && (
-            <ScoreCard
-              label="Rule-Based"
-              value={
-                p.klevu_bulk_boosting
-                  ? (+p.klevu_bulk_boosting).toFixed(5)
-                  : p.klevu_bulk_boosting
-              }
-            />
-          )}
-          {!isUndefined(p.klevu_selflearning_boosting) && (
-            <ScoreCard
-              label="SelfLearning"
-              value={
-                p.klevu_selflearning_boosting
-                  ? (+p.klevu_selflearning_boosting).toFixed(5)
-                  : p.klevu_selflearning_boosting
-              }
-            />
-          )}
-          {!isUndefined(p.klevu_manual_boosting) && (
-            <ScoreCard
-              label="Manual"
-              value={
-                p.klevu_manual_boosting
-                  ? (+p.klevu_manual_boosting).toFixed(5)
-                  : p.klevu_manual_boosting
-              }
-            />
-          )}
+          {!isUndefined(p.klevu_product_boosting) &&
+            d.includes("klevu_product_boosting") && (
+              <ScoreCard
+                label="Product Boosting"
+                value={
+                  p.klevu_product_boosting
+                    ? (+p.klevu_product_boosting).toFixed(5)
+                    : p.klevu_product_boosting
+                }
+              />
+            )}
+          {!isUndefined(p.klevu_bulk_boosting) &&
+            d.includes("klevu_bulk_boosting") && (
+              <ScoreCard
+                label="Rule-Based"
+                value={
+                  p.klevu_bulk_boosting
+                    ? (+p.klevu_bulk_boosting).toFixed(5)
+                    : p.klevu_bulk_boosting
+                }
+              />
+            )}
+          {!isUndefined(p.klevu_selflearning_boosting) &&
+            d.includes("klevu_selflearning_boosting") && (
+              <ScoreCard
+                label="SelfLearning"
+                value={
+                  p.klevu_selflearning_boosting
+                    ? (+p.klevu_selflearning_boosting).toFixed(5)
+                    : p.klevu_selflearning_boosting
+                }
+              />
+            )}
+          {!isUndefined(p.klevu_manual_boosting) &&
+            d.includes("klevu_manual_boosting") && (
+              <ScoreCard
+                label="Manual"
+                value={
+                  p.klevu_manual_boosting
+                    ? (+p.klevu_manual_boosting).toFixed(5)
+                    : p.klevu_manual_boosting
+                }
+              />
+            )}
         </Table>
       )}
       {props.hideAddToCart ? null : (
@@ -246,6 +265,14 @@ const TooltipContent = (props: {
   )
 }
 
+const defaultDebugModeShowFields = [
+  "score",
+  "klevu_product_boosting",
+  "klevu_bulk_boosting",
+  "klevu_selflearning_boosting",
+  "klevu_manual_boosting",
+]
+
 /**
  * This product has been modified to be used with both React and Hydrogen example.
  * You should not use this component in your project.
@@ -258,6 +285,7 @@ export function Product(props: {
   onClick?: (event: React.MouseEvent) => void
   onAddToCart?: (product: CartItem) => void
   hideAddToCart?: boolean
+  debugModeShowOnly?: string[]
 }) {
   const { debugMode } = useGlobalVariables()
   const cart = useCart()
@@ -274,10 +302,20 @@ export function Product(props: {
       props.product.klevu_applied_keyword_boosts) ? (
     <Tooltip placement="bottom" title={<TooltipContent {...props.product} />}>
       <div>
-        <ProductCard {...props} debugMode={debugMode} addToCart={addToCart} />
+        <ProductCard
+          debugModeShowOnly={defaultDebugModeShowFields}
+          {...props}
+          debugMode={debugMode}
+          addToCart={addToCart}
+        />
       </div>
     </Tooltip>
   ) : (
-    <ProductCard {...props} debugMode={debugMode} addToCart={addToCart} />
+    <ProductCard
+      debugModeShowOnly={defaultDebugModeShowFields}
+      {...props}
+      debugMode={debugMode}
+      addToCart={addToCart}
+    />
   )
 }

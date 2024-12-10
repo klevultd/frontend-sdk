@@ -42,6 +42,7 @@ const chatRender = (args: KlevuProductQuery) => {
       locale=${ifDefined(args.locale)}
       product-info-generator=${ifDefined(args.productInfoGenerator)}
       pqa-widget-layout=${ifDefined(args.pqaWidgetLayout)}
+      hide-embedded-title=${ifDefined(args.hideEmbeddedTitle)}
     ></klevu-product-query>
   `
 }

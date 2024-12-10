@@ -233,9 +233,10 @@ export class KlevuSearchLandingPage {
 
   async connectedCallback() {
     await KlevuInit.ready()
+    await this.init()
   }
 
-  async componentWillLoad() {
+  async init() {
     const settings = getKMCSettings()
     if (settings) {
       this.#noResultsOptions = settings.klevu_uc_userOptions?.noResultsOptions
@@ -321,7 +322,6 @@ export class KlevuSearchLandingPage {
     if (this.useKlaviyo) {
       modifiers.push(klaviyo())
     }
-
     const result = await KlevuFetch(
       search(this.term, { limit: this.limit, sort: this.sort, ...this.options }, ...modifiers)
     )

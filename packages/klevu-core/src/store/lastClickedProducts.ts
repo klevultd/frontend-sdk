@@ -14,11 +14,9 @@ const MAX_COUNT = 20
  */
 class LastClickedProducts {
   private categoryCache: {
-    [categoryPath: string]: {
-      cached: Date
-      ids: string[]
-    }
-  } = {}
+    cached: Date
+    ids: string[]
+  } | null = null
 
   private clicks: Array<{
     ts: Date
@@ -41,7 +39,7 @@ class LastClickedProducts {
     if (KlevuConfig.getDefault().disableClickTracking) {
       return
     }
-    if (isBrowser() && window.sessionStorage) {
+    if (isBrowser() && window.sessionStorage && this.categoryCache) {
       KlevuStorage.setItem(
         LAST_CLICKED_CATEGORY_STORAGE_KEY,
         JSON.stringify(this.categoryCache),
@@ -57,10 +55,10 @@ class LastClickedProducts {
         this.clicks = JSON.parse(res)
       }
     }
-    if (isBrowser() && window.sessionStorage) {
+    if (isBrowser() && window.localStorage) {
       const resCat = KlevuStorage.getItem(
         LAST_CLICKED_CATEGORY_STORAGE_KEY,
-        StorageType.SESSION
+        StorageType.LOCAL
       )
       if (resCat) {
         this.categoryCache = JSON.parse(resCat)
@@ -166,12 +164,12 @@ class LastClickedProducts {
       return []
     }
 
-    if (this.categoryCache[categoryPath]) {
+    if (this.categoryCache) {
       if (
-        new Date(this.categoryCache[categoryPath].cached).getTime() >
+        new Date(this.categoryCache.cached).getTime() >
         new Date().getTime() - ONE_HOUR
       ) {
-        return this.categoryCache[categoryPath].ids
+        return this.categoryCache.ids
       }
     }
 
@@ -183,7 +181,7 @@ class LastClickedProducts {
       )
       .slice(0, itemsToTake)
       .map((i) => i.id)
-    this.categoryCache[categoryPath] = {
+    this.categoryCache = {
       cached: new Date(),
       ids,
     }
