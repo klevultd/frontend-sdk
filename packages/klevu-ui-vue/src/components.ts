@@ -64,6 +64,7 @@ export const KlevuChatMessages = /*@__PURE__*/ defineContainer<JSX.KlevuChatMess
   'handleTypeWriterEffectEnds',
   'speed',
   'scrollBottom',
+  'centerNextPrev',
   'klevuChatProductClick',
   'klevuSelectFilter',
   'klevuSelectProductOption',
@@ -390,7 +391,8 @@ export const KlevuProductQueryPopup = /*@__PURE__*/ defineContainer<JSX.KlevuPro
   'locale',
   'pqaWidgetLayout',
   'removeAskloBranding',
-  'hideEmbeddedTitle'
+  'hideEmbeddedTitle',
+  'klevuMoiProductClick'
 ]);
 
 
@@ -557,7 +559,8 @@ export const KlevuSlider = /*@__PURE__*/ defineContainer<JSX.KlevuSlider>('klevu
 export const KlevuSlides = /*@__PURE__*/ defineContainer<JSX.KlevuSlides>('klevu-slides', undefined, [
   'heading',
   'slideFullWidth',
-  'hideNextPrev'
+  'hideNextPrev',
+  'centerNextPrev'
 ]);
 
 
