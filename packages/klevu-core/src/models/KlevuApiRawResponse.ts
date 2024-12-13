@@ -175,6 +175,7 @@ export type KlevuQueryResult = {
         urls: string[]
       }[]
     }
+    tags: string[]
   }
   records: Array<{ id: string } & KlevuRecord>
 }
