@@ -545,6 +545,11 @@ export namespace Components {
           * Ipv6 ServiceUrl for ipv6 retrieval used in analytics
          */
         "ipv6ServiceUrl"?: string;
+        /**
+          * Get settings defined in klevu-init
+          * @returns
+         */
+        "isSettingsDefined": () => Promise<boolean>;
         "kmcLoadDefaults"?: boolean;
         /**
           * Which language to load
