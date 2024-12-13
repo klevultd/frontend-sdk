@@ -10,6 +10,7 @@ import {
   search,
   suggestions,
   trendingProducts,
+  sendSearchEvent,
 } from "@klevu/core"
 import type { KlevuRecord, KlevuLastSearch, KMCRootObject } from "@klevu/core"
 import {
@@ -95,7 +96,7 @@ export function QuickSearch(props: Props) {
           mode: "demo",
           searchPrefs: debugMode ? ["debugQuery"] : undefined,
         },
-        ...searchModifiers
+        ...[...searchModifiers, sendSearchEvent()]
       ),
       search(term, {
         id: categoriesId,
