@@ -244,8 +244,6 @@ export class KlevuChatMessages {
                         return false
                       }}
                     style={{
-                      "--klevu-product-width": "188px",
-                      "box-shadow":"inset 0px 0px 4px 1px #00000026",
                       "text-align":"center"
                     }}
                       exportparts={partsExports("klevu-product")}
