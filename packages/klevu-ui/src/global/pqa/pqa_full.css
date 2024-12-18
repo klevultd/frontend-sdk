@@ -89,6 +89,7 @@
   --klevu-product-border:1px solid #000000;
   --klevu-product-border-radius:4px;
   --klevu-button-cursor-hover: pointer;
+  --klevu-product-image-fill: contain;
   /*
   --klevu-product-width: 300px;
   --klevu-product-small-width: 200px;
