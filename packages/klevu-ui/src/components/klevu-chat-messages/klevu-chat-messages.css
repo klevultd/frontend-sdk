@@ -58,4 +58,15 @@ a {
 
 klevu-product {
   --klevu-product-details-spacing: 1px;
+
+}
+klevu-button{
+  --klevu-button-cursor-hover:pointer;
+}
+
+klevu-product .productname span.variant-body-s{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 162px;
 }
