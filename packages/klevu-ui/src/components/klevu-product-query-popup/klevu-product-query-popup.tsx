@@ -10,7 +10,8 @@ import {
   KlevuConfig,
   MoiRequest,
   MoiQuestion,
-  ProductInfo, MoiProduct,
+  ProductInfo,
+  MoiProduct,
 } from "@klevu/core"
 import { KlevuTextfieldVariant } from "../klevu-textfield/klevu-textfield"
 import { Placement } from "@floating-ui/dom"

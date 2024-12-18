@@ -17,7 +17,7 @@
   --icon-color: var(--klevu-button-icon-color, var(--text-color));
   --icon-rotation: var(--klevu-button-icon-rotation, 0deg);
   --border-radius: var(--klevu-button-border-radius, 10000000px);
-  --cursor-hover: var(--klevu-button-cursor-hover,auto);
+  --cursor-hover: var(--klevu-button-cursor-hover, auto);
 }
 
 button {

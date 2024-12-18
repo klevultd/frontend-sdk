@@ -52,7 +52,6 @@ export class KlevuChatMessages {
    */
   @Prop() scrollBottom?: () => void
 
-
   /**
    * Should display the product slider navigation buttons centered in relating to product list
    */
@@ -224,7 +223,7 @@ export class KlevuChatMessages {
                   exportparts={partsExports("klevu-slides")}
                   style={{
                     "--klevu-slides-item-width": "188px",
-                    "--klevu-product-grid-spacing":"var(--klevu-spacing-04)",
+                    "--klevu-product-grid-spacing": "var(--klevu-spacing-04)",
                   }}
                 >
                   {message.productData.products.map((product) => (
@@ -243,9 +242,9 @@ export class KlevuChatMessages {
                         })
                         return false
                       }}
-                    style={{
-                      "text-align":"center"
-                    }}
+                      style={{
+                        "text-align": "center",
+                      }}
                       exportparts={partsExports("klevu-product")}
                     >
                       <div slot="bottom" class="productactions">

@@ -5,4 +5,3 @@
 :host([embedded]) {
   width: var(--klevu-product-query-popup-width, 100%);
 }
-

@@ -15,8 +15,8 @@
   --image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
   --image-fill: var(--klevu-product-image-fill, cover);
   --border: var(--klevu-product-border, none);
-  --border-radius: var(--klevu-product-border-radius, var(--klevu-border-radius-s,4px));
-  --gap-for-flex : var(--klevu-product-details-spacing,var(--klevu-spacing-06,24px));
+  --border-radius: var(--klevu-product-border-radius, var(--klevu-border-radius-s, 4px));
+  --gap-for-flex: var(--klevu-product-details-spacing, var(--klevu-spacing-06, 24px));
 }
 
 :host(.line) {
