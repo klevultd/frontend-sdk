@@ -17,6 +17,8 @@
   --border: var(--klevu-product-border, none);
   --border-radius: var(--klevu-product-border-radius, var(--klevu-border-radius-s, 4px));
   --gap-for-flex: var(--klevu-product-details-spacing, var(--klevu-spacing-06, 24px));
+  --line-clamp: var(--klevu-product-name-lines, 2);
+  --product-container-cursor: var(--klevu-product-container-cursor, "auto");
 }
 
 :host(.line) {
@@ -38,6 +40,7 @@
   border-radius: var(--border-radius);
   box-sizing: border-box;
   height: 100%;
+  cursor: var(--product-container-cursor);
 }
 
 .container.default {
@@ -131,15 +134,16 @@
   margin-bottom: 0;
 }
 
-.productname {
+.productname span {
   display: block;
   display: -webkit-box;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: var(--line-clamp);
   -webkit-box-orient: vertical;
   height: calc(var(--klevu-body-s-height) * var(--klevu-body-s-line-height) * 2);
   text-align: left;
   margin-top: var(--klevu-spacing-04);
+  overflow: hidden;
 }
 
 .brandname + .productname {

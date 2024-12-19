@@ -344,7 +344,14 @@ export class KlevuProduct {
                   </klevu-typography>
                 )}
                 {this.hideName || !this.product[this.keyName] ? null : (
-                  <klevu-typography class="productname" variant="body-s" part="product-name">
+                  <klevu-typography
+                    class="productname"
+                    variant="body-s"
+                    part="product-name"
+                    title={`${this.product[this.keyName]} ${
+                      this.showProductCode ? this.#formatSKU(this.product.sku) : ""
+                    }`}
+                  >
                     {`${this.product[this.keyName]} ${this.showProductCode ? this.#formatSKU(this.product.sku) : ""}`}
                   </klevu-typography>
                 )}

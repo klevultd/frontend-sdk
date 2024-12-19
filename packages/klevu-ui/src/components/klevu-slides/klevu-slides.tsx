@@ -47,9 +47,11 @@ export class KlevuSlides {
     const instance = await this.#scrollElement?.getInstance()
     if (instance?.customInstance) {
       const elements = instance.customInstance.elements()
+      const amountToSlide = await this.#calcAmountToSlide()
       const hideNext =
-        elements.viewport.scrollLeft + elements.viewport.clientWidth + (await this.#calcAmountToSlide()) >
-        elements.viewport.scrollWidth - 10
+        elements.viewport.scrollLeft + elements.viewport.clientWidth + amountToSlide >=
+        elements.viewport.scrollWidth + amountToSlide
+
       if (hideNext) {
         this.#nextButton?.classList.add("hidden")
       } else {
@@ -76,7 +78,6 @@ export class KlevuSlides {
         behavior: "smooth",
       })
     }
-    await this.#validateNavigation()
   }
 
   #next = async () => {
@@ -93,7 +94,16 @@ export class KlevuSlides {
         behavior: "smooth",
       })
     }
-    await this.#validateNavigation()
+  }
+
+  #attachEventListener = async () => {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance?.customInstance) {
+      const elements = instance.customInstance.elements()
+      elements.viewport.addEventListener("scrollend", this.#validateNavigation)
+    } else if (instance?.nativeContainer) {
+      instance.nativeContainer.addEventListener("scrollend", this.#validateNavigation)
+    }
   }
 
   async #calcAmountToSlide(): Promise<number> {
@@ -119,6 +129,7 @@ export class KlevuSlides {
 
   componentDidLoad() {
     this.#validateNavigation()
+    this.#attachEventListener()
   }
 
   render() {
