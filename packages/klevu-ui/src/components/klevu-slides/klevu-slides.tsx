@@ -84,7 +84,7 @@ export class KlevuSlides {
     const instance = await this.#scrollElement?.getInstance()
     if (instance?.customInstance) {
       const elements = instance.customInstance.elements()
-      await elements.viewport.scrollTo({
+      elements.viewport.scrollTo({
         left: elements.viewport.scrollLeft + (await this.#calcAmountToSlide()),
         behavior: "smooth",
       })
