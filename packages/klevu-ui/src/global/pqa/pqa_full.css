@@ -117,7 +117,8 @@ klevu-product-query-popup::part(product-query-footer) {
   --klevu-button-text-color: #000;
 }
 
-klevu-product-query {
+klevu-product-query,
+klevu-product-query-popup {
   --klevu-color-primary: #428bca;
   --klevu-color-primary-darker: #407db3;
   --klevu-product-image-fill: contain;
