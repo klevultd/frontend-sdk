@@ -226,7 +226,7 @@ export class KlevuChatMessages {
                     "--klevu-product-grid-spacing": "var(--klevu-spacing-04)",
                   }}
                 >
-                  {[...message.productData.products, ...message.productData.products].map((product) => (
+                  {message.productData.products.map((product) => (
                     <klevu-product
                       product={product}
                       hideSwatches
