@@ -5,6 +5,8 @@
   * @prop --klevu-product-image-aspect-ratio 1: On what aspect the background image will be
   * @prop --klevu-product-image-fill cover: How to fill image to it's space.
   * @prop --klevu-product-border none: Border style of the product
+  * @prop --klevu-product-border-radius --klevu-border-radius-s: Border radius style of the product
+  * @prop --klevu-product-details-spacing: gap of the flex grid for product details
   */
   display: inline-block;
   --loading-animation-time: 5s;
@@ -13,6 +15,10 @@
   --image-aspect-ratio: var(--klevu-product-image-aspect-ratio, 1);
   --image-fill: var(--klevu-product-image-fill, cover);
   --border: var(--klevu-product-border, none);
+  --border-radius: var(--klevu-product-border-radius, var(--klevu-border-radius-s, 4px));
+  --gap-for-flex: var(--klevu-product-details-spacing, var(--klevu-spacing-06, 24px));
+  --line-clamp: var(--klevu-product-name-lines, 2);
+  --product-container-cursor: var(--klevu-product-container-cursor, "auto");
 }
 
 :host(.line) {
@@ -31,16 +37,17 @@
   display: block;
   padding: var(--klevu-spacing-04);
   border: var(--border);
-  border-radius: var(--klevu-border-radius-s);
+  border-radius: var(--border-radius);
   box-sizing: border-box;
   height: 100%;
+  cursor: var(--product-container-cursor);
 }
 
 .container.default {
   display: flex;
   flex-direction: column;
   max-width: var(--width);
-  gap: var(--klevu-spacing-06);
+  gap: var(--gap-for-flex);
 }
 .container.default a,
 .container.small a {
@@ -48,7 +55,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: var(--width);
-  gap: var(--klevu-spacing-06);
+  gap: var(--gap-for-flex);
 }
 
 .container.default.fixedWidth {
@@ -127,15 +134,16 @@
   margin-bottom: 0;
 }
 
-.productname {
+.productname span {
   display: block;
   display: -webkit-box;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: var(--line-clamp);
   -webkit-box-orient: vertical;
   height: calc(var(--klevu-body-s-height) * var(--klevu-body-s-line-height) * 2);
   text-align: left;
   margin-top: var(--klevu-spacing-04);
+  overflow: hidden;
 }
 
 .brandname + .productname {

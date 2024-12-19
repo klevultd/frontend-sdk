@@ -84,12 +84,15 @@
   --klevu-animation-timing-function: ease-in-out;
 
   /** component specific variables */
-  --klevu-product-image-aspect-ratio: 1.3 / 1;
+  --klevu-product-image-aspect-ratio: 1 / 1;
+  --klevu-product-width: 188px;
+  --klevu-product-border: 1px solid #000000;
+  --klevu-product-border-radius: 4px;
+  --klevu-button-cursor-hover: pointer;
   /*
   --klevu-product-width: 300px;
   --klevu-product-small-width: 200px;
   */
-  --klevu-product-image-fill: cover; /* cover, contain */
 
   --klevu-color-primary: #d8edfd;
   --klevu-color-primary-rgb: 216, 237, 253;
@@ -114,7 +117,14 @@ klevu-product-query-popup::part(product-query-footer) {
   --klevu-button-text-color: #000;
 }
 
-klevu-product-query {
+klevu-product-query,
+klevu-product-query-popup {
   --klevu-color-primary: #428bca;
   --klevu-color-primary-darker: #407db3;
+  --klevu-product-image-fill: contain;
+  --klevu-product-border: 1px solid #ccc;
+  --klevu-product-border-radius: 4px;
+  --klevu-button-cursor-hover: pointer;
+  --klevu-product-name-lines: 1;
+  --klevu-product-container-cursor: pointer;
 }

@@ -18,6 +18,20 @@
   --klevu-button-text-color: #000;
 }
 
-.klevu-style-pqa klevu-product-query {
+klevu-product-query,
+klevu-product-query-popup {
   --klevu-color-primary: #428bca;
+  --klevu-color-primary: #428bca;
+  --klevu-color-primary-darker: #407db3;
+  --klevu-product-image-fill: contain;
+  --klevu-product-border: 1px solid #ccc;
+  --klevu-product-border-radius: 4px;
+  --klevu-button-cursor-hover: pointer;
+  --klevu-product-name-lines: 1;
+  --klevu-product-container-cursor: pointer;
 }
+
+/* klevu-product-query::part(product-name) {
+  --klevu-typography-font-size: 24px;
+  color: red;
+} */
