@@ -32,10 +32,38 @@ export class KlevuSlides {
   @Prop()
   hideNextPrev?: boolean
 
+  /**
+   * center position next and previous buttons
+   */
+  @Prop()
+  centerNextPrev?: boolean
+
   #gap = 0
   #slotElement?: HTMLSlotElement
   #scrollElement?: HTMLKlevuUtilScrollbarsElement
+  #previousButton?: HTMLKlevuButtonElement
+  #nextButton?: HTMLKlevuButtonElement
+  #validateNavigation = async () => {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance?.customInstance) {
+      const elements = instance.customInstance.elements()
+      const amountToSlide = await this.#calcAmountToSlide()
+      const hideNext =
+        elements.viewport.scrollLeft + elements.viewport.clientWidth + amountToSlide >=
+        elements.viewport.scrollWidth + amountToSlide
 
+      if (hideNext) {
+        this.#nextButton?.classList.add("hidden")
+      } else {
+        this.#nextButton?.classList.remove("hidden")
+      }
+      if (elements.viewport.scrollLeft === 0) {
+        this.#previousButton?.classList.add("hidden")
+      } else {
+        this.#previousButton?.classList.remove("hidden")
+      }
+    }
+  }
   #prev = async () => {
     const instance = await this.#scrollElement?.getInstance()
     if (instance?.customInstance) {
@@ -68,6 +96,16 @@ export class KlevuSlides {
     }
   }
 
+  #attachEventListener = async () => {
+    const instance = await this.#scrollElement?.getInstance()
+    if (instance?.customInstance) {
+      const elements = instance.customInstance.elements()
+      elements.viewport.addEventListener("scrollend", this.#validateNavigation)
+    } else if (instance?.nativeContainer) {
+      instance.nativeContainer.addEventListener("scrollend", this.#validateNavigation)
+    }
+  }
+
   async #calcAmountToSlide(): Promise<number> {
     let w: number | undefined
     if (this.slideFullWidth) {
@@ -89,41 +127,91 @@ export class KlevuSlides {
     }
   }
 
+  componentDidLoad() {
+    this.#validateNavigation()
+    this.#attachEventListener()
+  }
+
   render() {
     return (
       <Host>
-        <div part="slides-base">
-          {this.heading === undefined || !this.hideNextPrev ? (
-            <header>
-              <klevu-typography variant="h2" part="slides-heading">
-                {this.heading}
-              </klevu-typography>
+        {this.centerNextPrev ? (
+          <div part="slides-base">
+            {this.heading === undefined || !this.hideNextPrev ? (
+              <header>
+                <klevu-typography variant="h2" part="slides-heading">
+                  {this.heading}
+                </klevu-typography>
+              </header>
+            ) : null}
+            <div class="gridButtons">
               {this.hideNextPrev ? null : (
-                <div>
+                <div class="left">
                   <klevu-button
                     exportparts={partsExports("klevu-button")}
                     part="slides-previous-button"
                     class="prev"
                     icon="chevron_left"
                     onClick={this.#prev.bind(this)}
+                    ref={(el) => (this.#previousButton = el as HTMLKlevuButtonElement)}
                   ></klevu-button>
+                </div>
+              )}
+              <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+                <div class={{ slides: true }}>
+                  <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
+                </div>
+              </klevu-util-scrollbars>
+              {this.hideNextPrev ? null : (
+                <div class="right">
                   <klevu-button
                     exportparts={partsExports("klevu-button")}
                     part="slides-next-button"
                     class="next"
                     icon="chevron_right"
                     onClick={this.#next.bind(this)}
+                    ref={(el) => (this.#nextButton = el as HTMLKlevuButtonElement)}
                   ></klevu-button>
                 </div>
               )}
-            </header>
-          ) : null}
-          <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
-            <div class={{ slides: true }}>
-              <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
             </div>
-          </klevu-util-scrollbars>
-        </div>
+          </div>
+        ) : (
+          <div part="slides-base">
+            {this.heading === undefined || !this.hideNextPrev ? (
+              <header>
+                <klevu-typography variant="h2" part="slides-heading">
+                  {this.heading}
+                </klevu-typography>
+                {this.hideNextPrev ? null : (
+                  <div>
+                    <klevu-button
+                      exportparts={partsExports("klevu-button")}
+                      part="slides-previous-button"
+                      class="prev"
+                      icon="chevron_left"
+                      onClick={this.#prev.bind(this)}
+                      ref={(el) => (this.#previousButton = el as HTMLKlevuButtonElement)}
+                    ></klevu-button>
+                    <klevu-button
+                      exportparts={partsExports("klevu-button")}
+                      part="slides-next-button"
+                      class="next"
+                      icon="chevron_right"
+                      onClick={this.#next.bind(this)}
+                      ref={(el) => (this.#nextButton = el as HTMLKlevuButtonElement)}
+                    ></klevu-button>
+                  </div>
+                )}
+              </header>
+            ) : null}
+            <klevu-util-scrollbars overflowY="scroll" ref={(el) => (this.#scrollElement = el)}>
+              <div class={{ slides: true }}>
+                <slot ref={(el) => (this.#slotElement = el as HTMLSlotElement)}></slot>
+              </div>
+            </klevu-util-scrollbars>
+          </div>
+        )}
       </Host>
     )
   }

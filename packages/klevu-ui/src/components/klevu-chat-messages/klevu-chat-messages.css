@@ -55,3 +55,10 @@
 a {
   color: var(--klevu-chat-bubble-text-color-remote, var(--klevu-color-neutral-1));
 }
+
+klevu-product {
+  --klevu-product-details-spacing: 1px;
+}
+klevu-button {
+  --klevu-button-cursor-hover: pointer;
+}

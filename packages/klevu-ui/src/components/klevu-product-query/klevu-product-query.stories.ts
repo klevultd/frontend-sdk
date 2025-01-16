@@ -49,43 +49,139 @@ const chatRender = (args: KlevuProductQuery) => {
 
 export const Query: StoryObj<KlevuProductQuery> = {
   args: {
-    pqaWidgetId: "pqa-98a5afad-b242-4e0b-830f-78c4277e76b3",
-    url: "https://klevu-trustpilot-demo.myshopify.com/products/grand-vcm-205-ltr-hairline-silver",
+    productId: "7585342095542",
+    pqaWidgetId: "pqa-dcb56eb4-0989-4cfe-b006-2cc9e7350957",
+    productInfoGenerator: "getProductInfo()",
+    itemId: "6991200518230",
+    itemGroupId: "6991200518230",
+    itemVariantId: "41007904915542",
+    channelId: "18958647382",
+    locale: "en_US",
   },
   render: (args) =>
-    html` <div style="transform: translateY(-1px)">
-      <p>
-        Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
-        Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec massa
-        maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis odio
-        at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque urna
-        ligula nec orci. Nam sed porttitor dolor.
-        <klevu-init
-          assets-path="https://resources-webcomponents.klevu.com/1.0.0/klevu-ui"
-          .settings=${{
-            icons: {
-              thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
-              thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
-            },
-          }}
-          >${chatRender(args)}</klevu-init
-        >Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat libero, sit amet suscipit augue tortor at
-        justo. In consectetur, mi ac posuere dictum, erat ligula lacinia augue, sit amet sollicitudin felis sem eu
-        metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris quis ex interdum pretium. Praesent
-        ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida, ultrices magna vel, efficitur
-        lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
-      </p>
+    html` <script>
+        const metafields = []
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
-        maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
-        Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
-        cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
-        Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
-        efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
-        venenatis.
-      </p>
-    </div>`,
+        // Loop through each metafield key for the product
+
+        const productInfo = {
+          itemId: "6991200518230",
+          itemGroupId: "6991200518230",
+          itemVariantId: "41007904915542",
+          title: "7UP Plastic Bottles",
+          url: "https://bhavin-qa-market6.myshopify.com/en-in/products/dc8a650e3afeebd7e42a5627d6258cdb",
+          description:
+            "<p>This refreshing lime and lemon flavoured 7UP can keep you energised. You can relish each sip and feel the positive energy to capture every moment confidently.</p>",
+          vendor: "7UP",
+          priceMax: "Rs. 3,500.00",
+          priceMin: "Rs. 3,500.00",
+          tags: [],
+
+          options: [
+            {
+              name: "Title",
+              values: ["Default Title"],
+            },
+          ],
+
+          images: [
+            "https://bhavin-qa-market6.myshopify.com/cdn/shop/products/750-na-plastic-bottle-7up-original-imaf53n9fzbgcgde.jpg?v=1707312166",
+          ],
+
+          variants: [
+            {
+              itemVariantId: "41007904915542",
+              title: "Default Title",
+              sku: "Drinks002",
+              url: "https://bhavin-qa-market6.myshopify.com/en-in/products/dc8a650e3afeebd7e42a5627d6258cdb?variant=41007904915542",
+
+              price: "Rs. 3,500.00",
+
+              metafieldsV2: (function () {
+                const variantMetafields = []
+
+                return variantMetafields
+              })(),
+              inventoryStatus: (function () {
+                let inventoryStatus = ""
+
+                inventoryStatus = "OUT_OF_STOCK"
+
+                return inventoryStatus
+              })(),
+            },
+          ],
+
+          channelId: "18958647382",
+
+          locale: "en_IN",
+          metafieldsV2: metafields, // Product-level metafields
+        }
+
+        function getProductInfo() {
+          return productInfo
+        }
+
+        function loadVariantSelection(variantUrl) {
+          if (variantUrl.searchParams.has("variant") && productInfo !== null) {
+            productInfo.itemVariantId = variantUrl.searchParams.get("variant")
+
+            let pqaWidget = document.getElementsByTagName("klevu-product-query")
+            if (pqaWidget.length > 0) {
+              pqaWidget[0].setAttribute("item-variant-id", variantUrl.searchParams.get("variant"))
+            }
+
+            console.debug("variant selection updated.")
+          }
+        }
+
+        window.navigation.addEventListener("navigate", (event) => {
+          console.debug("variant selection changed")
+
+          if (document.readyState === "complete") {
+            loadVariantSelection(new URL(event.destination.url))
+          } else {
+            window.addEventListener("load", function onLoad() {
+              loadVariantSelection(new URL(event.destination.url))
+              window.removeEventListener("load", onLoad)
+            })
+          }
+        })
+      </script>
+      <div style="transform: translateY(-1px)">
+        <p>
+          Phasellus ultricies erat a nisl blandit commodo. Vivamus quis mi laoreet, scelerisque eros et, commodo augue.
+          Proin tristique malesuada diam non scelerisque. Integer sodales at dolor mollis lobortis. Sed at velit nec
+          massa maximus viverra in nec lacus. Fusce interdum quam ut porta maximus. Maecenas a turpis rhoncus, convallis
+          odio at, lacinia enim. Duis varius, dolor eu accumsan sagittis, augue libero ultricies quam, non pellentesque
+          urna ligula nec orci. Nam sed porttitor dolor.
+          <klevu-init
+            assets-path="https://resources-webcomponents.klevu.com/1.0.0/klevu-ui"
+            .settings=${{
+              icons: {
+                thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
+                thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
+              },
+            }}
+            moi-api-url="https://moi-ai-qa.ksearchnet.com/"
+            >${chatRender(args)}</klevu-init
+          >Sed hendrerit, leo sit amet ultricies volutpat, felis erat volutpat libero, sit amet suscipit augue tortor at
+          justo. In consectetur, mi ac posuere dictum, erat ligula lacinia augue, sit amet sollicitudin felis sem eu
+          metus. Nunc pretium eros ut enim finibus congue. Phasellus eu mauris quis ex interdum pretium. Praesent
+          ultricies tempus sapien, ut efficitur metus luctus ut. Sed non purus gravida, ultrices magna vel, efficitur
+          lectus. Aenean non nisi sed turpis suscipit rhoncus in ut lorem.
+        </p>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis, sapien et gravida faucibus, eros erat
+          maximus metus, nec maximus felis magna sed sem. Aliquam sodales nibh ex, imperdiet euismod velit egestas quis.
+          Nulla at orci vel ipsum luctus tempus non efficitur turpis. Donec malesuada nisl non fermentum faucibus. Proin
+          cursus, nisi sit amet auctor scelerisque, est erat pellentesque neque, sit amet blandit lacus enim vitae urna.
+          Praesent feugiat sem vitae sagittis pharetra. Morbi non nisl lectus. Pellentesque in dolor quis nunc porta
+          efficitur. Donec tincidunt lobortis malesuada. Nullam pretium orci non lorem mattis, nec ornare ligula
+          venenatis.
+        </p>
+      </div>`,
 }
 
 export const QueryWithProductId: StoryObj<KlevuProductQuery> = {
@@ -298,17 +394,106 @@ export const WithProductInfoAndItemId: StoryObj<KlevuProductQuery> = {
 export const EmbeddedView: StoryObj<KlevuProductQuery> = {
   args: {
     productId: "7585342095542",
-    pqaWidgetId: "pqa-5964f0f4-3277-4728-92e5-872eb0b49494",
+    pqaWidgetId: "pqa-dcb56eb4-0989-4cfe-b006-2cc9e7350957",
     productInfoGenerator: "getProductInfo()",
-    itemId: "7585342095542",
-    itemGroupId: "7585342095542",
-    itemVariantId: "",
-    channelId: "21678260406",
+    itemId: "6991200518230",
+    itemGroupId: "6991200518230",
+    itemVariantId: "41007904915542",
+    channelId: "18958647382",
     locale: "en_US",
     pqaWidgetLayout: "embedded",
   },
   render: (args) =>
     html`
+      <script>
+        const metafields = []
+
+        // Loop through each metafield key for the product
+
+        const productInfo = {
+          itemId: "6991200518230",
+          itemGroupId: "6991200518230",
+          itemVariantId: "41007904915542",
+          title: "7UP Plastic Bottles",
+          url: "https://bhavin-qa-market6.myshopify.com/en-in/products/dc8a650e3afeebd7e42a5627d6258cdb",
+          description:
+            "<p>This refreshing lime and lemon flavoured 7UP can keep you energised. You can relish each sip and feel the positive energy to capture every moment confidently.</p>",
+          vendor: "7UP",
+          priceMax: "Rs. 3,500.00",
+          priceMin: "Rs. 3,500.00",
+          tags: [],
+
+          options: [
+            {
+              name: "Title",
+              values: ["Default Title"],
+            },
+          ],
+
+          images: [
+            "https://bhavin-qa-market6.myshopify.com/cdn/shop/products/750-na-plastic-bottle-7up-original-imaf53n9fzbgcgde.jpg?v=1707312166",
+          ],
+
+          variants: [
+            {
+              itemVariantId: "41007904915542",
+              title: "Default Title",
+              sku: "Drinks002",
+              url: "https://bhavin-qa-market6.myshopify.com/en-in/products/dc8a650e3afeebd7e42a5627d6258cdb?variant=41007904915542",
+
+              price: "Rs. 3,500.00",
+
+              metafieldsV2: (function () {
+                const variantMetafields = []
+
+                return variantMetafields
+              })(),
+              inventoryStatus: (function () {
+                let inventoryStatus = ""
+
+                inventoryStatus = "OUT_OF_STOCK"
+
+                return inventoryStatus
+              })(),
+            },
+          ],
+
+          channelId: "18958647382",
+
+          locale: "en_IN",
+          metafieldsV2: metafields, // Product-level metafields
+        }
+
+        function getProductInfo() {
+          return productInfo
+        }
+
+        function loadVariantSelection(variantUrl) {
+          if (variantUrl.searchParams.has("variant") && productInfo !== null) {
+            productInfo.itemVariantId = variantUrl.searchParams.get("variant")
+
+            let pqaWidget = document.getElementsByTagName("klevu-product-query")
+            if (pqaWidget.length > 0) {
+              pqaWidget[0].setAttribute("item-variant-id", variantUrl.searchParams.get("variant"))
+            }
+
+            console.debug("variant selection updated.")
+          }
+        }
+
+        window.navigation.addEventListener("navigate", (event) => {
+          console.debug("variant selection changed")
+
+          if (document.readyState === "complete") {
+            loadVariantSelection(new URL(event.destination.url))
+          } else {
+            window.addEventListener("load", function onLoad() {
+              loadVariantSelection(new URL(event.destination.url))
+              window.removeEventListener("load", onLoad)
+            })
+          }
+        })
+      </script>
       <div style="transform: translateY(-1px)">
         <p>
           <klevu-init
@@ -319,7 +504,7 @@ export const EmbeddedView: StoryObj<KlevuProductQuery> = {
                 thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
               },
             }}
-            moi-api-url="https://moi-ai-qa2.ksearchnet.com/"
+            moi-api-url="https://moi-ai-qa.ksearchnet.com/"
             >${chatRender(args)}</klevu-init
           >
         </p>

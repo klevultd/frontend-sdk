@@ -51,6 +51,11 @@ export class KlevuChatMessages {
    * Scroll to bottom of the chat
    */
   @Prop() scrollBottom?: () => void
+
+  /**
+   * Should display the product slider navigation buttons centered in relating to product list
+   */
+  @Prop() centerNextPrev: boolean = true
   /**
    * When product is clicked
    */
@@ -214,15 +219,21 @@ export class KlevuChatMessages {
             return (
               <div>
                 <klevu-slides
+                  centerNextPrev={this.centerNextPrev}
                   exportparts={partsExports("klevu-slides")}
                   style={{
-                    "--klevu-slides-item-width": "200px;",
+                    "--klevu-slides-item-width": "188px",
+                    "--klevu-product-grid-spacing": "var(--klevu-spacing-04)",
                   }}
                 >
                   {message.productData.products.map((product) => (
                     <klevu-product
                       product={product}
                       hideSwatches
+                      hideDescription
+                      hidePrice
+                      showAddToCart={false}
+                      showRatings={false}
                       onKlevuProductClick={(event) => {
                         event.preventDefault()
                         event.stopPropagation()
@@ -230,6 +241,9 @@ export class KlevuChatMessages {
                           product,
                         })
                         return false
+                      }}
+                      style={{
+                        "text-align": "center",
                       }}
                       exportparts={partsExports("klevu-product")}
                     >

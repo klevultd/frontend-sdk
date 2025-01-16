@@ -392,7 +392,7 @@ export async function startMoi(
       config
     )
 
-    if (!result?.data[0].context) {
+    if (!result?.data || !result?.data[0]?.context) {
       throw new Error("No context found")
     }
 

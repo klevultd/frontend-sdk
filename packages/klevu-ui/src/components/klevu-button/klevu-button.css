@@ -5,6 +5,7 @@
   * @prop --klevu-button-text-align center: Align text on button
   * @prop --klevu-button-padding calc(var(--klevu-size-m) - (var(--klevu-body-s-size) / 2)): Override buttom padding with custom value
   * @prop --klevu-button-font-size var(--klevu-body-s-size): Size of button text
+  * @prop --klevu-button-cursor-hover auto: type of cursor on hover
   */
   --background-hover: var(--klevu-button-background-hover, var(--klevu-color-primary-darker));
   --background-color: var(--klevu-button-background-color, var(--klevu-color-primary));
@@ -16,6 +17,7 @@
   --icon-color: var(--klevu-button-icon-color, var(--text-color));
   --icon-rotation: var(--klevu-button-icon-rotation, 0deg);
   --border-radius: var(--klevu-button-border-radius, 10000000px);
+  --cursor-hover: var(--klevu-button-cursor-hover, auto);
 }
 
 button {
@@ -75,6 +77,7 @@ button klevu-icon {
 
 button:hover {
   background-color: var(--background-hover);
+  cursor: var(--cursor-hover);
 }
 
 button:focus {
@@ -112,6 +115,7 @@ button.secondary klevu-icon {
 
 button.secondary:hover {
   background: var(--klevu-color-neutral-3);
+  cursor: var(--cursor-hover);
 }
 
 button.fullwidth {
