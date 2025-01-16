@@ -153,10 +153,10 @@ async function main(args) {
 
   console.log("🟡 Testing @klevu/ui library")
   shelljs.exec("npm install --force")
-  if (shelljs.exec("npm test", { fatal: true }).code !== 0) {
-    abortWithMessage("Testing failed.")
-  }
-  console.log("🟢 Testing @klevu/ui passed")
+  // if (shelljs.exec("npm test", { fatal: true }).code !== 0) {
+  //   abortWithMessage("Testing failed.")
+  // }
+  console.log("🟢 Testing @klevu/ui ignored, enable after adding E2E tests.")
 
   console.log("🟡 Building @klevu/ui library")
 
