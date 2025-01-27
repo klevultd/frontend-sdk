@@ -14,7 +14,6 @@ type Config = {
   nav: Array<{
     key: string
     label: string
-    emoji: string
   }>
   eventsApiV2Url: string
   eventsApiV1Url: string
@@ -55,21 +54,18 @@ export const config: Config = {
   productPageRecommendationId: "k-efd5337c-051e-44a2-810c-e23de2be513f",
   recommendationsApiUrl: "https://config-cdn.ksearchnet.com/recommendations/",
   nav: [
-    {
-      key: "men",
-      label: "Men",
-      emoji: "🙎‍♂️",
-    },
-    {
-      key: "women",
-      label: "Women",
-      emoji: "🙍‍♀️",
-    },
-    {
-      key: "men;shoes",
-      label: "Men's shoes",
-      emoji: "👞",
-    },
+    // {
+    //   key: "",
+    //   label: "",
+    // },
+    // {
+    //   key: "",
+    //   label: "",
+    // },
+    // {
+    //   key: "",
+    //   label: "",
+    // },
   ],
   eventsApiV1Url: "https://stats.ksearchnet.com/analytics/",
   eventsApiV2Url: "https://stats.ksearchnet.com/analytics/collect",

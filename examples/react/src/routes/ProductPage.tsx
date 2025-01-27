@@ -9,6 +9,7 @@ import {
   sendRecommendationViewEvent,
   exclude,
   KlevuResponseQueryObject,
+  alsoViewed,
 } from "@klevu/core"
 import { Button, Container, Grid, Typography } from "@mui/material"
 import { useCallback, useEffect, useState, Fragment } from "react"
@@ -35,6 +36,7 @@ export function ProductPage() {
 
   const fetchProduct = useCallback(async () => {
     const alsoViewedId = "alsoviewed" + new Date().getTime()
+    let queryId = alsoViewedId
     const similarId = "similar" + new Date().getTime()
     let recsPayload
     try {
@@ -42,7 +44,7 @@ export function ProductPage() {
         recsPayload = await kmcRecommendation(
           config.productPageRecommendationId,
           {
-            id: alsoViewedId,
+            id: queryId,
             currentProductId: params.id,
             itemGroupId: params.groupId,
             mode: "demo",
@@ -57,6 +59,18 @@ export function ProductPage() {
       }
     } catch (e) {
       console.error("Failed to load product page", e)
+    }
+    if (!recsPayload?.queries || recsPayload.queries.length === 0) {
+      console.log(
+        "product recs not found for id ",
+        config.homePageRecommendationId1
+      )
+      recsPayload = alsoViewed()
+      queryId = "alsoviewed"
+      recsPayload.queries[0].settings.mode = "demo"
+      console.log("Updated product recs payload", {
+        recsPayload,
+      })
     }
     const res = await KlevuFetch(
       products([params.id]),
@@ -77,7 +91,7 @@ export function ProductPage() {
     setProduct(product)
     setSimilar(sim?.records)
     if (recsPayload?.queries?.length > 0) {
-      const also = res.queriesById(alsoViewedId)
+      const also = res.queriesById(queryId)
       setAlsoBoought(also?.records)
       setAlsoResult(also)
     }
@@ -203,7 +217,7 @@ export function ProductPage() {
         {alsoviewed.length > 0 && (
           <RecommendationBanner
             products={alsoviewed}
-            title="Also viewed KMC recommendation"
+            title="Also viewed"
             productClick={(productId, variantId, product, index) => {
               alsoResult.recommendationClickEvent?.({
                 productId,

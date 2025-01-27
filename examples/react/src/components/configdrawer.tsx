@@ -14,10 +14,17 @@ import {
   Snackbar,
   Menu,
   MenuItem,
+  Select,
+  SelectChangeEvent,
+  FormControl,
+  InputLabel,
 } from "@mui/material"
 import SettingsIcon from "@mui/icons-material/Settings"
 import { config, saveConfig, resetConfig } from "../config"
 import useCopyToClipboard from "../useCopyToClipboard"
+import { useGlobalVariables } from "../globalVariablesContext"
+import { getCategoryLabel } from "../utils"
+import { cloneDeep } from "lodash"
 
 const stylesDrawer = {
   maxWidth: 700,
@@ -54,6 +61,7 @@ export const ConfigDrawer = () => {
   const copy = useCopyToClipboard()
   const [showCopied, setShowCopied] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { topCategories } = useGlobalVariables()
 
   const onChangeValue = (id, value) => {
     setInputConfig((c) => {
@@ -61,12 +69,11 @@ export const ConfigDrawer = () => {
       return c
     })
   }
-  const onChangeValueNav = (id, value) => {
-    let [name, key] = id.split("-")
-    setInputConfig((c) => {
-      c.nav[key][name] = value
-      return c
-    })
+  const onChangeValueNav = (key, value) => {
+    console.log({ key, value, inputConfig })
+    const inputConfigCloned = cloneDeep(inputConfig)
+    inputConfigCloned.nav[key] = { key: value, label: getCategoryLabel(value) }
+    setInputConfig(inputConfigCloned)
   }
 
   const removeUrlParam = () => {
@@ -105,17 +112,14 @@ export const ConfigDrawer = () => {
       {
         key: "",
         label: "",
-        emoji: "",
       },
       {
         key: "",
         label: "",
-        emoji: "",
       },
       {
         key: "",
         label: "",
-        emoji: "",
       },
     ]
     setInputConfig(inputConfig)
@@ -151,6 +155,7 @@ export const ConfigDrawer = () => {
     setAnchorEl(null)
   }
   const open = Boolean(anchorEl)
+  // console.log({ inputConfig, config, topCategories })
   return (
     <>
       <IconButton onClick={() => setIsDrawerOpen(true)}>
@@ -227,40 +232,6 @@ export const ConfigDrawer = () => {
               >
                 Save
               </Button>
-              {/* <Grid container spacing={1}>
-                <Grid item xs={3}>
-                  <Button
-                    onClick={onResetForm}
-                    variant="outlined"
-                    color="secondary"
-                  >
-                    Reset Form
-                  </Button>
-                </Grid>
-                <Grid item xs={3}>
-                  <Button
-                    onClick={onReset}
-                    variant="outlined"
-                    color="secondary"
-                  >
-                    Reset
-                  </Button>
-                </Grid>
-                <Grid item xs={3}>
-                  <Button onClick={onSave} variant="outlined" color="primary">
-                    Save
-                  </Button>
-                </Grid>
-                <Grid item xs={3}>
-                  <Button
-                    onClick={onCopyUrl}
-                    variant="outlined"
-                    color="primary"
-                  >
-                    Copy Url
-                  </Button>
-                </Grid>
-              </Grid> */}
             </Grid>
           </Grid>
         </Box>
@@ -272,20 +243,6 @@ export const ConfigDrawer = () => {
                 General
               </Typography>
             </Grid>
-            {/* <Grid item xs={12} sm={4}>
-              <Typography variant="body2" component="div">
-                Reset Personalisation Data
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={8}>
-              <Button
-                onClick={onResetPersonalisation}
-                variant="outlined"
-                color="primary"
-              >
-                Reset & Refresh
-              </Button>
-            </Grid> */}
             <Grid item xs={12} sm={4}>
               <Typography variant="body2" component="div">
                 Search url
@@ -539,83 +496,56 @@ export const ConfigDrawer = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Typography variant="body1" component="div">
-                Category
+                Category Selection
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <Box>
-                <List>
-                  <ListItem>
-                    <Grid container spacing={2}>
-                      <Grid item xs={5}>
-                        <Typography variant="body2" component="div">
-                          Key
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={5}>
-                        <Typography variant="body2" component="div">
-                          Label
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={2}>
-                        <Typography variant="body2" component="div">
-                          Emoji
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </ListItem>
-                  {config.nav.map((item, key) => {
+            <Grid item xs={12} style={{ padding: 0 }}>
+              <List sx={{ display: "flex" }}>
+                {[...config.nav, ...Array.from({ length: 3 })]
+                  .slice(0, 3)
+                  .map((item, key) => {
                     return (
-                      <ListItem key={key.toString()}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={5}>
-                            <TextField
-                              fullWidth
-                              id={"key-" + key}
-                              type="text"
-                              defaultValue={item.key}
-                              onChange={(e) =>
-                                onChangeValueNav(
-                                  e.target.id,
-                                  e.target.value.trim()
-                                )
-                              }
-                            />
-                          </Grid>
-                          <Grid item xs={5}>
-                            <TextField
-                              fullWidth
-                              id={"label-" + key}
-                              type="text"
-                              defaultValue={item.label}
-                              onChange={(e) =>
-                                onChangeValueNav(
-                                  e.target.id,
-                                  e.target.value.trim()
-                                )
-                              }
-                            />
-                          </Grid>
-                          <Grid item xs={2}>
-                            <TextField
-                              fullWidth
-                              id={"emoji-" + key}
-                              type="text"
-                              defaultValue={item.emoji}
-                              onChange={(e) =>
-                                onChangeValueNav(
-                                  e.target.id,
-                                  e.target.value.trim()
-                                )
-                              }
-                            />
+                      <ListItem sx={{ p: 0 }} key={key.toString()}>
+                        <Grid container>
+                          <Grid item xs={10}>
+                            <FormControl
+                              variant="standard"
+                              sx={{ m: 2, minWidth: 150, maxWidth: 180 }}
+                            >
+                              <InputLabel>Category {key + 1}</InputLabel>
+
+                              <Select
+                                id="categorySelect"
+                                // value={item.key}
+                                defaultValue={
+                                  item?.key ||
+                                  (topCategories?.length
+                                    ? topCategories[key].id
+                                    : "")
+                                }
+                                label={item?.label}
+                                onChange={(v: SelectChangeEvent) => {
+                                  console.log(v.target.value)
+                                  onChangeValueNav(key, v.target.value)
+                                }}
+                                sx={{ maxWidth: 400 }}
+                              >
+                                {topCategories?.map((category) => (
+                                  <MenuItem
+                                    key={category.id}
+                                    value={category.id}
+                                  >
+                                    {category.label}
+                                  </MenuItem>
+                                ))}
+                              </Select>
+                            </FormControl>
                           </Grid>
                         </Grid>
                       </ListItem>
                     )
                   })}
-                </List>
-              </Box>
+              </List>
             </Grid>
           </Grid>
         </Box>
