@@ -230,7 +230,7 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
   }, [params.id])
 
   const title =
-    config.nav.find((n) => n?.key === params.id)?.label ||
+    config?.nav?.find((n) => n?.key === params.id)?.label ||
     getCategoryLabel(params.id)
   return (
     <>
