@@ -48,9 +48,13 @@ export function GlobalVariablesContextProvider(props: { children: any }) {
     if (!searchResult) {
       return
     }
+
+    // KLEVU_PRODUCT;;Womens Footwear Sneakers @ku@kuCategory@ku@
+
     const reducedResult = searchResult.records.reduce((acc, record) => {
       record.klevu_category
         .replace("KLEVU_PRODUCT;;", "")
+        .replace("@ku@kuCategory@ku@", "")
         .split(";;;")[0]
         .split(";;")
         .forEach((category) => {
