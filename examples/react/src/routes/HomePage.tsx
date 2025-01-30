@@ -113,19 +113,19 @@ export function HomePage() {
       trendingPayload = {
         queries: [
           {
-            id: trendingRecsNoPersonlisation,
+            id: trendingRecsNonPersonalizedId,
             typeOfRequest: "RECS_TRENDING",
             settings: {
               typeOfRecords: ["KLEVU_PRODUCT"],
               limit: 8,
-              id: trendingRecsNoPersonlisation,
+              id: trendingRecsNonPersonalizedId,
               mode: "demo",
             },
           },
         ],
       }
       console.log("Updated trending payload", {
-        trendingPersonalisedPayload,
+        trendingPayload,
       })
     }
 
