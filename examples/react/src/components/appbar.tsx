@@ -12,14 +12,13 @@ import { config } from "../config"
 import { useGlobalVariables } from "../globalVariablesContext"
 import { ConfigDrawer } from "./configdrawer"
 
-export const pages = config.nav.filter((n) => n.label).map((n) => n.label)
-export const links = config.nav.map((n) => n.key)
-const emojis = config.nav.reduce((a, v) => ({ ...a, [v.label]: v.emoji }), {})
+// export const pages = config.nav.filter((n) => n?.label).map((n) => n.label)
+// export const links = config.nav.map((n) => n.key)
 
 const ResponsiveAppBar = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const { debugMode, toggleDebugMode } = useGlobalVariables()
+  const { debugMode, toggleDebugMode, topCategories } = useGlobalVariables()
 
   return (
     <AppBar position="fixed" color="inherit">
@@ -45,14 +44,24 @@ const ResponsiveAppBar = () => {
               gap: "8px",
             }}
           >
-            {pages.map((page, index) => (
-              <Link key={page} to={`/category/${links[index]}`}>
+            {topCategories.slice(0, 3).map((page, index) => (
+              <Link
+                key={page.id}
+                to={`/category/${config.nav?.[index]?.key || page.id}`}
+              >
                 <Button
-                  sx={{ my: 2, display: "block", whiteSpace: "nowrap" }}
+                  title={config.nav?.[index]?.label || page.label}
+                  sx={{
+                    my: 2,
+                    display: "block",
+                    whiteSpace: "nowrap",
+                    maxWidth: "100px",
+                    overflow: "hidden",
+                  }}
                   variant="outlined"
                   color="secondary"
                 >
-                  {emojis[page]} {page}
+                  {config.nav?.[index]?.label || page.label}
                 </Button>
               </Link>
             ))}

@@ -4,6 +4,8 @@ import {
   KlevuRecord,
   KlevuResponseQueryObject,
   kmcRecommendation,
+  newArrivals,
+  personalisation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
 import { Container, Typography } from "@mui/material"
@@ -13,7 +15,12 @@ import { config } from "../config"
 import { useGlobalVariables } from "../globalVariablesContext"
 
 export function HomePage() {
+  const [newArrivalRecords, setNewArrivalRecords] = useState<KlevuRecord[]>([])
+  const [newArrivalsRecs, setNewArrivalsRecs] = useState<
+    KlevuResponseQueryObject | undefined
+  >()
   const [trendingRecs, setTrendingRecs] = useState<KlevuRecord[]>([])
+  useState<KlevuResponseQueryObject | undefined>()
   const [trendingRecsNoPersonlisation, setTrendingRecsNoPersonlisation] =
     useState<KlevuRecord[]>([])
   const [trendingResult, setTrendingResult] = useState<
@@ -26,13 +33,13 @@ export function HomePage() {
   const fetchData = async () => {
     if (!config.homePageRecommendationId1 && !config.homePageRecommendationId2)
       return
-    let recsPayload1, recsPayload2
+    let trendingPersonalisedPayload, trendingPayload
     const trendingRecsId = "trendingrecs" + new Date().getTime()
     const trendingRecsNonPersonalizedId =
       "trendingrecs-nopersonalisation" + new Date().getTime()
     try {
       if (config.homePageRecommendationId1) {
-        recsPayload1 = await kmcRecommendation(
+        trendingPersonalisedPayload = await kmcRecommendation(
           config.homePageRecommendationId1,
           {
             id: trendingRecsId,
@@ -47,7 +54,7 @@ export function HomePage() {
         )
       }
       if (config.homePageRecommendationId2) {
-        recsPayload2 = await kmcRecommendation(
+        trendingPayload = await kmcRecommendation(
           config.homePageRecommendationId2,
           {
             id: trendingRecsNonPersonalizedId,
@@ -62,14 +69,76 @@ export function HomePage() {
         )
       }
     } catch (error) {
+      console.log("*********")
       console.error("Failed to load recs on home page", error)
     }
-    const result = await KlevuFetch(recsPayload1 || {}, recsPayload2 || {})
-    if (recsPayload1?.queries?.length > 0) {
+    console.log("Generated payloads", {
+      trendingPersonalisedPayload,
+      trendingPayload,
+    })
+    if (
+      !trendingPersonalisedPayload?.queries ||
+      trendingPersonalisedPayload.queries.length === 0
+    ) {
+      console.log(
+        "personalized trending recs not found for id ",
+        config.homePageRecommendationId1
+      )
+      trendingPersonalisedPayload = {
+        queries: await personalisation().modifyAfter(
+          [
+            {
+              id: trendingRecsId,
+              typeOfRequest: "RECS_TRENDING",
+              settings: {
+                typeOfRecords: ["KLEVU_PRODUCT"],
+                limit: 8,
+                id: trendingRecsId,
+                mode: "demo",
+              },
+            },
+          ],
+          "kmcRecommendation"
+        ),
+      }
+      console.log("Updated personalised trending payload", {
+        trendingPersonalisedPayload,
+      })
+    }
+    if (!trendingPayload?.queries || trendingPayload.queries.length === 0) {
+      console.log(
+        "trending recs not found for id ",
+        config.homePageRecommendationId2
+      )
+      trendingPayload = {
+        queries: [
+          {
+            id: trendingRecsNonPersonalizedId,
+            typeOfRequest: "RECS_TRENDING",
+            settings: {
+              typeOfRecords: ["KLEVU_PRODUCT"],
+              limit: 8,
+              id: trendingRecsNonPersonalizedId,
+              mode: "demo",
+            },
+          },
+        ],
+      }
+      console.log("Updated trending payload", {
+        trendingPayload,
+      })
+    }
+
+    const result = await KlevuFetch(
+      trendingPersonalisedPayload || {},
+      trendingPayload || {},
+      newArrivals(undefined, { id: "newArrivals" })
+    )
+    if (trendingPersonalisedPayload?.queries?.length > 0) {
       setTrendingResult(result.queriesById(trendingRecsId))
       setTrendingRecs(result.queriesById(trendingRecsId)?.records)
     }
-    if (recsPayload2?.queries?.length > 0) {
+    if (trendingPayload?.queries?.length > 0) {
       setTrendingResultNoPersonalisation(
         result.queriesById(trendingRecsNonPersonalizedId)
       )
@@ -77,6 +146,8 @@ export function HomePage() {
         result.queriesById(trendingRecsNonPersonalizedId)?.records
       )
     }
+    setNewArrivalRecords(result.queriesById("newArrivals").records)
+    setNewArrivalsRecs(result.queriesById("newArrivals"))
   }
 
   useEffect(() => {
@@ -104,7 +175,7 @@ export function HomePage() {
         {trendingRecs.length > 0 && (
           <RecommendationBanner
             products={trendingRecs}
-            title="Trending recommendations using KMC builder personalised"
+            title="Trending products for you"
             productClick={(productId, variantId) => {
               trendingResult.recommendationClickEvent?.({
                 productId,
@@ -117,9 +188,21 @@ export function HomePage() {
         {trendingRecsNoPersonlisation.length > 0 && (
           <RecommendationBanner
             products={trendingRecsNoPersonlisation}
-            title="Trending recommendations using KMC builder"
+            title="Trending products"
             productClick={(productId, variantId) => {
               trendingResultNoPersonalisation.recommendationClickEvent?.({
+                productId,
+                variantId,
+              })
+            }}
+          />
+        )}
+        {trendingRecsNoPersonlisation.length > 0 && (
+          <RecommendationBanner
+            products={newArrivalRecords}
+            title="New Arrivals"
+            productClick={(productId, variantId) => {
+              newArrivalsRecs.recommendationClickEvent?.({
                 productId,
                 variantId,
               })

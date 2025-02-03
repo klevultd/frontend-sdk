@@ -4,6 +4,7 @@ import {
   KlevuFetch,
   KlevuRecord,
   KlevuResponseQueryObject,
+  boughtTogether,
   kmcRecommendation,
   sendRecommendationViewEvent,
 } from "@klevu/core"
@@ -36,7 +37,7 @@ export function CheckoutPage() {
       return
     }
     const alsoBoughtId = "alsobought" + new Date().getTime()
-
+    let queryId = alsoBoughtId
     let recsPayload
     try {
       recsPayload = await kmcRecommendation(
@@ -57,10 +58,27 @@ export function CheckoutPage() {
       console.error("Failed to render checkout recs", err)
     }
 
+    if (!recsPayload?.queries || recsPayload.queries.length === 0) {
+      console.log(
+        "checkout payload not found for id ",
+        config.checkoutPageRecommendationId
+      )
+      recsPayload = boughtTogether(
+        cart.items.map((p) => p.id),
+        {}
+      )
+      recsPayload.queries[0].settings.mode = "demo"
+      queryId = "boughtTogether"
+
+      console.log("Updated alsobought payload", {
+        recsPayload,
+      })
+    }
+
     const result = await KlevuFetch(recsPayload || {})
     if (recsPayload?.queries?.length > 0) {
-      setAlsoBoughtResult(result.queriesById(alsoBoughtId))
-      setAlsoBoughtProducts(result.queriesById(alsoBoughtId).records)
+      setAlsoBoughtResult(result.queriesById(queryId))
+      setAlsoBoughtProducts(result.queriesById(queryId).records)
     }
   }
 
@@ -141,7 +159,7 @@ export function CheckoutPage() {
       {alsoBoughtProducts.length > 0 && (
         <RecommendationBanner
           products={alsoBoughtProducts}
-          title="Also bought together KMC recommendation"
+          title="Also bought together"
           productClick={(productId, variantId) => {
             alsoBoughtResult.recommendationClickEvent?.({
               productId,

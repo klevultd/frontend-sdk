@@ -4,6 +4,8 @@ import {
   FilterManagerFilters,
   KMCRecommendationLogic,
   personalisation,
+  trendingCategoryProducts,
+  newArrivals,
 } from "@klevu/core"
 import {
   abTest,
@@ -36,11 +38,12 @@ import { useNavigate, useParams, useLocation } from "react-router-dom"
 import { Product } from "./product"
 
 import { useSnackbar } from "notistack"
-import { links, pages } from "./appbar"
+import { links } from "./appbar"
 import { FilterDrawer } from "./filterdrawer"
 import { RecommendationBanner } from "./recommendationBanner"
 import { config } from "../config"
 import { useGlobalVariables } from "../globalVariablesContext"
+import { getCategoryLabel } from "../utils"
 
 const manager = new FilterManager()
 
@@ -63,6 +66,9 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
   const [recommendationProducts, setRecommendationProducts] = useState<
     KlevuRecord[]
   >([])
+  const [alsoViewedProducts, setAlsoViewedProducts] = useState<KlevuRecord[]>(
+    []
+  )
   const searchId = useRef("")
   const [sorting, setSorting] = useState(KlevuSearchSorting.Relevance)
   const [showMore, setShowMore] = useState(false)
@@ -71,6 +77,9 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
     KlevuResponseQueryObject | undefined
   >(undefined)
   const [recommendationResponse, setRecommendationResponse] = useState<
+    KlevuResponseQueryObject | undefined
+  >(undefined)
+  const [alsoViewedResponse, setAlsoViewedResponse] = useState<
     KlevuResponseQueryObject | undefined
   >(undefined)
   const { debugMode } = useGlobalVariables()
@@ -108,6 +117,26 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
     } catch (e) {
       console.error("Failed to get recs data", e)
     }
+
+    if (!recsPayload?.queries || recsPayload.queries.length === 0) {
+      console.log(
+        "trending recs not found for id ",
+        config.homePageRecommendationId2
+      )
+      recsPayload = trendingCategoryProducts(
+        params.id,
+        {
+          id: recommendationId,
+        },
+        ...searchModifiers
+      )
+      recsPayload.queries[0].settings.mode = "demo"
+      console.log("Updated trending payload for category ", {
+        recsPayload,
+        searchModifiers,
+      })
+    }
+
     const res = await KlevuFetch(
       categoryMerchandising(
         params.id,
@@ -135,7 +164,8 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
         abTest(),
         ...searchModifiers
       ),
-      recsPayload || {}
+      recsPayload || {},
+      newArrivals(params.id, { id: "newarrivals" }, ...searchModifiers)
     )
 
     const searchResult = res.queriesById(searchId.current)
@@ -149,6 +179,10 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
       setRecommendationResponse(recommendationResult)
       setRecommendationProducts(recommendationResult?.records ?? [])
     }
+
+    const alsoViewedResult = res.queriesById("newarrivals")
+    setAlsoViewedResponse(alsoViewedResult)
+    setAlsoViewedProducts(alsoViewedResult?.records ?? [])
 
     setSearchResponse(searchResult)
 
@@ -195,8 +229,9 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
     initialFetch()
   }, [params.id])
 
-  const title = pages[links.findIndex((p) => p === params.id)]
-
+  const title =
+    config?.nav?.find((n) => n?.key === params.id)?.label ||
+    getCategoryLabel(params.id)
   return (
     <>
       <FilterDrawer
@@ -320,6 +355,18 @@ export function Category({ type = "" }: { type?: "" | "personalisation" }) {
           </div>
         ) : null}
       </div>
+      {alsoViewedProducts.length > 0 && (
+        <RecommendationBanner
+          products={alsoViewedProducts}
+          title="Also viewed"
+          productClick={(productId, variantId, product, index) => {
+            alsoViewedResponse.recommendationClickEvent?.({
+              productId,
+              variantId,
+            })
+          }}
+        />
+      )}
     </>
   )
 }
