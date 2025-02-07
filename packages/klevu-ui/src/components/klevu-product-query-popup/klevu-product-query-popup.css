@@ -146,11 +146,35 @@ klevu-typography.fineprint {
   --klevu-body-xs-size: 10px;
 }
 
+.disclaimer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
 .disclaimer {
-  display: inline;
   font-size: 8px;
   color: #666;
-  margin-left: 1px;
+  margin-left: 3px;
+}
+
+.privacy-link {
+  margin-left: 3px;
+}
+
+.powered-by-message,
+.privacy-link,
+.powered-by-message:visited,
+.privacy-link:visited,
+.powered-by-message:active,
+.privacy-link:active,
+.powered-by-message:hover,
+.privacy-link:hover {
+  font-size: 8px;
+  text-decoration: none;
+  color: #666;
+  white-space: nowrap;
 }
 
 .loading-sorry {
@@ -217,17 +241,6 @@ klevu-popup {
   100% {
     opacity: 1;
   }
-}
-
-.powered-by-message,
-.powered-by-message:visited,
-.powered-by-message:active,
-.powered-by-message:hover {
-  font-size: 8px;
-  margin-top: 8px;
-  display: inline;
-  text-decoration: none;
-  color: #666;
 }
 
 .error-text {
