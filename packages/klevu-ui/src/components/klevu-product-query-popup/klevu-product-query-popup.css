@@ -161,6 +161,7 @@ klevu-typography.fineprint {
 
 .privacy-link {
   margin-left: 3px;
+  text-decoration: underline !important;
 }
 
 .powered-by-message,
