@@ -585,13 +585,16 @@ export class KlevuProductQueryPopup {
                 )}
               </div>
             )}
-            <div style={{ textAlign: "center" }}>
+            <div class="disclaimer-wrapper">
               {!this.removeAskloBranding && (
                 <a target="_blank" href="https://asklo.ai/" class="powered-by-message">
                   {this.poweredByMessage}
                 </a>
               )}
               <span class="disclaimer">{this.#disclaimer}</span>
+              <a target="_blank" href="https://asklo.ai/policies/shopper-privacy-and-data" class="privacy-link">
+                View Privacy Details
+              </a>
             </div>
           </div>
         </klevu-chat-layout>
