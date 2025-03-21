@@ -504,6 +504,7 @@ export const ConfigDrawer = () => {
                 {[...config.nav, ...Array.from({ length: 3 })]
                   .slice(0, 3)
                   .map((item, key) => {
+                    if(!topCategories[key]?.id) return null;
                     return (
                       <ListItem sx={{ p: 0 }} key={key.toString()}>
                         <Grid container>

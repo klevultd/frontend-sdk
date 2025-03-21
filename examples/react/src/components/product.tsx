@@ -104,6 +104,16 @@ const ProductCard = (props: {
 }) => {
   const p = props.product
   const d = props.debugModeShowOnly
+  let price = new Intl.NumberFormat(undefined).format(parseFloat(p.salePrice));
+
+  try {
+    price = new Intl.NumberFormat(undefined, {
+          style: "currency",
+          currency: p.currency,
+        }).format(parseFloat(p.salePrice))
+  } catch(e) {
+    console.error("Error converting price in ProductCard:", e)
+  }
   return (
     <a
       href={
@@ -142,12 +152,7 @@ const ProductCard = (props: {
         ></Typography>
       </Tooltip>
       <Typography variant="h6" className="price">
-        {p.currency
-          ? new Intl.NumberFormat(undefined, {
-              style: "currency",
-              currency: p.currency,
-            }).format(parseFloat(p.salePrice))
-          : p.currency}
+        {price}
       </Typography>
 
       {props.debugMode && (
