@@ -58,8 +58,10 @@ export function GlobalVariablesContextProvider(props: { children: any }) {
         .split(";;;")[0]
         .split(";;")
         .forEach((category) => {
-          if (isUndefined(acc[category])) acc[category] = 1
-          else acc[category] = acc[category] + 1
+          if(category.trim()) {
+            if (isUndefined(acc[category])) acc[category] = 1
+            else acc[category] = acc[category] + 1
+          }
         })
       return acc
     }, {})
