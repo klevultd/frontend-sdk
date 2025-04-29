@@ -5,14 +5,12 @@ import type { Meta, StoryObj } from "@storybook/web-components"
 import { KlevuProductQuery } from "./klevu-product-query"
 export const { argTypes, parameters, description, decorators } = MDXAutoFillMeta("klevu-product-query")
 
-const decoratorsWithoutInit = [decorators[0]]
-
 const meta: Meta = {
   title: "Apps/Product Query",
   component: "klevu-product-query",
   argTypes,
   parameters,
-  decorators: decoratorsWithoutInit,
+  decorators: decorators,
 }
 
 export default meta
@@ -496,17 +494,7 @@ export const EmbeddedView: StoryObj<KlevuProductQuery> = {
       </script>
       <div style="transform: translateY(-1px)">
         <p>
-          <klevu-init
-            assets-path="https://resources-webcomponents.klevu.com/1.0.0/klevu-ui"
-            .settings=${{
-              icons: {
-                thumb_up: "https://resources-webcomponents.klevu.com/pqa/thumbs-up.svg",
-                thumb_down: "https://resources-webcomponents.klevu.com/pqa/thumbs-down.svg",
-              },
-            }}
-            moi-api-url="https://moi-ai-qa.ksearchnet.com/"
-            >${chatRender(args)}</klevu-init
-          >
+          ${chatRender(args)}
         </p>
       </div>
       <script type="text/javascript">
