@@ -48,6 +48,9 @@ export const Tool = memo(function KlevuSettings() {
   const [recommendationsApiUrl, setRecommendationsApiUrl] = useState<string | undefined>(
     localStorage.getItem("klevu-recommendations-api-url") || "https://config-cdn.ksearchnet.com/recommendations/"
   )
+  const [moiApiUrl, setMoiApiUrl] = useState<string | undefined>(
+    localStorage.getItem("klevu-moi-api-url") || "https://moi-ai.ksearchnet.com/"
+  )
   const [language, setLanguage] = useState(localStorage.getItem("klevu-language") || undefined)
   const [useKMC, setUseKMC] = useState<boolean>(localStorage.getItem("klevu-use-kmc") === "false" ? false : true)
 
@@ -71,6 +74,11 @@ export const Tool = memo(function KlevuSettings() {
     } else {
       localStorage.removeItem("klevu-recommendations-api-url")
     }
+    if (moiApiUrl) {
+      localStorage.setItem("klevu-moi-api-url", moiApiUrl)
+    } else {
+      localStorage.removeItem("klevu-moi-api-url")
+    }
     window.location.reload()
   }
 
@@ -82,6 +90,7 @@ export const Tool = memo(function KlevuSettings() {
     setEventsV1Url(localStorage.getItem("klevu-events-url-1") || undefined)
     setEventsV2Url(localStorage.getItem("klevu-events-url-2") || undefined)
     setRecommendationsApiUrl(localStorage.getItem("klevu-recommendations-api-url") || undefined)
+    setMoiApiUrl(localStorage.getItem("klevu-moi-api-url") || undefined)
     setIsOpen(false)
   }
 
@@ -165,6 +174,18 @@ export const Tool = memo(function KlevuSettings() {
                     }
                   }}
                   value={recommendationsApiUrl}
+                />
+                Moi API URL
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    if (e.target.value === "") {
+                      setMoiApiUrl(undefined)
+                    } else {
+                      setMoiApiUrl(e.target.value)
+                    }
+                  }}
+                  value={moiApiUrl}
                 />
                 Language
                 <select
