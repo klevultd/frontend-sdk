@@ -345,3 +345,12 @@ klevu-chat-layout {
   background-color: var(--klevu-prepopulated-questions-hover-background);
   color: var(--klevu-prepopulated-questions-hover-color);
 }
+
+.genericactions {
+  margin: var(--klevu-spacing-03) 0;
+  display: flex;
+  flex-direction: row;
+  gap: var(--klevu-spacing-03);
+  flex-wrap: wrap;
+  justify-content: center;
+}

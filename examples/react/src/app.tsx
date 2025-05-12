@@ -13,6 +13,7 @@ import ScrollToTop from "./scrollTop"
 import { GlobalVariablesContextProvider } from "./globalVariablesContext"
 import { KlevuInit, KlevuProductQuery } from "@klevu/ui-react";
 import "./app.css";
+import { config } from "./config"
 
 const primary = "#97C73E"
 const secondary = "#2b556e"
@@ -93,7 +94,7 @@ export function App() {
             </Box>
             <Footer />
             <div style={{position: "fixed", bottom: 10, right: 10}}>
-              <KlevuInit moiApiUrl="https://moi-ai-qa.ksearchnet.com/">
+              <KlevuInit apiKey={config.apiKey} url={config.url} moiApiUrl="https://moi-ai-qa.ksearchnet.com/">
               <KlevuProductQuery       
               pqaWidgetId={"pqa-dcb56eb4-0989-4cfe-b006-2cc9e7350957"}
               popupAnchor="top-start"></KlevuProductQuery>
