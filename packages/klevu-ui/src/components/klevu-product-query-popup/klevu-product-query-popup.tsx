@@ -494,6 +494,12 @@ export class KlevuProductQueryPopup {
                 this.#productClick(event.detail.product)
                 return false
               }}
+              onKlevuSelectProductOption={(event) => {
+                const option = event.detail.option
+                if (option.intent === "show-similar-products") {
+                  this.#sendMessage(option.chat)
+                }
+              }}
             >
               <div slot="chat-messages-after">
                 {this.showLoading ? (
@@ -529,6 +535,24 @@ export class KlevuProductQueryPopup {
                 ))}
               </div>
             )}
+            <div part="product-query-popup-actions" slot="actions" class="genericactions">
+              {this.session?.genericOptions?.options.map((item) => (
+                <klevu-button
+                  exportparts={partsExports("klevu-button")}
+                  size="small"
+                  isSecondary
+                  onClick={() => {
+                    if (item.type === "message") {
+                      this.#sendMessage(item.chat)
+                    } else if (item.type === "clearChat") {
+                      this.session?.clear()
+                    }
+                  }}
+                >
+                  {item.name}
+                </klevu-button>
+              ))}
+            </div>
           </div>
           <div part="product-query-popup-footer" slot="footer">
             {!this.registered ? (

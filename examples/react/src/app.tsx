@@ -11,6 +11,8 @@ import { LastVisited } from "./components/lastVisited"
 import { Container } from "@mui/material"
 import ScrollToTop from "./scrollTop"
 import { GlobalVariablesContextProvider } from "./globalVariablesContext"
+import { KlevuInit, KlevuProductQuery } from "@klevu/ui-react";
+import "./app.css";
 
 const primary = "#97C73E"
 const secondary = "#2b556e"
@@ -90,6 +92,13 @@ export function App() {
               </Container>
             </Box>
             <Footer />
+            <div style={{position: "fixed", bottom: 10, right: 10}}>
+              <KlevuInit moiApiUrl="https://moi-ai-qa.ksearchnet.com/">
+              <KlevuProductQuery       
+              pqaWidgetId={"pqa-dcb56eb4-0989-4cfe-b006-2cc9e7350957"}
+              popupAnchor="top-start"></KlevuProductQuery>
+              </KlevuInit>
+            </div>
           </ThemeProvider>
         </GlobalVariablesContextProvider>
       </CartContextProvider>

@@ -13,6 +13,9 @@
   --embedded-border-color: var(--klevu-product-query-popup-border-color, #6c757d1a);
   --embedded-border-radius: var(--klevu-product-query-popup-border-radius, var(--klevu-border-radius-m));
   --end-spacer-display: var(--klevu-product-query-popup-spacer-display, block);
+  --chat-background-color: var(--klevu-product-query-chat-background-color, #fff);
+  --chat-layout-height: var(--klevu-product-query-chat-layout-height, 100%);
+  --chat-popup-border: var(--klevu-product-query-chat-border, none);
 }
 
 :host([embedded]) {
@@ -56,6 +59,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  border: var(--chat-popup-border);
 }
 
 klevu-chat-layout {
@@ -311,6 +315,13 @@ klevu-popup {
 
 .embedded klevu-chat-messages .end-spacer {
   display: none;
+}
+
+klevu-chat-layout {
+  height: var(--chat-layout-height);
+  max-height: var(--chat-layout-height);
+  overflow: hidden;
+  background-color: var(--chat-background-color);
 }
 
 .embedded klevu-chat-layout {
