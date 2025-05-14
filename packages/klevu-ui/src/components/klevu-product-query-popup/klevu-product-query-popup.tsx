@@ -247,7 +247,7 @@ export class KlevuProductQueryPopup {
     this.sendMessageError = false
   }
 
-  async #sendMessage(overrideMessageValue?: string) {
+  async #sendMessage(overrideMessageValue?: string, product?: MoiRequest["product"]) {
     const message = overrideMessageValue || this.text.trim()
 
     if (message == "") {
@@ -265,6 +265,7 @@ export class KlevuProductQueryPopup {
         {
           message: message,
           klevuSettings: this.settings,
+          product
         },
         "send"
       )
@@ -496,8 +497,15 @@ export class KlevuProductQueryPopup {
               }}
               onKlevuSelectProductOption={(event) => {
                 const option = event.detail.option
+                const product = event.detail.product
                 if (option.intent === "show-similar-products") {
-                  this.#sendMessage(option.chat)
+                  this.#sendMessage(option.chat, {
+                    context: {
+                      url: product.url,
+                    },
+                    id: product.id,
+                    intent: option.intent,
+                  })
                 }
               }}
             >
