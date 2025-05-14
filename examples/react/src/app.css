@@ -1,4 +1,6 @@
 klevu-product-query-popup {
-    --klevu-product-query-chat-border: 2px solid #333;
+    --klevu-product-query-chat-border: 2px solid #ccc;
+    --klevu-product-query-chat-layout-height: 600px;
+    --klevu-product-query-popup-width: 600px;
+    --klevu-product-query-chat-border-radius: 10px;
 }
-  

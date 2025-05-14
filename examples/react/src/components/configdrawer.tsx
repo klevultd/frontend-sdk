@@ -18,6 +18,8 @@ import {
   SelectChangeEvent,
   FormControl,
   InputLabel,
+  Switch,
+  FormControlLabel,
 } from "@mui/material"
 import SettingsIcon from "@mui/icons-material/Settings"
 import { config, saveConfig, resetConfig } from "../config"
@@ -70,7 +72,6 @@ export const ConfigDrawer = () => {
     })
   }
   const onChangeValueNav = (key, value) => {
-    console.log({ key, value, inputConfig })
     const inputConfigCloned = cloneDeep(inputConfig)
     inputConfigCloned.nav[key] = { key: value, label: getCategoryLabel(value) }
     setInputConfig(inputConfigCloned)
@@ -155,7 +156,7 @@ export const ConfigDrawer = () => {
     setAnchorEl(null)
   }
   const open = Boolean(anchorEl)
-  // console.log({ inputConfig, config, topCategories })
+  console.log({ inputConfig, config, topCategories })
   return (
     <>
       <IconButton onClick={() => setIsDrawerOpen(true)}>
@@ -376,6 +377,39 @@ export const ConfigDrawer = () => {
                   onChangeValue(e.target.id, e.target.value.trim())
                 }
               />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="body2" component="div">
+                MOI Service URL
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <TextField
+                fullWidth
+                id="moiServiceUrl"
+                type="text"
+                defaultValue={config.moiServiceUrl}
+                onChange={(e) =>
+                  onChangeValue(e.target.id, e.target.value.trim())
+                }
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <FormControlLabel
+                  style={{ margin: "0 8px", whiteSpace: "nowrap" }}
+                  control={
+                    <Switch
+                      id="isProductAssistantEnabled"
+                      color="success"
+                      defaultChecked={config.isProductAssistantEnabled}
+                      onChange={(e) => {
+                        console.log({e: e.target.checked})
+                        onChangeValue(e.target.id, e.target.checked)
+                      }}
+                    />
+                  }
+                  label="Enable Shopping Assistant"
+                />
             </Grid>
           </Grid>
           <Divider />

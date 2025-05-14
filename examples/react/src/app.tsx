@@ -93,13 +93,17 @@ export function App() {
               </Container>
             </Box>
             <Footer />
-            <div style={{position: "fixed", bottom: 10, right: 10}}>
-              <KlevuInit apiKey={config.apiKey} url={config.url} moiApiUrl="https://moi-ai-qa.ksearchnet.com/">
-              <KlevuProductQuery       
-              pqaWidgetId={"pqa-dcb56eb4-0989-4cfe-b006-2cc9e7350957"}
-              popupAnchor="top-start"></KlevuProductQuery>
+            {config.isProductAssistantEnabled && 
+            <div style={{position: "fixed", bottom: 10, right: 20}}>
+              <KlevuInit apiKey={config.apiKey} url={config.url} moiApiUrl={config.moiServiceUrl}>
+                <KlevuProductQuery 
+                  popupTitle="Shopping Assistant AI" 
+                  buttonText="Shopping Assistant" 
+                  popupAnchor="top-start"
+                  />
               </KlevuInit>
             </div>
+            }
           </ThemeProvider>
         </GlobalVariablesContextProvider>
       </CartContextProvider>

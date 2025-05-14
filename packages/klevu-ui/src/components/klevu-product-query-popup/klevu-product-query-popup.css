@@ -16,6 +16,7 @@
   --chat-background-color: var(--klevu-product-query-chat-background-color, #fff);
   --chat-layout-height: var(--klevu-product-query-chat-layout-height, 100%);
   --chat-popup-border: var(--klevu-product-query-chat-border, none);
+  --chat-popup-border-radius: var(--klevu-product-query-chat-border-radius, none);
 }
 
 :host([embedded]) {
@@ -60,6 +61,7 @@
   flex-direction: column;
   height: 100%;
   border: var(--chat-popup-border);
+  border-radius: var(--chat-popup-border-radius);
 }
 
 klevu-chat-layout {

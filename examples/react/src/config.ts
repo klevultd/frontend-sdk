@@ -20,6 +20,8 @@ type Config = {
   visitorServiceUrl: string
   ipv6ServiceUrl: string
   ipv4ServiceUrl: string
+  isProductAssistantEnabled: boolean
+  moiServiceUrl: string
 }
 
 let loadedConfig: Config | undefined
@@ -72,6 +74,8 @@ export const config: Config = {
   visitorServiceUrl: "https://visitor.service.ksearchnet.com/public/1.0",
   ipv6ServiceUrl: "https://ipv6check.ksearchnet.com",
   ipv4ServiceUrl: "https://ipv4check.ksearchnet.com",
+  isProductAssistantEnabled: false,
+  moiServiceUrl: "https://moi-ai.ksearchnet.com/",
   ...(loadedConfig ?? {}),
 }
 
