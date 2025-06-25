@@ -310,9 +310,10 @@ export type ProductInfo = {
 
 const saveProductInfo = async (
   config: KlevuConfig,
-  productInfo: ProductInfo
+  productInfo: ProductInfo,
+  widgetId: string
 ) => {
-  return await post(`${config.moiApiUrl}chat/productInfo`, productInfo)
+  return await post(`${config.moiApiUrl}chat/${widgetId}/productInfo`, productInfo)
 }
 
 export async function startMoi(
@@ -381,7 +382,7 @@ export async function startMoi(
   if (shouldSendMessage) {
     try {
       if (options.productInfo && options.mode === "PQA")
-        await saveProductInfo(config, options.productInfo)
+        await saveProductInfo(config, options.productInfo, options.pqaWidgetId || 'NA')
     } catch (err) {
       console.warn("Failed to save product Info", err)
     }

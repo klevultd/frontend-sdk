@@ -1148,6 +1148,9 @@ export namespace Components {
      * @csspart product-query-popup-header Header of the popup
      * @csspart product-query-popup-footer Footer of the popup where input is
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-popup-question-container Help questions container
+     * @csspart product-query-popup-question Question bubble
+     * @csspart product-query-popup-sendmessage Send message section
      */
     interface KlevuProductQueryPopup {
         /**
@@ -2522,6 +2525,9 @@ declare global {
      * @csspart product-query-popup-header Header of the popup
      * @csspart product-query-popup-footer Footer of the popup where input is
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-popup-question-container Help questions container
+     * @csspart product-query-popup-question Question bubble
+     * @csspart product-query-popup-sendmessage Send message section
      */
     interface HTMLKlevuProductQueryPopupElement extends Components.KlevuProductQueryPopup, HTMLStencilElement {
     }
@@ -3908,6 +3914,9 @@ declare namespace LocalJSX {
      * @csspart product-query-popup-header Header of the popup
      * @csspart product-query-popup-footer Footer of the popup where input is
      * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
+     * @csspart product-query-popup-question-container Help questions container
+     * @csspart product-query-popup-question Question bubble
+     * @csspart product-query-popup-sendmessage Send message section
      */
     interface KlevuProductQueryPopup {
         /**
@@ -5099,6 +5108,9 @@ declare module "@stencil/core" {
              * @csspart product-query-popup-header Header of the popup
              * @csspart product-query-popup-footer Footer of the popup where input is
              * @csspart product-query-popup-feedback Feedback section of the popup when it is being closed
+             * @csspart product-query-popup-question-container Help questions container
+             * @csspart product-query-popup-question Question bubble
+             * @csspart product-query-popup-sendmessage Send message section
              */
             "klevu-product-query-popup": LocalJSX.KlevuProductQueryPopup & JSXBase.HTMLAttributes<HTMLKlevuProductQueryPopupElement>;
             /**
