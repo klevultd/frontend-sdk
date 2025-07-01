@@ -283,7 +283,7 @@ export function QuickSearch(props: Props) {
             ) : (
               <React.Fragment>
                 {kmcSettings &&
-                  kmcSettings.klevu_webstorePopularTerms.length > 0 && (
+                  kmcSettings.klevu_webstorePopularTerms?.length > 0 && (
                     <React.Fragment>
                       <Typography variant="h6">Popular searches</Typography>
                       <ul

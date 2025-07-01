@@ -151,6 +151,7 @@ klevu-typography.fineprint {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 8px;
+  direction: ltr !important;
 }
 
 .disclaimer {

@@ -218,6 +218,14 @@ export const parts = {
     local: ["product-query-open-button"],
     exportedcomponents: {
       "klevu-button": ["button-base"],
+      "klevu-product-query-popup": [
+        "product-query-popup-header",
+        "product-query-popup-footer",
+        "product-query-popup-feedback",
+        "product-query-popup-question-container",
+        "product-query-popup-question",
+        "product-query-popup-sendmessage",
+      ],
       "klevu-popup": ["popup-base", "popup-content"],
       "klevu-loading-indicator": ["loading-indicator-base"],
       "klevu-textfield": ["textfield-base", "textfield-icon", "textfield-input", "textfield-clearbutton"],
@@ -245,7 +253,14 @@ export const parts = {
     },
   },
   "klevu-product-query-popup": {
-    local: [],
+    local: [
+      "product-query-popup-header",
+      "product-query-popup-footer",
+      "product-query-popup-feedback",
+      "product-query-popup-question-container",
+      "product-query-popup-question",
+      "product-query-popup-sendmessage",
+    ],
     exportedcomponents: {
       "klevu-popup": ["popup-base", "popup-content"],
       "klevu-loading-indicator": ["loading-indicator-base"],
