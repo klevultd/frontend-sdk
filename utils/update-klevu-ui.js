@@ -155,7 +155,7 @@ async function main(args) {
   console.log("🟡 Testing @klevu/ui library")
   try {
     console.log("🟡 Installing with force in klevu-ui...")
-    execSync("npm install --force", { stdio: "inherit" })
+    execSync("npm install --force --loglevel verbose", { stdio: "inherit" })
     console.log("🟢 npm install completed")
   } catch (e) {
     abortWithMessage("Installing failed in @klevu/ui")
