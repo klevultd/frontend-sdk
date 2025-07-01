@@ -4,6 +4,7 @@ import fs from "fs"
 import { resolve } from "path"
 import shelljs from "shelljs"
 import yargs from "yargs"
+import { execSync } from "child_process"
 import { hideBin } from "yargs/helpers"
 
 const fileUiPackage = resolve("../packages/klevu-ui/package.json")
@@ -152,7 +153,13 @@ async function main(args) {
   shelljs.cd("../klevu-ui")
 
   console.log("🟡 Testing @klevu/ui library")
-  shelljs.exec("npm install --force")
+  try {
+    console.log("🟡 Installing with force in klevu-ui...")
+    execSync("npm install --force", { stdio: "inherit" })
+    console.log("🟢 npm install completed")
+  } catch (e) {
+    abortWithMessage("Installing failed in @klevu/ui")
+  }
   // if (shelljs.exec("npm test", { fatal: true }).code !== 0) {
   //   abortWithMessage("Testing failed.")
   // }
