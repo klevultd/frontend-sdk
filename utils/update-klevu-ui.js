@@ -156,7 +156,7 @@ async function main(args) {
   shelljs.cd("../klevu-ui")
 
   if (
-    shelljs.exec("npm install --force", {
+    shelljs.exec("npm install --force --loglevel silly", {
       fatal: true,
       silent: false, // show output
       async: false,  // default, but make explicit
