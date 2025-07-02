@@ -153,11 +153,15 @@ async function main(args) {
   shelljs.cd("../klevu-ui")
 
   console.log("🟡 Testing @klevu/ui library")
-  try {
-    console.log("🟡 Installing with force in klevu-ui...")
-    execSync("npm install --force --loglevel verbose", { stdio: "inherit" })
-    console.log("🟢 npm install completed")
-  } catch (e) {
+  shelljs.cd("../klevu-ui")
+
+  if (
+    shelljs.exec("npm install --force", {
+      fatal: true,
+      silent: false, // show output
+      async: false,  // default, but make explicit
+    }).code !== 0
+  ) {
     abortWithMessage("Installing failed in @klevu/ui")
   }
   // if (shelljs.exec("npm test", { fatal: true }).code !== 0) {
