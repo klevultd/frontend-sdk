@@ -133,6 +133,12 @@ export enum KlevuSearchPreference {
   debugQuery = "debugQuery",
 
   /**
+   * By default, Klevu groups results by itemGroupId. 
+   * Use this flag to disable the grouping of products.
+   */
+  disableGrouping = "disableGrouping",
+
+  /**
    * @TODO: Most probably ignores manual boostin. Needs proper documentation
    */
   ignoreManualBoosting = "ignoreManualBoosting",
