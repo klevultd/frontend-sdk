@@ -208,7 +208,9 @@ export class KlevuConfig {
   setConsentGiven(userConsent: boolean) {
     this.consentGiven = userConsent
     if (userConsent) {
-      KlevuUserSession.getDefault().generateSession()
+      if (!this.disableUserSession) {
+        KlevuUserSession.getDefault().generateSession()
+      }
       KlevuIpResolver.getDefault().generateIPData()
     }
 

@@ -163,15 +163,18 @@ export async function kmcRecommendation(
         ? `&gpid=${options.itemGroupId}`
         : ""
     }
-    const userSegments = KlevuUserSession.getDefault().getSegments()
+
+    const conf = KlevuConfig.getDefault()
+    // Only fetch user segments if user session is enabled
+    const userSegments = conf.disableUserSession
+      ? []
+      : KlevuUserSession.getDefault().getSegments()
     advFilterParams +=
       userSegments.length > 0
         ? `${advFilterParams.length > 0 ? "&" : "?"}sids=${userSegments.join(
             ","
           )}`
         : ""
-
-    const conf = KlevuConfig.getDefault()
 
     kmcConfig = await get<KlevuKMCRecommendations>(
       `${conf.recommendationsApiUrl}${conf.apiKey}/settings/${recommendationId}${advFilterParams}`
