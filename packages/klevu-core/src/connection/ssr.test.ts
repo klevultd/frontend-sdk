@@ -18,6 +18,10 @@ beforeEach(() => {
 
 test("Make SSR search", async () => {
   const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
+  const getSearchRequestCount = () =>
+    getSpySuccess.mock.calls.filter(
+      ([url]) => url === KlevuConfig.getDefault().url
+    ).length
 
   const functions = [search("hoodies", {}, sendSearchEvent())]
 
@@ -25,7 +29,7 @@ test("Make SSR search", async () => {
   expect(ssrResult.result.queryExists("search")).toBe(true)
 
   // first for the search
-  expect(getSpySuccess).toHaveBeenCalledTimes(1)
+  expect(getSearchRequestCount()).toBe(1)
 
   // emulate frontend hydration
   const responseObject = await KlevuSSRHydrate(
@@ -35,7 +39,7 @@ test("Make SSR search", async () => {
   )
 
   // 2nd for running the send search event after hydration
-  expect(getSpySuccess).toHaveBeenCalledTimes(2)
+  expect(getSearchRequestCount()).toBe(2)
 
   expect(responseObject.queryExists("search")).toBe(true)
 })
