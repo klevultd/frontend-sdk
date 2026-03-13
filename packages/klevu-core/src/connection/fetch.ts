@@ -43,7 +43,7 @@ export async function post<T>(
       return res.data
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      return error.response.data
+      return error?.response?.data
     }
   }
 
