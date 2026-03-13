@@ -1,7 +1,9 @@
 import {
   KlevuConfig,
+  KlevuIpResolver,
   KlevuSSRFetch,
   KlevuSSRHydrate,
+  KlevuUserSession,
   search,
   sendSearchEvent,
 } from "../index.js"
@@ -9,8 +11,12 @@ import axios from "axios"
 import { jest } from "@jest/globals"
 
 beforeEach(() => {
-  jest.spyOn(KlevuConfig, "initializeIPResolver").mockImplementation(() => {})
-  jest.spyOn(KlevuConfig, "initializeUserSession").mockImplementation(() => {})
+  jest
+    .spyOn(KlevuConfig, "initializeIPResolver")
+    .mockImplementation(() => KlevuIpResolver.init())
+  jest
+    .spyOn(KlevuConfig, "initializeUserSession")
+    .mockImplementation(() => KlevuUserSession.init())
   KlevuConfig.init({
     url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-164651914788114877",
