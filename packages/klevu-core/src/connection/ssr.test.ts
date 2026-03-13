@@ -9,6 +9,8 @@ import axios from "axios"
 import { jest } from "@jest/globals"
 
 beforeEach(() => {
+  jest.spyOn(KlevuConfig, "initializeIPResolver").mockImplementation(() => {})
+  jest.spyOn(KlevuConfig, "initializeUserSession").mockImplementation(() => {})
   KlevuConfig.init({
     url: "https://eucs29v2.ksearchnet.com/cs/v2/search",
     apiKey: "klevu-164651914788114877",
@@ -16,12 +18,12 @@ beforeEach(() => {
   })
 })
 
+afterEach(() => {
+  jest.restoreAllMocks()
+})
+
 test("Make SSR search", async () => {
   const getSpySuccess = jest.spyOn(KlevuConfig.default!.axios!, "post")
-  const getSearchRequestCount = () =>
-    getSpySuccess.mock.calls.filter(
-      ([url]) => url === KlevuConfig.getDefault().url
-    ).length
 
   const functions = [search("hoodies", {}, sendSearchEvent())]
 
@@ -29,7 +31,7 @@ test("Make SSR search", async () => {
   expect(ssrResult.result.queryExists("search")).toBe(true)
 
   // first for the search
-  expect(getSearchRequestCount()).toBe(1)
+  expect(getSpySuccess).toHaveBeenCalledTimes(1)
 
   // emulate frontend hydration
   const responseObject = await KlevuSSRHydrate(
@@ -39,7 +41,7 @@ test("Make SSR search", async () => {
   )
 
   // 2nd for running the send search event after hydration
-  expect(getSearchRequestCount()).toBe(2)
+  expect(getSpySuccess).toHaveBeenCalledTimes(2)
 
   expect(responseObject.queryExists("search")).toBe(true)
 })
