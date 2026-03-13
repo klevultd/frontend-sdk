@@ -1,12 +1,12 @@
 import {
   KlevuConfig,
-  KlevuIpResolver,
   KlevuSSRFetch,
   KlevuSSRHydrate,
-  KlevuUserSession,
   search,
   sendSearchEvent,
 } from "../index.js"
+import { KlevuIpResolver } from "../resolvers/ipresolver.js"
+import { KlevuUserSession } from "../resolvers/usersession.js"
 import axios from "axios"
 import { jest } from "@jest/globals"
 
